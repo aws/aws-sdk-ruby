@@ -148,7 +148,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, Types::Delete] :delete
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for
@@ -204,7 +204,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option options [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option options [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.

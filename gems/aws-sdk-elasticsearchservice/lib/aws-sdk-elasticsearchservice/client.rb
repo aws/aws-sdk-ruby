@@ -149,8 +149,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -171,7 +171,7 @@ module Aws
       #   (hyphen).
       # @option params [String] :elasticsearch_version
       #   String of format X.Y to specify version for the Elasticsearch domain
-      #   eg. \"1.5\" or \"2.3\". For more information, see [Creating
+      #   eg. "1.5" or "2.3". For more information, see [Creating
       #   Elasticsearch Domains][1] in the *Amazon Elasticsearch Service
       #   Developer Guide*.
       #
@@ -252,8 +252,8 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      # @overload create_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_elasticsearch_domain(params = {}, options = {})
         req = build_request(:create_elasticsearch_domain, params)
         req.send_request(options)
@@ -296,8 +296,8 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      # @overload delete_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_elasticsearch_domain(params = {}, options = {})
         req = build_request(:delete_elasticsearch_domain, params)
         req.send_request(options)
@@ -340,8 +340,8 @@ module Aws
       #   resp.domain_status.snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status.advanced_options #=> Hash
       #   resp.domain_status.advanced_options["String"] #=> String
+      # @overload describe_elasticsearch_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_elasticsearch_domain(params = {}, options = {})
         req = build_request(:describe_elasticsearch_domain, params)
         req.send_request(options)
@@ -407,8 +407,8 @@ module Aws
       #   resp.domain_config.advanced_options.status.update_version #=> Integer
       #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
       #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+      # @overload describe_elasticsearch_domain_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_elasticsearch_domain_config(params = {}, options = {})
         req = build_request(:describe_elasticsearch_domain_config, params)
         req.send_request(options)
@@ -452,15 +452,15 @@ module Aws
       #   resp.domain_status_list[0].snapshot_options.automated_snapshot_start_hour #=> Integer
       #   resp.domain_status_list[0].advanced_options #=> Hash
       #   resp.domain_status_list[0].advanced_options["String"] #=> String
+      # @overload describe_elasticsearch_domains(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_elasticsearch_domains(params = {}, options = {})
         req = build_request(:describe_elasticsearch_domains, params)
         req.send_request(options)
       end
 
       # Returns the name of all Elasticsearch domains owned by the current
-      # user\'s account.
+      # user's account.
       # @return [Types::ListDomainNamesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListDomainNamesResponse#domain_names #DomainNames} => Array&lt;Types::DomainInfo&gt;
@@ -468,8 +468,8 @@ module Aws
       # @example Response structure
       #   resp.domain_names #=> Array
       #   resp.domain_names[0].domain_name #=> String
+      # @overload list_domain_names(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_domain_names(params = {}, options = {})
         req = build_request(:list_domain_names, params)
         req.send_request(options)
@@ -492,8 +492,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags(params = {}, options = {})
         req = build_request(:list_tags, params)
         req.send_request(options)
@@ -514,8 +514,8 @@ module Aws
       #     arn: "ARN", # required
       #     tag_keys: ["String"], # required
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
@@ -621,8 +621,8 @@ module Aws
       #   resp.domain_config.advanced_options.status.update_version #=> Integer
       #   resp.domain_config.advanced_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active"
       #   resp.domain_config.advanced_options.status.pending_deletion #=> Boolean
+      # @overload update_elasticsearch_domain_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_elasticsearch_domain_config(params = {}, options = {})
         req = build_request(:update_elasticsearch_domain_config, params)
         req.send_request(options)

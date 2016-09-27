@@ -141,12 +141,12 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
-      #   the user\'s AWS account
+      #   the user's AWS account
       # @option options [String] :alarm_description
       #   The description for the alarm.
       # @option options [Boolean] :actions_enabled
       #   Indicates whether or not actions should be executed during any changes
-      #   to the alarm\'s state.
+      #   to the alarm's state.
       # @option options [Array<String>] :ok_actions
       #   The list of actions to execute when this alarm transitions into an
       #   `OK` state from any other state. Each action is specified as an Amazon
@@ -211,13 +211,13 @@ module Aws
       #   is created, you can create stop, terminate, or reboot alarms using the
       #   CLI.
       # @option options [required, String] :statistic
-      #   The statistic to apply to the alarm\'s associated metric.
+      #   The statistic to apply to the alarm's associated metric.
       # @option options [Array<Types::Dimension>] :dimensions
-      #   The dimensions for the alarm\'s associated metric.
+      #   The dimensions for the alarm's associated metric.
       # @option options [required, Integer] :period
       #   The period in seconds over which the specified statistic is applied.
       # @option options [String] :unit
-      #   The statistic\'s unit of measure. For example, the units for the
+      #   The statistic's unit of measure. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
       #   number of bytes that an instance receives on all network interfaces.
       #   You can also specify a unit when you create a custom metric. Units

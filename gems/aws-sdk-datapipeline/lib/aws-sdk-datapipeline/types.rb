@@ -105,7 +105,7 @@ module Aws
       #   identifier and pipeline name combination on a subsequent call to
       #   `CreatePipeline`. `CreatePipeline` ensures that if a pipeline
       #   already exists with the same name and unique identifier, a new
-      #   pipeline is not created. Instead, you\'ll receive the pipeline
+      #   pipeline is not created. Instead, you'll receive the pipeline
       #   identifier from the previous attempt. The uniqueness of the name and
       #   unique identifier combination is scoped to the AWS account or IAM
       #   user credentials.
@@ -498,7 +498,7 @@ module Aws
       #   set by the web service. When you name fields, you should choose
       #   names containing only alpha-numeric values, as symbols may be
       #   reserved by AWS Data Pipeline. User-defined fields that you add to a
-      #   pipeline should prefix their name with the string \"my\".
+      #   pipeline should prefix their name with the string "my".
       #   @return [String]
       #
       # @!attribute [rw] values
@@ -1034,7 +1034,7 @@ module Aws
       #       }
       # @!attribute [rw] field_name
       #   The name of the field that the operator will be applied to. The
-      #   field name is the \"key\" portion of the field definition in the
+      #   field name is the "key" portion of the field definition in the
       #   pipeline definition syntax that is used by the AWS Data Pipeline
       #   API. If the field is not set on the object, the condition fails.
       #   @return [String]
@@ -1104,7 +1104,7 @@ module Aws
       #   If an error occurred during the task, this value specifies the error
       #   code. This value is set on the physical attempt object. It is used
       #   to display error information to the user. It should not start with
-      #   string \"Service\_\" which is reserved by the system.
+      #   string "Service\_" which is reserved by the system.
       #   @return [String]
       #
       # @!attribute [rw] error_message

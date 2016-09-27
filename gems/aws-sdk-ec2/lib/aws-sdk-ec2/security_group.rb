@@ -141,7 +141,7 @@ module Aws
       #   The CIDR IP address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option options [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       # @return [EmptyStructure]
       def authorize_egress(options = {})
@@ -160,7 +160,7 @@ module Aws
       #   \[EC2-Classic, default VPC\] The name of the security group.
       # @option options [String] :source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. Creates rules that
       #   grant full ICMP, UDP, and TCP access. To create a rule with a specific
@@ -168,7 +168,7 @@ module Aws
       #   EC2-VPC, the source security group must be in the same VPC.
       # @option options [String] :source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account number for the source security group,
-      #   if the source security group is in a different account. You can\'t
+      #   if the source security group is in a different account. You can't
       #   specify this parameter in combination with the following parameters:
       #   the CIDR IP address range, the IP protocol, the start of the port
       #   range, and the end of the port range. Creates rules that grant full
@@ -191,7 +191,7 @@ module Aws
       #   number. For the ICMP code number, use `-1` to specify all ICMP codes
       #   for the ICMP type.
       # @option options [String] :cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option options [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. Can be used to specify multiple rules in a
@@ -210,7 +210,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -274,7 +274,7 @@ module Aws
       #   The CIDR IP address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option options [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       # @return [EmptyStructure]
       def revoke_egress(options = {})
@@ -293,7 +293,7 @@ module Aws
       #   \[EC2-Classic, default VPC\] The name of the security group.
       # @option options [String] :source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. For EC2-VPC, the
       #   source security group must be in the same VPC. To revoke a specific
@@ -301,7 +301,7 @@ module Aws
       #   instead.
       # @option options [String] :source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account ID of the source security group, if
-      #   the source security group is in a different account. You can\'t
+      #   the source security group is in a different account. You can't
       #   specify this parameter in combination with the following parameters:
       #   the CIDR IP address range, the IP protocol, the start of the port
       #   range, and the end of the port range. To revoke a specific rule for an
@@ -321,10 +321,10 @@ module Aws
       #   number. For the ICMP code number, use `-1` to specify all ICMP codes
       #   for the ICMP type.
       # @option options [String] :cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option options [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a source security group
+      #   A set of IP permissions. You can't specify a source security group
       #   and a CIDR IP address range.
       # @return [EmptyStructure]
       def revoke_ingress(options = {})

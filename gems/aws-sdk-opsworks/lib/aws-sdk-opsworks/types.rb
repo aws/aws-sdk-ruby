@@ -33,7 +33,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shortname
-      #   The app\'s short name.
+      #   The app's short name.
       #   @return [String]
       #
       # @!attribute [rw] name
@@ -45,7 +45,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] data_sources
-      #   The app\'s data sources.
+      #   The app's data sources.
       #   @return [Array<Types::DataSource>]
       #
       # @!attribute [rw] type
@@ -88,8 +88,8 @@ module Aws
       #   the variable names, values, and protected flag values - cannot
       #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
       #   not all use cases, but if you do exceed it, you will cause an
-      #   exception (API) with an \"Environment: is too large (maximum is
-      #   10KB)\" message.
+      #   exception (API) with an "Environment: is too large (maximum is
+      #   10KB)" message.
       #
       #    </note>
       #
@@ -184,7 +184,7 @@ module Aws
       #         layer_id: "String", # required
       #       }
       # @!attribute [rw] elastic_load_balancer_name
-      #   The Elastic Load Balancing instance\'s name.
+      #   The Elastic Load Balancing instance's name.
       #   @return [String]
       #
       # @!attribute [rw] layer_id
@@ -226,7 +226,7 @@ module Aws
       #   The amount of time (in minutes) after a scaling event occurs that
       #   AWS OpsWorks should ignore metrics and suppress additional scaling
       #   events. For example, AWS OpsWorks adds new instances following an
-      #   upscaling event but the instances won\'t start reducing the load
+      #   upscaling event but the instances won't start reducing the load
       #   until they have been booted and configured. There is no point in
       #   raising additional scaling events during that operation, which
       #   typically takes several minutes. `IgnoreMetricsTime` allows you to
@@ -310,7 +310,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] no_device
-      #   Suppresses the specified device included in the AMI\'s block device
+      #   Suppresses the specified device included in the AMI's block device
       #   mapping.
       #   @return [String]
       #
@@ -407,7 +407,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] region
-      #   The cloned stack AWS region, such as \"ap-northeast-2\". For more
+      #   The cloned stack AWS region, such as "ap-northeast-2". For more
       #   information about AWS regions, see [Regions and Endpoints][1].
       #
       #
@@ -460,12 +460,12 @@ module Aws
       #   must set this parameter to the Amazon Resource Name (ARN) for an
       #   existing IAM role. If you create a stack by using the AWS OpsWorks
       #   console, it creates the role for you. You can obtain an existing
-      #   stack\'s IAM ARN programmatically by calling DescribePermissions.
+      #   stack's IAM ARN programmatically by calling DescribePermissions.
       #   For more information about IAM ARNs, see [Using Identifiers][1].
       #
       #   <note markdown="1"> You must set this parameter to a valid service role ARN or the
       #   action will fail; there is no default value. You can specify the
-      #   source stack\'s service role ARN, if you prefer, but you must do so
+      #   source stack's service role ARN, if you prefer, but you must do so
       #   explicitly.
       #
       #    </note>
@@ -477,7 +477,7 @@ module Aws
       #
       # @!attribute [rw] default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
-      #   profile for all of the stack\'s EC2 instances. For more information
+      #   profile for all of the stack's EC2 instances. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -486,7 +486,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_os
-      #   The stack\'s operating system, which must be set to one of the
+      #   The stack's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such
@@ -509,7 +509,7 @@ module Aws
       #     when you create instances. For more information on how to use
       #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
       #
-      #   The default option is the parent stack\'s operating system. For more
+      #   The default option is the parent stack's operating system. For more
       #   information on the supported operating systems, see [AWS OpsWorks
       #   Operating Systems][2].
       #
@@ -526,11 +526,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] hostname_theme
-      #   The stack\'s host name theme, with spaces are replaced by
+      #   The stack's host name theme, with spaces are replaced by
       #   underscores. The theme is used to generate host names for the
-      #   stack\'s instances. By default, `HostnameTheme` is set to
+      #   stack's instances. By default, `HostnameTheme` is set to
       #   `Layer_Dependent`, which creates host names by appending integers to
-      #   the layer\'s short name. The other themes are:
+      #   the layer's short name. The other themes are:
       #
       #   * `Baked_Goods`
       #
@@ -559,7 +559,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_availability_zone
-      #   The cloned stack\'s default Availability Zone, which must be in the
+      #   The cloned stack's default Availability Zone, which must be in the
       #   specified region. For more information, see [Regions and
       #   Endpoints][1]. If you also specify a value for `DefaultSubnetId`,
       #   the subnet must be in the same zone. For more information, see the
@@ -571,7 +571,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if
+      #   The stack's default VPC subnet ID. This parameter is required if
       #   you specify a value for the `VpcId` parameter. All instances are
       #   launched into this subnet unless you specify otherwise when you
       #   create the instance. If you also specify a value for
@@ -584,9 +584,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
       #   The string should be in the following format and must escape
-      #   characters such as \'\"\':
+      #   characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1]
@@ -619,7 +619,7 @@ module Aws
       #
       # @!attribute [rw] use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups,
       #   one for each layer, which are associated with layers by default.
@@ -675,7 +675,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] clone_permissions
-      #   Whether to clone the source stack\'s permissions.
+      #   Whether to clone the source stack's permissions.
       #   @return [Boolean]
       #
       # @!attribute [rw] clone_app_ids
@@ -698,13 +698,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s
+      #     automatically installs new agent versions on the stack's
       #     instances as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent
       #     version. To update the agent version, you must edit the stack
       #     configuration and specify a new version. AWS OpsWorks then
-      #     automatically installs that version on the stack\'s instances.
+      #     automatically installs that version on the stack's instances.
       #
       #   The default setting is `LATEST`. To specify an agent version, you
       #   must use the complete version number, not the abbreviated number
@@ -712,7 +712,7 @@ module Aws
       #   call DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       #   @return [String]
@@ -880,7 +880,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shortname
-      #   The app\'s short name.
+      #   The app's short name.
       #   @return [String]
       #
       # @!attribute [rw] name
@@ -892,14 +892,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] data_sources
-      #   The app\'s data source.
+      #   The app's data source.
       #   @return [Array<Types::DataSource>]
       #
       # @!attribute [rw] type
       #   The app type. Each supported type is associated with a particular
       #   layer. For example, PHP applications are associated with a PHP
       #   layer. AWS OpsWorks deploys an application to those instances that
-      #   are members of the corresponding layer. If your app isn\'t one of
+      #   are members of the corresponding layer. If your app isn't one of
       #   the standard types, or you prefer to implement your own Deploy
       #   recipes, specify `other`.
       #   @return [String]
@@ -934,14 +934,14 @@ module Aws
       #
       #   There is no specific limit on the number of environment variables.
       #   However, the size of the associated data structure - which includes
-      #   the variables\' names, values, and protected flag values - cannot
+      #   the variables' names, values, and protected flag values - cannot
       #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
       #   not all use cases. Exceeding it will cause an exception with the
-      #   message, \"Environment: is too large (maximum is 10KB).\"
+      #   message, "Environment: is too large (maximum is 10KB)."
       #
       #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
       #   specified one or more environment variables, you cannot modify the
-      #   stack\'s Chef version.
+      #   stack's Chef version.
       #
       #    </note>
       #
@@ -1021,9 +1021,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
       #   The string should be in the following format and must escape
-      #   characters such as \'\"\':
+      #   characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -1094,7 +1094,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] layer_ids
-      #   An array that contains the instance\'s layer IDs.
+      #   An array that contains the instance's layer IDs.
       #   @return [Array<String>]
       #
       # @!attribute [rw] instance_type
@@ -1121,7 +1121,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] os
-      #   The instance\'s operating system, which must be set to one of the
+      #   The instance's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such
@@ -1148,7 +1148,7 @@ module Aws
       #
       #   The default option is the current Amazon Linux version. If you set
       #   this parameter to `Custom`, you must use the CreateInstance
-      #   action\'s AmiId parameter to specify the custom AMI that you want to
+      #   action's AmiId parameter to specify the custom AMI that you want to
       #   use. Block device mappings are not supported if the value is
       #   `Custom`. For more information on the supported operating systems,
       #   see [Operating Systems][1]For more information on how to use custom
@@ -1175,7 +1175,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ssh_key_name
-      #   The instance\'s Amazon EC2 key-pair name.
+      #   The instance's Amazon EC2 key-pair name.
       #   @return [String]
       #
       # @!attribute [rw] availability_zone
@@ -1188,12 +1188,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] virtualization_type
-      #   The instance\'s virtualization type, `paravirtual` or `hvm`.
+      #   The instance's virtualization type, `paravirtual` or `hvm`.
       #   @return [String]
       #
       # @!attribute [rw] subnet_id
-      #   The ID of the instance\'s subnet. If the stack is running in a VPC,
-      #   you can use this parameter to override the stack\'s default subnet
+      #   The ID of the instance's subnet. If the stack is running in a VPC,
+      #   you can use this parameter to override the stack's default subnet
       #   ID value and direct AWS OpsWorks to launch the instance in a
       #   different subnet.
       #   @return [String]
@@ -1220,7 +1220,7 @@ module Aws
       #
       # @!attribute [rw] block_device_mappings
       #   An array of `BlockDeviceMapping` objects that specify the
-      #   instance\'s block devices. For more information, see [Block Device
+      #   instance's block devices. For more information, see [Block Device
       #   Mapping][1]. Note that block device mappings are not supported for
       #   custom AMIs.
       #
@@ -1251,10 +1251,10 @@ module Aws
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
       #
-      #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #   * `INHERIT` - Use the stack's default agent version setting.
       #
       #   * *version\_number* - Use the specified agent version. This value
-      #     overrides the stack\'s default setting. To update the agent
+      #     overrides the stack's default setting. To update the agent
       #     version, edit the instance configuration and specify a new
       #     version. AWS OpsWorks then automatically installs that version on
       #     the instance.
@@ -1266,7 +1266,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] tenancy
-      #   The instance\'s tenancy option. The default option is no tenancy, or
+      #   The instance's tenancy option. The default option is no tenancy, or
       #   if the instance is running in a VPC, inherit tenancy settings from
       #   the VPC. The following are valid values for this parameter:
       #   `dedicated`, `default`, or `host`. Because there are costs
@@ -1373,14 +1373,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shortname
-      #   For custom layers only, use this parameter to specify the layer\'s
+      #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorks and by Chef
       #   recipes. The short name is also used as the name for the directory
       #   where your app files are installed. It can have a maximum of 200
-      #   characters, which are limited to the alphanumeric characters, \'-\',
-      #   \'\_\', and \'.\'.
+      #   characters, which are limited to the alphanumeric characters, '-',
+      #   '\_', and '.'.
       #
-      #   The built-in layers\' short names are defined by AWS OpsWorks. For
+      #   The built-in layers' short names are defined by AWS OpsWorks. For
       #   more information, see the [Layer Reference][1].
       #
       #
@@ -1393,11 +1393,11 @@ module Aws
       #   attributes.
       #
       #   To create a cluster layer, set the `EcsClusterArn` attribute to the
-      #   cluster\'s ARN.
+      #   cluster's ARN.
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] custom_instance_profile_arn
-      #   The ARN of an IAM profile to be used for the layer\'s EC2 instances.
+      #   The ARN of an IAM profile to be used for the layer's EC2 instances.
       #   For more information about IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -1407,7 +1407,7 @@ module Aws
       #
       # @!attribute [rw] custom_json
       #   A JSON-formatted string containing custom stack configuration and
-      #   deployment attributes to be installed on the layer\'s instances. For
+      #   deployment attributes to be installed on the layer's instances. For
       #   more information, see [ Using Custom JSON][1]. This feature is
       #   supported as of version 1.7.42 of the AWS CLI.
       #
@@ -1425,7 +1425,7 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon
+      #   A `VolumeConfigurations` object that describes the layer's Amazon
       #   EBS volumes.
       #   @return [Array<Types::VolumeConfiguration>]
       #
@@ -1435,7 +1435,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -1446,7 +1446,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically
-      #   assign a public IP address to the layer\'s instances. For more
+      #   assign a public IP address to the layer's instances. For more
       #   information, see [How to Edit a Layer][1].
       #
       #
@@ -1556,7 +1556,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] region
-      #   The stack\'s AWS region, such as \"ap-south-1\". For more
+      #   The stack's AWS region, such as "ap-south-1". For more
       #   information about Amazon regions, see [Regions and Endpoints][1].
       #
       #
@@ -1566,7 +1566,7 @@ module Aws
       #
       # @!attribute [rw] vpc_id
       #   The ID of the VPC that the stack is to be launched into. The VPC
-      #   must be in the stack\'s region. All instances are launched into this
+      #   must be in the stack's region. All instances are launched into this
       #   VPC. You cannot change the ID later.
       #
       #   * If your account supports EC2-Classic, the default value is `no
@@ -1605,7 +1605,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] service_role_arn
-      #   The stack\'s AWS Identity and Access Management (IAM) role, which
+      #   The stack's AWS Identity and Access Management (IAM) role, which
       #   allows AWS OpsWorks to work with AWS resources on your behalf. You
       #   must set this parameter to the Amazon Resource Name (ARN) for an
       #   existing IAM role. For more information about IAM ARNs, see [Using
@@ -1618,7 +1618,7 @@ module Aws
       #
       # @!attribute [rw] default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
-      #   profile for all of the stack\'s EC2 instances. For more information
+      #   profile for all of the stack's EC2 instances. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -1627,7 +1627,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_os
-      #   The stack\'s default operating system, which is installed on every
+      #   The stack's default operating system, which is installed on every
       #   instance unless you specify a different operating system when you
       #   create the instance. You can specify one of the following.
       #
@@ -1663,10 +1663,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] hostname_theme
-      #   The stack\'s host name theme, with spaces replaced by underscores.
-      #   The theme is used to generate host names for the stack\'s instances.
+      #   The stack's host name theme, with spaces replaced by underscores.
+      #   The theme is used to generate host names for the stack's instances.
       #   By default, `HostnameTheme` is set to `Layer_Dependent`, which
-      #   creates host names by appending integers to the layer\'s short name.
+      #   creates host names by appending integers to the layer's short name.
       #   The other themes are:
       #
       #   * `Baked_Goods`
@@ -1696,7 +1696,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_availability_zone
-      #   The stack\'s default Availability Zone, which must be in the
+      #   The stack's default Availability Zone, which must be in the
       #   specified region. For more information, see [Regions and
       #   Endpoints][1]. If you also specify a value for `DefaultSubnetId`,
       #   the subnet must be in the same zone. For more information, see the
@@ -1708,7 +1708,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if
+      #   The stack's default VPC subnet ID. This parameter is required if
       #   you specify a value for the `VpcId` parameter. All instances are
       #   launched into this subnet unless you specify otherwise when you
       #   create the instance. If you also specify a value for
@@ -1721,9 +1721,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values or to pass data to recipes. The string should be in the
-      #   following escape characters such as \'\"\':
+      #   following escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -1756,7 +1756,7 @@ module Aws
       #
       # @!attribute [rw] use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups,
       #   one for each layer, which are associated with layers by default.
@@ -1826,13 +1826,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s
+      #     automatically installs new agent versions on the stack's
       #     instances as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent
       #     version. To update the agent version, you must edit the stack
       #     configuration and specify a new version. AWS OpsWorks then
-      #     automatically installs that version on the stack\'s instances.
+      #     automatically installs that version on the stack's instances.
       #
       #   The default setting is the most recent release of the agent. To
       #   specify an agent version, you must use the complete version number,
@@ -1840,7 +1840,7 @@ module Aws
       #   available agent version numbers, call DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       #   @return [String]
@@ -1887,24 +1887,24 @@ module Aws
       #         allow_self_management: false,
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       #
       # @!attribute [rw] ssh_username
-      #   The user\'s SSH user name. The allowable characters are \[a-z\],
-      #   \[A-Z\], \[0-9\], \'-\', and \'\_\'. If the specified name includes
+      #   The user's SSH user name. The allowable characters are \[a-z\],
+      #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_public_key
-      #   The user\'s public SSH key.
+      #   The user's public SSH key.
       #   @return [String]
       #
       # @!attribute [rw] allow_self_management
       #   Whether users can specify their own SSH public key through the My
-      #   Settings page. For more information, see [Setting an IAM User\'s
+      #   Settings page. For more information, see [Setting an IAM User's
       #   Public SSH Key][1].
       #
       #
@@ -1921,14 +1921,14 @@ module Aws
 
       # Contains the response to a `CreateUserProfile` request.
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       class CreateUserProfileResult < Struct.new(
         :iam_user_arn)
         include Aws::Structure
       end
 
-      # Describes an app\'s data source.
+      # Describes an app's data source.
       # @note When making an API call, pass DataSource
       #   data as a hash:
       #
@@ -1938,12 +1938,12 @@ module Aws
       #         database_name: "String",
       #       }
       # @!attribute [rw] type
-      #   The data source\'s type, `AutoSelectOpsworksMysqlInstance`,
+      #   The data source's type, `AutoSelectOpsworksMysqlInstance`,
       #   `OpsworksMysqlInstance`, or `RdsDbInstance`.
       #   @return [String]
       #
       # @!attribute [rw] arn
-      #   The data source\'s ARN.
+      #   The data source's ARN.
       #   @return [String]
       #
       # @!attribute [rw] database_name
@@ -1987,7 +1987,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] delete_volumes
-      #   Whether to delete the instance\'s Amazon EBS volumes.
+      #   Whether to delete the instance's Amazon EBS volumes.
       #   @return [Boolean]
       class DeleteInstanceRequest < Struct.new(
         :instance_id,
@@ -2031,7 +2031,7 @@ module Aws
       #         iam_user_arn: "String", # required
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       class DeleteUserProfileRequest < Struct.new(
         :iam_user_arn)
@@ -2064,7 +2064,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       #
       # @!attribute [rw] comment
@@ -2089,9 +2089,9 @@ module Aws
       #   A string that contains user-defined custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values for stack or to pass data to recipes. The string should be in
-      #   the following format and must escape characters such as \'\"\':
+      #   the following format and must escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -2141,11 +2141,11 @@ module Aws
       #     `phpapp::appsetup`, set `Args` to
       #     `\{"recipes":["phpapp::appsetup"]\}`.
       #
-      #   * `install_dependencies`\: Install the stack\'s dependencies.
+      #   * `install_dependencies`\: Install the stack's dependencies.
       #
-      #   * `update_custom_cookbooks`\: Update the stack\'s custom cookbooks.
+      #   * `update_custom_cookbooks`\: Update the stack's custom cookbooks.
       #
-      #   * `update_dependencies`\: Update the stack\'s dependencies.
+      #   * `update_dependencies`\: Update the stack's dependencies.
       #
       #   <note markdown="1"> The update\_dependencies and install\_dependencies commands are
       #   supported only for Linux instances. You can run the commands
@@ -2157,19 +2157,19 @@ module Aws
       #
       #   * `deploy`\: Deploy an app. Ruby on Rails apps have an optional
       #     `Args` parameter named `migrate`. Set `Args` to
-      #     \\\{\"migrate\":\[\"true\"\]\\} to migrate the database. The
-      #     default setting is \\\{\"migrate\":\[\"false\"\]\\}.
+      #     \\\{"migrate":\["true"\]\\} to migrate the database. The
+      #     default setting is \\\{"migrate":\["false"\]\\}.
       #
       #   * `rollback` Roll the app back to the previous version. When you
       #     update an app, AWS OpsWorks stores the previous version, up to a
       #     maximum of five versions. You can use this command to roll an app
       #     back as many as four versions.
       #
-      #   * `start`\: Start the app\'s web or application server.
+      #   * `start`\: Start the app's web or application server.
       #
-      #   * `stop`\: Stop the app\'s web or application server.
+      #   * `stop`\: Stop the app's web or application server.
       #
-      #   * `restart`\: Restart the app\'s web or application server.
+      #   * `restart`\: Restart the app's web or application server.
       #
       #   * `undeploy`\: Undeploy the app.
       #   @return [String]
@@ -2211,7 +2211,7 @@ module Aws
       #         ecs_cluster_arn: "String", # required
       #       }
       # @!attribute [rw] ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       #   @return [String]
       class DeregisterEcsClusterRequest < Struct.new(
         :ecs_cluster_arn)
@@ -2253,7 +2253,7 @@ module Aws
       #         rds_db_instance_arn: "String", # required
       #       }
       # @!attribute [rw] rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       #   @return [String]
       class DeregisterRdsDbInstanceRequest < Struct.new(
         :rds_db_instance_arn)
@@ -2446,11 +2446,11 @@ module Aws
       #
       # @!attribute [rw] next_token
       #   If the previous paginated request did not return all of the
-      #   remaining results, the response object\'s`NextToken` parameter value
+      #   remaining results, the response object's`NextToken` parameter value
       #   is set to a token. To retrieve the next set of results, call
       #   `DescribeEcsClusters` again and assign that token to the request
-      #   object\'s `NextToken` parameter. If there are no remaining results,
-      #   the previous response object\'s `NextToken` parameter is set to
+      #   object's `NextToken` parameter. If there are no remaining results,
+      #   the previous response object's `NextToken` parameter is set to
       #   `null`.
       #   @return [String]
       #
@@ -2477,7 +2477,7 @@ module Aws
       # @!attribute [rw] next_token
       #   If a paginated request does not return all of the remaining results,
       #   this parameter is set to a token that you can assign to the request
-      #   object\'s `NextToken` parameter to retrieve the next set of results.
+      #   object's `NextToken` parameter to retrieve the next set of results.
       #   If the previous paginated request returned all of the remaining
       #   results, this parameter is set to `null`.
       #   @return [String]
@@ -2538,7 +2538,7 @@ module Aws
       #         layer_ids: ["String"],
       #       }
       # @!attribute [rw] stack_id
-      #   A stack ID. The action describes the stack\'s Elastic Load Balancing
+      #   A stack ID. The action describes the stack's Elastic Load Balancing
       #   instances.
       #   @return [String]
       #
@@ -2649,7 +2649,7 @@ module Aws
       # Contains the response to a `DescribeLoadBasedAutoScaling` request.
       # @!attribute [rw] load_based_auto_scaling_configurations
       #   An array of `LoadBasedAutoScalingConfiguration` objects that
-      #   describe each layer\'s configuration.
+      #   describe each layer's configuration.
       #   @return [Array<Types::LoadBasedAutoScalingConfiguration>]
       class DescribeLoadBasedAutoScalingResult < Struct.new(
         :load_based_auto_scaling_configurations)
@@ -2658,7 +2658,7 @@ module Aws
 
       # Contains the response to a `DescribeMyUserProfile` request.
       # @!attribute [rw] user_profile
-      #   A `UserProfile` object that describes the user\'s SSH information.
+      #   A `UserProfile` object that describes the user's SSH information.
       #   @return [Types::SelfUserProfile]
       class DescribeMyUserProfileResult < Struct.new(
         :user_profile)
@@ -2673,7 +2673,7 @@ module Aws
       #         stack_id: "String",
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN. For more information about IAM ARNs, see [Using
+      #   The user's IAM ARN. For more information about IAM ARNs, see [Using
       #   Identifiers][1].
       #
       #
@@ -2700,7 +2700,7 @@ module Aws
       #     ARNs.
       #
       #   * If the request object contains only an IAM ARN, the array contains
-      #     a `Permission` object with permissions for each of the user\'s
+      #     a `Permission` object with permissions for each of the user's
       #     stack IDs.
       #
       #   * If the request contains a stack ID and an IAM ARN, the array
@@ -2840,7 +2840,7 @@ module Aws
       # Contains the response to a `DescribeStackProvisioningParameters`
       # request.
       # @!attribute [rw] agent_installer_url
-      #   The AWS OpsWorks agent installer\'s URL.
+      #   The AWS OpsWorks agent installer's URL.
       #   @return [String]
       #
       # @!attribute [rw] parameters
@@ -2963,7 +2963,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] stack_id
-      #   A stack ID. The action describes the stack\'s registered Amazon EBS
+      #   A stack ID. The action describes the stack's registered Amazon EBS
       #   volumes.
       #   @return [String]
       #
@@ -3003,7 +3003,7 @@ module Aws
       #         layer_id: "String", # required
       #       }
       # @!attribute [rw] elastic_load_balancer_name
-      #   The Elastic Load Balancing instance\'s name.
+      #   The Elastic Load Balancing instance's name.
       #   @return [String]
       #
       # @!attribute [rw] layer_id
@@ -3087,7 +3087,7 @@ module Aws
 
       # Describes a registered Amazon ECS cluster.
       # @!attribute [rw] ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       #   @return [String]
       #
       # @!attribute [rw] ecs_cluster_name
@@ -3145,15 +3145,15 @@ module Aws
 
       # Describes an Elastic Load Balancing instance.
       # @!attribute [rw] elastic_load_balancer_name
-      #   The Elastic Load Balancing instance\'s name.
+      #   The Elastic Load Balancing instance's name.
       #   @return [String]
       #
       # @!attribute [rw] region
-      #   The instance\'s AWS region.
+      #   The instance's AWS region.
       #   @return [String]
       #
       # @!attribute [rw] dns_name
-      #   The instance\'s public DNS name.
+      #   The instance's public DNS name.
       #   @return [String]
       #
       # @!attribute [rw] stack_id
@@ -3193,7 +3193,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents an app\'s environment variable.
+      # Represents an app's environment variable.
       # @note When making an API call, pass EnvironmentVariable
       #   data as a hash:
       #
@@ -3203,21 +3203,21 @@ module Aws
       #         secure: false,
       #       }
       # @!attribute [rw] key
-      #   (Required) The environment variable\'s name, which can consist of up
+      #   (Required) The environment variable's name, which can consist of up
       #   to 64 characters and must be specified. The name can contain upper-
       #   and lowercase letters, numbers, and underscores (\_), but it must
       #   start with a letter or underscore.
       #   @return [String]
       #
       # @!attribute [rw] value
-      #   (Optional) The environment variable\'s value, which can be left
+      #   (Optional) The environment variable's value, which can be left
       #   empty. If you specify a value, it can contain up to 256 characters,
       #   which must all be printable.
       #   @return [String]
       #
       # @!attribute [rw] secure
-      #   (Optional) Whether the variable\'s value will be returned by the
-      #   DescribeApps action. To conceal an environment variable\'s value,
+      #   (Optional) Whether the variable's value will be returned by the
+      #   DescribeApps action. To conceal an environment variable's value,
       #   set `Secure` to `true`. `DescribeApps` then returns
       #   `*****FILTERED*****` instead of the actual value. The default value
       #   for `Secure` is `false`.
@@ -3265,7 +3265,7 @@ module Aws
       #         valid_for_in_minutes: 1,
       #       }
       # @!attribute [rw] instance_id
-      #   The instance\'s AWS OpsWorks ID.
+      #   The instance's AWS OpsWorks ID.
       #   @return [String]
       #
       # @!attribute [rw] valid_for_in_minutes
@@ -3308,7 +3308,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] architecture
-      #   The instance architecture: \"i386\" or \"x86\_64\".
+      #   The instance architecture: "i386" or "x86\_64".
       #   @return [String]
       #
       # @!attribute [rw] auto_scaling_type
@@ -3326,7 +3326,7 @@ module Aws
       #
       # @!attribute [rw] block_device_mappings
       #   An array of `BlockDeviceMapping` objects that specify the
-      #   instance\'s block device mappings.
+      #   instance's block device mappings.
       #   @return [Array<Types::BlockDeviceMapping>]
       #
       # @!attribute [rw] created_at
@@ -3342,11 +3342,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ecs_cluster_arn
-      #   For container instances, the Amazon ECS cluster\'s ARN.
+      #   For container instances, the Amazon ECS cluster's ARN.
       #   @return [String]
       #
       # @!attribute [rw] ecs_container_instance_arn
-      #   For container instances, the instance\'s ARN.
+      #   For container instances, the instance's ARN.
       #   @return [String]
       #
       # @!attribute [rw] elastic_ip
@@ -3385,7 +3385,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_profile_arn
-      #   The ARN of the instance\'s IAM profile. For more information about
+      #   The ARN of the instance's IAM profile. For more information about
       #   IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -3407,19 +3407,19 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] os
-      #   The instance\'s operating system.
+      #   The instance's operating system.
       #   @return [String]
       #
       # @!attribute [rw] platform
-      #   The instance\'s platform.
+      #   The instance's platform.
       #   @return [String]
       #
       # @!attribute [rw] private_dns
-      #   The The instance\'s private DNS name.
+      #   The The instance's private DNS name.
       #   @return [String]
       #
       # @!attribute [rw] private_ip
-      #   The instance\'s private IP address.
+      #   The instance's private IP address.
       #   @return [String]
       #
       # @!attribute [rw] public_dns
@@ -3435,7 +3435,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] reported_agent_version
-      #   The instance\'s reported AWS OpsWorks agent version.
+      #   The instance's reported AWS OpsWorks agent version.
       #   @return [String]
       #
       # @!attribute [rw] reported_os
@@ -3443,7 +3443,7 @@ module Aws
       #   @return [Types::ReportedOs]
       #
       # @!attribute [rw] root_device_type
-      #   The instance\'s root device type. For more information, see [Storage
+      #   The instance's root device type. For more information, see [Storage
       #   for the Root Device][1].
       #
       #
@@ -3460,15 +3460,15 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] ssh_host_dsa_key_fingerprint
-      #   The SSH key\'s Deep Security Agent (DSA) fingerprint.
+      #   The SSH key's Deep Security Agent (DSA) fingerprint.
       #   @return [String]
       #
       # @!attribute [rw] ssh_host_rsa_key_fingerprint
-      #   The SSH key\'s RSA fingerprint.
+      #   The SSH key's RSA fingerprint.
       #   @return [String]
       #
       # @!attribute [rw] ssh_key_name
-      #   The instance\'s Amazon EC2 key-pair name.
+      #   The instance's Amazon EC2 key-pair name.
       #   @return [String]
       #
       # @!attribute [rw] stack_id
@@ -3510,16 +3510,16 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] subnet_id
-      #   The instance\'s subnet ID; applicable only if the stack is running
+      #   The instance's subnet ID; applicable only if the stack is running
       #   in a VPC.
       #   @return [String]
       #
       # @!attribute [rw] tenancy
-      #   The instance\'s tenancy option, such as `dedicated` or `host`.
+      #   The instance's tenancy option, such as `dedicated` or `host`.
       #   @return [String]
       #
       # @!attribute [rw] virtualization_type
-      #   The instance\'s virtualization type: `paravirtual` or `hvm`.
+      #   The instance's virtualization type: `paravirtual` or `hvm`.
       #   @return [String]
       class Instance < Struct.new(
         :agent_version,
@@ -3584,7 +3584,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] signature
-      #   A signature that can be used to verify the document\'s accuracy and
+      #   A signature that can be used to verify the document's accuracy and
       #   authenticity.
       #   @return [String]
       class InstanceIdentity < Struct.new(
@@ -3721,11 +3721,11 @@ module Aws
       #   `*****FILTERED*****` instead of the actual value
       #
       #   For an ECS Cluster layer, AWS OpsWorks the `EcsClusterArn` attribute
-      #   is set to the cluster\'s ARN.
+      #   is set to the cluster's ARN.
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] custom_instance_profile_arn
-      #   The ARN of the default IAM profile to be used for the layer\'s EC2
+      #   The ARN of the default IAM profile to be used for the layer's EC2
       #   instances. For more information about IAM ARNs, see [Using
       #   Identifiers][1].
       #
@@ -3735,24 +3735,24 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] custom_json
-      #   A JSON formatted string containing the layer\'s custom stack
+      #   A JSON formatted string containing the layer's custom stack
       #   configuration and deployment attributes.
       #   @return [String]
       #
       # @!attribute [rw] custom_security_group_ids
-      #   An array containing the layer\'s custom security group IDs.
+      #   An array containing the layer's custom security group IDs.
       #   @return [Array<String>]
       #
       # @!attribute [rw] default_security_group_names
-      #   An array containing the layer\'s security group names.
+      #   An array containing the layer's security group names.
       #   @return [Array<String>]
       #
       # @!attribute [rw] packages
-      #   An array of `Package` objects that describe the layer\'s packages.
+      #   An array of `Package` objects that describe the layer's packages.
       #   @return [Array<String>]
       #
       # @!attribute [rw] volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon
+      #   A `VolumeConfigurations` object that describes the layer's Amazon
       #   EBS volumes.
       #   @return [Array<Types::VolumeConfiguration>]
       #
@@ -3762,7 +3762,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -3773,7 +3773,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically
-      #   assign a public IP address to the layer\'s instances. For more
+      #   assign a public IP address to the layer's instances. For more
       #   information, see [How to Edit a Layer][1].
       #
       #
@@ -3791,15 +3791,15 @@ module Aws
       #   for a particular layer to be run in response to each of the five
       #   events.
       #
-      #   To specify a recipe, use the cookbook\'s directory name in the
+      #   To specify a recipe, use the cookbook's directory name in the
       #   repository followed by two colons and the recipe name, which is the
-      #   recipe\'s file name without the .rb extension. For example:
+      #   recipe's file name without the .rb extension. For example:
       #   phpapp2::dbsetup specifies the dbsetup.rb recipe in the
-      #   repository\'s phpapp2 folder.
+      #   repository's phpapp2 folder.
       #   @return [Types::Recipes]
       #
       # @!attribute [rw] custom_recipes
-      #   A `LayerCustomRecipes` object that specifies the layer\'s custom
+      #   A `LayerCustomRecipes` object that specifies the layer's custom
       #   recipes.
       #   @return [Types::Recipes]
       #
@@ -3873,7 +3873,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a layer\'s load-based auto scaling configuration.
+      # Describes a layer's load-based auto scaling configuration.
       # @!attribute [rw] layer_id
       #   The layer ID.
       #   @return [String]
@@ -3925,7 +3925,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] level
-      #   The user\'s permission level, which must be the following:
+      #   The user's permission level, which must be the following:
       #
       #   * `deny`
       #
@@ -3953,7 +3953,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes an instance\'s RAID array.
+      # Describes an instance's RAID array.
       # @!attribute [rw] raid_array_id
       #   The array ID.
       #   @return [String]
@@ -3979,19 +3979,19 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] size
-      #   The array\'s size.
+      #   The array's size.
       #   @return [Integer]
       #
       # @!attribute [rw] device
-      #   The array\'s Linux device. For example /dev/mdadm0.
+      #   The array's Linux device. For example /dev/mdadm0.
       #   @return [String]
       #
       # @!attribute [rw] mount_point
-      #   The array\'s mount point.
+      #   The array's mount point.
       #   @return [String]
       #
       # @!attribute [rw] availability_zone
-      #   The array\'s Availability Zone. For more information, see [Regions
+      #   The array's Availability Zone. For more information, see [Regions
       #   and Endpoints][1].
       #
       #
@@ -4033,7 +4033,7 @@ module Aws
 
       # Describes an Amazon RDS instance.
       # @!attribute [rw] rds_db_instance_arn
-      #   The instance\'s ARN.
+      #   The instance's ARN.
       #   @return [String]
       #
       # @!attribute [rw] db_instance_identifier
@@ -4050,15 +4050,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] region
-      #   The instance\'s AWS region.
+      #   The instance's AWS region.
       #   @return [String]
       #
       # @!attribute [rw] address
-      #   The instance\'s address.
+      #   The instance's address.
       #   @return [String]
       #
       # @!attribute [rw] engine
-      #   The instance\'s database engine.
+      #   The instance's database engine.
       #   @return [String]
       #
       # @!attribute [rw] stack_id
@@ -4107,10 +4107,10 @@ module Aws
       # for a particular layer to be run in response to each of the five
       # events.
       #
-      # To specify a recipe, use the cookbook\'s directory name in the
+      # To specify a recipe, use the cookbook's directory name in the
       # repository followed by two colons and the recipe name, which is the
-      # recipe\'s file name without the .rb extension. For example:
-      # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository\'s
+      # recipe's file name without the .rb extension. For example:
+      # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's
       # phpapp2 folder.
       # @note When making an API call, pass Recipes
       #   data as a hash:
@@ -4162,7 +4162,7 @@ module Aws
       #         stack_id: "String", # required
       #       }
       # @!attribute [rw] ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       #   @return [String]
       #
       # @!attribute [rw] stack_id
@@ -4176,7 +4176,7 @@ module Aws
 
       # Contains the response to a `RegisterEcsCluster` request.
       # @!attribute [rw] ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       #   @return [String]
       class RegisterEcsClusterResult < Struct.new(
         :ecs_cluster_arn)
@@ -4232,15 +4232,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] hostname
-      #   The instance\'s hostname.
+      #   The instance's hostname.
       #   @return [String]
       #
       # @!attribute [rw] public_ip
-      #   The instance\'s public IP address.
+      #   The instance's public IP address.
       #   @return [String]
       #
       # @!attribute [rw] private_ip
-      #   The instance\'s private IP address.
+      #   The instance's private IP address.
       #   @return [String]
       #
       # @!attribute [rw] rsa_public_key
@@ -4253,7 +4253,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_identity
-      #   An InstanceIdentity object that contains the instance\'s identity.
+      #   An InstanceIdentity object that contains the instance's identity.
       #   @return [Types::InstanceIdentity]
       class RegisterInstanceRequest < Struct.new(
         :stack_id,
@@ -4268,7 +4268,7 @@ module Aws
 
       # Contains the response to a `RegisterInstanceResult` request.
       # @!attribute [rw] instance_id
-      #   The registered instance\'s AWS OpsWorks ID.
+      #   The registered instance's AWS OpsWorks ID.
       #   @return [String]
       class RegisterInstanceResult < Struct.new(
         :instance_id)
@@ -4289,11 +4289,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       #   @return [String]
       #
       # @!attribute [rw] db_user
-      #   The database\'s master user name.
+      #   The database's master user name.
       #   @return [String]
       #
       # @!attribute [rw] db_password
@@ -4336,7 +4336,7 @@ module Aws
         include Aws::Structure
       end
 
-      # A registered instance\'s reported operating system.
+      # A registered instance's reported operating system.
       # @!attribute [rw] family
       #   The operating system family.
       #   @return [String]
@@ -4355,21 +4355,21 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a user\'s SSH information.
+      # Describes a user's SSH information.
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The user\'s name.
+      #   The user's name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_username
-      #   The user\'s SSH user name.
+      #   The user's SSH user name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_public_key
-      #   The user\'s SSH public key.
+      #   The user's SSH public key.
       #   @return [String]
       class SelfUserProfile < Struct.new(
         :iam_user_arn,
@@ -4481,7 +4481,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       #
       # @!attribute [rw] allow_ssh
@@ -4493,7 +4493,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] level
-      #   The user\'s permission level, which must be set to one of the
+      #   The user's permission level, which must be set to one of the
       #   following strings. You cannot set your own permissions level.
       #
       #   * `deny`
@@ -4650,14 +4650,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ssh_key
-      #   In requests, the repository\'s SSH key.
+      #   In requests, the repository's SSH key.
       #
       #   In responses, AWS OpsWorks returns `*****FILTERED*****` instead of
       #   the actual value.
       #   @return [String]
       #
       # @!attribute [rw] revision
-      #   The application\'s version. AWS OpsWorks enables you to easily
+      #   The application's version. AWS OpsWorks enables you to easily
       #   deploy new versions of an application. One of the simplest
       #   approaches is to have branches or revisions in your repository that
       #   represent different versions that can potentially be deployed.
@@ -4672,7 +4672,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes an app\'s SSL configuration.
+      # Describes an app's SSL configuration.
       # @note When making an API call, pass SslConfiguration
       #   data as a hash:
       #
@@ -4682,11 +4682,11 @@ module Aws
       #         chain: "String",
       #       }
       # @!attribute [rw] certificate
-      #   The contents of the certificate\'s domain.crt file.
+      #   The contents of the certificate's domain.crt file.
       #   @return [String]
       #
       # @!attribute [rw] private_key
-      #   The private key; the contents of the certificate\'s domain.kex file.
+      #   The private key; the contents of the certificate's domain.kex file.
       #   @return [String]
       #
       # @!attribute [rw] chain
@@ -4710,11 +4710,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] arn
-      #   The stack\'s ARN.
+      #   The stack's ARN.
       #   @return [String]
       #
       # @!attribute [rw] region
-      #   The stack AWS region, such as \"ap-northeast-2\". For more
+      #   The stack AWS region, such as "ap-northeast-2". For more
       #   information about AWS regions, see [Regions and Endpoints][1].
       #
       #
@@ -4727,7 +4727,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] attributes
-      #   The stack\'s attributes.
+      #   The stack's attributes.
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] service_role_arn
@@ -4736,7 +4736,7 @@ module Aws
       #
       # @!attribute [rw] default_instance_profile_arn
       #   The ARN of an IAM profile that is the default profile for all of the
-      #   stack\'s EC2 instances. For more information about IAM ARNs, see
+      #   stack's EC2 instances. For more information about IAM ARNs, see
       #   [Using Identifiers][1].
       #
       #
@@ -4745,7 +4745,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_os
-      #   The stack\'s default operating system.
+      #   The stack's default operating system.
       #   @return [String]
       #
       # @!attribute [rw] hostname_theme
@@ -4753,7 +4753,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_availability_zone
-      #   The stack\'s default Availability Zone. For more information, see
+      #   The stack's default Availability Zone. For more information, see
       #   [Regions and Endpoints][1].
       #
       #
@@ -4772,9 +4772,9 @@ module Aws
       #   custom JSON to override the corresponding default stack
       #   configuration attribute values or to pass data to recipes. The
       #   string should be in the following format and must escape characters
-      #   such as \'\"\':
+      #   such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -4804,7 +4804,7 @@ module Aws
       #
       # @!attribute [rw] use_opsworks_security_groups
       #   Whether the stack automatically associates the AWS OpsWorks built-in
-      #   security groups with the stack\'s layers.
+      #   security groups with the stack's layers.
       #   @return [Boolean]
       #
       # @!attribute [rw] custom_cookbooks_source
@@ -4819,7 +4819,7 @@ module Aws
       #   @return [Types::Source]
       #
       # @!attribute [rw] default_ssh_key_name
-      #   A default Amazon EC2 key pair for the stack\'s instances. You can
+      #   A default Amazon EC2 key pair for the stack's instances. You can
       #   override this value when you create or update an instance.
       #   @return [String]
       #
@@ -4877,7 +4877,7 @@ module Aws
       #         version: "String",
       #       }
       # @!attribute [rw] name
-      #   The name. This parameter must be set to \"Chef\".
+      #   The name. This parameter must be set to "Chef".
       #   @return [String]
       #
       # @!attribute [rw] version
@@ -4901,7 +4901,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] arn
-      #   The stack\'s ARN.
+      #   The stack's ARN.
       #   @return [String]
       #
       # @!attribute [rw] layers_count
@@ -5000,7 +5000,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] instance_id
-      #   The instance\'s AWS OpsWorks ID.
+      #   The instance's AWS OpsWorks ID.
       #   @return [String]
       class TemporaryCredential < Struct.new(
         :username,
@@ -5010,7 +5010,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes an instance\'s time-based auto scaling configuration.
+      # Describes an instance's time-based auto scaling configuration.
       # @!attribute [rw] instance_id
       #   The instance ID.
       #   @return [String]
@@ -5106,7 +5106,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] data_sources
-      #   The app\'s data sources.
+      #   The app's data sources.
       #   @return [Array<Types::DataSource>]
       #
       # @!attribute [rw] type
@@ -5118,7 +5118,7 @@ module Aws
       #   @return [Types::Source]
       #
       # @!attribute [rw] domains
-      #   The app\'s virtual host settings, with multiple domains separated by
+      #   The app's virtual host settings, with multiple domains separated by
       #   commas. For example: `'www.example.com, example.com'`
       #   @return [Array<String>]
       #
@@ -5143,14 +5143,14 @@ module Aws
       #
       #   There is no specific limit on the number of environment variables.
       #   However, the size of the associated data structure - which includes
-      #   the variables\' names, values, and protected flag values - cannot
+      #   the variables' names, values, and protected flag values - cannot
       #   exceed 10 KB (10240 Bytes). This limit should accommodate most if
       #   not all use cases. Exceeding it will cause an exception with the
-      #   message, \"Environment: is too large (maximum is 10KB).\"
+      #   message, "Environment: is too large (maximum is 10KB)."
       #
       #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
       #   specified one or more environment variables, you cannot modify the
-      #   stack\'s Chef version.
+      #   stack's Chef version.
       #
       #    </note>
       #
@@ -5215,7 +5215,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] layer_ids
-      #   The instance\'s layer IDs.
+      #   The instance's layer IDs.
       #   @return [Array<String>]
       #
       # @!attribute [rw] instance_type
@@ -5242,7 +5242,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] os
-      #   The instance\'s operating system, which must be set to one of the
+      #   The instance's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such
@@ -5301,7 +5301,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ssh_key_name
-      #   The instance\'s Amazon EC2 key name.
+      #   The instance's Amazon EC2 key name.
       #   @return [String]
       #
       # @!attribute [rw] architecture
@@ -5337,10 +5337,10 @@ module Aws
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
       #
-      #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #   * `INHERIT` - Use the stack's default agent version setting.
       #
       #   * *version\_number* - Use the specified agent version. This value
-      #     overrides the stack\'s default setting. To update the agent
+      #     overrides the stack's default setting. To update the agent
       #     version, you must edit the instance configuration and specify a
       #     new version. AWS OpsWorks then automatically installs that version
       #     on the instance.
@@ -5418,13 +5418,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shortname
-      #   For custom layers only, use this parameter to specify the layer\'s
+      #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorksand by Chef. The
       #   short name is also used as the name for the directory where your app
       #   files are installed. It can have a maximum of 200 characters and
       #   must be in the following format: /\\A\[a-z0-9\\-\\\_\\.\]+\\Z/.
       #
-      #   The built-in layers\' short names are defined by AWS OpsWorks. For
+      #   The built-in layers' short names are defined by AWS OpsWorks. For
       #   more information, see the [Layer Reference][1]
       #
       #
@@ -5438,7 +5438,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] custom_instance_profile_arn
-      #   The ARN of an IAM profile to be used for all of the layer\'s EC2
+      #   The ARN of an IAM profile to be used for all of the layer's EC2
       #   instances. For more information about IAM ARNs, see [Using
       #   Identifiers][1].
       #
@@ -5449,7 +5449,7 @@ module Aws
       #
       # @!attribute [rw] custom_json
       #   A JSON-formatted string containing custom stack configuration and
-      #   deployment attributes to be installed on the layer\'s instances. For
+      #   deployment attributes to be installed on the layer's instances. For
       #   more information, see [ Using Custom JSON][1].
       #
       #
@@ -5458,15 +5458,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] custom_security_group_ids
-      #   An array containing the layer\'s custom security group IDs.
+      #   An array containing the layer's custom security group IDs.
       #   @return [Array<String>]
       #
       # @!attribute [rw] packages
-      #   An array of `Package` objects that describe the layer\'s packages.
+      #   An array of `Package` objects that describe the layer's packages.
       #   @return [Array<String>]
       #
       # @!attribute [rw] volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon
+      #   A `VolumeConfigurations` object that describes the layer's Amazon
       #   EBS volumes.
       #   @return [Array<Types::VolumeConfiguration>]
       #
@@ -5476,7 +5476,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -5487,7 +5487,7 @@ module Aws
       #
       # @!attribute [rw] auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically
-      #   assign a public IP address to the layer\'s instances. For more
+      #   assign a public IP address to the layer's instances. For more
       #   information, see [How to Edit a Layer][1].
       #
       #
@@ -5496,7 +5496,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] custom_recipes
-      #   A `LayerCustomRecipes` object that specifies the layer\'s custom
+      #   A `LayerCustomRecipes` object that specifies the layer's custom
       #   recipes.
       #   @return [Types::Recipes]
       #
@@ -5547,7 +5547,7 @@ module Aws
       #         ssh_public_key: "String",
       #       }
       # @!attribute [rw] ssh_public_key
-      #   The user\'s SSH public key.
+      #   The user's SSH public key.
       #   @return [String]
       class UpdateMyUserProfileRequest < Struct.new(
         :ssh_public_key)
@@ -5563,7 +5563,7 @@ module Aws
       #         db_password: "String",
       #       }
       # @!attribute [rw] rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       #   @return [String]
       #
       # @!attribute [rw] db_user
@@ -5623,7 +5623,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The stack\'s new name.
+      #   The stack's new name.
       #   @return [String]
       #
       # @!attribute [rw] attributes
@@ -5632,13 +5632,13 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] service_role_arn
-      #   Do not use this parameter. You cannot update a stack\'s service
+      #   Do not use this parameter. You cannot update a stack's service
       #   role.
       #   @return [String]
       #
       # @!attribute [rw] default_instance_profile_arn
       #   The ARN of an IAM profile that is the default profile for all of the
-      #   stack\'s EC2 instances. For more information about IAM ARNs, see
+      #   stack's EC2 instances. For more information about IAM ARNs, see
       #   [Using Identifiers][1].
       #
       #
@@ -5647,7 +5647,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_os
-      #   The stack\'s operating system, which must be set to one of the
+      #   The stack's operating system, which must be set to one of the
       #   following:
       #
       #   * A supported Linux operating system: An Amazon Linux version, such
@@ -5671,7 +5671,7 @@ module Aws
       #     when you create instances. For more information on how to use
       #     custom AMIs with OpsWorks, see [Using Custom AMIs][1].
       #
-      #   The default option is the stack\'s current operating system. For
+      #   The default option is the stack's current operating system. For
       #   more information on the supported operating systems, see [AWS
       #   OpsWorks Operating Systems][2].
       #
@@ -5682,11 +5682,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] hostname_theme
-      #   The stack\'s new host name theme, with spaces replaced by
+      #   The stack's new host name theme, with spaces replaced by
       #   underscores. The theme is used to generate host names for the
-      #   stack\'s instances. By default, `HostnameTheme` is set to
+      #   stack's instances. By default, `HostnameTheme` is set to
       #   `Layer_Dependent`, which creates host names by appending integers to
-      #   the layer\'s short name. The other themes are:
+      #   the layer's short name. The other themes are:
       #
       #   * `Baked_Goods`
       #
@@ -5715,8 +5715,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_availability_zone
-      #   The stack\'s default Availability Zone, which must be in the
-      #   stack\'s region. For more information, see [Regions and
+      #   The stack's default Availability Zone, which must be in the
+      #   stack's region. For more information, see [Regions and
       #   Endpoints][1]. If you also specify a value for `DefaultSubnetId`,
       #   the subnet must be in the same zone. For more information, see
       #   CreateStack.
@@ -5727,7 +5727,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if
+      #   The stack's default VPC subnet ID. This parameter is required if
       #   you specify a value for the `VpcId` parameter. All instances are
       #   launched into this subnet unless you specify otherwise when you
       #   create the instance. If you also specify a value for
@@ -5740,9 +5740,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration JSON values
       #   or to pass data to recipes. The string should be in the following
-      #   format and escape characters such as \'\"\':
+      #   format and escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -5813,7 +5813,7 @@ module Aws
       #
       # @!attribute [rw] use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups,
       #   one for each layer, which are associated with layers by default.
@@ -5845,13 +5845,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s
+      #     automatically installs new agent versions on the stack's
       #     instances as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent
       #     version. To update the agent version, you must edit the stack
       #     configuration and specify a new version. AWS OpsWorks then
-      #     automatically installs that version on the stack\'s instances.
+      #     automatically installs that version on the stack's instances.
       #
       #   The default setting is `LATEST`. To specify an agent version, you
       #   must use the complete version number, not the abbreviated number
@@ -5859,7 +5859,7 @@ module Aws
       #   call DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       #   @return [String]
@@ -5899,15 +5899,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ssh_username
-      #   The user\'s SSH user name. The allowable characters are \[a-z\],
-      #   \[A-Z\], \[0-9\], \'-\', and \'\_\'. If the specified name includes
+      #   The user's SSH user name. The allowable characters are \[a-z\],
+      #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_public_key
-      #   The user\'s new SSH public key.
+      #   The user's new SSH public key.
       #   @return [String]
       #
       # @!attribute [rw] allow_self_management
@@ -5953,21 +5953,21 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a user\'s SSH information.
+      # Describes a user's SSH information.
       # @!attribute [rw] iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The user\'s name.
+      #   The user's name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_username
-      #   The user\'s SSH user name.
+      #   The user's SSH user name.
       #   @return [String]
       #
       # @!attribute [rw] ssh_public_key
-      #   The user\'s SSH public key.
+      #   The user's SSH public key.
       #   @return [String]
       #
       # @!attribute [rw] allow_self_management
@@ -5988,7 +5988,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes an instance\'s Amazon EBS volume.
+      # Describes an instance's Amazon EBS volume.
       # @!attribute [rw] volume_id
       #   The volume ID.
       #   @return [String]
@@ -6026,7 +6026,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] mount_point
-      #   The volume mount point. For example, \"/mnt/disk1\".
+      #   The volume mount point. For example, "/mnt/disk1".
       #   @return [String]
       #
       # @!attribute [rw] region
@@ -6084,7 +6084,7 @@ module Aws
       #         iops: 1,
       #       }
       # @!attribute [rw] mount_point
-      #   The volume mount point. For example \"/dev/sdh\".
+      #   The volume mount point. For example "/dev/sdh".
       #   @return [String]
       #
       # @!attribute [rw] raid_level
@@ -6126,18 +6126,18 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a time-based instance\'s auto scaling schedule. The schedule
+      # Describes a time-based instance's auto scaling schedule. The schedule
       # consists of a set of key-value pairs.
       #
       # * The key is the time period (a UTC hour) and must be an integer from
       #   0 - 23.
       #
       # * The value indicates whether the instance should be online or offline
-      #   for the specified period, and must be set to \"on\" or \"off\"
+      #   for the specified period, and must be set to "on" or "off"
       #
       # The default setting for all time periods is off, so you use the
       # following parameters primarily to specify the online periods. You
-      # don\'t have to explicitly specify offline periods unless you want to
+      # don't have to explicitly specify offline periods unless you want to
       # change an online period to an offline period.
       #
       # The following example specifies that the instance should be online for

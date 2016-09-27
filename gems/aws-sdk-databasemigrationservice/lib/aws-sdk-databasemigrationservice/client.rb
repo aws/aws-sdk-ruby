@@ -156,8 +156,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -242,8 +242,8 @@ module Aws
       #   resp.endpoint.endpoint_arn #=> String
       #   resp.endpoint.certificate_arn #=> String
       #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+      # @overload create_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_endpoint(params = {}, options = {})
         req = build_request(:create_endpoint, params)
         req.send_request(options)
@@ -281,7 +281,7 @@ module Aws
       #   The EC2 Availability Zone that the replication instance will be
       #   created in.
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -384,8 +384,8 @@ module Aws
       #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
       #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
+      # @overload create_replication_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_replication_instance(params = {}, options = {})
         req = build_request(:create_replication_instance, params)
         req.send_request(options)
@@ -398,7 +398,7 @@ module Aws
       #   lowercase string.
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters,
-      #   periods, spaces, underscores, or hyphens. Must not be \"default\".
+      #   periods, spaces, underscores, or hyphens. Must not be "default".
       #
       #   Example: `mySubnetgroup`
       # @option params [required, String] :replication_subnet_group_description
@@ -433,8 +433,8 @@ module Aws
       #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+      # @overload create_replication_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_replication_subnet_group(params = {}, options = {})
         req = build_request(:create_replication_subnet_group, params)
         req.send_request(options)
@@ -463,7 +463,7 @@ module Aws
       #   The migration type.
       # @option params [required, String] :table_mappings
       #   The path of the JSON file that contains the table mappings. Preceed
-      #   the path with \"file://\".
+      #   the path with "file://".
       #
       #   For example, --table-mappings file://mappingfile.json
       # @option params [String] :replication_task_settings
@@ -513,8 +513,8 @@ module Aws
       #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
       #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
       #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+      # @overload create_replication_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_replication_task(params = {}, options = {})
         req = build_request(:create_replication_task, params)
         req.send_request(options)
@@ -542,8 +542,8 @@ module Aws
       #   resp.certificate.valid_to_date #=> Time
       #   resp.certificate.signing_algorithm #=> String
       #   resp.certificate.key_length #=> Integer
+      # @overload delete_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_certificate(params = {}, options = {})
         req = build_request(:delete_certificate, params)
         req.send_request(options)
@@ -581,8 +581,8 @@ module Aws
       #   resp.endpoint.endpoint_arn #=> String
       #   resp.endpoint.certificate_arn #=> String
       #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+      # @overload delete_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_endpoint(params = {}, options = {})
         req = build_request(:delete_endpoint, params)
         req.send_request(options)
@@ -641,8 +641,8 @@ module Aws
       #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
       #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
+      # @overload delete_replication_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_replication_instance(params = {}, options = {})
         req = build_request(:delete_replication_instance, params)
         req.send_request(options)
@@ -657,8 +657,8 @@ module Aws
       #   resp = client.delete_replication_subnet_group({
       #     replication_subnet_group_identifier: "String", # required
       #   })
+      # @overload delete_replication_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_replication_subnet_group(params = {}, options = {})
         req = build_request(:delete_replication_subnet_group, params)
         req.send_request(options)
@@ -695,8 +695,8 @@ module Aws
       #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
       #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
       #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+      # @overload delete_replication_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_replication_task(params = {}, options = {})
         req = build_request(:delete_replication_task, params)
         req.send_request(options)
@@ -705,7 +705,7 @@ module Aws
       # Lists all of the AWS DMS attributes for a customer account. The
       # attributes include AWS DMS quotas for the account, such as the number
       # of replication instances allowed. The description for a quota includes
-      # the quota name, current usage toward that quota, and the quota\'s
+      # the quota name, current usage toward that quota, and the quota's
       # maximum value.
       #
       # This command does not take any parameters.
@@ -721,8 +721,8 @@ module Aws
       #   resp.account_quotas[0].account_quota_name #=> String
       #   resp.account_quotas[0].used #=> Integer
       #   resp.account_quotas[0].max #=> Integer
+      # @overload describe_account_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_account_attributes(params = {}, options = {})
         req = build_request(:describe_account_attributes, params)
         req.send_request(options)
@@ -772,8 +772,8 @@ module Aws
       #   resp.certificates[0].valid_to_date #=> Time
       #   resp.certificates[0].signing_algorithm #=> String
       #   resp.certificates[0].key_length #=> Integer
+      # @overload describe_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_certificates(params = {}, options = {})
         req = build_request(:describe_certificates, params)
         req.send_request(options)
@@ -825,8 +825,8 @@ module Aws
       #   resp.connections[0].last_failure_message #=> String
       #   resp.connections[0].endpoint_identifier #=> String
       #   resp.connections[0].replication_instance_identifier #=> String
+      # @overload describe_connections(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_connections(params = {}, options = {})
         req = build_request(:describe_connections, params)
         req.send_request(options)
@@ -873,8 +873,8 @@ module Aws
       #   resp.supported_endpoint_types[0].engine_name #=> String
       #   resp.supported_endpoint_types[0].supports_cdc #=> Boolean
       #   resp.supported_endpoint_types[0].endpoint_type #=> String, one of "source", "target"
+      # @overload describe_endpoint_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_endpoint_types(params = {}, options = {})
         req = build_request(:describe_endpoint_types, params)
         req.send_request(options)
@@ -933,8 +933,8 @@ module Aws
       #   resp.endpoints[0].endpoint_arn #=> String
       #   resp.endpoints[0].certificate_arn #=> String
       #   resp.endpoints[0].ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+      # @overload describe_endpoints(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_endpoints(params = {}, options = {})
         req = build_request(:describe_endpoints, params)
         req.send_request(options)
@@ -976,8 +976,8 @@ module Aws
       #   resp.orderable_replication_instances[0].default_allocated_storage #=> Integer
       #   resp.orderable_replication_instances[0].included_allocated_storage #=> Integer
       #   resp.marker #=> String
+      # @overload describe_orderable_replication_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_orderable_replication_instances(params = {}, options = {})
         req = build_request(:describe_orderable_replication_instances, params)
         req.send_request(options)
@@ -1002,8 +1002,8 @@ module Aws
       #   resp.refresh_schemas_status.status #=> String, one of "successful", "failed", "refreshing"
       #   resp.refresh_schemas_status.last_refresh_date #=> Time
       #   resp.refresh_schemas_status.last_failure_message #=> String
+      # @overload describe_refresh_schemas_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_refresh_schemas_status(params = {}, options = {})
         req = build_request(:describe_refresh_schemas_status, params)
         req.send_request(options)
@@ -1084,8 +1084,8 @@ module Aws
       #   resp.replication_instances[0].replication_instance_private_ip_addresses #=> Array
       #   resp.replication_instances[0].replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instances[0].publicly_accessible #=> Boolean
+      # @overload describe_replication_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_replication_instances(params = {}, options = {})
         req = build_request(:describe_replication_instances, params)
         req.send_request(options)
@@ -1135,8 +1135,8 @@ module Aws
       #   resp.replication_subnet_groups[0].subnets[0].subnet_identifier #=> String
       #   resp.replication_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
       #   resp.replication_subnet_groups[0].subnets[0].subnet_status #=> String
+      # @overload describe_replication_subnet_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_replication_subnet_groups(params = {}, options = {})
         req = build_request(:describe_replication_subnet_groups, params)
         req.send_request(options)
@@ -1200,8 +1200,8 @@ module Aws
       #   resp.replication_tasks[0].replication_task_stats.tables_loading #=> Integer
       #   resp.replication_tasks[0].replication_task_stats.tables_queued #=> Integer
       #   resp.replication_tasks[0].replication_task_stats.tables_errored #=> Integer
+      # @overload describe_replication_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_replication_tasks(params = {}, options = {})
         req = build_request(:describe_replication_tasks, params)
         req.send_request(options)
@@ -1240,8 +1240,8 @@ module Aws
       #   resp.marker #=> String
       #   resp.schemas #=> Array
       #   resp.schemas[0] #=> String
+      # @overload describe_schemas(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_schemas(params = {}, options = {})
         req = build_request(:describe_schemas, params)
         req.send_request(options)
@@ -1290,8 +1290,8 @@ module Aws
       #   resp.table_statistics[0].last_update_time #=> Time
       #   resp.table_statistics[0].table_state #=> String
       #   resp.marker #=> String
+      # @overload describe_table_statistics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_table_statistics(params = {}, options = {})
         req = build_request(:describe_table_statistics, params)
         req.send_request(options)
@@ -1323,8 +1323,8 @@ module Aws
       #   resp.certificate.valid_to_date #=> Time
       #   resp.certificate.signing_algorithm #=> String
       #   resp.certificate.key_length #=> Integer
+      # @overload import_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_certificate(params = {}, options = {})
         req = build_request(:import_certificate, params)
         req.send_request(options)
@@ -1347,8 +1347,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -1423,8 +1423,8 @@ module Aws
       #   resp.endpoint.endpoint_arn #=> String
       #   resp.endpoint.certificate_arn #=> String
       #   resp.endpoint.ssl_mode #=> String, one of "none", "require", "verify-ca", "verify-full"
+      # @overload modify_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_endpoint(params = {}, options = {})
         req = build_request(:modify_endpoint, params)
         req.send_request(options)
@@ -1482,7 +1482,7 @@ module Aws
       #
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the `EngineVersion` parameter that is a different major
-      #   version than the replication instance\'s current version.
+      #   version than the replication instance's current version.
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the replication instance during the maintenance window. Changing this
@@ -1548,8 +1548,8 @@ module Aws
       #   resp.replication_instance.replication_instance_private_ip_addresses #=> Array
       #   resp.replication_instance.replication_instance_private_ip_addresses[0] #=> String
       #   resp.replication_instance.publicly_accessible #=> Boolean
+      # @overload modify_replication_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_replication_instance(params = {}, options = {})
         req = build_request(:modify_replication_instance, params)
         req.send_request(options)
@@ -1582,8 +1582,8 @@ module Aws
       #   resp.replication_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.replication_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.replication_subnet_group.subnets[0].subnet_status #=> String
+      # @overload modify_replication_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_replication_subnet_group(params = {}, options = {})
         req = build_request(:modify_replication_subnet_group, params)
         req.send_request(options)
@@ -1614,8 +1614,8 @@ module Aws
       #   resp.refresh_schemas_status.status #=> String, one of "successful", "failed", "refreshing"
       #   resp.refresh_schemas_status.last_refresh_date #=> Time
       #   resp.refresh_schemas_status.last_failure_message #=> String
+      # @overload refresh_schemas(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def refresh_schemas(params = {}, options = {})
         req = build_request(:refresh_schemas, params)
         req.send_request(options)
@@ -1634,8 +1634,8 @@ module Aws
       #     resource_arn: "String", # required
       #     tag_keys: ["String"], # required
       #   })
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -1679,8 +1679,8 @@ module Aws
       #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
       #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
       #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+      # @overload start_replication_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_replication_task(params = {}, options = {})
         req = build_request(:start_replication_task, params)
         req.send_request(options)
@@ -1717,8 +1717,8 @@ module Aws
       #   resp.replication_task.replication_task_stats.tables_loading #=> Integer
       #   resp.replication_task.replication_task_stats.tables_queued #=> Integer
       #   resp.replication_task.replication_task_stats.tables_errored #=> Integer
+      # @overload stop_replication_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_replication_task(params = {}, options = {})
         req = build_request(:stop_replication_task, params)
         req.send_request(options)
@@ -1748,8 +1748,8 @@ module Aws
       #   resp.connection.last_failure_message #=> String
       #   resp.connection.endpoint_identifier #=> String
       #   resp.connection.replication_instance_identifier #=> String
+      # @overload test_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_connection(params = {}, options = {})
         req = build_request(:test_connection, params)
         req.send_request(options)

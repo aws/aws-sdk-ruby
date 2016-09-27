@@ -34,7 +34,7 @@ module Aws
 
       # Information about the accepter VPC. CIDR block information is not
       # returned when creating a VPC peering connection, or when describing a
-      # VPC peering connection that\'s in the `initiating-request` or
+      # VPC peering connection that's in the `initiating-request` or
       # `pending-acceptance` state.
       # @return [Types::VpcPeeringConnectionVpcInfo]
       def accepter_vpc_info

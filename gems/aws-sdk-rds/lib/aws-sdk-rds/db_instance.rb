@@ -447,7 +447,7 @@ module Aws
       #   **PostgreSQL**
       #
       #   The name of the database to create when the DB instance is created. If
-      #   this parameter is not specified, the default \"postgres\" database is
+      #   this parameter is not specified, the default "postgres" database is
       #   created in the DB instance.
       #
       #   Constraints:
@@ -585,7 +585,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option options [String] :master_user_password
       #   The password for the master database user. Can be any printable ASCII
-      #   character except \"/\", \"\"\", or \"@\".
+      #   character except "/", """, or "@".
       #
       #   Type: String
       #
@@ -619,14 +619,14 @@ module Aws
       # @option options [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with this DB instance.
       #
-      #   Default: The default EC2 VPC security group for the DB subnet group\'s
+      #   Default: The default EC2 VPC security group for the DB subnet group's
       #   VPC.
       # @option options [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in. For information on regions and Availability Zones, see [Regions
       #   and Availability Zones][1].
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -1097,7 +1097,7 @@ module Aws
       #   The Amazon EC2 Availability Zone that the Read Replica will be created
       #   in.
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -1250,9 +1250,9 @@ module Aws
       #   instance is deleted.
       #
       #   Note that when a DB instance is in a failure state and has a status of
-      #   \'failed\', \'incompatible-restore\', or \'incompatible-network\', it
+      #   'failed', 'incompatible-restore', or 'incompatible-network', it
       #   can only be deleted when the SkipFinalSnapshot parameter is set to
-      #   \"true\".
+      #   "true".
       #
       #   Specify `true` when deleting a Read Replica.
       #
@@ -1450,7 +1450,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
       # @option options [String] :master_user_password
       #   The new password for the DB instance master user. Can be any printable
-      #   ASCII character except \"/\", \"\"\", or \"@\".
+      #   ASCII character except "/", """, or "@".
       #
       #   Changing this parameter does not result in an outage and the change is
       #   asynchronously applied as soon as possible. Between the time of the
@@ -1568,7 +1568,7 @@ module Aws
       #
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the EngineVersion parameter that is a different major
-      #   version than the DB instance\'s current version.
+      #   version than the DB instance's current version.
       # @option options [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the DB instance during the maintenance window. Changing this parameter
@@ -2282,17 +2282,17 @@ module Aws
       #
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated and
+      #   If you don't specify a `SnapshotType` value, then both automated and
       #   manual snapshots are returned. Shared and public DB snapshots are not
       #   included in the returned results by default. You can include shared
       #   snapshots with these results by setting the `IncludeShared` parameter
       #   to `true`. You can include public snapshots with these results by
       #   setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
-      #   parameter doesn\'t apply when `SnapshotType` is set to `shared`. The
-      #   `IncludeShared` parameter doesn\'t apply when `SnapshotType` is set to
+      #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
+      #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
       # @option options [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.

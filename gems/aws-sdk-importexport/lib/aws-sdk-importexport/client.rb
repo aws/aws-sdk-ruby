@@ -143,8 +143,8 @@ module Aws
       #
       # @example Response structure
       #   resp.success #=> Boolean
+      # @overload cancel_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_job(params = {}, options = {})
         req = build_request(:cancel_job, params)
         req.send_request(options)
@@ -194,8 +194,8 @@ module Aws
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      # @overload create_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_job(params = {}, options = {})
         req = build_request(:create_job, params)
         req.send_request(options)
@@ -256,8 +256,8 @@ module Aws
       # @example Response structure
       #   resp.shipping_label_url #=> String
       #   resp.warning #=> String
+      # @overload get_shipping_label(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_shipping_label(params = {}, options = {})
         req = build_request(:get_shipping_label, params)
         req.send_request(options)
@@ -315,8 +315,8 @@ module Aws
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      # @overload get_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_status(params = {}, options = {})
         req = build_request(:get_status, params)
         req.send_request(options)
@@ -357,8 +357,8 @@ module Aws
       #   resp.jobs[0].is_canceled #=> Boolean
       #   resp.jobs[0].job_type #=> String, one of "Import", "Export"
       #   resp.is_truncated #=> Boolean
+      # @overload list_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs(params = {}, options = {})
         req = build_request(:list_jobs, params)
         req.send_request(options)
@@ -401,8 +401,8 @@ module Aws
       #   resp.artifact_list #=> Array
       #   resp.artifact_list[0].description #=> String
       #   resp.artifact_list[0].url #=> String
+      # @overload update_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_job(params = {}, options = {})
         req = build_request(:update_job, params)
         req.send_request(options)

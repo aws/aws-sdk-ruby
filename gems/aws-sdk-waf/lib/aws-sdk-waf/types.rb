@@ -31,7 +31,7 @@ module Aws
       #   evaluated. Rules with a lower value for `Priority` are evaluated
       #   before `Rules` with a higher value. The value must be a unique
       #   integer. If you add multiple `Rules` to a `WebACL`, the values
-      #   don\'t need to be consecutive.
+      #   don't need to be consecutive.
       #   @return [Integer]
       #
       # @!attribute [rw] rule_id
@@ -85,7 +85,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the ByteMatchSet. You can\'t
+      #   A friendly name or description of the ByteMatchSet. You can't
       #   change `Name` after you create a `ByteMatchSet`.
       #   @return [String]
       #
@@ -115,7 +115,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the ByteMatchSet. You can\'t
+      #   A friendly name or description of the ByteMatchSet. You can't
       #   change `Name` after you create a `ByteMatchSet`.
       #   @return [String]
       class ByteMatchSetSummary < Struct.new(
@@ -213,7 +213,7 @@ module Aws
       #   If `TargetString` includes alphabetic characters A-Z and a-z, note
       #   that the value is case sensitive.
       #
-      #   **If you\'re using the AWS WAF API**
+      #   **If you're using the AWS WAF API**
       #
       #   Specify a base64-encoded version of the value. The maximum length of
       #   the value before you base64-encode it is 50 bytes.
@@ -224,7 +224,7 @@ module Aws
       #   base64 encoding and include the resulting value, `QmFkQm90`, in the
       #   value of `TargetString`.
       #
-      #   **If you\'re using the AWS CLI or one of the AWS SDKs**
+      #   **If you're using the AWS CLI or one of the AWS SDKs**
       #
       #   The value that you want AWS WAF to search for. The SDK automatically
       #   base64 encodes the value.
@@ -238,12 +238,12 @@ module Aws
       #
       #   **CMD\_LINE**
       #
-      #   When you\'re concerned that attackers are injecting an operating
+      #   When you're concerned that attackers are injecting an operating
       #   system commandline command and using unusual formatting to disguise
       #   some or all of the command, use this option to perform the following
       #   transformations:
       #
-      #   * Delete the following characters: \\ \" \' ^
+      #   * Delete the following characters: \\ " ' ^
       #   * Delete spaces before the following characters: / (
       #   * Replace the following characters with a space: , ;
       #   * Replace multiple spaces with one space
@@ -270,7 +270,7 @@ module Aws
       #
       #   * Replaces `(ampersand)quot;` with `"`
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
-      #   * Replaces `(ampersand)lt;` with a \"less than\" symbol
+      #   * Replaces `(ampersand)lt;` with a "less than" symbol
       #   * Replaces `(ampersand)gt;` with `>`
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
@@ -288,7 +288,7 @@ module Aws
       #
       #   **NONE**
       #
-      #   Specify `NONE` if you don\'t want to perform any text
+      #   Specify `NONE` if you don't want to perform any text
       #   transformations.
       #   @return [String]
       #
@@ -300,7 +300,7 @@ module Aws
       #   **CONTAINS**
       #
       #   The specified part of the web request must include the value of
-      #   `TargetString`, but the location doesn\'t matter.
+      #   `TargetString`, but the location doesn't matter.
       #
       #   **CONTAINS\_WORD**
       #
@@ -353,7 +353,7 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description of the ByteMatchSet. You can\'t
+      #   A friendly name or description of the ByteMatchSet. You can't
       #   change `Name` after you create a `ByteMatchSet`.
       #   @return [String]
       #
@@ -389,7 +389,7 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description of the IPSet. You can\'t change
+      #   A friendly name or description of the IPSet. You can't change
       #   `Name` after you create the `IPSet`.
       #   @return [String]
       #
@@ -426,14 +426,14 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description of the Rule. You can\'t change the
+      #   A friendly name or description of the Rule. You can't change the
       #   name of a `Rule` after you create it.
       #   @return [String]
       #
       # @!attribute [rw] metric_name
       #   A friendly name or description for the metrics for this `Rule`. The
       #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-      #   name can\'t contain whitespace. You can\'t change the name of the
+      #   name can't contain whitespace. You can't change the name of the
       #   metric after you create the `Rule`.
       #   @return [String]
       #
@@ -470,7 +470,7 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description of the SizeConstraintSet. You can\'t
+      #   A friendly name or description of the SizeConstraintSet. You can't
       #   change `Name` after you create a `SizeConstraintSet`.
       #   @return [String]
       #
@@ -509,7 +509,7 @@ module Aws
       #       }
       # @!attribute [rw] name
       #   A friendly name or description for the SqlInjectionMatchSet that
-      #   you\'re creating. You can\'t change `Name` after you create the
+      #   you're creating. You can't change `Name` after you create the
       #   `SqlInjectionMatchSet`.
       #   @return [String]
       #
@@ -551,19 +551,19 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description of the WebACL. You can\'t change
+      #   A friendly name or description of the WebACL. You can't change
       #   `Name` after you create the `WebACL`.
       #   @return [String]
       #
       # @!attribute [rw] metric_name
       #   A friendly name or description for the metrics for this `WebACL`.
       #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
-      #   the name can\'t contain whitespace. You can\'t change `MetricName`
+      #   the name can't contain whitespace. You can't change `MetricName`
       #   after you create the `WebACL`.
       #   @return [String]
       #
       # @!attribute [rw] default_action
-      #   The action that you want AWS WAF to take when a request doesn\'t
+      #   The action that you want AWS WAF to take when a request doesn't
       #   match the criteria specified in any of the `Rule` objects that are
       #   associated with the `WebACL`.
       #   @return [Types::WafAction]
@@ -603,8 +603,8 @@ module Aws
       #         change_token: "ChangeToken", # required
       #       }
       # @!attribute [rw] name
-      #   A friendly name or description for the XssMatchSet that you\'re
-      #   creating. You can\'t change `Name` after you create the
+      #   A friendly name or description for the XssMatchSet that you're
+      #   creating. You can't change `Name` after you create the
       #   `XssMatchSet`.
       #   @return [String]
       #
@@ -1057,7 +1057,7 @@ module Aws
       #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
       #     to return a sample of requests.
       #   * `Default_Action`, which causes `GetSampledRequests` to return a
-      #     sample of the requests that didn\'t match any of the rules in the
+      #     sample of the requests that didn't match any of the rules in the
       #     specified `WebACL`.
       #   @return [String]
       #
@@ -1333,7 +1333,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the IPSet. You can\'t change the
+      #   A friendly name or description of the IPSet. You can't change the
       #   name of an `IPSet` after you create it.
       #   @return [String]
       #
@@ -1400,7 +1400,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the IPSet. You can\'t change the
+      #   A friendly name or description of the IPSet. You can't change the
       #   name of an `IPSet` after you create it.
       #   @return [String]
       class IPSetSummary < Struct.new(
@@ -1836,7 +1836,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The friendly name or description for the `Rule`. You can\'t change
+      #   The friendly name or description for the `Rule`. You can't change
       #   the name of a `Rule` after you create it.
       #   @return [String]
       #
@@ -1869,7 +1869,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the Rule. You can\'t change the
+      #   A friendly name or description of the Rule. You can't change the
       #   name of a `Rule` after you create it.
       #   @return [String]
       class RuleSummary < Struct.new(
@@ -1941,8 +1941,8 @@ module Aws
 
       # Specifies a constraint on the size of a part of the web request. AWS
       # WAF uses the `Size`, `ComparisonOperator`, and `FieldToMatch` to build
-      # an expression in the form of \"`Size` `ComparisonOperator` size in
-      # bytes of `FieldToMatch`\". If that expression is true, the
+      # an expression in the form of "`Size` `ComparisonOperator` size in
+      # bytes of `FieldToMatch`". If that expression is true, the
       # `SizeConstraint` is considered to match.
       # @note When making an API call, pass SizeConstraint
       #   data as a hash:
@@ -1972,17 +1972,17 @@ module Aws
       #
       #   **NONE**
       #
-      #   Specify `NONE` if you don\'t want to perform any text
+      #   Specify `NONE` if you don't want to perform any text
       #   transformations.
       #
       #   **CMD\_LINE**
       #
-      #   When you\'re concerned that attackers are injecting an operating
+      #   When you're concerned that attackers are injecting an operating
       #   system command line command and using unusual formatting to disguise
       #   some or all of the command, use this option to perform the following
       #   transformations:
       #
-      #   * Delete the following characters: \\ \" \' ^
+      #   * Delete the following characters: \\ " ' ^
       #   * Delete spaces before the following characters: / (
       #   * Replace the following characters with a space: , ;
       #   * Replace multiple spaces with one space
@@ -2009,7 +2009,7 @@ module Aws
       #
       #   * Replaces `(ampersand)quot;` with `"`
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
-      #   * Replaces `(ampersand)lt;` with a \"less than\" symbol
+      #   * Replaces `(ampersand)lt;` with a "less than" symbol
       #   * Replaces `(ampersand)gt;` with `>`
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
@@ -2029,8 +2029,8 @@ module Aws
       # @!attribute [rw] comparison_operator
       #   The type of comparison you want AWS WAF to perform. AWS WAF uses
       #   this in combination with the provided `Size` and `FieldToMatch` to
-      #   build an expression in the form of \"`Size` `ComparisonOperator`
-      #   size in bytes of `FieldToMatch`\". If that expression is true, the
+      #   build an expression in the form of "`Size` `ComparisonOperator`
+      #   size in bytes of `FieldToMatch`". If that expression is true, the
       #   `SizeConstraint` is considered to match.
       #
       #   **EQ**\: Used to test if the `Size` is equal to the size of the
@@ -2056,8 +2056,8 @@ module Aws
       #   The size in bytes that you want AWS WAF to compare against the size
       #   of the specified `FieldToMatch`. AWS WAF uses this in combination
       #   with `ComparisonOperator` and `FieldToMatch` to build an expression
-      #   in the form of \"`Size` `ComparisonOperator` size in bytes of
-      #   `FieldToMatch`\". If that expression is true, the `SizeConstraint`
+      #   in the form of "`Size` `ComparisonOperator` size in bytes of
+      #   `FieldToMatch`". If that expression is true, the `SizeConstraint`
       #   is considered to match.
       #
       #   Valid values for size are 0 - 21474836480 bytes (0 - 20 GB).
@@ -2155,8 +2155,8 @@ module Aws
       # @!attribute [rw] size_constraint
       #   Specifies a constraint on the size of a part of the web request. AWS
       #   WAF uses the `Size`, `ComparisonOperator`, and `FieldToMatch` to
-      #   build an expression in the form of \"`Size` `ComparisonOperator`
-      #   size in bytes of `FieldToMatch`\". If that expression is true, the
+      #   build an expression in the form of "`Size` `ComparisonOperator`
+      #   size in bytes of `FieldToMatch`". If that expression is true, the
       #   `SizeConstraint` is considered to match.
       #   @return [Types::SizeConstraint]
       class SizeConstraintSetUpdate < Struct.new(
@@ -2282,12 +2282,12 @@ module Aws
       #
       #   **CMD\_LINE**
       #
-      #   When you\'re concerned that attackers are injecting an operating
+      #   When you're concerned that attackers are injecting an operating
       #   system commandline command and using unusual formatting to disguise
       #   some or all of the command, use this option to perform the following
       #   transformations:
       #
-      #   * Delete the following characters: \\ \" \' ^
+      #   * Delete the following characters: \\ " ' ^
       #   * Delete spaces before the following characters: / (
       #   * Replace the following characters with a space: , ;
       #   * Replace multiple spaces with one space
@@ -2314,7 +2314,7 @@ module Aws
       #
       #   * Replaces `(ampersand)quot;` with `"`
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
-      #   * Replaces `(ampersand)lt;` with a \"less than\" symbol
+      #   * Replaces `(ampersand)lt;` with a "less than" symbol
       #   * Replaces `(ampersand)gt;` with `>`
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
@@ -2332,7 +2332,7 @@ module Aws
       #
       #   **NONE**
       #
-      #   Specify `NONE` if you don\'t want to perform any text
+      #   Specify `NONE` if you don't want to perform any text
       #   transformations.
       #   @return [String]
       class SqlInjectionMatchTuple < Struct.new(
@@ -2705,7 +2705,7 @@ module Aws
       #   specifies the action that you want AWS WAF to perform when a web
       #   request matches all of the conditions in a rule. For the default
       #   action in a `WebACL`, specifies the action that you want AWS WAF to
-      #   take when a web request doesn\'t match all of the conditions in any
+      #   take when a web request doesn't match all of the conditions in any
       #   of the rules in a `WebACL`.
       #   @return [Types::WafAction]
       class UpdateWebACLRequest < Struct.new(
@@ -2787,7 +2787,7 @@ module Aws
       # the action that you want AWS WAF to perform when a web request matches
       # all of the conditions in a rule. For the default action in a `WebACL`,
       # specifies the action that you want AWS WAF to take when a web request
-      # doesn\'t match all of the conditions in any of the rules in a
+      # doesn't match all of the conditions in any of the rules in a
       # `WebACL`.
       # @note When making an API call, pass WafAction
       #   data as a hash:
@@ -2804,7 +2804,7 @@ module Aws
       #   * `COUNT`\: AWS WAF increments a counter of the requests that match
       #     all of the conditions in the rule. AWS WAF then continues to
       #     inspect the web request based on the remaining rules in the web
-      #     ACL. You can\'t specify `COUNT` for the default action for a
+      #     ACL. You can't specify `COUNT` for the default action for a
       #     `WebACL`.
       #   @return [String]
       class WafAction < Struct.new(
@@ -2832,7 +2832,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the `WebACL`. You can\'t change
+      #   A friendly name or description of the `WebACL`. You can't change
       #   the name of a `WebACL` after you create it.
       #   @return [String]
       #
@@ -2868,7 +2868,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   A friendly name or description of the WebACL. You can\'t change the
+      #   A friendly name or description of the WebACL. You can't change the
       #   name of a `WebACL` after you create it.
       #   @return [String]
       class WebACLSummary < Struct.new(
@@ -3023,12 +3023,12 @@ module Aws
       #
       #   **CMD\_LINE**
       #
-      #   When you\'re concerned that attackers are injecting an operating
+      #   When you're concerned that attackers are injecting an operating
       #   system commandline command and using unusual formatting to disguise
       #   some or all of the command, use this option to perform the following
       #   transformations:
       #
-      #   * Delete the following characters: \\ \" \' ^
+      #   * Delete the following characters: \\ " ' ^
       #   * Delete spaces before the following characters: / (
       #   * Replace the following characters with a space: , ;
       #   * Replace multiple spaces with one space
@@ -3055,7 +3055,7 @@ module Aws
       #
       #   * Replaces `(ampersand)quot;` with `"`
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
-      #   * Replaces `(ampersand)lt;` with a \"less than\" symbol
+      #   * Replaces `(ampersand)lt;` with a "less than" symbol
       #   * Replaces `(ampersand)gt;` with `>`
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
@@ -3073,7 +3073,7 @@ module Aws
       #
       #   **NONE**
       #
-      #   Specify `NONE` if you don\'t want to perform any text
+      #   Specify `NONE` if you don't want to perform any text
       #   transformations.
       #   @return [String]
       class XssMatchTuple < Struct.new(

@@ -160,8 +160,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload add_attributes_to_findings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_attributes_to_findings(params = {}, options = {})
         req = build_request(:add_attributes_to_findings, params)
         req.send_request(options)
@@ -194,8 +194,8 @@ module Aws
       #
       # @example Response structure
       #   resp.assessment_target_arn #=> String
+      # @overload create_assessment_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_assessment_target(params = {}, options = {})
         req = build_request(:create_assessment_target, params)
         req.send_request(options)
@@ -240,8 +240,8 @@ module Aws
       #
       # @example Response structure
       #   resp.assessment_template_arn #=> String
+      # @overload create_assessment_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_assessment_template(params = {}, options = {})
         req = build_request(:create_assessment_template, params)
         req.send_request(options)
@@ -254,10 +254,10 @@ module Aws
       # information, see CreateAssessmentTarget.
       # @option params [required, Array<Types::ResourceGroupTag>] :resource_group_tags
       #   A collection of keys and an array of possible values,
-      #   \'\[\\\{\"key\":\"key1\",\"values\":\[\"Value1\",\"Value2\"\]\\},\\\{\"key\":\"Key2\",\"values\":\[\"Value3\"\]\\}\]\'.
+      #   '\[\\\{"key":"key1","values":\["Value1","Value2"\]\\},\\\{"key":"Key2","values":\["Value3"\]\\}\]'.
       #
       #   For
-      #   example,\'\[\\\{\"key\":\"Name\",\"values\":\[\"TestEC2Instance\"\]\\}\]\'.
+      #   example,'\[\\\{"key":"Name","values":\["TestEC2Instance"\]\\}\]'.
       # @return [Types::CreateResourceGroupResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateResourceGroupResponse#resource_group_arn #resourceGroupArn} => String
@@ -274,8 +274,8 @@ module Aws
       #
       # @example Response structure
       #   resp.resource_group_arn #=> String
+      # @overload create_resource_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_resource_group(params = {}, options = {})
         req = build_request(:create_resource_group, params)
         req.send_request(options)
@@ -291,8 +291,8 @@ module Aws
       #   resp = client.delete_assessment_run({
       #     assessment_run_arn: "Arn", # required
       #   })
+      # @overload delete_assessment_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_assessment_run(params = {}, options = {})
         req = build_request(:delete_assessment_run, params)
         req.send_request(options)
@@ -308,8 +308,8 @@ module Aws
       #   resp = client.delete_assessment_target({
       #     assessment_target_arn: "Arn", # required
       #   })
+      # @overload delete_assessment_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_assessment_target(params = {}, options = {})
         req = build_request(:delete_assessment_target, params)
         req.send_request(options)
@@ -326,8 +326,8 @@ module Aws
       #   resp = client.delete_assessment_template({
       #     assessment_template_arn: "Arn", # required
       #   })
+      # @overload delete_assessment_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_assessment_template(params = {}, options = {})
         req = build_request(:delete_assessment_template, params)
         req.send_request(options)
@@ -377,8 +377,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_assessment_runs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_assessment_runs(params = {}, options = {})
         req = build_request(:describe_assessment_runs, params)
         req.send_request(options)
@@ -409,8 +409,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_assessment_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_assessment_targets(params = {}, options = {})
         req = build_request(:describe_assessment_targets, params)
         req.send_request(options)
@@ -446,8 +446,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_assessment_templates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_assessment_templates(params = {}, options = {})
         req = build_request(:describe_assessment_templates, params)
         req.send_request(options)
@@ -465,8 +465,8 @@ module Aws
       #   resp.role_arn #=> String
       #   resp.valid #=> Boolean
       #   resp.registered_at #=> Time
+      # @overload describe_cross_account_access_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cross_account_access_role(params = {}, options = {})
         req = build_request(:describe_cross_account_access_role, params)
         req.send_request(options)
@@ -524,8 +524,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_findings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_findings(params = {}, options = {})
         req = build_request(:describe_findings, params)
         req.send_request(options)
@@ -555,8 +555,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_resource_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_resource_groups(params = {}, options = {})
         req = build_request(:describe_resource_groups, params)
         req.send_request(options)
@@ -590,8 +590,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload describe_rules_packages(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_rules_packages(params = {}, options = {})
         req = build_request(:describe_rules_packages, params)
         req.send_request(options)
@@ -616,8 +616,8 @@ module Aws
       #   resp.telemetry_metadata[0].message_type #=> String
       #   resp.telemetry_metadata[0].count #=> Integer
       #   resp.telemetry_metadata[0].data_size #=> Integer
+      # @overload get_telemetry_metadata(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_telemetry_metadata(params = {}, options = {})
         req = build_request(:get_telemetry_metadata, params)
         req.send_request(options)
@@ -630,7 +630,7 @@ module Aws
       #   list.
       # @option params [Types::AgentFilter] :filter
       #   You can use this parameter to specify a subset of data to be included
-      #   in the action\'s response.
+      #   in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute, any
@@ -674,8 +674,8 @@ module Aws
       #   resp.assessment_run_agents[0].telemetry_metadata[0].count #=> Integer
       #   resp.assessment_run_agents[0].telemetry_metadata[0].data_size #=> Integer
       #   resp.next_token #=> String
+      # @overload list_assessment_run_agents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_assessment_run_agents(params = {}, options = {})
         req = build_request(:list_assessment_run_agents, params)
         req.send_request(options)
@@ -688,7 +688,7 @@ module Aws
       #   you want to list.
       # @option params [Types::AssessmentRunFilter] :filter
       #   You can use this parameter to specify a subset of data to be included
-      #   in the action\'s response.
+      #   in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute, any
@@ -740,8 +740,8 @@ module Aws
       #   resp.assessment_run_arns #=> Array
       #   resp.assessment_run_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_assessment_runs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_assessment_runs(params = {}, options = {})
         req = build_request(:list_assessment_runs, params)
         req.send_request(options)
@@ -756,7 +756,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/inspector/latest/userguide/inspector_applications.html
       # @option params [Types::AssessmentTargetFilter] :filter
       #   You can use this parameter to specify a subset of data to be included
-      #   in the action\'s response.
+      #   in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute, any
@@ -789,8 +789,8 @@ module Aws
       #   resp.assessment_target_arns #=> Array
       #   resp.assessment_target_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_assessment_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_assessment_targets(params = {}, options = {})
         req = build_request(:list_assessment_targets, params)
         req.send_request(options)
@@ -803,7 +803,7 @@ module Aws
       #   templates you want to list.
       # @option params [Types::AssessmentTemplateFilter] :filter
       #   You can use this parameter to specify a subset of data to be included
-      #   in the action\'s response.
+      #   in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute, any
@@ -842,8 +842,8 @@ module Aws
       #   resp.assessment_template_arns #=> Array
       #   resp.assessment_template_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_assessment_templates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_assessment_templates(params = {}, options = {})
         req = build_request(:list_assessment_templates, params)
         req.send_request(options)
@@ -885,8 +885,8 @@ module Aws
       #   resp.subscriptions[0].event_subscriptions[0].event #=> String, one of "ASSESSMENT_RUN_STARTED", "ASSESSMENT_RUN_COMPLETED", "ASSESSMENT_RUN_STATE_CHANGED", "FINDING_REPORTED", "OTHER"
       #   resp.subscriptions[0].event_subscriptions[0].subscribed_at #=> Time
       #   resp.next_token #=> String
+      # @overload list_event_subscriptions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_event_subscriptions(params = {}, options = {})
         req = build_request(:list_event_subscriptions, params)
         req.send_request(options)
@@ -899,7 +899,7 @@ module Aws
       #   want to list.
       # @option params [Types::FindingFilter] :filter
       #   You can use this parameter to specify a subset of data to be included
-      #   in the action\'s response.
+      #   in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute, any
@@ -953,8 +953,8 @@ module Aws
       #   resp.finding_arns #=> Array
       #   resp.finding_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_findings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_findings(params = {}, options = {})
         req = build_request(:list_findings, params)
         req.send_request(options)
@@ -986,8 +986,8 @@ module Aws
       #   resp.rules_package_arns #=> Array
       #   resp.rules_package_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_rules_packages(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_rules_packages(params = {}, options = {})
         req = build_request(:list_rules_packages, params)
         req.send_request(options)
@@ -1010,8 +1010,8 @@ module Aws
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -1048,8 +1048,8 @@ module Aws
       #   resp.agent_previews[0].agent_id #=> String
       #   resp.agent_previews[0].auto_scaling_group #=> String
       #   resp.next_token #=> String
+      # @overload preview_agents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def preview_agents(params = {}, options = {})
         req = build_request(:preview_agents, params)
         req.send_request(options)
@@ -1068,8 +1068,8 @@ module Aws
       #   resp = client.register_cross_account_access_role({
       #     role_arn: "Arn", # required
       #   })
+      # @overload register_cross_account_access_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_cross_account_access_role(params = {}, options = {})
         req = build_request(:register_cross_account_access_role, params)
         req.send_request(options)
@@ -1098,8 +1098,8 @@ module Aws
       #   resp.failed_items #=> Hash
       #   resp.failed_items["Arn"].failure_code #=> String, one of "INVALID_ARN", "DUPLICATE_ARN", "ITEM_DOES_NOT_EXIST", "ACCESS_DENIED", "LIMIT_EXCEEDED", "INTERNAL_ERROR"
       #   resp.failed_items["Arn"].retryable #=> Boolean
+      # @overload remove_attributes_from_findings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_attributes_from_findings(params = {}, options = {})
         req = build_request(:remove_attributes_from_findings, params)
         req.send_request(options)
@@ -1124,8 +1124,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload set_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_tags_for_resource(params = {}, options = {})
         req = build_request(:set_tags_for_resource, params)
         req.send_request(options)
@@ -1153,8 +1153,8 @@ module Aws
       #
       # @example Response structure
       #   resp.assessment_run_arn #=> String
+      # @overload start_assessment_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_assessment_run(params = {}, options = {})
         req = build_request(:start_assessment_run, params)
         req.send_request(options)
@@ -1170,8 +1170,8 @@ module Aws
       #   resp = client.stop_assessment_run({
       #     assessment_run_arn: "Arn", # required
       #   })
+      # @overload stop_assessment_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_assessment_run(params = {}, options = {})
         req = build_request(:stop_assessment_run, params)
         req.send_request(options)
@@ -1194,8 +1194,8 @@ module Aws
       #     event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
       #     topic_arn: "Arn", # required
       #   })
+      # @overload subscribe_to_event(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def subscribe_to_event(params = {}, options = {})
         req = build_request(:subscribe_to_event, params)
         req.send_request(options)
@@ -1218,8 +1218,8 @@ module Aws
       #     event: "ASSESSMENT_RUN_STARTED", # required, accepts ASSESSMENT_RUN_STARTED, ASSESSMENT_RUN_COMPLETED, ASSESSMENT_RUN_STATE_CHANGED, FINDING_REPORTED, OTHER
       #     topic_arn: "Arn", # required
       #   })
+      # @overload unsubscribe_from_event(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unsubscribe_from_event(params = {}, options = {})
         req = build_request(:unsubscribe_from_event, params)
         req.send_request(options)
@@ -1242,8 +1242,8 @@ module Aws
       #     assessment_target_name: "AssessmentTargetName", # required
       #     resource_group_arn: "Arn", # required
       #   })
+      # @overload update_assessment_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_assessment_target(params = {}, options = {})
         req = build_request(:update_assessment_target, params)
         req.send_request(options)

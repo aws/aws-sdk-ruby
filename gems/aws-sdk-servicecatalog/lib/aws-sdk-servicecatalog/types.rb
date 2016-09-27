@@ -34,13 +34,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] id
@@ -77,13 +77,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] id
@@ -122,13 +122,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] product_id
@@ -140,7 +140,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] path_id
-      #   The identifier of the path for this product\'s provisioning. This
+      #   The identifier of the path for this product's provisioning. This
       #   value is optional if the product has a default path, and is required
       #   if there is more than one path for the specified product.
       #   @return [String]
@@ -187,19 +187,19 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] id
       #   The record identifier of the ProvisionedProduct object for which to
       #   retrieve output information. This is the `RecordDetail.RecordId`
-      #   obtained from the request operation\'s response.
+      #   obtained from the request operation's response.
       #   @return [String]
       #
       # @!attribute [rw] page_token
@@ -280,13 +280,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] product_id
@@ -342,13 +342,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] search_filter
@@ -469,7 +469,7 @@ module Aws
       # @!attribute [rw] has_default_path
       #   A value of `false` indicates that the product does not have a
       #   default path, while a value of `true` indicates that it does. If
-      #   it\'s false, call ListLaunchPaths to disambiguate between paths. If
+      #   it's false, call ListLaunchPaths to disambiguate between paths. If
       #   true, ListLaunchPaths is not required, and the output of the
       #   ProductViewSummary operation can be used directly with
       #   DescribeProvisioningParameters.
@@ -528,13 +528,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] product_id
@@ -546,7 +546,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] path_id
-      #   The identifier of the path for this product\'s provisioning. This
+      #   The identifier of the path for this product's provisioning. This
       #   value is optional if the product has a default path, and is required
       #   if there is more than one path for the specified product.
       #   @return [String]
@@ -780,7 +780,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] path_id
-      #   The identifier of the path for this product\'s provisioning.
+      #   The identifier of the path for this product's provisioning.
       #   @return [String]
       #
       # @!attribute [rw] record_errors
@@ -867,13 +867,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] page_size
@@ -923,13 +923,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] filters
@@ -1049,13 +1049,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       class TerminateProvisionedProductInput < Struct.new(
         :provisioned_product_name,
@@ -1099,13 +1099,13 @@ module Aws
       # @!attribute [rw] accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
       # @!attribute [rw] provisioned_product_name

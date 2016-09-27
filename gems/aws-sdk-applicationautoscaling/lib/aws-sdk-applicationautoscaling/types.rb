@@ -758,7 +758,7 @@ module Aws
       # An object representing a step adjustment for a
       # StepScalingPolicyConfiguration. Describes an adjustment based on the
       # difference between the value of the aggregated CloudWatch metric and
-      # the breach threshold that you\'ve defined for the alarm.
+      # the breach threshold that you've defined for the alarm.
       #
       # For the following examples, suppose that you have an alarm with a
       # breach threshold of 50:
@@ -773,7 +773,7 @@ module Aws
       #
       # There are a few rules for the step adjustments for your step policy:
       #
-      # * The ranges of your step adjustments can\'t overlap or have a gap.
+      # * The ranges of your step adjustments can't overlap or have a gap.
       #
       # * At most one step adjustment can have a null lower bound. If one step
       #   adjustment has a negative lower bound, then there must be a step
@@ -783,7 +783,7 @@ module Aws
       #   adjustment has a positive upper bound, then there must be a step
       #   adjustment with a null upper bound.
       #
-      # * The upper and lower bound can\'t be null in the same step
+      # * The upper and lower bound can't be null in the same step
       #   adjustment.
       # @note When making an API call, pass StepAdjustment
       #   data as a hash:
@@ -880,7 +880,7 @@ module Aws
       #
       #   For scale in policies, the `Cooldown` period is used to block
       #   subsequent scale in requests until it has expired. The intention is
-      #   to scale in conservatively to protect your application\'s
+      #   to scale in conservatively to protect your application's
       #   availability. However, if another alarm triggers a scale out policy
       #   during the `Cooldown` period after a scale-in, Application Auto
       #   Scaling scales out your scalable target immediately.

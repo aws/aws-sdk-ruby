@@ -136,12 +136,12 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to
-      #   write to a user\'s log group.
+      #   write to a user's log group.
       #   @return [String]
       #
       # @!attribute [rw] kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
-      #   CloudTrail. The value can be a an alias name prefixed by \"alias/\",
+      #   CloudTrail. The value can be a an alias name prefixed by "alias/",
       #   a fully specified ARN to an alias, a fully specified ARN to a key,
       #   or a globally unique identifier.
       #
@@ -229,7 +229,7 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to
-      #   write to a user\'s log group.
+      #   write to a user's log group.
       #   @return [String]
       #
       # @!attribute [rw] kms_key_id
@@ -423,13 +423,13 @@ module Aws
       #
       # @!attribute [rw] latest_delivery_time
       #   Specifies the date and time that CloudTrail last delivered log files
-      #   to an account\'s Amazon S3 bucket.
+      #   to an account's Amazon S3 bucket.
       #   @return [Time]
       #
       # @!attribute [rw] latest_notification_time
       #   Specifies the date and time of the most recent Amazon SNS
       #   notification that CloudTrail has written a new log file to an
-      #   account\'s Amazon S3 bucket.
+      #   account's Amazon S3 bucket.
       #   @return [Time]
       #
       # @!attribute [rw] start_logging_time
@@ -454,7 +454,7 @@ module Aws
       #
       # @!attribute [rw] latest_digest_delivery_time
       #   Specifies the date and time that CloudTrail last delivered a digest
-      #   file to an account\'s Amazon S3 bucket.
+      #   file to an account's Amazon S3 bucket.
       #   @return [Time]
       #
       # @!attribute [rw] latest_digest_delivery_error
@@ -672,8 +672,8 @@ module Aws
       #   The token to use to get the next page of results after a previous
       #   API call. This token must be passed in with the same parameters that
       #   were specified in the the original call. For example, if the
-      #   original call specified an AttributeKey of \'Username\' with a value
-      #   of \'root\', the call with NextToken should include those same
+      #   original call specified an AttributeKey of 'Username' with a value
+      #   of 'root', the call with NextToken should include those same
       #   parameters.
       #   @return [String]
       class LookupEventsRequest < Struct.new(
@@ -697,7 +697,7 @@ module Aws
       #   API call. If the token does not appear, there are no more results to
       #   return. The token must be passed in with the same parameters as the
       #   previous call. For example, if the original call specified an
-      #   AttributeKey of \'Username\' with a value of \'root\', the call with
+      #   AttributeKey of 'Username' with a value of 'root', the call with
       #   NextToken should include those same parameters.
       #   @return [String]
       class LookupEventsResponse < Struct.new(
@@ -780,8 +780,8 @@ module Aws
       # @!attribute [rw] resource_name
       #   The name of the resource referenced by the event returned. These are
       #   user-created names whose values will depend on the environment. For
-      #   example, the resource name might be \"auto-scaling-test-group\" for
-      #   an Auto Scaling Group or \"i-1234567\" for an EC2 Instance.
+      #   example, the resource name might be "auto-scaling-test-group" for
+      #   an Auto Scaling Group or "i-1234567" for an EC2 Instance.
       #   @return [String]
       class Resource < Struct.new(
         :resource_type,
@@ -944,7 +944,7 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to
-      #   write to a user\'s log group.
+      #   write to a user's log group.
       #   @return [String]
       #
       # @!attribute [rw] kms_key_id
@@ -1074,12 +1074,12 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to
-      #   write to a user\'s log group.
+      #   write to a user's log group.
       #   @return [String]
       #
       # @!attribute [rw] kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
-      #   CloudTrail. The value can be a an alias name prefixed by \"alias/\",
+      #   CloudTrail. The value can be a an alias name prefixed by "alias/",
       #   a fully specified ARN to an alias, a fully specified ARN to a key,
       #   or a globally unique identifier.
       #
@@ -1167,7 +1167,7 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to
-      #   write to a user\'s log group.
+      #   write to a user's log group.
       #   @return [String]
       #
       # @!attribute [rw] kms_key_id

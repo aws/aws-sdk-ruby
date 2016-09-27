@@ -150,7 +150,7 @@ module Aws
       #
       # For federation, you can, for example, grant single sign-on access to
       # the AWS Management Console. If you already have an identity and
-      # authentication system in your corporate network, you don\'t have to
+      # authentication system in your corporate network, you don't have to
       # recreate user identities in AWS in order to grant those user
       # identities access to AWS. Instead, after a user has been
       # authenticated, you call `AssumeRole` (and specify the role with the
@@ -166,7 +166,7 @@ module Aws
       #
       # The temporary security credentials created by `AssumeRole` can be used
       # to make API calls to any AWS service with the following exception: you
-      # cannot call the STS service\'s `GetFederationToken` or
+      # cannot call the STS service's `GetFederationToken` or
       # `GetSessionToken` APIs.
       #
       # Optionally, you can pass an IAM access policy to this operation. If
@@ -185,18 +185,18 @@ module Aws
       # the *IAM User Guide*.
       #
       # To assume a role, your AWS account must be trusted by the role. The
-      # trust relationship is defined in the role\'s trust policy when the
+      # trust relationship is defined in the role's trust policy when the
       # role is created. That trust policy states which accounts are allowed
-      # to delegate access to this account\'s role.
+      # to delegate access to this account's role.
       #
       # The user who wants to access the role must also have permissions
-      # delegated from the role\'s administrator. If the user is in a
-      # different account than the role, then the user\'s administrator must
+      # delegated from the role's administrator. If the user is in a
+      # different account than the role, then the user's administrator must
       # attach a policy that allows the user to call AssumeRole on the ARN of
       # the role in the other account. If the user is in the same account as
       # the role, then you can either attach a policy to the user (identical
       # to the previous different account user), or you can add the user as a
-      # principal directly in the role\'s trust policy
+      # principal directly in the role's trust policy
       #
       # **Using MFA with AssumeRole**
       #
@@ -217,7 +217,7 @@ module Aws
       #
       # To use MFA with `AssumeRole`, you pass values for the `SerialNumber`
       # and `TokenCode` parameters. The `SerialNumber` value identifies the
-      # user\'s hardware or virtual MFA device. The `TokenCode` is the
+      # user's hardware or virtual MFA device. The `TokenCode` is the
       # time-based one-time password (TOTP) that the MFA devices produces.
       #
       #
@@ -298,11 +298,11 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_enable-console-custom-url.html
       # @option params [String] :external_id
       #   A unique identifier that is used by third parties when assuming roles
-      #   in their customers\' accounts. For each role that the third party can
-      #   assume, they should instruct their customers to ensure the role\'s
+      #   in their customers' accounts. For each role that the third party can
+      #   assume, they should instruct their customers to ensure the role's
       #   trust policy checks for the external ID that the third party
       #   generated. Each time the third party assumes the role, they should
-      #   pass the customer\'s external ID. The external ID is useful in order
+      #   pass the customer's external ID. The external ID is useful in order
       #   to help third parties bind a role to the customer who created it. For
       #   more information about the external ID, see [How to Use an External ID
       #   When Granting Access to Your AWS Resources to a Third Party][1] in the
@@ -334,7 +334,7 @@ module Aws
       #   being assumed requires MFA (that is, if the policy includes a
       #   condition that tests for MFA). If the role being assumed requires MFA
       #   and if the `TokenCode` value is missing or expired, the `AssumeRole`
-      #   call returns an \"access denied\" error.
+      #   call returns an "access denied" error.
       #
       #   The format for this parameter, as described by its regex pattern, is a
       #   sequence of six numeric digits.
@@ -363,8 +363,8 @@ module Aws
       #   resp.assumed_role_user.assumed_role_id #=> String
       #   resp.assumed_role_user.arn #=> String
       #   resp.packed_policy_size #=> Integer
+      # @overload assume_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assume_role(params = {}, options = {})
         req = build_request(:assume_role, params)
         req.send_request(options)
@@ -386,13 +386,13 @@ module Aws
       #
       # The temporary security credentials are valid for the duration that you
       # specified when calling `AssumeRole`, or until the time specified in
-      # the SAML authentication response\'s `SessionNotOnOrAfter` value,
+      # the SAML authentication response's `SessionNotOnOrAfter` value,
       # whichever is shorter. The duration can be from 900 seconds (15
       # minutes) to a maximum of 3600 seconds (1 hour). The default is 1 hour.
       #
       # The temporary security credentials created by `AssumeRoleWithSAML` can
       # be used to make API calls to any AWS service with the following
-      # exception: you cannot call the STS service\'s `GetFederationToken` or
+      # exception: you cannot call the STS service's `GetFederationToken` or
       # `GetSessionToken` APIs.
       #
       # Optionally, you can pass an IAM access policy to this operation. If
@@ -423,14 +423,12 @@ module Aws
       # the metadata document that is uploaded for the SAML provider entity
       # for your identity provider.
       #
-      # <important markdown="1"> Calling `AssumeRoleWithSAML` can result in an entry in your AWS
+      # Calling `AssumeRoleWithSAML` can result in an entry in your AWS
       # CloudTrail logs. The entry includes the value in the `NameID` element
       # of the SAML assertion. We recommend that you use a NameIDType that is
       # not associated with any personally identifiable information (PII). For
       # example, you could instead use the Persistent Identifier
       # (`urn:oasis:names:tc:SAML:2.0:nameid-format:persistent`).
-      #
-      #  </important>
       #
       # For more information, see the following resources:
       #
@@ -503,7 +501,7 @@ module Aws
       #   The duration, in seconds, of the role session. The value can range
       #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
       #   the value is set to 3600 seconds. An expiration can also be specified
-      #   in the SAML authentication response\'s `SessionNotOnOrAfter` value.
+      #   in the SAML authentication response's `SessionNotOnOrAfter` value.
       #   The actual expiration time is whichever value is shorter.
       #
       #   <note markdown="1"> This is separate from the duration of a console session that you might
@@ -552,8 +550,8 @@ module Aws
       #   resp.issuer #=> String
       #   resp.audience #=> String
       #   resp.name_qualifier #=> String
+      # @overload assume_role_with_saml(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assume_role_with_saml(params = {}, options = {})
         req = build_request(:assume_role_with_saml, params)
         req.send_request(options)
@@ -599,7 +597,7 @@ module Aws
       # The temporary security credentials created by
       # `AssumeRoleWithWebIdentity` can be used to make API calls to any AWS
       # service with the following exception: you cannot call the STS
-      # service\'s `GetFederationToken` or `GetSessionToken` APIs.
+      # service's `GetFederationToken` or `GetSessionToken` APIs.
       #
       # Optionally, you can pass an IAM access policy to this operation. If
       # you choose not to pass a policy, the temporary security credentials
@@ -621,16 +619,14 @@ module Aws
       # role that the application can assume. The role that your application
       # assumes must trust the identity provider that is associated with the
       # identity token. In other words, the identity provider must be
-      # specified in the role\'s trust policy.
+      # specified in the role's trust policy.
       #
-      # <important markdown="1"> Calling `AssumeRoleWithWebIdentity` can result in an entry in your AWS
+      # Calling `AssumeRoleWithWebIdentity` can result in an entry in your AWS
       # CloudTrail logs. The entry includes the [Subject][8] of the provided
       # Web Identity Token. We recommend that you avoid using any personally
       # identifiable information (PII) in this field. For example, you could
       # instead use a GUID or a pairwise identifier, as [suggested in the OIDC
       # specification][9].
-      #
-      #  </important>
       #
       # For more information about how to use web identity federation and the
       # `AssumeRoleWithWebIdentity` API, see the following resources:
@@ -778,8 +774,8 @@ module Aws
       #   resp.packed_policy_size #=> Integer
       #   resp.provider #=> String
       #   resp.audience #=> String
+      # @overload assume_role_with_web_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assume_role_with_web_identity(params = {}, options = {})
         req = build_request(:assume_role_with_web_identity, params)
         req.send_request(options)
@@ -820,7 +816,7 @@ module Aws
       #
       # * The requested resource.
       #
-      # * The values of condition keys in the context of the user\'s request.
+      # * The values of condition keys in the context of the user's request.
       #
       #
       #
@@ -838,8 +834,8 @@ module Aws
       #
       # @example Response structure
       #   resp.decoded_message #=> String
+      # @overload decode_authorization_message(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def decode_authorization_message(params = {}, options = {})
         req = build_request(:decode_authorization_message, params)
         req.send_request(options)
@@ -860,8 +856,8 @@ module Aws
       #   resp.user_id #=> String
       #   resp.account #=> String
       #   resp.arn #=> String
+      # @overload get_caller_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_caller_identity(params = {}, options = {})
         req = build_request(:get_caller_identity, params)
         req.send_request(options)
@@ -929,7 +925,7 @@ module Aws
       # evaluates the policy attached to the federated user in combination
       # with the policy or policies attached to the IAM user whose credentials
       # were used to call `GetFederationToken`. AWS allows the federated
-      # user\'s request only when both the federated user <i> <b>and</b> </i>
+      # user's request only when both the federated user <i> <b>and</b> </i>
       # the IAM user are explicitly allowed to perform the requested action.
       # The passed policy cannot grant more permissions than those that are
       # defined in the IAM user policy.
@@ -938,7 +934,7 @@ module Aws
       # credentials are used to call `GetFederationToken` are designed to
       # allow access to all the actions and resources that any federated user
       # will need. Then, for individual users, you pass a policy to the
-      # operation that scopes down the permissions to a level that\'s
+      # operation that scopes down the permissions to a level that's
       # appropriate to that individual user, using a policy that allows only a
       # subset of permissions that are granted to the IAM user.
       #
@@ -1040,8 +1036,8 @@ module Aws
       #   resp.federated_user.federated_user_id #=> String
       #   resp.federated_user.arn #=> String
       #   resp.packed_policy_size #=> Integer
+      # @overload get_federation_token(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_federation_token(params = {}, options = {})
         req = build_request(:get_federation_token, params)
         req.send_request(options)
@@ -1119,7 +1115,7 @@ module Aws
       #   `GAHT12345678`) or an Amazon Resource Name (ARN) for a virtual device
       #   (such as `arn:aws:iam::123456789012:mfa/user`). You can find the
       #   device for an IAM user by going to the AWS Management Console and
-      #   viewing the user\'s security credentials.
+      #   viewing the user's security credentials.
       #
       #   The format for this parameter, as described by its regex pattern, is a
       #   string of characters consisting of upper- and lower-case alphanumeric
@@ -1130,7 +1126,7 @@ module Aws
       #   policy requires the IAM user to submit an MFA code, specify this
       #   value. If MFA authentication is required, and the user does not
       #   provide a code when requesting a set of temporary security
-      #   credentials, the user will receive an \"access denied\" response when
+      #   credentials, the user will receive an "access denied" response when
       #   requesting resources that require MFA authentication.
       #
       #   The format for this parameter, as described by its regex pattern, is a
@@ -1151,8 +1147,8 @@ module Aws
       #   resp.credentials.secret_access_key #=> String
       #   resp.credentials.session_token #=> String
       #   resp.credentials.expiration #=> Time
+      # @overload get_session_token(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_session_token(params = {}, options = {})
         req = build_request(:get_session_token, params)
         req.send_request(options)

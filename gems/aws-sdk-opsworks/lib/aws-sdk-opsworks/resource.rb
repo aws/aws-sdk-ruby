@@ -26,7 +26,7 @@ module Aws
       # @option options [required, String] :name
       #   The stack name.
       # @option options [required, String] :region
-      #   The stack\'s AWS region, such as \"ap-south-1\". For more information
+      #   The stack's AWS region, such as "ap-south-1". For more information
       #   about Amazon regions, see [Regions and Endpoints][1].
       #
       #
@@ -34,7 +34,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option options [String] :vpc_id
       #   The ID of the VPC that the stack is to be launched into. The VPC must
-      #   be in the stack\'s region. All instances are launched into this VPC.
+      #   be in the stack's region. All instances are launched into this VPC.
       #   You cannot change the ID later.
       #
       #   * If your account supports EC2-Classic, the default value is `no VPC`.
@@ -68,7 +68,7 @@ module Aws
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
       # @option options [required, String] :service_role_arn
-      #   The stack\'s AWS Identity and Access Management (IAM) role, which
+      #   The stack's AWS Identity and Access Management (IAM) role, which
       #   allows AWS OpsWorks to work with AWS resources on your behalf. You
       #   must set this parameter to the Amazon Resource Name (ARN) for an
       #   existing IAM role. For more information about IAM ARNs, see [Using
@@ -79,14 +79,14 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option options [required, String] :default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
-      #   profile for all of the stack\'s EC2 instances. For more information
+      #   profile for all of the stack's EC2 instances. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option options [String] :default_os
-      #   The stack\'s default operating system, which is installed on every
+      #   The stack's default operating system, which is installed on every
       #   instance unless you specify a different operating system when you
       #   create the instance. You can specify one of the following.
       #
@@ -120,10 +120,10 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       # @option options [String] :hostname_theme
-      #   The stack\'s host name theme, with spaces replaced by underscores. The
-      #   theme is used to generate host names for the stack\'s instances. By
+      #   The stack's host name theme, with spaces replaced by underscores. The
+      #   theme is used to generate host names for the stack's instances. By
       #   default, `HostnameTheme` is set to `Layer_Dependent`, which creates
-      #   host names by appending integers to the layer\'s short name. The other
+      #   host names by appending integers to the layer's short name. The other
       #   themes are:
       #
       #   * `Baked_Goods`
@@ -151,7 +151,7 @@ module Aws
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
       # @option options [String] :default_availability_zone
-      #   The stack\'s default Availability Zone, which must be in the specified
+      #   The stack's default Availability Zone, which must be in the specified
       #   region. For more information, see [Regions and Endpoints][1]. If you
       #   also specify a value for `DefaultSubnetId`, the subnet must be in the
       #   same zone. For more information, see the `VpcId` parameter
@@ -161,7 +161,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option options [String] :default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if you
+      #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
       #   into this subnet unless you specify otherwise when you create the
       #   instance. If you also specify a value for `DefaultAvailabilityZone`,
@@ -172,9 +172,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values or to pass data to recipes. The string should be in the
-      #   following escape characters such as \'\"\':
+      #   following escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -199,7 +199,7 @@ module Aws
       #   Whether the stack uses custom cookbooks.
       # @option options [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups, one
       #   for each layer, which are associated with layers by default. With
@@ -261,13 +261,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s instances
+      #     automatically installs new agent versions on the stack's instances
       #     as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
-      #     that version on the stack\'s instances.
+      #     that version on the stack's instances.
       #
       #   The default setting is the most recent release of the agent. To
       #   specify an agent version, you must use the complete version number,
@@ -275,7 +275,7 @@ module Aws
       #   available agent version numbers, call DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       # @return [Stack]

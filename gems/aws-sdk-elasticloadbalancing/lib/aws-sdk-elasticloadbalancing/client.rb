@@ -154,8 +154,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -189,8 +189,8 @@ module Aws
       # @example Response structure
       #   resp.security_groups #=> Array
       #   resp.security_groups[0] #=> String
+      # @overload apply_security_groups_to_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def apply_security_groups_to_load_balancer(params = {}, options = {})
         req = build_request(:apply_security_groups_to_load_balancer, params)
         req.send_request(options)
@@ -224,8 +224,8 @@ module Aws
       # @example Response structure
       #   resp.subnets #=> Array
       #   resp.subnets[0] #=> String
+      # @overload attach_load_balancer_to_subnets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_load_balancer_to_subnets(params = {}, options = {})
         req = build_request(:attach_load_balancer_to_subnets, params)
         req.send_request(options)
@@ -266,8 +266,8 @@ module Aws
       #   resp.health_check.timeout #=> Integer
       #   resp.health_check.unhealthy_threshold #=> Integer
       #   resp.health_check.healthy_threshold #=> Integer
+      # @overload configure_health_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def configure_health_check(params = {}, options = {})
         req = build_request(:configure_health_check, params)
         req.send_request(options)
@@ -309,8 +309,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     cookie_name: "CookieName", # required
       #   })
+      # @overload create_app_cookie_stickiness_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_app_cookie_stickiness_policy(params = {}, options = {})
         req = build_request(:create_app_cookie_stickiness_policy, params)
         req.send_request(options)
@@ -358,8 +358,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     cookie_expiration_period: 1,
       #   })
+      # @overload create_lb_cookie_stickiness_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_lb_cookie_stickiness_policy(params = {}, options = {})
         req = build_request(:create_lb_cookie_stickiness_policy, params)
         req.send_request(options)
@@ -468,8 +468,8 @@ module Aws
       #
       # @example Response structure
       #   resp.dns_name #=> String
+      # @overload create_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_load_balancer(params = {}, options = {})
         req = build_request(:create_load_balancer, params)
         req.send_request(options)
@@ -505,8 +505,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_load_balancer_listeners(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_load_balancer_listeners(params = {}, options = {})
         req = build_request(:create_load_balancer_listeners, params)
         req.send_request(options)
@@ -542,8 +542,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_load_balancer_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_load_balancer_policy(params = {}, options = {})
         req = build_request(:create_load_balancer_policy, params)
         req.send_request(options)
@@ -567,8 +567,8 @@ module Aws
       #   resp = client.delete_load_balancer({
       #     load_balancer_name: "AccessPointName", # required
       #   })
+      # @overload delete_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_load_balancer(params = {}, options = {})
         req = build_request(:delete_load_balancer, params)
         req.send_request(options)
@@ -586,8 +586,8 @@ module Aws
       #     load_balancer_name: "AccessPointName", # required
       #     load_balancer_ports: [1], # required
       #   })
+      # @overload delete_load_balancer_listeners(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_load_balancer_listeners(params = {}, options = {})
         req = build_request(:delete_load_balancer_listeners, params)
         req.send_request(options)
@@ -606,8 +606,8 @@ module Aws
       #     load_balancer_name: "AccessPointName", # required
       #     policy_name: "PolicyName", # required
       #   })
+      # @overload delete_load_balancer_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_load_balancer_policy(params = {}, options = {})
         req = build_request(:delete_load_balancer_policy, params)
         req.send_request(options)
@@ -647,8 +647,8 @@ module Aws
       # @example Response structure
       #   resp.instances #=> Array
       #   resp.instances[0].instance_id #=> String
+      # @overload deregister_instances_from_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_instances_from_load_balancer(params = {}, options = {})
         req = build_request(:deregister_instances_from_load_balancer, params)
         req.send_request(options)
@@ -684,8 +684,8 @@ module Aws
       #   resp.instance_states[0].state #=> String
       #   resp.instance_states[0].reason_code #=> String
       #   resp.instance_states[0].description #=> String
+      # @overload describe_instance_health(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instance_health(params = {}, options = {})
         req = build_request(:describe_instance_health, params)
         req.send_request(options)
@@ -715,8 +715,8 @@ module Aws
       #   resp.load_balancer_attributes.additional_attributes #=> Array
       #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
       #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
+      # @overload describe_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancer_attributes(params = {}, options = {})
         req = build_request(:describe_load_balancer_attributes, params)
         req.send_request(options)
@@ -727,7 +727,7 @@ module Aws
       # If you specify a load balancer name, the action returns the
       # descriptions of all policies created for the load balancer. If you
       # specify a policy name associated with your load balancer, the action
-      # returns the description of that policy. If you don\'t specify a load
+      # returns the description of that policy. If you don't specify a load
       # balancer name, the action returns descriptions of the specified sample
       # policies, or descriptions of all sample policies. The names of the
       # sample policies have the `ELBSample-` prefix.
@@ -752,8 +752,8 @@ module Aws
       #   resp.policy_descriptions[0].policy_attribute_descriptions #=> Array
       #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_name #=> String
       #   resp.policy_descriptions[0].policy_attribute_descriptions[0].attribute_value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      # @overload describe_load_balancer_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancer_policies(params = {}, options = {})
         req = build_request(:describe_load_balancer_policies, params)
         req.send_request(options)
@@ -793,8 +793,8 @@ module Aws
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].description #=> String
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].default_value #=> String
       #   resp.policy_type_descriptions[0].policy_attribute_type_descriptions[0].cardinality #=> String
+      # @overload describe_load_balancer_policy_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancer_policy_types(params = {}, options = {})
         req = build_request(:describe_load_balancer_policy_types, params)
         req.send_request(options)
@@ -867,8 +867,8 @@ module Aws
       #   resp.load_balancer_descriptions[0].created_time #=> Time
       #   resp.load_balancer_descriptions[0].scheme #=> String
       #   resp.next_marker #=> String
+      # @overload describe_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancers(params = {}, options = {})
         req = build_request(:describe_load_balancers, params)
         req.send_request(options)
@@ -892,8 +892,8 @@ module Aws
       #   resp.tag_descriptions[0].tags #=> Array
       #   resp.tag_descriptions[0].tags[0].key #=> String
       #   resp.tag_descriptions[0].tags[0].value #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -923,8 +923,8 @@ module Aws
       # @example Response structure
       #   resp.subnets #=> Array
       #   resp.subnets[0] #=> String
+      # @overload detach_load_balancer_from_subnets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_load_balancer_from_subnets(params = {}, options = {})
         req = build_request(:detach_load_balancer_from_subnets, params)
         req.send_request(options)
@@ -963,8 +963,8 @@ module Aws
       # @example Response structure
       #   resp.availability_zones #=> Array
       #   resp.availability_zones[0] #=> String
+      # @overload disable_availability_zones_for_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_availability_zones_for_load_balancer(params = {}, options = {})
         req = build_request(:disable_availability_zones_for_load_balancer, params)
         req.send_request(options)
@@ -1000,8 +1000,8 @@ module Aws
       # @example Response structure
       #   resp.availability_zones #=> Array
       #   resp.availability_zones[0] #=> String
+      # @overload enable_availability_zones_for_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_availability_zones_for_load_balancer(params = {}, options = {})
         req = build_request(:enable_availability_zones_for_load_balancer, params)
         req.send_request(options)
@@ -1083,8 +1083,8 @@ module Aws
       #   resp.load_balancer_attributes.additional_attributes #=> Array
       #   resp.load_balancer_attributes.additional_attributes[0].key #=> String
       #   resp.load_balancer_attributes.additional_attributes[0].value #=> String
+      # @overload modify_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_load_balancer_attributes(params = {}, options = {})
         req = build_request(:modify_load_balancer_attributes, params)
         req.send_request(options)
@@ -1140,8 +1140,8 @@ module Aws
       # @example Response structure
       #   resp.instances #=> Array
       #   resp.instances[0].instance_id #=> String
+      # @overload register_instances_with_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_instances_with_load_balancer(params = {}, options = {})
         req = build_request(:register_instances_with_load_balancer, params)
         req.send_request(options)
@@ -1164,14 +1164,14 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
       end
 
-      # Sets the certificate that terminates the specified listener\'s SSL
+      # Sets the certificate that terminates the specified listener's SSL
       # connections. The specified certificate replaces any prior certificate
       # that was used on the same load balancer and port.
       #
@@ -1196,8 +1196,8 @@ module Aws
       #     load_balancer_port: 1, # required
       #     ssl_certificate_id: "SSLCertificateId", # required
       #   })
+      # @overload set_load_balancer_listener_ssl_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_load_balancer_listener_ssl_certificate(params = {}, options = {})
         req = build_request(:set_load_balancer_listener_ssl_certificate, params)
         req.send_request(options)
@@ -1241,8 +1241,8 @@ module Aws
       #     instance_port: 1, # required
       #     policy_names: ["PolicyName"], # required
       #   })
+      # @overload set_load_balancer_policies_for_backend_server(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_load_balancer_policies_for_backend_server(params = {}, options = {})
         req = build_request(:set_load_balancer_policies_for_backend_server, params)
         req.send_request(options)
@@ -1280,8 +1280,8 @@ module Aws
       #     load_balancer_port: 1, # required
       #     policy_names: ["PolicyName"], # required
       #   })
+      # @overload set_load_balancer_policies_of_listener(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_load_balancer_policies_of_listener(params = {}, options = {})
         req = build_request(:set_load_balancer_policies_of_listener, params)
         req.send_request(options)

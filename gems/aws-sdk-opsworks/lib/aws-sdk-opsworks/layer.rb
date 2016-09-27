@@ -68,13 +68,13 @@ module Aws
       # `*****FILTERED*****` instead of the actual value
       #
       # For an ECS Cluster layer, AWS OpsWorks the `EcsClusterArn` attribute
-      # is set to the cluster\'s ARN.
+      # is set to the cluster's ARN.
       # @return [Hash<String,String>]
       def attributes
         data.attributes
       end
 
-      # The ARN of the default IAM profile to be used for the layer\'s EC2
+      # The ARN of the default IAM profile to be used for the layer's EC2
       # instances. For more information about IAM ARNs, see [Using
       # Identifiers][1].
       #
@@ -86,32 +86,32 @@ module Aws
         data.custom_instance_profile_arn
       end
 
-      # A JSON formatted string containing the layer\'s custom stack
+      # A JSON formatted string containing the layer's custom stack
       # configuration and deployment attributes.
       # @return [String]
       def custom_json
         data.custom_json
       end
 
-      # An array containing the layer\'s custom security group IDs.
+      # An array containing the layer's custom security group IDs.
       # @return [Array<String>]
       def custom_security_group_ids
         data.custom_security_group_ids
       end
 
-      # An array containing the layer\'s security group names.
+      # An array containing the layer's security group names.
       # @return [Array<String>]
       def default_security_group_names
         data.default_security_group_names
       end
 
-      # An array of `Package` objects that describe the layer\'s packages.
+      # An array of `Package` objects that describe the layer's packages.
       # @return [Array<String>]
       def packages
         data.packages
       end
 
-      # A `VolumeConfigurations` object that describes the layer\'s Amazon EBS
+      # A `VolumeConfigurations` object that describes the layer's Amazon EBS
       # volumes.
       # @return [Array<Types::VolumeConfiguration>]
       def volume_configurations
@@ -125,7 +125,7 @@ module Aws
       end
 
       # Whether to automatically assign an [Elastic IP address][1] to the
-      # layer\'s instances. For more information, see [How to Edit a
+      # layer's instances. For more information, see [How to Edit a
       # Layer][2].
       #
       #
@@ -138,7 +138,7 @@ module Aws
       end
 
       # For stacks that are running in a VPC, whether to automatically assign
-      # a public IP address to the layer\'s instances. For more information,
+      # a public IP address to the layer's instances. For more information,
       # see [How to Edit a Layer][1].
       #
       #
@@ -158,17 +158,17 @@ module Aws
       # for a particular layer to be run in response to each of the five
       # events.
       #
-      # To specify a recipe, use the cookbook\'s directory name in the
+      # To specify a recipe, use the cookbook's directory name in the
       # repository followed by two colons and the recipe name, which is the
-      # recipe\'s file name without the .rb extension. For example:
-      # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository\'s
+      # recipe's file name without the .rb extension. For example:
+      # phpapp2::dbsetup specifies the dbsetup.rb recipe in the repository's
       # phpapp2 folder.
       # @return [Types::Recipes]
       def default_recipes
         data.default_recipes
       end
 
-      # A `LayerCustomRecipes` object that specifies the layer\'s custom
+      # A `LayerCustomRecipes` object that specifies the layer's custom
       # recipes.
       # @return [Types::Recipes]
       def custom_recipes

@@ -47,8 +47,8 @@ module Aws
       #   A map (key-value pairs) defining the configuration for AWS Lambda to
       #   use when reading the event source. Currently, AWS Lambda supports
       #   only the `InitialPositionInStream` key. The valid values are:
-      #   \"TRIM\_HORIZON\" and \"LATEST\". The default value is
-      #   \"TRIM\_HORIZON\". For more information, go to
+      #   "TRIM\_HORIZON" and "LATEST". The default value is
+      #   "TRIM\_HORIZON". For more information, go to
       #   [ShardIteratorType][1] in the Amazon Kinesis Service API Reference.
       #
       #
@@ -121,9 +121,9 @@ module Aws
       #
       # @!attribute [rw] status
       #   The description of the health of the event source mapping. Valid
-      #   values are: \"PENDING\", \"OK\", and \"PROBLEM:*message*\".
-      #   Initially this staus is \"PENDING\". When AWS Lambda begins
-      #   processing events, it changes the status to \"OK\".
+      #   values are: "PENDING", "OK", and "PROBLEM:*message*".
+      #   Initially this staus is "PENDING". When AWS Lambda begins
+      #   processing events, it changes the status to "OK".
       #   @return [String]
       class EventSourceConfiguration < Struct.new(
         :uuid,
@@ -144,7 +144,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] location
-      #   The presigned URL you can use to download the function\'s .zip file
+      #   The presigned URL you can use to download the function's .zip file
       #   that you previously uploaded. The URL is valid for up to 10 minutes.
       #   @return [String]
       class FunctionCodeLocation < Struct.new(
@@ -502,7 +502,7 @@ module Aws
       #
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function you are uploading.
-      #   Currently, Lambda supports only \"nodejs\" as the runtime.
+      #   Currently, Lambda supports only "nodejs" as the runtime.
       #   @return [String]
       #
       # @!attribute [rw] role
@@ -518,7 +518,7 @@ module Aws
       #
       # @!attribute [rw] mode
       #   How the Lambda function will be invoked. Lambda supports only the
-      #   \"event\" mode.
+      #   "event" mode.
       #   @return [String]
       #
       # @!attribute [rw] description

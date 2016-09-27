@@ -67,8 +67,8 @@ module Aws
       # CloudFront forwards only GET, HEAD and OPTIONS requests. - CloudFront
       # forwards GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE requests. If
       # you pick the third choice, you may need to restrict access to your
-      # Amazon S3 bucket or to your custom origin so users can\'t perform
-      # operations that you don\'t want them to. For example, you may not want
+      # Amazon S3 bucket or to your custom origin so users can't perform
+      # operations that you don't want them to. For example, you may not want
       # users to have permission to delete objects from your origin.
       # @note When making an API call, pass AllowedMethods
       #   data as a hash:
@@ -117,8 +117,8 @@ module Aws
       # want CloudFront to get objects. If you have two origins and only the
       # default cache behavior, the default cache behavior will cause
       # CloudFront to get objects from one of the origins, but the other
-      # origin will never be used. If you don\'t want to specify any cache
-      # behaviors, include only an empty CacheBehaviors element. Don\'t
+      # origin will never be used. If you don't want to specify any cache
+      # behaviors, include only an empty CacheBehaviors element. Don't
       # include an empty CacheBehavior element, or CloudFront returns a
       # MalformedXML error. To delete all cache behaviors in an existing
       # distribution, update the distribution configuration and include only
@@ -199,11 +199,11 @@ module Aws
       #   that match the PathPattern for this cache behavior, specify true for
       #   Enabled, and specify the applicable values for Quantity and Items.
       #   For more information, go to Using a Signed URL to Serve Private
-      #   Content in the Amazon CloudFront Developer Guide. If you don\'t want
+      #   Content in the Amazon CloudFront Developer Guide. If you don't want
       #   to require signed URLs in requests for objects that match
       #   PathPattern, specify false for Enabled and 0 for Quantity. Omit
       #   Items. To add, change, or remove one or more trusted signers, change
-      #   Enabled to true (if it\'s currently false), change Quantity as
+      #   Enabled to true (if it's currently false), change Quantity as
       #   applicable, and specify all of the trusted signers that you want to
       #   include in the updated distribution.
       #   @return [Types::TrustedSigners]
@@ -235,7 +235,7 @@ module Aws
       #   CloudFront forwards GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE
       #   requests. If you pick the third choice, you may need to restrict
       #   access to your Amazon S3 bucket or to your custom origin so users
-      #   can\'t perform operations that you don\'t want them to. For example,
+      #   can't perform operations that you don't want them to. For example,
       #   you may not want users to have permission to delete objects from
       #   your origin.
       #   @return [Types::AllowedMethods]
@@ -247,7 +247,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] default_ttl
-      #   If you don\'t configure your origin to add a Cache-Control max-age
+      #   If you don't configure your origin to add a Cache-Control max-age
       #   directive or an Expires header, DefaultTTL is the default amount of
       #   time (in seconds) that an object is in a CloudFront cache before
       #   CloudFront forwards another request to your origin to determine
@@ -283,7 +283,7 @@ module Aws
       #   header indicates that the version in a CloudFront edge cache is
       #   identical to the version on the origin server, but after compression
       #   the two versions are no longer identical. As a result, for
-      #   compressed objects, CloudFront can\'t use the ETag header to
+      #   compressed objects, CloudFront can't use the ETag header to
       #   determine whether an expired object in the CloudFront edge cache is
       #   still the latest version.
       #
@@ -431,7 +431,7 @@ module Aws
       #         comment: "string", # required
       #       }
       # @!attribute [rw] caller_reference
-      #   A unique number that ensures the request can\'t be replayed. If the
+      #   A unique number that ensures the request can't be replayed. If the
       #   CallerReference is new (no matter the content of the
       #   CloudFrontOriginAccessIdentityConfig object), a new origin access
       #   identity is created. If the CallerReference is a value you already
@@ -585,7 +585,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The origin access identity\'s configuration information.
+      #   The origin access identity's configuration information.
       #   @return [Types::CloudFrontOriginAccessIdentityConfig]
       class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
         :cloud_front_origin_access_identity_config)
@@ -594,7 +594,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity\'s information.
+      #   The origin access identity's information.
       #   @return [Types::CloudFrontOriginAccessIdentity]
       #
       # @!attribute [rw] location
@@ -782,7 +782,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] distribution_config
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       #   @return [Types::DistributionConfig]
       class CreateDistributionRequest < Struct.new(
         :distribution_config)
@@ -791,7 +791,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] distribution
-      #   The distribution\'s information.
+      #   The distribution's information.
       #   @return [Types::Distribution]
       #
       # @!attribute [rw] location
@@ -989,7 +989,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] distribution_config_with_tags
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       #   @return [Types::DistributionConfigWithTags]
       class CreateDistributionWithTagsRequest < Struct.new(
         :distribution_config_with_tags)
@@ -998,7 +998,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] distribution
-      #   The distribution\'s information.
+      #   The distribution's information.
       #   @return [Types::Distribution]
       #
       # @!attribute [rw] location
@@ -1032,7 +1032,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       #
       # @!attribute [rw] invalidation_batch
@@ -1051,7 +1051,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] invalidation
-      #   The invalidation\'s information.
+      #   The invalidation's information.
       #   @return [Types::Invalidation]
       class CreateInvalidationResult < Struct.new(
         :location,
@@ -1090,7 +1090,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       #   @return [Types::StreamingDistributionConfig]
       class CreateStreamingDistributionRequest < Struct.new(
         :streaming_distribution_config)
@@ -1099,7 +1099,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] streaming_distribution
-      #   The streaming distribution\'s information.
+      #   The streaming distribution's information.
       #   @return [Types::StreamingDistribution]
       #
       # @!attribute [rw] location
@@ -1159,7 +1159,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] streaming_distribution_config_with_tags
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       #   @return [Types::StreamingDistributionConfigWithTags]
       class CreateStreamingDistributionWithTagsRequest < Struct.new(
         :streaming_distribution_config_with_tags)
@@ -1168,7 +1168,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] streaming_distribution
-      #   The streaming distribution\'s information.
+      #   The streaming distribution's information.
       #   @return [Types::StreamingDistribution]
       #
       # @!attribute [rw] location
@@ -1187,11 +1187,11 @@ module Aws
         include Aws::Structure
       end
 
-      # A complex type that describes how you\'d prefer CloudFront to respond
+      # A complex type that describes how you'd prefer CloudFront to respond
       # to requests that result in either a 4xx or 5xx response. You can
       # control whether a custom error page should be displayed, what the
       # desired response code should be for this error page and how long
-      # should the error response be cached by CloudFront. If you don\'t want
+      # should the error response be cached by CloudFront. If you don't want
       # to specify any custom error responses, include only an empty
       # CustomErrorResponses element. To delete all custom error responses in
       # an existing distribution, update the distribution configuration and
@@ -1339,7 +1339,7 @@ module Aws
       end
 
       # A complex type that describes the default cache behavior if you do not
-      # specify a CacheBehavior element or if files don\'t match any of the
+      # specify a CacheBehavior element or if files don't match any of the
       # values of PathPattern in CacheBehavior elements.You must create
       # exactly one default cache behavior.
       # @note When making an API call, pass DefaultCacheBehavior
@@ -1403,11 +1403,11 @@ module Aws
       #   that match the PathPattern for this cache behavior, specify true for
       #   Enabled, and specify the applicable values for Quantity and Items.
       #   For more information, go to Using a Signed URL to Serve Private
-      #   Content in the Amazon CloudFront Developer Guide. If you don\'t want
+      #   Content in the Amazon CloudFront Developer Guide. If you don't want
       #   to require signed URLs in requests for objects that match
       #   PathPattern, specify false for Enabled and 0 for Quantity. Omit
       #   Items. To add, change, or remove one or more trusted signers, change
-      #   Enabled to true (if it\'s currently false), change Quantity as
+      #   Enabled to true (if it's currently false), change Quantity as
       #   applicable, and specify all of the trusted signers that you want to
       #   include in the updated distribution.
       #   @return [Types::TrustedSigners]
@@ -1439,7 +1439,7 @@ module Aws
       #   CloudFront forwards GET, HEAD, OPTIONS, PUT, PATCH, POST, and DELETE
       #   requests. If you pick the third choice, you may need to restrict
       #   access to your Amazon S3 bucket or to your custom origin so users
-      #   can\'t perform operations that you don\'t want them to. For example,
+      #   can't perform operations that you don't want them to. For example,
       #   you may not want users to have permission to delete objects from
       #   your origin.
       #   @return [Types::AllowedMethods]
@@ -1451,7 +1451,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] default_ttl
-      #   If you don\'t configure your origin to add a Cache-Control max-age
+      #   If you don't configure your origin to add a Cache-Control max-age
       #   directive or an Expires header, DefaultTTL is the default amount of
       #   time (in seconds) that an object is in a CloudFront cache before
       #   CloudFront forwards another request to your origin to determine
@@ -1487,7 +1487,7 @@ module Aws
       #   header indicates that the version in a CloudFront edge cache is
       #   identical to the version on the origin server, but after compression
       #   the two versions are no longer identical. As a result, for
-      #   compressed objects, CloudFront can\'t use the ETag header to
+      #   compressed objects, CloudFront can't use the ETag header to
       #   determine whether an expired object in the CloudFront edge cache is
       #   still the latest version.
       #
@@ -1518,7 +1518,7 @@ module Aws
       #         if_match: "string",
       #       }
       # @!attribute [rw] id
-      #   The origin access identity\'s id.
+      #   The origin access identity's id.
       #   @return [String]
       #
       # @!attribute [rw] if_match
@@ -1588,7 +1588,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   This response element indicates the current status of the
-      #   distribution. When the status is Deployed, the distribution\'s
+      #   distribution. When the status is Deployed, the distribution's
       #   information is fully propagated throughout the Amazon CloudFront
       #   system.
       #   @return [String]
@@ -1608,13 +1608,13 @@ module Aws
       #
       # @!attribute [rw] active_trusted_signers
       #   CloudFront automatically adds this element to the response only if
-      #   you\'ve set up the distribution to serve private content with signed
+      #   you've set up the distribution to serve private content with signed
       #   URLs. The element lists the key pair IDs that CloudFront is aware of
       #   for each trusted signer. The Signer child element lists the AWS
       #   account number of the trusted signer (or an empty Self element if
       #   the signer is you). The Signer element also includes the IDs of any
-      #   active key pairs associated with the trusted signer\'s AWS account.
-      #   If no KeyPairId element appears for a Signer, that signer can\'t
+      #   active key pairs associated with the trusted signer's AWS account.
+      #   If no KeyPairId element appears for a Signer, that signer can't
       #   create working signed URLs.
       #   @return [Types::ActiveTrustedSigners]
       #
@@ -1800,7 +1800,7 @@ module Aws
       #         web_acl_id: "string",
       #       }
       # @!attribute [rw] caller_reference
-      #   A unique number that ensures the request can\'t be replayed. If the
+      #   A unique number that ensures the request can't be replayed. If the
       #   CallerReference is new (no matter the content of the
       #   DistributionConfig object), a new distribution is created. If the
       #   CallerReference is a value you already sent in a previous request to
@@ -1824,7 +1824,7 @@ module Aws
       #   distribution (http://www.example.com) instead of an object in your
       #   distribution (http://www.example.com/index.html). Specifying a
       #   default root object avoids exposing the contents of your
-      #   distribution. If you don\'t want to specify a default root object
+      #   distribution. If you don't want to specify a default root object
       #   when you create a distribution, include an empty DefaultRootObject
       #   element. To delete the default root object from an existing
       #   distribution, update the distribution configuration and include an
@@ -1839,7 +1839,7 @@ module Aws
       #
       # @!attribute [rw] default_cache_behavior
       #   A complex type that describes the default cache behavior if you do
-      #   not specify a CacheBehavior element or if files don\'t match any of
+      #   not specify a CacheBehavior element or if files don't match any of
       #   the values of PathPattern in CacheBehavior elements.You must create
       #   exactly one default cache behavior.
       #   @return [Types::DefaultCacheBehavior]
@@ -1883,7 +1883,7 @@ module Aws
       #   @return [Types::Restrictions]
       #
       # @!attribute [rw] web_acl_id
-      #   (Optional) If you\'re using AWS WAF to filter CloudFront requests,
+      #   (Optional) If you're using AWS WAF to filter CloudFront requests,
       #   the Id of the AWS WAF web ACL that is associated with the
       #   distribution.
       #   @return [String]
@@ -2149,7 +2149,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   This response element indicates the current status of the
-      #   distribution. When the status is Deployed, the distribution\'s
+      #   distribution. When the status is Deployed, the distribution's
       #   information is fully propagated throughout the Amazon CloudFront
       #   system.
       #   @return [String]
@@ -2175,7 +2175,7 @@ module Aws
       #
       # @!attribute [rw] default_cache_behavior
       #   A complex type that describes the default cache behavior if you do
-      #   not specify a CacheBehavior element or if files don\'t match any of
+      #   not specify a CacheBehavior element or if files don't match any of
       #   the values of PathPattern in CacheBehavior elements.You must create
       #   exactly one default cache behavior.
       #   @return [Types::DefaultCacheBehavior]
@@ -2264,7 +2264,7 @@ module Aws
       #   the value of QueryString and on the values that you specify for
       #   QueryStringCacheKeys, if any:
       #
-      #   * If you specify true for QueryString and you don\'t specify any
+      #   * If you specify true for QueryString and you don't specify any
       #     values for QueryStringCacheKeys, CloudFront forwards all query
       #     string parameters to the origin and caches based on all query
       #     string parameters. Depending on how many query string parameters
@@ -2274,8 +2274,8 @@ module Aws
       #     values for QueryStringCacheKeys, CloudFront forwards all query
       #     string parameters to the origin, but it only caches based on the
       #     query string parameters that you specify.
-      #   * If you specify false for QueryString, CloudFront doesn\'t forward
-      #     any query string parameters to the origin, and doesn\'t cache
+      #   * If you specify false for QueryString, CloudFront doesn't forward
+      #     any query string parameters to the origin, and doesn't cache
       #     based on query string parameters.
       #   @return [Boolean]
       #
@@ -2351,7 +2351,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The request to get an origin access identity\'s configuration.
+      # The request to get an origin access identity's configuration.
       # @note When making an API call, pass GetCloudFrontOriginAccessIdentityConfigRequest
       #   data as a hash:
       #
@@ -2359,7 +2359,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The identity\'s id.
+      #   The identity's id.
       #   @return [String]
       class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
         :id)
@@ -2368,7 +2368,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The origin access identity\'s configuration information.
+      #   The origin access identity's configuration information.
       #   @return [Types::CloudFrontOriginAccessIdentityConfig]
       #
       # @!attribute [rw] etag
@@ -2381,7 +2381,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The request to get an origin access identity\'s information.
+      # The request to get an origin access identity's information.
       # @note When making an API call, pass GetCloudFrontOriginAccessIdentityRequest
       #   data as a hash:
       #
@@ -2389,7 +2389,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The identity\'s id.
+      #   The identity's id.
       #   @return [String]
       class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
         :id)
@@ -2398,11 +2398,11 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity\'s information.
+      #   The origin access identity's information.
       #   @return [Types::CloudFrontOriginAccessIdentity]
       #
       # @!attribute [rw] etag
-      #   The current version of the origin access identity\'s information.
+      #   The current version of the origin access identity's information.
       #   For example: E2QWRUHAPOMQZL.
       #   @return [String]
       class GetCloudFrontOriginAccessIdentityResult < Struct.new(
@@ -2419,7 +2419,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       class GetDistributionConfigRequest < Struct.new(
         :id)
@@ -2428,7 +2428,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] distribution_config
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       #   @return [Types::DistributionConfig]
       #
       # @!attribute [rw] etag
@@ -2441,7 +2441,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The request to get a distribution\'s information.
+      # The request to get a distribution's information.
       # @note When making an API call, pass GetDistributionRequest
       #   data as a hash:
       #
@@ -2449,7 +2449,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       class GetDistributionRequest < Struct.new(
         :id)
@@ -2458,11 +2458,11 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] distribution
-      #   The distribution\'s information.
+      #   The distribution's information.
       #   @return [Types::Distribution]
       #
       # @!attribute [rw] etag
-      #   The current version of the distribution\'s information. For example:
+      #   The current version of the distribution's information. For example:
       #   E2QWRUHAPOMQZL.
       #   @return [String]
       class GetDistributionResult < Struct.new(
@@ -2471,7 +2471,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The request to get an invalidation\'s information.
+      # The request to get an invalidation's information.
       # @note When making an API call, pass GetInvalidationRequest
       #   data as a hash:
       #
@@ -2480,11 +2480,11 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       #
       # @!attribute [rw] id
-      #   The invalidation\'s id.
+      #   The invalidation's id.
       #   @return [String]
       class GetInvalidationRequest < Struct.new(
         :distribution_id,
@@ -2494,7 +2494,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] invalidation
-      #   The invalidation\'s information.
+      #   The invalidation's information.
       #   @return [Types::Invalidation]
       class GetInvalidationResult < Struct.new(
         :invalidation)
@@ -2509,7 +2509,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       #   @return [String]
       class GetStreamingDistributionConfigRequest < Struct.new(
         :id)
@@ -2518,7 +2518,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       #   @return [Types::StreamingDistributionConfig]
       #
       # @!attribute [rw] etag
@@ -2531,7 +2531,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The request to get a streaming distribution\'s information.
+      # The request to get a streaming distribution's information.
       # @note When making an API call, pass GetStreamingDistributionRequest
       #   data as a hash:
       #
@@ -2539,7 +2539,7 @@ module Aws
       #         id: "string", # required
       #       }
       # @!attribute [rw] id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       #   @return [String]
       class GetStreamingDistributionRequest < Struct.new(
         :id)
@@ -2548,11 +2548,11 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] streaming_distribution
-      #   The streaming distribution\'s information.
+      #   The streaming distribution's information.
       #   @return [Types::StreamingDistribution]
       #
       # @!attribute [rw] etag
-      #   The current version of the streaming distribution\'s information.
+      #   The current version of the streaming distribution's information.
       #   For example: E2QWRUHAPOMQZL.
       #   @return [String]
       class GetStreamingDistributionResult < Struct.new(
@@ -2582,7 +2582,7 @@ module Aws
       #   to the origin and to vary on for this cache behavior. The maximum
       #   number of headers that you can specify by name is 10. If you want
       #   CloudFront to forward all headers to the origin and vary on all of
-      #   them, specify 1 for Quantity and \* for Name. If you don\'t want
+      #   them, specify 1 for Quantity and \* for Name. If you don't want
       #   CloudFront to forward any additional headers to the origin or to
       #   vary on any headers, specify 0 for Quantity and omit Items.
       #   @return [Integer]
@@ -2646,7 +2646,7 @@ module Aws
       #   @return [Types::Paths]
       #
       # @!attribute [rw] caller_reference
-      #   A unique name that ensures the request can\'t be replayed. If the
+      #   A unique name that ensures the request can't be replayed. If the
       #   CallerReference is new (no matter the content of the Path object), a
       #   new distribution is created. If the CallerReference is a value you
       #   already sent in a previous request to create an invalidation batch,
@@ -2751,7 +2751,7 @@ module Aws
       #   list of origin access identities. The results include identities in
       #   the list that occur after the marker. To get the next page of
       #   results, set the Marker to the value of the NextMarker from the
-      #   current page\'s response (which is also the ID of the last identity
+      #   current page's response (which is also the ID of the last identity
       #   on that page).
       #   @return [String]
       #
@@ -2801,8 +2801,8 @@ module Aws
       #
       # @!attribute [rw] web_acl_id
       #   The Id of the AWS WAF web ACL for which you want to list the
-      #   associated distributions. If you specify \"null\" for the Id, the
-      #   request returns a list of the distributions that aren\'t associated
+      #   associated distributions. If you specify "null" for the Id, the
+      #   request returns a list of the distributions that aren't associated
       #   with a web ACL.
       #   @return [String]
       class ListDistributionsByWebACLIdRequest < Struct.new(
@@ -2869,7 +2869,7 @@ module Aws
       #         max_items: 1,
       #       }
       # @!attribute [rw] distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       #
       # @!attribute [rw] marker
@@ -2878,7 +2878,7 @@ module Aws
       #   returned in decreasing order from most recent to oldest, the most
       #   recent results are on the first page, the second page will contain
       #   earlier results, and so on. To get the next page of results, set the
-      #   Marker to the value of the NextMarker from the current page\'s
+      #   Marker to the value of the NextMarker from the current page's
       #   response. This value is the same as the ID of the last invalidation
       #   batch on that page.
       #   @return [String]
@@ -2916,7 +2916,7 @@ module Aws
       #   list of streaming distributions. The results include distributions
       #   in the list that occur after the marker. To get the next page of
       #   results, set the Marker to the value of the NextMarker from the
-      #   current page\'s response (which is also the ID of the last
+      #   current page's response (which is also the ID of the last
       #   distribution on that page).
       #   @return [String]
       #
@@ -3104,11 +3104,11 @@ module Aws
       #         header_value: "string", # required
       #       }
       # @!attribute [rw] header_name
-      #   The header\'s name.
+      #   The header's name.
       #   @return [String]
       #
       # @!attribute [rw] header_value
-      #   The header\'s value.
+      #   The header's value.
       #   @return [String]
       class OriginCustomHeader < Struct.new(
         :header_name,
@@ -3277,7 +3277,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] origin_access_identity
-      #   Your S3 origin\'s origin access identity.
+      #   Your S3 origin's origin access identity.
       #   @return [String]
       class S3Origin < Struct.new(
         :domain_name,
@@ -3349,7 +3349,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   The current status of the streaming distribution. When the status is
-      #   Deployed, the distribution\'s information is fully propagated
+      #   Deployed, the distribution's information is fully propagated
       #   throughout the Amazon CloudFront system.
       #   @return [String]
       #
@@ -3364,13 +3364,13 @@ module Aws
       #
       # @!attribute [rw] active_trusted_signers
       #   CloudFront automatically adds this element to the response only if
-      #   you\'ve set up the distribution to serve private content with signed
+      #   you've set up the distribution to serve private content with signed
       #   URLs. The element lists the key pair IDs that CloudFront is aware of
       #   for each trusted signer. The Signer child element lists the AWS
       #   account number of the trusted signer (or an empty Self element if
       #   the signer is you). The Signer element also includes the IDs of any
-      #   active key pairs associated with the trusted signer\'s AWS account.
-      #   If no KeyPairId element appears for a Signer, that signer can\'t
+      #   active key pairs associated with the trusted signer's AWS account.
+      #   If no KeyPairId element appears for a Signer, that signer can't
       #   create working signed URLs.
       #   @return [Types::ActiveTrustedSigners]
       #
@@ -3418,7 +3418,7 @@ module Aws
       #         enabled: false, # required
       #       }
       # @!attribute [rw] caller_reference
-      #   A unique number that ensures the request can\'t be replayed. If the
+      #   A unique number that ensures the request can't be replayed. If the
       #   CallerReference is new (no matter the content of the
       #   StreamingDistributionConfig object), a new streaming distribution is
       #   created. If the CallerReference is a value you already sent in a
@@ -3459,11 +3459,11 @@ module Aws
       #   that match the PathPattern for this cache behavior, specify true for
       #   Enabled, and specify the applicable values for Quantity and Items.
       #   For more information, go to Using a Signed URL to Serve Private
-      #   Content in the Amazon CloudFront Developer Guide. If you don\'t want
+      #   Content in the Amazon CloudFront Developer Guide. If you don't want
       #   to require signed URLs in requests for objects that match
       #   PathPattern, specify false for Enabled and 0 for Quantity. Omit
       #   Items. To add, change, or remove one or more trusted signers, change
-      #   Enabled to true (if it\'s currently false), change Quantity as
+      #   Enabled to true (if it's currently false), change Quantity as
       #   applicable, and specify all of the trusted signers that you want to
       #   include in the updated distribution.
       #   @return [Types::TrustedSigners]
@@ -3598,7 +3598,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   Indicates the current status of the distribution. When the status is
-      #   Deployed, the distribution\'s information is fully propagated
+      #   Deployed, the distribution's information is fully propagated
       #   throughout the Amazon CloudFront system.
       #   @return [String]
       #
@@ -3629,11 +3629,11 @@ module Aws
       #   that match the PathPattern for this cache behavior, specify true for
       #   Enabled, and specify the applicable values for Quantity and Items.
       #   For more information, go to Using a Signed URL to Serve Private
-      #   Content in the Amazon CloudFront Developer Guide. If you don\'t want
+      #   Content in the Amazon CloudFront Developer Guide. If you don't want
       #   to require signed URLs in requests for objects that match
       #   PathPattern, specify false for Enabled and 0 for Quantity. Omit
       #   Items. To add, change, or remove one or more trusted signers, change
-      #   Enabled to true (if it\'s currently false), change Quantity as
+      #   Enabled to true (if it's currently false), change Quantity as
       #   applicable, and specify all of the trusted signers that you want to
       #   include in the updated distribution.
       #   @return [Types::TrustedSigners]
@@ -3797,10 +3797,10 @@ module Aws
       # match the PathPattern for this cache behavior, specify true for
       # Enabled, and specify the applicable values for Quantity and Items. For
       # more information, go to Using a Signed URL to Serve Private Content in
-      # the Amazon CloudFront Developer Guide. If you don\'t want to require
+      # the Amazon CloudFront Developer Guide. If you don't want to require
       # signed URLs in requests for objects that match PathPattern, specify
       # false for Enabled and 0 for Quantity. Omit Items. To add, change, or
-      # remove one or more trusted signers, change Enabled to true (if it\'s
+      # remove one or more trusted signers, change Enabled to true (if it's
       # currently false), change Quantity as applicable, and specify all of
       # the trusted signers that you want to include in the updated
       # distribution.
@@ -3868,16 +3868,16 @@ module Aws
       #         if_match: "string",
       #       }
       # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The identity\'s configuration information.
+      #   The identity's configuration information.
       #   @return [Types::CloudFrontOriginAccessIdentityConfig]
       #
       # @!attribute [rw] id
-      #   The identity\'s id.
+      #   The identity's id.
       #   @return [String]
       #
       # @!attribute [rw] if_match
       #   The value of the ETag header you received when retrieving the
-      #   identity\'s configuration. For example: E2QWRUHAPOMQZL.
+      #   identity's configuration. For example: E2QWRUHAPOMQZL.
       #   @return [String]
       class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
         :cloud_front_origin_access_identity_config,
@@ -3888,7 +3888,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity\'s information.
+      #   The origin access identity's information.
       #   @return [Types::CloudFrontOriginAccessIdentity]
       #
       # @!attribute [rw] etag
@@ -4072,16 +4072,16 @@ module Aws
       #         if_match: "string",
       #       }
       # @!attribute [rw] distribution_config
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       #   @return [Types::DistributionConfig]
       #
       # @!attribute [rw] id
-      #   The distribution\'s id.
+      #   The distribution's id.
       #   @return [String]
       #
       # @!attribute [rw] if_match
       #   The value of the ETag header you received when retrieving the
-      #   distribution\'s configuration. For example: E2QWRUHAPOMQZL.
+      #   distribution's configuration. For example: E2QWRUHAPOMQZL.
       #   @return [String]
       class UpdateDistributionRequest < Struct.new(
         :distribution_config,
@@ -4092,7 +4092,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] distribution
-      #   The distribution\'s information.
+      #   The distribution's information.
       #   @return [Types::Distribution]
       #
       # @!attribute [rw] etag
@@ -4138,16 +4138,16 @@ module Aws
       #         if_match: "string",
       #       }
       # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       #   @return [Types::StreamingDistributionConfig]
       #
       # @!attribute [rw] id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       #   @return [String]
       #
       # @!attribute [rw] if_match
       #   The value of the ETag header you received when retrieving the
-      #   streaming distribution\'s configuration. For example:
+      #   streaming distribution's configuration. For example:
       #   E2QWRUHAPOMQZL.
       #   @return [String]
       class UpdateStreamingDistributionRequest < Struct.new(
@@ -4159,7 +4159,7 @@ module Aws
 
       # The returned result of the corresponding request.
       # @!attribute [rw] streaming_distribution
-      #   The streaming distribution\'s information.
+      #   The streaming distribution's information.
       #   @return [Types::StreamingDistribution]
       #
       # @!attribute [rw] etag
@@ -4187,7 +4187,7 @@ module Aws
       #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
       #       }
       # @!attribute [rw] cloud_front_default_certificate
-      #   If you want viewers to use HTTPS to request your objects and you\'re
+      #   If you want viewers to use HTTPS to request your objects and you're
       #   using the CloudFront domain name of your distribution in your object
       #   URLs (for example, https://d111111abcdef8.cloudfront.net/logo.jpg),
       #   set to true. Omit this value if you are setting an ACMCertificateArn
@@ -4195,7 +4195,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] iam_certificate_id
-      #   If you want viewers to use HTTPS to request your objects and you\'re
+      #   If you want viewers to use HTTPS to request your objects and you're
       #   using an alternate domain name in your object URLs (for example,
       #   https://example.com/logo.jpg), specify the IAM certificate
       #   identifier of the custom viewer certificate for this distribution.
@@ -4204,7 +4204,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] acm_certificate_arn
-      #   If you want viewers to use HTTPS to request your objects and you\'re
+      #   If you want viewers to use HTTPS to request your objects and you're
       #   using an alternate domain name in your object URLs (for example,
       #   https://example.com/logo.jpg), specify the ACM certificate ARN of
       #   the custom viewer certificate for this distribution. Specify either
@@ -4220,7 +4220,7 @@ module Aws
       #   feature, and you incur additional monthly charges. If you specify
       #   sni-only, CloudFront can only respond to HTTPS requests from viewers
       #   that support Server Name Indication (SNI). All modern browsers
-      #   support SNI, but some browsers still in use don\'t support SNI. Do
+      #   support SNI, but some browsers still in use don't support SNI. Do
       #   not specify a value for SSLSupportMethod if you specified true for
       #   CloudFrontDefaultCertificate.
       #   @return [String]
@@ -4231,12 +4231,12 @@ module Aws
       #   will serve your objects only to browsers or devices that support at
       #   least the SSL version that you specify. The TLSv1 protocol is more
       #   secure, so we recommend that you specify SSLv3 only if your users
-      #   are using browsers or devices that don\'t support TLSv1. If you\'re
+      #   are using browsers or devices that don't support TLSv1. If you're
       #   using a custom certificate (if you specify a value for
-      #   IAMCertificateId) and if you\'re using dedicated IP (if you specify
+      #   IAMCertificateId) and if you're using dedicated IP (if you specify
       #   vip for SSLSupportMethod), you can choose SSLv3 or TLSv1 as the
-      #   MinimumProtocolVersion. If you\'re using a custom certificate (if
-      #   you specify a value for IAMCertificateId) and if you\'re using SNI
+      #   MinimumProtocolVersion. If you're using a custom certificate (if
+      #   you specify a value for IAMCertificateId) and if you're using SNI
       #   (if you specify sni-only for SSLSupportMethod), you must specify
       #   TLSv1 for MinimumProtocolVersion.
       #   @return [String]

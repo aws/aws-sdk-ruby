@@ -228,11 +228,11 @@ module Aws
       #
       #   * Amazon Route 53 looks at the resource record sets that are
       #     referenced by the alias resource record sets to determine which
-      #     health checks they\'re using.
+      #     health checks they're using.
       #
       #   * Amazon Route 53 checks the current status of each health check.
       #     (Amazon Route 53 periodically checks the health of the endpoint
-      #     that is specified in a health check; it doesn\'t perform the
+      #     that is specified in a health check; it doesn't perform the
       #     health check when the DNS query arrives.)
       #
       #   * Based on the status of the health checks, Amazon Route 53
@@ -284,7 +284,7 @@ module Aws
       #     corresponding alias resource record set, Amazon Route 53 routes
       #     queries to other resources. When you create a load balancer, you
       #     configure settings for Elastic Load Balancing health checks;
-      #     they\'re not Amazon Route 53 health checks, but they perform a
+      #     they're not Amazon Route 53 health checks, but they perform a
       #     similar function. Do not create Amazon Route 53 health checks for
       #     the Amazon EC2 instances that you register with an ELB load
       #     balancer.
@@ -331,12 +331,12 @@ module Aws
       #   The ID of the hosted zone you want to associate your VPC with.
       #
       #   Note that you cannot associate a VPC with a hosted zone that
-      #   doesn\'t have an existing VPC association.
+      #   doesn't have an existing VPC association.
       #   @return [String]
       #
       # @!attribute [rw] vpc
       #   A complex type containing information about the Amazon VPC that
-      #   you\'re associating with the specified hosted zone.
+      #   you're associating with the specified hosted zone.
       #   @return [Types::VPC]
       #
       # @!attribute [rw] comment
@@ -402,18 +402,16 @@ module Aws
       #     specified values for `Name`, `Type`, `SetIdentifier` (for latency,
       #     weighted, geolocation, and failover resource record sets), and
       #     `TTL` (except alias resource record sets, for which the TTL is
-      #     determined by the AWS resource that you\'re routing DNS queries
+      #     determined by the AWS resource that you're routing DNS queries
       #     to).
       #
-      #     <important markdown="1"> To delete the resource record set that is associated with a
+      #     To delete the resource record set that is associated with a
       #     traffic policy instance, use ` DeleteTrafficPolicyInstance `.
       #     Amazon Route 53will delete the resource record set automatically.
       #     If you delete the resource record set by using
-      #     `ChangeResourceRecordSets`, Amazon Route 53 doesn\'t automatically
-      #     delete the traffic policy instance, and you\'ll continue to be
-      #     charged for it even though it\'s no longer in use.
-      #
-      #      </important>
+      #     `ChangeResourceRecordSets`, Amazon Route 53 doesn't automatically
+      #     delete the traffic policy instance, and you'll continue to be
+      #     charged for it even though it's no longer in use.
       #
       #   * `UPSERT`\: If a resource record set does not already exist, Amazon
       #     Route 53 creates it. If a resource record set does exist, Amazon
@@ -837,7 +835,7 @@ module Aws
       #   Amazon Route 53 treats *www.example.com* (without a trailing dot)
       #   and *www.example.com.* (with a trailing dot) as identical.
       #
-      #   If you\'re creating a public hosted zone, this is the name you have
+      #   If you're creating a public hosted zone, this is the name you have
       #   registered with your DNS registrar. If your domain name is
       #   registered with a registrar other than Amazon Route 53, change the
       #   name servers for your domain to the set of `NameServers` that
@@ -861,7 +859,7 @@ module Aws
       #
       # @!attribute [rw] hosted_zone_config
       #   (Optional) A complex type that contains an optional comment about
-      #   your hosted zone. If you don\'t want to specify a comment, omit both
+      #   your hosted zone. If you don't want to specify a comment, omit both
       #   the `HostedZoneConfig` and `Comment` elements.
       #   @return [Types::HostedZoneConfig]
       #
@@ -1214,11 +1212,9 @@ module Aws
       # @!attribute [rw] id
       #   The ID of the traffic policy instance that you want to delete.
       #
-      #   <important markdown="1"> When you delete a traffic policy instance, Amazon Route 53 also
+      #   When you delete a traffic policy instance, Amazon Route 53 also
       #   deletes all of the resource record sets that were created when you
       #   created the traffic policy instance.
-      #
-      #    </important>
       #   @return [String]
       class DeleteTrafficPolicyInstanceRequest < Struct.new(
         :id)
@@ -1289,7 +1285,7 @@ module Aws
       #
       # @!attribute [rw] vpc
       #   A complex type containing information about the Amazon VPC that
-      #   you\'re disassociating from the specified hosted zone.
+      #   you're disassociating from the specified hosted zone.
       #   @return [Types::VPC]
       #
       # @!attribute [rw] comment
@@ -1490,7 +1486,7 @@ module Aws
       # @!attribute [rw] subdivision_code
       #   Amazon Route 53 uses the one- to three-letter subdivision codes that
       #   are specified in [ISO standard 3166-1 alpha-2][1]. Amazon Route 53
-      #   doesn\'t support subdivision codes for all countries. If you specify
+      #   doesn't support subdivision codes for all countries. If you specify
       #   `SubdivisionCode`, you must also specify `CountryCode`.
       #
       #
@@ -1630,7 +1626,7 @@ module Aws
       #   by periodically sending a request to the endpoint that is specified
       #   in the health check. If that endpoint returns an HTTP status code of
       #   2xx or 3xx, the endpoint is healthy. If the endpoint returns an HTTP
-      #   status code of 400 or greater, or if the endpoint doesn\'t respond
+      #   status code of 400 or greater, or if the endpoint doesn't respond
       #   for a certain amount of time, Amazon Route 53 considers the endpoint
       #   unhealthy and also considers the resource record set unhealthy.
       #
@@ -1640,7 +1636,7 @@ module Aws
       #   on the status of a health check. Configuring health checks only
       #   makes sense in the following configurations:
       #
-      #   * You\'re checking the health of the resource record sets in a
+      #   * You're checking the health of the resource record sets in a
       #     weighted, latency, geolocation, or failover resource record set,
       #     and you specify health check IDs for all of the resource record
       #     sets. If the health check for one resource record set specifies an
@@ -1654,7 +1650,7 @@ module Aws
       #     referenced by the alias resource record sets. For more information
       #     about this configuration, see `EvaluateTargetHealth`.
       #
-      #     Amazon Route 53 doesn\'t check the health of the endpoint
+      #     Amazon Route 53 doesn't check the health of the endpoint
       #     specified in the resource record set, for example, the endpoint
       #     specified by the IP address in the `Value` element. When you add a
       #     `HealthCheckId` element to a resource record set, Amazon Route 53
@@ -1680,12 +1676,10 @@ module Aws
       #   (such as `us-east-1-www.example.com`), not the name of the resource
       #   record sets (example.com).
       #
-      #   <important markdown="1"> In this configuration, if you create a health check for which the
+      #   In this configuration, if you create a health check for which the
       #   value of `FullyQualifiedDomainName` matches the name of the resource
       #   record sets and then associate the health check with those resource
       #   record sets, health check results will be unpredictable.
-      #
-      #    </important>
       #   @return [String]
       class GetHealthCheckStatusRequest < Struct.new(
         :health_check_id)
@@ -1931,7 +1925,7 @@ module Aws
       #       }
       # @!attribute [rw] ip_address
       #   The IPv4 IP address of the endpoint on which you want Amazon Route
-      #   53 to perform health checks. If you don\'t specify a value for
+      #   53 to perform health checks. If you don't specify a value for
       #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
       #   domain name that you specify in `FullyQualifiedDomainName` at the
       #   interval that you specify in RequestInterval. Using an IP address
@@ -1972,10 +1966,8 @@ module Aws
       #   The type of health check that you want to create, which indicates
       #   how Amazon Route 53 determines whether an endpoint is healthy.
       #
-      #   <important markdown="1"> You can\'t change the value of `Type` after you create a health
+      #   You can't change the value of `Type` after you create a health
       #   check.
-      #
-      #    </important>
       #
       #   You can create the following types of health checks:
       #
@@ -1987,10 +1979,8 @@ module Aws
       #     If successful, Amazon Route 53 submits an HTTPS request and waits
       #     for an HTTP status code of 200 or greater and less than 400.
       #
-      #     <important markdown="1"> If you specify `HTTPS` for the value of `Type`, the endpoint must
+      #     If you specify `HTTPS` for the value of `Type`, the endpoint must
       #     support TLS v1.0 or later.
-      #
-      #      </important>
       #
       #   * **HTTP\_STR\_MATCH**\: Amazon Route 53 tries to establish a TCP
       #     connection. If successful, Amazon Route 53 submits an HTTP request
@@ -2007,7 +1997,7 @@ module Aws
       #   * **CLOUDWATCH\_METRIC**\: The health check is associated with a
       #     CloudWatch alarm. If the state of the alarm is `OK`, the health
       #     check is considered healthy. If the state is `ALARM`, the health
-      #     check is considered unhealthy. If CloudWatch doesn\'t have
+      #     check is considered unhealthy. If CloudWatch doesn't have
       #     sufficient data to determine whether the state is `OK` or `ALARM`,
       #     the health check status depends on the setting for
       #     `InsufficientDataHealthStatus`\: `Healthy`, `Unhealthy`, or
@@ -2054,13 +2044,13 @@ module Aws
       #     for `Type`, Amazon Route 53 passes `FullyQualifiedDomainName:Port`
       #     to the endpoint in the `Host` header.
       #
-      #   If you don\'t specify a value for `FullyQualifiedDomainName`, Amazon
+      #   If you don't specify a value for `FullyQualifiedDomainName`, Amazon
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header
       #   in each of the preceding cases.
       #
-      #   **If you don\'t specify** `IPAddress`\:
+      #   **If you don't specify** `IPAddress`\:
       #
-      #   If you don\'t specify a value for `IPAddress`, Amazon Route 53 sends
+      #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends
       #   a DNS request to the domain that you specify in
       #   `FullyQualifiedDomainName` at the interval you specify in
       #   `RequestInterval`. Using an IP address that DNS returns, Amazon
@@ -2075,18 +2065,16 @@ module Aws
       #   of the server (such as us-east-1-www.example.com), not the name of
       #   the resource record sets (www.example.com).
       #
-      #   <important markdown="1"> In this configuration, if you create a health check for which the
+      #   In this configuration, if you create a health check for which the
       #   value of `FullyQualifiedDomainName` matches the name of the resource
       #   record sets and you then associate the health check with those
       #   resource record sets, health check results will be unpredictable.
-      #
-      #    </important>
       #
       #   In addition, if the value that you specify for `Type` is `HTTP`,
       #   `HTTPS`, `HTTP_STR_MATCH`, or `HTTPS_STR_MATCH`, Amazon Route 53
       #   passes the value of `FullyQualifiedDomainName` in the `Host` header,
       #   as it does when you specify a value for `IPAddress`. If the value of
-      #   `Type` is `TCP`, Amazon Route 53 doesn\'t pass a `Host` header.
+      #   `Type` is `TCP`, Amazon Route 53 doesn't pass a `Host` header.
       #   @return [String]
       #
       # @!attribute [rw] search_string
@@ -2105,10 +2093,8 @@ module Aws
       #   health-check request. Each Amazon Route 53 health checker makes
       #   requests at this interval.
       #
-      #   <important markdown="1"> You can\'t change the value of `RequestInterval` after you create a
+      #   You can't change the value of `RequestInterval` after you create a
       #   health check.
-      #
-      #    </important>
       #   @return [Integer]
       #
       # @!attribute [rw] failure_threshold
@@ -2129,10 +2115,8 @@ module Aws
       #   and to display CloudWatch latency graphs on the **Health Checks**
       #   page in the Amazon Route 53 console.
       #
-      #   <important markdown="1"> You can\'t change the value of `MeasureLatency` after you create a
+      #   You can't change the value of `MeasureLatency` after you create a
       #   health check.
-      #
-      #    </important>
       #   @return [Boolean]
       #
       # @!attribute [rw] inverted
@@ -2174,10 +2158,10 @@ module Aws
       #   certificate.
       #
       #   Some endpoints require that `HTTPS` requests include the host name
-      #   in the `client_hello` message. If you don\'t enable SNI, the status
+      #   in the `client_hello` message. If you don't enable SNI, the status
       #   of the health check will be `SSL alert handshake_failure`. A health
       #   check can also have that status for other reasons. If SNI is enabled
-      #   and you\'re still getting the error, check the SSL/TLS configuration
+      #   and you're still getting the error, check the SSL/TLS configuration
       #   on your endpoint and confirm that your certificate is valid.
       #
       #   The SSL/TLS certificate on your endpoint includes a domain name in
@@ -2289,7 +2273,7 @@ module Aws
       #   A complex type that includes the `Comment` and `PrivateZone`
       #   elements. If you omitted the `HostedZoneConfig` and `Comment`
       #   elements from the request, the `Config` and `Comment` elements
-      #   don\'t appear in the response.
+      #   don't appear in the response.
       #   @return [Types::HostedZoneConfig]
       #
       # @!attribute [rw] resource_record_set_count
@@ -2305,7 +2289,7 @@ module Aws
       end
 
       # A complex type that contains an optional comment about your hosted
-      # zone. If you don\'t want to specify a comment, omit both the
+      # zone. If you don't want to specify a comment, omit both the
       # `HostedZoneConfig` and `Comment` elements.
       # @note When making an API call, pass HostedZoneConfig
       #   data as a hash:
@@ -2512,7 +2496,7 @@ module Aws
       #   return the next page of results.
       #
       #   Include `StartContinentCode` only if you want to list continents.
-      #   Don\'t include `StartContinentCode` when you\'re listing countries
+      #   Don't include `StartContinentCode` when you're listing countries
       #   or countries with their subdivisions.
       #   @return [String]
       #
@@ -2724,7 +2708,7 @@ module Aws
       # its database. For example, to create a hosted zone for exämple.com,
       # you specify `ex\344mple.com` for the domain name.
       # `ListHostedZonesByName` alphabetizes it as: `com.ex\344mple`. The
-      # labels are reversed, and it\'s alphabetized using the escaped value.
+      # labels are reversed, and it's alphabetized using the escaped value.
       # For more information about valid domain name formats, including
       # internationalized domain names, see [DNS Domain Name Format][1] in the
       # *Amazon Route 53 Developer Guide*.
@@ -2774,7 +2758,7 @@ module Aws
       # @!attribute [rw] dns_name
       #   (Optional) For your first request to `ListHostedZonesByName`,
       #   include the `dnsname` parameter only if you want to specify the name
-      #   of the first hosted zone in the response. If you don\'t include the
+      #   of the first hosted zone in the response. If you don't include the
       #   `dnsname` parameter, Amazon Route 53 returns all of the hosted zones
       #   that were created by the current AWS account, in ASCII order. For
       #   subsequent requests, include both `dnsname` and `hostedzoneid`
@@ -2898,7 +2882,7 @@ module Aws
       #   If `IsTruncated` is `false`, the `NextMarker` element is omitted
       #   from the response.
       #
-      # * If you\'re making the second or subsequent call to
+      # * If you're making the second or subsequent call to
       #   `ListHostedZones`, the `Marker` element matches the value that you
       #   specified in the `marker` parameter in the previous request.
       # @note When making an API call, pass ListHostedZonesRequest
@@ -3119,7 +3103,7 @@ module Aws
       #         max_items: 1,
       #       }
       # @!attribute [rw] marker
-      #   If you\'re making the second or subsequent call to
+      #   If you're making the second or subsequent call to
       #   `ListReusableDelegationSets`, the `Marker` element matches the value
       #   that you specified in the `marker` parameter in the previous
       #   request.
@@ -3861,25 +3845,23 @@ module Aws
       #   You can use the asterisk (\*) wildcard to replace the leftmost label
       #   in a domain name. For example, `*.example.com`. Note the following:
       #
-      #   * The \* must replace the entire label. For example, you can\'t
+      #   * The \* must replace the entire label. For example, you can't
       #     specify `*prod.example.com` or `prod*.example.com`.
       #
-      #   * The \* can\'t replace any of the middle labels, for example,
+      #   * The \* can't replace any of the middle labels, for example,
       #     marketing.\*.example.com.
       #
       #   * If you include \* in any position other than the leftmost label in
       #     a domain name, DNS treats it as an \* character (ASCII 42), not as
       #     a wildcard.
       #
-      #     <important markdown="1"> You can\'t use the \* wildcard for resource records sets that have
+      #     You can't use the \* wildcard for resource records sets that have
       #     a type of NS.
-      #
-      #      </important>
       #
       #   You can use the \* wildcard as the leftmost label in a domain name,
       #   for example, `*.example.com`. You cannot use an \* for one of the
       #   middle labels, for example, `marketing.*.example.com`. In addition,
-      #   the \* must replace the entire label; for example, you can\'t
+      #   the \* must replace the entire label; for example, you can't
       #   specify `prod*.example.com`.
       #
       #
@@ -3906,10 +3888,10 @@ module Aws
       #   of email messages. However, we no longer recommend that you create
       #   resource record sets for which the value of `Type` is `SPF`. RFC
       #   7208, *Sender Policy Framework (SPF) for Authorizing Use of Domains
-      #   in Email, Version 1*, has been updated to say, \"...\[I\]ts
+      #   in Email, Version 1*, has been updated to say, "...\[I\]ts
       #   existence and mechanism defined in \[RFC4408\] have led to some
       #   interoperability issues. Accordingly, its use is no longer
-      #   appropriate for SPF version 1; implementations are not to use it.\"
+      #   appropriate for SPF version 1; implementations are not to use it."
       #   In RFC 7208, see section 14.1, [The SPF DNS Record Type][2].
       #
       #    </note>
@@ -3926,7 +3908,7 @@ module Aws
       #   * **Amazon S3 buckets:** `A`
       #
       #   * **Another resource record set in this hosted zone:** Specify the
-      #     type of the resource record set for which you\'re creating the
+      #     type of the resource record set for which you're creating the
       #     alias. Specify any value except `NS` or `SOA`.
       #
       #
@@ -3951,7 +3933,7 @@ module Aws
       #   responds to using the current resource record set. Amazon Route 53
       #   calculates the sum of the weights for the resource record sets that
       #   have the same combination of DNS name and type. Amazon Route 53 then
-      #   responds to queries based on the ratio of a resource\'s weight to
+      #   responds to queries based on the ratio of a resource's weight to
       #   the total. Note the following:
       #
       #   * You must specify a value for the `Weight` element for every
@@ -4047,23 +4029,21 @@ module Aws
       #   the same geographic location.
       #
       #   The value `*` in the `CountryCode` element matches all geographic
-      #   locations that aren\'t specified in other geolocation resource
+      #   locations that aren't specified in other geolocation resource
       #   record sets that have the same values for the `Name` and `Type`
       #   elements.
       #
-      #   <important markdown="1"> Geolocation works by mapping IP addresses to locations. However,
-      #   some IP addresses aren\'t mapped to geographic locations, so even if
+      #   Geolocation works by mapping IP addresses to locations. However,
+      #   some IP addresses aren't mapped to geographic locations, so even if
       #   you create geolocation resource record sets that cover all seven
       #   continents, Amazon Route 53 will receive some DNS queries from
-      #   locations that it can\'t identify. We recommend that you create a
+      #   locations that it can't identify. We recommend that you create a
       #   resource record set for which the value of `CountryCode` is `*`,
       #   which handles both queries that come from locations for which you
-      #   haven\'t created geolocation resource record sets and queries from
-      #   IP addresses that aren\'t mapped to a location. If you don\'t create
-      #   a `*` resource record set, Amazon Route 53 returns a \"no answer\"
+      #   haven't created geolocation resource record sets and queries from
+      #   IP addresses that aren't mapped to a location. If you don't create
+      #   a `*` resource record set, Amazon Route 53 returns a "no answer"
       #   response for queries from those locations.
-      #
-      #    </important>
       #
       #   You cannot create non-geolocation resource record sets that have the
       #   same values for the `Name` and `Type` elements as geolocation
@@ -4130,11 +4110,11 @@ module Aws
       #   The resource record cache time to live (TTL), in seconds. Note the
       #   following:
       #
-      #   * If you\'re creating an alias resource record set, omit `TTL`.
+      #   * If you're creating an alias resource record set, omit `TTL`.
       #     Amazon Route 53 uses the value of `TTL` for the alias target.
       #
-      #   * If you\'re associating this resource record set with a health
-      #     check (if you\'re adding a `HealthCheckId` element), we recommend
+      #   * If you're associating this resource record set with a health
+      #     check (if you're adding a `HealthCheckId` element), we recommend
       #     that you specify a `TTL` of 60 seconds or less so clients respond
       #     quickly to changes in health status.
       #
@@ -4167,10 +4147,10 @@ module Aws
       #   you are redirecting queries. The Elastic Beanstalk environment must
       #   have a regionalized subdomain.
       #
-      #   If you\'re creating resource records sets for a private hosted zone,
+      #   If you're creating resource records sets for a private hosted zone,
       #   note the following:
       #
-      #   * You can\'t create alias resource record sets for CloudFront
+      #   * You can't create alias resource record sets for CloudFront
       #     distributions in a private hosted zone.
       #
       #   * Creating geolocation alias resource record sets or latency alias
@@ -4212,7 +4192,7 @@ module Aws
       #   on the status of a health check. Configuring health checks only
       #   makes sense in the following configurations:
       #
-      #   * You\'re checking the health of the resource record sets in a
+      #   * You're checking the health of the resource record sets in a
       #     weighted, latency, geolocation, or failover resource record set,
       #     and you specify health check IDs for all of the resource record
       #     sets. If the health check for one resource record set specifies an
@@ -4225,14 +4205,12 @@ module Aws
       #     health check IDs for all of the resource record sets that are
       #     referenced by the alias resource record sets.
       #
-      #   <important markdown="1"> Amazon Route 53 doesn\'t check the health of the endpoint specified
+      #   Amazon Route 53 doesn't check the health of the endpoint specified
       #   in the resource record set, for example, the endpoint specified by
       #   the IP address in the `Value` element. When you add a
       #   `HealthCheckId` element to a resource record set, Amazon Route 53
       #   checks the health of the endpoint that you specified in the health
       #   check.
-      #
-      #    </important>
       #
       #   For geolocation resource record sets, if an endpoint is unhealthy,
       #   Amazon Route 53 looks for a resource record set for the larger,
@@ -4253,12 +4231,10 @@ module Aws
       #   (such as `us-east-1-www.example.com`), not the name of the resource
       #   record sets (example.com).
       #
-      #   <important markdown="1"> n this configuration, if you create a health check for which the
+      #   n this configuration, if you create a health check for which the
       #   value of `FullyQualifiedDomainName` matches the name of the resource
       #   record sets and then associate the health check with those resource
       #   record sets, health check results will be unpredictable.
-      #
-      #    </important>
       #
       #   For more informaiton, see the following topics in the Amazon Route
       #   53 Developer Guide:
@@ -4361,7 +4337,7 @@ module Aws
       #
       #   * **Give a name to a health check**\: Edit the default `Name` tag.
       #     In the Amazon Route 53 console, the list of your health checks
-      #     includes a **Name** column that lets you see the name that you\'ve
+      #     includes a **Name** column that lets you see the name that you've
       #     given to each health check.
       #   @return [String]
       #
@@ -4649,7 +4625,7 @@ module Aws
       #
       # @!attribute [rw] ip_address
       #   The IPv4 IP address of the endpoint on which you want Amazon Route
-      #   53 to perform health checks. If you don\'t specify a value for
+      #   53 to perform health checks. If you don't specify a value for
       #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
       #   domain name that you specify in `FullyQualifiedDomainName` at the
       #   interval you specify in `RequestInterval`. Using an IP address that
@@ -4663,7 +4639,7 @@ module Aws
       #   User Guide for Linux Instances*.
       #
       #   <note markdown="1"> If a health check already has a value for `IPAddress`, you can
-      #   change the value. However, you can\'t update an existing health
+      #   change the value. However, you can't update an existing health
       #   check to add or remove the value of `IPAddress`.
       #
       #    </note>
@@ -4695,7 +4671,7 @@ module Aws
       #   `IPAddress`.
       #
       #   <note markdown="1"> If a health check already has a value for `IPAddress`, you can
-      #   change the value. However, you can\'t update an existing health
+      #   change the value. However, you can't update an existing health
       #   check to add or remove the value of `IPAddress`.
       #
       #    </note>
@@ -4721,13 +4697,13 @@ module Aws
       #     <code>FullyQualifiedDomainName</code>\:<code>Port</code> </i> to
       #     the endpoint in the Host header.
       #
-      #   If you don\'t specify a value for `FullyQualifiedDomainName`, Amazon
+      #   If you don't specify a value for `FullyQualifiedDomainName`, Amazon
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header
       #   in each of the above cases.
       #
-      #   **If you don\'t specify** `IPAddress`\:
+      #   **If you don't specify** `IPAddress`\:
       #
-      #   If you don\'t specify a value for `IPAddress`, Amazon Route 53 sends
+      #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends
       #   a DNS request to the domain that you specify in
       #   `FullyQualifiedDomainName` at the interval you specify in
       #   `RequestInterval`. Using an IP address that DNS returns, Amazon
@@ -4742,18 +4718,16 @@ module Aws
       #   of the server (such as `us-east-1-www.example.com`), not the name of
       #   the resource record sets (www.example.com).
       #
-      #   <important markdown="1"> In this configuration, if the value of `FullyQualifiedDomainName`
+      #   In this configuration, if the value of `FullyQualifiedDomainName`
       #   matches the name of the resource record sets and you then associate
       #   the health check with those resource record sets, health check
       #   results will be unpredictable.
-      #
-      #    </important>
       #
       #   In addition, if the value of `Type` is `HTTP`, `HTTPS`,
       #   `HTTP_STR_MATCH`, or `HTTPS_STR_MATCH`, Amazon Route 53 passes the
       #   value of `FullyQualifiedDomainName` in the `Host` header, as it does
       #   when you specify a value for `IPAddress`. If the value of `Type` is
-      #   `TCP`, Amazon Route 53 doesn\'t pass a `Host` header.
+      #   `TCP`, Amazon Route 53 doesn't pass a `Host` header.
       #   @return [String]
       #
       # @!attribute [rw] search_string
@@ -4761,7 +4735,7 @@ module Aws
       #   string that you want Amazon Route 53 to search for in the response
       #   body from the specified resource. If the string appears in the
       #   response body, Amazon Route 53 considers the resource healthy. (You
-      #   can\'t change the value of `Type` when you update a health check.)
+      #   can't change the value of `Type` when you update a health check.)
       #   @return [String]
       #
       # @!attribute [rw] failure_threshold
@@ -4814,10 +4788,10 @@ module Aws
       #   certificate.
       #
       #   Some endpoints require that HTTPS requests include the host name in
-      #   the `client_hello` message. If you don\'t enable SNI, the status of
+      #   the `client_hello` message. If you don't enable SNI, the status of
       #   the health check will be SSL alert `handshake_failure`. A health
       #   check can also have that status for other reasons. If SNI is enabled
-      #   and you\'re still getting the error, check the SSL/TLS configuration
+      #   and you're still getting the error, check the SSL/TLS configuration
       #   on your endpoint and confirm that your certificate is valid.
       #
       #   The SSL/TLS certificate on your endpoint includes a domain name in
@@ -4887,7 +4861,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] comment
-      #   The new comment for the hosted zone. If you don\'t specify a value
+      #   The new comment for the hosted zone. If you don't specify a value
       #   for `Comment`, Amazon Route 53 deletes the existing value of the
       #   `Comment` element, if any.
       #   @return [String]

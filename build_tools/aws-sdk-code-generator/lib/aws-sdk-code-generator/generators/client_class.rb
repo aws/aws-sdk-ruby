@@ -113,10 +113,11 @@ module AwsSdkCodeGenerator
               examples: @examples,
               method: m
             )
-            m.param('options', type: Hash, default: {})
+            m.param('params', type: Hash, default: {})
+            m.param('options', type: Hash, default: {}, documented: false)
             m.code do |c|
-              c << "req = build_request(:#{method_name}, options)"
-              c << "req.send_request"
+              c << "req = build_request(:#{method_name}, params)"
+              c << "req.send_request(options)"
             end
           end
         end

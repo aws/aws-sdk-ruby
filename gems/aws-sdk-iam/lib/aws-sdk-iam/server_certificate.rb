@@ -98,7 +98,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :new_path
       #   The new path for the server certificate. Include this only if you are
-      #   updating the server certificate\'s path.
+      #   updating the server certificate's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -112,7 +112,7 @@ module Aws
       #   [1]: http://wikipedia.org/wiki/regex
       # @option options [String] :new_server_certificate_name
       #   The new name for the server certificate. Include this only if you are
-      #   updating the server certificate\'s name. The name of the certificate
+      #   updating the server certificate's name. The name of the certificate
       #   cannot contain any spaces.
       #
       #   The [regex pattern][1] for this parameter is a string of characters

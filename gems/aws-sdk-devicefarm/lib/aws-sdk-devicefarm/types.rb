@@ -33,15 +33,15 @@ module Aws
       # Represents the output of a test. Examples of artifacts include logs
       # and screenshots.
       # @!attribute [rw] arn
-      #   The artifact\'s ARN.
+      #   The artifact's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The artifact\'s name.
+      #   The artifact's name.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The artifact\'s type.
+      #   The artifact's type.
       #
       #   Allowed values include the following:
       #
@@ -95,12 +95,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] extension
-      #   The artifact\'s file extension.
+      #   The artifact's file extension.
       #   @return [String]
       #
       # @!attribute [rw] url
       #   The pre-signed Amazon S3 URL that can be used with a corresponding
-      #   GET request to download the artifact\'s file.
+      #   GET request to download the artifact's file.
       #   @return [String]
       class Artifact < Struct.new(
         :arn,
@@ -116,15 +116,15 @@ module Aws
       #
       # Note that this does not represent system-wide CPU usage.
       # @!attribute [rw] frequency
-      #   The CPU\'s frequency.
+      #   The CPU's frequency.
       #   @return [String]
       #
       # @!attribute [rw] architecture
-      #   The CPU\'s architecture, for example x86 or ARM.
+      #   The CPU's architecture, for example x86 or ARM.
       #   @return [String]
       #
       # @!attribute [rw] clock
-      #   The clock speed of the device\'s CPU, expressed in hertz (Hz). For
+      #   The clock speed of the device's CPU, expressed in hertz (Hz). For
       #   example, a 1.2 GHz CPU is expressed as 1200000000.
       #   @return [Float]
       class CPU < Struct.new(
@@ -194,15 +194,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The device pool\'s name.
+      #   The device pool's name.
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The device pool\'s description.
+      #   The device pool's description.
       #   @return [String]
       #
       # @!attribute [rw] rules
-      #   The device pool\'s rules.
+      #   The device pool's rules.
       #   @return [Array<Types::Rule>]
       class CreateDevicePoolRequest < Struct.new(
         :project_arn,
@@ -229,7 +229,7 @@ module Aws
       #         name: "Name", # required
       #       }
       # @!attribute [rw] name
-      #   The project\'s name.
+      #   The project's name.
       #   @return [String]
       class CreateProjectRequest < Struct.new(
         :name)
@@ -325,12 +325,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The upload\'s file name. The name should not contain the \'/\'
+      #   The upload's file name. The name should not contain the '/'
       #   character.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The upload\'s upload type.
+      #   The upload's upload type.
       #
       #   Must be one of the following values:
       #
@@ -377,8 +377,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] content_type
-      #   The upload\'s content type (for example,
-      #   \"application/octet-stream\").
+      #   The upload's content type (for example,
+      #   "application/octet-stream").
       #   @return [String]
       class CreateUploadRequest < Struct.new(
         :project_arn,
@@ -494,23 +494,23 @@ module Aws
 
       # Represents a device type that an app is tested against.
       # @!attribute [rw] arn
-      #   The device\'s ARN.
+      #   The device's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The device\'s display name.
+      #   The device's display name.
       #   @return [String]
       #
       # @!attribute [rw] manufacturer
-      #   The device\'s manufacturer name.
+      #   The device's manufacturer name.
       #   @return [String]
       #
       # @!attribute [rw] model
-      #   The device\'s model name.
+      #   The device's model name.
       #   @return [String]
       #
       # @!attribute [rw] form_factor
-      #   The device\'s form factor.
+      #   The device's form factor.
       #
       #   Allowed values include:
       #
@@ -520,7 +520,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] platform
-      #   The device\'s platform.
+      #   The device's platform.
       #
       #   Allowed values include:
       #
@@ -530,11 +530,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] os
-      #   The device\'s operating system type.
+      #   The device's operating system type.
       #   @return [String]
       #
       # @!attribute [rw] cpu
-      #   Information about the device\'s CPU.
+      #   Information about the device's CPU.
       #   @return [Types::CPU]
       #
       # @!attribute [rw] resolution
@@ -543,23 +543,23 @@ module Aws
       #   @return [Types::Resolution]
       #
       # @!attribute [rw] heap_size
-      #   The device\'s heap size, expressed in bytes.
+      #   The device's heap size, expressed in bytes.
       #   @return [Integer]
       #
       # @!attribute [rw] memory
-      #   The device\'s total memory size, expressed in bytes.
+      #   The device's total memory size, expressed in bytes.
       #   @return [Integer]
       #
       # @!attribute [rw] image
-      #   The device\'s image name.
+      #   The device's image name.
       #   @return [String]
       #
       # @!attribute [rw] carrier
-      #   The device\'s carrier.
+      #   The device's carrier.
       #   @return [String]
       #
       # @!attribute [rw] radio
-      #   The device\'s radio.
+      #   The device's radio.
       #   @return [String]
       #
       # @!attribute [rw] remote_access_enabled
@@ -622,19 +622,19 @@ module Aws
 
       # Represents a collection of device types.
       # @!attribute [rw] arn
-      #   The device pool\'s ARN.
+      #   The device pool's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The device pool\'s name.
+      #   The device pool's name.
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The device pool\'s description.
+      #   The device pool's description.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The device pool\'s type.
+      #   The device pool's type.
       #
       #   Allowed values include:
       #
@@ -646,7 +646,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] rules
-      #   Information about the device pool\'s rules.
+      #   Information about the device pool's rules.
       #   @return [Array<Types::Rule>]
       class DevicePool < Struct.new(
         :arn,
@@ -700,7 +700,7 @@ module Aws
       #         test_type: "BUILTIN_FUZZ", # accepts BUILTIN_FUZZ, BUILTIN_EXPLORER, APPIUM_JAVA_JUNIT, APPIUM_JAVA_TESTNG, APPIUM_PYTHON, APPIUM_WEB_JAVA_JUNIT, APPIUM_WEB_JAVA_TESTNG, APPIUM_WEB_PYTHON, CALABASH, INSTRUMENTATION, UIAUTOMATION, UIAUTOMATOR, XCTEST, XCTEST_UI
       #       }
       # @!attribute [rw] device_pool_arn
-      #   The device pool\'s ARN.
+      #   The device pool's ARN.
       #   @return [String]
       #
       # @!attribute [rw] app_arn
@@ -773,7 +773,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The device pool\'s ARN.
+      #   The device pool's ARN.
       #   @return [String]
       class GetDevicePoolRequest < Struct.new(
         :arn)
@@ -797,7 +797,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The device type\'s ARN.
+      #   The device type's ARN.
       #   @return [String]
       class GetDeviceRequest < Struct.new(
         :arn)
@@ -821,7 +821,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The job\'s ARN.
+      #   The job's ARN.
       #   @return [String]
       class GetJobRequest < Struct.new(
         :arn)
@@ -884,7 +884,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The project\'s ARN.
+      #   The project's ARN.
       #   @return [String]
       class GetProjectRequest < Struct.new(
         :arn)
@@ -937,7 +937,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The run\'s ARN.
+      #   The run's ARN.
       #   @return [String]
       class GetRunRequest < Struct.new(
         :arn)
@@ -962,7 +962,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The suite\'s ARN.
+      #   The suite's ARN.
       #   @return [String]
       class GetSuiteRequest < Struct.new(
         :arn)
@@ -986,7 +986,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The test\'s ARN.
+      #   The test's ARN.
       #   @return [String]
       class GetTestRequest < Struct.new(
         :arn)
@@ -1010,7 +1010,7 @@ module Aws
       #         arn: "AmazonResourceName", # required
       #       }
       # @!attribute [rw] arn
-      #   The upload\'s ARN.
+      #   The upload's ARN.
       #   @return [String]
       class GetUploadRequest < Struct.new(
         :arn)
@@ -1089,15 +1089,15 @@ module Aws
 
       # Represents a device.
       # @!attribute [rw] arn
-      #   The job\'s ARN.
+      #   The job's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The job\'s name.
+      #   The job's name.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The job\'s type.
+      #   The job's type.
       #
       #   Allowed values include the following:
       #
@@ -1138,7 +1138,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] status
-      #   The job\'s status.
+      #   The job's status.
       #
       #   Allowed values include:
       #
@@ -1162,7 +1162,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] result
-      #   The job\'s result.
+      #   The job's result.
       #
       #   Allowed values include:
       #
@@ -1182,19 +1182,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] started
-      #   The job\'s start time.
+      #   The job's start time.
       #   @return [Time]
       #
       # @!attribute [rw] stopped
-      #   The job\'s stop time.
+      #   The job's stop time.
       #   @return [Time]
       #
       # @!attribute [rw] counters
-      #   The job\'s result counters.
+      #   The job's result counters.
       #   @return [Types::Counters]
       #
       # @!attribute [rw] message
-      #   A message about the job\'s result.
+      #   A message about the job's result.
       #   @return [String]
       #
       # @!attribute [rw] device
@@ -1234,7 +1234,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The artifacts\' type.
+      #   The artifacts' type.
       #
       #   Allowed values include:
       #
@@ -1286,7 +1286,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The device pools\' type.
+      #   The device pools' type.
       #
       #   Allowed values include:
       #
@@ -1335,7 +1335,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The device types\' ARNs.
+      #   The device types' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1375,7 +1375,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The jobs\' ARNs.
+      #   The jobs' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1482,7 +1482,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The projects\' ARNs.
+      #   The projects' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1565,7 +1565,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The runs\' ARNs.
+      #   The runs' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1605,7 +1605,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The samples\' ARNs.
+      #   The samples' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1645,7 +1645,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The suites\' ARNs.
+      #   The suites' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1685,7 +1685,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The tests\' ARNs.
+      #   The tests' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1725,7 +1725,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The unique problems\' ARNs.
+      #   The unique problems' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1781,7 +1781,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The uploads\' ARNs.
+      #   The uploads' ARNs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1844,7 +1844,7 @@ module Aws
       #
       # @!attribute [rw] currency_code
       #   The currency code of a monetary amount. For example, `USD` means
-      #   \"U.S. dollars.\"
+      #   "U.S. dollars."
       #   @return [String]
       class MonetaryAmount < Struct.new(
         :amount,
@@ -1862,7 +1862,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The type of offering (e.g., \"RECURRING\") for a device.
+      #   The type of offering (e.g., "RECURRING") for a device.
       #   @return [String]
       #
       # @!attribute [rw] platform
@@ -1951,7 +1951,7 @@ module Aws
       #   @return [Types::Device]
       #
       # @!attribute [rw] result
-      #   The problem\'s result.
+      #   The problem's result.
       #
       #   Allowed values include:
       #
@@ -1971,7 +1971,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] message
-      #   A message about the problem\'s result.
+      #   A message about the problem's result.
       #   @return [String]
       class Problem < Struct.new(
         :run,
@@ -1986,11 +1986,11 @@ module Aws
 
       # Information about a problem detail.
       # @!attribute [rw] arn
-      #   The problem detail\'s ARN.
+      #   The problem detail's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The problem detail\'s name.
+      #   The problem detail's name.
       #   @return [String]
       class ProblemDetail < Struct.new(
         :arn,
@@ -2001,11 +2001,11 @@ module Aws
       # Represents an operating-system neutral workspace for running and
       # managing tests.
       # @!attribute [rw] arn
-      #   The project\'s ARN.
+      #   The project's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The project\'s name.
+      #   The project's name.
       #   @return [String]
       #
       # @!attribute [rw] created
@@ -2175,7 +2175,7 @@ module Aws
       # @!attribute [rw] billing_method
       #   The billing method of the remote access session. Possible values
       #   include `METERED` or `UNMETERED`. For more information about metered
-      #   devices, see [AWS Device Farm terminology][1].\"
+      #   devices, see [AWS Device Farm terminology][1]."
       #
       #
       #
@@ -2240,11 +2240,11 @@ module Aws
       # Represents the screen resolution of a device in height and width,
       # expressed in pixels.
       # @!attribute [rw] width
-      #   The screen resolution\'s width, expressed in pixels.
+      #   The screen resolution's width, expressed in pixels.
       #   @return [Integer]
       #
       # @!attribute [rw] height
-      #   The screen resolution\'s height, expressed in pixels.
+      #   The screen resolution's height, expressed in pixels.
       #   @return [Integer]
       class Resolution < Struct.new(
         :width,
@@ -2262,8 +2262,8 @@ module Aws
       #         value: "String",
       #       }
       # @!attribute [rw] attribute
-      #   The rule\'s stringified attribute. For example, specify the value as
-      #   `"\"abc\""`.
+      #   The rule's stringified attribute. For example, specify the value as
+      #   `""abc""`.
       #
       #   Allowed values include:
       #
@@ -2277,7 +2277,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] operator
-      #   The rule\'s operator.
+      #   The rule's operator.
       #
       #   * EQUALS: The equals operator.
       #
@@ -2291,7 +2291,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] value
-      #   The rule\'s value.
+      #   The rule's value.
       #   @return [String]
       class Rule < Struct.new(
         :attribute,
@@ -2303,15 +2303,15 @@ module Aws
       # Represents an app on a set of devices with a specific test and
       # configuration.
       # @!attribute [rw] arn
-      #   The run\'s ARN.
+      #   The run's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The run\'s name.
+      #   The run's name.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The run\'s type.
+      #   The run's type.
       #
       #   Must be one of the following values:
       #
@@ -2348,7 +2348,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] platform
-      #   The run\'s platform.
+      #   The run's platform.
       #
       #   Allowed values include:
       #
@@ -2362,7 +2362,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] status
-      #   The run\'s status.
+      #   The run's status.
       #
       #   Allowed values include:
       #
@@ -2386,7 +2386,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] result
-      #   The run\'s result.
+      #   The run's result.
       #
       #   Allowed values include:
       #
@@ -2406,19 +2406,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] started
-      #   The run\'s start time.
+      #   The run's start time.
       #   @return [Time]
       #
       # @!attribute [rw] stopped
-      #   The run\'s stop time.
+      #   The run's stop time.
       #   @return [Time]
       #
       # @!attribute [rw] counters
-      #   The run\'s result counters.
+      #   The run's result counters.
       #   @return [Types::Counters]
       #
       # @!attribute [rw] message
-      #   A message about the run\'s result.
+      #   A message about the run's result.
       #   @return [String]
       #
       # @!attribute [rw] total_jobs
@@ -2460,11 +2460,11 @@ module Aws
 
       # Represents a sample of performance data.
       # @!attribute [rw] arn
-      #   The sample\'s ARN.
+      #   The sample's ARN.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The sample\'s type.
+      #   The sample's type.
       #
       #   Must be one of the following values:
       #
@@ -2511,7 +2511,7 @@ module Aws
       #
       # @!attribute [rw] url
       #   The pre-signed Amazon S3 URL that can be used with a corresponding
-      #   GET request to download the sample\'s file.
+      #   GET request to download the sample's file.
       #   @return [String]
       class Sample < Struct.new(
         :arn,
@@ -2545,7 +2545,7 @@ module Aws
       # @!attribute [rw] extra_data_package_arn
       #   The ARN of the extra data for the run. The extra data is a .zip file
       #   that AWS Device Farm will extract to external data for Android or
-      #   the app\'s sandbox for iOS.
+      #   the app's sandbox for iOS.
       #   @return [String]
       #
       # @!attribute [rw] network_profile_arn
@@ -2674,7 +2674,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] type
-      #   The test\'s type.
+      #   The test's type.
       #
       #   Must be one of the following values:
       #
@@ -2715,11 +2715,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] filter
-      #   The test\'s filter.
+      #   The test's filter.
       #   @return [String]
       #
       # @!attribute [rw] parameters
-      #   The test\'s parameters, such as test framework parameters and
+      #   The test's parameters, such as test framework parameters and
       #   fixture settings.
       #   @return [Hash<String,String>]
       class ScheduleRunTest < Struct.new(
@@ -2785,15 +2785,15 @@ module Aws
 
       # Represents a collection of one or more tests.
       # @!attribute [rw] arn
-      #   The suite\'s ARN.
+      #   The suite's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The suite\'s name.
+      #   The suite's name.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The suite\'s type.
+      #   The suite's type.
       #
       #   Must be one of the following values:
       #
@@ -2834,7 +2834,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] status
-      #   The suite\'s status.
+      #   The suite's status.
       #
       #   Allowed values include:
       #
@@ -2858,7 +2858,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] result
-      #   The suite\'s result.
+      #   The suite's result.
       #
       #   Allowed values include:
       #
@@ -2878,19 +2878,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] started
-      #   The suite\'s start time.
+      #   The suite's start time.
       #   @return [Time]
       #
       # @!attribute [rw] stopped
-      #   The suite\'s stop time.
+      #   The suite's stop time.
       #   @return [Time]
       #
       # @!attribute [rw] counters
-      #   The suite\'s result counters.
+      #   The suite's result counters.
       #   @return [Types::Counters]
       #
       # @!attribute [rw] message
-      #   A message about the suite\'s result.
+      #   A message about the suite's result.
       #   @return [String]
       #
       # @!attribute [rw] device_minutes
@@ -2914,15 +2914,15 @@ module Aws
 
       # Represents a condition that is evaluated.
       # @!attribute [rw] arn
-      #   The test\'s ARN.
+      #   The test's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The test\'s name.
+      #   The test's name.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   The test\'s type.
+      #   The test's type.
       #
       #   Must be one of the following values:
       #
@@ -2963,7 +2963,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] status
-      #   The test\'s status.
+      #   The test's status.
       #
       #   Allowed values include:
       #
@@ -2987,7 +2987,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] result
-      #   The test\'s result.
+      #   The test's result.
       #
       #   Allowed values include:
       #
@@ -3007,19 +3007,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] started
-      #   The test\'s start time.
+      #   The test's start time.
       #   @return [Time]
       #
       # @!attribute [rw] stopped
-      #   The test\'s stop time.
+      #   The test's stop time.
       #   @return [Time]
       #
       # @!attribute [rw] counters
-      #   The test\'s result counters.
+      #   The test's result counters.
       #   @return [Types::Counters]
       #
       # @!attribute [rw] message
-      #   A message about the test\'s result.
+      #   A message about the test's result.
       #   @return [String]
       #
       # @!attribute [rw] device_minutes
@@ -3043,7 +3043,7 @@ module Aws
 
       # A collection of one or more problems, grouped by their result.
       # @!attribute [rw] message
-      #   A message about the unique problems\' result.
+      #   A message about the unique problems' result.
       #   @return [String]
       #
       # @!attribute [rw] problems
@@ -3143,11 +3143,11 @@ module Aws
       # An app or a set of one or more tests to upload or that have been
       # uploaded.
       # @!attribute [rw] arn
-      #   The upload\'s ARN.
+      #   The upload's ARN.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The upload\'s file name.
+      #   The upload's file name.
       #   @return [String]
       #
       # @!attribute [rw] created
@@ -3155,7 +3155,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] type
-      #   The upload\'s type.
+      #   The upload's type.
       #
       #   Must be one of the following values:
       #
@@ -3199,7 +3199,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The upload\'s status.
+      #   The upload's status.
       #
       #   Must be one of the following values:
       #
@@ -3218,18 +3218,18 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] metadata
-      #   The upload\'s metadata. For example, for Android, this contains
+      #   The upload's metadata. For example, for Android, this contains
       #   information that is parsed from the manifest and is displayed in the
       #   AWS Device Farm console after the associated app is uploaded.
       #   @return [String]
       #
       # @!attribute [rw] content_type
-      #   The upload\'s content type (for example,
-      #   \"application/octet-stream\").
+      #   The upload's content type (for example,
+      #   "application/octet-stream").
       #   @return [String]
       #
       # @!attribute [rw] message
-      #   A message about the upload\'s result.
+      #   A message about the upload's result.
       #   @return [String]
       class Upload < Struct.new(
         :arn,

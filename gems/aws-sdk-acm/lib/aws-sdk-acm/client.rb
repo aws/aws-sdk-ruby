@@ -183,8 +183,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags_to_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_certificate(params = {}, options = {})
         req = build_request(:add_tags_to_certificate, params)
         req.send_request(options)
@@ -219,8 +219,8 @@ module Aws
       #   resp = client.delete_certificate({
       #     certificate_arn: "Arn", # required
       #   })
+      # @overload delete_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_certificate(params = {}, options = {})
         req = build_request(:delete_certificate, params)
         req.send_request(options)
@@ -278,8 +278,8 @@ module Aws
       #   resp.certificate.in_use_by #=> Array
       #   resp.certificate.in_use_by[0] #=> String
       #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
+      # @overload describe_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_certificate(params = {}, options = {})
         req = build_request(:describe_certificate, params)
         req.send_request(options)
@@ -321,8 +321,8 @@ module Aws
       # @example Response structure
       #   resp.certificate #=> String
       #   resp.certificate_chain #=> String
+      # @overload get_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_certificate(params = {}, options = {})
         req = build_request(:get_certificate, params)
         req.send_request(options)
@@ -362,8 +362,8 @@ module Aws
       #   resp.certificate_summary_list #=> Array
       #   resp.certificate_summary_list[0].certificate_arn #=> String
       #   resp.certificate_summary_list[0].domain_name #=> String
+      # @overload list_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_certificates(params = {}, options = {})
         req = build_request(:list_certificates, params)
         req.send_request(options)
@@ -398,8 +398,8 @@ module Aws
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
+      # @overload list_tags_for_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_certificate(params = {}, options = {})
         req = build_request(:list_tags_for_certificate, params)
         req.send_request(options)
@@ -440,8 +440,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload remove_tags_from_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_certificate(params = {}, options = {})
         req = build_request(:remove_tags_from_certificate, params)
         req.send_request(options)
@@ -515,8 +515,8 @@ module Aws
       #
       # @example Response structure
       #   resp.certificate_arn #=> String
+      # @overload request_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_certificate(params = {}, options = {})
         req = build_request(:request_certificate, params)
         req.send_request(options)
@@ -572,8 +572,8 @@ module Aws
       #     domain: "DomainNameString", # required
       #     validation_domain: "DomainNameString", # required
       #   })
+      # @overload resend_validation_email(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resend_validation_email(params = {}, options = {})
         req = build_request(:resend_validation_email, params)
         req.send_request(options)

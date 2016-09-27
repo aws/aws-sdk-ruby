@@ -115,7 +115,7 @@ module Aws
         data.suspended_processes
       end
 
-      # The name of the placement group into which you\'ll launch your
+      # The name of the placement group into which you'll launch your
       # instances, if any. For more information, see [Placement Groups][1] in
       # the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -441,7 +441,7 @@ module Aws
       # @option options [Time,DateTime,Date,Integer,String] :time
       #   This parameter is deprecated.
       # @option options [Time,DateTime,Date,Integer,String] :start_time
-      #   The time for this action to start, in \"YYYY-MM-DDThh:mm:ssZ\" format
+      #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
       #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
       #   If you try to schedule your action in the past, Auto Scaling returns
@@ -587,7 +587,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
       # @option options [String] :placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
       #   the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -599,7 +599,7 @@ module Aws
       #   several subnets in a comma-separated list.
       #
       #   When you specify `VPCZoneIdentifier` with `AvailabilityZones`, ensure
-      #   that the subnets\' Availability Zones match the values you specify for
+      #   that the subnets' Availability Zones match the values you specify for
       #   `AvailabilityZones`.
       #
       #   For more information, see [Launching Auto Scaling Instances in a

@@ -53,7 +53,7 @@ module Aws
       #   that is more instances than Amazon EC2 can launch in the target
       #   Availability Zone, Amazon EC2 launches no instances.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
@@ -67,7 +67,7 @@ module Aws
       #   Amazon EC2 launches the largest possible number of instances above
       #   `MinCount`.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
@@ -79,11 +79,9 @@ module Aws
       #   The name of the key pair. You can create a key pair using
       #   CreateKeyPair or ImportKeyPair.
       #
-      #   <important markdown="1"> If you do not specify a key pair, you can\'t connect to the instance
+      #   If you do not specify a key pair, you can't connect to the instance
       #   unless you choose an AMI that is configured to allow users another way
       #   to log in.
-      #
-      #    </important>
       # @option options [Array<String>] :security_groups
       #   \[EC2-Classic, default VPC\] One or more security group names. For a
       #   nondefault VPC, you must use security group IDs instead.
@@ -120,11 +118,9 @@ module Aws
       # @option options [String] :kernel_id
       #   The ID of the kernel.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -132,11 +128,9 @@ module Aws
       # @option options [String] :ramdisk_id
       #   The ID of the RAM disk.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -144,20 +138,18 @@ module Aws
       # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
       #
-      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   Supplying both a snapshot ID and an encryption value as arguments for
       #   block-device mapping results in an error. This is because only blank
       #   volumes can be encrypted on start, and these are not created from a
       #   snapshot. If a snapshot is the basis for the volume, it contains data
       #   by definition and its encryption status cannot be changed using this
       #   action.
-      #
-      #    </important>
       # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option options [String] :subnet_id
       #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
       # @option options [Boolean] :disable_api_termination
-      #   If you set this parameter to `true`, you can\'t terminate the instance
+      #   If you set this parameter to `true`, you can't terminate the instance
       #   using the Amazon EC2 console, CLI, or API; otherwise, you can. If you
       #   set this parameter to `true` and then later want to be able to
       #   terminate the instance, you must first change the value of the
@@ -178,7 +170,7 @@ module Aws
       #   IP address range of the subnet.
       #
       #   Only one private IP address can be designated as primary. Therefore,
-      #   you can\'t specify this parameter if `PrivateIpAddresses.n.Primary` is
+      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary` is
       #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
       #   IP address.
       #
@@ -204,7 +196,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O performance.
-      #   This optimization isn\'t available with all instance types. Additional
+      #   This optimization isn't available with all instance types. Additional
       #   usage charges apply when using an EBS-optimized instance.
       #
       #   Default: `false`
@@ -282,7 +274,7 @@ module Aws
       # @option options [String] :description
       #   A description for the network interface.
       # @option options [String] :private_ip_address
-      #   The primary private IP address of the network interface. If you don\'t
+      #   The primary private IP address of the network interface. If you don't
       #   specify an IP address, Amazon EC2 selects one for you from the subnet
       #   range. If you specify an IP address, you cannot indicate any IP
       #   addresses specified in `privateIpAddresses` as primary (only one IP
@@ -294,7 +286,7 @@ module Aws
       # @option options [Integer] :secondary_private_ip_address_count
       #   The number of secondary private IP addresses to assign to a network
       #   interface. When you specify a number of secondary IP addresses, Amazon
-      #   EC2 selects these IP addresses within the subnet range. You can\'t
+      #   EC2 selects these IP addresses within the subnet range. You can't
       #   specify this option and specify more than one private IP address using
       #   `privateIpAddresses`.
       #
@@ -451,7 +443,7 @@ module Aws
       # @option options [required, Array<String>] :resources
       #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [EmptyStructure]
@@ -474,7 +466,7 @@ module Aws
       #   a snapshot, the volume size must be equal to or larger than the
       #   snapshot size.
       #
-      #   Default: If you\'re creating the volume from a snapshot and don\'t
+      #   Default: If you're creating the volume from a snapshot and don't
       #   specify a volume size, the default is the snapshot size.
       # @option options [String] :snapshot_id
       #   The snapshot from which to create the volume.
@@ -631,7 +623,7 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       # @option options [String] :description
       #   A description for your AMI.
       # @option options [String] :architecture
@@ -746,10 +738,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -873,10 +865,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the tag-value filter. For example, if you use both
-      #     the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you
+      #     the filter "tag-key=Purpose" and the filter "tag-value=X", you
       #     get any resources assigned both the tag key Purpose (regardless of
-      #     what the tag\'s value is), and the tag value X (regardless of what
-      #     the tag\'s key is). If you want to list only resources where Purpose
+      #     what the tag's value is), and the tag value X (regardless of what
+      #     the tag's key is). If you want to list only resources where Purpose
       #     is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1025,20 +1017,20 @@ module Aws
       #   * `ramdisk-id` - The RAM disk ID.
       #
       #   * `reason` - The reason for the current state of the instance (for
-      #     example, shows \"User Initiated \[date\]\" when you stop or
+      #     example, shows "User Initiated \[date\]" when you stop or
       #     terminate the instance). Similar to the state-reason-code filter.
       #
       #   * `requester-id` - The ID of the entity that launched the instance on
       #     your behalf (for example, AWS Management Console, Auto Scaling, and
       #     so on).
       #
-      #   * `reservation-id` - The ID of the instance\'s reservation. A
+      #   * `reservation-id` - The ID of the instance's reservation. A
       #     reservation ID is created any time you launch an instance. A
       #     reservation ID has a one-to-one relationship with an instance launch
       #     request, but can be associated with more than one instance if you
       #     launch multiple instances using the same launch request. For
-      #     example, if you launch one instance, you\'ll get one reservation ID.
-      #     If you launch ten instances using the same launch request, you\'ll
+      #     example, if you launch one instance, you'll get one reservation ID.
+      #     If you launch ten instances using the same launch request, you'll
       #     also get one reservation ID.
       #
       #   * `root-device-name` - The name of the root device for the instance
@@ -1062,14 +1054,14 @@ module Aws
       #   * `subnet-id` - The ID of the subnet for the instance.
       #
       #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-      #     to the resource, where `tag`\:*key* is the tag\'s key.
+      #     to the resource, where `tag`\:*key* is the tag's key.
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1228,10 +1220,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1351,7 +1343,7 @@ module Aws
       #     \| `deny`).
       #
       #   * `entry.rule-number` - The number of an entry (in other words, rule)
-      #     in the ACL\'s set of entries.
+      #     in the ACL's set of entries.
       #
       #   * `network-acl-id` - The ID of the network ACL.
       #
@@ -1360,10 +1352,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1507,10 +1499,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1647,8 +1639,8 @@ module Aws
       #     by route propagation.
       #
       #   * `route.state` - The state of a route in the route table (`active` \|
-      #     `blackhole`). The blackhole state indicates that the route\'s target
-      #     isn\'t available (for example, the specified gateway isn\'t attached
+      #     `blackhole`). The blackhole state indicates that the route's target
+      #     isn't available (for example, the specified gateway isn't attached
       #     to the VPC, the specified NAT instance has been terminated, and so
       #     on).
       #
@@ -1660,10 +1652,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1826,10 +1818,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1886,7 +1878,7 @@ module Aws
       #     subnet that are available.
       #
       #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
-      #     specify must exactly match the subnet\'s CIDR block for information
+      #     specify must exactly match the subnet's CIDR block for information
       #     to be returned for the subnet. You can also use `cidr` or
       #     `cidr-block` as the filter names.
       #
@@ -1903,10 +1895,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -1984,10 +1976,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -2094,7 +2086,7 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC peering
       #     connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester\'s
+      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester's
       #     VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
@@ -2114,10 +2106,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -2155,7 +2147,7 @@ module Aws
       #   One or more filters.
       #
       #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify must
-      #     exactly match the VPC\'s CIDR block for information to be returned
+      #     exactly match the VPC's CIDR block for information to be returned
       #     for the VPC. Must contain the slash followed by one or two digits
       #     (for example, `/28`).
       #
@@ -2170,10 +2162,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This

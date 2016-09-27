@@ -54,7 +54,7 @@ module Aws
       # @!attribute [rw] gateway_timezone
       #   A value that indicates the time zone you want to set for the
       #   gateway. The time zone is used, for example, for scheduling
-      #   snapshots and your gateway\'s maintenance schedule.
+      #   snapshots and your gateway's maintenance schedule.
       #   @return [String]
       #
       # @!attribute [rw] gateway_region
@@ -65,10 +65,10 @@ module Aws
       #   Gateway, see [Regions and Endpoints][1] in the *Amazon Web Services
       #   Glossary*.
       #
-      #   Valid Values: \"us-east-1\", \"us-west-1\", \"us-west-2\",
-      #   \"eu-west-1\", \"eu-central-1\", \"ap-northeast-1\",
-      #   \"ap-northeast-2\", \"ap-southeast-1\", \"ap-southeast-2\",
-      #   \"sa-east-1\"
+      #   Valid Values: "us-east-1", "us-west-1", "us-west-2",
+      #   "eu-west-1", "eu-central-1", "ap-northeast-1",
+      #   "ap-northeast-2", "ap-southeast-1", "ap-southeast-2",
+      #   "sa-east-1"
       #
       #
       #
@@ -85,14 +85,14 @@ module Aws
       #   The value that indicates the type of tape drive to use for
       #   gateway-VTL. This field is optional.
       #
-      #   Valid Values: \"IBM-ULT3580-TD5\"
+      #   Valid Values: "IBM-ULT3580-TD5"
       #   @return [String]
       #
       # @!attribute [rw] medium_changer_type
       #   The value that indicates the type of medium changer to use for
       #   gateway-VTL. This field is optional.
       #
-      #   Valid Values: \"STK-L700\", \"AWS-Gateway-VTL\"
+      #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
       #   @return [String]
       class ActivateGatewayInput < Struct.new(
         :activation_key,
@@ -568,7 +568,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] snapshot_id
-      #   The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore
+      #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore
       #   as the new stored volume. Specify this field if you want to create
       #   the iSCSI storage volume from a snapshot otherwise do not include
       #   this field. To list snapshots for your account use
@@ -1582,7 +1582,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] disk_ids
-      #   An array of the gateway\'s local disk IDs that are configured as
+      #   An array of the gateway's local disk IDs that are configured as
       #   working storage. Each local disk ID is specified as a string
       #   (minimum length of 1 and maximum length of 300). If no local disks
       #   are configured as working storage, then the DiskIds array is empty.
@@ -1855,7 +1855,7 @@ module Aws
       #       }
       # @!attribute [rw] tape_arns
       #   The Amazon Resource Name (ARN) of each of the tapes you want to
-      #   list. If you don\'t specify a tape ARN, the response lists all tapes
+      #   list. If you don't specify a tape ARN, the response lists all tapes
       #   in both your VTL and VTS.
       #   @return [Array<String>]
       #
@@ -2004,7 +2004,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a gateway\'s network interface.
+      # Describes a gateway's network interface.
       # @!attribute [rw] ipv_4_address
       #   The Internet Protocol version 4 (IPv4) address of the interface.
       #   @return [String]
@@ -2372,7 +2372,7 @@ module Aws
       #   The time that the archiving of the virtual tape was completed.
       #
       #   The string format of the completion time is in the ISO8601 extended
-      #   YYYY-MM-DD\'T\'HH:MM:SS\'Z\' format.
+      #   YYYY-MM-DD'T'HH:MM:SS'Z' format.
       #   @return [Time]
       #
       # @!attribute [rw] retrieved_to
@@ -2435,7 +2435,7 @@ module Aws
       #   replicated for later recovery.
       #
       #   The string format of the tape recovery point time is in the ISO8601
-      #   extended YYYY-MM-DD\'T\'HH:MM:SS\'Z\' format.
+      #   extended YYYY-MM-DD'T'HH:MM:SS'Z' format.
       #   @return [Time]
       #
       # @!attribute [rw] tape_size_in_bytes
@@ -2758,7 +2758,7 @@ module Aws
       # @!attribute [rw] device_type
       #   The type of medium changer you want to select.
       #
-      #   Valid Values: \"STK-L700\", \"AWS-Gateway-VTL\"
+      #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
       #   @return [String]
       class UpdateVTLDeviceTypeInput < Struct.new(
         :vtl_device_arn,

@@ -136,7 +136,7 @@ module Aws
 
       # Cancels the specified job. Note that you can only cancel a job before
       # its `JobState` value changes to `PreparingAppliance`. Requesting the
-      # `ListJobs` or `DescribeJob` action will return a job\'s `JobState` as
+      # `ListJobs` or `DescribeJob` action will return a job's `JobState` as
       # part of the response element data returned.
       # @option params [required, String] :job_id
       #   The 39 character job ID for the job that you want to cancel, for
@@ -147,8 +147,8 @@ module Aws
       #   resp = client.cancel_job({
       #     job_id: "JobId", # required
       #   })
+      # @overload cancel_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_job(params = {}, options = {})
         req = build_request(:cancel_job, params)
         req.send_request(options)
@@ -186,8 +186,8 @@ module Aws
       #
       # @example Response structure
       #   resp.address_id #=> String
+      # @overload create_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_address(params = {}, options = {})
         req = build_request(:create_address, params)
         req.send_request(options)
@@ -198,7 +198,7 @@ module Aws
       # right trust policies and permissions in place to create a job for
       # Snowball. For more information, see api-reference-policies.
       # @option params [required, String] :job_type
-      #   Defines the type of job that you\'re creating.
+      #   Defines the type of job that you're creating.
       # @option params [required, Types::JobResource] :resources
       #   Defines the Amazon S3 buckets associated with this job.
       #
@@ -234,11 +234,11 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
       # @option params [String] :snowball_capacity_preference
       #   If your job is being created in one of the US regions, you have the
-      #   option of specifying what size Snowball you\'d like for this job. In
+      #   option of specifying what size Snowball you'd like for this job. In
       #   all other regions, Snowballs come with 80 TB in storage capacity.
       # @option params [required, String] :shipping_option
       #   The shipping speed for this job. Note that this speed does not dictate
-      #   how soon you\'ll get the Snowball, rather it represents how quickly
+      #   how soon you'll get the Snowball, rather it represents how quickly
       #   the Snowball moves to its destination while in transit. Regional
       #   shipping speeds are as follows:
       #
@@ -289,8 +289,8 @@ module Aws
       #
       # @example Response structure
       #   resp.job_id #=> String
+      # @overload create_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_job(params = {}, options = {})
         req = build_request(:create_job, params)
         req.send_request(options)
@@ -323,8 +323,8 @@ module Aws
       #   resp.address.country #=> String
       #   resp.address.postal_code #=> String
       #   resp.address.phone_number #=> String
+      # @overload describe_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_address(params = {}, options = {})
         req = build_request(:describe_address, params)
         req.send_request(options)
@@ -336,7 +336,7 @@ module Aws
       # @option params [Integer] :max_results
       #   The number of `ADDRESS` objects to return.
       # @option params [String] :next_token
-      #   HTTP requests are stateless. To identify what object comes \"next\" in
+      #   HTTP requests are stateless. To identify what object comes "next" in
       #   the list of `ADDRESS` objects, you have the option of specifying a
       #   value for `NextToken` as the starting point for your list of returned
       #   addresses.
@@ -367,8 +367,8 @@ module Aws
       #   resp.addresses[0].postal_code #=> String
       #   resp.addresses[0].phone_number #=> String
       #   resp.next_token #=> String
+      # @overload describe_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_addresses(params = {}, options = {})
         req = build_request(:describe_addresses, params)
         req.send_request(options)
@@ -449,8 +449,8 @@ module Aws
       #   resp.sub_job_metadata[0].job_log_info.job_completion_report_uri #=> String
       #   resp.sub_job_metadata[0].job_log_info.job_success_log_uri #=> String
       #   resp.sub_job_metadata[0].job_log_info.job_failure_log_uri #=> String
+      # @overload describe_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_job(params = {}, options = {})
         req = build_request(:describe_job, params)
         req.send_request(options)
@@ -459,7 +459,7 @@ module Aws
       # Returns a link to an Amazon S3 presigned URL for the manifest file
       # associated with the specified `JobId` value. You can access the
       # manifest file for up to 60 minutes after this request has been made.
-      # To access the manifest file after 60 minutes have passed, you\'ll have
+      # To access the manifest file after 60 minutes have passed, you'll have
       # to make another call to the `GetJobManifest` action.
       #
       # The manifest is an encrypted file that you can download after your job
@@ -468,7 +468,7 @@ module Aws
       # through the Snowball client when the client is started for the first
       # time.
       #
-      # As a best practice, we recommend that you don\'t save a copy of an
+      # As a best practice, we recommend that you don't save a copy of an
       # `UnlockCode` value in the same location as the manifest file for that
       # job. Saving these separately helps prevent unauthorized parties from
       # gaining access to the Snowball associated with that job.
@@ -489,8 +489,8 @@ module Aws
       #
       # @example Response structure
       #   resp.manifest_uri #=> String
+      # @overload get_job_manifest(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_job_manifest(params = {}, options = {})
         req = build_request(:get_job_manifest, params)
         req.send_request(options)
@@ -505,7 +505,7 @@ module Aws
       # file when it is passed along with the manifest to the Snowball through
       # the Snowball client when the client is started for the first time.
       #
-      # As a best practice, we recommend that you don\'t save a copy of the
+      # As a best practice, we recommend that you don't save a copy of the
       # `UnlockCode` in the same location as the manifest file for that job.
       # Saving these separately helps prevent unauthorized parties from
       # gaining access to the Snowball associated with that job.
@@ -523,8 +523,8 @@ module Aws
       #
       # @example Response structure
       #   resp.unlock_code #=> String
+      # @overload get_job_unlock_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_job_unlock_code(params = {}, options = {})
         req = build_request(:get_job_unlock_code, params)
         req.send_request(options)
@@ -547,15 +547,15 @@ module Aws
       # @example Response structure
       #   resp.snowball_limit #=> Integer
       #   resp.snowballs_in_use #=> Integer
+      # @overload get_snowball_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_snowball_usage(params = {}, options = {})
         req = build_request(:get_snowball_usage, params)
         req.send_request(options)
       end
 
       # Returns an array of `JobListEntry` objects of the specified length.
-      # Each `JobListEntry` object contains a job\'s state, a job\'s ID, and a
+      # Each `JobListEntry` object contains a job's state, a job's ID, and a
       # value that indicates whether the job is a job part, in the case of
       # export jobs. Calling this API action in one of the US regions will
       # return jobs from the list of all jobs associated with this account in
@@ -563,7 +563,7 @@ module Aws
       # @option params [Integer] :max_results
       #   The number of `JobListEntry` objects to return.
       # @option params [String] :next_token
-      #   HTTP requests are stateless. To identify what object comes \"next\" in
+      #   HTTP requests are stateless. To identify what object comes "next" in
       #   the list of `JobListEntry` objects, you have the option of specifying
       #   `NextToken` as the starting point for your returned list.
       # @return [Types::ListJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -583,14 +583,14 @@ module Aws
       #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
       #   resp.job_list_entries[0].is_master #=> Boolean
       #   resp.next_token #=> String
+      # @overload list_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs(params = {}, options = {})
         req = build_request(:list_jobs, params)
         req.send_request(options)
       end
 
-      # While a job\'s `JobState` value is `New`, you can update some of the
+      # While a job's `JobState` value is `New`, you can update some of the
       # information associated with a job. Once the job changes to a different
       # job state, usually within 60 minutes of the job being created, this
       # action is no longer available.
@@ -614,12 +614,12 @@ module Aws
       # @option params [String] :address_id
       #   The ID of the updated Address object.
       # @option params [String] :shipping_option
-      #   The updated shipping option value of this job\'s ShippingDetails
+      #   The updated shipping option value of this job's ShippingDetails
       #   object.
       # @option params [String] :description
-      #   The updated description of this job\'s JobMetadata object.
+      #   The updated description of this job's JobMetadata object.
       # @option params [String] :snowball_capacity_preference
-      #   The updated `SnowballCapacityPreference` of this job\'s JobMetadata
+      #   The updated `SnowballCapacityPreference` of this job's JobMetadata
       #   object. Note that the 50 TB Snowballs are only available in the US
       #   regions.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -649,8 +649,8 @@ module Aws
       #     description: "String",
       #     snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
       #   })
+      # @overload update_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_job(params = {}, options = {})
         req = build_request(:update_job, params)
         req.send_request(options)

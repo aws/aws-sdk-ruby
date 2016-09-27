@@ -165,14 +165,14 @@ module Aws
       #     instance_id: "String", # required
       #     layer_ids: ["String"], # required
       #   })
+      # @overload assign_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assign_instance(params = {}, options = {})
         req = build_request(:assign_instance, params)
         req.send_request(options)
       end
 
-      # Assigns one of the stack\'s registered Amazon EBS volumes to a
+      # Assigns one of the stack's registered Amazon EBS volumes to a
       # specified instance. The volume must first be registered with the stack
       # by calling RegisterVolume. After you register the volume, you must
       # call UpdateVolume to specify a mount point before calling
@@ -198,14 +198,14 @@ module Aws
       #     volume_id: "String", # required
       #     instance_id: "String",
       #   })
+      # @overload assign_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assign_volume(params = {}, options = {})
         req = build_request(:assign_volume, params)
         req.send_request(options)
       end
 
-      # Associates one of the stack\'s registered Elastic IP addresses with a
+      # Associates one of the stack's registered Elastic IP addresses with a
       # specified instance. The address must first be registered with the
       # stack by calling RegisterElasticIp. For more information, see
       # [Resource Management][1].
@@ -230,8 +230,8 @@ module Aws
       #     elastic_ip: "String", # required
       #     instance_id: "String",
       #   })
+      # @overload associate_elastic_ip(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def associate_elastic_ip(params = {}, options = {})
         req = build_request(:associate_elastic_ip, params)
         req.send_request(options)
@@ -257,7 +257,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/ElasticLoadBalancing/latest/DeveloperGuide/Welcome.html
       # [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :elastic_load_balancer_name
-      #   The Elastic Load Balancing instance\'s name.
+      #   The Elastic Load Balancing instance's name.
       # @option params [required, String] :layer_id
       #   The ID of the layer that the Elastic Load Balancing instance is to be
       #   attached to.
@@ -268,8 +268,8 @@ module Aws
       #     elastic_load_balancer_name: "String", # required
       #     layer_id: "String", # required
       #   })
+      # @overload attach_elastic_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_elastic_load_balancer(params = {}, options = {})
         req = build_request(:attach_elastic_load_balancer, params)
         req.send_request(options)
@@ -292,7 +292,7 @@ module Aws
       # @option params [String] :name
       #   The cloned stack name.
       # @option params [String] :region
-      #   The cloned stack AWS region, such as \"ap-northeast-2\". For more
+      #   The cloned stack AWS region, such as "ap-northeast-2". For more
       #   information about AWS regions, see [Regions and Endpoints][1].
       #
       #
@@ -338,13 +338,13 @@ module Aws
       #   AWS OpsWorks to work with AWS resources on your behalf. You must set
       #   this parameter to the Amazon Resource Name (ARN) for an existing IAM
       #   role. If you create a stack by using the AWS OpsWorks console, it
-      #   creates the role for you. You can obtain an existing stack\'s IAM ARN
+      #   creates the role for you. You can obtain an existing stack's IAM ARN
       #   programmatically by calling DescribePermissions. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #   <note markdown="1"> You must set this parameter to a valid service role ARN or the action
       #   will fail; there is no default value. You can specify the source
-      #   stack\'s service role ARN, if you prefer, but you must do so
+      #   stack's service role ARN, if you prefer, but you must do so
       #   explicitly.
       #
       #    </note>
@@ -354,14 +354,14 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
-      #   profile for all of the stack\'s EC2 instances. For more information
+      #   profile for all of the stack's EC2 instances. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :default_os
-      #   The stack\'s operating system, which must be set to one of the
+      #   The stack's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
@@ -384,7 +384,7 @@ module Aws
       #     when you create instances. For more information on how to use custom
       #     AMIs with OpsWorks, see [Using Custom AMIs][1].
       #
-      #   The default option is the parent stack\'s operating system. For more
+      #   The default option is the parent stack's operating system. For more
       #   information on the supported operating systems, see [AWS OpsWorks
       #   Operating Systems][2].
       #
@@ -399,10 +399,10 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       # @option params [String] :hostname_theme
-      #   The stack\'s host name theme, with spaces are replaced by underscores.
-      #   The theme is used to generate host names for the stack\'s instances.
+      #   The stack's host name theme, with spaces are replaced by underscores.
+      #   The theme is used to generate host names for the stack's instances.
       #   By default, `HostnameTheme` is set to `Layer_Dependent`, which creates
-      #   host names by appending integers to the layer\'s short name. The other
+      #   host names by appending integers to the layer's short name. The other
       #   themes are:
       #
       #   * `Baked_Goods`
@@ -430,7 +430,7 @@ module Aws
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
       # @option params [String] :default_availability_zone
-      #   The cloned stack\'s default Availability Zone, which must be in the
+      #   The cloned stack's default Availability Zone, which must be in the
       #   specified region. For more information, see [Regions and
       #   Endpoints][1]. If you also specify a value for `DefaultSubnetId`, the
       #   subnet must be in the same zone. For more information, see the `VpcId`
@@ -440,7 +440,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option params [String] :default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if you
+      #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
       #   into this subnet unless you specify otherwise when you create the
       #   instance. If you also specify a value for `DefaultAvailabilityZone`,
@@ -451,9 +451,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
       #   The string should be in the following format and must escape
-      #   characters such as \'\"\':
+      #   characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1]
@@ -478,7 +478,7 @@ module Aws
       #   Whether to use custom cookbooks.
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups, one
       #   for each layer, which are associated with layers by default. With
@@ -528,7 +528,7 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/security-ssh-access.html
       #   [3]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-add.html
       # @option params [Boolean] :clone_permissions
-      #   Whether to clone the source stack\'s permissions.
+      #   Whether to clone the source stack's permissions.
       # @option params [Array<String>] :clone_app_ids
       #   A list of source stack app IDs to be included in the cloned stack.
       # @option params [String] :default_root_device_type
@@ -545,13 +545,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s instances
+      #     automatically installs new agent versions on the stack's instances
       #     as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
-      #     that version on the stack\'s instances.
+      #     that version on the stack's instances.
       #
       #   The default setting is `LATEST`. To specify an agent version, you must
       #   use the complete version number, not the abbreviated number shown on
@@ -559,7 +559,7 @@ module Aws
       #   DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       # @return [Types::CloneStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -609,8 +609,8 @@ module Aws
       #
       # @example Response structure
       #   resp.stack_id #=> String
+      # @overload clone_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def clone_stack(params = {}, options = {})
         req = build_request(:clone_stack, params)
         req.send_request(options)
@@ -631,18 +631,18 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [String] :shortname
-      #   The app\'s short name.
+      #   The app's short name.
       # @option params [required, String] :name
       #   The app name.
       # @option params [String] :description
       #   A description of the app.
       # @option params [Array<Types::DataSource>] :data_sources
-      #   The app\'s data source.
+      #   The app's data source.
       # @option params [required, String] :type
       #   The app type. Each supported type is associated with a particular
       #   layer. For example, PHP applications are associated with a PHP layer.
       #   AWS OpsWorks deploys an application to those instances that are
-      #   members of the corresponding layer. If your app isn\'t one of the
+      #   members of the corresponding layer. If your app isn't one of the
       #   standard types, or you prefer to implement your own Deploy recipes,
       #   specify `other`.
       # @option params [Types::Source] :app_source
@@ -665,14 +665,14 @@ module Aws
       #
       #   There is no specific limit on the number of environment variables.
       #   However, the size of the associated data structure - which includes
-      #   the variables\' names, values, and protected flag values - cannot
+      #   the variables' names, values, and protected flag values - cannot
       #   exceed 10 KB (10240 Bytes). This limit should accommodate most if not
       #   all use cases. Exceeding it will cause an exception with the message,
-      #   \"Environment: is too large (maximum is 10KB).\"
+      #   "Environment: is too large (maximum is 10KB)."
       #
       #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
       #   specified one or more environment variables, you cannot modify the
-      #   stack\'s Chef version.
+      #   stack's Chef version.
       #
       #    </note>
       #
@@ -726,8 +726,8 @@ module Aws
       #
       # @example Response structure
       #   resp.app_id #=> String
+      # @overload create_app(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_app(params = {}, options = {})
         req = build_request(:create_app, params)
         req.send_request(options)
@@ -764,9 +764,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
       #   The string should be in the following format and must escape
-      #   characters such as \'\"\':
+      #   characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -796,8 +796,8 @@ module Aws
       #
       # @example Response structure
       #   resp.deployment_id #=> String
+      # @overload create_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_deployment(params = {}, options = {})
         req = build_request(:create_deployment, params)
         req.send_request(options)
@@ -818,7 +818,7 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [required, Array<String>] :layer_ids
-      #   An array that contains the instance\'s layer IDs.
+      #   An array that contains the instance's layer IDs.
       # @option params [required, String] :instance_type
       #   The instance type, such as `t2.micro`. For a list of supported
       #   instance types, open the stack in the console, choose **Instances**,
@@ -837,7 +837,7 @@ module Aws
       # @option params [String] :hostname
       #   The instance host name.
       # @option params [String] :os
-      #   The instance\'s operating system, which must be set to one of the
+      #   The instance's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
@@ -863,7 +863,7 @@ module Aws
       #   OpsWorks Operating Systems][1].
       #
       #   The default option is the current Amazon Linux version. If you set
-      #   this parameter to `Custom`, you must use the CreateInstance action\'s
+      #   this parameter to `Custom`, you must use the CreateInstance action's
       #   AmiId parameter to specify the custom AMI that you want to use. Block
       #   device mappings are not supported if the value is `Custom`. For more
       #   information on the supported operating systems, see [Operating
@@ -887,7 +887,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       # @option params [String] :ssh_key_name
-      #   The instance\'s Amazon EC2 key-pair name.
+      #   The instance's Amazon EC2 key-pair name.
       # @option params [String] :availability_zone
       #   The instance Availability Zone. For more information, see [Regions and
       #   Endpoints][1].
@@ -896,10 +896,10 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option params [String] :virtualization_type
-      #   The instance\'s virtualization type, `paravirtual` or `hvm`.
+      #   The instance's virtualization type, `paravirtual` or `hvm`.
       # @option params [String] :subnet_id
-      #   The ID of the instance\'s subnet. If the stack is running in a VPC,
-      #   you can use this parameter to override the stack\'s default subnet ID
+      #   The ID of the instance's subnet. If the stack is running in a VPC,
+      #   you can use this parameter to override the stack's default subnet ID
       #   value and direct AWS OpsWorks to launch the instance in a different
       #   subnet.
       # @option params [String] :architecture
@@ -919,7 +919,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
-      #   An array of `BlockDeviceMapping` objects that specify the instance\'s
+      #   An array of `BlockDeviceMapping` objects that specify the instance's
       #   block devices. For more information, see [Block Device Mapping][1].
       #   Note that block device mappings are not supported for custom AMIs.
       #
@@ -944,10 +944,10 @@ module Aws
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
       #
-      #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #   * `INHERIT` - Use the stack's default agent version setting.
       #
       #   * *version\_number* - Use the specified agent version. This value
-      #     overrides the stack\'s default setting. To update the agent version,
+      #     overrides the stack's default setting. To update the agent version,
       #     edit the instance configuration and specify a new version. AWS
       #     OpsWorks then automatically installs that version on the instance.
       #
@@ -956,7 +956,7 @@ module Aws
       #   on the console. For a list of available agent version numbers, call
       #   DescribeAgentVersions.
       # @option params [String] :tenancy
-      #   The instance\'s tenancy option. The default option is no tenancy, or
+      #   The instance's tenancy option. The default option is no tenancy, or
       #   if the instance is running in a VPC, inherit tenancy settings from the
       #   VPC. The following are valid values for this parameter: `dedicated`,
       #   `default`, or `host`. Because there are costs associated with changes
@@ -1012,8 +1012,8 @@ module Aws
       #
       # @example Response structure
       #   resp.instance_id #=> String
+      # @overload create_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_instance(params = {}, options = {})
         req = build_request(:create_instance, params)
         req.send_request(options)
@@ -1048,14 +1048,14 @@ module Aws
       # @option params [required, String] :name
       #   The layer name, which is used by the console.
       # @option params [required, String] :shortname
-      #   For custom layers only, use this parameter to specify the layer\'s
+      #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorks and by Chef
       #   recipes. The short name is also used as the name for the directory
       #   where your app files are installed. It can have a maximum of 200
-      #   characters, which are limited to the alphanumeric characters, \'-\',
-      #   \'\_\', and \'.\'.
+      #   characters, which are limited to the alphanumeric characters, '-',
+      #   '\_', and '.'.
       #
-      #   The built-in layers\' short names are defined by AWS OpsWorks. For
+      #   The built-in layers' short names are defined by AWS OpsWorks. For
       #   more information, see the [Layer Reference][1].
       #
       #
@@ -1066,9 +1066,9 @@ module Aws
       #   attributes.
       #
       #   To create a cluster layer, set the `EcsClusterArn` attribute to the
-      #   cluster\'s ARN.
+      #   cluster's ARN.
       # @option params [String] :custom_instance_profile_arn
-      #   The ARN of an IAM profile to be used for the layer\'s EC2 instances.
+      #   The ARN of an IAM profile to be used for the layer's EC2 instances.
       #   For more information about IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -1076,7 +1076,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :custom_json
       #   A JSON-formatted string containing custom stack configuration and
-      #   deployment attributes to be installed on the layer\'s instances. For
+      #   deployment attributes to be installed on the layer's instances. For
       #   more information, see [ Using Custom JSON][1]. This feature is
       #   supported as of version 1.7.42 of the AWS CLI.
       #
@@ -1088,13 +1088,13 @@ module Aws
       # @option params [Array<String>] :packages
       #   An array of `Package` objects that describes the layer packages.
       # @option params [Array<Types::VolumeConfiguration>] :volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon EBS
+      #   A `VolumeConfigurations` object that describes the layer's Amazon EBS
       #   volumes.
       # @option params [Boolean] :enable_auto_healing
       #   Whether to disable auto healing for the layer.
       # @option params [Boolean] :auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -1103,7 +1103,7 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
       # @option params [Boolean] :auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically assign
-      #   a public IP address to the layer\'s instances. For more information,
+      #   a public IP address to the layer's instances. For more information,
       #   see [How to Edit a Layer][1].
       #
       #
@@ -1178,8 +1178,8 @@ module Aws
       #
       # @example Response structure
       #   resp.layer_id #=> String
+      # @overload create_layer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_layer(params = {}, options = {})
         req = build_request(:create_layer, params)
         req.send_request(options)
@@ -1199,7 +1199,7 @@ module Aws
       # @option params [required, String] :name
       #   The stack name.
       # @option params [required, String] :region
-      #   The stack\'s AWS region, such as \"ap-south-1\". For more information
+      #   The stack's AWS region, such as "ap-south-1". For more information
       #   about Amazon regions, see [Regions and Endpoints][1].
       #
       #
@@ -1207,7 +1207,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option params [String] :vpc_id
       #   The ID of the VPC that the stack is to be launched into. The VPC must
-      #   be in the stack\'s region. All instances are launched into this VPC.
+      #   be in the stack's region. All instances are launched into this VPC.
       #   You cannot change the ID later.
       #
       #   * If your account supports EC2-Classic, the default value is `no VPC`.
@@ -1241,7 +1241,7 @@ module Aws
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
       # @option params [required, String] :service_role_arn
-      #   The stack\'s AWS Identity and Access Management (IAM) role, which
+      #   The stack's AWS Identity and Access Management (IAM) role, which
       #   allows AWS OpsWorks to work with AWS resources on your behalf. You
       #   must set this parameter to the Amazon Resource Name (ARN) for an
       #   existing IAM role. For more information about IAM ARNs, see [Using
@@ -1252,14 +1252,14 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [required, String] :default_instance_profile_arn
       #   The Amazon Resource Name (ARN) of an IAM profile that is the default
-      #   profile for all of the stack\'s EC2 instances. For more information
+      #   profile for all of the stack's EC2 instances. For more information
       #   about IAM ARNs, see [Using Identifiers][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :default_os
-      #   The stack\'s default operating system, which is installed on every
+      #   The stack's default operating system, which is installed on every
       #   instance unless you specify a different operating system when you
       #   create the instance. You can specify one of the following.
       #
@@ -1293,10 +1293,10 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       # @option params [String] :hostname_theme
-      #   The stack\'s host name theme, with spaces replaced by underscores. The
-      #   theme is used to generate host names for the stack\'s instances. By
+      #   The stack's host name theme, with spaces replaced by underscores. The
+      #   theme is used to generate host names for the stack's instances. By
       #   default, `HostnameTheme` is set to `Layer_Dependent`, which creates
-      #   host names by appending integers to the layer\'s short name. The other
+      #   host names by appending integers to the layer's short name. The other
       #   themes are:
       #
       #   * `Baked_Goods`
@@ -1324,7 +1324,7 @@ module Aws
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
       # @option params [String] :default_availability_zone
-      #   The stack\'s default Availability Zone, which must be in the specified
+      #   The stack's default Availability Zone, which must be in the specified
       #   region. For more information, see [Regions and Endpoints][1]. If you
       #   also specify a value for `DefaultSubnetId`, the subnet must be in the
       #   same zone. For more information, see the `VpcId` parameter
@@ -1334,7 +1334,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option params [String] :default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if you
+      #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
       #   into this subnet unless you specify otherwise when you create the
       #   instance. If you also specify a value for `DefaultAvailabilityZone`,
@@ -1345,9 +1345,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values or to pass data to recipes. The string should be in the
-      #   following escape characters such as \'\"\':
+      #   following escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -1372,7 +1372,7 @@ module Aws
       #   Whether the stack uses custom cookbooks.
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups, one
       #   for each layer, which are associated with layers by default. With
@@ -1434,13 +1434,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s instances
+      #     automatically installs new agent versions on the stack's instances
       #     as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
-      #     that version on the stack\'s instances.
+      #     that version on the stack's instances.
       #
       #   The default setting is the most recent release of the agent. To
       #   specify an agent version, you must use the complete version number,
@@ -1448,7 +1448,7 @@ module Aws
       #   available agent version numbers, call DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       # @return [Types::CreateStackResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1495,8 +1495,8 @@ module Aws
       #
       # @example Response structure
       #   resp.stack_id #=> String
+      # @overload create_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_stack(params = {}, options = {})
         req = build_request(:create_stack, params)
         req.send_request(options)
@@ -1512,18 +1512,18 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       # @option params [String] :ssh_username
-      #   The user\'s SSH user name. The allowable characters are \[a-z\],
-      #   \[A-Z\], \[0-9\], \'-\', and \'\_\'. If the specified name includes
+      #   The user's SSH user name. The allowable characters are \[a-z\],
+      #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
       # @option params [String] :ssh_public_key
-      #   The user\'s public SSH key.
+      #   The user's public SSH key.
       # @option params [Boolean] :allow_self_management
       #   Whether users can specify their own SSH public key through the My
-      #   Settings page. For more information, see [Setting an IAM User\'s
+      #   Settings page. For more information, see [Setting an IAM User's
       #   Public SSH Key][1].
       #
       #
@@ -1543,8 +1543,8 @@ module Aws
       #
       # @example Response structure
       #   resp.iam_user_arn #=> String
+      # @overload create_user_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_user_profile(params = {}, options = {})
         req = build_request(:create_user_profile, params)
         req.send_request(options)
@@ -1568,8 +1568,8 @@ module Aws
       #   resp = client.delete_app({
       #     app_id: "String", # required
       #   })
+      # @overload delete_app(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_app(params = {}, options = {})
         req = build_request(:delete_app, params)
         req.send_request(options)
@@ -1594,7 +1594,7 @@ module Aws
       # @option params [Boolean] :delete_elastic_ip
       #   Whether to delete the instance Elastic IP address.
       # @option params [Boolean] :delete_volumes
-      #   Whether to delete the instance\'s Amazon EBS volumes.
+      #   Whether to delete the instance's Amazon EBS volumes.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1603,8 +1603,8 @@ module Aws
       #     delete_elastic_ip: false,
       #     delete_volumes: false,
       #   })
+      # @overload delete_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_instance(params = {}, options = {})
         req = build_request(:delete_instance, params)
         req.send_request(options)
@@ -1631,8 +1631,8 @@ module Aws
       #   resp = client.delete_layer({
       #     layer_id: "String", # required
       #   })
+      # @overload delete_layer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_layer(params = {}, options = {})
         req = build_request(:delete_layer, params)
         req.send_request(options)
@@ -1659,8 +1659,8 @@ module Aws
       #   resp = client.delete_stack({
       #     stack_id: "String", # required
       #   })
+      # @overload delete_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_stack(params = {}, options = {})
         req = build_request(:delete_stack, params)
         req.send_request(options)
@@ -1676,15 +1676,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_user_profile({
       #     iam_user_arn: "String", # required
       #   })
+      # @overload delete_user_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user_profile(params = {}, options = {})
         req = build_request(:delete_user_profile, params)
         req.send_request(options)
@@ -1704,15 +1704,15 @@ module Aws
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html#workinglayers-ecscluster-delete
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.deregister_ecs_cluster({
       #     ecs_cluster_arn: "String", # required
       #   })
+      # @overload deregister_ecs_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_ecs_cluster(params = {}, options = {})
         req = build_request(:deregister_ecs_cluster, params)
         req.send_request(options)
@@ -1739,8 +1739,8 @@ module Aws
       #   resp = client.deregister_elastic_ip({
       #     elastic_ip: "String", # required
       #   })
+      # @overload deregister_elastic_ip(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_elastic_ip(params = {}, options = {})
         req = build_request(:deregister_elastic_ip, params)
         req.send_request(options)
@@ -1767,8 +1767,8 @@ module Aws
       #   resp = client.deregister_instance({
       #     instance_id: "String", # required
       #   })
+      # @overload deregister_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_instance(params = {}, options = {})
         req = build_request(:deregister_instance, params)
         req.send_request(options)
@@ -1785,15 +1785,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.deregister_rds_db_instance({
       #     rds_db_instance_arn: "String", # required
       #   })
+      # @overload deregister_rds_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_rds_db_instance(params = {}, options = {})
         req = build_request(:deregister_rds_db_instance, params)
         req.send_request(options)
@@ -1821,8 +1821,8 @@ module Aws
       #   resp = client.deregister_volume({
       #     volume_id: "String", # required
       #   })
+      # @overload deregister_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_volume(params = {}, options = {})
         req = build_request(:deregister_volume, params)
         req.send_request(options)
@@ -1854,8 +1854,8 @@ module Aws
       #   resp.agent_versions[0].version #=> String
       #   resp.agent_versions[0].configuration_manager.name #=> String
       #   resp.agent_versions[0].configuration_manager.version #=> String
+      # @overload describe_agent_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_agent_versions(params = {}, options = {})
         req = build_request(:describe_agent_versions, params)
         req.send_request(options)
@@ -1923,8 +1923,8 @@ module Aws
       #   resp.apps[0].environment[0].key #=> String
       #   resp.apps[0].environment[0].value #=> String
       #   resp.apps[0].environment[0].secure #=> Boolean
+      # @overload describe_apps(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_apps(params = {}, options = {})
         req = build_request(:describe_apps, params)
         req.send_request(options)
@@ -1979,8 +1979,8 @@ module Aws
       #   resp.commands[0].exit_code #=> Integer
       #   resp.commands[0].log_url #=> String
       #   resp.commands[0].type #=> String
+      # @overload describe_commands(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_commands(params = {}, options = {})
         req = build_request(:describe_commands, params)
         req.send_request(options)
@@ -2042,8 +2042,8 @@ module Aws
       #   resp.deployments[0].custom_json #=> String
       #   resp.deployments[0].instance_ids #=> Array
       #   resp.deployments[0].instance_ids[0] #=> String
+      # @overload describe_deployments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_deployments(params = {}, options = {})
         req = build_request(:describe_deployments, params)
         req.send_request(options)
@@ -2070,11 +2070,11 @@ module Aws
       #   that is registered with the stack.
       # @option params [String] :next_token
       #   If the previous paginated request did not return all of the remaining
-      #   results, the response object\'s`NextToken` parameter value is set to a
+      #   results, the response object's`NextToken` parameter value is set to a
       #   token. To retrieve the next set of results, call `DescribeEcsClusters`
-      #   again and assign that token to the request object\'s `NextToken`
+      #   again and assign that token to the request object's `NextToken`
       #   parameter. If there are no remaining results, the previous response
-      #   object\'s `NextToken` parameter is set to `null`.
+      #   object's `NextToken` parameter is set to `null`.
       # @option params [Integer] :max_results
       #   To receive a paginated response, use this parameter to specify the
       #   maximum number of results to be returned with a single call. If the
@@ -2101,8 +2101,8 @@ module Aws
       #   resp.ecs_clusters[0].stack_id #=> String
       #   resp.ecs_clusters[0].registered_at #=> String
       #   resp.next_token #=> String
+      # @overload describe_ecs_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_ecs_clusters(params = {}, options = {})
         req = build_request(:describe_ecs_clusters, params)
         req.send_request(options)
@@ -2154,14 +2154,14 @@ module Aws
       #   resp.elastic_ips[0].domain #=> String
       #   resp.elastic_ips[0].region #=> String
       #   resp.elastic_ips[0].instance_id #=> String
+      # @overload describe_elastic_ips(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_elastic_ips(params = {}, options = {})
         req = build_request(:describe_elastic_ips, params)
         req.send_request(options)
       end
 
-      # Describes a stack\'s Elastic Load Balancing instances.
+      # Describes a stack's Elastic Load Balancing instances.
       #
       # <note markdown="1"> You must specify at least one of the parameters.
       #
@@ -2176,7 +2176,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [String] :stack_id
-      #   A stack ID. The action describes the stack\'s Elastic Load Balancing
+      #   A stack ID. The action describes the stack's Elastic Load Balancing
       #   instances.
       # @option params [Array<String>] :layer_ids
       #   A list of layer IDs. The action describes the Elastic Load Balancing
@@ -2205,8 +2205,8 @@ module Aws
       #   resp.elastic_load_balancers[0].subnet_ids[0] #=> String
       #   resp.elastic_load_balancers[0].ec2_instance_ids #=> Array
       #   resp.elastic_load_balancers[0].ec2_instance_ids[0] #=> String
+      # @overload describe_elastic_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_elastic_load_balancers(params = {}, options = {})
         req = build_request(:describe_elastic_load_balancers, params)
         req.send_request(options)
@@ -2301,8 +2301,8 @@ module Aws
       #   resp.instances[0].subnet_id #=> String
       #   resp.instances[0].tenancy #=> String
       #   resp.instances[0].virtualization_type #=> String, one of "paravirtual", "hvm"
+      # @overload describe_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instances(params = {}, options = {})
         req = build_request(:describe_instances, params)
         req.send_request(options)
@@ -2390,8 +2390,8 @@ module Aws
       #   resp.layers[0].use_ebs_optimized_instances #=> Boolean
       #   resp.layers[0].lifecycle_event_configuration.shutdown.execution_timeout #=> Integer
       #   resp.layers[0].lifecycle_event_configuration.shutdown.delay_until_elb_connections_drained #=> Boolean
+      # @overload describe_layers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_layers(params = {}, options = {})
         req = build_request(:describe_layers, params)
         req.send_request(options)
@@ -2442,14 +2442,14 @@ module Aws
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.load_threshold #=> Float
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.alarms #=> Array
       #   resp.load_based_auto_scaling_configurations[0].down_scaling.alarms[0] #=> String
+      # @overload describe_load_based_auto_scaling(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_based_auto_scaling(params = {}, options = {})
         req = build_request(:describe_load_based_auto_scaling, params)
         req.send_request(options)
       end
 
-      # Describes a user\'s SSH information.
+      # Describes a user's SSH information.
       #
       # **Required Permissions**\: To use this action, an IAM user must have
       # self-management enabled or an attached policy that explicitly grants
@@ -2468,8 +2468,8 @@ module Aws
       #   resp.user_profile.name #=> String
       #   resp.user_profile.ssh_username #=> String
       #   resp.user_profile.ssh_public_key #=> String
+      # @overload describe_my_user_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_my_user_profile(params = {}, options = {})
         req = build_request(:describe_my_user_profile, params)
         req.send_request(options)
@@ -2486,7 +2486,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [String] :iam_user_arn
-      #   The user\'s IAM ARN. For more information about IAM ARNs, see [Using
+      #   The user's IAM ARN. For more information about IAM ARNs, see [Using
       #   Identifiers][1].
       #
       #
@@ -2511,14 +2511,14 @@ module Aws
       #   resp.permissions[0].allow_ssh #=> Boolean
       #   resp.permissions[0].allow_sudo #=> Boolean
       #   resp.permissions[0].level #=> String
+      # @overload describe_permissions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_permissions(params = {}, options = {})
         req = build_request(:describe_permissions, params)
         req.send_request(options)
       end
 
-      # Describe an instance\'s RAID arrays.
+      # Describe an instance's RAID arrays.
       #
       # <note markdown="1"> You must specify at least one of the parameters.
       #
@@ -2568,8 +2568,8 @@ module Aws
       #   resp.raid_arrays[0].stack_id #=> String
       #   resp.raid_arrays[0].volume_type #=> String
       #   resp.raid_arrays[0].iops #=> Integer
+      # @overload describe_raid_arrays(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_raid_arrays(params = {}, options = {})
         req = build_request(:describe_raid_arrays, params)
         req.send_request(options)
@@ -2611,8 +2611,8 @@ module Aws
       #   resp.rds_db_instances[0].engine #=> String
       #   resp.rds_db_instances[0].stack_id #=> String
       #   resp.rds_db_instances[0].missing_on_rds #=> Boolean
+      # @overload describe_rds_db_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_rds_db_instances(params = {}, options = {})
         req = build_request(:describe_rds_db_instances, params)
         req.send_request(options)
@@ -2659,14 +2659,14 @@ module Aws
       #   resp.service_errors[0].type #=> String
       #   resp.service_errors[0].message #=> String
       #   resp.service_errors[0].created_at #=> String
+      # @overload describe_service_errors(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_service_errors(params = {}, options = {})
         req = build_request(:describe_service_errors, params)
         req.send_request(options)
       end
 
-      # Requests a description of a stack\'s provisioning parameters.
+      # Requests a description of a stack's provisioning parameters.
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
       # Show, Deploy, or Manage permissions level for the stack or an attached
@@ -2692,8 +2692,8 @@ module Aws
       #   resp.agent_installer_url #=> String
       #   resp.parameters #=> Hash
       #   resp.parameters["String"] #=> String
+      # @overload describe_stack_provisioning_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stack_provisioning_parameters(params = {}, options = {})
         req = build_request(:describe_stack_provisioning_parameters, params)
         req.send_request(options)
@@ -2747,8 +2747,8 @@ module Aws
       #   resp.stack_summary.instances_count.terminated #=> Integer
       #   resp.stack_summary.instances_count.terminating #=> Integer
       #   resp.stack_summary.instances_count.unassigning #=> Integer
+      # @overload describe_stack_summary(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stack_summary(params = {}, options = {})
         req = build_request(:describe_stack_summary, params)
         req.send_request(options)
@@ -2809,8 +2809,8 @@ module Aws
       #   resp.stacks[0].created_at #=> String
       #   resp.stacks[0].default_root_device_type #=> String, one of "ebs", "instance-store"
       #   resp.stacks[0].agent_version #=> String
+      # @overload describe_stacks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stacks(params = {}, options = {})
         req = build_request(:describe_stacks, params)
         req.send_request(options)
@@ -2859,8 +2859,8 @@ module Aws
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.saturday["Hour"] #=> String
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.sunday #=> Hash
       #   resp.time_based_auto_scaling_configurations[0].auto_scaling_schedule.sunday["Hour"] #=> String
+      # @overload describe_time_based_auto_scaling(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_time_based_auto_scaling(params = {}, options = {})
         req = build_request(:describe_time_based_auto_scaling, params)
         req.send_request(options)
@@ -2893,14 +2893,14 @@ module Aws
       #   resp.user_profiles[0].ssh_username #=> String
       #   resp.user_profiles[0].ssh_public_key #=> String
       #   resp.user_profiles[0].allow_self_management #=> Boolean
+      # @overload describe_user_profiles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_user_profiles(params = {}, options = {})
         req = build_request(:describe_user_profiles, params)
         req.send_request(options)
       end
 
-      # Describes an instance\'s Amazon EBS volumes.
+      # Describes an instance's Amazon EBS volumes.
       #
       # <note markdown="1"> You must specify at least one of the parameters.
       #
@@ -2918,7 +2918,7 @@ module Aws
       #   The instance ID. If you use this parameter, `DescribeVolumes` returns
       #   descriptions of the volumes associated with the specified instance.
       # @option params [String] :stack_id
-      #   A stack ID. The action describes the stack\'s registered Amazon EBS
+      #   A stack ID. The action describes the stack's registered Amazon EBS
       #   volumes.
       # @option params [String] :raid_array_id
       #   The RAID array ID. If you use this parameter, `DescribeVolumes`
@@ -2955,8 +2955,8 @@ module Aws
       #   resp.volumes[0].availability_zone #=> String
       #   resp.volumes[0].volume_type #=> String
       #   resp.volumes[0].iops #=> Integer
+      # @overload describe_volumes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_volumes(params = {}, options = {})
         req = build_request(:describe_volumes, params)
         req.send_request(options)
@@ -2973,7 +2973,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :elastic_load_balancer_name
-      #   The Elastic Load Balancing instance\'s name.
+      #   The Elastic Load Balancing instance's name.
       # @option params [required, String] :layer_id
       #   The ID of the layer that the Elastic Load Balancing instance is
       #   attached to.
@@ -2984,8 +2984,8 @@ module Aws
       #     elastic_load_balancer_name: "String", # required
       #     layer_id: "String", # required
       #   })
+      # @overload detach_elastic_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_elastic_load_balancer(params = {}, options = {})
         req = build_request(:detach_elastic_load_balancer, params)
         req.send_request(options)
@@ -3012,8 +3012,8 @@ module Aws
       #   resp = client.disassociate_elastic_ip({
       #     elastic_ip: "String", # required
       #   })
+      # @overload disassociate_elastic_ip(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disassociate_elastic_ip(params = {}, options = {})
         req = build_request(:disassociate_elastic_ip, params)
         req.send_request(options)
@@ -3045,8 +3045,8 @@ module Aws
       # @example Response structure
       #   resp.layer_id #=> String
       #   resp.hostname #=> String
+      # @overload get_hostname_suggestion(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_hostname_suggestion(params = {}, options = {})
         req = build_request(:get_hostname_suggestion, params)
         req.send_request(options)
@@ -3058,7 +3058,7 @@ module Aws
       #
       # Grants RDP access to a Windows instance for a specified time period.
       # @option params [required, String] :instance_id
-      #   The instance\'s AWS OpsWorks ID.
+      #   The instance's AWS OpsWorks ID.
       # @option params [Integer] :valid_for_in_minutes
       #   The length of time (in minutes) that the grant is valid. When the
       #   grant expires at the end of this period, the user will no longer be
@@ -3079,8 +3079,8 @@ module Aws
       #   resp.temporary_credential.password #=> String
       #   resp.temporary_credential.valid_for_in_minutes #=> Integer
       #   resp.temporary_credential.instance_id #=> String
+      # @overload grant_access(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def grant_access(params = {}, options = {})
         req = build_request(:grant_access, params)
         req.send_request(options)
@@ -3106,8 +3106,8 @@ module Aws
       #   resp = client.reboot_instance({
       #     instance_id: "String", # required
       #   })
+      # @overload reboot_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_instance(params = {}, options = {})
         req = build_request(:reboot_instance, params)
         req.send_request(options)
@@ -3128,7 +3128,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-ecscluster.html
       # [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :ecs_cluster_arn
-      #   The cluster\'s ARN.
+      #   The cluster's ARN.
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @return [Types::RegisterEcsClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3143,8 +3143,8 @@ module Aws
       #
       # @example Response structure
       #   resp.ecs_cluster_arn #=> String
+      # @overload register_ecs_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_ecs_cluster(params = {}, options = {})
         req = build_request(:register_ecs_cluster, params)
         req.send_request(options)
@@ -3181,8 +3181,8 @@ module Aws
       #
       # @example Response structure
       #   resp.elastic_ip #=> String
+      # @overload register_elastic_ip(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_elastic_ip(params = {}, options = {})
         req = build_request(:register_elastic_ip, params)
         req.send_request(options)
@@ -3213,18 +3213,18 @@ module Aws
       # @option params [required, String] :stack_id
       #   The ID of the stack that the instance is to be registered with.
       # @option params [String] :hostname
-      #   The instance\'s hostname.
+      #   The instance's hostname.
       # @option params [String] :public_ip
-      #   The instance\'s public IP address.
+      #   The instance's public IP address.
       # @option params [String] :private_ip
-      #   The instance\'s private IP address.
+      #   The instance's private IP address.
       # @option params [String] :rsa_public_key
       #   The instances public RSA key. This key is used to encrypt
       #   communication between the instance and the service.
       # @option params [String] :rsa_public_key_fingerprint
       #   The instances public RSA key fingerprint.
       # @option params [Types::InstanceIdentity] :instance_identity
-      #   An InstanceIdentity object that contains the instance\'s identity.
+      #   An InstanceIdentity object that contains the instance's identity.
       # @return [Types::RegisterInstanceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RegisterInstanceResult#instance_id #InstanceId} => String
@@ -3245,8 +3245,8 @@ module Aws
       #
       # @example Response structure
       #   resp.instance_id #=> String
+      # @overload register_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_instance(params = {}, options = {})
         req = build_request(:register_instance, params)
         req.send_request(options)
@@ -3265,9 +3265,9 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [required, String] :rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       # @option params [required, String] :db_user
-      #   The database\'s master user name.
+      #   The database's master user name.
       # @option params [required, String] :db_password
       #   The database password.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -3279,8 +3279,8 @@ module Aws
       #     db_user: "String", # required
       #     db_password: "String", # required
       #   })
+      # @overload register_rds_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_rds_db_instance(params = {}, options = {})
         req = build_request(:register_rds_db_instance, params)
         req.send_request(options)
@@ -3316,8 +3316,8 @@ module Aws
       #
       # @example Response structure
       #   resp.volume_id #=> String
+      # @overload register_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_volume(params = {}, options = {})
         req = build_request(:register_volume, params)
         req.send_request(options)
@@ -3381,14 +3381,14 @@ module Aws
       #       alarms: ["String"],
       #     },
       #   })
+      # @overload set_load_based_auto_scaling(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_load_based_auto_scaling(params = {}, options = {})
         req = build_request(:set_load_based_auto_scaling, params)
         req.send_request(options)
       end
 
-      # Specifies a user\'s permissions. For more information, see [Security
+      # Specifies a user's permissions. For more information, see [Security
       # and Permissions][1].
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
@@ -3403,13 +3403,13 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [required, String] :iam_user_arn
-      #   The user\'s IAM ARN.
+      #   The user's IAM ARN.
       # @option params [Boolean] :allow_ssh
       #   The user is allowed to use SSH to communicate with the instance.
       # @option params [Boolean] :allow_sudo
       #   The user is allowed to use **sudo** to elevate privileges.
       # @option params [String] :level
-      #   The user\'s permission level, which must be set to one of the
+      #   The user's permission level, which must be set to one of the
       #   following strings. You cannot set your own permissions level.
       #
       #   * `deny`
@@ -3438,8 +3438,8 @@ module Aws
       #     allow_sudo: false,
       #     level: "String",
       #   })
+      # @overload set_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_permission(params = {}, options = {})
         req = build_request(:set_permission, params)
         req.send_request(options)
@@ -3491,8 +3491,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload set_time_based_auto_scaling(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_time_based_auto_scaling(params = {}, options = {})
         req = build_request(:set_time_based_auto_scaling, params)
         req.send_request(options)
@@ -3518,14 +3518,14 @@ module Aws
       #   resp = client.start_instance({
       #     instance_id: "String", # required
       #   })
+      # @overload start_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_instance(params = {}, options = {})
         req = build_request(:start_instance, params)
         req.send_request(options)
       end
 
-      # Starts a stack\'s instances.
+      # Starts a stack's instances.
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
       # Manage permissions level for the stack, or an attached policy that
@@ -3543,8 +3543,8 @@ module Aws
       #   resp = client.start_stack({
       #     stack_id: "String", # required
       #   })
+      # @overload start_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_stack(params = {}, options = {})
         req = build_request(:start_stack, params)
         req.send_request(options)
@@ -3573,8 +3573,8 @@ module Aws
       #   resp = client.stop_instance({
       #     instance_id: "String", # required
       #   })
+      # @overload stop_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_instance(params = {}, options = {})
         req = build_request(:stop_instance, params)
         req.send_request(options)
@@ -3598,14 +3598,14 @@ module Aws
       #   resp = client.stop_stack({
       #     stack_id: "String", # required
       #   })
+      # @overload stop_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_stack(params = {}, options = {})
         req = build_request(:stop_stack, params)
         req.send_request(options)
       end
 
-      # Unassigns a registered instance from all of it\'s layers. The instance
+      # Unassigns a registered instance from all of it's layers. The instance
       # remains in the stack as an unassigned instance and can be assigned to
       # another layer, as needed. You cannot use this action with instances
       # that were created with AWS OpsWorks.
@@ -3626,8 +3626,8 @@ module Aws
       #   resp = client.unassign_instance({
       #     instance_id: "String", # required
       #   })
+      # @overload unassign_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unassign_instance(params = {}, options = {})
         req = build_request(:unassign_instance, params)
         req.send_request(options)
@@ -3653,8 +3653,8 @@ module Aws
       #   resp = client.unassign_volume({
       #     volume_id: "String", # required
       #   })
+      # @overload unassign_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unassign_volume(params = {}, options = {})
         req = build_request(:unassign_volume, params)
         req.send_request(options)
@@ -3677,13 +3677,13 @@ module Aws
       # @option params [String] :description
       #   A description of the app.
       # @option params [Array<Types::DataSource>] :data_sources
-      #   The app\'s data sources.
+      #   The app's data sources.
       # @option params [String] :type
       #   The app type.
       # @option params [Types::Source] :app_source
       #   A `Source` object that specifies the app repository.
       # @option params [Array<String>] :domains
-      #   The app\'s virtual host settings, with multiple domains separated by
+      #   The app's virtual host settings, with multiple domains separated by
       #   commas. For example: `'www.example.com, example.com'`
       # @option params [Boolean] :enable_ssl
       #   Whether SSL is enabled for the app.
@@ -3700,14 +3700,14 @@ module Aws
       #
       #   There is no specific limit on the number of environment variables.
       #   However, the size of the associated data structure - which includes
-      #   the variables\' names, values, and protected flag values - cannot
+      #   the variables' names, values, and protected flag values - cannot
       #   exceed 10 KB (10240 Bytes). This limit should accommodate most if not
       #   all use cases. Exceeding it will cause an exception with the message,
-      #   \"Environment: is too large (maximum is 10KB).\"
+      #   "Environment: is too large (maximum is 10KB)."
       #
       #   <note markdown="1"> This parameter is supported only by Chef 11.10 stacks. If you have
       #   specified one or more environment variables, you cannot modify the
-      #   stack\'s Chef version.
+      #   stack's Chef version.
       #
       #    </note>
       #
@@ -3755,14 +3755,14 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload update_app(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_app(params = {}, options = {})
         req = build_request(:update_app, params)
         req.send_request(options)
       end
 
-      # Updates a registered Elastic IP address\'s name. For more information,
+      # Updates a registered Elastic IP address's name. For more information,
       # see [Resource Management][1].
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
@@ -3785,8 +3785,8 @@ module Aws
       #     elastic_ip: "String", # required
       #     name: "String",
       #   })
+      # @overload update_elastic_ip(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_elastic_ip(params = {}, options = {})
         req = build_request(:update_elastic_ip, params)
         req.send_request(options)
@@ -3805,7 +3805,7 @@ module Aws
       # @option params [required, String] :instance_id
       #   The instance ID.
       # @option params [Array<String>] :layer_ids
-      #   The instance\'s layer IDs.
+      #   The instance's layer IDs.
       # @option params [String] :instance_type
       #   The instance type, such as `t2.micro`. For a list of supported
       #   instance types, open the stack in the console, choose **Instances**,
@@ -3824,7 +3824,7 @@ module Aws
       # @option params [String] :hostname
       #   The instance host name.
       # @option params [String] :os
-      #   The instance\'s operating system, which must be set to one of the
+      #   The instance's operating system, which must be set to one of the
       #   following.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
@@ -3879,7 +3879,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       # @option params [String] :ssh_key_name
-      #   The instance\'s Amazon EC2 key name.
+      #   The instance's Amazon EC2 key name.
       # @option params [String] :architecture
       #   The instance architecture. Instance types do not necessarily support
       #   both architectures. For a list of the architectures that are supported
@@ -3906,10 +3906,10 @@ module Aws
       #   The default AWS OpsWorks agent version. You have the following
       #   options:
       #
-      #   * `INHERIT` - Use the stack\'s default agent version setting.
+      #   * `INHERIT` - Use the stack's default agent version setting.
       #
       #   * *version\_number* - Use the specified agent version. This value
-      #     overrides the stack\'s default setting. To update the agent version,
+      #     overrides the stack's default setting. To update the agent version,
       #     you must edit the instance configuration and specify a new version.
       #     AWS OpsWorks then automatically installs that version on the
       #     instance.
@@ -3935,8 +3935,8 @@ module Aws
       #     ebs_optimized: false,
       #     agent_version: "String",
       #   })
+      # @overload update_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_instance(params = {}, options = {})
         req = build_request(:update_instance, params)
         req.send_request(options)
@@ -3957,13 +3957,13 @@ module Aws
       # @option params [String] :name
       #   The layer name, which is used by the console.
       # @option params [String] :shortname
-      #   For custom layers only, use this parameter to specify the layer\'s
+      #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorksand by Chef. The
       #   short name is also used as the name for the directory where your app
       #   files are installed. It can have a maximum of 200 characters and must
       #   be in the following format: /\\A\[a-z0-9\\-\\\_\\.\]+\\Z/.
       #
-      #   The built-in layers\' short names are defined by AWS OpsWorks. For
+      #   The built-in layers' short names are defined by AWS OpsWorks. For
       #   more information, see the [Layer Reference][1]
       #
       #
@@ -3973,7 +3973,7 @@ module Aws
       #   One or more user-defined key/value pairs to be added to the stack
       #   attributes.
       # @option params [String] :custom_instance_profile_arn
-      #   The ARN of an IAM profile to be used for all of the layer\'s EC2
+      #   The ARN of an IAM profile to be used for all of the layer's EC2
       #   instances. For more information about IAM ARNs, see [Using
       #   Identifiers][1].
       #
@@ -3982,24 +3982,24 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :custom_json
       #   A JSON-formatted string containing custom stack configuration and
-      #   deployment attributes to be installed on the layer\'s instances. For
+      #   deployment attributes to be installed on the layer's instances. For
       #   more information, see [ Using Custom JSON][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workingcookbook-json-override.html
       # @option params [Array<String>] :custom_security_group_ids
-      #   An array containing the layer\'s custom security group IDs.
+      #   An array containing the layer's custom security group IDs.
       # @option params [Array<String>] :packages
-      #   An array of `Package` objects that describe the layer\'s packages.
+      #   An array of `Package` objects that describe the layer's packages.
       # @option params [Array<Types::VolumeConfiguration>] :volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon EBS
+      #   A `VolumeConfigurations` object that describes the layer's Amazon EBS
       #   volumes.
       # @option params [Boolean] :enable_auto_healing
       #   Whether to disable auto healing for the layer.
       # @option params [Boolean] :auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -4008,14 +4008,14 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
       # @option params [Boolean] :auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically assign
-      #   a public IP address to the layer\'s instances. For more information,
+      #   a public IP address to the layer's instances. For more information,
       #   see [How to Edit a Layer][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
       # @option params [Types::Recipes] :custom_recipes
-      #   A `LayerCustomRecipes` object that specifies the layer\'s custom
+      #   A `LayerCustomRecipes` object that specifies the layer's custom
       #   recipes.
       # @option params [Boolean] :install_updates_on_boot
       #   Whether to install operating system and package updates when the
@@ -4075,14 +4075,14 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload update_layer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_layer(params = {}, options = {})
         req = build_request(:update_layer, params)
         req.send_request(options)
       end
 
-      # Updates a user\'s SSH public key.
+      # Updates a user's SSH public key.
       #
       # **Required Permissions**\: To use this action, an IAM user must have
       # self-management enabled or an attached policy that explicitly grants
@@ -4093,15 +4093,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [String] :ssh_public_key
-      #   The user\'s SSH public key.
+      #   The user's SSH public key.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_my_user_profile({
       #     ssh_public_key: "String",
       #   })
+      # @overload update_my_user_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_my_user_profile(params = {}, options = {})
         req = build_request(:update_my_user_profile, params)
         req.send_request(options)
@@ -4118,7 +4118,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :rds_db_instance_arn
-      #   The Amazon RDS instance\'s ARN.
+      #   The Amazon RDS instance's ARN.
       # @option params [String] :db_user
       #   The master user name.
       # @option params [String] :db_password
@@ -4131,8 +4131,8 @@ module Aws
       #     db_user: "String",
       #     db_password: "String",
       #   })
+      # @overload update_rds_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_rds_db_instance(params = {}, options = {})
         req = build_request(:update_rds_db_instance, params)
         req.send_request(options)
@@ -4151,22 +4151,22 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [String] :name
-      #   The stack\'s new name.
+      #   The stack's new name.
       # @option params [Hash<String,String>] :attributes
       #   One or more user-defined key-value pairs to be added to the stack
       #   attributes.
       # @option params [String] :service_role_arn
-      #   Do not use this parameter. You cannot update a stack\'s service role.
+      #   Do not use this parameter. You cannot update a stack's service role.
       # @option params [String] :default_instance_profile_arn
       #   The ARN of an IAM profile that is the default profile for all of the
-      #   stack\'s EC2 instances. For more information about IAM ARNs, see
+      #   stack's EC2 instances. For more information about IAM ARNs, see
       #   [Using Identifiers][1].
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option params [String] :default_os
-      #   The stack\'s operating system, which must be set to one of the
+      #   The stack's operating system, which must be set to one of the
       #   following:
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
@@ -4190,7 +4190,7 @@ module Aws
       #     when you create instances. For more information on how to use custom
       #     AMIs with OpsWorks, see [Using Custom AMIs][1].
       #
-      #   The default option is the stack\'s current operating system. For more
+      #   The default option is the stack's current operating system. For more
       #   information on the supported operating systems, see [AWS OpsWorks
       #   Operating Systems][2].
       #
@@ -4199,10 +4199,10 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       # @option params [String] :hostname_theme
-      #   The stack\'s new host name theme, with spaces replaced by underscores.
-      #   The theme is used to generate host names for the stack\'s instances.
+      #   The stack's new host name theme, with spaces replaced by underscores.
+      #   The theme is used to generate host names for the stack's instances.
       #   By default, `HostnameTheme` is set to `Layer_Dependent`, which creates
-      #   host names by appending integers to the layer\'s short name. The other
+      #   host names by appending integers to the layer's short name. The other
       #   themes are:
       #
       #   * `Baked_Goods`
@@ -4230,7 +4230,7 @@ module Aws
       #   To obtain a generated host name, call `GetHostNameSuggestion`, which
       #   returns a host name based on the current theme.
       # @option params [String] :default_availability_zone
-      #   The stack\'s default Availability Zone, which must be in the stack\'s
+      #   The stack's default Availability Zone, which must be in the stack's
       #   region. For more information, see [Regions and Endpoints][1]. If you
       #   also specify a value for `DefaultSubnetId`, the subnet must be in the
       #   same zone. For more information, see CreateStack.
@@ -4239,7 +4239,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/general/latest/gr/rande.html
       # @option params [String] :default_subnet_id
-      #   The stack\'s default VPC subnet ID. This parameter is required if you
+      #   The stack's default VPC subnet ID. This parameter is required if you
       #   specify a value for the `VpcId` parameter. All instances are launched
       #   into this subnet unless you specify otherwise when you create the
       #   instance. If you also specify a value for `DefaultAvailabilityZone`,
@@ -4250,9 +4250,9 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration JSON values or
       #   to pass data to recipes. The string should be in the following format
-      #   and escape characters such as \'\"\':
+      #   and escape characters such as '"':
       #
-      #   `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       #   For more information on custom JSON, see [Use Custom JSON to Modify
       #   the Stack Configuration Attributes][1].
@@ -4308,7 +4308,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ComponentsAMIs.html#storage-for-the-root-device
       # @option params [Boolean] :use_opsworks_security_groups
       #   Whether to associate the AWS OpsWorks built-in security groups with
-      #   the stack\'s layers.
+      #   the stack's layers.
       #
       #   AWS OpsWorks provides a standard set of built-in security groups, one
       #   for each layer, which are associated with layers by default.
@@ -4338,13 +4338,13 @@ module Aws
       #   options:
       #
       #   * Auto-update - Set this parameter to `LATEST`. AWS OpsWorks
-      #     automatically installs new agent versions on the stack\'s instances
+      #     automatically installs new agent versions on the stack's instances
       #     as soon as they are available.
       #
       #   * Fixed version - Set this parameter to your preferred agent version.
       #     To update the agent version, you must edit the stack configuration
       #     and specify a new version. AWS OpsWorks then automatically installs
-      #     that version on the stack\'s instances.
+      #     that version on the stack's instances.
       #
       #   The default setting is `LATEST`. To specify an agent version, you must
       #   use the complete version number, not the abbreviated number shown on
@@ -4352,7 +4352,7 @@ module Aws
       #   DescribeAgentVersions.
       #
       #   <note markdown="1"> You can also specify an agent version when you create or update an
-      #   instance, which overrides the stack\'s default setting.
+      #   instance, which overrides the stack's default setting.
       #
       #    </note>
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -4393,8 +4393,8 @@ module Aws
       #     use_opsworks_security_groups: false,
       #     agent_version: "String",
       #   })
+      # @overload update_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_stack(params = {}, options = {})
         req = build_request(:update_stack, params)
         req.send_request(options)
@@ -4412,13 +4412,13 @@ module Aws
       # @option params [required, String] :iam_user_arn
       #   The user IAM ARN.
       # @option params [String] :ssh_username
-      #   The user\'s SSH user name. The allowable characters are \[a-z\],
-      #   \[A-Z\], \[0-9\], \'-\', and \'\_\'. If the specified name includes
+      #   The user's SSH user name. The allowable characters are \[a-z\],
+      #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
       #   other punctuation marks, AWS OpsWorks removes them. For example,
       #   `my.name` will be changed to `myname`. If you do not specify an SSH
       #   user name, AWS OpsWorks generates one from the IAM user name.
       # @option params [String] :ssh_public_key
-      #   The user\'s new SSH public key.
+      #   The user's new SSH public key.
       # @option params [Boolean] :allow_self_management
       #   Whether users can specify their own SSH public key through the My
       #   Settings page. For more information, see [Managing User
@@ -4436,14 +4436,14 @@ module Aws
       #     ssh_public_key: "String",
       #     allow_self_management: false,
       #   })
+      # @overload update_user_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_user_profile(params = {}, options = {})
         req = build_request(:update_user_profile, params)
         req.send_request(options)
       end
 
-      # Updates an Amazon EBS volume\'s name or mount point. For more
+      # Updates an Amazon EBS volume's name or mount point. For more
       # information, see [Resource Management][1].
       #
       # **Required Permissions**\: To use this action, an IAM user must have a
@@ -4469,8 +4469,8 @@ module Aws
       #     name: "String",
       #     mount_point: "String",
       #   })
+      # @overload update_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_volume(params = {}, options = {})
         req = build_request(:update_volume, params)
         req.send_request(options)

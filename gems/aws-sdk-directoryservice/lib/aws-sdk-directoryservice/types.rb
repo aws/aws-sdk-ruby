@@ -34,8 +34,8 @@ module Aws
       #
       # @!attribute [rw] update_security_group_for_directory_controllers
       #   If set to true, updates the inbound and outbound rules of the
-      #   security group that has the description: \"AWS created security
-      #   group for *directory ID* directory controllers.\" Following are the
+      #   security group that has the description: "AWS created security
+      #   group for *directory ID* directory controllers." Following are the
       #   new rules:
       #
       #   Inbound:
@@ -477,7 +477,7 @@ module Aws
       #
       # @!attribute [rw] short_name
       #   The NetBIOS name for your domain. A short identifier for your
-      #   domain, such as `CORP`. If you don\'t specify a NetBIOS name, it
+      #   domain, such as `CORP`. If you don't specify a NetBIOS name, it
       #   will default to the first part of your directory DNS. For example,
       #   `CORP` for the directory DNS `corp.example.com`.
       #   @return [String]
@@ -1848,18 +1848,18 @@ module Aws
       #       }
       # @!attribute [rw] key
       #   Required name of the tag. The string value can be Unicode characters
-      #   and cannot be prefixed with \"aws:\". The string can contain only
-      #   the set of Unicode letters, digits, white-space, \'\_\', \'.\',
-      #   \'/\', \'=\', \'+\', \'-\' (Java regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   and cannot be prefixed with "aws:". The string can contain only
+      #   the set of Unicode letters, digits, white-space, '\_', '.',
+      #   '/', '=', '+', '-' (Java regex:
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       #
       # @!attribute [rw] value
       #   The optional value of the tag. The string value can be Unicode
       #   characters. The string can contain only the set of Unicode letters,
-      #   digits, white-space, \'\_\', \'.\', \'/\', \'=\', \'+\', \'-\' (Java
+      #   digits, white-space, '\_', '.', '/', '=', '+', '-' (Java
       #   regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       class Tag < Struct.new(
         :key,

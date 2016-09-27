@@ -72,8 +72,8 @@ module Aws
       #       }
       # @!attribute [rw] alias_name
       #   String that contains the display name. The name must start with the
-      #   word \"alias\" followed by a forward slash (alias/). Aliases that
-      #   begin with \"alias/AWS\" are reserved.
+      #   word "alias" followed by a forward slash (alias/). Aliases that
+      #   begin with "alias/AWS" are reserved.
       #   @return [String]
       #
       # @!attribute [rw] target_key_id
@@ -319,7 +319,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] origin
-      #   The source of the CMK\'s key material.
+      #   The source of the CMK's key material.
       #
       #   The default is `AWS_KMS`, which means AWS KMS creates the key
       #   material. When this parameter is set to `EXTERNAL`, the request
@@ -329,7 +329,7 @@ module Aws
       #   [Importing Key Material][1] in the *AWS Key Management Service
       #   Developer Guide*.
       #
-      #   The CMK\'s `Origin` is immutable and is set when the CMK is created.
+      #   The CMK's `Origin` is immutable and is set when the CMK is created.
       #
       #
       #
@@ -340,15 +340,13 @@ module Aws
       #   A flag to indicate whether to bypass the key policy lockout safety
       #   check.
       #
-      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   Setting this value to true increases the likelihood that the CMK
       #   becomes unmanageable. Do not set this value to true
       #   indiscriminately.
       #
       #    For more information, refer to the scenario in the [Default Key
       #   Policy][1] section in the *AWS Key Management Service Developer
       #   Guide*.
-      #
-      #    </important>
       #
       #   Use this parameter only when you include a policy in the request and
       #   you intend to prevent the principal making the request from making a
@@ -425,7 +423,7 @@ module Aws
       #
       # @!attribute [rw] plaintext
       #   Decrypted plaintext data. This value may not be returned if the
-      #   customer master key is not available or if you didn\'t have
+      #   customer master key is not available or if you didn't have
       #   permission to use it.
       #   @return [String]
       class DecryptResponse < Struct.new(
@@ -441,9 +439,9 @@ module Aws
       #         alias_name: "AliasNameType", # required
       #       }
       # @!attribute [rw] alias_name
-      #   The alias to be deleted. The name must start with the word \"alias\"
+      #   The alias to be deleted. The name must start with the word "alias"
       #   followed by a forward slash (alias/). Aliases that begin with
-      #   \"alias/AWS\" are reserved.
+      #   "alias/AWS" are reserved.
       #   @return [String]
       class DeleteAliasRequest < Struct.new(
         :alias_name)
@@ -457,7 +455,7 @@ module Aws
       #         key_id: "KeyIdType", # required
       #       }
       # @!attribute [rw] key_id
-      #   The identifier of the CMK whose key material to delete. The CMK\'s
+      #   The identifier of the CMK whose key material to delete. The CMK's
       #   `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
@@ -483,7 +481,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -530,7 +528,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the CMK.
       #
-      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
       #   For example:
       #
       #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -620,7 +618,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -696,7 +694,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -790,7 +788,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -901,7 +899,7 @@ module Aws
       #
       # @!attribute [rw] policy_name
       #   String that contains the name of the policy. Currently, this must be
-      #   \"default\". Policy names can be discovered by calling
+      #   "default". Policy names can be discovered by calling
       #   ListKeyPolicies.
       #   @return [String]
       class GetKeyPolicyRequest < Struct.new(
@@ -957,7 +955,7 @@ module Aws
       #       }
       # @!attribute [rw] key_id
       #   The identifier of the CMK into which you will import key material.
-      #   The CMK\'s `Origin` must be `EXTERNAL`.
+      #   The CMK's `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
       #   (ARN) of the CMK. Examples:
@@ -1084,7 +1082,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] grantee_principal
-      #   The principal that receives the grant\'s permissions.
+      #   The principal that receives the grant's permissions.
       #   @return [String]
       #
       # @!attribute [rw] retiring_principal
@@ -1100,7 +1098,7 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] constraints
-      #   The conditions under which the grant\'s operations are allowed.
+      #   The conditions under which the grant's operations are allowed.
       #   @return [Types::GrantConstraints]
       class GrantListEntry < Struct.new(
         :key_id,
@@ -1127,7 +1125,7 @@ module Aws
       #       }
       # @!attribute [rw] key_id
       #   The identifier of the CMK to import the key material into. The
-      #   CMK\'s `Origin` must be `EXTERNAL`.
+      #   CMK's `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
       #   (ARN) of the CMK. Examples:
@@ -1260,14 +1258,14 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] origin
-      #   The source of the CMK\'s key material. When this value is `AWS_KMS`,
+      #   The source of the CMK's key material. When this value is `AWS_KMS`,
       #   AWS KMS created the key material. When this value is `EXTERNAL`, the
       #   key material was imported from your existing key management
       #   infrastructure or the CMK lacks key material.
       #   @return [String]
       #
       # @!attribute [rw] expiration_model
-      #   Specifies whether the CMK\'s key material expires. This value is
+      #   Specifies whether the CMK's key material expires. This value is
       #   present only when `Origin` is `EXTERNAL`, otherwise this value is
       #   omitted.
       #   @return [String]
@@ -1317,7 +1315,7 @@ module Aws
       end
 
       # @!attribute [rw] aliases
-      #   A list of key aliases in the user\'s account.
+      #   A list of key aliases in the user's account.
       #   @return [Array<Types::AliasListEntry>]
       #
       # @!attribute [rw] next_marker
@@ -1415,7 +1413,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1456,7 +1454,7 @@ module Aws
 
       # @!attribute [rw] policy_names
       #   A list of policy names. Currently, there is only one policy and it
-      #   is named \"Default\".
+      #   is named "Default".
       #   @return [Array<String>]
       #
       # @!attribute [rw] next_marker
@@ -1589,7 +1587,7 @@ module Aws
       # @!attribute [rw] key_id
       #   A unique identifier for the CMK.
       #
-      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
       #   For example:
       #
       #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -1636,15 +1634,13 @@ module Aws
       #   A flag to indicate whether to bypass the key policy lockout safety
       #   check.
       #
-      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   Setting this value to true increases the likelihood that the CMK
       #   becomes unmanageable. Do not set this value to true
       #   indiscriminately.
       #
       #    For more information, refer to the scenario in the [Default Key
       #   Policy][1] section in the *AWS Key Management Service Developer
       #   Guide*.
-      #
-      #    </important>
       #
       #   Use this parameter only when you intend to prevent the principal
       #   making the request from making a subsequent `PutKeyPolicy` request
@@ -1691,7 +1687,7 @@ module Aws
       #   A unique identifier for the customer master key used to re-encrypt
       #   the data. This value can be a globally unique identifier, a fully
       #   specified ARN to either an alias or a key, or an alias name prefixed
-      #   by \"alias/\".
+      #   by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1874,8 +1870,8 @@ module Aws
       #       }
       # @!attribute [rw] alias_name
       #   String that contains the name of the alias to be modified. The name
-      #   must start with the word \"alias\" followed by a forward slash
-      #   (alias/). Aliases that begin with \"alias/aws\" are reserved.
+      #   must start with the word "alias" followed by a forward slash
+      #   (alias/). Aliases that begin with "alias/aws" are reserved.
       #   @return [String]
       #
       # @!attribute [rw] target_key_id

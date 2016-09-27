@@ -175,8 +175,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -219,8 +219,8 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      # @overload authorize_cache_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_cache_security_group_ingress(params = {}, options = {})
         req = build_request(:authorize_cache_security_group_ingress, params)
         req.send_request(options)
@@ -228,14 +228,12 @@ module Aws
 
       # The *CopySnapshot* action makes a copy of an existing snapshot.
       #
-      # <important markdown="1"> Users or groups that have permissions to use the *CopySnapshot* API
+      # Users or groups that have permissions to use the *CopySnapshot* API
       # can create their own Amazon S3 buckets and copy snapshots to it. To
       # control access to your snapshots, use an IAM policy to control who has
       # the ability to use the *CopySnapshot* API. For more information about
       # using IAM to control the use of ElastiCache APIs, see [Exporting
       # Snapshots][1] and [Authentication &amp; Access Control][2].
-      #
-      #  </important>
       #
       # **Erorr Message:**
       #
@@ -363,8 +361,8 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      # @overload copy_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_snapshot(params = {}, options = {})
         req = build_request(:copy_snapshot, params)
         req.send_request(options)
@@ -402,7 +400,7 @@ module Aws
       # @option params [String] :az_mode
       #   Specifies whether the nodes in this Memcached node group are created
       #   in a single Availability Zone or created across multiple Availability
-      #   Zones in the cluster\'s region.
+      #   Zones in the cluster's region.
       #
       #   This parameter is only supported for Memcached cache clusters.
       #
@@ -697,8 +695,8 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      # @overload create_cache_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cache_cluster(params = {}, options = {})
         req = build_request(:create_cache_cluster, params)
         req.send_request(options)
@@ -731,8 +729,8 @@ module Aws
       #   resp.cache_parameter_group.cache_parameter_group_name #=> String
       #   resp.cache_parameter_group.cache_parameter_group_family #=> String
       #   resp.cache_parameter_group.description #=> String
+      # @overload create_cache_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cache_parameter_group(params = {}, options = {})
         req = build_request(:create_cache_parameter_group, params)
         req.send_request(options)
@@ -755,7 +753,7 @@ module Aws
       #   lowercase string.
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Cannot be the word \"Default\".
+      #   Cannot be the word "Default".
       #
       #   Example: `mysecuritygroup`
       # @option params [required, String] :description
@@ -778,8 +776,8 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      # @overload create_cache_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cache_security_group(params = {}, options = {})
         req = build_request(:create_cache_security_group, params)
         req.send_request(options)
@@ -819,8 +817,8 @@ module Aws
       #   resp.cache_subnet_group.subnets #=> Array
       #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+      # @overload create_cache_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cache_subnet_group(params = {}, options = {})
         req = build_request(:create_cache_subnet_group, params)
         req.send_request(options)
@@ -891,7 +889,7 @@ module Aws
       #
       #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request
       # @option params [Array<String>] :preferred_cache_cluster_a_zs
-      #   A list of EC2 availability zones in which the replication group\'s
+      #   A list of EC2 availability zones in which the replication group's
       #   cache clusters will be created. The order of the availability zones in
       #   the list is not important.
       #
@@ -1128,8 +1126,8 @@ module Aws
       #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
       #   resp.replication_group.snapshotting_cluster_id #=> String
       #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+      # @overload create_replication_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_replication_group(params = {}, options = {})
         req = build_request(:create_replication_group, params)
         req.send_request(options)
@@ -1177,8 +1175,8 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot(params = {}, options = {})
         req = build_request(:create_snapshot, params)
         req.send_request(options)
@@ -1253,8 +1251,8 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      # @overload delete_cache_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cache_cluster(params = {}, options = {})
         req = build_request(:delete_cache_cluster, params)
         req.send_request(options)
@@ -1276,8 +1274,8 @@ module Aws
       #   resp = client.delete_cache_parameter_group({
       #     cache_parameter_group_name: "String", # required
       #   })
+      # @overload delete_cache_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cache_parameter_group(params = {}, options = {})
         req = build_request(:delete_cache_parameter_group, params)
         req.send_request(options)
@@ -1301,8 +1299,8 @@ module Aws
       #   resp = client.delete_cache_security_group({
       #     cache_security_group_name: "String", # required
       #   })
+      # @overload delete_cache_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cache_security_group(params = {}, options = {})
         req = build_request(:delete_cache_security_group, params)
         req.send_request(options)
@@ -1325,8 +1323,8 @@ module Aws
       #   resp = client.delete_cache_subnet_group({
       #     cache_subnet_group_name: "String", # required
       #   })
+      # @overload delete_cache_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cache_subnet_group(params = {}, options = {})
         req = build_request(:delete_cache_subnet_group, params)
         req.send_request(options)
@@ -1385,8 +1383,8 @@ module Aws
       #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
       #   resp.replication_group.snapshotting_cluster_id #=> String
       #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+      # @overload delete_replication_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_replication_group(params = {}, options = {})
         req = build_request(:delete_replication_group, params)
         req.send_request(options)
@@ -1432,8 +1430,8 @@ module Aws
       #   resp.snapshot.node_snapshots[0].cache_size #=> String
       #   resp.snapshot.node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshot.node_snapshots[0].snapshot_create_time #=> Time
+      # @overload delete_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_snapshot(params = {}, options = {})
         req = build_request(:delete_snapshot, params)
         req.send_request(options)
@@ -1467,7 +1465,7 @@ module Aws
       # @option params [String] :cache_cluster_id
       #   The user-supplied cluster identifier. If this parameter is specified,
       #   only information about that specific cache cluster is returned. This
-      #   parameter isn\'t case sensitive.
+      #   parameter isn't case sensitive.
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1544,8 +1542,8 @@ module Aws
       #   resp.cache_clusters[0].replication_group_id #=> String
       #   resp.cache_clusters[0].snapshot_retention_limit #=> Integer
       #   resp.cache_clusters[0].snapshot_window #=> String
+      # @overload describe_cache_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_clusters(params = {}, options = {})
         req = build_request(:describe_cache_clusters, params)
         req.send_request(options)
@@ -1610,8 +1608,8 @@ module Aws
       #   resp.cache_engine_versions[0].cache_parameter_group_family #=> String
       #   resp.cache_engine_versions[0].cache_engine_description #=> String
       #   resp.cache_engine_versions[0].cache_engine_version_description #=> String
+      # @overload describe_cache_engine_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_engine_versions(params = {}, options = {})
         req = build_request(:describe_cache_engine_versions, params)
         req.send_request(options)
@@ -1654,8 +1652,8 @@ module Aws
       #   resp.cache_parameter_groups[0].cache_parameter_group_name #=> String
       #   resp.cache_parameter_groups[0].cache_parameter_group_family #=> String
       #   resp.cache_parameter_groups[0].description #=> String
+      # @overload describe_cache_parameter_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_parameter_groups(params = {}, options = {})
         req = build_request(:describe_cache_parameter_groups, params)
         req.send_request(options)
@@ -1721,8 +1719,8 @@ module Aws
       #   resp.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].cache_node_type #=> String
       #   resp.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
       #   resp.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
+      # @overload describe_cache_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_parameters(params = {}, options = {})
         req = build_request(:describe_cache_parameters, params)
         req.send_request(options)
@@ -1769,8 +1767,8 @@ module Aws
       #   resp.cache_security_groups[0].ec2_security_groups[0].status #=> String
       #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_groups[0].ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      # @overload describe_cache_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_security_groups(params = {}, options = {})
         req = build_request(:describe_cache_security_groups, params)
         req.send_request(options)
@@ -1816,8 +1814,8 @@ module Aws
       #   resp.cache_subnet_groups[0].subnets #=> Array
       #   resp.cache_subnet_groups[0].subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
+      # @overload describe_cache_subnet_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache_subnet_groups(params = {}, options = {})
         req = build_request(:describe_cache_subnet_groups, params)
         req.send_request(options)
@@ -1879,8 +1877,8 @@ module Aws
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].cache_node_type #=> String
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].cache_node_type_specific_values[0].value #=> String
       #   resp.engine_defaults.cache_node_type_specific_parameters[0].change_type #=> String, one of "immediate", "requires-reboot"
+      # @overload describe_engine_default_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_engine_default_parameters(params = {}, options = {})
         req = build_request(:describe_engine_default_parameters, params)
         req.send_request(options)
@@ -1892,7 +1890,7 @@ module Aws
       # or cache parameter group by providing the name as a parameter.
       #
       # By default, only the events occurring within the last hour are
-      # returned; however, you can retrieve up to 14 days\' worth of events if
+      # returned; however, you can retrieve up to 14 days' worth of events if
       # necessary.
       # @option params [String] :source_identifier
       #   The identifier of the event source for which events will be returned.
@@ -1910,7 +1908,7 @@ module Aws
       #   The end of the time interval for which to retrieve events, specified
       #   in ISO 8601 format.
       # @option params [Integer] :duration
-      #   The number of minutes\' worth of events to retrieve.
+      #   The number of minutes' worth of events to retrieve.
       # @option params [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
@@ -1948,8 +1946,8 @@ module Aws
       #   resp.events[0].source_type #=> String, one of "cache-cluster", "cache-parameter-group", "cache-security-group", "cache-subnet-group"
       #   resp.events[0].message #=> String
       #   resp.events[0].date #=> Time
+      # @overload describe_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_events(params = {}, options = {})
         req = build_request(:describe_events, params)
         req.send_request(options)
@@ -2015,8 +2013,8 @@ module Aws
       #   resp.replication_groups[0].node_groups[0].node_group_members[0].current_role #=> String
       #   resp.replication_groups[0].snapshotting_cluster_id #=> String
       #   resp.replication_groups[0].automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+      # @overload describe_replication_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_replication_groups(params = {}, options = {})
         req = build_request(:describe_replication_groups, params)
         req.send_request(options)
@@ -2138,8 +2136,8 @@ module Aws
       #   resp.reserved_cache_nodes[0].recurring_charges #=> Array
       #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload describe_reserved_cache_nodes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_cache_nodes(params = {}, options = {})
         req = build_request(:describe_reserved_cache_nodes, params)
         req.send_request(options)
@@ -2255,8 +2253,8 @@ module Aws
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges #=> Array
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_nodes_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload describe_reserved_cache_nodes_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_cache_nodes_offerings(params = {}, options = {})
         req = build_request(:describe_reserved_cache_nodes_offerings, params)
         req.send_request(options)
@@ -2333,15 +2331,15 @@ module Aws
       #   resp.snapshots[0].node_snapshots[0].cache_size #=> String
       #   resp.snapshots[0].node_snapshots[0].cache_node_create_time #=> Time
       #   resp.snapshots[0].node_snapshots[0].snapshot_create_time #=> Time
+      # @overload describe_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshots(params = {}, options = {})
         req = build_request(:describe_snapshots, params)
         req.send_request(options)
       end
 
       # The `ListAllowedNodeTypeModifications` action lists all available node
-      # types that you can scale your Redis cluster\'s or replication group\'s
+      # types that you can scale your Redis cluster's or replication group's
       # current node type up to.
       #
       # When you use the `ModifyCacheCluster` or `ModifyReplicationGroup` APIs
@@ -2354,20 +2352,16 @@ module Aws
       #   current node type of this cluster and from that to to create a list of
       #   node types you can scale up to.
       #
-      #   <important markdown="1"> You must provide a value for either the *CacheClusterId* or the
+      #   You must provide a value for either the *CacheClusterId* or the
       #   *ReplicationGroupId*.
-      #
-      #    </important>
       # @option params [String] :replication_group_id
       #   The name of the replication group want to scale up to a larger node
       #   type. ElastiCache uses the replication group id to identify the
       #   current node type being used by this replication group, and from that
       #   to create a list of node types you can scale up to.
       #
-      #   <important markdown="1"> You must provide a value for either the *CacheClusterId* or the
+      #   You must provide a value for either the *CacheClusterId* or the
       #   *ReplicationGroupId*.
-      #
-      #    </important>
       # @return [Types::AllowedNodeTypeModificationsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::AllowedNodeTypeModificationsMessage#scale_up_modifications #ScaleUpModifications} => Array&lt;String&gt;
@@ -2381,8 +2375,8 @@ module Aws
       # @example Response structure
       #   resp.scale_up_modifications #=> Array
       #   resp.scale_up_modifications[0] #=> String
+      # @overload list_allowed_node_type_modifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_allowed_node_type_modifications(params = {}, options = {})
         req = build_request(:list_allowed_node_type_modifications, params)
         req.send_request(options)
@@ -2426,8 +2420,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -2462,7 +2456,7 @@ module Aws
       #    A pending action to modify the number of cache nodes in a cluster
       #   during its maintenance window, whether by adding or removing nodes in
       #   accordance with the scale out architecture, is not queued. The
-      #   customer\'s latest request to add or remove nodes to the cluster
+      #   customer's latest request to add or remove nodes to the cluster
       #   overrides any previous pending actions to modify the number of cache
       #   nodes in the cluster. For example, a request to remove 2 nodes would
       #   override a previous pending action to remove 3 nodes. Similarly, a
@@ -2589,11 +2583,9 @@ module Aws
       #
       #     * Result: The new create is added to the pending create.
       #
-      #       <important markdown="1"> **Important:** If the new create request is **Apply Immediately -
+      #       **Important:** If the new create request is **Apply Immediately -
       #       Yes**, all creates are performed immediately. If the new create
       #       request is **Apply Immediately - No**, all creates are pending.
-      #
-      #        </important>
       #
       #   Example:
       #
@@ -2610,7 +2602,7 @@ module Aws
       #   of an Amazon Virtual Private Cloud (VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Must not be \"Default\".
+      #   Must not be "Default".
       # @option params [Array<String>] :security_group_ids
       #   Specifies the VPC Security Groups associated with the cache cluster.
       #
@@ -2664,11 +2656,9 @@ module Aws
       #   maintenance reboot, or the next failure reboot, whichever occurs
       #   first.
       #
-      #   <important markdown="1"> If you perform a `ModifyCacheCluster` before a pending modification is
+      #   If you perform a `ModifyCacheCluster` before a pending modification is
       #   applied, the pending modification is replaced by the newer
       #   modification.
-      #
-      #    </important>
       #
       #   Valid values: `true` \| `false`
       #
@@ -2773,8 +2763,8 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      # @overload modify_cache_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cache_cluster(params = {}, options = {})
         req = build_request(:modify_cache_cluster, params)
         req.send_request(options)
@@ -2807,8 +2797,8 @@ module Aws
       #
       # @example Response structure
       #   resp.cache_parameter_group_name #=> String
+      # @overload modify_cache_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cache_parameter_group(params = {}, options = {})
         req = build_request(:modify_cache_parameter_group, params)
         req.send_request(options)
@@ -2846,8 +2836,8 @@ module Aws
       #   resp.cache_subnet_group.subnets #=> Array
       #   resp.cache_subnet_group.subnets[0].subnet_identifier #=> String
       #   resp.cache_subnet_group.subnets[0].subnet_availability_zone.name #=> String
+      # @overload modify_cache_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cache_subnet_group(params = {}, options = {})
         req = build_request(:modify_cache_subnet_group, params)
         req.send_request(options)
@@ -2891,7 +2881,7 @@ module Aws
       #   (VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Must not be \"Default\".
+      #   Must not be "Default".
       # @option params [Array<String>] :security_group_ids
       #   Specifies the VPC Security Groups associated with the cache clusters
       #   in the replication group.
@@ -3034,8 +3024,8 @@ module Aws
       #   resp.replication_group.node_groups[0].node_group_members[0].current_role #=> String
       #   resp.replication_group.snapshotting_cluster_id #=> String
       #   resp.replication_group.automatic_failover #=> String, one of "enabled", "disabled", "enabling", "disabling"
+      # @overload modify_replication_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_replication_group(params = {}, options = {})
         req = build_request(:modify_replication_group, params)
         req.send_request(options)
@@ -3087,8 +3077,8 @@ module Aws
       #   resp.reserved_cache_node.recurring_charges #=> Array
       #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_cache_node.recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload purchase_reserved_cache_nodes_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_reserved_cache_nodes_offering(params = {}, options = {})
         req = build_request(:purchase_reserved_cache_nodes_offering, params)
         req.send_request(options)
@@ -3166,8 +3156,8 @@ module Aws
       #   resp.cache_cluster.replication_group_id #=> String
       #   resp.cache_cluster.snapshot_retention_limit #=> Integer
       #   resp.cache_cluster.snapshot_window #=> String
+      # @overload reboot_cache_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_cache_cluster(params = {}, options = {})
         req = build_request(:reboot_cache_cluster, params)
         req.send_request(options)
@@ -3206,8 +3196,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -3248,8 +3238,8 @@ module Aws
       #
       # @example Response structure
       #   resp.cache_parameter_group_name #=> String
+      # @overload reset_cache_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_cache_parameter_group(params = {}, options = {})
         req = build_request(:reset_cache_parameter_group, params)
         req.send_request(options)
@@ -3285,8 +3275,8 @@ module Aws
       #   resp.cache_security_group.ec2_security_groups[0].status #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_name #=> String
       #   resp.cache_security_group.ec2_security_groups[0].ec2_security_group_owner_id #=> String
+      # @overload revoke_cache_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_cache_security_group_ingress(params = {}, options = {})
         req = build_request(:revoke_cache_security_group_ingress, params)
         req.send_request(options)

@@ -138,7 +138,7 @@ module Aws
       #   In addition, repository names are limited to 100 alphanumeric, dash,
       #   and underscore characters, and cannot include certain characters.
       #   For a full description of the limits on repository names, see
-      #   [Limits][1] in the AWS CodeCommit User Guide. The suffix \".git\" is
+      #   [Limits][1] in the AWS CodeCommit User Guide. The suffix ".git" is
       #   prohibited.
       #
       #   </note>
@@ -446,7 +446,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] repository_name
-      #   The repository\'s name.
+      #   The repository's name.
       #   @return [String]
       #
       # @!attribute [rw] repository_description
@@ -454,7 +454,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] default_branch
-      #   The repository\'s default branch name.
+      #   The repository's default branch name.
       #   @return [String]
       #
       # @!attribute [rw] last_modified_date

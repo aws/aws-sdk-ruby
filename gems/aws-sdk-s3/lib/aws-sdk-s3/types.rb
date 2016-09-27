@@ -276,7 +276,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -615,7 +615,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       #   @return [Time]
       #
@@ -658,7 +658,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       #   @return [String]
       #
       # @!attribute [rw] website_redirect_location
@@ -785,7 +785,7 @@ module Aws
       #         location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
       #       }
       # @!attribute [rw] location_constraint
-      #   Specifies the region where the bucket will be created. If you don\'t
+      #   Specifies the region where the bucket will be created. If you don't
       #   specify a region, the bucket will be created in US Standard.
       #   @return [String]
       class CreateBucketConfiguration < Struct.new(
@@ -1013,7 +1013,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       #   @return [String]
       #
       # @!attribute [rw] website_redirect_location
@@ -1265,7 +1265,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication
       #   device.
       #   @return [String]
@@ -1331,7 +1331,7 @@ module Aws
       #   @return [Types::Delete]
       #
       # @!attribute [rw] mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication
       #   device.
       #   @return [String]
@@ -2515,7 +2515,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -2659,8 +2659,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   If \'Enabled\', the rule is currently being applied. If
-      #   \'Disabled\', the rule is not currently being applied.
+      #   If 'Enabled', the rule is currently being applied. If
+      #   'Disabled', the rule is not currently being applied.
       #   @return [String]
       #
       # @!attribute [rw] transitions
@@ -2674,7 +2674,7 @@ module Aws
       #   Amazon S3 permanently deletes the noncurrent object versions. You
       #   set this lifecycle configuration action on a bucket that has
       #   versioning enabled (or suspended) to request that Amazon S3 delete
-      #   noncurrent object versions at a specific period in the object\'s
+      #   noncurrent object versions at a specific period in the object's
       #   lifetime.
       #   @return [Types::NoncurrentVersionExpiration]
       #
@@ -3408,7 +3408,7 @@ module Aws
       # Amazon S3 permanently deletes the noncurrent object versions. You set
       # this lifecycle configuration action on a bucket that has versioning
       # enabled (or suspended) to request that Amazon S3 delete noncurrent
-      # object versions at a specific period in the object\'s lifetime.
+      # object versions at a specific period in the object's lifetime.
       # @note When making an API call, pass NoncurrentVersionExpiration
       #   data as a hash:
       #
@@ -3436,7 +3436,7 @@ module Aws
       # your bucket is versioning-enabled (or versioning is suspended), you
       # can set this action to request that Amazon S3 transition noncurrent
       # object versions to the STANDARD\_IA or GLACIER storage class at a
-      # specific period in the object\'s lifetime.
+      # specific period in the object's lifetime.
       # @note When making an API call, pass NoncurrentVersionTransition
       #   data as a hash:
       #
@@ -4264,7 +4264,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication
       #   device.
       #   @return [String]
@@ -4599,7 +4599,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       #   @return [String]
       #
       # @!attribute [rw] website_redirect_location
@@ -4694,7 +4694,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -4734,7 +4734,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -5051,8 +5051,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   If \'Enabled\', the rule is currently being applied. If
-      #   \'Disabled\', the rule is not currently being applied.
+      #   If 'Enabled', the rule is currently being applied. If
+      #   'Disabled', the rule is not currently being applied.
       #   @return [String]
       #
       # @!attribute [rw] transition
@@ -5064,7 +5064,7 @@ module Aws
       #   your bucket is versioning-enabled (or versioning is suspended), you
       #   can set this action to request that Amazon S3 transition noncurrent
       #   object versions to the STANDARD\_IA or GLACIER storage class at a
-      #   specific period in the object\'s lifetime.
+      #   specific period in the object's lifetime.
       #   @return [Types::NoncurrentVersionTransition]
       #
       # @!attribute [rw] noncurrent_version_expiration
@@ -5072,7 +5072,7 @@ module Aws
       #   Amazon S3 permanently deletes the noncurrent object versions. You
       #   set this lifecycle configuration action on a bucket that has
       #   versioning enabled (or suspended) to request that Amazon S3 delete
-      #   noncurrent object versions at a specific period in the object\'s
+      #   noncurrent object versions at a specific period in the object's
       #   lifetime.
       #   @return [Types::NoncurrentVersionExpiration]
       #
@@ -5200,7 +5200,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -5240,7 +5240,7 @@ module Aws
       #       }
       # @!attribute [rw] id
       #   Optional unique identifier for configurations in a notification
-      #   configuration. If you don\'t provide one, Amazon S3 will assign an
+      #   configuration. If you don't provide one, Amazon S3 will assign an
       #   ID.
       #   @return [String]
       #
@@ -5382,7 +5382,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       #   @return [Time]
       #

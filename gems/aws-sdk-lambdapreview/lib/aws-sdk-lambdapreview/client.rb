@@ -171,8 +171,8 @@ module Aws
       #   A map (key-value pairs) defining the configuration for AWS Lambda to
       #   use when reading the event source. Currently, AWS Lambda supports only
       #   the `InitialPositionInStream` key. The valid values are:
-      #   \"TRIM\_HORIZON\" and \"LATEST\". The default value is
-      #   \"TRIM\_HORIZON\". For more information, go to [ShardIteratorType][1]
+      #   "TRIM\_HORIZON" and "LATEST". The default value is
+      #   "TRIM\_HORIZON". For more information, go to [ShardIteratorType][1]
       #   in the Amazon Kinesis Service API Reference.
       #
       #
@@ -212,8 +212,8 @@ module Aws
       #   resp.last_modified #=> Time
       #   resp.is_active #=> Boolean
       #   resp.status #=> String
+      # @overload add_event_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_event_source(params = {}, options = {})
         req = build_request(:add_event_source, params)
         req.send_request(options)
@@ -231,8 +231,8 @@ module Aws
       #   resp = client.delete_function({
       #     function_name: "FunctionName", # required
       #   })
+      # @overload delete_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_function(params = {}, options = {})
         req = build_request(:delete_function, params)
         req.send_request(options)
@@ -273,8 +273,8 @@ module Aws
       #   resp.last_modified #=> Time
       #   resp.is_active #=> Boolean
       #   resp.status #=> String
+      # @overload get_event_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_event_source(params = {}, options = {})
         req = build_request(:get_event_source, params)
         req.send_request(options)
@@ -315,8 +315,8 @@ module Aws
       #   resp.configuration.last_modified #=> Time
       #   resp.code.repository_type #=> String
       #   resp.code.location #=> String
+      # @overload get_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_function(params = {}, options = {})
         req = build_request(:get_function, params)
         req.send_request(options)
@@ -364,8 +364,8 @@ module Aws
       #   resp.timeout #=> Integer
       #   resp.memory_size #=> Integer
       #   resp.last_modified #=> Time
+      # @overload get_function_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_function_configuration(params = {}, options = {})
         req = build_request(:get_function_configuration, params)
         req.send_request(options)
@@ -394,8 +394,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> Integer
+      # @overload invoke_async(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def invoke_async(params = {}, options = {})
         req = build_request(:invoke_async, params)
         req.send_request(options)
@@ -447,8 +447,8 @@ module Aws
       #   resp.event_sources[0].last_modified #=> Time
       #   resp.event_sources[0].is_active #=> Boolean
       #   resp.event_sources[0].status #=> String
+      # @overload list_event_sources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_event_sources(params = {}, options = {})
         req = build_request(:list_event_sources, params)
         req.send_request(options)
@@ -493,8 +493,8 @@ module Aws
       #   resp.functions[0].timeout #=> Integer
       #   resp.functions[0].memory_size #=> Integer
       #   resp.functions[0].last_modified #=> Time
+      # @overload list_functions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_functions(params = {}, options = {})
         req = build_request(:list_functions, params)
         req.send_request(options)
@@ -513,8 +513,8 @@ module Aws
       #   resp = client.remove_event_source({
       #     uuid: "String", # required
       #   })
+      # @overload remove_event_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_event_source(params = {}, options = {})
         req = build_request(:remove_event_source, params)
         req.send_request(options)
@@ -523,7 +523,7 @@ module Aws
       # Updates the configuration parameters for the specified Lambda function
       # by using the values provided in the request. You provide only the
       # parameters you want to change. This operation must only be used on an
-      # existing Lambda function and cannot be used to update the function\'s
+      # existing Lambda function and cannot be used to update the function's
       # code.
       #
       # This operation requires permission for the
@@ -589,8 +589,8 @@ module Aws
       #   resp.timeout #=> Integer
       #   resp.memory_size #=> Integer
       #   resp.last_modified #=> Time
+      # @overload update_function_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_function_configuration(params = {}, options = {})
         req = build_request(:update_function_configuration, params)
         req.send_request(options)
@@ -619,7 +619,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/walkthrough-custom-events.html
       # @option params [required, String] :runtime
       #   The runtime environment for the Lambda function you are uploading.
-      #   Currently, Lambda supports only \"nodejs\" as the runtime.
+      #   Currently, Lambda supports only "nodejs" as the runtime.
       # @option params [required, String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
       #   when it executes your function to access any other Amazon Web Services
@@ -629,7 +629,7 @@ module Aws
       #   the *module-name*.*export* value in your function.
       # @option params [required, String] :mode
       #   How the Lambda function will be invoked. Lambda supports only the
-      #   \"event\" mode.
+      #   "event" mode.
       # @option params [String] :description
       #   A short, user-defined function description. Lambda does not use this
       #   value. Assign a meaningful description as you see fit.
@@ -686,8 +686,8 @@ module Aws
       #   resp.timeout #=> Integer
       #   resp.memory_size #=> Integer
       #   resp.last_modified #=> Time
+      # @overload upload_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_function(params = {}, options = {})
         req = build_request(:upload_function, params)
         req.send_request(options)

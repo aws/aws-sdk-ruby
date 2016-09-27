@@ -106,7 +106,7 @@ module Aws
       #
       # @!attribute [rw] signature
       #   An encrypted code used to authenticate the request and response, for
-      #   example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is
+      #   example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is
       #   you want to create the signature file yourself. Generally you should
       #   use the SignatureFileContents value.
       #   @return [String]
@@ -261,7 +261,7 @@ module Aws
       #
       # @!attribute [rw] location_code
       #   A token representing the location of the storage device, such as
-      #   \"AtAWS\".
+      #   "AtAWS".
       #   @return [String]
       #
       # @!attribute [rw] location_message
@@ -270,7 +270,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] progress_code
-      #   A token representing the state of the job, such as \"Started\".
+      #   A token representing the state of the job, such as "Started".
       #   @return [String]
       #
       # @!attribute [rw] progress_message
@@ -279,13 +279,13 @@ module Aws
       #
       # @!attribute [rw] carrier
       #   Name of the shipping company. This value is included when the
-      #   LocationCode is \"Returned\".
+      #   LocationCode is "Returned".
       #   @return [String]
       #
       # @!attribute [rw] tracking_number
       #   The shipping tracking number assigned by AWS Import/Export to the
-      #   storage device when it\'s returned to you. We return this value when
-      #   the LocationCode is \"Returned\".
+      #   storage device when it's returned to you. We return this value when
+      #   the LocationCode is "Returned".
       #   @return [String]
       #
       # @!attribute [rw] log_bucket
@@ -303,14 +303,14 @@ module Aws
       #
       # @!attribute [rw] signature
       #   An encrypted code used to authenticate the request and response, for
-      #   example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is
+      #   example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is
       #   you want to create the signature file yourself. Generally you should
       #   use the SignatureFileContents value.
       #   @return [String]
       #
       # @!attribute [rw] signature_file_contents
       #   An encrypted code used to authenticate the request and response, for
-      #   example, \"DV+TpDfx1/TdSE9ktyK9k/bDTVI=\". Only use this value is
+      #   example, "DV+TpDfx1/TdSE9ktyK9k/bDTVI=". Only use this value is
       #   you want to create the signature file yourself. Generally you should
       #   use the SignatureFileContents value.
       #   @return [String]
@@ -321,7 +321,7 @@ module Aws
       #
       # @!attribute [rw] creation_date
       #   Timestamp of the CreateJob request in ISO8601 date format. For
-      #   example \"2010-03-28T20:27:35Z\".
+      #   example "2010-03-28T20:27:35Z".
       #   @return [Time]
       #
       # @!attribute [rw] artifact_list
@@ -354,7 +354,7 @@ module Aws
       #
       # @!attribute [rw] creation_date
       #   Timestamp of the CreateJob request in ISO8601 date format. For
-      #   example \"2010-03-28T20:27:35Z\".
+      #   example "2010-03-28T20:27:35Z".
       #   @return [Time]
       #
       # @!attribute [rw] is_canceled

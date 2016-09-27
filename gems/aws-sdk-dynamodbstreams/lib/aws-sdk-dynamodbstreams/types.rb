@@ -227,12 +227,12 @@ module Aws
       # the partition key, and another *KeySchemaElement* for the sort key.
       #
       # <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-      # The term \"hash attribute\" derives from DynamoDB\'s usage of an
+      # The term "hash attribute" derives from DynamoDB's usage of an
       # internal hash function to evenly distribute data items across
       # partitions, based on their partition key values.
       #
       #  The sort key of an item is also known as its *range attribute*. The
-      # term \"range attribute\" derives from the way DynamoDB stores items
+      # term "range attribute" derives from the way DynamoDB stores items
       # with the same partition key physically close together, in sorted order
       # by the sort key value.
       #
@@ -292,7 +292,7 @@ module Aws
       #   the previous result set. Use this value to start a new operation,
       #   excluding this value in the new request.
       #
-      #   If `LastEvaluatedStreamArn` is empty, then the \"last page\" of
+      #   If `LastEvaluatedStreamArn` is empty, then the "last page" of
       #   results has been processed and there is no more data to be
       #   retrieved.
       #
@@ -319,7 +319,7 @@ module Aws
       #
       #   * `INSERT` - a new item was added to the table.
       #
-      #   * `MODIFY` - one or more of an existing item\'s attributes were
+      #   * `MODIFY` - one or more of an existing item's attributes were
       #     modified.
       #
       #   * `REMOVE` - the item was deleted from the table
@@ -383,7 +383,7 @@ module Aws
       #   @return [Types::SequenceNumberRange]
       #
       # @!attribute [rw] parent_shard_id
-      #   The shard ID of the current shard\'s parent.
+      #   The shard ID of the current shard's parent.
       #   @return [String]
       class Shard < Struct.new(
         :shard_id,
@@ -481,7 +481,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] key_schema
-      #   The key attribute(s) of the stream\'s DynamoDB table.
+      #   The key attribute(s) of the stream's DynamoDB table.
       #   @return [Array<Types::KeySchemaElement>]
       #
       # @!attribute [rw] shards
@@ -493,7 +493,7 @@ module Aws
       #   the previous result set. Use this value to start a new operation,
       #   excluding this value in the new request.
       #
-      #   If `LastEvaluatedShardId` is empty, then the \"last page\" of
+      #   If `LastEvaluatedShardId` is empty, then the "last page" of
       #   results has been processed and there is currently no more data to be
       #   retrieved.
       #

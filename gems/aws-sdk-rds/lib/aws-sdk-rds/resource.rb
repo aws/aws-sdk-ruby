@@ -110,7 +110,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option options [String] :master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option options [String] :option_group_name
@@ -260,7 +260,7 @@ module Aws
       #   **PostgreSQL**
       #
       #   The name of the database to create when the DB instance is created. If
-      #   this parameter is not specified, the default \"postgres\" database is
+      #   this parameter is not specified, the default "postgres" database is
       #   created in the DB instance.
       #
       #   Constraints:
@@ -412,7 +412,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option options [String] :master_user_password
       #   The password for the master database user. Can be any printable ASCII
-      #   character except \"/\", \"\"\", or \"@\".
+      #   character except "/", """, or "@".
       #
       #   Type: String
       #
@@ -446,14 +446,14 @@ module Aws
       # @option options [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with this DB instance.
       #
-      #   Default: The default EC2 VPC security group for the DB subnet group\'s
+      #   Default: The default EC2 VPC security group for the DB subnet group's
       #   VPC.
       # @option options [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in. For information on regions and Availability Zones, see [Regions
       #   and Availability Zones][1].
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -949,7 +949,7 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
-      #   * Must not be \"Default\"
+      #   * Must not be "Default"
       #
       #   Example: `mysecuritygroup`
       # @option options [required, String] :db_security_group_description
@@ -1120,7 +1120,7 @@ module Aws
       # @option options [String] :certificate_identifier
       #   The user-supplied certificate identifier. If this parameter is
       #   specified, information for only the identified certificate is
-      #   returned. This parameter isn\'t case-sensitive.
+      #   returned. This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -1229,7 +1229,7 @@ module Aws
       # @option options [String] :db_cluster_identifier
       #   The user-supplied DB cluster identifier. If this parameter is
       #   specified, information from only the specific DB cluster is returned.
-      #   This parameter isn\'t case-sensitive.
+      #   This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -1350,7 +1350,7 @@ module Aws
       # @option options [String] :db_instance_identifier
       #   The user-supplied instance identifier. If this parameter is specified,
       #   information from only the specific DB instance is returned. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -1506,17 +1506,17 @@ module Aws
       #
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated and
+      #   If you don't specify a `SnapshotType` value, then both automated and
       #   manual snapshots are returned. Shared and public DB snapshots are not
       #   included in the returned results by default. You can include shared
       #   snapshots with these results by setting the `IncludeShared` parameter
       #   to `true`. You can include public snapshots with these results by
       #   setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
-      #   parameter doesn\'t apply when `SnapshotType` is set to `shared`. The
-      #   `IncludeShared` parameter doesn\'t apply when `SnapshotType` is set to
+      #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
+      #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
       # @option options [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.

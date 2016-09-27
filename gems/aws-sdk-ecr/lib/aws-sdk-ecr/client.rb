@@ -172,8 +172,8 @@ module Aws
       #   resp.failures[0].layer_digest #=> String
       #   resp.failures[0].failure_code #=> String, one of "InvalidLayerDigest", "MissingLayerDigest"
       #   resp.failures[0].failure_reason #=> String
+      # @overload batch_check_layer_availability(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_check_layer_availability(params = {}, options = {})
         req = build_request(:batch_check_layer_availability, params)
         req.send_request(options)
@@ -217,8 +217,8 @@ module Aws
       #   resp.failures[0].image_id.image_tag #=> String
       #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
       #   resp.failures[0].failure_reason #=> String
+      # @overload batch_delete_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_delete_image(params = {}, options = {})
         req = build_request(:batch_delete_image, params)
         req.send_request(options)
@@ -266,8 +266,8 @@ module Aws
       #   resp.failures[0].image_id.image_tag #=> String
       #   resp.failures[0].failure_code #=> String, one of "InvalidImageDigest", "InvalidImageTag", "ImageTagDoesNotMatchDigest", "ImageNotFound", "MissingDigestAndTag"
       #   resp.failures[0].failure_reason #=> String
+      # @overload batch_get_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_image(params = {}, options = {})
         req = build_request(:batch_get_image, params)
         req.send_request(options)
@@ -314,8 +314,8 @@ module Aws
       #   resp.repository_name #=> String
       #   resp.upload_id #=> String
       #   resp.layer_digest #=> String
+      # @overload complete_layer_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def complete_layer_upload(params = {}, options = {})
         req = build_request(:complete_layer_upload, params)
         req.send_request(options)
@@ -341,8 +341,8 @@ module Aws
       #   resp.repository.registry_id #=> String
       #   resp.repository.repository_name #=> String
       #   resp.repository.repository_uri #=> String
+      # @overload create_repository(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_repository(params = {}, options = {})
         req = build_request(:create_repository, params)
         req.send_request(options)
@@ -374,8 +374,8 @@ module Aws
       #   resp.repository.registry_id #=> String
       #   resp.repository.repository_name #=> String
       #   resp.repository.repository_uri #=> String
+      # @overload delete_repository(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_repository(params = {}, options = {})
         req = build_request(:delete_repository, params)
         req.send_request(options)
@@ -405,8 +405,8 @@ module Aws
       #   resp.registry_id #=> String
       #   resp.repository_name #=> String
       #   resp.policy_text #=> String
+      # @overload delete_repository_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_repository_policy(params = {}, options = {})
         req = build_request(:delete_repository_policy, params)
         req.send_request(options)
@@ -462,8 +462,8 @@ module Aws
       #   resp.repositories[0].repository_name #=> String
       #   resp.repositories[0].repository_uri #=> String
       #   resp.next_token #=> String
+      # @overload describe_repositories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_repositories(params = {}, options = {})
         req = build_request(:describe_repositories, params)
         req.send_request(options)
@@ -496,8 +496,8 @@ module Aws
       #   resp.authorization_data[0].authorization_token #=> String
       #   resp.authorization_data[0].expires_at #=> Time
       #   resp.authorization_data[0].proxy_endpoint #=> String
+      # @overload get_authorization_token(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_authorization_token(params = {}, options = {})
         req = build_request(:get_authorization_token, params)
         req.send_request(options)
@@ -536,8 +536,8 @@ module Aws
       # @example Response structure
       #   resp.download_url #=> String
       #   resp.layer_digest #=> String
+      # @overload get_download_url_for_layer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_download_url_for_layer(params = {}, options = {})
         req = build_request(:get_download_url_for_layer, params)
         req.send_request(options)
@@ -566,8 +566,8 @@ module Aws
       #   resp.registry_id #=> String
       #   resp.repository_name #=> String
       #   resp.policy_text #=> String
+      # @overload get_repository_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_repository_policy(params = {}, options = {})
         req = build_request(:get_repository_policy, params)
         req.send_request(options)
@@ -600,8 +600,8 @@ module Aws
       # @example Response structure
       #   resp.upload_id #=> String
       #   resp.part_size #=> Integer
+      # @overload initiate_layer_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def initiate_layer_upload(params = {}, options = {})
         req = build_request(:initiate_layer_upload, params)
         req.send_request(options)
@@ -666,8 +666,8 @@ module Aws
       #   resp.image_ids[0].image_digest #=> String
       #   resp.image_ids[0].image_tag #=> String
       #   resp.next_token #=> String
+      # @overload list_images(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_images(params = {}, options = {})
         req = build_request(:list_images, params)
         req.send_request(options)
@@ -705,8 +705,8 @@ module Aws
       #   resp.image.image_id.image_digest #=> String
       #   resp.image.image_id.image_tag #=> String
       #   resp.image.image_manifest #=> String
+      # @overload put_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_image(params = {}, options = {})
         req = build_request(:put_image, params)
         req.send_request(options)
@@ -745,8 +745,8 @@ module Aws
       #   resp.registry_id #=> String
       #   resp.repository_name #=> String
       #   resp.policy_text #=> String
+      # @overload set_repository_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_repository_policy(params = {}, options = {})
         req = build_request(:set_repository_policy, params)
         req.send_request(options)
@@ -796,8 +796,8 @@ module Aws
       #   resp.repository_name #=> String
       #   resp.upload_id #=> String
       #   resp.last_byte_received #=> Integer
+      # @overload upload_layer_part(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_layer_part(params = {}, options = {})
         req = build_request(:upload_layer_part, params)
         req.send_request(options)

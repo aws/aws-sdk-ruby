@@ -24,7 +24,7 @@ module Aws
       # @!attribute [rw] bandwidth
       #   Bandwidth of the connection.
       #
-      #   Example: \"*500Mbps*\"
+      #   Example: "*500Mbps*"
       #
       #   Default: None
       #
@@ -34,7 +34,7 @@ module Aws
       # @!attribute [rw] connection_name
       #   Name of the provisioned connection.
       #
-      #   Example: \"*500M Connection to AWS*\"
+      #   Example: "*500M Connection to AWS*"
       #
       #   Default: None
       #   @return [String]
@@ -207,8 +207,8 @@ module Aws
       #
       #   * **Deleted**\: The connection has been deleted.
       #
-      #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
-      #     enter the \'Rejected\' state if it is deleted by the end customer.
+      #   * **Rejected**\: A hosted connection in the 'Ordering' state will
+      #     enter the 'Rejected' state if it is deleted by the end customer.
       #   @return [String]
       class ConfirmConnectionResponse < Struct.new(
         :connection_state)
@@ -282,8 +282,8 @@ module Aws
       #
       #   * **Rejected**\: The virtual interface owner has declined creation
       #     of the virtual interface. If a virtual interface in the
-      #     \'Confirming\' state is deleted by the virtual interface owner,
-      #     the virtual interface will enter the \'Rejected\' state.
+      #     'Confirming' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the 'Rejected' state.
       #   @return [String]
       class ConfirmPrivateVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
@@ -341,8 +341,8 @@ module Aws
       #
       #   * **Rejected**\: The virtual interface owner has declined creation
       #     of the virtual interface. If a virtual interface in the
-      #     \'Confirming\' state is deleted by the virtual interface owner,
-      #     the virtual interface will enter the \'Rejected\' state.
+      #     'Confirming' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the 'Rejected' state.
       #   @return [String]
       class ConfirmPublicVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
@@ -366,7 +366,7 @@ module Aws
       # @!attribute [rw] connection_name
       #   The name of the connection.
       #
-      #   Example: \"*My Connection to AWS*\"
+      #   Example: "*My Connection to AWS*"
       #
       #   Default: None
       #   @return [String]
@@ -395,8 +395,8 @@ module Aws
       #
       #   * **Deleted**\: The connection has been deleted.
       #
-      #   * **Rejected**\: A hosted connection in the \'Ordering\' state will
-      #     enter the \'Rejected\' state if it is deleted by the end customer.
+      #   * **Rejected**\: A hosted connection in the 'Ordering' state will
+      #     enter the 'Rejected' state if it is deleted by the end customer.
       #   @return [String]
       #
       # @!attribute [rw] region
@@ -490,7 +490,7 @@ module Aws
       # @!attribute [rw] connection_name
       #   The name of the connection.
       #
-      #   Example: \"*My Connection to AWS*\"
+      #   Example: "*My Connection to AWS*"
       #
       #   Default: None
       #   @return [String]
@@ -513,7 +513,7 @@ module Aws
       # @!attribute [rw] interconnect_name
       #   The name of the interconnect.
       #
-      #   Example: \"*1G Interconnect to AWS*\"
+      #   Example: "*1G Interconnect to AWS*"
       #
       #   Default: None
       #   @return [String]
@@ -731,8 +731,8 @@ module Aws
       #
       #   * **Rejected**\: The virtual interface owner has declined creation
       #     of the virtual interface. If a virtual interface in the
-      #     \'Confirming\' state is deleted by the virtual interface owner,
-      #     the virtual interface will enter the \'Rejected\' state.
+      #     'Confirming' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the 'Rejected' state.
       #   @return [String]
       class DeleteVirtualInterfaceResponse < Struct.new(
         :virtual_interface_state)
@@ -768,7 +768,7 @@ module Aws
       # @!attribute [rw] loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
       #   document. Currently, the only supported value is
-      #   \"application/pdf\".
+      #   "application/pdf".
       #
       #   Default: application/pdf
       #   @return [String]
@@ -855,7 +855,7 @@ module Aws
       # @!attribute [rw] loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
       #   document. Currently, the only supported value is
-      #   \"application/pdf\".
+      #   "application/pdf".
       #
       #   Default: application/pdf
       #   @return [String]
@@ -927,7 +927,7 @@ module Aws
       #
       # Like a standard AWS Direct Connect connection, an interconnect
       # represents the physical connection between an AWS Direct Connect
-      # partner\'s network and a specific Direct Connect location. An AWS
+      # partner's network and a specific Direct Connect location. An AWS
       # Direct Connect partner who owns an interconnect can provision hosted
       # connections on the interconnect for their end customers, thereby
       # providing the end customers with connectivity to AWS services.
@@ -945,7 +945,7 @@ module Aws
       # @!attribute [rw] interconnect_name
       #   The name of the interconnect.
       #
-      #   Example: \"*1G Interconnect to AWS*\"
+      #   Example: "*1G Interconnect to AWS*"
       #   @return [String]
       #
       # @!attribute [rw] interconnect_state
@@ -1026,7 +1026,7 @@ module Aws
       # @!attribute [rw] loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
       #   document. Currently, the only supported value is
-      #   \"application/pdf\".
+      #   "application/pdf".
       #
       #   Default: application/pdf
       #   @return [String]
@@ -1083,7 +1083,7 @@ module Aws
       # @!attribute [rw] virtual_interface_name
       #   The name of the virtual interface assigned by the customer.
       #
-      #   Example: \"My VPC\"
+      #   Example: "My VPC"
       #   @return [String]
       #
       # @!attribute [rw] vlan
@@ -1150,7 +1150,7 @@ module Aws
       # @!attribute [rw] virtual_interface_name
       #   The name of the virtual interface assigned by the customer.
       #
-      #   Example: \"My VPC\"
+      #   Example: "My VPC"
       #   @return [String]
       #
       # @!attribute [rw] vlan
@@ -1214,7 +1214,7 @@ module Aws
       # @!attribute [rw] virtual_interface_name
       #   The name of the virtual interface assigned by the customer.
       #
-      #   Example: \"My VPC\"
+      #   Example: "My VPC"
       #   @return [String]
       #
       # @!attribute [rw] vlan
@@ -1284,7 +1284,7 @@ module Aws
       # @!attribute [rw] virtual_interface_name
       #   The name of the virtual interface assigned by the customer.
       #
-      #   Example: \"My VPC\"
+      #   Example: "My VPC"
       #   @return [String]
       #
       # @!attribute [rw] vlan
@@ -1438,7 +1438,7 @@ module Aws
       # @!attribute [rw] virtual_interface_name
       #   The name of the virtual interface assigned by the customer.
       #
-      #   Example: \"My VPC\"
+      #   Example: "My VPC"
       #   @return [String]
       #
       # @!attribute [rw] vlan
@@ -1502,8 +1502,8 @@ module Aws
       #
       #   * **Rejected**\: The virtual interface owner has declined creation
       #     of the virtual interface. If a virtual interface in the
-      #     \'Confirming\' state is deleted by the virtual interface owner,
-      #     the virtual interface will enter the \'Rejected\' state.
+      #     'Confirming' state is deleted by the virtual interface owner,
+      #     the virtual interface will enter the 'Rejected' state.
       #   @return [String]
       #
       # @!attribute [rw] customer_router_config

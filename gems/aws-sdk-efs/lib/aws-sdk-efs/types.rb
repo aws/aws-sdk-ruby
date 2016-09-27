@@ -27,7 +27,7 @@ module Aws
       #   systems using the `maxIO` performance mode can scale to higher
       #   levels of aggregate throughput and operations per second with a
       #   tradeoff of slightly higher latencies for most file operations. This
-      #   can\'t be changed after the file system has been created.
+      #   can't be changed after the file system has been created.
       #   @return [String]
       class CreateFileSystemRequest < Struct.new(
         :creation_token,
@@ -156,7 +156,7 @@ module Aws
       #   (Optional) Specifies the maximum number of file systems to return in
       #   the response (integer). This parameter value must be greater than 0.
       #   The number of items that Amazon EFS returns is the minimum of the
-      #   `MaxItems` parameter specified in the request and the service\'s
+      #   `MaxItems` parameter specified in the request and the service's
       #   internal maximum number of items per page.
       #   @return [Integer]
       #
@@ -272,7 +272,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] mount_targets
-      #   Returns the file system\'s mount targets as an array of
+      #   Returns the file system's mount targets as an array of
       #   `MountTargetDescription` objects.
       #   @return [Array<Types::MountTargetDescription>]
       #
@@ -463,7 +463,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] subnet_id
-      #   ID of the mount target\'s subnet.
+      #   ID of the mount target's subnet.
       #   @return [String]
       #
       # @!attribute [rw] life_cycle_state
@@ -501,7 +501,7 @@ module Aws
       #         value: "TagValue", # required
       #       }
       # @!attribute [rw] key
-      #   Tag key (String). The key can\'t start with `aws:`.
+      #   Tag key (String). The key can't start with `aws:`.
       #   @return [String]
       #
       # @!attribute [rw] value

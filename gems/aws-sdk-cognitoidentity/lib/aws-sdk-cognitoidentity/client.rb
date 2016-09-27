@@ -152,7 +152,7 @@ module Aws
       # @option params [Hash<String,String>] :supported_login_providers
       #   Optional key:value pairs mapping provider names to provider app IDs.
       # @option params [String] :developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users. This name
+      #   The "domain" by which Cognito will refer to your users. This name
       #   acts as a placeholder that allows your backend and the Cognito service
       #   to communicate about the developer provider. For the
       #   `DeveloperProviderName`, you can use letters as well as period (`.`),
@@ -210,8 +210,8 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      # @overload create_identity_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_identity_pool(params = {}, options = {})
         req = build_request(:create_identity_pool, params)
         req.send_request(options)
@@ -236,8 +236,8 @@ module Aws
       #   resp.unprocessed_identity_ids #=> Array
       #   resp.unprocessed_identity_ids[0].identity_id #=> String
       #   resp.unprocessed_identity_ids[0].error_code #=> String, one of "AccessDenied", "InternalServerError"
+      # @overload delete_identities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_identities(params = {}, options = {})
         req = build_request(:delete_identities, params)
         req.send_request(options)
@@ -255,8 +255,8 @@ module Aws
       #   resp = client.delete_identity_pool({
       #     identity_pool_id: "IdentityPoolId", # required
       #   })
+      # @overload delete_identity_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_identity_pool(params = {}, options = {})
         req = build_request(:delete_identity_pool, params)
         req.send_request(options)
@@ -286,8 +286,8 @@ module Aws
       #   resp.logins[0] #=> String
       #   resp.creation_date #=> Time
       #   resp.last_modified_date #=> Time
+      # @overload describe_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_identity(params = {}, options = {})
         req = build_request(:describe_identity, params)
         req.send_request(options)
@@ -329,8 +329,8 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      # @overload describe_identity_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_identity_pool(params = {}, options = {})
         req = build_request(:describe_identity_pool, params)
         req.send_request(options)
@@ -373,8 +373,8 @@ module Aws
       #   resp.credentials.secret_key #=> String
       #   resp.credentials.session_token #=> String
       #   resp.credentials.expiration #=> Time
+      # @overload get_credentials_for_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_credentials_for_identity(params = {}, options = {})
         req = build_request(:get_credentials_for_identity, params)
         req.send_request(options)
@@ -414,8 +414,8 @@ module Aws
       #
       # @example Response structure
       #   resp.identity_id #=> String
+      # @overload get_id(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_id(params = {}, options = {})
         req = build_request(:get_id, params)
         req.send_request(options)
@@ -440,8 +440,8 @@ module Aws
       #   resp.identity_pool_id #=> String
       #   resp.roles #=> Hash
       #   resp.roles["RoleType"] #=> String
+      # @overload get_identity_pool_roles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_pool_roles(params = {}, options = {})
         req = build_request(:get_identity_pool_roles, params)
         req.send_request(options)
@@ -460,7 +460,7 @@ module Aws
       # @option params [Hash<String,String>] :logins
       #   A set of optional name-value pairs that map provider names to provider
       #   tokens. When using graph.facebook.com and www.amazon.com, supply the
-      #   access\_token returned from the provider\'s authflow. For
+      #   access\_token returned from the provider's authflow. For
       #   accounts.google.com or any other OpenId Connect provider, always
       #   include the id\_token.
       # @return [Types::GetOpenIdTokenResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -479,8 +479,8 @@ module Aws
       # @example Response structure
       #   resp.identity_id #=> String
       #   resp.token #=> String
+      # @overload get_open_id_token(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_open_id_token(params = {}, options = {})
         req = build_request(:get_open_id_token, params)
         req.send_request(options)
@@ -491,7 +491,7 @@ module Aws
       # Supplying multiple logins will create an implicit linked account. You
       # can only specify one developer provider as part of the `Logins` map,
       # which is linked to the identity pool. The developer provider is the
-      # \"domain\" by which Cognito will refer to your users.
+      # "domain" by which Cognito will refer to your users.
       #
       # You can use `GetOpenIdTokenForDeveloperIdentity` to create a new
       # identity and to link new logins (that is, user credentials issued by a
@@ -512,7 +512,7 @@ module Aws
       #   tokens. Each name-value pair represents a user from a public provider
       #   or developer provider. If the user is from a developer provider, the
       #   name-value pair will follow the syntax `"developer_provider_name":
-      #   "developer_user_identifier"`. The developer provider is the \"domain\"
+      #   "developer_user_identifier"`. The developer provider is the "domain"
       #   by which Cognito will refer to your users; you provided this domain
       #   while creating/updating the identity pool. The developer user
       #   identifier is an identifier from your backend that uniquely identifies
@@ -520,14 +520,14 @@ module Aws
       #   supported logins.
       # @option params [Integer] :token_duration
       #   The expiration time of the token, in seconds. You can specify a custom
-      #   expiration time for the token so that you can cache it. If you don\'t
+      #   expiration time for the token so that you can cache it. If you don't
       #   provide an expiration time, the token is valid for 15 minutes. You can
       #   exchange the token with Amazon STS for temporary AWS credentials,
       #   which are valid for a maximum of one hour. The maximum token duration
       #   you can set is 24 hours. You should take care in setting the
       #   expiration time for a token, as there are significant security
       #   implications: an attacker could use a leaked token to access your AWS
-      #   resources for the token\'s duration.
+      #   resources for the token's duration.
       # @return [Types::GetOpenIdTokenForDeveloperIdentityResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetOpenIdTokenForDeveloperIdentityResponse#identity_id #IdentityId} => String
@@ -546,8 +546,8 @@ module Aws
       # @example Response structure
       #   resp.identity_id #=> String
       #   resp.token #=> String
+      # @overload get_open_id_token_for_developer_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_open_id_token_for_developer_identity(params = {}, options = {})
         req = build_request(:get_open_id_token_for_developer_identity, params)
         req.send_request(options)
@@ -589,8 +589,8 @@ module Aws
       #   resp.identities[0].creation_date #=> Time
       #   resp.identities[0].last_modified_date #=> Time
       #   resp.next_token #=> String
+      # @overload list_identities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_identities(params = {}, options = {})
         req = build_request(:list_identities, params)
         req.send_request(options)
@@ -619,8 +619,8 @@ module Aws
       #   resp.identity_pools[0].identity_pool_id #=> String
       #   resp.identity_pools[0].identity_pool_name #=> String
       #   resp.next_token #=> String
+      # @overload list_identity_pools(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_identity_pools(params = {}, options = {})
         req = build_request(:list_identity_pools, params)
         req.send_request(options)
@@ -651,7 +651,7 @@ module Aws
       # @option params [String] :next_token
       #   A pagination token. The first call you make will have `NextToken` set
       #   to null. After that the service will return `NextToken` values as
-      #   needed. For example, let\'s say you make a request with `MaxResults`
+      #   needed. For example, let's say you make a request with `MaxResults`
       #   set to 10, and there are 20 matches in the database. The service will
       #   return a pagination token as a part of the response. This token can be
       #   used to call the API again and get results starting from the 11th
@@ -676,8 +676,8 @@ module Aws
       #   resp.developer_user_identifier_list #=> Array
       #   resp.developer_user_identifier_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload lookup_developer_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def lookup_developer_identity(params = {}, options = {})
         req = build_request(:lookup_developer_identity, params)
         req.send_request(options)
@@ -701,7 +701,7 @@ module Aws
       #   User identifier for the destination user. The value should be a
       #   `DeveloperUserIdentifier`.
       # @option params [required, String] :developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users. This is a
+      #   The "domain" by which Cognito will refer to your users. This is a
       #   (pseudo) domain name that you provide while creating an identity pool.
       #   This name acts as a placeholder that allows your backend and the
       #   Cognito service to communicate about the developer provider. For the
@@ -723,8 +723,8 @@ module Aws
       #
       # @example Response structure
       #   resp.identity_id #=> String
+      # @overload merge_developer_identities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def merge_developer_identities(params = {}, options = {})
         req = build_request(:merge_developer_identities, params)
         req.send_request(options)
@@ -738,7 +738,7 @@ module Aws
       #   An identity pool ID in the format REGION:GUID.
       # @option params [required, Hash<String,String>] :roles
       #   The map of roles associated with this pool. For a given role, the key
-      #   will be either \"authenticated\" or \"unauthenticated\" and the value
+      #   will be either "authenticated" or "unauthenticated" and the value
       #   will be the Role ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -749,8 +749,8 @@ module Aws
       #       "RoleType" => "ARNString",
       #     },
       #   })
+      # @overload set_identity_pool_roles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_pool_roles(params = {}, options = {})
         req = build_request(:set_identity_pool_roles, params)
         req.send_request(options)
@@ -768,7 +768,7 @@ module Aws
       # @option params [required, String] :identity_pool_id
       #   An identity pool ID in the format REGION:GUID.
       # @option params [required, String] :developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users.
+      #   The "domain" by which Cognito will refer to your users.
       # @option params [required, String] :developer_user_identifier
       #   A unique ID used by your backend authentication process to identify a
       #   user.
@@ -781,8 +781,8 @@ module Aws
       #     developer_provider_name: "DeveloperProviderName", # required
       #     developer_user_identifier: "DeveloperUserIdentifier", # required
       #   })
+      # @overload unlink_developer_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unlink_developer_identity(params = {}, options = {})
         req = build_request(:unlink_developer_identity, params)
         req.send_request(options)
@@ -811,8 +811,8 @@ module Aws
       #     },
       #     logins_to_remove: ["IdentityProviderName"], # required
       #   })
+      # @overload unlink_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unlink_identity(params = {}, options = {})
         req = build_request(:unlink_identity, params)
         req.send_request(options)
@@ -830,7 +830,7 @@ module Aws
       # @option params [Hash<String,String>] :supported_login_providers
       #   Optional key:value pairs mapping provider names to provider app IDs.
       # @option params [String] :developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users.
+      #   The "domain" by which Cognito will refer to your users.
       # @option params [Array<String>] :open_id_connect_provider_arns
       #   A list of OpendID Connect provider ARNs.
       # @option params [Array<Types::CognitoIdentityProvider>] :cognito_identity_providers
@@ -883,8 +883,8 @@ module Aws
       #   resp.cognito_identity_providers[0].client_id #=> String
       #   resp.saml_provider_arns #=> Array
       #   resp.saml_provider_arns[0] #=> String
+      # @overload update_identity_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_identity_pool(params = {}, options = {})
         req = build_request(:update_identity_pool, params)
         req.send_request(options)

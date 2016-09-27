@@ -78,9 +78,9 @@ module Aws
         data.create_date
       end
 
-      # The date and time, in [ISO 8601 date-time format][1], when the user\'s
+      # The date and time, in [ISO 8601 date-time format][1], when the user's
       # password was last used to sign in to an AWS website. For a list of AWS
-      # websites that capture a user\'s last sign-in time, see the [Credential
+      # websites that capture a user's last sign-in time, see the [Credential
       # Reports][2] topic in the *Using IAM* guide. If a password is used more
       # than once in a five-minute span, only the first use is returned in
       # this field. This field is null (not present) when:
@@ -388,8 +388,8 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [String] :new_path
-      #   New path for the IAM user. Include this parameter only if you\'re
-      #   changing the user\'s path.
+      #   New path for the IAM user. Include this parameter only if you're
+      #   changing the user's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -402,8 +402,8 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option options [String] :new_user_name
-      #   New name for the user. Include this parameter only if you\'re changing
-      #   the user\'s name.
+      #   New name for the user. Include this parameter only if you're changing
+      #   the user's name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no

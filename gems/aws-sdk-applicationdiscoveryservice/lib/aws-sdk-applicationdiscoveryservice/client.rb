@@ -157,8 +157,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tags(params = {}, options = {})
         req = build_request(:create_tags, params)
         req.send_request(options)
@@ -186,8 +186,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -227,8 +227,8 @@ module Aws
       #   resp.agents_info[0].version #=> String
       #   resp.agents_info[0].health #=> String, one of "HEALTHY", "UNHEALTHY", "RUNNING", "UNKNOWN", "BLACKLISTED", "SHUTDOWN"
       #   resp.next_token #=> String
+      # @overload describe_agents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_agents(params = {}, options = {})
         req = build_request(:describe_agents, params)
         req.send_request(options)
@@ -253,8 +253,8 @@ module Aws
       #   resp.configurations #=> Array
       #   resp.configurations[0] #=> Hash
       #   resp.configurations[0]["String"] #=> String
+      # @overload describe_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_configurations(params = {}, options = {})
         req = build_request(:describe_configurations, params)
         req.send_request(options)
@@ -293,8 +293,8 @@ module Aws
       #   resp.exports_info[0].configurations_download_url #=> String
       #   resp.exports_info[0].export_request_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_export_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_export_configurations(params = {}, options = {})
         req = build_request(:describe_export_configurations, params)
         req.send_request(options)
@@ -337,8 +337,8 @@ module Aws
       #   resp.tags[0].value #=> String
       #   resp.tags[0].time_of_creation #=> Time
       #   resp.next_token #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -356,8 +356,8 @@ module Aws
       #
       # @example Response structure
       #   resp.export_id #=> String
+      # @overload export_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def export_configurations(params = {}, options = {})
         req = build_request(:export_configurations, params)
         req.send_request(options)
@@ -403,8 +403,8 @@ module Aws
       #   resp.configurations[0] #=> Hash
       #   resp.configurations[0]["String"] #=> String
       #   resp.next_token #=> String
+      # @overload list_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_configurations(params = {}, options = {})
         req = build_request(:list_configurations, params)
         req.send_request(options)
@@ -435,8 +435,8 @@ module Aws
       #   resp.agents_configuration_status[0].agent_id #=> String
       #   resp.agents_configuration_status[0].operation_succeeded #=> Boolean
       #   resp.agents_configuration_status[0].description #=> String
+      # @overload start_data_collection_by_agent_ids(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_data_collection_by_agent_ids(params = {}, options = {})
         req = build_request(:start_data_collection_by_agent_ids, params)
         req.send_request(options)
@@ -459,8 +459,8 @@ module Aws
       #   resp.agents_configuration_status[0].agent_id #=> String
       #   resp.agents_configuration_status[0].operation_succeeded #=> Boolean
       #   resp.agents_configuration_status[0].description #=> String
+      # @overload stop_data_collection_by_agent_ids(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_data_collection_by_agent_ids(params = {}, options = {})
         req = build_request(:stop_data_collection_by_agent_ids, params)
         req.send_request(options)

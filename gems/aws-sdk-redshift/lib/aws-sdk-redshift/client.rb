@@ -194,8 +194,8 @@ module Aws
       #   resp.cluster_security_group.tags #=> Array
       #   resp.cluster_security_group.tags[0].key #=> String
       #   resp.cluster_security_group.tags[0].value #=> String
+      # @overload authorize_cluster_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_cluster_security_group_ingress(params = {}, options = {})
         req = build_request(:authorize_cluster_security_group_ingress, params)
         req.send_request(options)
@@ -265,8 +265,8 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      # @overload authorize_snapshot_access(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_snapshot_access(params = {}, options = {})
         req = build_request(:authorize_snapshot_access, params)
         req.send_request(options)
@@ -360,15 +360,15 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      # @overload copy_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_cluster_snapshot(params = {}, options = {})
         req = build_request(:copy_cluster_snapshot, params)
         req.send_request(options)
       end
 
       # Creates a new cluster. To create the cluster in virtual private cloud
-      # (VPC), you must provide cluster subnet group name. If you don\'t
+      # (VPC), you must provide cluster subnet group name. If you don't
       # provide a cluster subnet group name or the cluster security group
       # parameter, Amazon Redshift creates a non-VPC cluster, it associates
       # the default cluster security group with the cluster. For more
@@ -460,7 +460,7 @@ module Aws
       #   * Must contain at least one lowercase letter.
       #   * Must contain one number.
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-      #     \' (single quote), \" (double quote), \\, /, @, or space.
+      #     ' (single quote), " (double quote), \\, /, @, or space.
       # @option params [Array<String>] :cluster_security_groups
       #   A list of security groups to be associated with this cluster.
       #
@@ -571,7 +571,7 @@ module Aws
       #   Working with Clusters][1] in the *Amazon Redshift Cluster Management
       #   Guide*.
       #
-      #   If you don\'t specify this parameter, you get a single-node cluster.
+      #   If you don't specify this parameter, you get a single-node cluster.
       #   When requesting a multi-node cluster, you must specify the number of
       #   nodes that you want in the cluster.
       #
@@ -728,8 +728,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload create_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster(params = {}, options = {})
         req = build_request(:create_cluster, params)
         req.send_request(options)
@@ -773,7 +773,7 @@ module Aws
       #   including the default parameter groups for each Amazon Redshift engine
       #   version. The parameter group family names associated with the default
       #   parameter groups provide you the valid values. For example, a valid
-      #   family name is \"redshift-1.0\".
+      #   family name is "redshift-1.0".
       # @option params [required, String] :description
       #   A description of the parameter group.
       # @option params [Array<Types::Tag>] :tags
@@ -802,8 +802,8 @@ module Aws
       #   resp.cluster_parameter_group.tags #=> Array
       #   resp.cluster_parameter_group.tags[0].key #=> String
       #   resp.cluster_parameter_group.tags[0].value #=> String
+      # @overload create_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster_parameter_group(params = {}, options = {})
         req = build_request(:create_cluster_parameter_group, params)
         req.send_request(options)
@@ -826,7 +826,7 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
-      #   * Must not be \"Default\".
+      #   * Must not be "Default".
       #   * Must be unique for all security groups that are created by your AWS
       #     account.
       #
@@ -870,8 +870,8 @@ module Aws
       #   resp.cluster_security_group.tags #=> Array
       #   resp.cluster_security_group.tags[0].key #=> String
       #   resp.cluster_security_group.tags[0].value #=> String
+      # @overload create_cluster_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster_security_group(params = {}, options = {})
         req = build_request(:create_cluster_security_group, params)
         req.send_request(options)
@@ -952,8 +952,8 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      # @overload create_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster_snapshot(params = {}, options = {})
         req = build_request(:create_cluster_snapshot, params)
         req.send_request(options)
@@ -976,7 +976,7 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
-      #   * Must not be \"Default\".
+      #   * Must not be "Default".
       #   * Must be unique for all subnet groups that are created by your AWS
       #     account.
       #
@@ -1017,8 +1017,8 @@ module Aws
       #   resp.cluster_subnet_group.tags #=> Array
       #   resp.cluster_subnet_group.tags[0].key #=> String
       #   resp.cluster_subnet_group.tags[0].value #=> String
+      # @overload create_cluster_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster_subnet_group(params = {}, options = {})
         req = build_request(:create_cluster_subnet_group, params)
         req.send_request(options)
@@ -1133,15 +1133,15 @@ module Aws
       #   resp.event_subscription.tags #=> Array
       #   resp.event_subscription.tags[0].key #=> String
       #   resp.event_subscription.tags[0].value #=> String
+      # @overload create_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_event_subscription(params = {}, options = {})
         req = build_request(:create_event_subscription, params)
         req.send_request(options)
       end
 
       # Creates an HSM client certificate that an Amazon Redshift cluster will
-      # use to connect to the client\'s HSM in order to store and retrieve the
+      # use to connect to the client's HSM in order to store and retrieve the
       # keys used to encrypt the cluster databases.
       #
       # The command returns a public key, which you must store in the HSM. In
@@ -1181,8 +1181,8 @@ module Aws
       #   resp.hsm_client_certificate.tags #=> Array
       #   resp.hsm_client_certificate.tags[0].key #=> String
       #   resp.hsm_client_certificate.tags[0].value #=> String
+      # @overload create_hsm_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_hsm_client_certificate(params = {}, options = {})
         req = build_request(:create_hsm_client_certificate, params)
         req.send_request(options)
@@ -1247,8 +1247,8 @@ module Aws
       #   resp.hsm_configuration.tags #=> Array
       #   resp.hsm_configuration.tags[0].key #=> String
       #   resp.hsm_configuration.tags[0].value #=> String
+      # @overload create_hsm_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_hsm_configuration(params = {}, options = {})
         req = build_request(:create_hsm_configuration, params)
         req.send_request(options)
@@ -1304,8 +1304,8 @@ module Aws
       #   resp.snapshot_copy_grant.tags #=> Array
       #   resp.snapshot_copy_grant.tags[0].key #=> String
       #   resp.snapshot_copy_grant.tags[0].value #=> String
+      # @overload create_snapshot_copy_grant(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot_copy_grant(params = {}, options = {})
         req = build_request(:create_snapshot_copy_grant, params)
         req.send_request(options)
@@ -1341,8 +1341,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tags(params = {}, options = {})
         req = build_request(:create_tags, params)
         req.send_request(options)
@@ -1359,8 +1359,8 @@ module Aws
       # *SkipFinalClusterSnapshot* to `false` and specify a name for
       # *FinalClusterSnapshotIdentifier*. You can later restore this snapshot
       # to resume using the cluster. If a final cluster snapshot is requested,
-      # the status of the cluster will be \"final-snapshot\" while the
-      # snapshot is being taken, then it\'s \"deleting\" once Amazon Redshift
+      # the status of the cluster will be "final-snapshot" while the
+      # snapshot is being taken, then it's "deleting" once Amazon Redshift
       # begins deleting the cluster.
       #
       # For more information about managing clusters, go to [Amazon Redshift
@@ -1476,8 +1476,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload delete_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster(params = {}, options = {})
         req = build_request(:delete_cluster, params)
         req.send_request(options)
@@ -1498,8 +1498,8 @@ module Aws
       #   resp = client.delete_cluster_parameter_group({
       #     parameter_group_name: "String", # required
       #   })
+      # @overload delete_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster_parameter_group(params = {}, options = {})
         req = build_request(:delete_cluster_parameter_group, params)
         req.send_request(options)
@@ -1524,8 +1524,8 @@ module Aws
       #   resp = client.delete_cluster_security_group({
       #     cluster_security_group_name: "String", # required
       #   })
+      # @overload delete_cluster_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster_security_group(params = {}, options = {})
         req = build_request(:delete_cluster_security_group, params)
         req.send_request(options)
@@ -1596,8 +1596,8 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      # @overload delete_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster_snapshot(params = {}, options = {})
         req = build_request(:delete_cluster_snapshot, params)
         req.send_request(options)
@@ -1612,8 +1612,8 @@ module Aws
       #   resp = client.delete_cluster_subnet_group({
       #     cluster_subnet_group_name: "String", # required
       #   })
+      # @overload delete_cluster_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster_subnet_group(params = {}, options = {})
         req = build_request(:delete_cluster_subnet_group, params)
         req.send_request(options)
@@ -1629,8 +1629,8 @@ module Aws
       #   resp = client.delete_event_subscription({
       #     subscription_name: "String", # required
       #   })
+      # @overload delete_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_event_subscription(params = {}, options = {})
         req = build_request(:delete_event_subscription, params)
         req.send_request(options)
@@ -1645,8 +1645,8 @@ module Aws
       #   resp = client.delete_hsm_client_certificate({
       #     hsm_client_certificate_identifier: "String", # required
       #   })
+      # @overload delete_hsm_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_hsm_client_certificate(params = {}, options = {})
         req = build_request(:delete_hsm_client_certificate, params)
         req.send_request(options)
@@ -1661,8 +1661,8 @@ module Aws
       #   resp = client.delete_hsm_configuration({
       #     hsm_configuration_identifier: "String", # required
       #   })
+      # @overload delete_hsm_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_hsm_configuration(params = {}, options = {})
         req = build_request(:delete_hsm_configuration, params)
         req.send_request(options)
@@ -1677,8 +1677,8 @@ module Aws
       #   resp = client.delete_snapshot_copy_grant({
       #     snapshot_copy_grant_name: "String", # required
       #   })
+      # @overload delete_snapshot_copy_grant(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_snapshot_copy_grant(params = {}, options = {})
         req = build_request(:delete_snapshot_copy_grant, params)
         req.send_request(options)
@@ -1699,8 +1699,8 @@ module Aws
       #     resource_name: "String", # required
       #     tag_keys: ["String"], # required
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -1792,8 +1792,8 @@ module Aws
       #   resp.parameter_groups[0].tags #=> Array
       #   resp.parameter_groups[0].tags[0].key #=> String
       #   resp.parameter_groups[0].tags[0].value #=> String
+      # @overload describe_cluster_parameter_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_parameter_groups(params = {}, options = {})
         req = build_request(:describe_cluster_parameter_groups, params)
         req.send_request(options)
@@ -1869,8 +1869,8 @@ module Aws
       #   resp.parameters[0].is_modifiable #=> Boolean
       #   resp.parameters[0].minimum_engine_version #=> String
       #   resp.marker #=> String
+      # @overload describe_cluster_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_parameters(params = {}, options = {})
         req = build_request(:describe_cluster_parameters, params)
         req.send_request(options)
@@ -1976,8 +1976,8 @@ module Aws
       #   resp.cluster_security_groups[0].tags #=> Array
       #   resp.cluster_security_groups[0].tags[0].key #=> String
       #   resp.cluster_security_groups[0].tags[0].value #=> String
+      # @overload describe_cluster_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_security_groups(params = {}, options = {})
         req = build_request(:describe_cluster_security_groups, params)
         req.send_request(options)
@@ -2125,8 +2125,8 @@ module Aws
       #   resp.snapshots[0].tags[0].value #=> String
       #   resp.snapshots[0].restorable_node_types #=> Array
       #   resp.snapshots[0].restorable_node_types[0] #=> String
+      # @overload describe_cluster_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_snapshots(params = {}, options = {})
         req = build_request(:describe_cluster_snapshots, params)
         req.send_request(options)
@@ -2211,8 +2211,8 @@ module Aws
       #   resp.cluster_subnet_groups[0].tags #=> Array
       #   resp.cluster_subnet_groups[0].tags[0].key #=> String
       #   resp.cluster_subnet_groups[0].tags[0].value #=> String
+      # @overload describe_cluster_subnet_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_subnet_groups(params = {}, options = {})
         req = build_request(:describe_cluster_subnet_groups, params)
         req.send_request(options)
@@ -2276,8 +2276,8 @@ module Aws
       #   resp.cluster_versions[0].cluster_version #=> String
       #   resp.cluster_versions[0].cluster_parameter_group_family #=> String
       #   resp.cluster_versions[0].description #=> String
+      # @overload describe_cluster_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster_versions(params = {}, options = {})
         req = build_request(:describe_cluster_versions, params)
         req.send_request(options)
@@ -2427,8 +2427,8 @@ module Aws
       #   resp.clusters[0].iam_roles #=> Array
       #   resp.clusters[0].iam_roles[0].iam_role_arn #=> String
       #   resp.clusters[0].iam_roles[0].apply_status #=> String
+      # @overload describe_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_clusters(params = {}, options = {})
         req = build_request(:describe_clusters, params)
         req.send_request(options)
@@ -2488,8 +2488,8 @@ module Aws
       #   resp.default_cluster_parameters.parameters[0].apply_type #=> String, one of "static", "dynamic"
       #   resp.default_cluster_parameters.parameters[0].is_modifiable #=> Boolean
       #   resp.default_cluster_parameters.parameters[0].minimum_engine_version #=> String
+      # @overload describe_default_cluster_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_default_cluster_parameters(params = {}, options = {})
         req = build_request(:describe_default_cluster_parameters, params)
         req.send_request(options)
@@ -2526,8 +2526,8 @@ module Aws
       #   resp.event_categories_map_list[0].events[0].event_categories[0] #=> String
       #   resp.event_categories_map_list[0].events[0].event_description #=> String
       #   resp.event_categories_map_list[0].events[0].severity #=> String
+      # @overload describe_event_categories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_event_categories(params = {}, options = {})
         req = build_request(:describe_event_categories, params)
         req.send_request(options)
@@ -2587,8 +2587,8 @@ module Aws
       #   resp.event_subscriptions_list[0].tags #=> Array
       #   resp.event_subscriptions_list[0].tags[0].key #=> String
       #   resp.event_subscriptions_list[0].tags[0].value #=> String
+      # @overload describe_event_subscriptions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_event_subscriptions(params = {}, options = {})
         req = build_request(:describe_event_subscriptions, params)
         req.send_request(options)
@@ -2701,8 +2701,8 @@ module Aws
       #   resp.events[0].severity #=> String
       #   resp.events[0].date #=> Time
       #   resp.events[0].event_id #=> String
+      # @overload describe_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_events(params = {}, options = {})
         req = build_request(:describe_events, params)
         req.send_request(options)
@@ -2782,8 +2782,8 @@ module Aws
       #   resp.hsm_client_certificates[0].tags #=> Array
       #   resp.hsm_client_certificates[0].tags[0].key #=> String
       #   resp.hsm_client_certificates[0].tags[0].value #=> String
+      # @overload describe_hsm_client_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_hsm_client_certificates(params = {}, options = {})
         req = build_request(:describe_hsm_client_certificates, params)
         req.send_request(options)
@@ -2866,8 +2866,8 @@ module Aws
       #   resp.hsm_configurations[0].tags #=> Array
       #   resp.hsm_configurations[0].tags[0].key #=> String
       #   resp.hsm_configurations[0].tags[0].value #=> String
+      # @overload describe_hsm_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_hsm_configurations(params = {}, options = {})
         req = build_request(:describe_hsm_configurations, params)
         req.send_request(options)
@@ -2900,8 +2900,8 @@ module Aws
       #   resp.last_successful_delivery_time #=> Time
       #   resp.last_failure_time #=> Time
       #   resp.last_failure_message #=> String
+      # @overload describe_logging_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_logging_status(params = {}, options = {})
         req = build_request(:describe_logging_status, params)
         req.send_request(options)
@@ -2970,8 +2970,8 @@ module Aws
       #   resp.orderable_cluster_options[0].availability_zones #=> Array
       #   resp.orderable_cluster_options[0].availability_zones[0].name #=> String
       #   resp.marker #=> String
+      # @overload describe_orderable_cluster_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_orderable_cluster_options(params = {}, options = {})
         req = build_request(:describe_orderable_cluster_options, params)
         req.send_request(options)
@@ -3036,8 +3036,8 @@ module Aws
       #   resp.reserved_node_offerings[0].recurring_charges #=> Array
       #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_node_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload describe_reserved_node_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_node_offerings(params = {}, options = {})
         req = build_request(:describe_reserved_node_offerings, params)
         req.send_request(options)
@@ -3092,8 +3092,8 @@ module Aws
       #   resp.reserved_nodes[0].recurring_charges #=> Array
       #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_nodes[0].recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload describe_reserved_nodes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_nodes(params = {}, options = {})
         req = build_request(:describe_reserved_nodes, params)
         req.send_request(options)
@@ -3149,8 +3149,8 @@ module Aws
       #   resp.progress_in_mega_bytes #=> Integer
       #   resp.elapsed_time_in_seconds #=> Integer
       #   resp.estimated_time_to_completion_in_seconds #=> Integer
+      # @overload describe_resize(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_resize(params = {}, options = {})
         req = build_request(:describe_resize, params)
         req.send_request(options)
@@ -3225,15 +3225,15 @@ module Aws
       #   resp.snapshot_copy_grants[0].tags #=> Array
       #   resp.snapshot_copy_grants[0].tags[0].key #=> String
       #   resp.snapshot_copy_grants[0].tags[0].value #=> String
+      # @overload describe_snapshot_copy_grants(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshot_copy_grants(params = {}, options = {})
         req = build_request(:describe_snapshot_copy_grants, params)
         req.send_request(options)
       end
 
       # Lists the status of one or more table restore requests made using the
-      # RestoreTableFromClusterSnapshot API action. If you don\'t specify a
+      # RestoreTableFromClusterSnapshot API action. If you don't specify a
       # value for the `TableRestoreRequestId` parameter, then
       # `DescribeTableRestoreStatus` returns the status of all table restore
       # requests ordered by the date and time of the request in ascending
@@ -3243,7 +3243,7 @@ module Aws
       #   The Amazon Redshift cluster that the table is being restored to.
       # @option params [String] :table_restore_request_id
       #   The identifier of the table restore request to return status for. If
-      #   you don\'t specify a `TableRestoreRequestId` value, then
+      #   you don't specify a `TableRestoreRequestId` value, then
       #   `DescribeTableRestoreStatus` returns the status of all in-progress
       #   table restore requests.
       # @option params [Integer] :max_records
@@ -3286,8 +3286,8 @@ module Aws
       #   resp.table_restore_status_details[0].target_schema_name #=> String
       #   resp.table_restore_status_details[0].new_table_name #=> String
       #   resp.marker #=> String
+      # @overload describe_table_restore_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_table_restore_status(params = {}, options = {})
         req = build_request(:describe_table_restore_status, params)
         req.send_request(options)
@@ -3388,8 +3388,8 @@ module Aws
       #   resp.tagged_resources[0].resource_name #=> String
       #   resp.tagged_resources[0].resource_type #=> String
       #   resp.marker #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -3422,8 +3422,8 @@ module Aws
       #   resp.last_successful_delivery_time #=> Time
       #   resp.last_failure_time #=> Time
       #   resp.last_failure_message #=> String
+      # @overload disable_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_logging(params = {}, options = {})
         req = build_request(:disable_logging, params)
         req.send_request(options)
@@ -3519,8 +3519,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload disable_snapshot_copy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_snapshot_copy(params = {}, options = {})
         req = build_request(:disable_snapshot_copy, params)
         req.send_request(options)
@@ -3546,7 +3546,7 @@ module Aws
       #   Constraints:
       #
       #   * Cannot exceed 512 characters
-      #   * Cannot contain spaces( ), double quotes (\"), single quotes (\'), a
+      #   * Cannot contain spaces( ), double quotes ("), single quotes ('), a
       #     backslash (\\), or control characters. The hexadecimal codes for
       #     invalid characters are:
       #     * x00 to x20
@@ -3577,8 +3577,8 @@ module Aws
       #   resp.last_successful_delivery_time #=> Time
       #   resp.last_failure_time #=> Time
       #   resp.last_failure_message #=> String
+      # @overload enable_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_logging(params = {}, options = {})
         req = build_request(:enable_logging, params)
         req.send_request(options)
@@ -3691,8 +3691,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload enable_snapshot_copy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_snapshot_copy(params = {}, options = {})
         req = build_request(:enable_snapshot_copy, params)
         req.send_request(options)
@@ -3792,7 +3792,7 @@ module Aws
       #   * Must contain at least one lowercase letter.
       #   * Must contain one number.
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-      #     \' (single quote), \" (double quote), \\, /, @, or space.
+      #     ' (single quote), " (double quote), \\, /, @, or space.
       # @option params [String] :cluster_parameter_group_name
       #   The name of the cluster parameter group to apply to this cluster. This
       #   change is applied only after the cluster is rebooted. To reboot a
@@ -3980,8 +3980,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload modify_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cluster(params = {}, options = {})
         req = build_request(:modify_cluster, params)
         req.send_request(options)
@@ -4081,8 +4081,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload modify_cluster_iam_roles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cluster_iam_roles(params = {}, options = {})
         req = build_request(:modify_cluster_iam_roles, params)
         req.send_request(options)
@@ -4135,8 +4135,8 @@ module Aws
       # @example Response structure
       #   resp.parameter_group_name #=> String
       #   resp.parameter_group_status #=> String
+      # @overload modify_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cluster_parameter_group(params = {}, options = {})
         req = build_request(:modify_cluster_parameter_group, params)
         req.send_request(options)
@@ -4175,8 +4175,8 @@ module Aws
       #   resp.cluster_subnet_group.tags #=> Array
       #   resp.cluster_subnet_group.tags[0].key #=> String
       #   resp.cluster_subnet_group.tags[0].value #=> String
+      # @overload modify_cluster_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_cluster_subnet_group(params = {}, options = {})
         req = build_request(:modify_cluster_subnet_group, params)
         req.send_request(options)
@@ -4252,8 +4252,8 @@ module Aws
       #   resp.event_subscription.tags #=> Array
       #   resp.event_subscription.tags[0].key #=> String
       #   resp.event_subscription.tags[0].value #=> String
+      # @overload modify_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_event_subscription(params = {}, options = {})
         req = build_request(:modify_event_subscription, params)
         req.send_request(options)
@@ -4356,8 +4356,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload modify_snapshot_copy_retention_period(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_snapshot_copy_retention_period(params = {}, options = {})
         req = build_request(:modify_snapshot_copy_retention_period, params)
         req.send_request(options)
@@ -4408,8 +4408,8 @@ module Aws
       #   resp.reserved_node.recurring_charges #=> Array
       #   resp.reserved_node.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_node.recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload purchase_reserved_node_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_reserved_node_offering(params = {}, options = {})
         req = build_request(:purchase_reserved_node_offering, params)
         req.send_request(options)
@@ -4505,8 +4505,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload reboot_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_cluster(params = {}, options = {})
         req = build_request(:reboot_cluster, params)
         req.send_request(options)
@@ -4514,7 +4514,7 @@ module Aws
 
       # Sets one or more parameters of the specified parameter group to their
       # default values and sets the source values of the parameters to
-      # \"engine-default\". To reset the entire parameter group specify the
+      # "engine-default". To reset the entire parameter group specify the
       # *ResetAllParameters* parameter. For parameter changes to take effect
       # you must reboot any associated clusters.
       # @option params [required, String] :parameter_group_name
@@ -4557,8 +4557,8 @@ module Aws
       # @example Response structure
       #   resp.parameter_group_name #=> String
       #   resp.parameter_group_status #=> String
+      # @overload reset_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_cluster_parameter_group(params = {}, options = {})
         req = build_request(:reset_cluster_parameter_group, params)
         req.send_request(options)
@@ -4597,7 +4597,7 @@ module Aws
       #   * Must be unique for all clusters within an AWS account.
       # @option params [required, String] :snapshot_identifier
       #   The name of the snapshot from which to create the new cluster. This
-      #   parameter isn\'t case sensitive.
+      #   parameter isn't case sensitive.
       #
       #   Example: `my-snapshot-id`
       # @option params [String] :snapshot_cluster_identifier
@@ -4828,8 +4828,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload restore_from_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_from_cluster_snapshot(params = {}, options = {})
         req = build_request(:restore_from_cluster_snapshot, params)
         req.send_request(options)
@@ -4901,8 +4901,8 @@ module Aws
       #   resp.table_restore_status.target_database_name #=> String
       #   resp.table_restore_status.target_schema_name #=> String
       #   resp.table_restore_status.new_table_name #=> String
+      # @overload restore_table_from_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_table_from_cluster_snapshot(params = {}, options = {})
         req = build_request(:restore_table_from_cluster_snapshot, params)
         req.send_request(options)
@@ -4968,8 +4968,8 @@ module Aws
       #   resp.cluster_security_group.tags #=> Array
       #   resp.cluster_security_group.tags[0].key #=> String
       #   resp.cluster_security_group.tags[0].value #=> String
+      # @overload revoke_cluster_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_cluster_security_group_ingress(params = {}, options = {})
         req = build_request(:revoke_cluster_security_group_ingress, params)
         req.send_request(options)
@@ -5040,8 +5040,8 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      # @overload revoke_snapshot_access(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_snapshot_access(params = {}, options = {})
         req = build_request(:revoke_snapshot_access, params)
         req.send_request(options)
@@ -5131,8 +5131,8 @@ module Aws
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
+      # @overload rotate_encryption_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def rotate_encryption_key(params = {}, options = {})
         req = build_request(:rotate_encryption_key, params)
         req.send_request(options)

@@ -163,8 +163,8 @@ module Aws
       #
       # @example Response structure
       #   resp.availability #=> String, one of "AVAILABLE", "AVAILABLE_RESERVED", "AVAILABLE_PREORDER", "UNAVAILABLE", "UNAVAILABLE_PREMIUM", "UNAVAILABLE_RESTRICTED", "RESERVED", "DONT_KNOW"
+      # @overload check_domain_availability(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def check_domain_availability(params = {}, options = {})
         req = build_request(:check_domain_availability, params)
         req.send_request(options)
@@ -200,7 +200,7 @@ module Aws
       #
       #   Required: No
       #
-      #   \'>
+      #   '>
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -208,8 +208,8 @@ module Aws
       #     domain_name: "DomainName", # required
       #     tags_to_delete: ["TagKey"], # required
       #   })
+      # @overload delete_tags_for_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags_for_domain(params = {}, options = {})
         req = build_request(:delete_tags_for_domain, params)
         req.send_request(options)
@@ -224,8 +224,8 @@ module Aws
       #   resp = client.disable_domain_auto_renew({
       #     domain_name: "DomainName", # required
       #   })
+      # @overload disable_domain_auto_renew(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_domain_auto_renew(params = {}, options = {})
         req = build_request(:disable_domain_auto_renew, params)
         req.send_request(options)
@@ -261,8 +261,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload disable_domain_transfer_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_domain_transfer_lock(params = {}, options = {})
         req = build_request(:disable_domain_transfer_lock, params)
         req.send_request(options)
@@ -273,8 +273,8 @@ module Aws
       # renewing your domain registration is billed to your AWS account.
       #
       # The period during which you can renew a domain name varies by TLD. For
-      # a list of TLDs and their renewal policies, see [\"Renewal,
-      # restoration, and deletion times\"][1] on the website for our registrar
+      # a list of TLDs and their renewal policies, see ["Renewal,
+      # restoration, and deletion times"][1] on the website for our registrar
       # partner, Gandi. Route 53 requires that you renew before the end of the
       # renewal period that is listed on the Gandi website so we can complete
       # processing before the deadline.
@@ -289,8 +289,8 @@ module Aws
       #   resp = client.enable_domain_auto_renew({
       #     domain_name: "DomainName", # required
       #   })
+      # @overload enable_domain_auto_renew(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_domain_auto_renew(params = {}, options = {})
         req = build_request(:enable_domain_auto_renew, params)
         req.send_request(options)
@@ -325,8 +325,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload enable_domain_transfer_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_domain_transfer_lock(params = {}, options = {})
         req = build_request(:enable_domain_transfer_lock, params)
         req.send_request(options)
@@ -361,15 +361,15 @@ module Aws
       # @example Response structure
       #   resp.domain_name #=> String
       #   resp.status #=> String, one of "PENDING", "DONE", "EXPIRED"
+      # @overload get_contact_reachability_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_contact_reachability_status(params = {}, options = {})
         req = build_request(:get_contact_reachability_status, params)
         req.send_request(options)
       end
 
       # This operation returns detailed information about the domain. The
-      # domain\'s contact information is also returned as part of the output.
+      # domain's contact information is also returned as part of the output.
       # @option params [required, String] :domain_name
       #   The name of a domain.
       #
@@ -482,8 +482,8 @@ module Aws
       #   resp.dns_sec #=> String
       #   resp.status_list #=> Array
       #   resp.status_list[0] #=> String
+      # @overload get_domain_detail(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_domain_detail(params = {}, options = {})
         req = build_request(:get_domain_detail, params)
         req.send_request(options)
@@ -522,8 +522,8 @@ module Aws
       #   resp.suggestions_list #=> Array
       #   resp.suggestions_list[0].domain_name #=> String
       #   resp.suggestions_list[0].availability #=> String
+      # @overload get_domain_suggestions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_domain_suggestions(params = {}, options = {})
         req = build_request(:get_domain_suggestions, params)
         req.send_request(options)
@@ -562,8 +562,8 @@ module Aws
       #   resp.domain_name #=> String
       #   resp.type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
       #   resp.submitted_date #=> Time
+      # @overload get_operation_detail(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_operation_detail(params = {}, options = {})
         req = build_request(:get_operation_detail, params)
         req.send_request(options)
@@ -616,8 +616,8 @@ module Aws
       #   resp.domains[0].transfer_lock #=> Boolean
       #   resp.domains[0].expiry #=> Time
       #   resp.next_page_marker #=> String
+      # @overload list_domains(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_domains(params = {}, options = {})
         req = build_request(:list_domains, params)
         req.send_request(options)
@@ -666,8 +666,8 @@ module Aws
       #   resp.operations[0].type #=> String, one of "REGISTER_DOMAIN", "DELETE_DOMAIN", "TRANSFER_IN_DOMAIN", "UPDATE_DOMAIN_CONTACT", "UPDATE_NAMESERVER", "CHANGE_PRIVACY_PROTECTION", "DOMAIN_LOCK"
       #   resp.operations[0].submitted_date #=> Time
       #   resp.next_page_marker #=> String
+      # @overload list_operations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_operations(params = {}, options = {})
         req = build_request(:list_operations, params)
         req.send_request(options)
@@ -693,8 +693,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_domain(params = {}, options = {})
         req = build_request(:list_tags_for_domain, params)
         req.send_request(options)
@@ -711,7 +711,7 @@ module Aws
       #   zone and automatically updates your domain registration with the
       #   names of these name servers.
       # * Enables autorenew, so your domain registration will renew
-      #   automatically each year. We\'ll notify you in advance of the renewal
+      #   automatically each year. We'll notify you in advance of the renewal
       #   date so you can choose whether to renew the registration.
       # * Optionally enables privacy protection, so WHOIS queries return
       #   contact information for our registrar partner, Gandi, instead of the
@@ -796,7 +796,7 @@ module Aws
       #   Required: Yes
       # @option params [Boolean] :privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -809,7 +809,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -822,7 +822,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -913,8 +913,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload register_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_domain(params = {}, options = {})
         req = build_request(:register_domain, params)
         req.send_request(options)
@@ -925,7 +925,7 @@ module Aws
       #
       # We recommend that you renew your domain several weeks before the
       # expiration date. Some TLD registries delete domains before the
-      # expiration date if you haven\'t renewed far enough in advance. For
+      # expiration date if you haven't renewed far enough in advance. For
       # more information about renewing domain registration, see [Renewing
       # Registration for a Domain][1] in the Amazon Route 53 documentation.
       #
@@ -974,8 +974,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload renew_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def renew_domain(params = {}, options = {})
         req = build_request(:renew_domain, params)
         req.send_request(options)
@@ -1009,8 +1009,8 @@ module Aws
       #   resp.domain_name #=> String
       #   resp.email_address #=> String
       #   resp.is_already_verified #=> Boolean
+      # @overload resend_contact_reachability_email(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resend_contact_reachability_email(params = {}, options = {})
         req = build_request(:resend_contact_reachability_email, params)
         req.send_request(options)
@@ -1042,8 +1042,8 @@ module Aws
       #
       # @example Response structure
       #   resp.auth_code #=> String
+      # @overload retrieve_domain_auth_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retrieve_domain_auth_code(params = {}, options = {})
         req = build_request(:retrieve_domain_auth_code, params)
         req.send_request(options)
@@ -1070,7 +1070,7 @@ module Aws
       #
       # If the transfer is successful, this method returns an operation ID
       # that you can use to track the progress and completion of the action.
-      # If the transfer doesn\'t complete successfully, the domain registrant
+      # If the transfer doesn't complete successfully, the domain registrant
       # will be notified by email.
       #
       #
@@ -1161,7 +1161,7 @@ module Aws
       #   Required: Yes
       # @option params [Boolean] :privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1174,7 +1174,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1187,7 +1187,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1285,8 +1285,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload transfer_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def transfer_domain(params = {}, options = {})
         req = build_request(:transfer_domain, params)
         req.send_request(options)
@@ -1416,14 +1416,14 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload update_domain_contact(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_domain_contact(params = {}, options = {})
         req = build_request(:update_domain_contact, params)
         req.send_request(options)
       end
 
-      # This operation updates the specified domain contact\'s privacy
+      # This operation updates the specified domain contact's privacy
       # setting. When the privacy option is enabled, personal information such
       # as postal or email address is hidden from the results of a public
       # WHOIS query. The privacy services are provided by the AWS registrar,
@@ -1452,7 +1452,7 @@ module Aws
       #   Required: Yes
       # @option params [Boolean] :admin_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1465,7 +1465,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :registrant_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1478,7 +1478,7 @@ module Aws
       #   Required: No
       # @option params [Boolean] :tech_privacy
       #   Whether you want to conceal contact information from WHOIS queries. If
-      #   you specify true, WHOIS (\"who is\") queries will return contact
+      #   you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1503,8 +1503,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload update_domain_contact_privacy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_domain_contact_privacy(params = {}, options = {})
         req = build_request(:update_domain_contact_privacy, params)
         req.send_request(options)
@@ -1559,8 +1559,8 @@ module Aws
       #
       # @example Response structure
       #   resp.operation_id #=> String
+      # @overload update_domain_nameservers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_domain_nameservers(params = {}, options = {})
         req = build_request(:update_domain_nameservers, params)
         req.send_request(options)
@@ -1597,7 +1597,7 @@ module Aws
       #
       #   Required: No
       #
-      #   \'> Each tag includes the following elements:
+      #   '> Each tag includes the following elements:
       #
       #   * Key
       #
@@ -1608,7 +1608,7 @@ module Aws
       #     Default: None
       #
       #     Valid values: Unicode characters including alphanumeric, space, and
-      #     \".:/=+\\-@\"
+      #     ".:/=+\\-@"
       #
       #     Constraints: Each key can be 1-128 characters long.
       #
@@ -1623,7 +1623,7 @@ module Aws
       #     Default: None
       #
       #     Valid values: Unicode characters including alphanumeric, space, and
-      #     \".:/=+\\-@\"
+      #     ".:/=+\\-@"
       #
       #     Constraints: Each value can be 0-256 characters long.
       #
@@ -1640,8 +1640,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload update_tags_for_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_tags_for_domain(params = {}, options = {})
         req = build_request(:update_tags_for_domain, params)
         req.send_request(options)
@@ -1715,8 +1715,8 @@ module Aws
       #   resp.billing_records[0].invoice_id #=> String
       #   resp.billing_records[0].bill_date #=> Time
       #   resp.billing_records[0].price #=> Float
+      # @overload view_billing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def view_billing(params = {}, options = {})
         req = build_request(:view_billing, params)
         req.send_request(options)

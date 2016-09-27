@@ -57,7 +57,7 @@ module Aws
       end
 
       # The `ChangeSetSummary` structure describes a change set, its status,
-      # and the stack with which it\'s associated.
+      # and the stack with which it's associated.
       # @!attribute [rw] stack_id
       #   The ID of the stack with which the change set is associated.
       #   @return [String]
@@ -88,7 +88,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status_reason
-      #   A description of the change set\'s status. For example, if your
+      #   A description of the change set's status. For example, if your
       #   change set is in the `FAILED` state, AWS CloudFormation shows the
       #   error message.
       #   @return [String]
@@ -164,7 +164,7 @@ module Aws
       # @!attribute [rw] stack_name
       #   The name or the unique ID of the stack for which you are creating a
       #   change set. AWS CloudFormation generates the change set by comparing
-      #   this stack\'s information with the information that you submit, such
+      #   this stack's information with the information that you submit, such
       #   as a modified template or different parameter input values.
       #   @return [String]
       #
@@ -221,7 +221,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -244,8 +244,8 @@ module Aws
       #   if you execute this change set, such as `AWS::EC2::Instance`,
       #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
       #
-      #   If the list of resource types doesn\'t include a resource type that
-      #   you\'re updating, the stack update fails. By default, AWS
+      #   If the list of resource types doesn't include a resource type that
+      #   you're updating, the stack update fails. By default, AWS
       #   CloudFormation grants permissions to all resource types. AWS
       #   Identity and Access Management (IAM) uses this parameter for
       #   condition keys in IAM policies for AWS CloudFormation. For more
@@ -282,7 +282,7 @@ module Aws
       # @!attribute [rw] client_token
       #   A unique identifier for this `CreateChangeSet` request. Specify this
       #   token if you plan to retry requests so that AWS CloudFormation knows
-      #   that you\'re not attempting to create another change set with the
+      #   that you're not attempting to create another change set with the
       #   same name. You might retry `CreateChangeSet` requests to ensure that
       #   AWS CloudFormation successfully received them.
       #   @return [String]
@@ -436,7 +436,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -465,8 +465,8 @@ module Aws
       #   service), and `AWS::service_name::resource_logical_ID ` (for a
       #   specific AWS resource).
       #
-      #   If the list of resource types doesn\'t include a resource that
-      #   you\'re creating, the stack creation fails. By default, AWS
+      #   If the list of resource types doesn't include a resource that
+      #   you're creating, the stack creation fails. By default, AWS
       #   CloudFormation grants permissions to all resource types. AWS
       #   Identity and Access Management (IAM) uses this parameter for AWS
       #   CloudFormation-specific condition keys in IAM policies. For more
@@ -700,7 +700,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status_reason
-      #   A description of the change set\'s status. For example, if your
+      #   A description of the change set's status. For example, if your
       #   attempt to create a change set failed, AWS CloudFormation shows the
       #   error message.
       #   @return [String]
@@ -761,7 +761,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -807,7 +807,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -849,7 +849,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -909,7 +909,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -1073,7 +1073,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -1139,7 +1139,7 @@ module Aws
       # @!attribute [rw] stack_name
       #   The name or the stack ID that is associated with the stack, which
       #   are not always interchangeable. For running stacks, you can specify
-      #   either the stack\'s name or its unique stack ID. For deleted stack,
+      #   either the stack's name or its unique stack ID. For deleted stack,
       #   you must specify the unique stack ID.
       #
       #   Conditional: You must specify only one of the following parameters:
@@ -1260,7 +1260,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -1365,7 +1365,7 @@ module Aws
       #         use_previous_value: false,
       #       }
       # @!attribute [rw] parameter_key
-      #   The key associated with the parameter. If you don\'t specify a key
+      #   The key associated with the parameter. If you don't specify a key
       #   and value for a particular parameter, AWS CloudFormation uses the
       #   default value that is specified in your template.
       #   @return [String]
@@ -1444,13 +1444,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] logical_resource_id
-      #   The resource\'s logical ID, which is defined in the stack\'s
+      #   The resource's logical ID, which is defined in the stack's
       #   template.
       #   @return [String]
       #
       # @!attribute [rw] physical_resource_id
-      #   The resource\'s physical ID (resource name). Resources that you are
-      #   adding don\'t have physical IDs because they haven\'t been created.
+      #   The resource's physical ID (resource name). Resources that you are
+      #   adding don't have physical IDs because they haven't been created.
       #   @return [String]
       #
       # @!attribute [rw] resource_type
@@ -1476,7 +1476,7 @@ module Aws
       # @!attribute [rw] scope
       #   For the `Modify` action, indicates which resource attribute is
       #   triggering this update, such as a change in the resource
-      #   attribute\'s `Metadata`, `Properties`, or `Tags`.
+      #   attribute's `Metadata`, `Properties`, or `Tags`.
       #   @return [Array<String>]
       #
       # @!attribute [rw] details
@@ -1548,8 +1548,8 @@ module Aws
       #     types, which are also known as nested stacks. If you made no
       #     changes to the `AWS::CloudFormation::Stack` resource, AWS
       #     CloudFormation sets the `ChangeSource` to `Automatic` because the
-      #     nested stack\'s template might have changed. Changes to a nested
-      #     stack\'s template aren\'t visible to AWS CloudFormation until you
+      #     nested stack's template might have changed. Changes to a nested
+      #     stack's template aren't visible to AWS CloudFormation until you
       #     run an update on the parent stack.
       #   @return [String]
       #
@@ -1572,10 +1572,10 @@ module Aws
       end
 
       # The field that AWS CloudFormation will change, such as the name of a
-      # resource\'s property, and whether the resource will be recreated.
+      # resource's property, and whether the resource will be recreated.
       # @!attribute [rw] attribute
       #   Indicates which resource attribute is triggering this update, such
-      #   as a change in the resource attribute\'s `Metadata`, `Properties`,
+      #   as a change in the resource attribute's `Metadata`, `Properties`,
       #   or `Tags`.
       #   @return [String]
       #
@@ -2195,7 +2195,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -2218,8 +2218,8 @@ module Aws
       #   for this update stack action, such as `AWS::EC2::Instance`,
       #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
       #
-      #   If the list of resource types doesn\'t include a resource that
-      #   you\'re updating, the stack update fails. By default, AWS
+      #   If the list of resource types doesn't include a resource that
+      #   you're updating, the stack update fails. By default, AWS
       #   CloudFormation grants permissions to all resource types. AWS
       #   Identity and Access Management (IAM) uses this parameter for AWS
       #   CloudFormation-specific condition keys in IAM policies. For more
@@ -2265,8 +2265,8 @@ module Aws
       #   also propagates these tags to supported resources in the stack. You
       #   can specify a maximum number of 10 tags.
       #
-      #   If you don\'t specify this parameter, AWS CloudFormation doesn\'t
-      #   modify the stack\'s tags. If you specify an empty value, AWS
+      #   If you don't specify this parameter, AWS CloudFormation doesn't
+      #   modify the stack's tags. If you specify an empty value, AWS
       #   CloudFormation removes all associated tags.
       #   @return [Array<Types::Tag>]
       class UpdateStackInput < Struct.new(

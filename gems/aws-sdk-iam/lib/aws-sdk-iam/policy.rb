@@ -228,7 +228,7 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option options [Boolean] :set_as_default
-      #   Specifies whether to set this version as the policy\'s default
+      #   Specifies whether to set this version as the policy's default
       #   version.
       #
       #   When this parameter is `true`, the new policy version becomes the

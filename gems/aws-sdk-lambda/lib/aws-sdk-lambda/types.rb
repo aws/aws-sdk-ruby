@@ -63,23 +63,21 @@ module Aws
       #   Resource Name (ARN) as its value. This ensures that only events
       #   generated from the specified source can invoke the function.
       #
-      #   <important markdown="1">If you add a permission for the Amazon S3 principal without
+      #   If you add a permission for the Amazon S3 principal without
       #   providing the source ARN, any AWS account that creates a mapping to
       #   your function ARN can send events to invoke your Lambda function
       #   from Amazon S3.
-      #
-      #    </important>
       #   @return [String]
       #
       # @!attribute [rw] source_account
       #   This parameter is used for S3 and SES only. The AWS account ID
       #   (without a hyphen) of the source owner. For example, if the
-      #   `SourceArn` identifies a bucket, then this is the bucket owner\'s
+      #   `SourceArn` identifies a bucket, then this is the bucket owner's
       #   account ID. You can use this additional condition to ensure the
       #   bucket you specify is owned by a specific account (it is possible
       #   the bucket owner deleted the bucket and some other AWS account
       #   created the bucket). You can also use this condition to specify all
-      #   sources (that is, you don\'t specify the `SourceArn`) owned by a
+      #   sources (that is, you don't specify the `SourceArn`) owned by a
       #   specific account.
       #   @return [String]
       #
@@ -122,7 +120,7 @@ module Aws
 
       # @!attribute [rw] statement
       #   The permission statement you specified in the request. The response
-      #   returns the same as a string using a backslash (\"\\\") as an escape
+      #   returns the same as a string using a backslash ("\\") as an escape
       #   character in the JSON.
       #   @return [String]
       class AddPermissionResponse < Struct.new(
@@ -296,8 +294,8 @@ module Aws
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function you are uploading.
       #
-      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
-      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
+      #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
+      #   use earlier runtime (v0.10.42), set the value to "nodejs".
       #   @return [String]
       #
       # @!attribute [rw] role
@@ -444,7 +442,7 @@ module Aws
       #   this parameter. You cannot delete a function version using its
       #   alias.
       #
-      #   If you don\'t specify this parameter, AWS Lambda will delete the
+      #   If you don't specify this parameter, AWS Lambda will delete the
       #   function, including all of its versions and aliases.
       #   @return [String]
       class DeleteFunctionRequest < Struct.new(
@@ -559,7 +557,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] location
-      #   The presigned URL you can use to download the function\'s .zip file
+      #   The presigned URL you can use to download the function's .zip file
       #   that you previously uploaded. The URL is valid for up to 10 minutes.
       #   @return [String]
       class FunctionCodeLocation < Struct.new(
@@ -580,8 +578,8 @@ module Aws
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function.
       #
-      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
-      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
+      #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
+      #   use earlier runtime (v0.10.42), set the value to "nodejs".
       #   @return [String]
       #
       # @!attribute [rw] role
@@ -710,7 +708,7 @@ module Aws
       #   alias ARN and returns information about the function version to
       #   which the alias points.
       #
-      #   If you don\'t specify this parameter, the API uses unqualified
+      #   If you don't specify this parameter, the API uses unqualified
       #   function ARN, and returns information about the `$LATEST` function
       #   version.
       #   @return [String]
@@ -745,7 +743,7 @@ module Aws
       #   function ARN for the request and returns information about the
       #   specific Lambda function version. If you specify an alias name, the
       #   API uses the alias ARN and returns information about the function
-      #   version to which the alias points. If you don\'t provide this
+      #   version to which the alias points. If you don't provide this
       #   parameter, the API uses unqualified function ARN and returns
       #   information about the `$LATEST` version of the Lambda function.
       #   @return [String]
@@ -796,7 +794,7 @@ module Aws
       #   You can specify this optional query parameter to specify a function
       #   version or an alias name in which case this API will return all
       #   permissions associated with the specific qualified ARN. If you
-      #   don\'t provide this parameter, the API will return permissions that
+      #   don't provide this parameter, the API will return permissions that
       #   apply to the unqualified function ARN.
       #   @return [String]
       class GetPolicyRequest < Struct.new(
@@ -807,7 +805,7 @@ module Aws
 
       # @!attribute [rw] policy
       #   The resource policy associated with the specified function. The
-      #   response returns the same as a string using a backslash (\"\\\") as
+      #   response returns the same as a string using a backslash ("\\") as
       #   an escape character in the JSON.
       #   @return [String]
       class GetPolicyResponse < Struct.new(
@@ -884,7 +882,7 @@ module Aws
       #   function. If you specify an alias name, the API uses the alias ARN
       #   to invoke the Lambda function version to which the alias points.
       #
-      #   If you don\'t provide this parameter, then the API uses unqualified
+      #   If you don't provide this parameter, then the API uses unqualified
       #   function ARN which results in invocation of the `$LATEST` version.
       #   @return [String]
       class InvocationRequest < Struct.new(
@@ -1241,7 +1239,7 @@ module Aws
       # @!attribute [rw] qualifier
       #   You can specify this optional parameter to remove permission
       #   associated with a specific function version or function alias. If
-      #   you don\'t specify this parameter, the API removes permission
+      #   you don't specify this parameter, the API removes permission
       #   associated with the unqualified function ARN.
       #   @return [String]
       class RemovePermissionRequest < Struct.new(
@@ -1472,8 +1470,8 @@ module Aws
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function.
       #
-      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
-      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
+      #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
+      #   use earlier runtime (v0.10.42), set the value to "nodejs".
       #   @return [String]
       class UpdateFunctionConfigurationRequest < Struct.new(
         :function_name,

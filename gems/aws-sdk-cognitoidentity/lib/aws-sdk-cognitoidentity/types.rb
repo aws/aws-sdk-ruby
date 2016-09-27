@@ -65,7 +65,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users. This name
+      #   The "domain" by which Cognito will refer to your users. This name
       #   acts as a placeholder that allows your backend and the Cognito
       #   service to communicate about the developer provider. For the
       #   `DeveloperProviderName`, you can use letters as well as period
@@ -343,7 +343,7 @@ module Aws
       #   public provider or developer provider. If the user is from a
       #   developer provider, the name-value pair will follow the syntax
       #   `"developer_provider_name": "developer_user_identifier"`. The
-      #   developer provider is the \"domain\" by which Cognito will refer to
+      #   developer provider is the "domain" by which Cognito will refer to
       #   your users; you provided this domain while creating/updating the
       #   identity pool. The developer user identifier is an identifier from
       #   your backend that uniquely identifies a user. When you create an
@@ -353,13 +353,13 @@ module Aws
       # @!attribute [rw] token_duration
       #   The expiration time of the token, in seconds. You can specify a
       #   custom expiration time for the token so that you can cache it. If
-      #   you don\'t provide an expiration time, the token is valid for 15
+      #   you don't provide an expiration time, the token is valid for 15
       #   minutes. You can exchange the token with Amazon STS for temporary
       #   AWS credentials, which are valid for a maximum of one hour. The
       #   maximum token duration you can set is 24 hours. You should take care
       #   in setting the expiration time for a token, as there are significant
       #   security implications: an attacker could use a leaked token to
-      #   access your AWS resources for the token\'s duration.
+      #   access your AWS resources for the token's duration.
       #   @return [Integer]
       class GetOpenIdTokenForDeveloperIdentityInput < Struct.new(
         :identity_pool_id,
@@ -401,7 +401,7 @@ module Aws
       # @!attribute [rw] logins
       #   A set of optional name-value pairs that map provider names to
       #   provider tokens. When using graph.facebook.com and www.amazon.com,
-      #   supply the access\_token returned from the provider\'s authflow. For
+      #   supply the access\_token returned from the provider's authflow. For
       #   accounts.google.com or any other OpenId Connect provider, always
       #   include the id\_token.
       #   @return [Hash<String,String>]
@@ -489,7 +489,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users.
+      #   The "domain" by which Cognito will refer to your users.
       #   @return [String]
       #
       # @!attribute [rw] open_id_connect_provider_arns
@@ -652,7 +652,7 @@ module Aws
       # @!attribute [rw] next_token
       #   A pagination token. The first call you make will have `NextToken`
       #   set to null. After that the service will return `NextToken` values
-      #   as needed. For example, let\'s say you make a request with
+      #   as needed. For example, let's say you make a request with
       #   `MaxResults` set to 10, and there are 20 matches in the database.
       #   The service will return a pagination token as a part of the
       #   response. This token can be used to call the API again and get
@@ -681,7 +681,7 @@ module Aws
       # @!attribute [rw] next_token
       #   A pagination token. The first call you make will have `NextToken`
       #   set to null. After that the service will return `NextToken` values
-      #   as needed. For example, let\'s say you make a request with
+      #   as needed. For example, let's say you make a request with
       #   `MaxResults` set to 10, and there are 20 matches in the database.
       #   The service will return a pagination token as a part of the
       #   response. This token can be used to call the API again and get
@@ -715,7 +715,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users. This is a
+      #   The "domain" by which Cognito will refer to your users. This is a
       #   (pseudo) domain name that you provide while creating an identity
       #   pool. This name acts as a placeholder that allows your backend and
       #   the Cognito service to communicate about the developer provider. For
@@ -760,7 +760,7 @@ module Aws
       #
       # @!attribute [rw] roles
       #   The map of roles associated with this pool. For a given role, the
-      #   key will be either \"authenticated\" or \"unauthenticated\" and the
+      #   key will be either "authenticated" or "unauthenticated" and the
       #   value will be the Role ARN.
       #   @return [Hash<String,String>]
       class SetIdentityPoolRolesInput < Struct.new(
@@ -788,7 +788,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] developer_provider_name
-      #   The \"domain\" by which Cognito will refer to your users.
+      #   The "domain" by which Cognito will refer to your users.
       #   @return [String]
       #
       # @!attribute [rw] developer_user_identifier

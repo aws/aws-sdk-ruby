@@ -171,8 +171,8 @@ module Aws
       #   resp.vpc_peering_connection.tags[0].key #=> String
       #   resp.vpc_peering_connection.tags[0].value #=> String
       #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
+      # @overload accept_vpc_peering_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def accept_vpc_peering_connection(params = {}, options = {})
         req = build_request(:accept_vpc_peering_connection, params)
         req.send_request(options)
@@ -212,8 +212,8 @@ module Aws
       #   resp.public_ip #=> String
       #   resp.domain #=> String, one of "vpc", "standard"
       #   resp.allocation_id #=> String
+      # @overload allocate_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def allocate_address(params = {}, options = {})
         req = build_request(:allocate_address, params)
         req.send_request(options)
@@ -261,8 +261,8 @@ module Aws
       # @example Response structure
       #   resp.host_ids #=> Array
       #   resp.host_ids[0] #=> String
+      # @overload allocate_hosts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def allocate_hosts(params = {}, options = {})
         req = build_request(:allocate_hosts, params)
         req.send_request(options)
@@ -271,7 +271,7 @@ module Aws
       # Assigns one or more secondary private IP addresses to the specified
       # network interface. You can specify one or more specific secondary IP
       # addresses, or you can specify the number of secondary IP addresses to
-      # be automatically assigned within the subnet\'s CIDR block range. The
+      # be automatically assigned within the subnet's CIDR block range. The
       # number of secondary IP addresses that you can assign to an instance
       # varies by instance type. For information about instance types, see
       # [Instance Types][1] in the *Amazon Elastic Compute Cloud User Guide*.
@@ -288,14 +288,14 @@ module Aws
       #   The ID of the network interface.
       # @option params [Array<String>] :private_ip_addresses
       #   One or more IP addresses to be assigned as a secondary private IP
-      #   address to the network interface. You can\'t specify this parameter
+      #   address to the network interface. You can't specify this parameter
       #   when also specifying a number of secondary IP addresses.
       #
-      #   If you don\'t specify an IP address, Amazon EC2 automatically selects
+      #   If you don't specify an IP address, Amazon EC2 automatically selects
       #   an IP address within the subnet range.
       # @option params [Integer] :secondary_private_ip_address_count
       #   The number of secondary IP addresses to assign to the network
-      #   interface. You can\'t specify this parameter when also specifying
+      #   interface. You can't specify this parameter when also specifying
       #   private IP addresses.
       # @option params [Boolean] :allow_reassignment
       #   Indicates whether to allow an IP address that is already assigned to
@@ -310,8 +310,8 @@ module Aws
       #     secondary_private_ip_address_count: 1,
       #     allow_reassignment: false,
       #   })
+      # @overload assign_private_ip_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def assign_private_ip_addresses(params = {}, options = {})
         req = build_request(:assign_private_ip_addresses, params)
         req.send_request(options)
@@ -329,14 +329,14 @@ module Aws
       # disassociated from that instance and associated with the specified
       # instance.
       #
-      # \[VPC in an EC2-Classic account\] If you don\'t specify a private IP
+      # \[VPC in an EC2-Classic account\] If you don't specify a private IP
       # address, the Elastic IP address is associated with the primary IP
       # address. If the Elastic IP address is already associated with a
       # different instance or a network interface, you get an error unless you
       # allow reassociation.
       #
       # This is an idempotent operation. If you perform the operation more
-      # than once, Amazon EC2 doesn\'t return an error.
+      # than once, Amazon EC2 doesn't return an error.
       #
       #
       #
@@ -388,19 +388,19 @@ module Aws
       #
       # @example Response structure
       #   resp.association_id #=> String
+      # @overload associate_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def associate_address(params = {}, options = {})
         req = build_request(:associate_address, params)
         req.send_request(options)
       end
 
-      # Associates a set of DHCP options (that you\'ve previously created)
+      # Associates a set of DHCP options (that you've previously created)
       # with the specified VPC, or associates no DHCP options with the VPC.
       #
       # After you associate the options with the VPC, any existing instances
       # and all new instances that you launch in that VPC use the options. You
-      # don\'t need to restart or relaunch the instances. They automatically
+      # don't need to restart or relaunch the instances. They automatically
       # pick up the changes within a few hours, depending on how frequently
       # the instance renews its DHCP lease. You can explicitly renew the lease
       # using the operating system on the instance.
@@ -429,8 +429,8 @@ module Aws
       #     dhcp_options_id: "String", # required
       #     vpc_id: "String", # required
       #   })
+      # @overload associate_dhcp_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def associate_dhcp_options(params = {}, options = {})
         req = build_request(:associate_dhcp_options, params)
         req.send_request(options)
@@ -471,21 +471,21 @@ module Aws
       #
       # @example Response structure
       #   resp.association_id #=> String
+      # @overload associate_route_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def associate_route_table(params = {}, options = {})
         req = build_request(:associate_route_table, params)
         req.send_request(options)
       end
 
       # Links an EC2-Classic instance to a ClassicLink-enabled VPC through one
-      # or more of the VPC\'s security groups. You cannot link an EC2-Classic
+      # or more of the VPC's security groups. You cannot link an EC2-Classic
       # instance to more than one VPC at a time. You can only link an instance
-      # that\'s in the `running` state. An instance is automatically unlinked
-      # from a VPC when it\'s stopped - you can link it to the VPC again when
+      # that's in the `running` state. An instance is automatically unlinked
+      # from a VPC when it's stopped - you can link it to the VPC again when
       # you restart it.
       #
-      # After you\'ve linked an instance, you cannot change the VPC security
+      # After you've linked an instance, you cannot change the VPC security
       # groups that are associated with it. To change the security groups, you
       # must first unlink the instance, and then link it again.
       #
@@ -502,7 +502,7 @@ module Aws
       # @option params [required, String] :vpc_id
       #   The ID of a ClassicLink-enabled VPC.
       # @option params [required, Array<String>] :groups
-      #   The ID of one or more of the VPC\'s security groups. You cannot
+      #   The ID of one or more of the VPC's security groups. You cannot
       #   specify security groups from a different VPC.
       # @return [Types::AttachClassicLinkVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -518,8 +518,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload attach_classic_link_vpc(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_classic_link_vpc(params = {}, options = {})
         req = build_request(:attach_classic_link_vpc, params)
         req.send_request(options)
@@ -550,8 +550,8 @@ module Aws
       #     internet_gateway_id: "String", # required
       #     vpc_id: "String", # required
       #   })
+      # @overload attach_internet_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_internet_gateway(params = {}, options = {})
         req = build_request(:attach_internet_gateway, params)
         req.send_request(options)
@@ -583,8 +583,8 @@ module Aws
       #
       # @example Response structure
       #   resp.attachment_id #=> String
+      # @overload attach_network_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_network_interface(params = {}, options = {})
         req = build_request(:attach_network_interface, params)
         req.send_request(options)
@@ -598,7 +598,7 @@ module Aws
       # Encryption][1] in the *Amazon Elastic Compute Cloud User Guide*.
       #
       # For a list of supported device names, see [Attaching an EBS Volume to
-      # an Instance][2]. Any device names that aren\'t reserved for instance
+      # an Instance][2]. Any device names that aren't reserved for instance
       # store volumes can be used for EBS volumes. For more information, see
       # [Amazon EC2 Instance Store][3] in the *Amazon Elastic Compute Cloud
       # User Guide*.
@@ -613,7 +613,7 @@ module Aws
       # * You must be subscribed to the product.
       #
       # * The instance type and operating system of the instance must support
-      #   the product. For example, you can\'t detach a volume from a Windows
+      #   the product. For example, you can't detach a volume from a Windows
       #   instance and attach it to a Linux instance.
       #
       # For an overview of the AWS Marketplace, see [Introducing AWS
@@ -665,8 +665,8 @@ module Aws
       #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached"
       #   resp.attach_time #=> Time
       #   resp.delete_on_termination #=> Boolean
+      # @overload attach_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_volume(params = {}, options = {})
         req = build_request(:attach_volume, params)
         req.send_request(options)
@@ -702,8 +702,8 @@ module Aws
       # @example Response structure
       #   resp.vpc_attachment.vpc_id #=> String
       #   resp.vpc_attachment.state #=> String, one of "attaching", "attached", "detaching", "detached"
+      # @overload attach_vpn_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_vpn_gateway(params = {}, options = {})
         req = build_request(:attach_vpn_gateway, params)
         req.send_request(options)
@@ -713,14 +713,12 @@ module Aws
       # use with a VPC. Specifically, this action permits instances to send
       # traffic to one or more destination CIDR IP address ranges, or to one
       # or more destination security groups for the same VPC. This action
-      # doesn\'t apply to security groups for use in EC2-Classic. For more
+      # doesn't apply to security groups for use in EC2-Classic. For more
       # information, see [Security Groups for Your VPC][1] in the *Amazon
       # Virtual Private Cloud User Guide*.
       #
-      # <important markdown="1"> You can have up to 50 rules per security group (covering both ingress
+      # You can have up to 50 rules per security group (covering both ingress
       # and egress rules).
-      #
-      #  </important>
       #
       # Each rule consists of the protocol (for example, TCP), plus either a
       # CIDR range or a source group. For the TCP and UDP protocols, you must
@@ -764,7 +762,7 @@ module Aws
       #   The CIDR IP address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option params [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -806,8 +804,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload authorize_security_group_egress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_security_group_egress(params = {}, options = {})
         req = build_request(:authorize_security_group_egress, params)
         req.send_request(options)
@@ -815,12 +813,10 @@ module Aws
 
       # Adds one or more ingress rules to a security group.
       #
-      # <important markdown="1"> EC2-Classic: You can have up to 100 rules per group.
+      # EC2-Classic: You can have up to 100 rules per group.
       #
       #  EC2-VPC: You can have up to 50 rules per group (covering both ingress
       # and egress rules).
-      #
-      #  </important>
       #
       # Rule changes are propagated to instances within the security group as
       # quickly as possible. However, a small delay might occur.
@@ -847,7 +843,7 @@ module Aws
       #   The ID of the security group. Required for a nondefault VPC.
       # @option params [String] :source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. Creates rules that
       #   grant full ICMP, UDP, and TCP access. To create a rule with a specific
@@ -855,7 +851,7 @@ module Aws
       #   EC2-VPC, the source security group must be in the same VPC.
       # @option params [String] :source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account number for the source security group,
-      #   if the source security group is in a different account. You can\'t
+      #   if the source security group is in a different account. You can't
       #   specify this parameter in combination with the following parameters:
       #   the CIDR IP address range, the IP protocol, the start of the port
       #   range, and the end of the port range. Creates rules that grant full
@@ -878,7 +874,7 @@ module Aws
       #   number. For the ICMP code number, use `-1` to specify all ICMP codes
       #   for the ICMP type.
       # @option params [String] :cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option params [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. Can be used to specify multiple rules in a
@@ -924,8 +920,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload authorize_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_security_group_ingress(params = {}, options = {})
         req = build_request(:authorize_security_group_ingress, params)
         req.send_request(options)
@@ -998,8 +994,8 @@ module Aws
       #   resp.bundle_task.progress #=> String
       #   resp.bundle_task.bundle_task_error.code #=> String
       #   resp.bundle_task.bundle_task_error.message #=> String
+      # @overload bundle_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def bundle_instance(params = {}, options = {})
         req = build_request(:bundle_instance, params)
         req.send_request(options)
@@ -1038,8 +1034,8 @@ module Aws
       #   resp.bundle_task.progress #=> String
       #   resp.bundle_task.bundle_task_error.code #=> String
       #   resp.bundle_task.bundle_task_error.message #=> String
+      # @overload cancel_bundle_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_bundle_task(params = {}, options = {})
         req = build_request(:cancel_bundle_task, params)
         req.send_request(options)
@@ -1074,8 +1070,8 @@ module Aws
       #     conversion_task_id: "String", # required
       #     reason_message: "String",
       #   })
+      # @overload cancel_conversion_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_conversion_task(params = {}, options = {})
         req = build_request(:cancel_conversion_task, params)
         req.send_request(options)
@@ -1094,8 +1090,8 @@ module Aws
       #   resp = client.cancel_export_task({
       #     export_task_id: "String", # required
       #   })
+      # @overload cancel_export_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_export_task(params = {}, options = {})
         req = build_request(:cancel_export_task, params)
         req.send_request(options)
@@ -1128,8 +1124,8 @@ module Aws
       #   resp.import_task_id #=> String
       #   resp.state #=> String
       #   resp.previous_state #=> String
+      # @overload cancel_import_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_import_task(params = {}, options = {})
         req = build_request(:cancel_import_task, params)
         req.send_request(options)
@@ -1175,8 +1171,8 @@ module Aws
       #   resp.reserved_instances_listings[0].tags[0].key #=> String
       #   resp.reserved_instances_listings[0].tags[0].value #=> String
       #   resp.reserved_instances_listings[0].client_token #=> String
+      # @overload cancel_reserved_instances_listing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_reserved_instances_listing(params = {}, options = {})
         req = build_request(:cancel_reserved_instances_listing, params)
         req.send_request(options)
@@ -1222,8 +1218,8 @@ module Aws
       #   resp.successful_fleet_requests[0].spot_fleet_request_id #=> String
       #   resp.successful_fleet_requests[0].current_spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
       #   resp.successful_fleet_requests[0].previous_spot_fleet_request_state #=> String, one of "submitted", "active", "cancelled", "failed", "cancelled_running", "cancelled_terminating", "modifying"
+      # @overload cancel_spot_fleet_requests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_spot_fleet_requests(params = {}, options = {})
         req = build_request(:cancel_spot_fleet_requests, params)
         req.send_request(options)
@@ -1237,10 +1233,8 @@ module Aws
       # [Spot Instance Requests][1] in the *Amazon Elastic Compute Cloud User
       # Guide*.
       #
-      # <important markdown="1"> Canceling a Spot instance request does not terminate running Spot
+      # Canceling a Spot instance request does not terminate running Spot
       # instances associated with the request.
-      #
-      #  </important>
       #
       #
       #
@@ -1266,8 +1260,8 @@ module Aws
       #   resp.cancelled_spot_instance_requests #=> Array
       #   resp.cancelled_spot_instance_requests[0].spot_instance_request_id #=> String
       #   resp.cancelled_spot_instance_requests[0].state #=> String, one of "active", "open", "closed", "cancelled", "completed"
+      # @overload cancel_spot_instance_requests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_spot_instance_requests(params = {}, options = {})
         req = build_request(:cancel_spot_instance_requests, params)
         req.send_request(options)
@@ -1275,7 +1269,7 @@ module Aws
 
       # Determines whether a product code is associated with an instance. This
       # action can only be used by the owner of the product code. It is useful
-      # when a product code owner needs to verify whether another user\'s
+      # when a product code owner needs to verify whether another user's
       # instance is eligible for support.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1301,8 +1295,8 @@ module Aws
       # @example Response structure
       #   resp.owner_id #=> String
       #   resp.return #=> Boolean
+      # @overload confirm_product_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_product_instance(params = {}, options = {})
         req = build_request(:confirm_product_instance, params)
         req.send_request(options)
@@ -1379,8 +1373,8 @@ module Aws
       #
       # @example Response structure
       #   resp.image_id #=> String
+      # @overload copy_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_image(params = {}, options = {})
         req = build_request(:copy_image, params)
         req.send_request(options)
@@ -1524,8 +1518,8 @@ module Aws
       #
       # @example Response structure
       #   resp.snapshot_id #=> String
+      # @overload copy_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_snapshot(params = {}, options = {})
         req = build_request(:copy_snapshot, params)
         req.send_request(options)
@@ -1535,13 +1529,13 @@ module Aws
       # The customer gateway is the appliance at your end of the VPN
       # connection. (The device on the AWS side of the VPN connection is the
       # virtual private gateway.) You must provide the Internet-routable IP
-      # address of the customer gateway\'s external interface. The IP address
+      # address of the customer gateway's external interface. The IP address
       # must be static and may be behind a device performing network address
       # translation (NAT).
       #
       # For devices that use Border Gateway Protocol (BGP), you can also
-      # provide the device\'s BGP Autonomous System Number (ASN). You can use
-      # an existing ASN assigned to your network. If you don\'t have an ASN
+      # provide the device's BGP Autonomous System Number (ASN). You can use
+      # an existing ASN assigned to your network. If you don't have an ASN
       # already, you can use a private ASN (in the 64512 - 65534 range).
       #
       # <note markdown="1"> Amazon EC2 supports all 2-byte ASN numbers in the range of 1 - 65534,
@@ -1554,14 +1548,12 @@ module Aws
       # Hardware Virtual Private Gateway to Your VPC][1] in the *Amazon
       # Virtual Private Cloud User Guide*.
       #
-      # <important markdown="1"> You cannot create more than one customer gateway with the same VPN
+      # You cannot create more than one customer gateway with the same VPN
       # type, IP address, and BGP ASN parameter values. If you run an
       # identical request more than one time, the first request creates the
       # customer gateway, and subsequent requests return information about the
       # existing customer gateway. The subsequent requests do not create new
       # customer gateway resources.
-      #
-      #  </important>
       #
       #
       #
@@ -1575,10 +1567,10 @@ module Aws
       #   The type of VPN connection that this customer gateway supports
       #   (`ipsec.1`).
       # @option params [required, String] :public_ip
-      #   The Internet-routable IP address for the customer gateway\'s outside
+      #   The Internet-routable IP address for the customer gateway's outside
       #   interface. The address must be static.
       # @option params [required, Integer] :bgp_asn
-      #   For devices that support BGP, the customer gateway\'s BGP ASN.
+      #   For devices that support BGP, the customer gateway's BGP ASN.
       #
       #   Default: 65000
       # @return [Types::CreateCustomerGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1602,8 +1594,8 @@ module Aws
       #   resp.customer_gateway.tags #=> Array
       #   resp.customer_gateway.tags[0].key #=> String
       #   resp.customer_gateway.tags[0].value #=> String
+      # @overload create_customer_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_customer_gateway(params = {}, options = {})
         req = build_request(:create_customer_gateway, params)
         req.send_request(options)
@@ -1623,11 +1615,11 @@ module Aws
       #   specified in `domain-name`, you must set `domain-name-servers` to a
       #   custom DNS server.
       #
-      # * `domain-name` - If you\'re using AmazonProvidedDNS in \"us-east-1\",
-      #   specify \"ec2.internal\". If you\'re using AmazonProvidedDNS in
-      #   another region, specify \"region.compute.internal\" (for example,
-      #   \"ap-northeast-1.compute.internal\"). Otherwise, specify a domain
-      #   name (for example, \"MyCompany.com\"). This value is used to
+      # * `domain-name` - If you're using AmazonProvidedDNS in "us-east-1",
+      #   specify "ec2.internal". If you're using AmazonProvidedDNS in
+      #   another region, specify "region.compute.internal" (for example,
+      #   "ap-northeast-1.compute.internal"). Otherwise, specify a domain
+      #   name (for example, "MyCompany.com"). This value is used to
       #   complete unqualified DNS hostnames. **Important**\: Some Linux
       #   operating systems accept multiple domain names separated by spaces.
       #   However, Windows and other Linux operating systems treat the value
@@ -1689,8 +1681,8 @@ module Aws
       #   resp.dhcp_options.tags #=> Array
       #   resp.dhcp_options.tags[0].key #=> String
       #   resp.dhcp_options.tags[0].value #=> String
+      # @overload create_dhcp_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_dhcp_options(params = {}, options = {})
         req = build_request(:create_dhcp_options, params)
         req.send_request(options)
@@ -1718,7 +1710,7 @@ module Aws
       # @option params [required, String] :log_group_name
       #   The name of the CloudWatch log group.
       # @option params [required, String] :deliver_logs_permission_arn
-      #   The ARN for the IAM role that\'s used to post flow logs to a
+      #   The ARN for the IAM role that's used to post flow logs to a
       #   CloudWatch Logs log group.
       # @option params [String] :client_token
       #   Unique, case-sensitive identifier you provide to ensure the
@@ -1752,8 +1744,8 @@ module Aws
       #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      # @overload create_flow_logs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_flow_logs(params = {}, options = {})
         req = build_request(:create_flow_logs, params)
         req.send_request(options)
@@ -1786,14 +1778,14 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       # @option params [String] :description
       #   A description for the new image.
       # @option params [Boolean] :no_reboot
       #   By default, Amazon EC2 attempts to shut down and reboot the instance
-      #   before creating the image. If the \'No Reboot\' option is set, Amazon
-      #   EC2 doesn\'t shut down the instance before creating the image. When
-      #   this option is used, file system integrity on the created image can\'t
+      #   before creating the image. If the 'No Reboot' option is set, Amazon
+      #   EC2 doesn't shut down the instance before creating the image. When
+      #   this option is used, file system integrity on the created image can't
       #   be guaranteed.
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   Information about one or more block device mappings.
@@ -1827,8 +1819,8 @@ module Aws
       #
       # @example Response structure
       #   resp.image_id #=> String
+      # @overload create_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_image(params = {}, options = {})
         req = build_request(:create_image, params)
         req.send_request(options)
@@ -1881,8 +1873,8 @@ module Aws
       #   resp.export_task.export_to_s3_task.container_format #=> String, one of "ova"
       #   resp.export_task.export_to_s3_task.s3_bucket #=> String
       #   resp.export_task.export_to_s3_task.s3_key #=> String
+      # @overload create_instance_export_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_instance_export_task(params = {}, options = {})
         req = build_request(:create_instance_export_task, params)
         req.send_request(options)
@@ -1919,8 +1911,8 @@ module Aws
       #   resp.internet_gateway.tags #=> Array
       #   resp.internet_gateway.tags[0].key #=> String
       #   resp.internet_gateway.tags[0].value #=> String
+      # @overload create_internet_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_internet_gateway(params = {}, options = {})
         req = build_request(:create_internet_gateway, params)
         req.send_request(options)
@@ -1969,8 +1961,8 @@ module Aws
       #   resp.key_name #=> String
       #   resp.key_fingerprint #=> String
       #   resp.key_material #=> String
+      # @overload create_key_pair(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_key_pair(params = {}, options = {})
         req = build_request(:create_key_pair, params)
         req.send_request(options)
@@ -2034,8 +2026,8 @@ module Aws
       #   resp.nat_gateway.provisioned_bandwidth.provision_time #=> Time
       #   resp.nat_gateway.provisioned_bandwidth.status #=> String
       #   resp.client_token #=> String
+      # @overload create_nat_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_nat_gateway(params = {}, options = {})
         req = build_request(:create_nat_gateway, params)
         req.send_request(options)
@@ -2089,8 +2081,8 @@ module Aws
       #   resp.network_acl.tags #=> Array
       #   resp.network_acl.tags[0].key #=> String
       #   resp.network_acl.tags[0].value #=> String
+      # @overload create_network_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_network_acl(params = {}, options = {})
         req = build_request(:create_network_acl, params)
         req.send_request(options)
@@ -2109,7 +2101,7 @@ module Aws
       # other (for example, 101, 102, 103, ...). This makes it easier to add a
       # rule between existing ones without having to renumber the rules.
       #
-      # After you add an entry, you can\'t modify it; you must either replace
+      # After you add an entry, you can't modify it; you must either replace
       # it, or create an entry and delete the old one.
       #
       # For more information about network ACLs, see [Network ACLs][1] in the
@@ -2166,8 +2158,8 @@ module Aws
       #       to: 1,
       #     },
       #   })
+      # @overload create_network_acl_entry(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_network_acl_entry(params = {}, options = {})
         req = build_request(:create_network_acl_entry, params)
         req.send_request(options)
@@ -2186,7 +2178,7 @@ module Aws
       # @option params [String] :description
       #   A description for the network interface.
       # @option params [String] :private_ip_address
-      #   The primary private IP address of the network interface. If you don\'t
+      #   The primary private IP address of the network interface. If you don't
       #   specify an IP address, Amazon EC2 selects one for you from the subnet
       #   range. If you specify an IP address, you cannot indicate any IP
       #   addresses specified in `privateIpAddresses` as primary (only one IP
@@ -2198,7 +2190,7 @@ module Aws
       # @option params [Integer] :secondary_private_ip_address_count
       #   The number of secondary private IP addresses to assign to a network
       #   interface. When you specify a number of secondary IP addresses, Amazon
-      #   EC2 selects these IP addresses within the subnet range. You can\'t
+      #   EC2 selects these IP addresses within the subnet range. You can't
       #   specify this option and specify more than one private IP address using
       #   `privateIpAddresses`.
       #
@@ -2277,15 +2269,15 @@ module Aws
       #   resp.network_interface.private_ip_addresses[0].association.allocation_id #=> String
       #   resp.network_interface.private_ip_addresses[0].association.association_id #=> String
       #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway"
+      # @overload create_network_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_network_interface(params = {}, options = {})
         req = build_request(:create_network_interface, params)
         req.send_request(options)
       end
 
       # Creates a placement group that you launch cluster instances into. You
-      # must give the group a name that\'s unique within the scope of your
+      # must give the group a name that's unique within the scope of your
       # account.
       #
       # For more information about placement groups and cluster instances, see
@@ -2314,8 +2306,8 @@ module Aws
       #     group_name: "String", # required
       #     strategy: "cluster", # required, accepts cluster
       #   })
+      # @overload create_placement_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_placement_group(params = {}, options = {})
         req = build_request(:create_placement_group, params)
         req.send_request(options)
@@ -2403,8 +2395,8 @@ module Aws
       #   resp.reserved_instances_listings[0].tags[0].key #=> String
       #   resp.reserved_instances_listings[0].tags[0].value #=> String
       #   resp.reserved_instances_listings[0].client_token #=> String
+      # @overload create_reserved_instances_listing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_reserved_instances_listing(params = {}, options = {})
         req = build_request(:create_reserved_instances_listing, params)
         req.send_request(options)
@@ -2417,7 +2409,7 @@ module Aws
       # connection, or network interface.
       #
       # When determining how to route traffic, we use the route with the most
-      # specific match. For example, let\'s say the traffic is destined for
+      # specific match. For example, let's say the traffic is destined for
       # `192.0.2.3`, and the route table includes the following two routes:
       #
       # * `192.0.2.0/24` (goes to some target A)
@@ -2476,8 +2468,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload create_route(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_route(params = {}, options = {})
         req = build_request(:create_route, params)
         req.send_request(options)
@@ -2533,8 +2525,8 @@ module Aws
       #   resp.route_table.tags[0].value #=> String
       #   resp.route_table.propagating_vgws #=> Array
       #   resp.route_table.propagating_vgws[0].gateway_id #=> String
+      # @overload create_route_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_route_table(params = {}, options = {})
         req = build_request(:create_route_table, params)
         req.send_request(options)
@@ -2548,20 +2540,18 @@ module Aws
       # and [Security Groups for Your VPC][2] in the *Amazon Virtual Private
       # Cloud User Guide*.
       #
-      # <important markdown="1"> EC2-Classic: You can have up to 500 security groups.
+      # EC2-Classic: You can have up to 500 security groups.
       #
       #  EC2-VPC: You can create up to 500 security groups per VPC.
       #
-      #  </important>
-      #
       # When you create a security group, you specify a friendly name of your
       # choice. You can have a security group for use in EC2-Classic with the
-      # same name as a security group for use in a VPC. However, you can\'t
+      # same name as a security group for use in a VPC. However, you can't
       # have two security groups for use in EC2-Classic with the same name or
       # two security groups for use in a VPC with the same name.
       #
       # You have a default security group for use in EC2-Classic and a default
-      # security group for use in your VPC. If you don\'t specify a security
+      # security group for use in your VPC. If you don't specify a security
       # group when you launch an instance, the instance is launched into the
       # appropriate default security group. A default security group includes
       # a default rule that grants instances unrestricted network access to
@@ -2614,8 +2604,8 @@ module Aws
       #
       # @example Response structure
       #   resp.group_id #=> String
+      # @overload create_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_security_group(params = {}, options = {})
         req = build_request(:create_security_group, params)
         req.send_request(options)
@@ -2704,8 +2694,8 @@ module Aws
       #   resp.encrypted #=> Boolean
       #   resp.kms_key_id #=> String
       #   resp.data_encryption_key_id #=> String
+      # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot(params = {}, options = {})
         req = build_request(:create_snapshot, params)
         req.send_request(options)
@@ -2746,8 +2736,8 @@ module Aws
       #   resp.spot_datafeed_subscription.state #=> String, one of "Active", "Inactive"
       #   resp.spot_datafeed_subscription.fault.code #=> String
       #   resp.spot_datafeed_subscription.fault.message #=> String
+      # @overload create_spot_datafeed_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_spot_datafeed_subscription(params = {}, options = {})
         req = build_request(:create_spot_datafeed_subscription, params)
         req.send_request(options)
@@ -2756,27 +2746,25 @@ module Aws
       # Creates a subnet in an existing VPC.
       #
       # When you create each subnet, you provide the VPC ID and the CIDR block
-      # you want for the subnet. After you create a subnet, you can\'t change
-      # its CIDR block. The subnet\'s CIDR block can be the same as the VPC\'s
+      # you want for the subnet. After you create a subnet, you can't change
+      # its CIDR block. The subnet's CIDR block can be the same as the VPC's
       # CIDR block (assuming you want only a single subnet in the VPC), or a
-      # subset of the VPC\'s CIDR block. If you create more than one subnet in
-      # a VPC, the subnets\' CIDR blocks must not overlap. The smallest subnet
+      # subset of the VPC's CIDR block. If you create more than one subnet in
+      # a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet
       # (and VPC) you can create uses a /28 netmask (16 IP addresses), and the
       # largest uses a /16 netmask (65,536 IP addresses).
       #
-      # <important markdown="1"> AWS reserves both the first four and the last IP address in each
-      # subnet\'s CIDR block. They\'re not available for use.
+      # AWS reserves both the first four and the last IP address in each
+      # subnet's CIDR block. They're not available for use.
       #
-      #  </important>
-      #
-      # If you add more than one subnet to a VPC, they\'re set up in a star
+      # If you add more than one subnet to a VPC, they're set up in a star
       # topology with a logical router in the middle.
       #
       # If you launch an instance in a VPC using an Amazon EBS-backed AMI, the
-      # IP address doesn\'t change if you stop and restart the instance
+      # IP address doesn't change if you stop and restart the instance
       # (unlike a similar instance launched outside a VPC, which gets a new IP
-      # address when restarted). It\'s therefore possible to have a subnet
-      # with no running instances (they\'re all stopped), but no remaining IP
+      # address when restarted). It's therefore possible to have a subnet
+      # with no running instances (they're all stopped), but no remaining IP
       # addresses available.
       #
       # For more information about subnets, see [Your VPC and Subnets][1] in
@@ -2825,8 +2813,8 @@ module Aws
       #   resp.subnet.tags #=> Array
       #   resp.subnet.tags[0].key #=> String
       #   resp.subnet.tags[0].value #=> String
+      # @overload create_subnet(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_subnet(params = {}, options = {})
         req = build_request(:create_subnet, params)
         req.send_request(options)
@@ -2839,7 +2827,7 @@ module Aws
       #
       # For more information about tags, see [Tagging Your Resources][1] in
       # the *Amazon Elastic Compute Cloud User Guide*. For more information
-      # about creating IAM policies that control users\' access to resources
+      # about creating IAM policies that control users' access to resources
       # based on tags, see [Supported Resource-Level Permissions for Amazon
       # EC2 API Actions][2] in the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -2855,7 +2843,7 @@ module Aws
       # @option params [required, Array<String>] :resources
       #   The IDs of one or more resources to tag. For example, ami-1a2b3c4d.
       # @option params [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2871,8 +2859,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tags(params = {}, options = {})
         req = build_request(:create_tags, params)
         req.send_request(options)
@@ -2915,7 +2903,7 @@ module Aws
       #   a snapshot, the volume size must be equal to or larger than the
       #   snapshot size.
       #
-      #   Default: If you\'re creating the volume from a snapshot and don\'t
+      #   Default: If you're creating the volume from a snapshot and don't
       #   specify a volume size, the default is the snapshot size.
       # @option params [String] :snapshot_id
       #   The snapshot from which to create the volume.
@@ -3006,8 +2994,8 @@ module Aws
       #   resp.iops #=> Integer
       #   resp.encrypted #=> Boolean
       #   resp.kms_key_id #=> String
+      # @overload create_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_volume(params = {}, options = {})
         req = build_request(:create_volume, params)
         req.send_request(options)
@@ -3027,7 +3015,7 @@ module Aws
       # Guide*.
       #
       # You can specify the instance tenancy value for the VPC when you create
-      # it. You can\'t change this value for the VPC after you create it. For
+      # it. You can't change this value for the VPC after you create it. For
       # more information, see [Dedicated Instances][3] in the *Amazon Virtual
       # Private Cloud User Guide*.
       #
@@ -3077,8 +3065,8 @@ module Aws
       #   resp.vpc.tags[0].value #=> String
       #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
       #   resp.vpc.is_default #=> Boolean
+      # @overload create_vpc(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpc(params = {}, options = {})
         req = build_request(:create_vpc, params)
         req.send_request(options)
@@ -3143,8 +3131,8 @@ module Aws
       #   resp.vpc_endpoint.route_table_ids[0] #=> String
       #   resp.vpc_endpoint.creation_timestamp #=> Time
       #   resp.client_token #=> String
+      # @overload create_vpc_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpc_endpoint(params = {}, options = {})
         req = build_request(:create_vpc_endpoint, params)
         req.send_request(options)
@@ -3208,8 +3196,8 @@ module Aws
       #   resp.vpc_peering_connection.tags[0].key #=> String
       #   resp.vpc_peering_connection.tags[0].value #=> String
       #   resp.vpc_peering_connection.vpc_peering_connection_id #=> String
+      # @overload create_vpc_peering_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpc_peering_connection(params = {}, options = {})
         req = build_request(:create_vpc_peering_connection, params)
         req.send_request(options)
@@ -3222,18 +3210,16 @@ module Aws
       # The response includes information that you need to give to your
       # network administrator to configure your customer gateway.
       #
-      # <important markdown="1"> We strongly recommend that you use HTTPS when calling this operation
+      # We strongly recommend that you use HTTPS when calling this operation
       # because the response contains sensitive cryptographic information for
       # configuring your customer gateway.
-      #
-      #  </important>
       #
       # If you decide to shut down your VPN connection for any reason and
       # later create a new VPN connection, you must reconfigure your customer
       # gateway with the new information returned from this call.
       #
       # This is an idempotent operation. If you perform the operation more
-      # than once, Amazon EC2 doesn\'t return an error.
+      # than once, Amazon EC2 doesn't return an error.
       #
       # For more information about VPN connections, see [Adding a Hardware
       # Virtual Private Gateway to Your VPC][1] in the *Amazon Virtual Private
@@ -3295,8 +3281,8 @@ module Aws
       #   resp.vpn_connection.routes[0].destination_cidr_block #=> String
       #   resp.vpn_connection.routes[0].source #=> String, one of "Static"
       #   resp.vpn_connection.routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+      # @overload create_vpn_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpn_connection(params = {}, options = {})
         req = build_request(:create_vpn_connection, params)
         req.send_request(options)
@@ -3326,8 +3312,8 @@ module Aws
       #     vpn_connection_id: "String", # required
       #     destination_cidr_block: "String", # required
       #   })
+      # @overload create_vpn_connection_route(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpn_connection_route(params = {}, options = {})
         req = build_request(:create_vpn_connection_route, params)
         req.send_request(options)
@@ -3375,8 +3361,8 @@ module Aws
       #   resp.vpn_gateway.tags #=> Array
       #   resp.vpn_gateway.tags[0].key #=> String
       #   resp.vpn_gateway.tags[0].value #=> String
+      # @overload create_vpn_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vpn_gateway(params = {}, options = {})
         req = build_request(:create_vpn_gateway, params)
         req.send_request(options)
@@ -3398,8 +3384,8 @@ module Aws
       #     dry_run: false,
       #     customer_gateway_id: "String", # required
       #   })
+      # @overload delete_customer_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_customer_gateway(params = {}, options = {})
         req = build_request(:delete_customer_gateway, params)
         req.send_request(options)
@@ -3423,8 +3409,8 @@ module Aws
       #     dry_run: false,
       #     dhcp_options_id: "String", # required
       #   })
+      # @overload delete_dhcp_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_dhcp_options(params = {}, options = {})
         req = build_request(:delete_dhcp_options, params)
         req.send_request(options)
@@ -3447,8 +3433,8 @@ module Aws
       #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      # @overload delete_flow_logs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_flow_logs(params = {}, options = {})
         req = build_request(:delete_flow_logs, params)
         req.send_request(options)
@@ -3470,8 +3456,8 @@ module Aws
       #     dry_run: false,
       #     internet_gateway_id: "String", # required
       #   })
+      # @overload delete_internet_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_internet_gateway(params = {}, options = {})
         req = build_request(:delete_internet_gateway, params)
         req.send_request(options)
@@ -3493,8 +3479,8 @@ module Aws
       #     dry_run: false,
       #     key_name: "String", # required
       #   })
+      # @overload delete_key_pair(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_key_pair(params = {}, options = {})
         req = build_request(:delete_key_pair, params)
         req.send_request(options)
@@ -3517,15 +3503,15 @@ module Aws
       #
       # @example Response structure
       #   resp.nat_gateway_id #=> String
+      # @overload delete_nat_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_nat_gateway(params = {}, options = {})
         req = build_request(:delete_nat_gateway, params)
         req.send_request(options)
       end
 
-      # Deletes the specified network ACL. You can\'t delete the ACL if it\'s
-      # associated with any subnets. You can\'t delete the default network
+      # Deletes the specified network ACL. You can't delete the ACL if it's
+      # associated with any subnets. You can't delete the default network
       # ACL.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -3541,8 +3527,8 @@ module Aws
       #     dry_run: false,
       #     network_acl_id: "String", # required
       #   })
+      # @overload delete_network_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_network_acl(params = {}, options = {})
         req = build_request(:delete_network_acl, params)
         req.send_request(options)
@@ -3570,8 +3556,8 @@ module Aws
       #     rule_number: 1, # required
       #     egress: false, # required
       #   })
+      # @overload delete_network_acl_entry(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_network_acl_entry(params = {}, options = {})
         req = build_request(:delete_network_acl_entry, params)
         req.send_request(options)
@@ -3593,8 +3579,8 @@ module Aws
       #     dry_run: false,
       #     network_interface_id: "String", # required
       #   })
+      # @overload delete_network_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_network_interface(params = {}, options = {})
         req = build_request(:delete_network_interface, params)
         req.send_request(options)
@@ -3623,8 +3609,8 @@ module Aws
       #     dry_run: false,
       #     group_name: "String", # required
       #   })
+      # @overload delete_placement_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_placement_group(params = {}, options = {})
         req = build_request(:delete_placement_group, params)
         req.send_request(options)
@@ -3649,15 +3635,15 @@ module Aws
       #     route_table_id: "String", # required
       #     destination_cidr_block: "String", # required
       #   })
+      # @overload delete_route(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_route(params = {}, options = {})
         req = build_request(:delete_route, params)
         req.send_request(options)
       end
 
       # Deletes the specified route table. You must disassociate the route
-      # table from any subnets before you can delete it. You can\'t delete the
+      # table from any subnets before you can delete it. You can't delete the
       # main route table.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -3673,8 +3659,8 @@ module Aws
       #     dry_run: false,
       #     route_table_id: "String", # required
       #   })
+      # @overload delete_route_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_route_table(params = {}, options = {})
         req = build_request(:delete_route_table, params)
         req.send_request(options)
@@ -3704,8 +3690,8 @@ module Aws
       #     group_name: "String",
       #     group_id: "String",
       #   })
+      # @overload delete_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_security_group(params = {}, options = {})
         req = build_request(:delete_security_group, params)
         req.send_request(options)
@@ -3745,8 +3731,8 @@ module Aws
       #     dry_run: false,
       #     snapshot_id: "String", # required
       #   })
+      # @overload delete_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_snapshot(params = {}, options = {})
         req = build_request(:delete_snapshot, params)
         req.send_request(options)
@@ -3764,8 +3750,8 @@ module Aws
       #   resp = client.delete_spot_datafeed_subscription({
       #     dry_run: false,
       #   })
+      # @overload delete_spot_datafeed_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_spot_datafeed_subscription(params = {}, options = {})
         req = build_request(:delete_spot_datafeed_subscription, params)
         req.send_request(options)
@@ -3787,8 +3773,8 @@ module Aws
       #     dry_run: false,
       #     subnet_id: "String", # required
       #   })
+      # @overload delete_subnet(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_subnet(params = {}, options = {})
         req = build_request(:delete_subnet, params)
         req.send_request(options)
@@ -3829,8 +3815,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -3863,8 +3849,8 @@ module Aws
       #     dry_run: false,
       #     volume_id: "String", # required
       #   })
+      # @overload delete_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_volume(params = {}, options = {})
         req = build_request(:delete_volume, params)
         req.send_request(options)
@@ -3890,8 +3876,8 @@ module Aws
       #     dry_run: false,
       #     vpc_id: "String", # required
       #   })
+      # @overload delete_vpc(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpc(params = {}, options = {})
         req = build_request(:delete_vpc, params)
         req.send_request(options)
@@ -3922,8 +3908,8 @@ module Aws
       #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      # @overload delete_vpc_endpoints(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpc_endpoints(params = {}, options = {})
         req = build_request(:delete_vpc_endpoints, params)
         req.send_request(options)
@@ -3931,7 +3917,7 @@ module Aws
 
       # Deletes a VPC peering connection. Either the owner of the requester
       # VPC or the owner of the peer VPC can delete the VPC peering connection
-      # if it\'s in the `active` state. The owner of the requester VPC can
+      # if it's in the `active` state. The owner of the requester VPC can
       # delete a VPC peering connection in the `pending-acceptance` state.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -3952,8 +3938,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload delete_vpc_peering_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpc_peering_connection(params = {}, options = {})
         req = build_request(:delete_vpc_peering_connection, params)
         req.send_request(options)
@@ -3961,7 +3947,7 @@ module Aws
 
       # Deletes the specified VPN connection.
       #
-      # If you\'re deleting the VPC and its associated components, we
+      # If you're deleting the VPC and its associated components, we
       # recommend that you detach the virtual private gateway from the VPC and
       # delete the VPC before deleting the VPN connection. If you believe that
       # the tunnel credentials for your VPN connection have been compromised,
@@ -3984,8 +3970,8 @@ module Aws
       #     dry_run: false,
       #     vpn_connection_id: "String", # required
       #   })
+      # @overload delete_vpn_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpn_connection(params = {}, options = {})
         req = build_request(:delete_vpn_connection, params)
         req.send_request(options)
@@ -4007,8 +3993,8 @@ module Aws
       #     vpn_connection_id: "String", # required
       #     destination_cidr_block: "String", # required
       #   })
+      # @overload delete_vpn_connection_route(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpn_connection_route(params = {}, options = {})
         req = build_request(:delete_vpn_connection_route, params)
         req.send_request(options)
@@ -4016,7 +4002,7 @@ module Aws
 
       # Deletes the specified virtual private gateway. We recommend that
       # before you delete a virtual private gateway, you detach it from the
-      # VPC and delete the VPN connection. Note that you don\'t need to delete
+      # VPC and delete the VPN connection. Note that you don't need to delete
       # the virtual private gateway if you plan to delete and recreate the VPN
       # connection between your VPC and your network.
       # @option params [Boolean] :dry_run
@@ -4033,14 +4019,14 @@ module Aws
       #     dry_run: false,
       #     vpn_gateway_id: "String", # required
       #   })
+      # @overload delete_vpn_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vpn_gateway(params = {}, options = {})
         req = build_request(:delete_vpn_gateway, params)
         req.send_request(options)
       end
 
-      # Deregisters the specified AMI. After you deregister an AMI, it can\'t
+      # Deregisters the specified AMI. After you deregister an AMI, it can't
       # be used to launch new instances.
       #
       # This command does not delete the AMI.
@@ -4058,8 +4044,8 @@ module Aws
       #     dry_run: false,
       #     image_id: "String", # required
       #   })
+      # @overload deregister_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_image(params = {}, options = {})
         req = build_request(:deregister_image, params)
         req.send_request(options)
@@ -4107,8 +4093,8 @@ module Aws
       #   resp.account_attributes[0].attribute_name #=> String
       #   resp.account_attributes[0].attribute_values #=> Array
       #   resp.account_attributes[0].attribute_values[0].attribute_value #=> String
+      # @overload describe_account_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_account_attributes(params = {}, options = {})
         req = build_request(:describe_account_attributes, params)
         req.send_request(options)
@@ -4185,15 +4171,15 @@ module Aws
       #   resp.addresses[0].network_interface_id #=> String
       #   resp.addresses[0].network_interface_owner_id #=> String
       #   resp.addresses[0].private_ip_address #=> String
+      # @overload describe_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_addresses(params = {}, options = {})
         req = build_request(:describe_addresses, params)
         req.send_request(options)
       end
 
       # Describes one or more of the Availability Zones that are available to
-      # you. The results include zones only for the region you\'re currently
+      # you. The results include zones only for the region you're currently
       # using. If there is an event impacting an Availability Zone, you can
       # use this request to view the state and any provided message for that
       # Availability Zone.
@@ -4247,8 +4233,8 @@ module Aws
       #   resp.availability_zones[0].region_name #=> String
       #   resp.availability_zones[0].messages #=> Array
       #   resp.availability_zones[0].messages[0].message #=> String
+      # @overload describe_availability_zones(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_availability_zones(params = {}, options = {})
         req = build_request(:describe_availability_zones, params)
         req.send_request(options)
@@ -4328,8 +4314,8 @@ module Aws
       #   resp.bundle_tasks[0].progress #=> String
       #   resp.bundle_tasks[0].bundle_task_error.code #=> String
       #   resp.bundle_tasks[0].bundle_task_error.message #=> String
+      # @overload describe_bundle_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_bundle_tasks(params = {}, options = {})
         req = build_request(:describe_bundle_tasks, params)
         req.send_request(options)
@@ -4350,7 +4336,7 @@ module Aws
       # @option params [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `group-id` - The ID of a VPC security group that\'s associated with
+      #   * `group-id` - The ID of a VPC security group that's associated with
       #     the instance.
       #
       #   * `instance-id` - The ID of the instance.
@@ -4360,10 +4346,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -4412,8 +4398,8 @@ module Aws
       #   resp.instances[0].tags[0].key #=> String
       #   resp.instances[0].tags[0].value #=> String
       #   resp.next_token #=> String
+      # @overload describe_classic_link_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_classic_link_instances(params = {}, options = {})
         req = build_request(:describe_classic_link_instances, params)
         req.send_request(options)
@@ -4487,8 +4473,8 @@ module Aws
       #   resp.conversion_tasks[0].tags #=> Array
       #   resp.conversion_tasks[0].tags[0].key #=> String
       #   resp.conversion_tasks[0].tags[0].value #=> String
+      # @overload describe_conversion_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_conversion_tasks(params = {}, options = {})
         req = build_request(:describe_conversion_tasks, params)
         req.send_request(options)
@@ -4515,12 +4501,12 @@ module Aws
       # @option params [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `bgp-asn` - The customer gateway\'s Border Gateway Protocol (BGP)
+      #   * `bgp-asn` - The customer gateway's Border Gateway Protocol (BGP)
       #     Autonomous System Number (ASN).
       #
       #   * `customer-gateway-id` - The ID of the customer gateway.
       #
-      #   * `ip-address` - The IP address of the customer gateway\'s
+      #   * `ip-address` - The IP address of the customer gateway's
       #     Internet-routable external interface.
       #
       #   * `state` - The state of the customer gateway (`pending` \|
@@ -4534,10 +4520,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -4568,8 +4554,8 @@ module Aws
       #   resp.customer_gateways[0].tags #=> Array
       #   resp.customer_gateways[0].tags[0].key #=> String
       #   resp.customer_gateways[0].tags[0].value #=> String
+      # @overload describe_customer_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_customer_gateways(params = {}, options = {})
         req = build_request(:describe_customer_gateways, params)
         req.send_request(options)
@@ -4606,10 +4592,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -4640,8 +4626,8 @@ module Aws
       #   resp.dhcp_options[0].tags #=> Array
       #   resp.dhcp_options[0].tags[0].key #=> String
       #   resp.dhcp_options[0].tags[0].value #=> String
+      # @overload describe_dhcp_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_dhcp_options(params = {}, options = {})
         req = build_request(:describe_dhcp_options, params)
         req.send_request(options)
@@ -4671,8 +4657,8 @@ module Aws
       #   resp.export_tasks[0].export_to_s3_task.container_format #=> String, one of "ova"
       #   resp.export_tasks[0].export_to_s3_task.s3_bucket #=> String
       #   resp.export_tasks[0].export_to_s3_task.s3_key #=> String
+      # @overload describe_export_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_export_tasks(params = {}, options = {})
         req = build_request(:describe_export_tasks, params)
         req.send_request(options)
@@ -4735,8 +4721,8 @@ module Aws
       #   resp.flow_logs[0].deliver_logs_error_message #=> String
       #   resp.flow_logs[0].deliver_logs_permission_arn #=> String
       #   resp.next_token #=> String
+      # @overload describe_flow_logs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_flow_logs(params = {}, options = {})
         req = build_request(:describe_flow_logs, params)
         req.send_request(options)
@@ -4759,13 +4745,13 @@ module Aws
       # @option params [String] :offering_id
       #   The ID of the reservation offering.
       # @option params [Integer] :min_duration
-      #   This is the minimum duration of the reservation you\'d like to
+      #   This is the minimum duration of the reservation you'd like to
       #   purchase, specified in seconds. Reservations are available in one-year
       #   and three-year terms. The number of seconds specified must be the
       #   number of seconds in a year (365x24x60x60) times one of the supported
       #   durations (1 or 3). For example, specify 31536000 for one year.
       # @option params [Integer] :max_duration
-      #   This is the maximum duration of the reservation you\'d like to
+      #   This is the maximum duration of the reservation you'd like to
       #   purchase, specified in seconds. Reservations are available in one-year
       #   and three-year terms. The number of seconds specified must be the
       #   number of seconds in a year (365x24x60x60) times one of the supported
@@ -4816,8 +4802,8 @@ module Aws
       #   resp.offering_set[0].currency_code #=> String, one of "USD"
       #   resp.offering_set[0].duration #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_host_reservation_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_host_reservation_offerings(params = {}, options = {})
         req = build_request(:describe_host_reservation_offerings, params)
         req.send_request(options)
@@ -4880,8 +4866,8 @@ module Aws
       #   resp.host_reservation_set[0].start #=> Time
       #   resp.host_reservation_set[0].state #=> String, one of "payment-pending", "payment-failed", "active", "retired"
       #   resp.next_token #=> String
+      # @overload describe_host_reservations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_host_reservations(params = {}, options = {})
         req = build_request(:describe_host_reservations, params)
         req.send_request(options)
@@ -4889,7 +4875,7 @@ module Aws
 
       # Describes one or more of your Dedicated Hosts.
       #
-      # The results describe only the Dedicated Hosts in the region you\'re
+      # The results describe only the Dedicated Hosts in the region you're
       # currently using. All listed instances consume capacity on your
       # Dedicated Host. Dedicated Hosts that have recently been released will
       # be listed with the state `released`.
@@ -4964,8 +4950,8 @@ module Aws
       #   resp.hosts[0].available_capacity.available_instance_capacity[0].total_capacity #=> Integer
       #   resp.hosts[0].available_capacity.available_v_cpus #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_hosts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_hosts(params = {}, options = {})
         req = build_request(:describe_hosts, params)
         req.send_request(options)
@@ -5004,8 +4990,8 @@ module Aws
       #   resp.statuses[0].resource #=> String
       #   resp.statuses[0].use_long_ids #=> Boolean
       #   resp.statuses[0].deadline #=> Time
+      # @overload describe_id_format(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_id_format(params = {}, options = {})
         req = build_request(:describe_id_format, params)
         req.send_request(options)
@@ -5049,8 +5035,8 @@ module Aws
       #   resp.statuses[0].resource #=> String
       #   resp.statuses[0].use_long_ids #=> Boolean
       #   resp.statuses[0].deadline #=> Time
+      # @overload describe_identity_id_format(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_identity_id_format(params = {}, options = {})
         req = build_request(:describe_identity_id_format, params)
         req.send_request(options)
@@ -5112,8 +5098,8 @@ module Aws
       #   resp.block_device_mappings[0].ebs.iops #=> Integer
       #   resp.block_device_mappings[0].ebs.encrypted #=> Boolean
       #   resp.block_device_mappings[0].no_device #=> String
+      # @overload describe_image_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_image_attribute(params = {}, options = {})
         req = build_request(:describe_image_attribute, params)
         req.send_request(options)
@@ -5220,10 +5206,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the tag-value filter. For example, if you use both
-      #     the filter \"tag-key=Purpose\" and the filter \"tag-value=X\", you
+      #     the filter "tag-key=Purpose" and the filter "tag-value=X", you
       #     get any resources assigned both the tag key Purpose (regardless of
-      #     what the tag\'s value is), and the tag value X (regardless of what
-      #     the tag\'s key is). If you want to list only resources where Purpose
+      #     what the tag's value is), and the tag value X (regardless of what
+      #     the tag's key is). If you want to list only resources where Purpose
       #     is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -5289,8 +5275,8 @@ module Aws
       #   resp.images[0].tags[0].key #=> String
       #   resp.images[0].tags[0].value #=> String
       #   resp.images[0].hypervisor #=> String, one of "ovm", "xen"
+      # @overload describe_images(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_images(params = {}, options = {})
         req = build_request(:describe_images, params)
         req.send_request(options)
@@ -5358,8 +5344,8 @@ module Aws
       #   resp.import_image_tasks[0].status_message #=> String
       #   resp.import_image_tasks[0].status #=> String
       #   resp.next_token #=> String
+      # @overload describe_import_image_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_import_image_tasks(params = {}, options = {})
         req = build_request(:describe_import_image_tasks, params)
         req.send_request(options)
@@ -5415,8 +5401,8 @@ module Aws
       #   resp.import_snapshot_tasks[0].snapshot_task_detail.status #=> String
       #   resp.import_snapshot_tasks[0].description #=> String
       #   resp.next_token #=> String
+      # @overload describe_import_snapshot_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_import_snapshot_tasks(params = {}, options = {})
         req = build_request(:describe_import_snapshot_tasks, params)
         req.send_request(options)
@@ -5489,8 +5475,8 @@ module Aws
       #   resp.groups #=> Array
       #   resp.groups[0].group_name #=> String
       #   resp.groups[0].group_id #=> String
+      # @overload describe_instance_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instance_attribute(params = {}, options = {})
         req = build_request(:describe_instance_attribute, params)
         req.send_request(options)
@@ -5631,8 +5617,8 @@ module Aws
       #   resp.instance_statuses[0].instance_status.details[0].status #=> String, one of "passed", "failed", "insufficient-data", "initializing"
       #   resp.instance_statuses[0].instance_status.details[0].impaired_since #=> Time
       #   resp.next_token #=> String
+      # @overload describe_instance_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instance_status(params = {}, options = {})
         req = build_request(:describe_instance_status, params)
         req.send_request(options)
@@ -5769,20 +5755,20 @@ module Aws
       #   * `ramdisk-id` - The RAM disk ID.
       #
       #   * `reason` - The reason for the current state of the instance (for
-      #     example, shows \"User Initiated \[date\]\" when you stop or
+      #     example, shows "User Initiated \[date\]" when you stop or
       #     terminate the instance). Similar to the state-reason-code filter.
       #
       #   * `requester-id` - The ID of the entity that launched the instance on
       #     your behalf (for example, AWS Management Console, Auto Scaling, and
       #     so on).
       #
-      #   * `reservation-id` - The ID of the instance\'s reservation. A
+      #   * `reservation-id` - The ID of the instance's reservation. A
       #     reservation ID is created any time you launch an instance. A
       #     reservation ID has a one-to-one relationship with an instance launch
       #     request, but can be associated with more than one instance if you
       #     launch multiple instances using the same launch request. For
-      #     example, if you launch one instance, you\'ll get one reservation ID.
-      #     If you launch ten instances using the same launch request, you\'ll
+      #     example, if you launch one instance, you'll get one reservation ID.
+      #     If you launch ten instances using the same launch request, you'll
       #     also get one reservation ID.
       #
       #   * `root-device-name` - The name of the root device for the instance
@@ -5806,14 +5792,14 @@ module Aws
       #   * `subnet-id` - The ID of the subnet for the instance.
       #
       #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-      #     to the resource, where `tag`\:*key* is the tag\'s key.
+      #     to the resource, where `tag`\:*key* is the tag's key.
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -6047,8 +6033,8 @@ module Aws
       #   resp.reservations[0].instances[0].sriov_net_support #=> String
       #   resp.reservations[0].instances[0].ena_support #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instances(params = {}, options = {})
         req = build_request(:describe_instances, params)
         req.send_request(options)
@@ -6080,10 +6066,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -6113,8 +6099,8 @@ module Aws
       #   resp.internet_gateways[0].tags #=> Array
       #   resp.internet_gateways[0].tags[0].key #=> String
       #   resp.internet_gateways[0].tags[0].value #=> String
+      # @overload describe_internet_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_internet_gateways(params = {}, options = {})
         req = build_request(:describe_internet_gateways, params)
         req.send_request(options)
@@ -6163,8 +6149,8 @@ module Aws
       #   resp.key_pairs #=> Array
       #   resp.key_pairs[0].key_name #=> String
       #   resp.key_pairs[0].key_fingerprint #=> String
+      # @overload describe_key_pairs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_key_pairs(params = {}, options = {})
         req = build_request(:describe_key_pairs, params)
         req.send_request(options)
@@ -6222,8 +6208,8 @@ module Aws
       #   resp.moving_address_statuses[0].public_ip #=> String
       #   resp.moving_address_statuses[0].move_status #=> String, one of "movingToVpc", "restoringToClassic"
       #   resp.next_token #=> String
+      # @overload describe_moving_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_moving_addresses(params = {}, options = {})
         req = build_request(:describe_moving_addresses, params)
         req.send_request(options)
@@ -6291,8 +6277,8 @@ module Aws
       #   resp.nat_gateways[0].provisioned_bandwidth.provision_time #=> Time
       #   resp.nat_gateways[0].provisioned_bandwidth.status #=> String
       #   resp.next_token #=> String
+      # @overload describe_nat_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_nat_gateways(params = {}, options = {})
         req = build_request(:describe_nat_gateways, params)
         req.send_request(options)
@@ -6352,7 +6338,7 @@ module Aws
       #     \| `deny`).
       #
       #   * `entry.rule-number` - The number of an entry (in other words, rule)
-      #     in the ACL\'s set of entries.
+      #     in the ACL's set of entries.
       #
       #   * `network-acl-id` - The ID of the network ACL.
       #
@@ -6361,10 +6347,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -6409,8 +6395,8 @@ module Aws
       #   resp.network_acls[0].tags #=> Array
       #   resp.network_acls[0].tags[0].key #=> String
       #   resp.network_acls[0].tags[0].value #=> String
+      # @overload describe_network_acls(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_network_acls(params = {}, options = {})
         req = build_request(:describe_network_acls, params)
         req.send_request(options)
@@ -6456,8 +6442,8 @@ module Aws
       #   resp.attachment.status #=> String, one of "attaching", "attached", "detaching", "detached"
       #   resp.attachment.attach_time #=> Time
       #   resp.attachment.delete_on_termination #=> Boolean
+      # @overload describe_network_interface_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_network_interface_attribute(params = {}, options = {})
         req = build_request(:describe_network_interface_attribute, params)
         req.send_request(options)
@@ -6574,10 +6560,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -6643,8 +6629,8 @@ module Aws
       #   resp.network_interfaces[0].private_ip_addresses[0].association.allocation_id #=> String
       #   resp.network_interfaces[0].private_ip_addresses[0].association.association_id #=> String
       #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway"
+      # @overload describe_network_interfaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_network_interfaces(params = {}, options = {})
         req = build_request(:describe_network_interfaces, params)
         req.send_request(options)
@@ -6697,8 +6683,8 @@ module Aws
       #   resp.placement_groups[0].group_name #=> String
       #   resp.placement_groups[0].strategy #=> String, one of "cluster"
       #   resp.placement_groups[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+      # @overload describe_placement_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_placement_groups(params = {}, options = {})
         req = build_request(:describe_placement_groups, params)
         req.send_request(options)
@@ -6758,8 +6744,8 @@ module Aws
       #   resp.prefix_lists[0].cidrs #=> Array
       #   resp.prefix_lists[0].cidrs[0] #=> String
       #   resp.next_token #=> String
+      # @overload describe_prefix_lists(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_prefix_lists(params = {}, options = {})
         req = build_request(:describe_prefix_lists, params)
         req.send_request(options)
@@ -6807,8 +6793,8 @@ module Aws
       #   resp.regions #=> Array
       #   resp.regions[0].region_name #=> String
       #   resp.regions[0].endpoint #=> String
+      # @overload describe_regions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_regions(params = {}, options = {})
         req = build_request(:describe_regions, params)
         req.send_request(options)
@@ -6875,10 +6861,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -6929,14 +6915,14 @@ module Aws
       #   resp.reserved_instances[0].recurring_charges #=> Array
       #   resp.reserved_instances[0].recurring_charges[0].frequency #=> String, one of "Hourly"
       #   resp.reserved_instances[0].recurring_charges[0].amount #=> Float
+      # @overload describe_reserved_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_instances(params = {}, options = {})
         req = build_request(:describe_reserved_instances, params)
         req.send_request(options)
       end
 
-      # Describes your account\'s Reserved Instance listings in the Reserved
+      # Describes your account's Reserved Instance listings in the Reserved
       # Instance Marketplace.
       #
       # The Reserved Instance Marketplace matches sellers who want to resell
@@ -6951,8 +6937,8 @@ module Aws
       # Marketplace and are available for purchase.
       #
       # As a buyer, you specify the configuration of the Reserved Instance to
-      # purchase, and the Marketplace matches what you\'re searching for with
-      # what\'s available. The Marketplace first sells the lowest priced
+      # purchase, and the Marketplace matches what you're searching for with
+      # what's available. The Marketplace first sells the lowest priced
       # Reserved Instances to you, and continues to sell available Reserved
       # Instance listings to you until your demand is met. You are charged
       # based on the total price of all of the listings that you purchase.
@@ -7015,8 +7001,8 @@ module Aws
       #   resp.reserved_instances_listings[0].tags[0].key #=> String
       #   resp.reserved_instances_listings[0].tags[0].value #=> String
       #   resp.reserved_instances_listings[0].client_token #=> String
+      # @overload describe_reserved_instances_listings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_instances_listings(params = {}, options = {})
         req = build_request(:describe_reserved_instances_listings, params)
         req.send_request(options)
@@ -7110,8 +7096,8 @@ module Aws
       #   resp.reserved_instances_modifications[0].status_message #=> String
       #   resp.reserved_instances_modifications[0].client_token #=> String
       #   resp.next_token #=> String
+      # @overload describe_reserved_instances_modifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_instances_modifications(params = {}, options = {})
         req = build_request(:describe_reserved_instances_modifications, params)
         req.send_request(options)
@@ -7275,8 +7261,8 @@ module Aws
       #   resp.reserved_instances_offerings[0].pricing_details[0].price #=> Float
       #   resp.reserved_instances_offerings[0].pricing_details[0].count #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_reserved_instances_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_instances_offerings(params = {}, options = {})
         req = build_request(:describe_reserved_instances_offerings, params)
         req.send_request(options)
@@ -7343,8 +7329,8 @@ module Aws
       #     by route propagation.
       #
       #   * `route.state` - The state of a route in the route table (`active` \|
-      #     `blackhole`). The blackhole state indicates that the route\'s target
-      #     isn\'t available (for example, the specified gateway isn\'t attached
+      #     `blackhole`). The blackhole state indicates that the route's target
+      #     isn't available (for example, the specified gateway isn't attached
       #     to the VPC, the specified NAT instance has been terminated, and so
       #     on).
       #
@@ -7356,10 +7342,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -7407,8 +7393,8 @@ module Aws
       #   resp.route_tables[0].tags[0].value #=> String
       #   resp.route_tables[0].propagating_vgws #=> Array
       #   resp.route_tables[0].propagating_vgws[0].gateway_id #=> String
+      # @overload describe_route_tables(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_route_tables(params = {}, options = {})
         req = build_request(:describe_route_tables, params)
         req.send_request(options)
@@ -7513,8 +7499,8 @@ module Aws
       #   resp.scheduled_instance_availability_set[0].available_instance_count #=> Integer
       #   resp.scheduled_instance_availability_set[0].min_term_duration_in_days #=> Integer
       #   resp.scheduled_instance_availability_set[0].max_term_duration_in_days #=> Integer
+      # @overload describe_scheduled_instance_availability(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scheduled_instance_availability(params = {}, options = {})
         req = build_request(:describe_scheduled_instance_availability, params)
         req.send_request(options)
@@ -7595,15 +7581,15 @@ module Aws
       #   resp.scheduled_instance_set[0].term_start_date #=> Time
       #   resp.scheduled_instance_set[0].term_end_date #=> Time
       #   resp.scheduled_instance_set[0].create_date #=> Time
+      # @overload describe_scheduled_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scheduled_instances(params = {}, options = {})
         req = build_request(:describe_scheduled_instances, params)
         req.send_request(options)
       end
 
       # \[EC2-VPC only\] Describes the VPCs on the other side of a VPC peering
-      # connection that are referencing the security groups you\'ve specified
+      # connection that are referencing the security groups you've specified
       # in this request.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the operation,
@@ -7627,8 +7613,8 @@ module Aws
       #   resp.security_group_reference_set[0].group_id #=> String
       #   resp.security_group_reference_set[0].referencing_vpc_id #=> String
       #   resp.security_group_reference_set[0].vpc_peering_connection_id #=> String
+      # @overload describe_security_group_references(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_security_group_references(params = {}, options = {})
         req = build_request(:describe_security_group_references, params)
         req.send_request(options)
@@ -7763,8 +7749,8 @@ module Aws
       #   resp.security_groups[0].tags #=> Array
       #   resp.security_groups[0].tags[0].key #=> String
       #   resp.security_groups[0].tags[0].value #=> String
+      # @overload describe_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_security_groups(params = {}, options = {})
         req = build_request(:describe_security_groups, params)
         req.send_request(options)
@@ -7809,8 +7795,8 @@ module Aws
       #   resp.product_codes #=> Array
       #   resp.product_codes[0].product_code_id #=> String
       #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+      # @overload describe_snapshot_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshot_attribute(params = {}, options = {})
         req = build_request(:describe_snapshot_attribute, params)
         req.send_request(options)
@@ -7819,7 +7805,7 @@ module Aws
       # Describes one or more of the EBS snapshots available to you. Available
       # snapshots include public snapshots available for any AWS account to
       # launch, private snapshots that you own, and private snapshots owned by
-      # another AWS account but for which you\'ve been given explicit create
+      # another AWS account but for which you've been given explicit create
       # volume permissions.
       #
       # The create volume permissions fall into the following categories:
@@ -7911,10 +7897,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -7980,8 +7966,8 @@ module Aws
       #   resp.snapshots[0].kms_key_id #=> String
       #   resp.snapshots[0].data_encryption_key_id #=> String
       #   resp.next_token #=> String
+      # @overload describe_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshots(params = {}, options = {})
         req = build_request(:describe_snapshots, params)
         req.send_request(options)
@@ -8015,8 +8001,8 @@ module Aws
       #   resp.spot_datafeed_subscription.state #=> String, one of "Active", "Inactive"
       #   resp.spot_datafeed_subscription.fault.code #=> String
       #   resp.spot_datafeed_subscription.fault.message #=> String
+      # @overload describe_spot_datafeed_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_datafeed_subscription(params = {}, options = {})
         req = build_request(:describe_spot_datafeed_subscription, params)
         req.send_request(options)
@@ -8058,8 +8044,8 @@ module Aws
       #   resp.active_instances[0].instance_id #=> String
       #   resp.active_instances[0].spot_instance_request_id #=> String
       #   resp.next_token #=> String
+      # @overload describe_spot_fleet_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_fleet_instances(params = {}, options = {})
         req = build_request(:describe_spot_fleet_instances, params)
         req.send_request(options)
@@ -8119,8 +8105,8 @@ module Aws
       #   resp.history_records[0].event_information.event_sub_type #=> String
       #   resp.history_records[0].event_information.event_description #=> String
       #   resp.next_token #=> String
+      # @overload describe_spot_fleet_request_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_fleet_request_history(params = {}, options = {})
         req = build_request(:describe_spot_fleet_request_history, params)
         req.send_request(options)
@@ -8216,8 +8202,8 @@ module Aws
       #   resp.spot_fleet_request_configs[0].create_time #=> Time
       #   resp.spot_fleet_request_configs[0].activity_status #=> String, one of "error", "pending_fulfillment", "pending_termination", "fulfilled"
       #   resp.next_token #=> String
+      # @overload describe_spot_fleet_requests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_fleet_requests(params = {}, options = {})
         req = build_request(:describe_spot_fleet_requests, params)
         req.send_request(options)
@@ -8350,10 +8336,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -8453,8 +8439,8 @@ module Aws
       #   resp.spot_instance_requests[0].tags[0].key #=> String
       #   resp.spot_instance_requests[0].tags[0].value #=> String
       #   resp.spot_instance_requests[0].launched_availability_zone #=> String
+      # @overload describe_spot_instance_requests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_instance_requests(params = {}, options = {})
         req = build_request(:describe_spot_instance_requests, params)
         req.send_request(options)
@@ -8550,8 +8536,8 @@ module Aws
       #   resp.spot_price_history[0].timestamp #=> Time
       #   resp.spot_price_history[0].availability_zone #=> String
       #   resp.next_token #=> String
+      # @overload describe_spot_price_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_spot_price_history(params = {}, options = {})
         req = build_request(:describe_spot_price_history, params)
         req.send_request(options)
@@ -8625,8 +8611,8 @@ module Aws
       #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].vpc_peering_connection_id #=> String
       #   resp.stale_security_group_set[0].stale_ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
       #   resp.next_token #=> String
+      # @overload describe_stale_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stale_security_groups(params = {}, options = {})
         req = build_request(:describe_stale_security_groups, params)
         req.send_request(options)
@@ -8659,7 +8645,7 @@ module Aws
       #     subnet that are available.
       #
       #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
-      #     specify must exactly match the subnet\'s CIDR block for information
+      #     specify must exactly match the subnet's CIDR block for information
       #     to be returned for the subnet. You can also use `cidr` or
       #     `cidr-block` as the filter names.
       #
@@ -8676,10 +8662,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -8715,8 +8701,8 @@ module Aws
       #   resp.subnets[0].tags #=> Array
       #   resp.subnets[0].tags[0].key #=> String
       #   resp.subnets[0].tags[0].value #=> String
+      # @overload describe_subnets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_subnets(params = {}, options = {})
         req = build_request(:describe_subnets, params)
         req.send_request(options)
@@ -8781,8 +8767,8 @@ module Aws
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.next_token #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -8825,8 +8811,8 @@ module Aws
       #   resp.product_codes #=> Array
       #   resp.product_codes[0].product_code_id #=> String
       #   resp.product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
+      # @overload describe_volume_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_volume_attribute(params = {}, options = {})
         req = build_request(:describe_volume_attribute, params)
         req.send_request(options)
@@ -8835,8 +8821,8 @@ module Aws
       # Describes the status of the specified volumes. Volume status provides
       # the result of the checks performed on your volumes to determine events
       # that can impair the performance of your volumes. The performance of a
-      # volume can be affected if an issue occurs on the volume\'s underlying
-      # host. If the volume\'s underlying host experiences a power outage or
+      # volume can be affected if an issue occurs on the volume's underlying
+      # host. If the volume's underlying host experiences a power outage or
       # system issue, after the system is restored, there could be data
       # inconsistencies on the volume. Volume events notify you if this
       # occurs. Volume actions notify you if any action needs to be taken in
@@ -8976,8 +8962,8 @@ module Aws
       #   resp.volume_statuses[0].actions[0].event_type #=> String
       #   resp.volume_statuses[0].actions[0].event_id #=> String
       #   resp.next_token #=> String
+      # @overload describe_volume_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_volume_status(params = {}, options = {})
         req = build_request(:describe_volume_status, params)
         req.send_request(options)
@@ -9043,10 +9029,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9117,8 +9103,8 @@ module Aws
       #   resp.volumes[0].encrypted #=> Boolean
       #   resp.volumes[0].kms_key_id #=> String
       #   resp.next_token #=> String
+      # @overload describe_volumes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_volumes(params = {}, options = {})
         req = build_request(:describe_volumes, params)
         req.send_request(options)
@@ -9152,8 +9138,8 @@ module Aws
       #   resp.vpc_id #=> String
       #   resp.enable_dns_support.value #=> Boolean
       #   resp.enable_dns_hostnames.value #=> Boolean
+      # @overload describe_vpc_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_attribute(params = {}, options = {})
         req = build_request(:describe_vpc_attribute, params)
         req.send_request(options)
@@ -9179,10 +9165,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9210,8 +9196,8 @@ module Aws
       #   resp.vpcs[0].tags #=> Array
       #   resp.vpcs[0].tags[0].key #=> String
       #   resp.vpcs[0].tags[0].value #=> String
+      # @overload describe_vpc_classic_link(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_classic_link(params = {}, options = {})
         req = build_request(:describe_vpc_classic_link, params)
         req.send_request(options)
@@ -9220,7 +9206,7 @@ module Aws
       # Describes the ClassicLink DNS support status of one or more VPCs. If
       # enabled, the DNS hostname of a linked EC2-Classic instance resolves to
       # its private IP address when addressed from an instance in the VPC to
-      # which it\'s linked. Similarly, the DNS hostname of an instance in a
+      # which it's linked. Similarly, the DNS hostname of an instance in a
       # VPC resolves to its private IP address when addressed from a linked
       # EC2-Classic instance. For more information about ClassicLink, see
       # [ClassicLink][1] in the Amazon Elastic Compute Cloud User Guide.
@@ -9254,8 +9240,8 @@ module Aws
       #   resp.vpcs[0].vpc_id #=> String
       #   resp.vpcs[0].classic_link_dns_supported #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_vpc_classic_link_dns_support(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_classic_link_dns_support(params = {}, options = {})
         req = build_request(:describe_vpc_classic_link_dns_support, params)
         req.send_request(options)
@@ -9294,8 +9280,8 @@ module Aws
       #   resp.service_names #=> Array
       #   resp.service_names[0] #=> String
       #   resp.next_token #=> String
+      # @overload describe_vpc_endpoint_services(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_endpoint_services(params = {}, options = {})
         req = build_request(:describe_vpc_endpoint_services, params)
         req.send_request(options)
@@ -9360,8 +9346,8 @@ module Aws
       #   resp.vpc_endpoints[0].route_table_ids[0] #=> String
       #   resp.vpc_endpoints[0].creation_timestamp #=> Time
       #   resp.next_token #=> String
+      # @overload describe_vpc_endpoints(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_endpoints(params = {}, options = {})
         req = build_request(:describe_vpc_endpoints, params)
         req.send_request(options)
@@ -9390,7 +9376,7 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC peering
       #     connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester\'s
+      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester's
       #     VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
@@ -9410,10 +9396,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9457,8 +9443,8 @@ module Aws
       #   resp.vpc_peering_connections[0].tags[0].key #=> String
       #   resp.vpc_peering_connections[0].tags[0].value #=> String
       #   resp.vpc_peering_connections[0].vpc_peering_connection_id #=> String
+      # @overload describe_vpc_peering_connections(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpc_peering_connections(params = {}, options = {})
         req = build_request(:describe_vpc_peering_connections, params)
         req.send_request(options)
@@ -9478,7 +9464,7 @@ module Aws
       #   One or more filters.
       #
       #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify must
-      #     exactly match the VPC\'s CIDR block for information to be returned
+      #     exactly match the VPC's CIDR block for information to be returned
       #     for the VPC. Must contain the slash followed by one or two digits
       #     (for example, `/28`).
       #
@@ -9493,10 +9479,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9530,8 +9516,8 @@ module Aws
       #   resp.vpcs[0].tags[0].value #=> String
       #   resp.vpcs[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
       #   resp.vpcs[0].is_default #=> Boolean
+      # @overload describe_vpcs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpcs(params = {}, options = {})
         req = build_request(:describe_vpcs, params)
         req.send_request(options)
@@ -9582,10 +9568,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9636,8 +9622,8 @@ module Aws
       #   resp.vpn_connections[0].routes[0].destination_cidr_block #=> String
       #   resp.vpn_connections[0].routes[0].source #=> String, one of "Static"
       #   resp.vpn_connections[0].routes[0].state #=> String, one of "pending", "available", "deleting", "deleted"
+      # @overload describe_vpn_connections(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpn_connections(params = {}, options = {})
         req = build_request(:describe_vpn_connections, params)
         req.send_request(options)
@@ -9681,10 +9667,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter \"tag-value=X\",
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
       #     you get any resources assigned both the tag key Purpose (regardless
-      #     of what the tag\'s value is), and the tag value X (regardless of
-      #     what the tag\'s key is). If you want to list only resources where
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
       #     Purpose is X, see the `tag`\:*key*=*value* filter.
       #
       #   * `tag-value` - The value of a tag assigned to the resource. This
@@ -9722,8 +9708,8 @@ module Aws
       #   resp.vpn_gateways[0].tags #=> Array
       #   resp.vpn_gateways[0].tags[0].key #=> String
       #   resp.vpn_gateways[0].tags[0].value #=> String
+      # @overload describe_vpn_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vpn_gateways(params = {}, options = {})
         req = build_request(:describe_vpn_gateways, params)
         req.send_request(options)
@@ -9732,7 +9718,7 @@ module Aws
       # Unlinks (detaches) a linked EC2-Classic instance from a VPC. After the
       # instance has been unlinked, the VPC security groups are no longer
       # associated with it. An instance is automatically unlinked from a VPC
-      # when it\'s stopped.
+      # when it's stopped.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -9755,8 +9741,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload detach_classic_link_vpc(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_classic_link_vpc(params = {}, options = {})
         req = build_request(:detach_classic_link_vpc, params)
         req.send_request(options)
@@ -9782,8 +9768,8 @@ module Aws
       #     internet_gateway_id: "String", # required
       #     vpc_id: "String", # required
       #   })
+      # @overload detach_internet_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_internet_gateway(params = {}, options = {})
         req = build_request(:detach_internet_gateway, params)
         req.send_request(options)
@@ -9807,8 +9793,8 @@ module Aws
       #     attachment_id: "String", # required
       #     force: false,
       #   })
+      # @overload detach_network_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_network_interface(params = {}, options = {})
         req = build_request(:detach_network_interface, params)
         req.send_request(options)
@@ -9820,7 +9806,7 @@ module Aws
       # in the `busy` state while detaching. If this happens, detachment can
       # be delayed indefinitely until you unmount the volume, force
       # detachment, reboot the instance, or all three. If an EBS volume is the
-      # root device of an instance, it can\'t be detached while the instance
+      # root device of an instance, it can't be detached while the instance
       # is running. To detach the root volume, stop the instance first.
       #
       # When a volume with an AWS Marketplace product code is detached from an
@@ -9848,7 +9834,7 @@ module Aws
       #   cleanly (for example, logging into an instance, unmounting the volume,
       #   and detaching normally). This option can lead to data loss or a
       #   corrupted file system. Use this option only as a last resort to detach
-      #   a volume from a failed instance. The instance won\'t have an
+      #   a volume from a failed instance. The instance won't have an
       #   opportunity to flush file system caches or file system metadata. If
       #   you use this option, you must perform file system check and repair
       #   procedures.
@@ -9877,20 +9863,20 @@ module Aws
       #   resp.state #=> String, one of "attaching", "attached", "detaching", "detached"
       #   resp.attach_time #=> Time
       #   resp.delete_on_termination #=> Boolean
+      # @overload detach_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_volume(params = {}, options = {})
         req = build_request(:detach_volume, params)
         req.send_request(options)
       end
 
-      # Detaches a virtual private gateway from a VPC. You do this if you\'re
+      # Detaches a virtual private gateway from a VPC. You do this if you're
       # planning to turn off the VPC and not use it anymore. You can confirm a
       # virtual private gateway has been completely detached from a VPC by
       # describing the virtual private gateway (any attachments to the virtual
       # private gateway are also described).
       #
-      # You must wait for the attachment\'s state to switch to `detached`
+      # You must wait for the attachment's state to switch to `detached`
       # before you can delete the VPC or attach a different VPC to the virtual
       # private gateway.
       # @option params [Boolean] :dry_run
@@ -9910,8 +9896,8 @@ module Aws
       #     vpn_gateway_id: "String", # required
       #     vpc_id: "String", # required
       #   })
+      # @overload detach_vpn_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_vpn_gateway(params = {}, options = {})
         req = build_request(:detach_vpn_gateway, params)
         req.send_request(options)
@@ -9930,8 +9916,8 @@ module Aws
       #     route_table_id: "String", # required
       #     gateway_id: "String", # required
       #   })
+      # @overload disable_vgw_route_propagation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_vgw_route_propagation(params = {}, options = {})
         req = build_request(:disable_vgw_route_propagation, params)
         req.send_request(options)
@@ -9958,8 +9944,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload disable_vpc_classic_link(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_vpc_classic_link(params = {}, options = {})
         req = build_request(:disable_vpc_classic_link, params)
         req.send_request(options)
@@ -9967,7 +9953,7 @@ module Aws
 
       # Disables ClassicLink DNS support for a VPC. If disabled, DNS hostnames
       # resolve to public IP addresses when addressed between a linked
-      # EC2-Classic instance and instances in the VPC to which it\'s linked.
+      # EC2-Classic instance and instances in the VPC to which it's linked.
       # For more information about ClassicLink, see [ClassicLink][1] in the
       # Amazon Elastic Compute Cloud User Guide.
       #
@@ -9987,22 +9973,22 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload disable_vpc_classic_link_dns_support(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_vpc_classic_link_dns_support(params = {}, options = {})
         req = build_request(:disable_vpc_classic_link_dns_support, params)
         req.send_request(options)
       end
 
       # Disassociates an Elastic IP address from the instance or network
-      # interface it\'s associated with.
+      # interface it's associated with.
       #
       # An Elastic IP address is for use in either the EC2-Classic platform or
       # in a VPC. For more information, see [Elastic IP Addresses][1] in the
       # *Amazon Elastic Compute Cloud User Guide*.
       #
       # This is an idempotent operation. If you perform the operation more
-      # than once, Amazon EC2 doesn\'t return an error.
+      # than once, Amazon EC2 doesn't return an error.
       #
       #
       #
@@ -10024,8 +10010,8 @@ module Aws
       #     public_ip: "String",
       #     association_id: "String",
       #   })
+      # @overload disassociate_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disassociate_address(params = {}, options = {})
         req = build_request(:disassociate_address, params)
         req.send_request(options)
@@ -10034,7 +10020,7 @@ module Aws
       # Disassociates a subnet from a route table.
       #
       # After you perform this action, the subnet no longer uses the routes in
-      # the route table. Instead, it uses the routes in the VPC\'s main route
+      # the route table. Instead, it uses the routes in the VPC's main route
       # table. For more information about route tables, see [Route Tables][1]
       # in the *Amazon Virtual Private Cloud User Guide*.
       #
@@ -10056,8 +10042,8 @@ module Aws
       #     dry_run: false,
       #     association_id: "String", # required
       #   })
+      # @overload disassociate_route_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disassociate_route_table(params = {}, options = {})
         req = build_request(:disassociate_route_table, params)
         req.send_request(options)
@@ -10076,8 +10062,8 @@ module Aws
       #     route_table_id: "String", # required
       #     gateway_id: "String", # required
       #   })
+      # @overload enable_vgw_route_propagation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_vgw_route_propagation(params = {}, options = {})
         req = build_request(:enable_vgw_route_propagation, params)
         req.send_request(options)
@@ -10099,8 +10085,8 @@ module Aws
       #     dry_run: false,
       #     volume_id: "String", # required
       #   })
+      # @overload enable_volume_io(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_volume_io(params = {}, options = {})
         req = build_request(:enable_volume_io, params)
         req.send_request(options)
@@ -10109,7 +10095,7 @@ module Aws
       # Enables a VPC for ClassicLink. You can then link EC2-Classic instances
       # to your ClassicLink-enabled VPC to allow communication over private IP
       # addresses. You cannot enable your VPC for ClassicLink if any of your
-      # VPC\'s route tables have existing routes for address ranges within the
+      # VPC's route tables have existing routes for address ranges within the
       # `10.0.0.0/8` IP address range, excluding local routes for VPCs in the
       # `10.0.0.0/16` and `10.1.0.0/16` IP address ranges. For more
       # information, see [ClassicLink][1] in the Amazon Elastic Compute Cloud
@@ -10137,8 +10123,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload enable_vpc_classic_link(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_vpc_classic_link(params = {}, options = {})
         req = build_request(:enable_vpc_classic_link, params)
         req.send_request(options)
@@ -10147,7 +10133,7 @@ module Aws
       # Enables a VPC to support DNS hostname resolution for ClassicLink. If
       # enabled, the DNS hostname of a linked EC2-Classic instance resolves to
       # its private IP address when addressed from an instance in the VPC to
-      # which it\'s linked. Similarly, the DNS hostname of an instance in a
+      # which it's linked. Similarly, the DNS hostname of an instance in a
       # VPC resolves to its private IP address when addressed from a linked
       # EC2-Classic instance. For more information about ClassicLink, see
       # [ClassicLink][1] in the Amazon Elastic Compute Cloud User Guide.
@@ -10168,8 +10154,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload enable_vpc_classic_link_dns_support(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_vpc_classic_link_dns_support(params = {}, options = {})
         req = build_request(:enable_vpc_classic_link_dns_support, params)
         req.send_request(options)
@@ -10190,7 +10176,7 @@ module Aws
       # For Linux instances, the instance console output displays the exact
       # console output that would normally be displayed on a physical monitor
       # attached to a computer. This output is buffered because the instance
-      # produces it and then posts it to a store where the instance\'s owner
+      # produces it and then posts it to a store where the instance's owner
       # can retrieve it.
       #
       # For Windows instances, the instance console output includes output
@@ -10218,8 +10204,8 @@ module Aws
       #   resp.instance_id #=> String
       #   resp.timestamp #=> Time
       #   resp.output #=> String
+      # @overload get_console_output(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_console_output(params = {}, options = {})
         req = build_request(:get_console_output, params)
         req.send_request(options)
@@ -10238,7 +10224,7 @@ module Aws
       #   The ID of the instance.
       # @option params [Boolean] :wake_up
       #   When set to `true`, acts as keystroke input and wakes up an instance
-      #   that\'s in standby or \"sleep\" mode.
+      #   that's in standby or "sleep" mode.
       # @return [Types::GetConsoleScreenshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetConsoleScreenshotResult#instance_id #InstanceId} => String
@@ -10254,8 +10240,8 @@ module Aws
       # @example Response structure
       #   resp.instance_id #=> String
       #   resp.image_data #=> String
+      # @overload get_console_screenshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_console_screenshot(params = {}, options = {})
         req = build_request(:get_console_screenshot, params)
         req.send_request(options)
@@ -10299,8 +10285,8 @@ module Aws
       #   resp.total_upfront_price #=> String
       #   resp.total_hourly_price #=> String
       #   resp.currency_code #=> String, one of "USD"
+      # @overload get_host_reservation_purchase_preview(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_host_reservation_purchase_preview(params = {}, options = {})
         req = build_request(:get_host_reservation_purchase_preview, params)
         req.send_request(options)
@@ -10345,8 +10331,8 @@ module Aws
       #   resp.instance_id #=> String
       #   resp.timestamp #=> Time
       #   resp.password_data #=> String
+      # @overload get_password_data(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_password_data(params = {}, options = {})
         req = build_request(:get_password_data, params)
         req.send_request(options)
@@ -10401,7 +10387,7 @@ module Aws
       #   The token to enable idempotency for VM import requests.
       # @option params [String] :role_name
       #   The name of the role to use when not using the default role,
-      #   \'vmimport\'.
+      #   'vmimport'.
       # @return [Types::ImportImageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ImportImageResult#import_task_id #ImportTaskId} => String
@@ -10470,8 +10456,8 @@ module Aws
       #   resp.progress #=> String
       #   resp.status_message #=> String
       #   resp.status #=> String
+      # @overload import_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_image(params = {}, options = {})
         req = build_request(:import_image, params)
         req.send_request(options)
@@ -10579,8 +10565,8 @@ module Aws
       #   resp.conversion_task.tags #=> Array
       #   resp.conversion_task.tags[0].key #=> String
       #   resp.conversion_task.tags[0].value #=> String
+      # @overload import_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_instance(params = {}, options = {})
         req = build_request(:import_instance, params)
         req.send_request(options)
@@ -10624,8 +10610,8 @@ module Aws
       # @example Response structure
       #   resp.key_name #=> String
       #   resp.key_fingerprint #=> String
+      # @overload import_key_pair(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_key_pair(params = {}, options = {})
         req = build_request(:import_key_pair, params)
         req.send_request(options)
@@ -10647,7 +10633,7 @@ module Aws
       #   Token to enable idempotency for VM import requests.
       # @option params [String] :role_name
       #   The name of the role to use when not using the default role,
-      #   \'vmimport\'.
+      #   'vmimport'.
       # @return [Types::ImportSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ImportSnapshotResult#import_task_id #ImportTaskId} => String
@@ -10690,8 +10676,8 @@ module Aws
       #   resp.snapshot_task_detail.status_message #=> String
       #   resp.snapshot_task_detail.status #=> String
       #   resp.description #=> String
+      # @overload import_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_snapshot(params = {}, options = {})
         req = build_request(:import_snapshot, params)
         req.send_request(options)
@@ -10771,8 +10757,8 @@ module Aws
       #   resp.conversion_task.tags #=> Array
       #   resp.conversion_task.tags[0].key #=> String
       #   resp.conversion_task.tags[0].value #=> String
+      # @overload import_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_volume(params = {}, options = {})
         req = build_request(:import_volume, params)
         req.send_request(options)
@@ -10808,8 +10794,8 @@ module Aws
       #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      # @overload modify_hosts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_hosts(params = {}, options = {})
         req = build_request(:modify_hosts, params)
         req.send_request(options)
@@ -10823,7 +10809,7 @@ module Aws
       #
       # This setting applies to the IAM user who makes the request; it does
       # not apply to the entire AWS account. By default, an IAM user defaults
-      # to the same settings as the root user. If you\'re using this action as
+      # to the same settings as the root user. If you're using this action as
       # the root user, then these settings apply to the entire account, unless
       # an IAM user explicitly overrides these settings for themselves. For
       # more information, see [Resource IDs][1] in the *Amazon Elastic Compute
@@ -10850,8 +10836,8 @@ module Aws
       #     resource: "String", # required
       #     use_long_ids: false, # required
       #   })
+      # @overload modify_id_format(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_id_format(params = {}, options = {})
         req = build_request(:modify_id_format, params)
         req.send_request(options)
@@ -10895,8 +10881,8 @@ module Aws
       #     use_long_ids: false, # required
       #     principal_arn: "String", # required
       #   })
+      # @overload modify_identity_id_format(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_identity_id_format(params = {}, options = {})
         req = build_request(:modify_identity_id_format, params)
         req.send_request(options)
@@ -10935,7 +10921,7 @@ module Aws
       #   `launchPermission` attribute.
       # @option params [Array<String>] :product_codes
       #   One or more product codes. After you add a product code to an AMI, it
-      #   can\'t be removed. This is only valid when modifying the
+      #   can't be removed. This is only valid when modifying the
       #   `productCodes` attribute.
       # @option params [String] :value
       #   The value of the attribute being modified. This is only valid when
@@ -10972,8 +10958,8 @@ module Aws
       #     },
       #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   })
+      # @overload modify_image_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_image_attribute(params = {}, options = {})
         req = build_request(:modify_image_attribute, params)
         req.send_request(options)
@@ -11022,7 +11008,7 @@ module Aws
       #   disabled. This value must be `false` for a NAT instance to perform
       #   NAT.
       # @option params [Types::AttributeBooleanValue] :disable_api_termination
-      #   If the value is `true`, you can\'t terminate the instance using the
+      #   If the value is `true`, you can't terminate the instance using the
       #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
       #   this paramater for Spot Instances.
       # @option params [Types::AttributeValue] :instance_type
@@ -11034,7 +11020,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
       # @option params [Types::AttributeValue] :kernel
-      #   Changes the instance\'s kernel to the specified value. We recommend
+      #   Changes the instance's kernel to the specified value. We recommend
       #   that you use PV-GRUB instead of kernels and RAM disks. For more
       #   information, see [PV-GRUB][1].
       #
@@ -11042,7 +11028,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
       # @option params [Types::AttributeValue] :ramdisk
-      #   Changes the instance\'s RAM disk to the specified value. We recommend
+      #   Changes the instance's RAM disk to the specified value. We recommend
       #   that you use PV-GRUB instead of kernels and RAM disks. For more
       #   information, see [PV-GRUB][1].
       #
@@ -11050,7 +11036,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
       # @option params [Types::BlobAttributeValue] :user_data
-      #   Changes the instance\'s user data to the specified value. If you are
+      #   Changes the instance's user data to the specified value. If you are
       #   using an AWS SDK or command line tool, Base64-encoding is performed
       #   for you, and you can load the text from a file. Otherwise, you must
       #   provide Base64-encoded text.
@@ -11060,14 +11046,14 @@ module Aws
       #   system shutdown).
       # @option params [Array<String>] :groups
       #   \[EC2-VPC\] Changes the security groups of the instance. You must
-      #   specify at least one security group, even if it\'s just the default
+      #   specify at least one security group, even if it's just the default
       #   security group for the VPC. You must specify the security group ID,
       #   not the security group name.
       # @option params [Types::AttributeBooleanValue] :ebs_optimized
       #   Specifies whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O performance.
-      #   This optimization isn\'t available with all instance types. Additional
+      #   This optimization isn't available with all instance types. Additional
       #   usage charges apply when using an EBS Optimized instance.
       # @option params [Types::AttributeValue] :sriov_net_support
       #   Set to `simple` to enable enhanced networking with the Intel 82599
@@ -11124,8 +11110,8 @@ module Aws
       #       value: false,
       #     },
       #   })
+      # @overload modify_instance_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_instance_attribute(params = {}, options = {})
         req = build_request(:modify_instance_attribute, params)
         req.send_request(options)
@@ -11174,8 +11160,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload modify_instance_placement(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_instance_placement(params = {}, options = {})
         req = build_request(:modify_instance_placement, params)
         req.send_request(options)
@@ -11205,11 +11191,11 @@ module Aws
       # @option params [Array<String>] :groups
       #   Changes the security groups for the network interface. The new set of
       #   groups you specify replaces the current set. You must specify at least
-      #   one group, even if it\'s just the default security group in the VPC.
+      #   one group, even if it's just the default security group in the VPC.
       #   You must specify the ID of the security group, not the name.
       # @option params [Types::NetworkInterfaceAttachmentChanges] :attachment
-      #   Information about the interface attachment. If modifying the \'delete
-      #   on termination\' attribute, you must specify the ID of the interface
+      #   Information about the interface attachment. If modifying the 'delete
+      #   on termination' attribute, you must specify the ID of the interface
       #   attachment.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -11227,8 +11213,8 @@ module Aws
       #       delete_on_termination: false,
       #     },
       #   })
+      # @overload modify_network_interface_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_network_interface_attribute(params = {}, options = {})
         req = build_request(:modify_network_interface_attribute, params)
         req.send_request(options)
@@ -11277,15 +11263,15 @@ module Aws
       #
       # @example Response structure
       #   resp.reserved_instances_modification_id #=> String
+      # @overload modify_reserved_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_reserved_instances(params = {}, options = {})
         req = build_request(:modify_reserved_instances, params)
         req.send_request(options)
       end
 
       # Adds or removes permission settings for the specified snapshot. You
-      # may add or remove specified AWS account IDs from a snapshot\'s list of
+      # may add or remove specified AWS account IDs from a snapshot's list of
       # create volume permissions, but you cannot do both in a single API
       # call. If you need to both add and remove account IDs for a snapshot,
       # you must use multiple API calls.
@@ -11349,8 +11335,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload modify_snapshot_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_snapshot_attribute(params = {}, options = {})
         req = build_request(:modify_snapshot_attribute, params)
         req.send_request(options)
@@ -11400,8 +11386,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload modify_spot_fleet_request(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_spot_fleet_request(params = {}, options = {})
         req = build_request(:modify_spot_fleet_request, params)
         req.send_request(options)
@@ -11422,8 +11408,8 @@ module Aws
       #       value: false,
       #     },
       #   })
+      # @overload modify_subnet_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_subnet_attribute(params = {}, options = {})
         req = build_request(:modify_subnet_attribute, params)
         req.send_request(options)
@@ -11460,8 +11446,8 @@ module Aws
       #       value: false,
       #     },
       #   })
+      # @overload modify_volume_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_volume_attribute(params = {}, options = {})
         req = build_request(:modify_volume_attribute, params)
         req.send_request(options)
@@ -11474,7 +11460,7 @@ module Aws
       #   Indicates whether the DNS resolution is supported for the VPC. If
       #   enabled, queries to the Amazon provided DNS server at the
       #   169.254.169.253 IP address, or the reserved IP address at the base of
-      #   the VPC network range \"plus two\" will succeed. If disabled, the
+      #   the VPC network range "plus two" will succeed. If disabled, the
       #   Amazon provided DNS service in the VPC that resolves public DNS
       #   hostnames to IP addresses is not enabled.
       #
@@ -11487,7 +11473,7 @@ module Aws
       #
       #   You cannot modify the DNS resolution and DNS hostnames attributes in
       #   the same request. Use separate requests for each attribute. You can
-      #   only enable DNS hostnames if you\'ve enabled DNS support.
+      #   only enable DNS hostnames if you've enabled DNS support.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -11500,8 +11486,8 @@ module Aws
       #       value: false,
       #     },
       #   })
+      # @overload modify_vpc_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_vpc_attribute(params = {}, options = {})
         req = build_request(:modify_vpc_attribute, params)
         req.send_request(options)
@@ -11543,8 +11529,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload modify_vpc_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_vpc_endpoint(params = {}, options = {})
         req = build_request(:modify_vpc_endpoint, params)
         req.send_request(options)
@@ -11554,11 +11540,11 @@ module Aws
       # peering connection. You can do the following:
       #
       # * Enable/disable communication over the peering connection between an
-      #   EC2-Classic instance that\'s linked to your VPC (using ClassicLink)
+      #   EC2-Classic instance that's linked to your VPC (using ClassicLink)
       #   and instances in the peer VPC.
       #
       # * Enable/disable communication over the peering connection between
-      #   instances in your VPC and an EC2-Classic instance that\'s linked to
+      #   instances in your VPC and an EC2-Classic instance that's linked to
       #   the peer VPC.
       #
       # * Enable/disable a local VPC to resolve public DNS hostnames to
@@ -11610,8 +11596,8 @@ module Aws
       #   resp.accepter_peering_connection_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.accepter_peering_connection_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.accepter_peering_connection_options.allow_dns_resolution_from_remote_vpc #=> Boolean
+      # @overload modify_vpc_peering_connection_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_vpc_peering_connection_options(params = {}, options = {})
         req = build_request(:modify_vpc_peering_connection_options, params)
         req.send_request(options)
@@ -11645,8 +11631,8 @@ module Aws
       #   resp.instance_monitorings #=> Array
       #   resp.instance_monitorings[0].instance_id #=> String
       #   resp.instance_monitorings[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
+      # @overload monitor_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def monitor_instances(params = {}, options = {})
         req = build_request(:monitor_instances, params)
         req.send_request(options)
@@ -11681,8 +11667,8 @@ module Aws
       # @example Response structure
       #   resp.allocation_id #=> String
       #   resp.status #=> String, one of "MoveInProgress", "InVpc", "InClassic"
+      # @overload move_address_to_vpc(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def move_address_to_vpc(params = {}, options = {})
         req = build_request(:move_address_to_vpc, params)
         req.send_request(options)
@@ -11699,7 +11685,7 @@ module Aws
       #   associated with.
       # @option params [String] :limit_price
       #   The specified limit is checked against the total upfront cost of the
-      #   reservation (calculated as the offering\'s upfront cost multiplied by
+      #   reservation (calculated as the offering's upfront cost multiplied by
       #   the host count). If the total upfront cost is greater than the
       #   specified price limit, the request will fail. This is used to ensure
       #   that the purchase does not exceed the expected upfront cost of the
@@ -11749,8 +11735,8 @@ module Aws
       #   resp.total_hourly_price #=> String
       #   resp.currency_code #=> String, one of "USD"
       #   resp.client_token #=> String
+      # @overload purchase_host_reservation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_host_reservation(params = {}, options = {})
         req = build_request(:purchase_host_reservation, params)
         req.send_request(options)
@@ -11762,7 +11748,7 @@ module Aws
       # rate compared to On-Demand instance pricing.
       #
       # Use DescribeReservedInstancesOfferings to get a list of Reserved
-      # Instance offerings that match your specifications. After you\'ve
+      # Instance offerings that match your specifications. After you've
       # purchased a Reserved Instance, you can check for your new Reserved
       # Instance with DescribeReservedInstances.
       #
@@ -11804,8 +11790,8 @@ module Aws
       #
       # @example Response structure
       #   resp.reserved_instances_id #=> String
+      # @overload purchase_reserved_instances_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_reserved_instances_offering(params = {}, options = {})
         req = build_request(:purchase_reserved_instances_offering, params)
         req.send_request(options)
@@ -11820,7 +11806,7 @@ module Aws
       # purchase a Scheduled Instance, you must call RunScheduledInstances
       # during each scheduled time period.
       #
-      # After you purchase a Scheduled Instance, you can\'t cancel, modify, or
+      # After you purchase a Scheduled Instance, you can't cancel, modify, or
       # resell your purchase.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -11874,8 +11860,8 @@ module Aws
       #   resp.scheduled_instance_set[0].term_start_date #=> Time
       #   resp.scheduled_instance_set[0].term_end_date #=> Time
       #   resp.scheduled_instance_set[0].create_date #=> Time
+      # @overload purchase_scheduled_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_scheduled_instances(params = {}, options = {})
         req = build_request(:purchase_scheduled_instances, params)
         req.send_request(options)
@@ -11910,20 +11896,20 @@ module Aws
       #     dry_run: false,
       #     instance_ids: ["String"], # required
       #   })
+      # @overload reboot_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_instances(params = {}, options = {})
         req = build_request(:reboot_instances, params)
         req.send_request(options)
       end
 
-      # Registers an AMI. When you\'re creating an AMI, this is the final step
+      # Registers an AMI. When you're creating an AMI, this is the final step
       # you must complete before you can launch an instance from the AMI. For
       # more information about creating AMIs, see [Creating Your Own AMIs][1]
       # in the *Amazon Elastic Compute Cloud User Guide*.
       #
       # <note markdown="1"> For Amazon EBS-backed instances, CreateImage creates and registers the
-      # AMI in a single request, so you don\'t have to register the AMI
+      # AMI in a single request, so you don't have to register the AMI
       # yourself.
       #
       #  </note>
@@ -11933,7 +11919,7 @@ module Aws
       # [Launching an Instance from a Snapshot][2] in the *Amazon Elastic
       # Compute Cloud User Guide*.
       #
-      # <important markdown="1"> Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and
+      # Some Linux distributions, such as Red Hat Enterprise Linux (RHEL) and
       # SUSE Linux Enterprise Server (SLES), use the EC2 `billingProduct` code
       # associated with an AMI to verify subscription status for package
       # updates. Creating an AMI from an EBS snapshot does not maintain this
@@ -11941,19 +11927,17 @@ module Aws
       # not be able to connect to package update infrastructure.
       #
       #  Similarly, although you can create a Windows AMI from a snapshot, you
-      # can\'t successfully launch an instance from the AMI.
+      # can't successfully launch an instance from the AMI.
       #
       #  To create Windows AMIs or to create AMIs for Linux operating systems
       # that must retain AMI billing codes to work properly, see CreateImage.
-      #
-      #  </important>
       #
       # If needed, you can deregister an AMI at any time. Any modifications
       # you make to an AMI backed by an instance store volume invalidates its
       # registration. If you make changes to an image, deregister the previous
       # image and register the new image.
       #
-      # <note markdown="1"> You can\'t register an image where a secondary (non-root) snapshot has
+      # <note markdown="1"> You can't register an image where a secondary (non-root) snapshot has
       # AWS Marketplace product codes.
       #
       #  </note>
@@ -11974,7 +11958,7 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       # @option params [String] :description
       #   A description for your AMI.
       # @option params [String] :architecture
@@ -12046,8 +12030,8 @@ module Aws
       #
       # @example Response structure
       #   resp.image_id #=> String
+      # @overload register_image(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_image(params = {}, options = {})
         req = build_request(:register_image, params)
         req.send_request(options)
@@ -12078,8 +12062,8 @@ module Aws
       #
       # @example Response structure
       #   resp.return #=> Boolean
+      # @overload reject_vpc_peering_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reject_vpc_peering_connection(params = {}, options = {})
         req = build_request(:reject_vpc_peering_connection, params)
         req.send_request(options)
@@ -12091,11 +12075,11 @@ module Aws
       # address pool and might be unavailable to you. Be sure to update your
       # DNS records and any servers or devices that communicate with the
       # address. If you attempt to release an Elastic IP address that you
-      # already released, you\'ll get an `AuthFailure` error if the address is
+      # already released, you'll get an `AuthFailure` error if the address is
       # already allocated to another AWS account.
       #
       # \[EC2-Classic, default VPC\] Releasing an Elastic IP address
-      # automatically disassociates it from any instance that it\'s associated
+      # automatically disassociates it from any instance that it's associated
       # with. To disassociate an Elastic IP address without releasing it, use
       # DisassociateAddress.
       #
@@ -12119,8 +12103,8 @@ module Aws
       #     public_ip: "String",
       #     allocation_id: "String",
       #   })
+      # @overload release_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def release_address(params = {}, options = {})
         req = build_request(:release_address, params)
         req.send_request(options)
@@ -12158,15 +12142,15 @@ module Aws
       #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      # @overload release_hosts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def release_hosts(params = {}, options = {})
         req = build_request(:release_hosts, params)
         req.send_request(options)
       end
 
       # Changes which network ACL a subnet is associated with. By default when
-      # you create a subnet, it\'s automatically associated with the default
+      # you create a subnet, it's automatically associated with the default
       # network ACL. For more information about network ACLs, see [Network
       # ACLs][1] in the *Amazon Virtual Private Cloud User Guide*.
       #
@@ -12196,8 +12180,8 @@ module Aws
       #
       # @example Response structure
       #   resp.new_association_id #=> String
+      # @overload replace_network_acl_association(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def replace_network_acl_association(params = {}, options = {})
         req = build_request(:replace_network_acl_association, params)
         req.send_request(options)
@@ -12255,8 +12239,8 @@ module Aws
       #       to: 1,
       #     },
       #   })
+      # @overload replace_network_acl_entry(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def replace_network_acl_entry(params = {}, options = {})
         req = build_request(:replace_network_acl_entry, params)
         req.send_request(options)
@@ -12306,8 +12290,8 @@ module Aws
       #     vpc_peering_connection_id: "String",
       #     nat_gateway_id: "String",
       #   })
+      # @overload replace_route(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def replace_route(params = {}, options = {})
         req = build_request(:replace_route, params)
         req.send_request(options)
@@ -12315,13 +12299,13 @@ module Aws
 
       # Changes the route table associated with a given subnet in a VPC. After
       # the operation completes, the subnet uses the routes in the new route
-      # table it\'s associated with. For more information about route tables,
+      # table it's associated with. For more information about route tables,
       # see [Route Tables][1] in the *Amazon Virtual Private Cloud User
       # Guide*.
       #
       # You can also use ReplaceRouteTableAssociation to change which table is
       # the main route table in the VPC. You just specify the main route
-      # table\'s association ID and the route table to be the new main route
+      # table's association ID and the route table to be the new main route
       # table.
       #
       #
@@ -12349,8 +12333,8 @@ module Aws
       #
       # @example Response structure
       #   resp.new_association_id #=> String
+      # @overload replace_route_table_association(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def replace_route_table_association(params = {}, options = {})
         req = build_request(:replace_route_table_association, params)
         req.send_request(options)
@@ -12420,8 +12404,8 @@ module Aws
       #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
       #     description: "String",
       #   })
+      # @overload report_instance_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def report_instance_status(params = {}, options = {})
         req = build_request(:report_instance_status, params)
         req.send_request(options)
@@ -12547,8 +12531,8 @@ module Aws
       #
       # @example Response structure
       #   resp.spot_fleet_request_id #=> String
+      # @overload request_spot_fleet(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_spot_fleet(params = {}, options = {})
         req = build_request(:request_spot_fleet, params)
         req.send_request(options)
@@ -12641,7 +12625,7 @@ module Aws
       #   notice, which gives the instance a two-minute warning before it
       #   terminates.
       #
-      #   Note that you can\'t specify an Availability Zone group or a launch
+      #   Note that you can't specify an Availability Zone group or a launch
       #   group if you specify a duration.
       # @option params [Types::RequestSpotLaunchSpecification] :launch_specification
       #   Describes the launch specification for an instance.
@@ -12786,8 +12770,8 @@ module Aws
       #   resp.spot_instance_requests[0].tags[0].key #=> String
       #   resp.spot_instance_requests[0].tags[0].value #=> String
       #   resp.spot_instance_requests[0].launched_availability_zone #=> String
+      # @overload request_spot_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_spot_instances(params = {}, options = {})
         req = build_request(:request_spot_instances, params)
         req.send_request(options)
@@ -12795,7 +12779,7 @@ module Aws
 
       # Resets an attribute of an AMI to its default value.
       #
-      # <note markdown="1"> The productCodes attribute can\'t be reset.
+      # <note markdown="1"> The productCodes attribute can't be reset.
       #
       #  </note>
       # @option params [Boolean] :dry_run
@@ -12816,8 +12800,8 @@ module Aws
       #     image_id: "String", # required
       #     attribute: "launchPermission", # required, accepts launchPermission
       #   })
+      # @overload reset_image_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_image_attribute(params = {}, options = {})
         req = build_request(:reset_image_attribute, params)
         req.send_request(options)
@@ -12847,11 +12831,9 @@ module Aws
       # @option params [required, String] :attribute
       #   The attribute to reset.
       #
-      #   <important markdown="1"> You can only reset the following attributes: `kernel` \| `ramdisk` \|
+      #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
       #   `sourceDestCheck`. To change an instance attribute, use
       #   ModifyInstanceAttribute.
-      #
-      #    </important>
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -12860,8 +12842,8 @@ module Aws
       #     instance_id: "String", # required
       #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
       #   })
+      # @overload reset_instance_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_instance_attribute(params = {}, options = {})
         req = build_request(:reset_instance_attribute, params)
         req.send_request(options)
@@ -12886,8 +12868,8 @@ module Aws
       #     network_interface_id: "String", # required
       #     source_dest_check: "String",
       #   })
+      # @overload reset_network_interface_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_network_interface_attribute(params = {}, options = {})
         req = build_request(:reset_network_interface_attribute, params)
         req.send_request(options)
@@ -12919,8 +12901,8 @@ module Aws
       #     snapshot_id: "String", # required
       #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
       #   })
+      # @overload reset_snapshot_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_snapshot_attribute(params = {}, options = {})
         req = build_request(:reset_snapshot_attribute, params)
         req.send_request(options)
@@ -12952,17 +12934,17 @@ module Aws
       # @example Response structure
       #   resp.status #=> String, one of "MoveInProgress", "InVpc", "InClassic"
       #   resp.public_ip #=> String
+      # @overload restore_address_to_classic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_address_to_classic(params = {}, options = {})
         req = build_request(:restore_address_to_classic, params)
         req.send_request(options)
       end
 
       # \[EC2-VPC only\] Removes one or more egress rules from a security
-      # group for EC2-VPC. This action doesn\'t apply to security groups for
+      # group for EC2-VPC. This action doesn't apply to security groups for
       # use in EC2-Classic. The values that you specify in the revoke request
-      # (for example, ports) must match the existing rule\'s values for the
+      # (for example, ports) must match the existing rule's values for the
       # rule to be revoked.
       #
       # Each rule consists of the protocol and the CIDR range or source
@@ -13002,7 +12984,7 @@ module Aws
       #   The CIDR IP address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option params [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -13044,8 +13026,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload revoke_security_group_egress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_security_group_egress(params = {}, options = {})
         req = build_request(:revoke_security_group_egress, params)
         req.send_request(options)
@@ -13053,7 +13035,7 @@ module Aws
 
       # Removes one or more ingress rules from a security group. The values
       # that you specify in the revoke request (for example, ports) must match
-      # the existing rule\'s values for the rule to be removed.
+      # the existing rule's values for the rule to be removed.
       #
       # Each rule consists of the protocol and the CIDR range or source
       # security group. For the TCP and UDP protocols, you must also specify
@@ -13074,7 +13056,7 @@ module Aws
       #   nondefault VPC.
       # @option params [String] :source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. For EC2-VPC, the
       #   source security group must be in the same VPC. To revoke a specific
@@ -13082,7 +13064,7 @@ module Aws
       #   instead.
       # @option params [String] :source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account ID of the source security group, if
-      #   the source security group is in a different account. You can\'t
+      #   the source security group is in a different account. You can't
       #   specify this parameter in combination with the following parameters:
       #   the CIDR IP address range, the IP protocol, the start of the port
       #   range, and the end of the port range. To revoke a specific rule for an
@@ -13102,10 +13084,10 @@ module Aws
       #   number. For the ICMP code number, use `-1` to specify all ICMP codes
       #   for the ICMP type.
       # @option params [String] :cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option params [Array<Types::IpPermission>] :ip_permissions
-      #   A set of IP permissions. You can\'t specify a source security group
+      #   A set of IP permissions. You can't specify a source security group
       #   and a CIDR IP address range.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -13148,8 +13130,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload revoke_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_security_group_ingress(params = {}, options = {})
         req = build_request(:revoke_security_group_ingress, params)
         req.send_request(options)
@@ -13170,15 +13152,15 @@ module Aws
       # requires a resource ID. For more information about tagging, see
       # [Tagging Your Amazon EC2 Resources][1].
       #
-      # If you don\'t specify a security group when launching an instance,
+      # If you don't specify a security group when launching an instance,
       # Amazon EC2 uses the default security group. For more information, see
       # [Security Groups][2] in the *Amazon Elastic Compute Cloud User Guide*.
       #
-      # \[EC2-VPC only accounts\] If you don\'t specify a subnet in the
+      # \[EC2-VPC only accounts\] If you don't specify a subnet in the
       # request, we choose a default subnet from your default VPC for you.
       #
-      # \[EC2-Classic accounts\] If you\'re launching into EC2-Classic and you
-      # don\'t specify an Availability Zone, we choose one for you.
+      # \[EC2-Classic accounts\] If you're launching into EC2-Classic and you
+      # don't specify an Availability Zone, we choose one for you.
       #
       # Linux instances have access to the public key of the key pair at boot.
       # You can use this key to provide secure access to the instance. Amazon
@@ -13223,7 +13205,7 @@ module Aws
       #   that is more instances than Amazon EC2 can launch in the target
       #   Availability Zone, Amazon EC2 launches no instances.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
@@ -13237,7 +13219,7 @@ module Aws
       #   Amazon EC2 launches the largest possible number of instances above
       #   `MinCount`.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
@@ -13249,11 +13231,9 @@ module Aws
       #   The name of the key pair. You can create a key pair using
       #   CreateKeyPair or ImportKeyPair.
       #
-      #   <important markdown="1"> If you do not specify a key pair, you can\'t connect to the instance
+      #   If you do not specify a key pair, you can't connect to the instance
       #   unless you choose an AMI that is configured to allow users another way
       #   to log in.
-      #
-      #    </important>
       # @option params [Array<String>] :security_groups
       #   \[EC2-Classic, default VPC\] One or more security group names. For a
       #   nondefault VPC, you must use security group IDs instead.
@@ -13290,11 +13270,9 @@ module Aws
       # @option params [String] :kernel_id
       #   The ID of the kernel.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -13302,11 +13280,9 @@ module Aws
       # @option params [String] :ramdisk_id
       #   The ID of the RAM disk.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -13314,20 +13290,18 @@ module Aws
       # @option params [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
       #
-      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   Supplying both a snapshot ID and an encryption value as arguments for
       #   block-device mapping results in an error. This is because only blank
       #   volumes can be encrypted on start, and these are not created from a
       #   snapshot. If a snapshot is the basis for the volume, it contains data
       #   by definition and its encryption status cannot be changed using this
       #   action.
-      #
-      #    </important>
       # @option params [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option params [String] :subnet_id
       #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
       # @option params [Boolean] :disable_api_termination
-      #   If you set this parameter to `true`, you can\'t terminate the instance
+      #   If you set this parameter to `true`, you can't terminate the instance
       #   using the Amazon EC2 console, CLI, or API; otherwise, you can. If you
       #   set this parameter to `true` and then later want to be able to
       #   terminate the instance, you must first change the value of the
@@ -13348,7 +13322,7 @@ module Aws
       #   IP address range of the subnet.
       #
       #   Only one private IP address can be designated as primary. Therefore,
-      #   you can\'t specify this parameter if `PrivateIpAddresses.n.Primary` is
+      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary` is
       #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
       #   IP address.
       #
@@ -13374,7 +13348,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O performance.
-      #   This optimization isn\'t available with all instance types. Additional
+      #   This optimization isn't available with all instance types. Additional
       #   usage charges apply when using an EBS-optimized instance.
       #
       #   Default: `false`
@@ -13548,8 +13522,8 @@ module Aws
       #   resp.instances[0].ebs_optimized #=> Boolean
       #   resp.instances[0].sriov_net_support #=> String
       #   resp.instances[0].ena_support #=> Boolean
+      # @overload run_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def run_instances(params = {}, options = {})
         req = build_request(:run_instances, params)
         req.send_request(options)
@@ -13561,7 +13535,7 @@ module Aws
       # obtain an identifier using PurchaseScheduledInstances.
       #
       # You must launch a Scheduled Instance during its scheduled time period.
-      # You can\'t stop or reboot a Scheduled Instance, but you can terminate
+      # You can't stop or reboot a Scheduled Instance, but you can terminate
       # it as needed. If you terminate a Scheduled Instance before the current
       # scheduled time period ends, you can launch it again after a few
       # minutes. For more information, see [Scheduled Instances][1] in the
@@ -13663,14 +13637,14 @@ module Aws
       # @example Response structure
       #   resp.instance_id_set #=> Array
       #   resp.instance_id_set[0] #=> String
+      # @overload run_scheduled_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def run_scheduled_instances(params = {}, options = {})
         req = build_request(:run_scheduled_instances, params)
         req.send_request(options)
       end
 
-      # Starts an Amazon EBS-backed AMI that you\'ve previously stopped.
+      # Starts an Amazon EBS-backed AMI that you've previously stopped.
       #
       # Instances that use Amazon EBS volumes as their root devices can be
       # quickly stopped and started. When an instance is stopped, the compute
@@ -13722,8 +13696,8 @@ module Aws
       #   resp.starting_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
       #   resp.starting_instances[0].previous_state.code #=> Integer
       #   resp.starting_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+      # @overload start_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_instances(params = {}, options = {})
         req = build_request(:start_instances, params)
         req.send_request(options)
@@ -13731,14 +13705,14 @@ module Aws
 
       # Stops an Amazon EBS-backed instance.
       #
-      # We don\'t charge hourly usage for a stopped instance, or data transfer
+      # We don't charge hourly usage for a stopped instance, or data transfer
       # fees; however, your root partition Amazon EBS volume remains,
       # continues to persist your data, and you are charged for Amazon EBS
       # volume usage. Each time you transition an instance from stopped to
       # started, Amazon EC2 charges a full instance hour, even if transitions
       # happen multiple times within a single hour.
       #
-      # You can\'t start or stop Spot instances, and you can\'t stop instance
+      # You can't start or stop Spot instances, and you can't stop instance
       # store-backed instances.
       #
       # When you stop an instance, we shut it down. You can restart your
@@ -13797,8 +13771,8 @@ module Aws
       #   resp.stopping_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
       #   resp.stopping_instances[0].previous_state.code #=> Integer
       #   resp.stopping_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+      # @overload stop_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_instances(params = {}, options = {})
         req = build_request(:stop_instances, params)
         req.send_request(options)
@@ -13857,8 +13831,8 @@ module Aws
       #   resp.terminating_instances[0].current_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
       #   resp.terminating_instances[0].previous_state.code #=> Integer
       #   resp.terminating_instances[0].previous_state.name #=> String, one of "pending", "running", "shutting-down", "terminated", "stopping", "stopped"
+      # @overload terminate_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_instances(params = {}, options = {})
         req = build_request(:terminate_instances, params)
         req.send_request(options)
@@ -13879,8 +13853,8 @@ module Aws
       #     network_interface_id: "String", # required
       #     private_ip_addresses: ["String"], # required
       #   })
+      # @overload unassign_private_ip_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unassign_private_ip_addresses(params = {}, options = {})
         req = build_request(:unassign_private_ip_addresses, params)
         req.send_request(options)
@@ -13914,8 +13888,8 @@ module Aws
       #   resp.instance_monitorings #=> Array
       #   resp.instance_monitorings[0].instance_id #=> String
       #   resp.instance_monitorings[0].monitoring.state #=> String, one of "disabled", "disabling", "enabled", "pending"
+      # @overload unmonitor_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unmonitor_instances(params = {}, options = {})
         req = build_request(:unmonitor_instances, params)
         req.send_request(options)

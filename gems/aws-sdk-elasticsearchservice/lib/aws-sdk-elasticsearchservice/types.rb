@@ -9,7 +9,7 @@ module Aws
   module ElasticsearchService
     module Types
 
-      # The configured access rules for the domain\'s document and search
+      # The configured access rules for the domain's document and search
       # endpoints, and the current status of those rules.
       # @!attribute [rw] options
       #   The access policy configured for the Elasticsearch domain. Access
@@ -23,7 +23,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   The status of the access policy for the Elasticsearch domain. See
-      #   `OptionStatus` for the status information that\'s included.
+      #   `OptionStatus` for the status information that's included.
       #   @return [Types::OptionStatus]
       class AccessPoliciesStatus < Struct.new(
         :options,
@@ -126,7 +126,7 @@ module Aws
       #
       # @!attribute [rw] elasticsearch_version
       #   String of format X.Y to specify version for the Elasticsearch domain
-      #   eg. \"1.5\" or \"2.3\". For more information, see [Creating
+      #   eg. "1.5" or "2.3". For more information, see [Creating
       #   Elasticsearch Domains][1] in the *Amazon Elasticsearch Service
       #   Developer Guide*.
       #

@@ -201,7 +201,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -326,7 +326,7 @@ module Aws
       #   cleanly (for example, logging into an instance, unmounting the volume,
       #   and detaching normally). This option can lead to data loss or a
       #   corrupted file system. Use this option only as a last resort to detach
-      #   a volume from a failed instance. The instance won\'t have an
+      #   a volume from a failed instance. The instance won't have an
       #   opportunity to flush file system caches or file system metadata. If
       #   you use this option, you must perform file system check and repair
       #   procedures.

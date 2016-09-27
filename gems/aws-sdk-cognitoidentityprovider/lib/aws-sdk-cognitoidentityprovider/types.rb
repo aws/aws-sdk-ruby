@@ -415,7 +415,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Lists the device\'s response, as an administrator.
+      # Lists the device's response, as an administrator.
       # @!attribute [rw] devices
       #   The devices in the list of devices response.
       #   @return [Array<Types::DeviceType>]
@@ -429,7 +429,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the request to reset a user\'s password as an
+      # Represents the request to reset a user's password as an
       # administrator.
       # @note When making an API call, pass AdminResetUserPasswordRequest
       #   data as a hash:
@@ -440,7 +440,7 @@ module Aws
       #       }
       # @!attribute [rw] user_pool_id
       #   The user pool ID for the user pool where you want to reset the
-      #   user\'s password.
+      #   user's password.
       #   @return [String]
       #
       # @!attribute [rw] username
@@ -537,7 +537,7 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] user_pool_id
-      #   The user pool ID for the user pool where you want to set the user\'s
+      #   The user pool ID for the user pool where you want to set the user's
       #   settings, such as MFA options.
       #   @return [String]
       #
@@ -596,7 +596,7 @@ module Aws
       # administrator.
       class AdminUpdateDeviceStatusResponse < Aws::EmptyStructure; end
 
-      # Represents the request to update the user\'s attributes as an
+      # Represents the request to update the user's attributes as an
       # administrator.
       # @note When making an API call, pass AdminUpdateUserAttributesRequest
       #   data as a hash:
@@ -836,12 +836,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] confirmation_code
-      #   The confirmation code sent by a user\'s request to retrieve a
+      #   The confirmation code sent by a user's request to retrieve a
       #   forgotten password.
       #   @return [String]
       #
       # @!attribute [rw] password
-      #   The password sent by sent by a user\'s request to retrieve a
+      #   The password sent by sent by a user's request to retrieve a
       #   forgotten password.
       #   @return [String]
       class ConfirmForgotPasswordRequest < Struct.new(
@@ -853,7 +853,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The response from the server that results from a user\'s request to
+      # The response from the server that results from a user's request to
       # retrieve a forgotten password.
       class ConfirmForgotPasswordResponse < Aws::EmptyStructure; end
 
@@ -883,7 +883,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] confirmation_code
-      #   The confirmation code sent by a user\'s request to confirm
+      #   The confirmation code sent by a user's request to confirm
       #   registration.
       #   @return [String]
       #
@@ -1301,7 +1301,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The type of configuration for the user pool\'s device tracking.
+      # The type of configuration for the user pool's device tracking.
       # @note When making an API call, pass DeviceConfigurationType
       #   data as a hash:
       #
@@ -1415,7 +1415,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the request to reset a user\'s password.
+      # Represents the request to reset a user's password.
       # @note When making an API call, pass ForgotPasswordRequest
       #   data as a hash:
       #
@@ -1630,7 +1630,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] client_metadata
-      #   The client app\'s metadata.
+      #   The client app's metadata.
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] client_id
@@ -2729,8 +2729,8 @@ module Aws
       #
       # @!attribute [rw] cloud_watch_logs_role_arn
       #   The role ARN for the Amazon CloudWatch Logging role for the user
-      #   import job. For more information, see \"Creating the CloudWatch Logs
-      #   IAM Role\" in the Amazon Cognito Developer Guide.
+      #   import job. For more information, see "Creating the CloudWatch Logs
+      #   IAM Role" in the Amazon Cognito Developer Guide.
       #   @return [String]
       #
       # @!attribute [rw] imported_users

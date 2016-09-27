@@ -135,8 +135,8 @@ module Aws
       #   resp = client.delete_alarms({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      # @overload delete_alarms(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_alarms(params = {}, options = {})
         req = build_request(:delete_alarms, params)
         req.send_request(options)
@@ -144,7 +144,7 @@ module Aws
 
       # Retrieves history for the specified alarm. Filter alarms by date range
       # or item type. If an alarm name is not specified, Amazon CloudWatch
-      # returns histories for all of the owner\'s alarms.
+      # returns histories for all of the owner's alarms.
       #
       # <note markdown="1"> Amazon CloudWatch retains the history of an alarm for two weeks,
       # whether or not you delete the alarm.
@@ -186,8 +186,8 @@ module Aws
       #   resp.alarm_history_items[0].history_summary #=> String
       #   resp.alarm_history_items[0].history_data #=> String
       #   resp.next_token #=> String
+      # @overload describe_alarm_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_alarm_history(params = {}, options = {})
         req = build_request(:describe_alarm_history, params)
         req.send_request(options)
@@ -255,8 +255,8 @@ module Aws
       #   resp.metric_alarms[0].threshold #=> Float
       #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
       #   resp.next_token #=> String
+      # @overload describe_alarms(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_alarms(params = {}, options = {})
         req = build_request(:describe_alarms, params)
         req.send_request(options)
@@ -325,15 +325,15 @@ module Aws
       #   resp.metric_alarms[0].evaluation_periods #=> Integer
       #   resp.metric_alarms[0].threshold #=> Float
       #   resp.metric_alarms[0].comparison_operator #=> String, one of "GreaterThanOrEqualToThreshold", "GreaterThanThreshold", "LessThanThreshold", "LessThanOrEqualToThreshold"
+      # @overload describe_alarms_for_metric(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_alarms_for_metric(params = {}, options = {})
         req = build_request(:describe_alarms_for_metric, params)
         req.send_request(options)
       end
 
-      # Disables actions for the specified alarms. When an alarm\'s actions
-      # are disabled the alarm\'s state may change, but none of the alarm\'s
+      # Disables actions for the specified alarms. When an alarm's actions
+      # are disabled the alarm's state may change, but none of the alarm's
       # actions will execute.
       # @option params [required, Array<String>] :alarm_names
       #   The names of the alarms to disable actions for.
@@ -343,8 +343,8 @@ module Aws
       #   resp = client.disable_alarm_actions({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      # @overload disable_alarm_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_alarm_actions(params = {}, options = {})
         req = build_request(:disable_alarm_actions, params)
         req.send_request(options)
@@ -359,8 +359,8 @@ module Aws
       #   resp = client.enable_alarm_actions({
       #     alarm_names: ["AlarmName"], # required
       #   })
+      # @overload enable_alarm_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_alarm_actions(params = {}, options = {})
         req = build_request(:enable_alarm_actions, params)
         req.send_request(options)
@@ -481,8 +481,8 @@ module Aws
       #   resp.datapoints[0].minimum #=> Float
       #   resp.datapoints[0].maximum #=> Float
       #   resp.datapoints[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+      # @overload get_metric_statistics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_metric_statistics(params = {}, options = {})
         req = build_request(:get_metric_statistics, params)
         req.send_request(options)
@@ -538,8 +538,8 @@ module Aws
       #   resp.metrics[0].dimensions[0].name #=> String
       #   resp.metrics[0].dimensions[0].value #=> String
       #   resp.next_token #=> String
+      # @overload list_metrics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_metrics(params = {}, options = {})
         req = build_request(:list_metrics, params)
         req.send_request(options)
@@ -555,7 +555,7 @@ module Aws
       # `StateValue` are then executed.
       #
       # <note markdown="1"> When updating an existing alarm, its `StateValue` is left unchanged,
-      # but it completely overwrites the alarm\'s previous configuration.
+      # but it completely overwrites the alarm's previous configuration.
       #
       #  </note>
       #
@@ -575,7 +575,7 @@ module Aws
       #
       #  If you have read/write permissions for Amazon CloudWatch but not for
       # Amazon EC2, you can still create an alarm but the stop or terminate
-      # actions won\'t be performed on the Amazon EC2 instance. However, if
+      # actions won't be performed on the Amazon EC2 instance. However, if
       # you are later granted permission to use the associated Amazon EC2
       # APIs, the alarm actions you created earlier will be performed. For
       # more information about IAM permissions, see [Permissions and
@@ -597,12 +597,12 @@ module Aws
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
       # @option params [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
-      #   the user\'s AWS account
+      #   the user's AWS account
       # @option params [String] :alarm_description
       #   The description for the alarm.
       # @option params [Boolean] :actions_enabled
       #   Indicates whether or not actions should be executed during any changes
-      #   to the alarm\'s state.
+      #   to the alarm's state.
       # @option params [Array<String>] :ok_actions
       #   The list of actions to execute when this alarm transitions into an
       #   `OK` state from any other state. Each action is specified as an Amazon
@@ -667,17 +667,17 @@ module Aws
       #   is created, you can create stop, terminate, or reboot alarms using the
       #   CLI.
       # @option params [required, String] :metric_name
-      #   The name for the alarm\'s associated metric.
+      #   The name for the alarm's associated metric.
       # @option params [required, String] :namespace
-      #   The namespace for the alarm\'s associated metric.
+      #   The namespace for the alarm's associated metric.
       # @option params [required, String] :statistic
-      #   The statistic to apply to the alarm\'s associated metric.
+      #   The statistic to apply to the alarm's associated metric.
       # @option params [Array<Types::Dimension>] :dimensions
-      #   The dimensions for the alarm\'s associated metric.
+      #   The dimensions for the alarm's associated metric.
       # @option params [required, Integer] :period
       #   The period in seconds over which the specified statistic is applied.
       # @option params [String] :unit
-      #   The statistic\'s unit of measure. For example, the units for the
+      #   The statistic's unit of measure. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
       #   number of bytes that an instance receives on all network interfaces.
       #   You can also specify a unit when you create a custom metric. Units
@@ -721,8 +721,8 @@ module Aws
       #     threshold: 1.0, # required
       #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
       #   })
+      # @overload put_metric_alarm(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_metric_alarm(params = {}, options = {})
         req = build_request(:put_metric_alarm, params)
         req.send_request(options)
@@ -737,13 +737,11 @@ module Aws
       # Each `PutMetricData` request is limited to 8 KB in size for HTTP GET
       # requests and is limited to 40 KB in size for HTTP POST requests.
       #
-      # <important markdown="1"> Although the `Value` parameter accepts numbers of type `Double`,
+      # Although the `Value` parameter accepts numbers of type `Double`,
       # Amazon CloudWatch rejects values that are either too small or too
       # large. Values must be in the range of 8.515920e-109 to 1.174271e+108
       # (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
       # (e.g., NaN, +Infinity, -Infinity) are not supported.
-      #
-      #  </important>
       #
       # Data that is timestamped 24 hours or more in the past may take in
       # excess of 48 hours to become available from submission time using
@@ -751,8 +749,8 @@ module Aws
       # @option params [required, String] :namespace
       #   The namespace for the metric data.
       #
-      #   <note markdown="1"> You cannot specify a namespace that begins with \"AWS/\". Namespaces
-      #   that begin with \"AWS/\" are reserved for other Amazon Web Services
+      #   <note markdown="1"> You cannot specify a namespace that begins with "AWS/". Namespaces
+      #   that begin with "AWS/" are reserved for other Amazon Web Services
       #   products that send metrics to Amazon CloudWatch.
       #
       #    </note>
@@ -784,8 +782,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload put_metric_data(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_metric_data(params = {}, options = {})
         req = build_request(:put_metric_data, params)
         req.send_request(options)
@@ -795,14 +793,14 @@ module Aws
       # updated `StateValue` differs from the previous value, the action
       # configured for the appropriate state is invoked. For example, if your
       # alarm is configured to send an Amazon SNS message when an alarm is
-      # triggered, temporarily changing the alarm\'s state to **ALARM** sends
+      # triggered, temporarily changing the alarm's state to **ALARM** sends
       # an Amazon SNS message. The alarm returns to its actual state (often
       # within seconds). Because the alarm state change happens very quickly,
-      # it is typically only visible in the alarm\'s **History** tab in the
+      # it is typically only visible in the alarm's **History** tab in the
       # Amazon CloudWatch console or through `DescribeAlarmHistory`.
       # @option params [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
-      #   the user\'s AWS account. The maximum length is 255 characters.
+      #   the user's AWS account. The maximum length is 255 characters.
       # @option params [required, String] :state_value
       #   The value of the state.
       # @option params [required, String] :state_reason
@@ -820,8 +818,8 @@ module Aws
       #     state_reason: "StateReason", # required
       #     state_reason_data: "StateReasonData",
       #   })
+      # @overload set_alarm_state(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_alarm_state(params = {}, options = {})
         req = build_request(:set_alarm_state, params)
         req.send_request(options)

@@ -140,8 +140,8 @@ module Aws
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      # @overload abort_environment_update(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def abort_environment_update(params = {}, options = {})
         req = build_request(:abort_environment_update, params)
         req.send_request(options)
@@ -175,8 +175,8 @@ module Aws
       #   resp.action_description #=> String
       #   resp.action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
       #   resp.status #=> String
+      # @overload apply_environment_managed_action(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def apply_environment_managed_action(params = {}, options = {})
         req = build_request(:apply_environment_managed_action, params)
         req.send_request(options)
@@ -198,8 +198,8 @@ module Aws
       # @example Response structure
       #   resp.available #=> Boolean
       #   resp.fully_qualified_cname #=> String
+      # @overload check_dns_availability(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def check_dns_availability(params = {}, options = {})
         req = build_request(:check_dns_availability, params)
         req.send_request(options)
@@ -221,7 +221,7 @@ module Aws
       # @option params [String] :group_name
       #   The name of the group to which the target environments belong. Specify
       #   a group name only if the environment name defined in each target
-      #   environment\'s manifest ends with a + (plus) character. See
+      #   environment's manifest ends with a + (plus) character. See
       #   [Environment Manifest (env.yaml)][1] for details.
       #
       #
@@ -272,8 +272,8 @@ module Aws
       #   resp.environments[0].environment_links #=> Array
       #   resp.environments[0].environment_links[0].link_name #=> String
       #   resp.environments[0].environment_links[0].environment_name #=> String
+      # @overload compose_environments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def compose_environments(params = {}, options = {})
         req = build_request(:compose_environments, params)
         req.send_request(options)
@@ -308,8 +308,8 @@ module Aws
       #   resp.application.versions[0] #=> String
       #   resp.application.configuration_templates #=> Array
       #   resp.application.configuration_templates[0] #=> String
+      # @overload create_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_application(params = {}, options = {})
         req = build_request(:create_application, params)
         req.send_request(options)
@@ -386,8 +386,8 @@ module Aws
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
       #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      # @overload create_application_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_application_version(params = {}, options = {})
         req = build_request(:create_application_version, params)
         req.send_request(options)
@@ -499,8 +499,8 @@ module Aws
       #   resp.option_settings[0].namespace #=> String
       #   resp.option_settings[0].option_name #=> String
       #   resp.option_settings[0].value #=> String
+      # @overload create_configuration_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_configuration_template(params = {}, options = {})
         req = build_request(:create_configuration_template, params)
         req.send_request(options)
@@ -528,7 +528,7 @@ module Aws
       #   your application.
       # @option params [String] :group_name
       #   The name of the group to which the target environment belongs. Specify
-      #   a group name only if the environment\'s name is specified in an
+      #   a group name only if the environment's name is specified in an
       #   environment manifest and not with the environment name parameter. See
       #   [Environment Manifest (env.yaml)][1] for details.
       #
@@ -667,8 +667,8 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      # @overload create_environment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_environment(params = {}, options = {})
         req = build_request(:create_environment, params)
         req.send_request(options)
@@ -683,8 +683,8 @@ module Aws
       #
       # @example Response structure
       #   resp.s3_bucket #=> String
+      # @overload create_storage_location(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_storage_location(params = {}, options = {})
         req = build_request(:create_storage_location, params)
         req.send_request(options)
@@ -707,8 +707,8 @@ module Aws
       #     application_name: "ApplicationName", # required
       #     terminate_env_by_force: false,
       #   })
+      # @overload delete_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application(params = {}, options = {})
         req = build_request(:delete_application, params)
         req.send_request(options)
@@ -739,8 +739,8 @@ module Aws
       #     version_label: "VersionLabel", # required
       #     delete_source_bundle: false,
       #   })
+      # @overload delete_application_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application_version(params = {}, options = {})
         req = build_request(:delete_application_version, params)
         req.send_request(options)
@@ -760,8 +760,8 @@ module Aws
       #     application_name: "ApplicationName", # required
       #     template_name: "ConfigurationTemplateName", # required
       #   })
+      # @overload delete_configuration_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_configuration_template(params = {}, options = {})
         req = build_request(:delete_configuration_template, params)
         req.send_request(options)
@@ -788,8 +788,8 @@ module Aws
       #     application_name: "ApplicationName", # required
       #     environment_name: "EnvironmentName", # required
       #   })
+      # @overload delete_environment_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_environment_configuration(params = {}, options = {})
         req = build_request(:delete_environment_configuration, params)
         req.send_request(options)
@@ -824,8 +824,8 @@ module Aws
       #   resp.application_versions[0].date_created #=> Time
       #   resp.application_versions[0].date_updated #=> Time
       #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      # @overload describe_application_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_application_versions(params = {}, options = {})
         req = build_request(:describe_application_versions, params)
         req.send_request(options)
@@ -854,8 +854,8 @@ module Aws
       #   resp.applications[0].versions[0] #=> String
       #   resp.applications[0].configuration_templates #=> Array
       #   resp.applications[0].configuration_templates[0] #=> String
+      # @overload describe_applications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_applications(params = {}, options = {})
         req = build_request(:describe_applications, params)
         req.send_request(options)
@@ -919,8 +919,8 @@ module Aws
       #   resp.options[0].max_length #=> Integer
       #   resp.options[0].regex.pattern #=> String
       #   resp.options[0].regex.label #=> String
+      # @overload describe_configuration_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_configuration_options(params = {}, options = {})
         req = build_request(:describe_configuration_options, params)
         req.send_request(options)
@@ -982,8 +982,8 @@ module Aws
       #   resp.configuration_settings[0].option_settings[0].namespace #=> String
       #   resp.configuration_settings[0].option_settings[0].option_name #=> String
       #   resp.configuration_settings[0].option_settings[0].value #=> String
+      # @overload describe_configuration_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_configuration_settings(params = {}, options = {})
         req = build_request(:describe_configuration_settings, params)
         req.send_request(options)
@@ -1056,14 +1056,14 @@ module Aws
       #   resp.instances_health.degraded #=> Integer
       #   resp.instances_health.severe #=> Integer
       #   resp.refreshed_at #=> Time
+      # @overload describe_environment_health(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_environment_health(params = {}, options = {})
         req = build_request(:describe_environment_health, params)
         req.send_request(options)
       end
 
-      # Lists an environment\'s completed and failed managed actions.
+      # Lists an environment's completed and failed managed actions.
       # @option params [String] :environment_id
       #   The environment ID of the target environment.
       # @option params [String] :environment_name
@@ -1096,14 +1096,14 @@ module Aws
       #   resp.managed_action_history_items[0].executed_time #=> Time
       #   resp.managed_action_history_items[0].finished_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_environment_managed_action_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_environment_managed_action_history(params = {}, options = {})
         req = build_request(:describe_environment_managed_action_history, params)
         req.send_request(options)
       end
 
-      # Lists an environment\'s upcoming and in-progress managed actions.
+      # Lists an environment's upcoming and in-progress managed actions.
       # @option params [String] :environment_name
       #   The name of the target environment.
       # @option params [String] :environment_id
@@ -1128,8 +1128,8 @@ module Aws
       #   resp.managed_actions[0].action_type #=> String, one of "InstanceRefresh", "PlatformUpdate", "Unknown"
       #   resp.managed_actions[0].status #=> String, one of "Scheduled", "Pending", "Running", "Unknown"
       #   resp.managed_actions[0].window_start_time #=> Time
+      # @overload describe_environment_managed_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_environment_managed_actions(params = {}, options = {})
         req = build_request(:describe_environment_managed_actions, params)
         req.send_request(options)
@@ -1173,8 +1173,8 @@ module Aws
       #   resp.environment_resources.queues #=> Array
       #   resp.environment_resources.queues[0].name #=> String
       #   resp.environment_resources.queues[0].url #=> String
+      # @overload describe_environment_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_environment_resources(params = {}, options = {})
         req = build_request(:describe_environment_resources, params)
         req.send_request(options)
@@ -1247,8 +1247,8 @@ module Aws
       #   resp.environments[0].environment_links #=> Array
       #   resp.environments[0].environment_links[0].link_name #=> String
       #   resp.environments[0].environment_links[0].environment_name #=> String
+      # @overload describe_environments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_environments(params = {}, options = {})
         req = build_request(:describe_environments, params)
         req.send_request(options)
@@ -1324,8 +1324,8 @@ module Aws
       #   resp.events[0].request_id #=> String
       #   resp.events[0].severity #=> String, one of "TRACE", "DEBUG", "INFO", "WARN", "ERROR", "FATAL"
       #   resp.next_token #=> String
+      # @overload describe_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_events(params = {}, options = {})
         req = build_request(:describe_events, params)
         req.send_request(options)
@@ -1398,8 +1398,8 @@ module Aws
       #   resp.instance_health_list[0].instance_type #=> String
       #   resp.refreshed_at #=> Time
       #   resp.next_token #=> String
+      # @overload describe_instances_health(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instances_health(params = {}, options = {})
         req = build_request(:describe_instances_health, params)
         req.send_request(options)
@@ -1418,8 +1418,8 @@ module Aws
       #   resp.solution_stack_details[0].solution_stack_name #=> String
       #   resp.solution_stack_details[0].permitted_file_types #=> Array
       #   resp.solution_stack_details[0].permitted_file_types[0] #=> String
+      # @overload list_available_solution_stacks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_available_solution_stacks(params = {}, options = {})
         req = build_request(:list_available_solution_stacks, params)
         req.send_request(options)
@@ -1447,8 +1447,8 @@ module Aws
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      # @overload rebuild_environment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def rebuild_environment(params = {}, options = {})
         req = build_request(:rebuild_environment, params)
         req.send_request(options)
@@ -1498,8 +1498,8 @@ module Aws
       #     environment_name: "EnvironmentName",
       #     info_type: "tail", # required, accepts tail, bundle
       #   })
+      # @overload request_environment_info(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_environment_info(params = {}, options = {})
         req = build_request(:request_environment_info, params)
         req.send_request(options)
@@ -1526,8 +1526,8 @@ module Aws
       #     environment_id: "EnvironmentId",
       #     environment_name: "EnvironmentName",
       #   })
+      # @overload restart_app_server(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restart_app_server(params = {}, options = {})
         req = build_request(:restart_app_server, params)
         req.send_request(options)
@@ -1540,7 +1540,7 @@ module Aws
       #
       # * RequestEnvironmentInfo
       # @option params [String] :environment_id
-      #   The ID of the data\'s environment.
+      #   The ID of the data's environment.
       #
       #   If no such environment is found, returns an `InvalidParameterValue`
       #   error.
@@ -1549,7 +1549,7 @@ module Aws
       #   both. If you do not specify either, AWS Elastic Beanstalk returns
       #   `MissingRequiredParameter` error.
       # @option params [String] :environment_name
-      #   The name of the data\'s environment.
+      #   The name of the data's environment.
       #
       #   If no such environment is found, returns an `InvalidParameterValue`
       #   error.
@@ -1576,8 +1576,8 @@ module Aws
       #   resp.environment_info[0].ec2_instance_id #=> String
       #   resp.environment_info[0].sample_timestamp #=> Time
       #   resp.environment_info[0].message #=> String
+      # @overload retrieve_environment_info(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retrieve_environment_info(params = {}, options = {})
         req = build_request(:retrieve_environment_info, params)
         req.send_request(options)
@@ -1620,8 +1620,8 @@ module Aws
       #     destination_environment_id: "EnvironmentId",
       #     destination_environment_name: "EnvironmentName",
       #   })
+      # @overload swap_environment_cnames(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def swap_environment_cnames(params = {}, options = {})
         req = build_request(:swap_environment_cnames, params)
         req.send_request(options)
@@ -1718,8 +1718,8 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      # @overload terminate_environment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_environment(params = {}, options = {})
         req = build_request(:terminate_environment, params)
         req.send_request(options)
@@ -1755,8 +1755,8 @@ module Aws
       #   resp.application.versions[0] #=> String
       #   resp.application.configuration_templates #=> Array
       #   resp.application.configuration_templates[0] #=> String
+      # @overload update_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_application(params = {}, options = {})
         req = build_request(:update_application, params)
         req.send_request(options)
@@ -1798,8 +1798,8 @@ module Aws
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
       #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      # @overload update_application_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_application_version(params = {}, options = {})
         req = build_request(:update_application_version, params)
         req.send_request(options)
@@ -1883,8 +1883,8 @@ module Aws
       #   resp.option_settings[0].namespace #=> String
       #   resp.option_settings[0].option_name #=> String
       #   resp.option_settings[0].value #=> String
+      # @overload update_configuration_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_configuration_template(params = {}, options = {})
         req = build_request(:update_configuration_template, params)
         req.send_request(options)
@@ -1924,7 +1924,7 @@ module Aws
       #   `MissingRequiredParameter` error.
       # @option params [String] :group_name
       #   The name of the group to which the target environment belongs. Specify
-      #   a group name only if the environment\'s name is specified in an
+      #   a group name only if the environment's name is specified in an
       #   environment manifest and not with the environment name or environment
       #   ID parameters. See [Environment Manifest (env.yaml)][1] for details.
       #
@@ -2038,8 +2038,8 @@ module Aws
       #   resp.environment_links #=> Array
       #   resp.environment_links[0].link_name #=> String
       #   resp.environment_links[0].environment_name #=> String
+      # @overload update_environment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_environment(params = {}, options = {})
         req = build_request(:update_environment, params)
         req.send_request(options)
@@ -2091,8 +2091,8 @@ module Aws
       #   resp.messages[0].severity #=> String, one of "error", "warning"
       #   resp.messages[0].namespace #=> String
       #   resp.messages[0].option_name #=> String
+      # @overload validate_configuration_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def validate_configuration_settings(params = {}, options = {})
         req = build_request(:validate_configuration_settings, params)
         req.send_request(options)

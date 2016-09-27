@@ -47,7 +47,7 @@ module Aws
       end
 
       # The UTC date when the vault was created. A string representation of
-      # ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".
+      # ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
       # @return [Time]
       def creation_date
         data.creation_date
@@ -55,7 +55,7 @@ module Aws
 
       # The UTC date when Amazon Glacier completed the last vault inventory. A
       # string representation of ISO 8601 date format, for example,
-      # \"2012-03-20T17:03:43.221Z\".
+      # "2012-03-20T17:03:43.221Z".
       # @return [Time]
       def last_inventory_date
         data.last_inventory_date
@@ -230,7 +230,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :statuscode
       #   Specifies the type of job status to return. You can specify the
-      #   following values: \"InProgress\", \"Succeeded\", or \"Failed\".
+      #   following values: "InProgress", "Succeeded", or "Failed".
       # @return [Job::Collection]
       def completed_jobs(options = {})
         batches = Enumerator.new do |y|
@@ -301,7 +301,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :statuscode
       #   Specifies the type of job status to return. You can specify the
-      #   following values: \"InProgress\", \"Succeeded\", or \"Failed\".
+      #   following values: "InProgress", "Succeeded", or "Failed".
       # @option options [String] :completed
       #   Specifies the state of the jobs to return. You can specify `true` or
       #   `false`.

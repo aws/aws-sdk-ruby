@@ -129,11 +129,9 @@ module Aws
 
       # Associates an Amazon VPC with a private hosted zone.
       #
-      # <important markdown="1"> The VPC and the hosted zone must already exist, and you must have
+      # The VPC and the hosted zone must already exist, and you must have
       # created a private hosted zone. You cannot convert a public hosted zone
       # into a private hosted zone.
-      #
-      #  </important>
       #
       # Send a `POST` request to the `/Amazon Route 53 API
       # version/hostedzone/hosted zone ID/associatevpc` resource. The request
@@ -155,11 +153,11 @@ module Aws
       # @option params [required, String] :hosted_zone_id
       #   The ID of the hosted zone you want to associate your VPC with.
       #
-      #   Note that you cannot associate a VPC with a hosted zone that doesn\'t
+      #   Note that you cannot associate a VPC with a hosted zone that doesn't
       #   have an existing VPC association.
       # @option params [required, Types::VPC] :vpc
       #   A complex type containing information about the Amazon VPC that
-      #   you\'re associating with the specified hosted zone.
+      #   you're associating with the specified hosted zone.
       # @option params [String] :comment
       #   *Optional:* A comment about the association request.
       # @return [Types::AssociateVPCWithHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -181,8 +179,8 @@ module Aws
       #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
       #   resp.change_info.submitted_at #=> Time
       #   resp.change_info.comment #=> String
+      # @overload associate_vpc_with_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def associate_vpc_with_hosted_zone(params = {}, options = {})
         req = build_request(:associate_vpc_with_hosted_zone, params)
         req.send_request(options)
@@ -211,12 +209,10 @@ module Aws
       # (plus any other changes in the batch) fail, and the original `CNAME`
       # record continues to exist.
       #
-      # <important markdown="1"> Due to the nature of transactional changes, you cannot delete the same
+      # Due to the nature of transactional changes, you cannot delete the same
       # resource record set more than once in a single change batch. If you
       # attempt to delete the same change batch more than once, Amazon Route
       # 53 returns an `InvalidChangeBatch` error.
-      #
-      #  </important>
       #
       # <note markdown="1"> To create resource record sets for complex routing configurations, use
       # either the traffic flow visual editor in the Amazon Route 53 console
@@ -225,7 +221,7 @@ module Aws
       # policy with one or more domain names (such as example.com) or
       # subdomain names (such as www.example.com), in the same hosted zone or
       # in multiple hosted zones. You can roll back the updates if the new
-      # configuration isn\'t performing as expected. For more information, see
+      # configuration isn't performing as expected. For more information, see
       # [Using Traffic Flow to Route DNS Traffic][1] in the Amazon Route 53
       # API Reference or [Actions on Traffic Policies and Traffic Policy
       # Instances][2] in this guide.
@@ -242,7 +238,7 @@ module Aws
       #   specified values for `Name`, `Type`, `Set Identifier` (for code
       #   latency, weighted, geolocation, and failover resource record sets),
       #   and `TTL` (except alias resource record sets, for which the TTL is
-      #   determined by the AWS resource you\'re routing queries to).
+      #   determined by the AWS resource you're routing queries to).
       #
       # * `UPSERT`\: If a resource record set does not already exist, AWS
       #   creates it. If a resource set does exist, Amazon Route 53 updates it
@@ -361,8 +357,8 @@ module Aws
       #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
       #   resp.change_info.submitted_at #=> Time
       #   resp.change_info.comment #=> String
+      # @overload change_resource_record_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_resource_record_sets(params = {}, options = {})
         req = build_request(:change_resource_record_sets, params)
         req.send_request(options)
@@ -401,8 +397,8 @@ module Aws
       #     ],
       #     remove_tag_keys: ["TagKey"],
       #   })
+      # @overload change_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_tags_for_resource(params = {}, options = {})
         req = build_request(:change_tags_for_resource, params)
         req.send_request(options)
@@ -521,8 +517,8 @@ module Aws
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
       #   resp.location #=> String
+      # @overload create_health_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_health_check(params = {}, options = {})
         req = build_request(:create_health_check, params)
         req.send_request(options)
@@ -532,11 +528,9 @@ module Aws
       # System (DNS) routes traffic on the Internet for a domain, such as
       # example.com, and its subdomains.
       #
-      # <important markdown="1"> Public hosted zones cannot be converted to a private hosted zone or
+      # Public hosted zones cannot be converted to a private hosted zone or
       # vice versa. Instead, create a new hosted zone with the same name and
       # create new resource record sets.
-      #
-      #  </important>
       #
       # Send a `POST` request to the `/Amazon Route 53 API version/hostedzone`
       # resource. The request body must include an XML document with a
@@ -560,7 +554,7 @@ module Aws
       #   Route 53, you must update the name servers with your registrar to
       #   make Amazon Route 53 your DNS service. For more information, see
       #   [Configuring Amazon Route 53 as your DNS Service][3] in the *Amazon
-      #   Route 53 Developer\'s Guide*.
+      #   Route 53 Developer's Guide*.
       #
       # After creating a zone, its initial status is `PENDING`. This means
       # that it is not yet available on all DNS servers. The status of the
@@ -584,7 +578,7 @@ module Aws
       #   Amazon Route 53 treats *www.example.com* (without a trailing dot) and
       #   *www.example.com.* (with a trailing dot) as identical.
       #
-      #   If you\'re creating a public hosted zone, this is the name you have
+      #   If you're creating a public hosted zone, this is the name you have
       #   registered with your DNS registrar. If your domain name is registered
       #   with a registrar other than Amazon Route 53, change the name servers
       #   for your domain to the set of `NameServers` that `CreateHostedZone`
@@ -601,7 +595,7 @@ module Aws
       #   any unique string, for example, a date/time stamp.
       # @option params [Types::HostedZoneConfig] :hosted_zone_config
       #   (Optional) A complex type that contains an optional comment about your
-      #   hosted zone. If you don\'t want to specify a comment, omit both the
+      #   hosted zone. If you don't want to specify a comment, omit both the
       #   `HostedZoneConfig` and `Comment` elements.
       # @option params [String] :delegation_set_id
       #   If you want to associate a reusable delegation set with this hosted
@@ -661,8 +655,8 @@ module Aws
       #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vpc.vpc_id #=> String
       #   resp.location #=> String
+      # @overload create_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_hosted_zone(params = {}, options = {})
         req = build_request(:create_hosted_zone, params)
         req.send_request(options)
@@ -716,8 +710,8 @@ module Aws
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
       #   resp.location #=> String
+      # @overload create_reusable_delegation_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_reusable_delegation_set(params = {}, options = {})
         req = build_request(:create_reusable_delegation_set, params)
         req.send_request(options)
@@ -765,8 +759,8 @@ module Aws
       #   resp.traffic_policy.document #=> String
       #   resp.traffic_policy.comment #=> String
       #   resp.location #=> String
+      # @overload create_traffic_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_traffic_policy(params = {}, options = {})
         req = build_request(:create_traffic_policy, params)
         req.send_request(options)
@@ -827,8 +821,8 @@ module Aws
       #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
       #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.location #=> String
+      # @overload create_traffic_policy_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_traffic_policy_instance(params = {}, options = {})
         req = build_request(:create_traffic_policy_instance, params)
         req.send_request(options)
@@ -841,7 +835,7 @@ module Aws
       # DNS resource record sets for one domain name (such as example.com) or
       # one subdomain name (such as www.example.com). You can create a maximum
       # of 1000 versions of a traffic policy. If you reach the limit and need
-      # to create another version, you\'ll need to start a new traffic policy.
+      # to create another version, you'll need to start a new traffic policy.
       #
       # Send a `POST` request to the `/Amazon Route 53 version/trafficpolicy/`
       # resource. The request body includes a document with a
@@ -878,8 +872,8 @@ module Aws
       #   resp.traffic_policy.document #=> String
       #   resp.traffic_policy.comment #=> String
       #   resp.location #=> String
+      # @overload create_traffic_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_traffic_policy_version(params = {}, options = {})
         req = build_request(:create_traffic_policy_version, params)
         req.send_request(options)
@@ -888,16 +882,14 @@ module Aws
       # Deletes a health check. Send a `DELETE` request to the
       # `/2013-04-01/healthcheck/health check ID ` resource.
       #
-      # <important markdown="1"> Amazon Route 53 does not prevent you from deleting a health check even
+      # Amazon Route 53 does not prevent you from deleting a health check even
       # if the health check is associated with one or more resource record
-      # sets. If you delete a health check and you don\'t update the
+      # sets. If you delete a health check and you don't update the
       # associated resource record sets, the future status of the health check
       # cannot be predicted and may change. This will affect the routing of
       # DNS queries for your DNS failover configuration. For more information,
       # see [Replacing and Deleting Health Checks][1] in the Amazon Route 53
       # Developer Guide.
-      #
-      #  </important>
       #
       #
       #
@@ -909,8 +901,8 @@ module Aws
       #   resp = client.delete_health_check({
       #     health_check_id: "HealthCheckId", # required
       #   })
+      # @overload delete_health_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_health_check(params = {}, options = {})
         req = build_request(:delete_health_check, params)
         req.send_request(options)
@@ -919,15 +911,13 @@ module Aws
       # Deletes a hosted zone. Send a `DELETE` request to the `/Amazon Route
       # 53 API version/hostedzone/hosted zone ID ` resource.
       #
-      # <important markdown="1"> Delete a hosted zone only if there are no resource record sets other
+      # Delete a hosted zone only if there are no resource record sets other
       # than the default SOA record and NS resource record sets. If the hosted
       # zone contains other resource record sets, delete them before deleting
       # the hosted zone. If you try to delete a hosted zone that contains
       # other resource record sets, Amazon Route 53 denies your request with a
       # `HostedZoneNotEmpty` error. For information about deleting records
       # from your hosted zone, see ChangeResourceRecordSets.
-      #
-      #  </important>
       # @option params [required, String] :id
       #   The ID of the hosted zone you want to delete.
       # @return [Types::DeleteHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -944,8 +934,8 @@ module Aws
       #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
       #   resp.change_info.submitted_at #=> Time
       #   resp.change_info.comment #=> String
+      # @overload delete_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_hosted_zone(params = {}, options = {})
         req = build_request(:delete_hosted_zone, params)
         req.send_request(options)
@@ -954,10 +944,8 @@ module Aws
       # Deletes a reusable delegation set. Send a `DELETE` request to the
       # `/2013-04-01/delegationset/delegation set ID ` resource.
       #
-      # <important markdown="1"> You can delete a reusable delegation set only if there are no
+      # You can delete a reusable delegation set only if there are no
       # associated hosted zones.
-      #
-      #  </important>
       #
       # To verify that the reusable delegation set is not associated with any
       # hosted zones, run the GetReusableDelegationSet action and specify the
@@ -970,8 +958,8 @@ module Aws
       #   resp = client.delete_reusable_delegation_set({
       #     id: "ResourceId", # required
       #   })
+      # @overload delete_reusable_delegation_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_reusable_delegation_set(params = {}, options = {})
         req = build_request(:delete_reusable_delegation_set, params)
         req.send_request(options)
@@ -992,8 +980,8 @@ module Aws
       #     id: "TrafficPolicyId", # required
       #     version: 1, # required
       #   })
+      # @overload delete_traffic_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_traffic_policy(params = {}, options = {})
         req = build_request(:delete_traffic_policy, params)
         req.send_request(options)
@@ -1012,19 +1000,17 @@ module Aws
       # @option params [required, String] :id
       #   The ID of the traffic policy instance that you want to delete.
       #
-      #   <important markdown="1"> When you delete a traffic policy instance, Amazon Route 53 also
+      #   When you delete a traffic policy instance, Amazon Route 53 also
       #   deletes all of the resource record sets that were created when you
       #   created the traffic policy instance.
-      #
-      #    </important>
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_traffic_policy_instance({
       #     id: "TrafficPolicyInstanceId", # required
       #   })
+      # @overload delete_traffic_policy_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_traffic_policy_instance(params = {}, options = {})
         req = build_request(:delete_traffic_policy_instance, params)
         req.send_request(options)
@@ -1038,17 +1024,15 @@ module Aws
       # `DisassociateVPCFromHostedZoneRequest` element. The response returns
       # the `DisassociateVPCFromHostedZoneResponse` element.
       #
-      # <important markdown="1"> You can only disassociate a VPC from a private hosted zone when two or
+      # You can only disassociate a VPC from a private hosted zone when two or
       # more VPCs are associated with that hosted zone. You cannot convert a
       # private hosted zone into a public hosted zone.
-      #
-      #  </important>
       # @option params [required, String] :hosted_zone_id
       #   The ID of the VPC that you want to disassociate from an Amazon Route
       #   53 hosted zone.
       # @option params [required, Types::VPC] :vpc
       #   A complex type containing information about the Amazon VPC that
-      #   you\'re disassociating from the specified hosted zone.
+      #   you're disassociating from the specified hosted zone.
       # @option params [String] :comment
       #   *Optional:* A comment about the disassociation request.
       # @return [Types::DisassociateVPCFromHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1070,8 +1054,8 @@ module Aws
       #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
       #   resp.change_info.submitted_at #=> Time
       #   resp.change_info.comment #=> String
+      # @overload disassociate_vpc_from_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disassociate_vpc_from_hosted_zone(params = {}, options = {})
         req = build_request(:disassociate_vpc_from_hosted_zone, params)
         req.send_request(options)
@@ -1104,8 +1088,8 @@ module Aws
       #   resp.change_info.status #=> String, one of "PENDING", "INSYNC"
       #   resp.change_info.submitted_at #=> Time
       #   resp.change_info.comment #=> String
+      # @overload get_change(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_change(params = {}, options = {})
         req = build_request(:get_change, params)
         req.send_request(options)
@@ -1149,8 +1133,8 @@ module Aws
       #   resp.change_batch_record.changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
       #   resp.change_batch_record.changes[0].resource_record_set.health_check_id #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.traffic_policy_instance_id #=> String
+      # @overload get_change_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_change_details(params = {}, options = {})
         req = build_request(:get_change_details, params)
         req.send_request(options)
@@ -1171,8 +1155,8 @@ module Aws
       # @example Response structure
       #   resp.checker_ip_ranges #=> Array
       #   resp.checker_ip_ranges[0] #=> String
+      # @overload get_checker_ip_ranges(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_checker_ip_ranges(params = {}, options = {})
         req = build_request(:get_checker_ip_ranges, params)
         req.send_request(options)
@@ -1207,7 +1191,7 @@ module Aws
       # @option params [String] :subdivision_code
       #   Amazon Route 53 uses the one- to three-letter subdivision codes that
       #   are specified in [ISO standard 3166-1 alpha-2][1]. Amazon Route 53
-      #   doesn\'t support subdivision codes for all countries. If you specify
+      #   doesn't support subdivision codes for all countries. If you specify
       #   `SubdivisionCode`, you must also specify `CountryCode`.
       #
       #
@@ -1231,8 +1215,8 @@ module Aws
       #   resp.geo_location_details.country_name #=> String
       #   resp.geo_location_details.subdivision_code #=> String
       #   resp.geo_location_details.subdivision_name #=> String
+      # @overload get_geo_location(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_geo_location(params = {}, options = {})
         req = build_request(:get_geo_location, params)
         req.send_request(options)
@@ -1294,8 +1278,8 @@ module Aws
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions #=> Array
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
+      # @overload get_health_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_health_check(params = {}, options = {})
         req = build_request(:get_health_check, params)
         req.send_request(options)
@@ -1312,8 +1296,8 @@ module Aws
       #
       # @example Response structure
       #   resp.health_check_count #=> Integer
+      # @overload get_health_check_count(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_health_check_count(params = {}, options = {})
         req = build_request(:get_health_check_count, params)
         req.send_request(options)
@@ -1342,8 +1326,8 @@ module Aws
       #   resp.health_check_observations[0].ip_address #=> String
       #   resp.health_check_observations[0].status_report.status #=> String
       #   resp.health_check_observations[0].status_report.checked_time #=> Time
+      # @overload get_health_check_last_failure_reason(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_health_check_last_failure_reason(params = {}, options = {})
         req = build_request(:get_health_check_last_failure_reason, params)
         req.send_request(options)
@@ -1351,7 +1335,7 @@ module Aws
 
       # Gets status of a specified health check. Send a `GET` request to the
       # `/2013-04-01/healthcheck/health check ID/status` resource. You can use
-      # this call to get a health check\'s current status.
+      # this call to get a health check's current status.
       # @option params [required, String] :health_check_id
       #   If you want Amazon Route 53 to return this resource record set in
       #   response to a DNS query only when a health check is passing, include
@@ -1362,7 +1346,7 @@ module Aws
       #   periodically sending a request to the endpoint that is specified in
       #   the health check. If that endpoint returns an HTTP status code of 2xx
       #   or 3xx, the endpoint is healthy. If the endpoint returns an HTTP
-      #   status code of 400 or greater, or if the endpoint doesn\'t respond for
+      #   status code of 400 or greater, or if the endpoint doesn't respond for
       #   a certain amount of time, Amazon Route 53 considers the endpoint
       #   unhealthy and also considers the resource record set unhealthy.
       #
@@ -1372,7 +1356,7 @@ module Aws
       #   status of a health check. Configuring health checks only makes sense
       #   in the following configurations:
       #
-      #   * You\'re checking the health of the resource record sets in a
+      #   * You're checking the health of the resource record sets in a
       #     weighted, latency, geolocation, or failover resource record set, and
       #     you specify health check IDs for all of the resource record sets. If
       #     the health check for one resource record set specifies an endpoint
@@ -1386,7 +1370,7 @@ module Aws
       #     alias resource record sets. For more information about this
       #     configuration, see `EvaluateTargetHealth`.
       #
-      #     Amazon Route 53 doesn\'t check the health of the endpoint specified
+      #     Amazon Route 53 doesn't check the health of the endpoint specified
       #     in the resource record set, for example, the endpoint specified by
       #     the IP address in the `Value` element. When you add a
       #     `HealthCheckId` element to a resource record set, Amazon Route 53
@@ -1412,12 +1396,10 @@ module Aws
       #   (such as `us-east-1-www.example.com`), not the name of the resource
       #   record sets (example.com).
       #
-      #   <important markdown="1"> In this configuration, if you create a health check for which the
+      #   In this configuration, if you create a health check for which the
       #   value of `FullyQualifiedDomainName` matches the name of the resource
       #   record sets and then associate the health check with those resource
       #   record sets, health check results will be unpredictable.
-      #
-      #    </important>
       # @return [Types::GetHealthCheckStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetHealthCheckStatusResponse#health_check_observations #HealthCheckObservations} => Array&lt;Types::HealthCheckObservation&gt;
@@ -1433,8 +1415,8 @@ module Aws
       #   resp.health_check_observations[0].ip_address #=> String
       #   resp.health_check_observations[0].status_report.status #=> String
       #   resp.health_check_observations[0].status_report.checked_time #=> Time
+      # @overload get_health_check_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_health_check_status(params = {}, options = {})
         req = build_request(:get_health_check_status, params)
         req.send_request(options)
@@ -1471,8 +1453,8 @@ module Aws
       #   resp.vp_cs #=> Array
       #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vp_cs[0].vpc_id #=> String
+      # @overload get_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_hosted_zone(params = {}, options = {})
         req = build_request(:get_hosted_zone, params)
         req.send_request(options)
@@ -1489,8 +1471,8 @@ module Aws
       #
       # @example Response structure
       #   resp.hosted_zone_count #=> Integer
+      # @overload get_hosted_zone_count(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_hosted_zone_count(params = {}, options = {})
         req = build_request(:get_hosted_zone_count, params)
         req.send_request(options)
@@ -1515,8 +1497,8 @@ module Aws
       #   resp.delegation_set.caller_reference #=> String
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
+      # @overload get_reusable_delegation_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_reusable_delegation_set(params = {}, options = {})
         req = build_request(:get_reusable_delegation_set, params)
         req.send_request(options)
@@ -1548,8 +1530,8 @@ module Aws
       #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.traffic_policy.document #=> String
       #   resp.traffic_policy.comment #=> String
+      # @overload get_traffic_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_traffic_policy(params = {}, options = {})
         req = build_request(:get_traffic_policy, params)
         req.send_request(options)
@@ -1561,7 +1543,7 @@ module Aws
       # version/trafficpolicyinstance` resource.
       #
       # <note markdown="1"> After you submit a `CreateTrafficPolicyInstance` or an
-      # `UpdateTrafficPolicyInstance` request, there\'s a brief delay while
+      # `UpdateTrafficPolicyInstance` request, there's a brief delay while
       # Amazon Route 53 creates the resource record sets that are specified in
       # the traffic policy definition. For more information, see the `State`
       # response element.
@@ -1594,8 +1576,8 @@ module Aws
       #   resp.traffic_policy_instance.traffic_policy_id #=> String
       #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
       #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+      # @overload get_traffic_policy_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_traffic_policy_instance(params = {}, options = {})
         req = build_request(:get_traffic_policy_instance, params)
         req.send_request(options)
@@ -1615,8 +1597,8 @@ module Aws
       #
       # @example Response structure
       #   resp.traffic_policy_instance_count #=> Integer
+      # @overload get_traffic_policy_instance_count(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_traffic_policy_instance_count(params = {}, options = {})
         req = build_request(:get_traffic_policy_instance_count, params)
         req.send_request(options)
@@ -1681,8 +1663,8 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.health_check_id #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.traffic_policy_instance_id #=> String
       #   resp.next_marker #=> String
+      # @overload list_change_batches_by_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_change_batches_by_hosted_zone(params = {}, options = {})
         req = build_request(:list_change_batches_by_hosted_zone, params)
         req.send_request(options)
@@ -1756,8 +1738,8 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.health_check_id #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.traffic_policy_instance_id #=> String
       #   resp.next_marker #=> String
+      # @overload list_change_batches_by_rr_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_change_batches_by_rr_set(params = {}, options = {})
         req = build_request(:list_change_batches_by_rr_set, params)
         req.send_request(options)
@@ -1781,7 +1763,7 @@ module Aws
       #   return the next page of results.
       #
       #   Include `StartContinentCode` only if you want to list continents.
-      #   Don\'t include `StartContinentCode` when you\'re listing countries or
+      #   Don't include `StartContinentCode` when you're listing countries or
       #   countries with their subdivisions.
       # @option params [String] :start_country_code
       #   The code for the country with which you want to start listing
@@ -1843,8 +1825,8 @@ module Aws
       #   resp.next_country_code #=> String
       #   resp.next_subdivision_code #=> String
       #   resp.max_items #=> Integer
+      # @overload list_geo_locations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_geo_locations(params = {}, options = {})
         req = build_request(:list_geo_locations, params)
         req.send_request(options)
@@ -1941,8 +1923,8 @@ module Aws
       #   resp.is_truncated #=> Boolean
       #   resp.next_marker #=> String
       #   resp.max_items #=> Integer
+      # @overload list_health_checks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_health_checks(params = {}, options = {})
         req = build_request(:list_health_checks, params)
         req.send_request(options)
@@ -1973,7 +1955,7 @@ module Aws
       #   If `IsTruncated` is false, the `NextMarker` element is omitted from
       #   the response.
       #
-      # * If you\'re making the second or subsequent call to
+      # * If you're making the second or subsequent call to
       #   `ListHostedZones`, the `Marker` element matches the value that you
       #   specified in the `marker` parameter in the previous request.
       # @option params [String] :marker
@@ -2019,8 +2001,8 @@ module Aws
       #   resp.is_truncated #=> Boolean
       #   resp.next_marker #=> String
       #   resp.max_items #=> Integer
+      # @overload list_hosted_zones(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_hosted_zones(params = {}, options = {})
         req = build_request(:list_hosted_zones, params)
         req.send_request(options)
@@ -2092,7 +2074,7 @@ module Aws
       # @option params [String] :dns_name
       #   (Optional) For your first request to `ListHostedZonesByName`, include
       #   the `dnsname` parameter only if you want to specify the name of the
-      #   first hosted zone in the response. If you don\'t include the `dnsname`
+      #   first hosted zone in the response. If you don't include the `dnsname`
       #   parameter, Amazon Route 53 returns all of the hosted zones that were
       #   created by the current AWS account, in ASCII order. For subsequent
       #   requests, include both `dnsname` and `hostedzoneid` parameters. For
@@ -2146,8 +2128,8 @@ module Aws
       #   resp.next_dns_name #=> String
       #   resp.next_hosted_zone_id #=> String
       #   resp.max_items #=> Integer
+      # @overload list_hosted_zones_by_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_hosted_zones_by_name(params = {}, options = {})
         req = build_request(:list_hosted_zones_by_name, params)
         req.send_request(options)
@@ -2238,8 +2220,8 @@ module Aws
       #   resp.next_record_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.next_record_identifier #=> String
       #   resp.max_items #=> Integer
+      # @overload list_resource_record_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_resource_record_sets(params = {}, options = {})
         req = build_request(:list_resource_record_sets, params)
         req.send_request(options)
@@ -2259,7 +2241,7 @@ module Aws
       #
       #  </note>
       # @option params [String] :marker
-      #   If you\'re making the second or subsequent call to
+      #   If you're making the second or subsequent call to
       #   `ListReusableDelegationSets`, the `Marker` element matches the value
       #   that you specified in the `marker` parameter in the previous request.
       # @option params [Integer] :max_items
@@ -2289,8 +2271,8 @@ module Aws
       #   resp.is_truncated #=> Boolean
       #   resp.next_marker #=> String
       #   resp.max_items #=> Integer
+      # @overload list_reusable_delegation_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_reusable_delegation_sets(params = {}, options = {})
         req = build_request(:list_reusable_delegation_sets, params)
         req.send_request(options)
@@ -2320,8 +2302,8 @@ module Aws
       #   resp.resource_tag_set.tags #=> Array
       #   resp.resource_tag_set.tags[0].key #=> String
       #   resp.resource_tag_set.tags[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -2353,8 +2335,8 @@ module Aws
       #   resp.resource_tag_sets[0].tags #=> Array
       #   resp.resource_tag_sets[0].tags[0].key #=> String
       #   resp.resource_tag_sets[0].tags[0].value #=> String
+      # @overload list_tags_for_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resources(params = {}, options = {})
         req = build_request(:list_tags_for_resources, params)
         req.send_request(options)
@@ -2438,8 +2420,8 @@ module Aws
       #   resp.is_truncated #=> Boolean
       #   resp.traffic_policy_id_marker #=> String
       #   resp.max_items #=> Integer
+      # @overload list_traffic_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_traffic_policies(params = {}, options = {})
         req = build_request(:list_traffic_policies, params)
         req.send_request(options)
@@ -2448,7 +2430,7 @@ module Aws
       # Gets information about the traffic policy instances that you created
       # by using the current AWS account.
       #
-      # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there\'s a
+      # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there's a
       # brief delay while Amazon Route 53 creates the resource record sets
       # that are specified in the traffic policy definition. For more
       # information, see the `State` response element.
@@ -2568,8 +2550,8 @@ module Aws
       #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.is_truncated #=> Boolean
       #   resp.max_items #=> Integer
+      # @overload list_traffic_policy_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_traffic_policy_instances(params = {}, options = {})
         req = build_request(:list_traffic_policy_instances, params)
         req.send_request(options)
@@ -2578,7 +2560,7 @@ module Aws
       # Gets information about the traffic policy instances that you created
       # in a specified hosted zone.
       #
-      # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there\'s a
+      # <note markdown="1"> After you submit an `UpdateTrafficPolicyInstance` request, there's a
       # brief delay while Amazon Route 53 creates the resource record sets
       # that are specified in the traffic policy definition. For more
       # information, see the `State` response element.
@@ -2682,8 +2664,8 @@ module Aws
       #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.is_truncated #=> Boolean
       #   resp.max_items #=> Integer
+      # @overload list_traffic_policy_instances_by_hosted_zone(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_traffic_policy_instances_by_hosted_zone(params = {}, options = {})
         req = build_request(:list_traffic_policy_instances_by_hosted_zone, params)
         req.send_request(options)
@@ -2693,7 +2675,7 @@ module Aws
       # by using a specify traffic policy version.
       #
       # <note markdown="1"> After you submit a `CreateTrafficPolicyInstance` or an
-      # `UpdateTrafficPolicyInstance` request, there\'s a brief delay while
+      # `UpdateTrafficPolicyInstance` request, there's a brief delay while
       # Amazon Route 53 creates the resource record sets that are specified in
       # the traffic policy definition. For more information, see the `State`
       # response element.
@@ -2829,8 +2811,8 @@ module Aws
       #   resp.traffic_policy_instance_type_marker #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.is_truncated #=> Boolean
       #   resp.max_items #=> Integer
+      # @overload list_traffic_policy_instances_by_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_traffic_policy_instances_by_policy(params = {}, options = {})
         req = build_request(:list_traffic_policy_instances_by_policy, params)
         req.send_request(options)
@@ -2922,8 +2904,8 @@ module Aws
       #   resp.is_truncated #=> Boolean
       #   resp.traffic_policy_version_marker #=> String
       #   resp.max_items #=> Integer
+      # @overload list_traffic_policy_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_traffic_policy_versions(params = {}, options = {})
         req = build_request(:list_traffic_policy_versions, params)
         req.send_request(options)
@@ -2962,8 +2944,8 @@ module Aws
       #   resp.record_data[0] #=> String
       #   resp.response_code #=> String
       #   resp.protocol #=> String
+      # @overload test_dns_answer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_dns_answer(params = {}, options = {})
         req = build_request(:test_dns_answer, params)
         req.send_request(options)
@@ -3006,7 +2988,7 @@ module Aws
       #     `HealthCheckVersionMismatch` error.
       # @option params [String] :ip_address
       #   The IPv4 IP address of the endpoint on which you want Amazon Route 53
-      #   to perform health checks. If you don\'t specify a value for
+      #   to perform health checks. If you don't specify a value for
       #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the domain
       #   name that you specify in `FullyQualifiedDomainName` at the interval
       #   you specify in `RequestInterval`. Using an IP address that DNS
@@ -3020,7 +3002,7 @@ module Aws
       #   Linux Instances*.
       #
       #   <note markdown="1"> If a health check already has a value for `IPAddress`, you can change
-      #   the value. However, you can\'t update an existing health check to add
+      #   the value. However, you can't update an existing health check to add
       #   or remove the value of `IPAddress`.
       #
       #    </note>
@@ -3046,7 +3028,7 @@ module Aws
       #   `IPAddress`.
       #
       #   <note markdown="1"> If a health check already has a value for `IPAddress`, you can change
-      #   the value. However, you can\'t update an existing health check to add
+      #   the value. However, you can't update an existing health check to add
       #   or remove the value of `IPAddress`.
       #
       #    </note>
@@ -3072,13 +3054,13 @@ module Aws
       #     <code>FullyQualifiedDomainName</code>\:<code>Port</code> </i> to the
       #     endpoint in the Host header.
       #
-      #   If you don\'t specify a value for `FullyQualifiedDomainName`, Amazon
+      #   If you don't specify a value for `FullyQualifiedDomainName`, Amazon
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header in
       #   each of the above cases.
       #
-      #   **If you don\'t specify** `IPAddress`\:
+      #   **If you don't specify** `IPAddress`\:
       #
-      #   If you don\'t specify a value for `IPAddress`, Amazon Route 53 sends a
+      #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends a
       #   DNS request to the domain that you specify in
       #   `FullyQualifiedDomainName` at the interval you specify in
       #   `RequestInterval`. Using an IP address that DNS returns, Amazon Route
@@ -3093,24 +3075,22 @@ module Aws
       #   server (such as `us-east-1-www.example.com`), not the name of the
       #   resource record sets (www.example.com).
       #
-      #   <important markdown="1"> In this configuration, if the value of `FullyQualifiedDomainName`
+      #   In this configuration, if the value of `FullyQualifiedDomainName`
       #   matches the name of the resource record sets and you then associate
       #   the health check with those resource record sets, health check results
       #   will be unpredictable.
-      #
-      #    </important>
       #
       #   In addition, if the value of `Type` is `HTTP`, `HTTPS`,
       #   `HTTP_STR_MATCH`, or `HTTPS_STR_MATCH`, Amazon Route 53 passes the
       #   value of `FullyQualifiedDomainName` in the `Host` header, as it does
       #   when you specify a value for `IPAddress`. If the value of `Type` is
-      #   `TCP`, Amazon Route 53 doesn\'t pass a `Host` header.
+      #   `TCP`, Amazon Route 53 doesn't pass a `Host` header.
       # @option params [String] :search_string
       #   If the value of `Type` is `HTTP_STR_MATCH` or `HTTP_STR_MATCH`, the
       #   string that you want Amazon Route 53 to search for in the response
       #   body from the specified resource. If the string appears in the
       #   response body, Amazon Route 53 considers the resource healthy. (You
-      #   can\'t change the value of `Type` when you update a health check.)
+      #   can't change the value of `Type` when you update a health check.)
       # @option params [Integer] :failure_threshold
       #   The number of consecutive health checks that an endpoint must pass or
       #   fail for Amazon Route 53 to change the current status of the endpoint
@@ -3153,10 +3133,10 @@ module Aws
       #   certificate.
       #
       #   Some endpoints require that HTTPS requests include the host name in
-      #   the `client_hello` message. If you don\'t enable SNI, the status of
+      #   the `client_hello` message. If you don't enable SNI, the status of
       #   the health check will be SSL alert `handshake_failure`. A health check
       #   can also have that status for other reasons. If SNI is enabled and
-      #   you\'re still getting the error, check the SSL/TLS configuration on
+      #   you're still getting the error, check the SSL/TLS configuration on
       #   your endpoint and confirm that your certificate is valid.
       #
       #   The SSL/TLS certificate on your endpoint includes a domain name in the
@@ -3237,8 +3217,8 @@ module Aws
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions #=> Array
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].name #=> String
       #   resp.health_check.cloud_watch_alarm_configuration.dimensions[0].value #=> String
+      # @overload update_health_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_health_check(params = {}, options = {})
         req = build_request(:update_health_check, params)
         req.send_request(options)
@@ -3249,7 +3229,7 @@ module Aws
       # @option params [required, String] :id
       #   The ID for the hosted zone for which you want to update the comment.
       # @option params [String] :comment
-      #   The new comment for the hosted zone. If you don\'t specify a value for
+      #   The new comment for the hosted zone. If you don't specify a value for
       #   `Comment`, Amazon Route 53 deletes the existing value of the `Comment`
       #   element, if any.
       # @return [Types::UpdateHostedZoneCommentResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3269,8 +3249,8 @@ module Aws
       #   resp.hosted_zone.config.comment #=> String
       #   resp.hosted_zone.config.private_zone #=> Boolean
       #   resp.hosted_zone.resource_record_set_count #=> Integer
+      # @overload update_hosted_zone_comment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_hosted_zone_comment(params = {}, options = {})
         req = build_request(:update_hosted_zone_comment, params)
         req.send_request(options)
@@ -3309,8 +3289,8 @@ module Aws
       #   resp.traffic_policy.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.traffic_policy.document #=> String
       #   resp.traffic_policy.comment #=> String
+      # @overload update_traffic_policy_comment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_traffic_policy_comment(params = {}, options = {})
         req = build_request(:update_traffic_policy_comment, params)
         req.send_request(options)
@@ -3375,8 +3355,8 @@ module Aws
       #   resp.traffic_policy_instance.traffic_policy_id #=> String
       #   resp.traffic_policy_instance.traffic_policy_version #=> Integer
       #   resp.traffic_policy_instance.traffic_policy_type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
+      # @overload update_traffic_policy_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_traffic_policy_instance(params = {}, options = {})
         req = build_request(:update_traffic_policy_instance, params)
         req.send_request(options)

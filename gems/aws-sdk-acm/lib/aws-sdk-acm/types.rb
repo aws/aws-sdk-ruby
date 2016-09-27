@@ -136,7 +136,7 @@ module Aws
       #
       # @!attribute [rw] failure_reason
       #   The reason the certificate request failed. This value exists only
-      #   when the structure\'s `Status` is `FAILED`. For more information,
+      #   when the structure's `Status` is `FAILED`. For more information,
       #   see [Certificate Request Failed][1] in the *AWS Certificate Manager
       #   User Guide*.
       #

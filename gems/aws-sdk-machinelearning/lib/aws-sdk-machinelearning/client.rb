@@ -139,7 +139,7 @@ module Aws
       # Adds one or more tags to an object, up to a limit of 10. Each tag
       # consists of a key and an optional value. If you add a tag using a key
       # that is already associated with the ML object, `AddTags` updates the
-      # tag\'s value.
+      # tag's value.
       # @option params [required, Array<Types::Tag>] :tags
       #   The key-value pairs to use to create tags. If you specify a key
       #   without specifying a value, Amazon ML creates a tag with the specified
@@ -168,8 +168,8 @@ module Aws
       # @example Response structure
       #   resp.resource_id #=> String
       #   resp.resource_type #=> String, one of "BatchPrediction", "DataSource", "Evaluation", "MLModel"
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -206,7 +206,7 @@ module Aws
       #   The location of an Amazon Simple Storage Service (Amazon S3) bucket or
       #   directory to store the batch prediction results. The following
       #   substrings are not allowed in the `s3 key` portion of the `outputURI`
-      #   field: \':\', \'//\', \'/./\', \'/../\'.
+      #   field: ':', '//', '/./', '/../'.
       #
       #   Amazon ML needs permissions to store and retrieve the logs on your
       #   behalf. For information about how to set permissions, see the [Amazon
@@ -230,8 +230,8 @@ module Aws
       #
       # @example Response structure
       #   resp.batch_prediction_id #=> String
+      # @overload create_batch_prediction(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_batch_prediction(params = {}, options = {})
         req = build_request(:create_batch_prediction, params)
         req.send_request(options)
@@ -307,14 +307,14 @@ module Aws
       #
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/datapipeline/latest/DeveloperGuide/dp-iam-roles.html
       # @option params [required, String] :role_arn
       #   The role that Amazon ML assumes on behalf of the user to create and
-      #   activate a data pipeline in the user\'s account and copy data using
+      #   activate a data pipeline in the user's account and copy data using
       #   the `SelectSqlQuery` query from Amazon RDS to Amazon S3.
       # @option params [Boolean] :compute_statistics
       #   The compute statistics for a `DataSource`. The statistics are
@@ -355,8 +355,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_source_id #=> String
+      # @overload create_data_source_from_rds(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_data_source_from_rds(params = {}, options = {})
         req = build_request(:create_data_source_from_rds, params)
         req.send_request(options)
@@ -376,7 +376,7 @@ module Aws
       # `CreateMLModel`, `CreateEvaluation`, or `CreateBatchPrediction`
       # operations.
       #
-      # If Amazon ML can\'t accept the input source, it sets the `Status`
+      # If Amazon ML can't accept the input source, it sets the `Status`
       # parameter to `FAILED` and includes an error message in the `Message`
       # attribute of the `GetDataSource` operation response.
       #
@@ -386,7 +386,7 @@ module Aws
       # transfer the result set of the `SelectSqlQuery` query to
       # `S3StagingLocation`.
       #
-      # After the `DataSource` has been created, it\'s ready for use in
+      # After the `DataSource` has been created, it's ready for use in
       # evaluations and batch predictions. If you plan to use the `DataSource`
       # to train an `MLModel`, the `DataSource` also requires a recipe. A
       # recipe describes how each input variable will be used in training an
@@ -395,7 +395,7 @@ module Aws
       # with another variable or will it be split apart into word
       # combinations? The recipe provides answers to these questions.
       #
-      #  <?oxy\_insert\_start author=\"laurama\" timestamp=\"20160406T153842-0700\">You can\'t change an existing datasource, but you can copy and modify
+      #  <?oxy\_insert\_start author="laurama" timestamp="20160406T153842-0700">You can't change an existing datasource, but you can copy and modify
       # the settings from an existing Amazon Redshift datasource to create a
       # new datasource. To do so, call `GetDataSource` for an existing
       # datasource and copy the values to a `CreateDataSource` call. Change
@@ -436,7 +436,7 @@ module Aws
       #     rearrangement requirements for the `DataSource`.
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       # @option params [required, String] :role_arn
       #   A fully specified role Amazon Resource Name (ARN). Amazon ML assumes
       #   the role on behalf of the user to create the following:
@@ -481,8 +481,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_source_id #=> String
+      # @overload create_data_source_from_redshift(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_data_source_from_redshift(params = {}, options = {})
         req = build_request(:create_data_source_from_redshift, params)
         req.send_request(options)
@@ -501,7 +501,7 @@ module Aws
       # `CreateMLModel`, `CreateEvaluation` or `CreateBatchPrediction`
       # operations.
       #
-      # If Amazon ML can\'t accept the input source, it sets the `Status`
+      # If Amazon ML can't accept the input source, it sets the `Status`
       # parameter to `FAILED` and includes an error message in the `Message`
       # attribute of the `GetDataSource` operation response.
       #
@@ -513,7 +513,7 @@ module Aws
       # name and type. The same schema must be used for all of the data files
       # referenced by the `DataSource`.
       #
-      # After the `DataSource` has been created, it\'s ready to use in
+      # After the `DataSource` has been created, it's ready to use in
       # evaluations and batch predictions. If you plan to use the `DataSource`
       # to train an `MLModel`, the `DataSource` also needs a recipe. A recipe
       # describes how each input variable will be used in training an
@@ -539,7 +539,7 @@ module Aws
       #     rearrangement requirements for the `Datasource`.
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       # @option params [Boolean] :compute_statistics
       #   The compute statistics for a `DataSource`. The statistics are
       #   generated from the observation data referenced by a `DataSource`.
@@ -565,8 +565,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_source_id #=> String
+      # @overload create_data_source_from_s3(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_data_source_from_s3(params = {}, options = {})
         req = build_request(:create_data_source_from_s3, params)
         req.send_request(options)
@@ -617,8 +617,8 @@ module Aws
       #
       # @example Response structure
       #   resp.evaluation_id #=> String
+      # @overload create_evaluation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_evaluation(params = {}, options = {})
         req = build_request(:create_evaluation, params)
         req.send_request(options)
@@ -682,10 +682,10 @@ module Aws
       #     integer that ranges from `1` to `10000`. The default value is `10`.
       #
       #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
-      #     Shuffling the data improves a model\'s ability to find the optimal
+      #     Shuffling the data improves a model's ability to find the optimal
       #     solution for a variety of data types. The valid values are `auto`
       #     and `none`. The default value is `none`. We <?oxy\_insert\_start
-      #     author=\"laurama\" timestamp=\"20160329T131121-0700\">strongly
+      #     author="laurama" timestamp="20160329T131121-0700">strongly
       #     recommend that you shuffle your data.<?oxy\_insert\_end>
       #
       #   * `sgd.l1RegularizationAmount` - The coefficient regularization L1
@@ -695,7 +695,7 @@ module Aws
       #     a small value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L1 normalization. This parameter can\'t be
+      #     default is to not use L1 normalization. This parameter can't be
       #     used when `L2` is specified. Use this parameter sparingly.
       #
       #   * `sgd.l2RegularizationAmount` - The coefficient regularization L2
@@ -705,18 +705,18 @@ module Aws
       #     value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L2 normalization. This parameter can\'t be
+      #     default is to not use L2 normalization. This parameter can't be
       #     used when `L1` is specified. Use this parameter sparingly.
       # @option params [required, String] :training_data_source_id
       #   The `DataSource` that points to the training data.
       # @option params [String] :recipe
       #   The data recipe for creating the `MLModel`. You must specify either
-      #   the recipe or its URI. If you don\'t specify a recipe or its URI,
+      #   the recipe or its URI. If you don't specify a recipe or its URI,
       #   Amazon ML creates a default.
       # @option params [String] :recipe_uri
       #   The Amazon Simple Storage Service (Amazon S3) location and file name
       #   that contains the `MLModel` recipe. You must specify either the recipe
-      #   or its URI. If you don\'t specify a recipe or its URI, Amazon ML
+      #   or its URI. If you don't specify a recipe or its URI, Amazon ML
       #   creates a default.
       # @return [Types::CreateMLModelOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -737,8 +737,8 @@ module Aws
       #
       # @example Response structure
       #   resp.ml_model_id #=> String
+      # @overload create_ml_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_ml_model(params = {}, options = {})
         req = build_request(:create_ml_model, params)
         req.send_request(options)
@@ -765,8 +765,8 @@ module Aws
       #   resp.realtime_endpoint_info.created_at #=> Time
       #   resp.realtime_endpoint_info.endpoint_url #=> String
       #   resp.realtime_endpoint_info.endpoint_status #=> String, one of "NONE", "READY", "UPDATING", "FAILED"
+      # @overload create_realtime_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_realtime_endpoint(params = {}, options = {})
         req = build_request(:create_realtime_endpoint, params)
         req.send_request(options)
@@ -794,8 +794,8 @@ module Aws
       #
       # @example Response structure
       #   resp.batch_prediction_id #=> String
+      # @overload delete_batch_prediction(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_batch_prediction(params = {}, options = {})
         req = build_request(:delete_batch_prediction, params)
         req.send_request(options)
@@ -822,8 +822,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_source_id #=> String
+      # @overload delete_data_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_data_source(params = {}, options = {})
         req = build_request(:delete_data_source, params)
         req.send_request(options)
@@ -853,8 +853,8 @@ module Aws
       #
       # @example Response structure
       #   resp.evaluation_id #=> String
+      # @overload delete_evaluation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_evaluation(params = {}, options = {})
         req = build_request(:delete_evaluation, params)
         req.send_request(options)
@@ -881,8 +881,8 @@ module Aws
       #
       # @example Response structure
       #   resp.ml_model_id #=> String
+      # @overload delete_ml_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_ml_model(params = {}, options = {})
         req = build_request(:delete_ml_model, params)
         req.send_request(options)
@@ -907,17 +907,17 @@ module Aws
       #   resp.realtime_endpoint_info.created_at #=> Time
       #   resp.realtime_endpoint_info.endpoint_url #=> String
       #   resp.realtime_endpoint_info.endpoint_status #=> String, one of "NONE", "READY", "UPDATING", "FAILED"
+      # @overload delete_realtime_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_realtime_endpoint(params = {}, options = {})
         req = build_request(:delete_realtime_endpoint, params)
         req.send_request(options)
       end
 
       # Deletes the specified tags associated with an ML object. After this
-      # operation is complete, you can\'t recover deleted tags.
+      # operation is complete, you can't recover deleted tags.
       #
-      # If you specify a tag that doesn\'t exist, Amazon ML ignores it.
+      # If you specify a tag that doesn't exist, Amazon ML ignores it.
       # @option params [required, Array<String>] :tag_keys
       #   One or more tags to delete.
       # @option params [required, String] :resource_id
@@ -939,8 +939,8 @@ module Aws
       # @example Response structure
       #   resp.resource_id #=> String
       #   resp.resource_type #=> String, one of "BatchPrediction", "DataSource", "Evaluation", "MLModel"
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -1055,8 +1055,8 @@ module Aws
       #   resp.results[0].total_record_count #=> Integer
       #   resp.results[0].invalid_record_count #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_batch_predictions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_batch_predictions(params = {}, options = {})
         req = build_request(:describe_batch_predictions, params)
         req.send_request(options)
@@ -1176,8 +1176,8 @@ module Aws
       #   resp.results[0].finished_at #=> Time
       #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
+      # @overload describe_data_sources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_data_sources(params = {}, options = {})
         req = build_request(:describe_data_sources, params)
         req.send_request(options)
@@ -1290,8 +1290,8 @@ module Aws
       #   resp.results[0].finished_at #=> Time
       #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
+      # @overload describe_evaluations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_evaluations(params = {}, options = {})
         req = build_request(:describe_evaluations, params)
         req.send_request(options)
@@ -1415,8 +1415,8 @@ module Aws
       #   resp.results[0].finished_at #=> Time
       #   resp.results[0].started_at #=> Time
       #   resp.next_token #=> String
+      # @overload describe_ml_models(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_ml_models(params = {}, options = {})
         req = build_request(:describe_ml_models, params)
         req.send_request(options)
@@ -1445,8 +1445,8 @@ module Aws
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -1499,8 +1499,8 @@ module Aws
       #   resp.started_at #=> Time
       #   resp.total_record_count #=> Integer
       #   resp.invalid_record_count #=> Integer
+      # @overload get_batch_prediction(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_batch_prediction(params = {}, options = {})
         req = build_request(:get_batch_prediction, params)
         req.send_request(options)
@@ -1580,8 +1580,8 @@ module Aws
       #   resp.finished_at #=> Time
       #   resp.started_at #=> Time
       #   resp.data_source_schema #=> String
+      # @overload get_data_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_data_source(params = {}, options = {})
         req = build_request(:get_data_source, params)
         req.send_request(options)
@@ -1633,8 +1633,8 @@ module Aws
       #   resp.compute_time #=> Integer
       #   resp.finished_at #=> Time
       #   resp.started_at #=> Time
+      # @overload get_evaluation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_evaluation(params = {}, options = {})
         req = build_request(:get_evaluation, params)
         req.send_request(options)
@@ -1708,8 +1708,8 @@ module Aws
       #   resp.started_at #=> Time
       #   resp.recipe #=> String
       #   resp.schema #=> String
+      # @overload get_ml_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_ml_model(params = {}, options = {})
         req = build_request(:get_ml_model, params)
         req.send_request(options)
@@ -1747,8 +1747,8 @@ module Aws
       #   resp.prediction.predicted_scores["Label"] #=> Float
       #   resp.prediction.details #=> Hash
       #   resp.prediction.details["DetailsAttributes"] #=> String
+      # @overload predict(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def predict(params = {}, options = {})
         req = build_request(:predict, params)
         req.send_request(options)
@@ -1774,8 +1774,8 @@ module Aws
       #
       # @example Response structure
       #   resp.batch_prediction_id #=> String
+      # @overload update_batch_prediction(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_batch_prediction(params = {}, options = {})
         req = build_request(:update_batch_prediction, params)
         req.send_request(options)
@@ -1802,8 +1802,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_source_id #=> String
+      # @overload update_data_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_data_source(params = {}, options = {})
         req = build_request(:update_data_source, params)
         req.send_request(options)
@@ -1830,8 +1830,8 @@ module Aws
       #
       # @example Response structure
       #   resp.evaluation_id #=> String
+      # @overload update_evaluation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_evaluation(params = {}, options = {})
         req = build_request(:update_evaluation, params)
         req.send_request(options)
@@ -1867,8 +1867,8 @@ module Aws
       #
       # @example Response structure
       #   resp.ml_model_id #=> String
+      # @overload update_ml_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_ml_model(params = {}, options = {})
         req = build_request(:update_ml_model, params)
         req.send_request(options)

@@ -151,7 +151,7 @@ module Aws
       # @!attribute [rw] db_name
       #   The name of the initial database that was created when the cluster
       #   was created. This same name is returned for the life of the cluster.
-      #   If an initial database was not specified, a database named \"dev\"
+      #   If an initial database was not specified, a database named "dev"
       #   was created by default.
       #   @return [String]
       #
@@ -326,7 +326,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] apply_status
-      #   Describes the status of the IAM role\'s association with an Amazon
+      #   Describes the status of the IAM role's association with an Amazon
       #   Redshift cluster.
       #
       #   The following are possible statuses and descriptions.* `in-sync`\:
@@ -886,7 +886,7 @@ module Aws
       #   * Must contain at least one lowercase letter.
       #   * Must contain one number.
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-      #     \' (single quote), \" (double quote), \\, /, @, or space.
+      #     ' (single quote), " (double quote), \\, /, @, or space.
       #   @return [String]
       #
       # @!attribute [rw] cluster_security_groups
@@ -1021,7 +1021,7 @@ module Aws
       #   Working with Clusters][1] in the *Amazon Redshift Cluster Management
       #   Guide*.
       #
-      #   If you don\'t specify this parameter, you get a single-node cluster.
+      #   If you don't specify this parameter, you get a single-node cluster.
       #   When requesting a multi-node cluster, you must specify the number of
       #   nodes that you want in the cluster.
       #
@@ -1158,7 +1158,7 @@ module Aws
       #   account, including the default parameter groups for each Amazon
       #   Redshift engine version. The parameter group family names associated
       #   with the default parameter groups provide you the valid values. For
-      #   example, a valid family name is \"redshift-1.0\".
+      #   example, a valid family name is "redshift-1.0".
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -1212,7 +1212,7 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
-      #   * Must not be \"Default\".
+      #   * Must not be "Default".
       #   * Must be unique for all security groups that are created by your
       #     AWS account.
       #
@@ -1311,7 +1311,7 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
-      #   * Must not be \"Default\".
+      #   * Must not be "Default".
       #   * Must be unique for all subnet groups that are created by your AWS
       #     account.
       #
@@ -2997,7 +2997,7 @@ module Aws
       #
       # @!attribute [rw] table_restore_request_id
       #   The identifier of the table restore request to return status for. If
-      #   you don\'t specify a `TableRestoreRequestId` value, then
+      #   you don't specify a `TableRestoreRequestId` value, then
       #   `DescribeTableRestoreStatus` returns the status of all in-progress
       #   table restore requests.
       #   @return [String]
@@ -3219,7 +3219,7 @@ module Aws
       #   Constraints:
       #
       #   * Cannot exceed 512 characters
-      #   * Cannot contain spaces( ), double quotes (\"), single quotes (\'),
+      #   * Cannot contain spaces( ), double quotes ("), single quotes ('),
       #     a backslash (\\), or control characters. The hexadecimal codes for
       #     invalid characters are:
       #     * x00 to x20
@@ -3420,9 +3420,9 @@ module Aws
       #
       #   * Can be one of the following: active \| no-permission \|
       #     topic-not-exist
-      #   * The status \"no-permission\" indicates that Amazon Redshift no
+      #   * The status "no-permission" indicates that Amazon Redshift no
       #     longer has permission to post to the Amazon SNS topic. The status
-      #     \"topic-not-exist\" indicates that the topic was deleted after the
+      #     "topic-not-exist" indicates that the topic was deleted after the
       #     subscription was created.
       #   @return [String]
       #
@@ -3635,7 +3635,7 @@ module Aws
 
       # Describes an IP range used in a security group.
       # @!attribute [rw] status
-      #   The status of the IP range, for example, \"authorized\".
+      #   The status of the IP range, for example, "authorized".
       #   @return [String]
       #
       # @!attribute [rw] cidrip
@@ -3836,7 +3836,7 @@ module Aws
       #   * Must contain at least one lowercase letter.
       #   * Must contain one number.
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
-      #     \' (single quote), \" (double quote), \\, /, @, or space.
+      #     ' (single quote), " (double quote), \\, /, @, or space.
       #   @return [String]
       #
       # @!attribute [rw] cluster_parameter_group_name
@@ -4253,8 +4253,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] source
-      #   The source of the parameter value, such as \"engine-default\" or
-      #   \"user\".
+      #   The source of the parameter value, such as "engine-default" or
+      #   "user".
       #   @return [String]
       #
       # @!attribute [rw] data_type
@@ -4309,7 +4309,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] node_type
-      #   The pending or in-progress change of the cluster\'s node type.
+      #   The pending or in-progress change of the cluster's node type.
       #   @return [String]
       #
       # @!attribute [rw] number_of_nodes
@@ -4761,7 +4761,7 @@ module Aws
       #
       # @!attribute [rw] snapshot_identifier
       #   The name of the snapshot from which to create the new cluster. This
-      #   parameter isn\'t case sensitive.
+      #   parameter isn't case sensitive.
       #
       #   Example: `my-snapshot-id`
       #   @return [String]
@@ -5213,10 +5213,10 @@ module Aws
       #   The snapshot status. The value of the status depends on the API
       #   operation used. * CreateClusterSnapshot and CopyClusterSnapshot
       #   returns status as
-      #     \"creating\".
-      #   * DescribeClusterSnapshots returns status as \"creating\",
-      #     \"available\", \"final snapshot\", or \"failed\".
-      #   * DeleteClusterSnapshot returns status as \"deleted\".
+      #     "creating".
+      #   * DescribeClusterSnapshots returns status as "creating",
+      #     "available", "final snapshot", or "failed".
+      #   * DeleteClusterSnapshot returns status as "deleted".
       #   @return [String]
       #
       # @!attribute [rw] port
@@ -5242,7 +5242,7 @@ module Aws
       #
       # @!attribute [rw] snapshot_type
       #   The snapshot type. Snapshots created using CreateClusterSnapshot and
-      #   CopyClusterSnapshot will be of type \"manual\".
+      #   CopyClusterSnapshot will be of type "manual".
       #   @return [String]
       #
       # @!attribute [rw] node_type

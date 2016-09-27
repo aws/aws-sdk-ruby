@@ -160,8 +160,8 @@ module Aws
       #   resp.cluster.running_tasks_count #=> Integer
       #   resp.cluster.pending_tasks_count #=> Integer
       #   resp.cluster.active_services_count #=> Integer
+      # @overload create_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cluster(params = {}, options = {})
         req = build_request(:create_cluster, params)
         req.send_request(options)
@@ -210,7 +210,7 @@ module Aws
       # logic:
       #
       # * Determine which of the container instances in your cluster can
-      #   support your service\'s task definition (for example, they have the
+      #   support your service's task definition (for example, they have the
       #   required CPU, memory, ports, and container instance attributes).
       #
       # * Sort the valid container instances by the fewest number of running
@@ -342,8 +342,8 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      # @overload create_service(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_service(params = {}, options = {})
         req = build_request(:create_service, params)
         req.send_request(options)
@@ -373,8 +373,8 @@ module Aws
       #   resp.cluster.running_tasks_count #=> Integer
       #   resp.cluster.pending_tasks_count #=> Integer
       #   resp.cluster.active_services_count #=> Integer
+      # @overload delete_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cluster(params = {}, options = {})
         req = build_request(:delete_cluster, params)
         req.send_request(options)
@@ -444,8 +444,8 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      # @overload delete_service(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_service(params = {}, options = {})
         req = build_request(:delete_service, params)
         req.send_request(options)
@@ -534,8 +534,8 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      # @overload deregister_container_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_container_instance(params = {}, options = {})
         req = build_request(:deregister_container_instance, params)
         req.send_request(options)
@@ -546,7 +546,7 @@ module Aws
       # tasks and services that reference an `INACTIVE` task definition
       # continue to run without disruption. Existing services that reference
       # an `INACTIVE` task definition can still scale up or down by modifying
-      # the service\'s desired count.
+      # the service's desired count.
       #
       # You cannot use an `INACTIVE` task definition to run new tasks or
       # create new services, and you cannot update an existing service to
@@ -630,8 +630,8 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      # @overload deregister_task_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_task_definition(params = {}, options = {})
         req = build_request(:deregister_task_definition, params)
         req.send_request(options)
@@ -664,8 +664,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload describe_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_clusters(params = {}, options = {})
         req = build_request(:describe_clusters, params)
         req.send_request(options)
@@ -726,8 +726,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload describe_container_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_container_instances(params = {}, options = {})
         req = build_request(:describe_container_instances, params)
         req.send_request(options)
@@ -785,8 +785,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload describe_services(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_services(params = {}, options = {})
         req = build_request(:describe_services, params)
         req.send_request(options)
@@ -878,8 +878,8 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      # @overload describe_task_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_task_definition(params = {}, options = {})
         req = build_request(:describe_task_definition, params)
         req.send_request(options)
@@ -940,8 +940,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload describe_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tasks(params = {}, options = {})
         req = build_request(:describe_tasks, params)
         req.send_request(options)
@@ -978,8 +978,8 @@ module Aws
       # @example Response structure
       #   resp.endpoint #=> String
       #   resp.telemetry_endpoint #=> String
+      # @overload discover_poll_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def discover_poll_endpoint(params = {}, options = {})
         req = build_request(:discover_poll_endpoint, params)
         req.send_request(options)
@@ -1022,8 +1022,8 @@ module Aws
       #   resp.cluster_arns #=> Array
       #   resp.cluster_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_clusters(params = {}, options = {})
         req = build_request(:list_clusters, params)
         req.send_request(options)
@@ -1072,8 +1072,8 @@ module Aws
       #   resp.container_instance_arns #=> Array
       #   resp.container_instance_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_container_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_container_instances(params = {}, options = {})
         req = build_request(:list_container_instances, params)
         req.send_request(options)
@@ -1121,8 +1121,8 @@ module Aws
       #   resp.service_arns #=> Array
       #   resp.service_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_services(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_services(params = {}, options = {})
         req = build_request(:list_services, params)
         req.send_request(options)
@@ -1190,8 +1190,8 @@ module Aws
       #   resp.families #=> Array
       #   resp.families[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_task_definition_families(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_task_definition_families(params = {}, options = {})
         req = build_request(:list_task_definition_families, params)
         req.send_request(options)
@@ -1260,8 +1260,8 @@ module Aws
       #   resp.task_definition_arns #=> Array
       #   resp.task_definition_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_task_definitions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_task_definitions(params = {}, options = {})
         req = build_request(:list_task_definitions, params)
         req.send_request(options)
@@ -1327,7 +1327,7 @@ module Aws
       #
       #   <note markdown="1"> Although you can filter results based on a desired status of
       #   `PENDING`, this will not return any results because ECS never sets the
-      #   desired status of a task to that value (only a task\'s `lastStatus`
+      #   desired status of a task to that value (only a task's `lastStatus`
       #   may have a value of `PENDING`).
       #
       #    </note>
@@ -1352,8 +1352,8 @@ module Aws
       #   resp.task_arns #=> Array
       #   resp.task_arns[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tasks(params = {}, options = {})
         req = build_request(:list_tasks, params)
         req.send_request(options)
@@ -1454,8 +1454,8 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      # @overload register_container_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_container_instance(params = {}, options = {})
         req = build_request(:register_container_instance, params)
         req.send_request(options)
@@ -1499,7 +1499,7 @@ module Aws
       #
       #   The default Docker network mode is `bridge`. If the network mode is
       #   set to `none`, you cannot specify port mappings in your container
-      #   definitions, and the task\'s containers do not have external
+      #   definitions, and the task's containers do not have external
       #   connectivity. The `host` network mode offers the highest networking
       #   performance for containers because they use the host network stack
       #   instead of the virtualized network stack provided by the `bridge`
@@ -1673,8 +1673,8 @@ module Aws
       #   resp.task_definition.requires_attributes #=> Array
       #   resp.task_definition.requires_attributes[0].name #=> String
       #   resp.task_definition.requires_attributes[0].value #=> String
+      # @overload register_task_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_task_definition(params = {}, options = {})
         req = build_request(:register_task_definition, params)
         req.send_request(options)
@@ -1684,9 +1684,7 @@ module Aws
       # scheduler. To use your own scheduler or place a task on a specific
       # container instance, use `StartTask` instead.
       #
-      # <important markdown="1"> The `count` parameter is limited to 10 tasks per call.
-      #
-      #  </important>
+      # The `count` parameter is limited to 10 tasks per call.
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your task. If you do not specify a cluster, the default
@@ -1713,9 +1711,7 @@ module Aws
       #   The number of instantiations of the specified task to place on your
       #   cluster.
       #
-      #   <important markdown="1"> The `count` parameter is limited to 10 tasks per call.
-      #
-      #    </important>
+      #   The `count` parameter is limited to 10 tasks per call.
       # @option params [String] :started_by
       #   An optional tag specified when a task is started. For example if you
       #   automatically trigger a task to run a batch process job, you could
@@ -1791,8 +1787,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload run_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def run_task(params = {}, options = {})
         req = build_request(:run_task, params)
         req.send_request(options)
@@ -1802,9 +1798,7 @@ module Aws
       # container instance or instances. To use the default Amazon ECS
       # scheduler to place your task, use `RunTask` instead.
       #
-      # <important markdown="1"> The list of container instances to start tasks on is limited to 10.
-      #
-      #  </important>
+      # The list of container instances to start tasks on is limited to 10.
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to start your task. If you do not specify a cluster, the default
@@ -1832,9 +1826,7 @@ module Aws
       #   for the container instances on which you would like to place your
       #   task.
       #
-      #   <important markdown="1"> The list of container instances to start tasks on is limited to 10.
-      #
-      #    </important>
+      #   The list of container instances to start tasks on is limited to 10.
       # @option params [String] :started_by
       #   An optional tag specified when a task is started. For example if you
       #   automatically trigger a task to run a batch process job, you could
@@ -1910,8 +1902,8 @@ module Aws
       #   resp.failures #=> Array
       #   resp.failures[0].arn #=> String
       #   resp.failures[0].reason #=> String
+      # @overload start_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_task(params = {}, options = {})
         req = build_request(:start_task, params)
         req.send_request(options)
@@ -1981,8 +1973,8 @@ module Aws
       #   resp.task.created_at #=> Time
       #   resp.task.started_at #=> Time
       #   resp.task.stopped_at #=> Time
+      # @overload stop_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_task(params = {}, options = {})
         req = build_request(:stop_task, params)
         req.send_request(options)
@@ -2034,8 +2026,8 @@ module Aws
       #
       # @example Response structure
       #   resp.acknowledgment #=> String
+      # @overload submit_container_state_change(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def submit_container_state_change(params = {}, options = {})
         req = build_request(:submit_container_state_change, params)
         req.send_request(options)
@@ -2071,8 +2063,8 @@ module Aws
       #
       # @example Response structure
       #   resp.acknowledgment #=> String
+      # @overload submit_task_state_change(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def submit_task_state_change(params = {}, options = {})
         req = build_request(:submit_task_state_change, params)
         req.send_request(options)
@@ -2142,8 +2134,8 @@ module Aws
       #   resp.container_instance.attributes #=> Array
       #   resp.container_instance.attributes[0].name #=> String
       #   resp.container_instance.attributes[0].value #=> String
+      # @overload update_container_agent(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_container_agent(params = {}, options = {})
         req = build_request(:update_container_agent, params)
         req.send_request(options)
@@ -2195,7 +2187,7 @@ module Aws
       # logic:
       #
       # * Determine which of the container instances in your cluster can
-      #   support your service\'s task definition (for example, they have the
+      #   support your service's task definition (for example, they have the
       #   required CPU, memory, ports, and container instance attributes).
       #
       # * Sort the valid container instances by the fewest number of running
@@ -2274,8 +2266,8 @@ module Aws
       #   resp.service.events[0].created_at #=> Time
       #   resp.service.events[0].message #=> String
       #   resp.service.created_at #=> Time
+      # @overload update_service(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_service(params = {}, options = {})
         req = build_request(:update_service, params)
         req.send_request(options)

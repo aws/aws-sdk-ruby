@@ -253,7 +253,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -323,7 +323,7 @@ module Aws
       #   `launchPermission` attribute.
       # @option options [Array<String>] :product_codes
       #   One or more product codes. After you add a product code to an AMI, it
-      #   can\'t be removed. This is only valid when modifying the
+      #   can't be removed. This is only valid when modifying the
       #   `productCodes` attribute.
       # @option options [String] :value
       #   The value of the attribute being modified. This is only valid when

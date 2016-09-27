@@ -154,8 +154,8 @@ module Aws
       #     ],
       #     instance_names: ["InstanceName"], # required
       #   })
+      # @overload add_tags_to_on_premises_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_on_premises_instances(params = {}, options = {})
         req = build_request(:add_tags_to_on_premises_instances, params)
         req.send_request(options)
@@ -213,8 +213,8 @@ module Aws
       #   resp.revisions[0].generic_revision_info.first_used_time #=> Time
       #   resp.revisions[0].generic_revision_info.last_used_time #=> Time
       #   resp.revisions[0].generic_revision_info.register_time #=> Time
+      # @overload batch_get_application_revisions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_application_revisions(params = {}, options = {})
         req = build_request(:batch_get_application_revisions, params)
         req.send_request(options)
@@ -238,8 +238,8 @@ module Aws
       #   resp.applications_info[0].application_name #=> String
       #   resp.applications_info[0].create_time #=> Time
       #   resp.applications_info[0].linked_to_git_hub #=> Boolean
+      # @overload batch_get_applications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_applications(params = {}, options = {})
         req = build_request(:batch_get_applications, params)
         req.send_request(options)
@@ -250,7 +250,7 @@ module Aws
       #   The name of an AWS CodeDeploy application associated with the
       #   applicable IAM user or AWS account.
       # @option params [required, Array<String>] :deployment_group_names
-      #   The deployment groups\' names.
+      #   The deployment groups' names.
       # @return [Types::BatchGetDeploymentGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::BatchGetDeploymentGroupsOutput#deployment_groups_info #deploymentGroupsInfo} => Array&lt;Types::DeploymentGroupInfo&gt;
@@ -294,8 +294,8 @@ module Aws
       #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_events #=> Array
       #   resp.deployment_groups_info[0].trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "InstanceStart", "InstanceSuccess", "InstanceFailure"
       #   resp.error_message #=> String
+      # @overload batch_get_deployment_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_deployment_groups(params = {}, options = {})
         req = build_request(:batch_get_deployment_groups, params)
         req.send_request(options)
@@ -334,8 +334,8 @@ module Aws
       #   resp.instances_summary[0].lifecycle_events[0].end_time #=> Time
       #   resp.instances_summary[0].lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
       #   resp.error_message #=> String
+      # @overload batch_get_deployment_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_deployment_instances(params = {}, options = {})
         req = build_request(:batch_get_deployment_instances, params)
         req.send_request(options)
@@ -381,8 +381,8 @@ module Aws
       #   resp.deployments_info[0].description #=> String
       #   resp.deployments_info[0].creator #=> String, one of "user", "autoscaling"
       #   resp.deployments_info[0].ignore_application_stop_failures #=> Boolean
+      # @overload batch_get_deployments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_deployments(params = {}, options = {})
         req = build_request(:batch_get_deployments, params)
         req.send_request(options)
@@ -410,8 +410,8 @@ module Aws
       #   resp.instance_infos[0].tags #=> Array
       #   resp.instance_infos[0].tags[0].key #=> String
       #   resp.instance_infos[0].tags[0].value #=> String
+      # @overload batch_get_on_premises_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_on_premises_instances(params = {}, options = {})
         req = build_request(:batch_get_on_premises_instances, params)
         req.send_request(options)
@@ -432,8 +432,8 @@ module Aws
       #
       # @example Response structure
       #   resp.application_id #=> String
+      # @overload create_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_application(params = {}, options = {})
         req = build_request(:create_application, params)
         req.send_request(options)
@@ -497,8 +497,8 @@ module Aws
       #
       # @example Response structure
       #   resp.deployment_id #=> String
+      # @overload create_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_deployment(params = {}, options = {})
         req = build_request(:create_deployment, params)
         req.send_request(options)
@@ -541,8 +541,8 @@ module Aws
       #
       # @example Response structure
       #   resp.deployment_config_id #=> String
+      # @overload create_deployment_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_deployment_config(params = {}, options = {})
         req = build_request(:create_deployment_config, params)
         req.send_request(options)
@@ -562,7 +562,7 @@ module Aws
       #   deployment configuration operation.
       #
       #   <note markdown="1"> CodeDeployDefault.OneAtATime is the default deployment configuration.
-      #   It is used if a configuration isn\'t specified for the deployment or
+      #   It is used if a configuration isn't specified for the deployment or
       #   the deployment group.
       #
       #    </note>
@@ -623,7 +623,7 @@ module Aws
       # @option params [Array<String>] :auto_scaling_groups
       #   A list of associated Auto Scaling groups.
       # @option params [required, String] :service_role_arn
-      #   A service role ARN that allows AWS CodeDeploy to act on the user\'s
+      #   A service role ARN that allows AWS CodeDeploy to act on the user's
       #   behalf when interacting with AWS services.
       # @option params [Array<Types::TriggerConfig>] :trigger_configurations
       #   Information about triggers to create when the deployment group is
@@ -664,8 +664,8 @@ module Aws
       #
       # @example Response structure
       #   resp.deployment_group_id #=> String
+      # @overload create_deployment_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_deployment_group(params = {}, options = {})
         req = build_request(:create_deployment_group, params)
         req.send_request(options)
@@ -681,8 +681,8 @@ module Aws
       #   resp = client.delete_application({
       #     application_name: "ApplicationName", # required
       #   })
+      # @overload delete_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application(params = {}, options = {})
         req = build_request(:delete_application, params)
         req.send_request(options)
@@ -700,8 +700,8 @@ module Aws
       #   resp = client.delete_deployment_config({
       #     deployment_config_name: "DeploymentConfigName", # required
       #   })
+      # @overload delete_deployment_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_deployment_config(params = {}, options = {})
         req = build_request(:delete_deployment_config, params)
         req.send_request(options)
@@ -728,8 +728,8 @@ module Aws
       #   resp.hooks_not_cleaned_up #=> Array
       #   resp.hooks_not_cleaned_up[0].name #=> String
       #   resp.hooks_not_cleaned_up[0].hook #=> String
+      # @overload delete_deployment_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_deployment_group(params = {}, options = {})
         req = build_request(:delete_deployment_group, params)
         req.send_request(options)
@@ -744,8 +744,8 @@ module Aws
       #   resp = client.deregister_on_premises_instance({
       #     instance_name: "InstanceName", # required
       #   })
+      # @overload deregister_on_premises_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_on_premises_instance(params = {}, options = {})
         req = build_request(:deregister_on_premises_instance, params)
         req.send_request(options)
@@ -769,8 +769,8 @@ module Aws
       #   resp.application.application_name #=> String
       #   resp.application.create_time #=> Time
       #   resp.application.linked_to_git_hub #=> Boolean
+      # @overload get_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_application(params = {}, options = {})
         req = build_request(:get_application, params)
         req.send_request(options)
@@ -823,8 +823,8 @@ module Aws
       #   resp.revision_info.first_used_time #=> Time
       #   resp.revision_info.last_used_time #=> Time
       #   resp.revision_info.register_time #=> Time
+      # @overload get_application_revision(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_application_revision(params = {}, options = {})
         req = build_request(:get_application_revision, params)
         req.send_request(options)
@@ -870,8 +870,8 @@ module Aws
       #   resp.deployment_info.description #=> String
       #   resp.deployment_info.creator #=> String, one of "user", "autoscaling"
       #   resp.deployment_info.ignore_application_stop_failures #=> Boolean
+      # @overload get_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployment(params = {}, options = {})
         req = build_request(:get_deployment, params)
         req.send_request(options)
@@ -896,8 +896,8 @@ module Aws
       #   resp.deployment_config_info.minimum_healthy_hosts.value #=> Integer
       #   resp.deployment_config_info.minimum_healthy_hosts.type #=> String, one of "HOST_COUNT", "FLEET_PERCENT"
       #   resp.deployment_config_info.create_time #=> Time
+      # @overload get_deployment_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployment_config(params = {}, options = {})
         req = build_request(:get_deployment_config, params)
         req.send_request(options)
@@ -950,8 +950,8 @@ module Aws
       #   resp.deployment_group_info.trigger_configurations[0].trigger_target_arn #=> String
       #   resp.deployment_group_info.trigger_configurations[0].trigger_events #=> Array
       #   resp.deployment_group_info.trigger_configurations[0].trigger_events[0] #=> String, one of "DeploymentStart", "DeploymentSuccess", "DeploymentFailure", "DeploymentStop", "InstanceStart", "InstanceSuccess", "InstanceFailure"
+      # @overload get_deployment_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployment_group(params = {}, options = {})
         req = build_request(:get_deployment_group, params)
         req.send_request(options)
@@ -986,8 +986,8 @@ module Aws
       #   resp.instance_summary.lifecycle_events[0].start_time #=> Time
       #   resp.instance_summary.lifecycle_events[0].end_time #=> Time
       #   resp.instance_summary.lifecycle_events[0].status #=> String, one of "Pending", "InProgress", "Succeeded", "Failed", "Skipped", "Unknown"
+      # @overload get_deployment_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployment_instance(params = {}, options = {})
         req = build_request(:get_deployment_instance, params)
         req.send_request(options)
@@ -1014,8 +1014,8 @@ module Aws
       #   resp.instance_info.tags #=> Array
       #   resp.instance_info.tags[0].key #=> String
       #   resp.instance_info.tags[0].value #=> String
+      # @overload get_on_premises_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_on_premises_instance(params = {}, options = {})
         req = build_request(:get_on_premises_instance, params)
         req.send_request(options)
@@ -1049,7 +1049,7 @@ module Aws
       # @option params [String] :s3_bucket
       #   An Amazon S3 bucket name to limit the search for revisions.
       #
-      #   If set to null, all of the user\'s buckets will be searched.
+      #   If set to null, all of the user's buckets will be searched.
       # @option params [String] :s3_key_prefix
       #   A key prefix for the set of Amazon S3 objects to limit the search for
       #   revisions.
@@ -1093,8 +1093,8 @@ module Aws
       #   resp.revisions[0].git_hub_location.repository #=> String
       #   resp.revisions[0].git_hub_location.commit_id #=> String
       #   resp.next_token #=> String
+      # @overload list_application_revisions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_application_revisions(params = {}, options = {})
         req = build_request(:list_application_revisions, params)
         req.send_request(options)
@@ -1119,8 +1119,8 @@ module Aws
       #   resp.applications #=> Array
       #   resp.applications[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_applications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_applications(params = {}, options = {})
         req = build_request(:list_applications, params)
         req.send_request(options)
@@ -1146,8 +1146,8 @@ module Aws
       #   resp.deployment_configs_list #=> Array
       #   resp.deployment_configs_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_deployment_configs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_deployment_configs(params = {}, options = {})
         req = build_request(:list_deployment_configs, params)
         req.send_request(options)
@@ -1179,8 +1179,8 @@ module Aws
       #   resp.deployment_groups #=> Array
       #   resp.deployment_groups[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_deployment_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_deployment_groups(params = {}, options = {})
         req = build_request(:list_deployment_groups, params)
         req.send_request(options)
@@ -1221,8 +1221,8 @@ module Aws
       #   resp.instances_list #=> Array
       #   resp.instances_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_deployment_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_deployment_instances(params = {}, options = {})
         req = build_request(:list_deployment_instances, params)
         req.send_request(options)
@@ -1272,8 +1272,8 @@ module Aws
       #   resp.deployments #=> Array
       #   resp.deployments[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_deployments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_deployments(params = {}, options = {})
         req = build_request(:list_deployments, params)
         req.send_request(options)
@@ -1321,8 +1321,8 @@ module Aws
       #   resp.instance_names #=> Array
       #   resp.instance_names[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_on_premises_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_on_premises_instances(params = {}, options = {})
         req = build_request(:list_on_premises_instances, params)
         req.send_request(options)
@@ -1359,8 +1359,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload register_application_revision(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_application_revision(params = {}, options = {})
         req = build_request(:register_application_revision, params)
         req.send_request(options)
@@ -1378,8 +1378,8 @@ module Aws
       #     instance_name: "InstanceName", # required
       #     iam_user_arn: "IamUserArn", # required
       #   })
+      # @overload register_on_premises_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_on_premises_instance(params = {}, options = {})
         req = build_request(:register_on_premises_instance, params)
         req.send_request(options)
@@ -1402,8 +1402,8 @@ module Aws
       #     ],
       #     instance_names: ["InstanceName"], # required
       #   })
+      # @overload remove_tags_from_on_premises_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_on_premises_instances(params = {}, options = {})
         req = build_request(:remove_tags_from_on_premises_instances, params)
         req.send_request(options)
@@ -1425,8 +1425,8 @@ module Aws
       # @example Response structure
       #   resp.status #=> String, one of "Pending", "Succeeded"
       #   resp.status_message #=> String
+      # @overload stop_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_deployment(params = {}, options = {})
         req = build_request(:stop_deployment, params)
         req.send_request(options)
@@ -1444,8 +1444,8 @@ module Aws
       #     application_name: "ApplicationName",
       #     new_application_name: "ApplicationName",
       #   })
+      # @overload update_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_application(params = {}, options = {})
         req = build_request(:update_application, params)
         req.send_request(options)
@@ -1518,8 +1518,8 @@ module Aws
       #   resp.hooks_not_cleaned_up #=> Array
       #   resp.hooks_not_cleaned_up[0].name #=> String
       #   resp.hooks_not_cleaned_up[0].hook #=> String
+      # @overload update_deployment_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_deployment_group(params = {}, options = {})
         req = build_request(:update_deployment_group, params)
         req.send_request(options)

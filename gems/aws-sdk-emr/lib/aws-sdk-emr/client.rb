@@ -187,8 +187,8 @@ module Aws
       #   resp.job_flow_id #=> String
       #   resp.instance_group_ids #=> Array
       #   resp.instance_group_ids[0] #=> String
+      # @overload add_instance_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_instance_groups(params = {}, options = {})
         req = build_request(:add_instance_groups, params)
         req.send_request(options)
@@ -204,7 +204,7 @@ module Aws
       # directly to the software running on the master node, such as Hive and
       # Hadoop. For more information on how to do this, go to [Add More than
       # 256 Steps to a Job Flow][1] in the *Amazon Elastic MapReduce
-      # Developer\'s Guide*.
+      # Developer's Guide*.
       #
       # A step specifies the location of a JAR file stored either on the
       # master node of the job flow or in Amazon S3. Each step is performed by
@@ -257,8 +257,8 @@ module Aws
       # @example Response structure
       #   resp.step_ids #=> Array
       #   resp.step_ids[0] #=> String
+      # @overload add_job_flow_steps(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_job_flow_steps(params = {}, options = {})
         req = build_request(:add_job_flow_steps, params)
         req.send_request(options)
@@ -292,8 +292,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -358,8 +358,8 @@ module Aws
       #   resp.cluster.configurations[0].configurations #=> Types::ConfigurationList
       #   resp.cluster.configurations[0].properties #=> Hash
       #   resp.cluster.configurations[0].properties["String"] #=> String
+      # @overload describe_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cluster(params = {}, options = {})
         req = build_request(:describe_cluster, params)
         req.send_request(options)
@@ -471,8 +471,8 @@ module Aws
       #   resp.job_flows[0].visible_to_all_users #=> Boolean
       #   resp.job_flows[0].job_flow_role #=> String
       #   resp.job_flows[0].service_role #=> String
+      # @overload describe_job_flows(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_job_flows(params = {}, options = {})
         req = build_request(:describe_job_flows, params)
         req.send_request(options)
@@ -512,8 +512,8 @@ module Aws
       #   resp.step.status.timeline.creation_date_time #=> Time
       #   resp.step.status.timeline.start_date_time #=> Time
       #   resp.step.status.timeline.end_date_time #=> Time
+      # @overload describe_step(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_step(params = {}, options = {})
         req = build_request(:describe_step, params)
         req.send_request(options)
@@ -544,8 +544,8 @@ module Aws
       #   resp.bootstrap_actions[0].args #=> Array
       #   resp.bootstrap_actions[0].args[0] #=> String
       #   resp.marker #=> String
+      # @overload list_bootstrap_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_bootstrap_actions(params = {}, options = {})
         req = build_request(:list_bootstrap_actions, params)
         req.send_request(options)
@@ -592,8 +592,8 @@ module Aws
       #   resp.clusters[0].status.timeline.end_date_time #=> Time
       #   resp.clusters[0].normalized_instance_hours #=> Integer
       #   resp.marker #=> String
+      # @overload list_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_clusters(params = {}, options = {})
         req = build_request(:list_clusters, params)
         req.send_request(options)
@@ -650,8 +650,8 @@ module Aws
       #   resp.instance_groups[0].shrink_policy.instance_resize_policy.instances_to_protect[0] #=> String
       #   resp.instance_groups[0].shrink_policy.instance_resize_policy.instance_termination_timeout #=> Integer
       #   resp.marker #=> String
+      # @overload list_instance_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_instance_groups(params = {}, options = {})
         req = build_request(:list_instance_groups, params)
         req.send_request(options)
@@ -707,8 +707,8 @@ module Aws
       #   resp.instances[0].ebs_volumes[0].device #=> String
       #   resp.instances[0].ebs_volumes[0].volume_id #=> String
       #   resp.marker #=> String
+      # @overload list_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_instances(params = {}, options = {})
         req = build_request(:list_instances, params)
         req.send_request(options)
@@ -759,8 +759,8 @@ module Aws
       #   resp.steps[0].status.timeline.start_date_time #=> Time
       #   resp.steps[0].status.timeline.end_date_time #=> Time
       #   resp.marker #=> String
+      # @overload list_steps(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_steps(params = {}, options = {})
         req = build_request(:list_steps, params)
         req.send_request(options)
@@ -792,8 +792,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload modify_instance_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_instance_groups(params = {}, options = {})
         req = build_request(:modify_instance_groups, params)
         req.send_request(options)
@@ -822,8 +822,8 @@ module Aws
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["String"], # required
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
@@ -851,7 +851,7 @@ module Aws
       # directly to the software running on the master node, such as Hive and
       # Hadoop. For more information on how to do this, go to [Add More than
       # 256 Steps to a Job Flow][1] in the *Amazon Elastic MapReduce
-      # Developer\'s Guide*.
+      # Developer's Guide*.
       #
       # For long running job flows, we recommend that you periodically store
       # your results.
@@ -875,7 +875,7 @@ module Aws
       #   The version of the Amazon Machine Image (AMI) to use when launching
       #   Amazon EC2 instances in the job flow. The following values are valid:
       #
-      #   * The version number of the AMI to use, for example, \"2.0.\"
+      #   * The version number of the AMI to use, for example, "2.0."
       #
       #   ^
       #
@@ -886,7 +886,7 @@ module Aws
       #
       #   For details about the AMI versions currently supported by Amazon
       #   Elastic MapReduce, go to [AMI Versions Supported in Elastic
-      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer\'s Guide.*
+      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer's Guide.*
       #
       #
       #
@@ -916,9 +916,9 @@ module Aws
       #   job flow. For more information, go to [Use Third Party Applications
       #   with Amazon EMR][1]. Currently supported values are:
       #
-      #   * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+      #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
       #
-      #   * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
+      #   * "mapr-m5" - launch the job flow using MapR M5 Edition.
       #
       #
       #
@@ -936,24 +936,24 @@ module Aws
       #   Flow on the MapR Distribution for Hadoop][1]. Currently supported
       #   values are:
       #
-      #   * \"mapr-m3\" - launch the cluster using MapR M3 Edition.
+      #   * "mapr-m3" - launch the cluster using MapR M3 Edition.
       #
-      #   * \"mapr-m5\" - launch the cluster using MapR M5 Edition.
+      #   * "mapr-m5" - launch the cluster using MapR M5 Edition.
       #
-      #   * \"mapr\" with the user arguments specifying \"--edition,m3\" or
-      #     \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition
+      #   * "mapr" with the user arguments specifying "--edition,m3" or
+      #     "--edition,m5" - launch the job flow using MapR M3 or M5 Edition
       #     respectively.
       #
-      #   * \"mapr-m7\" - launch the cluster using MapR M7 Edition.
+      #   * "mapr-m7" - launch the cluster using MapR M7 Edition.
       #
-      #   * \"hunk\" - launch the cluster with the Hunk Big Data Analtics
+      #   * "hunk" - launch the cluster with the Hunk Big Data Analtics
       #     Platform.
       #
-      #   * \"hue\"- launch the cluster with Hue installed.
+      #   * "hue"- launch the cluster with Hue installed.
       #
-      #   * \"spark\" - launch the cluster with Apache Spark installed.
+      #   * "spark" - launch the cluster with Apache Spark installed.
       #
-      #   * \"ganglia\" - launch the cluster with the Ganglia Monitoring System
+      #   * "ganglia" - launch the cluster with the Ganglia Monitoring System
       #     installed.
       #
       #
@@ -964,8 +964,8 @@ module Aws
       #
       #    </note>
       #
-      #   A list of applications for the cluster. Valid values are: \"Hadoop\",
-      #   \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are case
+      #   A list of applications for the cluster. Valid values are: "Hadoop",
+      #   "Hive", "Mahout", "Pig", and "Spark." They are case
       #   insensitive.
       # @option params [Array<Types::Configuration>] :configurations
       #   <note markdown="1"> Amazon EMR releases 4.x or later.
@@ -1121,8 +1121,8 @@ module Aws
       #
       # @example Response structure
       #   resp.job_flow_id #=> String
+      # @overload run_job_flow(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def run_job_flow(params = {}, options = {})
         req = build_request(:run_job_flow, params)
         req.send_request(options)
@@ -1147,7 +1147,7 @@ module Aws
       # value to `false`.
       #
       # For more information, go to [Protecting a Job Flow from
-      # Termination][1] in the *Amazon Elastic MapReduce Developer\'s Guide.*
+      # Termination][1] in the *Amazon Elastic MapReduce Developer's Guide.*
       #
       #
       #
@@ -1167,8 +1167,8 @@ module Aws
       #     job_flow_ids: ["XmlString"], # required
       #     termination_protected: false, # required
       #   })
+      # @overload set_termination_protection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_termination_protection(params = {}, options = {})
         req = build_request(:set_termination_protection, params)
         req.send_request(options)
@@ -1196,8 +1196,8 @@ module Aws
       #     job_flow_ids: ["XmlString"], # required
       #     visible_to_all_users: false, # required
       #   })
+      # @overload set_visible_to_all_users(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_visible_to_all_users(params = {}, options = {})
         req = build_request(:set_visible_to_all_users, params)
         req.send_request(options)
@@ -1222,8 +1222,8 @@ module Aws
       #   resp = client.terminate_job_flows({
       #     job_flow_ids: ["XmlString"], # required
       #   })
+      # @overload terminate_job_flows(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_job_flows(params = {}, options = {})
         req = build_request(:terminate_job_flows, params)
         req.send_request(options)

@@ -86,7 +86,7 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [String] :marker
-      #   The pagination token provided in the previous request or \"0\". If the
+      #   The pagination token provided in the previous request or "0". If the
       #   Marker parameter is specified the response includes only records
       #   beyond the marker until the end of the file or up to NumberOfLines.
       # @option options [Integer] :number_of_lines
@@ -105,12 +105,12 @@ module Aws
       #   * If NumberOfLines is specified and Marker is not specified, then the
       #     most recent lines from the end of the log file are returned.
       #
-      #   * If Marker is specified as \"0\", then the specified number of lines
+      #   * If Marker is specified as "0", then the specified number of lines
       #     from the beginning of the log file are returned.
       #
       #   * You can download the log file in blocks of lines by specifying the
       #     size of the block using the NumberOfLines parameter, and by
-      #     specifying a value of \"0\" for the Marker parameter in your first
+      #     specifying a value of "0" for the Marker parameter in your first
       #     request. Include the Marker value returned in the response as the
       #     Marker value for the next request, continuing until the
       #     AdditionalDataPending response element returns false.

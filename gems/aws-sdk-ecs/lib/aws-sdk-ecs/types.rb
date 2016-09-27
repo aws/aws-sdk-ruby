@@ -362,12 +362,10 @@ module Aws
       #   section of the [Docker Remote API][3] and the `--link` option to
       #   [docker run][4].
       #
-      #   <important markdown="1"> Containers that are collocated on a single container instance may be
+      #   Containers that are collocated on a single container instance may be
       #   able to communicate with each other without requiring links or host
       #   port mappings. Network isolation is achieved on the container
       #   instance using security groups and VPC settings.
-      #
-      #    </important>
       #
       #
       #
@@ -424,12 +422,10 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] entry_point
-      #   <important markdown="1"> Early versions of the Amazon ECS container agent do not properly
+      #   Early versions of the Amazon ECS container agent do not properly
       #   handle `entryPoint` parameters. If you have problems using
       #   `entryPoint`, update your container agent or enter your commands and
       #   arguments as `command` array items instead.
-      #
-      #    </important>
       #
       #   The entry point that is passed to the container. This parameter maps
       #   to `Entrypoint` in the [Create a container][1] section of the
@@ -465,10 +461,8 @@ module Aws
       #   maps to `Env` in the [Create a container][1] section of the [Docker
       #   Remote API][2] and the `--env` option to [docker run][3].
       #
-      #   <important markdown="1"> We do not recommend using plain text environment variables for
+      #   We do not recommend using plain text environment variables for
       #   sensitive information, such as credential data.
-      #
-      #    </important>
       #
       #
       #
@@ -1121,7 +1115,7 @@ module Aws
       #         minimum_healthy_percent: 1,
       #       }
       # @!attribute [rw] maximum_percent
-      #   The upper limit (as a percentage of the service\'s `desiredCount`)
+      #   The upper limit (as a percentage of the service's `desiredCount`)
       #   of the number of running tasks that can be running in a service
       #   during a deployment. The maximum number of tasks during a deployment
       #   is the `desiredCount` multiplied by the `maximumPercent`/100,
@@ -1129,7 +1123,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] minimum_healthy_percent
-      #   The lower limit (as a percentage of the service\'s `desiredCount`)
+      #   The lower limit (as a percentage of the service's `desiredCount`)
       #   of the number of running tasks that must remain running and healthy
       #   in a service during a deployment. The minimum healthy tasks during a
       #   deployment is the `desiredCount` multiplied by the
@@ -1929,7 +1923,7 @@ module Aws
       #
       #   <note markdown="1"> Although you can filter results based on a desired status of
       #   `PENDING`, this will not return any results because ECS never sets
-      #   the desired status of a task to that value (only a task\'s
+      #   the desired status of a task to that value (only a task's
       #   `lastStatus` may have a value of `PENDING`).
       #
       #    </note>
@@ -1989,7 +1983,7 @@ module Aws
       #
       # @!attribute [rw] container_port
       #   The port on the container to associate with the load balancer. This
-      #   port must correspond to a `containerPort` in the service\'s task
+      #   port must correspond to a `containerPort` in the service's task
       #   definition. Your container instances must allow ingress traffic on
       #   the `hostPort` of the port mapping.
       #   @return [Integer]
@@ -2376,7 +2370,7 @@ module Aws
       #
       #   The default Docker network mode is `bridge`. If the network mode is
       #   set to `none`, you cannot specify port mappings in your container
-      #   definitions, and the task\'s containers do not have external
+      #   definitions, and the task's containers do not have external
       #   connectivity. The `host` network mode offers the highest networking
       #   performance for containers because they use the host network stack
       #   instead of the virtualized network stack provided by the `bridge`
@@ -2526,9 +2520,7 @@ module Aws
       #   The number of instantiations of the specified task to place on your
       #   cluster.
       #
-      #   <important markdown="1"> The `count` parameter is limited to 10 tasks per call.
-      #
-      #    </important>
+      #   The `count` parameter is limited to 10 tasks per call.
       #   @return [Integer]
       #
       # @!attribute [rw] started_by
@@ -2739,9 +2731,7 @@ module Aws
       #   entries for the container instances on which you would like to place
       #   your task.
       #
-      #   <important markdown="1"> The list of container instances to start tasks on is limited to 10.
-      #
-      #    </important>
+      #   The list of container instances to start tasks on is limited to 10.
       #   @return [Array<String>]
       #
       # @!attribute [rw] started_by

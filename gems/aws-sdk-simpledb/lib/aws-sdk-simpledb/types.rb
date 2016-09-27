@@ -111,7 +111,7 @@ module Aws
       # @!attribute [rw] domain_name
       #   The name of the domain to create. The name can range between 3 and
       #   255 characters and can contain the following characters: a-z, A-Z,
-      #   0-9, \'\_\', \'-\', and \'.\'.
+      #   0-9, '\_', '-', and '.'.
       #   @return [String]
       class CreateDomainRequest < Struct.new(
         :domain_name)
@@ -493,7 +493,7 @@ module Aws
       # update condition is specified for a request, the data will only be
       # updated if the condition is satisfied. For example, if an attribute
       # with a specific name and value exists, or if a specific attribute
-      # doesn\'t exist.
+      # doesn't exist.
       # @note When making an API call, pass UpdateCondition
       #   data as a hash:
       #

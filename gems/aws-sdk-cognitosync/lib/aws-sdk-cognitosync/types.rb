@@ -74,7 +74,7 @@ module Aws
       # A collection of data for an identity pool. An identity pool can have
       # multiple datasets. A dataset is per identity and can be general or
       # associated with a particular entity in an application (like a saved
-      # game). Datasets are automatically created if they don\'t exist. Data
+      # game). Datasets are automatically created if they don't exist. Data
       # is synced by dataset, and a dataset can hold up to 1MB of key-value
       # pairs.
       # @!attribute [rw] identity_id
@@ -85,7 +85,7 @@ module Aws
       #
       # @!attribute [rw] dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       #   @return [String]
       #
       # @!attribute [rw] creation_date
@@ -141,7 +141,7 @@ module Aws
       #
       # @!attribute [rw] dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       #   @return [String]
       class DeleteDatasetRequest < Struct.new(
         :identity_pool_id,
@@ -155,7 +155,7 @@ module Aws
       #   A collection of data for an identity pool. An identity pool can have
       #   multiple datasets. A dataset is per identity and can be general or
       #   associated with a particular entity in an application (like a saved
-      #   game). Datasets are automatically created if they don\'t exist. Data
+      #   game). Datasets are automatically created if they don't exist. Data
       #   is synced by dataset, and a dataset can hold up to 1MB of key-value
       #   pairs.
       #   @return [Types::Dataset]
@@ -188,7 +188,7 @@ module Aws
       #
       # @!attribute [rw] dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       #   @return [String]
       class DescribeDatasetRequest < Struct.new(
         :identity_pool_id,
@@ -202,7 +202,7 @@ module Aws
       #   Meta data for a collection of data for an identity. An identity can
       #   have multiple datasets. A dataset can be general or associated with
       #   a particular entity in an application (like a saved game). Datasets
-      #   are automatically created if they don\'t exist. Data is synced by
+      #   are automatically created if they don't exist. Data is synced by
       #   dataset, and a dataset can hold up to 1MB of key-value pairs.
       #   @return [Types::Dataset]
       class DescribeDatasetResponse < Struct.new(
@@ -579,7 +579,7 @@ module Aws
       #
       # @!attribute [rw] dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       #   @return [String]
       #
       # @!attribute [rw] last_sync_count
@@ -796,9 +796,9 @@ module Aws
         include Aws::Structure
       end
 
-      # A request to configure Cognito Events\"
+      # A request to configure Cognito Events"
       #
-      # \"
+      # "
       # @note When making an API call, pass SetCognitoEventsRequest
       #   data as a hash:
       #
@@ -990,7 +990,7 @@ module Aws
       #
       # @!attribute [rw] dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       #   @return [String]
       #
       # @!attribute [rw] device_id

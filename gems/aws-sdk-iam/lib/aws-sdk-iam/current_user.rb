@@ -73,9 +73,9 @@ module Aws
         data.create_date
       end
 
-      # The date and time, in [ISO 8601 date-time format][1], when the user\'s
+      # The date and time, in [ISO 8601 date-time format][1], when the user's
       # password was last used to sign in to an AWS website. For a list of AWS
-      # websites that capture a user\'s last sign-in time, see the [Credential
+      # websites that capture a user's last sign-in time, see the [Credential
       # Reports][2] topic in the *Using IAM* guide. If a password is used more
       # than once in a five-minute span, only the first use is returned in
       # this field. This field is null (not present) when:

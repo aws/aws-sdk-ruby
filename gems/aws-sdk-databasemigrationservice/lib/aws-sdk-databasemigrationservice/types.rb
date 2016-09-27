@@ -329,7 +329,7 @@ module Aws
       #   created in.
       #
       #   Default: A random, system-chosen Availability Zone in the
-      #   endpoint\'s region.
+      #   endpoint's region.
       #
       #   Example: `us-east-1d`
       #   @return [String]
@@ -432,7 +432,7 @@ module Aws
       #   lowercase string.
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters,
-      #   periods, spaces, underscores, or hyphens. Must not be \"default\".
+      #   periods, spaces, underscores, or hyphens. Must not be "default".
       #
       #   Example: `mySubnetgroup`
       #   @return [String]
@@ -515,7 +515,7 @@ module Aws
       #
       # @!attribute [rw] table_mappings
       #   The path of the JSON file that contains the table mappings. Preceed
-      #   the path with \"file://\".
+      #   the path with "file://".
       #
       #   For example, --table-mappings file://mappingfile.json
       #   @return [String]
@@ -1570,7 +1570,7 @@ module Aws
       #
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the `EngineVersion` parameter that is a different major
-      #   version than the replication instance\'s current version.
+      #   version than the replication instance's current version.
       #   @return [Boolean]
       #
       # @!attribute [rw] auto_minor_version_upgrade
@@ -2225,19 +2225,19 @@ module Aws
       # @!attribute [rw] key
       #   A key is the required name of the tag. The string value can be from
       #   1 to 128 Unicode characters in length and cannot be prefixed with
-      #   \"aws:\" or \"dms:\". The string can only contain only the set of
-      #   Unicode letters, digits, white-space, \'\_\', \'.\', \'/\', \'=\',
-      #   \'+\', \'-\' (Java regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   "aws:" or "dms:". The string can only contain only the set of
+      #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
+      #   '+', '-' (Java regex:
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       #
       # @!attribute [rw] value
       #   A value is the optional value of the tag. The string value can be
       #   from 1 to 256 Unicode characters in length and cannot be prefixed
-      #   with \"aws:\" or \"dms:\". The string can only contain only the set
-      #   of Unicode letters, digits, white-space, \'\_\', \'.\', \'/\',
-      #   \'=\', \'+\', \'-\' (Java regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   with "aws:" or "dms:". The string can only contain only the set
+      #   of Unicode letters, digits, white-space, '\_', '.', '/',
+      #   '=', '+', '-' (Java regex:
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       class Tag < Struct.new(
         :key,

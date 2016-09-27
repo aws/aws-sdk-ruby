@@ -152,7 +152,7 @@ module Aws
       # @!attribute [rw] shard_level_metrics
       #   List of shard-level metrics to disable.
       #
-      #   The following are the valid shard-level metrics. The value \"`ALL`\"
+      #   The following are the valid shard-level metrics. The value "`ALL`"
       #   disables every metric.
       #
       #   * `IncomingBytes`
@@ -193,7 +193,7 @@ module Aws
       # @!attribute [rw] shard_level_metrics
       #   List of shard-level metrics to enable.
       #
-      #   The following are the valid shard-level metrics. The value \"`ALL`\"
+      #   The following are the valid shard-level metrics. The value "`ALL`"
       #   enables every metric.
       #
       #   * `IncomingBytes`
@@ -223,7 +223,7 @@ module Aws
       # @!attribute [rw] shard_level_metrics
       #   List of shard-level metrics.
       #
-      #   The following are the valid shard-level metrics. The value \"`ALL`\"
+      #   The following are the valid shard-level metrics. The value "`ALL`"
       #   enhances every metric.
       #
       #   * `IncomingBytes`
@@ -809,11 +809,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] parent_shard_id
-      #   The shard ID of the shard\'s parent.
+      #   The shard ID of the shard's parent.
       #   @return [String]
       #
       # @!attribute [rw] adjacent_parent_shard_id
-      #   The shard ID of the shard adjacent to the shard\'s parent.
+      #   The shard ID of the shard adjacent to the shard's parent.
       #   @return [String]
       #
       # @!attribute [rw] hash_key_range

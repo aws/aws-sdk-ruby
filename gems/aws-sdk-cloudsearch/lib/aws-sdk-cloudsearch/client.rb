@@ -148,8 +148,8 @@ module Aws
       # @example Response structure
       #   resp.field_names #=> Array
       #   resp.field_names[0] #=> String
+      # @overload build_suggesters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def build_suggesters(params = {}, options = {})
         req = build_request(:build_suggesters, params)
         req.send_request(options)
@@ -190,8 +190,8 @@ module Aws
       #   resp.domain_status.search_instance_count #=> Integer
       #   resp.domain_status.limits.maximum_replication_count #=> Integer
       #   resp.domain_status.limits.maximum_partition_count #=> Integer
+      # @overload create_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_domain(params = {}, options = {})
         req = build_request(:create_domain, params)
         req.send_request(options)
@@ -249,8 +249,8 @@ module Aws
       #   resp.analysis_scheme.status.update_version #=> Integer
       #   resp.analysis_scheme.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.analysis_scheme.status.pending_deletion #=> Boolean
+      # @overload define_analysis_scheme(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def define_analysis_scheme(params = {}, options = {})
         req = build_request(:define_analysis_scheme, params)
         req.send_request(options)
@@ -295,8 +295,8 @@ module Aws
       #   resp.expression.status.update_version #=> Integer
       #   resp.expression.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.expression.status.pending_deletion #=> Boolean
+      # @overload define_expression(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def define_expression(params = {}, options = {})
         req = build_request(:define_expression, params)
         req.send_request(options)
@@ -487,8 +487,8 @@ module Aws
       #   resp.index_field.status.update_version #=> Integer
       #   resp.index_field.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.index_field.status.pending_deletion #=> Boolean
+      # @overload define_index_field(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def define_index_field(params = {}, options = {})
         req = build_request(:define_index_field, params)
         req.send_request(options)
@@ -541,8 +541,8 @@ module Aws
       #   resp.suggester.status.update_version #=> Integer
       #   resp.suggester.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.suggester.status.pending_deletion #=> Boolean
+      # @overload define_suggester(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def define_suggester(params = {}, options = {})
         req = build_request(:define_suggester, params)
         req.send_request(options)
@@ -584,8 +584,8 @@ module Aws
       #   resp.analysis_scheme.status.update_version #=> Integer
       #   resp.analysis_scheme.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.analysis_scheme.status.pending_deletion #=> Boolean
+      # @overload delete_analysis_scheme(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_analysis_scheme(params = {}, options = {})
         req = build_request(:delete_analysis_scheme, params)
         req.send_request(options)
@@ -625,8 +625,8 @@ module Aws
       #   resp.domain_status.search_instance_count #=> Integer
       #   resp.domain_status.limits.maximum_replication_count #=> Integer
       #   resp.domain_status.limits.maximum_partition_count #=> Integer
+      # @overload delete_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_domain(params = {}, options = {})
         req = build_request(:delete_domain, params)
         req.send_request(options)
@@ -664,8 +664,8 @@ module Aws
       #   resp.expression.status.update_version #=> Integer
       #   resp.expression.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.expression.status.pending_deletion #=> Boolean
+      # @overload delete_expression(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_expression(params = {}, options = {})
         req = build_request(:delete_expression, params)
         req.send_request(options)
@@ -684,7 +684,7 @@ module Aws
       #   names start with a letter or number and can contain the following
       #   characters: a-z (lowercase), 0-9, and - (hyphen).
       # @option params [required, String] :index_field_name
-      #   The name of the index field your want to remove from the domain\'s
+      #   The name of the index field your want to remove from the domain's
       #   indexing options.
       # @return [Types::DeleteIndexFieldResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -765,8 +765,8 @@ module Aws
       #   resp.index_field.status.update_version #=> Integer
       #   resp.index_field.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.index_field.status.pending_deletion #=> Boolean
+      # @overload delete_index_field(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_index_field(params = {}, options = {})
         req = build_request(:delete_index_field, params)
         req.send_request(options)
@@ -805,8 +805,8 @@ module Aws
       #   resp.suggester.status.update_version #=> Integer
       #   resp.suggester.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.suggester.status.pending_deletion #=> Boolean
+      # @overload delete_suggester(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_suggester(params = {}, options = {})
         req = build_request(:delete_suggester, params)
         req.send_request(options)
@@ -856,8 +856,8 @@ module Aws
       #   resp.analysis_schemes[0].status.update_version #=> Integer
       #   resp.analysis_schemes[0].status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.analysis_schemes[0].status.pending_deletion #=> Boolean
+      # @overload describe_analysis_schemes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_analysis_schemes(params = {}, options = {})
         req = build_request(:describe_analysis_schemes, params)
         req.send_request(options)
@@ -894,8 +894,8 @@ module Aws
       #   resp.availability_options.status.update_version #=> Integer
       #   resp.availability_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.availability_options.status.pending_deletion #=> Boolean
+      # @overload describe_availability_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_availability_options(params = {}, options = {})
         req = build_request(:describe_availability_options, params)
         req.send_request(options)
@@ -904,7 +904,7 @@ module Aws
       # Gets information about the search domains owned by this account. Can
       # be limited to specific domains. Shows all domains by default. To get
       # the number of searchable documents in a domain, use the console or
-      # submit a `matchall` request to your domain\'s search endpoint:
+      # submit a `matchall` request to your domain's search endpoint:
       # `q=matchall&amp;q.parser=structured&amp;size=0`. For more information,
       # see [Getting Information about a Search Domain][1] in the *Amazon
       # CloudSearch Developer Guide*.
@@ -939,8 +939,8 @@ module Aws
       #   resp.domain_status_list[0].search_instance_count #=> Integer
       #   resp.domain_status_list[0].limits.maximum_replication_count #=> Integer
       #   resp.domain_status_list[0].limits.maximum_partition_count #=> Integer
+      # @overload describe_domains(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_domains(params = {}, options = {})
         req = build_request(:describe_domains, params)
         req.send_request(options)
@@ -984,8 +984,8 @@ module Aws
       #   resp.expressions[0].status.update_version #=> Integer
       #   resp.expressions[0].status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.expressions[0].status.pending_deletion #=> Boolean
+      # @overload describe_expressions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_expressions(params = {}, options = {})
         req = build_request(:describe_expressions, params)
         req.send_request(options)
@@ -1090,14 +1090,14 @@ module Aws
       #   resp.index_fields[0].status.update_version #=> Integer
       #   resp.index_fields[0].status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.index_fields[0].status.pending_deletion #=> Boolean
+      # @overload describe_index_fields(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_index_fields(params = {}, options = {})
         req = build_request(:describe_index_fields, params)
         req.send_request(options)
       end
 
-      # Gets the scaling parameters configured for a domain. A domain\'s
+      # Gets the scaling parameters configured for a domain. A domain's
       # scaling parameters specify the desired search instance type and
       # replication count. For more information, see [Configuring Scaling
       # Options][1] in the *Amazon CloudSearch Developer Guide*.
@@ -1128,15 +1128,15 @@ module Aws
       #   resp.scaling_parameters.status.update_version #=> Integer
       #   resp.scaling_parameters.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.scaling_parameters.status.pending_deletion #=> Boolean
+      # @overload describe_scaling_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_parameters(params = {}, options = {})
         req = build_request(:describe_scaling_parameters, params)
         req.send_request(options)
       end
 
       # Gets information about the access policies that control access to the
-      # domain\'s document and search endpoints. By default, shows the
+      # domain's document and search endpoints. By default, shows the
       # configuration with any pending changes. Set the `Deployed` option to
       # `true` to show the active configuration and exclude pending changes.
       # For more information, see [Configuring Access for a Search Domain][1]
@@ -1167,8 +1167,8 @@ module Aws
       #   resp.access_policies.status.update_version #=> Integer
       #   resp.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.access_policies.status.pending_deletion #=> Boolean
+      # @overload describe_service_access_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_service_access_policies(params = {}, options = {})
         req = build_request(:describe_service_access_policies, params)
         req.send_request(options)
@@ -1214,8 +1214,8 @@ module Aws
       #   resp.suggesters[0].status.update_version #=> Integer
       #   resp.suggesters[0].status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.suggesters[0].status.pending_deletion #=> Boolean
+      # @overload describe_suggesters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_suggesters(params = {}, options = {})
         req = build_request(:describe_suggesters, params)
         req.send_request(options)
@@ -1241,8 +1241,8 @@ module Aws
       # @example Response structure
       #   resp.field_names #=> Array
       #   resp.field_names[0] #=> String
+      # @overload index_documents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def index_documents(params = {}, options = {})
         req = build_request(:index_documents, params)
         req.send_request(options)
@@ -1256,8 +1256,8 @@ module Aws
       # @example Response structure
       #   resp.domain_names #=> Hash
       #   resp.domain_names["DomainName"] #=> String
+      # @overload list_domain_names(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_domain_names(params = {}, options = {})
         req = build_request(:list_domain_names, params)
         req.send_request(options)
@@ -1301,14 +1301,14 @@ module Aws
       #   resp.availability_options.status.update_version #=> Integer
       #   resp.availability_options.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.availability_options.status.pending_deletion #=> Boolean
+      # @overload update_availability_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_availability_options(params = {}, options = {})
         req = build_request(:update_availability_options, params)
         req.send_request(options)
       end
 
-      # Configures scaling parameters for a domain. A domain\'s scaling
+      # Configures scaling parameters for a domain. A domain's scaling
       # parameters specify the desired search instance type and replication
       # count. Amazon CloudSearch will still automatically scale your domain
       # based on the volume of data and traffic, but not below the desired
@@ -1351,14 +1351,14 @@ module Aws
       #   resp.scaling_parameters.status.update_version #=> Integer
       #   resp.scaling_parameters.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.scaling_parameters.status.pending_deletion #=> Boolean
+      # @overload update_scaling_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_scaling_parameters(params = {}, options = {})
         req = build_request(:update_scaling_parameters, params)
         req.send_request(options)
       end
 
-      # Configures the access rules that control access to the domain\'s
+      # Configures the access rules that control access to the domain's
       # document and search endpoints. For more information, see [ Configuring
       # Access for an Amazon CloudSearch Domain][1].
       #
@@ -1390,8 +1390,8 @@ module Aws
       #   resp.access_policies.status.update_version #=> Integer
       #   resp.access_policies.status.state #=> String, one of "RequiresIndexDocuments", "Processing", "Active", "FailedToValidate"
       #   resp.access_policies.status.pending_deletion #=> Boolean
+      # @overload update_service_access_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_service_access_policies(params = {}, options = {})
         req = build_request(:update_service_access_policies, params)
         req.send_request(options)

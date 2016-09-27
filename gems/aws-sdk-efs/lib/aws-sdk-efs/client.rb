@@ -129,7 +129,7 @@ module Aws
       # token in the request that Amazon EFS uses to ensure idempotent
       # creation (calling the operation with same creation token has no
       # effect). If a file system does not currently exist that is owned by
-      # the caller\'s AWS account with the specified creation token, this
+      # the caller's AWS account with the specified creation token, this
       # operation does the following:
       #
       # * Creates a new, empty file system. The file system will have an
@@ -154,7 +154,7 @@ module Aws
       # creating a file system, the client can learn of its existence from the
       # `FileSystemAlreadyExists` error.
       #
-      # <note markdown="1"> The `CreateFileSystem` call returns while the file system\'s lifecycle
+      # <note markdown="1"> The `CreateFileSystem` call returns while the file system's lifecycle
       # state is still `creating`. You can check the file system creation
       # status by calling the DescribeFileSystems operation, which among other
       # things returns the file system state.
@@ -166,7 +166,7 @@ module Aws
       # performance mode for most file systems. File systems using the `maxIO`
       # performance mode can scale to higher levels of aggregate throughput
       # and operations per second with a tradeoff of slightly higher latencies
-      # for most file operations. The performance mode can\'t be changed after
+      # for most file operations. The performance mode can't be changed after
       # the file system has been created. For more information, see [Amazon
       # EFS: Performance Modes][1].
       #
@@ -192,7 +192,7 @@ module Aws
       #   `generalPurpose` performance mode for most file systems. File systems
       #   using the `maxIO` performance mode can scale to higher levels of
       #   aggregate throughput and operations per second with a tradeoff of
-      #   slightly higher latencies for most file operations. This can\'t be
+      #   slightly higher latencies for most file operations. This can't be
       #   changed after the file system has been created.
       # @return [Types::FileSystemDescription] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -223,8 +223,8 @@ module Aws
       #   resp.size_in_bytes.value #=> Integer
       #   resp.size_in_bytes.timestamp #=> Time
       #   resp.performance_mode #=> String, one of "generalPurpose", "maxIO"
+      # @overload create_file_system(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_file_system(params = {}, options = {})
         req = build_request(:create_file_system, params)
         req.send_request(options)
@@ -242,7 +242,7 @@ module Aws
       # information, see [Amazon EFS: How it Works][1].
       #
       # In the request, you also specify a file system ID for which you are
-      # creating the mount target and the file system\'s lifecycle state must
+      # creating the mount target and the file system's lifecycle state must
       # be `available`. For more information, see DescribeFileSystems.
       #
       # In the request, you also provide a subnet ID, which determines the
@@ -253,14 +253,14 @@ module Aws
       # * Availability Zone in which Amazon EFS creates the mount target
       #
       # * IP address range from which Amazon EFS selects the IP address of the
-      #   mount target (if you don\'t specify an IP address in the request)
+      #   mount target (if you don't specify an IP address in the request)
       #
       # After creating the mount target, Amazon EFS returns a response that
       # includes, a `MountTargetId` and an `IpAddress`. You use this IP
       # address when mounting the file system in an EC2 instance. You can also
-      # use the mount target\'s DNS name when mounting the file system. The
+      # use the mount target's DNS name when mounting the file system. The
       # EC2 instance on which you mount the file system via the mount target
-      # can resolve the mount target\'s DNS name to its IP address. For more
+      # can resolve the mount target's DNS name to its IP address. For more
       # information, see [How it Works: Implementation Overview][2].
       #
       # Note that you can create mount targets for a file system in only one
@@ -290,7 +290,7 @@ module Aws
       # 
       #   * If the request provides `SecurityGroups`, this network interface
       #     is associated with those security groups. Otherwise, it belongs to
-      #     the default security group for the subnet\'s VPC.
+      #     the default security group for the subnet's VPC.
       # 
       #   * Assigns the description `Mount target fsmt-id for file system
       #     fs-id ` where ` fsmt-id ` is the mount target ID, and ` fs-id ` is
@@ -302,7 +302,7 @@ module Aws
       #   Each Amazon EFS mount target has one corresponding requestor-managed
       #   EC2 network interface. After the network interface is created,
       #   Amazon EFS sets the `NetworkInterfaceId` field in the mount
-      #   target\'s description to the network interface ID, and the
+      #   target's description to the network interface ID, and the
       #   `IpAddress` field to its address. If network interface creation
       #   fails, the entire `CreateMountTarget` operation fails.
       #
@@ -318,10 +318,10 @@ module Aws
       # Zones. There are cost considerations for using a file system in an
       # Availability Zone through a mount target created in another
       # Availability Zone. For more information, see [Amazon EFS][3]. In
-      # addition, by always using a mount target local to the instance\'s
+      # addition, by always using a mount target local to the instance's
       # Availability Zone, you eliminate a partial failure scenario. If the
       # Availability Zone in which your mount target is created goes down,
-      # then you won\'t be able to access your file system through that mount
+      # then you won't be able to access your file system through that mount
       # target.
       #
       # This operation requires permissions for the following action on the
@@ -380,8 +380,8 @@ module Aws
       #   resp.life_cycle_state #=> String, one of "creating", "available", "deleting", "deleted"
       #   resp.ip_address #=> String
       #   resp.network_interface_id #=> String
+      # @overload create_mount_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_mount_target(params = {}, options = {})
         req = build_request(:create_mount_target, params)
         req.send_request(options)
@@ -413,18 +413,18 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tags(params = {}, options = {})
         req = build_request(:create_tags, params)
         req.send_request(options)
       end
 
       # Deletes a file system, permanently severing access to its contents.
-      # Upon return, the file system no longer exists and you can\'t access
+      # Upon return, the file system no longer exists and you can't access
       # any contents of the deleted file system.
       #
-      # You can\'t delete a file system that is in use. That is, if the file
+      # You can't delete a file system that is in use. That is, if the file
       # system has any mount targets, you must first delete them. For more
       # information, see DescribeMountTargets and DeleteMountTarget.
       #
@@ -447,8 +447,8 @@ module Aws
       #   resp = client.delete_file_system({
       #     file_system_id: "FileSystemId", # required
       #   })
+      # @overload delete_file_system(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_file_system(params = {}, options = {})
         req = build_request(:delete_file_system, params)
         req.send_request(options)
@@ -481,7 +481,7 @@ module Aws
       #  </note>
       #
       # The operation also requires permissions for the following Amazon EC2
-      # action on the mount target\'s network interface:
+      # action on the mount target's network interface:
       #
       # * `ec2:DeleteNetworkInterface`
       #
@@ -494,8 +494,8 @@ module Aws
       #   resp = client.delete_mount_target({
       #     mount_target_id: "MountTargetId", # required
       #   })
+      # @overload delete_mount_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_mount_target(params = {}, options = {})
         req = build_request(:delete_mount_target, params)
         req.send_request(options)
@@ -503,7 +503,7 @@ module Aws
 
       # Deletes the specified tags from a file system. If the `DeleteTags`
       # request includes a tag key that does not exist, Amazon EFS ignores it
-      # and doesn\'t cause an error. For more information about tags and
+      # and doesn't cause an error. For more information about tags and
       # related restrictions, see [Tag Restrictions][1] in the *AWS Billing
       # and Cost Management User Guide*.
       #
@@ -524,8 +524,8 @@ module Aws
       #     file_system_id: "FileSystemId", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -534,7 +534,7 @@ module Aws
       # Returns the description of a specific Amazon EFS file system if either
       # the file system `CreationToken` or the `FileSystemId` is provided.
       # Otherwise, it returns descriptions of all file systems owned by the
-      # caller\'s AWS account in the AWS Region of the endpoint that you\'re
+      # caller's AWS account in the AWS Region of the endpoint that you're
       # calling.
       #
       # When retrieving all file system descriptions, you can optionally
@@ -563,7 +563,7 @@ module Aws
       #   (Optional) Specifies the maximum number of file systems to return in
       #   the response (integer). This parameter value must be greater than 0.
       #   The number of items that Amazon EFS returns is the minimum of the
-      #   `MaxItems` parameter specified in the request and the service\'s
+      #   `MaxItems` parameter specified in the request and the service's
       #   internal maximum number of items per page.
       # @option params [String] :marker
       #   (Optional) Opaque pagination token returned from a previous
@@ -604,8 +604,8 @@ module Aws
       #   resp.file_systems[0].size_in_bytes.timestamp #=> Time
       #   resp.file_systems[0].performance_mode #=> String, one of "generalPurpose", "maxIO"
       #   resp.next_marker #=> String
+      # @overload describe_file_systems(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_file_systems(params = {}, options = {})
         req = build_request(:describe_file_systems, params)
         req.send_request(options)
@@ -619,10 +619,10 @@ module Aws
       # This operation requires permissions for the following actions:
       #
       # * `elasticfilesystem:DescribeMountTargetSecurityGroups` action on the
-      #   mount target\'s file system.
+      #   mount target's file system.
       #
       # * `ec2:DescribeNetworkInterfaceAttribute` action on the mount
-      #   target\'s network interface.
+      #   target's network interface.
       # @option params [required, String] :mount_target_id
       #   ID of the mount target whose security groups you want to retrieve.
       # @return [Types::DescribeMountTargetSecurityGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -637,8 +637,8 @@ module Aws
       # @example Response structure
       #   resp.security_groups #=> Array
       #   resp.security_groups[0] #=> String
+      # @overload describe_mount_target_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_mount_target_security_groups(params = {}, options = {})
         req = build_request(:describe_mount_target_security_groups, params)
         req.send_request(options)
@@ -693,8 +693,8 @@ module Aws
       #   resp.mount_targets[0].ip_address #=> String
       #   resp.mount_targets[0].network_interface_id #=> String
       #   resp.next_marker #=> String
+      # @overload describe_mount_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_mount_targets(params = {}, options = {})
         req = build_request(:describe_mount_targets, params)
         req.send_request(options)
@@ -735,8 +735,8 @@ module Aws
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.next_marker #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -755,9 +755,9 @@ module Aws
       # The operation requires permissions for the following actions:
       #
       # * `elasticfilesystem:ModifyMountTargetSecurityGroups` action on the
-      #   mount target\'s file system.
+      #   mount target's file system.
       #
-      # * `ec2:ModifyNetworkInterfaceAttribute` action on the mount target\'s
+      # * `ec2:ModifyNetworkInterfaceAttribute` action on the mount target's
       #   network interface.
       # @option params [required, String] :mount_target_id
       #   ID of the mount target whose security groups you want to modify.
@@ -770,8 +770,8 @@ module Aws
       #     mount_target_id: "MountTargetId", # required
       #     security_groups: ["SecurityGroup"],
       #   })
+      # @overload modify_mount_target_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_mount_target_security_groups(params = {}, options = {})
         req = build_request(:modify_mount_target_security_groups, params)
         req.send_request(options)

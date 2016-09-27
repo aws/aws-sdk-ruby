@@ -149,8 +149,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -218,8 +218,8 @@ module Aws
       #   resp.listeners[0].default_actions #=> Array
       #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
       #   resp.listeners[0].default_actions[0].target_group_arn #=> String
+      # @overload create_listener(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_listener(params = {}, options = {})
         req = build_request(:create_listener, params)
         req.send_request(options)
@@ -307,8 +307,8 @@ module Aws
       #   resp.load_balancers[0].availability_zones[0].subnet_id #=> String
       #   resp.load_balancers[0].security_groups #=> Array
       #   resp.load_balancers[0].security_groups[0] #=> String
+      # @overload create_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_load_balancer(params = {}, options = {})
         req = build_request(:create_load_balancer, params)
         req.send_request(options)
@@ -319,7 +319,7 @@ module Aws
       # A rule consists conditions and actions. Rules are evaluated in
       # priority order, from the lowest value to the highest value. When the
       # conditions for a rule are met, the specified actions are taken. If no
-      # rule\'s conditions are met, the default actions for the listener are
+      # rule's conditions are met, the default actions for the listener are
       # taken.
       #
       # To view your current rules, use DescribeRules. To update a rule, use
@@ -330,7 +330,7 @@ module Aws
       # @option params [required, Array<Types::RuleCondition>] :conditions
       #   The conditions.
       # @option params [required, Integer] :priority
-      #   The priority for the rule. A listener can\'t have multiple rules with
+      #   The priority for the rule. A listener can't have multiple rules with
       #   the same priority.
       # @option params [required, Array<Types::Action>] :actions
       #   The actions for the rule.
@@ -368,8 +368,8 @@ module Aws
       #   resp.rules[0].actions[0].type #=> String, one of "forward"
       #   resp.rules[0].actions[0].target_group_arn #=> String
       #   resp.rules[0].is_default #=> Boolean
+      # @overload create_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_rule(params = {}, options = {})
         req = build_request(:create_rule, params)
         req.send_request(options)
@@ -466,8 +466,8 @@ module Aws
       #   resp.target_groups[0].matcher.http_code #=> String
       #   resp.target_groups[0].load_balancer_arns #=> Array
       #   resp.target_groups[0].load_balancer_arns[0] #=> String
+      # @overload create_target_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_target_group(params = {}, options = {})
         req = build_request(:create_target_group, params)
         req.send_request(options)
@@ -485,8 +485,8 @@ module Aws
       #   resp = client.delete_listener({
       #     listener_arn: "ListenerArn", # required
       #   })
+      # @overload delete_listener(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_listener(params = {}, options = {})
         req = build_request(:delete_listener, params)
         req.send_request(options)
@@ -494,7 +494,7 @@ module Aws
 
       # Deletes the specified load balancer and its attached listeners.
       #
-      # You can\'t delete a load balancer if deletion protection is enabled.
+      # You can't delete a load balancer if deletion protection is enabled.
       # If the load balancer does not exist or has already been deleted, the
       # call succeeds.
       #
@@ -510,8 +510,8 @@ module Aws
       #   resp = client.delete_load_balancer({
       #     load_balancer_arn: "LoadBalancerArn", # required
       #   })
+      # @overload delete_load_balancer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_load_balancer(params = {}, options = {})
         req = build_request(:delete_load_balancer, params)
         req.send_request(options)
@@ -526,8 +526,8 @@ module Aws
       #   resp = client.delete_rule({
       #     rule_arn: "RuleArn", # required
       #   })
+      # @overload delete_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_rule(params = {}, options = {})
         req = build_request(:delete_rule, params)
         req.send_request(options)
@@ -545,8 +545,8 @@ module Aws
       #   resp = client.delete_target_group({
       #     target_group_arn: "TargetGroupArn", # required
       #   })
+      # @overload delete_target_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_target_group(params = {}, options = {})
         req = build_request(:delete_target_group, params)
         req.send_request(options)
@@ -571,8 +571,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload deregister_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_targets(params = {}, options = {})
         req = build_request(:deregister_targets, params)
         req.send_request(options)
@@ -616,8 +616,8 @@ module Aws
       #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
       #   resp.listeners[0].default_actions[0].target_group_arn #=> String
       #   resp.next_marker #=> String
+      # @overload describe_listeners(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_listeners(params = {}, options = {})
         req = build_request(:describe_listeners, params)
         req.send_request(options)
@@ -639,8 +639,8 @@ module Aws
       #   resp.attributes #=> Array
       #   resp.attributes[0].key #=> String
       #   resp.attributes[0].value #=> String
+      # @overload describe_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancer_attributes(params = {}, options = {})
         req = build_request(:describe_load_balancer_attributes, params)
         req.send_request(options)
@@ -692,8 +692,8 @@ module Aws
       #   resp.load_balancers[0].security_groups #=> Array
       #   resp.load_balancers[0].security_groups[0] #=> String
       #   resp.next_marker #=> String
+      # @overload describe_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancers(params = {}, options = {})
         req = build_request(:describe_load_balancers, params)
         req.send_request(options)
@@ -727,8 +727,8 @@ module Aws
       #   resp.rules[0].actions[0].type #=> String, one of "forward"
       #   resp.rules[0].actions[0].target_group_arn #=> String
       #   resp.rules[0].is_default #=> Boolean
+      # @overload describe_rules(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_rules(params = {}, options = {})
         req = build_request(:describe_rules, params)
         req.send_request(options)
@@ -767,8 +767,8 @@ module Aws
       #   resp.ssl_policies[0].ciphers[0].priority #=> Integer
       #   resp.ssl_policies[0].name #=> String
       #   resp.next_marker #=> String
+      # @overload describe_ssl_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_ssl_policies(params = {}, options = {})
         req = build_request(:describe_ssl_policies, params)
         req.send_request(options)
@@ -792,8 +792,8 @@ module Aws
       #   resp.tag_descriptions[0].tags #=> Array
       #   resp.tag_descriptions[0].tags[0].key #=> String
       #   resp.tag_descriptions[0].tags[0].value #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -815,8 +815,8 @@ module Aws
       #   resp.attributes #=> Array
       #   resp.attributes[0].key #=> String
       #   resp.attributes[0].value #=> String
+      # @overload describe_target_group_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_target_group_attributes(params = {}, options = {})
         req = build_request(:describe_target_group_attributes, params)
         req.send_request(options)
@@ -874,8 +874,8 @@ module Aws
       #   resp.target_groups[0].load_balancer_arns #=> Array
       #   resp.target_groups[0].load_balancer_arns[0] #=> String
       #   resp.next_marker #=> String
+      # @overload describe_target_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_target_groups(params = {}, options = {})
         req = build_request(:describe_target_groups, params)
         req.send_request(options)
@@ -909,8 +909,8 @@ module Aws
       #   resp.target_health_descriptions[0].target_health.state #=> String, one of "initial", "healthy", "unhealthy", "unused", "draining"
       #   resp.target_health_descriptions[0].target_health.reason #=> String, one of "Elb.RegistrationInProgress", "Elb.InitialHealthChecking", "Target.ResponseCodeMismatch", "Target.Timeout", "Target.FailedHealthChecks", "Target.NotRegistered", "Target.NotInUse", "Target.DeregistrationInProgress", "Target.InvalidState", "Elb.InternalError"
       #   resp.target_health_descriptions[0].target_health.description #=> String
+      # @overload describe_target_health(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_target_health(params = {}, options = {})
         req = build_request(:describe_target_health, params)
         req.send_request(options)
@@ -970,8 +970,8 @@ module Aws
       #   resp.listeners[0].default_actions #=> Array
       #   resp.listeners[0].default_actions[0].type #=> String, one of "forward"
       #   resp.listeners[0].default_actions[0].target_group_arn #=> String
+      # @overload modify_listener(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_listener(params = {}, options = {})
         req = build_request(:modify_listener, params)
         req.send_request(options)
@@ -979,7 +979,7 @@ module Aws
 
       # Modifies the specified attributes of the specified load balancer.
       #
-      # If any of the specified attributes can\'t be modified as requested,
+      # If any of the specified attributes can't be modified as requested,
       # the call fails. Any existing attributes that you do not modify retain
       # their current values.
       # @option params [required, String] :load_balancer_arn
@@ -1005,8 +1005,8 @@ module Aws
       #   resp.attributes #=> Array
       #   resp.attributes[0].key #=> String
       #   resp.attributes[0].value #=> String
+      # @overload modify_load_balancer_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_load_balancer_attributes(params = {}, options = {})
         req = build_request(:modify_load_balancer_attributes, params)
         req.send_request(options)
@@ -1057,8 +1057,8 @@ module Aws
       #   resp.rules[0].actions[0].type #=> String, one of "forward"
       #   resp.rules[0].actions[0].target_group_arn #=> String
       #   resp.rules[0].is_default #=> Boolean
+      # @overload modify_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_rule(params = {}, options = {})
         req = build_request(:modify_rule, params)
         req.send_request(options)
@@ -1127,8 +1127,8 @@ module Aws
       #   resp.target_groups[0].matcher.http_code #=> String
       #   resp.target_groups[0].load_balancer_arns #=> Array
       #   resp.target_groups[0].load_balancer_arns[0] #=> String
+      # @overload modify_target_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_target_group(params = {}, options = {})
         req = build_request(:modify_target_group, params)
         req.send_request(options)
@@ -1158,8 +1158,8 @@ module Aws
       #   resp.attributes #=> Array
       #   resp.attributes[0].key #=> String
       #   resp.attributes[0].value #=> String
+      # @overload modify_target_group_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_target_group_attributes(params = {}, options = {})
         req = build_request(:modify_target_group_attributes, params)
         req.send_request(options)
@@ -1187,8 +1187,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload register_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_targets(params = {}, options = {})
         req = build_request(:register_targets, params)
         req.send_request(options)
@@ -1208,8 +1208,8 @@ module Aws
       #     resource_arns: ["ResourceArn"], # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
@@ -1248,8 +1248,8 @@ module Aws
       #   resp.rules[0].actions[0].type #=> String, one of "forward"
       #   resp.rules[0].actions[0].target_group_arn #=> String
       #   resp.rules[0].is_default #=> Boolean
+      # @overload set_rule_priorities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_rule_priorities(params = {}, options = {})
         req = build_request(:set_rule_priorities, params)
         req.send_request(options)
@@ -1275,8 +1275,8 @@ module Aws
       # @example Response structure
       #   resp.security_group_ids #=> Array
       #   resp.security_group_ids[0] #=> String
+      # @overload set_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_security_groups(params = {}, options = {})
         req = build_request(:set_security_groups, params)
         req.send_request(options)
@@ -1304,8 +1304,8 @@ module Aws
       #   resp.availability_zones #=> Array
       #   resp.availability_zones[0].zone_name #=> String
       #   resp.availability_zones[0].subnet_id #=> String
+      # @overload set_subnets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_subnets(params = {}, options = {})
         req = build_request(:set_subnets, params)
         req.send_request(options)

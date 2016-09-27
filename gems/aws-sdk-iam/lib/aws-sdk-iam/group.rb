@@ -259,7 +259,7 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [String] :new_path
-      #   New path for the IAM group. Only include this if changing the group\'s
+      #   New path for the IAM group. Only include this if changing the group's
       #   path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -273,7 +273,7 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option options [String] :new_group_name
-      #   New name for the IAM group. Only include this if changing the group\'s
+      #   New name for the IAM group. Only include this if changing the group's
       #   name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters

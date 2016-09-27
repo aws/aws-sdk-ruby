@@ -496,13 +496,13 @@ module Aws
       #
       # @!attribute [rw] creation_date
       #   The UTC date when the vault was created. A string representation of
-      #   ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".
+      #   ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
       #   @return [Time]
       #
       # @!attribute [rw] last_inventory_date
       #   The UTC date when Amazon Glacier completed the last vault inventory.
       #   A string representation of ISO 8601 date format, for example,
-      #   \"2012-03-20T17:03:43.221Z\".
+      #   "2012-03-20T17:03:43.221Z".
       #   @return [Time]
       #
       # @!attribute [rw] number_of_archives
@@ -586,8 +586,8 @@ module Aws
       #
       # @!attribute [rw] range
       #   The range of bytes to retrieve from the output. For example, if you
-      #   want to download the first 1,048,576 bytes, specify \"Range:
-      #   bytes=0-1048575\". By default, this operation downloads the entire
+      #   want to download the first 1,048,576 bytes, specify "Range:
+      #   bytes=0-1048575". By default, this operation downloads the entire
       #   output.
       #   @return [String]
       class GetJobOutputInput < Struct.new(
@@ -727,7 +727,7 @@ module Aws
 
       # Contains the Amazon Glacier response to your request.
       # @!attribute [rw] policy
-      #   The vault lock policy as a JSON string, which uses \"\\\" as an
+      #   The vault lock policy as a JSON string, which uses "\\" as an
       #   escape character.
       #   @return [String]
       #
@@ -813,11 +813,11 @@ module Aws
       #
       # @!attribute [rw] creation_date
       #   The UTC date when the job was created. A string representation of
-      #   ISO 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".
+      #   ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
       #   @return [Time]
       #
       # @!attribute [rw] completed
-      #   The job status. When a job is completed, you get the job\'s output.
+      #   The job status. When a job is completed, you get the job's output.
       #   @return [Boolean]
       #
       # @!attribute [rw] status_code
@@ -885,7 +885,7 @@ module Aws
       #
       # @!attribute [rw] retrieval_byte_range
       #   The retrieved byte range for archive retrieval jobs in the form
-      #   \"*StartByteValue*-*EndByteValue*\" If no range was specified in the
+      #   "*StartByteValue*-*EndByteValue*" If no range was specified in the
       #   archive retrieval, then the whole archive is retrieved and
       #   *StartByteValue* equals 0 and *EndByteValue* equals the size of the
       #   archive minus 1. For inventory retrieval jobs this field is null.
@@ -1061,7 +1061,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] policy
-      #   The vault lock policy as a JSON string, which uses \"\\\" as an
+      #   The vault lock policy as a JSON string, which uses "\\" as an
       #   escape character.
       #   @return [Types::VaultLockPolicy]
       class InitiateVaultLockInput < Struct.new(
@@ -1084,7 +1084,7 @@ module Aws
       # @!attribute [rw] format
       #   The output format for the vault inventory list, which is set by the
       #   **InitiateJob** request when initiating a job to retrieve a vault
-      #   inventory. Valid values are \"CSV\" and \"JSON\".
+      #   inventory. Valid values are "CSV" and "JSON".
       #   @return [String]
       #
       # @!attribute [rw] start_date
@@ -1191,14 +1191,14 @@ module Aws
       #   When initiating a job to retrieve a vault inventory, you can
       #   optionally add this parameter to your request to specify the output
       #   format. If you are initiating an inventory job and do not specify a
-      #   Format field, JSON is the default format. Valid values are \"CSV\"
-      #   and \"JSON\".
+      #   Format field, JSON is the default format. Valid values are "CSV"
+      #   and "JSON".
       #   @return [String]
       #
       # @!attribute [rw] type
       #   The job type. You can initiate a job to retrieve an archive or get
-      #   an inventory of a vault. Valid values are \"archive-retrieval\" and
-      #   \"inventory-retrieval\".
+      #   an inventory of a vault. Valid values are "archive-retrieval" and
+      #   "inventory-retrieval".
       #   @return [String]
       #
       # @!attribute [rw] archive_id
@@ -1224,7 +1224,7 @@ module Aws
       #
       # @!attribute [rw] retrieval_byte_range
       #   The byte range to retrieve for an archive retrieval. in the form
-      #   \"*StartByteValue*-*EndByteValue*\" If not specified, the whole
+      #   "*StartByteValue*-*EndByteValue*" If not specified, the whole
       #   archive is retrieved. If specified, the byte range must be megabyte
       #   (1024\*1024) aligned which means that *StartByteValue* must be
       #   divisible by 1 MB and *EndByteValue* plus 1 must be divisible by 1
@@ -1292,7 +1292,7 @@ module Aws
       #
       # @!attribute [rw] statuscode
       #   Specifies the type of job status to return. You can specify the
-      #   following values: \"InProgress\", \"Succeeded\", or \"Failed\".
+      #   following values: "InProgress", "Succeeded", or "Failed".
       #   @return [String]
       #
       # @!attribute [rw] completed
@@ -1521,7 +1521,7 @@ module Aws
       end
 
       # Provides options to retrieve the vault list owned by the calling
-      # user\'s account. The list provides metadata information for each
+      # user's account. The list provides metadata information for each
       # vault.
       # @note When making an API call, pass ListVaultsInput
       #   data as a hash:
@@ -1547,7 +1547,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the List Vaults operation returns up to 1,000
       #   items.
       #   @return [Integer]
@@ -1898,7 +1898,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents a vault\'s notification configuration.
+      # Represents a vault's notification configuration.
       # @note When making an API call, pass VaultNotificationConfig
       #   data as a hash:
       #

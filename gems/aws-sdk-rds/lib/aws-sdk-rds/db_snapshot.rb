@@ -262,7 +262,7 @@ module Aws
       #
       #   If you copy an encrypted DB snapshot from your AWS account, you can
       #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-      #   encryption key. If you don\'t specify a value for `KmsKeyId` then the
+      #   encryption key. If you don't specify a value for `KmsKeyId` then the
       #   copy of the DB snapshot is encrypted with the same KMS key as the
       #   source DB snapshot.
       #
@@ -301,7 +301,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, String] :db_instance_identifier
       #   Name of the DB instance to create from the DB snapshot. This parameter
-      #   isn\'t case-sensitive.
+      #   isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -384,7 +384,7 @@ module Aws
       # @option options [String] :db_name
       #   The database name for the restored DB instance.
       #
-      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+      #   <note markdown="1"> This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB
       #   engines.
       #
       #    </note>

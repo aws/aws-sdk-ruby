@@ -36,6 +36,7 @@ module AwsSdkCodeGenerator
           apply_examples_from_disk(docstring)
           apply_request_syntax_example(docstring)
           apply_response_struture_example(docstring)
+          apply_overload_tag(docstring)
         end
       end
 
@@ -144,6 +145,10 @@ module AwsSdkCodeGenerator
         if output && shape(output)['members'].size > 0
           docstring.append(ResponseStructureExample.new(shape_ref:output, api:@api).to_s)
         end
+      end
+
+      def apply_overload_tag(docstring)
+        docstring.append("@overload #{@method_name}(params = {})")
       end
 
     end

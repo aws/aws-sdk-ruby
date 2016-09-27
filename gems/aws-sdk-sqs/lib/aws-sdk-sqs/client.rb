@@ -169,7 +169,7 @@ module Aws
       #
       #   Queue URLs are case-sensitive.
       # @option params [required, String] :label
-      #   The unique identification of the permission you\'re setting (e.g.,
+      #   The unique identification of the permission you're setting (e.g.,
       #   `AliceSendMessage`). Constraints: Maximum 80 characters; alphanumeric
       #   characters, hyphens (-), and underscores (\_) are allowed.
       # @option params [required, Array<String>] :aws_account_ids
@@ -208,8 +208,8 @@ module Aws
       #     aws_account_ids: ["String"], # required
       #     actions: ["String"], # required
       #   })
+      # @overload add_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_permission(params = {}, options = {})
         req = build_request(:add_permission, params)
         req.send_request(options)
@@ -217,12 +217,12 @@ module Aws
 
       # Changes the visibility timeout of a specified message in a queue to a
       # new value. The maximum allowed timeout value you can set the value to
-      # is 12 hours. This means you can\'t extend the timeout of a message in
+      # is 12 hours. This means you can't extend the timeout of a message in
       # an existing queue to more than a total visibility timeout of 12 hours.
       # (For more information visibility timeout, see [Visibility Timeout][1]
       # in the *Amazon SQS Developer Guide*.)
       #
-      # For example, let\'s say you have a message and its default message
+      # For example, let's say you have a message and its default message
       # visibility timeout is 5 minutes. After 3 minutes, you call
       # `ChangeMessageVisiblity` with a timeout of 10 minutes. At that time,
       # the timeout for the message would be extended by 10 minutes beyond the
@@ -243,21 +243,17 @@ module Aws
       #
       # </note>
       #
-      # <important markdown="1">If you attempt to set the `VisibilityTimeout` to an amount more than
+      # If you attempt to set the `VisibilityTimeout` to an amount more than
       # the maximum time left, Amazon SQS returns an error. It will not
       # automatically recalculate and increase the timeout to the maximum time
       # remaining.
       #
-      # </important>
-      #
-      # <important markdown="1">Unlike with a queue, when you change the visibility timeout for a
+      # Unlike with a queue, when you change the visibility timeout for a
       # specific message, that timeout value is applied immediately but is not
-      # saved in memory for that message. If you don\'t delete a message after
+      # saved in memory for that message. If you don't delete a message after
       # it is received, the visibility timeout for the message the next time
       # it is received reverts to the original timeout value, not the value
       # you set with the `ChangeMessageVisibility` action.
-      #
-      # </important>
       #
       #
       #
@@ -272,7 +268,7 @@ module Aws
       #   ReceiveMessage action.
       # @option params [required, Integer] :visibility_timeout
       #   The new value (in seconds - from 0 to 43200 - maximum 12 hours) for
-      #   the message\'s visibility timeout.
+      #   the message's visibility timeout.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -281,8 +277,8 @@ module Aws
       #     receipt_handle: "String", # required
       #     visibility_timeout: 1, # required
       #   })
+      # @overload change_message_visibility(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_message_visibility(params = {}, options = {})
         req = build_request(:change_message_visibility, params)
         req.send_request(options)
@@ -294,11 +290,9 @@ module Aws
       # 10 ChangeMessageVisibility requests with each
       # `ChangeMessageVisibilityBatch` action.
       #
-      # <important markdown="1">Because the batch request can result in a combination of successful
+      # Because the batch request can result in a combination of successful
       # and unsuccessful actions, you should check for batch errors even when
       # the call returns an HTTP status code of 200.
-      #
-      # </important>
       #
       # <note markdown="1">Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
@@ -341,8 +335,8 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      # @overload change_message_visibility_batch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_message_visibility_batch(params = {}, options = {})
         req = build_request(:change_message_visibility_batch, params)
         req.send_request(options)
@@ -362,13 +356,13 @@ module Aws
       # provide a value for any attribute, the queue will have the default
       # value for that attribute.
       #
-      # <note markdown="1">Use GetQueueUrl to get a queue\'s URL. GetQueueUrl requires only the
+      # <note markdown="1">Use GetQueueUrl to get a queue's URL. GetQueueUrl requires only the
       # `QueueName` parameter.
       #
       # </note>
       #
       # If you provide the name of an existing queue, along with the exact
-      # names and values of all the queue\'s attributes, `CreateQueue` returns
+      # names and values of all the queue's attributes, `CreateQueue` returns
       # the queue URL for the existing queue. If the queue name, attribute
       # names, or attribute values do not match an existing queue,
       # `CreateQueue` returns an error.
@@ -406,7 +400,7 @@ module Aws
       #     1209600 (14 days). The default for this attribute is 345600 (4
       #     days).
       #
-      #   * `Policy` - The queue\'s policy. A valid AWS policy. For more
+      #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #
@@ -448,39 +442,37 @@ module Aws
       #
       # @example Response structure
       #   resp.queue_url #=> String
+      # @overload create_queue(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_queue(params = {}, options = {})
         req = build_request(:create_queue, params)
         req.send_request(options)
       end
 
       # Deletes the specified message from the specified queue. You specify
-      # the message by using the message\'s `receipt handle` and not the
+      # the message by using the message's `receipt handle` and not the
       # `message ID` you received when you sent the message. Even if the
       # message is locked by another reader due to the visibility timeout
       # setting, it is still deleted from the queue. If you leave a message in
-      # the queue for longer than the queue\'s configured retention period,
+      # the queue for longer than the queue's configured retention period,
       # Amazon SQS automatically deletes it.
       #
       # <note markdown="1"> The receipt handle is associated with a specific instance of receiving
       # the message. If you receive a message more than once, the receipt
       # handle you get each time you receive the message is different. When
-      # you request `DeleteMessage`, if you don\'t provide the most recently
+      # you request `DeleteMessage`, if you don't provide the most recently
       # received receipt handle for the message, the request will still
       # succeed, but the message might not be deleted.
       #
       #  </note>
       #
-      # <important markdown="1"> It is possible you will receive a message even after you have deleted
+      # It is possible you will receive a message even after you have deleted
       # it. This might happen on rare occasions if one of the servers storing
       # a copy of the message is unavailable when you request to delete the
       # message. The copy remains on the server and might be returned to you
       # again on a subsequent receive request. You should create your system
       # to be idempotent so that receiving a particular message more than once
       # is not a problem.
-      #
-      #  </important>
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
@@ -494,8 +486,8 @@ module Aws
       #     queue_url: "String", # required
       #     receipt_handle: "String", # required
       #   })
+      # @overload delete_message(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_message(params = {}, options = {})
         req = build_request(:delete_message, params)
         req.send_request(options)
@@ -505,11 +497,9 @@ module Aws
       # version of DeleteMessage. The result of the delete action on each
       # message is reported individually in the response.
       #
-      # <important markdown="1"> Because the batch request can result in a combination of successful
+      # Because the batch request can result in a combination of successful
       # and unsuccessful actions, you should check for batch errors even when
       # the call returns an HTTP status code of 200.
-      #
-      #  </important>
       #
       # <note markdown="1">Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
@@ -550,8 +540,8 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      # @overload delete_message_batch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_message_batch(params = {}, options = {})
         req = build_request(:delete_message_batch, params)
         req.send_request(options)
@@ -561,10 +551,8 @@ module Aws
       # whether the queue is empty. If the specified queue does not exist,
       # Amazon SQS returns a successful response.
       #
-      # <important markdown="1"> Use `DeleteQueue` with care; once you delete your queue, any messages
+      # Use `DeleteQueue` with care; once you delete your queue, any messages
       # in the queue are no longer available.
-      #
-      #  </important>
       #
       # When you delete a queue, the deletion process takes up to 60 seconds.
       # Requests you send involving that queue during the 60 seconds might
@@ -590,8 +578,8 @@ module Aws
       #   resp = client.delete_queue({
       #     queue_url: "String", # required
       #   })
+      # @overload delete_queue(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_queue(params = {}, options = {})
         req = build_request(:delete_queue, params)
         req.send_request(options)
@@ -638,7 +626,7 @@ module Aws
       #   * `LastModifiedTimestamp` - returns the time when the queue was last
       #     changed (epoch time in seconds).
       #
-      #   * `Policy` - returns the queue\'s policy.
+      #   * `Policy` - returns the queue's policy.
       #
       #   * `MaximumMessageSize` - returns the limit of how many bytes a message
       #     can contain before Amazon SQS rejects it.
@@ -646,7 +634,7 @@ module Aws
       #   * `MessageRetentionPeriod` - returns the number of seconds Amazon SQS
       #     retains a message.
       #
-      #   * `QueueArn` - returns the queue\'s Amazon resource name (ARN).
+      #   * `QueueArn` - returns the queue's Amazon resource name (ARN).
       #
       #   * `ApproximateNumberOfMessagesDelayed` - returns the approximate
       #     number of messages that are pending to be added to the queue.
@@ -685,8 +673,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["QueueAttributeName"] #=> String
+      # @overload get_queue_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_queue_attributes(params = {}, options = {})
         req = build_request(:get_queue_attributes, params)
         req.send_request(options)
@@ -697,7 +685,7 @@ module Aws
       #
       # To access a queue that belongs to another AWS account, use the
       # `QueueOwnerAWSAccountId` parameter to specify the account ID of the
-      # queue\'s owner. The queue\'s owner must grant you permission to access
+      # queue's owner. The queue's owner must grant you permission to access
       # the queue. For more information about shared queue access, see
       # AddPermission or go to [Shared Queues][1] in the *Amazon SQS Developer
       # Guide*.
@@ -725,8 +713,8 @@ module Aws
       #
       # @example Response structure
       #   resp.queue_url #=> String
+      # @overload get_queue_url(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_queue_url(params = {}, options = {})
         req = build_request(:get_queue_url, params)
         req.send_request(options)
@@ -757,8 +745,8 @@ module Aws
       # @example Response structure
       #   resp.queue_urls #=> Array
       #   resp.queue_urls[0] #=> String
+      # @overload list_dead_letter_source_queues(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_dead_letter_source_queues(params = {}, options = {})
         req = build_request(:list_dead_letter_source_queues, params)
         req.send_request(options)
@@ -785,8 +773,8 @@ module Aws
       # @example Response structure
       #   resp.queue_urls #=> Array
       #   resp.queue_urls[0] #=> String
+      # @overload list_queues(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_queues(params = {}, options = {})
         req = build_request(:list_queues, params)
         req.send_request(options)
@@ -794,10 +782,8 @@ module Aws
 
       # Deletes the messages in a queue specified by the **queue URL**.
       #
-      # <important markdown="1">When you use the `PurgeQueue` API, the deleted messages in the queue
+      # When you use the `PurgeQueue` API, the deleted messages in the queue
       # cannot be retrieved.
-      #
-      # </important>
       #
       # When you purge a queue, the message deletion process takes up to 60
       # seconds. All messages sent to the queue before calling `PurgeQueue`
@@ -816,8 +802,8 @@ module Aws
       #   resp = client.purge_queue({
       #     queue_url: "String", # required
       #   })
+      # @overload purge_queue(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purge_queue(params = {}, options = {})
         req = build_request(:purge_queue, params)
         req.send_request(options)
@@ -912,14 +898,14 @@ module Aws
       #   or end with a period, and it should not have successive periods. The
       #   name is case sensitive and must be unique among all attribute names
       #   for the message. The name can be up to 256 characters long. The name
-      #   cannot start with \"AWS.\" or \"Amazon.\" (or any variations in
+      #   cannot start with "AWS." or "Amazon." (or any variations in
       #   casing), because these prefixes are reserved for use by Amazon Web
       #   Services.
       #
       #   When using `ReceiveMessage`, you can send a list of attribute names to
-      #   receive, or you can return all of the attributes by specifying \"All\"
-      #   or \".\*\" in your request. You can also use \"bar.\*\" to return all
-      #   message attributes starting with the \"bar\" prefix.
+      #   receive, or you can return all of the attributes by specifying "All"
+      #   or ".\*" in your request. You can also use "bar.\*" to return all
+      #   message attributes starting with the "bar" prefix.
       # @option params [Integer] :max_number_of_messages
       #   The maximum number of messages to return. Amazon SQS never returns
       #   more messages than this value but may return fewer. Values can be from
@@ -965,8 +951,8 @@ module Aws
       #   resp.messages[0].message_attributes["String"].binary_list_values #=> Array
       #   resp.messages[0].message_attributes["String"].binary_list_values[0] #=> String
       #   resp.messages[0].message_attributes["String"].data_type #=> String
+      # @overload receive_message(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def receive_message(params = {}, options = {})
         req = build_request(:receive_message, params)
         req.send_request(options)
@@ -988,8 +974,8 @@ module Aws
       #     queue_url: "String", # required
       #     label: "String", # required
       #   })
+      # @overload remove_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_permission(params = {}, options = {})
         req = build_request(:remove_permission, params)
         req.send_request(options)
@@ -1001,15 +987,13 @@ module Aws
       # SDK that supports SigV4 signing. To verify whether SigV4 is supported
       # for an AWS SDK, check the SDK release notes.
       #
-      # <important markdown="1"> The following list shows the characters (in Unicode) allowed in your
+      # The following list shows the characters (in Unicode) allowed in your
       # message, according to the W3C XML specification. For more information,
       # go to [http://www.w3.org/TR/REC-xml/#charsets][1] If you send any
       # characters not included in the list, your request will be rejected.
       #
       #  \#x9 \| #xA \| #xD \| \[#x20 to #xD7FF\] \| \[#xE000 to #xFFFD\] \|
       # \[#x10000 to #x10FFFF\]
-      #
-      #  </important>
       #
       #
       #
@@ -1025,7 +1009,7 @@ module Aws
       #   The number of seconds (0 to 900 - 15 minutes) to delay a specific
       #   message. Messages with a positive `DelaySeconds` value become
       #   available for processing after the delay time is finished. If you
-      #   don\'t specify a value, the default value for the queue applies.
+      #   don't specify a value, the default value for the queue applies.
       # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
       #   information, see [Message Attribute Items][1].
@@ -1059,8 +1043,8 @@ module Aws
       #   resp.md5_of_message_body #=> String
       #   resp.md5_of_message_attributes #=> String
       #   resp.message_id #=> String
+      # @overload send_message(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_message(params = {}, options = {})
         req = build_request(:send_message, params)
         req.send_request(options)
@@ -1071,13 +1055,13 @@ module Aws
       # is reported individually in the response. The maximum allowed
       # individual message size is 256 KB (262,144 bytes).
       #
-      # The maximum total payload size (i.e., the sum of all a batch\'s
+      # The maximum total payload size (i.e., the sum of all a batch's
       # individual message lengths) is also 256 KB (262,144 bytes).
       #
       # If the `DelaySeconds` parameter is not specified for an entry, the
       # default for the queue is used.
       #
-      # <important markdown="1">The following list shows the characters (in Unicode) that are allowed
+      # The following list shows the characters (in Unicode) that are allowed
       # in your message, according to the W3C XML specification. For more
       # information, go to [http://www.faqs.org/rfcs/rfc1321.html][1]. If you
       # send any characters that are not included in the list, your request
@@ -1086,13 +1070,9 @@ module Aws
       #  \#x9 \| #xA \| #xD \| \[#x20 to #xD7FF\] \| \[#xE000 to #xFFFD\] \|
       # \[#x10000 to #x10FFFF\]
       #
-      #  </important>
-      #
-      # <important markdown="1"> Because the batch request can result in a combination of successful
+      # Because the batch request can result in a combination of successful
       # and unsuccessful actions, you should check for batch errors even when
       # the call returns an HTTP status code of 200.
-      #
-      #  </important>
       #
       # <note markdown="1">Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
@@ -1150,15 +1130,15 @@ module Aws
       #   resp.failed[0].sender_fault #=> Boolean
       #   resp.failed[0].code #=> String
       #   resp.failed[0].message #=> String
+      # @overload send_message_batch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_message_batch(params = {}, options = {})
         req = build_request(:send_message_batch, params)
         req.send_request(options)
       end
 
       # Sets the value of one or more queue attributes. When you change a
-      # queue\'s attributes, the change can take up to 60 seconds for most of
+      # queue's attributes, the change can take up to 60 seconds for most of
       # the attributes to propagate throughout the SQS system. Changes made to
       # the `MessageRetentionPeriod` attribute can take up to 15 minutes.
       #
@@ -1191,7 +1171,7 @@ module Aws
       #     1209600 (14 days). The default for this attribute is 345600 (4
       #     days).
       #
-      #   * `Policy` - The queue\'s policy. A valid AWS policy. For more
+      #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #
@@ -1226,8 +1206,8 @@ module Aws
       #       "Policy" => "String",
       #     },
       #   })
+      # @overload set_queue_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_queue_attributes(params = {}, options = {})
         req = build_request(:set_queue_attributes, params)
         req.send_request(options)

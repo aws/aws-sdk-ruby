@@ -180,21 +180,19 @@ module Aws
       #   Resource Name (ARN) as its value. This ensures that only events
       #   generated from the specified source can invoke the function.
       #
-      #   <important markdown="1">If you add a permission for the Amazon S3 principal without providing
+      #   If you add a permission for the Amazon S3 principal without providing
       #   the source ARN, any AWS account that creates a mapping to your
       #   function ARN can send events to invoke your Lambda function from
       #   Amazon S3.
-      #
-      #    </important>
       # @option params [String] :source_account
       #   This parameter is used for S3 and SES only. The AWS account ID
       #   (without a hyphen) of the source owner. For example, if the
-      #   `SourceArn` identifies a bucket, then this is the bucket owner\'s
+      #   `SourceArn` identifies a bucket, then this is the bucket owner's
       #   account ID. You can use this additional condition to ensure the bucket
       #   you specify is owned by a specific account (it is possible the bucket
       #   owner deleted the bucket and some other AWS account created the
       #   bucket). You can also use this condition to specify all sources (that
-      #   is, you don\'t specify the `SourceArn`) owned by a specific account.
+      #   is, you don't specify the `SourceArn`) owned by a specific account.
       # @option params [String] :event_source_token
       #   A unique token that must be supplied by the principal invoking the
       #   function. This is currently only used for Alexa Smart Home functions.
@@ -234,8 +232,8 @@ module Aws
       #
       # @example Response structure
       #   resp.statement #=> String
+      # @overload add_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_permission(params = {}, options = {})
         req = build_request(:add_permission, params)
         req.send_request(options)
@@ -278,8 +276,8 @@ module Aws
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      # @overload create_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_alias(params = {}, options = {})
         req = build_request(:create_alias, params)
         req.send_request(options)
@@ -293,11 +291,9 @@ module Aws
       # This association between a stream source and a Lambda function is
       # called the event source mapping.
       #
-      # <important markdown="1">This event source mapping is relevant only in the AWS Lambda pull
+      # This event source mapping is relevant only in the AWS Lambda pull
       # model, where AWS Lambda invokes the function. For more information, go
       # to [AWS Lambda: How it Works][1] in the *AWS Lambda Developer Guide*.
-      #
-      #  </important>
       #
       # You provide mapping information (for example, which stream to read
       # from and which Lambda function to invoke) in the request body.
@@ -392,8 +388,8 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      # @overload create_event_source_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_event_source_mapping(params = {}, options = {})
         req = build_request(:create_event_source_mapping, params)
         req.send_request(options)
@@ -424,8 +420,8 @@ module Aws
       # @option params [required, String] :runtime
       #   The runtime environment for the Lambda function you are uploading.
       #
-      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
-      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
+      #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
+      #   use earlier runtime (v0.10.42), set the value to "nodejs".
       # @option params [required, String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
       #   when it executes your function to access any other Amazon Web Services
@@ -526,8 +522,8 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      # @overload create_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_function(params = {}, options = {})
         req = build_request(:create_function, params)
         req.send_request(options)
@@ -553,8 +549,8 @@ module Aws
       #     function_name: "FunctionName", # required
       #     name: "Alias", # required
       #   })
+      # @overload delete_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_alias(params = {}, options = {})
         req = build_request(:delete_alias, params)
         req.send_request(options)
@@ -592,8 +588,8 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      # @overload delete_event_source_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_event_source_mapping(params = {}, options = {})
         req = build_request(:delete_event_source_mapping, params)
         req.send_request(options)
@@ -601,7 +597,7 @@ module Aws
 
       # Deletes the specified Lambda function code and configuration.
       #
-      # If you are using the versioning feature and you don\'t specify a
+      # If you are using the versioning feature and you don't specify a
       # function version in your `DeleteFunction` request, AWS Lambda will
       # delete the function, including all its versions, and any aliases
       # pointing to the function versions. To delete a specific function
@@ -643,7 +639,7 @@ module Aws
       #   You can only specify a function version, not an alias name, using this
       #   parameter. You cannot delete a function version using its alias.
       #
-      #   If you don\'t specify this parameter, AWS Lambda will delete the
+      #   If you don't specify this parameter, AWS Lambda will delete the
       #   function, including all of its versions and aliases.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -652,8 +648,8 @@ module Aws
       #     function_name: "FunctionName", # required
       #     qualifier: "Qualifier",
       #   })
+      # @overload delete_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_function(params = {}, options = {})
         req = build_request(:delete_function, params)
         req.send_request(options)
@@ -692,8 +688,8 @@ module Aws
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      # @overload get_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_alias(params = {}, options = {})
         req = build_request(:get_alias, params)
         req.send_request(options)
@@ -731,8 +727,8 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      # @overload get_event_source_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_event_source_mapping(params = {}, options = {})
         req = build_request(:get_event_source_mapping, params)
         req.send_request(options)
@@ -745,7 +741,7 @@ module Aws
       # you provided as parameters when uploading the function.
       #
       # Using the optional `Qualifier` parameter, you can specify a specific
-      # function version for which you want this information. If you don\'t
+      # function version for which you want this information. If you don't
       # specify this parameter, the API uses unqualified function ARN which
       # return information about the `$LATEST` version of the Lambda function.
       # For more information, see [AWS Lambda Function Versioning and
@@ -773,7 +769,7 @@ module Aws
       #   function ARN for the request and returns information about the
       #   specific Lambda function version. If you specify an alias name, the
       #   API uses the alias ARN and returns information about the function
-      #   version to which the alias points. If you don\'t provide this
+      #   version to which the alias points. If you don't provide this
       #   parameter, the API uses unqualified function ARN and returns
       #   information about the `$LATEST` version of the Lambda function.
       # @return [Types::GetFunctionResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -807,8 +803,8 @@ module Aws
       #   resp.configuration.vpc_config.vpc_id #=> String
       #   resp.code.repository_type #=> String
       #   resp.code.location #=> String
+      # @overload get_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_function(params = {}, options = {})
         req = build_request(:get_function, params)
         req.send_request(options)
@@ -821,7 +817,7 @@ module Aws
       # If you are using the versioning feature, you can retrieve this
       # information for a specific function version by using the optional
       # `Qualifier` parameter and specifying the function version or alias
-      # that points to it. If you don\'t provide it, the API returns
+      # that points to it. If you don't provide it, the API returns
       # information about the $LATEST version of the function. For more
       # information about versioning, see [AWS Lambda Function Versioning and
       # Aliases][1].
@@ -851,7 +847,7 @@ module Aws
       #   returns information about the function version to which the alias
       #   points.
       #
-      #   If you don\'t specify this parameter, the API uses unqualified
+      #   If you don't specify this parameter, the API uses unqualified
       #   function ARN, and returns information about the `$LATEST` function
       #   version.
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -894,8 +890,8 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      # @overload get_function_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_function_configuration(params = {}, options = {})
         req = build_request(:get_function_configuration, params)
         req.send_request(options)
@@ -932,7 +928,7 @@ module Aws
       # @option params [String] :qualifier
       #   You can specify this optional query parameter to specify a function
       #   version or an alias name in which case this API will return all
-      #   permissions associated with the specific qualified ARN. If you don\'t
+      #   permissions associated with the specific qualified ARN. If you don't
       #   provide this parameter, the API will return permissions that apply to
       #   the unqualified function ARN.
       # @return [Types::GetPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -947,8 +943,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy #=> String
+      # @overload get_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_policy(params = {}, options = {})
         req = build_request(:get_policy, params)
         req.send_request(options)
@@ -959,7 +955,7 @@ module Aws
       # If you are using the versioning feature, you can invoke the specific
       # function version by providing function version or alias name that is
       # pointing to the function version using the `Qualifier` parameter in
-      # the request. If you don\'t provide the `Qualifier` parameter, the
+      # the request. If you don't provide the `Qualifier` parameter, the
       # `$LATEST` version of the Lambda function is invoked. Invocations occur
       # at least once in response to an event and functions must be idempotent
       # to handle this. For information about the versioning feature, see [AWS
@@ -1018,7 +1014,7 @@ module Aws
       #   you specify an alias name, the API uses the alias ARN to invoke the
       #   Lambda function version to which the alias points.
       #
-      #   If you don\'t provide this parameter, then the API uses unqualified
+      #   If you don't provide this parameter, then the API uses unqualified
       #   function ARN which results in invocation of the `$LATEST` version.
       # @return [Types::InvocationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1042,17 +1038,15 @@ module Aws
       #   resp.function_error #=> String
       #   resp.log_result #=> String
       #   resp.payload #=> String
+      # @overload invoke(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def invoke(params = {}, options = {})
         req = build_request(:invoke, params)
         req.send_request(options)
       end
 
-      # <important markdown="1">This API is deprecated. We recommend you use `Invoke` API (see
+      # This API is deprecated. We recommend you use `Invoke` API (see
       # Invoke).
-      #
-      #  </important>
       #
       # Submits an invocation request to AWS Lambda. Upon receiving the
       # request, Lambda executes the specified function asynchronously. To see
@@ -1077,8 +1071,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> Integer
+      # @overload invoke_async(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def invoke_async(params = {}, options = {})
         req = build_request(:invoke_async, params)
         req.send_request(options)
@@ -1128,8 +1122,8 @@ module Aws
       #   resp.aliases[0].name #=> String
       #   resp.aliases[0].function_version #=> String
       #   resp.aliases[0].description #=> String
+      # @overload list_aliases(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_aliases(params = {}, options = {})
         req = build_request(:list_aliases, params)
         req.send_request(options)
@@ -1199,8 +1193,8 @@ module Aws
       #   resp.event_source_mappings[0].last_processing_result #=> String
       #   resp.event_source_mappings[0].state #=> String
       #   resp.event_source_mappings[0].state_transition_reason #=> String
+      # @overload list_event_source_mappings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_event_source_mappings(params = {}, options = {})
         req = build_request(:list_event_source_mappings, params)
         req.send_request(options)
@@ -1259,8 +1253,8 @@ module Aws
       #   resp.functions[0].vpc_config.security_group_ids #=> Array
       #   resp.functions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.functions[0].vpc_config.vpc_id #=> String
+      # @overload list_functions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_functions(params = {}, options = {})
         req = build_request(:list_functions, params)
         req.send_request(options)
@@ -1321,8 +1315,8 @@ module Aws
       #   resp.versions[0].vpc_config.security_group_ids #=> Array
       #   resp.versions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.versions[0].vpc_config.vpc_id #=> String
+      # @overload list_versions_by_function(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_versions_by_function(params = {}, options = {})
         req = build_request(:list_versions_by_function, params)
         req.send_request(options)
@@ -1396,8 +1390,8 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      # @overload publish_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def publish_version(params = {}, options = {})
         req = build_request(:publish_version, params)
         req.send_request(options)
@@ -1437,7 +1431,7 @@ module Aws
       # @option params [String] :qualifier
       #   You can specify this optional parameter to remove permission
       #   associated with a specific function version or function alias. If you
-      #   don\'t specify this parameter, the API removes permission associated
+      #   don't specify this parameter, the API removes permission associated
       #   with the unqualified function ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -1447,8 +1441,8 @@ module Aws
       #     statement_id: "StatementId", # required
       #     qualifier: "Qualifier",
       #   })
+      # @overload remove_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_permission(params = {}, options = {})
         req = build_request(:remove_permission, params)
         req.send_request(options)
@@ -1492,8 +1486,8 @@ module Aws
       #   resp.name #=> String
       #   resp.function_version #=> String
       #   resp.description #=> String
+      # @overload update_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_alias(params = {}, options = {})
         req = build_request(:update_alias, params)
         req.send_request(options)
@@ -1513,7 +1507,7 @@ module Aws
       #
       # If you disable the event source mapping, AWS Lambda stops polling. If
       # you enable again, it will resume polling from the time it had stopped
-      # polling, so you don\'t lose processing of any records. However, if you
+      # polling, so you don't lose processing of any records. However, if you
       # delete event source mapping and create it again, it will reset.
       #
       # This operation requires permission for the
@@ -1579,8 +1573,8 @@ module Aws
       #   resp.last_processing_result #=> String
       #   resp.state #=> String
       #   resp.state_transition_reason #=> String
+      # @overload update_event_source_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_event_source_mapping(params = {}, options = {})
         req = build_request(:update_event_source_mapping, params)
         req.send_request(options)
@@ -1679,8 +1673,8 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      # @overload update_function_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_function_code(params = {}, options = {})
         req = build_request(:update_function_code, params)
         req.send_request(options)
@@ -1689,7 +1683,7 @@ module Aws
       # Updates the configuration parameters for the specified Lambda function
       # by using the values provided in the request. You provide only the
       # parameters you want to change. This operation must only be used on an
-      # existing Lambda function and cannot be used to update the function\'s
+      # existing Lambda function and cannot be used to update the function's
       # code.
       #
       # If you are using the versioning feature, note this API will always
@@ -1742,8 +1736,8 @@ module Aws
       # @option params [String] :runtime
       #   The runtime environment for the Lambda function.
       #
-      #   To use the Node.js runtime v4.3, set the value to \"nodejs4.3\". To
-      #   use earlier runtime (v0.10.42), set the value to \"nodejs\".
+      #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
+      #   use earlier runtime (v0.10.42), set the value to "nodejs".
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
@@ -1793,8 +1787,8 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      # @overload update_function_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_function_configuration(params = {}, options = {})
         req = build_request(:update_function_configuration, params)
         req.send_request(options)

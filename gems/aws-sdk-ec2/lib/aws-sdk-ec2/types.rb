@@ -257,16 +257,16 @@ module Aws
       #
       # @!attribute [rw] private_ip_addresses
       #   One or more IP addresses to be assigned as a secondary private IP
-      #   address to the network interface. You can\'t specify this parameter
+      #   address to the network interface. You can't specify this parameter
       #   when also specifying a number of secondary IP addresses.
       #
-      #   If you don\'t specify an IP address, Amazon EC2 automatically
+      #   If you don't specify an IP address, Amazon EC2 automatically
       #   selects an IP address within the subnet range.
       #   @return [Array<String>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
       #   The number of secondary IP addresses to assign to the network
-      #   interface. You can\'t specify this parameter when also specifying
+      #   interface. You can't specify this parameter when also specifying
       #   private IP addresses.
       #   @return [Integer]
       #
@@ -459,7 +459,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] groups
-      #   The ID of one or more of the VPC\'s security groups. You cannot
+      #   The ID of one or more of the VPC's security groups. You cannot
       #   specify security groups from a different VPC.
       #   @return [Array<String>]
       class AttachClassicLinkVpcRequest < Struct.new(
@@ -749,7 +749,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       #   @return [Array<Types::IpPermission>]
       class AuthorizeSecurityGroupEgressRequest < Struct.new(
@@ -824,7 +824,7 @@ module Aws
       #
       # @!attribute [rw] source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. Creates rules that
       #   grant full ICMP, UDP, and TCP access. To create a rule with a
@@ -836,7 +836,7 @@ module Aws
       # @!attribute [rw] source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account number for the source security
       #   group, if the source security group is in a different account. You
-      #   can\'t specify this parameter in combination with the following
+      #   can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the IP protocol, the start of
       #   the port range, and the end of the port range. Creates rules that
       #   grant full ICMP, UDP, and TCP access. To create a rule with a
@@ -868,7 +868,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       #   @return [String]
       #
@@ -1535,7 +1535,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] expiration_time
-      #   The time when the task expires. If the upload isn\'t complete before
+      #   The time when the task expires. If the upload isn't complete before
       #   the expiration time, we automatically cancel the task.
       #   @return [String]
       #
@@ -1803,12 +1803,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] public_ip
-      #   The Internet-routable IP address for the customer gateway\'s outside
+      #   The Internet-routable IP address for the customer gateway's outside
       #   interface. The address must be static.
       #   @return [String]
       #
       # @!attribute [rw] bgp_asn
-      #   For devices that support BGP, the customer gateway\'s BGP ASN.
+      #   For devices that support BGP, the customer gateway's BGP ASN.
       #
       #   Default: 65000
       #   @return [Integer]
@@ -1898,7 +1898,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] deliver_logs_permission_arn
-      #   The ARN for the IAM role that\'s used to post flow logs to a
+      #   The ARN for the IAM role that's used to post flow logs to a
       #   CloudWatch Logs log group.
       #   @return [String]
       #
@@ -1984,7 +1984,7 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -1993,10 +1993,10 @@ module Aws
       #
       # @!attribute [rw] no_reboot
       #   By default, Amazon EC2 attempts to shut down and reboot the instance
-      #   before creating the image. If the \'No Reboot\' option is set,
-      #   Amazon EC2 doesn\'t shut down the instance before creating the
+      #   before creating the image. If the 'No Reboot' option is set,
+      #   Amazon EC2 doesn't shut down the instance before creating the
       #   image. When this option is used, file system integrity on the
-      #   created image can\'t be guaranteed.
+      #   created image can't be guaranteed.
       #   @return [Boolean]
       #
       # @!attribute [rw] block_device_mappings
@@ -2316,7 +2316,7 @@ module Aws
       #
       # @!attribute [rw] private_ip_address
       #   The primary private IP address of the network interface. If you
-      #   don\'t specify an IP address, Amazon EC2 selects one for you from
+      #   don't specify an IP address, Amazon EC2 selects one for you from
       #   the subnet range. If you specify an IP address, you cannot indicate
       #   any IP addresses specified in `privateIpAddresses` as primary (only
       #   one IP address can be designated as primary).
@@ -2334,7 +2334,7 @@ module Aws
       #   The number of secondary private IP addresses to assign to a network
       #   interface. When you specify a number of secondary IP addresses,
       #   Amazon EC2 selects these IP addresses within the subnet range. You
-      #   can\'t specify this option and specify more than one private IP
+      #   can't specify this option and specify more than one private IP
       #   address using `privateIpAddresses`.
       #
       #   The number of IP addresses you can assign to a network interface
@@ -2775,7 +2775,7 @@ module Aws
       #
       # @!attribute [rw] tags
       #   One or more tags. The `value` parameter is required, but if you
-      #   don\'t want the tag to have a value, specify the parameter with no
+      #   don't want the tag to have a value, specify the parameter with no
       #   value, and we set the value to an empty string.
       #   @return [Array<Types::Tag>]
       class CreateTagsRequest < Struct.new(
@@ -2796,11 +2796,11 @@ module Aws
       #       }
       # @!attribute [rw] user_id
       #   The specific AWS account ID that is to be added or removed from a
-      #   volume\'s list of create volume permissions.
+      #   volume's list of create volume permissions.
       #   @return [String]
       #
       # @!attribute [rw] group
-      #   The specific group that is to be added or removed from a volume\'s
+      #   The specific group that is to be added or removed from a volume's
       #   list of create volume permissions.
       #   @return [String]
       class CreateVolumePermission < Struct.new(
@@ -2828,12 +2828,12 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] add
-      #   Adds a specific AWS account ID or group to a volume\'s list of
+      #   Adds a specific AWS account ID or group to a volume's list of
       #   create volume permissions.
       #   @return [Array<Types::CreateVolumePermission>]
       #
       # @!attribute [rw] remove
-      #   Removes a specific AWS account ID or group from a volume\'s list of
+      #   Removes a specific AWS account ID or group from a volume's list of
       #   create volume permissions.
       #   @return [Array<Types::CreateVolumePermission>]
       class CreateVolumePermissionModifications < Struct.new(
@@ -2871,7 +2871,7 @@ module Aws
       #   specify a snapshot, the volume size must be equal to or larger than
       #   the snapshot size.
       #
-      #   Default: If you\'re creating the volume from a snapshot and don\'t
+      #   Default: If you're creating the volume from a snapshot and don't
       #   specify a volume size, the default is the snapshot size.
       #   @return [Integer]
       #
@@ -3245,12 +3245,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ip_address
-      #   The Internet-routable IP address of the customer gateway\'s outside
+      #   The Internet-routable IP address of the customer gateway's outside
       #   interface.
       #   @return [String]
       #
       # @!attribute [rw] bgp_asn
-      #   The customer gateway\'s Border Gateway Protocol (BGP) Autonomous
+      #   The customer gateway's Border Gateway Protocol (BGP) Autonomous
       #   System Number (ASN).
       #   @return [String]
       #
@@ -4183,7 +4183,7 @@ module Aws
       # @!attribute [rw] filters
       #   One or more filters.
       #
-      #   * `group-id` - The ID of a VPC security group that\'s associated
+      #   * `group-id` - The ID of a VPC security group that's associated
       #     with the instance.
       #
       #   * `instance-id` - The ID of the instance.
@@ -4193,10 +4193,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -4319,12 +4319,12 @@ module Aws
       # @!attribute [rw] filters
       #   One or more filters.
       #
-      #   * `bgp-asn` - The customer gateway\'s Border Gateway Protocol (BGP)
+      #   * `bgp-asn` - The customer gateway's Border Gateway Protocol (BGP)
       #     Autonomous System Number (ASN).
       #
       #   * `customer-gateway-id` - The ID of the customer gateway.
       #
-      #   * `ip-address` - The IP address of the customer gateway\'s
+      #   * `ip-address` - The IP address of the customer gateway's
       #     Internet-routable external interface.
       #
       #   * `state` - The state of the customer gateway (`pending` \|
@@ -4338,10 +4338,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -4406,10 +4406,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -4547,7 +4547,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] min_duration
-      #   This is the minimum duration of the reservation you\'d like to
+      #   This is the minimum duration of the reservation you'd like to
       #   purchase, specified in seconds. Reservations are available in
       #   one-year and three-year terms. The number of seconds specified must
       #   be the number of seconds in a year (365x24x60x60) times one of the
@@ -4556,7 +4556,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] max_duration
-      #   This is the maximum duration of the reservation you\'d like to
+      #   This is the maximum duration of the reservation you'd like to
       #   purchase, specified in seconds. Reservations are available in
       #   one-year and three-year terms. The number of seconds specified must
       #   be the number of seconds in a year (365x24x60x60) times one of the
@@ -4659,7 +4659,7 @@ module Aws
       end
 
       # @!attribute [rw] host_reservation_set
-      #   Details about the reservation\'s configuration.
+      #   Details about the reservation's configuration.
       #   @return [Array<Types::HostReservation>]
       #
       # @!attribute [rw] next_token
@@ -4959,10 +4959,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the tag-value filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -5410,21 +5410,21 @@ module Aws
       #   * `ramdisk-id` - The RAM disk ID.
       #
       #   * `reason` - The reason for the current state of the instance (for
-      #     example, shows \"User Initiated \[date\]\" when you stop or
+      #     example, shows "User Initiated \[date\]" when you stop or
       #     terminate the instance). Similar to the state-reason-code filter.
       #
       #   * `requester-id` - The ID of the entity that launched the instance
       #     on your behalf (for example, AWS Management Console, Auto Scaling,
       #     and so on).
       #
-      #   * `reservation-id` - The ID of the instance\'s reservation. A
+      #   * `reservation-id` - The ID of the instance's reservation. A
       #     reservation ID is created any time you launch an instance. A
       #     reservation ID has a one-to-one relationship with an instance
       #     launch request, but can be associated with more than one instance
       #     if you launch multiple instances using the same launch request.
-      #     For example, if you launch one instance, you\'ll get one
+      #     For example, if you launch one instance, you'll get one
       #     reservation ID. If you launch ten instances using the same launch
-      #     request, you\'ll also get one reservation ID.
+      #     request, you'll also get one reservation ID.
       #
       #   * `root-device-name` - The name of the root device for the instance
       #     (for example, `/dev/sda1` or `/dev/xvda`).
@@ -5448,14 +5448,14 @@ module Aws
       #   * `subnet-id` - The ID of the subnet for the instance.
       #
       #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
-      #     to the resource, where `tag`\:*key* is the tag\'s key.
+      #     to the resource, where `tag`\:*key* is the tag's key.
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -5642,10 +5642,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -5923,7 +5923,7 @@ module Aws
       #     (`allow` \| `deny`).
       #
       #   * `entry.rule-number` - The number of an entry (in other words,
-      #     rule) in the ACL\'s set of entries.
+      #     rule) in the ACL's set of entries.
       #
       #   * `network-acl-id` - The ID of the network ACL.
       #
@@ -5932,10 +5932,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -6149,10 +6149,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -6742,10 +6742,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -6844,8 +6844,8 @@ module Aws
       #     propagated by route propagation.
       #
       #   * `route.state` - The state of a route in the route table (`active`
-      #     \| `blackhole`). The blackhole state indicates that the route\'s
-      #     target isn\'t available (for example, the specified gateway isn\'t
+      #     \| `blackhole`). The blackhole state indicates that the route's
+      #     target isn't available (for example, the specified gateway isn't
       #     attached to the VPC, the specified NAT instance has been
       #     terminated, and so on).
       #
@@ -6857,10 +6857,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -7323,10 +7323,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -7747,10 +7747,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -7987,7 +7987,7 @@ module Aws
       #     subnet that are available.
       #
       #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
-      #     specify must exactly match the subnet\'s CIDR block for
+      #     specify must exactly match the subnet's CIDR block for
       #     information to be returned for the subnet. You can also use `cidr`
       #     or `cidr-block` as the filter names.
       #
@@ -8004,10 +8004,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8324,10 +8324,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8525,10 +8525,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8720,7 +8720,7 @@ module Aws
       #     peering connection.
       #
       #   * `requester-vpc-info.cidr-block` - The CIDR block of the
-      #     requester\'s VPC.
+      #     requester's VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the requester VPC.
@@ -8739,10 +8739,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8799,7 +8799,7 @@ module Aws
       #   One or more filters.
       #
       #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify
-      #     must exactly match the VPC\'s CIDR block for information to be
+      #     must exactly match the VPC's CIDR block for information to be
       #     returned for the VPC. Must contain the slash followed by one or
       #     two digits (for example, `/28`).
       #
@@ -8814,10 +8814,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8896,10 +8896,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -8977,10 +8977,10 @@ module Aws
       #
       #   * `tag-key` - The key of a tag assigned to the resource. This filter
       #     is independent of the `tag-value` filter. For example, if you use
-      #     both the filter \"tag-key=Purpose\" and the filter
-      #     \"tag-value=X\", you get any resources assigned both the tag key
-      #     Purpose (regardless of what the tag\'s value is), and the tag
-      #     value X (regardless of what the tag\'s key is). If you want to
+      #     both the filter "tag-key=Purpose" and the filter
+      #     "tag-value=X", you get any resources assigned both the tag key
+      #     Purpose (regardless of what the tag's value is), and the tag
+      #     value X (regardless of what the tag's key is). If you want to
       #     list only resources where Purpose is X, see the
       #     `tag`\:*key*=*value* filter.
       #
@@ -9143,7 +9143,7 @@ module Aws
       #   cleanly (for example, logging into an instance, unmounting the
       #   volume, and detaching normally). This option can lead to data loss
       #   or a corrupted file system. Use this option only as a last resort to
-      #   detach a volume from a failed instance. The instance won\'t have an
+      #   detach a volume from a failed instance. The instance won't have an
       #   opportunity to flush file system caches or file system metadata. If
       #   you use this option, you must perform file system check and repair
       #   procedures.
@@ -9400,7 +9400,7 @@ module Aws
       # @!attribute [rw] import_manifest_url
       #   A presigned URL for the import manifest stored in Amazon S3. For
       #   information about creating a presigned URL for an Amazon S3 object,
-      #   read the \"Query String Request Authentication Alternative\" section
+      #   read the "Query String Request Authentication Alternative" section
       #   of the [Authenticating REST Requests][1] topic in the *Amazon Simple
       #   Storage Service Developer Guide*.
       #
@@ -9444,8 +9444,8 @@ module Aws
       # @!attribute [rw] import_manifest_url
       #   A presigned URL for the import manifest stored in Amazon S3 and
       #   presented here as an Amazon S3 presigned URL. For information about
-      #   creating a presigned URL for an Amazon S3 object, read the \"Query
-      #   String Request Authentication Alternative\" section of the
+      #   creating a presigned URL for an Amazon S3 object, read the "Query
+      #   String Request Authentication Alternative" section of the
       #   [Authenticating REST Requests][1] topic in the *Amazon Simple
       #   Storage Service Developer Guide*.
       #
@@ -9503,7 +9503,7 @@ module Aws
       #   (`standard`) volumes. If you specify a snapshot, the volume size
       #   must be equal to or larger than the snapshot size.
       #
-      #   Default: If you\'re creating the volume from a snapshot and don\'t
+      #   Default: If you're creating the volume from a snapshot and don't
       #   specify a volume size, the default is the snapshot size.
       #   @return [Integer]
       #
@@ -9726,7 +9726,7 @@ module Aws
       #   * `spotFleetRequestConfigurationInvalid` - The configuration is not
       #     valid. For more information, see the description of the event.
       #
-      #   * `spotInstanceCountLimitExceeded` - You\'ve reached the limit on
+      #   * `spotInstanceCountLimitExceeded` - You've reached the limit on
       #     the number of Spot instances that you can launch.
       #
       #   The following are the `fleetRequestChange` events.
@@ -9866,7 +9866,7 @@ module Aws
       #
       # @!attribute [rw] s3_prefix
       #   The image is written to a single object in the S3 bucket at the S3
-      #   key s3prefix + exportTaskId + \'.\' + diskImageFormat.
+      #   key s3prefix + exportTaskId + '.' + diskImageFormat.
       #   @return [String]
       class ExportToS3TaskSpecification < Struct.new(
         :disk_image_format,
@@ -9931,7 +9931,7 @@ module Aws
       # @!attribute [rw] deliver_logs_error_message
       #   Information about the error that occurred. `Rate limited` indicates
       #   that CloudWatch logs throttling has been applied for one or more
-      #   network interfaces, or that you\'ve reached the limit on the number
+      #   network interfaces, or that you've reached the limit on the number
       #   of CloudWatch Logs log groups that you can create. `Access error`
       #   indicates that the IAM role associated with the flow log does not
       #   have sufficient permissions to publish to CloudWatch Logs. `Unknown
@@ -10020,7 +10020,7 @@ module Aws
       #
       # @!attribute [rw] wake_up
       #   When set to `true`, acts as keystroke input and wakes up an instance
-      #   that\'s in standby or \"sleep\" mode.
+      #   that's in standby or "sleep" mode.
       #   @return [Boolean]
       class GetConsoleScreenshotRequest < Struct.new(
         :dry_run,
@@ -10193,7 +10193,7 @@ module Aws
       #
       # @!attribute [rw] host_reservation_id
       #   The reservation ID of the Dedicated Host. This returns a `null`
-      #   response if the Dedicated Host doesn\'t have an associated
+      #   response if the Dedicated Host doesn't have an associated
       #   reservation.
       #   @return [String]
       #
@@ -10212,7 +10212,7 @@ module Aws
       #   @return [Types::HostProperties]
       #
       # @!attribute [rw] state
-      #   The Dedicated Host\'s state.
+      #   The Dedicated Host's state.
       #   @return [String]
       #
       # @!attribute [rw] availability_zone
@@ -10365,7 +10365,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] duration
-      #   The length of the reservation\'s term, specified in seconds. Can be
+      #   The length of the reservation's term, specified in seconds. Can be
       #   `31536000 (1 year)` \| `94608000 (3 years)`.
       #   @return [Integer]
       #
@@ -10797,7 +10797,7 @@ module Aws
       #
       # @!attribute [rw] role_name
       #   The name of the role to use when not using the default role,
-      #   \'vmimport\'.
+      #   'vmimport'.
       #   @return [String]
       class ImportImageRequest < Struct.new(
         :dry_run,
@@ -11273,7 +11273,7 @@ module Aws
       #
       # @!attribute [rw] role_name
       #   The name of the role to use when not using the default role,
-      #   \'vmimport\'.
+      #   'vmimport'.
       #   @return [String]
       class ImportSnapshotRequest < Struct.new(
         :dry_run,
@@ -11426,14 +11426,14 @@ module Aws
       #   The private DNS name assigned to the instance. This DNS name can
       #   only be used inside the Amazon EC2 network. This name is not
       #   available until the instance enters the `running` state. For
-      #   EC2-VPC, this name is only available if you\'ve enabled DNS
+      #   EC2-VPC, this name is only available if you've enabled DNS
       #   hostnames for your VPC.
       #   @return [String]
       #
       # @!attribute [rw] public_dns_name
       #   The public DNS name assigned to the instance. This name is not
       #   available until the instance enters the `running` state. For
-      #   EC2-VPC, this name is only available if you\'ve enabled DNS
+      #   EC2-VPC, this name is only available if you've enabled DNS
       #   hostnames for your VPC.
       #   @return [String]
       #
@@ -11576,7 +11576,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal I/O performance.
-      #   This optimization isn\'t available with all instance types.
+      #   This optimization isn't available with all instance types.
       #   Additional usage charges apply when using an EBS Optimized instance.
       #   @return [Boolean]
       #
@@ -11652,7 +11652,7 @@ module Aws
       #   @return [Types::AttributeValue]
       #
       # @!attribute [rw] disable_api_termination
-      #   If the value is `true`, you can\'t terminate the instance through
+      #   If the value is `true`, you can't terminate the instance through
       #   the Amazon EC2 console, CLI, or API; otherwise, you can.
       #   @return [Types::AttributeBooleanValue]
       #
@@ -12025,7 +12025,7 @@ module Aws
       #   @return [Array<Types::PrivateIpAddressSpecification>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
-      #   The number of secondary private IP addresses. You can\'t specify
+      #   The number of secondary private IP addresses. You can't specify
       #   this option and specify more than one private IP address using the
       #   private IP addresses option.
       #   @return [Integer]
@@ -12507,7 +12507,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS Optimized
       #   instance.
       #
@@ -12686,7 +12686,7 @@ module Aws
       #
       # @!attribute [rw] product_codes
       #   One or more product codes. After you add a product code to an AMI,
-      #   it can\'t be removed. This is only valid when modifying the
+      #   it can't be removed. This is only valid when modifying the
       #   `productCodes` attribute.
       #   @return [Array<String>]
       #
@@ -12803,7 +12803,7 @@ module Aws
       #   @return [Types::AttributeBooleanValue]
       #
       # @!attribute [rw] disable_api_termination
-      #   If the value is `true`, you can\'t terminate the instance using the
+      #   If the value is `true`, you can't terminate the instance using the
       #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
       #   this paramater for Spot Instances.
       #   @return [Types::AttributeBooleanValue]
@@ -12819,7 +12819,7 @@ module Aws
       #   @return [Types::AttributeValue]
       #
       # @!attribute [rw] kernel
-      #   Changes the instance\'s kernel to the specified value. We recommend
+      #   Changes the instance's kernel to the specified value. We recommend
       #   that you use PV-GRUB instead of kernels and RAM disks. For more
       #   information, see [PV-GRUB][1].
       #
@@ -12829,7 +12829,7 @@ module Aws
       #   @return [Types::AttributeValue]
       #
       # @!attribute [rw] ramdisk
-      #   Changes the instance\'s RAM disk to the specified value. We
+      #   Changes the instance's RAM disk to the specified value. We
       #   recommend that you use PV-GRUB instead of kernels and RAM disks. For
       #   more information, see [PV-GRUB][1].
       #
@@ -12839,7 +12839,7 @@ module Aws
       #   @return [Types::AttributeValue]
       #
       # @!attribute [rw] user_data
-      #   Changes the instance\'s user data to the specified value. If you are
+      #   Changes the instance's user data to the specified value. If you are
       #   using an AWS SDK or command line tool, Base64-encoding is performed
       #   for you, and you can load the text from a file. Otherwise, you must
       #   provide Base64-encoded text.
@@ -12853,7 +12853,7 @@ module Aws
       #
       # @!attribute [rw] groups
       #   \[EC2-VPC\] Changes the security groups of the instance. You must
-      #   specify at least one security group, even if it\'s just the default
+      #   specify at least one security group, even if it's just the default
       #   security group for the VPC. You must specify the security group ID,
       #   not the security group name.
       #   @return [Array<String>]
@@ -12862,7 +12862,7 @@ module Aws
       #   Specifies whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS Optimized
       #   instance.
       #   @return [Types::AttributeBooleanValue]
@@ -12995,14 +12995,14 @@ module Aws
       # @!attribute [rw] groups
       #   Changes the security groups for the network interface. The new set
       #   of groups you specify replaces the current set. You must specify at
-      #   least one group, even if it\'s just the default security group in
+      #   least one group, even if it's just the default security group in
       #   the VPC. You must specify the ID of the security group, not the
       #   name.
       #   @return [Array<String>]
       #
       # @!attribute [rw] attachment
       #   Information about the interface attachment. If modifying the
-      #   \'delete on termination\' attribute, you must specify the ID of the
+      #   'delete on termination' attribute, you must specify the ID of the
       #   interface attachment.
       #   @return [Types::NetworkInterfaceAttachmentChanges]
       class ModifyNetworkInterfaceAttributeRequest < Struct.new(
@@ -13252,7 +13252,7 @@ module Aws
       #   Indicates whether the DNS resolution is supported for the VPC. If
       #   enabled, queries to the Amazon provided DNS server at the
       #   169.254.169.253 IP address, or the reserved IP address at the base
-      #   of the VPC network range \"plus two\" will succeed. If disabled, the
+      #   of the VPC network range "plus two" will succeed. If disabled, the
       #   Amazon provided DNS service in the VPC that resolves public DNS
       #   hostnames to IP addresses is not enabled.
       #
@@ -13267,7 +13267,7 @@ module Aws
       #
       #   You cannot modify the DNS resolution and DNS hostnames attributes in
       #   the same request. Use separate requests for each attribute. You can
-      #   only enable DNS hostnames if you\'ve enabled DNS support.
+      #   only enable DNS hostnames if you've enabled DNS support.
       #   @return [Types::AttributeBooleanValue]
       class ModifyVpcAttributeRequest < Struct.new(
         :vpc_id,
@@ -13480,7 +13480,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] move_status
-      #   The status of the Elastic IP address that\'s being moved to the
+      #   The status of the Elastic IP address that's being moved to the
       #   EC2-VPC platform, or restored to the EC2-Classic platform.
       #   @return [String]
       class MovingAddressStatus < Struct.new(
@@ -13547,24 +13547,24 @@ module Aws
       #   If the NAT gateway could not be created, specifies the error message
       #   for the failure, that corresponds to the error code.
       #
-      #   * For InsufficientFreeAddressesInSubnet: \"Subnet has insufficient
-      #     free addresses to create this NAT gateway\"
+      #   * For InsufficientFreeAddressesInSubnet: "Subnet has insufficient
+      #     free addresses to create this NAT gateway"
       #
-      #   * For Gateway.NotAttached: \"Network vpc-xxxxxxxx has no Internet
-      #     gateway attached\"
+      #   * For Gateway.NotAttached: "Network vpc-xxxxxxxx has no Internet
+      #     gateway attached"
       #
-      #   * For InvalidAllocationID.NotFound: \"Elastic IP address
-      #     eipalloc-xxxxxxxx could not be associated with this NAT gateway\"
+      #   * For InvalidAllocationID.NotFound: "Elastic IP address
+      #     eipalloc-xxxxxxxx could not be associated with this NAT gateway"
       #
-      #   * For Resource.AlreadyAssociated: \"Elastic IP address
-      #     eipalloc-xxxxxxxx is already associated\"
+      #   * For Resource.AlreadyAssociated: "Elastic IP address
+      #     eipalloc-xxxxxxxx is already associated"
       #
-      #   * For InternalError: \"Network interface eni-xxxxxxxx, created and
+      #   * For InternalError: "Network interface eni-xxxxxxxx, created and
       #     used internally by this NAT gateway is in an invalid state. Please
-      #     try again.\"
+      #     try again."
       #
-      #   * For InvalidSubnetID.NotFound: \"The specified subnet
-      #     subnet-xxxxxxxx does not exist or could not be found.\"
+      #   * For InvalidSubnetID.NotFound: "The specified subnet
+      #     subnet-xxxxxxxx does not exist or could not be found."
       #   @return [String]
       #
       # @!attribute [rw] provisioned_bandwidth
@@ -13597,7 +13597,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] allocation_id
-      #   The allocation ID of the Elastic IP address that\'s associated with
+      #   The allocation ID of the Elastic IP address that's associated with
       #   the NAT gateway.
       #   @return [String]
       #
@@ -13952,13 +13952,13 @@ module Aws
       # Describes the VPC peering connection options.
       # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
       #   If true, enables outbound communication from an EC2-Classic instance
-      #   that\'s linked to a local VPC via ClassicLink to instances in a peer
+      #   that's linked to a local VPC via ClassicLink to instances in a peer
       #   VPC.
       #   @return [Boolean]
       #
       # @!attribute [rw] allow_egress_from_local_vpc_to_remote_classic_link
       #   If true, enables outbound communication from instances in a local
-      #   VPC to an EC2-Classic instance that\'s linked to a peer VPC via
+      #   VPC to an EC2-Classic instance that's linked to a peer VPC via
       #   ClassicLink.
       #   @return [Boolean]
       #
@@ -13984,13 +13984,13 @@ module Aws
       #       }
       # @!attribute [rw] allow_egress_from_local_classic_link_to_remote_vpc
       #   If true, enables outbound communication from an EC2-Classic instance
-      #   that\'s linked to a local VPC via ClassicLink to instances in a peer
+      #   that's linked to a local VPC via ClassicLink to instances in a peer
       #   VPC.
       #   @return [Boolean]
       #
       # @!attribute [rw] allow_egress_from_local_vpc_to_remote_classic_link
       #   If true, enables outbound communication from instances in a local
-      #   VPC to an EC2-Classic instance that\'s linked to a peer VPC via
+      #   VPC to an EC2-Classic instance that's linked to a peer VPC via
       #   ClassicLink.
       #   @return [Boolean]
       #
@@ -14347,7 +14347,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] duration
-      #   The duration of the reservation\'s term in seconds.
+      #   The duration of the reservation's term in seconds.
       #   @return [Integer]
       class Purchase < Struct.new(
         :host_reservation_id,
@@ -14382,7 +14382,7 @@ module Aws
       #
       # @!attribute [rw] limit_price
       #   The specified limit is checked against the total upfront cost of the
-      #   reservation (calculated as the offering\'s upfront cost multiplied
+      #   reservation (calculated as the offering's upfront cost multiplied
       #   by the host count). If the total upfront cost is greater than the
       #   specified price limit, the request will fail. This is used to ensure
       #   that the purchase does not exceed the expected upfront cost of the
@@ -14671,7 +14671,7 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -15426,7 +15426,7 @@ module Aws
       #   termination notice, which gives the instance a two-minute warning
       #   before it terminates.
       #
-      #   Note that you can\'t specify an Availability Zone group or a launch
+      #   Note that you can't specify an Availability Zone group or a launch
       #   group if you specify a duration.
       #   @return [Integer]
       #
@@ -15580,7 +15580,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS Optimized
       #   instance.
       #
@@ -15720,7 +15720,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] currency_code
-      #   The currency of the Reserved Instance. It\'s specified using ISO
+      #   The currency of the Reserved Instance. It's specified using ISO
       #   4217 standard currency codes. At this time, the only supported
       #   currency is `USD`.
       #   @return [String]
@@ -15965,7 +15965,7 @@ module Aws
       #
       # @!attribute [rw] currency_code
       #   The currency of the Reserved Instance offering you are purchasing.
-      #   It\'s specified using ISO 4217 standard currency codes. At this
+      #   It's specified using ISO 4217 standard currency codes. At this
       #   time, the only supported currency is `USD`.
       #   @return [String]
       #
@@ -15979,7 +15979,7 @@ module Aws
       #
       # @!attribute [rw] marketplace
       #   Indicates whether the offering is available through the Reserved
-      #   Instance Marketplace (resale) or AWS. If it\'s a Reserved Instance
+      #   Instance Marketplace (resale) or AWS. If it's a Reserved Instance
       #   Marketplace offering, this is `true`.
       #   @return [Boolean]
       #
@@ -16057,11 +16057,9 @@ module Aws
       # @!attribute [rw] attribute
       #   The attribute to reset.
       #
-      #   <important markdown="1"> You can only reset the following attributes: `kernel` \| `ramdisk`
+      #   You can only reset the following attributes: `kernel` \| `ramdisk`
       #   \| `sourceDestCheck`. To change an instance attribute, use
       #   ModifyInstanceAttribute.
-      #
-      #    </important>
       #   @return [String]
       class ResetInstanceAttributeRequest < Struct.new(
         :dry_run,
@@ -16257,7 +16255,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ip_permissions
-      #   A set of IP permissions. You can\'t specify a destination security
+      #   A set of IP permissions. You can't specify a destination security
       #   group and a CIDR IP address range.
       #   @return [Array<Types::IpPermission>]
       class RevokeSecurityGroupEgressRequest < Struct.new(
@@ -16333,7 +16331,7 @@ module Aws
       #
       # @!attribute [rw] source_security_group_name
       #   \[EC2-Classic, default VPC\] The name of the source security group.
-      #   You can\'t specify this parameter in combination with the following
+      #   You can't specify this parameter in combination with the following
       #   parameters: the CIDR IP address range, the start of the port range,
       #   the IP protocol, and the end of the port range. For EC2-VPC, the
       #   source security group must be in the same VPC. To revoke a specific
@@ -16343,7 +16341,7 @@ module Aws
       #
       # @!attribute [rw] source_security_group_owner_id
       #   \[EC2-Classic\] The AWS account ID of the source security group, if
-      #   the source security group is in a different account. You can\'t
+      #   the source security group is in a different account. You can't
       #   specify this parameter in combination with the following parameters:
       #   the CIDR IP address range, the IP protocol, the start of the port
       #   range, and the end of the port range. To revoke a specific rule for
@@ -16372,12 +16370,12 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] cidr_ip
-      #   The CIDR IP address range. You can\'t specify this parameter when
+      #   The CIDR IP address range. You can't specify this parameter when
       #   specifying a source security group.
       #   @return [String]
       #
       # @!attribute [rw] ip_permissions
-      #   A set of IP permissions. You can\'t specify a source security group
+      #   A set of IP permissions. You can't specify a source security group
       #   and a CIDR IP address range.
       #   @return [Array<Types::IpPermission>]
       class RevokeSecurityGroupIngressRequest < Struct.new(
@@ -16429,8 +16427,8 @@ module Aws
       #
       # @!attribute [rw] state
       #   The state of the route. The `blackhole` state indicates that the
-      #   route\'s target isn\'t available (for example, the specified gateway
-      #   isn\'t attached to the VPC, or the specified NAT instance has been
+      #   route's target isn't available (for example, the specified gateway
+      #   isn't attached to the VPC, or the specified NAT instance has been
       #   terminated).
       #   @return [String]
       #
@@ -16621,7 +16619,7 @@ module Aws
       #   that is more instances than Amazon EC2 can launch in the target
       #   Availability Zone, Amazon EC2 launches no instances.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for
+      #   Constraints: Between 1 and the maximum number you're allowed for
       #   the specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can
       #   I run in Amazon EC2][1] in the Amazon EC2 General FAQ.
@@ -16637,7 +16635,7 @@ module Aws
       #   Zone, Amazon EC2 launches the largest possible number of instances
       #   above `MinCount`.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for
+      #   Constraints: Between 1 and the maximum number you're allowed for
       #   the specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can
       #   I run in Amazon EC2][1] in the Amazon EC2 FAQ.
@@ -16651,11 +16649,9 @@ module Aws
       #   The name of the key pair. You can create a key pair using
       #   CreateKeyPair or ImportKeyPair.
       #
-      #   <important markdown="1"> If you do not specify a key pair, you can\'t connect to the instance
+      #   If you do not specify a key pair, you can't connect to the instance
       #   unless you choose an AMI that is configured to allow users another
       #   way to log in.
-      #
-      #    </important>
       #   @return [String]
       #
       # @!attribute [rw] security_groups
@@ -16704,11 +16700,9 @@ module Aws
       # @!attribute [rw] kernel_id
       #   The ID of the kernel.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
       #   Compute Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -16718,11 +16712,9 @@ module Aws
       # @!attribute [rw] ramdisk_id
       #   The ID of the RAM disk.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic
       #   Compute Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -16732,14 +16724,12 @@ module Aws
       # @!attribute [rw] block_device_mappings
       #   The block device mapping.
       #
-      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments
+      #   Supplying both a snapshot ID and an encryption value as arguments
       #   for block-device mapping results in an error. This is because only
       #   blank volumes can be encrypted on start, and these are not created
       #   from a snapshot. If a snapshot is the basis for the volume, it
       #   contains data by definition and its encryption status cannot be
       #   changed using this action.
-      #
-      #    </important>
       #   @return [Array<Types::BlockDeviceMapping>]
       #
       # @!attribute [rw] monitoring
@@ -16751,7 +16741,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] disable_api_termination
-      #   If you set this parameter to `true`, you can\'t terminate the
+      #   If you set this parameter to `true`, you can't terminate the
       #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
       #   can. If you set this parameter to `true` and then later want to be
       #   able to terminate the instance, you must first change the value of
@@ -16777,7 +16767,7 @@ module Aws
       #   the IP address range of the subnet.
       #
       #   Only one private IP address can be designated as primary. Therefore,
-      #   you can\'t specify this parameter if `PrivateIpAddresses.n.Primary`
+      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary`
       #   is set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set
       #   to an IP address.
       #
@@ -16813,7 +16803,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS-optimized
       #   instance.
       #
@@ -17216,21 +17206,21 @@ module Aws
       # @!attribute [rw] occurrence_days
       #   The days. For a monthly schedule, this is one or more days of the
       #   month (1-31). For a weekly schedule, this is one or more days of the
-      #   week (1-7, where 1 is Sunday). You can\'t specify this value with a
+      #   week (1-7, where 1 is Sunday). You can't specify this value with a
       #   daily schedule. If the occurrence is relative to the end of the
       #   month, you can specify only a single day.
       #   @return [Array<Integer>]
       #
       # @!attribute [rw] occurrence_relative_to_end
       #   Indicates whether the occurrence is relative to the end of the
-      #   specified week or month. You can\'t specify this value with a daily
+      #   specified week or month. You can't specify this value with a daily
       #   schedule.
       #   @return [Boolean]
       #
       # @!attribute [rw] occurrence_unit
       #   The unit for `OccurrenceDays` (`DayOfWeek` or `DayOfMonth`). This
-      #   value is required for a monthly schedule. You can\'t specify
-      #   `DayOfWeek` with a weekly schedule. You can\'t specify this value
+      #   value is required for a monthly schedule. You can't specify
+      #   `DayOfWeek` with a weekly schedule. You can't specify this value
       #   with a daily schedule.
       #   @return [String]
       class ScheduledInstanceRecurrenceRequest < Struct.new(
@@ -17314,7 +17304,7 @@ module Aws
       # @!attribute [rw] volume_size
       #   The size of the volume, in GiB.
       #
-      #   Default: If you\'re creating the volume from a snapshot and don\'t
+      #   Default: If you're creating the volume from a snapshot and don't
       #   specify a volume size, the default is the snapshot size.
       #   @return [Integer]
       #
@@ -17507,7 +17497,7 @@ module Aws
       #   Indicates whether the instances are optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS-optimized
       #   instance.
       #
@@ -18169,7 +18159,7 @@ module Aws
       # @!attribute [rw] subnet_id
       #   The ID of the subnet in which to launch the instances. To specify
       #   multiple subnets, separate them using commas; for example,
-      #   \"subnet-a61dafcf, subnet-65ea5f08\".
+      #   "subnet-a61dafcf, subnet-65ea5f08".
       #   @return [String]
       #
       # @!attribute [rw] network_interfaces
@@ -18184,7 +18174,7 @@ module Aws
       #   Indicates whether the instances are optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O
-      #   performance. This optimization isn\'t available with all instance
+      #   performance. This optimization isn't available with all instance
       #   types. Additional usage charges apply when using an EBS Optimized
       #   instance.
       #
@@ -18623,7 +18613,7 @@ module Aws
       #   The Availability Zone.
       #
       #   \[Spot fleet only\] To specify multiple Availability Zones, separate
-      #   them using commas; for example, \"us-west-2a, us-west-2b\".
+      #   them using commas; for example, "us-west-2a, us-west-2b".
       #   @return [String]
       #
       # @!attribute [rw] group_name
@@ -19221,7 +19211,7 @@ module Aws
 
       # Describes telemetry for a VPN tunnel.
       # @!attribute [rw] outside_ip_address
-      #   The Internet-routable IP address of the virtual private gateway\'s
+      #   The Internet-routable IP address of the virtual private gateway's
       #   outside interface.
       #   @return [String]
       #
@@ -19508,7 +19498,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] dhcp_options_id
-      #   The ID of the set of DHCP options you\'ve associated with the VPC
+      #   The ID of the set of DHCP options you've associated with the VPC
       #   (or `default` if the default options are associated with the VPC).
       #   @return [String]
       #
@@ -19610,7 +19600,7 @@ module Aws
       # @!attribute [rw] accepter_vpc_info
       #   Information about the accepter VPC. CIDR block information is not
       #   returned when creating a VPC peering connection, or when describing
-      #   a VPC peering connection that\'s in the `initiating-request` or
+      #   a VPC peering connection that's in the `initiating-request` or
       #   `pending-acceptance` state.
       #   @return [Types::VpcPeeringConnectionVpcInfo]
       #
@@ -19715,9 +19705,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] customer_gateway_configuration
-      #   The configuration information for the VPN connection\'s customer
+      #   The configuration information for the VPN connection's customer
       #   gateway (in the native XML format). This element is always present
-      #   in the CreateVpnConnection response; however, it\'s present in the
+      #   in the CreateVpnConnection response; however, it's present in the
       #   DescribeVpnConnections response only if the VPN connection is in the
       #   `pending` or `available` state.
       #   @return [String]
@@ -19767,7 +19757,7 @@ module Aws
       # Describes VPN connection options.
       # @!attribute [rw] static_routes_only
       #   Indicates whether the VPN connection uses static routes only. Static
-      #   routes must be used for devices that don\'t support BGP.
+      #   routes must be used for devices that don't support BGP.
       #   @return [Boolean]
       class VpnConnectionOptions < Struct.new(
         :static_routes_only)
@@ -19783,7 +19773,7 @@ module Aws
       #       }
       # @!attribute [rw] static_routes_only
       #   Indicates whether the VPN connection uses static routes only. Static
-      #   routes must be used for devices that don\'t support BGP.
+      #   routes must be used for devices that don't support BGP.
       #   @return [Boolean]
       class VpnConnectionOptionsSpecification < Struct.new(
         :static_routes_only)

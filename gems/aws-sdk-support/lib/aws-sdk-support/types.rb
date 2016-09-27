@@ -154,8 +154,8 @@ module Aws
       # 3.  **DisplayId.** The identifier for the case on pages in the AWS
       #     Support Center.
       # 4.  **Language.** The ISO 639-1 code for the language in which AWS
-      #     provides support. AWS Support currently supports English (\"en\")
-      #     and Japanese (\"ja\"). Language parameters must be passed
+      #     provides support. AWS Support currently supports English ("en")
+      #     and Japanese ("ja"). Language parameters must be passed
       #     explicitly for operations that take them.
       # 5.  **RecentCommunications.** One or more Communication objects.
       #     Fields of these objects are `Attachments`, `Body`, `CaseId`,
@@ -228,8 +228,8 @@ module Aws
       #
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       class CaseDetails < Struct.new(
@@ -325,7 +325,7 @@ module Aws
       #   The code for the severity level returned by the call to
       #   DescribeSeverityLevels.
       #
-      #   <note markdown="1">The availability of severity levels depends on each customer\'s
+      #   <note markdown="1">The availability of severity levels depends on each customer's
       #   support subscription. In other words, your subscription may not
       #   necessarily require the urgent level of response time.
       #
@@ -348,15 +348,15 @@ module Aws
       #
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       #
       # @!attribute [rw] issue_type
       #   The type of issue for the case. You can specify either
-      #   \"customer-service\" or \"technical.\" If you do not indicate a
-      #   value, the default is \"technical.\"
+      #   "customer-service" or "technical." If you do not indicate a
+      #   value, the default is "technical."
       #   @return [String]
       #
       # @!attribute [rw] attachment_set_id
@@ -464,8 +464,8 @@ module Aws
       #
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       #
@@ -572,8 +572,8 @@ module Aws
       #
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       class DescribeServicesRequest < Struct.new(
@@ -599,8 +599,8 @@ module Aws
       #       }
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       class DescribeSeverityLevelsRequest < Struct.new(
@@ -657,8 +657,8 @@ module Aws
       #
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       class DescribeTrustedAdvisorCheckResultRequest < Struct.new(
@@ -709,8 +709,8 @@ module Aws
       #       }
       # @!attribute [rw] language
       #   The ISO 639-1 code for the language in which AWS provides support.
-      #   AWS Support currently supports English (\"en\") and Japanese
-      #   (\"ja\"). Language parameters must be passed explicitly for
+      #   AWS Support currently supports English ("en") and Japanese
+      #   ("ja"). Language parameters must be passed explicitly for
       #   operations that take them.
       #   @return [String]
       class DescribeTrustedAdvisorChecksRequest < Struct.new(
@@ -825,7 +825,7 @@ module Aws
       # A code and name pair that represent a severity level that can be
       # applied to a support case.
       # @!attribute [rw] code
-      #   One of four values: \"low,\" \"medium,\" \"high,\" and \"urgent\".
+      #   One of four values: "low," "medium," "high," and "urgent".
       #   These values correspond to response times returned to the caller in
       #   `SeverityLevel.name`.
       #   @return [String]
@@ -893,8 +893,8 @@ module Aws
       #
       # @!attribute [rw] status
       #   The status of the Trusted Advisor check for which a refresh has been
-      #   requested: \"none\", \"enqueued\", \"processing\", \"success\", or
-      #   \"abandoned\".
+      #   requested: "none", "enqueued", "processing", "success", or
+      #   "abandoned".
       #   @return [String]
       #
       # @!attribute [rw] millis_until_next_refreshable
@@ -919,8 +919,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The alert status of the check: \"ok\" (green), \"warning\" (yellow),
-      #   \"error\" (red), or \"not\_available\".
+      #   The alert status of the check: "ok" (green), "warning" (yellow),
+      #   "error" (red), or "not\_available".
       #   @return [String]
       #
       # @!attribute [rw] resources_summary
@@ -957,8 +957,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The alert status of the check: \"ok\" (green), \"warning\" (yellow),
-      #   \"error\" (red), or \"not\_available\".
+      #   The alert status of the check: "ok" (green), "warning" (yellow),
+      #   "error" (red), or "not\_available".
       #   @return [String]
       #
       # @!attribute [rw] has_flagged_resources

@@ -104,7 +104,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
       # @option options [String] :placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
       #   the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -116,7 +116,7 @@ module Aws
       #   cloud (VPC).
       #
       #   If you specify subnets and Availability Zones with this call, ensure
-      #   that the subnets\' Availability Zones match the Availability Zones
+      #   that the subnets' Availability Zones match the Availability Zones
       #   specified.
       #
       #   For more information, see [Launching Auto Scaling Instances in a

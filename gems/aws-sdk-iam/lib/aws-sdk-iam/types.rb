@@ -379,12 +379,12 @@ module Aws
       #         new_password: "passwordType", # required
       #       }
       # @!attribute [rw] old_password
-      #   The IAM user\'s current password.
+      #   The IAM user's current password.
       #   @return [String]
       #
       # @!attribute [rw] new_password
       #   The new password. The new password must conform to the AWS
-      #   account\'s password policy, if one exists.
+      #   account's password policy, if one exists.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of almost any printable ASCII character from the space
@@ -533,7 +533,7 @@ module Aws
       #   spaces. You can also include any of the following characters: =,.@-.
       #   The group name must be unique within the account. Group names are
       #   not distinguished by case. For example, you cannot create groups
-      #   named both \"ADMINS\" and \"admins\".
+      #   named both "ADMINS" and "admins".
       #
       #
       #
@@ -676,11 +676,11 @@ module Aws
       #       }
       # @!attribute [rw] url
       #   The URL of the identity provider. The URL must begin with
-      #   \"https://\" and should correspond to the `iss` claim in the
-      #   provider\'s OpenID Connect ID tokens. Per the OIDC standard, path
+      #   "https://" and should correspond to the `iss` claim in the
+      #   provider's OpenID Connect ID tokens. Per the OIDC standard, path
       #   components are allowed but query parameters are not. Typically the
       #   URL consists of only a host name, like
-      #   \"https://server.example.org\" or \"https://example.com\".
+      #   "https://server.example.org" or "https://example.com".
       #
       #   You cannot register the same provider multiple times in a single AWS
       #   account. If you try to submit a URL that has already been used for
@@ -691,7 +691,7 @@ module Aws
       # @!attribute [rw] client_id_list
       #   A list of client IDs (also known as audiences). When a mobile or web
       #   app registers with an OpenID Connect provider, they establish a
-      #   value that identifies the application. (This is the value that\'s
+      #   value that identifies the application. (This is the value that's
       #   sent as the `client_id` parameter on OAuth requests.)
       #
       #   You can register multiple client IDs with the same provider. For
@@ -706,7 +706,7 @@ module Aws
       #
       # @!attribute [rw] thumbprint_list
       #   A list of server certificate thumbprints for the OpenID Connect
-      #   (OIDC) identity provider\'s server certificate(s). Typically this
+      #   (OIDC) identity provider's server certificate(s). Typically this
       #   list includes only one entry. However, IAM lets you have up to five
       #   thumbprints for an OIDC provider. This lets you maintain multiple
       #   thumbprints if the identity provider is rotating certificates.
@@ -719,11 +719,11 @@ module Aws
       #   You must provide at least one thumbprint when creating an IAM OIDC
       #   provider. For example, if the OIDC provider is `server.example.com`
       #   and the provider stores its keys at
-      #   \"https://keys.server.example.com/openid-connect\", the thumbprint
+      #   "https://keys.server.example.com/openid-connect", the thumbprint
       #   string would be the hex-encoded SHA-1 hash value of the certificate
       #   used by https://keys.server.example.com.
       #
-      #   For more information about obtaining the OIDC provider\'s
+      #   For more information about obtaining the OIDC provider's
       #   thumbprint, see [Obtaining the Thumbprint for an OpenID Connect
       #   Provider][1] in the *IAM User Guide*.
       #
@@ -812,8 +812,8 @@ module Aws
       #   A friendly description of the policy.
       #
       #   Typically used to store information about the permissions defined in
-      #   the policy. For example, \"Grants access to production DynamoDB
-      #   tables.\"
+      #   the policy. For example, "Grants access to production DynamoDB
+      #   tables."
       #
       #   The policy description is immutable. After a value is assigned, it
       #   cannot be changed.
@@ -871,7 +871,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] set_as_default
-      #   Specifies whether to set this version as the policy\'s default
+      #   Specifies whether to set this version as the policy's default
       #   version.
       #
       #   When this parameter is `true`, the new policy version becomes the
@@ -936,7 +936,7 @@ module Aws
       #   consisting of upper and lowercase alphanumeric characters with no
       #   spaces. You can also include any of the following characters: =,.@-.
       #   Role names are not distinguished by case. For example, you cannot
-      #   create roles named both \"PRODROLE\" and \"prodrole\".
+      #   create roles named both "PRODROLE" and "prodrole".
       #
       #
       #
@@ -982,11 +982,11 @@ module Aws
       #       }
       # @!attribute [rw] saml_metadata_document
       #   An XML document generated by an identity provider (IdP) that
-      #   supports SAML 2.0. The document includes the issuer\'s name,
+      #   supports SAML 2.0. The document includes the issuer's name,
       #   expiration information, and keys that can be used to validate the
       #   SAML authentication response (assertions) that are received from the
       #   IdP. You must generate the metadata document using the identity
-      #   management software that is used as your organization\'s IdP.
+      #   management software that is used as your organization's IdP.
       #
       #   For more information, see [About SAML 2.0-based Federation][1] in
       #   the *IAM User Guide*
@@ -1057,7 +1057,7 @@ module Aws
       #   consisting of upper and lowercase alphanumeric characters with no
       #   spaces. You can also include any of the following characters: =,.@-.
       #   User names are not distinguished by case. For example, you cannot
-      #   create users named both \"TESTUSER\" and \"testuser\".
+      #   create users named both "TESTUSER" and "testuser".
       #
       #
       #
@@ -1392,8 +1392,8 @@ module Aws
       #   The policy version to delete.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
-      #   that consists of the lowercase letter \'v\' followed by one or two
-      #   digits, and optionally followed by a period \'.\' and a string of
+      #   that consists of the lowercase letter 'v' followed by one or two
+      #   digits, and optionally followed by a period '.' and a string of
       #   letters and digits.
       #
       #   For more information about managed policy versions, see [Versioning
@@ -1848,7 +1848,7 @@ module Aws
       # @!attribute [rw] missing_context_values
       #   A list of context keys that are required by the included input
       #   policies but that were not provided by one of the input parameters.
-      #   This list is used when the resource in a simulation is \"\*\",
+      #   This list is used when the resource in a simulation is "\*",
       #   either explicitly, or when the `ResourceArns` parameter blank. If
       #   you include a list of resources, then any missing context values are
       #   instead included under the `ResourceSpecificResults` section. To
@@ -1861,7 +1861,7 @@ module Aws
       #   When there are both IAM policies and resource policies, this
       #   parameter explains how each set of policies contributes to the final
       #   evaluation decision. When simulating cross-account access to a
-      #   resource, both the resource-based policy and the caller\'s IAM
+      #   resource, both the resource-based policy and the caller's IAM
       #   policy must grant access. See [How IAM Roles Differ from
       #   Resource-based Policies][1]
       #
@@ -2456,8 +2456,8 @@ module Aws
       #   Identifies the policy version to retrieve.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
-      #   that consists of the lowercase letter \'v\' followed by one or two
-      #   digits, and optionally followed by a period \'.\' and a string of
+      #   that consists of the lowercase letter 'v' followed by one or two
+      #   digits, and optionally followed by a period '.' and a string of
       #   letters and digits.
       #
       #
@@ -2838,7 +2838,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains information about an IAM group, including all of the group\'s
+      # Contains information about an IAM group, including all of the group's
       # policies.
       #
       # This data type is used as a response element in the
@@ -4508,7 +4508,7 @@ module Aws
 
       # Contains the response to a successful ListSigningCertificates request.
       # @!attribute [rw] certificates
-      #   A list of the user\'s signing certificate information.
+      #   A list of the user's signing certificate information.
       #   @return [Array<Types::SigningCertificate>]
       #
       # @!attribute [rw] is_truncated
@@ -4800,7 +4800,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains information about a managed policy, including the policy\'s
+      # Contains information about a managed policy, including the policy's
       # ARN, versions, and the number of principal entities (users, groups,
       # and roles) that the policy is attached to.
       #
@@ -5247,7 +5247,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] is_default_version
-      #   Specifies whether the policy version is set as the policy\'s default
+      #   Specifies whether the policy version is set as the policy's default
       #   version.
       #   @return [Boolean]
       #
@@ -5571,8 +5571,8 @@ module Aws
       #   A list of context keys that are required by the included input
       #   policies but that were not provided by one of the input parameters.
       #   This list is used when a list of ARNs is included in the
-      #   `ResourceArns` parameter instead of \"\*\". If you do not specify
-      #   individual resources, by setting `ResourceArns` to \"\*\" or by not
+      #   `ResourceArns` parameter instead of "\*". If you do not specify
+      #   individual resources, by setting `ResourceArns` to "\*" or by not
       #   including the `ResourceArns` parameter, then any missing context
       #   values are instead included under the `EvaluationResults` section.
       #   To discover the context keys used by a set of policies, you can call
@@ -5584,7 +5584,7 @@ module Aws
       #   When there are both IAM policies and resource policies, this
       #   parameter explains how each set of policies contributes to the final
       #   evaluation decision. When simulating cross-account access to a
-      #   resource, both the resource-based policy and the caller\'s IAM
+      #   resource, both the resource-based policy and the caller's IAM
       #   policy must grant access.
       #   @return [Hash<String,String>]
       class ResourceSpecificResult < Struct.new(
@@ -5712,7 +5712,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains information about an IAM role, including all of the role\'s
+      # Contains information about an IAM role, including all of the role's
       # policies.
       #
       # This data type is used as a response element in the
@@ -5771,12 +5771,12 @@ module Aws
       #
       # @!attribute [rw] role_policy_list
       #   A list of inline policies embedded in the role. These policies are
-      #   the role\'s access (permissions) policies.
+      #   the role's access (permissions) policies.
       #   @return [Array<Types::PolicyDetail>]
       #
       # @!attribute [rw] attached_managed_policies
       #   A list of managed policies attached to the role. These policies are
-      #   the role\'s access (permissions) policies.
+      #   the role's access (permissions) policies.
       #   @return [Array<Types::AttachedPolicy>]
       class RoleDetail < Struct.new(
         :path,
@@ -5854,7 +5854,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains information about an SSH public key, without the key\'s body
+      # Contains information about an SSH public key, without the key's body
       # or fingerprint.
       #
       # This data type is used as a response element in the ListSSHPublicKeys
@@ -6062,7 +6062,7 @@ module Aws
       #   JSON text of an IAM policy. Do not include any resource-based
       #   policies in this parameter. Any resource-based policy must be
       #   submitted with the `ResourcePolicy` parameter. The policies cannot
-      #   be \"scope-down\" policies, such as you could include in a call to
+      #   be "scope-down" policies, such as you could include in a call to
       #   [GetFederationToken][1] or one of the [AssumeRole][2] APIs to
       #   restrict what a user can do while using the temporary credentials.
       #
@@ -6143,7 +6143,7 @@ module Aws
       # @!attribute [rw] caller_arn
       #   The ARN of the IAM user that you want to use as the simulated caller
       #   of the APIs. `CallerArn` is required if you include a
-      #   `ResourcePolicy` so that the policy\'s `Principal` element has a
+      #   `ResourcePolicy` so that the policy's `Principal` element has a
       #   value to use in evaluating the policy.
       #
       #   You can specify only the ARN of an IAM user. You cannot specify the
@@ -6382,7 +6382,7 @@ module Aws
       #   specified a user. If you include both a `PolicySourceArn` (for
       #   example, `arn:aws:iam::123456789012:user/David`) and a `CallerArn`
       #   (for example, `arn:aws:iam::123456789012:user/Bob`), the result is
-      #   that you simulate calling the APIs as Bob, as if Bob had David\'s
+      #   that you simulate calling the APIs as Bob, as if Bob had David's
       #   policies.
       #
       #   You can specify only the ARN of an IAM user. You cannot specify the
@@ -6390,7 +6390,7 @@ module Aws
       #
       #   `CallerArn` is required if you include a `ResourcePolicy` and the
       #   `PolicySourceArn` is not the ARN for an IAM user. This is required
-      #   so that the resource-based policy\'s `Principal` element has a value
+      #   so that the resource-based policy's `Principal` element has a value
       #   to use in evaluating the policy.
       #
       #   For more information about ARNs, see [Amazon Resource Names (ARNs)
@@ -6584,7 +6584,7 @@ module Aws
       #   Specifies whether IAM user passwords must contain at least one of
       #   the following non-alphanumeric characters:
       #
-      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| \'
+      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| '
       #
       #   Default value: false
       #   @return [Boolean]
@@ -6704,7 +6704,7 @@ module Aws
       #         new_group_name: "groupNameType",
       #       }
       # @!attribute [rw] group_name
-      #   Name of the IAM group to update. If you\'re changing the name of the
+      #   Name of the IAM group to update. If you're changing the name of the
       #   group, this is the original name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6718,7 +6718,7 @@ module Aws
       #
       # @!attribute [rw] new_path
       #   New path for the IAM group. Only include this if changing the
-      #   group\'s path.
+      #   group's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -6734,7 +6734,7 @@ module Aws
       #
       # @!attribute [rw] new_group_name
       #   New name for the IAM group. Only include this if changing the
-      #   group\'s name.
+      #   group's name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
@@ -6840,11 +6840,11 @@ module Aws
       #       }
       # @!attribute [rw] saml_metadata_document
       #   An XML document generated by an identity provider (IdP) that
-      #   supports SAML 2.0. The document includes the issuer\'s name,
+      #   supports SAML 2.0. The document includes the issuer's name,
       #   expiration information, and keys that can be used to validate the
       #   SAML authentication response (assertions) that are received from the
       #   IdP. You must generate the metadata document using the identity
-      #   management software that is used as your organization\'s IdP.
+      #   management software that is used as your organization's IdP.
       #   @return [String]
       #
       # @!attribute [rw] saml_provider_arn
@@ -6938,7 +6938,7 @@ module Aws
       #
       # @!attribute [rw] new_path
       #   The new path for the server certificate. Include this only if you
-      #   are updating the server certificate\'s path.
+      #   are updating the server certificate's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -6954,7 +6954,7 @@ module Aws
       #
       # @!attribute [rw] new_server_certificate_name
       #   The new name for the server certificate. Include this only if you
-      #   are updating the server certificate\'s name. The name of the
+      #   are updating the server certificate's name. The name of the
       #   certificate cannot contain any spaces.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -7024,7 +7024,7 @@ module Aws
       #         new_user_name: "userNameType",
       #       }
       # @!attribute [rw] user_name
-      #   Name of the user to update. If you\'re changing the name of the
+      #   Name of the user to update. If you're changing the name of the
       #   user, this is the original user name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -7037,8 +7037,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] new_path
-      #   New path for the IAM user. Include this parameter only if you\'re
-      #   changing the user\'s path.
+      #   New path for the IAM user. Include this parameter only if you're
+      #   changing the user's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -7053,8 +7053,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] new_user_name
-      #   New name for the user. Include this parameter only if you\'re
-      #   changing the user\'s name.
+      #   New name for the user. Include this parameter only if you're
+      #   changing the user's name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
@@ -7330,8 +7330,8 @@ module Aws
       #
       # @!attribute [rw] password_last_used
       #   The date and time, in [ISO 8601 date-time format][1], when the
-      #   user\'s password was last used to sign in to an AWS website. For a
-      #   list of AWS websites that capture a user\'s last sign-in time, see
+      #   user's password was last used to sign in to an AWS website. For a
+      #   list of AWS websites that capture a user's last sign-in time, see
       #   the [Credential Reports][2] topic in the *Using IAM* guide. If a
       #   password is used more than once in a five-minute span, only the
       #   first use is returned in this field. This field is null (not
@@ -7361,7 +7361,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains information about an IAM user, including all the user\'s
+      # Contains information about an IAM user, including all the user's
       # policies and all the IAM groups the user is in.
       #
       # This data type is used as a response element in the

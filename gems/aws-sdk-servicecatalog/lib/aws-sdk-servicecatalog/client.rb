@@ -141,13 +141,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :id
       #   The `ProductId` of the product to describe.
       # @return [Types::DescribeProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -178,8 +178,8 @@ module Aws
       #   resp.provisioning_artifacts[0].name #=> String
       #   resp.provisioning_artifacts[0].description #=> String
       #   resp.provisioning_artifacts[0].created_time #=> Time
+      # @overload describe_product(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_product(params = {}, options = {})
         req = build_request(:describe_product, params)
         req.send_request(options)
@@ -192,13 +192,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :id
       #   The `ProductViewId` of the product to describe.
       # @return [Types::DescribeProductViewOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -229,8 +229,8 @@ module Aws
       #   resp.provisioning_artifacts[0].name #=> String
       #   resp.provisioning_artifacts[0].description #=> String
       #   resp.provisioning_artifacts[0].created_time #=> Time
+      # @overload describe_product_view(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_product_view(params = {}, options = {})
         req = build_request(:describe_product_view, params)
         req.send_request(options)
@@ -243,19 +243,19 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
       #   The identifier of the product.
       # @option params [required, String] :provisioning_artifact_id
       #   The provisioning artifact identifier for this product.
       # @option params [String] :path_id
-      #   The identifier of the path for this product\'s provisioning. This
+      #   The identifier of the path for this product's provisioning. This
       #   value is optional if the product has a default path, and is required
       #   if there is more than one path for the specified product.
       # @return [Types::DescribeProvisioningParametersOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -287,8 +287,8 @@ module Aws
       #   resp.usage_instructions #=> Array
       #   resp.usage_instructions[0].type #=> String
       #   resp.usage_instructions[0].value #=> String
+      # @overload describe_provisioning_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_provisioning_parameters(params = {}, options = {})
         req = build_request(:describe_provisioning_parameters, params)
         req.send_request(options)
@@ -301,17 +301,17 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :id
       #   The record identifier of the ProvisionedProduct object for which to
       #   retrieve output information. This is the `RecordDetail.RecordId`
-      #   obtained from the request operation\'s response.
+      #   obtained from the request operation's response.
       # @option params [String] :page_token
       #   The page token of the first page retrieve. If null, this retrieves the
       #   first page of size `PageSize`.
@@ -356,8 +356,8 @@ module Aws
       #   resp.record_outputs[0].output_value #=> String
       #   resp.record_outputs[0].description #=> String
       #   resp.next_page_token #=> String
+      # @overload describe_record(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_record(params = {}, options = {})
         req = build_request(:describe_record, params)
         req.send_request(options)
@@ -370,13 +370,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
       #   Identifies the product for which to retrieve `LaunchPathSummaries`
       #   information.
@@ -411,8 +411,8 @@ module Aws
       #   resp.launch_path_summaries[0].tags[0].value #=> String
       #   resp.launch_path_summaries[0].name #=> String
       #   resp.next_page_token #=> String
+      # @overload list_launch_paths(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_launch_paths(params = {}, options = {})
         req = build_request(:list_launch_paths, params)
         req.send_request(options)
@@ -423,13 +423,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [Types::ListRecordHistorySearchFilter] :search_filter
       #   (Optional) The filter to limit search results.
       # @option params [Integer] :page_size
@@ -475,8 +475,8 @@ module Aws
       #   resp.record_details[0].record_tags[0].key #=> String
       #   resp.record_details[0].record_tags[0].value #=> String
       #   resp.next_page_token #=> String
+      # @overload list_record_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_record_history(params = {}, options = {})
         req = build_request(:list_record_history, params)
         req.send_request(options)
@@ -493,19 +493,19 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
       #   The identifier of the product.
       # @option params [required, String] :provisioning_artifact_id
       #   The provisioning artifact identifier for this product.
       # @option params [String] :path_id
-      #   The identifier of the path for this product\'s provisioning. This
+      #   The identifier of the path for this product's provisioning. This
       #   value is optional if the product has a default path, and is required
       #   if there is more than one path for the specified product.
       # @option params [required, String] :provisioned_product_name
@@ -568,8 +568,8 @@ module Aws
       #   resp.record_detail.record_tags #=> Array
       #   resp.record_detail.record_tags[0].key #=> String
       #   resp.record_detail.record_tags[0].value #=> String
+      # @overload provision_product(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def provision_product(params = {}, options = {})
         req = build_request(:provision_product, params)
         req.send_request(options)
@@ -580,13 +580,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
@@ -618,8 +618,8 @@ module Aws
       #   resp.provisioned_products[0].idempotency_token #=> String
       #   resp.provisioned_products[0].last_record_id #=> String
       #   resp.next_page_token #=> String
+      # @overload scan_provisioned_products(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def scan_provisioned_products(params = {}, options = {})
         req = build_request(:scan_provisioned_products, params)
         req.send_request(options)
@@ -633,13 +633,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [Hash<String,Array>] :filters
       #   (Optional) The list of filters with which to limit search results. If
       #   no search filters are specified, the output is all the products to
@@ -693,8 +693,8 @@ module Aws
       #   resp.product_view_aggregations["ProductViewAggregationType"][0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.product_view_aggregations["ProductViewAggregationType"][0].approximate_count #=> Integer
       #   resp.next_page_token #=> String
+      # @overload search_products(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def search_products(params = {}, options = {})
         req = build_request(:search_products, params)
         req.send_request(options)
@@ -730,13 +730,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @return [Types::TerminateProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::TerminateProvisionedProductOutput#record_detail #RecordDetail} => Types::RecordDetail
@@ -768,8 +768,8 @@ module Aws
       #   resp.record_detail.record_tags #=> Array
       #   resp.record_detail.record_tags[0].key #=> String
       #   resp.record_detail.record_tags[0].value #=> String
+      # @overload terminate_provisioned_product(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_provisioned_product(params = {}, options = {})
         req = build_request(:terminate_provisioned_product, params)
         req.send_request(options)
@@ -787,13 +787,13 @@ module Aws
       # @option params [String] :accept_language
       #   Optional language code. Supported language codes are as follows:
       #
-      #   \"en\" (English)
+      #   "en" (English)
       #
-      #   \"jp\" (Japanese)
+      #   "jp" (Japanese)
       #
-      #   \"zh\" (Chinese)
+      #   "zh" (Chinese)
       #
-      #   If no code is specified, \"en\" is used as the default.
+      #   If no code is specified, "en" is used as the default.
       # @option params [String] :provisioned_product_name
       #   The updated name of the ProvisionedProduct object . You must specify
       #   either `ProvisionedProductName` or `ProvisionedProductId`, but not
@@ -856,8 +856,8 @@ module Aws
       #   resp.record_detail.record_tags #=> Array
       #   resp.record_detail.record_tags[0].key #=> String
       #   resp.record_detail.record_tags[0].value #=> String
+      # @overload update_provisioned_product(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_provisioned_product(params = {}, options = {})
         req = build_request(:update_provisioned_product, params)
         req.send_request(options)

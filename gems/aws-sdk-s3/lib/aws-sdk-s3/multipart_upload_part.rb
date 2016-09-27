@@ -117,7 +117,7 @@ module Aws
       #   Copies the object if its entity tag (ETag) is different than the
       #   specified ETag.
       # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       # @option options [String] :copy_source_range
       #   The range of bytes to copy from the source object. The range value

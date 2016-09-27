@@ -148,7 +148,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -180,8 +180,8 @@ module Aws
       #     vault_name: "string", # required
       #     upload_id: "string", # required
       #   })
+      # @overload abort_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def abort_multipart_upload(params = {}, options = {})
         req = build_request(:abort_multipart_upload, params)
         req.send_request(options)
@@ -226,8 +226,8 @@ module Aws
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      # @overload abort_vault_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def abort_vault_lock(params = {}, options = {})
         req = build_request(:abort_vault_lock, params)
         req.send_request(options)
@@ -266,8 +266,8 @@ module Aws
       #       "TagKey" => "TagValue",
       #     },
       #   })
+      # @overload add_tags_to_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_vault(params = {}, options = {})
         req = build_request(:add_tags_to_vault, params)
         req.send_request(options)
@@ -311,7 +311,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][2].
       #
@@ -364,8 +364,8 @@ module Aws
       #   resp.location #=> String
       #   resp.checksum #=> String
       #   resp.archive_id #=> String
+      # @overload complete_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def complete_multipart_upload(params = {}, options = {})
         req = build_request(:complete_multipart_upload, params)
         req.send_request(options)
@@ -413,8 +413,8 @@ module Aws
       #     vault_name: "string", # required
       #     lock_id: "string", # required
       #   })
+      # @overload complete_vault_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def complete_vault_lock(params = {}, options = {})
         req = build_request(:complete_vault_lock, params)
         req.send_request(options)
@@ -429,14 +429,14 @@ module Aws
       #
       # * Names can be between 1 and 255 characters long.
       #
-      # * Allowed characters are a-z, A-Z, 0-9, \'\_\' (underscore), \'-\'
-      #   (hyphen), and \'.\' (period).
+      # * Allowed characters are a-z, A-Z, 0-9, '\_' (underscore), '-'
+      #   (hyphen), and '.' (period).
       #
       # This operation is idempotent.
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -471,8 +471,8 @@ module Aws
       #
       # @example Response structure
       #   resp.location #=> String
+      # @overload create_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_vault(params = {}, options = {})
         req = build_request(:create_vault, params)
         req.send_request(options)
@@ -495,7 +495,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -527,8 +527,8 @@ module Aws
       #     vault_name: "string", # required
       #     archive_id: "string", # required
       #   })
+      # @overload delete_archive(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_archive(params = {}, options = {})
         req = build_request(:delete_archive, params)
         req.send_request(options)
@@ -549,7 +549,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][3].
       #
@@ -580,8 +580,8 @@ module Aws
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      # @overload delete_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vault(params = {}, options = {})
         req = build_request(:delete_vault, params)
         req.send_request(options)
@@ -617,8 +617,8 @@ module Aws
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      # @overload delete_vault_access_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vault_access_policy(params = {}, options = {})
         req = build_request(:delete_vault_access_policy, params)
         req.send_request(options)
@@ -632,7 +632,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -661,8 +661,8 @@ module Aws
       #     account_id: "string", # required
       #     vault_name: "string", # required
       #   })
+      # @overload delete_vault_notifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_vault_notifications(params = {}, options = {})
         req = build_request(:delete_vault_notifications, params)
         req.send_request(options)
@@ -686,7 +686,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -758,15 +758,15 @@ module Aws
       #   resp.inventory_retrieval_parameters.end_date #=> Time
       #   resp.inventory_retrieval_parameters.limit #=> String
       #   resp.inventory_retrieval_parameters.marker #=> String
+      # @overload describe_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_job(params = {}, options = {})
         req = build_request(:describe_job, params)
         req.send_request(options)
       end
 
       # This operation returns information about a vault, including the
-      # vault\'s Amazon Resource Name (ARN), the date the vault was created,
+      # vault's Amazon Resource Name (ARN), the date the vault was created,
       # the number of archives it contains, and the total size of all the
       # archives in the vault. The number of archives and their total size are
       # as of the last inventory generation. This means that if you add or
@@ -779,7 +779,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][2].
       #
@@ -824,8 +824,8 @@ module Aws
       #   resp.last_inventory_date #=> Time
       #   resp.number_of_archives #=> Integer
       #   resp.size_in_bytes #=> Integer
+      # @overload describe_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vault(params = {}, options = {})
         req = build_request(:describe_vault, params)
         req.send_request(options)
@@ -860,8 +860,8 @@ module Aws
       #   resp.policy.rules #=> Array
       #   resp.policy.rules[0].strategy #=> String
       #   resp.policy.rules[0].bytes_per_hour #=> Integer
+      # @overload get_data_retrieval_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_data_retrieval_policy(params = {}, options = {})
         req = build_request(:get_data_retrieval_policy, params)
         req.send_request(options)
@@ -906,7 +906,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -933,8 +933,8 @@ module Aws
       #   The job ID whose data is downloaded.
       # @option params [String] :range
       #   The range of bytes to retrieve from the output. For example, if you
-      #   want to download the first 1,048,576 bytes, specify \"Range:
-      #   bytes=0-1048575\". By default, this operation downloads the entire
+      #   want to download the first 1,048,576 bytes, specify "Range:
+      #   bytes=0-1048575". By default, this operation downloads the entire
       #   output.
       # @return [Types::GetJobOutputOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -962,8 +962,8 @@ module Aws
       #   resp.accept_ranges #=> String
       #   resp.content_type #=> String
       #   resp.archive_description #=> String
+      # @overload get_job_output(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_job_output(params = {}, options = {})
         req = build_request(:get_job_output, params)
         req.send_request(options)
@@ -1001,8 +1001,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy.policy #=> String
+      # @overload get_vault_access_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_vault_access_policy(params = {}, options = {})
         req = build_request(:get_vault_access_policy, params)
         req.send_request(options)
@@ -1062,8 +1062,8 @@ module Aws
       #   resp.state #=> String
       #   resp.expiration_date #=> Time
       #   resp.creation_date #=> Time
+      # @overload get_vault_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_vault_lock(params = {}, options = {})
         req = build_request(:get_vault_lock, params)
         req.send_request(options)
@@ -1080,7 +1080,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][2].
       #
@@ -1116,8 +1116,8 @@ module Aws
       #   resp.vault_notification_config.sns_topic #=> String
       #   resp.vault_notification_config.events #=> Array
       #   resp.vault_notification_config.events[0] #=> String
+      # @overload get_vault_notifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_vault_notifications(params = {}, options = {})
         req = build_request(:get_vault_notifications, params)
         req.send_request(options)
@@ -1176,7 +1176,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][3].
       #
@@ -1246,7 +1246,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][3].
       #
@@ -1299,8 +1299,8 @@ module Aws
       # @example Response structure
       #   resp.location #=> String
       #   resp.job_id #=> String
+      # @overload initiate_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def initiate_job(params = {}, options = {})
         req = build_request(:initiate_job, params)
         req.send_request(options)
@@ -1323,7 +1323,7 @@ module Aws
       # MB file. If you initiate the multipart upload with a part size of 4
       # MB, you will upload four parts of 4 MB each and one part of 0.2 MB.
       #
-      # <note markdown="1">You don\'t need to know the size of the archive when you start a
+      # <note markdown="1">You don't need to know the size of the archive when you start a
       # multipart upload because Amazon Glacier does not require you to
       # specify the overall archive size.
       #
@@ -1337,7 +1337,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -1385,8 +1385,8 @@ module Aws
       # @example Response structure
       #   resp.location #=> String
       #   resp.upload_id #=> String
+      # @overload initiate_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def initiate_multipart_upload(params = {}, options = {})
         req = build_request(:initiate_multipart_upload, params)
         req.send_request(options)
@@ -1440,7 +1440,7 @@ module Aws
       # @option params [required, String] :vault_name
       #   The name of the vault.
       # @option params [Types::VaultLockPolicy] :policy
-      #   The vault lock policy as a JSON string, which uses \"\\\" as an escape
+      #   The vault lock policy as a JSON string, which uses "\\" as an escape
       #   character.
       # @return [Types::InitiateVaultLockOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1457,8 +1457,8 @@ module Aws
       #
       # @example Response structure
       #   resp.lock_id #=> String
+      # @overload initiate_vault_lock(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def initiate_vault_lock(params = {}, options = {})
         req = build_request(:initiate_vault_lock, params)
         req.send_request(options)
@@ -1505,7 +1505,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -1536,7 +1536,7 @@ module Aws
       #   Jobs request.
       # @option params [String] :statuscode
       #   Specifies the type of job status to return. You can specify the
-      #   following values: \"InProgress\", \"Succeeded\", or \"Failed\".
+      #   following values: "InProgress", "Succeeded", or "Failed".
       # @option params [String] :completed
       #   Specifies the state of the jobs to return. You can specify `true` or
       #   `false`.
@@ -1579,8 +1579,8 @@ module Aws
       #   resp.job_list[0].inventory_retrieval_parameters.limit #=> String
       #   resp.job_list[0].inventory_retrieval_parameters.marker #=> String
       #   resp.marker #=> String
+      # @overload list_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs(params = {}, options = {})
         req = build_request(:list_jobs, params)
         req.send_request(options)
@@ -1610,7 +1610,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -1663,8 +1663,8 @@ module Aws
       #   resp.uploads_list[0].part_size_in_bytes #=> Integer
       #   resp.uploads_list[0].creation_date #=> Time
       #   resp.marker #=> String
+      # @overload list_multipart_uploads(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_multipart_uploads(params = {}, options = {})
         req = build_request(:list_multipart_uploads, params)
         req.send_request(options)
@@ -1688,7 +1688,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -1751,8 +1751,8 @@ module Aws
       #   resp.parts[0].range_in_bytes #=> String
       #   resp.parts[0].sha256_tree_hash #=> String
       #   resp.marker #=> String
+      # @overload list_parts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_parts(params = {}, options = {})
         req = build_request(:list_parts, params)
         req.send_request(options)
@@ -1787,14 +1787,14 @@ module Aws
       # @example Response structure
       #   resp.tags #=> Hash
       #   resp.tags["TagKey"] #=> String
+      # @overload list_tags_for_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_vault(params = {}, options = {})
         req = build_request(:list_tags_for_vault, params)
         req.send_request(options)
       end
 
-      # This operation lists all vaults owned by the calling user\'s account.
+      # This operation lists all vaults owned by the calling user's account.
       # The list returned in the response is ASCII-sorted by vault name.
       #
       # By default, this operation returns up to 1,000 items. If there are
@@ -1809,7 +1809,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -1834,7 +1834,7 @@ module Aws
       #   A string used for pagination. The marker specifies the vault ARN after
       #   which the listing of vaults should begin.
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the List Vaults operation returns up to 1,000 items.
       # @return [Types::ListVaultsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1857,8 +1857,8 @@ module Aws
       #   resp.vault_list[0].number_of_archives #=> Integer
       #   resp.vault_list[0].size_in_bytes #=> Integer
       #   resp.marker #=> String
+      # @overload list_vaults(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_vaults(params = {}, options = {})
         req = build_request(:list_vaults, params)
         req.send_request(options)
@@ -1891,8 +1891,8 @@ module Aws
       #     vault_name: "string", # required
       #     tag_keys: ["string"],
       #   })
+      # @overload remove_tags_from_vault(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_vault(params = {}, options = {})
         req = build_request(:remove_tags_from_vault, params)
         req.send_request(options)
@@ -1935,8 +1935,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload set_data_retrieval_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_data_retrieval_policy(params = {}, options = {})
         req = build_request(:set_data_retrieval_policy, params)
         req.send_request(options)
@@ -1975,15 +1975,15 @@ module Aws
       #       policy: "string",
       #     },
       #   })
+      # @overload set_vault_access_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_vault_access_policy(params = {}, options = {})
         req = build_request(:set_vault_access_policy, params)
         req.send_request(options)
       end
 
       # This operation configures notifications that will be sent when
-      # specific events happen to a vault. By default, you don\'t get any
+      # specific events happen to a vault. By default, you don't get any
       # notifications.
       #
       # To configure vault notifications, send a PUT request to the
@@ -1998,18 +1998,18 @@ module Aws
       #
       # * **ArchiveRetrievalCompleted** This event occurs when a job that was
       #   initiated for an archive retrieval is completed (InitiateJob). The
-      #   status of the completed job can be \"Succeeded\" or \"Failed\". The
+      #   status of the completed job can be "Succeeded" or "Failed". The
       #   notification sent to the SNS topic is the same output as returned
       #   from DescribeJob.
       # * **InventoryRetrievalCompleted** This event occurs when a job that
       #   was initiated for an inventory retrieval is completed (InitiateJob).
-      #   The status of the completed job can be \"Succeeded\" or \"Failed\".
+      #   The status of the completed job can be "Succeeded" or "Failed".
       #   The notification sent to the SNS topic is the same output as
       #   returned from DescribeJob.
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][1].
       #
@@ -2044,8 +2044,8 @@ module Aws
       #       events: ["string"],
       #     },
       #   })
+      # @overload set_vault_notifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_vault_notifications(params = {}, options = {})
         req = build_request(:set_vault_notifications, params)
         req.send_request(options)
@@ -2083,7 +2083,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][2].
       #
@@ -2131,8 +2131,8 @@ module Aws
       #   resp.location #=> String
       #   resp.checksum #=> String
       #   resp.archive_id #=> String
+      # @overload upload_archive(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_archive(params = {}, options = {})
         req = build_request(:upload_archive, params)
         req.send_request(options)
@@ -2149,7 +2149,7 @@ module Aws
       #   corrupted in transmission, you compute a SHA256 tree hash of the
       #   part and include it in your request. Upon receiving the part data,
       #   Amazon Glacier also computes a SHA256 tree hash. If these hash
-      #   values don\'t match, the operation fails. For information about
+      #   values don't match, the operation fails. For information about
       #   computing a SHA256 tree hash, see [Computing Checksums][1].
       #
       # * **Part size does not match**The size of each part except the last
@@ -2178,7 +2178,7 @@ module Aws
       #
       # An AWS account has full permission to perform all operations
       # (actions). However, AWS Identity and Access Management (IAM) users
-      # don\'t have any permissions by default. You must grant them explicit
+      # don't have any permissions by default. You must grant them explicit
       # permission to perform specific actions. For more information, see
       # [Access Control Using AWS Identity and Access Management (IAM)][2].
       #
@@ -2229,8 +2229,8 @@ module Aws
       #
       # @example Response structure
       #   resp.checksum #=> String
+      # @overload upload_multipart_part(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_multipart_part(params = {}, options = {})
         req = build_request(:upload_multipart_part, params)
         req.send_request(options)

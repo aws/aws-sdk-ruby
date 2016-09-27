@@ -153,8 +153,8 @@ module Aws
       #       "TagKey" => "TagValue",
       #     },
       #   })
+      # @overload add_tags_to_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_stream(params = {}, options = {})
         req = build_request(:add_tags_to_stream, params)
         req.send_request(options)
@@ -225,18 +225,18 @@ module Aws
       #     stream_name: "StreamName", # required
       #     shard_count: 1, # required
       #   })
+      # @overload create_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_stream(params = {}, options = {})
         req = build_request(:create_stream, params)
         req.send_request(options)
       end
 
-      # Decreases the Amazon Kinesis stream\'s retention period, which is the
+      # Decreases the Amazon Kinesis stream's retention period, which is the
       # length of time data records are accessible after they are added to the
-      # stream. The minimum value of a stream\'s retention period is 24 hours.
+      # stream. The minimum value of a stream's retention period is 24 hours.
       #
-      # This operation may result in lost data. For example, if the stream\'s
+      # This operation may result in lost data. For example, if the stream's
       # retention period is 48 hours and is decreased to 24 hours, any data
       # already in the stream that is older than 24 hours is inaccessible.
       # @option params [required, String] :stream_name
@@ -251,8 +251,8 @@ module Aws
       #     stream_name: "StreamName", # required
       #     retention_period_hours: 1, # required
       #   })
+      # @overload decrease_stream_retention_period(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def decrease_stream_retention_period(params = {}, options = {})
         req = build_request(:decrease_stream_retention_period, params)
         req.send_request(options)
@@ -286,8 +286,8 @@ module Aws
       #   resp = client.delete_stream({
       #     stream_name: "StreamName", # required
       #   })
+      # @overload delete_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_stream(params = {}, options = {})
         req = build_request(:delete_stream, params)
         req.send_request(options)
@@ -354,8 +354,8 @@ module Aws
       #   resp.stream_description.enhanced_monitoring #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      # @overload describe_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stream(params = {}, options = {})
         req = build_request(:describe_stream, params)
         req.send_request(options)
@@ -368,7 +368,7 @@ module Aws
       # @option params [required, Array<String>] :shard_level_metrics
       #   List of shard-level metrics to disable.
       #
-      #   The following are the valid shard-level metrics. The value \"`ALL`\"
+      #   The following are the valid shard-level metrics. The value "`ALL`"
       #   disables every metric.
       #
       #   * `IncomingBytes`
@@ -405,8 +405,8 @@ module Aws
       #   resp.current_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
       #   resp.desired_shard_level_metrics #=> Array
       #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      # @overload disable_enhanced_monitoring(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_enhanced_monitoring(params = {}, options = {})
         req = build_request(:disable_enhanced_monitoring, params)
         req.send_request(options)
@@ -419,7 +419,7 @@ module Aws
       # @option params [required, Array<String>] :shard_level_metrics
       #   List of shard-level metrics to enable.
       #
-      #   The following are the valid shard-level metrics. The value \"`ALL`\"
+      #   The following are the valid shard-level metrics. The value "`ALL`"
       #   enables every metric.
       #
       #   * `IncomingBytes`
@@ -456,14 +456,14 @@ module Aws
       #   resp.current_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
       #   resp.desired_shard_level_metrics #=> Array
       #   resp.desired_shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
+      # @overload enable_enhanced_monitoring(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_enhanced_monitoring(params = {}, options = {})
         req = build_request(:enable_enhanced_monitoring, params)
         req.send_request(options)
       end
 
-      # Gets data records from an Amazon Kinesis stream\'s shard.
+      # Gets data records from an Amazon Kinesis stream's shard.
       #
       # Specify a shard iterator using the `ShardIterator` parameter. The
       # shard iterator specifies the position in the shard from which you want
@@ -481,14 +481,14 @@ module Aws
       # to specify in the first GetRecords call. GetRecords returns a new
       # shard iterator in `NextShardIterator`. Specify the shard iterator
       # returned in `NextShardIterator` in subsequent calls to GetRecords.
-      # Note that if the shard has been closed, the shard iterator can\'t
+      # Note that if the shard has been closed, the shard iterator can't
       # return more data and GetRecords returns `null` in `NextShardIterator`.
       # You can terminate the loop when the shard is closed, or when the shard
       # iterator reaches the record with the sequence number or other
       # attribute that marks it as the last record to process.
       #
       # Each data record can be up to 1 MB in size, and each shard can read up
-      # to 2 MB per second. You can ensure that your calls don\'t exceed the
+      # to 2 MB per second. You can ensure that your calls don't exceed the
       # maximum supported size or throughput by using the `Limit` parameter to
       # specify the maximum number of records that GetRecords can return.
       # Consider your average record size when determining this limit.
@@ -500,9 +500,9 @@ module Aws
       # `ProvisionedThroughputExceededException`. If there is insufficient
       # provisioned throughput on the shard, subsequent calls made within the
       # next 1 second throw `ProvisionedThroughputExceededException`. Note
-      # that GetRecords won\'t return any data when it throws an exception.
+      # that GetRecords won't return any data when it throws an exception.
       # For this reason, we recommend that you wait one second between calls
-      # to GetRecords; however, it\'s possible that the application will get
+      # to GetRecords; however, it's possible that the application will get
       # exceptions for longer than 1 second.
       #
       # To detect whether the application is falling behind in processing, you
@@ -553,8 +553,8 @@ module Aws
       #   resp.records[0].partition_key #=> String
       #   resp.next_shard_iterator #=> String
       #   resp.millis_behind_latest #=> Integer
+      # @overload get_records(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_records(params = {}, options = {})
         req = build_request(:get_records, params)
         req.send_request(options)
@@ -655,23 +655,23 @@ module Aws
       #
       # @example Response structure
       #   resp.shard_iterator #=> String
+      # @overload get_shard_iterator(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_shard_iterator(params = {}, options = {})
         req = build_request(:get_shard_iterator, params)
         req.send_request(options)
       end
 
-      # Increases the Amazon Kinesis stream\'s retention period, which is the
+      # Increases the Amazon Kinesis stream's retention period, which is the
       # length of time data records are accessible after they are added to the
-      # stream. The maximum value of a stream\'s retention period is 168 hours
+      # stream. The maximum value of a stream's retention period is 168 hours
       # (7 days).
       #
       # Upon choosing a longer stream retention period, this operation will
       # increase the time period records are accessible that have not yet
       # expired. However, it will not make previous data that has expired
-      # (older than the stream\'s previous retention period) accessible after
-      # the operation has been called. For example, if a stream\'s retention
+      # (older than the stream's previous retention period) accessible after
+      # the operation has been called. For example, if a stream's retention
       # period is set to 24 hours and is increased to 168 hours, any data that
       # is older than 24 hours will remain inaccessible to consumer
       # applications.
@@ -687,8 +687,8 @@ module Aws
       #     stream_name: "StreamName", # required
       #     retention_period_hours: 1, # required
       #   })
+      # @overload increase_stream_retention_period(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def increase_stream_retention_period(params = {}, options = {})
         req = build_request(:increase_stream_retention_period, params)
         req.send_request(options)
@@ -731,8 +731,8 @@ module Aws
       #   resp.stream_names #=> Array
       #   resp.stream_names[0] #=> String
       #   resp.has_more_streams #=> Boolean
+      # @overload list_streams(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_streams(params = {}, options = {})
         req = build_request(:list_streams, params)
         req.send_request(options)
@@ -767,15 +767,15 @@ module Aws
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.has_more_tags #=> Boolean
+      # @overload list_tags_for_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_stream(params = {}, options = {})
         req = build_request(:list_tags_for_stream, params)
         req.send_request(options)
       end
 
       # Merges two adjacent shards in an Amazon Kinesis stream and combines
-      # them into a single shard to reduce the stream\'s capacity to ingest
+      # them into a single shard to reduce the stream's capacity to ingest
       # and transport data. Two shards are considered adjacent if the union of
       # the hash key ranges for the two shards form a contiguous set with no
       # gaps. For example, if you have two shards, one with a hash key range
@@ -834,8 +834,8 @@ module Aws
       #     shard_to_merge: "ShardId", # required
       #     adjacent_shard_to_merge: "ShardId", # required
       #   })
+      # @overload merge_shards(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def merge_shards(params = {}, options = {})
         req = build_request(:merge_shards, params)
         req.send_request(options)
@@ -933,8 +933,8 @@ module Aws
       # @example Response structure
       #   resp.shard_id #=> String
       #   resp.sequence_number #=> String
+      # @overload put_record(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_record(params = {}, options = {})
         req = build_request(:put_record, params)
         req.send_request(options)
@@ -1042,8 +1042,8 @@ module Aws
       #   resp.records[0].shard_id #=> String
       #   resp.records[0].error_code #=> String
       #   resp.records[0].error_message #=> String
+      # @overload put_records(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_records(params = {}, options = {})
         req = build_request(:put_records, params)
         req.send_request(options)
@@ -1065,15 +1065,15 @@ module Aws
       #     stream_name: "StreamName", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      # @overload remove_tags_from_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_stream(params = {}, options = {})
         req = build_request(:remove_tags_from_stream, params)
         req.send_request(options)
       end
 
       # Splits a shard into two new shards in the Amazon Kinesis stream to
-      # increase the stream\'s capacity to ingest and transport data.
+      # increase the stream's capacity to ingest and transport data.
       # `SplitShard` is called when there is a need to increase the overall
       # capacity of a stream because of an expected increase in the volume of
       # data records being ingested.
@@ -1150,8 +1150,8 @@ module Aws
       #     shard_to_split: "ShardId", # required
       #     new_starting_hash_key: "HashKey", # required
       #   })
+      # @overload split_shard(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def split_shard(params = {}, options = {})
         req = build_request(:split_shard, params)
         req.send_request(options)

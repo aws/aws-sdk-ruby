@@ -58,9 +58,9 @@ module Aws
         data.lifecycle_state
       end
 
-      # The last reported health status of this instance. \"Healthy\" means
+      # The last reported health status of this instance. "Healthy" means
       # that the instance is healthy and should remain in service.
-      # \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+      # "Unhealthy" means that the instance is unhealthy and Auto Scaling
       # should terminate and replace it.
       # @return [String]
       def health_status
@@ -153,7 +153,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
       #   Specifies whether the instances moved to `Standby` mode count as part
-      #   of the Auto Scaling group\'s desired capacity. If set, the desired
+      #   of the Auto Scaling group's desired capacity. If set, the desired
       #   capacity for the Auto Scaling group decrements by the number of
       #   instances moved to `Standby` mode.
       # @return [Activity::Collection]

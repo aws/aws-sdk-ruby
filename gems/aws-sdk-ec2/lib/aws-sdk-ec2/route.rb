@@ -82,8 +82,8 @@ module Aws
       end
 
       # The state of the route. The `blackhole` state indicates that the
-      # route\'s target isn\'t available (for example, the specified gateway
-      # isn\'t attached to the VPC, or the specified NAT instance has been
+      # route's target isn't available (for example, the specified gateway
+      # isn't attached to the VPC, or the specified NAT instance has been
       # terminated).
       # @return [String]
       def state

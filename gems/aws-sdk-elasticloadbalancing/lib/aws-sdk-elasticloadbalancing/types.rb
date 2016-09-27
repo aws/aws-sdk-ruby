@@ -895,7 +895,7 @@ module Aws
       #   or SSL. The range of valid ports is one (1) through 65535.
       #
       #   TCP is the default, specified as a TCP: port pair, for example
-      #   \"TCP:5000\". In this case, a health check simply attempts to open a
+      #   "TCP:5000". In this case, a health check simply attempts to open a
       #   TCP connection to the instance on the specified port. Failure to
       #   connect within the configured timeout is considered unhealthy.
       #
@@ -903,9 +903,9 @@ module Aws
       #
       #   For HTTP/HTTPS, you must include a ping path in the string. HTTP is
       #   specified as a HTTP:port;/;PathToPing; grouping, for example
-      #   \"HTTP:80/weather/us/wa/seattle\". In this case, a HTTP GET request
+      #   "HTTP:80/weather/us/wa/seattle". In this case, a HTTP GET request
       #   is issued to the instance on the given port and path. Any answer
-      #   other than \"200 OK\" within the timeout period is considered
+      #   other than "200 OK" within the timeout period is considered
       #   unhealthy.
       #
       #   The total length of the HTTP ping target must be 1024 16-bit Unicode
@@ -1071,11 +1071,11 @@ module Aws
       #   `InstanceProtocol` must be at the same protocol.
       #
       #   If there is another listener with the same `InstancePort` whose
-      #   `InstanceProtocol` is secure, (HTTPS or SSL), the listener\'s
+      #   `InstanceProtocol` is secure, (HTTPS or SSL), the listener's
       #   `InstanceProtocol` must also be secure.
       #
       #   If there is another listener with the same `InstancePort` whose
-      #   `InstanceProtocol` is HTTP or TCP, the listener\'s
+      #   `InstanceProtocol` is HTTP or TCP, the listener's
       #   `InstanceProtocol` must be HTTP or TCP.
       #   @return [String]
       #

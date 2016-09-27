@@ -75,13 +75,11 @@ module AwsSdkCodeGenerator
       def yard_docs
         docs = []
         docs.concat(@docstring.lines)
-        docs.concat(["# @overload #{@name}#{ParamList.new(@params).signature}"])
         tags = []
         tags.concat(ParamList.new(@params).tags)
         tags.concat(@option_tags)
         tags.concat(@return_tags)
         tags.each.with_index do |tag, n|
-          #docs.concat(['#']) unless n == 0
           docs.concat(tag.lines)
         end
         docs.compact

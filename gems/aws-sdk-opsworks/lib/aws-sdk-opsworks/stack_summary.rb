@@ -37,7 +37,7 @@ module Aws
         data.name
       end
 
-      # The stack\'s ARN.
+      # The stack's ARN.
       # @return [String]
       def arn
         data.arn

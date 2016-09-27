@@ -118,8 +118,8 @@ module Aws
       # @!attribute [rw] output_uri
       #   The location of an Amazon S3 bucket or directory to receive the
       #   operation results. The following substrings are not allowed in the
-      #   `s3 key` portion of the `outputURI` field: \':\', \'//\', \'/./\',
-      #   \'/../\'.
+      #   `s3 key` portion of the `outputURI` field: ':', '//', '/./',
+      #   '/../'.
       #   @return [String]
       #
       # @!attribute [rw] message
@@ -199,7 +199,7 @@ module Aws
       #   The location of an Amazon Simple Storage Service (Amazon S3) bucket
       #   or directory to store the batch prediction results. The following
       #   substrings are not allowed in the `s3 key` portion of the
-      #   `outputURI` field: \':\', \'//\', \'/./\', \'/../\'.
+      #   `outputURI` field: ':', '//', '/./', '/../'.
       #
       #   Amazon ML needs permissions to store and retrieve the logs on your
       #   behalf. For information about how to set permissions, see the
@@ -316,7 +316,7 @@ module Aws
       #
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       #
       #
       #
@@ -325,7 +325,7 @@ module Aws
       #
       # @!attribute [rw] role_arn
       #   The role that Amazon ML assumes on behalf of the user to create and
-      #   activate a data pipeline in the user\'s account and copy data using
+      #   activate a data pipeline in the user's account and copy data using
       #   the `SelectSqlQuery` query from Amazon RDS to Amazon S3.
       #   @return [String]
       #
@@ -425,7 +425,7 @@ module Aws
       #     and rearrangement requirements for the `DataSource`.
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       #   @return [Types::RedshiftDataSpec]
       #
       # @!attribute [rw] role_arn
@@ -508,7 +508,7 @@ module Aws
       #     and rearrangement requirements for the `Datasource`.
       #
       #     Sample - `
-      #     "\{\"splitting\":\{\"percentBegin\":10,\"percentEnd\":60\}\}"`
+      #     "\{"splitting":\{"percentBegin":10,"percentEnd":60\}\}"`
       #   @return [Types::S3DataSpec]
       #
       # @!attribute [rw] compute_statistics
@@ -653,10 +653,10 @@ module Aws
       #     `10`.
       #
       #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
-      #     Shuffling the data improves a model\'s ability to find the optimal
+      #     Shuffling the data improves a model's ability to find the optimal
       #     solution for a variety of data types. The valid values are `auto`
       #     and `none`. The default value is `none`. We <?oxy\_insert\_start
-      #     author=\"laurama\" timestamp=\"20160329T131121-0700\">strongly
+      #     author="laurama" timestamp="20160329T131121-0700">strongly
       #     recommend that you shuffle your data.<?oxy\_insert\_end>
       #
       #   * `sgd.l1RegularizationAmount` - The coefficient regularization L1
@@ -666,7 +666,7 @@ module Aws
       #     specifying a small value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L1 normalization. This parameter can\'t be
+      #     default is to not use L1 normalization. This parameter can't be
       #     used when `L2` is specified. Use this parameter sparingly.
       #
       #   * `sgd.l2RegularizationAmount` - The coefficient regularization L2
@@ -676,7 +676,7 @@ module Aws
       #     value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L2 normalization. This parameter can\'t be
+      #     default is to not use L2 normalization. This parameter can't be
       #     used when `L1` is specified. Use this parameter sparingly.
       #   @return [Hash<String,String>]
       #
@@ -686,14 +686,14 @@ module Aws
       #
       # @!attribute [rw] recipe
       #   The data recipe for creating the `MLModel`. You must specify either
-      #   the recipe or its URI. If you don\'t specify a recipe or its URI,
+      #   the recipe or its URI. If you don't specify a recipe or its URI,
       #   Amazon ML creates a default.
       #   @return [String]
       #
       # @!attribute [rw] recipe_uri
       #   The Amazon Simple Storage Service (Amazon S3) location and file name
       #   that contains the `MLModel` recipe. You must specify either the
-      #   recipe or its URI. If you don\'t specify a recipe or its URI, Amazon
+      #   recipe or its URI. If you don't specify a recipe or its URI, Amazon
       #   ML creates a default.
       #   @return [String]
       class CreateMLModelInput < Struct.new(
@@ -1867,7 +1867,7 @@ module Aws
       #
       # @!attribute [rw] started_at
       #   The epoch time when Amazon Machine Learning marked the
-      #   `BatchPrediction` as `INPROGRESS`. `StartedAt` isn\'t available if
+      #   `BatchPrediction` as `INPROGRESS`. `StartedAt` isn't available if
       #   the `BatchPrediction` is in the `PENDING` state.
       #   @return [Time]
       #
@@ -2033,7 +2033,7 @@ module Aws
       #
       # @!attribute [rw] started_at
       #   The epoch time when Amazon Machine Learning marked the `DataSource`
-      #   as `INPROGRESS`. `StartedAt` isn\'t available if the `DataSource` is
+      #   as `INPROGRESS`. `StartedAt` isn't available if the `DataSource` is
       #   in the `PENDING` state.
       #   @return [Time]
       #
@@ -2187,7 +2187,7 @@ module Aws
       #
       # @!attribute [rw] started_at
       #   The epoch time when Amazon Machine Learning marked the `Evaluation`
-      #   as `INPROGRESS`. `StartedAt` isn\'t available if the `Evaluation` is
+      #   as `INPROGRESS`. `StartedAt` isn't available if the `Evaluation` is
       #   in the `PENDING` state.
       #   @return [Time]
       class GetEvaluationOutput < Struct.new(
@@ -2236,8 +2236,8 @@ module Aws
       # Represents the output of a `GetMLModel` operation, and provides
       # detailed information about a `MLModel`.
       # @!attribute [rw] ml_model_id
-      #   The MLModel ID<?oxy\_insert\_start author=\"annbech\"
-      #   timestamp=\"20160328T151251-0700\">,<?oxy\_insert\_end> which is
+      #   The MLModel ID<?oxy\_insert\_start author="annbech"
+      #   timestamp="20160328T151251-0700">,<?oxy\_insert\_end> which is
       #   same as the `MLModelId` in the request.
       #   @return [String]
       #
@@ -2273,9 +2273,9 @@ module Aws
       #     request to describe a `MLModel`.
       #   * `INPROGRESS` - The request is processing.
       #   * `FAILED` - The request did not run to completion. The ML model
-      #     isn\'t usable.
+      #     isn't usable.
       #   * `COMPLETED` - The request completed successfully.
-      #   * `DELETED` - The `MLModel` is marked as deleted. It isn\'t usable.
+      #   * `DELETED` - The `MLModel` is marked as deleted. It isn't usable.
       #   @return [String]
       #
       # @!attribute [rw] size_in_bytes
@@ -2305,7 +2305,7 @@ module Aws
       #     `10`.
       #
       #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
-      #     Shuffling data improves a model\'s ability to find the optimal
+      #     Shuffling data improves a model's ability to find the optimal
       #     solution for a variety of data types. The valid values are `auto`
       #     and `none`. The default value is `none`. We strongly recommend
       #     that you shuffle your data.
@@ -2317,7 +2317,7 @@ module Aws
       #     specifying a small value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L1 normalization. This parameter can\'t be
+      #     default is to not use L1 normalization. This parameter can't be
       #     used when `L2` is specified. Use this parameter sparingly.
       #
       #   * `sgd.l2RegularizationAmount` - The coefficient regularization L2
@@ -2327,7 +2327,7 @@ module Aws
       #     value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L2 normalization. This parameter can\'t be
+      #     default is to not use L2 normalization. This parameter can't be
       #     used when `L1` is specified. Use this parameter sparingly.
       #   @return [Hash<String,String>]
       #
@@ -2340,18 +2340,18 @@ module Aws
       #   Identifies the `MLModel` category. The following are the available
       #   types:
       #
-      #   * REGRESSION -- Produces a numeric result. For example, \"What price
-      #     should a house be listed at?\"
-      #   * BINARY -- Produces one of two possible results. For example, \"Is
-      #     this an e-commerce website?\"
+      #   * REGRESSION -- Produces a numeric result. For example, "What price
+      #     should a house be listed at?"
+      #   * BINARY -- Produces one of two possible results. For example, "Is
+      #     this an e-commerce website?"
       #   * MULTICLASS -- Produces one of several possible results. For
-      #     example, \"Is this a HIGH, LOW or MEDIUM risk trade?\"
+      #     example, "Is this a HIGH, LOW or MEDIUM risk trade?"
       #   @return [String]
       #
       # @!attribute [rw] score_threshold
       #   The scoring threshold is used in binary classification
-      #   `MLModel`<?oxy\_insert\_start author=\"laurama\"
-      #   timestamp=\"20160329T114851-0700\"> <?oxy\_insert\_end>models. It
+      #   `MLModel`<?oxy\_insert\_start author="laurama"
+      #   timestamp="20160329T114851-0700"> <?oxy\_insert\_end>models. It
       #   marks the boundary between a positive prediction and a negative
       #   prediction.
       #
@@ -2391,7 +2391,7 @@ module Aws
       #
       # @!attribute [rw] started_at
       #   The epoch time when Amazon Machine Learning marked the `MLModel` as
-      #   `INPROGRESS`. `StartedAt` isn\'t available if the `MLModel` is in
+      #   `INPROGRESS`. `StartedAt` isn't available if the `MLModel` is in
       #   the `PENDING` state.
       #   @return [Time]
       #
@@ -2479,10 +2479,10 @@ module Aws
       #   * `PENDING` - Amazon Machine Learning (Amazon ML) submitted a
       #     request to create an `MLModel`.
       #   * `INPROGRESS` - The creation process is underway.
-      #   * `FAILED` - The request to create an `MLModel` didn\'t run to
-      #     completion. The model isn\'t usable.
+      #   * `FAILED` - The request to create an `MLModel` didn't run to
+      #     completion. The model isn't usable.
       #   * `COMPLETED` - The creation process completed successfully.
-      #   * `DELETED` - The `MLModel` is marked as deleted. It isn\'t usable.
+      #   * `DELETED` - The `MLModel` is marked as deleted. It isn't usable.
       #   @return [String]
       #
       # @!attribute [rw] size_in_bytes
@@ -2512,7 +2512,7 @@ module Aws
       #     `10`.
       #
       #   * `sgd.shuffleType` - Whether Amazon ML shuffles the training data.
-      #     Shuffling the data improves a model\'s ability to find the optimal
+      #     Shuffling the data improves a model's ability to find the optimal
       #     solution for a variety of data types. The valid values are `auto`
       #     and `none`. The default value is `none`.
       #
@@ -2523,7 +2523,7 @@ module Aws
       #     by specifying a small value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L1 normalization. This parameter can\'t be
+      #     default is to not use L1 normalization. This parameter can't be
       #     used when `L2` is specified. Use this parameter sparingly.
       #
       #   * `sgd.l2RegularizationAmount` - The coefficient regularization L2
@@ -2533,7 +2533,7 @@ module Aws
       #     value, such as `1.0E-08`.
       #
       #     The value is a double that ranges from `0` to `MAX_DOUBLE`. The
-      #     default is to not use L2 normalization. This parameter can\'t be
+      #     default is to not use L2 normalization. This parameter can't be
       #     used when `L1` is specified. Use this parameter sparingly.
       #   @return [Hash<String,String>]
       #
@@ -2554,16 +2554,16 @@ module Aws
       #   Identifies the `MLModel` category. The following are the available
       #   types:
       #
-      #   * `REGRESSION` - Produces a numeric result. For example, \"What
-      #     price should a house be listed at?\"
-      #   * `BINARY` - Produces one of two possible results. For example, \"Is
-      #     this a child-friendly web site?\".
+      #   * `REGRESSION` - Produces a numeric result. For example, "What
+      #     price should a house be listed at?"
+      #   * `BINARY` - Produces one of two possible results. For example, "Is
+      #     this a child-friendly web site?".
       #   * `MULTICLASS` - Produces one of several possible results. For
-      #     example, \"Is this a HIGH-, LOW-, or MEDIUM<?oxy\_delete
-      #     author=\"annbech\" timestamp=\"20160328T175050-0700\" content=\"
-      #     \"><?oxy\_insert\_start author=\"annbech\"
-      #     timestamp=\"20160328T175050-0700\">-<?oxy\_insert\_end>risk
-      #     trade?\".
+      #     example, "Is this a HIGH-, LOW-, or MEDIUM<?oxy\_delete
+      #     author="annbech" timestamp="20160328T175050-0700" content="
+      #     "><?oxy\_insert\_start author="annbech"
+      #     timestamp="20160328T175050-0700">-<?oxy\_insert\_end>risk
+      #     trade?".
       #   @return [String]
       #
       # @!attribute [rw] score_threshold
@@ -2876,31 +2876,31 @@ module Aws
       #   pairs for their value. Use the following format to define your
       #   `DataSchema`.
       #
-      #   \\\{ \"version\": \"1.0\",
+      #   \\\{ "version": "1.0",
       #
-      #   \"recordAnnotationFieldName\": \"F1\",
+      #   "recordAnnotationFieldName": "F1",
       #
-      #   \"recordWeightFieldName\": \"F2\",
+      #   "recordWeightFieldName": "F2",
       #
-      #   \"targetFieldName\": \"F3\",
+      #   "targetFieldName": "F3",
       #
-      #   \"dataFormat\": \"CSV\",
+      #   "dataFormat": "CSV",
       #
-      #   \"dataFileContainsHeader\": true,
+      #   "dataFileContainsHeader": true,
       #
-      #   \"attributes\": \[
+      #   "attributes": \[
       #
-      #   \\\{ \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED\_INT\_SEQUENCE\"
-      #   \\}, \\\{ \"fieldName\": \"F8\", \"fieldType\":
-      #   \"WEIGHTED\_STRING\_SEQUENCE\" \\} \],
+      #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
+      #   \\}, \\\{ "fieldName": "F8", "fieldType":
+      #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
       #
-      #   \"excludedVariableNames\": \[ \"F6\" \] \\}
+      #   "excludedVariableNames": \[ "F6" \] \\}
       #
       #    <?oxy\_insert\_end>
       #   @return [String]
@@ -3240,31 +3240,31 @@ module Aws
       #   pairs for their value. Use the following format to define your
       #   `DataSchema`.
       #
-      #   \\\{ \"version\": \"1.0\",
+      #   \\\{ "version": "1.0",
       #
-      #   \"recordAnnotationFieldName\": \"F1\",
+      #   "recordAnnotationFieldName": "F1",
       #
-      #   \"recordWeightFieldName\": \"F2\",
+      #   "recordWeightFieldName": "F2",
       #
-      #   \"targetFieldName\": \"F3\",
+      #   "targetFieldName": "F3",
       #
-      #   \"dataFormat\": \"CSV\",
+      #   "dataFormat": "CSV",
       #
-      #   \"dataFileContainsHeader\": true,
+      #   "dataFileContainsHeader": true,
       #
-      #   \"attributes\": \[
+      #   "attributes": \[
       #
-      #   \\\{ \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED\_INT\_SEQUENCE\"
-      #   \\}, \\\{ \"fieldName\": \"F8\", \"fieldType\":
-      #   \"WEIGHTED\_STRING\_SEQUENCE\" \\} \],
+      #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
+      #   \\}, \\\{ "fieldName": "F8", "fieldType":
+      #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
       #
-      #   \"excludedVariableNames\": \[ \"F6\" \] \\}
+      #   "excludedVariableNames": \[ "F6" \] \\}
       #   @return [String]
       #
       # @!attribute [rw] data_schema_uri
@@ -3492,31 +3492,31 @@ module Aws
       #   pairs for their value. Use the following format to define your
       #   `DataSchema`.
       #
-      #   \\\{ \"version\": \"1.0\",
+      #   \\\{ "version": "1.0",
       #
-      #   \"recordAnnotationFieldName\": \"F1\",
+      #   "recordAnnotationFieldName": "F1",
       #
-      #   \"recordWeightFieldName\": \"F2\",
+      #   "recordWeightFieldName": "F2",
       #
-      #   \"targetFieldName\": \"F3\",
+      #   "targetFieldName": "F3",
       #
-      #   \"dataFormat\": \"CSV\",
+      #   "dataFormat": "CSV",
       #
-      #   \"dataFileContainsHeader\": true,
+      #   "dataFileContainsHeader": true,
       #
-      #   \"attributes\": \[
+      #   "attributes": \[
       #
-      #   \\\{ \"fieldName\": \"F1\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F2\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F3\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F4\", \"fieldType\": \"NUMERIC\" \\}, \\\{
-      #   \"fieldName\": \"F5\", \"fieldType\": \"CATEGORICAL\" \\}, \\\{
-      #   \"fieldName\": \"F6\", \"fieldType\": \"TEXT\" \\}, \\\{
-      #   \"fieldName\": \"F7\", \"fieldType\": \"WEIGHTED\_INT\_SEQUENCE\"
-      #   \\}, \\\{ \"fieldName\": \"F8\", \"fieldType\":
-      #   \"WEIGHTED\_STRING\_SEQUENCE\" \\} \],
+      #   \\\{ "fieldName": "F1", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F2", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F3", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F4", "fieldType": "NUMERIC" \\}, \\\{
+      #   "fieldName": "F5", "fieldType": "CATEGORICAL" \\}, \\\{
+      #   "fieldName": "F6", "fieldType": "TEXT" \\}, \\\{
+      #   "fieldName": "F7", "fieldType": "WEIGHTED\_INT\_SEQUENCE"
+      #   \\}, \\\{ "fieldName": "F8", "fieldType":
+      #   "WEIGHTED\_STRING\_SEQUENCE" \\} \],
       #
-      #   \"excludedVariableNames\": \[ \"F6\" \] \\}
+      #   "excludedVariableNames": \[ "F6" \] \\}
       #
       #    <?oxy\_insert\_end>
       #   @return [String]

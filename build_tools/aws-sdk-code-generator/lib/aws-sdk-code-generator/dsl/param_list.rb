@@ -18,7 +18,7 @@ module AwsSdkCodeGenerator
       def tags
         lines = []
         @params.each do |param|
-          lines.concat(param.tag)
+          lines.concat(param.tag) if param.documented?
         end
         lines
       end

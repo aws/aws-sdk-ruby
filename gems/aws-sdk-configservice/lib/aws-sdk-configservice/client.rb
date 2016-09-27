@@ -152,8 +152,8 @@ module Aws
       #   resp = client.delete_config_rule({
       #     config_rule_name: "StringWithCharLimit64", # required
       #   })
+      # @overload delete_config_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_config_rule(params = {}, options = {})
         req = build_request(:delete_config_rule, params)
         req.send_request(options)
@@ -180,8 +180,8 @@ module Aws
       #   resp = client.delete_configuration_recorder({
       #     configuration_recorder_name: "RecorderName", # required
       #   })
+      # @overload delete_configuration_recorder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_configuration_recorder(params = {}, options = {})
         req = build_request(:delete_configuration_recorder, params)
         req.send_request(options)
@@ -199,8 +199,8 @@ module Aws
       #   resp = client.delete_delivery_channel({
       #     delivery_channel_name: "ChannelName", # required
       #   })
+      # @overload delete_delivery_channel(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_delivery_channel(params = {}, options = {})
         req = build_request(:delete_delivery_channel, params)
         req.send_request(options)
@@ -219,8 +219,8 @@ module Aws
       #   resp = client.delete_evaluation_results({
       #     config_rule_name: "StringWithCharLimit64", # required
       #   })
+      # @overload delete_evaluation_results(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_evaluation_results(params = {}, options = {})
         req = build_request(:delete_evaluation_results, params)
         req.send_request(options)
@@ -250,8 +250,8 @@ module Aws
       #
       # @example Response structure
       #   resp.config_snapshot_id #=> String
+      # @overload deliver_config_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deliver_config_snapshot(params = {}, options = {})
         req = build_request(:deliver_config_snapshot, params)
         req.send_request(options)
@@ -272,14 +272,14 @@ module Aws
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
-      # * The rule\'s AWS Lambda function is failing to send evaluation
+      # * The rule's AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
       #   permission. If the rule is a custom rule, verify that the AWS Lambda
       #   execution role includes the `config:PutEvaluations` permission.
-      # * The rule\'s AWS Lambda function has returned `NOT_APPLICABLE` for
+      # * The rule's AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
-      #   or removed from the rule\'s scope.
+      #   or removed from the rule's scope.
       # @option params [Array<String>] :config_rule_names
       #   Specify one or more AWS Config rule names to filter the results by
       #   rule.
@@ -310,8 +310,8 @@ module Aws
       #   resp.compliance_by_config_rules[0].compliance.compliance_contributor_count.capped_count #=> Integer
       #   resp.compliance_by_config_rules[0].compliance.compliance_contributor_count.cap_exceeded #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_compliance_by_config_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_compliance_by_config_rule(params = {}, options = {})
         req = build_request(:describe_compliance_by_config_rule, params)
         req.send_request(options)
@@ -333,14 +333,14 @@ module Aws
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
-      # * The rule\'s AWS Lambda function is failing to send evaluation
+      # * The rule's AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
       #   permission. If the rule is a custom rule, verify that the AWS Lambda
       #   execution role includes the `config:PutEvaluations` permission.
-      # * The rule\'s AWS Lambda function has returned `NOT_APPLICABLE` for
+      # * The rule's AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
-      #   or removed from the rule\'s scope.
+      #   or removed from the rule's scope.
       # @option params [String] :resource_type
       #   The types of AWS resources for which you want compliance information;
       #   for example, `AWS::EC2::Instance`. For this action, you can specify
@@ -384,8 +384,8 @@ module Aws
       #   resp.compliance_by_resources[0].compliance.compliance_contributor_count.capped_count #=> Integer
       #   resp.compliance_by_resources[0].compliance.compliance_contributor_count.cap_exceeded #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_compliance_by_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_compliance_by_resource(params = {}, options = {})
         req = build_request(:describe_compliance_by_resource, params)
         req.send_request(options)
@@ -421,8 +421,8 @@ module Aws
       #   resp.config_rules_evaluation_status[0].last_error_code #=> String
       #   resp.config_rules_evaluation_status[0].last_error_message #=> String
       #   resp.config_rules_evaluation_status[0].first_evaluation_started #=> Boolean
+      # @overload describe_config_rule_evaluation_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_config_rule_evaluation_status(params = {}, options = {})
         req = build_request(:describe_config_rule_evaluation_status, params)
         req.send_request(options)
@@ -468,8 +468,8 @@ module Aws
       #   resp.config_rules[0].maximum_execution_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
       #   resp.config_rules[0].config_rule_state #=> String, one of "ACTIVE", "DELETING", "DELETING_RESULTS", "EVALUATING"
       #   resp.next_token #=> String
+      # @overload describe_config_rules(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_config_rules(params = {}, options = {})
         req = build_request(:describe_config_rules, params)
         req.send_request(options)
@@ -506,8 +506,8 @@ module Aws
       #   resp.configuration_recorders_status[0].last_error_code #=> String
       #   resp.configuration_recorders_status[0].last_error_message #=> String
       #   resp.configuration_recorders_status[0].last_status_change_time #=> Time
+      # @overload describe_configuration_recorder_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_configuration_recorder_status(params = {}, options = {})
         req = build_request(:describe_configuration_recorder_status, params)
         req.send_request(options)
@@ -540,8 +540,8 @@ module Aws
       #   resp.configuration_recorders[0].recording_group.include_global_resource_types #=> Boolean
       #   resp.configuration_recorders[0].recording_group.resource_types #=> Array
       #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      # @overload describe_configuration_recorders(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_configuration_recorders(params = {}, options = {})
         req = build_request(:describe_configuration_recorders, params)
         req.send_request(options)
@@ -584,8 +584,8 @@ module Aws
       #   resp.delivery_channels_status[0].config_stream_delivery_info.last_error_code #=> String
       #   resp.delivery_channels_status[0].config_stream_delivery_info.last_error_message #=> String
       #   resp.delivery_channels_status[0].config_stream_delivery_info.last_status_change_time #=> Time
+      # @overload describe_delivery_channel_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_delivery_channel_status(params = {}, options = {})
         req = build_request(:describe_delivery_channel_status, params)
         req.send_request(options)
@@ -616,8 +616,8 @@ module Aws
       #   resp.delivery_channels[0].s3_key_prefix #=> String
       #   resp.delivery_channels[0].sns_topic_arn #=> String
       #   resp.delivery_channels[0].config_snapshot_delivery_properties.delivery_frequency #=> String, one of "One_Hour", "Three_Hours", "Six_Hours", "Twelve_Hours", "TwentyFour_Hours"
+      # @overload describe_delivery_channels(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_delivery_channels(params = {}, options = {})
         req = build_request(:describe_delivery_channels, params)
         req.send_request(options)
@@ -667,8 +667,8 @@ module Aws
       #   resp.evaluation_results[0].annotation #=> String
       #   resp.evaluation_results[0].result_token #=> String
       #   resp.next_token #=> String
+      # @overload get_compliance_details_by_config_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_compliance_details_by_config_rule(params = {}, options = {})
         req = build_request(:get_compliance_details_by_config_rule, params)
         req.send_request(options)
@@ -716,8 +716,8 @@ module Aws
       #   resp.evaluation_results[0].annotation #=> String
       #   resp.evaluation_results[0].result_token #=> String
       #   resp.next_token #=> String
+      # @overload get_compliance_details_by_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_compliance_details_by_resource(params = {}, options = {})
         req = build_request(:get_compliance_details_by_resource, params)
         req.send_request(options)
@@ -735,8 +735,8 @@ module Aws
       #   resp.compliance_summary.non_compliant_resource_count.capped_count #=> Integer
       #   resp.compliance_summary.non_compliant_resource_count.cap_exceeded #=> Boolean
       #   resp.compliance_summary.compliance_summary_timestamp #=> Time
+      # @overload get_compliance_summary_by_config_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_compliance_summary_by_config_rule(params = {}, options = {})
         req = build_request(:get_compliance_summary_by_config_rule, params)
         req.send_request(options)
@@ -771,8 +771,8 @@ module Aws
       #   resp.compliance_summaries_by_resource_type[0].compliance_summary.non_compliant_resource_count.capped_count #=> Integer
       #   resp.compliance_summaries_by_resource_type[0].compliance_summary.non_compliant_resource_count.cap_exceeded #=> Boolean
       #   resp.compliance_summaries_by_resource_type[0].compliance_summary.compliance_summary_timestamp #=> Time
+      # @overload get_compliance_summary_by_resource_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_compliance_summary_by_resource_type(params = {}, options = {})
         req = build_request(:get_compliance_summary_by_resource_type, params)
         req.send_request(options)
@@ -859,8 +859,8 @@ module Aws
       #   resp.configuration_items[0].supplementary_configuration #=> Hash
       #   resp.configuration_items[0].supplementary_configuration["SupplementaryConfigurationName"] #=> String
       #   resp.next_token #=> String
+      # @overload get_resource_config_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_resource_config_history(params = {}, options = {})
         req = build_request(:get_resource_config_history, params)
         req.send_request(options)
@@ -927,8 +927,8 @@ module Aws
       #   resp.resource_identifiers[0].resource_name #=> String
       #   resp.resource_identifiers[0].resource_deletion_time #=> Time
       #   resp.next_token #=> String
+      # @overload list_discovered_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_discovered_resources(params = {}, options = {})
         req = build_request(:list_discovered_resources, params)
         req.send_request(options)
@@ -950,7 +950,7 @@ module Aws
       # key. This key is part of the `Source` object, which is part of the
       # `ConfigRule` object.
       #
-      # If you are adding a new AWS managed Config rule, specify the rule\'s
+      # If you are adding a new AWS managed Config rule, specify the rule's
       # identifier for the `SourceIdentifier` key. To reference AWS managed
       # Config rule identifiers, see [Using AWS Managed Config Rules][1].
       #
@@ -960,7 +960,7 @@ module Aws
       # rules.
       #
       # If you are updating a rule that you have added previously, specify the
-      # rule\'s `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in the
+      # rule's `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in the
       # `ConfigRule` data type that you use in this request.
       #
       # The maximum number of rules that AWS Config supports is 25.
@@ -1029,8 +1029,8 @@ module Aws
       #       config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #     },
       #   })
+      # @overload put_config_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_config_rule(params = {}, options = {})
         req = build_request(:put_config_rule, params)
         req.send_request(options)
@@ -1068,8 +1068,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload put_configuration_recorder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_configuration_recorder(params = {}, options = {})
         req = build_request(:put_configuration_recorder, params)
         req.send_request(options)
@@ -1109,8 +1109,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload put_delivery_channel(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_delivery_channel(params = {}, options = {})
         req = build_request(:put_delivery_channel, params)
         req.send_request(options)
@@ -1151,8 +1151,8 @@ module Aws
       #   resp.failed_evaluations[0].compliance_type #=> String, one of "COMPLIANT", "NON_COMPLIANT", "NOT_APPLICABLE", "INSUFFICIENT_DATA"
       #   resp.failed_evaluations[0].annotation #=> String
       #   resp.failed_evaluations[0].ordering_timestamp #=> Time
+      # @overload put_evaluations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_evaluations(params = {}, options = {})
         req = build_request(:put_evaluations, params)
         req.send_request(options)
@@ -1166,7 +1166,7 @@ module Aws
       # have AWS Config stream to an Amazon SNS topic, you will receive a
       # `ConfigRuleEvaluationStarted` notification when the evaluation starts.
       #
-      # <note markdown="1"> You don\'t need to call the `StartConfigRulesEvaluation` API to run an
+      # <note markdown="1"> You don't need to call the `StartConfigRulesEvaluation` API to run an
       # evaluation for a new rule. When you create a new rule, AWS Config
       # automatically evaluates your resources against the rule.
       #
@@ -1198,8 +1198,8 @@ module Aws
       #   resp = client.start_config_rules_evaluation({
       #     config_rule_names: ["StringWithCharLimit64"],
       #   })
+      # @overload start_config_rules_evaluation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_config_rules_evaluation(params = {}, options = {})
         req = build_request(:start_config_rules_evaluation, params)
         req.send_request(options)
@@ -1219,8 +1219,8 @@ module Aws
       #   resp = client.start_configuration_recorder({
       #     configuration_recorder_name: "RecorderName", # required
       #   })
+      # @overload start_configuration_recorder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_configuration_recorder(params = {}, options = {})
         req = build_request(:start_configuration_recorder, params)
         req.send_request(options)
@@ -1237,8 +1237,8 @@ module Aws
       #   resp = client.stop_configuration_recorder({
       #     configuration_recorder_name: "RecorderName", # required
       #   })
+      # @overload stop_configuration_recorder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_configuration_recorder(params = {}, options = {})
         req = build_request(:stop_configuration_recorder, params)
         req.send_request(options)

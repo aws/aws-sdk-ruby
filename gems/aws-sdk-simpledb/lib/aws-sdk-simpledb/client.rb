@@ -155,8 +155,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload batch_delete_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_delete_attributes(params = {}, options = {})
         req = build_request(:batch_delete_attributes, params)
         req.send_request(options)
@@ -190,10 +190,13 @@ module Aws
       # '2'\}` and `\{ 'b', '3' \}` and the requester does a
       # BatchPutAttributes of `\{'I', 'b', '4' \}` with the Replace parameter
       # set to true, the final attributes of the item will be `\{ 'a', '1' \}`
-      # and `\{ 'b', '4' \}`, replacing the previous values of the \'b\'
+      # and `\{ 'b', '4' \}`, replacing the previous values of the 'b'
       # attribute with the new value.
       #
-      # <important> This operation is vulnerable to exceeding the maximum URL size when making a REST request using the HTTP GET method. This operation does not support conditions using `Expected.X.Name`, `Expected.X.Value`, or `Expected.X.Exists`. </important>
+      # This operation is vulnerable to exceeding the maximum URL size when
+      # making a REST request using the HTTP GET method. This operation does
+      # not support conditions using `Expected.X.Name`, `Expected.X.Value`, or
+      # `Expected.X.Exists`.
       #
       # You can execute multiple `BatchPutAttributes` operations and other
       # operations in parallel. However, large numbers of concurrent
@@ -228,8 +231,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload batch_put_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_put_attributes(params = {}, options = {})
         req = build_request(:batch_put_attributes, params)
         req.send_request(options)
@@ -251,15 +254,15 @@ module Aws
       # @option params [required, String] :domain_name
       #   The name of the domain to create. The name can range between 3 and 255
       #   characters and can contain the following characters: a-z, A-Z, 0-9,
-      #   \'\_\', \'-\', and \'.\'.
+      #   '\_', '-', and '.'.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_domain({
       #     domain_name: "String", # required
       #   })
+      # @overload create_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_domain(params = {}, options = {})
         req = build_request(:create_domain, params)
         req.send_request(options)
@@ -310,8 +313,8 @@ module Aws
       #       exists: false,
       #     },
       #   })
+      # @overload delete_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_attributes(params = {}, options = {})
         req = build_request(:delete_attributes, params)
         req.send_request(options)
@@ -328,8 +331,8 @@ module Aws
       #   resp = client.delete_domain({
       #     domain_name: "String", # required
       #   })
+      # @overload delete_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_domain(params = {}, options = {})
         req = build_request(:delete_domain, params)
         req.send_request(options)
@@ -363,8 +366,8 @@ module Aws
       #   resp.attribute_value_count #=> Integer
       #   resp.attribute_values_size_bytes #=> Integer
       #   resp.timestamp #=> Integer
+      # @overload domain_metadata(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def domain_metadata(params = {}, options = {})
         req = build_request(:domain_metadata, params)
         req.send_request(options)
@@ -404,8 +407,8 @@ module Aws
       #   resp.attributes[0].alternate_name_encoding #=> String
       #   resp.attributes[0].value #=> String
       #   resp.attributes[0].alternate_value_encoding #=> String
+      # @overload get_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_attributes(params = {}, options = {})
         req = build_request(:get_attributes, params)
         req.send_request(options)
@@ -439,8 +442,8 @@ module Aws
       #   resp.domain_names #=> Array
       #   resp.domain_names[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_domains(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_domains(params = {}, options = {})
         req = build_request(:list_domains, params)
         req.send_request(options)
@@ -467,7 +470,7 @@ module Aws
       # using the attributes `\{ 'b', '4' \}` with the `Replace` parameter set
       # to true, the final attributes of the item are changed to `\{ 'a', '1'
       # \}` and `\{ 'b', '4' \}`, which replaces the previous values of the
-      # \'b\' attribute with the new value.
+      # 'b' attribute with the new value.
       #
       # You cannot specify an empty string as an attribute name.
       #
@@ -510,8 +513,8 @@ module Aws
       #       exists: false,
       #     },
       #   })
+      # @overload put_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_attributes(params = {}, options = {})
         req = build_request(:put_attributes, params)
         req.send_request(options)
@@ -558,8 +561,8 @@ module Aws
       #   resp.items[0].attributes[0].value #=> String
       #   resp.items[0].attributes[0].alternate_value_encoding #=> String
       #   resp.next_token #=> String
+      # @overload select(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def select(params = {}, options = {})
         req = build_request(:select, params)
         req.send_request(options)

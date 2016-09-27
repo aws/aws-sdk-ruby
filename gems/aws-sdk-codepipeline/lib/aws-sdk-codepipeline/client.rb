@@ -155,8 +155,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String, one of "Created", "Queued", "Dispatched", "InProgress", "TimedOut", "Succeeded", "Failed"
+      # @overload acknowledge_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def acknowledge_job(params = {}, options = {})
         req = build_request(:acknowledge_job, params)
         req.send_request(options)
@@ -187,8 +187,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String, one of "Created", "Queued", "Dispatched", "InProgress", "TimedOut", "Succeeded", "Failed"
+      # @overload acknowledge_third_party_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def acknowledge_third_party_job(params = {}, options = {})
         req = build_request(:acknowledge_third_party_job, params)
         req.send_request(options)
@@ -286,8 +286,8 @@ module Aws
       #   resp.action_type.input_artifact_details.maximum_count #=> Integer
       #   resp.action_type.output_artifact_details.minimum_count #=> Integer
       #   resp.action_type.output_artifact_details.maximum_count #=> Integer
+      # @overload create_custom_action_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_custom_action_type(params = {}, options = {})
         req = build_request(:create_custom_action_type, params)
         req.send_request(options)
@@ -382,8 +382,8 @@ module Aws
       #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
       #   resp.pipeline.stages[0].actions[0].role_arn #=> String
       #   resp.pipeline.version #=> Integer
+      # @overload create_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_pipeline(params = {}, options = {})
         req = build_request(:create_pipeline, params)
         req.send_request(options)
@@ -393,10 +393,8 @@ module Aws
       # will fail after the action is marked for deletion. Only used for
       # custom actions.
       #
-      # <important markdown="1"> You cannot recreate a custom action after it has been deleted unless
+      # You cannot recreate a custom action after it has been deleted unless
       # you increase the version number of the action.
-      #
-      #  </important>
       # @option params [required, String] :category
       #   The category of the custom action that you want to delete, such as
       #   source or deploy.
@@ -413,8 +411,8 @@ module Aws
       #     provider: "ActionProvider", # required
       #     version: "Version", # required
       #   })
+      # @overload delete_custom_action_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_custom_action_type(params = {}, options = {})
         req = build_request(:delete_custom_action_type, params)
         req.send_request(options)
@@ -429,8 +427,8 @@ module Aws
       #   resp = client.delete_pipeline({
       #     name: "PipelineName", # required
       #   })
+      # @overload delete_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_pipeline(params = {}, options = {})
         req = build_request(:delete_pipeline, params)
         req.send_request(options)
@@ -462,8 +460,8 @@ module Aws
       #     transition_type: "Inbound", # required, accepts Inbound, Outbound
       #     reason: "DisabledReason", # required
       #   })
+      # @overload disable_stage_transition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_stage_transition(params = {}, options = {})
         req = build_request(:disable_stage_transition, params)
         req.send_request(options)
@@ -491,8 +489,8 @@ module Aws
       #     stage_name: "StageName", # required
       #     transition_type: "Inbound", # required, accepts Inbound, Outbound
       #   })
+      # @overload enable_stage_transition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_stage_transition(params = {}, options = {})
         req = build_request(:enable_stage_transition, params)
         req.send_request(options)
@@ -500,13 +498,11 @@ module Aws
 
       # Returns information about a job. Only used for custom actions.
       #
-      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
+      # When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
-      #
-      #  </important>
       # @option params [required, String] :job_id
       #   The unique system-generated ID for the job.
       # @return [Types::GetJobDetailsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -548,8 +544,8 @@ module Aws
       #   resp.job_details.data.encryption_key.id #=> String
       #   resp.job_details.data.encryption_key.type #=> String, one of "KMS"
       #   resp.job_details.account_id #=> String
+      # @overload get_job_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_job_details(params = {}, options = {})
         req = build_request(:get_job_details, params)
         req.send_request(options)
@@ -603,8 +599,8 @@ module Aws
       #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
       #   resp.pipeline.stages[0].actions[0].role_arn #=> String
       #   resp.pipeline.version #=> Integer
+      # @overload get_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_pipeline(params = {}, options = {})
         req = build_request(:get_pipeline, params)
         req.send_request(options)
@@ -641,8 +637,8 @@ module Aws
       #   resp.pipeline_execution.artifact_revisions[0].revision_summary #=> String
       #   resp.pipeline_execution.artifact_revisions[0].created #=> Time
       #   resp.pipeline_execution.artifact_revisions[0].revision_url #=> String
+      # @overload get_pipeline_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_pipeline_execution(params = {}, options = {})
         req = build_request(:get_pipeline_execution, params)
         req.send_request(options)
@@ -695,8 +691,8 @@ module Aws
       #   resp.stage_states[0].latest_execution.status #=> String, one of "InProgress", "Failed", "Succeeded"
       #   resp.created #=> Time
       #   resp.updated #=> Time
+      # @overload get_pipeline_state(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_pipeline_state(params = {}, options = {})
         req = build_request(:get_pipeline_state, params)
         req.send_request(options)
@@ -705,13 +701,11 @@ module Aws
       # Requests the details of a job for a third party action. Only used for
       # partner actions.
       #
-      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
+      # When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
-      #
-      #  </important>
       # @option params [required, String] :job_id
       #   The unique system-generated ID used for identifying the job.
       # @option params [required, String] :client_token
@@ -758,8 +752,8 @@ module Aws
       #   resp.job_details.data.encryption_key.id #=> String
       #   resp.job_details.data.encryption_key.type #=> String, one of "KMS"
       #   resp.job_details.nonce #=> String
+      # @overload get_third_party_job_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_third_party_job_details(params = {}, options = {})
         req = build_request(:get_third_party_job_details, params)
         req.send_request(options)
@@ -808,8 +802,8 @@ module Aws
       #   resp.action_types[0].output_artifact_details.minimum_count #=> Integer
       #   resp.action_types[0].output_artifact_details.maximum_count #=> Integer
       #   resp.next_token #=> String
+      # @overload list_action_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_action_types(params = {}, options = {})
         req = build_request(:list_action_types, params)
         req.send_request(options)
@@ -836,8 +830,8 @@ module Aws
       #   resp.pipelines[0].created #=> Time
       #   resp.pipelines[0].updated #=> Time
       #   resp.next_token #=> String
+      # @overload list_pipelines(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_pipelines(params = {}, options = {})
         req = build_request(:list_pipelines, params)
         req.send_request(options)
@@ -845,13 +839,11 @@ module Aws
 
       # Returns information about any jobs for AWS CodePipeline to act upon.
       #
-      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
+      # When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts. Additionally, this API returns any secret
       # values defined for the action.
-      #
-      #  </important>
       # @option params [required, Types::ActionTypeId] :action_type_id
       #   Represents information about an action type.
       # @option params [Integer] :max_batch_size
@@ -912,8 +904,8 @@ module Aws
       #   resp.jobs[0].data.encryption_key.type #=> String, one of "KMS"
       #   resp.jobs[0].nonce #=> String
       #   resp.jobs[0].account_id #=> String
+      # @overload poll_for_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def poll_for_jobs(params = {}, options = {})
         req = build_request(:poll_for_jobs, params)
         req.send_request(options)
@@ -922,12 +914,10 @@ module Aws
       # Determines whether there are any third party jobs for a job worker to
       # act on. Only used for partner actions.
       #
-      # <important markdown="1"> When this API is called, AWS CodePipeline returns temporary
+      # When this API is called, AWS CodePipeline returns temporary
       # credentials for the Amazon S3 bucket used to store artifacts for the
       # pipeline, if the action requires access to that Amazon S3 bucket for
       # input or output artifacts.
-      #
-      #  </important>
       # @option params [required, Types::ActionTypeId] :action_type_id
       #   Represents information about an action type.
       # @option params [Integer] :max_batch_size
@@ -951,8 +941,8 @@ module Aws
       #   resp.jobs #=> Array
       #   resp.jobs[0].client_id #=> String
       #   resp.jobs[0].job_id #=> String
+      # @overload poll_for_third_party_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def poll_for_third_party_jobs(params = {}, options = {})
         req = build_request(:poll_for_third_party_jobs, params)
         req.send_request(options)
@@ -990,8 +980,8 @@ module Aws
       # @example Response structure
       #   resp.new_revision #=> Boolean
       #   resp.pipeline_execution_id #=> String
+      # @overload put_action_revision(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_action_revision(params = {}, options = {})
         req = build_request(:put_action_revision, params)
         req.send_request(options)
@@ -1030,8 +1020,8 @@ module Aws
       #
       # @example Response structure
       #   resp.approved_at #=> Time
+      # @overload put_approval_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_approval_result(params = {}, options = {})
         req = build_request(:put_approval_result, params)
         req.send_request(options)
@@ -1055,8 +1045,8 @@ module Aws
       #       external_execution_id: "ExecutionId",
       #     },
       #   })
+      # @overload put_job_failure_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_job_failure_result(params = {}, options = {})
         req = build_request(:put_job_failure_result, params)
         req.send_request(options)
@@ -1098,8 +1088,8 @@ module Aws
       #       percent_complete: 1,
       #     },
       #   })
+      # @overload put_job_success_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_job_success_result(params = {}, options = {})
         req = build_request(:put_job_success_result, params)
         req.send_request(options)
@@ -1128,8 +1118,8 @@ module Aws
       #       external_execution_id: "ExecutionId",
       #     },
       #   })
+      # @overload put_third_party_job_failure_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_third_party_job_failure_result(params = {}, options = {})
         req = build_request(:put_third_party_job_failure_result, params)
         req.send_request(options)
@@ -1176,8 +1166,8 @@ module Aws
       #       percent_complete: 1,
       #     },
       #   })
+      # @overload put_third_party_job_success_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_third_party_job_success_result(params = {}, options = {})
         req = build_request(:put_third_party_job_success_result, params)
         req.send_request(options)
@@ -1210,8 +1200,8 @@ module Aws
       #
       # @example Response structure
       #   resp.pipeline_execution_id #=> String
+      # @overload retry_stage_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retry_stage_execution(params = {}, options = {})
         req = build_request(:retry_stage_execution, params)
         req.send_request(options)
@@ -1233,8 +1223,8 @@ module Aws
       #
       # @example Response structure
       #   resp.pipeline_execution_id #=> String
+      # @overload start_pipeline_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_pipeline_execution(params = {}, options = {})
         req = build_request(:start_pipeline_execution, params)
         req.send_request(options)
@@ -1331,8 +1321,8 @@ module Aws
       #   resp.pipeline.stages[0].actions[0].input_artifacts[0].name #=> String
       #   resp.pipeline.stages[0].actions[0].role_arn #=> String
       #   resp.pipeline.version #=> Integer
+      # @overload update_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_pipeline(params = {}, options = {})
         req = build_request(:update_pipeline, params)
         req.send_request(options)

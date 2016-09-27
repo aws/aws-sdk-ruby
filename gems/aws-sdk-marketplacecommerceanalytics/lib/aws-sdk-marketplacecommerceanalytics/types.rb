@@ -91,9 +91,9 @@ module Aws
       # @!attribute [rw] destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
-      #   the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\",
-      #   the output file \"outputfile\" would be published to
-      #   \"s3://mybucket/myprefix/mydatasets/outputfile\". If the prefix
+      #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
+      #   the output file "outputfile" would be published to
+      #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
       #   @return [String]
@@ -183,9 +183,9 @@ module Aws
       # @!attribute [rw] destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
-      #   the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\",
-      #   the output file \"outputfile\" would be published to
-      #   \"s3://mybucket/myprefix/mydatasets/outputfile\". If the prefix
+      #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
+      #   the output file "outputfile" would be published to
+      #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
       #   @return [String]

@@ -2,14 +2,19 @@ module AwsSdkCodeGenerator
   module Dsl
     class Param
 
-      def initialize(name, type:nil, default:nil, docstring:nil)
+      def initialize(name, type:nil, default:nil, docstring:nil, documented: true)
         @name = name.to_s
         @type = TagType.new(type)
         @default = TagDefault.new(default)
         @docstring = TagDocstring.new(docstring)
+        @documented = documented
       end
 
       attr_reader :name, :default
+
+      def documented?
+        !!@documented
+      end
 
       def tag
         if [@type, @default, @docstring].all?(&:empty?)
@@ -22,7 +27,7 @@ module AwsSdkCodeGenerator
       private
 
       def first_line
-        "#   @param#{@type} #{@name}#{yard_default}"
+        "# @param#{@type} #{@name}#{yard_default}"
       end
 
       def yard_default

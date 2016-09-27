@@ -186,8 +186,8 @@ module Aws
       #   resp.last_updated_date #=> Time
       #   resp.stage_keys #=> Array
       #   resp.stage_keys[0] #=> String
+      # @overload create_api_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_api_key(params = {}, options = {})
         req = build_request(:create_api_key, params)
         req.send_request(options)
@@ -209,12 +209,12 @@ module Aws
       # @option params [required, String] :type
       #   \[Required\] The type of the authorizer.
       # @option params [Array<String>] :provider_arns
-      #   A list of the Cognito Your User Pool authorizer\'s provider ARNs.
+      #   A list of the Cognito Your User Pool authorizer's provider ARNs.
       # @option params [String] :auth_type
       #   Optional customer-defined field, used in Swagger imports/exports. Has
       #   no functional impact.
       # @option params [String] :authorizer_uri
-      #   \[Required\] Specifies the authorizer\'s Uniform Resource Identifier
+      #   \[Required\] Specifies the authorizer's Uniform Resource Identifier
       #   (URI).
       # @option params [String] :authorizer_credentials
       #   Specifies the credentials required for the authorizer, if any.
@@ -263,8 +263,8 @@ module Aws
       #   resp.identity_source #=> String
       #   resp.identity_validation_expression #=> String
       #   resp.authorizer_result_ttl_in_seconds #=> Integer
+      # @overload create_authorizer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_authorizer(params = {}, options = {})
         req = build_request(:create_authorizer, params)
         req.send_request(options)
@@ -281,7 +281,7 @@ module Aws
       # @option params [required, String] :rest_api_id
       #   The name of the API that you want to apply this mapping to.
       # @option params [String] :stage
-      #   The name of the API\'s stage that you want to use for this mapping.
+      #   The name of the API's stage that you want to use for this mapping.
       #   Leave this blank if you do not want callers to explicitly specify the
       #   stage name after any base path name.
       # @return [Types::BasePathMapping] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -302,8 +302,8 @@ module Aws
       #   resp.base_path #=> String
       #   resp.rest_api_id #=> String
       #   resp.stage #=> String
+      # @overload create_base_path_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_base_path_mapping(params = {}, options = {})
         req = build_request(:create_base_path_mapping, params)
         req.send_request(options)
@@ -358,8 +358,8 @@ module Aws
       #   resp.api_summary["String"] #=> Hash
       #   resp.api_summary["String"]["String"].authorization_type #=> String
       #   resp.api_summary["String"]["String"].api_key_required #=> Boolean
+      # @overload create_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_deployment(params = {}, options = {})
         req = build_request(:create_deployment, params)
         req.send_request(options)
@@ -374,7 +374,7 @@ module Aws
       #   The body of the server certificate provided by your certificate
       #   authority.
       # @option params [required, String] :certificate_private_key
-      #   Your certificate\'s private key.
+      #   Your certificate's private key.
       # @option params [required, String] :certificate_chain
       #   The intermediate certificates and optionally the root certificate, one
       #   after the other without any blank lines. If you include the root
@@ -403,8 +403,8 @@ module Aws
       #   resp.certificate_name #=> String
       #   resp.certificate_upload_date #=> Time
       #   resp.distribution_domain_name #=> String
+      # @overload create_domain_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_domain_name(params = {}, options = {})
         req = build_request(:create_domain_name, params)
         req.send_request(options)
@@ -449,8 +449,8 @@ module Aws
       #   resp.description #=> String
       #   resp.schema #=> String
       #   resp.content_type #=> String
+      # @overload create_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_model(params = {}, options = {})
         req = build_request(:create_model, params)
         req.send_request(options)
@@ -460,7 +460,7 @@ module Aws
       # @option params [required, String] :rest_api_id
       #   The identifier of the RestApi for the resource.
       # @option params [required, String] :parent_id
-      #   The parent resource\'s identifier.
+      #   The parent resource's identifier.
       # @option params [required, String] :path_part
       #   The last path segment for this resource.
       # @return [Types::Resource] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -517,8 +517,8 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload create_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_resource(params = {}, options = {})
         req = build_request(:create_resource, params)
         req.send_request(options)
@@ -553,8 +553,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload create_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_rest_api(params = {}, options = {})
         req = build_request(:create_rest_api, params)
         req.send_request(options)
@@ -574,7 +574,7 @@ module Aws
       # @option params [Boolean] :cache_cluster_enabled
       #   Whether cache clustering is enabled for the stage.
       # @option params [String] :cache_cluster_size
-      #   The stage\'s cache cluster size.
+      #   The stage's cache cluster size.
       # @option params [Hash<String,String>] :variables
       #   A map that defines the stage variables for the new Stage resource.
       #   Variable names can have alphanumeric and underscore characters, and
@@ -629,8 +629,8 @@ module Aws
       #   resp.variables["String"] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      # @overload create_stage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_stage(params = {}, options = {})
         req = build_request(:create_stage, params)
         req.send_request(options)
@@ -690,8 +690,8 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @overload create_usage_plan(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_usage_plan(params = {}, options = {})
         req = build_request(:create_usage_plan, params)
         req.send_request(options)
@@ -726,8 +726,8 @@ module Aws
       #   resp.type #=> String
       #   resp.value #=> String
       #   resp.name #=> String
+      # @overload create_usage_plan_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_usage_plan_key(params = {}, options = {})
         req = build_request(:create_usage_plan_key, params)
         req.send_request(options)
@@ -742,8 +742,8 @@ module Aws
       #   resp = client.delete_api_key({
       #     api_key: "String", # required
       #   })
+      # @overload delete_api_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_api_key(params = {}, options = {})
         req = build_request(:delete_api_key, params)
         req.send_request(options)
@@ -769,8 +769,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     authorizer_id: "String", # required
       #   })
+      # @overload delete_authorizer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_authorizer(params = {}, options = {})
         req = build_request(:delete_authorizer, params)
         req.send_request(options)
@@ -788,8 +788,8 @@ module Aws
       #     domain_name: "String", # required
       #     base_path: "String", # required
       #   })
+      # @overload delete_base_path_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_base_path_mapping(params = {}, options = {})
         req = build_request(:delete_base_path_mapping, params)
         req.send_request(options)
@@ -804,8 +804,8 @@ module Aws
       #   resp = client.delete_client_certificate({
       #     client_certificate_id: "String", # required
       #   })
+      # @overload delete_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_client_certificate(params = {}, options = {})
         req = build_request(:delete_client_certificate, params)
         req.send_request(options)
@@ -825,8 +825,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     deployment_id: "String", # required
       #   })
+      # @overload delete_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_deployment(params = {}, options = {})
         req = build_request(:delete_deployment, params)
         req.send_request(options)
@@ -841,8 +841,8 @@ module Aws
       #   resp = client.delete_domain_name({
       #     domain_name: "String", # required
       #   })
+      # @overload delete_domain_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_domain_name(params = {}, options = {})
         req = build_request(:delete_domain_name, params)
         req.send_request(options)
@@ -850,11 +850,11 @@ module Aws
 
       # Represents a delete integration.
       # @option params [required, String] :rest_api_id
-      #   Specifies a delete integration request\'s API identifier.
+      #   Specifies a delete integration request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a delete integration request\'s resource identifier.
+      #   Specifies a delete integration request's resource identifier.
       # @option params [required, String] :http_method
-      #   Specifies a delete integration request\'s HTTP method.
+      #   Specifies a delete integration request's HTTP method.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -863,8 +863,8 @@ module Aws
       #     resource_id: "String", # required
       #     http_method: "String", # required
       #   })
+      # @overload delete_integration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_integration(params = {}, options = {})
         req = build_request(:delete_integration, params)
         req.send_request(options)
@@ -872,14 +872,14 @@ module Aws
 
       # Represents a delete integration response.
       # @option params [required, String] :rest_api_id
-      #   Specifies a delete integration response request\'s API identifier.
+      #   Specifies a delete integration response request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a delete integration response request\'s resource
+      #   Specifies a delete integration response request's resource
       #   identifier.
       # @option params [required, String] :http_method
-      #   Specifies a delete integration response request\'s HTTP method.
+      #   Specifies a delete integration response request's HTTP method.
       # @option params [required, String] :status_code
-      #   Specifies a delete integration response request\'s status code.
+      #   Specifies a delete integration response request's status code.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -889,8 +889,8 @@ module Aws
       #     http_method: "String", # required
       #     status_code: "StatusCode", # required
       #   })
+      # @overload delete_integration_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_integration_response(params = {}, options = {})
         req = build_request(:delete_integration_response, params)
         req.send_request(options)
@@ -911,8 +911,8 @@ module Aws
       #     resource_id: "String", # required
       #     http_method: "String", # required
       #   })
+      # @overload delete_method(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_method(params = {}, options = {})
         req = build_request(:delete_method, params)
         req.send_request(options)
@@ -936,8 +936,8 @@ module Aws
       #     http_method: "String", # required
       #     status_code: "StatusCode", # required
       #   })
+      # @overload delete_method_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_method_response(params = {}, options = {})
         req = build_request(:delete_method_response, params)
         req.send_request(options)
@@ -955,8 +955,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     model_name: "String", # required
       #   })
+      # @overload delete_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_model(params = {}, options = {})
         req = build_request(:delete_model, params)
         req.send_request(options)
@@ -974,8 +974,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     resource_id: "String", # required
       #   })
+      # @overload delete_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_resource(params = {}, options = {})
         req = build_request(:delete_resource, params)
         req.send_request(options)
@@ -990,8 +990,8 @@ module Aws
       #   resp = client.delete_rest_api({
       #     rest_api_id: "String", # required
       #   })
+      # @overload delete_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_rest_api(params = {}, options = {})
         req = build_request(:delete_rest_api, params)
         req.send_request(options)
@@ -1010,8 +1010,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     stage_name: "String", # required
       #   })
+      # @overload delete_stage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_stage(params = {}, options = {})
         req = build_request(:delete_stage, params)
         req.send_request(options)
@@ -1026,8 +1026,8 @@ module Aws
       #   resp = client.delete_usage_plan({
       #     usage_plan_id: "String", # required
       #   })
+      # @overload delete_usage_plan(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_usage_plan(params = {}, options = {})
         req = build_request(:delete_usage_plan, params)
         req.send_request(options)
@@ -1048,8 +1048,8 @@ module Aws
       #     usage_plan_id: "String", # required
       #     key_id: "String", # required
       #   })
+      # @overload delete_usage_plan_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_usage_plan_key(params = {}, options = {})
         req = build_request(:delete_usage_plan_key, params)
         req.send_request(options)
@@ -1067,14 +1067,14 @@ module Aws
       #     rest_api_id: "String", # required
       #     stage_name: "String", # required
       #   })
+      # @overload flush_stage_authorizers_cache(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def flush_stage_authorizers_cache(params = {}, options = {})
         req = build_request(:flush_stage_authorizers_cache, params)
         req.send_request(options)
       end
 
-      # Flushes a stage\'s cache.
+      # Flushes a stage's cache.
       # @option params [required, String] :rest_api_id
       #   The API identifier of the stage to flush its cache.
       # @option params [required, String] :stage_name
@@ -1086,8 +1086,8 @@ module Aws
       #     rest_api_id: "String", # required
       #     stage_name: "String", # required
       #   })
+      # @overload flush_stage_cache(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def flush_stage_cache(params = {}, options = {})
         req = build_request(:flush_stage_cache, params)
         req.send_request(options)
@@ -1115,8 +1115,8 @@ module Aws
       #   resp.pem_encoded_certificate #=> String
       #   resp.created_date #=> Time
       #   resp.expiration_date #=> Time
+      # @overload generate_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_client_certificate(params = {}, options = {})
         req = build_request(:generate_client_certificate, params)
         req.send_request(options)
@@ -1140,8 +1140,8 @@ module Aws
       #   resp.features #=> Array
       #   resp.features[0] #=> String
       #   resp.api_key_version #=> String
+      # @overload get_account(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_account(params = {}, options = {})
         req = build_request(:get_account, params)
         req.send_request(options)
@@ -1180,8 +1180,8 @@ module Aws
       #   resp.last_updated_date #=> Time
       #   resp.stage_keys #=> Array
       #   resp.stage_keys[0] #=> String
+      # @overload get_api_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_api_key(params = {}, options = {})
         req = build_request(:get_api_key, params)
         req.send_request(options)
@@ -1225,8 +1225,8 @@ module Aws
       #   resp.items[0].last_updated_date #=> Time
       #   resp.items[0].stage_keys #=> Array
       #   resp.items[0].stage_keys[0] #=> String
+      # @overload get_api_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_api_keys(params = {}, options = {})
         req = build_request(:get_api_keys, params)
         req.send_request(options)
@@ -1276,8 +1276,8 @@ module Aws
       #   resp.identity_source #=> String
       #   resp.identity_validation_expression #=> String
       #   resp.authorizer_result_ttl_in_seconds #=> Integer
+      # @overload get_authorizer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_authorizer(params = {}, options = {})
         req = build_request(:get_authorizer, params)
         req.send_request(options)
@@ -1325,8 +1325,8 @@ module Aws
       #   resp.items[0].identity_source #=> String
       #   resp.items[0].identity_validation_expression #=> String
       #   resp.items[0].authorizer_result_ttl_in_seconds #=> Integer
+      # @overload get_authorizers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_authorizers(params = {}, options = {})
         req = build_request(:get_authorizers, params)
         req.send_request(options)
@@ -1356,8 +1356,8 @@ module Aws
       #   resp.base_path #=> String
       #   resp.rest_api_id #=> String
       #   resp.stage #=> String
+      # @overload get_base_path_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_base_path_mapping(params = {}, options = {})
         req = build_request(:get_base_path_mapping, params)
         req.send_request(options)
@@ -1391,8 +1391,8 @@ module Aws
       #   resp.items[0].base_path #=> String
       #   resp.items[0].rest_api_id #=> String
       #   resp.items[0].stage #=> String
+      # @overload get_base_path_mappings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_base_path_mappings(params = {}, options = {})
         req = build_request(:get_base_path_mappings, params)
         req.send_request(options)
@@ -1420,8 +1420,8 @@ module Aws
       #   resp.pem_encoded_certificate #=> String
       #   resp.created_date #=> Time
       #   resp.expiration_date #=> Time
+      # @overload get_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_client_certificate(params = {}, options = {})
         req = build_request(:get_client_certificate, params)
         req.send_request(options)
@@ -1454,8 +1454,8 @@ module Aws
       #   resp.items[0].pem_encoded_certificate #=> String
       #   resp.items[0].created_date #=> Time
       #   resp.items[0].expiration_date #=> Time
+      # @overload get_client_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_client_certificates(params = {}, options = {})
         req = build_request(:get_client_certificates, params)
         req.send_request(options)
@@ -1488,8 +1488,8 @@ module Aws
       #   resp.api_summary["String"] #=> Hash
       #   resp.api_summary["String"]["String"].authorization_type #=> String
       #   resp.api_summary["String"]["String"].api_key_required #=> Boolean
+      # @overload get_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployment(params = {}, options = {})
         req = build_request(:get_deployment, params)
         req.send_request(options)
@@ -1528,8 +1528,8 @@ module Aws
       #   resp.items[0].api_summary["String"] #=> Hash
       #   resp.items[0].api_summary["String"]["String"].authorization_type #=> String
       #   resp.items[0].api_summary["String"]["String"].api_key_required #=> Boolean
+      # @overload get_deployments(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_deployments(params = {}, options = {})
         req = build_request(:get_deployments, params)
         req.send_request(options)
@@ -1556,8 +1556,8 @@ module Aws
       #   resp.certificate_name #=> String
       #   resp.certificate_upload_date #=> Time
       #   resp.distribution_domain_name #=> String
+      # @overload get_domain_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_domain_name(params = {}, options = {})
         req = build_request(:get_domain_name, params)
         req.send_request(options)
@@ -1588,8 +1588,8 @@ module Aws
       #   resp.items[0].certificate_name #=> String
       #   resp.items[0].certificate_upload_date #=> Time
       #   resp.items[0].distribution_domain_name #=> String
+      # @overload get_domain_names(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_domain_names(params = {}, options = {})
         req = build_request(:get_domain_names, params)
         req.send_request(options)
@@ -1601,7 +1601,7 @@ module Aws
       # @option params [required, String] :stage_name
       #   The name of the Stage that will be exported.
       # @option params [required, String] :export_type
-      #   The type of export. Currently only \'swagger\' is supported.
+      #   The type of export. Currently only 'swagger' is supported.
       # @option params [Hash<String,String>] :parameters
       #   A key-value map of query string parameters that specify properties of
       #   the export, depending on the requested `exportType`. For `exportType`
@@ -1637,8 +1637,8 @@ module Aws
       #   resp.content_type #=> String
       #   resp.content_disposition #=> String
       #   resp.body #=> String
+      # @overload get_export(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_export(params = {}, options = {})
         req = build_request(:get_export, params)
         req.send_request(options)
@@ -1646,11 +1646,11 @@ module Aws
 
       # Represents a get integration.
       # @option params [required, String] :rest_api_id
-      #   Specifies a get integration request\'s API identifier.
+      #   Specifies a get integration request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a get integration request\'s resource identifier
+      #   Specifies a get integration request's resource identifier
       # @option params [required, String] :http_method
-      #   Specifies a get integration request\'s HTTP method.
+      #   Specifies a get integration request's HTTP method.
       # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Integration#type #type} => String
@@ -1691,8 +1691,8 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      # @overload get_integration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_integration(params = {}, options = {})
         req = build_request(:get_integration, params)
         req.send_request(options)
@@ -1700,13 +1700,13 @@ module Aws
 
       # Represents a get integration response.
       # @option params [required, String] :rest_api_id
-      #   Specifies a get integration response request\'s API identifier.
+      #   Specifies a get integration response request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a get integration response request\'s resource identifier.
+      #   Specifies a get integration response request's resource identifier.
       # @option params [required, String] :http_method
-      #   Specifies a get integration response request\'s HTTP method.
+      #   Specifies a get integration response request's HTTP method.
       # @option params [required, String] :status_code
-      #   Specifies a get integration response request\'s status code.
+      #   Specifies a get integration response request's status code.
       # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IntegrationResponse#status_code #statusCode} => String
@@ -1729,8 +1729,8 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      # @overload get_integration_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_integration_response(params = {}, options = {})
         req = build_request(:get_integration_response, params)
         req.send_request(options)
@@ -1742,7 +1742,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the Method resource.
       # @option params [required, String] :http_method
-      #   Specifies the method request\'s HTTP method type.
+      #   Specifies the method request's HTTP method type.
       # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Method#http_method #httpMethod} => String
@@ -1795,8 +1795,8 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload get_method(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_method(params = {}, options = {})
         req = build_request(:get_method, params)
         req.send_request(options)
@@ -1831,8 +1831,8 @@ module Aws
       #   resp.response_parameters["String"] #=> Boolean
       #   resp.response_models #=> Hash
       #   resp.response_models["String"] #=> String
+      # @overload get_method_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_method_response(params = {}, options = {})
         req = build_request(:get_method_response, params)
         req.send_request(options)
@@ -1868,8 +1868,8 @@ module Aws
       #   resp.description #=> String
       #   resp.schema #=> String
       #   resp.content_type #=> String
+      # @overload get_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_model(params = {}, options = {})
         req = build_request(:get_model, params)
         req.send_request(options)
@@ -1893,8 +1893,8 @@ module Aws
       #
       # @example Response structure
       #   resp.value #=> String
+      # @overload get_model_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_model_template(params = {}, options = {})
         req = build_request(:get_model_template, params)
         req.send_request(options)
@@ -1930,8 +1930,8 @@ module Aws
       #   resp.items[0].description #=> String
       #   resp.items[0].schema #=> String
       #   resp.items[0].content_type #=> String
+      # @overload get_models(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_models(params = {}, options = {})
         req = build_request(:get_models, params)
         req.send_request(options)
@@ -1995,8 +1995,8 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload get_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_resource(params = {}, options = {})
         req = build_request(:get_resource, params)
         req.send_request(options)
@@ -2065,8 +2065,8 @@ module Aws
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload get_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_resources(params = {}, options = {})
         req = build_request(:get_resources, params)
         req.send_request(options)
@@ -2095,8 +2095,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload get_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_rest_api(params = {}, options = {})
         req = build_request(:get_rest_api, params)
         req.send_request(options)
@@ -2130,8 +2130,8 @@ module Aws
       #   resp.items[0].created_date #=> Time
       #   resp.items[0].warnings #=> Array
       #   resp.items[0].warnings[0] #=> String
+      # @overload get_rest_apis(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_rest_apis(params = {}, options = {})
         req = build_request(:get_rest_apis, params)
         req.send_request(options)
@@ -2171,8 +2171,8 @@ module Aws
       #   resp.content_type #=> String
       #   resp.content_disposition #=> String
       #   resp.body #=> String
+      # @overload get_sdk(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_sdk(params = {}, options = {})
         req = build_request(:get_sdk, params)
         req.send_request(options)
@@ -2227,8 +2227,8 @@ module Aws
       #   resp.variables["String"] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      # @overload get_stage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_stage(params = {}, options = {})
         req = build_request(:get_stage, params)
         req.send_request(options)
@@ -2236,9 +2236,9 @@ module Aws
 
       # Gets information about one or more Stage resources.
       # @option params [required, String] :rest_api_id
-      #   The stages\' API identifiers.
+      #   The stages' API identifiers.
       # @option params [String] :deployment_id
-      #   The stages\' deployment identifiers.
+      #   The stages' deployment identifiers.
       # @return [Types::Stages] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Stages#item #item} => Array&lt;Types::Stage&gt;
@@ -2273,8 +2273,8 @@ module Aws
       #   resp.item[0].variables["String"] #=> String
       #   resp.item[0].created_date #=> Time
       #   resp.item[0].last_updated_date #=> Time
+      # @overload get_stages(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_stages(params = {}, options = {})
         req = build_request(:get_stages, params)
         req.send_request(options)
@@ -2320,8 +2320,8 @@ module Aws
       #   resp.items["String"] #=> Array
       #   resp.items["String"][0] #=> Array
       #   resp.items["String"][0][0] #=> Integer
+      # @overload get_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_usage(params = {}, options = {})
         req = build_request(:get_usage, params)
         req.send_request(options)
@@ -2356,8 +2356,8 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @overload get_usage_plan(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_usage_plan(params = {}, options = {})
         req = build_request(:get_usage_plan, params)
         req.send_request(options)
@@ -2389,8 +2389,8 @@ module Aws
       #   resp.type #=> String
       #   resp.value #=> String
       #   resp.name #=> String
+      # @overload get_usage_plan_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_usage_plan_key(params = {}, options = {})
         req = build_request(:get_usage_plan_key, params)
         req.send_request(options)
@@ -2431,14 +2431,14 @@ module Aws
       #   resp.items[0].type #=> String
       #   resp.items[0].value #=> String
       #   resp.items[0].name #=> String
+      # @overload get_usage_plan_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_usage_plan_keys(params = {}, options = {})
         req = build_request(:get_usage_plan_keys, params)
         req.send_request(options)
       end
 
-      # Gets all the usage plans of the caller\'s account.
+      # Gets all the usage plans of the caller's account.
       # @option params [String] :position
       #   The zero-based array index specifying the position of the
       #   to-be-retrieved UsagePlan resource.
@@ -2472,8 +2472,8 @@ module Aws
       #   resp.items[0].quota.limit #=> Integer
       #   resp.items[0].quota.offset #=> Integer
       #   resp.items[0].quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @overload get_usage_plans(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_usage_plans(params = {}, options = {})
         req = build_request(:get_usage_plans, params)
         req.send_request(options)
@@ -2510,8 +2510,8 @@ module Aws
       #   resp.ids[0] #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload import_api_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_api_keys(params = {}, options = {})
         req = build_request(:import_api_keys, params)
         req.send_request(options)
@@ -2552,8 +2552,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload import_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_rest_api(params = {}, options = {})
         req = build_request(:import_rest_api, params)
         req.send_request(options)
@@ -2561,22 +2561,22 @@ module Aws
 
       # Represents a put integration.
       # @option params [required, String] :rest_api_id
-      #   Specifies a put integration request\'s API identifier.
+      #   Specifies a put integration request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a put integration request\'s resource ID.
+      #   Specifies a put integration request's resource ID.
       # @option params [required, String] :http_method
-      #   Specifies a put integration request\'s HTTP method.
+      #   Specifies a put integration request's HTTP method.
       # @option params [required, String] :type
-      #   Specifies a put integration input\'s type.
+      #   Specifies a put integration input's type.
       # @option params [String] :integration_http_method
       #   Specifies a put integration HTTP method. When the integration type is
       #   HTTP or AWS, this field is required.
       # @option params [String] :uri
-      #   Specifies a put integration input\'s Uniform Resource Identifier
+      #   Specifies a put integration input's Uniform Resource Identifier
       #   (URI). When the integration type is HTTP or AWS, this field is
       #   required. For integration with Lambda as an AWS service proxy, this
       #   value is of the
-      #   \'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations\'
+      #   'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations'
       #   format.
       # @option params [String] :credentials
       #   Specifies whether credentials are required for a put integration.
@@ -2606,16 +2606,16 @@ module Aws
       #     through to the integration back end without transformation.
       #
       #   * `NEVER` rejects unmapped content types with an HTTP 415
-      #     \'Unsupported Media Type\' response.
+      #     'Unsupported Media Type' response.
       #
       #   * `WHEN_NO_TEMPLATES` allows pass-through when the integration has NO
       #     content types mapped to templates. However if there is at least one
       #     content type defined, unmapped content types will be rejected with
       #     the same 415 response.
       # @option params [String] :cache_namespace
-      #   Specifies a put integration input\'s cache namespace.
+      #   Specifies a put integration input's cache namespace.
       # @option params [Array<String>] :cache_key_parameters
-      #   Specifies a put integration input\'s cache key parameters.
+      #   Specifies a put integration input's cache key parameters.
       # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Integration#type #type} => String
@@ -2669,8 +2669,8 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      # @overload put_integration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_integration(params = {}, options = {})
         req = build_request(:put_integration, params)
         req.send_request(options)
@@ -2678,11 +2678,11 @@ module Aws
 
       # Represents a put integration.
       # @option params [required, String] :rest_api_id
-      #   Specifies a put integration response request\'s API identifier.
+      #   Specifies a put integration response request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a put integration response request\'s resource identifier.
+      #   Specifies a put integration response request's resource identifier.
       # @option params [required, String] :http_method
-      #   Specifies a put integration response request\'s HTTP method.
+      #   Specifies a put integration response request's HTTP method.
       # @option params [required, String] :status_code
       #   Specifies the status code that is used to map the integration response
       #   to an existing MethodResponse.
@@ -2701,7 +2701,7 @@ module Aws
       #   a valid and unique response header name and `JSON-expression` a valid
       #   JSON expression without the `$` prefix.
       # @option params [Hash<String,String>] :response_templates
-      #   Specifies a put integration response\'s templates.
+      #   Specifies a put integration response's templates.
       # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IntegrationResponse#status_code #statusCode} => String
@@ -2731,8 +2731,8 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      # @overload put_integration_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_integration_response(params = {}, options = {})
         req = build_request(:put_integration_response, params)
         req.send_request(options)
@@ -2744,7 +2744,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The Resource identifier for the new Method resource.
       # @option params [required, String] :http_method
-      #   Specifies the method request\'s HTTP method type.
+      #   Specifies the method request's HTTP method type.
       # @option params [required, String] :authorization_type
       #   Specifies the type of authorization used for the method.
       # @option params [String] :authorizer_id
@@ -2764,7 +2764,7 @@ module Aws
       #   available in Integration to be mapped to integration request
       #   parameters or body-mapping templates.
       # @option params [Hash<String,String>] :request_models
-      #   Specifies the Model resources used for the request\'s content type.
+      #   Specifies the Model resources used for the request's content type.
       #   Request models are represented as a key/value map, with a content type
       #   as the key and a Model name as the value.
       # @return [Types::Method] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2828,8 +2828,8 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload put_method(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_method(params = {}, options = {})
         req = build_request(:put_method, params)
         req.send_request(options)
@@ -2843,7 +2843,7 @@ module Aws
       # @option params [required, String] :http_method
       #   The HTTP verb of the Method resource.
       # @option params [required, String] :status_code
-      #   The method response\'s status code.
+      #   The method response's status code.
       # @option params [Hash<String,Boolean>] :response_parameters
       #   A key-value map specifying required or optional response parameters
       #   that Amazon API Gateway can send back to the caller. A key defines a
@@ -2860,7 +2860,7 @@ module Aws
       #   `integration.response.body.\{JSON-expression\}`, where
       #   `JSON-expression` is a valid JSON expression without the `$` prefix.)
       # @option params [Hash<String,String>] :response_models
-      #   Specifies the Model resources used for the response\'s content type.
+      #   Specifies the Model resources used for the response's content type.
       #   Response models are represented as a key/value map, with a content
       #   type as the key and a Model name as the value.
       # @return [Types::MethodResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2889,8 +2889,8 @@ module Aws
       #   resp.response_parameters["String"] #=> Boolean
       #   resp.response_models #=> Hash
       #   resp.response_models["String"] #=> String
+      # @overload put_method_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_method_response(params = {}, options = {})
         req = build_request(:put_method_response, params)
         req.send_request(options)
@@ -2904,8 +2904,8 @@ module Aws
       #   The identifier of the RestApi to be updated.
       # @option params [String] :mode
       #   The `mode` query parameter to specify the update mode. Valid values
-      #   are \"merge\" and \"overwrite\". By default, the update mode is
-      #   \"merge\".
+      #   are "merge" and "overwrite". By default, the update mode is
+      #   "merge".
       # @option params [Boolean] :fail_on_warnings
       #   A query parameter to indicate whether to rollback the API update
       #   (`true`) or not (`false`) when a warning is encountered. The default
@@ -2941,8 +2941,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload put_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_rest_api(params = {}, options = {})
         req = build_request(:put_rest_api, params)
         req.send_request(options)
@@ -2959,9 +2959,9 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/use-custom-authorizer.html
       # @option params [required, String] :rest_api_id
-      #   Specifies a test invoke authorizer request\'s RestApi identifier.
+      #   Specifies a test invoke authorizer request's RestApi identifier.
       # @option params [required, String] :authorizer_id
-      #   Specifies a test invoke authorizer request\'s Authorizer ID.
+      #   Specifies a test invoke authorizer request's Authorizer ID.
       # @option params [Hash<String,String>] :headers
       #   \[Required\] A key-value map of headers to simulate an incoming
       #   invocation request. This is where the incoming authorization token, or
@@ -3016,8 +3016,8 @@ module Aws
       #   resp.authorization["String"][0] #=> String
       #   resp.claims #=> Hash
       #   resp.claims["String"] #=> String
+      # @overload test_invoke_authorizer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_invoke_authorizer(params = {}, options = {})
         req = build_request(:test_invoke_authorizer, params)
         req.send_request(options)
@@ -3026,11 +3026,11 @@ module Aws
       # Simulate the execution of a Method in your RestApi with headers,
       # parameters, and an incoming request body.
       # @option params [required, String] :rest_api_id
-      #   Specifies a test invoke method request\'s API identifier.
+      #   Specifies a test invoke method request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies a test invoke method request\'s resource ID.
+      #   Specifies a test invoke method request's resource ID.
       # @option params [required, String] :http_method
-      #   Specifies a test invoke method request\'s HTTP method.
+      #   Specifies a test invoke method request's HTTP method.
       # @option params [String] :path_with_query_string
       #   The URI path, including query string, of the simulated invocation
       #   request. Use this to specify path parameters and query string
@@ -3077,8 +3077,8 @@ module Aws
       #   resp.headers["String"] #=> String
       #   resp.log #=> String
       #   resp.latency #=> Integer
+      # @overload test_invoke_method(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_invoke_method(params = {}, options = {})
         req = build_request(:test_invoke_method, params)
         req.send_request(options)
@@ -3114,8 +3114,8 @@ module Aws
       #   resp.features #=> Array
       #   resp.features[0] #=> String
       #   resp.api_key_version #=> String
+      # @overload update_account(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_account(params = {}, options = {})
         req = build_request(:update_account, params)
         req.send_request(options)
@@ -3161,8 +3161,8 @@ module Aws
       #   resp.last_updated_date #=> Time
       #   resp.stage_keys #=> Array
       #   resp.stage_keys[0] #=> String
+      # @overload update_api_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_api_key(params = {}, options = {})
         req = build_request(:update_api_key, params)
         req.send_request(options)
@@ -3223,8 +3223,8 @@ module Aws
       #   resp.identity_source #=> String
       #   resp.identity_validation_expression #=> String
       #   resp.authorizer_result_ttl_in_seconds #=> Integer
+      # @overload update_authorizer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_authorizer(params = {}, options = {})
         req = build_request(:update_authorizer, params)
         req.send_request(options)
@@ -3262,8 +3262,8 @@ module Aws
       #   resp.base_path #=> String
       #   resp.rest_api_id #=> String
       #   resp.stage #=> String
+      # @overload update_base_path_mapping(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_base_path_mapping(params = {}, options = {})
         req = build_request(:update_base_path_mapping, params)
         req.send_request(options)
@@ -3302,8 +3302,8 @@ module Aws
       #   resp.pem_encoded_certificate #=> String
       #   resp.created_date #=> Time
       #   resp.expiration_date #=> Time
+      # @overload update_client_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_client_certificate(params = {}, options = {})
         req = build_request(:update_client_certificate, params)
         req.send_request(options)
@@ -3348,8 +3348,8 @@ module Aws
       #   resp.api_summary["String"] #=> Hash
       #   resp.api_summary["String"]["String"].authorization_type #=> String
       #   resp.api_summary["String"]["String"].api_key_required #=> Boolean
+      # @overload update_deployment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_deployment(params = {}, options = {})
         req = build_request(:update_deployment, params)
         req.send_request(options)
@@ -3386,8 +3386,8 @@ module Aws
       #   resp.certificate_name #=> String
       #   resp.certificate_upload_date #=> Time
       #   resp.distribution_domain_name #=> String
+      # @overload update_domain_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_domain_name(params = {}, options = {})
         req = build_request(:update_domain_name, params)
         req.send_request(options)
@@ -3395,11 +3395,11 @@ module Aws
 
       # Represents an update integration.
       # @option params [required, String] :rest_api_id
-      #   Represents an update integration request\'s API identifier.
+      #   Represents an update integration request's API identifier.
       # @option params [required, String] :resource_id
-      #   Represents an update integration request\'s resource identifier.
+      #   Represents an update integration request's resource identifier.
       # @option params [required, String] :http_method
-      #   Represents an update integration request\'s HTTP method.
+      #   Represents an update integration request's HTTP method.
       # @option params [Array<Types::PatchOperation>] :patch_operations
       #   A list of update operations to be applied to the specified resource
       #   and in the order specified in this list.
@@ -3451,8 +3451,8 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      # @overload update_integration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_integration(params = {}, options = {})
         req = build_request(:update_integration, params)
         req.send_request(options)
@@ -3460,14 +3460,14 @@ module Aws
 
       # Represents an update integration response.
       # @option params [required, String] :rest_api_id
-      #   Specifies an update integration response request\'s API identifier.
+      #   Specifies an update integration response request's API identifier.
       # @option params [required, String] :resource_id
-      #   Specifies an update integration response request\'s resource
+      #   Specifies an update integration response request's resource
       #   identifier.
       # @option params [required, String] :http_method
-      #   Specifies an update integration response request\'s HTTP method.
+      #   Specifies an update integration response request's HTTP method.
       # @option params [required, String] :status_code
-      #   Specifies an update integration response request\'s status code.
+      #   Specifies an update integration response request's status code.
       # @option params [Array<Types::PatchOperation>] :patch_operations
       #   A list of update operations to be applied to the specified resource
       #   and in the order specified in this list.
@@ -3501,8 +3501,8 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      # @overload update_integration_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_integration_response(params = {}, options = {})
         req = build_request(:update_integration_response, params)
         req.send_request(options)
@@ -3578,8 +3578,8 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload update_method(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_method(params = {}, options = {})
         req = build_request(:update_method, params)
         req.send_request(options)
@@ -3625,8 +3625,8 @@ module Aws
       #   resp.response_parameters["String"] #=> Boolean
       #   resp.response_models #=> Hash
       #   resp.response_models["String"] #=> String
+      # @overload update_method_response(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_method_response(params = {}, options = {})
         req = build_request(:update_method_response, params)
         req.send_request(options)
@@ -3668,8 +3668,8 @@ module Aws
       #   resp.description #=> String
       #   resp.schema #=> String
       #   resp.content_type #=> String
+      # @overload update_model(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_model(params = {}, options = {})
         req = build_request(:update_model, params)
         req.send_request(options)
@@ -3744,8 +3744,8 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      # @overload update_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_resource(params = {}, options = {})
         req = build_request(:update_resource, params)
         req.send_request(options)
@@ -3785,8 +3785,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      # @overload update_rest_api(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_rest_api(params = {}, options = {})
         req = build_request(:update_rest_api, params)
         req.send_request(options)
@@ -3852,8 +3852,8 @@ module Aws
       #   resp.variables["String"] #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
+      # @overload update_stage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_stage(params = {}, options = {})
         req = build_request(:update_stage, params)
         req.send_request(options)
@@ -3900,8 +3900,8 @@ module Aws
       #   resp.items["String"] #=> Array
       #   resp.items["String"][0] #=> Array
       #   resp.items["String"][0][0] #=> Integer
+      # @overload update_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_usage(params = {}, options = {})
         req = build_request(:update_usage, params)
         req.send_request(options)
@@ -3947,8 +3947,8 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      # @overload update_usage_plan(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_usage_plan(params = {}, options = {})
         req = build_request(:update_usage_plan, params)
         req.send_request(options)

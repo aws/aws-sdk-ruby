@@ -151,8 +151,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tags(params = {}, options = {})
         req = build_request(:create_tags, params)
         req.send_request(options)
@@ -226,8 +226,8 @@ module Aws
       #   resp.pending_requests[0].root_volume_encryption_enabled #=> Boolean
       #   resp.pending_requests[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
       #   resp.pending_requests[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
+      # @overload create_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_workspaces(params = {}, options = {})
         req = build_request(:create_workspaces, params)
         req.send_request(options)
@@ -245,8 +245,8 @@ module Aws
       #     resource_id: "NonEmptyString", # required
       #     tag_keys: ["NonEmptyString"], # required
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -268,8 +268,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -323,8 +323,8 @@ module Aws
       #   resp.bundles[0].user_storage.capacity #=> String
       #   resp.bundles[0].compute_type.name #=> String, one of "VALUE", "STANDARD", "PERFORMANCE"
       #   resp.next_token #=> String
+      # @overload describe_workspace_bundles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workspace_bundles(params = {}, options = {})
         req = build_request(:describe_workspace_bundles, params)
         req.send_request(options)
@@ -377,8 +377,8 @@ module Aws
       #   resp.directories[0].workspace_creation_properties.custom_security_group_id #=> String
       #   resp.directories[0].workspace_creation_properties.user_enabled_as_local_administrator #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_workspace_directories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workspace_directories(params = {}, options = {})
         req = build_request(:describe_workspace_directories, params)
         req.send_request(options)
@@ -451,8 +451,8 @@ module Aws
       #   resp.workspaces[0].workspace_properties.running_mode #=> String, one of "AUTO_STOP", "ALWAYS_ON"
       #   resp.workspaces[0].workspace_properties.running_mode_auto_stop_timeout_in_minutes #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workspaces(params = {}, options = {})
         req = build_request(:describe_workspaces, params)
         req.send_request(options)
@@ -481,8 +481,8 @@ module Aws
       #   resp.workspaces_connection_status[0].connection_state_check_timestamp #=> Time
       #   resp.workspaces_connection_status[0].last_known_user_connection_timestamp #=> Time
       #   resp.next_token #=> String
+      # @overload describe_workspaces_connection_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workspaces_connection_status(params = {}, options = {})
         req = build_request(:describe_workspaces_connection_status, params)
         req.send_request(options)
@@ -504,8 +504,8 @@ module Aws
       #       running_mode_auto_stop_timeout_in_minutes: 1,
       #     },
       #   })
+      # @overload modify_workspace_properties(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_workspace_properties(params = {}, options = {})
         req = build_request(:modify_workspace_properties, params)
         req.send_request(options)
@@ -540,8 +540,8 @@ module Aws
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      # @overload reboot_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_workspaces(params = {}, options = {})
         req = build_request(:reboot_workspaces, params)
         req.send_request(options)
@@ -591,8 +591,8 @@ module Aws
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      # @overload rebuild_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def rebuild_workspaces(params = {}, options = {})
         req = build_request(:rebuild_workspaces, params)
         req.send_request(options)
@@ -621,8 +621,8 @@ module Aws
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      # @overload start_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_workspaces(params = {}, options = {})
         req = build_request(:start_workspaces, params)
         req.send_request(options)
@@ -651,8 +651,8 @@ module Aws
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      # @overload stop_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_workspaces(params = {}, options = {})
         req = build_request(:stop_workspaces, params)
         req.send_request(options)
@@ -661,7 +661,7 @@ module Aws
       # Terminates the specified WorkSpaces.
       #
       # Terminating a WorkSpace is a permanent action and cannot be undone.
-      # The user\'s data is not maintained and will be destroyed. If you need
+      # The user's data is not maintained and will be destroyed. If you need
       # to archive any user data, contact Amazon Web Services before
       # terminating the WorkSpace.
       #
@@ -691,8 +691,8 @@ module Aws
       #   resp.failed_requests[0].workspace_id #=> String
       #   resp.failed_requests[0].error_code #=> String
       #   resp.failed_requests[0].error_message #=> String
+      # @overload terminate_workspaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_workspaces(params = {}, options = {})
         req = build_request(:terminate_workspaces, params)
         req.send_request(options)

@@ -100,13 +100,13 @@ module Aws
       # @option options [String] :topic_arn
       #   The topic you want to publish to.
       #
-      #   If you don\'t specify a value for the `TopicArn` parameter, you must
+      #   If you don't specify a value for the `TopicArn` parameter, you must
       #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
       # @option options [String] :phone_number
       #   The phone number to which you want to deliver an SMS message. Use
       #   E.164 format.
       #
-      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   If you don't specify a value for the `PhoneNumber` parameter, you
       #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option options [required, String] :message
       #   The message you want to send to the topic.
@@ -132,7 +132,7 @@ module Aws
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
       #
-      #   * Values have a minimum length of 0 (the empty string, \"\", is
+      #   * Values have a minimum length of 0 (the empty string, "", is
       #     allowed).
       #
       #   * Values have a maximum length bounded by the overall message size
@@ -148,7 +148,7 @@ module Aws
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option options [String] :subject
-      #   Optional parameter to be used as the \"Subject\" line when the message
+      #   Optional parameter to be used as the "Subject" line when the message
       #   is delivered to email endpoints. This field will also be included, if
       #   present, in the standard JSON messages delivered to other endpoints.
       #
@@ -164,11 +164,11 @@ module Aws
       #
       #   * be a syntactically valid JSON object; and
       #
-      #   * contain at least a top-level JSON key of \"default\" with a value
+      #   * contain at least a top-level JSON key of "default" with a value
       #     that is a string.
       #
       #   You can define other top-level keys that define the message you want
-      #   to send to a specific transport protocol (e.g., \"http\").
+      #   to send to a specific transport protocol (e.g., "http").
       #
       #   For information about sending different messages for each protocol
       #   using the AWS Management Console, go to [Create Different Messages for

@@ -146,8 +146,8 @@ module Aws
       #
       # @example Response structure
       #   resp.payload #=> String
+      # @overload delete_thing_shadow(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_thing_shadow(params = {}, options = {})
         req = build_request(:delete_thing_shadow, params)
         req.send_request(options)
@@ -174,8 +174,8 @@ module Aws
       #
       # @example Response structure
       #   resp.payload #=> String
+      # @overload get_thing_shadow(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_thing_shadow(params = {}, options = {})
         req = build_request(:get_thing_shadow, params)
         req.send_request(options)
@@ -203,8 +203,8 @@ module Aws
       #     qos: 1,
       #     payload: "data",
       #   })
+      # @overload publish(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def publish(params = {}, options = {})
         req = build_request(:publish, params)
         req.send_request(options)
@@ -234,8 +234,8 @@ module Aws
       #
       # @example Response structure
       #   resp.payload #=> String
+      # @overload update_thing_shadow(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_thing_shadow(params = {}, options = {})
         req = build_request(:update_thing_shadow, params)
         req.send_request(options)

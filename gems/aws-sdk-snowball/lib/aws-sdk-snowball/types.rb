@@ -154,7 +154,7 @@ module Aws
       end
 
       # @!attribute [rw] address_id
-      #   The automatically generated ID for a specific address. You\'ll use
+      #   The automatically generated ID for a specific address. You'll use
       #   this ID when you create a job to specify which address you want the
       #   Snowball for that job shipped to.
       #   @return [String]
@@ -192,7 +192,7 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] job_type
-      #   Defines the type of job that you\'re creating.
+      #   Defines the type of job that you're creating.
       #   @return [String]
       #
       # @!attribute [rw] resources
@@ -240,13 +240,13 @@ module Aws
       #
       # @!attribute [rw] snowball_capacity_preference
       #   If your job is being created in one of the US regions, you have the
-      #   option of specifying what size Snowball you\'d like for this job. In
+      #   option of specifying what size Snowball you'd like for this job. In
       #   all other regions, Snowballs come with 80 TB in storage capacity.
       #   @return [String]
       #
       # @!attribute [rw] shipping_option
       #   The shipping speed for this job. Note that this speed does not
-      #   dictate how soon you\'ll get the Snowball, rather it represents how
+      #   dictate how soon you'll get the Snowball, rather it represents how
       #   quickly the Snowball moves to its destination while in transit.
       #   Regional shipping speeds are as follows:
       #
@@ -290,7 +290,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Defines the real-time status of a Snowball\'s data transfer while the
+      # Defines the real-time status of a Snowball's data transfer while the
       # appliance is at AWS. Note that this data is only available while a job
       # has a `JobState` value of `InProgress`, for both import and export
       # jobs.
@@ -356,7 +356,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] next_token
-      #   HTTP requests are stateless. To identify what object comes \"next\"
+      #   HTTP requests are stateless. To identify what object comes "next"
       #   in the list of `ADDRESS` objects, you have the option of specifying
       #   a value for `NextToken` as the starting point for your list of
       #   returned addresses.
@@ -478,7 +478,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Each `JobListEntry` object contains a job\'s state, a job\'s ID, and a
+      # Each `JobListEntry` object contains a job's state, a job's ID, and a
       # value that indicates whether the job is a job part, in the case of an
       # export job.
       # @!attribute [rw] job_id
@@ -493,7 +493,7 @@ module Aws
       # @!attribute [rw] is_master
       #   A value that indicates that this job is a master job. A master job
       #   represents a successful request to create an export job. Master jobs
-      #   aren\'t associated with any Snowballs. Instead, each master job will
+      #   aren't associated with any Snowballs. Instead, each master job will
       #   have at least one job part, and each job part is associated with a
       #   Snowball. It might take some time before the job parts associated
       #   with a particular master job are listed, because they are created
@@ -507,12 +507,12 @@ module Aws
       end
 
       # Contains job logs. Whenever Snowball is used to import data into or
-      # export data out of Amazon S3, you\'ll have the option of downloading a
+      # export data out of Amazon S3, you'll have the option of downloading a
       # PDF job report. Job logs are returned as a part of the response syntax
       # of the `DescribeJob` action in the `JobMetadata` data type. The job
       # logs can be accessed for up to 60 minutes after this request has been
       # made. To access any of the job logs after 60 minutes have passed,
-      # you\'ll have to make another call to the `DescribeJob` action.
+      # you'll have to make another call to the `DescribeJob` action.
       #
       # For import jobs, the PDF job report becomes available at the end of
       # the import process. For export jobs, your job report typically becomes
@@ -597,7 +597,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shipping_details
-      #   A job\'s shipping information, including inbound and outbound
+      #   A job's shipping information, including inbound and outbound
       #   tracking numbers and shipping speed options.
       #   @return [Types::ShippingDetails]
       #
@@ -615,7 +615,7 @@ module Aws
       #   @return [Types::Notification]
       #
       # @!attribute [rw] data_transfer_progress
-      #   A value that defines the real-time status of a Snowball\'s data
+      #   A value that defines the real-time status of a Snowball's data
       #   transfer while the appliance is at AWS. Note that this data is only
       #   available while a job has a `JobState` value of `InProgress`, for
       #   both import and export jobs.
@@ -709,7 +709,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] next_token
-      #   HTTP requests are stateless. To identify what object comes \"next\"
+      #   HTTP requests are stateless. To identify what object comes "next"
       #   in the list of `JobListEntry` objects, you have the option of
       #   specifying `NextToken` as the starting point for your returned list.
       #   @return [String]
@@ -720,7 +720,7 @@ module Aws
       end
 
       # @!attribute [rw] job_list_entries
-      #   Each `JobListEntry` object contains a job\'s state, a job\'s ID, and
+      #   Each `JobListEntry` object contains a job's state, a job's ID, and
       #   a value that indicates whether the job is a job part, in the case of
       #   export jobs.
       #   @return [Array<Types::JobListEntry>]
@@ -825,7 +825,7 @@ module Aws
       #
       # @!attribute [rw] tracking_number
       #   The tracking number for this job. Using this tracking number with
-      #   your region\'s carrier\'s website, you can track a Snowball as the
+      #   your region's carrier's website, you can track a Snowball as the
       #   carrier transports it.
       #
       #   For India, the carrier is Amazon Logistics. For all other regions,
@@ -837,11 +837,11 @@ module Aws
         include Aws::Structure
       end
 
-      # A job\'s shipping information, including inbound and outbound tracking
+      # A job's shipping information, including inbound and outbound tracking
       # numbers and shipping speed options.
       # @!attribute [rw] shipping_option
       #   The shipping speed for a particular job. Note that this speed does
-      #   not dictate how soon you\'ll get the Snowball from the job\'s
+      #   not dictate how soon you'll get the Snowball from the job's
       #   creation date. This speed represents how quickly it moves to its
       #   destination while in transit. Regional shipping speeds are as
       #   follows:
@@ -933,16 +933,16 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shipping_option
-      #   The updated shipping option value of this job\'s ShippingDetails
+      #   The updated shipping option value of this job's ShippingDetails
       #   object.
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The updated description of this job\'s JobMetadata object.
+      #   The updated description of this job's JobMetadata object.
       #   @return [String]
       #
       # @!attribute [rw] snowball_capacity_preference
-      #   The updated `SnowballCapacityPreference` of this job\'s JobMetadata
+      #   The updated `SnowballCapacityPreference` of this job's JobMetadata
       #   object. Note that the 50 TB Snowballs are only available in the US
       #   regions.
       #   @return [String]

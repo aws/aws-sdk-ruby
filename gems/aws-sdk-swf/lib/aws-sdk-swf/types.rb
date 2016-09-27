@@ -195,7 +195,7 @@ module Aws
       #   If set, this will override any default priority value that was
       #   assigned when the activity type was registered.
       #
-      #   Valid values are integers that range from Java\'s
+      #   Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
@@ -328,7 +328,7 @@ module Aws
       #   `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -346,7 +346,7 @@ module Aws
       #   valid; the activity worker should clean up the activity task.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -360,11 +360,11 @@ module Aws
       #
       # @!attribute [rw] default_task_priority
       #   *Optional.* The default task priority for tasks of this activity
-      #   type, specified at registration. If not set, then \"0\" will be used
+      #   type, specified at registration. If not set, then "0" will be used
       #   as the default priority. This default can be overridden when
       #   scheduling an activity task.
       #
-      #   Valid values are integers that range from Java\'s
+      #   Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
@@ -383,7 +383,7 @@ module Aws
       #   scheduling a task through the `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -394,7 +394,7 @@ module Aws
       #   `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       class ActivityTypeConfiguration < Struct.new(
@@ -486,18 +486,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -552,18 +552,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -835,18 +835,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -898,7 +898,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -914,7 +914,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -948,7 +948,7 @@ module Aws
       #   when registering the workflow type.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>An execution start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this field. If neither this field is set nor a default execution start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -962,7 +962,7 @@ module Aws
       #   *Optional.* The task priority that, if set, specifies the priority
       #   for the decision tasks for this workflow execution. This overrides
       #   the defaultTaskPriority specified when registering the workflow
-      #   type. Valid values are integers that range from Java\'s
+      #   type. Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
@@ -981,7 +981,7 @@ module Aws
       #   workflow type using RegisterWorkflowType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A task start-to-close timeout for the new workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -1310,7 +1310,7 @@ module Aws
       # * The decision lacks sufficient permissions.
       #
       # One of the following events might be added to the history to indicate
-      # an error. The event attribute\'s **cause** parameter indicates the
+      # an error. The event attribute's **cause** parameter indicates the
       # cause. If **cause** is set to OPERATION\_NOT\_PERMITTED, the decision
       # failed because it lacked sufficient permissions. For details and
       # example IAM policies, see [Using IAM to Manage Access to Amazon SWF
@@ -1323,7 +1323,7 @@ module Aws
       # * **ScheduleLambdaFunctionFailed**\: a ScheduleLambdaFunctionFailed
       #   decision failed. This could happen if the AWS Lambda function
       #   specified in the decision does not exist, or the AWS Lambda
-      #   service\'s limits are exceeded.
+      #   service's limits are exceeded.
       # * **RequestCancelActivityTaskFailed**\: a RequestCancelActivityTask
       #   decision failed. This could happen if there is no open activity task
       #   with the specified activityId.
@@ -1552,7 +1552,7 @@ module Aws
       #
       #   **Access Control**
       #
-      #   You can use IAM policies to control this decision\'s access to
+      #   You can use IAM policies to control this decision's access to
       #   Amazon SWF resources as follows:
       #
       #   * Use a `Resource` element with the domain name to limit the action
@@ -1569,7 +1569,7 @@ module Aws
       #
       #   If the caller does not have sufficient permissions to invoke the
       #   action, or the parameter values fall outside the specified
-      #   constraints, the action fails. The associated event attribute\'s
+      #   constraints, the action fails. The associated event attribute's
       #   **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       #   details and example IAM policies, see [Using IAM to Manage Access to
       #   Amazon SWF Workflows][1].
@@ -1682,7 +1682,7 @@ module Aws
       # @!attribute [rw] task_priority
       #   *Optional.* A task priority that, if set, specifies the priority for
       #   this decision task. Valid values are integers that range from
-      #   Java\'s `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+      #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
       #   For more information about setting task priority, see [Setting Task
@@ -1698,7 +1698,7 @@ module Aws
       #   timed out if it does not completed within this duration.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       class DecisionTaskScheduledEventAttributes < Struct.new(
@@ -2038,18 +2038,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3326,7 +3326,10 @@ module Aws
       # @!attribute [rw] task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results. </important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       #   @return [String]
       #
       # @!attribute [rw] details
@@ -3342,18 +3345,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3383,7 +3386,7 @@ module Aws
 
       # Provides details of the `RecordMarkerFailed` event.
       # @!attribute [rw] marker_name
-      #   The marker\'s name.
+      #   The marker's name.
       #   @return [String]
       #
       # @!attribute [rw] cause
@@ -3463,7 +3466,7 @@ module Aws
       #   `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -3480,7 +3483,7 @@ module Aws
       #   worker should clean up the activity task.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -3493,8 +3496,8 @@ module Aws
       #
       # @!attribute [rw] default_task_priority
       #   The default task priority to assign to the activity type. If not
-      #   assigned, then \"0\" will be used. Valid values are integers that
-      #   range from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   assigned, then "0" will be used. Valid values are integers that
+      #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -3513,7 +3516,7 @@ module Aws
       #   `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -3523,7 +3526,7 @@ module Aws
       #   activity task using the `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       class RegisterActivityTypeInput < Struct.new(
@@ -3640,7 +3643,7 @@ module Aws
       #   `StartChildWorkflowExecution` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -3652,7 +3655,7 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or
       #   equal to 0. Unlike some of the other timeout parameters in Amazon
-      #   SWF, you cannot specify a value of \"NONE\" for
+      #   SWF, you cannot specify a value of "NONE" for
       #   `defaultExecutionStartToCloseTimeout`; there is a one-year max limit
       #   on the time that a workflow execution can run. Exceeding this limit
       #   will always cause the workflow execution to time out.
@@ -3668,8 +3671,8 @@ module Aws
       #
       # @!attribute [rw] default_task_priority
       #   The default task priority to assign to the workflow type. If not
-      #   assigned, then \"0\" will be used. Valid values are integers that
-      #   range from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   assigned, then "0" will be used. Valid values are integers that
+      #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -3728,18 +3731,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3797,18 +3800,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3962,7 +3965,10 @@ module Aws
       # @!attribute [rw] task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important>`taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       #   @return [String]
       #
       # @!attribute [rw] details
@@ -3984,7 +3990,10 @@ module Aws
       # @!attribute [rw] task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       #   @return [String]
       #
       # @!attribute [rw] result
@@ -4008,7 +4017,10 @@ module Aws
       # @!attribute [rw] task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       #   @return [String]
       #
       # @!attribute [rw] reason
@@ -4131,7 +4143,10 @@ module Aws
       # @!attribute [rw] task_token
       #   The `taskToken` from the DecisionTask.
       #
-      #   <important>`taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       #   @return [String]
       #
       # @!attribute [rw] decisions
@@ -4165,7 +4180,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -4182,7 +4197,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -4237,7 +4252,7 @@ module Aws
       #   The maximum duration for this activity task.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A schedule-to-close timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default schedule-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -4261,7 +4276,7 @@ module Aws
       #   task is to be assigned to a worker. This overrides the
       #   defaultTaskPriority specified when registering the activity type
       #   using RegisterActivityType. Valid values are integers that range
-      #   from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -4280,7 +4295,7 @@ module Aws
       #   type using RegisterActivityType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A schedule-to-start timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default schedule-to-start timeout was specified at registration time then a fault will be returned.</note>
@@ -4293,7 +4308,7 @@ module Aws
       #   RegisterActivityType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A start-to-close timeout for this activity task must be specified either as a default for the activity type or through this field. If neither this field is set nor a default start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -4309,7 +4324,7 @@ module Aws
       #   registering the activity type using RegisterActivityType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       class ScheduleActivityTaskDecisionAttributes < Struct.new(
@@ -4366,7 +4381,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -4383,7 +4398,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -4467,18 +4482,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -4649,7 +4664,7 @@ module Aws
       #
       # @!attribute [rw] input
       #   Data to attach to the `WorkflowExecutionSignaled` event in the
-      #   target workflow execution\'s history.
+      #   target workflow execution's history.
       #   @return [String]
       class SignalWorkflowExecutionInput < Struct.new(
         :domain,
@@ -4664,7 +4679,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -4673,7 +4688,7 @@ module Aws
       #   action.
       # * Constrain the following parameters by using a `Condition` element
       #   with the appropriate keys.
-      #   * `tagList.member.N`\: The key is \"swf:tagList.N\" where N is the
+      #   * `tagList.member.N`\: The key is "swf:tagList.N" where N is the
       #     tag number from 0 to 4, inclusive.
       #   * `taskList`\: String constraint. The key is `swf:taskList.name`.
       #   * `workflowType.name`\: String constraint. The key is
@@ -4683,7 +4698,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -4741,7 +4756,7 @@ module Aws
       #   workflow type.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>An execution start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default execution start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -4763,7 +4778,7 @@ module Aws
       #   *Optional.* A task priority that, if set, specifies the priority for
       #   a decision task of this workflow execution. This overrides the
       #   defaultTaskPriority specified when registering the workflow type.
-      #   Valid values are integers that range from Java\'s
+      #   Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
@@ -4782,7 +4797,7 @@ module Aws
       #   workflow type using RegisterWorkflowType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -4912,7 +4927,7 @@ module Aws
       #   timed out and force terminated.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -4924,7 +4939,7 @@ module Aws
       # @!attribute [rw] task_priority
       #   *Optional.* The priority assigned for the decision tasks for this
       #   workflow execution. Valid values are integers that range from
-      #   Java\'s `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+      #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
       #   For more information about setting task priority, see [Setting Task
@@ -4965,7 +4980,7 @@ module Aws
       #   workflow execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5026,18 +5041,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this decision\'s access to Amazon
+      # You can use IAM policies to control this decision's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -5171,7 +5186,7 @@ module Aws
       #   override any default priority that was assigned when the workflow
       #   type was registered. If not set, then the default task priority for
       #   the workflow type will be used. Valid values are integers that range
-      #   from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -5198,7 +5213,7 @@ module Aws
       #   The duration is specified in seconds; an integer greater than or
       #   equal to 0. Exceeding this limit will cause the workflow execution
       #   to time out. Unlike some of the other timeout parameters in Amazon
-      #   SWF, you cannot specify a value of \"NONE\" for this timeout; there
+      #   SWF, you cannot specify a value of "NONE" for this timeout; there
       #   is a one-year max limit on the time that a workflow execution can
       #   run.
       #
@@ -5219,7 +5234,7 @@ module Aws
       #   workflow type using RegisterWorkflowType.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #
       #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
@@ -5528,7 +5543,7 @@ module Aws
       #   execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5536,7 +5551,7 @@ module Aws
       #   The total duration for this workflow execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5547,7 +5562,7 @@ module Aws
       #
       # @!attribute [rw] task_priority
       #   The priority assigned to decision tasks for this workflow execution.
-      #   Valid values are integers that range from Java\'s
+      #   Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
@@ -5611,7 +5626,7 @@ module Aws
       #   The total duration allowed for the new workflow execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5627,7 +5642,7 @@ module Aws
       #   execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5931,7 +5946,7 @@ module Aws
       #   The maximum duration for this workflow execution.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -5939,7 +5954,7 @@ module Aws
       #   The maximum duration of decision tasks for this workflow type.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -6122,7 +6137,7 @@ module Aws
       #   decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -6134,7 +6149,7 @@ module Aws
       #   `StartChildWorkflowExecution` decision.
       #
       #   The duration is specified in seconds; an integer greater than or
-      #   equal to 0. The value \"NONE\" can be used to specify unlimited
+      #   equal to 0. The value "NONE" can be used to specify unlimited
       #   duration.
       #   @return [String]
       #
@@ -6153,7 +6168,7 @@ module Aws
       #   using the StartWorkflowExecution action or the
       #   `StartChildWorkflowExecution` decision.
       #
-      #   Valid values are integers that range from Java\'s
+      #   Valid values are integers that range from Java's
       #   `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #

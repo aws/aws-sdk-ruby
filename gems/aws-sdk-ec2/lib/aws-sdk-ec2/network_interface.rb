@@ -175,14 +175,14 @@ module Aws
       # @param [Hash] options ({})
       # @option options [Array<String>] :private_ip_addresses
       #   One or more IP addresses to be assigned as a secondary private IP
-      #   address to the network interface. You can\'t specify this parameter
+      #   address to the network interface. You can't specify this parameter
       #   when also specifying a number of secondary IP addresses.
       #
-      #   If you don\'t specify an IP address, Amazon EC2 automatically selects
+      #   If you don't specify an IP address, Amazon EC2 automatically selects
       #   an IP address within the subnet range.
       # @option options [Integer] :secondary_private_ip_address_count
       #   The number of secondary IP addresses to assign to the network
-      #   interface. You can\'t specify this parameter when also specifying
+      #   interface. You can't specify this parameter when also specifying
       #   private IP addresses.
       # @option options [Boolean] :allow_reassignment
       #   Indicates whether to allow an IP address that is already assigned to
@@ -219,7 +219,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -302,11 +302,11 @@ module Aws
       # @option options [Array<String>] :groups
       #   Changes the security groups for the network interface. The new set of
       #   groups you specify replaces the current set. You must specify at least
-      #   one group, even if it\'s just the default security group in the VPC.
+      #   one group, even if it's just the default security group in the VPC.
       #   You must specify the ID of the security group, not the name.
       # @option options [Types::NetworkInterfaceAttachmentChanges] :attachment
-      #   Information about the interface attachment. If modifying the \'delete
-      #   on termination\' attribute, you must specify the ID of the interface
+      #   Information about the interface attachment. If modifying the 'delete
+      #   on termination' attribute, you must specify the ID of the interface
       #   attachment.
       # @return [EmptyStructure]
       def modify_attribute(options = {})

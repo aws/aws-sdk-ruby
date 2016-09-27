@@ -357,7 +357,7 @@ module Aws
       #   server) errors. When you enable partial results, Amazon CloudSearch
       #   returns whatever results are available and includes the percentage
       #   of documents searched in the search results (percent-searched). This
-      #   enables you to more gracefully degrade your users\' search
+      #   enables you to more gracefully degrade your users' search
       #   experience. For example, rather than displaying no results, you
       #   could display the partial results and a message indicating that the
       #   results might be incomplete due to a temporary system outage.
@@ -426,7 +426,7 @@ module Aws
       #     ability to use the ~ operator to perform a sloppy phrase search.
       #     Disabling the `fuzzy` operator disables the ability to use the ~
       #     operator to perform a fuzzy search. `escape` disables the ability
-      #     to use a backslash (`\`) to escape special characters within the
+      #     to use a backslash (``) to escape special characters within the
       #     search string. Disabling whitespace is an advanced option that
       #     prevents the parser from tokenizing on whitespace, which can be
       #     useful for Vietnamese. (It prevents Vietnamese words from being
@@ -447,7 +447,7 @@ module Aws
       #     field over the `abstract` field, you could specify:
       #     `"phraseFields":["title^3", "plot"]` Valid values: The name of any
       #     `text` or `text-array` field and an optional numeric value greater
-      #     than zero. Default: No fields. If you don\'t specify any fields
+      #     than zero. Default: No fields. If you don't specify any fields
       #     with `phraseFields`, proximity scoring is disabled even if
       #     `phraseSlop` is specified. Valid for: `dismax`.
       #   * `phraseSlop`\: An integer value that specifies how much matches
@@ -464,13 +464,13 @@ module Aws
       #     would specify `"explicitPhraseSlop":3`. Valid values: positive
       #     integers. Default: 0. Valid for: `dismax`.
       #   * `tieBreaker`\: When a term in the search string is found in a
-      #     document\'s field, a score is calculated for that field based on
+      #     document's field, a score is calculated for that field based on
       #     how common the word is in that field compared to other documents.
       #     If the term occurs in multiple fields within a document, by
       #     default only the highest scoring field contributes to the
-      #     document\'s overall score. You can specify a `tieBreaker` value to
+      #     document's overall score. You can specify a `tieBreaker` value to
       #     enable the matches in lower-scoring fields to contribute to the
-      #     document\'s score. That way, if two documents have the same max
+      #     document's score. That way, if two documents have the same max
       #     field score for a particular term, the score for the document that
       #     has matches in more fields will be higher. The formula for
       #     calculating the score with a tieBreaker is `(max field score) +

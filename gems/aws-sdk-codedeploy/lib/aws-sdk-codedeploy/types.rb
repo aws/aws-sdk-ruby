@@ -174,7 +174,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] deployment_group_names
-      #   The deployment groups\' names.
+      #   The deployment groups' names.
       #   @return [Array<String>]
       class BatchGetDeploymentGroupsInput < Struct.new(
         :application_name,
@@ -404,7 +404,7 @@ module Aws
       #   create deployment configuration operation.
       #
       #   <note markdown="1"> CodeDeployDefault.OneAtATime is the default deployment
-      #   configuration. It is used if a configuration isn\'t specified for
+      #   configuration. It is used if a configuration isn't specified for
       #   the deployment or the deployment group.
       #
       #    </note>
@@ -475,7 +475,7 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] service_role_arn
-      #   A service role ARN that allows AWS CodeDeploy to act on the user\'s
+      #   A service role ARN that allows AWS CodeDeploy to act on the user's
       #   behalf when interacting with AWS services.
       #   @return [String]
       #
@@ -716,7 +716,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] target_revision
-      #   Information about the deployment group\'s target revision, including
+      #   Information about the deployment group's target revision, including
       #   type and location.
       #   @return [Types::RevisionLocation]
       #
@@ -1415,7 +1415,7 @@ module Aws
       # @!attribute [rw] s3_bucket
       #   An Amazon S3 bucket name to limit the search for revisions.
       #
-      #   If set to null, all of the user\'s buckets will be searched.
+      #   If set to null, all of the user's buckets will be searched.
       #   @return [String]
       #
       # @!attribute [rw] s3_key_prefix
@@ -2040,11 +2040,11 @@ module Aws
       #         value: "Value",
       #       }
       # @!attribute [rw] key
-      #   The tag\'s key.
+      #   The tag's key.
       #   @return [String]
       #
       # @!attribute [rw] value
-      #   The tag\'s value.
+      #   The tag's value.
       #   @return [String]
       class Tag < Struct.new(
         :key,

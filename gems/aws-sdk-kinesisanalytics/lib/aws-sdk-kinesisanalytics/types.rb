@@ -416,8 +416,8 @@ module Aws
 
       # Provides additional mapping information when the record format uses
       # delimiters, such as CSV. For example, the following sample records use
-      # CSV format, where the records use the *\'\\n\'* as the row delimiter
-      # and a comma (\",\") as the column delimiter:
+      # CSV format, where the records use the *'\\n'* as the row delimiter
+      # and a comma (",") as the column delimiter:
       #
       # `"name1", "address1" `
       #
@@ -430,12 +430,12 @@ module Aws
       #         record_column_delimiter: "RecordColumnDelimiter", # required
       #       }
       # @!attribute [rw] record_row_delimiter
-      #   Row delimiter. For example, in a CSV format, *\'\\n\'* is the
+      #   Row delimiter. For example, in a CSV format, *'\\n'* is the
       #   typical row delimiter.
       #   @return [String]
       #
       # @!attribute [rw] record_column_delimiter
-      #   Column delimiter. For example, in a CSV format, a comma (\",\") is
+      #   Column delimiter. For example, in a CSV format, a comma (",") is
       #   the typical column delimiter.
       #   @return [String]
       class CSVMappingParameters < Struct.new(
@@ -830,22 +830,22 @@ module Aws
       #       }
       # @!attribute [rw] name_prefix
       #   Name prefix to use when creating in-application stream. Suppose you
-      #   specify a prefix \"MyInApplicationStream\". Kinesis Analytics will
+      #   specify a prefix "MyInApplicationStream". Kinesis Analytics will
       #   then create one or more (as per the `InputParallelism` count you
       #   specified) in-application streams with names
-      #   \"MyInApplicationStream\_001\", \"MyInApplicationStream\_002\" and
+      #   "MyInApplicationStream\_001", "MyInApplicationStream\_002" and
       #   so on.
       #   @return [String]
       #
       # @!attribute [rw] kinesis_streams_input
       #   If the streaming source is an Amazon Kinesis stream, identifies the
-      #   stream\'s Amazon Resource Name (ARN) and an IAM role that enables
+      #   stream's Amazon Resource Name (ARN) and an IAM role that enables
       #   Amazon Kinesis Analytics to access the stream on your behalf.
       #   @return [Types::KinesisStreamsInput]
       #
       # @!attribute [rw] kinesis_firehose_input
       #   If the streaming source is an Amazon Kinesis Firehose delivery
-      #   stream, identifies the Firehose delivery stream\'s ARN and an IAM
+      #   stream, identifies the Firehose delivery stream's ARN and an IAM
       #   role that enables Amazon Kinesis Analytics to access the stream on
       #   your behalf.
       #   @return [Types::KinesisFirehoseInput]
@@ -929,13 +929,13 @@ module Aws
       #
       # @!attribute [rw] kinesis_streams_input_description
       #   If an Amazon Kinesis stream is configured as streaming source,
-      #   provides Amazon Kinesis stream\'s ARN and an IAM role that enables
+      #   provides Amazon Kinesis stream's ARN and an IAM role that enables
       #   Amazon Kinesis Analytics to access the stream on your behalf.
       #   @return [Types::KinesisStreamsInputDescription]
       #
       # @!attribute [rw] kinesis_firehose_input_description
       #   If an Amazon Kinesis Firehose delivery stream is configured as a
-      #   streaming source, provides the Firehose delivery stream\'s Amazon
+      #   streaming source, provides the Firehose delivery stream's Amazon
       #   Resource Name (ARN) and an IAM role that enables Amazon Kinesis
       #   Analytics to access the stream on your behalf.
       #   @return [Types::KinesisFirehoseInputDescription]
@@ -1009,7 +1009,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes updates for the application\'s input schema.
+      # Describes updates for the application's input schema.
       # @note When making an API call, pass InputSchemaUpdate
       #   data as a hash:
       #
@@ -1188,7 +1188,7 @@ module Aws
       end
 
       # Identifies an Amazon Kinesis Firehose delivery stream as the streaming
-      # source. You provide the Firehose delivery stream\'s Amazon Resource
+      # source. You provide the Firehose delivery stream's Amazon Resource
       # Name (ARN) and an IAM role ARN that enables Amazon Kinesis Analytics
       # to access the stream on your behalf.
       # @note When making an API call, pass KinesisFirehoseInput
@@ -1327,7 +1327,7 @@ module Aws
       end
 
       # Identifies an Amazon Kinesis stream as the streaming source. You
-      # provide the stream\'s ARN and an IAM role ARN that enables Amazon
+      # provide the stream's ARN and an IAM role ARN that enables Amazon
       # Kinesis Analytics to access the stream on your behalf.
       # @note When making an API call, pass KinesisStreamsInput
       #   data as a hash:
@@ -1473,7 +1473,7 @@ module Aws
       #
       # @!attribute [rw] exclusive_start_application_name
       #   Name of the application to start the list with. When using
-      #   pagination to retrieve the list, you don\'t need to specify this
+      #   pagination to retrieve the list, you don't need to specify this
       #   parameter in the first request. However, in subsequent requests, you
       #   add the last application name from the previous response to get the
       #   next page of applications.

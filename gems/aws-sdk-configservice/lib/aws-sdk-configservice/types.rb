@@ -1768,7 +1768,7 @@ module Aws
       # Global resources are not tied to an individual region and can be used
       # in all regions.
       #
-      # <important markdown="1"> The configuration details for any global resource are the same in all
+      # The configuration details for any global resource are the same in all
       # regions. If you customize AWS Config in multiple regions to record
       # global resources, it will create multiple configuration items each
       # time a global resource changes: one configuration item for each
@@ -1777,9 +1777,7 @@ module Aws
       # AWS Config in only one region to record global resources, unless you
       # want the configuration items to be available in multiple regions.
       #
-      #  </important>
-      #
-      # If you don\'t want AWS Config to record all resources, you can specify
+      # If you don't want AWS Config to record all resources, you can specify
       # which types of resources it will record with the `resourceTypes`
       # parameter.
       #
@@ -1980,7 +1978,7 @@ module Aws
       #   To reference the list, see [Using AWS Managed Config Rules][1].
       #
       #   For custom Config rules, the identifier is the Amazon Resource Name
-      #   (ARN) of the rule\'s AWS Lambda function.
+      #   (ARN) of the rule's AWS Lambda function.
       #
       #
       #

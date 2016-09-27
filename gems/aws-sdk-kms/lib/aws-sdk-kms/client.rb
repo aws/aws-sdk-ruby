@@ -170,8 +170,8 @@ module Aws
       #
       # @example Response structure
       #   resp.key_id #=> String
+      # @overload cancel_key_deletion(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_key_deletion(params = {}, options = {})
         req = build_request(:cancel_key_deletion, params)
         req.send_request(options)
@@ -181,9 +181,9 @@ module Aws
       # to identify a key and should be unique. The console enforces a
       # one-to-one mapping between the alias and a key. An alias name can
       # contain only alphanumeric characters, forward slashes (/), underscores
-      # (\_), and dashes (-). An alias must start with the word \"alias\"
+      # (\_), and dashes (-). An alias must start with the word "alias"
       # followed by a forward slash (alias/). An alias that begins with
-      # \"aws\" after the forward slash (alias/aws...) is reserved by Amazon
+      # "aws" after the forward slash (alias/aws...) is reserved by Amazon
       # Web Services (AWS).
       #
       # The alias and the key it is mapped to must be in the same AWS account
@@ -192,8 +192,8 @@ module Aws
       # To map an alias to a different key, call UpdateAlias.
       # @option params [required, String] :alias_name
       #   String that contains the display name. The name must start with the
-      #   word \"alias\" followed by a forward slash (alias/). Aliases that
-      #   begin with \"alias/AWS\" are reserved.
+      #   word "alias" followed by a forward slash (alias/). Aliases that
+      #   begin with "alias/AWS" are reserved.
       # @option params [required, String] :target_key_id
       #   An identifier of the key for which you are creating the alias. This
       #   value cannot be another alias but can be a globally unique identifier
@@ -211,8 +211,8 @@ module Aws
       #     alias_name: "AliasNameType", # required
       #     target_key_id: "KeyIdType", # required
       #   })
+      # @overload create_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_alias(params = {}, options = {})
         req = build_request(:create_alias, params)
         req.send_request(options)
@@ -356,8 +356,8 @@ module Aws
       # @example Response structure
       #   resp.grant_token #=> String
       #   resp.grant_id #=> String
+      # @overload create_grant(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_grant(params = {}, options = {})
         req = build_request(:create_grant, params)
         req.send_request(options)
@@ -421,7 +421,7 @@ module Aws
       #
       #   You can use CMKs only for symmetric encryption and decryption.
       # @option params [String] :origin
-      #   The source of the CMK\'s key material.
+      #   The source of the CMK's key material.
       #
       #   The default is `AWS_KMS`, which means AWS KMS creates the key
       #   material. When this parameter is set to `EXTERNAL`, the request
@@ -430,7 +430,7 @@ module Aws
       #   about importing key material into AWS KMS, see [Importing Key
       #   Material][1] in the *AWS Key Management Service Developer Guide*.
       #
-      #   The CMK\'s `Origin` is immutable and is set when the CMK is created.
+      #   The CMK's `Origin` is immutable and is set when the CMK is created.
       #
       #
       #
@@ -439,14 +439,12 @@ module Aws
       #   A flag to indicate whether to bypass the key policy lockout safety
       #   check.
       #
-      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   Setting this value to true increases the likelihood that the CMK
       #   becomes unmanageable. Do not set this value to true indiscriminately.
       #
       #    For more information, refer to the scenario in the [Default Key
       #   Policy][1] section in the *AWS Key Management Service Developer
       #   Guide*.
-      #
-      #    </important>
       #
       #   Use this parameter only when you include a policy in the request and
       #   you intend to prevent the principal making the request from making a
@@ -483,8 +481,8 @@ module Aws
       #   resp.key_metadata.valid_to #=> Time
       #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
       #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
+      # @overload create_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_key(params = {}, options = {})
         req = build_request(:create_key, params)
         req.send_request(options)
@@ -544,8 +542,8 @@ module Aws
       # @example Response structure
       #   resp.key_id #=> String
       #   resp.plaintext #=> String
+      # @overload decrypt(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def decrypt(params = {}, options = {})
         req = build_request(:decrypt, params)
         req.send_request(options)
@@ -554,17 +552,17 @@ module Aws
       # Deletes the specified alias. To map an alias to a different key, call
       # UpdateAlias.
       # @option params [required, String] :alias_name
-      #   The alias to be deleted. The name must start with the word \"alias\"
+      #   The alias to be deleted. The name must start with the word "alias"
       #   followed by a forward slash (alias/). Aliases that begin with
-      #   \"alias/AWS\" are reserved.
+      #   "alias/AWS" are reserved.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_alias({
       #     alias_name: "AliasNameType", # required
       #   })
+      # @overload delete_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_alias(params = {}, options = {})
         req = build_request(:delete_alias, params)
         req.send_request(options)
@@ -576,8 +574,8 @@ module Aws
       # Material][1] in the *AWS Key Management Service Developer Guide*.
       #
       # When the specified CMK is in the `PendingDeletion` state, this
-      # operation does not change the CMK\'s state. Otherwise, it changes the
-      # CMK\'s state to `PendingImport`.
+      # operation does not change the CMK's state. Otherwise, it changes the
+      # CMK's state to `PendingImport`.
       #
       # After you delete key material, you can use ImportKeyMaterial to
       # reimport the same key material into the CMK.
@@ -586,7 +584,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
       # @option params [required, String] :key_id
-      #   The identifier of the CMK whose key material to delete. The CMK\'s
+      #   The identifier of the CMK whose key material to delete. The CMK's
       #   `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
@@ -602,8 +600,8 @@ module Aws
       #   resp = client.delete_imported_key_material({
       #     key_id: "KeyIdType", # required
       #   })
+      # @overload delete_imported_key_material(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_imported_key_material(params = {}, options = {})
         req = build_request(:delete_imported_key_material, params)
         req.send_request(options)
@@ -613,7 +611,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -657,8 +655,8 @@ module Aws
       #   resp.key_metadata.valid_to #=> Time
       #   resp.key_metadata.origin #=> String, one of "AWS_KMS", "EXTERNAL"
       #   resp.key_metadata.expiration_model #=> String, one of "KEY_MATERIAL_EXPIRES", "KEY_MATERIAL_DOES_NOT_EXPIRE"
+      # @overload describe_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_key(params = {}, options = {})
         req = build_request(:describe_key, params)
         req.send_request(options)
@@ -676,7 +674,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the CMK.
       #
-      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
       #   For example:
       #
       #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -689,8 +687,8 @@ module Aws
       #   resp = client.disable_key({
       #     key_id: "KeyIdType", # required
       #   })
+      # @overload disable_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_key(params = {}, options = {})
         req = build_request(:disable_key, params)
         req.send_request(options)
@@ -712,8 +710,8 @@ module Aws
       #   resp = client.disable_key_rotation({
       #     key_id: "KeyIdType", # required
       #   })
+      # @overload disable_key_rotation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_key_rotation(params = {}, options = {})
         req = build_request(:disable_key_rotation, params)
         req.send_request(options)
@@ -735,8 +733,8 @@ module Aws
       #   resp = client.enable_key({
       #     key_id: "KeyIdType", # required
       #   })
+      # @overload enable_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_key(params = {}, options = {})
         req = build_request(:enable_key, params)
         req.send_request(options)
@@ -758,8 +756,8 @@ module Aws
       #   resp = client.enable_key_rotation({
       #     key_id: "KeyIdType", # required
       #   })
+      # @overload enable_key_rotation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_key_rotation(params = {}, options = {})
         req = build_request(:enable_key_rotation, params)
         req.send_request(options)
@@ -779,10 +777,10 @@ module Aws
       #   data.
       #
       # Unless you are moving encrypted data from one region to another, you
-      # don\'t use this function to encrypt a generated data key within a
+      # don't use this function to encrypt a generated data key within a
       # region. You retrieve data keys already encrypted by calling the
       # GenerateDataKey or GenerateDataKeyWithoutPlaintext function. Data keys
-      # don\'t need to be encrypted again by calling `Encrypt`.
+      # don't need to be encrypted again by calling `Encrypt`.
       #
       # If you want to encrypt data locally in your application, you can use
       # the `GenerateDataKey` function to return a plaintext data encryption
@@ -791,7 +789,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -841,8 +839,8 @@ module Aws
       # @example Response structure
       #   resp.ciphertext_blob #=> String
       #   resp.key_id #=> String
+      # @overload encrypt(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def encrypt(params = {}, options = {})
         req = build_request(:encrypt, params)
         req.send_request(options)
@@ -891,7 +889,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -945,8 +943,8 @@ module Aws
       #   resp.ciphertext_blob #=> String
       #   resp.plaintext #=> String
       #   resp.key_id #=> String
+      # @overload generate_data_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_data_key(params = {}, options = {})
         req = build_request(:generate_data_key, params)
         req.send_request(options)
@@ -960,7 +958,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1010,8 +1008,8 @@ module Aws
       # @example Response structure
       #   resp.ciphertext_blob #=> String
       #   resp.key_id #=> String
+      # @overload generate_data_key_without_plaintext(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_data_key_without_plaintext(params = {}, options = {})
         req = build_request(:generate_data_key_without_plaintext, params)
         req.send_request(options)
@@ -1032,8 +1030,8 @@ module Aws
       #
       # @example Response structure
       #   resp.plaintext #=> String
+      # @overload generate_random(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_random(params = {}, options = {})
         req = build_request(:generate_random, params)
         req.send_request(options)
@@ -1051,7 +1049,7 @@ module Aws
       #     12345678-1234-1234-1234-123456789012
       # @option params [required, String] :policy_name
       #   String that contains the name of the policy. Currently, this must be
-      #   \"default\". Policy names can be discovered by calling
+      #   "default". Policy names can be discovered by calling
       #   ListKeyPolicies.
       # @return [Types::GetKeyPolicyResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1065,8 +1063,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy #=> String
+      # @overload get_key_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_key_policy(params = {}, options = {})
         req = build_request(:get_key_policy, params)
         req.send_request(options)
@@ -1094,8 +1092,8 @@ module Aws
       #
       # @example Response structure
       #   resp.key_rotation_enabled #=> Boolean
+      # @overload get_key_rotation_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_key_rotation_status(params = {}, options = {})
         req = build_request(:get_key_rotation_status, params)
         req.send_request(options)
@@ -1107,7 +1105,7 @@ module Aws
       # Key Material][1] in the *AWS Key Management Service Developer Guide*.
       #
       # You must specify the key ID of the customer master key (CMK) into
-      # which you will import key material. This CMK\'s `Origin` must be
+      # which you will import key material. This CMK's `Origin` must be
       # `EXTERNAL`. You must also specify the wrapping algorithm and type of
       # wrapping key (public key) that you will use to encrypt the key
       # material.
@@ -1125,7 +1123,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
       # @option params [required, String] :key_id
       #   The identifier of the CMK into which you will import key material. The
-      #   CMK\'s `Origin` must be `EXTERNAL`.
+      #   CMK's `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
       #   (ARN) of the CMK. Examples:
@@ -1165,8 +1163,8 @@ module Aws
       #   resp.import_token #=> String
       #   resp.public_key #=> String
       #   resp.parameters_valid_to #=> Time
+      # @overload get_parameters_for_import(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_parameters_for_import(params = {}, options = {})
         req = build_request(:get_parameters_for_import, params)
         req.send_request(options)
@@ -1178,7 +1176,7 @@ module Aws
       # Material][1] in the *AWS Key Management Service Developer Guide*.
       #
       # You must specify the key ID of the CMK to import the key material
-      # into. This CMK\'s `Origin` must be `EXTERNAL`. You must also send an
+      # into. This CMK's `Origin` must be `EXTERNAL`. You must also send an
       # import token and the encrypted key material. Send the import token
       # that you received in the same GetParametersForImport response that
       # contained the public key that you used to encrypt the key material.
@@ -1189,7 +1187,7 @@ module Aws
       # it only by reimporting the same key material and specifying a new
       # expiration date.
       #
-      # When this operation is successful, the specified CMK\'s key state
+      # When this operation is successful, the specified CMK's key state
       # changes to `Enabled`, and you can use the CMK.
       #
       # After you successfully import key material into a CMK, you can
@@ -1200,7 +1198,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/importing-keys.html
       # @option params [required, String] :key_id
-      #   The identifier of the CMK to import the key material into. The CMK\'s
+      #   The identifier of the CMK to import the key material into. The CMK's
       #   `Origin` must be `EXTERNAL`.
       #
       #   A valid identifier is the unique key ID or the Amazon Resource Name
@@ -1240,8 +1238,8 @@ module Aws
       #     valid_to: Time.now,
       #     expiration_model: "KEY_MATERIAL_EXPIRES", # accepts KEY_MATERIAL_EXPIRES, KEY_MATERIAL_DOES_NOT_EXPIRE
       #   })
+      # @overload import_key_material(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def import_key_material(params = {}, options = {})
         req = build_request(:import_key_material, params)
         req.send_request(options)
@@ -1279,8 +1277,8 @@ module Aws
       #   resp.aliases[0].target_key_id #=> String
       #   resp.next_marker #=> String
       #   resp.truncated #=> Boolean
+      # @overload list_aliases(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_aliases(params = {}, options = {})
         req = build_request(:list_aliases, params)
         req.send_request(options)
@@ -1338,8 +1336,8 @@ module Aws
       #   resp.grants[0].constraints.encryption_context_equals["EncryptionContextKey"] #=> String
       #   resp.next_marker #=> String
       #   resp.truncated #=> Boolean
+      # @overload list_grants(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_grants(params = {}, options = {})
         req = build_request(:list_grants, params)
         req.send_request(options)
@@ -1349,7 +1347,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the customer master key. This value can be a
       #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by \"alias/\".
+      #   or a key, or an alias name prefixed by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1394,8 +1392,8 @@ module Aws
       #   resp.policy_names[0] #=> String
       #   resp.next_marker #=> String
       #   resp.truncated #=> Boolean
+      # @overload list_key_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_key_policies(params = {}, options = {})
         req = build_request(:list_key_policies, params)
         req.send_request(options)
@@ -1433,14 +1431,14 @@ module Aws
       #   resp.keys[0].key_arn #=> String
       #   resp.next_marker #=> String
       #   resp.truncated #=> Boolean
+      # @overload list_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_keys(params = {}, options = {})
         req = build_request(:list_keys, params)
         req.send_request(options)
       end
 
-      # Returns a list of all grants for which the grant\'s
+      # Returns a list of all grants for which the grant's
       # `RetiringPrincipal` matches the one specified.
       #
       # A typical use is to list all grants that you are able to retire. To
@@ -1501,8 +1499,8 @@ module Aws
       #   resp.grants[0].constraints.encryption_context_equals["EncryptionContextKey"] #=> String
       #   resp.next_marker #=> String
       #   resp.truncated #=> Boolean
+      # @overload list_retirable_grants(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_retirable_grants(params = {}, options = {})
         req = build_request(:list_retirable_grants, params)
         req.send_request(options)
@@ -1519,7 +1517,7 @@ module Aws
       # @option params [required, String] :key_id
       #   A unique identifier for the CMK.
       #
-      #   Use the CMK\'s unique identifier or its Amazon Resource Name (ARN).
+      #   Use the CMK's unique identifier or its Amazon Resource Name (ARN).
       #   For example:
       #
       #   * Unique ID: 1234abcd-12ab-34cd-56ef-1234567890ab
@@ -1560,14 +1558,12 @@ module Aws
       #   A flag to indicate whether to bypass the key policy lockout safety
       #   check.
       #
-      #   <important markdown="1"> Setting this value to true increases the likelihood that the CMK
+      #   Setting this value to true increases the likelihood that the CMK
       #   becomes unmanageable. Do not set this value to true indiscriminately.
       #
       #    For more information, refer to the scenario in the [Default Key
       #   Policy][1] section in the *AWS Key Management Service Developer
       #   Guide*.
-      #
-      #    </important>
       #
       #   Use this parameter only when you intend to prevent the principal
       #   making the request from making a subsequent `PutKeyPolicy` request on
@@ -1587,8 +1583,8 @@ module Aws
       #     policy: "PolicyType", # required
       #     bypass_policy_lockout_safety_check: false,
       #   })
+      # @overload put_key_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_key_policy(params = {}, options = {})
         req = build_request(:put_key_policy, params)
         req.send_request(options)
@@ -1616,7 +1612,7 @@ module Aws
       #   A unique identifier for the customer master key used to re-encrypt the
       #   data. This value can be a globally unique identifier, a fully
       #   specified ARN to either an alias or a key, or an alias name prefixed
-      #   by \"alias/\".
+      #   by "alias/".
       #
       #   * Key ARN Example -
       #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
@@ -1662,14 +1658,14 @@ module Aws
       #   resp.ciphertext_blob #=> String
       #   resp.source_key_id #=> String
       #   resp.key_id #=> String
+      # @overload re_encrypt(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def re_encrypt(params = {}, options = {})
         req = build_request(:re_encrypt, params)
         req.send_request(options)
       end
 
-      # Retires a grant. You can retire a grant when you\'re done using it to
+      # Retires a grant. You can retire a grant when you're done using it to
       # clean up. You should revoke a grant when you intend to actively deny
       # operations that depend on it. The following are permitted to call this
       # API:
@@ -1713,8 +1709,8 @@ module Aws
       #     key_id: "KeyIdType",
       #     grant_id: "GrantIdType",
       #   })
+      # @overload retire_grant(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retire_grant(params = {}, options = {})
         req = build_request(:retire_grant, params)
         req.send_request(options)
@@ -1741,8 +1737,8 @@ module Aws
       #     key_id: "KeyIdType", # required
       #     grant_id: "GrantIdType", # required
       #   })
+      # @overload revoke_grant(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_grant(params = {}, options = {})
         req = build_request(:revoke_grant, params)
         req.send_request(options)
@@ -1757,12 +1753,10 @@ module Aws
       # period ends, AWS KMS deletes the CMK and all AWS KMS data associated
       # with it, including all aliases that point to it.
       #
-      # <important markdown="1"> Deleting a CMK is a destructive and potentially dangerous operation.
+      # Deleting a CMK is a destructive and potentially dangerous operation.
       # When a CMK is deleted, all data that was encrypted under the CMK is
       # rendered unrecoverable. To restrict the use of a CMK without deleting
       # it, use DisableKey.
-      #
-      #  </important>
       #
       # For more information about scheduling a CMK for deletion, see
       # [Deleting Customer Master Keys][1] in the *AWS Key Management Service
@@ -1804,8 +1798,8 @@ module Aws
       # @example Response structure
       #   resp.key_id #=> String
       #   resp.deletion_date #=> Time
+      # @overload schedule_key_deletion(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def schedule_key_deletion(params = {}, options = {})
         req = build_request(:schedule_key_deletion, params)
         req.send_request(options)
@@ -1819,16 +1813,16 @@ module Aws
       #
       # An alias name can contain only alphanumeric characters, forward
       # slashes (/), underscores (\_), and dashes (-). An alias must start
-      # with the word \"alias\" followed by a forward slash (alias/). An alias
-      # that begins with \"aws\" after the forward slash (alias/aws...) is
+      # with the word "alias" followed by a forward slash (alias/). An alias
+      # that begins with "aws" after the forward slash (alias/aws...) is
       # reserved by Amazon Web Services (AWS).
       #
       # The alias and the key it is mapped to must be in the same AWS account
       # and the same region.
       # @option params [required, String] :alias_name
       #   String that contains the name of the alias to be modified. The name
-      #   must start with the word \"alias\" followed by a forward slash
-      #   (alias/). Aliases that begin with \"alias/aws\" are reserved.
+      #   must start with the word "alias" followed by a forward slash
+      #   (alias/). Aliases that begin with "alias/aws" are reserved.
       # @option params [required, String] :target_key_id
       #   Unique identifier of the customer master key to be mapped to the
       #   alias. This value can be a globally unique identifier or the fully
@@ -1849,8 +1843,8 @@ module Aws
       #     alias_name: "AliasNameType", # required
       #     target_key_id: "KeyIdType", # required
       #   })
+      # @overload update_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_alias(params = {}, options = {})
         req = build_request(:update_alias, params)
         req.send_request(options)
@@ -1875,8 +1869,8 @@ module Aws
       #     key_id: "KeyIdType", # required
       #     description: "DescriptionType", # required
       #   })
+      # @overload update_key_description(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_key_description(params = {}, options = {})
         req = build_request(:update_key_description, params)
         req.send_request(options)

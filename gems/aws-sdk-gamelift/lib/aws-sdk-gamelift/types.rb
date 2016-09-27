@@ -30,13 +30,13 @@ module Aws
       # @!attribute [rw] creation_time
       #   Time stamp indicating when this data object was created. Format is a
       #   number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] last_updated_time
       #   Time stamp indicating when this data object was last modified.
       #   Format is a number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       class Alias < Struct.new(
         :alias_id,
@@ -115,7 +115,7 @@ module Aws
       # @!attribute [rw] creation_time
       #   Time stamp indicating when this data object was created. Format is a
       #   number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       class Build < Struct.new(
         :build_id,
@@ -196,7 +196,7 @@ module Aws
       #
       # @!attribute [rw] storage_location
       #   Location in Amazon Simple Storage Service (Amazon S3) where a
-      #   build\'s files are stored. This location is assigned in response to
+      #   build's files are stored. This location is assigned in response to
       #   a CreateBuild call, and is always in the same region as the service
       #   used to create the build. For more details see the [Amazon S3
       #   documentation][1].
@@ -340,7 +340,7 @@ module Aws
       # @!attribute [rw] new_game_session_protection_policy
       #   Game session protection policy to apply to all instances in this
       #   fleet. If this parameter is not set, instances in this fleet default
-      #   to no protection. You can change a fleet\'s protection policy using
+      #   to no protection. You can change a fleet's protection policy using
       #   UpdateFleetAttributes, but this change will only affect sessions
       #   created after the policy change. You can also set protection for
       #   individual instances using UpdateGameSession.
@@ -798,14 +798,14 @@ module Aws
       #   Earliest date to retrieve event logs for. If no start time is
       #   specified, this call returns entries starting from when the fleet
       #   was created to the specified end time. Format is a number expressed
-      #   in Unix time as milliseconds (ex: \"1469498468.057\".
+      #   in Unix time as milliseconds (ex: "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] end_time
       #   Most recent date to retrieve event logs for. If no end time is
       #   specified, this call returns entries from the specified start time
       #   up to the present. Format is a number expressed in Unix time as
-      #   milliseconds (ex: \"1469498468.057\".
+      #   milliseconds (ex: "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] limit
@@ -1279,11 +1279,11 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] minimum
-      #   Minimum value allowed for the fleet\'s instance count.
+      #   Minimum value allowed for the fleet's instance count.
       #   @return [Integer]
       #
       # @!attribute [rw] maximum
-      #   Maximum value allowed for the fleet\'s instance count.
+      #   Maximum value allowed for the fleet's instance count.
       #   @return [Integer]
       #
       # @!attribute [rw] pending
@@ -1302,7 +1302,7 @@ module Aws
       #
       # @!attribute [rw] terminating
       #   Number of instances in the fleet that are no longer active but
-      #   haven\'t yet been terminated.
+      #   haven't yet been terminated.
       #   @return [Integer]
       class EC2InstanceCounts < Struct.new(
         :desired,
@@ -1365,7 +1365,7 @@ module Aws
       #
       # @!attribute [rw] event_time
       #   Time stamp indicating when this event occurred. Format is a number
-      #   expressed in Unix time as milliseconds (ex: \"1469498468.057\".
+      #   expressed in Unix time as milliseconds (ex: "1469498468.057".
       #   @return [Time]
       class Event < Struct.new(
         :event_id,
@@ -1393,13 +1393,13 @@ module Aws
       # @!attribute [rw] creation_time
       #   Time stamp indicating when this data object was created. Format is a
       #   number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] termination_time
       #   Time stamp indicating when this data object was terminated. Format
       #   is a number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] status
@@ -1424,16 +1424,16 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] server_launch_path
-      #   Path to a game server executable in the fleet\'s build, specified
+      #   Path to a game server executable in the fleet's build, specified
       #   for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16).
       #   Server launch paths for fleets created after this date are specified
-      #   in the fleet\'s `RuntimeConfiguration`.
+      #   in the fleet's `RuntimeConfiguration`.
       #   @return [String]
       #
       # @!attribute [rw] server_launch_parameters
       #   Game server launch parameters specified for fleets created prior to
       #   2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for
-      #   fleets created after this date are specified in the fleet\'s
+      #   fleets created after this date are specified in the fleet's
       #   `RuntimeConfiguration`.
       #   @return [String]
       #
@@ -1462,7 +1462,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] operating_system
-      #   Operating system of the fleet\'s computing resources. A fleet\'s
+      #   Operating system of the fleet's computing resources. A fleet's
       #   operating system depends on the OS specified for the build that is
       #   deployed on this fleet.
       #   @return [String]
@@ -1482,10 +1482,10 @@ module Aws
         include Aws::Structure
       end
 
-      # Information about the fleet\'s capacity. Fleet capacity is measured in
+      # Information about the fleet's capacity. Fleet capacity is measured in
       # EC2 instances. By default, new fleets have a capacity of one instance,
       # but can be updated as needed. The maximum number of instances for a
-      # fleet is determined by the fleet\'s instance type.
+      # fleet is determined by the fleet's instance type.
       # @!attribute [rw] fleet_id
       #   Unique identifier for a fleet.
       #   @return [String]
@@ -1589,13 +1589,13 @@ module Aws
       # @!attribute [rw] creation_time
       #   Time stamp indicating when this data object was created. Format is a
       #   number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] termination_time
       #   Time stamp indicating when this data object was terminated. Format
       #   is a number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] current_player_session_count
@@ -1644,7 +1644,7 @@ module Aws
         include Aws::Structure
       end
 
-      # A game session\'s properties and the protection policy currently in
+      # A game session's properties and the protection policy currently in
       # force.
       # @!attribute [rw] game_session
       #   Properties describing a game session.
@@ -1692,7 +1692,7 @@ module Aws
       # A range of IP addresses and port settings that allow inbound traffic
       # to connect to server processes on GameLift. Each game session hosted
       # on a fleet is assigned a unique combination of IP address and port
-      # number, which must fall into the fleet\'s allowed ranges. This
+      # number, which must fall into the fleet's allowed ranges. This
       # combination is included in the GameSession object.
       # @note When making an API call, pass IpPermission
       #   data as a hash:
@@ -1714,8 +1714,8 @@ module Aws
       #
       # @!attribute [rw] ip_range
       #   Range of allowed IP addresses. This value must be expressed in [CIDR
-      #   notation][1]. Example: \"`000.000.000.000/[subnet mask]`\" or
-      #   optionally the shortened version \"`0.0.0.0/[subnet mask]`\".
+      #   notation][1]. Example: "`000.000.000.000/[subnet mask]`" or
+      #   optionally the shortened version "`0.0.0.0/[subnet mask]`".
       #
       #
       #
@@ -1944,13 +1944,13 @@ module Aws
       # @!attribute [rw] creation_time
       #   Time stamp indicating when this data object was created. Format is a
       #   number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] termination_time
       #   Time stamp indicating when this data object was terminated. Format
       #   is a number expressed in Unix time as milliseconds (ex:
-      #   \"1469498468.057\".
+      #   "1469498468.057".
       #   @return [Time]
       #
       # @!attribute [rw] status
@@ -2020,7 +2020,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] scaling_adjustment_type
-      #   Type of adjustment to make to a fleet\'s instance count (see
+      #   Type of adjustment to make to a fleet's instance count (see
       #   FleetCapacity):
       #
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
@@ -2031,7 +2031,7 @@ module Aws
       #   * **PercentChangeInCapacity** – increase or reduce the current
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down; for
-      #     example, a value of \"-10\" scales the fleet down by 10%.
+      #     example, a value of "-10" scales the fleet down by 10%.
       #   @return [String]
       #
       # @!attribute [rw] threshold
@@ -2060,7 +2060,7 @@ module Aws
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
-      #     calculated by subtracting a game session\'s current player session
+      #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number includes
       #     game sessions that are not currently accepting players (game
       #     session `PlayerSessionCreationPolicy` = `DENY_ALL`).
@@ -2224,7 +2224,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Location in Amazon Simple Storage Service (Amazon S3) where a build\'s
+      # Location in Amazon Simple Storage Service (Amazon S3) where a build's
       # files are stored. This location is assigned in response to a
       # CreateBuild call, and is always in the same region as the service used
       # to create the build. For more details see the [Amazon S3
@@ -2292,7 +2292,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] scaling_adjustment_type
-      #   Type of adjustment to make to a fleet\'s instance count (see
+      #   Type of adjustment to make to a fleet's instance count (see
       #   FleetCapacity):
       #
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
@@ -2331,7 +2331,7 @@ module Aws
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
-      #     calculated by subtracting a game session\'s current player session
+      #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number does
       #     include game sessions that are not currently accepting players
       #     (game session `PlayerSessionCreationPolicy` = `DENY_ALL`).
@@ -2394,8 +2394,8 @@ module Aws
       #     sensitive, enclosed in single quotes. Special characters must be
       #     escaped. Boolean and string values can only be used with the
       #     comparators `=` and `&lt;&gt;`. For example, the following filter
-      #     expression searches on `gameSessionName`\: \"`FilterExpression":
-      #     "gameSessionName = 'Matt\\'s Awesome Game 1'"`.
+      #     expression searches on `gameSessionName`\: "`FilterExpression":
+      #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
       #
       #   To chain multiple conditions in a single expression, use the logical
       #   keywords `AND`, `OR`, and `NOT` and parentheses as needed. For
@@ -2481,7 +2481,7 @@ module Aws
       # in a fleet. Each instruction set identifies the location of the server
       # executable, optional launch parameters, and the number of server
       # processes with this configuration to maintain concurrently on the
-      # instance. Server process configurations make up a fleet\'s
+      # instance. Server process configurations make up a fleet's
       # `RuntimeConfiguration`.
       # @note When making an API call, pass ServerProcess
       #   data as a hash:
@@ -2495,7 +2495,7 @@ module Aws
       #   Location in the game build of the server executable. All game builds
       #   are installed on instances at the root `C:\game\...`, so an
       #   executable file located at `MyGame\latest\server.exe` has a launch
-      #   path of \"`C:\game\MyGame\latest\server.exe`\".
+      #   path of "`C:\game\MyGame\latest\server.exe`".
       #   @return [String]
       #
       # @!attribute [rw] parameters
@@ -2670,12 +2670,12 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] min_size
-      #   Minimum value allowed for the fleet\'s instance count. Default if
+      #   Minimum value allowed for the fleet's instance count. Default if
       #   not set is 0.
       #   @return [Integer]
       #
       # @!attribute [rw] max_size
-      #   Maximum value allowed for the fleet\'s instance count. Default if
+      #   Maximum value allowed for the fleet's instance count. Default if
       #   not set is 1.
       #   @return [Integer]
       class UpdateFleetCapacityInput < Struct.new(

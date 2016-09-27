@@ -139,8 +139,8 @@ module Aws
       # you to categorize your managed instances in different ways, for
       # example, by purpose, owner, or environment. Each tag consists of a key
       # and an optional value, both of which you define. For example, you
-      # could define a set of tags for your account\'s managed instances that
-      # helps you track each instance\'s owner and stack level. For example:
+      # could define a set of tags for your account's managed instances that
+      # helps you track each instance's owner and stack level. For example:
       # Key=Owner and Value=DbAdmin, SysAdmin, or Dev. Or Key=Stack and
       # Value=Production, Pre-Production, or Test. Each resource can have a
       # maximum of 10 tags.
@@ -148,7 +148,7 @@ module Aws
       # We recommend that you devise a set of tag keys that meets your needs
       # for each resource type. Using a consistent set of tag keys makes it
       # easier for you to manage your resources. You can search and filter the
-      # resources based on the tags you add. Tags don\'t have any semantic
+      # resources based on the tags you add. Tags don't have any semantic
       # meaning to Amazon EC2 and are interpreted strictly as a string of
       # characters.
       #
@@ -163,7 +163,7 @@ module Aws
       # @option params [required, String] :resource_id
       #   The resource ID you want to tag.
       # @option params [required, Array<Types::Tag>] :tags
-      #   One or more tags. The value parameter is required, but if you don\'t
+      #   One or more tags. The value parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -179,8 +179,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -202,8 +202,8 @@ module Aws
       #     command_id: "CommandId", # required
       #     instance_ids: ["InstanceId"],
       #   })
+      # @overload cancel_command(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_command(params = {}, options = {})
         req = build_request(:cancel_command, params)
         req.send_request(options)
@@ -253,8 +253,8 @@ module Aws
       # @example Response structure
       #   resp.activation_id #=> String
       #   resp.activation_code #=> String
+      # @overload create_activation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_activation(params = {}, options = {})
         req = build_request(:create_activation, params)
         req.send_request(options)
@@ -300,8 +300,8 @@ module Aws
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      # @overload create_association(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_association(params = {}, options = {})
         req = build_request(:create_association, params)
         req.send_request(options)
@@ -357,8 +357,8 @@ module Aws
       #   resp.failed[0].entry.parameters["ParameterName"][0] #=> String
       #   resp.failed[0].message #=> String
       #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
+      # @overload create_association_batch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_association_batch(params = {}, options = {})
         req = build_request(:create_association_batch, params)
         req.send_request(options)
@@ -398,8 +398,8 @@ module Aws
       #   resp.document_description.parameters[0].default_value #=> String
       #   resp.document_description.platform_types #=> Array
       #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
+      # @overload create_document(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_document(params = {}, options = {})
         req = build_request(:create_document, params)
         req.send_request(options)
@@ -418,8 +418,8 @@ module Aws
       #   resp = client.delete_activation({
       #     activation_id: "ActivationId", # required
       #   })
+      # @overload delete_activation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_activation(params = {}, options = {})
         req = build_request(:delete_activation, params)
         req.send_request(options)
@@ -443,8 +443,8 @@ module Aws
       #     name: "DocumentName", # required
       #     instance_id: "InstanceId", # required
       #   })
+      # @overload delete_association(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_association(params = {}, options = {})
         req = build_request(:delete_association, params)
         req.send_request(options)
@@ -464,8 +464,8 @@ module Aws
       #   resp = client.delete_document({
       #     name: "DocumentName", # required
       #   })
+      # @overload delete_document(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_document(params = {}, options = {})
         req = build_request(:delete_document, params)
         req.send_request(options)
@@ -484,8 +484,8 @@ module Aws
       #   resp = client.deregister_managed_instance({
       #     instance_id: "ManagedInstanceId", # required
       #   })
+      # @overload deregister_managed_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_managed_instance(params = {}, options = {})
         req = build_request(:deregister_managed_instance, params)
         req.send_request(options)
@@ -533,8 +533,8 @@ module Aws
       #   resp.activation_list[0].expired #=> Boolean
       #   resp.activation_list[0].created_date #=> Time
       #   resp.next_token #=> String
+      # @overload describe_activations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_activations(params = {}, options = {})
         req = build_request(:describe_activations, params)
         req.send_request(options)
@@ -566,8 +566,8 @@ module Aws
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      # @overload describe_association(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_association(params = {}, options = {})
         req = build_request(:describe_association, params)
         req.send_request(options)
@@ -601,8 +601,8 @@ module Aws
       #   resp.document.parameters[0].default_value #=> String
       #   resp.document.platform_types #=> Array
       #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
+      # @overload describe_document(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_document(params = {}, options = {})
         req = build_request(:describe_document, params)
         req.send_request(options)
@@ -630,8 +630,8 @@ module Aws
       # @example Response structure
       #   resp.account_ids #=> Array
       #   resp.account_ids[0] #=> String
+      # @overload describe_document_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_document_permission(params = {}, options = {})
         req = build_request(:describe_document_permission, params)
         req.send_request(options)
@@ -689,8 +689,8 @@ module Aws
       #   resp.instance_information_list[0].ip_address #=> String
       #   resp.instance_information_list[0].computer_name #=> String
       #   resp.next_token #=> String
+      # @overload describe_instance_information(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_instance_information(params = {}, options = {})
         req = build_request(:describe_instance_information, params)
         req.send_request(options)
@@ -712,8 +712,8 @@ module Aws
       # @example Response structure
       #   resp.name #=> String
       #   resp.content #=> String
+      # @overload get_document(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_document(params = {}, options = {})
         req = build_request(:get_document, params)
         req.send_request(options)
@@ -752,8 +752,8 @@ module Aws
       #   resp.associations[0].name #=> String
       #   resp.associations[0].instance_id #=> String
       #   resp.next_token #=> String
+      # @overload list_associations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_associations(params = {}, options = {})
         req = build_request(:list_associations, params)
         req.send_request(options)
@@ -826,8 +826,8 @@ module Aws
       #   resp.command_invocations[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
       #   resp.command_invocations[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
       #   resp.next_token #=> String
+      # @overload list_command_invocations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_command_invocations(params = {}, options = {})
         req = build_request(:list_command_invocations, params)
         req.send_request(options)
@@ -888,8 +888,8 @@ module Aws
       #   resp.commands[0].notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
       #   resp.commands[0].notification_config.notification_type #=> String, one of "Command", "Invocation"
       #   resp.next_token #=> String
+      # @overload list_commands(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_commands(params = {}, options = {})
         req = build_request(:list_commands, params)
         req.send_request(options)
@@ -930,8 +930,8 @@ module Aws
       #   resp.document_identifiers[0].platform_types #=> Array
       #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
       #   resp.next_token #=> String
+      # @overload list_documents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_documents(params = {}, options = {})
         req = build_request(:list_documents, params)
         req.send_request(options)
@@ -956,8 +956,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -990,8 +990,8 @@ module Aws
       #     account_ids_to_add: ["AccountId"],
       #     account_ids_to_remove: ["AccountId"],
       #   })
+      # @overload modify_document_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_document_permission(params = {}, options = {})
         req = build_request(:modify_document_permission, params)
         req.send_request(options)
@@ -1012,8 +1012,8 @@ module Aws
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -1102,8 +1102,8 @@ module Aws
       #   resp.command.notification_config.notification_events #=> Array
       #   resp.command.notification_config.notification_events[0] #=> String, one of "All", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
       #   resp.command.notification_config.notification_type #=> String, one of "Command", "Invocation"
+      # @overload send_command(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_command(params = {}, options = {})
         req = build_request(:send_command, params)
         req.send_request(options)
@@ -1144,8 +1144,8 @@ module Aws
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      # @overload update_association_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_association_status(params = {}, options = {})
         req = build_request(:update_association_status, params)
         req.send_request(options)
@@ -1164,8 +1164,8 @@ module Aws
       #     instance_id: "ManagedInstanceId", # required
       #     iam_role: "IamRole", # required
       #   })
+      # @overload update_managed_instance_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_managed_instance_role(params = {}, options = {})
         req = build_request(:update_managed_instance_role, params)
         req.send_request(options)

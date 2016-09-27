@@ -160,8 +160,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -183,8 +183,8 @@ module Aws
       #
       # @example Response structure
       #   resp.hapg_arn #=> String
+      # @overload create_hapg(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_hapg(params = {}, options = {})
         req = build_request(:create_hapg, params)
         req.send_request(options)
@@ -198,11 +198,9 @@ module Aws
       # operation, go to the [AWS Support Center][1], create a new case, and
       # select **Account and Billing Support**.
       #
-      # <important markdown="1"> It can take up to 20 minutes to create and provision an HSM. You can
+      # It can take up to 20 minutes to create and provision an HSM. You can
       # monitor the status of the HSM with the DescribeHsm operation. The HSM
       # is ready to be initialized when the status changes to `RUNNING`.
-      #
-      #  </important>
       #
       #
       #
@@ -212,7 +210,7 @@ module Aws
       # @option params [required, String] :ssh_key
       #   The SSH public key to install on the HSM.
       # @option params [String] :eni_ip
-      #   The IP address to assign to the HSM\'s ENI.
+      #   The IP address to assign to the HSM's ENI.
       #
       #   If an IP address is not specified, an IP address will be randomly
       #   chosen from the CIDR range of the subnet.
@@ -250,8 +248,8 @@ module Aws
       #
       # @example Response structure
       #   resp.hsm_arn #=> String
+      # @overload create_hsm(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_hsm(params = {}, options = {})
         req = build_request(:create_hsm, params)
         req.send_request(options)
@@ -275,8 +273,8 @@ module Aws
       #
       # @example Response structure
       #   resp.client_arn #=> String
+      # @overload create_luna_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_luna_client(params = {}, options = {})
         req = build_request(:create_luna_client, params)
         req.send_request(options)
@@ -296,8 +294,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String
+      # @overload delete_hapg(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_hapg(params = {}, options = {})
         req = build_request(:delete_hapg, params)
         req.send_request(options)
@@ -318,8 +316,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String
+      # @overload delete_hsm(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_hsm(params = {}, options = {})
         req = build_request(:delete_hsm, params)
         req.send_request(options)
@@ -339,8 +337,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String
+      # @overload delete_luna_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_luna_client(params = {}, options = {})
         req = build_request(:delete_luna_client, params)
         req.send_request(options)
@@ -380,8 +378,8 @@ module Aws
       #   resp.partition_serial_list #=> Array
       #   resp.partition_serial_list[0] #=> String
       #   resp.state #=> String, one of "READY", "UPDATING", "DEGRADED"
+      # @overload describe_hapg(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_hapg(params = {}, options = {})
         req = build_request(:describe_hapg, params)
         req.send_request(options)
@@ -448,8 +446,8 @@ module Aws
       #   resp.server_cert_last_updated #=> String
       #   resp.partitions #=> Array
       #   resp.partitions[0] #=> String
+      # @overload describe_hsm(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_hsm(params = {}, options = {})
         req = build_request(:describe_hsm, params)
         req.send_request(options)
@@ -480,8 +478,8 @@ module Aws
       #   resp.certificate_fingerprint #=> String
       #   resp.last_modified_timestamp #=> String
       #   resp.label #=> String
+      # @overload describe_luna_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_luna_client(params = {}, options = {})
         req = build_request(:describe_luna_client, params)
         req.send_request(options)
@@ -513,8 +511,8 @@ module Aws
       #   resp.config_type #=> String
       #   resp.config_file #=> String
       #   resp.config_cred #=> String
+      # @overload get_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_config(params = {}, options = {})
         req = build_request(:get_config, params)
         req.send_request(options)
@@ -532,8 +530,8 @@ module Aws
       # @example Response structure
       #   resp.az_list #=> Array
       #   resp.az_list[0] #=> String
+      # @overload list_available_zones(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_available_zones(params = {}, options = {})
         req = build_request(:list_available_zones, params)
         req.send_request(options)
@@ -562,8 +560,8 @@ module Aws
       #   resp.hapg_list #=> Array
       #   resp.hapg_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_hapgs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_hapgs(params = {}, options = {})
         req = build_request(:list_hapgs, params)
         req.send_request(options)
@@ -593,8 +591,8 @@ module Aws
       #   resp.hsm_list #=> Array
       #   resp.hsm_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_hsms(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_hsms(params = {}, options = {})
         req = build_request(:list_hsms, params)
         req.send_request(options)
@@ -623,8 +621,8 @@ module Aws
       #   resp.client_list #=> Array
       #   resp.client_list[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_luna_clients(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_luna_clients(params = {}, options = {})
         req = build_request(:list_luna_clients, params)
         req.send_request(options)
@@ -646,8 +644,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -674,8 +672,8 @@ module Aws
       #
       # @example Response structure
       #   resp.hapg_arn #=> String
+      # @overload modify_hapg(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_hapg(params = {}, options = {})
         req = build_request(:modify_hapg, params)
         req.send_request(options)
@@ -683,13 +681,11 @@ module Aws
 
       # Modifies an HSM.
       #
-      # <important markdown="1"> This operation can result in the HSM being offline for up to 15
+      # This operation can result in the HSM being offline for up to 15
       # minutes while the AWS CloudHSM service is reconfigured. If you are
       # modifying a production HSM, you should ensure that your AWS CloudHSM
       # service is configured for high availability, and consider executing
       # this operation during a maintenance window.
-      #
-      #  </important>
       # @option params [required, String] :hsm_arn
       #   The ARN of the HSM to modify.
       # @option params [String] :subnet_id
@@ -725,8 +721,8 @@ module Aws
       #
       # @example Response structure
       #   resp.hsm_arn #=> String
+      # @overload modify_hsm(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_hsm(params = {}, options = {})
         req = build_request(:modify_hsm, params)
         req.send_request(options)
@@ -735,7 +731,7 @@ module Aws
       # Modifies the certificate used by the client.
       #
       # This action can potentially start a workflow to install the new
-      # certificate on the client\'s HSMs.
+      # certificate on the client's HSMs.
       # @option params [required, String] :client_arn
       #   The ARN of the client.
       # @option params [required, String] :certificate
@@ -752,8 +748,8 @@ module Aws
       #
       # @example Response structure
       #   resp.client_arn #=> String
+      # @overload modify_luna_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_luna_client(params = {}, options = {})
         req = build_request(:modify_luna_client, params)
         req.send_request(options)
@@ -782,8 +778,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)

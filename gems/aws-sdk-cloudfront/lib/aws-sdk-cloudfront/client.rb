@@ -127,7 +127,7 @@ module Aws
 
       # Create a new origin access identity.
       # @option params [required, Types::CloudFrontOriginAccessIdentityConfig] :cloud_front_origin_access_identity_config
-      #   The origin access identity\'s configuration information.
+      #   The origin access identity's configuration information.
       # @return [Types::CreateCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -149,8 +149,8 @@ module Aws
       #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
       #   resp.location #=> String
       #   resp.etag #=> String
+      # @overload create_cloud_front_origin_access_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cloud_front_origin_access_identity(params = {}, options = {})
         req = build_request(:create_cloud_front_origin_access_identity, params)
         req.send_request(options)
@@ -158,7 +158,7 @@ module Aws
 
       # Create a new distribution.
       # @option params [required, Types::DistributionConfig] :distribution_config
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       # @return [Types::CreateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateDistributionResult#distribution #Distribution} => Types::Distribution
@@ -452,8 +452,8 @@ module Aws
       #   resp.distribution.distribution_config.web_acl_id #=> String
       #   resp.location #=> String
       #   resp.etag #=> String
+      # @overload create_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_distribution(params = {}, options = {})
         req = build_request(:create_distribution, params)
         req.send_request(options)
@@ -461,7 +461,7 @@ module Aws
 
       # Create a new distribution with tags.
       # @option params [required, Types::DistributionConfigWithTags] :distribution_config_with_tags
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       # @return [Types::CreateDistributionWithTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateDistributionWithTagsResult#distribution #Distribution} => Types::Distribution
@@ -765,8 +765,8 @@ module Aws
       #   resp.distribution.distribution_config.web_acl_id #=> String
       #   resp.location #=> String
       #   resp.etag #=> String
+      # @overload create_distribution_with_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_distribution_with_tags(params = {}, options = {})
         req = build_request(:create_distribution_with_tags, params)
         req.send_request(options)
@@ -774,7 +774,7 @@ module Aws
 
       # Create a new invalidation.
       # @option params [required, String] :distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @option params [required, Types::InvalidationBatch] :invalidation_batch
       #   The batch information for the invalidation.
       # @return [Types::CreateInvalidationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -803,8 +803,8 @@ module Aws
       #   resp.invalidation.invalidation_batch.paths.items #=> Array
       #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
       #   resp.invalidation.invalidation_batch.caller_reference #=> String
+      # @overload create_invalidation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_invalidation(params = {}, options = {})
         req = build_request(:create_invalidation, params)
         req.send_request(options)
@@ -812,7 +812,7 @@ module Aws
 
       # Create a new streaming distribution.
       # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       # @return [Types::CreateStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateStreamingDistributionResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
@@ -878,8 +878,8 @@ module Aws
       #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
       #   resp.location #=> String
       #   resp.etag #=> String
+      # @overload create_streaming_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_streaming_distribution(params = {}, options = {})
         req = build_request(:create_streaming_distribution, params)
         req.send_request(options)
@@ -887,7 +887,7 @@ module Aws
 
       # Create a new streaming distribution with tags.
       # @option params [required, Types::StreamingDistributionConfigWithTags] :streaming_distribution_config_with_tags
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       # @return [Types::CreateStreamingDistributionWithTagsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateStreamingDistributionWithTagsResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
@@ -963,8 +963,8 @@ module Aws
       #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
       #   resp.location #=> String
       #   resp.etag #=> String
+      # @overload create_streaming_distribution_with_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_streaming_distribution_with_tags(params = {}, options = {})
         req = build_request(:create_streaming_distribution_with_tags, params)
         req.send_request(options)
@@ -972,7 +972,7 @@ module Aws
 
       # Delete an origin access identity.
       # @option params [required, String] :id
-      #   The origin access identity\'s id.
+      #   The origin access identity's id.
       # @option params [String] :if_match
       #   The value of the ETag header you received from a previous GET or PUT
       #   request. For example: E2QWRUHAPOMQZL.
@@ -983,8 +983,8 @@ module Aws
       #     id: "string", # required
       #     if_match: "string",
       #   })
+      # @overload delete_cloud_front_origin_access_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_cloud_front_origin_access_identity(params = {}, options = {})
         req = build_request(:delete_cloud_front_origin_access_identity, params)
         req.send_request(options)
@@ -1003,8 +1003,8 @@ module Aws
       #     id: "string", # required
       #     if_match: "string",
       #   })
+      # @overload delete_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_distribution(params = {}, options = {})
         req = build_request(:delete_distribution, params)
         req.send_request(options)
@@ -1023,8 +1023,8 @@ module Aws
       #     id: "string", # required
       #     if_match: "string",
       #   })
+      # @overload delete_streaming_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_streaming_distribution(params = {}, options = {})
         req = build_request(:delete_streaming_distribution, params)
         req.send_request(options)
@@ -1032,7 +1032,7 @@ module Aws
 
       # Get the information about an origin access identity.
       # @option params [required, String] :id
-      #   The identity\'s id.
+      #   The identity's id.
       # @return [Types::GetCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -1049,8 +1049,8 @@ module Aws
       #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.caller_reference #=> String
       #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
       #   resp.etag #=> String
+      # @overload get_cloud_front_origin_access_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_cloud_front_origin_access_identity(params = {}, options = {})
         req = build_request(:get_cloud_front_origin_access_identity, params)
         req.send_request(options)
@@ -1058,7 +1058,7 @@ module Aws
 
       # Get the configuration information about an origin access identity.
       # @option params [required, String] :id
-      #   The identity\'s id.
+      #   The identity's id.
       # @return [Types::GetCloudFrontOriginAccessIdentityConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCloudFrontOriginAccessIdentityConfigResult#cloud_front_origin_access_identity_config #CloudFrontOriginAccessIdentityConfig} => Types::CloudFrontOriginAccessIdentityConfig
@@ -1073,8 +1073,8 @@ module Aws
       #   resp.cloud_front_origin_access_identity_config.caller_reference #=> String
       #   resp.cloud_front_origin_access_identity_config.comment #=> String
       #   resp.etag #=> String
+      # @overload get_cloud_front_origin_access_identity_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_cloud_front_origin_access_identity_config(params = {}, options = {})
         req = build_request(:get_cloud_front_origin_access_identity_config, params)
         req.send_request(options)
@@ -1082,7 +1082,7 @@ module Aws
 
       # Get the information about a distribution.
       # @option params [required, String] :id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @return [Types::GetDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDistributionResult#distribution #Distribution} => Types::Distribution
@@ -1213,8 +1213,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
       #   resp.etag #=> String
+      # @overload get_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_distribution(params = {}, options = {})
         req = build_request(:get_distribution, params)
         req.send_request(options)
@@ -1222,7 +1222,7 @@ module Aws
 
       # Get the configuration information about a distribution.
       # @option params [required, String] :id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @return [Types::GetDistributionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDistributionConfigResult#distribution_config #DistributionConfig} => Types::DistributionConfig
@@ -1340,8 +1340,8 @@ module Aws
       #   resp.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_config.web_acl_id #=> String
       #   resp.etag #=> String
+      # @overload get_distribution_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_distribution_config(params = {}, options = {})
         req = build_request(:get_distribution_config, params)
         req.send_request(options)
@@ -1349,9 +1349,9 @@ module Aws
 
       # Get the information about an invalidation.
       # @option params [required, String] :distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @option params [required, String] :id
-      #   The invalidation\'s id.
+      #   The invalidation's id.
       # @return [Types::GetInvalidationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetInvalidationResult#invalidation #Invalidation} => Types::Invalidation
@@ -1370,8 +1370,8 @@ module Aws
       #   resp.invalidation.invalidation_batch.paths.items #=> Array
       #   resp.invalidation.invalidation_batch.paths.items[0] #=> String
       #   resp.invalidation.invalidation_batch.caller_reference #=> String
+      # @overload get_invalidation(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_invalidation(params = {}, options = {})
         req = build_request(:get_invalidation, params)
         req.send_request(options)
@@ -1379,7 +1379,7 @@ module Aws
 
       # Get the information about a streaming distribution.
       # @option params [required, String] :id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       # @return [Types::GetStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetStreamingDistributionResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
@@ -1420,8 +1420,8 @@ module Aws
       #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
       #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
       #   resp.etag #=> String
+      # @overload get_streaming_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_streaming_distribution(params = {}, options = {})
         req = build_request(:get_streaming_distribution, params)
         req.send_request(options)
@@ -1429,7 +1429,7 @@ module Aws
 
       # Get the configuration information about a streaming distribution.
       # @option params [required, String] :id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       # @return [Types::GetStreamingDistributionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetStreamingDistributionConfigResult#streaming_distribution_config #StreamingDistributionConfig} => Types::StreamingDistributionConfig
@@ -1458,8 +1458,8 @@ module Aws
       #   resp.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
       #   resp.streaming_distribution_config.enabled #=> Boolean
       #   resp.etag #=> String
+      # @overload get_streaming_distribution_config(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_streaming_distribution_config(params = {}, options = {})
         req = build_request(:get_streaming_distribution_config, params)
         req.send_request(options)
@@ -1470,7 +1470,7 @@ module Aws
       #   Use this when paginating results to indicate where to begin in your
       #   list of origin access identities. The results include identities in
       #   the list that occur after the marker. To get the next page of results,
-      #   set the Marker to the value of the NextMarker from the current page\'s
+      #   set the Marker to the value of the NextMarker from the current page's
       #   response (which is also the ID of the last identity on that page).
       # @option params [Integer] :max_items
       #   The maximum number of origin access identities you want in the
@@ -1495,8 +1495,8 @@ module Aws
       #   resp.cloud_front_origin_access_identity_list.items[0].id #=> String
       #   resp.cloud_front_origin_access_identity_list.items[0].s3_canonical_user_id #=> String
       #   resp.cloud_front_origin_access_identity_list.items[0].comment #=> String
+      # @overload list_cloud_front_origin_access_identities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_cloud_front_origin_access_identities(params = {}, options = {})
         req = build_request(:list_cloud_front_origin_access_identities, params)
         req.send_request(options)
@@ -1634,8 +1634,8 @@ module Aws
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_list.items[0].web_acl_id #=> String
+      # @overload list_distributions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_distributions(params = {}, options = {})
         req = build_request(:list_distributions, params)
         req.send_request(options)
@@ -1655,8 +1655,8 @@ module Aws
       #   in the response body. The maximum and default values are both 100.
       # @option params [required, String] :web_acl_id
       #   The Id of the AWS WAF web ACL for which you want to list the
-      #   associated distributions. If you specify \"null\" for the Id, the
-      #   request returns a list of the distributions that aren\'t associated
+      #   associated distributions. If you specify "null" for the Id, the
+      #   request returns a list of the distributions that aren't associated
       #   with a web ACL.
       # @return [Types::ListDistributionsByWebACLIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1780,8 +1780,8 @@ module Aws
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_list.items[0].web_acl_id #=> String
+      # @overload list_distributions_by_web_acl_id(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_distributions_by_web_acl_id(params = {}, options = {})
         req = build_request(:list_distributions_by_web_acl_id, params)
         req.send_request(options)
@@ -1789,14 +1789,14 @@ module Aws
 
       # List invalidation batches.
       # @option params [required, String] :distribution_id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @option params [String] :marker
       #   Use this parameter when paginating results to indicate where to begin
       #   in your list of invalidation batches. Because the results are returned
       #   in decreasing order from most recent to oldest, the most recent
       #   results are on the first page, the second page will contain earlier
       #   results, and so on. To get the next page of results, set the Marker to
-      #   the value of the NextMarker from the current page\'s response. This
+      #   the value of the NextMarker from the current page's response. This
       #   value is the same as the ID of the last invalidation batch on that
       #   page.
       # @option params [Integer] :max_items
@@ -1823,8 +1823,8 @@ module Aws
       #   resp.invalidation_list.items[0].id #=> String
       #   resp.invalidation_list.items[0].create_time #=> Time
       #   resp.invalidation_list.items[0].status #=> String
+      # @overload list_invalidations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_invalidations(params = {}, options = {})
         req = build_request(:list_invalidations, params)
         req.send_request(options)
@@ -1835,7 +1835,7 @@ module Aws
       #   Use this when paginating results to indicate where to begin in your
       #   list of streaming distributions. The results include distributions in
       #   the list that occur after the marker. To get the next page of results,
-      #   set the Marker to the value of the NextMarker from the current page\'s
+      #   set the Marker to the value of the NextMarker from the current page's
       #   response (which is also the ID of the last distribution on that page).
       # @option params [Integer] :max_items
       #   The maximum number of streaming distributions you want in the response
@@ -1874,8 +1874,8 @@ module Aws
       #   resp.streaming_distribution_list.items[0].comment #=> String
       #   resp.streaming_distribution_list.items[0].price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
       #   resp.streaming_distribution_list.items[0].enabled #=> Boolean
+      # @overload list_streaming_distributions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_streaming_distributions(params = {}, options = {})
         req = build_request(:list_streaming_distributions, params)
         req.send_request(options)
@@ -1897,8 +1897,8 @@ module Aws
       #   resp.tags.items #=> Array
       #   resp.tags.items[0].key #=> String
       #   resp.tags.items[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -1923,8 +1923,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload tag_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def tag_resource(params = {}, options = {})
         req = build_request(:tag_resource, params)
         req.send_request(options)
@@ -1944,8 +1944,8 @@ module Aws
       #       items: ["TagKey"],
       #     },
       #   })
+      # @overload untag_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def untag_resource(params = {}, options = {})
         req = build_request(:untag_resource, params)
         req.send_request(options)
@@ -1953,12 +1953,12 @@ module Aws
 
       # Update an origin access identity.
       # @option params [required, Types::CloudFrontOriginAccessIdentityConfig] :cloud_front_origin_access_identity_config
-      #   The identity\'s configuration information.
+      #   The identity's configuration information.
       # @option params [required, String] :id
-      #   The identity\'s id.
+      #   The identity's id.
       # @option params [String] :if_match
       #   The value of the ETag header you received when retrieving the
-      #   identity\'s configuration. For example: E2QWRUHAPOMQZL.
+      #   identity's configuration. For example: E2QWRUHAPOMQZL.
       # @return [Types::UpdateCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -1980,8 +1980,8 @@ module Aws
       #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.caller_reference #=> String
       #   resp.cloud_front_origin_access_identity.cloud_front_origin_access_identity_config.comment #=> String
       #   resp.etag #=> String
+      # @overload update_cloud_front_origin_access_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_cloud_front_origin_access_identity(params = {}, options = {})
         req = build_request(:update_cloud_front_origin_access_identity, params)
         req.send_request(options)
@@ -1989,12 +1989,12 @@ module Aws
 
       # Update a distribution.
       # @option params [required, Types::DistributionConfig] :distribution_config
-      #   The distribution\'s configuration information.
+      #   The distribution's configuration information.
       # @option params [required, String] :id
-      #   The distribution\'s id.
+      #   The distribution's id.
       # @option params [String] :if_match
       #   The value of the ETag header you received when retrieving the
-      #   distribution\'s configuration. For example: E2QWRUHAPOMQZL.
+      #   distribution's configuration. For example: E2QWRUHAPOMQZL.
       # @return [Types::UpdateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateDistributionResult#distribution #Distribution} => Types::Distribution
@@ -2288,8 +2288,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
       #   resp.etag #=> String
+      # @overload update_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_distribution(params = {}, options = {})
         req = build_request(:update_distribution, params)
         req.send_request(options)
@@ -2297,12 +2297,12 @@ module Aws
 
       # Update a streaming distribution.
       # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
-      #   The streaming distribution\'s configuration information.
+      #   The streaming distribution's configuration information.
       # @option params [required, String] :id
-      #   The streaming distribution\'s id.
+      #   The streaming distribution's id.
       # @option params [String] :if_match
       #   The value of the ETag header you received when retrieving the
-      #   streaming distribution\'s configuration. For example: E2QWRUHAPOMQZL.
+      #   streaming distribution's configuration. For example: E2QWRUHAPOMQZL.
       # @return [Types::UpdateStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateStreamingDistributionResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
@@ -2368,8 +2368,8 @@ module Aws
       #   resp.streaming_distribution.streaming_distribution_config.price_class #=> String, one of "PriceClass_100", "PriceClass_200", "PriceClass_All"
       #   resp.streaming_distribution.streaming_distribution_config.enabled #=> Boolean
       #   resp.etag #=> String
+      # @overload update_streaming_distribution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_streaming_distribution(params = {}, options = {})
         req = build_request(:update_streaming_distribution, params)
         req.send_request(options)

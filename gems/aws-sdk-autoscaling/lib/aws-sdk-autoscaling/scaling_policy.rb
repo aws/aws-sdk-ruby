@@ -188,7 +188,7 @@ module Aws
       #   want to use a step adjustment with a lower bound of 0 and an upper
       #   bound of 10, you can set the metric value to 59.
       #
-      #   If you specify a metric value that doesn\'t correspond to a step
+      #   If you specify a metric value that doesn't correspond to a step
       #   adjustment for the policy, the call returns an error.
       #
       #   This parameter is required if the policy type is `StepScaling` and not

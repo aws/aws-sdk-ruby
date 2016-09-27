@@ -145,8 +145,8 @@ module Aws
       #     open_id_connect_provider_arn: "arnType", # required
       #     client_id: "clientIDType", # required
       #   })
+      # @overload add_client_id_to_open_id_connect_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_client_id_to_open_id_connect_provider(params = {}, options = {})
         req = build_request(:add_client_id_to_open_id_connect_provider, params)
         req.send_request(options)
@@ -194,8 +194,8 @@ module Aws
       #     instance_profile_name: "instanceProfileNameType", # required
       #     role_name: "roleNameType", # required
       #   })
+      # @overload add_role_to_instance_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_role_to_instance_profile(params = {}, options = {})
         req = build_request(:add_role_to_instance_profile, params)
         req.send_request(options)
@@ -229,8 +229,8 @@ module Aws
       #     group_name: "groupNameType", # required
       #     user_name: "existingUserNameType", # required
       #   })
+      # @overload add_user_to_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_user_to_group(params = {}, options = {})
         req = build_request(:add_user_to_group, params)
         req.send_request(options)
@@ -274,8 +274,8 @@ module Aws
       #     group_name: "groupNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload attach_group_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_group_policy(params = {}, options = {})
         req = build_request(:attach_group_policy, params)
         req.send_request(options)
@@ -284,10 +284,10 @@ module Aws
       # Attaches the specified managed policy to the specified IAM role.
       #
       # When you attach a managed policy to a role, the managed policy becomes
-      # part of the role\'s permission (access) policy. You cannot use a
-      # managed policy as the role\'s trust policy. The role\'s trust policy
+      # part of the role's permission (access) policy. You cannot use a
+      # managed policy as the role's trust policy. The role's trust policy
       # is created at the same time as the role, using CreateRole. You can
-      # update a role\'s trust policy using UpdateAssumeRolePolicy.
+      # update a role's trust policy using UpdateAssumeRolePolicy.
       #
       # Use this API to attach a *managed* policy to a role. To embed an
       # inline policy in a role, use PutRolePolicy. For more information about
@@ -323,8 +323,8 @@ module Aws
       #     role_name: "roleNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload attach_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_role_policy(params = {}, options = {})
         req = build_request(:attach_role_policy, params)
         req.send_request(options)
@@ -368,8 +368,8 @@ module Aws
       #     user_name: "userNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload attach_user_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_user_policy(params = {}, options = {})
         req = build_request(:attach_user_policy, params)
         req.send_request(options)
@@ -386,9 +386,9 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_ManagingLogins.html
       # @option params [required, String] :old_password
-      #   The IAM user\'s current password.
+      #   The IAM user's current password.
       # @option params [required, String] :new_password
-      #   The new password. The new password must conform to the AWS account\'s
+      #   The new password. The new password must conform to the AWS account's
       #   password policy, if one exists.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -410,8 +410,8 @@ module Aws
       #     old_password: "passwordType", # required
       #     new_password: "passwordType", # required
       #   })
+      # @overload change_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_password(params = {}, options = {})
         req = build_request(:change_password, params)
         req.send_request(options)
@@ -430,13 +430,11 @@ module Aws
       # For information about limits on the number of keys you can create, see
       # [Limitations on IAM Entities][1] in the *IAM User Guide*.
       #
-      # <important markdown="1"> To ensure the security of your AWS account, the secret access key is
+      # To ensure the security of your AWS account, the secret access key is
       # accessible only during key and user creation. You must save the key
       # (for example, in a text file) if you want to be able to access it
       # again. If a secret key is lost, you can delete the access keys for the
       # associated user and then create new keys.
-      #
-      #  </important>
       #
       #
       #
@@ -466,8 +464,8 @@ module Aws
       #   resp.access_key.status #=> String, one of "Active", "Inactive"
       #   resp.access_key.secret_access_key #=> String
       #   resp.access_key.create_date #=> Time
+      # @overload create_access_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_access_key(params = {}, options = {})
         req = build_request(:create_access_key, params)
         req.send_request(options)
@@ -496,8 +494,8 @@ module Aws
       #   resp = client.create_account_alias({
       #     account_alias: "accountAliasType", # required
       #   })
+      # @overload create_account_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_account_alias(params = {}, options = {})
         req = build_request(:create_account_alias, params)
         req.send_request(options)
@@ -538,7 +536,7 @@ module Aws
       #   spaces. You can also include any of the following characters: =,.@-.
       #   The group name must be unique within the account. Group names are not
       #   distinguished by case. For example, you cannot create groups named
-      #   both \"ADMINS\" and \"admins\".
+      #   both "ADMINS" and "admins".
       #
       #
       #
@@ -559,8 +557,8 @@ module Aws
       #   resp.group.group_id #=> String
       #   resp.group.arn #=> String
       #   resp.group.create_date #=> Time
+      # @overload create_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_group(params = {}, options = {})
         req = build_request(:create_group, params)
         req.send_request(options)
@@ -627,8 +625,8 @@ module Aws
       #   resp.instance_profile.roles[0].arn #=> String
       #   resp.instance_profile.roles[0].create_date #=> Time
       #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
+      # @overload create_instance_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_instance_profile(params = {}, options = {})
         req = build_request(:create_instance_profile, params)
         req.send_request(options)
@@ -686,8 +684,8 @@ module Aws
       #   resp.login_profile.user_name #=> String
       #   resp.login_profile.create_date #=> Time
       #   resp.login_profile.password_reset_required #=> Boolean
+      # @overload create_login_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_login_profile(params = {}, options = {})
         req = build_request(:create_login_profile, params)
         req.send_request(options)
@@ -697,7 +695,7 @@ module Aws
       # supports [OpenID Connect (OIDC)][1].
       #
       # The OIDC provider that you create with this operation can be used as a
-      # principal in a role\'s trust policy to establish a trust relationship
+      # principal in a role's trust policy to establish a trust relationship
       # between AWS and the OIDC provider.
       #
       # When you create the IAM OIDC provider, you specify the URL of the OIDC
@@ -719,12 +717,12 @@ module Aws
       #
       # [1]: http://openid.net/connect/
       # @option params [required, String] :url
-      #   The URL of the identity provider. The URL must begin with \"https://\"
-      #   and should correspond to the `iss` claim in the provider\'s OpenID
+      #   The URL of the identity provider. The URL must begin with "https://"
+      #   and should correspond to the `iss` claim in the provider's OpenID
       #   Connect ID tokens. Per the OIDC standard, path components are allowed
       #   but query parameters are not. Typically the URL consists of only a
-      #   host name, like \"https://server.example.org\" or
-      #   \"https://example.com\".
+      #   host name, like "https://server.example.org" or
+      #   "https://example.com".
       #
       #   You cannot register the same provider multiple times in a single AWS
       #   account. If you try to submit a URL that has already been used for an
@@ -732,7 +730,7 @@ module Aws
       # @option params [Array<String>] :client_id_list
       #   A list of client IDs (also known as audiences). When a mobile or web
       #   app registers with an OpenID Connect provider, they establish a value
-      #   that identifies the application. (This is the value that\'s sent as
+      #   that identifies the application. (This is the value that's sent as
       #   the `client_id` parameter on OAuth requests.)
       #
       #   You can register multiple client IDs with the same provider. For
@@ -745,7 +743,7 @@ module Aws
       #   255 characters long.
       # @option params [required, Array<String>] :thumbprint_list
       #   A list of server certificate thumbprints for the OpenID Connect (OIDC)
-      #   identity provider\'s server certificate(s). Typically this list
+      #   identity provider's server certificate(s). Typically this list
       #   includes only one entry. However, IAM lets you have up to five
       #   thumbprints for an OIDC provider. This lets you maintain multiple
       #   thumbprints if the identity provider is rotating certificates.
@@ -757,11 +755,11 @@ module Aws
       #   You must provide at least one thumbprint when creating an IAM OIDC
       #   provider. For example, if the OIDC provider is `server.example.com`
       #   and the provider stores its keys at
-      #   \"https://keys.server.example.com/openid-connect\", the thumbprint
+      #   "https://keys.server.example.com/openid-connect", the thumbprint
       #   string would be the hex-encoded SHA-1 hash value of the certificate
       #   used by https://keys.server.example.com.
       #
-      #   For more information about obtaining the OIDC provider\'s thumbprint,
+      #   For more information about obtaining the OIDC provider's thumbprint,
       #   see [Obtaining the Thumbprint for an OpenID Connect Provider][1] in
       #   the *IAM User Guide*.
       #
@@ -781,8 +779,8 @@ module Aws
       #
       # @example Response structure
       #   resp.open_id_connect_provider_arn #=> String
+      # @overload create_open_id_connect_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_open_id_connect_provider(params = {}, options = {})
         req = build_request(:create_open_id_connect_provider, params)
         req.send_request(options)
@@ -791,7 +789,7 @@ module Aws
       # Creates a new managed policy for your AWS account.
       #
       # This operation creates a policy version with a version identifier of
-      # `v1` and sets v1 as the policy\'s default version. For more
+      # `v1` and sets v1 as the policy's default version. For more
       # information about policy versions, see [Versioning for Managed
       # Policies][1] in the *IAM User Guide*.
       #
@@ -849,8 +847,8 @@ module Aws
       #   A friendly description of the policy.
       #
       #   Typically used to store information about the permissions defined in
-      #   the policy. For example, \"Grants access to production DynamoDB
-      #   tables.\"
+      #   the policy. For example, "Grants access to production DynamoDB
+      #   tables."
       #
       #   The policy description is immutable. After a value is assigned, it
       #   cannot be changed.
@@ -877,8 +875,8 @@ module Aws
       #   resp.policy.description #=> String
       #   resp.policy.create_date #=> Time
       #   resp.policy.update_date #=> Time
+      # @overload create_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_policy(params = {}, options = {})
         req = build_request(:create_policy, params)
         req.send_request(options)
@@ -890,7 +888,7 @@ module Aws
       # delete an existing version using DeletePolicyVersion before you create
       # a new version.
       #
-      # Optionally, you can set the new version as the policy\'s default
+      # Optionally, you can set the new version as the policy's default
       # version. The default version is the version that is in effect for the
       # IAM users, groups, and roles to which the policy is attached.
       #
@@ -924,7 +922,7 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [Boolean] :set_as_default
-      #   Specifies whether to set this version as the policy\'s default
+      #   Specifies whether to set this version as the policy's default
       #   version.
       #
       #   When this parameter is `true`, the new policy version becomes the
@@ -953,8 +951,8 @@ module Aws
       #   resp.policy_version.version_id #=> String
       #   resp.policy_version.is_default_version #=> Boolean
       #   resp.policy_version.create_date #=> Time
+      # @overload create_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_policy_version(params = {}, options = {})
         req = build_request(:create_policy_version, params)
         req.send_request(options)
@@ -994,7 +992,7 @@ module Aws
       #   consisting of upper and lowercase alphanumeric characters with no
       #   spaces. You can also include any of the following characters: =,.@-.
       #   Role names are not distinguished by case. For example, you cannot
-      #   create roles named both \"PRODROLE\" and \"prodrole\".
+      #   create roles named both "PRODROLE" and "prodrole".
       #
       #
       #
@@ -1030,8 +1028,8 @@ module Aws
       #   resp.role.arn #=> String
       #   resp.role.create_date #=> Time
       #   resp.role.assume_role_policy_document #=> String
+      # @overload create_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_role(params = {}, options = {})
         req = build_request(:create_role, params)
         req.send_request(options)
@@ -1041,17 +1039,17 @@ module Aws
       # supports SAML 2.0.
       #
       # The SAML provider resource that you create with this operation can be
-      # used as a principal in an IAM role\'s trust policy to enable federated
+      # used as a principal in an IAM role's trust policy to enable federated
       # users who sign-in using the SAML IdP to assume the role. You can
       # create an IAM role that supports Web-based single sign-on (SSO) to the
       # AWS Management Console or one that supports API access to AWS.
       #
       # When you create the SAML provider resource, you upload an a SAML
       # metadata document that you get from your IdP and that includes the
-      # issuer\'s name, expiration information, and keys that can be used to
+      # issuer's name, expiration information, and keys that can be used to
       # validate the SAML authentication response (assertions) that the IdP
       # sends. You must generate the metadata document using the identity
-      # management software that is used as your organization\'s IdP.
+      # management software that is used as your organization's IdP.
       #
       # <note markdown="1"> This operation requires [Signature Version 4][1].
       #
@@ -1068,11 +1066,11 @@ module Aws
       # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_saml.html
       # @option params [required, String] :saml_metadata_document
       #   An XML document generated by an identity provider (IdP) that supports
-      #   SAML 2.0. The document includes the issuer\'s name, expiration
+      #   SAML 2.0. The document includes the issuer's name, expiration
       #   information, and keys that can be used to validate the SAML
       #   authentication response (assertions) that are received from the IdP.
       #   You must generate the metadata document using the identity management
-      #   software that is used as your organization\'s IdP.
+      #   software that is used as your organization's IdP.
       #
       #   For more information, see [About SAML 2.0-based Federation][1] in the
       #   *IAM User Guide*
@@ -1102,8 +1100,8 @@ module Aws
       #
       # @example Response structure
       #   resp.saml_provider_arn #=> String
+      # @overload create_saml_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_saml_provider(params = {}, options = {})
         req = build_request(:create_saml_provider, params)
         req.send_request(options)
@@ -1142,7 +1140,7 @@ module Aws
       #   consisting of upper and lowercase alphanumeric characters with no
       #   spaces. You can also include any of the following characters: =,.@-.
       #   User names are not distinguished by case. For example, you cannot
-      #   create users named both \"TESTUSER\" and \"testuser\".
+      #   create users named both "TESTUSER" and "testuser".
       #
       #
       #
@@ -1164,8 +1162,8 @@ module Aws
       #   resp.user.arn #=> String
       #   resp.user.create_date #=> Time
       #   resp.user.password_last_used #=> Time
+      # @overload create_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_user(params = {}, options = {})
         req = build_request(:create_user, params)
         req.send_request(options)
@@ -1180,13 +1178,11 @@ module Aws
       # For information about limits on the number of MFA devices you can
       # create, see [Limitations on Entities][2] in the *IAM User Guide*.
       #
-      # <important markdown="1"> The seed information contained in the QR code and the Base32 string
+      # The seed information contained in the QR code and the Base32 string
       # should be treated like any other secret access information, such as
       # your AWS access keys or your passwords. After you provision your
       # virtual device, you should ensure that the information is destroyed
       # following secure procedures.
-      #
-      #  </important>
       #
       #
       #
@@ -1242,8 +1238,8 @@ module Aws
       #   resp.virtual_mfa_device.user.create_date #=> Time
       #   resp.virtual_mfa_device.user.password_last_used #=> Time
       #   resp.virtual_mfa_device.enable_date #=> Time
+      # @overload create_virtual_mfa_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_virtual_mfa_device(params = {}, options = {})
         req = build_request(:create_virtual_mfa_device, params)
         req.send_request(options)
@@ -1287,8 +1283,8 @@ module Aws
       #     user_name: "existingUserNameType", # required
       #     serial_number: "serialNumberType", # required
       #   })
+      # @overload deactivate_mfa_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deactivate_mfa_device(params = {}, options = {})
         req = build_request(:deactivate_mfa_device, params)
         req.send_request(options)
@@ -1328,8 +1324,8 @@ module Aws
       #     user_name: "existingUserNameType",
       #     access_key_id: "accessKeyIdType", # required
       #   })
+      # @overload delete_access_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_access_key(params = {}, options = {})
         req = build_request(:delete_access_key, params)
         req.send_request(options)
@@ -1358,8 +1354,8 @@ module Aws
       #   resp = client.delete_account_alias({
       #     account_alias: "accountAliasType", # required
       #   })
+      # @overload delete_account_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_account_alias(params = {}, options = {})
         req = build_request(:delete_account_alias, params)
         req.send_request(options)
@@ -1368,8 +1364,8 @@ module Aws
       # Deletes the password policy for the AWS account. There are no
       # parameters.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      # @overload delete_account_password_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_account_password_policy(params = {}, options = {})
         req = build_request(:delete_account_password_policy, params)
         req.send_request(options)
@@ -1393,8 +1389,8 @@ module Aws
       #   resp = client.delete_group({
       #     group_name: "groupNameType", # required
       #   })
+      # @overload delete_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_group(params = {}, options = {})
         req = build_request(:delete_group, params)
         req.send_request(options)
@@ -1439,8 +1435,8 @@ module Aws
       #     group_name: "groupNameType", # required
       #     policy_name: "policyNameType", # required
       #   })
+      # @overload delete_group_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_group_policy(params = {}, options = {})
         req = build_request(:delete_group_policy, params)
         req.send_request(options)
@@ -1449,12 +1445,10 @@ module Aws
       # Deletes the specified instance profile. The instance profile must not
       # have an associated role.
       #
-      # <important markdown="1"> Make sure you do not have any Amazon EC2 instances running with the
+      # Make sure you do not have any Amazon EC2 instances running with the
       # instance profile you are about to delete. Deleting a role or instance
       # profile that is associated with a running instance will break any
       # applications running on the instance.
-      #
-      #  </important>
       #
       # For more information about instance profiles, go to [About Instance
       # Profiles][1].
@@ -1478,24 +1472,22 @@ module Aws
       #   resp = client.delete_instance_profile({
       #     instance_profile_name: "instanceProfileNameType", # required
       #   })
+      # @overload delete_instance_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_instance_profile(params = {}, options = {})
         req = build_request(:delete_instance_profile, params)
         req.send_request(options)
       end
 
       # Deletes the password for the specified IAM user, which terminates the
-      # user\'s ability to access AWS services through the AWS Management
+      # user's ability to access AWS services through the AWS Management
       # Console.
       #
-      # <important markdown="1"> Deleting a user\'s password does not prevent a user from accessing AWS
+      # Deleting a user's password does not prevent a user from accessing AWS
       # through the command line interface or the API. To prevent all user
       # access you must also either make any access keys inactive or delete
       # them. For more information about making keys inactive or deleting
       # them, see UpdateAccessKey and DeleteAccessKey.
-      #
-      #  </important>
       # @option params [required, String] :user_name
       #   The name of the user whose password you want to delete.
       #
@@ -1512,8 +1504,8 @@ module Aws
       #   resp = client.delete_login_profile({
       #     user_name: "userNameType", # required
       #   })
+      # @overload delete_login_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_login_profile(params = {}, options = {})
         req = build_request(:delete_login_profile, params)
         req.send_request(options)
@@ -1538,8 +1530,8 @@ module Aws
       #   resp = client.delete_open_id_connect_provider({
       #     open_id_connect_provider_arn: "arnType", # required
       #   })
+      # @overload delete_open_id_connect_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_open_id_connect_provider(params = {}, options = {})
         req = build_request(:delete_open_id_connect_provider, params)
         req.send_request(options)
@@ -1549,7 +1541,7 @@ module Aws
       #
       # Before you can delete a managed policy, you must first detach the
       # policy from all users, groups, and roles that it is attached to, and
-      # you must delete all of the policy\'s versions. The following steps
+      # you must delete all of the policy's versions. The following steps
       # describe the process for deleting a managed policy:
       #
       # * Detach the policy from all users, groups, and roles that the policy
@@ -1558,12 +1550,12 @@ module Aws
       #   a policy is attached to, use ListEntitiesForPolicy.
       #
       # * Delete all versions of the policy using DeletePolicyVersion. To list
-      #   the policy\'s versions, use ListPolicyVersions. You cannot use
+      #   the policy's versions, use ListPolicyVersions. You cannot use
       #   DeletePolicyVersion to delete the version that is marked as the
-      #   default version. You delete the policy\'s default version in the
+      #   default version. You delete the policy's default version in the
       #   next step of the process.
       #
-      # * Delete the policy (this automatically deletes the policy\'s default
+      # * Delete the policy (this automatically deletes the policy's default
       #   version) using this API.
       #
       # For information about managed policies, see [Managed Policies and
@@ -1587,8 +1579,8 @@ module Aws
       #   resp = client.delete_policy({
       #     policy_arn: "arnType", # required
       #   })
+      # @overload delete_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_policy(params = {}, options = {})
         req = build_request(:delete_policy, params)
         req.send_request(options)
@@ -1621,8 +1613,8 @@ module Aws
       #   The policy version to delete.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
-      #   that consists of the lowercase letter \'v\' followed by one or two
-      #   digits, and optionally followed by a period \'.\' and a string of
+      #   that consists of the lowercase letter 'v' followed by one or two
+      #   digits, and optionally followed by a period '.' and a string of
       #   letters and digits.
       #
       #   For more information about managed policy versions, see [Versioning
@@ -1639,8 +1631,8 @@ module Aws
       #     policy_arn: "arnType", # required
       #     version_id: "policyVersionIdType", # required
       #   })
+      # @overload delete_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_policy_version(params = {}, options = {})
         req = build_request(:delete_policy_version, params)
         req.send_request(options)
@@ -1650,12 +1642,10 @@ module Aws
       # attached. For more information about roles, go to [Working with
       # Roles][1].
       #
-      # <important markdown="1"> Make sure you do not have any Amazon EC2 instances running with the
+      # Make sure you do not have any Amazon EC2 instances running with the
       # role you are about to delete. Deleting a role or instance profile that
       # is associated with a running instance will break any applications
       # running on the instance.
-      #
-      #  </important>
       #
       #
       #
@@ -1676,8 +1666,8 @@ module Aws
       #   resp = client.delete_role({
       #     role_name: "roleNameType", # required
       #   })
+      # @overload delete_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_role(params = {}, options = {})
         req = build_request(:delete_role, params)
         req.send_request(options)
@@ -1722,8 +1712,8 @@ module Aws
       #     role_name: "roleNameType", # required
       #     policy_name: "policyNameType", # required
       #   })
+      # @overload delete_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_role_policy(params = {}, options = {})
         req = build_request(:delete_role_policy, params)
         req.send_request(options)
@@ -1732,7 +1722,7 @@ module Aws
       # Deletes a SAML provider resource in IAM.
       #
       # Deleting the provider resource from IAM does not update any roles that
-      # reference the SAML provider resource\'s ARN as a principal in their
+      # reference the SAML provider resource's ARN as a principal in their
       # trust policies. Any attempt to assume a role that references a
       # non-existent provider resource ARN fails.
       #
@@ -1751,8 +1741,8 @@ module Aws
       #   resp = client.delete_saml_provider({
       #     saml_provider_arn: "arnType", # required
       #   })
+      # @overload delete_saml_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_saml_provider(params = {}, options = {})
         req = build_request(:delete_saml_provider, params)
         req.send_request(options)
@@ -1795,8 +1785,8 @@ module Aws
       #     user_name: "userNameType", # required
       #     ssh_public_key_id: "publicKeyIdType", # required
       #   })
+      # @overload delete_ssh_public_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_ssh_public_key(params = {}, options = {})
         req = build_request(:delete_ssh_public_key, params)
         req.send_request(options)
@@ -1809,17 +1799,15 @@ module Aws
       # manage with IAM, go to [Working with Server Certificates][1] in the
       # *IAM User Guide*.
       #
-      # <important markdown="1"> If you are using a server certificate with Elastic Load Balancing,
+      # If you are using a server certificate with Elastic Load Balancing,
       # deleting the certificate could have implications for your application.
-      # If Elastic Load Balancing doesn\'t detect the deletion of bound
+      # If Elastic Load Balancing doesn't detect the deletion of bound
       # certificates, it may continue to use the certificates. This could
       # cause Elastic Load Balancing to stop accepting traffic. We recommend
       # that you remove the reference to the certificate from Elastic Load
       # Balancing before using this command to delete the certificate. For
       # more information, go to [DeleteLoadBalancerListeners][2] in the
       # *Elastic Load Balancing API Reference*.
-      #
-      #  </important>
       #
       #
       #
@@ -1841,8 +1829,8 @@ module Aws
       #   resp = client.delete_server_certificate({
       #     server_certificate_name: "serverCertificateNameType", # required
       #   })
+      # @overload delete_server_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_server_certificate(params = {}, options = {})
         req = build_request(:delete_server_certificate, params)
         req.send_request(options)
@@ -1882,8 +1870,8 @@ module Aws
       #     user_name: "existingUserNameType",
       #     certificate_id: "certificateIdType", # required
       #   })
+      # @overload delete_signing_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_signing_certificate(params = {}, options = {})
         req = build_request(:delete_signing_certificate, params)
         req.send_request(options)
@@ -1907,8 +1895,8 @@ module Aws
       #   resp = client.delete_user({
       #     user_name: "existingUserNameType", # required
       #   })
+      # @overload delete_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user(params = {}, options = {})
         req = build_request(:delete_user, params)
         req.send_request(options)
@@ -1953,8 +1941,8 @@ module Aws
       #     user_name: "existingUserNameType", # required
       #     policy_name: "policyNameType", # required
       #   })
+      # @overload delete_user_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user_policy(params = {}, options = {})
         req = build_request(:delete_user_policy, params)
         req.send_request(options)
@@ -1962,7 +1950,7 @@ module Aws
 
       # Deletes a virtual MFA device.
       #
-      # <note markdown="1"> You must deactivate a user\'s virtual MFA device before you can delete
+      # <note markdown="1"> You must deactivate a user's virtual MFA device before you can delete
       # it. For information about deactivating MFA devices, see
       # DeactivateMFADevice.
       #
@@ -1984,8 +1972,8 @@ module Aws
       #   resp = client.delete_virtual_mfa_device({
       #     serial_number: "serialNumberType", # required
       #   })
+      # @overload delete_virtual_mfa_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_virtual_mfa_device(params = {}, options = {})
         req = build_request(:delete_virtual_mfa_device, params)
         req.send_request(options)
@@ -2028,8 +2016,8 @@ module Aws
       #     group_name: "groupNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload detach_group_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_group_policy(params = {}, options = {})
         req = build_request(:detach_group_policy, params)
         req.send_request(options)
@@ -2072,8 +2060,8 @@ module Aws
       #     role_name: "roleNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload detach_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_role_policy(params = {}, options = {})
         req = build_request(:detach_role_policy, params)
         req.send_request(options)
@@ -2116,8 +2104,8 @@ module Aws
       #     user_name: "userNameType", # required
       #     policy_arn: "arnType", # required
       #   })
+      # @overload detach_user_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_user_policy(params = {}, options = {})
         req = build_request(:detach_user_policy, params)
         req.send_request(options)
@@ -2164,8 +2152,8 @@ module Aws
       #     authentication_code_1: "authenticationCodeType", # required
       #     authentication_code_2: "authenticationCodeType", # required
       #   })
+      # @overload enable_mfa_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_mfa_device(params = {}, options = {})
         req = build_request(:enable_mfa_device, params)
         req.send_request(options)
@@ -2186,8 +2174,8 @@ module Aws
       # @example Response structure
       #   resp.state #=> String, one of "STARTED", "INPROGRESS", "COMPLETE"
       #   resp.description #=> String
+      # @overload generate_credential_report(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_credential_report(params = {}, options = {})
         req = build_request(:generate_credential_report, params)
         req.send_request(options)
@@ -2221,8 +2209,8 @@ module Aws
       #   resp.access_key_last_used.last_used_date #=> Time
       #   resp.access_key_last_used.service_name #=> String
       #   resp.access_key_last_used.region #=> String
+      # @overload get_access_key_last_used(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_access_key_last_used(params = {}, options = {})
         req = build_request(:get_access_key_last_used, params)
         req.send_request(options)
@@ -2346,8 +2334,8 @@ module Aws
       #   resp.policies[0].policy_version_list[0].create_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload get_account_authorization_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_account_authorization_details(params = {}, options = {})
         req = build_request(:get_account_authorization_details, params)
         req.send_request(options)
@@ -2375,8 +2363,8 @@ module Aws
       #   resp.password_policy.max_password_age #=> Integer
       #   resp.password_policy.password_reuse_prevention #=> Integer
       #   resp.password_policy.hard_expiry #=> Boolean
+      # @overload get_account_password_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_account_password_policy(params = {}, options = {})
         req = build_request(:get_account_password_policy, params)
         req.send_request(options)
@@ -2398,8 +2386,8 @@ module Aws
       # @example Response structure
       #   resp.summary_map #=> Hash
       #   resp.summary_map["summaryKeyType"] #=> Integer
+      # @overload get_account_summary(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_account_summary(params = {}, options = {})
         req = build_request(:get_account_summary, params)
         req.send_request(options)
@@ -2443,8 +2431,8 @@ module Aws
       # @example Response structure
       #   resp.context_key_names #=> Array
       #   resp.context_key_names[0] #=> String
+      # @overload get_context_keys_for_custom_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_context_keys_for_custom_policy(params = {}, options = {})
         req = build_request(:get_context_keys_for_custom_policy, params)
         req.send_request(options)
@@ -2461,7 +2449,7 @@ module Aws
       # by string, use GetContextKeysForCustomPolicy instead.
       #
       # **Note:** This API discloses information about the permissions granted
-      # to other users. If you do not want users to see other user\'s
+      # to other users. If you do not want users to see other user's
       # permissions, then consider allowing them to use
       # GetContextKeysForCustomPolicy instead.
       #
@@ -2512,8 +2500,8 @@ module Aws
       # @example Response structure
       #   resp.context_key_names #=> Array
       #   resp.context_key_names[0] #=> String
+      # @overload get_context_keys_for_principal_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_context_keys_for_principal_policy(params = {}, options = {})
         req = build_request(:get_context_keys_for_principal_policy, params)
         req.send_request(options)
@@ -2536,8 +2524,8 @@ module Aws
       #   resp.content #=> String
       #   resp.report_format #=> String, one of "text/csv"
       #   resp.generated_time #=> Time
+      # @overload get_credential_report(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_credential_report(params = {}, options = {})
         req = build_request(:get_credential_report, params)
         req.send_request(options)
@@ -2599,8 +2587,8 @@ module Aws
       #   resp.users[0].password_last_used #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload get_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_group(params = {}, options = {})
         req = build_request(:get_group, params)
         req.send_request(options)
@@ -2619,7 +2607,7 @@ module Aws
       #
       # An IAM group can also have managed policies attached to it. To
       # retrieve a managed policy document that is attached to a group, use
-      # GetPolicy to determine the policy\'s default version, then use
+      # GetPolicy to determine the policy's default version, then use
       # GetPolicyVersion to retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
@@ -2665,15 +2653,15 @@ module Aws
       #   resp.group_name #=> String
       #   resp.policy_name #=> String
       #   resp.policy_document #=> String
+      # @overload get_group_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_group_policy(params = {}, options = {})
         req = build_request(:get_group_policy, params)
         req.send_request(options)
       end
 
       # Retrieves information about the specified instance profile, including
-      # the instance profile\'s path, GUID, ARN, and role. For more
+      # the instance profile's path, GUID, ARN, and role. For more
       # information about instance profiles, see [About Instance Profiles][1]
       # in the *IAM User Guide*.
       #
@@ -2712,8 +2700,8 @@ module Aws
       #   resp.instance_profile.roles[0].arn #=> String
       #   resp.instance_profile.roles[0].create_date #=> Time
       #   resp.instance_profile.roles[0].assume_role_policy_document #=> String
+      # @overload get_instance_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_instance_profile(params = {}, options = {})
         req = build_request(:get_instance_profile, params)
         req.send_request(options)
@@ -2745,8 +2733,8 @@ module Aws
       #   resp.login_profile.user_name #=> String
       #   resp.login_profile.create_date #=> Time
       #   resp.login_profile.password_reset_required #=> Boolean
+      # @overload get_login_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_login_profile(params = {}, options = {})
         req = build_request(:get_login_profile, params)
         req.send_request(options)
@@ -2784,15 +2772,15 @@ module Aws
       #   resp.thumbprint_list #=> Array
       #   resp.thumbprint_list[0] #=> String
       #   resp.create_date #=> Time
+      # @overload get_open_id_connect_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_open_id_connect_provider(params = {}, options = {})
         req = build_request(:get_open_id_connect_provider, params)
         req.send_request(options)
       end
 
       # Retrieves information about the specified managed policy, including
-      # the policy\'s default version and the total number of IAM users,
+      # the policy's default version and the total number of IAM users,
       # groups, and roles to which the policy is attached. To retrieve the
       # list of the specific users, groups, and roles that the policy is
       # attached to, use the ListEntitiesForPolicy API. This API returns
@@ -2840,8 +2828,8 @@ module Aws
       #   resp.policy.description #=> String
       #   resp.policy.create_date #=> Time
       #   resp.policy.update_date #=> Time
+      # @overload get_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_policy(params = {}, options = {})
         req = build_request(:get_policy, params)
         req.send_request(options)
@@ -2889,8 +2877,8 @@ module Aws
       #   Identifies the policy version to retrieve.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
-      #   that consists of the lowercase letter \'v\' followed by one or two
-      #   digits, and optionally followed by a period \'.\' and a string of
+      #   that consists of the lowercase letter 'v' followed by one or two
+      #   digits, and optionally followed by a period '.' and a string of
       #   letters and digits.
       #
       #
@@ -2911,15 +2899,15 @@ module Aws
       #   resp.policy_version.version_id #=> String
       #   resp.policy_version.is_default_version #=> Boolean
       #   resp.policy_version.create_date #=> Time
+      # @overload get_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_policy_version(params = {}, options = {})
         req = build_request(:get_policy_version, params)
         req.send_request(options)
       end
 
-      # Retrieves information about the specified role, including the role\'s
-      # path, GUID, ARN, and the role\'s trust policy that grants permission
+      # Retrieves information about the specified role, including the role's
+      # path, GUID, ARN, and the role's trust policy that grants permission
       # to assume the role. For more information about roles, see [Working
       # with Roles][1].
       #
@@ -2961,8 +2949,8 @@ module Aws
       #   resp.role.arn #=> String
       #   resp.role.create_date #=> Time
       #   resp.role.assume_role_policy_document #=> String
+      # @overload get_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_role(params = {}, options = {})
         req = build_request(:get_role, params)
         req.send_request(options)
@@ -2981,7 +2969,7 @@ module Aws
       #
       # An IAM role can also have managed policies attached to it. To retrieve
       # a managed policy document that is attached to a role, use GetPolicy to
-      # determine the policy\'s default version, then use GetPolicyVersion to
+      # determine the policy's default version, then use GetPolicyVersion to
       # retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
@@ -3031,8 +3019,8 @@ module Aws
       #   resp.role_name #=> String
       #   resp.policy_name #=> String
       #   resp.policy_document #=> String
+      # @overload get_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_role_policy(params = {}, options = {})
         req = build_request(:get_role_policy, params)
         req.send_request(options)
@@ -3073,8 +3061,8 @@ module Aws
       #   resp.saml_metadata_document #=> String
       #   resp.create_date #=> Time
       #   resp.valid_until #=> Time
+      # @overload get_saml_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_saml_provider(params = {}, options = {})
         req = build_request(:get_saml_provider, params)
         req.send_request(options)
@@ -3133,8 +3121,8 @@ module Aws
       #   resp.ssh_public_key.ssh_public_key_body #=> String
       #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
       #   resp.ssh_public_key.upload_date #=> Time
+      # @overload get_ssh_public_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_ssh_public_key(params = {}, options = {})
         req = build_request(:get_ssh_public_key, params)
         req.send_request(options)
@@ -3180,15 +3168,15 @@ module Aws
       #   resp.server_certificate.server_certificate_metadata.expiration #=> Time
       #   resp.server_certificate.certificate_body #=> String
       #   resp.server_certificate.certificate_chain #=> String
+      # @overload get_server_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_server_certificate(params = {}, options = {})
         req = build_request(:get_server_certificate, params)
         req.send_request(options)
       end
 
       # Retrieves information about the specified IAM user, including the
-      # user\'s creation date, path, unique ID, and ARN.
+      # user's creation date, path, unique ID, and ARN.
       #
       # If you do not specify a user name, IAM determines the user name
       # implicitly based on the AWS access key ID used to sign the request to
@@ -3221,8 +3209,8 @@ module Aws
       #   resp.user.arn #=> String
       #   resp.user.create_date #=> Time
       #   resp.user.password_last_used #=> Time
+      # @overload get_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_user(params = {}, options = {})
         req = build_request(:get_user, params)
         req.send_request(options)
@@ -3241,7 +3229,7 @@ module Aws
       #
       # An IAM user can also have managed policies attached to it. To retrieve
       # a managed policy document that is attached to a user, use GetPolicy to
-      # determine the policy\'s default version, then use GetPolicyVersion to
+      # determine the policy's default version, then use GetPolicyVersion to
       # retrieve the policy document.
       #
       # For more information about policies, see [Managed Policies and Inline
@@ -3287,8 +3275,8 @@ module Aws
       #   resp.user_name #=> String
       #   resp.policy_name #=> String
       #   resp.policy_document #=> String
+      # @overload get_user_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_user_policy(params = {}, options = {})
         req = build_request(:get_user_policy, params)
         req.send_request(options)
@@ -3357,8 +3345,8 @@ module Aws
       #   resp.access_key_metadata[0].create_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_access_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_access_keys(params = {}, options = {})
         req = build_request(:list_access_keys, params)
         req.send_request(options)
@@ -3403,8 +3391,8 @@ module Aws
       #   resp.account_aliases[0] #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_account_aliases(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_account_aliases(params = {}, options = {})
         req = build_request(:list_account_aliases, params)
         req.send_request(options)
@@ -3488,8 +3476,8 @@ module Aws
       #   resp.attached_policies[0].policy_arn #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_attached_group_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_attached_group_policies(params = {}, options = {})
         req = build_request(:list_attached_group_policies, params)
         req.send_request(options)
@@ -3573,8 +3561,8 @@ module Aws
       #   resp.attached_policies[0].policy_arn #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_attached_role_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_attached_role_policies(params = {}, options = {})
         req = build_request(:list_attached_role_policies, params)
         req.send_request(options)
@@ -3658,8 +3646,8 @@ module Aws
       #   resp.attached_policies[0].policy_arn #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_attached_user_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_attached_user_policies(params = {}, options = {})
         req = build_request(:list_attached_user_policies, params)
         req.send_request(options)
@@ -3752,8 +3740,8 @@ module Aws
       #   resp.policy_roles[0].role_id #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_entities_for_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_entities_for_policy(params = {}, options = {})
         req = build_request(:list_entities_for_policy, params)
         req.send_request(options)
@@ -3817,8 +3805,8 @@ module Aws
       #   resp.policy_names[0] #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_group_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_group_policies(params = {}, options = {})
         req = build_request(:list_group_policies, params)
         req.send_request(options)
@@ -3881,8 +3869,8 @@ module Aws
       #   resp.groups[0].create_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_groups(params = {}, options = {})
         req = build_request(:list_groups, params)
         req.send_request(options)
@@ -3939,8 +3927,8 @@ module Aws
       #   resp.groups[0].create_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_groups_for_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_groups_for_user(params = {}, options = {})
         req = build_request(:list_groups_for_user, params)
         req.send_request(options)
@@ -4016,8 +4004,8 @@ module Aws
       #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_instance_profiles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_instance_profiles(params = {}, options = {})
         req = build_request(:list_instance_profiles, params)
         req.send_request(options)
@@ -4088,8 +4076,8 @@ module Aws
       #   resp.instance_profiles[0].roles[0].assume_role_policy_document #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_instance_profiles_for_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_instance_profiles_for_role(params = {}, options = {})
         req = build_request(:list_instance_profiles_for_role, params)
         req.send_request(options)
@@ -4148,8 +4136,8 @@ module Aws
       #   resp.mfa_devices[0].enable_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_mfa_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_mfa_devices(params = {}, options = {})
         req = build_request(:list_mfa_devices, params)
         req.send_request(options)
@@ -4167,8 +4155,8 @@ module Aws
       # @example Response structure
       #   resp.open_id_connect_provider_list #=> Array
       #   resp.open_id_connect_provider_list[0].arn #=> String
+      # @overload list_open_id_connect_providers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_open_id_connect_providers(params = {}, options = {})
         req = build_request(:list_open_id_connect_providers, params)
         req.send_request(options)
@@ -4266,15 +4254,15 @@ module Aws
       #   resp.policies[0].update_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_policies(params = {}, options = {})
         req = build_request(:list_policies, params)
         req.send_request(options)
       end
 
       # Lists information about the versions of the specified managed policy,
-      # including the version that is currently set as the policy\'s default
+      # including the version that is currently set as the policy's default
       # version.
       #
       # For more information about managed policies, see [Managed Policies and
@@ -4329,8 +4317,8 @@ module Aws
       #   resp.versions[0].create_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_policy_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_policy_versions(params = {}, options = {})
         req = build_request(:list_policy_versions, params)
         req.send_request(options)
@@ -4394,8 +4382,8 @@ module Aws
       #   resp.policy_names[0] #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_role_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_role_policies(params = {}, options = {})
         req = build_request(:list_role_policies, params)
         req.send_request(options)
@@ -4465,8 +4453,8 @@ module Aws
       #   resp.roles[0].assume_role_policy_document #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_roles(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_roles(params = {}, options = {})
         req = build_request(:list_roles, params)
         req.send_request(options)
@@ -4494,8 +4482,8 @@ module Aws
       #   resp.saml_provider_list[0].arn #=> String
       #   resp.saml_provider_list[0].valid_until #=> Time
       #   resp.saml_provider_list[0].create_date #=> Time
+      # @overload list_saml_providers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_saml_providers(params = {}, options = {})
         req = build_request(:list_saml_providers, params)
         req.send_request(options)
@@ -4565,8 +4553,8 @@ module Aws
       #   resp.ssh_public_keys[0].upload_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_ssh_public_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_ssh_public_keys(params = {}, options = {})
         req = build_request(:list_ssh_public_keys, params)
         req.send_request(options)
@@ -4640,8 +4628,8 @@ module Aws
       #   resp.server_certificate_metadata_list[0].expiration #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_server_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_server_certificates(params = {}, options = {})
         req = build_request(:list_server_certificates, params)
         req.send_request(options)
@@ -4708,8 +4696,8 @@ module Aws
       #   resp.certificates[0].upload_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_signing_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_signing_certificates(params = {}, options = {})
         req = build_request(:list_signing_certificates, params)
         req.send_request(options)
@@ -4773,8 +4761,8 @@ module Aws
       #   resp.policy_names[0] #=> String
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_user_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_user_policies(params = {}, options = {})
         req = build_request(:list_user_policies, params)
         req.send_request(options)
@@ -4840,8 +4828,8 @@ module Aws
       #   resp.users[0].password_last_used #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_users(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_users(params = {}, options = {})
         req = build_request(:list_users, params)
         req.send_request(options)
@@ -4900,8 +4888,8 @@ module Aws
       #   resp.virtual_mfa_devices[0].enable_date #=> Time
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload list_virtual_mfa_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_virtual_mfa_devices(params = {}, options = {})
         req = build_request(:list_virtual_mfa_devices, params)
         req.send_request(options)
@@ -4971,8 +4959,8 @@ module Aws
       #     policy_name: "policyNameType", # required
       #     policy_document: "policyDocumentType", # required
       #   })
+      # @overload put_group_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_group_policy(params = {}, options = {})
         req = build_request(:put_group_policy, params)
         req.send_request(options)
@@ -4982,9 +4970,9 @@ module Aws
       # specified IAM role.
       #
       # When you embed an inline policy in a role, the inline policy is used
-      # as part of the role\'s access (permissions) policy. The role\'s trust
+      # as part of the role's access (permissions) policy. The role's trust
       # policy is created at the same time as the role, using CreateRole. You
-      # can update a role\'s trust policy using UpdateAssumeRolePolicy. For
+      # can update a role's trust policy using UpdateAssumeRolePolicy. For
       # more information about IAM roles, go to [Using Roles to Delegate
       # Permissions and Federate Identities][1].
       #
@@ -5050,8 +5038,8 @@ module Aws
       #     policy_name: "policyNameType", # required
       #     policy_document: "policyDocumentType", # required
       #   })
+      # @overload put_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_role_policy(params = {}, options = {})
         req = build_request(:put_role_policy, params)
         req.send_request(options)
@@ -5121,8 +5109,8 @@ module Aws
       #     policy_name: "policyNameType", # required
       #     policy_document: "policyDocumentType", # required
       #   })
+      # @overload put_user_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_user_policy(params = {}, options = {})
         req = build_request(:put_user_policy, params)
         req.send_request(options)
@@ -5156,8 +5144,8 @@ module Aws
       #     open_id_connect_provider_arn: "arnType", # required
       #     client_id: "clientIDType", # required
       #   })
+      # @overload remove_client_id_from_open_id_connect_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_client_id_from_open_id_connect_provider(params = {}, options = {})
         req = build_request(:remove_client_id_from_open_id_connect_provider, params)
         req.send_request(options)
@@ -5166,12 +5154,10 @@ module Aws
       # Removes the specified IAM role from the specified EC2 instance
       # profile.
       #
-      # <important markdown="1"> Make sure you do not have any Amazon EC2 instances running with the
+      # Make sure you do not have any Amazon EC2 instances running with the
       # role you are about to remove from the instance profile. Removing a
       # role from an instance profile that is associated with a running
       # instance break any applications running on the instance.
-      #
-      #  </important>
       #
       # For more information about IAM roles, go to [Working with Roles][1].
       # For more information about instance profiles, go to [About Instance
@@ -5208,8 +5194,8 @@ module Aws
       #     instance_profile_name: "instanceProfileNameType", # required
       #     role_name: "roleNameType", # required
       #   })
+      # @overload remove_role_from_instance_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_role_from_instance_profile(params = {}, options = {})
         req = build_request(:remove_role_from_instance_profile, params)
         req.send_request(options)
@@ -5243,8 +5229,8 @@ module Aws
       #     group_name: "groupNameType", # required
       #     user_name: "existingUserNameType", # required
       #   })
+      # @overload remove_user_from_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_user_from_group(params = {}, options = {})
         req = build_request(:remove_user_from_group, params)
         req.send_request(options)
@@ -5297,14 +5283,14 @@ module Aws
       #     authentication_code_1: "authenticationCodeType", # required
       #     authentication_code_2: "authenticationCodeType", # required
       #   })
+      # @overload resync_mfa_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resync_mfa_device(params = {}, options = {})
         req = build_request(:resync_mfa_device, params)
         req.send_request(options)
       end
 
-      # Sets the specified version of the specified policy as the policy\'s
+      # Sets the specified version of the specified policy as the policy's
       # default (operative) version.
       #
       # This action affects all users, groups, and roles that the policy is
@@ -5343,8 +5329,8 @@ module Aws
       #     policy_arn: "arnType", # required
       #     version_id: "policyVersionIdType", # required
       #   })
+      # @overload set_default_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_default_policy_version(params = {}, options = {})
         req = build_request(:set_default_policy_version, params)
         req.send_request(options)
@@ -5352,7 +5338,7 @@ module Aws
 
       # Simulate how a set of IAM policies and optionally a resource-based
       # policy works with a list of API actions and AWS resources to determine
-      # the policies\' effective permissions. The policies are provided as
+      # the policies' effective permissions. The policies are provided as
       # strings.
       #
       # The simulation does not perform the API actions; it only checks the
@@ -5375,7 +5361,7 @@ module Aws
       #   is specified as a string containing the complete, valid JSON text of
       #   an IAM policy. Do not include any resource-based policies in this
       #   parameter. Any resource-based policy must be submitted with the
-      #   `ResourcePolicy` parameter. The policies cannot be \"scope-down\"
+      #   `ResourcePolicy` parameter. The policies cannot be "scope-down"
       #   policies, such as you could include in a call to
       #   [GetFederationToken][1] or one of the [AssumeRole][2] APIs to restrict
       #   what a user can do while using the temporary credentials.
@@ -5447,7 +5433,7 @@ module Aws
       # @option params [String] :caller_arn
       #   The ARN of the IAM user that you want to use as the simulated caller
       #   of the APIs. `CallerArn` is required if you include a `ResourcePolicy`
-      #   so that the policy\'s `Principal` element has a value to use in
+      #   so that the policy's `Principal` element has a value to use in
       #   evaluating the policy.
       #
       #   You can specify only the ARN of an IAM user. You cannot specify the
@@ -5574,8 +5560,8 @@ module Aws
       #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload simulate_custom_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def simulate_custom_policy(params = {}, options = {})
         req = build_request(:simulate_custom_policy, params)
         req.send_request(options)
@@ -5583,7 +5569,7 @@ module Aws
 
       # Simulate how a set of IAM policies attached to an IAM entity works
       # with a list of API actions and AWS resources to determine the
-      # policies\' effective permissions. The entity can be an IAM user,
+      # policies' effective permissions. The entity can be an IAM user,
       # group, or role. If you specify a user, then the simulation also
       # includes all of the policies that are attached to groups that the user
       # belongs to .
@@ -5601,7 +5587,7 @@ module Aws
       # actions.
       #
       # **Note:** This API discloses information about the permissions granted
-      # to other users. If you do not want users to see other user\'s
+      # to other users. If you do not want users to see other user's
       # permissions, then consider allowing them to use SimulateCustomPolicy
       # instead.
       #
@@ -5697,7 +5683,7 @@ module Aws
       #   specified a user. If you include both a `PolicySourceArn` (for
       #   example, `arn:aws:iam::123456789012:user/David`) and a `CallerArn`
       #   (for example, `arn:aws:iam::123456789012:user/Bob`), the result is
-      #   that you simulate calling the APIs as Bob, as if Bob had David\'s
+      #   that you simulate calling the APIs as Bob, as if Bob had David's
       #   policies.
       #
       #   You can specify only the ARN of an IAM user. You cannot specify the
@@ -5705,7 +5691,7 @@ module Aws
       #
       #   `CallerArn` is required if you include a `ResourcePolicy` and the
       #   `PolicySourceArn` is not the ARN for an IAM user. This is required so
-      #   that the resource-based policy\'s `Principal` element has a value to
+      #   that the resource-based policy's `Principal` element has a value to
       #   use in evaluating the policy.
       #
       #   For more information about ARNs, see [Amazon Resource Names (ARNs) and
@@ -5837,15 +5823,15 @@ module Aws
       #   resp.evaluation_results[0].resource_specific_results[0].eval_decision_details["EvalDecisionSourceType"] #=> String, one of "allowed", "explicitDeny", "implicitDeny"
       #   resp.is_truncated #=> Boolean
       #   resp.marker #=> String
+      # @overload simulate_principal_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def simulate_principal_policy(params = {}, options = {})
         req = build_request(:simulate_principal_policy, params)
         req.send_request(options)
       end
 
       # Changes the status of the specified access key from Active to
-      # Inactive, or vice versa. This action can be used to disable a user\'s
+      # Inactive, or vice versa. This action can be used to disable a user's
       # key as part of a key rotation work flow.
       #
       # If the `UserName` field is not specified, the UserName is determined
@@ -5891,8 +5877,8 @@ module Aws
       #     access_key_id: "accessKeyIdType", # required
       #     status: "Active", # required, accepts Active, Inactive
       #   })
+      # @overload update_access_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_access_key(params = {}, options = {})
         req = build_request(:update_access_key, params)
         req.send_request(options)
@@ -5901,9 +5887,9 @@ module Aws
       # Updates the password policy settings for the AWS account.
       #
       # <note markdown="1"> This action does not support partial updates. No parameters are
-      # required, but if you do not specify a parameter, that parameter\'s
+      # required, but if you do not specify a parameter, that parameter's
       # value reverts to its default value. See the **Request Parameters**
-      # section for each parameter\'s default value.
+      # section for each parameter's default value.
       #
       #  </note>
       #
@@ -5921,7 +5907,7 @@ module Aws
       #   Specifies whether IAM user passwords must contain at least one of the
       #   following non-alphanumeric characters:
       #
-      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| \'
+      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| '
       #
       #   Default value: false
       # @option params [Boolean] :require_numbers
@@ -5979,15 +5965,15 @@ module Aws
       #     password_reuse_prevention: 1,
       #     hard_expiry: false,
       #   })
+      # @overload update_account_password_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_account_password_policy(params = {}, options = {})
         req = build_request(:update_account_password_policy, params)
         req.send_request(options)
       end
 
       # Updates the policy that grants an IAM entity permission to assume a
-      # role. This is typically referred to as the \"role trust policy\". For
+      # role. This is typically referred to as the "role trust policy". For
       # more information about roles, go to [Using Roles to Delegate
       # Permissions and Federate Identities][1].
       #
@@ -6023,8 +6009,8 @@ module Aws
       #     role_name: "roleNameType", # required
       #     policy_document: "policyDocumentType", # required
       #   })
+      # @overload update_assume_role_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_assume_role_policy(params = {}, options = {})
         req = build_request(:update_assume_role_policy, params)
         req.send_request(options)
@@ -6032,16 +6018,14 @@ module Aws
 
       # Updates the name and/or the path of the specified IAM group.
       #
-      # <important markdown="1"> You should understand the implications of changing a group\'s path or
+      # You should understand the implications of changing a group's path or
       # name. For more information, see [Renaming Users and Groups][1] in the
       # *IAM User Guide*.
       #
-      #  </important>
-      #
       # <note markdown="1"> To change an IAM group name the requester must have appropriate
       # permissions on both the source object and the target object. For
-      # example, to change \"Managers\" to \"MGRs\", the entity making the
-      # request must have permission on both \"Managers\" and \"MGRs\", or
+      # example, to change "Managers" to "MGRs", the entity making the
+      # request must have permission on both "Managers" and "MGRs", or
       # must have permission on all (\*). For more information about
       # permissions, see [Permissions and Policies][2].
       #
@@ -6052,7 +6036,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_WorkingWithGroupsAndUsers.html
       # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
       # @option params [required, String] :group_name
-      #   Name of the IAM group to update. If you\'re changing the name of the
+      #   Name of the IAM group to update. If you're changing the name of the
       #   group, this is the original name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6063,7 +6047,7 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_path
-      #   New path for the IAM group. Only include this if changing the group\'s
+      #   New path for the IAM group. Only include this if changing the group's
       #   path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6077,7 +6061,7 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_group_name
-      #   New name for the IAM group. Only include this if changing the group\'s
+      #   New name for the IAM group. Only include this if changing the group's
       #   name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6095,8 +6079,8 @@ module Aws
       #     new_path: "pathType",
       #     new_group_name: "groupNameType",
       #   })
+      # @overload update_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_group(params = {}, options = {})
         req = build_request(:update_group, params)
         req.send_request(options)
@@ -6147,8 +6131,8 @@ module Aws
       #     password: "passwordType",
       #     password_reset_required: false,
       #   })
+      # @overload update_login_profile(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_login_profile(params = {}, options = {})
         req = build_request(:update_login_profile, params)
         req.send_request(options)
@@ -6162,13 +6146,13 @@ module Aws
       # existing list of thumbprints. (The lists are not merged.)
       #
       # Typically, you need to update a thumbprint only when the identity
-      # provider\'s certificate changes, which occurs rarely. However, if the
-      # provider\'s certificate *does* change, any attempt to assume an IAM
+      # provider's certificate changes, which occurs rarely. However, if the
+      # provider's certificate *does* change, any attempt to assume an IAM
       # role that specifies the OIDC provider as a principal fails until the
       # certificate thumbprint is updated.
       #
       # <note markdown="1"> Because trust for the OIDC provider is ultimately derived from the
-      # provider\'s certificate and is validated by the thumbprint, it is a
+      # provider's certificate and is validated by the thumbprint, it is a
       # best practice to limit access to the
       # `UpdateOpenIDConnectProviderThumbprint` action to highly-privileged
       # users.
@@ -6196,8 +6180,8 @@ module Aws
       #     open_id_connect_provider_arn: "arnType", # required
       #     thumbprint_list: ["thumbprintType"], # required
       #   })
+      # @overload update_open_id_connect_provider_thumbprint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_open_id_connect_provider_thumbprint(params = {}, options = {})
         req = build_request(:update_open_id_connect_provider_thumbprint, params)
         req.send_request(options)
@@ -6215,11 +6199,11 @@ module Aws
       # [1]: http://docs.aws.amazon.com/general/latest/gr/signature-version-4.html
       # @option params [required, String] :saml_metadata_document
       #   An XML document generated by an identity provider (IdP) that supports
-      #   SAML 2.0. The document includes the issuer\'s name, expiration
+      #   SAML 2.0. The document includes the issuer's name, expiration
       #   information, and keys that can be used to validate the SAML
       #   authentication response (assertions) that are received from the IdP.
       #   You must generate the metadata document using the identity management
-      #   software that is used as your organization\'s IdP.
+      #   software that is used as your organization's IdP.
       # @option params [required, String] :saml_provider_arn
       #   The Amazon Resource Name (ARN) of the SAML provider to update.
       #
@@ -6241,16 +6225,16 @@ module Aws
       #
       # @example Response structure
       #   resp.saml_provider_arn #=> String
+      # @overload update_saml_provider(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_saml_provider(params = {}, options = {})
         req = build_request(:update_saml_provider, params)
         req.send_request(options)
       end
 
-      # Sets the status of an IAM user\'s SSH public key to active or
+      # Sets the status of an IAM user's SSH public key to active or
       # inactive. SSH public keys that are inactive cannot be used for
-      # authentication. This action can be used to disable a user\'s SSH
+      # authentication. This action can be used to disable a user's SSH
       # public key as part of a key rotation work flow.
       #
       # The SSH public key affected by this action is used only for
@@ -6293,8 +6277,8 @@ module Aws
       #     ssh_public_key_id: "publicKeyIdType", # required
       #     status: "Active", # required, accepts Active, Inactive
       #   })
+      # @overload update_ssh_public_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_ssh_public_key(params = {}, options = {})
         req = build_request(:update_ssh_public_key, params)
         req.send_request(options)
@@ -6308,17 +6292,15 @@ module Aws
       # manage with IAM, go to [Working with Server Certificates][1] in the
       # *IAM User Guide*.
       #
-      # <important markdown="1"> You should understand the implications of changing a server
-      # certificate\'s path or name. For more information, see [Renaming a
+      # You should understand the implications of changing a server
+      # certificate's path or name. For more information, see [Renaming a
       # Server Certificate][2] in the *IAM User Guide*.
-      #
-      #  </important>
       #
       # <note markdown="1"> To change a server certificate name the requester must have
       # appropriate permissions on both the source object and the target
-      # object. For example, to change the name from \"ProductionCert\" to
-      # \"ProdCert\", the entity making the request must have permission on
-      # \"ProductionCert\" and \"ProdCert\", or must have permission on all
+      # object. For example, to change the name from "ProductionCert" to
+      # "ProdCert", the entity making the request must have permission on
+      # "ProductionCert" and "ProdCert", or must have permission on all
       # (\*). For more information about permissions, see [Access
       # Management][3] in the *IAM User Guide*.
       #
@@ -6341,7 +6323,7 @@ module Aws
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_path
       #   The new path for the server certificate. Include this only if you are
-      #   updating the server certificate\'s path.
+      #   updating the server certificate's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -6355,7 +6337,7 @@ module Aws
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_server_certificate_name
       #   The new name for the server certificate. Include this only if you are
-      #   updating the server certificate\'s name. The name of the certificate
+      #   updating the server certificate's name. The name of the certificate
       #   cannot contain any spaces.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6373,8 +6355,8 @@ module Aws
       #     new_path: "pathType",
       #     new_server_certificate_name: "serverCertificateNameType",
       #   })
+      # @overload update_server_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_server_certificate(params = {}, options = {})
         req = build_request(:update_server_certificate, params)
         req.send_request(options)
@@ -6382,7 +6364,7 @@ module Aws
 
       # Changes the status of the specified user signing certificate from
       # active to disabled, or vice versa. This action can be used to disable
-      # an IAM user\'s signing certificate as part of a certificate rotation
+      # an IAM user's signing certificate as part of a certificate rotation
       # work flow.
       #
       # If the `UserName` field is not specified, the UserName is determined
@@ -6421,8 +6403,8 @@ module Aws
       #     certificate_id: "certificateIdType", # required
       #     status: "Active", # required, accepts Active, Inactive
       #   })
+      # @overload update_signing_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_signing_certificate(params = {}, options = {})
         req = build_request(:update_signing_certificate, params)
         req.send_request(options)
@@ -6430,11 +6412,9 @@ module Aws
 
       # Updates the name and/or the path of the specified IAM user.
       #
-      # <important markdown="1"> You should understand the implications of changing an IAM user\'s path
+      # You should understand the implications of changing an IAM user's path
       # or name. For more information, see [Renaming an IAM User][1] and
       # [Renaming an IAM Group][2] in the *IAM User Guide*.
-      #
-      #  </important>
       #
       # <note markdown="1"> To change a user name the requester must have appropriate permissions
       # on both the source object and the target object. For example, to
@@ -6450,7 +6430,7 @@ module Aws
       # [2]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_groups_manage_rename.html
       # [3]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
       # @option params [required, String] :user_name
-      #   Name of the user to update. If you\'re changing the name of the user,
+      #   Name of the user to update. If you're changing the name of the user,
       #   this is the original user name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
@@ -6461,8 +6441,8 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_path
-      #   New path for the IAM user. Include this parameter only if you\'re
-      #   changing the user\'s path.
+      #   New path for the IAM user. Include this parameter only if you're
+      #   changing the user's path.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of either a forward slash (/) by itself or a string that
@@ -6475,8 +6455,8 @@ module Aws
       #
       #   [1]: http://wikipedia.org/wiki/regex
       # @option params [String] :new_user_name
-      #   New name for the user. Include this parameter only if you\'re changing
-      #   the user\'s name.
+      #   New name for the user. Include this parameter only if you're changing
+      #   the user's name.
       #
       #   The [regex pattern][1] for this parameter is a string of characters
       #   consisting of upper and lowercase alphanumeric characters with no
@@ -6493,8 +6473,8 @@ module Aws
       #     new_path: "pathType",
       #     new_user_name: "userNameType",
       #   })
+      # @overload update_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_user(params = {}, options = {})
         req = build_request(:update_user, params)
         req.send_request(options)
@@ -6552,8 +6532,8 @@ module Aws
       #   resp.ssh_public_key.ssh_public_key_body #=> String
       #   resp.ssh_public_key.status #=> String, one of "Active", "Inactive"
       #   resp.ssh_public_key.upload_date #=> Time
+      # @overload upload_ssh_public_key(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_ssh_public_key(params = {}, options = {})
         req = build_request(:upload_ssh_public_key, params)
         req.send_request(options)
@@ -6679,8 +6659,8 @@ module Aws
       #   resp.server_certificate_metadata.arn #=> String
       #   resp.server_certificate_metadata.upload_date #=> Time
       #   resp.server_certificate_metadata.expiration #=> Time
+      # @overload upload_server_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_server_certificate(params = {}, options = {})
         req = build_request(:upload_server_certificate, params)
         req.send_request(options)
@@ -6748,8 +6728,8 @@ module Aws
       #   resp.certificate.certificate_body #=> String
       #   resp.certificate.status #=> String, one of "Active", "Inactive"
       #   resp.certificate.upload_date #=> Time
+      # @overload upload_signing_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_signing_certificate(params = {}, options = {})
         req = build_request(:upload_signing_certificate, params)
         req.send_request(options)

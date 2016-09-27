@@ -236,7 +236,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] authorizer_uri
-      #   \[Required\] Specifies the authorizer\'s Uniform Resource Identifier
+      #   \[Required\] Specifies the authorizer's Uniform Resource Identifier
       #   (URI). For TOKEN authorizers, this must be a well-formed Lambda
       #   function URI. The URI should be of the form
       #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`.
@@ -250,7 +250,7 @@ module Aws
       # @!attribute [rw] authorizer_credentials
       #   Specifies the credentials required for the authorizer, if any. Two
       #   options are available. To specify an IAM role for Amazon API Gateway
-      #   to assume, use the role\'s Amazon Resource Name (ARN). To use
+      #   to assume, use the role's Amazon Resource Name (ARN). To use
       #   resource-based permissions on the Lambda function, specify null.
       #   @return [String]
       #
@@ -258,16 +258,16 @@ module Aws
       #   \[Required\] The source of the identity in an incoming request. For
       #   TOKEN authorizers, this value is a mapping expression with the same
       #   syntax as integration parameter mappings. The only valid source for
-      #   tokens is \'header\', so the expression should match
-      #   \'method.request.header.\[headerName\]\'. The value of the header
-      #   \'\[headerName\]\' will be interpreted as the incoming token.
+      #   tokens is 'header', so the expression should match
+      #   'method.request.header.\[headerName\]'. The value of the header
+      #   '\[headerName\]' will be interpreted as the incoming token.
       #   @return [String]
       #
       # @!attribute [rw] identity_validation_expression
       #   A validation expression for the incoming identity. For TOKEN
       #   authorizers, this value should be a regular expression. The incoming
       #   token from the client is matched against this expression, and will
-      #   proceed if the token matches. If the token doesn\'t match, the
+      #   proceed if the token matches. If the token doesn't match, the
       #   client receives a 401 Unauthorized response.
       #   @return [String]
       #
@@ -336,7 +336,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] stage
-      #   The name of the API\'s stage.
+      #   The name of the API's stage.
       #   @return [String]
       class BasePathMapping < Struct.new(
         :base_path,
@@ -526,7 +526,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] provider_arns
-      #   A list of the Cognito Your User Pool authorizer\'s provider ARNs.
+      #   A list of the Cognito Your User Pool authorizer's provider ARNs.
       #   @return [Array<String>]
       #
       # @!attribute [rw] auth_type
@@ -535,7 +535,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] authorizer_uri
-      #   \[Required\] Specifies the authorizer\'s Uniform Resource Identifier
+      #   \[Required\] Specifies the authorizer's Uniform Resource Identifier
       #   (URI).
       #   @return [String]
       #
@@ -594,7 +594,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] stage
-      #   The name of the API\'s stage that you want to use for this mapping.
+      #   The name of the API's stage that you want to use for this mapping.
       #   Leave this blank if you do not want callers to explicitly specify
       #   the stage name after any base path name.
       #   @return [String]
@@ -692,7 +692,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] certificate_private_key
-      #   Your certificate\'s private key.
+      #   Your certificate's private key.
       #   @return [String]
       #
       # @!attribute [rw] certificate_chain
@@ -771,7 +771,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] parent_id
-      #   The parent resource\'s identifier.
+      #   The parent resource's identifier.
       #   @return [String]
       #
       # @!attribute [rw] path_part
@@ -848,7 +848,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] cache_cluster_size
-      #   The stage\'s cache cluster size.
+      #   The stage's cache cluster size.
       #   @return [String]
       #
       # @!attribute [rw] variables
@@ -1069,15 +1069,15 @@ module Aws
       #         http_method: "String", # required
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a delete integration request\'s API identifier.
+      #   Specifies a delete integration request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a delete integration request\'s resource identifier.
+      #   Specifies a delete integration request's resource identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a delete integration request\'s HTTP method.
+      #   Specifies a delete integration request's HTTP method.
       #   @return [String]
       class DeleteIntegrationRequest < Struct.new(
         :rest_api_id,
@@ -1097,20 +1097,20 @@ module Aws
       #         status_code: "StatusCode", # required
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a delete integration response request\'s API identifier.
+      #   Specifies a delete integration response request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a delete integration response request\'s resource
+      #   Specifies a delete integration response request's resource
       #   identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a delete integration response request\'s HTTP method.
+      #   Specifies a delete integration response request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] status_code
-      #   Specifies a delete integration response request\'s status code.
+      #   Specifies a delete integration response request's status code.
       #   @return [String]
       class DeleteIntegrationResponseRequest < Struct.new(
         :rest_api_id,
@@ -1443,7 +1443,7 @@ module Aws
       # SDK.
       # @!attribute [rw] content_type
       #   The content-type header value in the HTTP response. This will
-      #   correspond to a valid \'accept\' type in the request.
+      #   correspond to a valid 'accept' type in the request.
       #   @return [String]
       #
       # @!attribute [rw] content_disposition
@@ -1481,7 +1481,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Requests Amazon API Gateway to flush a stage\'s cache.
+      # Requests Amazon API Gateway to flush a stage's cache.
       # @note When making an API call, pass FlushStageCacheRequest
       #   data as a hash:
       #
@@ -1839,7 +1839,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] export_type
-      #   The type of export. Currently only \'swagger\' is supported.
+      #   The type of export. Currently only 'swagger' is supported.
       #   @return [String]
       #
       # @!attribute [rw] parameters
@@ -1878,15 +1878,15 @@ module Aws
       #         http_method: "String", # required
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a get integration request\'s API identifier.
+      #   Specifies a get integration request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a get integration request\'s resource identifier
+      #   Specifies a get integration request's resource identifier
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a get integration request\'s HTTP method.
+      #   Specifies a get integration request's HTTP method.
       #   @return [String]
       class GetIntegrationRequest < Struct.new(
         :rest_api_id,
@@ -1906,19 +1906,19 @@ module Aws
       #         status_code: "StatusCode", # required
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a get integration response request\'s API identifier.
+      #   Specifies a get integration response request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a get integration response request\'s resource identifier.
+      #   Specifies a get integration response request's resource identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a get integration response request\'s HTTP method.
+      #   Specifies a get integration response request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] status_code
-      #   Specifies a get integration response request\'s status code.
+      #   Specifies a get integration response request's status code.
       #   @return [String]
       class GetIntegrationResponseRequest < Struct.new(
         :rest_api_id,
@@ -1946,7 +1946,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies the method request\'s HTTP method type.
+      #   Specifies the method request's HTTP method type.
       #   @return [String]
       class GetMethodRequest < Struct.new(
         :rest_api_id,
@@ -2233,11 +2233,11 @@ module Aws
       #         deployment_id: "String",
       #       }
       # @!attribute [rw] rest_api_id
-      #   The stages\' API identifiers.
+      #   The stages' API identifiers.
       #   @return [String]
       #
       # @!attribute [rw] deployment_id
-      #   The stages\' deployment identifiers.
+      #   The stages' deployment identifiers.
       #   @return [String]
       class GetStagesRequest < Struct.new(
         :rest_api_id,
@@ -2323,7 +2323,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The GET request to get all the usage plans of the caller\'s account.
+      # The GET request to get all the usage plans of the caller's account.
       # @note When making an API call, pass GetUsagePlansRequest
       #   data as a hash:
       #
@@ -2480,16 +2480,16 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       # @!attribute [rw] type
-      #   Specifies the integration\'s type. The valid value is `HTTP`, `AWS`,
+      #   Specifies the integration's type. The valid value is `HTTP`, `AWS`,
       #   or `MOCK`.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies the integration\'s HTTP method type.
+      #   Specifies the integration's HTTP method type.
       #   @return [String]
       #
       # @!attribute [rw] uri
-      #   Specifies the integration\'s Uniform Resource Identifier (URI). For
+      #   Specifies the integration's Uniform Resource Identifier (URI). For
       #   HTTP integrations, the URI must be a fully formed, encoded HTTP(S)
       #   URL according to the [RFC-3986 specification][1]. For AWS
       #   integrations, the URI should be of the form
@@ -2509,8 +2509,8 @@ module Aws
       # @!attribute [rw] credentials
       #   Specifies the credentials required for the integration, if any. For
       #   AWS integrations, three options are available. To specify an IAM
-      #   Role for Amazon API Gateway to assume, use the role\'s Amazon
-      #   Resource Name (ARN). To require that the caller\'s identity be
+      #   Role for Amazon API Gateway to assume, use the role's Amazon
+      #   Resource Name (ARN). To require that the caller's identity be
       #   passed through from the request, specify the string
       #   `arn:aws:iam::\*:user/\*`. To use resource-based permissions on
       #   supported AWS services, specify null.
@@ -2566,15 +2566,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cache_namespace
-      #   Specifies the integration\'s cache namespace.
+      #   Specifies the integration's cache namespace.
       #   @return [String]
       #
       # @!attribute [rw] cache_key_parameters
-      #   Specifies the integration\'s cache key parameters.
+      #   Specifies the integration's cache key parameters.
       #   @return [Array<String>]
       #
       # @!attribute [rw] integration_responses
-      #   Specifies the integration\'s responses.
+      #   Specifies the integration's responses.
       #
       #   <div class="remarks" markdown="1">
       #
@@ -2592,7 +2592,7 @@ module Aws
       #   The successful response returns `200 OK` status and a payload as
       #   follows:
       #
-      #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" \}, "statusCode": "200" \}
+      #       \{ "_links": \{ "curies": \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \}
       #
       #
       #
@@ -2705,7 +2705,7 @@ module Aws
       # The successful response returns a `200 OK` status code and a payload
       # similar to the following:
       #
-      #     \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E\")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+      #     \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": true, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E%23foreach(%24stream%20in%20%24input.path(%27%24.StreamNames%27))%3Cstream%3E%3Cname%3E%24stream%3C%2Fname%3E%3C%2Fstream%3E%23end%3C%2FkinesisStreams%3E")" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
       #
       # In the example above, the response template for the `200 OK` response
       # maps the JSON output from the `ListStreams` action in the back end to
@@ -2726,11 +2726,11 @@ module Aws
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-mapping-template-reference.html#util-templat-reference
       # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-method-settings.html
       # @!attribute [rw] http_method
-      #   The method\'s HTTP verb.
+      #   The method's HTTP verb.
       #   @return [String]
       #
       # @!attribute [rw] authorization_type
-      #   The method\'s authorization type.
+      #   The method's authorization type.
       #   @return [String]
       #
       # @!attribute [rw] authorizer_id
@@ -2767,7 +2767,7 @@ module Aws
       #
       #   <div class="remarks" markdown="1">
       #   The collection of method responses are encapsulated in a key-value
-      #   map, where the key is a response\'s HTTP status code and the value
+      #   map, where the key is a response's HTTP status code and the value
       #   is a MethodResponse resource that specifies the response returned to
       #   the caller from the back end through the integration response.
       #
@@ -2800,7 +2800,7 @@ module Aws
       #   @return [Hash<String,Types::MethodResponse>]
       #
       # @!attribute [rw] method_integration
-      #   Gets the method\'s integration responsible for passing the
+      #   Gets the method's integration responsible for passing the
       #   client-submitted request to the back end and performing necessary
       #   transformations to make the request compliant with the back end.
       #
@@ -2820,7 +2820,7 @@ module Aws
       #   The successful response returns a `200 OK` status code and a payload
       #   similar to the following:
       #
-      #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n \"a\": \"$input.params('operand1')\",\n \"b\": \"$input.params('operand2')\", \n \"op\": \"$input.params('operator')\" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n \"result\": \"$res.a, $res.b, $res.op => $res.c\",\n \"a\" : \"$res.a\",\n \"b\" : \"$res.b\",\n \"op\" : \"$res.op\",\n \"c\" : \"$res.c\"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
+      #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \} ], "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "0cjtch", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestTemplates": \{ "application/json": "\{\n "a": "$input.params('operand1')",\n "b": "$input.params('operand2')", \n "op": "$input.params('operator')" \n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-west-2:lambda:path//2015-03-31/functions/arn:aws:lambda:us-west-2:123456789012:function:Calc/invocations", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/uojnr9hd57/resources/0cjtch/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.operator": "integration.response.body.op", "method.response.header.operand_2": "integration.response.body.b", "method.response.header.operand_1": "integration.response.body.a" \}, "responseTemplates": \{ "application/json": "#set($res = $input.path('$'))\n\{\n "result": "$res.a, $res.b, $res.op => $res.c",\n "a" : "$res.a",\n "b" : "$res.b",\n "op" : "$res.op",\n "c" : "$res.c"\n\}" \}, "selectionPattern": "", "statusCode": "200" \} \} \}
       #
       #
       #
@@ -2882,7 +2882,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       # @!attribute [rw] status_code
-      #   The method response\'s status code.
+      #   The method response's status code.
       #   @return [String]
       #
       # @!attribute [rw] response_parameters
@@ -2894,7 +2894,7 @@ module Aws
       #   where `name` is a valid and unique header name. Amazon API Gateway
       #   passes certain integration response data to the method response
       #   headers specified here according to the mapping you prescribe in the
-      #   API\'s IntegrationResponse. The integration response data that can
+      #   API's IntegrationResponse. The integration response data that can
       #   be mapped include an integration response header expressed in
       #   `integration.response.header.\{name\}`, a static value enclosed
       #   within a pair of single quotes (e.g., `'application/json'`), or a
@@ -2905,7 +2905,7 @@ module Aws
       #   @return [Hash<String,Boolean>]
       #
       # @!attribute [rw] response_models
-      #   Specifies the Model resources used for the response\'s content-type.
+      #   Specifies the Model resources used for the response's content-type.
       #   Response models are represented as a key/value map, with a
       #   content-type as the key and a Model name as the value.
       #   @return [Hash<String,String>]
@@ -3016,7 +3016,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the data structure of a method\'s request or response
+      # Represents the data structure of a method's request or response
       # payload.
       #
       # <div class="remarks" markdown="1">
@@ -3026,7 +3026,7 @@ module Aws
       # models are useful for mapping payloads between the front end and back
       # end.
       #
-      # A model is used for generating an API\'s SDK, validating the input
+      # A model is used for generating an API's SDK, validating the input
       # request body, and creating a skeletal mapping template.
       #
       # </div>
@@ -3052,11 +3052,11 @@ module Aws
       #
       # @!attribute [rw] schema
       #   The schema for the model. For `application/json` models, this should
-      #   be [JSON-schema draft v4][1] model. Do not include \"\\\*/\"
+      #   be [JSON-schema draft v4][1] model. Do not include "\\\*/"
       #   characters in the description of any properties because such
-      #   \"\\\*/\" characters may be interpreted as the closing marker for
+      #   "\\\*/" characters may be interpreted as the closing marker for
       #   comments in some languages, such as Java or JavaScript, causing the
-      #   installation of your API\'s SDK generated by API Gateway to fail.
+      #   installation of your API's SDK generated by API Gateway to fail.
       #
       #
       #
@@ -3110,7 +3110,7 @@ module Aws
       #       }
       # @!attribute [rw] op
       #   An update operation to be performed with this PATCH request. The
-      #   valid value can be \"add\", \"remove\", or \"replace\". Not all
+      #   valid value can be "add", "remove", or "replace". Not all
       #   valid operations are supported for a given resource. Support of the
       #   operations depends on specific operational contexts. Attempts to
       #   apply an unsupported operation on a resource will return an error
@@ -3118,14 +3118,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] path
-      #   The `op` operation\'s target, as identified by a [JSON Pointer][1]
+      #   The `op` operation's target, as identified by a [JSON Pointer][1]
       #   value that references a location within the targeted resource. For
       #   example, if the target resource has an updateable property of
       #   `\{"name":"value"\}`, the path for this property is `/name`. If the
       #   `name` property value is a JSON object (e.g., `\{"name":
       #   \{"child/name": "child-value"\}\}`), the path for the `child/name`
-      #   property will be `/name/child~1name`. Any slash (\"/\") character
-      #   appearing in path names must be escaped with \"~1\", as shown in the
+      #   property will be `/name/child~1name`. Any slash ("/") character
+      #   appearing in path names must be escaped with "~1", as shown in the
       #   example above. Each `op` operation can have only one `path`
       #   associated with it.
       #
@@ -3172,19 +3172,19 @@ module Aws
       #         cache_key_parameters: ["String"],
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a put integration request\'s API identifier.
+      #   Specifies a put integration request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a put integration request\'s resource ID.
+      #   Specifies a put integration request's resource ID.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a put integration request\'s HTTP method.
+      #   Specifies a put integration request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   Specifies a put integration input\'s type.
+      #   Specifies a put integration input's type.
       #   @return [String]
       #
       # @!attribute [rw] integration_http_method
@@ -3193,11 +3193,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] uri
-      #   Specifies a put integration input\'s Uniform Resource Identifier
+      #   Specifies a put integration input's Uniform Resource Identifier
       #   (URI). When the integration type is HTTP or AWS, this field is
       #   required. For integration with Lambda as an AWS service proxy, this
       #   value is of the
-      #   \'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations\'
+      #   'arn:aws:apigateway:&lt;region&gt;\:lambda:path/2015-03-31/functions/&lt;functionArn&gt;/invocations'
       #   format.
       #   @return [String]
       #
@@ -3235,7 +3235,7 @@ module Aws
       #     through to the integration back end without transformation.
       #
       #   * `NEVER` rejects unmapped content types with an HTTP 415
-      #     \'Unsupported Media Type\' response.
+      #     'Unsupported Media Type' response.
       #
       #   * `WHEN_NO_TEMPLATES` allows pass-through when the integration has
       #     NO content types mapped to templates. However if there is at least
@@ -3244,11 +3244,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cache_namespace
-      #   Specifies a put integration input\'s cache namespace.
+      #   Specifies a put integration input's cache namespace.
       #   @return [String]
       #
       # @!attribute [rw] cache_key_parameters
-      #   Specifies a put integration input\'s cache key parameters.
+      #   Specifies a put integration input's cache key parameters.
       #   @return [Array<String>]
       class PutIntegrationRequest < Struct.new(
         :rest_api_id,
@@ -3284,15 +3284,15 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a put integration response request\'s API identifier.
+      #   Specifies a put integration response request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a put integration response request\'s resource identifier.
+      #   Specifies a put integration response request's resource identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a put integration response request\'s HTTP method.
+      #   Specifies a put integration response request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] status_code
@@ -3320,7 +3320,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] response_templates
-      #   Specifies a put integration response\'s templates.
+      #   Specifies a put integration response's templates.
       #   @return [Hash<String,String>]
       class PutIntegrationResponseRequest < Struct.new(
         :rest_api_id,
@@ -3360,7 +3360,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies the method request\'s HTTP method type.
+      #   Specifies the method request's HTTP method type.
       #   @return [String]
       #
       # @!attribute [rw] authorization_type
@@ -3390,7 +3390,7 @@ module Aws
       #   @return [Hash<String,Boolean>]
       #
       # @!attribute [rw] request_models
-      #   Specifies the Model resources used for the request\'s content type.
+      #   Specifies the Model resources used for the request's content type.
       #   Request models are represented as a key/value map, with a content
       #   type as the key and a Model name as the value.
       #   @return [Hash<String,String>]
@@ -3435,7 +3435,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status_code
-      #   The method response\'s status code.
+      #   The method response's status code.
       #   @return [String]
       #
       # @!attribute [rw] response_parameters
@@ -3457,7 +3457,7 @@ module Aws
       #   @return [Hash<String,Boolean>]
       #
       # @!attribute [rw] response_models
-      #   Specifies the Model resources used for the response\'s content type.
+      #   Specifies the Model resources used for the response's content type.
       #   Response models are represented as a key/value map, with a content
       #   type as the key and a Model name as the value.
       #   @return [Hash<String,String>]
@@ -3491,8 +3491,8 @@ module Aws
       #
       # @!attribute [rw] mode
       #   The `mode` query parameter to specify the update mode. Valid values
-      #   are \"merge\" and \"overwrite\". By default, the update mode is
-      #   \"merge\".
+      #   are "merge" and "overwrite". By default, the update mode is
+      #   "merge".
       #   @return [String]
       #
       # @!attribute [rw] fail_on_warnings
@@ -3539,7 +3539,7 @@ module Aws
       #
       # @!attribute [rw] period
       #   The time period in which the limit applies. Valid values are
-      #   \"DAY\", \"WEEK\" or \"MONTH\".
+      #   "DAY", "WEEK" or "MONTH".
       #   @return [String]
       class QuotaSettings < Struct.new(
         :limit,
@@ -3558,11 +3558,11 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       # @!attribute [rw] id
-      #   The resource\'s identifier.
+      #   The resource's identifier.
       #   @return [String]
       #
       # @!attribute [rw] parent_id
-      #   The parent resource\'s identifier.
+      #   The parent resource's identifier.
       #   @return [String]
       #
       # @!attribute [rw] path_part
@@ -3574,10 +3574,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] resource_methods
-      #   Gets an API resource\'s method of a given HTTP verb.
+      #   Gets an API resource's method of a given HTTP verb.
       #
       #   <div class="remarks" markdown="1">
-      #   The resource methods are a map of methods indexed by methods\' HTTP
+      #   The resource methods are a map of methods indexed by methods' HTTP
       #   verbs enabled on the resource. This method map is included in the
       #   `200 OK` response of the `GET
       #   /restapis/\{restapi_id\}/resources/\{resource_id\}` or `GET
@@ -3592,7 +3592,7 @@ module Aws
       #
       #   ##### Response
       #
-      #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode(\"%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E\")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
+      #       \{ "_links": \{ "curies": [ \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-\{rel\}.html", "name": "integration", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-integration-response-\{rel\}.html", "name": "integrationresponse", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-\{rel\}.html", "name": "method", "templated": true \}, \{ "href": "http://docs.aws.amazon.com/apigateway/latest/developerguide/restapi-method-response-\{rel\}.html", "name": "methodresponse", "templated": true \} ], "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET", "name": "GET", "title": "GET" \}, "integration:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "method:integration": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "method:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "method:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET" \}, "methodresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/\{status_code\}", "templated": true \} \}, "apiKeyRequired": false, "authorizationType": "NONE", "httpMethod": "GET", "_embedded": \{ "method:integration": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integration:responses": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integration:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration" \}, "integrationresponse:put": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/\{status_code\}", "templated": true \} \}, "cacheKeyParameters": [], "cacheNamespace": "3kzxbg5sa2", "credentials": "arn:aws:iam::123456789012:role/apigAwsProxyRole", "httpMethod": "POST", "passthroughBehavior": "WHEN_NO_MATCH", "requestParameters": \{ "integration.request.header.Content-Type": "'application/x-amz-json-1.1'" \}, "requestTemplates": \{ "application/json": "\{\n\}" \}, "type": "AWS", "uri": "arn:aws:apigateway:us-east-1:kinesis:action/ListStreams", "_embedded": \{ "integration:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200", "name": "200", "title": "200" \}, "integrationresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \}, "integrationresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/integration/responses/200" \} \}, "responseParameters": \{ "method.response.header.Content-Type": "'application/xml'" \}, "responseTemplates": \{ "application/json": "$util.urlDecode("%3CkinesisStreams%3E#foreach($stream in $input.path('$.StreamNames'))%3Cstream%3E%3Cname%3E$stream%3C/name%3E%3C/stream%3E#end%3C/kinesisStreams%3E")\n" \}, "statusCode": "200" \} \} \}, "method:responses": \{ "_links": \{ "self": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200", "name": "200", "title": "200" \}, "methodresponse:delete": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \}, "methodresponse:update": \{ "href": "/restapis/fugvjdxtri/resources/3kzxbg5sa2/methods/GET/responses/200" \} \}, "responseModels": \{ "application/json": "Empty" \}, "responseParameters": \{ "method.response.header.Content-Type": false \}, "statusCode": "200" \} \} \}
       #
       #   If the `OPTIONS` is enabled on the resource, you can follow the
       #   example here to get that method. Just replace the `GET` of the last
@@ -3642,16 +3642,16 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       # @!attribute [rw] id
-      #   The API\'s identifier. This identifier is unique across all of your
+      #   The API's identifier. This identifier is unique across all of your
       #   APIs in Amazon API Gateway.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The API\'s name.
+      #   The API's name.
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The API\'s description.
+      #   The API's description.
       #   @return [String]
       #
       # @!attribute [rw] created_date
@@ -3742,7 +3742,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The stage\'s description.
+      #   The stage's description.
       #   @return [String]
       #
       # @!attribute [rw] cache_cluster_enabled
@@ -3762,8 +3762,8 @@ module Aws
       #   (designated as `/\{method_setting_key` below) are method paths
       #   defined as `\{resource_path\}/\{http_method\}` for an individual
       #   method override, or `/\*/\*` for overriding all methods in the
-      #   stage. Any forward slash (\"/\") characters in the `resource_path`
-      #   part must be encoded as \"~1\" as in, for example,
+      #   stage. Any forward slash ("/") characters in the `resource_path`
+      #   part must be encoded as "~1" as in, for example,
       #   `~1resource~1sub-resource/GET`.
       #   @return [Hash<String,Types::MethodSetting>]
       #
@@ -3888,11 +3888,11 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a test invoke authorizer request\'s RestApi identifier.
+      #   Specifies a test invoke authorizer request's RestApi identifier.
       #   @return [String]
       #
       # @!attribute [rw] authorizer_id
-      #   Specifies a test invoke authorizer request\'s Authorizer ID.
+      #   Specifies a test invoke authorizer request's Authorizer ID.
       #   @return [String]
       #
       # @!attribute [rw] headers
@@ -3996,15 +3996,15 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies a test invoke method request\'s API identifier.
+      #   Specifies a test invoke method request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies a test invoke method request\'s resource ID.
+      #   Specifies a test invoke method request's resource ID.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies a test invoke method request\'s HTTP method.
+      #   Specifies a test invoke method request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] path_with_query_string
@@ -4341,15 +4341,15 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] rest_api_id
-      #   Represents an update integration request\'s API identifier.
+      #   Represents an update integration request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Represents an update integration request\'s resource identifier.
+      #   Represents an update integration request's resource identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Represents an update integration request\'s HTTP method.
+      #   Represents an update integration request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] patch_operations
@@ -4383,20 +4383,20 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] rest_api_id
-      #   Specifies an update integration response request\'s API identifier.
+      #   Specifies an update integration response request's API identifier.
       #   @return [String]
       #
       # @!attribute [rw] resource_id
-      #   Specifies an update integration response request\'s resource
+      #   Specifies an update integration response request's resource
       #   identifier.
       #   @return [String]
       #
       # @!attribute [rw] http_method
-      #   Specifies an update integration response request\'s HTTP method.
+      #   Specifies an update integration response request's HTTP method.
       #   @return [String]
       #
       # @!attribute [rw] status_code
-      #   Specifies an update integration response request\'s status code.
+      #   Specifies an update integration response request's status code.
       #   @return [String]
       #
       # @!attribute [rw] patch_operations
@@ -4750,7 +4750,7 @@ module Aws
       # stages with specified request limits and quotas.
       #
       # <div class="remarks" markdown="1">
-      # In a usage plan, you associate an API by specifying the API\'s Id and
+      # In a usage plan, you associate an API by specifying the API's Id and
       # a stage name of the specified API. You add plan customers by adding
       # API keys to the plan.
       #
@@ -4805,7 +4805,7 @@ module Aws
       #
       # </div>
       #
-      # \" <div class="seeAlso">
+      # " <div class="seeAlso">
       # [Create and Use Usage Plans][1]
       # </div>
       #

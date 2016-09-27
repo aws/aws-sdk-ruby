@@ -150,7 +150,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] state_changed_at
-      #   The last time when the assessment run\'s state changed.
+      #   The last time when the assessment run's state changed.
       #   @return [Time]
       #
       # @!attribute [rw] data_collected
@@ -653,10 +653,10 @@ module Aws
       #       }
       # @!attribute [rw] resource_group_tags
       #   A collection of keys and an array of possible values,
-      #   \'\[\\\{\"key\":\"key1\",\"values\":\[\"Value1\",\"Value2\"\]\\},\\\{\"key\":\"Key2\",\"values\":\[\"Value3\"\]\\}\]\'.
+      #   '\[\\\{"key":"key1","values":\["Value1","Value2"\]\\},\\\{"key":"Key2","values":\["Value3"\]\\}\]'.
       #
       #   For
-      #   example,\'\[\\\{\"key\":\"Name\",\"values\":\[\"TestEC2Instance\"\]\\}\]\'.
+      #   example,'\[\\\{"key":"Name","values":\["TestEC2Instance"\]\\}\]'.
       #   @return [Array<Types::ResourceGroupTag>]
       class CreateResourceGroupRequest < Struct.new(
         :resource_group_tags)
@@ -984,7 +984,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] service
-      #   The data element is set to \"Inspector\".
+      #   The data element is set to "Inspector".
       #   @return [String]
       #
       # @!attribute [rw] service_attributes
@@ -1216,7 +1216,7 @@ module Aws
       #
       # @!attribute [rw] filter
       #   You can use this parameter to specify a subset of data to be
-      #   included in the action\'s response.
+      #   included in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute,
@@ -1297,7 +1297,7 @@ module Aws
       #
       # @!attribute [rw] filter
       #   You can use this parameter to specify a subset of data to be
-      #   included in the action\'s response.
+      #   included in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute,
@@ -1355,7 +1355,7 @@ module Aws
       #       }
       # @!attribute [rw] filter
       #   You can use this parameter to specify a subset of data to be
-      #   included in the action\'s response.
+      #   included in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute,
@@ -1423,7 +1423,7 @@ module Aws
       #
       # @!attribute [rw] filter
       #   You can use this parameter to specify a subset of data to be
-      #   included in the action\'s response.
+      #   included in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute,
@@ -1557,7 +1557,7 @@ module Aws
       #
       # @!attribute [rw] filter
       #   You can use this parameter to specify a subset of data to be
-      #   included in the action\'s response.
+      #   included in the action's response.
       #
       #   For a record to match a filter, all specified filter attributes must
       #   match. When multiple values are specified for a filter attribute,

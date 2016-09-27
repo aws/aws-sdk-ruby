@@ -277,7 +277,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -298,7 +298,7 @@ module Aws
       #   this update stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
       #   or `Custom::MyCustomInstance`.
       #
-      #   If the list of resource types doesn\'t include a resource that you\'re
+      #   If the list of resource types doesn't include a resource that you're
       #   updating, the stack update fails. By default, AWS CloudFormation
       #   grants permissions to all resource types. AWS Identity and Access
       #   Management (IAM) uses this parameter for AWS CloudFormation-specific
@@ -335,8 +335,8 @@ module Aws
       #   propagates these tags to supported resources in the stack. You can
       #   specify a maximum number of 10 tags.
       #
-      #   If you don\'t specify this parameter, AWS CloudFormation doesn\'t
-      #   modify the stack\'s tags. If you specify an empty value, AWS
+      #   If you don't specify this parameter, AWS CloudFormation doesn't
+      #   modify the stack's tags. If you specify an empty value, AWS
       #   CloudFormation removes all associated tags.
       # @return [Types::UpdateStackOutput]
       def update(options = {})

@@ -155,8 +155,8 @@ module Aws
       #     instance_ids: ["XmlStringMaxLen19"],
       #     auto_scaling_group_name: "ResourceName", # required
       #   })
+      # @overload attach_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_instances(params = {}, options = {})
         req = build_request(:attach_instances, params)
         req.send_request(options)
@@ -186,8 +186,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     target_group_arns: ["XmlStringMaxLen511"], # required
       #   })
+      # @overload attach_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_load_balancer_target_groups(params = {}, options = {})
         req = build_request(:attach_load_balancer_target_groups, params)
         req.send_request(options)
@@ -220,8 +220,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
+      # @overload attach_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_load_balancers(params = {}, options = {})
         req = build_request(:attach_load_balancers, params)
         req.send_request(options)
@@ -281,8 +281,8 @@ module Aws
       #     lifecycle_action_result: "LifecycleActionResult", # required
       #     instance_id: "XmlStringMaxLen19",
       #   })
+      # @overload complete_lifecycle_action(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def complete_lifecycle_action(params = {}, options = {})
         req = build_request(:complete_lifecycle_action, params)
         req.send_request(options)
@@ -381,7 +381,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
       # @option params [String] :placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
       #   the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -393,7 +393,7 @@ module Aws
       #   cloud (VPC).
       #
       #   If you specify subnets and Availability Zones with this call, ensure
-      #   that the subnets\' Availability Zones match the Availability Zones
+      #   that the subnets' Availability Zones match the Availability Zones
       #   specified.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
@@ -455,8 +455,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_auto_scaling_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_auto_scaling_group(params = {}, options = {})
         req = build_request(:create_auto_scaling_group, params)
         req.send_request(options)
@@ -686,8 +686,8 @@ module Aws
       #     associate_public_ip_address: false,
       #     placement_tenancy: "XmlStringMaxLen64",
       #   })
+      # @overload create_launch_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_launch_configuration(params = {}, options = {})
         req = build_request(:create_launch_configuration, params)
         req.send_request(options)
@@ -721,8 +721,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload create_or_update_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_or_update_tags(params = {}, options = {})
         req = build_request(:create_or_update_tags, params)
         req.send_request(options)
@@ -759,8 +759,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     force_delete: false,
       #   })
+      # @overload delete_auto_scaling_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_auto_scaling_group(params = {}, options = {})
         req = build_request(:delete_auto_scaling_group, params)
         req.send_request(options)
@@ -779,8 +779,8 @@ module Aws
       #   resp = client.delete_launch_configuration({
       #     launch_configuration_name: "ResourceName", # required
       #   })
+      # @overload delete_launch_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_launch_configuration(params = {}, options = {})
         req = build_request(:delete_launch_configuration, params)
         req.send_request(options)
@@ -802,8 +802,8 @@ module Aws
       #     lifecycle_hook_name: "AsciiStringMaxLen255", # required
       #     auto_scaling_group_name: "ResourceName", # required
       #   })
+      # @overload delete_lifecycle_hook(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_lifecycle_hook(params = {}, options = {})
         req = build_request(:delete_lifecycle_hook, params)
         req.send_request(options)
@@ -822,8 +822,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     topic_arn: "ResourceName", # required
       #   })
+      # @overload delete_notification_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_notification_configuration(params = {}, options = {})
         req = build_request(:delete_notification_configuration, params)
         req.send_request(options)
@@ -844,8 +844,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName",
       #     policy_name: "ResourceName", # required
       #   })
+      # @overload delete_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_policy(params = {}, options = {})
         req = build_request(:delete_policy, params)
         req.send_request(options)
@@ -863,8 +863,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     scheduled_action_name: "ResourceName", # required
       #   })
+      # @overload delete_scheduled_action(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_scheduled_action(params = {}, options = {})
         req = build_request(:delete_scheduled_action, params)
         req.send_request(options)
@@ -887,8 +887,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload delete_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tags(params = {}, options = {})
         req = build_request(:delete_tags, params)
         req.send_request(options)
@@ -915,8 +915,8 @@ module Aws
       #   resp.max_number_of_launch_configurations #=> Integer
       #   resp.number_of_auto_scaling_groups #=> Integer
       #   resp.number_of_launch_configurations #=> Integer
+      # @overload describe_account_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_account_limits(params = {}, options = {})
         req = build_request(:describe_account_limits, params)
         req.send_request(options)
@@ -930,8 +930,8 @@ module Aws
       # @example Response structure
       #   resp.adjustment_types #=> Array
       #   resp.adjustment_types[0].adjustment_type #=> String
+      # @overload describe_adjustment_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_adjustment_types(params = {}, options = {})
         req = build_request(:describe_adjustment_types, params)
         req.send_request(options)
@@ -1002,8 +1002,8 @@ module Aws
       #   resp.auto_scaling_groups[0].termination_policies[0] #=> String
       #   resp.auto_scaling_groups[0].new_instances_protected_from_scale_in #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_auto_scaling_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_auto_scaling_groups(params = {}, options = {})
         req = build_request(:describe_auto_scaling_groups, params)
         req.send_request(options)
@@ -1041,8 +1041,8 @@ module Aws
       #   resp.auto_scaling_instances[0].launch_configuration_name #=> String
       #   resp.auto_scaling_instances[0].protected_from_scale_in #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_auto_scaling_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_auto_scaling_instances(params = {}, options = {})
         req = build_request(:describe_auto_scaling_instances, params)
         req.send_request(options)
@@ -1056,8 +1056,8 @@ module Aws
       # @example Response structure
       #   resp.auto_scaling_notification_types #=> Array
       #   resp.auto_scaling_notification_types[0] #=> String
+      # @overload describe_auto_scaling_notification_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_auto_scaling_notification_types(params = {}, options = {})
         req = build_request(:describe_auto_scaling_notification_types, params)
         req.send_request(options)
@@ -1118,8 +1118,8 @@ module Aws
       #   resp.launch_configurations[0].associate_public_ip_address #=> Boolean
       #   resp.launch_configurations[0].placement_tenancy #=> String
       #   resp.next_token #=> String
+      # @overload describe_launch_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_launch_configurations(params = {}, options = {})
         req = build_request(:describe_launch_configurations, params)
         req.send_request(options)
@@ -1133,8 +1133,8 @@ module Aws
       # @example Response structure
       #   resp.lifecycle_hook_types #=> Array
       #   resp.lifecycle_hook_types[0] #=> String
+      # @overload describe_lifecycle_hook_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_lifecycle_hook_types(params = {}, options = {})
         req = build_request(:describe_lifecycle_hook_types, params)
         req.send_request(options)
@@ -1167,8 +1167,8 @@ module Aws
       #   resp.lifecycle_hooks[0].heartbeat_timeout #=> Integer
       #   resp.lifecycle_hooks[0].global_timeout #=> Integer
       #   resp.lifecycle_hooks[0].default_result #=> String
+      # @overload describe_lifecycle_hooks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_lifecycle_hooks(params = {}, options = {})
         req = build_request(:describe_lifecycle_hooks, params)
         req.send_request(options)
@@ -1199,8 +1199,8 @@ module Aws
       #   resp.load_balancer_target_groups[0].load_balancer_target_group_arn #=> String
       #   resp.load_balancer_target_groups[0].state #=> String
       #   resp.next_token #=> String
+      # @overload describe_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancer_target_groups(params = {}, options = {})
         req = build_request(:describe_load_balancer_target_groups, params)
         req.send_request(options)
@@ -1235,8 +1235,8 @@ module Aws
       #   resp.load_balancers[0].load_balancer_name #=> String
       #   resp.load_balancers[0].state #=> String
       #   resp.next_token #=> String
+      # @overload describe_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_load_balancers(params = {}, options = {})
         req = build_request(:describe_load_balancers, params)
         req.send_request(options)
@@ -1257,8 +1257,8 @@ module Aws
       #   resp.metrics[0].metric #=> String
       #   resp.granularities #=> Array
       #   resp.granularities[0].granularity #=> String
+      # @overload describe_metric_collection_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_metric_collection_types(params = {}, options = {})
         req = build_request(:describe_metric_collection_types, params)
         req.send_request(options)
@@ -1291,8 +1291,8 @@ module Aws
       #   resp.notification_configurations[0].topic_arn #=> String
       #   resp.notification_configurations[0].notification_type #=> String
       #   resp.next_token #=> String
+      # @overload describe_notification_configurations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_notification_configurations(params = {}, options = {})
         req = build_request(:describe_notification_configurations, params)
         req.send_request(options)
@@ -1350,8 +1350,8 @@ module Aws
       #   resp.scaling_policies[0].alarms[0].alarm_name #=> String
       #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
       #   resp.next_token #=> String
+      # @overload describe_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_policies(params = {}, options = {})
         req = build_request(:describe_policies, params)
         req.send_request(options)
@@ -1398,8 +1398,8 @@ module Aws
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
       #   resp.next_token #=> String
+      # @overload describe_scaling_activities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_activities(params = {}, options = {})
         req = build_request(:describe_scaling_activities, params)
         req.send_request(options)
@@ -1414,15 +1414,15 @@ module Aws
       # @example Response structure
       #   resp.processes #=> Array
       #   resp.processes[0].process_name #=> String
+      # @overload describe_scaling_process_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_process_types(params = {}, options = {})
         req = build_request(:describe_scaling_process_types, params)
         req.send_request(options)
       end
 
       # Describes the actions scheduled for your Auto Scaling group that
-      # haven\'t run. To describe the actions that have already run, use
+      # haven't run. To describe the actions that have already run, use
       # DescribeScalingActivities.
       # @option params [String] :auto_scaling_group_name
       #   The name of the group.
@@ -1473,8 +1473,8 @@ module Aws
       #   resp.scheduled_update_group_actions[0].max_size #=> Integer
       #   resp.scheduled_update_group_actions[0].desired_capacity #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_scheduled_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scheduled_actions(params = {}, options = {})
         req = build_request(:describe_scheduled_actions, params)
         req.send_request(options)
@@ -1488,7 +1488,7 @@ module Aws
       # specified values for it to be included in the results.
       #
       # You can also specify multiple filters. The result includes information
-      # for a particular tag only if it matches all the filters. If there\'s
+      # for a particular tag only if it matches all the filters. If there's
       # no match, no special message is returned.
       # @option params [Array<Types::Filter>] :filters
       #   A filter used to scope the tags to return.
@@ -1522,8 +1522,8 @@ module Aws
       #   resp.tags[0].value #=> String
       #   resp.tags[0].propagate_at_launch #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tags(params = {}, options = {})
         req = build_request(:describe_tags, params)
         req.send_request(options)
@@ -1537,8 +1537,8 @@ module Aws
       # @example Response structure
       #   resp.termination_policy_types #=> Array
       #   resp.termination_policy_types[0] #=> String
+      # @overload describe_termination_policy_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_termination_policy_types(params = {}, options = {})
         req = build_request(:describe_termination_policy_types, params)
         req.send_request(options)
@@ -1593,8 +1593,8 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      # @overload detach_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_instances(params = {}, options = {})
         req = build_request(:detach_instances, params)
         req.send_request(options)
@@ -1613,8 +1613,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     target_group_arns: ["XmlStringMaxLen511"], # required
       #   })
+      # @overload detach_load_balancer_target_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_load_balancer_target_groups(params = {}, options = {})
         req = build_request(:detach_load_balancer_target_groups, params)
         req.send_request(options)
@@ -1642,8 +1642,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     load_balancer_names: ["XmlStringMaxLen255"], # required
       #   })
+      # @overload detach_load_balancers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_load_balancers(params = {}, options = {})
         req = build_request(:detach_load_balancers, params)
         req.send_request(options)
@@ -1678,8 +1678,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     metrics: ["XmlStringMaxLen255"],
       #   })
+      # @overload disable_metrics_collection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_metrics_collection(params = {}, options = {})
         req = build_request(:disable_metrics_collection, params)
         req.send_request(options)
@@ -1724,8 +1724,8 @@ module Aws
       #     metrics: ["XmlStringMaxLen255"],
       #     granularity: "XmlStringMaxLen255", # required
       #   })
+      # @overload enable_metrics_collection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_metrics_collection(params = {}, options = {})
         req = build_request(:enable_metrics_collection, params)
         req.send_request(options)
@@ -1746,7 +1746,7 @@ module Aws
       #   The name of the Auto Scaling group.
       # @option params [required, Boolean] :should_decrement_desired_capacity
       #   Specifies whether the instances moved to `Standby` mode count as part
-      #   of the Auto Scaling group\'s desired capacity. If set, the desired
+      #   of the Auto Scaling group's desired capacity. If set, the desired
       #   capacity for the Auto Scaling group decrements by the number of
       #   instances moved to `Standby` mode.
       # @return [Types::EnterStandbyAnswer] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1772,8 +1772,8 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      # @overload enter_standby(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enter_standby(params = {}, options = {})
         req = build_request(:enter_standby, params)
         req.send_request(options)
@@ -1805,7 +1805,7 @@ module Aws
       #   want to use a step adjustment with a lower bound of 0 and an upper
       #   bound of 10, you can set the metric value to 59.
       #
-      #   If you specify a metric value that doesn\'t correspond to a step
+      #   If you specify a metric value that doesn't correspond to a step
       #   adjustment for the policy, the call returns an error.
       #
       #   This parameter is required if the policy type is `StepScaling` and not
@@ -1825,8 +1825,8 @@ module Aws
       #     metric_value: 1.0,
       #     breach_threshold: 1.0,
       #   })
+      # @overload execute_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def execute_policy(params = {}, options = {})
         req = build_request(:execute_policy, params)
         req.send_request(options)
@@ -1866,8 +1866,8 @@ module Aws
       #   resp.activities[0].status_message #=> String
       #   resp.activities[0].progress #=> Integer
       #   resp.activities[0].details #=> String
+      # @overload exit_standby(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def exit_standby(params = {}, options = {})
         req = build_request(:exit_standby, params)
         req.send_request(options)
@@ -1987,8 +1987,8 @@ module Aws
       #     heartbeat_timeout: 1,
       #     default_result: "LifecycleActionResult",
       #   })
+      # @overload put_lifecycle_hook(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_lifecycle_hook(params = {}, options = {})
         req = build_request(:put_lifecycle_hook, params)
         req.send_request(options)
@@ -2024,8 +2024,8 @@ module Aws
       #     topic_arn: "ResourceName", # required
       #     notification_types: ["XmlStringMaxLen255"], # required
       #   })
+      # @overload put_notification_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_notification_configuration(params = {}, options = {})
         req = build_request(:put_notification_configuration, params)
         req.send_request(options)
@@ -2135,8 +2135,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy_arn #=> String
+      # @overload put_scaling_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_scaling_policy(params = {}, options = {})
         req = build_request(:put_scaling_policy, params)
         req.send_request(options)
@@ -2160,7 +2160,7 @@ module Aws
       # @option params [Time,DateTime,Date,Integer,String] :time
       #   This parameter is deprecated.
       # @option params [Time,DateTime,Date,Integer,String] :start_time
-      #   The time for this action to start, in \"YYYY-MM-DDThh:mm:ssZ\" format
+      #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
       #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
       #   If you try to schedule your action in the past, Auto Scaling returns
@@ -2201,8 +2201,8 @@ module Aws
       #     max_size: 1,
       #     desired_capacity: 1,
       #   })
+      # @overload put_scheduled_update_group_action(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_scheduled_update_group_action(params = {}, options = {})
         req = build_request(:put_scheduled_update_group_action, params)
         req.send_request(options)
@@ -2258,8 +2258,8 @@ module Aws
       #     lifecycle_action_token: "LifecycleActionToken",
       #     instance_id: "XmlStringMaxLen19",
       #   })
+      # @overload record_lifecycle_action_heartbeat(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def record_lifecycle_action_heartbeat(params = {}, options = {})
         req = build_request(:record_lifecycle_action_heartbeat, params)
         req.send_request(options)
@@ -2302,8 +2302,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     scaling_processes: ["XmlStringMaxLen255"],
       #   })
+      # @overload resume_processes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resume_processes(params = {}, options = {})
         req = build_request(:resume_processes, params)
         req.send_request(options)
@@ -2336,8 +2336,8 @@ module Aws
       #     desired_capacity: 1, # required
       #     honor_cooldown: false,
       #   })
+      # @overload set_desired_capacity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_desired_capacity(params = {}, options = {})
         req = build_request(:set_desired_capacity, params)
         req.send_request(options)
@@ -2374,8 +2374,8 @@ module Aws
       #     health_status: "XmlStringMaxLen32", # required
       #     should_respect_grace_period: false,
       #   })
+      # @overload set_instance_health(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_instance_health(params = {}, options = {})
         req = build_request(:set_instance_health, params)
         req.send_request(options)
@@ -2404,8 +2404,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     protected_from_scale_in: false, # required
       #   })
+      # @overload set_instance_protection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_instance_protection(params = {}, options = {})
         req = build_request(:set_instance_protection, params)
         req.send_request(options)
@@ -2453,8 +2453,8 @@ module Aws
       #     auto_scaling_group_name: "ResourceName", # required
       #     scaling_processes: ["XmlStringMaxLen255"],
       #   })
+      # @overload suspend_processes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def suspend_processes(params = {}, options = {})
         req = build_request(:suspend_processes, params)
         req.send_request(options)
@@ -2491,8 +2491,8 @@ module Aws
       #   resp.activity.status_message #=> String
       #   resp.activity.progress #=> Integer
       #   resp.activity.details #=> String
+      # @overload terminate_instance_in_auto_scaling_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_instance_in_auto_scaling_group(params = {}, options = {})
         req = build_request(:terminate_instance_in_auto_scaling_group, params)
         req.send_request(options)
@@ -2509,7 +2509,7 @@ module Aws
       # The new settings are registered upon the completion of this call. Any
       # launch configuration settings take effect on any triggers after this
       # call returns. Scaling activities that are currently in progress
-      # aren\'t affected.
+      # aren't affected.
       #
       # Note the following:
       #
@@ -2563,7 +2563,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
       # @option params [String] :placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
       #   the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -2575,7 +2575,7 @@ module Aws
       #   several subnets in a comma-separated list.
       #
       #   When you specify `VPCZoneIdentifier` with `AvailabilityZones`, ensure
-      #   that the subnets\' Availability Zones match the values you specify for
+      #   that the subnets' Availability Zones match the values you specify for
       #   `AvailabilityZones`.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
@@ -2616,8 +2616,8 @@ module Aws
       #     termination_policies: ["XmlStringMaxLen1600"],
       #     new_instances_protected_from_scale_in: false,
       #   })
+      # @overload update_auto_scaling_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_auto_scaling_group(params = {}, options = {})
         req = build_request(:update_auto_scaling_group, params)
         req.send_request(options)

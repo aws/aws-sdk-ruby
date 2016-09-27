@@ -107,7 +107,7 @@ module Aws
       #   * `UNAVAILABLE_RESTRICTED` – The domain name is forbidden.
       #   * `RESERVED` – The domain name has been reserved for another person
       #     or organization.
-      #   * `DONT_KNOW` – The TLD registry didn\'t reply with a definitive
+      #   * `DONT_KNOW` – The TLD registry didn't reply with a definitive
       #     answer about whether the domain name is available. Amazon Route 53
       #     can return this response for a variety of reasons, for example,
       #     the registry is performing maintenance. Try again later.
@@ -297,7 +297,7 @@ module Aws
       #   Default: None
       #
       #   Constraints: Phone number must be specified in the format
-      #   \"+\[country dialing code\].\[number including any area code>\]\".
+      #   "+\[country dialing code\].\[number including any area code>\]".
       #   For example, a US phone number might appear as `"+1.1234567890"`.
       #
       #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
@@ -327,7 +327,7 @@ module Aws
       #   Default: None
       #
       #   Constraints: Phone number must be specified in the format
-      #   \"+\[country dialing code\].\[number including any area code\]\".
+      #   "+\[country dialing code\].\[number including any area code\]".
       #   For example, a US phone number might appear as `"+1.1234567890"`.
       #
       #   Parents: `RegistrantContact`, `AdminContact`, `TechContact`
@@ -404,7 +404,7 @@ module Aws
       #
       #   Required: No
       #
-      #   \'>
+      #   '>
       #   @return [Array<String>]
       class DeleteTagsForDomainRequest < Struct.new(
         :domain_name,
@@ -650,7 +650,7 @@ module Aws
       #
       # @!attribute [rw] status
       #   Whether the registrant contact has responded. `PENDING` indicates
-      #   that we sent the confirmation email and haven\'t received a response
+      #   that we sent the confirmation email and haven't received a response
       #   yet, `DONE` indicates that we sent the email and got confirmation
       #   from the registrant contact, and `EXPIRED` indicates that the time
       #   limit expired before the registrant contact responded.
@@ -745,8 +745,8 @@ module Aws
       #
       # @!attribute [rw] admin_privacy
       #   Specifies whether contact information for the admin contact is
-      #   concealed from WHOIS queries. If the value is `true`, WHOIS (\"who
-      #   is\") queries will return contact information for our registrar
+      #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
+      #   is") queries will return contact information for our registrar
       #   partner, Gandi, instead of the contact information that you enter.
       #
       #   Type: Boolean
@@ -754,8 +754,8 @@ module Aws
       #
       # @!attribute [rw] registrant_privacy
       #   Specifies whether contact information for the registrant contact is
-      #   concealed from WHOIS queries. If the value is `true`, WHOIS (\"who
-      #   is\") queries will return contact information for our registrar
+      #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
+      #   is") queries will return contact information for our registrar
       #   partner, Gandi, instead of the contact information that you enter.
       #
       #   Type: Boolean
@@ -763,8 +763,8 @@ module Aws
       #
       # @!attribute [rw] tech_privacy
       #   Specifies whether contact information for the tech contact is
-      #   concealed from WHOIS queries. If the value is `true`, WHOIS (\"who
-      #   is\") queries will return contact information for our registrar
+      #   concealed from WHOIS queries. If the value is `true`, WHOIS ("who
+      #   is") queries will return contact information for our registrar
       #   partner, Gandi, instead of the contact information that you enter.
       #
       #   Type: Boolean
@@ -1388,7 +1388,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1403,7 +1403,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1418,7 +1418,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1552,7 +1552,7 @@ module Aws
       # @!attribute [rw] is_already_verified
       #   True if the email address for the registrant contact has already
       #   been verified, and false otherwise. If the email address has already
-      #   been verified, we don\'t send another confirmation email.
+      #   been verified, we don't send another confirmation email.
       #   @return [Boolean]
       class ResendContactReachabilityEmailResponse < Struct.new(
         :domain_name,
@@ -1612,7 +1612,7 @@ module Aws
       #
       #   Default: None
       #
-      #   Valid values: A-Z, a-z, 0-9, space, \".:/=+\\-@\"
+      #   Valid values: A-Z, a-z, 0-9, space, ".:/=+\\-@"
       #
       #   Constraints: Each key can be 1-128 characters long.
       #
@@ -1626,7 +1626,7 @@ module Aws
       #
       #   Default: None
       #
-      #   Valid values: A-Z, a-z, 0-9, space, \".:/=+\\-@\"
+      #   Valid values: A-Z, a-z, 0-9, space, ".:/=+\\-@"
       #
       #   Constraints: Each value can be 0-256 characters long.
       #
@@ -1827,7 +1827,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_admin_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1842,7 +1842,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_registrant_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1857,7 +1857,7 @@ module Aws
       #
       # @!attribute [rw] privacy_protect_tech_contact
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1928,7 +1928,7 @@ module Aws
       #
       # @!attribute [rw] admin_privacy
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1943,7 +1943,7 @@ module Aws
       #
       # @!attribute [rw] registrant_privacy
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -1958,7 +1958,7 @@ module Aws
       #
       # @!attribute [rw] tech_privacy
       #   Whether you want to conceal contact information from WHOIS queries.
-      #   If you specify true, WHOIS (\"who is\") queries will return contact
+      #   If you specify true, WHOIS ("who is") queries will return contact
       #   information for our registrar partner, Gandi, instead of the contact
       #   information that you enter.
       #
@@ -2248,7 +2248,7 @@ module Aws
       #
       #   Required: No
       #
-      #   \'> Each tag includes the following elements:
+      #   '> Each tag includes the following elements:
       #
       #   * Key
       #
@@ -2259,7 +2259,7 @@ module Aws
       #     Default: None
       #
       #     Valid values: Unicode characters including alphanumeric, space,
-      #     and \".:/=+\\-@\"
+      #     and ".:/=+\\-@"
       #
       #     Constraints: Each key can be 1-128 characters long.
       #
@@ -2274,7 +2274,7 @@ module Aws
       #     Default: None
       #
       #     Valid values: Unicode characters including alphanumeric, space,
-      #     and \".:/=+\\-@\"
+      #     and ".:/=+\\-@"
       #
       #     Constraints: Each value can be 0-256 characters long.
       #

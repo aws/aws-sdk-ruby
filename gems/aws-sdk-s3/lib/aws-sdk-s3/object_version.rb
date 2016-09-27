@@ -128,7 +128,7 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for

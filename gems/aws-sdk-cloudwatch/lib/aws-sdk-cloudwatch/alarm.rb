@@ -51,7 +51,7 @@ module Aws
       end
 
       # Indicates whether actions should be executed during any changes to the
-      # alarm\'s state.
+      # alarm's state.
       # @return [Boolean]
       def actions_enabled
         data.actions_enabled
@@ -77,9 +77,7 @@ module Aws
       # `INSUFFICIENT_DATA` state from any other state. Each action is
       # specified as an Amazon Resource Name (ARN).
       #
-      # <important markdown="1"> The current WSDL lists this attribute as `UnknownActions`.
-      #
-      #  </important>
+      # The current WSDL lists this attribute as `UnknownActions`.
       # @return [Array<String>]
       def insufficient_data_actions
         data.insufficient_data_actions
@@ -91,43 +89,43 @@ module Aws
         data.state_value
       end
 
-      # A human-readable explanation for the alarm\'s state.
+      # A human-readable explanation for the alarm's state.
       # @return [String]
       def state_reason
         data.state_reason
       end
 
-      # An explanation for the alarm\'s state in machine-readable JSON format
+      # An explanation for the alarm's state in machine-readable JSON format
       # @return [String]
       def state_reason_data
         data.state_reason_data
       end
 
-      # The time stamp of the last update to the alarm\'s state.
+      # The time stamp of the last update to the alarm's state.
       # @return [Time]
       def state_updated_timestamp
         data.state_updated_timestamp
       end
 
-      # The name of the alarm\'s metric.
+      # The name of the alarm's metric.
       # @return [String]
       def metric_name
         data.metric_name
       end
 
-      # The namespace of alarm\'s associated metric.
+      # The namespace of alarm's associated metric.
       # @return [String]
       def namespace
         data.namespace
       end
 
-      # The statistic to apply to the alarm\'s associated metric.
+      # The statistic to apply to the alarm's associated metric.
       # @return [String]
       def statistic
         data.statistic
       end
 
-      # The list of dimensions associated with the alarm\'s associated metric.
+      # The list of dimensions associated with the alarm's associated metric.
       # @return [Array<Types::Dimension>]
       def dimensions
         data.dimensions
@@ -139,7 +137,7 @@ module Aws
         data.period
       end
 
-      # The unit of the alarm\'s associated metric.
+      # The unit of the alarm's associated metric.
       # @return [String]
       def unit
         data.unit

@@ -794,7 +794,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] owner
-      #   The owner of the bundle. This contains the owner\'s account
+      #   The owner of the bundle. This contains the owner's account
       #   identifier, or `AMAZON` if the bundle is provided by AWS.
       #   @return [String]
       #
@@ -895,7 +895,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] state
-      #   The state of the directory\'s registration with Amazon WorkSpaces
+      #   The state of the directory's registration with Amazon WorkSpaces
       #   @return [String]
       #
       # @!attribute [rw] workspace_creation_properties

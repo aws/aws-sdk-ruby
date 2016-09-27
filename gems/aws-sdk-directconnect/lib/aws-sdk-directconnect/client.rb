@@ -145,7 +145,7 @@ module Aws
       # @option params [required, String] :bandwidth
       #   Bandwidth of the connection.
       #
-      #   Example: \"*500Mbps*\"
+      #   Example: "*500Mbps*"
       #
       #   Default: None
       #
@@ -153,7 +153,7 @@ module Aws
       # @option params [required, String] :connection_name
       #   Name of the provisioned connection.
       #
-      #   Example: \"*500M Connection to AWS*\"
+      #   Example: "*500M Connection to AWS*"
       #
       #   Default: None
       # @option params [required, String] :owner_account
@@ -208,8 +208,8 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      # @overload allocate_connection_on_interconnect(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def allocate_connection_on_interconnect(params = {}, options = {})
         req = build_request(:allocate_connection_on_interconnect, params)
         req.send_request(options)
@@ -224,7 +224,7 @@ module Aws
       # Virtual interfaces created using this function must be confirmed by
       # the virtual interface owner by calling ConfirmPrivateVirtualInterface.
       # Until this step has been completed, the virtual interface will be in
-      # \'Confirming\' state, and will not be available for handling traffic.
+      # 'Confirming' state, and will not be available for handling traffic.
       # @option params [required, String] :connection_id
       #   The connection ID on which the private virtual interface is
       #   provisioned.
@@ -288,8 +288,8 @@ module Aws
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      # @overload allocate_private_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def allocate_private_virtual_interface(params = {}, options = {})
         req = build_request(:allocate_private_virtual_interface, params)
         req.send_request(options)
@@ -304,7 +304,7 @@ module Aws
       # Virtual interfaces created using this function must be confirmed by
       # the virtual interface owner by calling ConfirmPublicVirtualInterface.
       # Until this step has been completed, the virtual interface will be in
-      # \'Confirming\' state, and will not be available for handling traffic.
+      # 'Confirming' state, and will not be available for handling traffic.
       # @option params [required, String] :connection_id
       #   The connection ID on which the public virtual interface is
       #   provisioned.
@@ -373,8 +373,8 @@ module Aws
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      # @overload allocate_public_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def allocate_public_virtual_interface(params = {}, options = {})
         req = build_request(:allocate_public_virtual_interface, params)
         req.send_request(options)
@@ -382,7 +382,7 @@ module Aws
 
       # Confirm the creation of a hosted connection on an interconnect.
       #
-      # Upon creation, the hosted connection is initially in the \'Ordering\'
+      # Upon creation, the hosted connection is initially in the 'Ordering'
       # state, and will remain in this state until the owner calls
       # ConfirmConnection to confirm creation of the hosted connection.
       # @option params [required, String] :connection_id
@@ -402,8 +402,8 @@ module Aws
       #
       # @example Response structure
       #   resp.connection_state #=> String, one of "ordering", "requested", "pending", "available", "down", "deleting", "deleted", "rejected"
+      # @overload confirm_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_connection(params = {}, options = {})
         req = build_request(:confirm_connection, params)
         req.send_request(options)
@@ -445,8 +445,8 @@ module Aws
       #
       # @example Response structure
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      # @overload confirm_private_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_private_virtual_interface(params = {}, options = {})
         req = build_request(:confirm_private_virtual_interface, params)
         req.send_request(options)
@@ -475,8 +475,8 @@ module Aws
       #
       # @example Response structure
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      # @overload confirm_public_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_public_virtual_interface(params = {}, options = {})
         req = build_request(:confirm_public_virtual_interface, params)
         req.send_request(options)
@@ -508,7 +508,7 @@ module Aws
       # @option params [required, String] :connection_name
       #   The name of the connection.
       #
-      #   Example: \"*My Connection to AWS*\"
+      #   Example: "*My Connection to AWS*"
       #
       #   Default: None
       # @return [Types::Connection] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -542,23 +542,23 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      # @overload create_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_connection(params = {}, options = {})
         req = build_request(:create_connection, params)
         req.send_request(options)
       end
 
-      # Creates a new interconnect between a AWS Direct Connect partner\'s
+      # Creates a new interconnect between a AWS Direct Connect partner's
       # network and a specific AWS Direct Connect location.
       #
       # An interconnect is a connection which is capable of hosting other
       # connections. The AWS Direct Connect partner can use an interconnect to
       # provide sub-1Gbps AWS Direct Connect service to tier 2 customers who
       # do not have their own connections. Like a standard connection, an
-      # interconnect links the AWS Direct Connect partner\'s network to an AWS
+      # interconnect links the AWS Direct Connect partner's network to an AWS
       # Direct Connect location over a standard 1 Gbps or 10 Gbps Ethernet
-      # fiber-optic cable. One end is connected to the partner\'s router, the
+      # fiber-optic cable. One end is connected to the partner's router, the
       # other to an AWS Direct Connect router.
       #
       # For each end customer, the AWS Direct Connect partner provisions a
@@ -573,7 +573,7 @@ module Aws
       # @option params [required, String] :interconnect_name
       #   The name of the interconnect.
       #
-      #   Example: \"*1G Interconnect to AWS*\"
+      #   Example: "*1G Interconnect to AWS*"
       #
       #   Default: None
       # @option params [required, String] :bandwidth
@@ -615,8 +615,8 @@ module Aws
       #   resp.location #=> String
       #   resp.bandwidth #=> String
       #   resp.loa_issue_time #=> Time
+      # @overload create_interconnect(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_interconnect(params = {}, options = {})
         req = build_request(:create_interconnect, params)
         req.send_request(options)
@@ -685,8 +685,8 @@ module Aws
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      # @overload create_private_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_private_virtual_interface(params = {}, options = {})
         req = build_request(:create_private_virtual_interface, params)
         req.send_request(options)
@@ -759,8 +759,8 @@ module Aws
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      # @overload create_public_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_public_virtual_interface(params = {}, options = {})
         req = build_request(:create_public_virtual_interface, params)
         req.send_request(options)
@@ -807,8 +807,8 @@ module Aws
       #   resp.vlan #=> Integer
       #   resp.partner_name #=> String
       #   resp.loa_issue_time #=> Time
+      # @overload delete_connection(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_connection(params = {}, options = {})
         req = build_request(:delete_connection, params)
         req.send_request(options)
@@ -834,8 +834,8 @@ module Aws
       #
       # @example Response structure
       #   resp.interconnect_state #=> String, one of "requested", "pending", "available", "down", "deleting", "deleted"
+      # @overload delete_interconnect(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_interconnect(params = {}, options = {})
         req = build_request(:delete_interconnect, params)
         req.send_request(options)
@@ -859,8 +859,8 @@ module Aws
       #
       # @example Response structure
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      # @overload delete_virtual_interface(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_virtual_interface(params = {}, options = {})
         req = build_request(:delete_virtual_interface, params)
         req.send_request(options)
@@ -892,7 +892,7 @@ module Aws
       #   Default: None
       # @option params [String] :loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
-      #   document. Currently, the only supported value is \"application/pdf\".
+      #   document. Currently, the only supported value is "application/pdf".
       #
       #   Default: application/pdf
       # @return [Types::DescribeConnectionLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -909,8 +909,8 @@ module Aws
       # @example Response structure
       #   resp.loa.loa_content #=> String
       #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      # @overload describe_connection_loa(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_connection_loa(params = {}, options = {})
         req = build_request(:describe_connection_loa, params)
         req.send_request(options)
@@ -947,8 +947,8 @@ module Aws
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
       #   resp.connections[0].loa_issue_time #=> Time
+      # @overload describe_connections(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_connections(params = {}, options = {})
         req = build_request(:describe_connections, params)
         req.send_request(options)
@@ -987,8 +987,8 @@ module Aws
       #   resp.connections[0].vlan #=> Integer
       #   resp.connections[0].partner_name #=> String
       #   resp.connections[0].loa_issue_time #=> Time
+      # @overload describe_connections_on_interconnect(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_connections_on_interconnect(params = {}, options = {})
         req = build_request(:describe_connections_on_interconnect, params)
         req.send_request(options)
@@ -1018,7 +1018,7 @@ module Aws
       #   Default: None
       # @option params [String] :loa_content_type
       #   A standard media type indicating the content type of the LOA-CFA
-      #   document. Currently, the only supported value is \"application/pdf\".
+      #   document. Currently, the only supported value is "application/pdf".
       #
       #   Default: application/pdf
       # @return [Types::DescribeInterconnectLoaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1035,8 +1035,8 @@ module Aws
       # @example Response structure
       #   resp.loa.loa_content #=> String
       #   resp.loa.loa_content_type #=> String, one of "application/pdf"
+      # @overload describe_interconnect_loa(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_interconnect_loa(params = {}, options = {})
         req = build_request(:describe_interconnect_loa, params)
         req.send_request(options)
@@ -1068,8 +1068,8 @@ module Aws
       #   resp.interconnects[0].location #=> String
       #   resp.interconnects[0].bandwidth #=> String
       #   resp.interconnects[0].loa_issue_time #=> Time
+      # @overload describe_interconnects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_interconnects(params = {}, options = {})
         req = build_request(:describe_interconnects, params)
         req.send_request(options)
@@ -1086,8 +1086,8 @@ module Aws
       #   resp.locations #=> Array
       #   resp.locations[0].location_code #=> String
       #   resp.locations[0].location_name #=> String
+      # @overload describe_locations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_locations(params = {}, options = {})
         req = build_request(:describe_locations, params)
         req.send_request(options)
@@ -1111,8 +1111,8 @@ module Aws
       #   resp.virtual_gateways #=> Array
       #   resp.virtual_gateways[0].virtual_gateway_id #=> String
       #   resp.virtual_gateways[0].virtual_gateway_state #=> String
+      # @overload describe_virtual_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_virtual_gateways(params = {}, options = {})
         req = build_request(:describe_virtual_gateways, params)
         req.send_request(options)
@@ -1171,8 +1171,8 @@ module Aws
       #   resp.virtual_interfaces[0].virtual_gateway_id #=> String
       #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array
       #   resp.virtual_interfaces[0].route_filter_prefixes[0].cidr #=> String
+      # @overload describe_virtual_interfaces(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_virtual_interfaces(params = {}, options = {})
         req = build_request(:describe_virtual_interfaces, params)
         req.send_request(options)

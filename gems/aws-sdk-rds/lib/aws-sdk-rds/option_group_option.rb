@@ -80,7 +80,7 @@ module Aws
         data.options_conflicts_with
       end
 
-      # Persistent options can\'t be removed from an option group while DB
+      # Persistent options can't be removed from an option group while DB
       # instances are associated with the option group. If you disassociate
       # all DB instances from the option group, your can remove the persistent
       # option from the option group.
@@ -90,7 +90,7 @@ module Aws
       end
 
       # Permanent options can never be removed from an option group. An option
-      # group containing a permanent option can\'t be removed from a DB
+      # group containing a permanent option can't be removed from a DB
       # instance.
       # @return [Boolean]
       def permanent

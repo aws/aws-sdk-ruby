@@ -31,17 +31,17 @@ module Aws
         @arn
       end
 
-      # A map of the topic\'s attributes. Attributes in this map include the
+      # A map of the topic's attributes. Attributes in this map include the
       # following:
       #
-      # * `TopicArn` -- the topic\'s ARN
+      # * `TopicArn` -- the topic's ARN
       #
-      # * `Owner` -- the AWS account ID of the topic\'s owner
+      # * `Owner` -- the AWS account ID of the topic's owner
       #
-      # * `Policy` -- the JSON serialization of the topic\'s access control
+      # * `Policy` -- the JSON serialization of the topic's access control
       #   policy
       #
-      # * `DisplayName` -- the human-readable name used in the \"From\" field
+      # * `DisplayName` -- the human-readable name used in the "From" field
       #   for notifications to email and email-json endpoints
       #
       # * `SubscriptionsPending` -- the number of subscriptions pending
@@ -53,7 +53,7 @@ module Aws
       # * `SubscriptionsDeleted` -- the number of deleted subscriptions on
       #   this topic
       #
-      # * `DeliveryPolicy` -- the JSON serialization of the topic\'s delivery
+      # * `DeliveryPolicy` -- the JSON serialization of the topic's delivery
       #   policy
       #
       # * `EffectiveDeliveryPolicy` -- the JSON serialization of the effective
@@ -149,13 +149,13 @@ module Aws
       # @option options [String] :target_arn
       #   Either TopicArn or EndpointArn, but not both.
       #
-      #   If you don\'t specify a value for the `TargetArn` parameter, you must
+      #   If you don't specify a value for the `TargetArn` parameter, you must
       #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
       # @option options [String] :phone_number
       #   The phone number to which you want to deliver an SMS message. Use
       #   E.164 format.
       #
-      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   If you don't specify a value for the `PhoneNumber` parameter, you
       #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option options [required, String] :message
       #   The message you want to send to the topic.
@@ -181,7 +181,7 @@ module Aws
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
       #
-      #   * Values have a minimum length of 0 (the empty string, \"\", is
+      #   * Values have a minimum length of 0 (the empty string, "", is
       #     allowed).
       #
       #   * Values have a maximum length bounded by the overall message size
@@ -197,7 +197,7 @@ module Aws
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option options [String] :subject
-      #   Optional parameter to be used as the \"Subject\" line when the message
+      #   Optional parameter to be used as the "Subject" line when the message
       #   is delivered to email endpoints. This field will also be included, if
       #   present, in the standard JSON messages delivered to other endpoints.
       #
@@ -213,11 +213,11 @@ module Aws
       #
       #   * be a syntactically valid JSON object; and
       #
-      #   * contain at least a top-level JSON key of \"default\" with a value
+      #   * contain at least a top-level JSON key of "default" with a value
       #     that is a string.
       #
       #   You can define other top-level keys that define the message you want
-      #   to send to a specific transport protocol (e.g., \"http\").
+      #   to send to a specific transport protocol (e.g., "http").
       #
       #   For information about sending different messages for each protocol
       #   using the AWS Management Console, go to [Create Different Messages for
@@ -251,7 +251,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [required, String] :attribute_name
       #   The name of the attribute you want to set. Only a subset of the
-      #   topic\'s attributes are mutable.
+      #   topic's attributes are mutable.
       #
       #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
       # @option options [String] :attribute_value
@@ -289,10 +289,10 @@ module Aws
       #   protocol:
       #
       #   * For the `http` protocol, the endpoint is an URL beginning with
-      #     \"http://\"
+      #     "http://"
       #
       #   * For the `https` protocol, the endpoint is a URL beginning with
-      #     \"https://\"
+      #     "https://"
       #
       #   * For the `email` protocol, the endpoint is an email address
       #

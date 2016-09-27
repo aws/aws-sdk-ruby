@@ -143,7 +143,7 @@ module Aws
       # not in the `ACTIVE` state cause an exception. To check the state of a
       # delivery stream, use DescribeDeliveryStream.
       #
-      # The name of a delivery stream identifies it. You can\'t have two
+      # The name of a delivery stream identifies it. You can't have two
       # delivery streams with the same name in the same region. Two delivery
       # streams in different AWS accounts or different regions in the same AWS
       # account can have the same name.
@@ -181,7 +181,7 @@ module Aws
       # * The compression formats `SNAPPY` or `ZIP` cannot be specified in
       #   **RedshiftDestinationConfiguration.S3Configuration** because the
       #   Amazon Redshift `COPY` operation that reads from the S3 bucket
-      #   doesn\'t support these compression formats.
+      #   doesn't support these compression formats.
       #
       # * We strongly recommend that the username and password provided is
       #   used exclusively for Firehose purposes, and that the permissions for
@@ -324,8 +324,8 @@ module Aws
       #
       # @example Response structure
       #   resp.delivery_stream_arn #=> String
+      # @overload create_delivery_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_delivery_stream(params = {}, options = {})
         req = build_request(:create_delivery_stream, params)
         req.send_request(options)
@@ -340,7 +340,7 @@ module Aws
       # To check the state of a delivery stream, use DescribeDeliveryStream.
       #
       # While the delivery stream is `DELETING` state, the service may
-      # continue to accept the records, but the service doesn\'t make any
+      # continue to accept the records, but the service doesn't make any
       # guarantees with respect to delivering the data. Therefore, as a best
       # practice, you should first stop any applications that are sending
       # records before deleting a delivery stream.
@@ -352,8 +352,8 @@ module Aws
       #   resp = client.delete_delivery_stream({
       #     delivery_stream_name: "DeliveryStreamName", # required
       #   })
+      # @overload delete_delivery_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_delivery_stream(params = {}, options = {})
         req = build_request(:delete_delivery_stream, params)
         req.send_request(options)
@@ -448,8 +448,8 @@ module Aws
       #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_group_name #=> String
       #   resp.delivery_stream_description.destinations[0].elasticsearch_destination_description.cloud_watch_logging_options.log_stream_name #=> String
       #   resp.delivery_stream_description.has_more_destinations #=> Boolean
+      # @overload describe_delivery_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_delivery_stream(params = {}, options = {})
         req = build_request(:describe_delivery_stream, params)
         req.send_request(options)
@@ -484,8 +484,8 @@ module Aws
       #   resp.delivery_stream_names #=> Array
       #   resp.delivery_stream_names[0] #=> String
       #   resp.has_more_delivery_streams #=> Boolean
+      # @overload list_delivery_streams(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_delivery_streams(params = {}, options = {})
         req = build_request(:list_delivery_streams, params)
         req.send_request(options)
@@ -550,8 +550,8 @@ module Aws
       #
       # @example Response structure
       #   resp.record_id #=> String
+      # @overload put_record(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_record(params = {}, options = {})
         req = build_request(:put_record, params)
         req.send_request(options)
@@ -650,8 +650,8 @@ module Aws
       #   resp.request_responses[0].record_id #=> String
       #   resp.request_responses[0].error_code #=> String
       #   resp.request_responses[0].error_message #=> String
+      # @overload put_record_batch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_record_batch(params = {}, options = {})
         req = build_request(:put_record_batch, params)
         req.send_request(options)
@@ -819,8 +819,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload update_destination(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_destination(params = {}, options = {})
         req = build_request(:update_destination, params)
         req.send_request(options)

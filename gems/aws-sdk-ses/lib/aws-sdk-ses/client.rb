@@ -155,8 +155,8 @@ module Aws
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     original_rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      # @overload clone_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def clone_receipt_rule_set(params = {}, options = {})
         req = build_request(:clone_receipt_rule_set, params)
         req.send_request(options)
@@ -188,8 +188,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload create_receipt_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_receipt_filter(params = {}, options = {})
         req = build_request(:create_receipt_filter, params)
         req.send_request(options)
@@ -212,7 +212,7 @@ module Aws
       #   If this parameter is null, the new rule will be inserted at the
       #   beginning of the rule list.
       # @option params [required, Types::ReceiptRule] :rule
-      #   A data structure that contains the specified rule\'s name, actions,
+      #   A data structure that contains the specified rule's name, actions,
       #   recipients, domains, enabled status, scan status, and TLS policy.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -266,8 +266,8 @@ module Aws
       #       scan_enabled: false,
       #     },
       #   })
+      # @overload create_receipt_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_receipt_rule(params = {}, options = {})
         req = build_request(:create_receipt_rule, params)
         req.send_request(options)
@@ -298,8 +298,8 @@ module Aws
       #   resp = client.create_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      # @overload create_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_receipt_rule_set(params = {}, options = {})
         req = build_request(:create_receipt_rule_set, params)
         req.send_request(options)
@@ -318,8 +318,8 @@ module Aws
       #   resp = client.delete_identity({
       #     identity: "Identity", # required
       #   })
+      # @overload delete_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_identity(params = {}, options = {})
         req = build_request(:delete_identity, params)
         req.send_request(options)
@@ -360,8 +360,8 @@ module Aws
       #     identity: "Identity", # required
       #     policy_name: "PolicyName", # required
       #   })
+      # @overload delete_identity_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_identity_policy(params = {}, options = {})
         req = build_request(:delete_identity_policy, params)
         req.send_request(options)
@@ -385,8 +385,8 @@ module Aws
       #   resp = client.delete_receipt_filter({
       #     filter_name: "ReceiptFilterName", # required
       #   })
+      # @overload delete_receipt_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_receipt_filter(params = {}, options = {})
         req = build_request(:delete_receipt_filter, params)
         req.send_request(options)
@@ -414,8 +414,8 @@ module Aws
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_name: "ReceiptRuleName", # required
       #   })
+      # @overload delete_receipt_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_receipt_rule(params = {}, options = {})
         req = build_request(:delete_receipt_rule, params)
         req.send_request(options)
@@ -444,8 +444,8 @@ module Aws
       #   resp = client.delete_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName", # required
       #   })
+      # @overload delete_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_receipt_rule_set(params = {}, options = {})
         req = build_request(:delete_receipt_rule_set, params)
         req.send_request(options)
@@ -454,11 +454,9 @@ module Aws
       # Deletes the specified email address from the list of verified
       # addresses.
       #
-      # <important markdown="1"> The DeleteVerifiedEmailAddress action is deprecated as of the May 15,
+      # The DeleteVerifiedEmailAddress action is deprecated as of the May 15,
       # 2012 release of Domain Verification. The DeleteIdentity action is now
       # preferred.
-      #
-      #  </important>
       #
       # This action is throttled at one request per second.
       # @option params [required, String] :email_address
@@ -469,8 +467,8 @@ module Aws
       #   resp = client.delete_verified_email_address({
       #     email_address: "Address", # required
       #   })
+      # @overload delete_verified_email_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_verified_email_address(params = {}, options = {})
         req = build_request(:delete_verified_email_address, params)
         req.send_request(options)
@@ -526,8 +524,8 @@ module Aws
       #   resp.rules[0].actions[0].sns_action.topic_arn #=> String
       #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rules[0].scan_enabled #=> Boolean
+      # @overload describe_active_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_active_receipt_rule_set(params = {}, options = {})
         req = build_request(:describe_active_receipt_rule_set, params)
         req.send_request(options)
@@ -585,8 +583,8 @@ module Aws
       #   resp.rule.actions[0].sns_action.topic_arn #=> String
       #   resp.rule.actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rule.scan_enabled #=> Boolean
+      # @overload describe_receipt_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_receipt_rule(params = {}, options = {})
         req = build_request(:describe_receipt_rule, params)
         req.send_request(options)
@@ -645,8 +643,8 @@ module Aws
       #   resp.rules[0].actions[0].sns_action.topic_arn #=> String
       #   resp.rules[0].actions[0].sns_action.encoding #=> String, one of "UTF-8", "Base64"
       #   resp.rules[0].scan_enabled #=> Boolean
+      # @overload describe_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_receipt_rule_set(params = {}, options = {})
         req = build_request(:describe_receipt_rule_set, params)
         req.send_request(options)
@@ -666,7 +664,7 @@ module Aws
       #   an email address, the tokens represent the domain of that address.
       #
       # * Whether Amazon SES has successfully verified the DKIM tokens
-      #   published in the domain\'s DNS. This information is only returned
+      #   published in the domain's DNS. This information is only returned
       #   for domain name identities, not for email addresses.
       #
       # This action is throttled at one request per second and can only get
@@ -696,8 +694,8 @@ module Aws
       #   resp.dkim_attributes["Identity"].dkim_verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
       #   resp.dkim_attributes["Identity"].dkim_tokens #=> Array
       #   resp.dkim_attributes["Identity"].dkim_tokens[0] #=> String
+      # @overload get_identity_dkim_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_dkim_attributes(params = {}, options = {})
         req = build_request(:get_identity_dkim_attributes, params)
         req.send_request(options)
@@ -724,8 +722,8 @@ module Aws
       #   resp.mail_from_domain_attributes["Identity"].mail_from_domain #=> String
       #   resp.mail_from_domain_attributes["Identity"].mail_from_domain_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure"
       #   resp.mail_from_domain_attributes["Identity"].behavior_on_mx_failure #=> String, one of "UseDefaultValue", "RejectMessage"
+      # @overload get_identity_mail_from_domain_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_mail_from_domain_attributes(params = {}, options = {})
         req = build_request(:get_identity_mail_from_domain_attributes, params)
         req.send_request(options)
@@ -766,8 +764,8 @@ module Aws
       #   resp.notification_attributes["Identity"].headers_in_bounce_notifications_enabled #=> Boolean
       #   resp.notification_attributes["Identity"].headers_in_complaint_notifications_enabled #=> Boolean
       #   resp.notification_attributes["Identity"].headers_in_delivery_notifications_enabled #=> Boolean
+      # @overload get_identity_notification_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_notification_attributes(params = {}, options = {})
         req = build_request(:get_identity_notification_attributes, params)
         req.send_request(options)
@@ -817,8 +815,8 @@ module Aws
       # @example Response structure
       #   resp.policies #=> Hash
       #   resp.policies["PolicyName"] #=> String
+      # @overload get_identity_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_policies(params = {}, options = {})
         req = build_request(:get_identity_policies, params)
         req.send_request(options)
@@ -845,14 +843,14 @@ module Aws
       #   resp.verification_attributes #=> Hash
       #   resp.verification_attributes["Identity"].verification_status #=> String, one of "Pending", "Success", "Failed", "TemporaryFailure", "NotStarted"
       #   resp.verification_attributes["Identity"].verification_token #=> String
+      # @overload get_identity_verification_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_verification_attributes(params = {}, options = {})
         req = build_request(:get_identity_verification_attributes, params)
         req.send_request(options)
       end
 
-      # Returns the user\'s current sending limits.
+      # Returns the user's current sending limits.
       #
       # This action is throttled at one request per second.
       # @return [Types::GetSendQuotaResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -865,14 +863,14 @@ module Aws
       #   resp.max_24_hour_send #=> Float
       #   resp.max_send_rate #=> Float
       #   resp.sent_last_24_hours #=> Float
+      # @overload get_send_quota(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_send_quota(params = {}, options = {})
         req = build_request(:get_send_quota, params)
         req.send_request(options)
       end
 
-      # Returns the user\'s sending statistics. The result is a list of data
+      # Returns the user's sending statistics. The result is a list of data
       # points, representing the last two weeks of sending activity.
       #
       # Each data point in the list contains statistics for a 15-minute
@@ -890,8 +888,8 @@ module Aws
       #   resp.send_data_points[0].bounces #=> Integer
       #   resp.send_data_points[0].complaints #=> Integer
       #   resp.send_data_points[0].rejects #=> Integer
+      # @overload get_send_statistics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_send_statistics(params = {}, options = {})
         req = build_request(:get_send_statistics, params)
         req.send_request(options)
@@ -903,7 +901,7 @@ module Aws
       # This action is throttled at one request per second.
       # @option params [String] :identity_type
       #   The type of the identities to list. Possible values are
-      #   \"EmailAddress\" and \"Domain\". If this parameter is omitted, then
+      #   "EmailAddress" and "Domain". If this parameter is omitted, then
       #   all identities will be listed.
       # @option params [String] :next_token
       #   The token to use for pagination.
@@ -926,8 +924,8 @@ module Aws
       #   resp.identities #=> Array
       #   resp.identities[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_identities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_identities(params = {}, options = {})
         req = build_request(:list_identities, params)
         req.send_request(options)
@@ -972,8 +970,8 @@ module Aws
       # @example Response structure
       #   resp.policy_names #=> Array
       #   resp.policy_names[0] #=> String
+      # @overload list_identity_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_identity_policies(params = {}, options = {})
         req = build_request(:list_identity_policies, params)
         req.send_request(options)
@@ -1001,8 +999,8 @@ module Aws
       #   resp.filters[0].name #=> String
       #   resp.filters[0].ip_filter.policy #=> String, one of "Block", "Allow"
       #   resp.filters[0].ip_filter.cidr #=> String
+      # @overload list_receipt_filters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_receipt_filters(params = {}, options = {})
         req = build_request(:list_receipt_filters, params)
         req.send_request(options)
@@ -1039,8 +1037,8 @@ module Aws
       #   resp.rule_sets[0].name #=> String
       #   resp.rule_sets[0].created_timestamp #=> Time
       #   resp.next_token #=> String
+      # @overload list_receipt_rule_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_receipt_rule_sets(params = {}, options = {})
         req = build_request(:list_receipt_rule_sets, params)
         req.send_request(options)
@@ -1049,11 +1047,9 @@ module Aws
       # Returns a list containing all of the email addresses that have been
       # verified.
       #
-      # <important markdown="1"> The ListVerifiedEmailAddresses action is deprecated as of the May 15,
+      # The ListVerifiedEmailAddresses action is deprecated as of the May 15,
       # 2012 release of Domain Verification. The ListIdentities action is now
       # preferred.
-      #
-      #  </important>
       #
       # This action is throttled at one request per second.
       # @return [Types::ListVerifiedEmailAddressesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1063,8 +1059,8 @@ module Aws
       # @example Response structure
       #   resp.verified_email_addresses #=> Array
       #   resp.verified_email_addresses[0] #=> String
+      # @overload list_verified_email_addresses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_verified_email_addresses(params = {}, options = {})
         req = build_request(:list_verified_email_addresses, params)
         req.send_request(options)
@@ -1116,8 +1112,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     policy: "Policy", # required
       #   })
+      # @overload put_identity_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_identity_policy(params = {}, options = {})
         req = build_request(:put_identity_policy, params)
         req.send_request(options)
@@ -1126,7 +1122,7 @@ module Aws
       # Reorders the receipt rules within a receipt rule set.
       #
       # <note markdown="1"> All of the rules in the rule set must be represented in this request.
-      # That is, this API will return an error if the reorder request doesn\'t
+      # That is, this API will return an error if the reorder request doesn't
       # explicitly position all of the rules.
       #
       #  </note>
@@ -1142,7 +1138,7 @@ module Aws
       # @option params [required, String] :rule_set_name
       #   The name of the receipt rule set to reorder.
       # @option params [required, Array<String>] :rule_names
-      #   A list of the specified receipt rule set\'s receipt rules in the order
+      #   A list of the specified receipt rule set's receipt rules in the order
       #   that you want to put them.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -1151,8 +1147,8 @@ module Aws
       #     rule_set_name: "ReceiptRuleSetName", # required
       #     rule_names: ["ReceiptRuleName"], # required
       #   })
+      # @overload reorder_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reorder_receipt_rule_set(params = {}, options = {})
         req = build_request(:reorder_receipt_rule_set, params)
         req.send_request(options)
@@ -1178,7 +1174,7 @@ module Aws
       # @option params [required, String] :original_message_id
       #   The message ID of the message to be bounced.
       # @option params [required, String] :bounce_sender
-      #   The address to use in the \"From\" header of the bounce message. This
+      #   The address to use in the "From" header of the bounce message. This
       #   must be an identity that you have verified with Amazon SES.
       # @option params [String] :explanation
       #   Human-readable text for the bounce message to explain the failure. If
@@ -1195,7 +1191,7 @@ module Aws
       # @option params [String] :bounce_sender_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
-      #   policy that permits you to use the address in the \"From\" header of
+      #   policy that permits you to use the address in the "From" header of
       #   the bounce. For more information about sending authorization, see the
       #   [Amazon SES Developer Guide][1].
       #
@@ -1247,8 +1243,8 @@ module Aws
       #
       # @example Response structure
       #   resp.message_id #=> String
+      # @overload send_bounce(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_bounce(params = {}, options = {})
         req = build_request(:send_bounce, params)
         req.send_request(options)
@@ -1260,7 +1256,7 @@ module Aws
       # There are several important points to know about `SendEmail`\:
       #
       # * You can only send email from verified email addresses and domains;
-      #   otherwise, you will get an \"Email address not verified\" error. If
+      #   otherwise, you will get an "Email address not verified" error. If
       #   your account is still in the Amazon SES sandbox, you must also
       #   verify every recipient email address except for the recipients
       #   provided by the Amazon SES mailbox simulator. For more information,
@@ -1319,7 +1315,7 @@ module Aws
       #   The email address to which bounces and complaints are to be forwarded
       #   when feedback forwarding is enabled. If the message cannot be
       #   delivered to the recipient, then an error message will be returned
-      #   from the recipient\'s ISP; this message will then be forwarded to the
+      #   from the recipient's ISP; this message will then be forwarded to the
       #   email address specified by the `ReturnPath` parameter. The
       #   `ReturnPath` parameter is never overwritten. This email address must
       #   be either individually verified with Amazon SES, or from a domain that
@@ -1398,8 +1394,8 @@ module Aws
       #
       # @example Response structure
       #   resp.message_id #=> String
+      # @overload send_email(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_email(params = {}, options = {})
         req = build_request(:send_email, params)
         req.send_request(options)
@@ -1413,7 +1409,7 @@ module Aws
       # There are several important points to know about `SendRawEmail`\:
       #
       # * You can only send email from verified email addresses and domains;
-      #   otherwise, you will get an \"Email address not verified\" error. If
+      #   otherwise, you will get an "Email address not verified" error. If
       #   your account is still in the Amazon SES sandbox, you must also
       #   verify every recipient email address except for the recipients
       #   provided by the Amazon SES mailbox simulator. For more information,
@@ -1443,7 +1439,7 @@ module Aws
       #
       # * If you are using sending authorization to send on behalf of another
       #   user, `SendRawEmail` enables you to specify the cross-account
-      #   identity for the email\'s \"Source,\" \"From,\" and \"Return-Path\"
+      #   identity for the email's "Source," "From," and "Return-Path"
       #   parameters in one of two ways: you can pass optional parameters
       #   `SourceArn`, `FromArn`, and/or `ReturnPathArn` to the API, or you
       #   can include the following X-headers in the header of your raw email:
@@ -1454,17 +1450,15 @@ module Aws
       # 
       #   * `X-SES-RETURN-PATH-ARN`
       # 
-      #   <important markdown="1"> Do not include these X-headers in the DKIM signature, because they
+      #   Do not include these X-headers in the DKIM signature, because they
       #   are removed by Amazon SES before sending the email.
-      # 
-      #    </important>
       # 
       #   For the most common sending authorization use case, we recommend
       #   that you specify the `SourceIdentityArn` and do not specify either
       #   the `FromIdentityArn` or `ReturnPathIdentityArn`. (The same note
       #   applies to the corresponding X-headers.) If you only specify the
-      #   `SourceIdentityArn`, Amazon SES will simply set the \"From\" address
-      #   and the \"Return Path\" address to the identity specified in
+      #   `SourceIdentityArn`, Amazon SES will simply set the "From" address
+      #   and the "Return Path" address to the identity specified in
       #   `SourceIdentityArn`. For more information about sending
       #   authorization, see the [Amazon SES Developer Guide][3].
       #
@@ -1474,8 +1468,8 @@ module Aws
       # [2]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/manage-sending-limits.html
       # [3]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
       # @option params [String] :source
-      #   The identity\'s email address. If you do not provide a value for this
-      #   parameter, you must specify a \"From\" address in the raw text of the
+      #   The identity's email address. If you do not provide a value for this
+      #   parameter, you must specify a "From" address in the raw text of the
       #   message. (You can also specify both.)
       #
       #   By default, the string must be 7-bit ASCII. If the text must contain
@@ -1518,7 +1512,7 @@ module Aws
       # @option params [String] :from_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
-      #   policy that permits you to specify a particular \"From\" address in
+      #   policy that permits you to specify a particular "From" address in
       #   the header of the raw email.
       #
       #   Instead of using this parameter, you can use the X-header
@@ -1607,8 +1601,8 @@ module Aws
       #
       # @example Response structure
       #   resp.message_id #=> String
+      # @overload send_raw_email(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def send_raw_email(params = {}, options = {})
         req = build_request(:send_raw_email, params)
         req.send_request(options)
@@ -1638,8 +1632,8 @@ module Aws
       #   resp = client.set_active_receipt_rule_set({
       #     rule_set_name: "ReceiptRuleSetName",
       #   })
+      # @overload set_active_receipt_rule_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_active_receipt_rule_set(params = {}, options = {})
         req = build_request(:set_active_receipt_rule_set, params)
         req.send_request(options)
@@ -1679,8 +1673,8 @@ module Aws
       #     identity: "Identity", # required
       #     dkim_enabled: false, # required
       #   })
+      # @overload set_identity_dkim_enabled(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_dkim_enabled(params = {}, options = {})
         req = build_request(:set_identity_dkim_enabled, params)
         req.send_request(options)
@@ -1724,8 +1718,8 @@ module Aws
       #     identity: "Identity", # required
       #     forwarding_enabled: false, # required
       #   })
+      # @overload set_identity_feedback_forwarding_enabled(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_feedback_forwarding_enabled(params = {}, options = {})
         req = build_request(:set_identity_feedback_forwarding_enabled, params)
         req.send_request(options)
@@ -1766,8 +1760,8 @@ module Aws
       #     notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #     enabled: false, # required
       #   })
+      # @overload set_identity_headers_in_notifications_enabled(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_headers_in_notifications_enabled(params = {}, options = {})
         req = build_request(:set_identity_headers_in_notifications_enabled, params)
         req.send_request(options)
@@ -1776,13 +1770,11 @@ module Aws
       # Enables or disables the custom MAIL FROM domain setup for a verified
       # identity (an email address or a domain).
       #
-      # <important markdown="1"> To send emails using the specified MAIL FROM domain, you must add an
-      # MX record to your MAIL FROM domain\'s DNS settings. If you want your
+      # To send emails using the specified MAIL FROM domain, you must add an
+      # MX record to your MAIL FROM domain's DNS settings. If you want your
       # emails to pass Sender Policy Framework (SPF) checks, you must also add
       # or update an SPF record. For more information, see the [Amazon SES
       # Developer Guide][1].
-      #
-      #  </important>
       #
       # This action is throttled at one request per second.
       #
@@ -1795,7 +1787,7 @@ module Aws
       # @option params [String] :mail_from_domain
       #   The custom MAIL FROM domain that you want the verified identity to
       #   use. The MAIL FROM domain must 1) be a subdomain of the verified
-      #   identity, 2) not be used in a \"From\" address if the MAIL FROM domain
+      #   identity, 2) not be used in a "From" address if the MAIL FROM domain
       #   is the destination of email feedback forwarding (for more information,
       #   see the [Amazon SES Developer Guide][1]), and 3) not be used to
       #   receive emails. A value of `null` disables the custom MAIL FROM
@@ -1823,8 +1815,8 @@ module Aws
       #     mail_from_domain: "MailFromDomainName",
       #     behavior_on_mx_failure: "UseDefaultValue", # accepts UseDefaultValue, RejectMessage
       #   })
+      # @overload set_identity_mail_from_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_mail_from_domain(params = {}, options = {})
         req = build_request(:set_identity_mail_from_domain, params)
         req.send_request(options)
@@ -1869,8 +1861,8 @@ module Aws
       #     notification_type: "Bounce", # required, accepts Bounce, Complaint, Delivery
       #     sns_topic: "NotificationTopic",
       #   })
+      # @overload set_identity_notification_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_notification_topic(params = {}, options = {})
         req = build_request(:set_identity_notification_topic, params)
         req.send_request(options)
@@ -1903,8 +1895,8 @@ module Aws
       #     rule_name: "ReceiptRuleName", # required
       #     after: "ReceiptRuleName",
       #   })
+      # @overload set_receipt_rule_position(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_receipt_rule_position(params = {}, options = {})
         req = build_request(:set_receipt_rule_position, params)
         req.send_request(options)
@@ -1975,15 +1967,15 @@ module Aws
       #       scan_enabled: false,
       #     },
       #   })
+      # @overload update_receipt_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_receipt_rule(params = {}, options = {})
         req = build_request(:update_receipt_rule, params)
         req.send_request(options)
       end
 
       # Returns a set of DKIM tokens for a domain. DKIM *tokens* are character
-      # strings that represent your domain\'s identity. Using these tokens,
+      # strings that represent your domain's identity. Using these tokens,
       # you will need to create DNS CNAME records that point to DKIM public
       # keys hosted by Amazon SES. Amazon Web Services will eventually detect
       # that you have updated your DNS records; this detection process may
@@ -2015,8 +2007,8 @@ module Aws
       # @example Response structure
       #   resp.dkim_tokens #=> Array
       #   resp.dkim_tokens[0] #=> String
+      # @overload verify_domain_dkim(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_domain_dkim(params = {}, options = {})
         req = build_request(:verify_domain_dkim, params)
         req.send_request(options)
@@ -2038,8 +2030,8 @@ module Aws
       #
       # @example Response structure
       #   resp.verification_token #=> String
+      # @overload verify_domain_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_domain_identity(params = {}, options = {})
         req = build_request(:verify_domain_identity, params)
         req.send_request(options)
@@ -2048,11 +2040,9 @@ module Aws
       # Verifies an email address. This action causes a confirmation email
       # message to be sent to the specified address.
       #
-      # <important markdown="1"> The VerifyEmailAddress action is deprecated as of the May 15, 2012
+      # The VerifyEmailAddress action is deprecated as of the May 15, 2012
       # release of Domain Verification. The VerifyEmailIdentity action is now
       # preferred.
-      #
-      #  </important>
       #
       # This action is throttled at one request per second.
       # @option params [required, String] :email_address
@@ -2063,8 +2053,8 @@ module Aws
       #   resp = client.verify_email_address({
       #     email_address: "Address", # required
       #   })
+      # @overload verify_email_address(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_email_address(params = {}, options = {})
         req = build_request(:verify_email_address, params)
         req.send_request(options)
@@ -2082,8 +2072,8 @@ module Aws
       #   resp = client.verify_email_identity({
       #     email_address: "Address", # required
       #   })
+      # @overload verify_email_identity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_email_identity(params = {}, options = {})
         req = build_request(:verify_email_identity, params)
         req.send_request(options)

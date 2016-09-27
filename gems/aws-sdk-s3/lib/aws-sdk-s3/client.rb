@@ -175,7 +175,7 @@ module Aws
 
       # Aborts a multipart upload.
       #
-      # To verify that all parts have been removed, so you don\'t get charged
+      # To verify that all parts have been removed, so you don't get charged
       # for the part storage, you should call the List Parts operation and
       # ensure the parts list is empty.
       # @option params [required, String] :bucket
@@ -201,8 +201,8 @@ module Aws
       #
       # @example Response structure
       #   resp.request_charged #=> String, one of "requester"
+      # @overload abort_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def abort_multipart_upload(params = {}, options = {})
         req = build_request(:abort_multipart_upload, params)
         req.send_request(options)
@@ -257,8 +257,8 @@ module Aws
       #   resp.version_id #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload complete_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def complete_multipart_upload(params = {}, options = {})
         req = build_request(:complete_multipart_upload, params)
         req.send_request(options)
@@ -291,7 +291,7 @@ module Aws
       #   Copies the object if its entity tag (ETag) is different than the
       #   specified ETag.
       # @option params [Time,DateTime,Date,Integer,String] :copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       # @option params [Time,DateTime,Date,Integer,String] :expires
       #   The date and time at which the object is no longer cacheable.
@@ -314,7 +314,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option params [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option params [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.
@@ -415,8 +415,8 @@ module Aws
       #   resp.sse_customer_key_md5 #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload copy_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_object(params = {}, options = {})
         req = build_request(:copy_object, params)
         req.send_request(options)
@@ -459,8 +459,8 @@ module Aws
       #
       # @example Response structure
       #   resp.location #=> String
+      # @overload create_bucket(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_bucket(params = {}, options = {})
         req = build_request(:create_bucket, params)
         req.send_request(options)
@@ -506,7 +506,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option params [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option params [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.
@@ -588,8 +588,8 @@ module Aws
       #   resp.sse_customer_key_md5 #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload create_multipart_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_multipart_upload(params = {}, options = {})
         req = build_request(:create_multipart_upload, params)
         req.send_request(options)
@@ -605,8 +605,8 @@ module Aws
       #   resp = client.delete_bucket({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket(params = {}, options = {})
         req = build_request(:delete_bucket, params)
         req.send_request(options)
@@ -620,8 +620,8 @@ module Aws
       #   resp = client.delete_bucket_cors({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_cors(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_cors(params = {}, options = {})
         req = build_request(:delete_bucket_cors, params)
         req.send_request(options)
@@ -635,8 +635,8 @@ module Aws
       #   resp = client.delete_bucket_lifecycle({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_lifecycle(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_lifecycle(params = {}, options = {})
         req = build_request(:delete_bucket_lifecycle, params)
         req.send_request(options)
@@ -650,8 +650,8 @@ module Aws
       #   resp = client.delete_bucket_policy({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_policy(params = {}, options = {})
         req = build_request(:delete_bucket_policy, params)
         req.send_request(options)
@@ -665,8 +665,8 @@ module Aws
       #   resp = client.delete_bucket_replication({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_replication(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_replication(params = {}, options = {})
         req = build_request(:delete_bucket_replication, params)
         req.send_request(options)
@@ -680,8 +680,8 @@ module Aws
       #   resp = client.delete_bucket_tagging({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_tagging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_tagging(params = {}, options = {})
         req = build_request(:delete_bucket_tagging, params)
         req.send_request(options)
@@ -695,8 +695,8 @@ module Aws
       #   resp = client.delete_bucket_website({
       #     bucket: "BucketName", # required
       #   })
+      # @overload delete_bucket_website(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bucket_website(params = {}, options = {})
         req = build_request(:delete_bucket_website, params)
         req.send_request(options)
@@ -704,11 +704,11 @@ module Aws
 
       # Removes the null version (if there is one) of an object and inserts a
       # delete marker, which becomes the latest version of the object. If
-      # there isn\'t a null version, Amazon S3 does not remove any objects.
+      # there isn't a null version, Amazon S3 does not remove any objects.
       # @option params [required, String] :bucket
       # @option params [required, String] :key
       # @option params [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option params [String] :version_id
       #   VersionId used to reference a specific version of the object.
@@ -737,8 +737,8 @@ module Aws
       #   resp.delete_marker #=> Boolean
       #   resp.version_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload delete_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_object(params = {}, options = {})
         req = build_request(:delete_object, params)
         req.send_request(options)
@@ -749,7 +749,7 @@ module Aws
       # @option params [required, String] :bucket
       # @option params [required, Types::Delete] :delete
       # @option params [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option params [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for
@@ -791,8 +791,8 @@ module Aws
       #   resp.errors[0].version_id #=> String
       #   resp.errors[0].code #=> String
       #   resp.errors[0].message #=> String
+      # @overload delete_objects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_objects(params = {}, options = {})
         req = build_request(:delete_objects, params)
         req.send_request(options)
@@ -813,8 +813,8 @@ module Aws
       #
       # @example Response structure
       #   resp.status #=> String, one of "Enabled", "Suspended"
+      # @overload get_bucket_accelerate_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_accelerate_configuration(params = {}, options = {})
         req = build_request(:get_bucket_accelerate_configuration, params)
         req.send_request(options)
@@ -842,8 +842,8 @@ module Aws
       #   resp.grants[0].grantee.type #=> String, one of "CanonicalUser", "AmazonCustomerByEmail", "Group"
       #   resp.grants[0].grantee.uri #=> String
       #   resp.grants[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
+      # @overload get_bucket_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_acl(params = {}, options = {})
         req = build_request(:get_bucket_acl, params)
         req.send_request(options)
@@ -871,8 +871,8 @@ module Aws
       #   resp.cors_rules[0].expose_headers #=> Array
       #   resp.cors_rules[0].expose_headers[0] #=> String
       #   resp.cors_rules[0].max_age_seconds #=> Integer
+      # @overload get_bucket_cors(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_cors(params = {}, options = {})
         req = build_request(:get_bucket_cors, params)
         req.send_request(options)
@@ -904,8 +904,8 @@ module Aws
       #   resp.rules[0].noncurrent_version_transition.storage_class #=> String, one of "GLACIER", "STANDARD_IA"
       #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
       #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+      # @overload get_bucket_lifecycle(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_lifecycle(params = {}, options = {})
         req = build_request(:get_bucket_lifecycle, params)
         req.send_request(options)
@@ -939,8 +939,8 @@ module Aws
       #   resp.rules[0].noncurrent_version_transitions[0].storage_class #=> String, one of "GLACIER", "STANDARD_IA"
       #   resp.rules[0].noncurrent_version_expiration.noncurrent_days #=> Integer
       #   resp.rules[0].abort_incomplete_multipart_upload.days_after_initiation #=> Integer
+      # @overload get_bucket_lifecycle_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_lifecycle_configuration(params = {}, options = {})
         req = build_request(:get_bucket_lifecycle_configuration, params)
         req.send_request(options)
@@ -959,8 +959,8 @@ module Aws
       #
       # @example Response structure
       #   resp.location_constraint #=> String, one of "EU", "eu-west-1", "us-west-1", "us-west-2", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1", "cn-north-1", "eu-central-1"
+      # @overload get_bucket_location(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_location(params = {}, options = {})
         req = build_request(:get_bucket_location, params)
         req.send_request(options)
@@ -989,8 +989,8 @@ module Aws
       #   resp.logging_enabled.target_grants[0].grantee.uri #=> String
       #   resp.logging_enabled.target_grants[0].permission #=> String, one of "FULL_CONTROL", "READ", "WRITE"
       #   resp.logging_enabled.target_prefix #=> String
+      # @overload get_bucket_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_logging(params = {}, options = {})
         req = build_request(:get_bucket_logging, params)
         req.send_request(options)
@@ -1027,8 +1027,8 @@ module Aws
       #   resp.cloud_function_configuration.events[0] #=> String, one of "s3:ReducedRedundancyLostObject", "s3:ObjectCreated:*", "s3:ObjectCreated:Put", "s3:ObjectCreated:Post", "s3:ObjectCreated:Copy", "s3:ObjectCreated:CompleteMultipartUpload", "s3:ObjectRemoved:*", "s3:ObjectRemoved:Delete", "s3:ObjectRemoved:DeleteMarkerCreated"
       #   resp.cloud_function_configuration.cloud_function #=> String
       #   resp.cloud_function_configuration.invocation_role #=> String
+      # @overload get_bucket_notification(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_notification(params = {}, options = {})
         req = build_request(:get_bucket_notification, params)
         req.send_request(options)
@@ -1073,8 +1073,8 @@ module Aws
       #   resp.lambda_function_configurations[0].filter.key.filter_rules #=> Array
       #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].name #=> String, one of "prefix", "suffix"
       #   resp.lambda_function_configurations[0].filter.key.filter_rules[0].value #=> String
+      # @overload get_bucket_notification_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_notification_configuration(params = {}, options = {})
         req = build_request(:get_bucket_notification_configuration, params)
         req.send_request(options)
@@ -1093,8 +1093,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy #=> String
+      # @overload get_bucket_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_policy(params = {}, options = {})
         req = build_request(:get_bucket_policy, params)
         req.send_request(options)
@@ -1119,8 +1119,8 @@ module Aws
       #   resp.replication_configuration.rules[0].status #=> String, one of "Enabled", "Disabled"
       #   resp.replication_configuration.rules[0].destination.bucket #=> String
       #   resp.replication_configuration.rules[0].destination.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
+      # @overload get_bucket_replication(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_replication(params = {}, options = {})
         req = build_request(:get_bucket_replication, params)
         req.send_request(options)
@@ -1139,8 +1139,8 @@ module Aws
       #
       # @example Response structure
       #   resp.payer #=> String, one of "Requester", "BucketOwner"
+      # @overload get_bucket_request_payment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_request_payment(params = {}, options = {})
         req = build_request(:get_bucket_request_payment, params)
         req.send_request(options)
@@ -1161,8 +1161,8 @@ module Aws
       #   resp.tag_set #=> Array
       #   resp.tag_set[0].key #=> String
       #   resp.tag_set[0].value #=> String
+      # @overload get_bucket_tagging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_tagging(params = {}, options = {})
         req = build_request(:get_bucket_tagging, params)
         req.send_request(options)
@@ -1183,8 +1183,8 @@ module Aws
       # @example Response structure
       #   resp.status #=> String, one of "Enabled", "Suspended"
       #   resp.mfa_delete #=> String, one of "Enabled", "Disabled"
+      # @overload get_bucket_versioning(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_versioning(params = {}, options = {})
         req = build_request(:get_bucket_versioning, params)
         req.send_request(options)
@@ -1217,8 +1217,8 @@ module Aws
       #   resp.routing_rules[0].redirect.protocol #=> String, one of "http", "https"
       #   resp.routing_rules[0].redirect.replace_key_prefix_with #=> String
       #   resp.routing_rules[0].redirect.replace_key_with #=> String
+      # @overload get_bucket_website(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bucket_website(params = {}, options = {})
         req = build_request(:get_bucket_website, params)
         req.send_request(options)
@@ -1384,8 +1384,8 @@ module Aws
       #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
       #   resp.request_charged #=> String, one of "requester"
       #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+      # @overload get_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_object(params = {}, options = {})
         req = build_request(:get_object, params)
         req.send_request(options)
@@ -1427,8 +1427,8 @@ module Aws
       #   resp.grants[0].grantee.uri #=> String
       #   resp.grants[0].permission #=> String, one of "FULL_CONTROL", "WRITE", "WRITE_ACP", "READ", "READ_ACP"
       #   resp.request_charged #=> String, one of "requester"
+      # @overload get_object_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_object_acl(params = {}, options = {})
         req = build_request(:get_object_acl, params)
         req.send_request(options)
@@ -1458,8 +1458,8 @@ module Aws
       # @example Response structure
       #   resp.body #=> IO
       #   resp.request_charged #=> String, one of "requester"
+      # @overload get_object_torrent(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_object_torrent(params = {}, options = {})
         req = build_request(:get_object_torrent, params)
         req.send_request(options)
@@ -1474,16 +1474,16 @@ module Aws
       #   resp = client.head_bucket({
       #     bucket: "BucketName", # required
       #   })
+      # @overload head_bucket(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def head_bucket(params = {}, options = {})
         req = build_request(:head_bucket, params)
         req.send_request(options)
       end
 
       # The HEAD operation retrieves metadata from an object without returning
-      # the object itself. This operation is useful if you\'re only interested
-      # in an object\'s metadata. To use HEAD, you must have READ access to
+      # the object itself. This operation is useful if you're only interested
+      # in an object's metadata. To use HEAD, you must have READ access to
       # the object.
       # @option params [required, String] :bucket
       # @option params [String] :if_match
@@ -1595,8 +1595,8 @@ module Aws
       #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
       #   resp.request_charged #=> String, one of "requester"
       #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+      # @overload head_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def head_object(params = {}, options = {})
         req = build_request(:head_object, params)
         req.send_request(options)
@@ -1615,8 +1615,8 @@ module Aws
       #   resp.buckets[0].creation_date #=> Time
       #   resp.owner.display_name #=> String
       #   resp.owner.id #=> String
+      # @overload list_buckets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_buckets(params = {}, options = {})
         req = build_request(:list_buckets, params)
         req.send_request(options)
@@ -1695,8 +1695,8 @@ module Aws
       #   resp.common_prefixes #=> Array
       #   resp.common_prefixes[0].prefix #=> String
       #   resp.encoding_type #=> String, one of "url"
+      # @overload list_multipart_uploads(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_multipart_uploads(params = {}, options = {})
         req = build_request(:list_multipart_uploads, params)
         req.send_request(options)
@@ -1779,8 +1779,8 @@ module Aws
       #   resp.common_prefixes #=> Array
       #   resp.common_prefixes[0].prefix #=> String
       #   resp.encoding_type #=> String, one of "url"
+      # @overload list_object_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_object_versions(params = {}, options = {})
         req = build_request(:list_object_versions, params)
         req.send_request(options)
@@ -1848,8 +1848,8 @@ module Aws
       #   resp.common_prefixes #=> Array
       #   resp.common_prefixes[0].prefix #=> String
       #   resp.encoding_type #=> String, one of "url"
+      # @overload list_objects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_objects(params = {}, options = {})
         req = build_request(:list_objects, params)
         req.send_request(options)
@@ -1931,8 +1931,8 @@ module Aws
       #   resp.continuation_token #=> String
       #   resp.next_continuation_token #=> String
       #   resp.start_after #=> String
+      # @overload list_objects_v2(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_objects_v2(params = {}, options = {})
         req = build_request(:list_objects_v2, params)
         req.send_request(options)
@@ -2004,8 +2004,8 @@ module Aws
       #   resp.owner.id #=> String
       #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
       #   resp.request_charged #=> String, one of "requester"
+      # @overload list_parts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_parts(params = {}, options = {})
         req = build_request(:list_parts, params)
         req.send_request(options)
@@ -2025,8 +2025,8 @@ module Aws
       #       status: "Enabled", # accepts Enabled, Suspended
       #     },
       #   })
+      # @overload put_bucket_accelerate_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_accelerate_configuration(params = {}, options = {})
         req = build_request(:put_bucket_accelerate_configuration, params)
         req.send_request(options)
@@ -2081,8 +2081,8 @@ module Aws
       #     grant_write: "GrantWrite",
       #     grant_write_acp: "GrantWriteACP",
       #   })
+      # @overload put_bucket_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_acl(params = {}, options = {})
         req = build_request(:put_bucket_acl, params)
         req.send_request(options)
@@ -2110,8 +2110,8 @@ module Aws
       #     },
       #     content_md5: "ContentMD5",
       #   })
+      # @overload put_bucket_cors(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_cors(params = {}, options = {})
         req = build_request(:put_bucket_cors, params)
         req.send_request(options)
@@ -2157,8 +2157,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_lifecycle(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_lifecycle(params = {}, options = {})
         req = build_request(:put_bucket_lifecycle, params)
         req.send_request(options)
@@ -2207,8 +2207,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_lifecycle_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_lifecycle_configuration(params = {}, options = {})
         req = build_request(:put_bucket_lifecycle_configuration, params)
         req.send_request(options)
@@ -2245,8 +2245,8 @@ module Aws
       #     },
       #     content_md5: "ContentMD5",
       #   })
+      # @overload put_bucket_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_logging(params = {}, options = {})
         req = build_request(:put_bucket_logging, params)
         req.send_request(options)
@@ -2284,8 +2284,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload put_bucket_notification(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_notification(params = {}, options = {})
         req = build_request(:put_bucket_notification, params)
         req.send_request(options)
@@ -2355,8 +2355,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_notification_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_notification_configuration(params = {}, options = {})
         req = build_request(:put_bucket_notification_configuration, params)
         req.send_request(options)
@@ -2376,8 +2376,8 @@ module Aws
       #     content_md5: "ContentMD5",
       #     policy: "Policy", # required
       #   })
+      # @overload put_bucket_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_policy(params = {}, options = {})
         req = build_request(:put_bucket_policy, params)
         req.send_request(options)
@@ -2411,8 +2411,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_replication(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_replication(params = {}, options = {})
         req = build_request(:put_bucket_replication, params)
         req.send_request(options)
@@ -2437,8 +2437,8 @@ module Aws
       #       payer: "Requester", # required, accepts Requester, BucketOwner
       #     },
       #   })
+      # @overload put_bucket_request_payment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_request_payment(params = {}, options = {})
         req = build_request(:put_bucket_request_payment, params)
         req.send_request(options)
@@ -2463,8 +2463,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_tagging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_tagging(params = {}, options = {})
         req = build_request(:put_bucket_tagging, params)
         req.send_request(options)
@@ -2475,7 +2475,7 @@ module Aws
       # @option params [required, String] :bucket
       # @option params [String] :content_md5
       # @option params [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option params [required, Types::VersioningConfiguration] :versioning_configuration
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2490,8 +2490,8 @@ module Aws
       #       status: "Enabled", # accepts Enabled, Suspended
       #     },
       #   })
+      # @overload put_bucket_versioning(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_versioning(params = {}, options = {})
         req = build_request(:put_bucket_versioning, params)
         req.send_request(options)
@@ -2535,8 +2535,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload put_bucket_website(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_bucket_website(params = {}, options = {})
         req = build_request(:put_bucket_website, params)
         req.send_request(options)
@@ -2585,7 +2585,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option params [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option params [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.
@@ -2672,8 +2672,8 @@ module Aws
       #   resp.sse_customer_key_md5 #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload put_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_object(params = {}, options = {})
         req = build_request(:put_object, params)
         req.send_request(options)
@@ -2746,8 +2746,8 @@ module Aws
       #
       # @example Response structure
       #   resp.request_charged #=> String, one of "requester"
+      # @overload put_object_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_object_acl(params = {}, options = {})
         req = build_request(:put_object_acl, params)
         req.send_request(options)
@@ -2781,8 +2781,8 @@ module Aws
       #
       # @example Response structure
       #   resp.request_charged #=> String, one of "requester"
+      # @overload restore_object(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_object(params = {}, options = {})
         req = build_request(:restore_object, params)
         req.send_request(options)
@@ -2864,8 +2864,8 @@ module Aws
       #   resp.sse_customer_key_md5 #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload upload_part(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_part(params = {}, options = {})
         req = build_request(:upload_part, params)
         req.send_request(options)
@@ -2884,7 +2884,7 @@ module Aws
       #   Copies the object if its entity tag (ETag) is different than the
       #   specified ETag.
       # @option params [Time,DateTime,Date,Integer,String] :copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       # @option params [String] :copy_source_range
       #   The range of bytes to copy from the source object. The range value
@@ -2970,8 +2970,8 @@ module Aws
       #   resp.sse_customer_key_md5 #=> String
       #   resp.ssekms_key_id #=> String
       #   resp.request_charged #=> String, one of "requester"
+      # @overload upload_part_copy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_part_copy(params = {}, options = {})
         req = build_request(:upload_part_copy, params)
         req.send_request(options)

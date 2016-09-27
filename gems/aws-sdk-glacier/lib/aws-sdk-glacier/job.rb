@@ -75,13 +75,13 @@ module Aws
       end
 
       # The UTC date when the job was created. A string representation of ISO
-      # 8601 date format, for example, \"2012-03-20T17:03:43.221Z\".
+      # 8601 date format, for example, "2012-03-20T17:03:43.221Z".
       # @return [Time]
       def creation_date
         data.creation_date
       end
 
-      # The job status. When a job is completed, you get the job\'s output.
+      # The job status. When a job is completed, you get the job's output.
       # @return [Boolean]
       def completed
         data.completed
@@ -167,7 +167,7 @@ module Aws
       end
 
       # The retrieved byte range for archive retrieval jobs in the form
-      # \"*StartByteValue*-*EndByteValue*\" If no range was specified in the
+      # "*StartByteValue*-*EndByteValue*" If no range was specified in the
       # archive retrieval, then the whole archive is retrieved and
       # *StartByteValue* equals 0 and *EndByteValue* equals the size of the
       # archive minus 1. For inventory retrieval jobs this field is null.
@@ -226,8 +226,8 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :range
       #   The range of bytes to retrieve from the output. For example, if you
-      #   want to download the first 1,048,576 bytes, specify \"Range:
-      #   bytes=0-1048575\". By default, this operation downloads the entire
+      #   want to download the first 1,048,576 bytes, specify "Range:
+      #   bytes=0-1048575". By default, this operation downloads the entire
       #   output.
       # @return [Types::GetJobOutputOutput]
       def get_output(options = {})

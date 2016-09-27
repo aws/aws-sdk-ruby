@@ -47,7 +47,7 @@ module Aws
       # The private DNS name assigned to the instance. This DNS name can only
       # be used inside the Amazon EC2 network. This name is not available
       # until the instance enters the `running` state. For EC2-VPC, this name
-      # is only available if you\'ve enabled DNS hostnames for your VPC.
+      # is only available if you've enabled DNS hostnames for your VPC.
       # @return [String]
       def private_dns_name
         data.private_dns_name
@@ -55,7 +55,7 @@ module Aws
 
       # The public DNS name assigned to the instance. This name is not
       # available until the instance enters the `running` state. For EC2-VPC,
-      # this name is only available if you\'ve enabled DNS hostnames for your
+      # this name is only available if you've enabled DNS hostnames for your
       # VPC.
       # @return [String]
       def public_dns_name
@@ -253,7 +253,7 @@ module Aws
       # Indicates whether the instance is optimized for EBS I/O. This
       # optimization provides dedicated throughput to Amazon EBS and an
       # optimized configuration stack to provide optimal I/O performance. This
-      # optimization isn\'t available with all instance types. Additional
+      # optimization isn't available with all instance types. Additional
       # usage charges apply when using an EBS Optimized instance.
       # @return [Boolean]
       def ebs_optimized
@@ -400,7 +400,7 @@ module Aws
       # @option options [required, String] :vpc_id
       #   The ID of a ClassicLink-enabled VPC.
       # @option options [required, Array<String>] :groups
-      #   The ID of one or more of the VPC\'s security groups. You cannot
+      #   The ID of one or more of the VPC's security groups. You cannot
       #   specify security groups from a different VPC.
       # @return [Types::AttachClassicLinkVpcResult]
       def attach_classic_link_vpc(options = {})
@@ -452,14 +452,14 @@ module Aws
       #
       #   Constraints: 3-128 alphanumeric characters, parentheses (()), square
       #   brackets (\[\]), spaces ( ), periods (.), slashes (/), dashes (-),
-      #   single quotes (\'), at-signs (@), or underscores(\_)
+      #   single quotes ('), at-signs (@), or underscores(\_)
       # @option options [String] :description
       #   A description for the new image.
       # @option options [Boolean] :no_reboot
       #   By default, Amazon EC2 attempts to shut down and reboot the instance
-      #   before creating the image. If the \'No Reboot\' option is set, Amazon
-      #   EC2 doesn\'t shut down the instance before creating the image. When
-      #   this option is used, file system integrity on the created image can\'t
+      #   before creating the image. If the 'No Reboot' option is set, Amazon
+      #   EC2 doesn't shut down the instance before creating the image. When
+      #   this option is used, file system integrity on the created image can't
       #   be guaranteed.
       # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   Information about one or more block device mappings.
@@ -480,7 +480,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -546,7 +546,7 @@ module Aws
       #   cleanly (for example, logging into an instance, unmounting the volume,
       #   and detaching normally). This option can lead to data loss or a
       #   corrupted file system. Use this option only as a last resort to detach
-      #   a volume from a failed instance. The instance won\'t have an
+      #   a volume from a failed instance. The instance won't have an
       #   opportunity to flush file system caches or file system metadata. If
       #   you use this option, you must perform file system check and repair
       #   procedures.
@@ -589,7 +589,7 @@ module Aws
       #   disabled. This value must be `false` for a NAT instance to perform
       #   NAT.
       # @option options [Types::AttributeBooleanValue] :disable_api_termination
-      #   If the value is `true`, you can\'t terminate the instance using the
+      #   If the value is `true`, you can't terminate the instance using the
       #   Amazon EC2 console, CLI, or API; otherwise, you can. You cannot use
       #   this paramater for Spot Instances.
       # @option options [Types::AttributeValue] :instance_type
@@ -601,7 +601,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/instance-types.html
       # @option options [Types::AttributeValue] :kernel
-      #   Changes the instance\'s kernel to the specified value. We recommend
+      #   Changes the instance's kernel to the specified value. We recommend
       #   that you use PV-GRUB instead of kernels and RAM disks. For more
       #   information, see [PV-GRUB][1].
       #
@@ -609,7 +609,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
       # @option options [Types::AttributeValue] :ramdisk
-      #   Changes the instance\'s RAM disk to the specified value. We recommend
+      #   Changes the instance's RAM disk to the specified value. We recommend
       #   that you use PV-GRUB instead of kernels and RAM disks. For more
       #   information, see [PV-GRUB][1].
       #
@@ -617,7 +617,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/UserProvidedKernels.html
       # @option options [Types::BlobAttributeValue] :user_data
-      #   Changes the instance\'s user data to the specified value. If you are
+      #   Changes the instance's user data to the specified value. If you are
       #   using an AWS SDK or command line tool, Base64-encoding is performed
       #   for you, and you can load the text from a file. Otherwise, you must
       #   provide Base64-encoded text.
@@ -627,14 +627,14 @@ module Aws
       #   system shutdown).
       # @option options [Array<String>] :groups
       #   \[EC2-VPC\] Changes the security groups of the instance. You must
-      #   specify at least one security group, even if it\'s just the default
+      #   specify at least one security group, even if it's just the default
       #   security group for the VPC. You must specify the security group ID,
       #   not the security group name.
       # @option options [Types::AttributeBooleanValue] :ebs_optimized
       #   Specifies whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O performance.
-      #   This optimization isn\'t available with all instance types. Additional
+      #   This optimization isn't available with all instance types. Additional
       #   usage charges apply when using an EBS Optimized instance.
       # @option options [Types::AttributeValue] :sriov_net_support
       #   Set to `simple` to enable enhanced networking with the Intel 82599
@@ -754,11 +754,9 @@ module Aws
       # @option options [required, String] :attribute
       #   The attribute to reset.
       #
-      #   <important markdown="1"> You can only reset the following attributes: `kernel` \| `ramdisk` \|
+      #   You can only reset the following attributes: `kernel` \| `ramdisk` \|
       #   `sourceDestCheck`. To change an instance attribute, use
       #   ModifyInstanceAttribute.
-      #
-      #    </important>
       # @return [EmptyStructure]
       def reset_attribute(options = {})
         options = options.merge(instance_id: @id)

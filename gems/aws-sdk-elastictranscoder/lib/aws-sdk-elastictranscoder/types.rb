@@ -13,11 +13,11 @@ module Aws
       # associated with an audio file, to a maximum of 20.
       #
       # To remove artwork or leave the artwork empty, you can either set
-      # `Artwork` to null, or set the `Merge Policy` to \"Replace\" and use an
+      # `Artwork` to null, or set the `Merge Policy` to "Replace" and use an
       # empty `Artwork` array.
       #
       # To pass through existing artwork unchanged, set the `Merge Policy` to
-      # \"Prepend\", \"Append\", or \"Fallback\", and use an empty `Artwork`
+      # "Prepend", "Append", or "Fallback", and use an empty `Artwork`
       # array.
       # @note When making an API call, pass Artwork
       #   data as a hash:
@@ -43,7 +43,7 @@ module Aws
       #   object in that pipeline identifies the bucket.
       #
       #   If the file name includes a prefix, for example, `cooking/pie.jpg`,
-      #   include the prefix in the key. If the file isn\'t in the specified
+      #   include the prefix in the key. If the file isn't in the specified
       #   bucket, Elastic Transcoder returns an error.
       #   @return [String]
       #
@@ -447,13 +447,13 @@ module Aws
       #     in the output file names.
       #
       #   If you don't include `\{language\}` in the file name pattern,
-      #   Elastic Transcoder automatically appends \"`\{language\}`\" to the
+      #   Elastic Transcoder automatically appends "`\{language\}`" to the
       #   value that you specify for the description. In addition, Elastic
       #   Transcoder automatically appends the count to the end of the segment
       #   files.
       #
       #   For example, suppose you're transcoding into srt format. When you
-      #   enter \"Sydney-\\\{language\\}-sunrise\", and the language of the
+      #   enter "Sydney-\\\{language\\}-sunrise", and the language of the
       #   captions is English (en), the name of the first caption file will be
       #   Sydney-en-sunrise00000.srt.
       #   @return [String]
@@ -729,8 +729,8 @@ module Aws
       #   videos and, if so, how you want Elastic Transcoder to name the
       #   files.
       #
-      #   If you don\'t want Elastic Transcoder to create thumbnails, specify
-      #   \"\".
+      #   If you don't want Elastic Transcoder to create thumbnails, specify
+      #   "".
       #
       #   If you do want Elastic Transcoder to create thumbnails, specify the
       #   information that you want to include in the file name for each
@@ -743,7 +743,9 @@ module Aws
       #     file names. The number indicates where a given thumbnail appears
       #     in the sequence of thumbnails for a transcoded file.
       #
-      #     <important>If you specify a literal value and/or `\{resolution\}` but you omit `\{count\}`, Elastic Transcoder returns a validation error and does not create the job.</important>
+      #     If you specify a literal value and/or `\{resolution\}` but you
+      #     omit `\{count\}`, Elastic Transcoder returns a validation error
+      #     and does not create the job.
       #
       #   * **Literal values (Optional)**\: You can specify literal values
       #     anywhere in the `ThumbnailPattern` object. For example, you can
@@ -769,7 +771,7 @@ module Aws
       #   The number of degrees clockwise by which you want Elastic Transcoder
       #   to rotate the output relative to the input. Enter one of the
       #   following values: `auto`, `0`, `90`, `180`, `270`. The value `auto`
-      #   generally works only if the file that you\'re transcoding contains
+      #   generally works only if the file that you're transcoding contains
       #   rotation metadata.
       #   @return [String]
       #
@@ -780,8 +782,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] segment_duration
-      #   <important>(Outputs in Fragmented MP4 or MPEG-TS format
-      #   only.</important>
+      #   (Outputs in Fragmented MP4 or MPEG-TS format only.
       #
       #   If you specify a preset in `PresetId` for which the value of
       #   `Container` is `fmp4` (Fragmented MP4) or `ts` (MPEG-TS),
@@ -1367,9 +1368,9 @@ module Aws
       #     the transcoded files, thumbnails, and playlists.
       #   * You do not want to specify the permissions that Elastic Transcoder
       #     grants to the files.
-      #     <important>When Elastic Transcoder saves files in `OutputBucket`,
-      #   it grants full control over the files only to the AWS account that
-      #   owns the role that is specified by `Role`.</important>
+      #     When Elastic Transcoder saves files in `OutputBucket`, it grants
+      #     full control over the files only to the AWS account that owns the
+      #     role that is specified by `Role`.
       #
       #   * You want to associate the transcoded files and thumbnails with the
       #     Amazon S3 Standard storage class.
@@ -1391,7 +1392,7 @@ module Aws
       #   with this pipeline.
       #
       #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
-      #   you don\'t need to provide a key with your job because a default
+      #   you don't need to provide a key with your job because a default
       #   key, known as an AWS-KMS key, is created for you automatically. You
       #   need to provide an AWS-KMS key only if you want to use a non-default
       #   AWS-KMS key, or if you are using an `Encryption:Mode` of
@@ -1402,7 +1403,8 @@ module Aws
       #   The Amazon Simple Notification Service (Amazon SNS) topic that you
       #   want to notify to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic
+      #   in the Amazon SNS console.
       #
       #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
       #     Service (Amazon SNS) topic that you want to notify when Elastic
@@ -1454,7 +1456,7 @@ module Aws
       #       identities to require that users use CloudFront URLs instead of
       #       Amazon S3 URLs, see Using an Origin Access Identity to Restrict
       #       Access to Your Amazon S3 Content.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -1496,7 +1498,7 @@ module Aws
       #   that you want to assign to the files.
       #
       #   If you specify values for `ContentConfig`, you must also specify
-      #   values for `ThumbnailConfig` even if you don\'t want to create
+      #   values for `ThumbnailConfig` even if you don't want to create
       #   thumbnails.
       #
       #   If you specify values for `ContentConfig` and `ThumbnailConfig`,
@@ -1514,7 +1516,7 @@ module Aws
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -1686,9 +1688,9 @@ module Aws
       #   @return [Types::Preset]
       #
       # @!attribute [rw] warning
-      #   If the preset settings don\'t comply with the standards for the
+      #   If the preset settings don't comply with the standards for the
       #   video codec but Elastic Transcoder created the preset, this message
-      #   explains the reason the preset settings don\'t meet the standard.
+      #   explains the reason the preset settings don't meet the standard.
       #   Elastic Transcoder created the preset because the settings might
       #   produce acceptable output.
       #   @return [String]
@@ -1800,7 +1802,7 @@ module Aws
       #
       #   * **S3-AWS-KMS:** Amazon S3 calls the Amazon Key Management Service,
       #     which creates and manages the keys that are used for encrypting
-      #     your files. If you specify `S3-AWS-KMS` and you don\'t want to use
+      #     your files. If you specify `S3-AWS-KMS` and you don't want to use
       #     the default key, you must add the AWS-KMS key that you want to use
       #     to your pipeline.
       #
@@ -1823,12 +1825,10 @@ module Aws
       #
       #   * **Initialization Vector**
       #
-      #   <important markdown="1">For the AES modes, your private encryption keys and your unencrypted
+      #   For the AES modes, your private encryption keys and your unencrypted
       #   data are never stored by AWS; therefore, it is important that you
-      #   safely manage your encryption keys. If you lose them, you won\'t be
+      #   safely manage your encryption keys. If you lose them, you won't be
       #   able to unencrypt your data.
-      #
-      #   </important>
       #   @return [String]
       #
       # @!attribute [rw] key
@@ -1975,7 +1975,7 @@ module Aws
       #   information that is listed for the first output in the Outputs
       #   object.
       #
-      #   <important>Outputs recommended instead.</important>
+      #   Outputs recommended instead.
       #
       #    A section of the request or response body that provides information
       #   about the transcoded (target) file.
@@ -2001,8 +2001,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] playlists
-      #   <important>Outputs in Fragmented MP4 or MPEG-TS format
-      #   only.</important>
+      #   Outputs in Fragmented MP4 or MPEG-TS format only.
       #
       #   If you specify a preset in `PresetId` for which the value of
       #   `Container` is fmp4 (Fragmented MP4) or ts (MPEG-TS), `Playlists`
@@ -2104,7 +2103,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Information about the file that you\'re transcoding.
+      # Information about the file that you're transcoding.
       # @note When making an API call, pass JobInput
       #   data as a hash:
       #
@@ -2136,7 +2135,7 @@ module Aws
       #   which Amazon S3 bucket to get the file from.
       #
       #   If the file name includes a prefix, such as `cooking/lasagna.mpg`,
-      #   include the prefix in the key. If the file isn\'t in the specified
+      #   include the prefix in the key. If the file isn't in the specified
       #   bucket, Elastic Transcoder returns an error.
       #   @return [String]
       #
@@ -2213,7 +2212,7 @@ module Aws
         include Aws::Structure
       end
 
-      # <important>Outputs recommended instead.</important>
+      # Outputs recommended instead.
       #
       # If you specified one output for a job, information about that output.
       # If you specified multiple outputs for a job, the `Output` object lists
@@ -2236,8 +2235,8 @@ module Aws
       #   videos and, if so, how you want Elastic Transcoder to name the
       #   files.
       #
-      #   If you don\'t want Elastic Transcoder to create thumbnails, specify
-      #   \"\".
+      #   If you don't want Elastic Transcoder to create thumbnails, specify
+      #   "".
       #
       #   If you do want Elastic Transcoder to create thumbnails, specify the
       #   information that you want to include in the file name for each
@@ -2250,7 +2249,9 @@ module Aws
       #     file names. The number indicates where a given thumbnail appears
       #     in the sequence of thumbnails for a transcoded file.
       #
-      #     <important>If you specify a literal value and/or `\{resolution\}` but you omit `\{count\}`, Elastic Transcoder returns a validation error and does not create the job.</important>
+      #     If you specify a literal value and/or `\{resolution\}` but you
+      #     omit `\{count\}`, Elastic Transcoder returns a validation error
+      #     and does not create the job.
       #
       #   * **Literal values (Optional)**\: You can specify literal values
       #     anywhere in the `ThumbnailPattern` object. For example, you can
@@ -2279,7 +2280,7 @@ module Aws
       #
       #   `auto`, `0`, `90`, `180`, `270`
       #
-      #   The value `auto` generally works only if the file that you\'re
+      #   The value `auto` generally works only if the file that you're
       #   transcoding contains rotation metadata.
       #   @return [String]
       #
@@ -2294,8 +2295,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] segment_duration
-      #   <important>(Outputs in Fragmented MP4 or MPEG-TS format
-      #   only.</important>
+      #   (Outputs in Fragmented MP4 or MPEG-TS format only.
       #
       #   If you specify a preset in `PresetId` for which the value of
       #   `Container` is `fmp4` (Fragmented MP4) or `ts` (MPEG-TS),
@@ -2524,7 +2524,7 @@ module Aws
       #
       #   If the file name includes a prefix, for example,
       #   **logos/128x64.png**, include the prefix in the key. If the file
-      #   isn\'t in the specified bucket, Elastic Transcoder returns an error.
+      #   isn't in the specified bucket, Elastic Transcoder returns an error.
       #   @return [String]
       #
       # @!attribute [rw] encryption
@@ -2577,7 +2577,7 @@ module Aws
       # @!attribute [rw] next_page_token
       #   A value that you use to access the second and subsequent pages of
       #   results, if any. When the jobs in the specified pipeline fit on one
-      #   page or when you\'ve reached the last page of results, the value of
+      #   page or when you've reached the last page of results, the value of
       #   `NextPageToken` is `null`.
       #   @return [String]
       class ListJobsByPipelineResponse < Struct.new(
@@ -2627,7 +2627,7 @@ module Aws
       # @!attribute [rw] next_page_token
       #   A value that you use to access the second and subsequent pages of
       #   results, if any. When the jobs in the specified pipeline fit on one
-      #   page or when you\'ve reached the last page of results, the value of
+      #   page or when you've reached the last page of results, the value of
       #   `NextPageToken` is `null`.
       #   @return [String]
       class ListJobsByStatusResponse < Struct.new(
@@ -2668,7 +2668,7 @@ module Aws
       #
       # @!attribute [rw] next_page_token
       #   A value that you use to access the second and subsequent pages of
-      #   results, if any. When the pipelines fit on one page or when you\'ve
+      #   results, if any. When the pipelines fit on one page or when you've
       #   reached the last page of results, the value of `NextPageToken` is
       #   `null`.
       #   @return [String]
@@ -2710,7 +2710,7 @@ module Aws
       #
       # @!attribute [rw] next_page_token
       #   A value that you use to access the second and subsequent pages of
-      #   results, if any. When the presets fit on one page or when you\'ve
+      #   results, if any. When the presets fit on one page or when you've
       #   reached the last page of results, the value of `NextPageToken` is
       #   `null`.
       #   @return [String]
@@ -2723,7 +2723,8 @@ module Aws
       # The Amazon Simple Notification Service (Amazon SNS) topic or topics to
       # notify in order to report job status.
       #
-      # <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      # To receive notifications, you must also subscribe to the new topic in
+      # the Amazon SNS console.
       # @note When making an API call, pass Notifications
       #   data as a hash:
       #
@@ -2774,8 +2775,7 @@ module Aws
       #   The type of value that appears in the Grantee object: *
       #   `Canonical`\: Either the canonical user ID for an AWS account or
       #     an origin access identity for an Amazon CloudFront distribution.
-      #     <important>A canonical user ID is not the same as an AWS account
-      #   number.</important>
+      #     A canonical user ID is not the same as an AWS account number.
       #
       #   * `Email`\: The registered email address of an AWS account.
       #   * `Group`\: One of the following predefined Amazon S3 groups:
@@ -2857,7 +2857,7 @@ module Aws
       #   with this pipeline.
       #
       #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
-      #   you don\'t need to provide a key with your job because a default
+      #   you don't need to provide a key with your job because a default
       #   key, known as an AWS-KMS key, is created for you automatically. You
       #   need to provide an AWS-KMS key only if you want to use a non-default
       #   AWS-KMS key, or if you are using an `Encryption:Mode` of
@@ -2868,7 +2868,8 @@ module Aws
       #   The Amazon Simple Notification Service (Amazon SNS) topic that you
       #   want to notify to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic
+      #   in the Amazon SNS console.
       #
       #   * **Progressing** (optional): The Amazon Simple Notification Service
       #     (Amazon SNS) topic that you want to notify when Elastic Transcoder
@@ -2937,7 +2938,7 @@ module Aws
       #       * `Canonical`\: Either the canonical user ID for an AWS account
       #         or an origin access identity for an Amazon CloudFront
       #         distribution.
-      #         <important>A canonical user ID is not the same as an AWS account number.</important>
+      #         A canonical user ID is not the same as an AWS account number.
       #
       #       * `Email`\: The registered email address of an AWS account.
       #       * `Group`\: One of the following predefined Amazon S3 groups:
@@ -3224,7 +3225,7 @@ module Aws
       # transcoding media files from one format to another. Elastic Transcoder
       # includes some default presets for common formats, for example, several
       # iPod and iPhone versions. You can also create your own presets for
-      # formats that aren\'t included among the default presets. You specify
+      # formats that aren't included among the default presets. You specify
       # which preset you want to use when you create a job.
       # @!attribute [rw] id
       #   Identifier for the new preset. You use this value to get settings
@@ -3438,7 +3439,7 @@ module Aws
       #   Elastic Transcoder supports transparent .png graphics. If you use a
       #   transparent .png, the transparent portion of the video appears as if
       #   you had specified a value of 0 for `Opacity`. The .jpg file format
-      #   doesn\'t support transparency.
+      #   doesn't support transparency.
       #   @return [String]
       #
       # @!attribute [rw] target
@@ -3638,13 +3639,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] resolution
-      #   <important markdown="1"> To better control resolution and aspect ratio of thumbnails, we
+      #   To better control resolution and aspect ratio of thumbnails, we
       #   recommend that you use the values `MaxWidth`, `MaxHeight`,
       #   `SizingPolicy`, and `PaddingPolicy` instead of `Resolution` and
       #   `AspectRatio`. The two groups of settings are mutually exclusive. Do
       #   not use them together.
-      #
-      #    </important>
       #
       #   The width and height of thumbnail files in pixels. Specify a value
       #   in the format `width` x `height` where both values are even
@@ -3653,13 +3652,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] aspect_ratio
-      #   <important markdown="1"> To better control resolution and aspect ratio of thumbnails, we
+      #   To better control resolution and aspect ratio of thumbnails, we
       #   recommend that you use the values `MaxWidth`, `MaxHeight`,
       #   `SizingPolicy`, and `PaddingPolicy` instead of `Resolution` and
       #   `AspectRatio`. The two groups of settings are mutually exclusive. Do
       #   not use them together.
-      #
-      #    </important>
       #
       #   The aspect ratio of thumbnails. Valid values include:
       #
@@ -3744,14 +3741,14 @@ module Aws
       #   The place in the input file where you want a clip to start. The
       #   format can be either HH:mm:ss.SSS (maximum value: 23:59:59.999; SSS
       #   is thousandths of a second) or sssss.SSS (maximum value: 86399.999).
-      #   If you don\'t specify a value, Elastic Transcoder starts at the
+      #   If you don't specify a value, Elastic Transcoder starts at the
       #   beginning of the input file.
       #   @return [String]
       #
       # @!attribute [rw] duration
       #   The duration of the clip. The format can be either HH:mm:ss.SSS
       #   (maximum value: 23:59:59.999; SSS is thousandths of a second) or
-      #   sssss.SSS (maximum value: 86399.999). If you don\'t specify a value,
+      #   sssss.SSS (maximum value: 86399.999). If you don't specify a value,
       #   Elastic Transcoder creates an output file from StartTime to the end
       #   of the file.
       #
@@ -3807,7 +3804,8 @@ module Aws
       #   The topic ARN for the Amazon Simple Notification Service (Amazon
       #   SNS) topic that you want to notify to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic
+      #   in the Amazon SNS console.
       #
       #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
       #     Service (Amazon SNS) topic that you want to notify when Elastic
@@ -3909,7 +3907,7 @@ module Aws
       #   with this pipeline.
       #
       #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`,
-      #   you don\'t need to provide a key with your job because a default
+      #   you don't need to provide a key with your job because a default
       #   key, known as an AWS-KMS key, is created for you automatically. You
       #   need to provide an AWS-KMS key only if you want to use a non-default
       #   AWS-KMS key, or if you are using an `Encryption:Mode` of
@@ -3920,7 +3918,8 @@ module Aws
       #   The Amazon Simple Notification Service (Amazon SNS) topic or topics
       #   to notify in order to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic
+      #   in the Amazon SNS console.
       #   @return [Types::Notifications]
       #
       # @!attribute [rw] content_config
@@ -3953,7 +3952,7 @@ module Aws
       #       identities to require that users use CloudFront URLs instead of
       #       Amazon S3 URLs, see Using an Origin Access Identity to Restrict
       #       Access to Your Amazon S3 Content.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -3995,7 +3994,7 @@ module Aws
       #   that you want to assign to the files.
       #
       #   If you specify values for `ContentConfig`, you must also specify
-      #   values for `ThumbnailConfig` even if you don\'t want to create
+      #   values for `ThumbnailConfig` even if you don't want to create
       #   thumbnails.
       #
       #   If you specify values for `ContentConfig` and `ThumbnailConfig`,
@@ -4013,7 +4012,7 @@ module Aws
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -4217,7 +4216,7 @@ module Aws
       #
       #   The maximum number of bits in any x seconds of the output video.
       #   This window is commonly 10 seconds, the standard segment duration
-      #   when you\'re using FMP4 or MPEG-TS for the container type of the
+      #   when you're using FMP4 or MPEG-TS for the container type of the
       #   output video. Specify an integer greater than 0. If you specify
       #   `MaxBitRate` and omit `BufferSize`, Elastic Transcoder sets
       #   `BufferSize` to 10 times the value of `MaxBitRate`.
@@ -4329,9 +4328,7 @@ module Aws
       #     group of pictures, or GOP).
       #   * `false`\: The distance between key frames can vary.
       #
-      #   <important markdown="1">`FixedGOP` must be set to `true` for `fmp4` containers.
-      #
-      #   </important>
+      #   `FixedGOP` must be set to `true` for `fmp4` containers.
       #   @return [String]
       #
       # @!attribute [rw] bit_rate
@@ -4411,13 +4408,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] resolution
-      #   <important markdown="1"> To better control resolution and aspect ratio of output videos, we
+      #   To better control resolution and aspect ratio of output videos, we
       #   recommend that you use the values `MaxWidth`, `MaxHeight`,
       #   `SizingPolicy`, `PaddingPolicy`, and `DisplayAspectRatio` instead of
       #   `Resolution` and `AspectRatio`. The two groups of settings are
       #   mutually exclusive. Do not use them together.
-      #
-      #    </important>
       #
       #   The width and height of the video in the output file, in pixels.
       #   Valid values are `auto` and *width* x *height*\:
@@ -4456,13 +4451,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] aspect_ratio
-      #   <important markdown="1"> To better control resolution and aspect ratio of output videos, we
+      #   To better control resolution and aspect ratio of output videos, we
       #   recommend that you use the values `MaxWidth`, `MaxHeight`,
       #   `SizingPolicy`, `PaddingPolicy`, and `DisplayAspectRatio` instead of
       #   `Resolution` and `AspectRatio`. The two groups of settings are
       #   mutually exclusive. Do not use them together.
-      #
-      #    </important>
       #
       #   The display aspect ratio of the video in the output file. Valid
       #   values include:

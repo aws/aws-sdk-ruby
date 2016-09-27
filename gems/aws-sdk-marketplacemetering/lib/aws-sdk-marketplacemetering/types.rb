@@ -31,7 +31,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] usage_dimension
-      #   It will be one of the \'fcp dimension name\' provided during the
+      #   It will be one of the 'fcp dimension name' provided during the
       #   publishing of the product.
       #   @return [String]
       #

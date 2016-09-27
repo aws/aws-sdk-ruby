@@ -246,7 +246,7 @@ module Aws
       #   restored DB cluster can be created in.
       # @option options [required, String] :db_cluster_identifier
       #   The name of the DB cluster to create from the DB cluster snapshot.
-      #   This parameter isn\'t case-sensitive.
+      #   This parameter isn't case-sensitive.
       #
       #   Constraints:
       #

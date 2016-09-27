@@ -204,9 +204,9 @@ module Aws
       # @option params [String] :destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
-      #   the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\",
-      #   the output file \"outputfile\" would be published to
-      #   \"s3://mybucket/myprefix/mydatasets/outputfile\". If the prefix
+      #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
+      #   the output file "outputfile" would be published to
+      #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
       # @option params [required, String] :sns_topic_arn
@@ -236,8 +236,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_set_request_id #=> String
+      # @overload generate_data_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def generate_data_set(params = {}, options = {})
         req = build_request(:generate_data_set, params)
         req.send_request(options)
@@ -249,7 +249,7 @@ module Aws
       # unique request identifier that can be used to correlate requests with
       # notifications from the SNS topic. Data sets will be published in
       # comma-separated values (CSV) format with the file name
-      # \\\{data\_set\_type\\}\_YYYY-MM-DD\'T\'HH-mm-ss\'Z\'.csv. If a file
+      # \\\{data\_set\_type\\}\_YYYY-MM-DD'T'HH-mm-ss'Z'.csv. If a file
       # with the same name already exists (e.g. if the same data set is
       # requested twice), the original file will be overwritten by the new
       # file. Requires a Role with an attached permissions policy providing
@@ -284,9 +284,9 @@ module Aws
       # @option params [String] :destination_s3_prefix
       #   (Optional) The desired S3 prefix for the published data set, similar
       #   to a directory path in standard file systems. For example, if given
-      #   the bucket name \"mybucket\" and the prefix \"myprefix/mydatasets\",
-      #   the output file \"outputfile\" would be published to
-      #   \"s3://mybucket/myprefix/mydatasets/outputfile\". If the prefix
+      #   the bucket name "mybucket" and the prefix "myprefix/mydatasets",
+      #   the output file "outputfile" would be published to
+      #   "s3://mybucket/myprefix/mydatasets/outputfile". If the prefix
       #   directory structure does not exist, it will be created. If no prefix
       #   is provided, the data set will be published to the S3 bucket root.
       # @option params [required, String] :sns_topic_arn
@@ -314,8 +314,8 @@ module Aws
       #
       # @example Response structure
       #   resp.data_set_request_id #=> String
+      # @overload start_support_data_export(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_support_data_export(params = {}, options = {})
         req = build_request(:start_support_data_export, params)
         req.send_request(options)

@@ -219,7 +219,7 @@ module Aws
       #   A JSON string containing up to three key-value pair in JSON format.
       #   For example:
       #
-      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
+      #   `\{"attributes":\{"string1":"string2"\}\})`
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] merge
@@ -294,7 +294,7 @@ module Aws
       #
       # @!attribute [rw] auto_registration_status
       #   Whether the CA certificate configured for auto registration of
-      #   device certificates. Valid values are \"ENABLE\" and \"DISABLE\"
+      #   device certificates. Valid values are "ENABLE" and "DISABLE"
       #   @return [String]
       class CACertificateDescription < Struct.new(
         :certificate_arn,
@@ -701,7 +701,7 @@ module Aws
       #   The attribute payload, which consists of up to three name/value
       #   pairs in a JSON document. For example:
       #
-      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
+      #   `\{"attributes":\{"string1":"string2"\}\})`
       #   @return [Types::AttributePayload]
       class CreateThingRequest < Struct.new(
         :thing_name,
@@ -1294,7 +1294,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] hash_key_type
-      #   The hash key type. Valid values are \"STRING\" or \"NUMBER\"
+      #   The hash key type. Valid values are "STRING" or "NUMBER"
       #   @return [String]
       #
       # @!attribute [rw] range_key_field
@@ -1306,7 +1306,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] range_key_type
-      #   The range key type. Valid values are \"STRING\" or \"NUMBER\"
+      #   The range key type. Valid values are "STRING" or "NUMBER"
       #   @return [String]
       #
       # @!attribute [rw] payload_field
@@ -1402,8 +1402,8 @@ module Aws
       #
       # @!attribute [rw] separator
       #   A character separator that will be used to separate records written
-      #   to the firehose stream. Valid values are: \'\\n\' (newline), \'\\t\'
-      #   (tab), \'\\r\\n\' (Windows newline), \',\' (comma).
+      #   to the firehose stream. Valid values are: '\\n' (newline), '\\t'
+      #   (tab), '\\r\\n' (Windows newline), ',' (comma).
       #   @return [String]
       class FirehoseAction < Struct.new(
         :role_arn,
@@ -2574,8 +2574,8 @@ module Aws
       #
       # @!attribute [rw] message_format
       #   The message format of the message to publish. Optional. Accepted
-      #   values are \"JSON\" and \"RAW\". The default value of the attribute
-      #   is \"RAW\". SNS uses this setting to determine if the payload should
+      #   values are "JSON" and "RAW". The default value of the attribute
+      #   is "RAW". SNS uses this setting to determine if the payload should
       #   be parsed and relevant platform-specific bits of the payload should
       #   be extracted. To read more about SNS message formats, see [][1]
       #   refer to their official documentation.
@@ -2981,7 +2981,7 @@ module Aws
       #
       # @!attribute [rw] new_auto_registration_status
       #   The new value for the auto registration status. Valid values are:
-      #   \"ENABLE\" or \"DISABLE\".
+      #   "ENABLE" or "DISABLE".
       #   @return [String]
       class UpdateCACertificateRequest < Struct.new(
         :certificate_id,
@@ -3046,7 +3046,7 @@ module Aws
       #   A list of thing attributes, a JSON string containing name-value
       #   pairs. For example:
       #
-      #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
+      #   `\{"attributes":\{"name1":"value2"\}\})`
       #
       #   This data is used to add new attributes or update existing
       #   attributes.

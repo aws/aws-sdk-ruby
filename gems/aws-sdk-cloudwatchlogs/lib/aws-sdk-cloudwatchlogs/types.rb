@@ -45,7 +45,7 @@ module Aws
       #
       # @!attribute [rw] log_stream_name_prefix
       #   Will only export log streams that match the provided
-      #   logStreamNamePrefix. If you don\'t specify a value, no prefix filter
+      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
       #   is applied.
       #   @return [String]
       #
@@ -72,7 +72,7 @@ module Aws
       # @!attribute [rw] destination_prefix
       #   Prefix that will be used as the start of Amazon S3 key for every
       #   object exported. If not specified, this defaults to
-      #   \'exportedlogs\'.
+      #   'exportedlogs'.
       #   @return [String]
       class CreateExportTaskRequest < Struct.new(
         :task_name,
@@ -244,7 +244,7 @@ module Aws
       #       }
       # @!attribute [rw] destination_name_prefix
       #   Will only return destinations that match the provided
-      #   destinationNamePrefix. If you don\'t specify a value, no prefix is
+      #   destinationNamePrefix. If you don't specify a value, no prefix is
       #   applied.
       #   @return [String]
       #
@@ -304,7 +304,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       #   @return [Integer]
       class DescribeExportTasksRequest < Struct.new(
@@ -340,7 +340,7 @@ module Aws
       #       }
       # @!attribute [rw] log_group_name_prefix
       #   Will only return log groups that match the provided
-      #   logGroupNamePrefix. If you don\'t specify a value, no prefix filter
+      #   logGroupNamePrefix. If you don't specify a value, no prefix filter
       #   is applied.
       #   @return [String]
       #
@@ -351,7 +351,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       #   @return [Integer]
       class DescribeLogGroupsRequest < Struct.new(
@@ -393,20 +393,20 @@ module Aws
       #
       # @!attribute [rw] log_stream_name_prefix
       #   Will only return log streams that match the provided
-      #   logStreamNamePrefix. If you don\'t specify a value, no prefix filter
+      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
       #   is applied.
       #   @return [String]
       #
       # @!attribute [rw] order_by
       #   Specifies what to order the returned log streams by. Valid arguments
-      #   are \'LogStreamName\' or \'LastEventTime\'. If you don\'t specify a
-      #   value, results are ordered by LogStreamName. If \'LastEventTime\' is
+      #   are 'LogStreamName' or 'LastEventTime'. If you don't specify a
+      #   value, results are ordered by LogStreamName. If 'LastEventTime' is
       #   chosen, the request cannot also contain a logStreamNamePrefix.
       #   @return [String]
       #
       # @!attribute [rw] descending
       #   If set to true, results are returned in descending order. If you
-      #   don\'t specify a value or set it to false, results are returned in
+      #   don't specify a value or set it to false, results are returned in
       #   ascending order.
       #   @return [Boolean]
       #
@@ -417,7 +417,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       #   @return [Integer]
       class DescribeLogStreamsRequest < Struct.new(
@@ -460,7 +460,7 @@ module Aws
       #
       # @!attribute [rw] filter_name_prefix
       #   Will only return metric filters that match the provided
-      #   filterNamePrefix. If you don\'t specify a value, no prefix filter is
+      #   filterNamePrefix. If you don't specify a value, no prefix filter is
       #   applied.
       #   @return [String]
       #
@@ -471,7 +471,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       #   @return [Integer]
       class DescribeMetricFiltersRequest < Struct.new(
@@ -511,7 +511,7 @@ module Aws
       #
       # @!attribute [rw] filter_name_prefix
       #   Will only return subscription filters that match the provided
-      #   filterNamePrefix. If you don\'t specify a value, no prefix filter is
+      #   filterNamePrefix. If you don't specify a value, no prefix filter is
       #   applied.
       #   @return [String]
       #
@@ -828,7 +828,7 @@ module Aws
       #
       # @!attribute [rw] limit
       #   The maximum number of log events returned in the response. If you
-      #   don\'t specify a value, the request would return as many log events
+      #   don't specify a value, the request would return as many log events
       #   as can fit in a response size of 1MB, up to 10,000 log events.
       #   @return [Integer]
       #
@@ -1286,7 +1286,7 @@ module Aws
       #
       # @!attribute [rw] role_arn
       #   The ARN of an IAM role that grants CloudWatch Logs permissions to
-      #   deliver ingested log events to the destination stream. You don\'t
+      #   deliver ingested log events to the destination stream. You don't
       #   need to provide the ARN when you are working with a logical
       #   destination (used via an ARN of `Destination`) for cross-account
       #   delivery.

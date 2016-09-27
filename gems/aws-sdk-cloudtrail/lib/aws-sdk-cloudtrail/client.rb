@@ -135,7 +135,7 @@ module Aws
       # @!group API Operations
 
       # Adds one or more tags to a trail, up to a limit of 10. Tags must be
-      # unique per trail. Overwrites an existing tag\'s value when a new value
+      # unique per trail. Overwrites an existing tag's value when a new value
       # is specified for an existing tag key. If you specify a key without a
       # value, the tag will be created with the specified key and a value of
       # null. You can tag a trail that applies to all regions only from the
@@ -159,8 +159,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -231,10 +231,10 @@ module Aws
       #   CloudWatchLogsRoleArn.
       # @option params [String] :cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to write
-      #   to a user\'s log group.
+      #   to a user's log group.
       # @option params [String] :kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
-      #   CloudTrail. The value can be a an alias name prefixed by \"alias/\", a
+      #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
       #   fully specified ARN to an alias, a fully specified ARN to a key, or a
       #   globally unique identifier.
       #
@@ -289,8 +289,8 @@ module Aws
       #   resp.cloud_watch_logs_log_group_arn #=> String
       #   resp.cloud_watch_logs_role_arn #=> String
       #   resp.kms_key_id #=> String
+      # @overload create_trail(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_trail(params = {}, options = {})
         req = build_request(:create_trail, params)
         req.send_request(options)
@@ -311,8 +311,8 @@ module Aws
       #   resp = client.delete_trail({
       #     name: "String", # required
       #   })
+      # @overload delete_trail(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_trail(params = {}, options = {})
         req = build_request(:delete_trail, params)
         req.send_request(options)
@@ -371,8 +371,8 @@ module Aws
       #   resp.trail_list[0].cloud_watch_logs_log_group_arn #=> String
       #   resp.trail_list[0].cloud_watch_logs_role_arn #=> String
       #   resp.trail_list[0].kms_key_id #=> String
+      # @overload describe_trails(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trails(params = {}, options = {})
         req = build_request(:describe_trails, params)
         req.send_request(options)
@@ -434,8 +434,8 @@ module Aws
       #   resp.latest_delivery_attempt_succeeded #=> String
       #   resp.time_logging_started #=> String
       #   resp.time_logging_stopped #=> String
+      # @overload get_trail_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_trail_status(params = {}, options = {})
         req = build_request(:get_trail_status, params)
         req.send_request(options)
@@ -481,8 +481,8 @@ module Aws
       #   resp.public_key_list[0].validity_end_time #=> Time
       #   resp.public_key_list[0].fingerprint #=> String
       #   resp.next_token #=> String
+      # @overload list_public_keys(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_public_keys(params = {}, options = {})
         req = build_request(:list_public_keys, params)
         req.send_request(options)
@@ -514,8 +514,8 @@ module Aws
       #   resp.resource_tag_list[0].tags_list[0].key #=> String
       #   resp.resource_tag_list[0].tags_list[0].value #=> String
       #   resp.next_token #=> String
+      # @overload list_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags(params = {}, options = {})
         req = build_request(:list_tags, params)
         req.send_request(options)
@@ -533,16 +533,12 @@ module Aws
       # possible. The response includes a token that you can use to get the
       # next page of results.
       #
-      # <important markdown="1"> The rate of lookup requests is limited to one per second per account.
+      # The rate of lookup requests is limited to one per second per account.
       # If this limit is exceeded, a throttling error occurs.
       #
-      #  </important>
-      #
-      # <important markdown="1"> Events that occurred during the selected time range will not be
+      # Events that occurred during the selected time range will not be
       # available for lookup if CloudTrail logging was not enabled when the
       # events occurred.
-      #
-      #  </important>
       # @option params [Array<Types::LookupAttribute>] :lookup_attributes
       #   Contains a list of lookup attributes. Currently the list can contain
       #   only one item.
@@ -561,7 +557,7 @@ module Aws
       #   The token to use to get the next page of results after a previous API
       #   call. This token must be passed in with the same parameters that were
       #   specified in the the original call. For example, if the original call
-      #   specified an AttributeKey of \'Username\' with a value of \'root\',
+      #   specified an AttributeKey of 'Username' with a value of 'root',
       #   the call with NextToken should include those same parameters.
       # @return [Types::LookupEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -593,8 +589,8 @@ module Aws
       #   resp.events[0].resources[0].resource_name #=> String
       #   resp.events[0].cloud_trail_event #=> String
       #   resp.next_token #=> String
+      # @overload lookup_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def lookup_events(params = {}, options = {})
         req = build_request(:lookup_events, params)
         req.send_request(options)
@@ -620,8 +616,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
@@ -643,8 +639,8 @@ module Aws
       #   resp = client.start_logging({
       #     name: "String", # required
       #   })
+      # @overload start_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_logging(params = {}, options = {})
         req = build_request(:start_logging, params)
         req.send_request(options)
@@ -670,8 +666,8 @@ module Aws
       #   resp = client.stop_logging({
       #     name: "String", # required
       #   })
+      # @overload stop_logging(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_logging(params = {}, options = {})
         req = build_request(:stop_logging, params)
         req.send_request(options)
@@ -755,10 +751,10 @@ module Aws
       #   CloudWatchLogsRoleArn.
       # @option params [String] :cloud_watch_logs_role_arn
       #   Specifies the role for the CloudWatch Logs endpoint to assume to write
-      #   to a user\'s log group.
+      #   to a user's log group.
       # @option params [String] :kms_key_id
       #   Specifies the KMS key ID to use to encrypt the logs delivered by
-      #   CloudTrail. The value can be a an alias name prefixed by \"alias/\", a
+      #   CloudTrail. The value can be a an alias name prefixed by "alias/", a
       #   fully specified ARN to an alias, a fully specified ARN to a key, or a
       #   globally unique identifier.
       #
@@ -813,8 +809,8 @@ module Aws
       #   resp.cloud_watch_logs_log_group_arn #=> String
       #   resp.cloud_watch_logs_role_arn #=> String
       #   resp.kms_key_id #=> String
+      # @overload update_trail(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_trail(params = {}, options = {})
         req = build_request(:update_trail, params)
         req.send_request(options)

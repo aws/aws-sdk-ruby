@@ -371,7 +371,7 @@ module Aws
       #
       #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #     notifications should be sent upon Direct Publish delivery failure
-      #     (permanent) to one of the application\'s endpoints.
+      #     (permanent) to one of the application's endpoints.
       #   @return [Hash<String,String>]
       class GetPlatformApplicationAttributesResponse < Struct.new(
         :attributes)
@@ -391,7 +391,7 @@ module Aws
       #
       #   For all attribute names, see [SetSMSAttributes][1].
       #
-      #   If you don\'t use this parameter, Amazon SNS returns all SMS
+      #   If you don't use this parameter, Amazon SNS returns all SMS
       #   attributes.
       #
       #
@@ -429,20 +429,20 @@ module Aws
 
       # Response for GetSubscriptionAttributes action.
       # @!attribute [rw] attributes
-      #   A map of the subscription\'s attributes. Attributes in this map
+      #   A map of the subscription's attributes. Attributes in this map
       #   include the following:
       #
-      #   * `SubscriptionArn` -- the subscription\'s ARN
+      #   * `SubscriptionArn` -- the subscription's ARN
       #
       #   * `TopicArn` -- the topic ARN that the subscription is associated
       #     with
       #
-      #   * `Owner` -- the AWS account ID of the subscription\'s owner
+      #   * `Owner` -- the AWS account ID of the subscription's owner
       #
       #   * `ConfirmationWasAuthenticated` -- true if the subscription
       #     confirmation request was authenticated
       #
-      #   * `DeliveryPolicy` -- the JSON serialization of the subscription\'s
+      #   * `DeliveryPolicy` -- the JSON serialization of the subscription's
       #     delivery policy
       #
       #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
@@ -471,17 +471,17 @@ module Aws
 
       # Response for GetTopicAttributes action.
       # @!attribute [rw] attributes
-      #   A map of the topic\'s attributes. Attributes in this map include the
+      #   A map of the topic's attributes. Attributes in this map include the
       #   following:
       #
-      #   * `TopicArn` -- the topic\'s ARN
+      #   * `TopicArn` -- the topic's ARN
       #
-      #   * `Owner` -- the AWS account ID of the topic\'s owner
+      #   * `Owner` -- the AWS account ID of the topic's owner
       #
-      #   * `Policy` -- the JSON serialization of the topic\'s access control
+      #   * `Policy` -- the JSON serialization of the topic's access control
       #     policy
       #
-      #   * `DisplayName` -- the human-readable name used in the \"From\"
+      #   * `DisplayName` -- the human-readable name used in the "From"
       #     field for notifications to email and email-json endpoints
       #
       #   * `SubscriptionsPending` -- the number of subscriptions pending
@@ -493,7 +493,7 @@ module Aws
       #   * `SubscriptionsDeleted` -- the number of deleted subscriptions on
       #     this topic
       #
-      #   * `DeliveryPolicy` -- the JSON serialization of the topic\'s
+      #   * `DeliveryPolicy` -- the JSON serialization of the topic's
       #     delivery policy
       #
       #   * `EffectiveDeliveryPolicy` -- the JSON serialization of the
@@ -816,14 +816,14 @@ module Aws
       # @!attribute [rw] topic_arn
       #   The topic you want to publish to.
       #
-      #   If you don\'t specify a value for the `TopicArn` parameter, you must
+      #   If you don't specify a value for the `TopicArn` parameter, you must
       #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
       #   @return [String]
       #
       # @!attribute [rw] target_arn
       #   Either TopicArn or EndpointArn, but not both.
       #
-      #   If you don\'t specify a value for the `TargetArn` parameter, you
+      #   If you don't specify a value for the `TargetArn` parameter, you
       #   must specify a value for the `PhoneNumber` or `TopicArn` parameters.
       #   @return [String]
       #
@@ -831,7 +831,7 @@ module Aws
       #   The phone number to which you want to deliver an SMS message. Use
       #   E.164 format.
       #
-      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   If you don't specify a value for the `PhoneNumber` parameter, you
       #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       #   @return [String]
       #
@@ -859,7 +859,7 @@ module Aws
       #   * Outbound notifications are JSON encoded (meaning that the
       #     characters will be reescaped for sending).
       #
-      #   * Values have a minimum length of 0 (the empty string, \"\", is
+      #   * Values have a minimum length of 0 (the empty string, "", is
       #     allowed).
       #
       #   * Values have a maximum length bounded by the overall message size
@@ -877,7 +877,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] subject
-      #   Optional parameter to be used as the \"Subject\" line when the
+      #   Optional parameter to be used as the "Subject" line when the
       #   message is delivered to email endpoints. This field will also be
       #   included, if present, in the standard JSON messages delivered to
       #   other endpoints.
@@ -896,11 +896,11 @@ module Aws
       #
       #   * be a syntactically valid JSON object; and
       #
-      #   * contain at least a top-level JSON key of \"default\" with a value
+      #   * contain at least a top-level JSON key of "default" with a value
       #     that is a string.
       #
       #   You can define other top-level keys that define the message you want
-      #   to send to a specific transport protocol (e.g., \"http\").
+      #   to send to a specific transport protocol (e.g., "http").
       #
       #   For information about sending different messages for each protocol
       #   using the AWS Management Console, go to [Create Different Messages
@@ -1018,13 +1018,13 @@ module Aws
       #
       #   * `PlatformCredential` -- The credential received from the
       #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential
-      #     is private key. For GCM, PlatformCredential is \"API key\". For
-      #     ADM, PlatformCredential is \"client secret\".
+      #     is private key. For GCM, PlatformCredential is "API key". For
+      #     ADM, PlatformCredential is "client secret".
       #
       #   * `PlatformPrincipal` -- The principal received from the
       #     notification service. For APNS/APNS\_SANDBOX, PlatformPrincipal is
       #     SSL certificate. For GCM, PlatformPrincipal is not applicable. For
-      #     ADM, PlatformPrincipal is \"client id\".
+      #     ADM, PlatformPrincipal is "client id".
       #
       #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
       #     notifications should be sent.
@@ -1037,7 +1037,7 @@ module Aws
       #
       #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #     notifications should be sent upon Direct Publish delivery failure
-      #     (permanent) to one of the application\'s endpoints.
+      #     (permanent) to one of the application's endpoints.
       #
       #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
       #     write access to use CloudWatch Logs on your behalf.
@@ -1072,11 +1072,9 @@ module Aws
       #   that sending an SMS message would incur a cost that exceeds this
       #   limit, it stops sending SMS messages within minutes.
       #
-      #   <important markdown="1"> Amazon SNS stops sending SMS messages within minutes of the limit
+      #   Amazon SNS stops sending SMS messages within minutes of the limit
       #   being crossed. During that interval, if you continue to send SMS
       #   messages, you will incur costs that exceed your limit.
-      #
-      #    </important>
       #
       #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
       #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
@@ -1195,7 +1193,7 @@ module Aws
       #
       # @!attribute [rw] attribute_name
       #   The name of the attribute you want to set. Only a subset of the
-      #   topic\'s attributes are mutable.
+      #   topic's attributes are mutable.
       #
       #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
       #   @return [String]
@@ -1250,10 +1248,10 @@ module Aws
       #   by protocol:
       #
       #   * For the `http` protocol, the endpoint is an URL beginning with
-      #     \"http://\"
+      #     "http://"
       #
       #   * For the `https` protocol, the endpoint is a URL beginning with
-      #     \"https://\"
+      #     "https://"
       #
       #   * For the `email` protocol, the endpoint is an email address
       #
@@ -1291,23 +1289,23 @@ module Aws
 
       # A wrapper type for the attributes of an Amazon SNS subscription.
       # @!attribute [rw] subscription_arn
-      #   The subscription\'s ARN.
+      #   The subscription's ARN.
       #   @return [String]
       #
       # @!attribute [rw] owner
-      #   The subscription\'s owner.
+      #   The subscription's owner.
       #   @return [String]
       #
       # @!attribute [rw] protocol
-      #   The subscription\'s protocol.
+      #   The subscription's protocol.
       #   @return [String]
       #
       # @!attribute [rw] endpoint
-      #   The subscription\'s endpoint (format depends on the protocol).
+      #   The subscription's endpoint (format depends on the protocol).
       #   @return [String]
       #
       # @!attribute [rw] topic_arn
-      #   The ARN of the subscription\'s topic.
+      #   The ARN of the subscription's topic.
       #   @return [String]
       class Subscription < Struct.new(
         :subscription_arn,
@@ -1318,10 +1316,10 @@ module Aws
         include Aws::Structure
       end
 
-      # A wrapper type for the topic\'s Amazon Resource Name (ARN). To
-      # retrieve a topic\'s attributes, use `GetTopicAttributes`.
+      # A wrapper type for the topic's Amazon Resource Name (ARN). To
+      # retrieve a topic's attributes, use `GetTopicAttributes`.
       # @!attribute [rw] topic_arn
-      #   The topic\'s ARN.
+      #   The topic's ARN.
       #   @return [String]
       class Topic < Struct.new(
         :topic_arn)

@@ -43,13 +43,13 @@ module Aws
         data.name
       end
 
-      # The stack\'s ARN.
+      # The stack's ARN.
       # @return [String]
       def arn
         data.arn
       end
 
-      # The stack AWS region, such as \"ap-northeast-2\". For more information
+      # The stack AWS region, such as "ap-northeast-2". For more information
       # about AWS regions, see [Regions and Endpoints][1].
       #
       #
@@ -66,7 +66,7 @@ module Aws
         data.vpc_id
       end
 
-      # The stack\'s attributes.
+      # The stack's attributes.
       # @return [Hash<String,String>]
       def attributes
         data.attributes
@@ -79,7 +79,7 @@ module Aws
       end
 
       # The ARN of an IAM profile that is the default profile for all of the
-      # stack\'s EC2 instances. For more information about IAM ARNs, see
+      # stack's EC2 instances. For more information about IAM ARNs, see
       # [Using Identifiers][1].
       #
       #
@@ -90,7 +90,7 @@ module Aws
         data.default_instance_profile_arn
       end
 
-      # The stack\'s default operating system.
+      # The stack's default operating system.
       # @return [String]
       def default_os
         data.default_os
@@ -102,7 +102,7 @@ module Aws
         data.hostname_theme
       end
 
-      # The stack\'s default Availability Zone. For more information, see
+      # The stack's default Availability Zone. For more information, see
       # [Regions and Endpoints][1].
       #
       #
@@ -124,9 +124,9 @@ module Aws
       # stack configuration and deployment attributes. You can use custom JSON
       # to override the corresponding default stack configuration attribute
       # values or to pass data to recipes. The string should be in the
-      # following format and must escape characters such as \'\"\':
+      # following format and must escape characters such as '"':
       #
-      # `"\{\"key1\": \"value1\", \"key2\": \"value2\",...\}"`
+      # `"\{"key1": "value1", "key2": "value2",...\}"`
       #
       # For more information on custom JSON, see [Use Custom JSON to Modify
       # the Stack Configuration Attributes][1].
@@ -164,7 +164,7 @@ module Aws
       end
 
       # Whether the stack automatically associates the AWS OpsWorks built-in
-      # security groups with the stack\'s layers.
+      # security groups with the stack's layers.
       # @return [Boolean]
       def use_opsworks_security_groups
         data.use_opsworks_security_groups
@@ -183,7 +183,7 @@ module Aws
         data.custom_cookbooks_source
       end
 
-      # A default Amazon EC2 key pair for the stack\'s instances. You can
+      # A default Amazon EC2 key pair for the stack's instances. You can
       # override this value when you create or update an instance.
       # @return [String]
       def default_ssh_key_name
@@ -260,14 +260,14 @@ module Aws
       # @option options [required, String] :name
       #   The layer name, which is used by the console.
       # @option options [required, String] :shortname
-      #   For custom layers only, use this parameter to specify the layer\'s
+      #   For custom layers only, use this parameter to specify the layer's
       #   short name, which is used internally by AWS OpsWorks and by Chef
       #   recipes. The short name is also used as the name for the directory
       #   where your app files are installed. It can have a maximum of 200
-      #   characters, which are limited to the alphanumeric characters, \'-\',
-      #   \'\_\', and \'.\'.
+      #   characters, which are limited to the alphanumeric characters, '-',
+      #   '\_', and '.'.
       #
-      #   The built-in layers\' short names are defined by AWS OpsWorks. For
+      #   The built-in layers' short names are defined by AWS OpsWorks. For
       #   more information, see the [Layer Reference][1].
       #
       #
@@ -278,9 +278,9 @@ module Aws
       #   attributes.
       #
       #   To create a cluster layer, set the `EcsClusterArn` attribute to the
-      #   cluster\'s ARN.
+      #   cluster's ARN.
       # @option options [String] :custom_instance_profile_arn
-      #   The ARN of an IAM profile to be used for the layer\'s EC2 instances.
+      #   The ARN of an IAM profile to be used for the layer's EC2 instances.
       #   For more information about IAM ARNs, see [Using Identifiers][1].
       #
       #
@@ -288,7 +288,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/Using_Identifiers.html
       # @option options [String] :custom_json
       #   A JSON-formatted string containing custom stack configuration and
-      #   deployment attributes to be installed on the layer\'s instances. For
+      #   deployment attributes to be installed on the layer's instances. For
       #   more information, see [ Using Custom JSON][1]. This feature is
       #   supported as of version 1.7.42 of the AWS CLI.
       #
@@ -300,13 +300,13 @@ module Aws
       # @option options [Array<String>] :packages
       #   An array of `Package` objects that describes the layer packages.
       # @option options [Array<Types::VolumeConfiguration>] :volume_configurations
-      #   A `VolumeConfigurations` object that describes the layer\'s Amazon EBS
+      #   A `VolumeConfigurations` object that describes the layer's Amazon EBS
       #   volumes.
       # @option options [Boolean] :enable_auto_healing
       #   Whether to disable auto healing for the layer.
       # @option options [Boolean] :auto_assign_elastic_ips
       #   Whether to automatically assign an [Elastic IP address][1] to the
-      #   layer\'s instances. For more information, see [How to Edit a
+      #   layer's instances. For more information, see [How to Edit a
       #   Layer][2].
       #
       #
@@ -315,7 +315,7 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinglayers-basics-edit.html
       # @option options [Boolean] :auto_assign_public_ips
       #   For stacks that are running in a VPC, whether to automatically assign
-      #   a public IP address to the layer\'s instances. For more information,
+      #   a public IP address to the layer's instances. For more information,
       #   see [How to Edit a Layer][1].
       #
       #

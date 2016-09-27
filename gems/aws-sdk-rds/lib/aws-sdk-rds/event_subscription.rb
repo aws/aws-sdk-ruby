@@ -52,8 +52,8 @@ module Aws
       # Can be one of the following: creating \| modifying \| deleting \|
       # active \| no-permission \| topic-not-exist
       #
-      # The status \"no-permission\" indicates that RDS no longer has
-      # permission to post to the SNS topic. The status \"topic-not-exist\"
+      # The status "no-permission" indicates that RDS no longer has
+      # permission to post to the SNS topic. The status "topic-not-exist"
       # indicates that the topic was deleted after the subscription was
       # created.
       # @return [String]

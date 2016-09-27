@@ -323,7 +323,7 @@ module Aws
       #   Copies the object if its entity tag (ETag) is different than the
       #   specified ETag.
       # @option options [Time,DateTime,Date,Integer,String] :copy_source_if_unmodified_since
-      #   Copies the object if it hasn\'t been modified since the specified
+      #   Copies the object if it hasn't been modified since the specified
       #   time.
       # @option options [Time,DateTime,Date,Integer,String] :expires
       #   The date and time at which the object is no longer cacheable.
@@ -345,7 +345,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option options [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option options [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.
@@ -398,7 +398,7 @@ module Aws
 
       # @param [Hash] options ({})
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option options [String] :version_id
       #   VersionId used to reference a specific version of the object.
@@ -510,7 +510,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option options [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option options [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.
@@ -594,7 +594,7 @@ module Aws
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
       # @option options [String] :storage_class
-      #   The type of storage to use for the object. Defaults to \'STANDARD\'.
+      #   The type of storage to use for the object. Defaults to 'STANDARD'.
       # @option options [String] :website_redirect_location
       #   If the bucket is configured as a website, redirects requests for this
       #   object to another object in the same bucket or to an external URL.

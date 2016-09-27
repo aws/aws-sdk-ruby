@@ -179,8 +179,8 @@ module Aws
       #     resource_id: "ResourceIdMaxLen1600", # required
       #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #   })
+      # @overload delete_scaling_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_scaling_policy(params = {}, options = {})
         req = build_request(:delete_scaling_policy, params)
         req.send_request(options)
@@ -225,8 +225,8 @@ module Aws
       #     resource_id: "ResourceIdMaxLen1600", # required
       #     scalable_dimension: "ecs:service:DesiredCount", # required, accepts ecs:service:DesiredCount, ec2:spot-fleet-request:TargetCapacity
       #   })
+      # @overload deregister_scalable_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_scalable_target(params = {}, options = {})
         req = build_request(:deregister_scalable_target, params)
         req.send_request(options)
@@ -306,8 +306,8 @@ module Aws
       #   resp.scalable_targets[0].role_arn #=> String
       #   resp.scalable_targets[0].creation_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_scalable_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scalable_targets(params = {}, options = {})
         req = build_request(:describe_scalable_targets, params)
         req.send_request(options)
@@ -393,8 +393,8 @@ module Aws
       #   resp.scaling_activities[0].status_message #=> String
       #   resp.scaling_activities[0].details #=> String
       #   resp.next_token #=> String
+      # @overload describe_scaling_activities(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_activities(params = {}, options = {})
         req = build_request(:describe_scaling_activities, params)
         req.send_request(options)
@@ -488,8 +488,8 @@ module Aws
       #   resp.scaling_policies[0].alarms[0].alarm_arn #=> String
       #   resp.scaling_policies[0].creation_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_scaling_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_policies(params = {}, options = {})
         req = build_request(:describe_scaling_policies, params)
         req.send_request(options)
@@ -571,8 +571,8 @@ module Aws
       #
       # @example Response structure
       #   resp.policy_arn #=> String
+      # @overload put_scaling_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_scaling_policy(params = {}, options = {})
         req = build_request(:put_scaling_policy, params)
         req.send_request(options)
@@ -640,8 +640,8 @@ module Aws
       #     max_capacity: 1,
       #     role_arn: "ResourceIdMaxLen1600",
       #   })
+      # @overload register_scalable_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_scalable_target(params = {}, options = {})
         req = build_request(:register_scalable_target, params)
         req.send_request(options)

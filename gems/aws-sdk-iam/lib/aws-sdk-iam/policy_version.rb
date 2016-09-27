@@ -50,7 +50,7 @@ module Aws
         data.document
       end
 
-      # Specifies whether the policy version is set as the policy\'s default
+      # Specifies whether the policy version is set as the policy's default
       # version.
       # @return [Boolean]
       def is_default_version

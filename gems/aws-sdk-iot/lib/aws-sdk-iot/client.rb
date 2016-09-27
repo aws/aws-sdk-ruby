@@ -141,8 +141,8 @@ module Aws
       #     certificate_id: "CertificateId", # required
       #     set_as_active: false,
       #   })
+      # @overload accept_certificate_transfer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def accept_certificate_transfer(params = {}, options = {})
         req = build_request(:accept_certificate_transfer, params)
         req.send_request(options)
@@ -162,8 +162,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     principal: "Principal", # required
       #   })
+      # @overload attach_principal_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_principal_policy(params = {}, options = {})
         req = build_request(:attach_principal_policy, params)
         req.send_request(options)
@@ -181,8 +181,8 @@ module Aws
       #     thing_name: "ThingName", # required
       #     principal: "Principal", # required
       #   })
+      # @overload attach_thing_principal(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def attach_thing_principal(params = {}, options = {})
         req = build_request(:attach_thing_principal, params)
         req.send_request(options)
@@ -207,8 +207,8 @@ module Aws
       #   resp = client.cancel_certificate_transfer({
       #     certificate_id: "CertificateId", # required
       #   })
+      # @overload cancel_certificate_transfer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_certificate_transfer(params = {}, options = {})
         req = build_request(:cancel_certificate_transfer, params)
         req.send_request(options)
@@ -255,9 +255,9 @@ module Aws
       # On a Windows command prompt, the command to create certificates for
       # all CSRs in my-csr-directory is:
       #
-      # &gt; forfiles /p my-csr-directory /c \"cmd /c aws iot
+      # &gt; forfiles /p my-csr-directory /c "cmd /c aws iot
       # create-certificate-from-csr --certificate-signing-request
-      # file://@path\"
+      # file://@path"
       # @option params [required, String] :certificate_signing_request
       #   The certificate signing request (CSR).
       # @option params [Boolean] :set_as_active
@@ -278,8 +278,8 @@ module Aws
       #   resp.certificate_arn #=> String
       #   resp.certificate_id #=> String
       #   resp.certificate_pem #=> String
+      # @overload create_certificate_from_csr(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_certificate_from_csr(params = {}, options = {})
         req = build_request(:create_certificate_from_csr, params)
         req.send_request(options)
@@ -310,8 +310,8 @@ module Aws
       #   resp.certificate_pem #=> String
       #   resp.key_pair.public_key #=> String
       #   resp.key_pair.private_key #=> String
+      # @overload create_keys_and_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_keys_and_certificate(params = {}, options = {})
         req = build_request(:create_keys_and_certificate, params)
         req.send_request(options)
@@ -321,7 +321,7 @@ module Aws
       #
       # The created policy is the default version for the policy. This
       # operation creates a policy version with a version identifier of **1**
-      # and sets **1** as the policy\'s default version.
+      # and sets **1** as the policy's default version.
       # @option params [required, String] :policy_name
       #   The policy name.
       # @option params [required, String] :policy_document
@@ -346,8 +346,8 @@ module Aws
       #   resp.policy_arn #=> String
       #   resp.policy_document #=> String
       #   resp.policy_version_id #=> String
+      # @overload create_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_policy(params = {}, options = {})
         req = build_request(:create_policy, params)
         req.send_request(options)
@@ -359,7 +359,7 @@ module Aws
       # DeletePolicyVersion to delete an existing version before you create a
       # new one.
       #
-      # Optionally, you can set the new version as the policy\'s default
+      # Optionally, you can set the new version as the policy's default
       # version. The default version is the operative version (that is, the
       # version that is in effect for the certificates to which the policy is
       # attached).
@@ -392,8 +392,8 @@ module Aws
       #   resp.policy_document #=> String
       #   resp.policy_version_id #=> String
       #   resp.is_default_version #=> Boolean
+      # @overload create_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_policy_version(params = {}, options = {})
         req = build_request(:create_policy_version, params)
         req.send_request(options)
@@ -408,7 +408,7 @@ module Aws
       #   The attribute payload, which consists of up to three name/value pairs
       #   in a JSON document. For example:
       #
-      #   `\{\"attributes\":\{\"string1\":\"string2\"\}\})`
+      #   `\{"attributes":\{"string1":"string2"\}\})`
       # @return [Types::CreateThingResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateThingResponse#thing_name #thingName} => String
@@ -429,8 +429,8 @@ module Aws
       # @example Response structure
       #   resp.thing_name #=> String
       #   resp.thing_arn #=> String
+      # @overload create_thing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_thing(params = {}, options = {})
         req = build_request(:create_thing, params)
         req.send_request(options)
@@ -460,8 +460,8 @@ module Aws
       # @example Response structure
       #   resp.thing_type_name #=> String
       #   resp.thing_type_arn #=> String
+      # @overload create_thing_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_thing_type(params = {}, options = {})
         req = build_request(:create_thing_type, params)
         req.send_request(options)
@@ -555,8 +555,8 @@ module Aws
       #       aws_iot_sql_version: "AwsIotSqlVersion",
       #     },
       #   })
+      # @overload create_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_topic_rule(params = {}, options = {})
         req = build_request(:create_topic_rule, params)
         req.send_request(options)
@@ -571,8 +571,8 @@ module Aws
       #   resp = client.delete_ca_certificate({
       #     certificate_id: "CertificateId", # required
       #   })
+      # @overload delete_ca_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_ca_certificate(params = {}, options = {})
         req = build_request(:delete_ca_certificate, params)
         req.send_request(options)
@@ -592,8 +592,8 @@ module Aws
       #   resp = client.delete_certificate({
       #     certificate_id: "CertificateId", # required
       #   })
+      # @overload delete_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_certificate(params = {}, options = {})
         req = build_request(:delete_certificate, params)
         req.send_request(options)
@@ -619,8 +619,8 @@ module Aws
       #   resp = client.delete_policy({
       #     policy_name: "PolicyName", # required
       #   })
+      # @overload delete_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_policy(params = {}, options = {})
         req = build_request(:delete_policy, params)
         req.send_request(options)
@@ -642,8 +642,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     policy_version_id: "PolicyVersionId", # required
       #   })
+      # @overload delete_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_policy_version(params = {}, options = {})
         req = build_request(:delete_policy_version, params)
         req.send_request(options)
@@ -654,8 +654,8 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_registration_code()
+      # @overload delete_registration_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_registration_code(params = {}, options = {})
         req = build_request(:delete_registration_code, params)
         req.send_request(options)
@@ -676,8 +676,8 @@ module Aws
       #     thing_name: "ThingName", # required
       #     expected_version: 1,
       #   })
+      # @overload delete_thing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_thing(params = {}, options = {})
         req = build_request(:delete_thing, params)
         req.send_request(options)
@@ -697,8 +697,8 @@ module Aws
       #   resp = client.delete_thing_type({
       #     thing_type_name: "ThingTypeName", # required
       #   })
+      # @overload delete_thing_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_thing_type(params = {}, options = {})
         req = build_request(:delete_thing_type, params)
         req.send_request(options)
@@ -713,8 +713,8 @@ module Aws
       #   resp = client.delete_topic_rule({
       #     rule_name: "RuleName", # required
       #   })
+      # @overload delete_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_topic_rule(params = {}, options = {})
         req = build_request(:delete_topic_rule, params)
         req.send_request(options)
@@ -735,8 +735,8 @@ module Aws
       #     thing_type_name: "ThingTypeName", # required
       #     undo_deprecate: false,
       #   })
+      # @overload deprecate_thing_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deprecate_thing_type(params = {}, options = {})
         req = build_request(:deprecate_thing_type, params)
         req.send_request(options)
@@ -762,8 +762,8 @@ module Aws
       #   resp.certificate_description.owned_by #=> String
       #   resp.certificate_description.creation_date #=> Time
       #   resp.certificate_description.auto_registration_status #=> String, one of "ENABLE", "DISABLE"
+      # @overload describe_ca_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_ca_certificate(params = {}, options = {})
         req = build_request(:describe_ca_certificate, params)
         req.send_request(options)
@@ -796,8 +796,8 @@ module Aws
       #   resp.certificate_description.transfer_data.transfer_date #=> Time
       #   resp.certificate_description.transfer_data.accept_date #=> Time
       #   resp.certificate_description.transfer_data.reject_date #=> Time
+      # @overload describe_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_certificate(params = {}, options = {})
         req = build_request(:describe_certificate, params)
         req.send_request(options)
@@ -813,8 +813,8 @@ module Aws
       #
       # @example Response structure
       #   resp.endpoint_address #=> String
+      # @overload describe_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_endpoint(params = {}, options = {})
         req = build_request(:describe_endpoint, params)
         req.send_request(options)
@@ -843,8 +843,8 @@ module Aws
       #   resp.attributes #=> Hash
       #   resp.attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.version #=> Integer
+      # @overload describe_thing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_thing(params = {}, options = {})
         req = build_request(:describe_thing, params)
         req.send_request(options)
@@ -872,8 +872,8 @@ module Aws
       #   resp.thing_type_metadata.deprecated #=> Boolean
       #   resp.thing_type_metadata.deprecation_date #=> Time
       #   resp.thing_type_metadata.creation_date #=> Time
+      # @overload describe_thing_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_thing_type(params = {}, options = {})
         req = build_request(:describe_thing_type, params)
         req.send_request(options)
@@ -894,8 +894,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     principal: "Principal", # required
       #   })
+      # @overload detach_principal_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_principal_policy(params = {}, options = {})
         req = build_request(:detach_principal_policy, params)
         req.send_request(options)
@@ -915,8 +915,8 @@ module Aws
       #     thing_name: "ThingName", # required
       #     principal: "Principal", # required
       #   })
+      # @overload detach_thing_principal(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def detach_thing_principal(params = {}, options = {})
         req = build_request(:detach_thing_principal, params)
         req.send_request(options)
@@ -931,8 +931,8 @@ module Aws
       #   resp = client.disable_topic_rule({
       #     rule_name: "RuleName", # required
       #   })
+      # @overload disable_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_topic_rule(params = {}, options = {})
         req = build_request(:disable_topic_rule, params)
         req.send_request(options)
@@ -947,8 +947,8 @@ module Aws
       #   resp = client.enable_topic_rule({
       #     rule_name: "RuleName", # required
       #   })
+      # @overload enable_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_topic_rule(params = {}, options = {})
         req = build_request(:enable_topic_rule, params)
         req.send_request(options)
@@ -966,8 +966,8 @@ module Aws
       # @example Response structure
       #   resp.role_arn #=> String
       #   resp.log_level #=> String, one of "DEBUG", "INFO", "ERROR", "WARN", "DISABLED"
+      # @overload get_logging_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_logging_options(params = {}, options = {})
         req = build_request(:get_logging_options, params)
         req.send_request(options)
@@ -994,8 +994,8 @@ module Aws
       #   resp.policy_arn #=> String
       #   resp.policy_document #=> String
       #   resp.default_version_id #=> String
+      # @overload get_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_policy(params = {}, options = {})
         req = build_request(:get_policy, params)
         req.send_request(options)
@@ -1026,8 +1026,8 @@ module Aws
       #   resp.policy_document #=> String
       #   resp.policy_version_id #=> String
       #   resp.is_default_version #=> Boolean
+      # @overload get_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_policy_version(params = {}, options = {})
         req = build_request(:get_policy_version, params)
         req.send_request(options)
@@ -1044,8 +1044,8 @@ module Aws
       #
       # @example Response structure
       #   resp.registration_code #=> String
+      # @overload get_registration_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_registration_code(params = {}, options = {})
         req = build_request(:get_registration_code, params)
         req.send_request(options)
@@ -1116,8 +1116,8 @@ module Aws
       #   resp.rule.actions[0].elasticsearch.id #=> String
       #   resp.rule.rule_disabled #=> Boolean
       #   resp.rule.aws_iot_sql_version #=> String
+      # @overload get_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_topic_rule(params = {}, options = {})
         req = build_request(:get_topic_rule, params)
         req.send_request(options)
@@ -1152,8 +1152,8 @@ module Aws
       #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE"
       #   resp.certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
+      # @overload list_ca_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_ca_certificates(params = {}, options = {})
         req = build_request(:list_ca_certificates, params)
         req.send_request(options)
@@ -1189,8 +1189,8 @@ module Aws
       #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
       #   resp.certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
+      # @overload list_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_certificates(params = {}, options = {})
         req = build_request(:list_certificates, params)
         req.send_request(options)
@@ -1227,8 +1227,8 @@ module Aws
       #   resp.certificates[0].status #=> String, one of "ACTIVE", "INACTIVE", "REVOKED", "PENDING_TRANSFER", "REGISTER_INACTIVE", "PENDING_ACTIVATION"
       #   resp.certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
+      # @overload list_certificates_by_ca(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_certificates_by_ca(params = {}, options = {})
         req = build_request(:list_certificates_by_ca, params)
         req.send_request(options)
@@ -1263,8 +1263,8 @@ module Aws
       #   resp.outgoing_certificates[0].transfer_message #=> String
       #   resp.outgoing_certificates[0].creation_date #=> Time
       #   resp.next_marker #=> String
+      # @overload list_outgoing_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_outgoing_certificates(params = {}, options = {})
         req = build_request(:list_outgoing_certificates, params)
         req.send_request(options)
@@ -1295,8 +1295,8 @@ module Aws
       #   resp.policies[0].policy_name #=> String
       #   resp.policies[0].policy_arn #=> String
       #   resp.next_marker #=> String
+      # @overload list_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_policies(params = {}, options = {})
         req = build_request(:list_policies, params)
         req.send_request(options)
@@ -1329,8 +1329,8 @@ module Aws
       #   resp.principals #=> Array
       #   resp.principals[0] #=> String
       #   resp.next_marker #=> String
+      # @overload list_policy_principals(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_policy_principals(params = {}, options = {})
         req = build_request(:list_policy_principals, params)
         req.send_request(options)
@@ -1354,8 +1354,8 @@ module Aws
       #   resp.policy_versions[0].version_id #=> String
       #   resp.policy_versions[0].is_default_version #=> Boolean
       #   resp.policy_versions[0].create_date #=> Time
+      # @overload list_policy_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_policy_versions(params = {}, options = {})
         req = build_request(:list_policy_versions, params)
         req.send_request(options)
@@ -1395,8 +1395,8 @@ module Aws
       #   resp.policies[0].policy_name #=> String
       #   resp.policies[0].policy_arn #=> String
       #   resp.next_marker #=> String
+      # @overload list_principal_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_principal_policies(params = {}, options = {})
         req = build_request(:list_principal_policies, params)
         req.send_request(options)
@@ -1426,8 +1426,8 @@ module Aws
       #   resp.things #=> Array
       #   resp.things[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_principal_things(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_principal_things(params = {}, options = {})
         req = build_request(:list_principal_things, params)
         req.send_request(options)
@@ -1448,8 +1448,8 @@ module Aws
       # @example Response structure
       #   resp.principals #=> Array
       #   resp.principals[0] #=> String
+      # @overload list_thing_principals(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_thing_principals(params = {}, options = {})
         req = build_request(:list_thing_principals, params)
         req.send_request(options)
@@ -1485,8 +1485,8 @@ module Aws
       #   resp.thing_types[0].thing_type_metadata.deprecation_date #=> Time
       #   resp.thing_types[0].thing_type_metadata.creation_date #=> Time
       #   resp.next_token #=> String
+      # @overload list_thing_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_thing_types(params = {}, options = {})
         req = build_request(:list_thing_types, params)
         req.send_request(options)
@@ -1530,8 +1530,8 @@ module Aws
       #   resp.things[0].attributes["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.things[0].version #=> Integer
       #   resp.next_token #=> String
+      # @overload list_things(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_things(params = {}, options = {})
         req = build_request(:list_things, params)
         req.send_request(options)
@@ -1567,8 +1567,8 @@ module Aws
       #   resp.rules[0].created_at #=> Time
       #   resp.rules[0].rule_disabled #=> Boolean
       #   resp.next_token #=> String
+      # @overload list_topic_rules(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_topic_rules(params = {}, options = {})
         req = build_request(:list_topic_rules, params)
         req.send_request(options)
@@ -1607,8 +1607,8 @@ module Aws
       # @example Response structure
       #   resp.certificate_arn #=> String
       #   resp.certificate_id #=> String
+      # @overload register_ca_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_ca_certificate(params = {}, options = {})
         req = build_request(:register_ca_certificate, params)
         req.send_request(options)
@@ -1640,8 +1640,8 @@ module Aws
       # @example Response structure
       #   resp.certificate_arn #=> String
       #   resp.certificate_id #=> String
+      # @overload register_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_certificate(params = {}, options = {})
         req = build_request(:register_certificate, params)
         req.send_request(options)
@@ -1655,7 +1655,7 @@ module Aws
       # enumerate your certificates.
       #
       # This operation can only be called by the transfer destination. After
-      # it is called, the certificate will be returned to the source\'s
+      # it is called, the certificate will be returned to the source's
       # account in the INACTIVE state.
       # @option params [required, String] :certificate_id
       #   The ID of the certificate.
@@ -1668,8 +1668,8 @@ module Aws
       #     certificate_id: "CertificateId", # required
       #     reject_reason: "Message",
       #   })
+      # @overload reject_certificate_transfer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reject_certificate_transfer(params = {}, options = {})
         req = build_request(:reject_certificate_transfer, params)
         req.send_request(options)
@@ -1764,14 +1764,14 @@ module Aws
       #       aws_iot_sql_version: "AwsIotSqlVersion",
       #     },
       #   })
+      # @overload replace_topic_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def replace_topic_rule(params = {}, options = {})
         req = build_request(:replace_topic_rule, params)
         req.send_request(options)
       end
 
-      # Sets the specified version of the specified policy as the policy\'s
+      # Sets the specified version of the specified policy as the policy's
       # default (operative) version. This action affects all certificates to
       # which the policy is attached. To list the principals the policy is
       # attached to, use the ListPrincipalPolicy API.
@@ -1786,8 +1786,8 @@ module Aws
       #     policy_name: "PolicyName", # required
       #     policy_version_id: "PolicyVersionId", # required
       #   })
+      # @overload set_default_policy_version(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_default_policy_version(params = {}, options = {})
         req = build_request(:set_default_policy_version, params)
         req.send_request(options)
@@ -1805,8 +1805,8 @@ module Aws
       #       log_level: "DEBUG", # accepts DEBUG, INFO, ERROR, WARN, DISABLED
       #     },
       #   })
+      # @overload set_logging_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_logging_options(params = {}, options = {})
         req = build_request(:set_logging_options, params)
         req.send_request(options)
@@ -1816,7 +1816,7 @@ module Aws
       #
       # You can cancel the transfer until it is acknowledged by the recipient.
       #
-      # No notification is sent to the transfer destination\'s account. It is
+      # No notification is sent to the transfer destination's account. It is
       # up to the caller to notify the transfer target.
       #
       # The certificate being transferred must not be in the ACTIVE state. You
@@ -1843,8 +1843,8 @@ module Aws
       #
       # @example Response structure
       #   resp.transferred_certificate_arn #=> String
+      # @overload transfer_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def transfer_certificate(params = {}, options = {})
         req = build_request(:transfer_certificate, params)
         req.send_request(options)
@@ -1860,7 +1860,7 @@ module Aws
       #   not be used.
       # @option params [String] :new_auto_registration_status
       #   The new value for the auto registration status. Valid values are:
-      #   \"ENABLE\" or \"DISABLE\".
+      #   "ENABLE" or "DISABLE".
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1869,8 +1869,8 @@ module Aws
       #     new_status: "ACTIVE", # accepts ACTIVE, INACTIVE
       #     new_auto_registration_status: "ENABLE", # accepts ENABLE, DISABLE
       #   })
+      # @overload update_ca_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_ca_certificate(params = {}, options = {})
         req = build_request(:update_ca_certificate, params)
         req.send_request(options)
@@ -1903,8 +1903,8 @@ module Aws
       #     certificate_id: "CertificateId", # required
       #     new_status: "ACTIVE", # required, accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #   })
+      # @overload update_certificate(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_certificate(params = {}, options = {})
         req = build_request(:update_certificate, params)
         req.send_request(options)
@@ -1919,7 +1919,7 @@ module Aws
       #   A list of thing attributes, a JSON string containing name-value pairs.
       #   For example:
       #
-      #   `\{\"attributes\":\{\"name1\":\"value2\"\}\})`
+      #   `\{"attributes":\{"name1":"value2"\}\})`
       #
       #   This data is used to add new attributes or update existing attributes.
       # @option params [Integer] :expected_version
@@ -1945,8 +1945,8 @@ module Aws
       #     expected_version: 1,
       #     remove_thing_type: false,
       #   })
+      # @overload update_thing(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_thing(params = {}, options = {})
         req = build_request(:update_thing, params)
         req.send_request(options)

@@ -163,7 +163,7 @@ module Aws
       # @option params [required, String] :gateway_timezone
       #   A value that indicates the time zone you want to set for the gateway.
       #   The time zone is used, for example, for scheduling snapshots and your
-      #   gateway\'s maintenance schedule.
+      #   gateway's maintenance schedule.
       # @option params [required, String] :gateway_region
       #   A value that indicates the region where you want to store the snapshot
       #   backups. The gateway region specified must be the same region as the
@@ -171,10 +171,10 @@ module Aws
       #   about available regions and endpoints for AWS Storage Gateway, see
       #   [Regions and Endpoints][1] in the *Amazon Web Services Glossary*.
       #
-      #   Valid Values: \"us-east-1\", \"us-west-1\", \"us-west-2\",
-      #   \"eu-west-1\", \"eu-central-1\", \"ap-northeast-1\",
-      #   \"ap-northeast-2\", \"ap-southeast-1\", \"ap-southeast-2\",
-      #   \"sa-east-1\"
+      #   Valid Values: "us-east-1", "us-west-1", "us-west-2",
+      #   "eu-west-1", "eu-central-1", "ap-northeast-1",
+      #   "ap-northeast-2", "ap-southeast-1", "ap-southeast-2",
+      #   "sa-east-1"
       #
       #
       #
@@ -187,12 +187,12 @@ module Aws
       #   The value that indicates the type of tape drive to use for
       #   gateway-VTL. This field is optional.
       #
-      #   Valid Values: \"IBM-ULT3580-TD5\"
+      #   Valid Values: "IBM-ULT3580-TD5"
       # @option params [String] :medium_changer_type
       #   The value that indicates the type of medium changer to use for
       #   gateway-VTL. This field is optional.
       #
-      #   Valid Values: \"STK-L700\", \"AWS-Gateway-VTL\"
+      #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
       # @return [Types::ActivateGatewayOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ActivateGatewayOutput#gateway_arn #GatewayARN} => String
@@ -210,8 +210,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload activate_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def activate_gateway(params = {}, options = {})
         req = build_request(:activate_gateway, params)
         req.send_request(options)
@@ -245,8 +245,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload add_cache(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_cache(params = {}, options = {})
         req = build_request(:add_cache, params)
         req.send_request(options)
@@ -305,8 +305,8 @@ module Aws
       #
       # @example Response structure
       #   resp.resource_arn #=> String
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -335,8 +335,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload add_upload_buffer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_upload_buffer(params = {}, options = {})
         req = build_request(:add_upload_buffer, params)
         req.send_request(options)
@@ -375,8 +375,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload add_working_storage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_working_storage(params = {}, options = {})
         req = build_request(:add_working_storage, params)
         req.send_request(options)
@@ -402,8 +402,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload cancel_archival(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_archival(params = {}, options = {})
         req = build_request(:cancel_archival, params)
         req.send_request(options)
@@ -430,8 +430,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload cancel_retrieval(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_retrieval(params = {}, options = {})
         req = build_request(:cancel_retrieval, params)
         req.send_request(options)
@@ -478,8 +478,8 @@ module Aws
       # @example Response structure
       #   resp.volume_arn #=> String
       #   resp.target_arn #=> String
+      # @overload create_cached_iscsi_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_cached_iscsi_volume(params = {}, options = {})
         req = build_request(:create_cached_iscsi_volume, params)
         req.send_request(options)
@@ -511,10 +511,8 @@ module Aws
       #
       #  </note>
       #
-      # <important markdown="1"> Volume and snapshot IDs are changing to a longer length ID format. For
+      # Volume and snapshot IDs are changing to a longer length ID format. For
       # more information, see the important note on the [Welcome][3] page.
-      #
-      #  </important>
       #
       #
       #
@@ -543,8 +541,8 @@ module Aws
       # @example Response structure
       #   resp.volume_arn #=> String
       #   resp.snapshot_id #=> String
+      # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot(params = {}, options = {})
         req = build_request(:create_snapshot, params)
         req.send_request(options)
@@ -590,8 +588,8 @@ module Aws
       #   resp.snapshot_id #=> String
       #   resp.volume_arn #=> String
       #   resp.volume_recovery_point_time #=> String
+      # @overload create_snapshot_from_volume_recovery_point(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot_from_volume_recovery_point(params = {}, options = {})
         req = build_request(:create_snapshot_from_volume_recovery_point, params)
         req.send_request(options)
@@ -623,7 +621,7 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/storagegateway/latest/userguide/API_ListLocalDisks.html
       # @option params [String] :snapshot_id
-      #   The snapshot ID (e.g. \"snap-1122aabb\") of the snapshot to restore as
+      #   The snapshot ID (e.g. "snap-1122aabb") of the snapshot to restore as
       #   the new stored volume. Specify this field if you want to create the
       #   iSCSI storage volume from a snapshot otherwise do not include this
       #   field. To list snapshots for your account use [DescribeSnapshots][1]
@@ -671,8 +669,8 @@ module Aws
       #   resp.volume_arn #=> String
       #   resp.volume_size_in_bytes #=> Integer
       #   resp.target_arn #=> String
+      # @overload create_stored_iscsi_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_stored_iscsi_volume(params = {}, options = {})
         req = build_request(:create_stored_iscsi_volume, params)
         req.send_request(options)
@@ -711,8 +709,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload create_tape_with_barcode(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tape_with_barcode(params = {}, options = {})
         req = build_request(:create_tape_with_barcode, params)
         req.send_request(options)
@@ -771,8 +769,8 @@ module Aws
       # @example Response structure
       #   resp.tape_arns #=> Array
       #   resp.tape_arns[0] #=> String
+      # @overload create_tapes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_tapes(params = {}, options = {})
         req = build_request(:create_tapes, params)
         req.send_request(options)
@@ -799,8 +797,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload delete_bandwidth_rate_limit(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_bandwidth_rate_limit(params = {}, options = {})
         req = build_request(:delete_bandwidth_rate_limit, params)
         req.send_request(options)
@@ -828,8 +826,8 @@ module Aws
       # @example Response structure
       #   resp.target_arn #=> String
       #   resp.initiator_name #=> String
+      # @overload delete_chap_credentials(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_chap_credentials(params = {}, options = {})
         req = build_request(:delete_chap_credentials, params)
         req.send_request(options)
@@ -846,7 +844,7 @@ module Aws
       # delete a gateway, your next step is to remove it from your
       # environment.
       #
-      # <important markdown="1"> You no longer pay software charges after the gateway is deleted;
+      # You no longer pay software charges after the gateway is deleted;
       # however, your existing Amazon EBS snapshots persist and you will
       # continue to be billed for these snapshots. You can choose to remove
       # all remaining Amazon EBS snapshots by canceling your Amazon EC2
@@ -854,8 +852,6 @@ module Aws
       # subscription, you can delete your snapshots using the Amazon EC2
       # console. For more information, see the [ AWS Storage Gateway Detail
       # Page][1].
-      #
-      #  </important>
       #
       #
       #
@@ -874,8 +870,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload delete_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_gateway(params = {}, options = {})
         req = build_request(:delete_gateway, params)
         req.send_request(options)
@@ -909,8 +905,8 @@ module Aws
       #
       # @example Response structure
       #   resp.volume_arn #=> String
+      # @overload delete_snapshot_schedule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_snapshot_schedule(params = {}, options = {})
         req = build_request(:delete_snapshot_schedule, params)
         req.send_request(options)
@@ -935,8 +931,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload delete_tape(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tape(params = {}, options = {})
         req = build_request(:delete_tape, params)
         req.send_request(options)
@@ -957,8 +953,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload delete_tape_archive(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_tape_archive(params = {}, options = {})
         req = build_request(:delete_tape_archive, params)
         req.send_request(options)
@@ -998,8 +994,8 @@ module Aws
       #
       # @example Response structure
       #   resp.volume_arn #=> String
+      # @overload delete_volume(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_volume(params = {}, options = {})
         req = build_request(:delete_volume, params)
         req.send_request(options)
@@ -1032,8 +1028,8 @@ module Aws
       #   resp.gateway_arn #=> String
       #   resp.average_upload_rate_limit_in_bits_per_sec #=> Integer
       #   resp.average_download_rate_limit_in_bits_per_sec #=> Integer
+      # @overload describe_bandwidth_rate_limit(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_bandwidth_rate_limit(params = {}, options = {})
         req = build_request(:describe_bandwidth_rate_limit, params)
         req.send_request(options)
@@ -1071,8 +1067,8 @@ module Aws
       #   resp.cache_dirty_percentage #=> Float
       #   resp.cache_hit_percentage #=> Float
       #   resp.cache_miss_percentage #=> Float
+      # @overload describe_cache(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cache(params = {}, options = {})
         req = build_request(:describe_cache, params)
         req.send_request(options)
@@ -1109,8 +1105,8 @@ module Aws
       #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.network_interface_port #=> Integer
       #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.lun_number #=> Integer
       #   resp.cached_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
+      # @overload describe_cached_iscsi_volumes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cached_iscsi_volumes(params = {}, options = {})
         req = build_request(:describe_cached_iscsi_volumes, params)
         req.send_request(options)
@@ -1138,8 +1134,8 @@ module Aws
       #   resp.chap_credentials[0].secret_to_authenticate_initiator #=> String
       #   resp.chap_credentials[0].initiator_name #=> String
       #   resp.chap_credentials[0].secret_to_authenticate_target #=> String
+      # @overload describe_chap_credentials(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_chap_credentials(params = {}, options = {})
         req = build_request(:describe_chap_credentials, params)
         req.send_request(options)
@@ -1182,16 +1178,16 @@ module Aws
       #   resp.gateway_type #=> String
       #   resp.next_update_availability_date #=> String
       #   resp.last_software_update #=> String
+      # @overload describe_gateway_information(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_gateway_information(params = {}, options = {})
         req = build_request(:describe_gateway_information, params)
         req.send_request(options)
       end
 
-      # Returns your gateway\'s weekly maintenance start time including the
+      # Returns your gateway's weekly maintenance start time including the
       # day and time of the week. Note that values are in terms of the
-      # gateway\'s time zone.
+      # gateway's time zone.
       # @option params [required, String] :gateway_arn
       #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
       #   operation to return a list of gateways for your account and region.
@@ -1214,8 +1210,8 @@ module Aws
       #   resp.minute_of_hour #=> Integer
       #   resp.day_of_week #=> Integer
       #   resp.timezone #=> String
+      # @overload describe_maintenance_start_time(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_maintenance_start_time(params = {}, options = {})
         req = build_request(:describe_maintenance_start_time, params)
         req.send_request(options)
@@ -1246,8 +1242,8 @@ module Aws
       #   resp.recurrence_in_hours #=> Integer
       #   resp.description #=> String
       #   resp.timezone #=> String
+      # @overload describe_snapshot_schedule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshot_schedule(params = {}, options = {})
         req = build_request(:describe_snapshot_schedule, params)
         req.send_request(options)
@@ -1287,8 +1283,8 @@ module Aws
       #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.network_interface_port #=> Integer
       #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.lun_number #=> Integer
       #   resp.stored_iscsi_volumes[0].volume_iscsi_attributes.chap_enabled #=> Boolean
+      # @overload describe_stored_iscsi_volumes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stored_iscsi_volumes(params = {}, options = {})
         req = build_request(:describe_stored_iscsi_volumes, params)
         req.send_request(options)
@@ -1330,8 +1326,8 @@ module Aws
       #   resp.tape_archives[0].retrieved_to #=> String
       #   resp.tape_archives[0].tape_status #=> String
       #   resp.marker #=> String
+      # @overload describe_tape_archives(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tape_archives(params = {}, options = {})
         req = build_request(:describe_tape_archives, params)
         req.send_request(options)
@@ -1374,8 +1370,8 @@ module Aws
       #   resp.tape_recovery_point_infos[0].tape_size_in_bytes #=> Integer
       #   resp.tape_recovery_point_infos[0].tape_status #=> String
       #   resp.marker #=> String
+      # @overload describe_tape_recovery_points(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tape_recovery_points(params = {}, options = {})
         req = build_request(:describe_tape_recovery_points, params)
         req.send_request(options)
@@ -1427,8 +1423,8 @@ module Aws
       #   resp.tapes[0].vtl_device #=> String
       #   resp.tapes[0].progress #=> Float
       #   resp.marker #=> String
+      # @overload describe_tapes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_tapes(params = {}, options = {})
         req = build_request(:describe_tapes, params)
         req.send_request(options)
@@ -1462,8 +1458,8 @@ module Aws
       #   resp.disk_ids[0] #=> String
       #   resp.upload_buffer_used_in_bytes #=> Integer
       #   resp.upload_buffer_allocated_in_bytes #=> Integer
+      # @overload describe_upload_buffer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_upload_buffer(params = {}, options = {})
         req = build_request(:describe_upload_buffer, params)
         req.send_request(options)
@@ -1518,8 +1514,8 @@ module Aws
       #   resp.vtl_devices[0].device_iscsi_attributes.network_interface_port #=> Integer
       #   resp.vtl_devices[0].device_iscsi_attributes.chap_enabled #=> Boolean
       #   resp.marker #=> String
+      # @overload describe_vtl_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_vtl_devices(params = {}, options = {})
         req = build_request(:describe_vtl_devices, params)
         req.send_request(options)
@@ -1559,8 +1555,8 @@ module Aws
       #   resp.disk_ids[0] #=> String
       #   resp.working_storage_used_in_bytes #=> Integer
       #   resp.working_storage_allocated_in_bytes #=> Integer
+      # @overload describe_working_storage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_working_storage(params = {}, options = {})
         req = build_request(:describe_working_storage, params)
         req.send_request(options)
@@ -1573,9 +1569,7 @@ module Aws
       # Use this operation for a gateway-VTL that is not reachable or not
       # functioning.
       #
-      # <important markdown="1">Once a gateway is disabled it cannot be enabled.
-      #
-      #  </important>
+      # Once a gateway is disabled it cannot be enabled.
       # @option params [required, String] :gateway_arn
       #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
       #   operation to return a list of gateways for your account and region.
@@ -1590,8 +1584,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload disable_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_gateway(params = {}, options = {})
         req = build_request(:disable_gateway, params)
         req.send_request(options)
@@ -1634,14 +1628,14 @@ module Aws
       #   resp.gateways[0].gateway_operational_state #=> String
       #   resp.gateways[0].gateway_name #=> String
       #   resp.marker #=> String
+      # @overload list_gateways(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_gateways(params = {}, options = {})
         req = build_request(:list_gateways, params)
         req.send_request(options)
       end
 
-      # Returns a list of the gateway\'s local disks. To specify which gateway
+      # Returns a list of the gateway's local disks. To specify which gateway
       # to describe, you use the Amazon Resource Name (ARN) of the gateway in
       # the body of the request.
       #
@@ -1675,8 +1669,8 @@ module Aws
       #   resp.disks[0].disk_size_in_bytes #=> Integer
       #   resp.disks[0].disk_allocation_type #=> String
       #   resp.disks[0].disk_allocation_resource #=> String
+      # @overload list_local_disks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_local_disks(params = {}, options = {})
         req = build_request(:list_local_disks, params)
         req.send_request(options)
@@ -1711,8 +1705,8 @@ module Aws
       #   resp.tags #=> Array
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -1720,7 +1714,7 @@ module Aws
 
       # Lists virtual tapes in your virtual tape library (VTL) and your
       # virtual tape shelf (VTS). You specify the tapes to list by specifying
-      # one or more tape Amazon Resource Names (ARNs). If you don\'t specify a
+      # one or more tape Amazon Resource Names (ARNs). If you don't specify a
       # tape ARN, the operation lists all virtual tapes in both your VTL and
       # VTS.
       #
@@ -1732,7 +1726,7 @@ module Aws
       # subsequent request to retrieve the next set of tapes.
       # @option params [Array<String>] :tape_arns
       #   The Amazon Resource Name (ARN) of each of the tapes you want to list.
-      #   If you don\'t specify a tape ARN, the response lists all tapes in both
+      #   If you don't specify a tape ARN, the response lists all tapes in both
       #   your VTL and VTS.
       # @option params [String] :marker
       #   A string that indicates the position at which to begin the returned
@@ -1760,8 +1754,8 @@ module Aws
       #   resp.tape_infos[0].tape_status #=> String
       #   resp.tape_infos[0].gateway_arn #=> String
       #   resp.marker #=> String
+      # @overload list_tapes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tapes(params = {}, options = {})
         req = build_request(:list_tapes, params)
         req.send_request(options)
@@ -1784,8 +1778,8 @@ module Aws
       # @example Response structure
       #   resp.initiators #=> Array
       #   resp.initiators[0] #=> String
+      # @overload list_volume_initiators(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_volume_initiators(params = {}, options = {})
         req = build_request(:list_volume_initiators, params)
         req.send_request(options)
@@ -1819,8 +1813,8 @@ module Aws
       #   resp.volume_recovery_point_infos[0].volume_size_in_bytes #=> Integer
       #   resp.volume_recovery_point_infos[0].volume_usage_in_bytes #=> Integer
       #   resp.volume_recovery_point_infos[0].volume_recovery_point_time #=> String
+      # @overload list_volume_recovery_points(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_volume_recovery_points(params = {}, options = {})
         req = build_request(:list_volume_recovery_points, params)
         req.send_request(options)
@@ -1869,8 +1863,8 @@ module Aws
       #   resp.volume_infos[0].gateway_id #=> String
       #   resp.volume_infos[0].volume_type #=> String
       #   resp.volume_infos[0].volume_size_in_bytes #=> Integer
+      # @overload list_volumes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_volumes(params = {}, options = {})
         req = build_request(:list_volumes, params)
         req.send_request(options)
@@ -1895,8 +1889,8 @@ module Aws
       #
       # @example Response structure
       #   resp.resource_arn #=> String
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -1910,13 +1904,11 @@ module Aws
       # cache is reset, the gateway loses its cache storage. At this point you
       # can reconfigure the disks as cache disks.
       #
-      # <important markdown="1"> If the cache disk you are resetting contains data that has not been
+      # If the cache disk you are resetting contains data that has not been
       # uploaded to Amazon S3 yet, that data can be lost. After you reset
       # cache disks, there will be no configured cache disks left in the
       # gateway, so you must configure at least one new cache disk for your
       # gateway to function properly.
-      #
-      #  </important>
       # @option params [required, String] :gateway_arn
       #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
       #   operation to return a list of gateways for your account and region.
@@ -1931,8 +1923,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload reset_cache(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_cache(params = {}, options = {})
         req = build_request(:reset_cache, params)
         req.send_request(options)
@@ -1968,8 +1960,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload retrieve_tape_archive(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retrieve_tape_archive(params = {}, options = {})
         req = build_request(:retrieve_tape_archive, params)
         req.send_request(options)
@@ -2005,8 +1997,8 @@ module Aws
       #
       # @example Response structure
       #   resp.tape_arn #=> String
+      # @overload retrieve_tape_recovery_point(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def retrieve_tape_recovery_point(params = {}, options = {})
         req = build_request(:retrieve_tape_recovery_point, params)
         req.send_request(options)
@@ -2015,7 +2007,7 @@ module Aws
       # Sets the password for your VM local console. When you log in to the
       # local console for the first time, you log in to the VM with the
       # default credentials. We recommend that you set a new password. You
-      # don\'t need to know the default password to set a new password.
+      # don't need to know the default password to set a new password.
       # @option params [required, String] :gateway_arn
       #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
       #   operation to return a list of gateways for your account and region.
@@ -2033,8 +2025,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload set_local_console_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_local_console_password(params = {}, options = {})
         req = build_request(:set_local_console_password, params)
         req.send_request(options)
@@ -2044,7 +2036,7 @@ module Aws
       # Amazon Resource Name (ARN) of the gateway in the body of your request.
       #
       # The operation shuts down the gateway service component running in the
-      # storage gateway\'s virtual machine (VM) and not the VM.
+      # storage gateway's virtual machine (VM) and not the VM.
       #
       # <note markdown="1">If you want to shut down the VM, it is recommended that you first shut
       # down the gateway component in the VM to avoid unpredictable
@@ -2055,7 +2047,7 @@ module Aws
       # After the gateway is shutdown, you cannot call any other API except
       # StartGateway, DescribeGatewayInformation, and ListGateways. For more
       # information, see ActivateGateway. Your applications cannot read from
-      # or write to the gateway\'s storage volumes, and there are no snapshots
+      # or write to the gateway's storage volumes, and there are no snapshots
       # taken.
       #
       # <note markdown="1">When you make a shutdown request, you will get a `200 OK` success
@@ -2082,8 +2074,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload shutdown_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def shutdown_gateway(params = {}, options = {})
         req = build_request(:shutdown_gateway, params)
         req.send_request(options)
@@ -2091,7 +2083,7 @@ module Aws
 
       # Starts a gateway that you previously shut down (see ShutdownGateway).
       # After the gateway starts, you can then make other API calls, your
-      # applications can read from or write to the gateway\'s storage volumes
+      # applications can read from or write to the gateway's storage volumes
       # and you will be able to take snapshot backups.
       #
       # <note markdown="1">When you make a request, you will get a 200 OK success response
@@ -2118,8 +2110,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload start_gateway(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_gateway(params = {}, options = {})
         req = build_request(:start_gateway, params)
         req.send_request(options)
@@ -2127,11 +2119,11 @@ module Aws
 
       # Updates the bandwidth rate limits of a gateway. You can update both
       # the upload and download bandwidth rate limit or specify only one of
-      # the two. If you don\'t set a bandwidth rate limit, the existing rate
+      # the two. If you don't set a bandwidth rate limit, the existing rate
       # limit remains.
       #
-      # By default, a gateway\'s bandwidth rate limits are not set. If you
-      # don\'t set any limit, the gateway does not have any limitations on its
+      # By default, a gateway's bandwidth rate limits are not set. If you
+      # don't set any limit, the gateway does not have any limitations on its
       # bandwidth usage and could potentially use the maximum available
       # bandwidth.
       #
@@ -2157,8 +2149,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload update_bandwidth_rate_limit(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_bandwidth_rate_limit(params = {}, options = {})
         req = build_request(:update_bandwidth_rate_limit, params)
         req.send_request(options)
@@ -2168,11 +2160,9 @@ module Aws
       # credentials for a specified iSCSI target. By default, a gateway does
       # not have CHAP enabled; however, for added security, you might use it.
       #
-      # <important markdown="1"> When you update CHAP credentials, all existing connections on the
+      # When you update CHAP credentials, all existing connections on the
       # target are closed and initiators must reconnect with the new
       # credentials.
-      #
-      #  </important>
       # @option params [required, String] :target_arn
       #   The Amazon Resource Name (ARN) of the iSCSI volume target. Use the
       #   DescribeStorediSCSIVolumes operation to return the TargetARN for
@@ -2211,20 +2201,20 @@ module Aws
       # @example Response structure
       #   resp.target_arn #=> String
       #   resp.initiator_name #=> String
+      # @overload update_chap_credentials(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_chap_credentials(params = {}, options = {})
         req = build_request(:update_chap_credentials, params)
         req.send_request(options)
       end
 
-      # Updates a gateway\'s metadata, which includes the gateway\'s name and
+      # Updates a gateway's metadata, which includes the gateway's name and
       # time zone. To specify which gateway to update, use the Amazon Resource
       # Name (ARN) of the gateway in your request.
       #
-      # <note markdown="1">For Gateways activated after September 2, 2015, the gateway\'s ARN
+      # <note markdown="1">For Gateways activated after September 2, 2015, the gateway's ARN
       # contains the gateway ID rather than the gateway name. However,
-      # changing the name of the gateway has no effect on the gateway\'s ARN.
+      # changing the name of the gateway has no effect on the gateway's ARN.
       #
       #  </note>
       # @option params [required, String] :gateway_arn
@@ -2248,8 +2238,8 @@ module Aws
       # @example Response structure
       #   resp.gateway_arn #=> String
       #   resp.gateway_name #=> String
+      # @overload update_gateway_information(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_gateway_information(params = {}, options = {})
         req = build_request(:update_gateway_information, params)
         req.send_request(options)
@@ -2265,14 +2255,12 @@ module Aws
       #
       #  </note>
       #
-      # <important markdown="1">A software update forces a system restart of your gateway. You can
+      # A software update forces a system restart of your gateway. You can
       # minimize the chance of any disruption to your applications by
-      # increasing your iSCSI Initiators\' timeouts. For more information
+      # increasing your iSCSI Initiators' timeouts. For more information
       # about increasing iSCSI Initiator timeouts for Windows and Linux, see
       # [Customizing Your Windows iSCSI Settings][1] and [Customizing Your
       # Linux iSCSI Settings][2], respectively.
-      #
-      #  </important>
       #
       #
       #
@@ -2292,16 +2280,16 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload update_gateway_software_now(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_gateway_software_now(params = {}, options = {})
         req = build_request(:update_gateway_software_now, params)
         req.send_request(options)
       end
 
-      # Updates a gateway\'s weekly maintenance start time information,
+      # Updates a gateway's weekly maintenance start time information,
       # including day and time of the week. The maintenance time is the time
-      # in your gateway\'s time zone.
+      # in your gateway's time zone.
       # @option params [required, String] :gateway_arn
       #   The Amazon Resource Name (ARN) of the gateway. Use the ListGateways
       #   operation to return a list of gateways for your account and region.
@@ -2329,8 +2317,8 @@ module Aws
       #
       # @example Response structure
       #   resp.gateway_arn #=> String
+      # @overload update_maintenance_start_time(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_maintenance_start_time(params = {}, options = {})
         req = build_request(:update_maintenance_start_time, params)
         req.send_request(options)
@@ -2372,8 +2360,8 @@ module Aws
       #
       # @example Response structure
       #   resp.volume_arn #=> String
+      # @overload update_snapshot_schedule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_snapshot_schedule(params = {}, options = {})
         req = build_request(:update_snapshot_schedule, params)
         req.send_request(options)
@@ -2389,7 +2377,7 @@ module Aws
       # @option params [required, String] :device_type
       #   The type of medium changer you want to select.
       #
-      #   Valid Values: \"STK-L700\", \"AWS-Gateway-VTL\"
+      #   Valid Values: "STK-L700", "AWS-Gateway-VTL"
       # @return [Types::UpdateVTLDeviceTypeOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateVTLDeviceTypeOutput#vtl_device_arn #VTLDeviceARN} => String
@@ -2402,8 +2390,8 @@ module Aws
       #
       # @example Response structure
       #   resp.vtl_device_arn #=> String
+      # @overload update_vtl_device_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_vtl_device_type(params = {}, options = {})
         req = build_request(:update_vtl_device_type, params)
         req.send_request(options)

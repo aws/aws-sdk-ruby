@@ -148,8 +148,8 @@ module Aws
       #   domain.
       # @option params [Boolean] :update_security_group_for_directory_controllers
       #   If set to true, updates the inbound and outbound rules of the security
-      #   group that has the description: \"AWS created security group for
-      #   *directory ID* directory controllers.\" Following are the new rules:
+      #   group that has the description: "AWS created security group for
+      #   *directory ID* directory controllers." Following are the new rules:
       #
       #   Inbound:
       #
@@ -212,8 +212,8 @@ module Aws
       #     ],
       #     update_security_group_for_directory_controllers: false,
       #   })
+      # @overload add_ip_routes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_ip_routes(params = {}, options = {})
         req = build_request(:add_ip_routes, params)
         req.send_request(options)
@@ -239,8 +239,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -282,8 +282,8 @@ module Aws
       #
       # @example Response structure
       #   resp.directory_id #=> String
+      # @overload connect_directory(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def connect_directory(params = {}, options = {})
         req = build_request(:connect_directory, params)
         req.send_request(options)
@@ -293,10 +293,8 @@ module Aws
       # directory. The alias is used to construct the access URL for the
       # directory, such as `http://<alias>.awsapps.com`.
       #
-      # <important markdown="1"> After an alias has been created, it cannot be deleted or reused, so
+      # After an alias has been created, it cannot be deleted or reused, so
       # this operation should only be used when absolutely necessary.
-      #
-      #  </important>
       # @option params [required, String] :directory_id
       #   The identifier of the directory for which to create the alias.
       # @option params [required, String] :alias
@@ -319,8 +317,8 @@ module Aws
       # @example Response structure
       #   resp.directory_id #=> String
       #   resp.alias #=> String
+      # @overload create_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_alias(params = {}, options = {})
         req = build_request(:create_alias, params)
         req.send_request(options)
@@ -367,8 +365,8 @@ module Aws
       #   resp.computer.computer_attributes #=> Array
       #   resp.computer.computer_attributes[0].name #=> String
       #   resp.computer.computer_attributes[0].value #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      # @overload create_computer(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_computer(params = {}, options = {})
         req = build_request(:create_computer, params)
         req.send_request(options)
@@ -395,8 +393,8 @@ module Aws
       #     remote_domain_name: "RemoteDomainName", # required
       #     dns_ip_addrs: ["IpAddr"], # required
       #   })
+      # @overload create_conditional_forwarder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_conditional_forwarder(params = {}, options = {})
         req = build_request(:create_conditional_forwarder, params)
         req.send_request(options)
@@ -438,8 +436,8 @@ module Aws
       #
       # @example Response structure
       #   resp.directory_id #=> String
+      # @overload create_directory(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_directory(params = {}, options = {})
         req = build_request(:create_directory, params)
         req.send_request(options)
@@ -452,7 +450,7 @@ module Aws
       #   does not need to be publicly resolvable.
       # @option params [String] :short_name
       #   The NetBIOS name for your domain. A short identifier for your domain,
-      #   such as `CORP`. If you don\'t specify a NetBIOS name, it will default
+      #   such as `CORP`. If you don't specify a NetBIOS name, it will default
       #   to the first part of your directory DNS. For example, `CORP` for the
       #   directory DNS `corp.example.com`.
       # @option params [required, String] :password
@@ -481,8 +479,8 @@ module Aws
       #
       # @example Response structure
       #   resp.directory_id #=> String
+      # @overload create_microsoft_ad(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_microsoft_ad(params = {}, options = {})
         req = build_request(:create_microsoft_ad, params)
         req.send_request(options)
@@ -510,8 +508,8 @@ module Aws
       #
       # @example Response structure
       #   resp.snapshot_id #=> String
+      # @overload create_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_snapshot(params = {}, options = {})
         req = build_request(:create_snapshot, params)
         req.send_request(options)
@@ -559,8 +557,8 @@ module Aws
       #
       # @example Response structure
       #   resp.trust_id #=> String
+      # @overload create_trust(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_trust(params = {}, options = {})
         req = build_request(:create_trust, params)
         req.send_request(options)
@@ -580,8 +578,8 @@ module Aws
       #     directory_id: "DirectoryId", # required
       #     remote_domain_name: "RemoteDomainName", # required
       #   })
+      # @overload delete_conditional_forwarder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_conditional_forwarder(params = {}, options = {})
         req = build_request(:delete_conditional_forwarder, params)
         req.send_request(options)
@@ -601,8 +599,8 @@ module Aws
       #
       # @example Response structure
       #   resp.directory_id #=> String
+      # @overload delete_directory(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_directory(params = {}, options = {})
         req = build_request(:delete_directory, params)
         req.send_request(options)
@@ -622,8 +620,8 @@ module Aws
       #
       # @example Response structure
       #   resp.snapshot_id #=> String
+      # @overload delete_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_snapshot(params = {}, options = {})
         req = build_request(:delete_snapshot, params)
         req.send_request(options)
@@ -647,8 +645,8 @@ module Aws
       #
       # @example Response structure
       #   resp.trust_id #=> String
+      # @overload delete_trust(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_trust(params = {}, options = {})
         req = build_request(:delete_trust, params)
         req.send_request(options)
@@ -669,8 +667,8 @@ module Aws
       #     directory_id: "DirectoryId", # required
       #     topic_name: "TopicName", # required
       #   })
+      # @overload deregister_event_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deregister_event_topic(params = {}, options = {})
         req = build_request(:deregister_event_topic, params)
         req.send_request(options)
@@ -704,8 +702,8 @@ module Aws
       #   resp.conditional_forwarders[0].dns_ip_addrs #=> Array
       #   resp.conditional_forwarders[0].dns_ip_addrs[0] #=> String
       #   resp.conditional_forwarders[0].replication_scope #=> String, one of "Domain"
+      # @overload describe_conditional_forwarders(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_conditional_forwarders(params = {}, options = {})
         req = build_request(:describe_conditional_forwarders, params)
         req.send_request(options)
@@ -793,8 +791,8 @@ module Aws
       #   resp.directory_descriptions[0].stage_reason #=> String
       #   resp.directory_descriptions[0].sso_enabled #=> Boolean
       #   resp.next_token #=> String
+      # @overload describe_directories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_directories(params = {}, options = {})
         req = build_request(:describe_directories, params)
         req.send_request(options)
@@ -832,8 +830,8 @@ module Aws
       #   resp.event_topics[0].topic_arn #=> String
       #   resp.event_topics[0].created_date_time #=> Time
       #   resp.event_topics[0].status #=> String, one of "Registered", "Topic not found", "Failed", "Deleted"
+      # @overload describe_event_topics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_event_topics(params = {}, options = {})
         req = build_request(:describe_event_topics, params)
         req.send_request(options)
@@ -883,8 +881,8 @@ module Aws
       #   resp.snapshots[0].status #=> String, one of "Creating", "Completed", "Failed"
       #   resp.snapshots[0].start_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_snapshots(params = {}, options = {})
         req = build_request(:describe_snapshots, params)
         req.send_request(options)
@@ -935,8 +933,8 @@ module Aws
       #   resp.trusts[0].state_last_updated_date_time #=> Time
       #   resp.trusts[0].trust_state_reason #=> String
       #   resp.next_token #=> String
+      # @overload describe_trusts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trusts(params = {}, options = {})
         req = build_request(:describe_trusts, params)
         req.send_request(options)
@@ -953,8 +951,8 @@ module Aws
       #   resp = client.disable_radius({
       #     directory_id: "DirectoryId", # required
       #   })
+      # @overload disable_radius(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_radius(params = {}, options = {})
         req = build_request(:disable_radius, params)
         req.send_request(options)
@@ -985,8 +983,8 @@ module Aws
       #     user_name: "UserName",
       #     password: "ConnectPassword",
       #   })
+      # @overload disable_sso(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_sso(params = {}, options = {})
         req = build_request(:disable_sso, params)
         req.send_request(options)
@@ -1016,8 +1014,8 @@ module Aws
       #       use_same_username: false,
       #     },
       #   })
+      # @overload enable_radius(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_radius(params = {}, options = {})
         req = build_request(:enable_radius, params)
         req.send_request(options)
@@ -1048,8 +1046,8 @@ module Aws
       #     user_name: "UserName",
       #     password: "ConnectPassword",
       #   })
+      # @overload enable_sso(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_sso(params = {}, options = {})
         req = build_request(:enable_sso, params)
         req.send_request(options)
@@ -1073,8 +1071,8 @@ module Aws
       #   resp.directory_limits.connected_directories_limit #=> Integer
       #   resp.directory_limits.connected_directories_current_count #=> Integer
       #   resp.directory_limits.connected_directories_limit_reached #=> Boolean
+      # @overload get_directory_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_directory_limits(params = {}, options = {})
         req = build_request(:get_directory_limits, params)
         req.send_request(options)
@@ -1096,8 +1094,8 @@ module Aws
       #   resp.snapshot_limits.manual_snapshots_limit #=> Integer
       #   resp.snapshot_limits.manual_snapshots_current_count #=> Integer
       #   resp.snapshot_limits.manual_snapshots_limit_reached #=> Boolean
+      # @overload get_snapshot_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_snapshot_limits(params = {}, options = {})
         req = build_request(:get_snapshot_limits, params)
         req.send_request(options)
@@ -1134,8 +1132,8 @@ module Aws
       #   resp.ip_routes_info[0].ip_route_status_reason #=> String
       #   resp.ip_routes_info[0].description #=> String
       #   resp.next_token #=> String
+      # @overload list_ip_routes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_ip_routes(params = {}, options = {})
         req = build_request(:list_ip_routes, params)
         req.send_request(options)
@@ -1165,8 +1163,8 @@ module Aws
       #   resp.tags[0].key #=> String
       #   resp.tags[0].value #=> String
       #   resp.next_token #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -1191,8 +1189,8 @@ module Aws
       #     directory_id: "DirectoryId", # required
       #     topic_name: "TopicName", # required
       #   })
+      # @overload register_event_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_event_topic(params = {}, options = {})
         req = build_request(:register_event_topic, params)
         req.send_request(options)
@@ -1211,8 +1209,8 @@ module Aws
       #     directory_id: "DirectoryId", # required
       #     cidr_ips: ["CidrIp"], # required
       #   })
+      # @overload remove_ip_routes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_ip_routes(params = {}, options = {})
         req = build_request(:remove_ip_routes, params)
         req.send_request(options)
@@ -1230,8 +1228,8 @@ module Aws
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["TagKey"], # required
       #   })
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -1255,8 +1253,8 @@ module Aws
       #   resp = client.restore_from_snapshot({
       #     snapshot_id: "SnapshotId", # required
       #   })
+      # @overload restore_from_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_from_snapshot(params = {}, options = {})
         req = build_request(:restore_from_snapshot, params)
         req.send_request(options)
@@ -1281,8 +1279,8 @@ module Aws
       #     remote_domain_name: "RemoteDomainName", # required
       #     dns_ip_addrs: ["IpAddr"], # required
       #   })
+      # @overload update_conditional_forwarder(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_conditional_forwarder(params = {}, options = {})
         req = build_request(:update_conditional_forwarder, params)
         req.send_request(options)
@@ -1312,8 +1310,8 @@ module Aws
       #       use_same_username: false,
       #     },
       #   })
+      # @overload update_radius(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_radius(params = {}, options = {})
         req = build_request(:update_radius, params)
         req.send_request(options)
@@ -1337,8 +1335,8 @@ module Aws
       #
       # @example Response structure
       #   resp.trust_id #=> String
+      # @overload verify_trust(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_trust(params = {}, options = {})
         req = build_request(:verify_trust, params)
         req.send_request(options)

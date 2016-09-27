@@ -184,8 +184,8 @@ module Aws
       #   resp.stream_description.shards[0].sequence_number_range.ending_sequence_number #=> String
       #   resp.stream_description.shards[0].parent_shard_id #=> String
       #   resp.stream_description.last_evaluated_shard_id #=> String
+      # @overload describe_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stream(params = {}, options = {})
         req = build_request(:describe_stream, params)
         req.send_request(options)
@@ -241,8 +241,8 @@ module Aws
       #   resp.records[0].dynamodb.size_bytes #=> Integer
       #   resp.records[0].dynamodb.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.next_shard_iterator #=> String
+      # @overload get_records(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_records(params = {}, options = {})
         req = build_request(:get_records, params)
         req.send_request(options)
@@ -298,8 +298,8 @@ module Aws
       #
       # @example Response structure
       #   resp.shard_iterator #=> String
+      # @overload get_shard_iterator(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_shard_iterator(params = {}, options = {})
         req = build_request(:get_shard_iterator, params)
         req.send_request(options)
@@ -339,8 +339,8 @@ module Aws
       #   resp.streams[0].table_name #=> String
       #   resp.streams[0].stream_label #=> String
       #   resp.last_evaluated_stream_arn #=> String
+      # @overload list_streams(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_streams(params = {}, options = {})
         req = build_request(:list_streams, params)
         req.send_request(options)

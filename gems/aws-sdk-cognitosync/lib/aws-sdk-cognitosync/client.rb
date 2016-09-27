@@ -149,15 +149,15 @@ module Aws
       #
       # @example Response structure
       #   resp.identity_pool_id #=> String
+      # @overload bulk_publish(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def bulk_publish(params = {}, options = {})
         req = build_request(:bulk_publish, params)
         req.send_request(options)
       end
 
       # Deletes the specific dataset. The dataset will be deleted permanently,
-      # and the action can\'t be undone. Datasets that this dataset was merged
+      # and the action can't be undone. Datasets that this dataset was merged
       # with will no longer report the merge. Any subsequent operation on this
       # dataset will result in a ResourceNotFoundException.
       #
@@ -173,7 +173,7 @@ module Aws
       #   Cognito. GUID generation is unique within a region.
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       # @return [Types::DeleteDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeleteDatasetResponse#dataset #Dataset} => Types::Dataset
@@ -193,8 +193,8 @@ module Aws
       #   resp.dataset.last_modified_by #=> String
       #   resp.dataset.data_storage #=> Integer
       #   resp.dataset.num_records #=> Integer
+      # @overload delete_dataset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_dataset(params = {}, options = {})
         req = build_request(:delete_dataset, params)
         req.send_request(options)
@@ -218,7 +218,7 @@ module Aws
       #   Cognito. GUID generation is unique within a region.
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       # @return [Types::DescribeDatasetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeDatasetResponse#dataset #Dataset} => Types::Dataset
@@ -238,8 +238,8 @@ module Aws
       #   resp.dataset.last_modified_by #=> String
       #   resp.dataset.data_storage #=> Integer
       #   resp.dataset.num_records #=> Integer
+      # @overload describe_dataset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_dataset(params = {}, options = {})
         req = build_request(:describe_dataset, params)
         req.send_request(options)
@@ -269,8 +269,8 @@ module Aws
       #   resp.identity_pool_usage.sync_sessions_count #=> Integer
       #   resp.identity_pool_usage.data_storage #=> Integer
       #   resp.identity_pool_usage.last_modified_date #=> Time
+      # @overload describe_identity_pool_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_identity_pool_usage(params = {}, options = {})
         req = build_request(:describe_identity_pool_usage, params)
         req.send_request(options)
@@ -305,8 +305,8 @@ module Aws
       #   resp.identity_usage.last_modified_date #=> Time
       #   resp.identity_usage.dataset_count #=> Integer
       #   resp.identity_usage.data_storage #=> Integer
+      # @overload describe_identity_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_identity_usage(params = {}, options = {})
         req = build_request(:describe_identity_usage, params)
         req.send_request(options)
@@ -340,8 +340,8 @@ module Aws
       #   resp.bulk_publish_complete_time #=> Time
       #   resp.bulk_publish_status #=> String, one of "NOT_STARTED", "IN_PROGRESS", "FAILED", "SUCCEEDED"
       #   resp.failure_message #=> String
+      # @overload get_bulk_publish_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_bulk_publish_details(params = {}, options = {})
         req = build_request(:get_bulk_publish_details, params)
         req.send_request(options)
@@ -367,8 +367,8 @@ module Aws
       # @example Response structure
       #   resp.events #=> Hash
       #   resp.events["CognitoEventType"] #=> String
+      # @overload get_cognito_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_cognito_events(params = {}, options = {})
         req = build_request(:get_cognito_events, params)
         req.send_request(options)
@@ -403,8 +403,8 @@ module Aws
       #   resp.cognito_streams.stream_name #=> String
       #   resp.cognito_streams.role_arn #=> String
       #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
+      # @overload get_identity_pool_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_identity_pool_configuration(params = {}, options = {})
         req = build_request(:get_identity_pool_configuration, params)
         req.send_request(options)
@@ -454,8 +454,8 @@ module Aws
       #   resp.datasets[0].num_records #=> Integer
       #   resp.count #=> Integer
       #   resp.next_token #=> String
+      # @overload list_datasets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_datasets(params = {}, options = {})
         req = build_request(:list_datasets, params)
         req.send_request(options)
@@ -492,8 +492,8 @@ module Aws
       #   resp.max_results #=> Integer
       #   resp.count #=> Integer
       #   resp.next_token #=> String
+      # @overload list_identity_pool_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_identity_pool_usage(params = {}, options = {})
         req = build_request(:list_identity_pool_usage, params)
         req.send_request(options)
@@ -517,7 +517,7 @@ module Aws
       #   Cognito. GUID generation is unique within a region.
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       # @option params [Integer] :last_sync_count
       #   The last server sync count for this record.
       # @option params [String] :next_token
@@ -566,8 +566,8 @@ module Aws
       #   resp.dataset_exists #=> Boolean
       #   resp.dataset_deleted_after_requested_sync_count #=> Boolean
       #   resp.sync_session_token #=> String
+      # @overload list_records(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_records(params = {}, options = {})
         req = build_request(:list_records, params)
         req.send_request(options)
@@ -601,8 +601,8 @@ module Aws
       #
       # @example Response structure
       #   resp.device_id #=> String
+      # @overload register_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_device(params = {}, options = {})
         req = build_request(:register_device, params)
         req.send_request(options)
@@ -629,8 +629,8 @@ module Aws
       #       "CognitoEventType" => "LambdaFunctionArn",
       #     },
       #   })
+      # @overload set_cognito_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_cognito_events(params = {}, options = {})
         req = build_request(:set_cognito_events, params)
         req.send_request(options)
@@ -677,8 +677,8 @@ module Aws
       #   resp.cognito_streams.stream_name #=> String
       #   resp.cognito_streams.role_arn #=> String
       #   resp.cognito_streams.streaming_status #=> String, one of "ENABLED", "DISABLED"
+      # @overload set_identity_pool_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_identity_pool_configuration(params = {}, options = {})
         req = build_request(:set_identity_pool_configuration, params)
         req.send_request(options)
@@ -708,8 +708,8 @@ module Aws
       #     dataset_name: "DatasetName", # required
       #     device_id: "DeviceId", # required
       #   })
+      # @overload subscribe_to_dataset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def subscribe_to_dataset(params = {}, options = {})
         req = build_request(:subscribe_to_dataset, params)
         req.send_request(options)
@@ -739,8 +739,8 @@ module Aws
       #     dataset_name: "DatasetName", # required
       #     device_id: "DeviceId", # required
       #   })
+      # @overload unsubscribe_from_dataset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unsubscribe_from_dataset(params = {}, options = {})
         req = build_request(:unsubscribe_from_dataset, params)
         req.send_request(options)
@@ -774,7 +774,7 @@ module Aws
       #   Cognito. GUID generation is unique within a region.
       # @option params [required, String] :dataset_name
       #   A string of up to 128 characters. Allowed characters are a-z, A-Z,
-      #   0-9, \'\_\' (underscore), \'-\' (dash), and \'.\' (dot).
+      #   0-9, '\_' (underscore), '-' (dash), and '.' (dot).
       # @option params [String] :device_id
       #   The unique ID generated for this device by Cognito.
       # @option params [Array<Types::RecordPatch>] :record_patches
@@ -817,8 +817,8 @@ module Aws
       #   resp.records[0].last_modified_date #=> Time
       #   resp.records[0].last_modified_by #=> String
       #   resp.records[0].device_last_modified_date #=> Time
+      # @overload update_records(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_records(params = {}, options = {})
         req = build_request(:update_records, params)
         req.send_request(options)

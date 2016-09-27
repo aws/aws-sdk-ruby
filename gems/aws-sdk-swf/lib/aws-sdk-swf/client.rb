@@ -143,7 +143,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -161,7 +161,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -236,8 +236,8 @@ module Aws
       # @example Response structure
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      # @overload count_closed_workflow_executions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def count_closed_workflow_executions(params = {}, options = {})
         req = build_request(:count_closed_workflow_executions, params)
         req.send_request(options)
@@ -250,7 +250,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -268,7 +268,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -322,8 +322,8 @@ module Aws
       # @example Response structure
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      # @overload count_open_workflow_executions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def count_open_workflow_executions(params = {}, options = {})
         req = build_request(:count_open_workflow_executions, params)
         req.send_request(options)
@@ -336,7 +336,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -349,7 +349,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -377,8 +377,8 @@ module Aws
       # @example Response structure
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      # @overload count_pending_activity_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def count_pending_activity_tasks(params = {}, options = {})
         req = build_request(:count_pending_activity_tasks, params)
         req.send_request(options)
@@ -391,7 +391,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -404,7 +404,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -432,8 +432,8 @@ module Aws
       # @example Response structure
       #   resp.count #=> Integer
       #   resp.truncated #=> Boolean
+      # @overload count_pending_decision_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def count_pending_decision_tasks(params = {}, options = {})
         req = build_request(:count_pending_decision_tasks, params)
         req.send_request(options)
@@ -448,7 +448,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -464,7 +464,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -486,8 +486,8 @@ module Aws
       #       version: "Version", # required
       #     },
       #   })
+      # @overload deprecate_activity_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deprecate_activity_type(params = {}, options = {})
         req = build_request(:deprecate_activity_type, params)
         req.send_request(options)
@@ -504,18 +504,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -531,8 +531,8 @@ module Aws
       #   resp = client.deprecate_domain({
       #     name: "DomainName", # required
       #   })
+      # @overload deprecate_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deprecate_domain(params = {}, options = {})
         req = build_request(:deprecate_domain, params)
         req.send_request(options)
@@ -548,7 +548,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -564,7 +564,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -586,8 +586,8 @@ module Aws
       #       version: "Version", # required
       #     },
       #   })
+      # @overload deprecate_workflow_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deprecate_workflow_type(params = {}, options = {})
         req = build_request(:deprecate_workflow_type, params)
         req.send_request(options)
@@ -599,7 +599,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -615,7 +615,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -656,8 +656,8 @@ module Aws
       #   resp.configuration.default_task_priority #=> String
       #   resp.configuration.default_task_schedule_to_start_timeout #=> String
       #   resp.configuration.default_task_schedule_to_close_timeout #=> String
+      # @overload describe_activity_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_activity_type(params = {}, options = {})
         req = build_request(:describe_activity_type, params)
         req.send_request(options)
@@ -668,18 +668,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -704,8 +704,8 @@ module Aws
       #   resp.domain_info.status #=> String, one of "REGISTERED", "DEPRECATED"
       #   resp.domain_info.description #=> String
       #   resp.configuration.workflow_execution_retention_period_in_days #=> String
+      # @overload describe_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_domain(params = {}, options = {})
         req = build_request(:describe_domain, params)
         req.send_request(options)
@@ -718,18 +718,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -785,8 +785,8 @@ module Aws
       #   resp.open_counts.open_lambda_functions #=> Integer
       #   resp.latest_activity_task_timestamp #=> Time
       #   resp.latest_execution_context #=> String
+      # @overload describe_workflow_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workflow_execution(params = {}, options = {})
         req = build_request(:describe_workflow_execution, params)
         req.send_request(options)
@@ -798,7 +798,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -814,7 +814,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -853,8 +853,8 @@ module Aws
       #   resp.configuration.default_task_priority #=> String
       #   resp.configuration.default_child_policy #=> String, one of "TERMINATE", "REQUEST_CANCEL", "ABANDON"
       #   resp.configuration.default_lambda_role #=> String
+      # @overload describe_workflow_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_workflow_type(params = {}, options = {})
         req = build_request(:describe_workflow_type, params)
         req.send_request(options)
@@ -868,18 +868,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1175,8 +1175,8 @@ module Aws
       #   resp.events[0].start_lambda_function_failed_event_attributes.cause #=> String, one of "ASSUME_ROLE_FAILED"
       #   resp.events[0].start_lambda_function_failed_event_attributes.message #=> String
       #   resp.next_page_token #=> String
+      # @overload get_workflow_execution_history(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_workflow_execution_history(params = {}, options = {})
         req = build_request(:get_workflow_execution_history, params)
         req.send_request(options)
@@ -1191,18 +1191,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1261,8 +1261,8 @@ module Aws
       #   resp.type_infos[0].creation_date #=> Time
       #   resp.type_infos[0].deprecation_date #=> Time
       #   resp.next_page_token #=> String
+      # @overload list_activity_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_activity_types(params = {}, options = {})
         req = build_request(:list_activity_types, params)
         req.send_request(options)
@@ -1277,7 +1277,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -1295,7 +1295,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1409,8 +1409,8 @@ module Aws
       #   resp.execution_infos[0].tag_list[0] #=> String
       #   resp.execution_infos[0].cancel_requested #=> Boolean
       #   resp.next_page_token #=> String
+      # @overload list_closed_workflow_executions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_closed_workflow_executions(params = {}, options = {})
         req = build_request(:list_closed_workflow_executions, params)
         req.send_request(options)
@@ -1424,7 +1424,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -1433,11 +1433,11 @@ module Aws
       #   ID, with no dashes.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1486,8 +1486,8 @@ module Aws
       #   resp.domain_infos[0].status #=> String, one of "REGISTERED", "DEPRECATED"
       #   resp.domain_infos[0].description #=> String
       #   resp.next_page_token #=> String
+      # @overload list_domains(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_domains(params = {}, options = {})
         req = build_request(:list_domains, params)
         req.send_request(options)
@@ -1502,7 +1502,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -1520,7 +1520,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1611,8 +1611,8 @@ module Aws
       #   resp.execution_infos[0].tag_list[0] #=> String
       #   resp.execution_infos[0].cancel_requested #=> Boolean
       #   resp.next_page_token #=> String
+      # @overload list_open_workflow_executions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_open_workflow_executions(params = {}, options = {})
         req = build_request(:list_open_workflow_executions, params)
         req.send_request(options)
@@ -1624,18 +1624,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1694,8 +1694,8 @@ module Aws
       #   resp.type_infos[0].creation_date #=> Time
       #   resp.type_infos[0].deprecation_date #=> Time
       #   resp.next_page_token #=> String
+      # @overload list_workflow_types(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_workflow_types(params = {}, options = {})
         req = build_request(:list_workflow_types, params)
         req.send_request(options)
@@ -1711,11 +1711,13 @@ module Aws
       # an empty string. If a task is returned, the worker should use its type
       # to identify and process it correctly.
       #
-      # <important>Workers should set their client side socket timeout to at least 70 seconds (10 seconds higher than the maximum time service may hold the poll request).</important>
+      # Workers should set their client side socket timeout to at least 70
+      # seconds (10 seconds higher than the maximum time service may hold the
+      # poll request).
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -1728,7 +1730,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -1777,8 +1779,8 @@ module Aws
       #   resp.activity_type.name #=> String
       #   resp.activity_type.version #=> String
       #   resp.input #=> String
+      # @overload poll_for_activity_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def poll_for_activity_task(params = {}, options = {})
         req = build_request(:poll_for_activity_task, params)
         req.send_request(options)
@@ -1798,13 +1800,20 @@ module Aws
       # result, in this context, means that a DecisionTask is returned, but
       # that the value of `taskToken` is an empty string.
       #
-      # <important>Deciders should set their client-side socket timeout to at least 70 seconds (10 seconds higher than the timeout).</important>
+      # Deciders should set their client-side socket timeout to at least 70
+      # seconds (10 seconds higher than the timeout).
       #
-      # <important>Because the number of workflow history events for a single workflow execution might be very large, the result returned might be split up across a number of pages. To retrieve subsequent pages, make additional calls to `PollForDecisionTask` using the `nextPageToken` returned by the initial call. Note that you do **not** call `GetWorkflowExecutionHistory` with this `nextPageToken`. Instead, call `PollForDecisionTask` again.</important>
+      # Because the number of workflow history events for a single workflow
+      # execution might be very large, the result returned might be split up
+      # across a number of pages. To retrieve subsequent pages, make
+      # additional calls to `PollForDecisionTask` using the `nextPageToken`
+      # returned by the initial call. Note that you do **not** call
+      # `GetWorkflowExecutionHistory` with this `nextPageToken`. Instead, call
+      # `PollForDecisionTask` again.
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -1817,7 +1826,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2139,8 +2148,8 @@ module Aws
       #   resp.events[0].start_lambda_function_failed_event_attributes.message #=> String
       #   resp.next_page_token #=> String
       #   resp.previous_started_event_id #=> Integer
+      # @overload poll_for_decision_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def poll_for_decision_task(params = {}, options = {})
         req = build_request(:poll_for_decision_task, params)
         req.send_request(options)
@@ -2169,22 +2178,25 @@ module Aws
       #
       # <note>This operation is only useful for long-lived activities to report liveliness of the task and to determine if a cancellation is being attempted. </note>
       #
-      # <important>If the `cancelRequested` flag returns `true`, a cancellation is being attempted. If the worker can cancel the activity, it should respond with RespondActivityTaskCanceled. Otherwise, it should ignore the cancellation request.</important>
+      # If the `cancelRequested` flag returns `true`, a cancellation is being
+      # attempted. If the worker can cancel the activity, it should respond
+      # with RespondActivityTaskCanceled. Otherwise, it should ignore the
+      # cancellation request.
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2195,7 +2207,10 @@ module Aws
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results. </important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       # @option params [String] :details
       #   If specified, contains details about the progress of the task.
       # @return [Types::ActivityTaskStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2210,8 +2225,8 @@ module Aws
       #
       # @example Response structure
       #   resp.cancel_requested #=> Boolean
+      # @overload record_activity_task_heartbeat(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def record_activity_task_heartbeat(params = {}, options = {})
         req = build_request(:record_activity_task_heartbeat, params)
         req.send_request(options)
@@ -2220,11 +2235,13 @@ module Aws
       # Registers a new *activity type* along with its configuration settings
       # in the specified domain.
       #
-      # <important>A `TypeAlreadyExists` fault is returned if the type already exists in the domain. You cannot change any configuration settings of the type after its registration, and it must be registered as a new version.</important>
+      # A `TypeAlreadyExists` fault is returned if the type already exists in
+      # the domain. You cannot change any configuration settings of the type
+      # after its registration, and it must be registered as a new version.
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -2240,7 +2257,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2275,7 +2292,7 @@ module Aws
       #   decision.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       # @option params [String] :default_task_heartbeat_timeout
       #   If set, specifies the default maximum time before which a worker
       #   processing a task of this type must report progress by calling
@@ -2288,7 +2305,7 @@ module Aws
       #   to be valid; the activity worker should clean up the activity task.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       # @option params [Types::TaskList] :default_task_list
       #   If set, specifies the default task list to use for scheduling tasks of
       #   this activity type. This default task list is used if a task list is
@@ -2296,8 +2313,8 @@ module Aws
       #   `ScheduleActivityTask` decision.
       # @option params [String] :default_task_priority
       #   The default task priority to assign to the activity type. If not
-      #   assigned, then \"0\" will be used. Valid values are integers that
-      #   range from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   assigned, then "0" will be used. Valid values are integers that
+      #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -2314,14 +2331,14 @@ module Aws
       #   `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       # @option params [String] :default_task_schedule_to_close_timeout
       #   If set, specifies the default maximum duration for a task of this
       #   activity type. This default can be overridden when scheduling an
       #   activity task using the `ScheduleActivityTask` decision.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -2339,8 +2356,8 @@ module Aws
       #     default_task_schedule_to_start_timeout: "DurationInSecondsOptional",
       #     default_task_schedule_to_close_timeout: "DurationInSecondsOptional",
       #   })
+      # @overload register_activity_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_activity_type(params = {}, options = {})
         req = build_request(:register_activity_type, params)
         req.send_request(options)
@@ -2350,7 +2367,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * You cannot use an IAM policy to control domain access for this
@@ -2358,11 +2375,11 @@ module Aws
       #   resource of this action.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2405,8 +2422,8 @@ module Aws
       #     description: "Description",
       #     workflow_execution_retention_period_in_days: "DurationInDays", # required
       #   })
+      # @overload register_domain(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_domain(params = {}, options = {})
         req = build_request(:register_domain, params)
         req.send_request(options)
@@ -2418,11 +2435,13 @@ module Aws
       # The retention period for the workflow history is set by the
       # RegisterDomain action.
       #
-      # <important>If the type already exists, then a `TypeAlreadyExists` fault is returned. You cannot change the configuration settings of a workflow type once it is registered and it must be registered as a new version.</important>
+      # If the type already exists, then a `TypeAlreadyExists` fault is
+      # returned. You cannot change the configuration settings of a workflow
+      # type once it is registered and it must be registered as a new version.
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -2438,7 +2457,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2473,7 +2492,7 @@ module Aws
       #   `StartChildWorkflowExecution` decision.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       # @option params [String] :default_execution_start_to_close_timeout
       #   If set, specifies the default maximum duration for executions of this
       #   workflow type. You can override this default when starting an
@@ -2482,7 +2501,7 @@ module Aws
       #
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. Unlike some of the other timeout parameters in Amazon SWF, you
-      #   cannot specify a value of \"NONE\" for
+      #   cannot specify a value of "NONE" for
       #   `defaultExecutionStartToCloseTimeout`; there is a one-year max limit
       #   on the time that a workflow execution can run. Exceeding this limit
       #   will always cause the workflow execution to time out.
@@ -2494,8 +2513,8 @@ module Aws
       #   decision.
       # @option params [String] :default_task_priority
       #   The default task priority to assign to the workflow type. If not
-      #   assigned, then \"0\" will be used. Valid values are integers that
-      #   range from Java\'s `Integer.MIN_VALUE` (-2147483648) to
+      #   assigned, then "0" will be used. Valid values are integers that
+      #   range from Java's `Integer.MIN_VALUE` (-2147483648) to
       #   `Integer.MAX_VALUE` (2147483647). Higher numbers indicate higher
       #   priority.
       #
@@ -2547,8 +2566,8 @@ module Aws
       #     default_child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #     default_lambda_role: "Arn",
       #   })
+      # @overload register_workflow_type(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def register_workflow_type(params = {}, options = {})
         req = build_request(:register_workflow_type, params)
         req.send_request(options)
@@ -2566,18 +2585,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2599,8 +2618,8 @@ module Aws
       #     workflow_id: "WorkflowId", # required
       #     run_id: "RunIdOptional",
       #   })
+      # @overload request_cancel_workflow_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_cancel_workflow_execution(params = {}, options = {})
         req = build_request(:request_cancel_workflow_execution, params)
         req.send_request(options)
@@ -2613,7 +2632,9 @@ module Aws
       # These `details` (if provided) appear in the `ActivityTaskCanceled`
       # event added to the workflow history.
       #
-      # <important>Only use this operation if the `canceled` flag of a RecordActivityTaskHeartbeat request returns `true` and if the activity can be safely undone or abandoned.</important>
+      # Only use this operation if the `canceled` flag of a
+      # RecordActivityTaskHeartbeat request returns `true` and if the activity
+      # can be safely undone or abandoned.
       #
       # A task is considered open from the time that it is scheduled until it
       # is closed. Therefore a task is reported as open while a worker is
@@ -2623,18 +2644,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][2].
@@ -2646,7 +2667,10 @@ module Aws
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important>`taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       # @option params [String] :details
       #   *Optional.* Information about the cancellation.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2656,8 +2680,8 @@ module Aws
       #     task_token: "TaskToken", # required
       #     details: "Data",
       #   })
+      # @overload respond_activity_task_canceled(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def respond_activity_task_canceled(params = {}, options = {})
         req = build_request(:respond_activity_task_canceled, params)
         req.send_request(options)
@@ -2668,7 +2692,11 @@ module Aws
       # provided). The `result` appears in the `ActivityTaskCompleted` event
       # in the workflow history.
       #
-      # <important> If the requested task does not complete successfully, use RespondActivityTaskFailed instead. If the worker finds that the task is canceled through the `canceled` flag returned by RecordActivityTaskHeartbeat, it should cancel the task, clean up and then call RespondActivityTaskCanceled.</important>
+      # If the requested task does not complete successfully, use
+      # RespondActivityTaskFailed instead. If the worker finds that the task
+      # is canceled through the `canceled` flag returned by
+      # RecordActivityTaskHeartbeat, it should cancel the task, clean up and
+      # then call RespondActivityTaskCanceled.
       #
       # A task is considered open from the time that it is scheduled until it
       # is closed. Therefore a task is reported as open while a worker is
@@ -2678,18 +2706,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][2].
@@ -2701,7 +2729,10 @@ module Aws
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       # @option params [String] :result
       #   The result of the activity task. It is a free form string that is
       #   implementation specific.
@@ -2712,8 +2743,8 @@ module Aws
       #     task_token: "TaskToken", # required
       #     result: "Data",
       #   })
+      # @overload respond_activity_task_completed(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def respond_activity_task_completed(params = {}, options = {})
         req = build_request(:respond_activity_task_completed, params)
         req.send_request(options)
@@ -2732,18 +2763,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][2].
@@ -2755,7 +2786,10 @@ module Aws
       # @option params [required, String] :task_token
       #   The `taskToken` of the ActivityTask.
       #
-      #   <important> `taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       # @option params [String] :reason
       #   Description of the error that may assist in diagnostics.
       # @option params [String] :details
@@ -2768,8 +2802,8 @@ module Aws
       #     reason: "FailureReason",
       #     details: "Data",
       #   })
+      # @overload respond_activity_task_failed(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def respond_activity_task_failed(params = {}, options = {})
         req = build_request(:respond_activity_task_failed, params)
         req.send_request(options)
@@ -2801,7 +2835,10 @@ module Aws
       # @option params [required, String] :task_token
       #   The `taskToken` from the DecisionTask.
       #
-      #   <important>`taskToken` is generated by the service and should be treated as an opaque value. If the task is passed to another process, its `taskToken` must also be passed. This enables it to provide its progress and respond with results.</important>
+      #   `taskToken` is generated by the service and should be treated as an
+      #   opaque value. If the task is passed to another process, its
+      #   `taskToken` must also be passed. This enables it to provide its
+      #   progress and respond with results.
       # @option params [Array<Types::Decision>] :decisions
       #   The list of decisions (possibly empty) made by the decider while
       #   processing this decision task. See the docs for the decision structure
@@ -2911,8 +2948,8 @@ module Aws
       #     ],
       #     execution_context: "Data",
       #   })
+      # @overload respond_decision_task_completed(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def respond_decision_task_completed(params = {}, options = {})
         req = build_request(:respond_decision_task_completed, params)
         req.send_request(options)
@@ -2930,18 +2967,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -2960,7 +2997,7 @@ module Aws
       #   workflow.
       # @option params [String] :input
       #   Data to attach to the `WorkflowExecutionSignaled` event in the target
-      #   workflow execution\'s history.
+      #   workflow execution's history.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -2971,8 +3008,8 @@ module Aws
       #     signal_name: "SignalName", # required
       #     input: "Data",
       #   })
+      # @overload signal_workflow_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def signal_workflow_execution(params = {}, options = {})
         req = build_request(:signal_workflow_execution, params)
         req.send_request(options)
@@ -2985,7 +3022,7 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
@@ -3007,7 +3044,7 @@ module Aws
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3046,7 +3083,7 @@ module Aws
       #   override any default priority that was assigned when the workflow type
       #   was registered. If not set, then the default task priority for the
       #   workflow type will be used. Valid values are integers that range from
-      #   Java\'s `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
+      #   Java's `Integer.MIN_VALUE` (-2147483648) to `Integer.MAX_VALUE`
       #   (2147483647). Higher numbers indicate higher priority.
       #
       #   For more information about setting task priority, see [Setting Task
@@ -3068,7 +3105,7 @@ module Aws
       #   The duration is specified in seconds; an integer greater than or equal
       #   to 0. Exceeding this limit will cause the workflow execution to time
       #   out. Unlike some of the other timeout parameters in Amazon SWF, you
-      #   cannot specify a value of \"NONE\" for this timeout; there is a
+      #   cannot specify a value of "NONE" for this timeout; there is a
       #   one-year max limit on the time that a workflow execution can run.
       #
       #   <note> An execution start-to-close timeout must be specified either through this parameter or as a default when the workflow type is registered. If neither this parameter nor a default execution start-to-close timeout is specified, a fault is returned.</note>
@@ -3084,7 +3121,7 @@ module Aws
       #   workflow type using RegisterWorkflowType.
       #
       #   The duration is specified in seconds; an integer greater than or equal
-      #   to 0. The value \"NONE\" can be used to specify unlimited duration.
+      #   to 0. The value "NONE" can be used to specify unlimited duration.
       #
       #   <note>A task start-to-close timeout for this workflow execution must be specified either as a default for the workflow type or through this parameter. If neither this parameter is set nor a default task start-to-close timeout was specified at registration time then a fault will be returned.</note>
       # @option params [String] :child_policy
@@ -3136,8 +3173,8 @@ module Aws
       #
       # @example Response structure
       #   resp.run_id #=> String
+      # @overload start_workflow_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_workflow_execution(params = {}, options = {})
         req = build_request(:start_workflow_execution, params)
         req.send_request(options)
@@ -3149,7 +3186,8 @@ module Aws
       # specified when starting this execution, is applied to any open child
       # workflow executions of this workflow execution.
       #
-      # <important> If the identified workflow execution was in progress, it is terminated immediately.</important>
+      # If the identified workflow execution was in progress, it is terminated
+      # immediately.
       #
       # <note> If a runId is not specified, then the `WorkflowExecutionTerminated` event is recorded in the history of the current open workflow with the matching workflowId in the domain.</note>
       #
@@ -3157,18 +3195,18 @@ module Aws
       #
       # **Access Control**
       #
-      # You can use IAM policies to control this action\'s access to Amazon
+      # You can use IAM policies to control this action's access to Amazon
       # SWF resources as follows:
       #
       # * Use a `Resource` element with the domain name to limit the action to
       #   only specified domains.
       # * Use an `Action` element to allow or deny permission to call this
       #   action.
-      # * You cannot use an IAM policy to constrain this action\'s parameters.
+      # * You cannot use an IAM policy to constrain this action's parameters.
       #
       # If the caller does not have sufficient permissions to invoke the
       # action, or the parameter values fall outside the specified
-      # constraints, the action fails. The associated event attribute\'s
+      # constraints, the action fails. The associated event attribute's
       # **cause** parameter will be set to OPERATION\_NOT\_PERMITTED. For
       # details and example IAM policies, see [Using IAM to Manage Access to
       # Amazon SWF Workflows][1].
@@ -3215,8 +3253,8 @@ module Aws
       #     details: "Data",
       #     child_policy: "TERMINATE", # accepts TERMINATE, REQUEST_CANCEL, ABANDON
       #   })
+      # @overload terminate_workflow_execution(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def terminate_workflow_execution(params = {}, options = {})
         req = build_request(:terminate_workflow_execution, params)
         req.send_request(options)

@@ -44,7 +44,7 @@ module Aws
         data.cidr_block
       end
 
-      # The ID of the set of DHCP options you\'ve associated with the VPC (or
+      # The ID of the set of DHCP options you've associated with the VPC (or
       # `default` if the default options are associated with the VPC).
       # @return [String]
       def dhcp_options_id
@@ -177,7 +177,7 @@ module Aws
       #   The ID of an EC2-Classic instance to link to the ClassicLink-enabled
       #   VPC.
       # @option options [required, Array<String>] :groups
-      #   The ID of one or more of the VPC\'s security groups. You cannot
+      #   The ID of one or more of the VPC's security groups. You cannot
       #   specify security groups from a different VPC.
       # @return [Types::AttachClassicLinkVpcResult]
       def attach_classic_link_instance(options = {})
@@ -302,7 +302,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]
@@ -410,7 +410,7 @@ module Aws
       #   Indicates whether the DNS resolution is supported for the VPC. If
       #   enabled, queries to the Amazon provided DNS server at the
       #   169.254.169.253 IP address, or the reserved IP address at the base of
-      #   the VPC network range \"plus two\" will succeed. If disabled, the
+      #   the VPC network range "plus two" will succeed. If disabled, the
       #   Amazon provided DNS service in the VPC that resolves public DNS
       #   hostnames to IP addresses is not enabled.
       #
@@ -423,7 +423,7 @@ module Aws
       #
       #   You cannot modify the DNS resolution and DNS hostnames attributes in
       #   the same request. Use separate requests for each attribute. You can
-      #   only enable DNS hostnames if you\'ve enabled DNS support.
+      #   only enable DNS hostnames if you've enabled DNS support.
       # @return [EmptyStructure]
       def modify_attribute(options = {})
         options = options.merge(vpc_id: @id)

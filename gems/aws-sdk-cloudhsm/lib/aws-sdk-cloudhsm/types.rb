@@ -89,7 +89,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] eni_ip
-      #   The IP address to assign to the HSM\'s ENI.
+      #   The IP address to assign to the HSM's ENI.
       #
       #   If an IP address is not specified, an IP address will be randomly
       #   chosen from the CIDR range of the subnet.
@@ -355,7 +355,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] eni_ip
-      #   The IP address assigned to the HSM\'s ENI.
+      #   The IP address assigned to the HSM's ENI.
       #   @return [String]
       #
       # @!attribute [rw] subscription_type

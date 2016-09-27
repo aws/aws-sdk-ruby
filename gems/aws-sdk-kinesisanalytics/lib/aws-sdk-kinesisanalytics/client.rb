@@ -211,8 +211,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload add_application_input(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_application_input(params = {}, options = {})
         req = build_request(:add_application_input, params)
         req.send_request(options)
@@ -284,8 +284,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload add_application_output(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_application_output(params = {}, options = {})
         req = build_request(:add_application_output, params)
         req.send_request(options)
@@ -363,8 +363,8 @@ module Aws
       #       },
       #     },
       #   })
+      # @overload add_application_reference_data_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_application_reference_data_source(params = {}, options = {})
         req = build_request(:add_application_reference_data_source, params)
         req.send_request(options)
@@ -527,8 +527,8 @@ module Aws
       #   resp.application_summary.application_name #=> String
       #   resp.application_summary.application_arn #=> String
       #   resp.application_summary.application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
+      # @overload create_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_application(params = {}, options = {})
         req = build_request(:create_application, params)
         req.send_request(options)
@@ -552,8 +552,8 @@ module Aws
       #     application_name: "ApplicationName", # required
       #     create_timestamp: Time.now, # required
       #   })
+      # @overload delete_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application(params = {}, options = {})
         req = build_request(:delete_application, params)
         req.send_request(options)
@@ -588,8 +588,8 @@ module Aws
       #     current_application_version_id: 1, # required
       #     output_id: "Id", # required
       #   })
+      # @overload delete_application_output(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application_output(params = {}, options = {})
         req = build_request(:delete_application_output, params)
         req.send_request(options)
@@ -624,8 +624,8 @@ module Aws
       #     current_application_version_id: 1, # required
       #     reference_id: "Id", # required
       #   })
+      # @overload delete_application_reference_data_source(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_application_reference_data_source(params = {}, options = {})
         req = build_request(:delete_application_reference_data_source, params)
         req.send_request(options)
@@ -704,8 +704,8 @@ module Aws
       #   resp.application_detail.reference_data_source_descriptions[0].reference_schema.record_columns[0].sql_type #=> String
       #   resp.application_detail.application_code #=> String
       #   resp.application_detail.application_version_id #=> Integer
+      # @overload describe_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_application(params = {}, options = {})
         req = build_request(:describe_application, params)
         req.send_request(options)
@@ -767,8 +767,8 @@ module Aws
       #   resp.parsed_input_records[0][0] #=> String
       #   resp.raw_input_records #=> Array
       #   resp.raw_input_records[0] #=> String
+      # @overload discover_input_schema(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def discover_input_schema(params = {}, options = {})
         req = build_request(:discover_input_schema, params)
         req.send_request(options)
@@ -791,7 +791,7 @@ module Aws
       #   Maximum number of applications to list.
       # @option params [String] :exclusive_start_application_name
       #   Name of the application to start the list with. When using pagination
-      #   to retrieve the list, you don\'t need to specify this parameter in the
+      #   to retrieve the list, you don't need to specify this parameter in the
       #   first request. However, in subsequent requests, you add the last
       #   application name from the previous response to get the next page of
       #   applications.
@@ -812,8 +812,8 @@ module Aws
       #   resp.application_summaries[0].application_arn #=> String
       #   resp.application_summaries[0].application_status #=> String, one of "DELETING", "STARTING", "STOPPING", "READY", "RUNNING", "UPDATING"
       #   resp.has_more_applications #=> Boolean
+      # @overload list_applications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_applications(params = {}, options = {})
         req = build_request(:list_applications, params)
         req.send_request(options)
@@ -856,8 +856,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload start_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_application(params = {}, options = {})
         req = build_request(:start_application, params)
         req.send_request(options)
@@ -880,8 +880,8 @@ module Aws
       #   resp = client.stop_application({
       #     application_name: "ApplicationName", # required
       #   })
+      # @overload stop_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_application(params = {}, options = {})
         req = build_request(:stop_application, params)
         req.send_request(options)
@@ -1002,8 +1002,8 @@ module Aws
       #       ],
       #     },
       #   })
+      # @overload update_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_application(params = {}, options = {})
         req = build_request(:update_application, params)
         req.send_request(options)

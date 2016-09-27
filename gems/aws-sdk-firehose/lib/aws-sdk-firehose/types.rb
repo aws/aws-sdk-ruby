@@ -89,14 +89,14 @@ module Aws
       #
       # @!attribute [rw] copy_options
       #   Optional parameters to use with the Amazon Redshift `COPY` command.
-      #   For more information, see the \"Optional Parameters\" section of
+      #   For more information, see the "Optional Parameters" section of
       #   [Amazon Redshift COPY command][1]. Some possible examples that would
       #   apply to Firehose are as follows.
       #
-      #   `delimiter '\t' lzop;` - fields are delimited with \"\\t\" (TAB
+      #   `delimiter '\t' lzop;` - fields are delimited with "\\t" (TAB
       #   character) and compressed using lzop.
       #
-      #   `delimiter '|` - fields are delimited with \"\|\" (this is the
+      #   `delimiter '|` - fields are delimited with "\|" (this is the
       #   default delimiter).
       #
       #   `delimiter '|' escape` - the delimiter should be escaped.
@@ -1005,7 +1005,7 @@ module Aws
       #   The compression formats `SNAPPY` or `ZIP` cannot be specified in
       #   **RedshiftDestinationConfiguration.S3Configuration** because the
       #   Amazon Redshift `COPY` operation that reads from the S3 bucket
-      #   doesn\'t support these compression formats.
+      #   doesn't support these compression formats.
       #   @return [Types::S3DestinationConfiguration]
       #
       # @!attribute [rw] cloud_watch_logging_options
@@ -1139,7 +1139,7 @@ module Aws
       #
       #   The compression formats `SNAPPY` or `ZIP` cannot be specified in
       #   **RedshiftDestinationUpdate.S3Update** because the Amazon Redshift
-      #   `COPY` operation that reads from the S3 bucket doesn\'t support
+      #   `COPY` operation that reads from the S3 bucket doesn't support
       #   these compression formats.
       #   @return [Types::S3DestinationUpdate]
       #
@@ -1212,7 +1212,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] prefix
-      #   The \"YYYY/MM/DD/HH\" time format prefix is automatically used for
+      #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
       #   delivered S3 files. You can specify an extra prefix to be added in
       #   front of the time format prefix. Note that if the prefix ends with a
       #   slash, it appears as a folder in the S3 bucket. For more
@@ -1268,7 +1268,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] prefix
-      #   The \"YYYY/MM/DD/HH\" time format prefix is automatically used for
+      #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
       #   delivered S3 files. You can specify an extra prefix to be added in
       #   front of the time format prefix. Note that if the prefix ends with a
       #   slash, it appears as a folder in the S3 bucket. For more
@@ -1344,7 +1344,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] prefix
-      #   The \"YYYY/MM/DD/HH\" time format prefix is automatically used for
+      #   The "YYYY/MM/DD/HH" time format prefix is automatically used for
       #   delivered S3 files. You can specify an extra prefix to be added in
       #   front of the time format prefix. Note that if the prefix ends with a
       #   slash, it appears as a folder in the S3 bucket. For more

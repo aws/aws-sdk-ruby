@@ -178,8 +178,8 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      # @overload create_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_alias(params = {}, options = {})
         req = build_request(:create_alias, params)
         req.send_request(options)
@@ -190,14 +190,12 @@ module Aws
       # created and its status is `INITIALIZED`, you can upload your game
       # build.
       #
-      # <important markdown="1"> Do not use this API action unless you are using your own Amazon Simple
+      # Do not use this API action unless you are using your own Amazon Simple
       # Storage Service (Amazon S3) client and need to manually upload your
       # build files. Instead, to create a build, use the CLI command
       # `upload-build`, which creates a new build record and uploads the build
       # files in one step. (See the [Amazon GameLift Developer Guide][1] help
       # on packaging and uploading your build.)
-      #
-      #  </important>
       #
       # To create a new build, identify the operating system of the game
       # server binaries. All game servers in a build must use the same
@@ -219,7 +217,7 @@ module Aws
       #   unique to a build. A build version can be changed later using
       #   `UpdateBuild`.
       # @option params [Types::S3Location] :storage_location
-      #   Location in Amazon Simple Storage Service (Amazon S3) where a build\'s
+      #   Location in Amazon Simple Storage Service (Amazon S3) where a build's
       #   files are stored. This location is assigned in response to a
       #   CreateBuild call, and is always in the same region as the service used
       #   to create the build. For more details see the [Amazon S3
@@ -264,8 +262,8 @@ module Aws
       #   resp.storage_location.bucket #=> String
       #   resp.storage_location.key #=> String
       #   resp.storage_location.role_arn #=> String
+      # @overload create_build(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_build(params = {}, options = {})
         req = build_request(:create_build, params)
         req.send_request(options)
@@ -293,14 +291,14 @@ module Aws
       #
       # * Creates a fleet record and sets the status to `NEW` (followed by
       #   other statuses as the fleet is activated).
-      # * Sets the fleet\'s capacity to 1 \"desired\", which causes GameLift
+      # * Sets the fleet's capacity to 1 "desired", which causes GameLift
       #   to start one new EC2 instance.
       # * Starts launching server processes on the instance. If the fleet is
       #   configured to run multiple server processes per instance, GameLift
       #   staggers each launch by a few seconds.
       # * Begins writing events to the fleet event log, which can be accessed
       #   in the GameLift console.
-      # * Sets the fleet\'s status to `ACTIVE` once one server process in the
+      # * Sets the fleet's status to `ACTIVE` once one server process in the
       #   fleet is ready to host a game session.
       #
       # After a fleet is created, use the following actions to change fleet
@@ -370,7 +368,7 @@ module Aws
       # @option params [String] :new_game_session_protection_policy
       #   Game session protection policy to apply to all instances in this
       #   fleet. If this parameter is not set, instances in this fleet default
-      #   to no protection. You can change a fleet\'s protection policy using
+      #   to no protection. You can change a fleet's protection policy using
       #   UpdateFleetAttributes, but this change will only affect sessions
       #   created after the policy change. You can also set protection for
       #   individual instances using UpdateGameSession.
@@ -439,8 +437,8 @@ module Aws
       #   resp.fleet_attributes.log_paths[0] #=> String
       #   resp.fleet_attributes.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+      # @overload create_fleet(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_fleet(params = {}, options = {})
         req = build_request(:create_fleet, params)
         req.send_request(options)
@@ -507,8 +505,8 @@ module Aws
       #   resp.game_session.ip_address #=> String
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      # @overload create_game_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_game_session(params = {}, options = {})
         req = build_request(:create_game_session, params)
         req.send_request(options)
@@ -547,8 +545,8 @@ module Aws
       #   resp.player_session.status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_session.ip_address #=> String
       #   resp.player_session.port #=> Integer
+      # @overload create_player_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_player_session(params = {}, options = {})
         req = build_request(:create_player_session, params)
         req.send_request(options)
@@ -589,8 +587,8 @@ module Aws
       #   resp.player_sessions[0].status #=> String, one of "RESERVED", "ACTIVE", "COMPLETED", "TIMEDOUT"
       #   resp.player_sessions[0].ip_address #=> String
       #   resp.player_sessions[0].port #=> Integer
+      # @overload create_player_sessions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_player_sessions(params = {}, options = {})
         req = build_request(:create_player_sessions, params)
         req.send_request(options)
@@ -609,8 +607,8 @@ module Aws
       #   resp = client.delete_alias({
       #     alias_id: "AliasId", # required
       #   })
+      # @overload delete_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_alias(params = {}, options = {})
         req = build_request(:delete_alias, params)
         req.send_request(options)
@@ -630,18 +628,18 @@ module Aws
       #   resp = client.delete_build({
       #     build_id: "BuildId", # required
       #   })
+      # @overload delete_build(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_build(params = {}, options = {})
         req = build_request(:delete_build, params)
         req.send_request(options)
       end
 
       # Deletes everything related to a fleet. Before deleting a fleet, you
-      # must set the fleet\'s desired capacity to zero. See
+      # must set the fleet's desired capacity to zero. See
       # UpdateFleetCapacity.
       #
-      # This action removes the fleet\'s resources and the fleet record. Once
+      # This action removes the fleet's resources and the fleet record. Once
       # a fleet is deleted, you can no longer use that fleet.
       # @option params [required, String] :fleet_id
       #   Unique identifier for the fleet you want to delete.
@@ -651,8 +649,8 @@ module Aws
       #   resp = client.delete_fleet({
       #     fleet_id: "FleetId", # required
       #   })
+      # @overload delete_fleet(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_fleet(params = {}, options = {})
         req = build_request(:delete_fleet, params)
         req.send_request(options)
@@ -674,8 +672,8 @@ module Aws
       #     name: "NonZeroAndMaxString", # required
       #     fleet_id: "FleetId", # required
       #   })
+      # @overload delete_scaling_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_scaling_policy(params = {}, options = {})
         req = build_request(:delete_scaling_policy, params)
         req.send_request(options)
@@ -704,8 +702,8 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      # @overload describe_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_alias(params = {}, options = {})
         req = build_request(:describe_alias, params)
         req.send_request(options)
@@ -734,8 +732,8 @@ module Aws
       #   resp.build.size_on_disk #=> Integer
       #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.build.creation_time #=> Time
+      # @overload describe_build(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_build(params = {}, options = {})
         req = build_request(:describe_build, params)
         req.send_request(options)
@@ -775,8 +773,8 @@ module Aws
       #   resp.ec2_instance_limits[0].ec2_instance_type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
       #   resp.ec2_instance_limits[0].current_instances #=> Integer
       #   resp.ec2_instance_limits[0].instance_limit #=> Integer
+      # @overload describe_ec2_instance_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_ec2_instance_limits(params = {}, options = {})
         req = build_request(:describe_ec2_instance_limits, params)
         req.send_request(options)
@@ -839,8 +837,8 @@ module Aws
       #   resp.fleet_attributes[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.next_token #=> String
+      # @overload describe_fleet_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_fleet_attributes(params = {}, options = {})
         req = build_request(:describe_fleet_attributes, params)
         req.send_request(options)
@@ -900,14 +898,14 @@ module Aws
       #   resp.fleet_capacity[0].instance_counts.idle #=> Integer
       #   resp.fleet_capacity[0].instance_counts.terminating #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_fleet_capacity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_fleet_capacity(params = {}, options = {})
         req = build_request(:describe_fleet_capacity, params)
         req.send_request(options)
       end
 
-      # Retrieves entries from the specified fleet\'s event log. You can
+      # Retrieves entries from the specified fleet's event log. You can
       # specify a time range to limit the result set. Use the pagination
       # parameters to retrieve results as a set of sequential pages. If
       # successful, a collection of event log entries matching the request are
@@ -918,12 +916,12 @@ module Aws
       #   Earliest date to retrieve event logs for. If no start time is
       #   specified, this call returns entries starting from when the fleet was
       #   created to the specified end time. Format is a number expressed in
-      #   Unix time as milliseconds (ex: \"1469498468.057\".
+      #   Unix time as milliseconds (ex: "1469498468.057".
       # @option params [Time,DateTime,Date,Integer,String] :end_time
       #   Most recent date to retrieve event logs for. If no end time is
       #   specified, this call returns entries from the specified start time up
       #   to the present. Format is a number expressed in Unix time as
-      #   milliseconds (ex: \"1469498468.057\".
+      #   milliseconds (ex: "1469498468.057".
       # @option params [Integer] :limit
       #   Maximum number of results to return. Use this parameter with
       #   `NextToken` to get results as a set of sequential pages.
@@ -953,8 +951,8 @@ module Aws
       #   resp.events[0].message #=> String
       #   resp.events[0].event_time #=> Time
       #   resp.next_token #=> String
+      # @overload describe_fleet_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_fleet_events(params = {}, options = {})
         req = build_request(:describe_fleet_events, params)
         req.send_request(options)
@@ -963,7 +961,7 @@ module Aws
       # Retrieves the inbound connection permissions for a fleet. Connection
       # permissions include a range of IP addresses and port settings that
       # incoming traffic can use to access server processes in the fleet. To
-      # get a fleet\'s inbound connection permissions, specify a fleet ID. If
+      # get a fleet's inbound connection permissions, specify a fleet ID. If
       # successful, a collection of IpPermission objects is returned for the
       # requested fleet ID. If the requested fleet has been deleted, the
       # result set is empty.
@@ -985,8 +983,8 @@ module Aws
       #   resp.inbound_permissions[0].to_port #=> Integer
       #   resp.inbound_permissions[0].ip_range #=> String
       #   resp.inbound_permissions[0].protocol #=> String, one of "TCP", "UDP"
+      # @overload describe_fleet_port_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_fleet_port_settings(params = {}, options = {})
         req = build_request(:describe_fleet_port_settings, params)
         req.send_request(options)
@@ -1040,8 +1038,8 @@ module Aws
       #   resp.fleet_utilization[0].current_player_session_count #=> Integer
       #   resp.fleet_utilization[0].maximum_player_session_count #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_fleet_utilization(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_fleet_utilization(params = {}, options = {})
         req = build_request(:describe_fleet_utilization, params)
         req.send_request(options)
@@ -1111,8 +1109,8 @@ module Aws
       #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.next_token #=> String
+      # @overload describe_game_session_details(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_game_session_details(params = {}, options = {})
         req = build_request(:describe_game_session_details, params)
         req.send_request(options)
@@ -1181,8 +1179,8 @@ module Aws
       #   resp.game_sessions[0].port #=> Integer
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.next_token #=> String
+      # @overload describe_game_sessions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_game_sessions(params = {}, options = {})
         req = build_request(:describe_game_sessions, params)
         req.send_request(options)
@@ -1258,8 +1256,8 @@ module Aws
       #   resp.player_sessions[0].ip_address #=> String
       #   resp.player_sessions[0].port #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_player_sessions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_player_sessions(params = {}, options = {})
         req = build_request(:describe_player_sessions, params)
         req.send_request(options)
@@ -1284,8 +1282,8 @@ module Aws
       #   resp.runtime_configuration.server_processes[0].launch_path #=> String
       #   resp.runtime_configuration.server_processes[0].parameters #=> String
       #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      # @overload describe_runtime_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_runtime_configuration(params = {}, options = {})
         req = build_request(:describe_runtime_configuration, params)
         req.send_request(options)
@@ -1293,7 +1291,7 @@ module Aws
 
       # Retrieves all scaling policies applied to a fleet.
       #
-      # To get a fleet\'s scaling policies, specify the fleet ID. You can
+      # To get a fleet's scaling policies, specify the fleet ID. You can
       # filter this request by policy status, such as to retrieve only active
       # scaling policies. Use the pagination parameters to retrieve results as
       # a set of sequential pages. If successful, set of ScalingPolicy objects
@@ -1347,8 +1345,8 @@ module Aws
       #   resp.scaling_policies[0].evaluation_periods #=> Integer
       #   resp.scaling_policies[0].metric_name #=> String, one of "ActivatingGameSessions", "ActiveGameSessions", "ActiveInstances", "AvailablePlayerSessions", "CurrentPlayerSessions", "IdleInstances"
       #   resp.next_token #=> String
+      # @overload describe_scaling_policies(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_scaling_policies(params = {}, options = {})
         req = build_request(:describe_scaling_policies, params)
         req.send_request(options)
@@ -1381,8 +1379,8 @@ module Aws
       #
       # @example Response structure
       #   resp.pre_signed_url #=> String
+      # @overload get_game_session_log_url(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_game_session_log_url(params = {}, options = {})
         req = build_request(:get_game_session_log_url, params)
         req.send_request(options)
@@ -1442,8 +1440,8 @@ module Aws
       #   resp.aliases[0].creation_time #=> Time
       #   resp.aliases[0].last_updated_time #=> Time
       #   resp.next_token #=> String
+      # @overload list_aliases(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_aliases(params = {}, options = {})
         req = build_request(:list_aliases, params)
         req.send_request(options)
@@ -1500,8 +1498,8 @@ module Aws
       #   resp.builds[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.builds[0].creation_time #=> Time
       #   resp.next_token #=> String
+      # @overload list_builds(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_builds(params = {}, options = {})
         req = build_request(:list_builds, params)
         req.send_request(options)
@@ -1541,8 +1539,8 @@ module Aws
       #   resp.fleet_ids #=> Array
       #   resp.fleet_ids[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_fleets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_fleets(params = {}, options = {})
         req = build_request(:list_fleets, params)
         req.send_request(options)
@@ -1550,7 +1548,7 @@ module Aws
 
       # Creates or updates a scaling policy for a fleet. An active scaling
       # policy prompts Amazon GameLift to track a certain metric for a fleet
-      # and automatically change the fleet\'s capacity in specific
+      # and automatically change the fleet's capacity in specific
       # circumstances. Each scaling policy contains one rule statement. Fleets
       # can have multiple scaling policies in force simultaneously.
       #
@@ -1560,9 +1558,9 @@ module Aws
       # `[EvaluationPeriods]` minutes, then `[ScalingAdjustmentType]` to/by
       # `[ScalingAdjustment]`.
       #
-      # For example, this policy: \"If the number of idle instances exceeds 20
+      # For example, this policy: "If the number of idle instances exceeds 20
       # for more than 15 minutes, then reduce the fleet capacity by 10
-      # instances\" could be implemented as the following rule statement:
+      # instances" could be implemented as the following rule statement:
       #
       # If \[IdleInstances\] is \[GreaterThanOrEqualToThreshold\] \[20\] for
       # \[15\] minutes, then \[ChangeInCapacity\] by \[-10\].
@@ -1581,7 +1579,7 @@ module Aws
       # @option params [required, Integer] :scaling_adjustment
       #   Amount of adjustment to make, based on the scaling adjustment type.
       # @option params [required, String] :scaling_adjustment_type
-      #   Type of adjustment to make to a fleet\'s instance count (see
+      #   Type of adjustment to make to a fleet's instance count (see
       #   FleetCapacity):
       #
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
@@ -1592,7 +1590,7 @@ module Aws
       #   * **PercentChangeInCapacity** – increase or reduce the current
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down; for
-      #     example, a value of \"-10\" scales the fleet down by 10%.
+      #     example, a value of "-10" scales the fleet down by 10%.
       # @option params [required, Float] :threshold
       #   Metric value used to trigger a scaling event.
       # @option params [required, String] :comparison_operator
@@ -1613,7 +1611,7 @@ module Aws
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
-      #     calculated by subtracting a game session\'s current player session
+      #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number includes
       #     game sessions that are not currently accepting players (game session
       #     `PlayerSessionCreationPolicy` = `DENY_ALL`).
@@ -1639,8 +1637,8 @@ module Aws
       #
       # @example Response structure
       #   resp.name #=> String
+      # @overload put_scaling_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_scaling_policy(params = {}, options = {})
         req = build_request(:put_scaling_policy, params)
         req.send_request(options)
@@ -1650,12 +1648,10 @@ module Aws
       # storage location for a specific build. Valid credentials are required
       # to upload your game build files to Amazon S3.
       #
-      # <important markdown="1"> Call this action only if you need credentials for a build created with
+      # Call this action only if you need credentials for a build created with
       # `CreateBuild`. This is a rare situation; in most cases, builds are
       # created using the CLI command `upload-build`, which creates a build
       # record and also uploads build files.
-      #
-      #  </important>
       #
       # Upload credentials are returned when you create the build, but they
       # have a limited lifespan. You can get fresh credentials and use them to
@@ -1680,8 +1676,8 @@ module Aws
       #   resp.storage_location.bucket #=> String
       #   resp.storage_location.key #=> String
       #   resp.storage_location.role_arn #=> String
+      # @overload request_upload_credentials(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def request_upload_credentials(params = {}, options = {})
         req = build_request(:request_upload_credentials, params)
         req.send_request(options)
@@ -1702,8 +1698,8 @@ module Aws
       #
       # @example Response structure
       #   resp.fleet_id #=> String
+      # @overload resolve_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resolve_alias(params = {}, options = {})
         req = build_request(:resolve_alias, params)
         req.send_request(options)
@@ -1776,8 +1772,8 @@ module Aws
       #     sensitive, enclosed in single quotes. Special characters must be
       #     escaped. Boolean and string values can only be used with the
       #     comparators `=` and `&lt;&gt;`. For example, the following filter
-      #     expression searches on `gameSessionName`\: \"`FilterExpression":
-      #     "gameSessionName = 'Matt\\'s Awesome Game 1'"`.
+      #     expression searches on `gameSessionName`\: "`FilterExpression":
+      #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
       #
       #   To chain multiple conditions in a single expression, use the logical
       #   keywords `AND`, `OR`, and `NOT` and parentheses as needed. For
@@ -1851,8 +1847,8 @@ module Aws
       #   resp.game_sessions[0].port #=> Integer
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
       #   resp.next_token #=> String
+      # @overload search_game_sessions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def search_game_sessions(params = {}, options = {})
         req = build_request(:search_game_sessions, params)
         req.send_request(options)
@@ -1897,8 +1893,8 @@ module Aws
       #   resp.alias.routing_strategy.message #=> String
       #   resp.alias.creation_time #=> Time
       #   resp.alias.last_updated_time #=> Time
+      # @overload update_alias(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_alias(params = {}, options = {})
         req = build_request(:update_alias, params)
         req.send_request(options)
@@ -1935,8 +1931,8 @@ module Aws
       #   resp.build.size_on_disk #=> Integer
       #   resp.build.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
       #   resp.build.creation_time #=> Time
+      # @overload update_build(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_build(params = {}, options = {})
         req = build_request(:update_build, params)
         req.send_request(options)
@@ -1977,8 +1973,8 @@ module Aws
       #
       # @example Response structure
       #   resp.fleet_id #=> String
+      # @overload update_fleet_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_fleet_attributes(params = {}, options = {})
         req = build_request(:update_fleet_attributes, params)
         req.send_request(options)
@@ -1988,20 +1984,20 @@ module Aws
       # number of EC2 instances (hosts) that you want this fleet to contain.
       # Before calling this action, you may want to call
       # DescribeEC2InstanceLimits to get the maximum capacity based on the
-      # fleet\'s EC2 instance type.
+      # fleet's EC2 instance type.
       #
-      # If you\'re using autoscaling (see PutScalingPolicy), you may want to
-      # specify a minimum and/or maximum capacity. If you don\'t provide
+      # If you're using autoscaling (see PutScalingPolicy), you may want to
+      # specify a minimum and/or maximum capacity. If you don't provide
       # these, autoscaling can set capacity anywhere between zero and the
       # [service limits][1].
       #
       # To update fleet capacity, specify the fleet ID and the number of
       # instances you want the fleet to host. If successful, Amazon GameLift
-      # starts or terminates instances so that the fleet\'s active instance
-      # count matches the desired instance count. You can view a fleet\'s
+      # starts or terminates instances so that the fleet's active instance
+      # count matches the desired instance count. You can view a fleet's
       # current capacity information by calling DescribeFleetCapacity. If the
-      # desired instance count is higher than the instance type\'s limit, the
-      # \"Limit Exceeded\" exception occurs.
+      # desired instance count is higher than the instance type's limit, the
+      # "Limit Exceeded" exception occurs.
       #
       #
       #
@@ -2011,10 +2007,10 @@ module Aws
       # @option params [Integer] :desired_instances
       #   Number of EC2 instances you want this fleet to host.
       # @option params [Integer] :min_size
-      #   Minimum value allowed for the fleet\'s instance count. Default if not
+      #   Minimum value allowed for the fleet's instance count. Default if not
       #   set is 0.
       # @option params [Integer] :max_size
-      #   Maximum value allowed for the fleet\'s instance count. Default if not
+      #   Maximum value allowed for the fleet's instance count. Default if not
       #   set is 1.
       # @return [Types::UpdateFleetCapacityOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -2030,8 +2026,8 @@ module Aws
       #
       # @example Response structure
       #   resp.fleet_id #=> String
+      # @overload update_fleet_capacity(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_fleet_capacity(params = {}, options = {})
         req = build_request(:update_fleet_capacity, params)
         req.send_request(options)
@@ -2077,8 +2073,8 @@ module Aws
       #
       # @example Response structure
       #   resp.fleet_id #=> String
+      # @overload update_fleet_port_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_fleet_port_settings(params = {}, options = {})
         req = build_request(:update_fleet_port_settings, params)
         req.send_request(options)
@@ -2138,8 +2134,8 @@ module Aws
       #   resp.game_session.ip_address #=> String
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      # @overload update_game_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_game_session(params = {}, options = {})
         req = build_request(:update_game_session, params)
         req.send_request(options)
@@ -2147,7 +2143,7 @@ module Aws
 
       # Updates the current runtime configuration for the specified fleet,
       # which tells GameLift how to launch server processes on instances in
-      # the fleet. You can update a fleet\'s runtime configuration at any time
+      # the fleet. You can update a fleet's runtime configuration at any time
       # after the fleet is created; it does not need to be in an `ACTIVE`
       # status.
       #
@@ -2162,7 +2158,7 @@ module Aws
       # GameLift simply adds new server processes to fit the current runtime
       # configuration. As a result, the runtime configuration changes are
       # applied gradually as existing processes shut down and new processes
-      # are launched in GameLift\'s normal process recycling activity.
+      # are launched in GameLift's normal process recycling activity.
       # @option params [required, String] :fleet_id
       #   Unique identifier of the fleet to update runtime configuration for.
       # @option params [required, Types::RuntimeConfiguration] :runtime_configuration
@@ -2196,8 +2192,8 @@ module Aws
       #   resp.runtime_configuration.server_processes[0].launch_path #=> String
       #   resp.runtime_configuration.server_processes[0].parameters #=> String
       #   resp.runtime_configuration.server_processes[0].concurrent_executions #=> Integer
+      # @overload update_runtime_configuration(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_runtime_configuration(params = {}, options = {})
         req = build_request(:update_runtime_configuration, params)
         req.send_request(options)

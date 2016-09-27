@@ -93,7 +93,7 @@ module Aws
       #   set this list to include one or more AWS account IDs, or `all` to make
       #   the manual DB snapshot restorable by any AWS account. Do not add the
       #   `all` value for any manual DB snapshots that contain private
-      #   information that you don\'t want available to all AWS accounts.
+      #   information that you don't want available to all AWS accounts.
       # @option options [Array<String>] :values_to_remove
       #   A list of DB snapshot attributes to remove from the attribute
       #   specified by `AttributeName`.

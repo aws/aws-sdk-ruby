@@ -140,8 +140,8 @@ module Aws
       #   resp = client.cancel_update_stack({
       #     stack_name: "StackName", # required
       #   })
+      # @overload cancel_update_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_update_stack(params = {}, options = {})
         req = build_request(:cancel_update_stack, params)
         req.send_request(options)
@@ -159,7 +159,7 @@ module Aws
       # CloudFormation cannot roll back all changes after a failed stack
       # update. For example, you might have a stack that is rolling back to an
       # old database instance that was deleted outside of AWS CloudFormation.
-      # Because AWS CloudFormation doesn\'t know the database was deleted, it
+      # Because AWS CloudFormation doesn't know the database was deleted, it
       # assumes that the database instance still exists and attempts to roll
       # back to it, causing the update rollback to fail.
       #
@@ -175,22 +175,22 @@ module Aws
       #   resp = client.continue_update_rollback({
       #     stack_name: "StackNameOrId", # required
       #   })
+      # @overload continue_update_rollback(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def continue_update_rollback(params = {}, options = {})
         req = build_request(:continue_update_rollback, params)
         req.send_request(options)
       end
 
       # Creates a list of changes for a stack. AWS CloudFormation generates
-      # the change set by comparing the stack\'s information with the
+      # the change set by comparing the stack's information with the
       # information that you submit. A change set can help you understand
       # which resources AWS CloudFormation will change and how it will change
       # them before you update your stack. Change sets allow you to check
-      # before you make a change so that you don\'t delete or replace critical
+      # before you make a change so that you don't delete or replace critical
       # resources.
       #
-      # AWS CloudFormation doesn\'t make any changes to the stack when you
+      # AWS CloudFormation doesn't make any changes to the stack when you
       # create a change set. To make the specified changes, you must execute
       # the change set by using the ExecuteChangeSet action.
       #
@@ -200,7 +200,7 @@ module Aws
       # @option params [required, String] :stack_name
       #   The name or the unique ID of the stack for which you are creating a
       #   change set. AWS CloudFormation generates the change set by comparing
-      #   this stack\'s information with the information that you submit, such
+      #   this stack's information with the information that you submit, such
       #   as a modified template or different parameter input values.
       # @option params [String] :template_body
       #   A structure that contains the body of the revised template, with a
@@ -245,7 +245,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -266,8 +266,8 @@ module Aws
       #   you execute this change set, such as `AWS::EC2::Instance`,
       #   `AWS::EC2::*`, or `Custom::MyCustomInstance`.
       #
-      #   If the list of resource types doesn\'t include a resource type that
-      #   you\'re updating, the stack update fails. By default, AWS
+      #   If the list of resource types doesn't include a resource type that
+      #   you're updating, the stack update fails. By default, AWS
       #   CloudFormation grants permissions to all resource types. AWS Identity
       #   and Access Management (IAM) uses this parameter for condition keys in
       #   IAM policies for AWS CloudFormation. For more information, see
@@ -295,7 +295,7 @@ module Aws
       # @option params [String] :client_token
       #   A unique identifier for this `CreateChangeSet` request. Specify this
       #   token if you plan to retry requests so that AWS CloudFormation knows
-      #   that you\'re not attempting to create another change set with the same
+      #   that you're not attempting to create another change set with the same
       #   name. You might retry `CreateChangeSet` requests to ensure that AWS
       #   CloudFormation successfully received them.
       # @option params [String] :description
@@ -333,8 +333,8 @@ module Aws
       #
       # @example Response structure
       #   resp.id #=> String
+      # @overload create_change_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_change_set(params = {}, options = {})
         req = build_request(:create_change_set, params)
         req.send_request(options)
@@ -419,7 +419,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -445,7 +445,7 @@ module Aws
       #   particular AWS service), and `AWS::service_name::resource_logical_ID `
       #   (for a specific AWS resource).
       #
-      #   If the list of resource types doesn\'t include a resource that you\'re
+      #   If the list of resource types doesn't include a resource that you're
       #   creating, the stack creation fails. By default, AWS CloudFormation
       #   grants permissions to all resource types. AWS Identity and Access
       #   Management (IAM) uses this parameter for AWS CloudFormation-specific
@@ -513,8 +513,8 @@ module Aws
       #
       # @example Response structure
       #   resp.stack_id #=> String
+      # @overload create_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_stack(params = {}, options = {})
         req = build_request(:create_stack, params)
         req.send_request(options)
@@ -538,8 +538,8 @@ module Aws
       #     change_set_name: "ChangeSetNameOrId", # required
       #     stack_name: "StackNameOrId",
       #   })
+      # @overload delete_change_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_change_set(params = {}, options = {})
         req = build_request(:delete_change_set, params)
         req.send_request(options)
@@ -565,14 +565,14 @@ module Aws
       #     stack_name: "StackName", # required
       #     retain_resources: ["LogicalResourceId"],
       #   })
+      # @overload delete_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_stack(params = {}, options = {})
         req = build_request(:delete_stack, params)
         req.send_request(options)
       end
 
-      # Retrieves your account\'s AWS CloudFormation limits, such as the
+      # Retrieves your account's AWS CloudFormation limits, such as the
       # maximum number of stacks that you can create in your account.
       # @option params [String] :next_token
       #   A string that identifies the next page of limits that you want to
@@ -592,8 +592,8 @@ module Aws
       #   resp.account_limits[0].name #=> String
       #   resp.account_limits[0].value #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_account_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_account_limits(params = {}, options = {})
         req = build_request(:describe_account_limits, params)
         req.send_request(options)
@@ -679,15 +679,15 @@ module Aws
       #   resp.changes[0].resource_change.details[0].change_source #=> String, one of "ResourceReference", "ParameterReference", "ResourceAttribute", "DirectModification", "Automatic"
       #   resp.changes[0].resource_change.details[0].causing_entity #=> String
       #   resp.next_token #=> String
+      # @overload describe_change_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_change_set(params = {}, options = {})
         req = build_request(:describe_change_set, params)
         req.send_request(options)
       end
 
       # Returns all stack related events for a specified stack in reverse
-      # chronological order. For more information about a stack\'s event
+      # chronological order. For more information about a stack's event
       # history, go to [Stacks][1] in the AWS CloudFormation User Guide.
       #
       # <note markdown="1"> You can list events for stacks that have failed to create or have been
@@ -702,7 +702,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -735,8 +735,8 @@ module Aws
       #   resp.stack_events[0].resource_status_reason #=> String
       #   resp.stack_events[0].resource_properties #=> String
       #   resp.next_token #=> String
+      # @overload describe_stack_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stack_events(params = {}, options = {})
         req = build_request(:describe_stack_events, params)
         req.send_request(options)
@@ -751,7 +751,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -782,8 +782,8 @@ module Aws
       #   resp.stack_resource_detail.resource_status_reason #=> String
       #   resp.stack_resource_detail.description #=> String
       #   resp.stack_resource_detail.metadata #=> String
+      # @overload describe_stack_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stack_resource(params = {}, options = {})
         req = build_request(:describe_stack_resource, params)
         req.send_request(options)
@@ -821,7 +821,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -869,8 +869,8 @@ module Aws
       #   resp.stack_resources[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
       #   resp.stack_resources[0].resource_status_reason #=> String
       #   resp.stack_resources[0].description #=> String
+      # @overload describe_stack_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stack_resources(params = {}, options = {})
         req = build_request(:describe_stack_resources, params)
         req.send_request(options)
@@ -882,7 +882,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -929,8 +929,8 @@ module Aws
       #   resp.stacks[0].tags[0].key #=> String
       #   resp.stacks[0].tags[0].value #=> String
       #   resp.next_token #=> String
+      # @overload describe_stacks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_stacks(params = {}, options = {})
         req = build_request(:describe_stacks, params)
         req.send_request(options)
@@ -982,8 +982,8 @@ module Aws
       #
       # @example Response structure
       #   resp.url #=> String
+      # @overload estimate_template_cost(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def estimate_template_cost(params = {}, options = {})
         req = build_request(:estimate_template_cost, params)
         req.send_request(options)
@@ -995,11 +995,11 @@ module Aws
       # DescribeStacks action to view the status of the update.
       #
       # When you execute a change set, AWS CloudFormation deletes all other
-      # change sets associated with the stack because they aren\'t valid for
+      # change sets associated with the stack because they aren't valid for
       # the updated stack.
       #
       # If a stack policy is associated with the stack, AWS CloudFormation
-      # enforces the policy during the update. You can\'t specify a temporary
+      # enforces the policy during the update. You can't specify a temporary
       # stack policy that overrides the current policy.
       # @option params [required, String] :change_set_name
       #   The name or ARN of the change set that you want use to update the
@@ -1014,14 +1014,14 @@ module Aws
       #     change_set_name: "ChangeSetNameOrId", # required
       #     stack_name: "StackNameOrId",
       #   })
+      # @overload execute_change_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def execute_change_set(params = {}, options = {})
         req = build_request(:execute_change_set, params)
         req.send_request(options)
       end
 
-      # Returns the stack policy for a specified stack. If a stack doesn\'t
+      # Returns the stack policy for a specified stack. If a stack doesn't
       # have a policy, a null value is returned.
       # @option params [required, String] :stack_name
       #   The name or unique stack ID that is associated with the stack whose
@@ -1037,8 +1037,8 @@ module Aws
       #
       # @example Response structure
       #   resp.stack_policy_body #=> String
+      # @overload get_stack_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_stack_policy(params = {}, options = {})
         req = build_request(:get_stack_policy, params)
         req.send_request(options)
@@ -1057,7 +1057,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -1074,8 +1074,8 @@ module Aws
       #
       # @example Response structure
       #   resp.template_body #=> String
+      # @overload get_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_template(params = {}, options = {})
         req = build_request(:get_template, params)
         req.send_request(options)
@@ -1120,7 +1120,7 @@ module Aws
       # @option params [String] :stack_name
       #   The name or the stack ID that is associated with the stack, which are
       #   not always interchangeable. For running stacks, you can specify either
-      #   the stack\'s name or its unique stack ID. For deleted stack, you must
+      #   the stack's name or its unique stack ID. For deleted stack, you must
       #   specify the unique stack ID.
       #
       #   Conditional: You must specify only one of the following parameters:
@@ -1159,8 +1159,8 @@ module Aws
       #   resp.resource_types[0] #=> String
       #   resp.version #=> String
       #   resp.metadata #=> String
+      # @overload get_template_summary(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_template_summary(params = {}, options = {})
         req = build_request(:get_template_summary, params)
         req.send_request(options)
@@ -1198,8 +1198,8 @@ module Aws
       #   resp.summaries[0].creation_time #=> Time
       #   resp.summaries[0].description #=> String
       #   resp.next_token #=> String
+      # @overload list_change_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_change_sets(params = {}, options = {})
         req = build_request(:list_change_sets, params)
         req.send_request(options)
@@ -1213,7 +1213,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.
@@ -1242,8 +1242,8 @@ module Aws
       #   resp.stack_resource_summaries[0].resource_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "DELETE_SKIPPED", "UPDATE_IN_PROGRESS", "UPDATE_FAILED", "UPDATE_COMPLETE"
       #   resp.stack_resource_summaries[0].resource_status_reason #=> String
       #   resp.next_token #=> String
+      # @overload list_stack_resources(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_stack_resources(params = {}, options = {})
         req = build_request(:list_stack_resources, params)
         req.send_request(options)
@@ -1285,8 +1285,8 @@ module Aws
       #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE"
       #   resp.stack_summaries[0].stack_status_reason #=> String
       #   resp.next_token #=> String
+      # @overload list_stacks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_stacks(params = {}, options = {})
         req = build_request(:list_stacks, params)
         req.send_request(options)
@@ -1317,8 +1317,8 @@ module Aws
       #     stack_policy_body: "StackPolicyBody",
       #     stack_policy_url: "StackPolicyURL",
       #   })
+      # @overload set_stack_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_stack_policy(params = {}, options = {})
         req = build_request(:set_stack_policy, params)
         req.send_request(options)
@@ -1326,7 +1326,7 @@ module Aws
 
       # Sends a signal to the specified resource with a success or failure
       # status. You can use the SignalResource API in conjunction with a
-      # creation policy or update policy. AWS CloudFormation doesn\'t proceed
+      # creation policy or update policy. AWS CloudFormation doesn't proceed
       # with a stack creation or update until resources receive the required
       # number of signals or the timeout period is exceeded. The
       # SignalResource API is useful in cases where you want to send signals
@@ -1356,8 +1356,8 @@ module Aws
       #     unique_id: "ResourceSignalUniqueId", # required
       #     status: "SUCCESS", # required, accepts SUCCESS, FAILURE
       #   })
+      # @overload signal_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def signal_resource(params = {}, options = {})
         req = build_request(:signal_resource, params)
         req.send_request(options)
@@ -1450,7 +1450,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -1471,7 +1471,7 @@ module Aws
       #   this update stack action, such as `AWS::EC2::Instance`, `AWS::EC2::*`,
       #   or `Custom::MyCustomInstance`.
       #
-      #   If the list of resource types doesn\'t include a resource that you\'re
+      #   If the list of resource types doesn't include a resource that you're
       #   updating, the stack update fails. By default, AWS CloudFormation
       #   grants permissions to all resource types. AWS Identity and Access
       #   Management (IAM) uses this parameter for AWS CloudFormation-specific
@@ -1508,8 +1508,8 @@ module Aws
       #   propagates these tags to supported resources in the stack. You can
       #   specify a maximum number of 10 tags.
       #
-      #   If you don\'t specify this parameter, AWS CloudFormation doesn\'t
-      #   modify the stack\'s tags. If you specify an empty value, AWS
+      #   If you don't specify this parameter, AWS CloudFormation doesn't
+      #   modify the stack's tags. If you specify an empty value, AWS
       #   CloudFormation removes all associated tags.
       # @return [Types::UpdateStackOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1545,8 +1545,8 @@ module Aws
       #
       # @example Response structure
       #   resp.stack_id #=> String
+      # @overload update_stack(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_stack(params = {}, options = {})
         req = build_request(:update_stack, params)
         req.send_request(options)
@@ -1599,8 +1599,8 @@ module Aws
       #   resp.capabilities #=> Array
       #   resp.capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"
       #   resp.capabilities_reason #=> String
+      # @overload validate_template(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def validate_template(params = {}, options = {})
         req = build_request(:validate_template, params)
         req.send_request(options)

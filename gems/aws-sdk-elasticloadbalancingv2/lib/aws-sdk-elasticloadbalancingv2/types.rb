@@ -268,7 +268,7 @@ module Aws
       #   @return [Array<Types::RuleCondition>]
       #
       # @!attribute [rw] priority
-      #   The priority for the rule. A listener can\'t have multiple rules
+      #   The priority for the rule. A listener can't have multiple rules
       #   with the same priority.
       #   @return [Integer]
       #
@@ -960,7 +960,7 @@ module Aws
       #     Balancing permission to write to the bucket.
       #
       #   * `access_logs.s3.prefix` - The prefix for the location in the S3
-      #     bucket. If you don\'t specify a prefix, the access logs are stored
+      #     bucket. If you don't specify a prefix, the access logs are stored
       #     in the root of the bucket.
       #
       #   * `deletion_protection.enabled` - Indicates whether deletion
@@ -1006,8 +1006,8 @@ module Aws
       #       }
       # @!attribute [rw] http_code
       #   The HTTP codes. The default value is 200. You can specify multiple
-      #   values (for example, \"200,202\") or a range of values (for example,
-      #   \"200-299\").
+      #   values (for example, "200,202") or a range of values (for example,
+      #   "200-299").
       #   @return [String]
       class Matcher < Struct.new(
         :http_code)
@@ -1375,7 +1375,7 @@ module Aws
       #
       #   * A-Z, a-z, 0-9
       #
-      #   * \_ - . $ / ~ \" \' @ : +
+      #   * \_ - . $ / ~ " ' @ : +
       #
       #   * &amp;amp; (using &amp;amp;amp;)
       #

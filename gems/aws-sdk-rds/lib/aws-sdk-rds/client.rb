@@ -172,8 +172,8 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      # @overload add_source_identifier_to_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_source_identifier_to_subscription(params = {}, options = {})
         req = build_request(:add_source_identifier_to_subscription, params)
         req.send_request(options)
@@ -212,8 +212,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags_to_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags_to_resource(params = {}, options = {})
         req = build_request(:add_tags_to_resource, params)
         req.send_request(options)
@@ -266,8 +266,8 @@ module Aws
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].opt_in_status #=> String
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].current_apply_date #=> Time
       #   resp.resource_pending_maintenance_actions.pending_maintenance_action_details[0].description #=> String
+      # @overload apply_pending_maintenance_action(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def apply_pending_maintenance_action(params = {}, options = {})
         req = build_request(:apply_pending_maintenance_action, params)
         req.send_request(options)
@@ -341,8 +341,8 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      # @overload authorize_db_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def authorize_db_security_group_ingress(params = {}, options = {})
         req = build_request(:authorize_db_security_group_ingress, params)
         req.send_request(options)
@@ -409,8 +409,8 @@ module Aws
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
+      # @overload copy_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_db_cluster_parameter_group(params = {}, options = {})
         req = build_request(:copy_db_cluster_parameter_group, params)
         req.send_request(options)
@@ -486,8 +486,8 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      # @overload copy_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_db_cluster_snapshot(params = {}, options = {})
         req = build_request(:copy_db_cluster_snapshot, params)
         req.send_request(options)
@@ -549,15 +549,15 @@ module Aws
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
       #   resp.db_parameter_group.db_parameter_group_arn #=> String
+      # @overload copy_db_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_db_parameter_group(params = {}, options = {})
         req = build_request(:copy_db_parameter_group, params)
         req.send_request(options)
       end
 
       # Copies the specified DB snapshot. The source DB snapshot must be in
-      # the \"available\" state.
+      # the "available" state.
       #
       # If you are copying from a shared manual DB snapshot, the
       # `SourceDBSnapshotIdentifier` must be the ARN of the shared DB
@@ -570,7 +570,7 @@ module Aws
       #
       #   Constraints:
       #
-      #   * Must specify a valid system snapshot in the \"available\" state.
+      #   * Must specify a valid system snapshot in the "available" state.
       #
       #   * If the source snapshot is in the same region as the copy, specify a
       #     valid DB snapshot identifier.
@@ -612,7 +612,7 @@ module Aws
       #
       #   If you copy an encrypted DB snapshot from your AWS account, you can
       #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-      #   encryption key. If you don\'t specify a value for `KmsKeyId` then the
+      #   encryption key. If you don't specify a value for `KmsKeyId` then the
       #   copy of the DB snapshot is encrypted with the same KMS key as the
       #   source DB snapshot.
       #
@@ -666,8 +666,8 @@ module Aws
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
+      # @overload copy_db_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_db_snapshot(params = {}, options = {})
         req = build_request(:copy_db_snapshot, params)
         req.send_request(options)
@@ -760,8 +760,8 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      # @overload copy_option_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def copy_option_group(params = {}, options = {})
         req = build_request(:copy_option_group, params)
         req.send_request(options)
@@ -865,7 +865,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option params [String] :master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option params [String] :option_group_name
@@ -1009,8 +1009,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload create_db_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_cluster(params = {}, options = {})
         req = build_request(:create_db_cluster, params)
         req.send_request(options)
@@ -1025,14 +1025,14 @@ module Aws
       # parameters for the database engine used by instances in the DB
       # cluster. To provide custom values for any of the parameters, you must
       # modify the group after creating it using
-      # ModifyDBClusterParameterGroup. Once you\'ve created a DB cluster
+      # ModifyDBClusterParameterGroup. Once you've created a DB cluster
       # parameter group, you need to associate it with your DB cluster using
       # ModifyDBCluster. When you associate a new DB cluster parameter group
       # with a running DB cluster, you need to reboot the DB instances in the
       # DB cluster without failover for the new DB cluster parameter group and
       # associated settings to take effect.
       #
-      # <important markdown="1"> After you create a DB cluster parameter group, you should wait at
+      # After you create a DB cluster parameter group, you should wait at
       # least 5 minutes before creating your first DB cluster that uses that
       # DB cluster parameter group as the default parameter group. This allows
       # Amazon RDS to fully complete the create action before the DB cluster
@@ -1043,8 +1043,6 @@ module Aws
       # parameter. You can use the *Parameter Groups* option of the [Amazon
       # RDS console][1] or the DescribeDBClusterParameters command to verify
       # that your DB cluster parameter group has been created or modified.
-      #
-      #  </important>
       #
       # For more information on Amazon Aurora, see [Aurora on Amazon RDS][2]
       # in the *Amazon RDS User Guide.*
@@ -1099,8 +1097,8 @@ module Aws
       #   resp.db_cluster_parameter_group.db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_group.description #=> String
       #   resp.db_cluster_parameter_group.db_cluster_parameter_group_arn #=> String
+      # @overload create_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_cluster_parameter_group(params = {}, options = {})
         req = build_request(:create_db_cluster_parameter_group, params)
         req.send_request(options)
@@ -1176,8 +1174,8 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      # @overload create_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_cluster_snapshot(params = {}, options = {})
         req = build_request(:create_db_cluster_snapshot, params)
         req.send_request(options)
@@ -1217,7 +1215,7 @@ module Aws
       #   **PostgreSQL**
       #
       #   The name of the database to create when the DB instance is created. If
-      #   this parameter is not specified, the default \"postgres\" database is
+      #   this parameter is not specified, the default "postgres" database is
       #   created in the DB instance.
       #
       #   Constraints:
@@ -1369,7 +1367,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option params [String] :master_user_password
       #   The password for the master database user. Can be any printable ASCII
-      #   character except \"/\", \"\"\", or \"@\".
+      #   character except "/", """, or "@".
       #
       #   Type: String
       #
@@ -1403,14 +1401,14 @@ module Aws
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of EC2 VPC security groups to associate with this DB instance.
       #
-      #   Default: The default EC2 VPC security group for the DB subnet group\'s
+      #   Default: The default EC2 VPC security group for the DB subnet group's
       #   VPC.
       # @option params [String] :availability_zone
       #   The EC2 Availability Zone that the database instance will be created
       #   in. For information on regions and Availability Zones, see [Regions
       #   and Availability Zones][1].
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -1985,8 +1983,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload create_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_instance(params = {}, options = {})
         req = build_request(:create_db_instance, params)
         req.send_request(options)
@@ -2000,9 +1998,7 @@ module Aws
       # security groups and DB parameter groups) are inherited from the source
       # DB instance, except as specified below.
       #
-      # <important markdown="1"> The source DB instance must have backup retention enabled.
-      #
-      #  </important>
+      # The source DB instance must have backup retention enabled.
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier of the Read Replica. This identifier is the
       #   unique key that identifies a DB instance. This parameter is stored as
@@ -2051,7 +2047,7 @@ module Aws
       #   The Amazon EC2 Availability Zone that the Read Replica will be created
       #   in.
       #
-      #   Default: A random, system-chosen Availability Zone in the endpoint\'s
+      #   Default: A random, system-chosen Availability Zone in the endpoint's
       #   region.
       #
       #   Example: `us-east-1d`
@@ -2270,8 +2266,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload create_db_instance_read_replica(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_instance_read_replica(params = {}, options = {})
         req = build_request(:create_db_instance_read_replica, params)
         req.send_request(options)
@@ -2282,14 +2278,14 @@ module Aws
       # A DB parameter group is initially created with the default parameters
       # for the database engine used by the DB instance. To provide custom
       # values for any of the parameters, you must modify the group after
-      # creating it using *ModifyDBParameterGroup*. Once you\'ve created a DB
+      # creating it using *ModifyDBParameterGroup*. Once you've created a DB
       # parameter group, you need to associate it with your DB instance using
       # *ModifyDBInstance*. When you associate a new DB parameter group with a
       # running DB instance, you need to reboot the DB instance without
       # failover for the new DB parameter group and associated settings to
       # take effect.
       #
-      # <important markdown="1"> After you create a DB parameter group, you should wait at least 5
+      # After you create a DB parameter group, you should wait at least 5
       # minutes before creating your first DB instance that uses that DB
       # parameter group as the default parameter group. This allows Amazon RDS
       # to fully complete the create action before the parameter group is used
@@ -2300,8 +2296,6 @@ module Aws
       # *Parameter Groups* option of the [Amazon RDS console][1] or the
       # *DescribeDBParameters* command to verify that your DB parameter group
       # has been created or modified.
-      #
-      #  </important>
       #
       #
       #
@@ -2351,8 +2345,8 @@ module Aws
       #   resp.db_parameter_group.db_parameter_group_family #=> String
       #   resp.db_parameter_group.description #=> String
       #   resp.db_parameter_group.db_parameter_group_arn #=> String
+      # @overload create_db_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_parameter_group(params = {}, options = {})
         req = build_request(:create_db_parameter_group, params)
         req.send_request(options)
@@ -2372,7 +2366,7 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
-      #   * Must not be \"Default\"
+      #   * Must not be "Default"
       #
       #   Example: `mysecuritygroup`
       # @option params [required, String] :db_security_group_description
@@ -2409,14 +2403,14 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      # @overload create_db_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_security_group(params = {}, options = {})
         req = build_request(:create_db_security_group, params)
         req.send_request(options)
       end
 
-      # Creates a DBSnapshot. The source DBInstance must be in \"available\"
+      # Creates a DBSnapshot. The source DBInstance must be in "available"
       # state.
       # @option params [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot.
@@ -2486,8 +2480,8 @@ module Aws
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
+      # @overload create_db_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_snapshot(params = {}, options = {})
         req = build_request(:create_db_snapshot, params)
         req.send_request(options)
@@ -2536,8 +2530,8 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
       #   resp.db_subnet_group.db_subnet_group_arn #=> String
+      # @overload create_db_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_db_subnet_group(params = {}, options = {})
         req = build_request(:create_db_subnet_group, params)
         req.send_request(options)
@@ -2649,8 +2643,8 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      # @overload create_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_event_subscription(params = {}, options = {})
         req = build_request(:create_event_subscription, params)
         req.send_request(options)
@@ -2728,8 +2722,8 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      # @overload create_option_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_option_group(params = {}, options = {})
         req = build_request(:create_option_group, params)
         req.send_request(options)
@@ -2750,7 +2744,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_Aurora.html
       # @option params [required, String] :db_cluster_identifier
       #   The DB cluster identifier for the DB cluster to be deleted. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -2838,8 +2832,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload delete_db_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_cluster(params = {}, options = {})
         req = build_request(:delete_db_cluster, params)
         req.send_request(options)
@@ -2871,8 +2865,8 @@ module Aws
       #   resp = client.delete_db_cluster_parameter_group({
       #     db_cluster_parameter_group_name: "String", # required
       #   })
+      # @overload delete_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_cluster_parameter_group(params = {}, options = {})
         req = build_request(:delete_db_cluster_parameter_group, params)
         req.send_request(options)
@@ -2926,8 +2920,8 @@ module Aws
       #   resp.db_cluster_snapshot.storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshot.kms_key_id #=> String
       #   resp.db_cluster_snapshot.db_cluster_snapshot_arn #=> String
+      # @overload delete_db_cluster_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_cluster_snapshot(params = {}, options = {})
         req = build_request(:delete_db_cluster_snapshot, params)
         req.send_request(options)
@@ -2959,12 +2953,12 @@ module Aws
       #
       # To delete a DB instance in this case, first call the
       # PromoteReadReplicaDBCluster API action to promote the DB cluster so
-      # it\'s no longer a Read Replica. After the promotion completes, then
+      # it's no longer a Read Replica. After the promotion completes, then
       # call the `DeleteDBInstance` API action to delete the final instance in
       # the DB cluster.
       # @option params [required, String] :db_instance_identifier
       #   The DB instance identifier for the DB instance to be deleted. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -2980,9 +2974,9 @@ module Aws
       #   instance is deleted.
       #
       #   Note that when a DB instance is in a failure state and has a status of
-      #   \'failed\', \'incompatible-restore\', or \'incompatible-network\', it
+      #   'failed', 'incompatible-restore', or 'incompatible-network', it
       #   can only be deleted when the SkipFinalSnapshot parameter is set to
-      #   \"true\".
+      #   "true".
       #
       #   Specify `true` when deleting a Read Replica.
       #
@@ -3107,8 +3101,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload delete_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_instance(params = {}, options = {})
         req = build_request(:delete_db_instance, params)
         req.send_request(options)
@@ -3132,8 +3126,8 @@ module Aws
       #   resp = client.delete_db_parameter_group({
       #     db_parameter_group_name: "String", # required
       #   })
+      # @overload delete_db_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_parameter_group(params = {}, options = {})
         req = build_request(:delete_db_parameter_group, params)
         req.send_request(options)
@@ -3160,15 +3154,15 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
-      #   * Must not be \"Default\"
+      #   * Must not be "Default"
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_db_security_group({
       #     db_security_group_name: "String", # required
       #   })
+      # @overload delete_db_security_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_security_group(params = {}, options = {})
         req = build_request(:delete_db_security_group, params)
         req.send_request(options)
@@ -3219,8 +3213,8 @@ module Aws
       #   resp.db_snapshot.encrypted #=> Boolean
       #   resp.db_snapshot.kms_key_id #=> String
       #   resp.db_snapshot.db_snapshot_arn #=> String
+      # @overload delete_db_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_snapshot(params = {}, options = {})
         req = build_request(:delete_db_snapshot, params)
         req.send_request(options)
@@ -3251,8 +3245,8 @@ module Aws
       #   resp = client.delete_db_subnet_group({
       #     db_subnet_group_name: "String", # required
       #   })
+      # @overload delete_db_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_db_subnet_group(params = {}, options = {})
         req = build_request(:delete_db_subnet_group, params)
         req.send_request(options)
@@ -3284,8 +3278,8 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      # @overload delete_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_event_subscription(params = {}, options = {})
         req = build_request(:delete_event_subscription, params)
         req.send_request(options)
@@ -3304,8 +3298,8 @@ module Aws
       #   resp = client.delete_option_group({
       #     option_group_name: "String", # required
       #   })
+      # @overload delete_option_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_option_group(params = {}, options = {})
         req = build_request(:delete_option_group, params)
         req.send_request(options)
@@ -3314,7 +3308,7 @@ module Aws
       # Lists all of the attributes for a customer account. The attributes
       # include Amazon RDS quotas for the account, such as the number of DB
       # instances allowed. The description for a quota includes the quota
-      # name, current usage toward that quota, and the quota\'s maximum value.
+      # name, current usage toward that quota, and the quota's maximum value.
       #
       # This command does not take any parameters.
       # @return [Types::AccountAttributesMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -3329,8 +3323,8 @@ module Aws
       #   resp.account_quotas[0].account_quota_name #=> String
       #   resp.account_quotas[0].used #=> Integer
       #   resp.account_quotas[0].max #=> Integer
+      # @overload describe_account_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_account_attributes(params = {}, options = {})
         req = build_request(:describe_account_attributes, params)
         req.send_request(options)
@@ -3341,7 +3335,7 @@ module Aws
       # @option params [String] :certificate_identifier
       #   The user-supplied certificate identifier. If this parameter is
       #   specified, information for only the identified certificate is
-      #   returned. This parameter isn\'t case-sensitive.
+      #   returned. This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -3393,8 +3387,8 @@ module Aws
       #   resp.certificates[0].valid_till #=> Time
       #   resp.certificates[0].certificate_arn #=> String
       #   resp.marker #=> String
+      # @overload describe_certificates(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_certificates(params = {}, options = {})
         req = build_request(:describe_certificates, params)
         req.send_request(options)
@@ -3463,8 +3457,8 @@ module Aws
       #   resp.db_cluster_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_cluster_parameter_groups[0].description #=> String
       #   resp.db_cluster_parameter_groups[0].db_cluster_parameter_group_arn #=> String
+      # @overload describe_db_cluster_parameter_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_cluster_parameter_groups(params = {}, options = {})
         req = build_request(:describe_db_cluster_parameter_groups, params)
         req.send_request(options)
@@ -3541,8 +3535,8 @@ module Aws
       #   resp.parameters[0].minimum_engine_version #=> String
       #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
       #   resp.marker #=> String
+      # @overload describe_db_cluster_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_cluster_parameters(params = {}, options = {})
         req = build_request(:describe_db_cluster_parameters, params)
         req.send_request(options)
@@ -3579,8 +3573,8 @@ module Aws
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+      # @overload describe_db_cluster_snapshot_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_cluster_snapshot_attributes(params = {}, options = {})
         req = build_request(:describe_db_cluster_snapshot_attributes, params)
         req.send_request(options)
@@ -3639,16 +3633,16 @@ module Aws
       #   * `public` - Return all DB cluster snapshots that have been marked as
       #     public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated and
+      #   If you don't specify a `SnapshotType` value, then both automated and
       #   manual DB cluster snapshots are returned. You can include shared DB
       #   cluster snapshots with these results by setting the `IncludeShared`
       #   parameter to `true`. You can include public DB cluster snapshots with
       #   these results by setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
-      #   parameter doesn\'t apply when `SnapshotType` is set to `shared`. The
-      #   `IncludeShared` parameter doesn\'t apply when `SnapshotType` is set to
+      #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
+      #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
@@ -3727,8 +3721,8 @@ module Aws
       #   resp.db_cluster_snapshots[0].storage_encrypted #=> Boolean
       #   resp.db_cluster_snapshots[0].kms_key_id #=> String
       #   resp.db_cluster_snapshots[0].db_cluster_snapshot_arn #=> String
+      # @overload describe_db_cluster_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_cluster_snapshots(params = {}, options = {})
         req = build_request(:describe_db_cluster_snapshots, params)
         req.send_request(options)
@@ -3746,7 +3740,7 @@ module Aws
       # @option params [String] :db_cluster_identifier
       #   The user-supplied DB cluster identifier. If this parameter is
       #   specified, information from only the specific DB cluster is returned.
-      #   This parameter isn\'t case-sensitive.
+      #   This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -3830,8 +3824,8 @@ module Aws
       #   resp.db_clusters[0].kms_key_id #=> String
       #   resp.db_clusters[0].db_cluster_resource_id #=> String
       #   resp.db_clusters[0].db_cluster_arn #=> String
+      # @overload describe_db_clusters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_clusters(params = {}, options = {})
         req = build_request(:describe_db_clusters, params)
         req.send_request(options)
@@ -3918,8 +3912,8 @@ module Aws
       #   resp.db_engine_versions[0].valid_upgrade_target[0].description #=> String
       #   resp.db_engine_versions[0].valid_upgrade_target[0].auto_upgrade #=> Boolean
       #   resp.db_engine_versions[0].valid_upgrade_target[0].is_major_version_upgrade #=> Boolean
+      # @overload describe_db_engine_versions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_engine_versions(params = {}, options = {})
         req = build_request(:describe_db_engine_versions, params)
         req.send_request(options)
@@ -3930,7 +3924,7 @@ module Aws
       # @option params [String] :db_instance_identifier
       #   The user-supplied instance identifier. If this parameter is specified,
       #   information from only the specific DB instance is returned. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -4061,8 +4055,8 @@ module Aws
       #   resp.db_instances[0].monitoring_role_arn #=> String
       #   resp.db_instances[0].promotion_tier #=> Integer
       #   resp.db_instances[0].db_instance_arn #=> String
+      # @overload describe_db_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_instances(params = {}, options = {})
         req = build_request(:describe_db_instances, params)
         req.send_request(options)
@@ -4127,8 +4121,8 @@ module Aws
       #   resp.describe_db_log_files[0].last_written #=> Integer
       #   resp.describe_db_log_files[0].size #=> Integer
       #   resp.marker #=> String
+      # @overload describe_db_log_files(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_log_files(params = {}, options = {})
         req = build_request(:describe_db_log_files, params)
         req.send_request(options)
@@ -4188,8 +4182,8 @@ module Aws
       #   resp.db_parameter_groups[0].db_parameter_group_family #=> String
       #   resp.db_parameter_groups[0].description #=> String
       #   resp.db_parameter_groups[0].db_parameter_group_arn #=> String
+      # @overload describe_db_parameter_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_parameter_groups(params = {}, options = {})
         req = build_request(:describe_db_parameter_groups, params)
         req.send_request(options)
@@ -4261,8 +4255,8 @@ module Aws
       #   resp.parameters[0].minimum_engine_version #=> String
       #   resp.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
       #   resp.marker #=> String
+      # @overload describe_db_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_parameters(params = {}, options = {})
         req = build_request(:describe_db_parameters, params)
         req.send_request(options)
@@ -4323,8 +4317,8 @@ module Aws
       #   resp.db_security_groups[0].ip_ranges[0].status #=> String
       #   resp.db_security_groups[0].ip_ranges[0].cidrip #=> String
       #   resp.db_security_groups[0].db_security_group_arn #=> String
+      # @overload describe_db_security_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_security_groups(params = {}, options = {})
         req = build_request(:describe_db_security_groups, params)
         req.send_request(options)
@@ -4360,8 +4354,8 @@ module Aws
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
+      # @overload describe_db_snapshot_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_snapshot_attributes(params = {}, options = {})
         req = build_request(:describe_db_snapshot_attributes, params)
         req.send_request(options)
@@ -4411,17 +4405,17 @@ module Aws
       #
       #   * `public` - Return all DB snapshots that have been marked as public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated and
+      #   If you don't specify a `SnapshotType` value, then both automated and
       #   manual snapshots are returned. Shared and public DB snapshots are not
       #   included in the returned results by default. You can include shared
       #   snapshots with these results by setting the `IncludeShared` parameter
       #   to `true`. You can include public snapshots with these results by
       #   setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
-      #   parameter doesn\'t apply when `SnapshotType` is set to `shared`. The
-      #   `IncludeShared` parameter doesn\'t apply when `SnapshotType` is set to
+      #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
+      #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
       # @option params [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
@@ -4504,8 +4498,8 @@ module Aws
       #   resp.db_snapshots[0].encrypted #=> Boolean
       #   resp.db_snapshots[0].kms_key_id #=> String
       #   resp.db_snapshots[0].db_snapshot_arn #=> String
+      # @overload describe_db_snapshots(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_snapshots(params = {}, options = {})
         req = build_request(:describe_db_snapshots, params)
         req.send_request(options)
@@ -4568,8 +4562,8 @@ module Aws
       #   resp.db_subnet_groups[0].subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_groups[0].subnets[0].subnet_status #=> String
       #   resp.db_subnet_groups[0].db_subnet_group_arn #=> String
+      # @overload describe_db_subnet_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_db_subnet_groups(params = {}, options = {})
         req = build_request(:describe_db_subnet_groups, params)
         req.send_request(options)
@@ -4634,8 +4628,8 @@ module Aws
       #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
       #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
       #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+      # @overload describe_engine_default_cluster_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_engine_default_cluster_parameters(params = {}, options = {})
         req = build_request(:describe_engine_default_cluster_parameters, params)
         req.send_request(options)
@@ -4692,8 +4686,8 @@ module Aws
       #   resp.engine_defaults.parameters[0].is_modifiable #=> Boolean
       #   resp.engine_defaults.parameters[0].minimum_engine_version #=> String
       #   resp.engine_defaults.parameters[0].apply_method #=> String, one of "immediate", "pending-reboot"
+      # @overload describe_engine_default_parameters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_engine_default_parameters(params = {}, options = {})
         req = build_request(:describe_engine_default_parameters, params)
         req.send_request(options)
@@ -4734,8 +4728,8 @@ module Aws
       #   resp.event_categories_map_list[0].source_type #=> String
       #   resp.event_categories_map_list[0].event_categories #=> Array
       #   resp.event_categories_map_list[0].event_categories[0] #=> String
+      # @overload describe_event_categories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_event_categories(params = {}, options = {})
         req = build_request(:describe_event_categories, params)
         req.send_request(options)
@@ -4799,8 +4793,8 @@ module Aws
       #   resp.event_subscriptions_list[0].event_categories_list[0] #=> String
       #   resp.event_subscriptions_list[0].enabled #=> Boolean
       #   resp.event_subscriptions_list[0].event_subscription_arn #=> String
+      # @overload describe_event_subscriptions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_event_subscriptions(params = {}, options = {})
         req = build_request(:describe_event_subscriptions, params)
         req.send_request(options)
@@ -4910,8 +4904,8 @@ module Aws
       #   resp.events[0].event_categories[0] #=> String
       #   resp.events[0].date #=> Time
       #   resp.events[0].source_arn #=> String
+      # @overload describe_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_events(params = {}, options = {})
         req = build_request(:describe_events, params)
         req.send_request(options)
@@ -4984,8 +4978,8 @@ module Aws
       #   resp.option_group_options[0].option_group_option_versions[0].version #=> String
       #   resp.option_group_options[0].option_group_option_versions[0].is_default #=> Boolean
       #   resp.marker #=> String
+      # @overload describe_option_group_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_option_group_options(params = {}, options = {})
         req = build_request(:describe_option_group_options, params)
         req.send_request(options)
@@ -5071,8 +5065,8 @@ module Aws
       #   resp.option_groups_list[0].vpc_id #=> String
       #   resp.option_groups_list[0].option_group_arn #=> String
       #   resp.marker #=> String
+      # @overload describe_option_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_option_groups(params = {}, options = {})
         req = build_request(:describe_option_groups, params)
         req.send_request(options)
@@ -5148,8 +5142,8 @@ module Aws
       #   resp.orderable_db_instance_options[0].supports_iops #=> Boolean
       #   resp.orderable_db_instance_options[0].supports_enhanced_monitoring #=> Boolean
       #   resp.marker #=> String
+      # @overload describe_orderable_db_instance_options(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_orderable_db_instance_options(params = {}, options = {})
         req = build_request(:describe_orderable_db_instance_options, params)
         req.send_request(options)
@@ -5214,8 +5208,8 @@ module Aws
       #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].current_apply_date #=> Time
       #   resp.pending_maintenance_actions[0].pending_maintenance_action_details[0].description #=> String
       #   resp.marker #=> String
+      # @overload describe_pending_maintenance_actions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_pending_maintenance_actions(params = {}, options = {})
         req = build_request(:describe_pending_maintenance_actions, params)
         req.send_request(options)
@@ -5309,8 +5303,8 @@ module Aws
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instances[0].recurring_charges[0].recurring_charge_frequency #=> String
       #   resp.reserved_db_instances[0].reserved_db_instance_arn #=> String
+      # @overload describe_reserved_db_instances(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_db_instances(params = {}, options = {})
         req = build_request(:describe_reserved_db_instances, params)
         req.send_request(options)
@@ -5395,8 +5389,8 @@ module Aws
       #   resp.reserved_db_instances_offerings[0].recurring_charges #=> Array
       #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instances_offerings[0].recurring_charges[0].recurring_charge_frequency #=> String
+      # @overload describe_reserved_db_instances_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_reserved_db_instances_offerings(params = {}, options = {})
         req = build_request(:describe_reserved_db_instances_offerings, params)
         req.send_request(options)
@@ -5453,8 +5447,8 @@ module Aws
       #   resp.source_regions[0].region_name #=> String
       #   resp.source_regions[0].endpoint #=> String
       #   resp.source_regions[0].status #=> String
+      # @overload describe_source_regions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_source_regions(params = {}, options = {})
         req = build_request(:describe_source_regions, params)
         req.send_request(options)
@@ -5476,7 +5470,7 @@ module Aws
       # @option params [required, String] :log_file_name
       #   The name of the log file to be downloaded.
       # @option params [String] :marker
-      #   The pagination token provided in the previous request or \"0\". If the
+      #   The pagination token provided in the previous request or "0". If the
       #   Marker parameter is specified the response includes only records
       #   beyond the marker until the end of the file or up to NumberOfLines.
       # @option params [Integer] :number_of_lines
@@ -5495,12 +5489,12 @@ module Aws
       #   * If NumberOfLines is specified and Marker is not specified, then the
       #     most recent lines from the end of the log file are returned.
       #
-      #   * If Marker is specified as \"0\", then the specified number of lines
+      #   * If Marker is specified as "0", then the specified number of lines
       #     from the beginning of the log file are returned.
       #
       #   * You can download the log file in blocks of lines by specifying the
       #     size of the block using the NumberOfLines parameter, and by
-      #     specifying a value of \"0\" for the Marker parameter in your first
+      #     specifying a value of "0" for the Marker parameter in your first
       #     request. Include the Marker value returned in the response as the
       #     Marker value for the next request, continuing until the
       #     AdditionalDataPending response element returns false.
@@ -5522,8 +5516,8 @@ module Aws
       #   resp.log_file_data #=> String
       #   resp.marker #=> String
       #   resp.additional_data_pending #=> Boolean
+      # @overload download_db_log_file_portion(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def download_db_log_file_portion(params = {}, options = {})
         req = build_request(:download_db_log_file_portion, params)
         req.send_request(options)
@@ -5614,8 +5608,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload failover_db_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def failover_db_cluster(params = {}, options = {})
         req = build_request(:failover_db_cluster, params)
         req.send_request(options)
@@ -5658,8 +5652,8 @@ module Aws
       #   resp.tag_list #=> Array
       #   resp.tag_list[0].key #=> String
       #   resp.tag_list[0].value #=> String
+      # @overload list_tags_for_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tags_for_resource(params = {}, options = {})
         req = build_request(:list_tags_for_resource, params)
         req.send_request(options)
@@ -5739,7 +5733,7 @@ module Aws
       #   Default: The same port as the original DB cluster.
       # @option params [String] :master_user_password
       #   The new password for the master database user. This password can
-      #   contain any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   contain any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option params [String] :option_group_name
@@ -5854,8 +5848,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload modify_db_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_cluster(params = {}, options = {})
         req = build_request(:modify_db_cluster, params)
         req.send_request(options)
@@ -5875,7 +5869,7 @@ module Aws
       #
       #  </note>
       #
-      # <important markdown="1"> After you create a DB cluster parameter group, you should wait at
+      # After you create a DB cluster parameter group, you should wait at
       # least 5 minutes before creating your first DB cluster that uses that
       # DB cluster parameter group as the default parameter group. This allows
       # Amazon RDS to fully complete the create action before the parameter
@@ -5886,8 +5880,6 @@ module Aws
       # use the *Parameter Groups* option of the [Amazon RDS console][2] or
       # the DescribeDBClusterParameters command to verify that your DB cluster
       # parameter group has been created or modified.
-      #
-      #  </important>
       #
       #
       #
@@ -5922,8 +5914,8 @@ module Aws
       #
       # @example Response structure
       #   resp.db_cluster_parameter_group_name #=> String
+      # @overload modify_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_cluster_parameter_group(params = {}, options = {})
         req = build_request(:modify_db_cluster_parameter_group, params)
         req.send_request(options)
@@ -5939,7 +5931,7 @@ module Aws
       # the manual DB cluster snapshot public, which means that it can be
       # copied or restored by all AWS accounts. Do not add the `all` value for
       # any manual DB cluster snapshots that contain private information that
-      # you don\'t want available to all AWS accounts.
+      # you don't want available to all AWS accounts.
       #
       # To view which AWS accounts have access to copy or restore a manual DB
       # cluster snapshot, or whether a manual DB cluster snapshot public or
@@ -5962,7 +5954,7 @@ module Aws
       #   snapshot, set this list to include one or more AWS account IDs, or
       #   `all` to make the manual DB cluster snapshot restorable by any AWS
       #   account. Do not add the `all` value for any manual DB cluster
-      #   snapshots that contain private information that you don\'t want
+      #   snapshots that contain private information that you don't want
       #   available to all AWS accounts.
       # @option params [Array<String>] :values_to_remove
       #   A list of DB cluster snapshot attributes to remove from the attribute
@@ -5993,8 +5985,8 @@ module Aws
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_cluster_snapshot_attributes_result.db_cluster_snapshot_attributes[0].attribute_values[0] #=> String
+      # @overload modify_db_cluster_snapshot_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_cluster_snapshot_attribute(params = {}, options = {})
         req = build_request(:modify_db_cluster_snapshot_attribute, params)
         req.send_request(options)
@@ -6174,7 +6166,7 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Overview.DBInstance.Modifying.html
       # @option params [String] :master_user_password
       #   The new password for the DB instance master user. Can be any printable
-      #   ASCII character except \"/\", \"\"\", or \"@\".
+      #   ASCII character except "/", """, or "@".
       #
       #   Changing this parameter does not result in an outage and the change is
       #   asynchronously applied as soon as possible. Between the time of the
@@ -6292,7 +6284,7 @@ module Aws
       #
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the EngineVersion parameter that is a different major
-      #   version than the DB instance\'s current version.
+      #   version than the DB instance's current version.
       # @option params [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor version upgrades will be applied automatically to
       #   the DB instance during the maintenance window. Changing this parameter
@@ -6626,8 +6618,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload modify_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_instance(params = {}, options = {})
         req = build_request(:modify_db_instance, params)
         req.send_request(options)
@@ -6644,7 +6636,7 @@ module Aws
       #
       #  </note>
       #
-      # <important markdown="1"> After you modify a DB parameter group, you should wait at least 5
+      # After you modify a DB parameter group, you should wait at least 5
       # minutes before creating your first DB instance that uses that DB
       # parameter group as the default parameter group. This allows Amazon RDS
       # to fully complete the modify action before the parameter group is used
@@ -6655,8 +6647,6 @@ module Aws
       # *Parameter Groups* option of the [Amazon RDS console][1] or the
       # *DescribeDBParameters* command to verify that your DB parameter group
       # has been created or modified.
-      #
-      #  </important>
       #
       #
       #
@@ -6713,8 +6703,8 @@ module Aws
       #
       # @example Response structure
       #   resp.db_parameter_group_name #=> String
+      # @overload modify_db_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_parameter_group(params = {}, options = {})
         req = build_request(:modify_db_parameter_group, params)
         req.send_request(options)
@@ -6729,7 +6719,7 @@ module Aws
       # restore the manual DB snapshot. Uses the value `all` to make the
       # manual DB snapshot public, which means it can be copied or restored by
       # all AWS accounts. Do not add the `all` value for any manual DB
-      # snapshots that contain private information that you don\'t want
+      # snapshots that contain private information that you don't want
       # available to all AWS accounts.
       #
       # To view which AWS accounts have access to copy or restore a manual DB
@@ -6752,7 +6742,7 @@ module Aws
       #   set this list to include one or more AWS account IDs, or `all` to make
       #   the manual DB snapshot restorable by any AWS account. Do not add the
       #   `all` value for any manual DB snapshots that contain private
-      #   information that you don\'t want available to all AWS accounts.
+      #   information that you don't want available to all AWS accounts.
       # @option params [Array<String>] :values_to_remove
       #   A list of DB snapshot attributes to remove from the attribute
       #   specified by `AttributeName`.
@@ -6781,8 +6771,8 @@ module Aws
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_name #=> String
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values #=> Array
       #   resp.db_snapshot_attributes_result.db_snapshot_attributes[0].attribute_values[0] #=> String
+      # @overload modify_db_snapshot_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_snapshot_attribute(params = {}, options = {})
         req = build_request(:modify_db_snapshot_attribute, params)
         req.send_request(options)
@@ -6823,8 +6813,8 @@ module Aws
       #   resp.db_subnet_group.subnets[0].subnet_availability_zone.name #=> String
       #   resp.db_subnet_group.subnets[0].subnet_status #=> String
       #   resp.db_subnet_group.db_subnet_group_arn #=> String
+      # @overload modify_db_subnet_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_db_subnet_group(params = {}, options = {})
         req = build_request(:modify_db_subnet_group, params)
         req.send_request(options)
@@ -6894,8 +6884,8 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      # @overload modify_event_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_event_subscription(params = {}, options = {})
         req = build_request(:modify_event_subscription, params)
         req.send_request(options)
@@ -6983,8 +6973,8 @@ module Aws
       #   resp.option_group.allows_vpc_and_non_vpc_instance_memberships #=> Boolean
       #   resp.option_group.vpc_id #=> String
       #   resp.option_group.option_group_arn #=> String
+      # @overload modify_option_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def modify_option_group(params = {}, options = {})
         req = build_request(:modify_option_group, params)
         req.send_request(options)
@@ -7144,8 +7134,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload promote_read_replica(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def promote_read_replica(params = {}, options = {})
         req = build_request(:promote_read_replica, params)
         req.send_request(options)
@@ -7214,8 +7204,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload promote_read_replica_db_cluster(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def promote_read_replica_db_cluster(params = {}, options = {})
         req = build_request(:promote_read_replica_db_cluster, params)
         req.send_request(options)
@@ -7271,8 +7261,8 @@ module Aws
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_amount #=> Float
       #   resp.reserved_db_instance.recurring_charges[0].recurring_charge_frequency #=> String
       #   resp.reserved_db_instance.reserved_db_instance_arn #=> String
+      # @overload purchase_reserved_db_instances_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_reserved_db_instances_offering(params = {}, options = {})
         req = build_request(:purchase_reserved_db_instances_offering, params)
         req.send_request(options)
@@ -7293,7 +7283,7 @@ module Aws
       # failover occurs.
       #
       # The time required to reboot is a function of the specific database
-      # engine\'s crash recovery process. To improve the reboot time, we
+      # engine's crash recovery process. To improve the reboot time, we
       # recommend that you reduce database activities as much as possible
       # during the reboot process to reduce rollback activity for in-transit
       # transactions.
@@ -7409,8 +7399,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload reboot_db_instance(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reboot_db_instance(params = {}, options = {})
         req = build_request(:reboot_db_instance, params)
         req.send_request(options)
@@ -7448,8 +7438,8 @@ module Aws
       #   resp.event_subscription.event_categories_list[0] #=> String
       #   resp.event_subscription.enabled #=> Boolean
       #   resp.event_subscription.event_subscription_arn #=> String
+      # @overload remove_source_identifier_from_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_source_identifier_from_subscription(params = {}, options = {})
         req = build_request(:remove_source_identifier_from_subscription, params)
         req.send_request(options)
@@ -7480,8 +7470,8 @@ module Aws
       #     resource_name: "String", # required
       #     tag_keys: ["String"], # required
       #   })
+      # @overload remove_tags_from_resource(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags_from_resource(params = {}, options = {})
         req = build_request(:remove_tags_from_resource, params)
         req.send_request(options)
@@ -7542,8 +7532,8 @@ module Aws
       #
       # @example Response structure
       #   resp.db_cluster_parameter_group_name #=> String
+      # @overload reset_db_cluster_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_db_cluster_parameter_group(params = {}, options = {})
         req = build_request(:reset_db_cluster_parameter_group, params)
         req.send_request(options)
@@ -7623,8 +7613,8 @@ module Aws
       #
       # @example Response structure
       #   resp.db_parameter_group_name #=> String
+      # @overload reset_db_parameter_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def reset_db_parameter_group(params = {}, options = {})
         req = build_request(:reset_db_parameter_group, params)
         req.send_request(options)
@@ -7660,7 +7650,7 @@ module Aws
       #   The database name for the restored DB cluster.
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to create from the source data in the S3
-      #   bucket. This parameter is isn\'t case-sensitive.
+      #   bucket. This parameter is isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -7721,7 +7711,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option params [required, String] :master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option params [String] :option_group_name
@@ -7889,8 +7879,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload restore_db_cluster_from_s3(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_db_cluster_from_s3(params = {}, options = {})
         req = build_request(:restore_db_cluster_from_s3, params)
         req.send_request(options)
@@ -7912,7 +7902,7 @@ module Aws
       #   restored DB cluster can be created in.
       # @option params [required, String] :db_cluster_identifier
       #   The name of the DB cluster to create from the DB cluster snapshot.
-      #   This parameter isn\'t case-sensitive.
+      #   This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -8046,8 +8036,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload restore_db_cluster_from_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_db_cluster_from_snapshot(params = {}, options = {})
         req = build_request(:restore_db_cluster_from_snapshot, params)
         req.send_request(options)
@@ -8218,8 +8208,8 @@ module Aws
       #   resp.db_cluster.kms_key_id #=> String
       #   resp.db_cluster.db_cluster_resource_id #=> String
       #   resp.db_cluster.db_cluster_arn #=> String
+      # @overload restore_db_cluster_to_point_in_time(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_db_cluster_to_point_in_time(params = {}, options = {})
         req = build_request(:restore_db_cluster_to_point_in_time, params)
         req.send_request(options)
@@ -8248,7 +8238,7 @@ module Aws
       # `DBSnapshotIdentifier` must be the ARN of the shared DB snapshot.
       # @option params [required, String] :db_instance_identifier
       #   Name of the DB instance to create from the DB snapshot. This parameter
-      #   isn\'t case-sensitive.
+      #   isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -8344,7 +8334,7 @@ module Aws
       # @option params [String] :db_name
       #   The database name for the restored DB instance.
       #
-      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+      #   <note markdown="1"> This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB
       #   engines.
       #
       #    </note>
@@ -8526,8 +8516,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload restore_db_instance_from_db_snapshot(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_db_instance_from_db_snapshot(params = {}, options = {})
         req = build_request(:restore_db_instance_from_db_snapshot, params)
         req.send_request(options)
@@ -8839,8 +8829,8 @@ module Aws
       #   resp.db_instance.monitoring_role_arn #=> String
       #   resp.db_instance.promotion_tier #=> Integer
       #   resp.db_instance.db_instance_arn #=> String
+      # @overload restore_db_instance_to_point_in_time(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def restore_db_instance_to_point_in_time(params = {}, options = {})
         req = build_request(:restore_db_instance_to_point_in_time, params)
         req.send_request(options)
@@ -8901,8 +8891,8 @@ module Aws
       #   resp.db_security_group.ip_ranges[0].status #=> String
       #   resp.db_security_group.ip_ranges[0].cidrip #=> String
       #   resp.db_security_group.db_security_group_arn #=> String
+      # @overload revoke_db_security_group_ingress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def revoke_db_security_group_ingress(params = {}, options = {})
         req = build_request(:revoke_db_security_group_ingress, params)
         req.send_request(options)

@@ -569,7 +569,7 @@ module Aws
       #
       #   Constraints:
       #
-      #   * Must specify a valid system snapshot in the \"available\" state.
+      #   * Must specify a valid system snapshot in the "available" state.
       #
       #   * If the source snapshot is in the same region as the copy, specify
       #     a valid DB snapshot identifier.
@@ -615,7 +615,7 @@ module Aws
       #
       #   If you copy an encrypted DB snapshot from your AWS account, you can
       #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-      #   encryption key. If you don\'t specify a value for `KmsKeyId` then
+      #   encryption key. If you don't specify a value for `KmsKeyId` then
       #   the copy of the DB snapshot is encrypted with the same KMS key as
       #   the source DB snapshot.
       #
@@ -871,7 +871,7 @@ module Aws
       #
       # @!attribute [rw] master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       #   @return [String]
@@ -1221,7 +1221,7 @@ module Aws
       #   **PostgreSQL**
       #
       #   The name of the database to create when the DB instance is created.
-      #   If this parameter is not specified, the default \"postgres\"
+      #   If this parameter is not specified, the default "postgres"
       #   database is created in the DB instance.
       #
       #   Constraints:
@@ -1385,7 +1385,7 @@ module Aws
       #
       # @!attribute [rw] master_user_password
       #   The password for the master database user. Can be any printable
-      #   ASCII character except \"/\", \"\"\", or \"@\".
+      #   ASCII character except "/", """, or "@".
       #
       #   Type: String
       #
@@ -1425,7 +1425,7 @@ module Aws
       #   instance.
       #
       #   Default: The default EC2 VPC security group for the DB subnet
-      #   group\'s VPC.
+      #   group's VPC.
       #   @return [Array<String>]
       #
       # @!attribute [rw] availability_zone
@@ -1434,7 +1434,7 @@ module Aws
       #   and Availability Zones][1].
       #
       #   Default: A random, system-chosen Availability Zone in the
-      #   endpoint\'s region.
+      #   endpoint's region.
       #
       #   Example: `us-east-1d`
       #
@@ -2054,7 +2054,7 @@ module Aws
       #   created in.
       #
       #   Default: A random, system-chosen Availability Zone in the
-      #   endpoint\'s region.
+      #   endpoint's region.
       #
       #   Example: `us-east-1d`
       #   @return [String]
@@ -2327,7 +2327,7 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
-      #   * Must not be \"Default\"
+      #   * Must not be "Default"
       #
       #   Example: `mysecuritygroup`
       #   @return [String]
@@ -3584,7 +3584,7 @@ module Aws
 
       # Provides a list of status information for a DB instance.
       # @!attribute [rw] status_type
-      #   This value is currently \"read replication.\"
+      #   This value is currently "read replication."
       #   @return [String]
       #
       # @!attribute [rw] normal
@@ -4082,7 +4082,7 @@ module Aws
       #       }
       # @!attribute [rw] db_cluster_identifier
       #   The DB cluster identifier for the DB cluster to be deleted. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -4220,7 +4220,7 @@ module Aws
       #       }
       # @!attribute [rw] db_instance_identifier
       #   The DB instance identifier for the DB instance to be deleted. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -4238,9 +4238,9 @@ module Aws
       #   the DB instance is deleted.
       #
       #   Note that when a DB instance is in a failure state and has a status
-      #   of \'failed\', \'incompatible-restore\', or
-      #   \'incompatible-network\', it can only be deleted when the
-      #   SkipFinalSnapshot parameter is set to \"true\".
+      #   of 'failed', 'incompatible-restore', or
+      #   'incompatible-network', it can only be deleted when the
+      #   SkipFinalSnapshot parameter is set to "true".
       #
       #   Specify `true` when deleting a Read Replica.
       #
@@ -4339,7 +4339,7 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
-      #   * Must not be \"Default\"
+      #   * Must not be "Default"
       #   @return [String]
       class DeleteDBSecurityGroupMessage < Struct.new(
         :db_security_group_name)
@@ -4466,7 +4466,7 @@ module Aws
       # @!attribute [rw] certificate_identifier
       #   The user-supplied certificate identifier. If this parameter is
       #   specified, information for only the identified certificate is
-      #   returned. This parameter isn\'t case-sensitive.
+      #   returned. This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -4721,17 +4721,17 @@ module Aws
       #   * `public` - Return all DB cluster snapshots that have been marked
       #     as public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated
+      #   If you don't specify a `SnapshotType` value, then both automated
       #   and manual DB cluster snapshots are returned. You can include shared
       #   DB cluster snapshots with these results by setting the
       #   `IncludeShared` parameter to `true`. You can include public DB
       #   cluster snapshots with these results by setting the `IncludePublic`
       #   parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The
-      #   `IncludePublic` parameter doesn\'t apply when `SnapshotType` is set
-      #   to `shared`. The `IncludeShared` parameter doesn\'t apply when
+      #   `IncludePublic` parameter doesn't apply when `SnapshotType` is set
+      #   to `shared`. The `IncludeShared` parameter doesn't apply when
       #   `SnapshotType` is set to `public`.
       #   @return [String]
       #
@@ -4806,7 +4806,7 @@ module Aws
       # @!attribute [rw] db_cluster_identifier
       #   The user-supplied DB cluster identifier. If this parameter is
       #   specified, information from only the specific DB cluster is
-      #   returned. This parameter isn\'t case-sensitive.
+      #   returned. This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -4947,7 +4947,7 @@ module Aws
       # @!attribute [rw] db_instance_identifier
       #   The user-supplied instance identifier. If this parameter is
       #   specified, information from only the specific DB instance is
-      #   returned. This parameter isn\'t case-sensitive.
+      #   returned. This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -5352,17 +5352,17 @@ module Aws
       #   * `public` - Return all DB snapshots that have been marked as
       #     public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated
+      #   If you don't specify a `SnapshotType` value, then both automated
       #   and manual snapshots are returned. Shared and public DB snapshots
       #   are not included in the returned results by default. You can include
       #   shared snapshots with these results by setting the `IncludeShared`
       #   parameter to `true`. You can include public snapshots with these
       #   results by setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The
-      #   `IncludePublic` parameter doesn\'t apply when `SnapshotType` is set
-      #   to `shared`. The `IncludeShared` parameter doesn\'t apply when
+      #   `IncludePublic` parameter doesn't apply when `SnapshotType` is set
+      #   to `shared`. The `IncludeShared` parameter doesn't apply when
       #   `SnapshotType` is set to `public`.
       #   @return [String]
       #
@@ -6269,7 +6269,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The status of the DB instance\'s Active Directory Domain membership,
+      #   The status of the DB instance's Active Directory Domain membership,
       #   such as joined, pending-join, failed etc).
       #   @return [String]
       #
@@ -6338,7 +6338,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] marker
-      #   The pagination token provided in the previous request or \"0\". If
+      #   The pagination token provided in the previous request or "0". If
       #   the Marker parameter is specified the response includes only records
       #   beyond the marker until the end of the file or up to NumberOfLines.
       #   @return [String]
@@ -6359,12 +6359,12 @@ module Aws
       #   * If NumberOfLines is specified and Marker is not specified, then
       #     the most recent lines from the end of the log file are returned.
       #
-      #   * If Marker is specified as \"0\", then the specified number of
+      #   * If Marker is specified as "0", then the specified number of
       #     lines from the beginning of the log file are returned.
       #
       #   * You can download the log file in blocks of lines by specifying the
       #     size of the block using the NumberOfLines parameter, and by
-      #     specifying a value of \"0\" for the Marker parameter in your first
+      #     specifying a value of "0" for the Marker parameter in your first
       #     request. Include the Marker value returned in the response as the
       #     Marker value for the next request, continuing until the
       #     AdditionalDataPending response element returns false.
@@ -6386,7 +6386,7 @@ module Aws
       # * RevokeDBSecurityGroupIngress
       # @!attribute [rw] status
       #   Provides the status of the EC2 security group. Status can be
-      #   \"authorizing\", \"authorized\", \"revoking\", and \"revoked\".
+      #   "authorizing", "authorized", "revoking", and "revoked".
       #   @return [String]
       #
       # @!attribute [rw] ec2_security_group_name
@@ -6541,8 +6541,8 @@ module Aws
       #   Can be one of the following: creating \| modifying \| deleting \|
       #   active \| no-permission \| topic-not-exist
       #
-      #   The status \"no-permission\" indicates that RDS no longer has
-      #   permission to post to the SNS topic. The status \"topic-not-exist\"
+      #   The status "no-permission" indicates that RDS no longer has
+      #   permission to post to the SNS topic. The status "topic-not-exist"
       #   indicates that the topic was deleted after the subscription was
       #   created.
       #   @return [String]
@@ -6700,8 +6700,8 @@ module Aws
       # This data type is used as a response element in the
       # DescribeDBSecurityGroups action.
       # @!attribute [rw] status
-      #   Specifies the status of the IP range. Status can be \"authorizing\",
-      #   \"authorized\", \"revoking\", and \"revoked\".
+      #   Specifies the status of the IP range. Status can be "authorizing",
+      #   "authorized", "revoking", and "revoked".
       #   @return [String]
       #
       # @!attribute [rw] cidrip
@@ -6840,8 +6840,8 @@ module Aws
       #
       # @!attribute [rw] master_user_password
       #   The new password for the master database user. This password can
-      #   contain any printable ASCII character except \"/\", \"\"\", or
-      #   \"@\".
+      #   contain any printable ASCII character except "/", """, or
+      #   "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       #   @return [String]
@@ -7006,7 +7006,7 @@ module Aws
       #   cluster snapshot, set this list to include one or more AWS account
       #   IDs, or `all` to make the manual DB cluster snapshot restorable by
       #   any AWS account. Do not add the `all` value for any manual DB
-      #   cluster snapshots that contain private information that you don\'t
+      #   cluster snapshots that contain private information that you don't
       #   want available to all AWS accounts.
       #   @return [Array<String>]
       #
@@ -7266,7 +7266,7 @@ module Aws
       #
       # @!attribute [rw] master_user_password
       #   The new password for the DB instance master user. Can be any
-      #   printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   printable ASCII character except "/", """, or "@".
       #
       #   Changing this parameter does not result in an outage and the change
       #   is asynchronously applied as soon as possible. Between the time of
@@ -7400,7 +7400,7 @@ module Aws
       #
       #   Constraints: This parameter must be set to true when specifying a
       #   value for the EngineVersion parameter that is a different major
-      #   version than the DB instance\'s current version.
+      #   version than the DB instance's current version.
       #   @return [Boolean]
       #
       # @!attribute [rw] auto_minor_version_upgrade
@@ -7782,7 +7782,7 @@ module Aws
       #   snapshot, set this list to include one or more AWS account IDs, or
       #   `all` to make the manual DB snapshot restorable by any AWS account.
       #   Do not add the `all` value for any manual DB snapshots that contain
-      #   private information that you don\'t want available to all AWS
+      #   private information that you don't want available to all AWS
       #   accounts.
       #   @return [Array<String>]
       #
@@ -8170,7 +8170,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The status of the DB instance\'s option group membership. Valid
+      #   The status of the DB instance's option group membership. Valid
       #   values are: `in-sync`, `pending-apply`, `pending-removal`,
       #   `pending-maintenance-apply`, `pending-maintenance-removal`,
       #   `applying`, `removing`, and `failed`.
@@ -8220,7 +8220,7 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] persistent
-      #   Persistent options can\'t be removed from an option group while DB
+      #   Persistent options can't be removed from an option group while DB
       #   instances are associated with the option group. If you disassociate
       #   all DB instances from the option group, your can remove the
       #   persistent option from the option group.
@@ -8228,7 +8228,7 @@ module Aws
       #
       # @!attribute [rw] permanent
       #   Permanent options can never be removed from an option group. An
-      #   option group containing a permanent option can\'t be removed from a
+      #   option group containing a permanent option can't be removed from a
       #   DB instance.
       #   @return [Boolean]
       #
@@ -9399,7 +9399,7 @@ module Aws
       #
       # @!attribute [rw] db_cluster_identifier
       #   The name of the DB cluster to create from the source data in the S3
-      #   bucket. This parameter is isn\'t case-sensitive.
+      #   bucket. This parameter is isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -9476,7 +9476,7 @@ module Aws
       #
       # @!attribute [rw] master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       #   @return [String]
@@ -9672,7 +9672,7 @@ module Aws
       #
       # @!attribute [rw] db_cluster_identifier
       #   The name of the DB cluster to create from the DB cluster snapshot.
-      #   This parameter isn\'t case-sensitive.
+      #   This parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -10002,7 +10002,7 @@ module Aws
       #       }
       # @!attribute [rw] db_instance_identifier
       #   Name of the DB instance to create from the DB snapshot. This
-      #   parameter isn\'t case-sensitive.
+      #   parameter isn't case-sensitive.
       #
       #   Constraints:
       #
@@ -10118,7 +10118,7 @@ module Aws
       # @!attribute [rw] db_name
       #   The database name for the restored DB instance.
       #
-      #   <note markdown="1"> This parameter doesn\'t apply to the MySQL, PostgreSQL, or MariaDB
+      #   <note markdown="1"> This parameter doesn't apply to the MySQL, PostgreSQL, or MariaDB
       #   engines.
       #
       #    </note>
@@ -10689,19 +10689,19 @@ module Aws
       # @!attribute [rw] key
       #   A key is the required name of the tag. The string value can be from
       #   1 to 128 Unicode characters in length and cannot be prefixed with
-      #   \"aws:\" or \"rds:\". The string can only contain only the set of
-      #   Unicode letters, digits, white-space, \'\_\', \'.\', \'/\', \'=\',
-      #   \'+\', \'-\' (Java regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   "aws:" or "rds:". The string can only contain only the set of
+      #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
+      #   '+', '-' (Java regex:
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       #
       # @!attribute [rw] value
       #   A value is the optional value of the tag. The string value can be
       #   from 1 to 256 Unicode characters in length and cannot be prefixed
-      #   with \"aws:\" or \"rds:\". The string can only contain only the set
-      #   of Unicode letters, digits, white-space, \'\_\', \'.\', \'/\',
-      #   \'=\', \'+\', \'-\' (Java regex:
-      #   \"^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$\").
+      #   with "aws:" or "rds:". The string can only contain only the set
+      #   of Unicode letters, digits, white-space, '\_', '.', '/',
+      #   '=', '+', '-' (Java regex:
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
       #   @return [String]
       class Tag < Struct.new(
         :key,

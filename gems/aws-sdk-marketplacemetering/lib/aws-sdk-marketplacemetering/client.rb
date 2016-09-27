@@ -144,7 +144,7 @@ module Aws
       #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
       #   portions of the timestamp will be ignored.
       # @option params [required, String] :usage_dimension
-      #   It will be one of the \'fcp dimension name\' provided during the
+      #   It will be one of the 'fcp dimension name' provided during the
       #   publishing of the product.
       # @option params [required, Integer] :usage_quantity
       #   Consumption value for the hour.
@@ -167,8 +167,8 @@ module Aws
       #
       # @example Response structure
       #   resp.metering_record_id #=> String
+      # @overload meter_usage(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def meter_usage(params = {}, options = {})
         req = build_request(:meter_usage, params)
         req.send_request(options)

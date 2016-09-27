@@ -163,8 +163,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_custom_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_custom_attributes(params = {}, options = {})
         req = build_request(:add_custom_attributes, params)
         req.send_request(options)
@@ -183,8 +183,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_confirm_sign_up(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_confirm_sign_up(params = {}, options = {})
         req = build_request(:admin_confirm_sign_up, params)
         req.send_request(options)
@@ -202,8 +202,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_delete_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_delete_user(params = {}, options = {})
         req = build_request(:admin_delete_user, params)
         req.send_request(options)
@@ -228,8 +228,8 @@ module Aws
       #     username: "UsernameType", # required
       #     user_attribute_names: ["AttributeNameType"], # required
       #   })
+      # @overload admin_delete_user_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_delete_user_attributes(params = {}, options = {})
         req = build_request(:admin_delete_user_attributes, params)
         req.send_request(options)
@@ -247,8 +247,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_disable_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_disable_user(params = {}, options = {})
         req = build_request(:admin_disable_user, params)
         req.send_request(options)
@@ -266,8 +266,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_enable_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_enable_user(params = {}, options = {})
         req = build_request(:admin_enable_user, params)
         req.send_request(options)
@@ -288,8 +288,8 @@ module Aws
       #     username: "UsernameType", # required
       #     device_key: "DeviceKeyType", # required
       #   })
+      # @overload admin_forget_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_forget_device(params = {}, options = {})
         req = build_request(:admin_forget_device, params)
         req.send_request(options)
@@ -321,8 +321,8 @@ module Aws
       #   resp.device.device_create_date #=> Time
       #   resp.device.device_last_modified_date #=> Time
       #   resp.device.device_last_authenticated_date #=> Time
+      # @overload admin_get_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_get_device(params = {}, options = {})
         req = build_request(:admin_get_device, params)
         req.send_request(options)
@@ -363,8 +363,8 @@ module Aws
       #   resp.mfa_options #=> Array
       #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.mfa_options[0].attribute_name #=> String
+      # @overload admin_get_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_get_user(params = {}, options = {})
         req = build_request(:admin_get_user, params)
         req.send_request(options)
@@ -413,8 +413,8 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      # @overload admin_initiate_auth(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_initiate_auth(params = {}, options = {})
         req = build_request(:admin_initiate_auth, params)
         req.send_request(options)
@@ -452,14 +452,14 @@ module Aws
       #   resp.devices[0].device_last_modified_date #=> Time
       #   resp.devices[0].device_last_authenticated_date #=> Time
       #   resp.pagination_token #=> String
+      # @overload admin_list_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_list_devices(params = {}, options = {})
         req = build_request(:admin_list_devices, params)
         req.send_request(options)
       end
 
-      # Resets the specified user\'s password in a user pool as an
+      # Resets the specified user's password in a user pool as an
       # administrator. Works on any user.
       #
       # When a developer calls this API, the current password is invalidated,
@@ -473,7 +473,7 @@ module Aws
       # in sending a message to the end user with the code to change their
       # password.
       # @option params [required, String] :user_pool_id
-      #   The user pool ID for the user pool where you want to reset the user\'s
+      #   The user pool ID for the user pool where you want to reset the user's
       #   password.
       # @option params [required, String] :username
       #   The user name of the user whose password you wish to reset.
@@ -484,8 +484,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_reset_user_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_reset_user_password(params = {}, options = {})
         req = build_request(:admin_reset_user_password, params)
         req.send_request(options)
@@ -532,8 +532,8 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      # @overload admin_respond_to_auth_challenge(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_respond_to_auth_challenge(params = {}, options = {})
         req = build_request(:admin_respond_to_auth_challenge, params)
         req.send_request(options)
@@ -542,7 +542,7 @@ module Aws
       # Sets all the user settings for a specified user name. Works on any
       # user.
       # @option params [required, String] :user_pool_id
-      #   The user pool ID for the user pool where you want to set the user\'s
+      #   The user pool ID for the user pool where you want to set the user's
       #   settings, such as MFA options.
       # @option params [required, String] :username
       #   The user name of the user for whom you wish to set user settings.
@@ -561,8 +561,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload admin_set_user_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_set_user_settings(params = {}, options = {})
         req = build_request(:admin_set_user_settings, params)
         req.send_request(options)
@@ -586,14 +586,14 @@ module Aws
       #     device_key: "DeviceKeyType", # required
       #     device_remembered_status: "remembered", # accepts remembered, not_remembered
       #   })
+      # @overload admin_update_device_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_update_device_status(params = {}, options = {})
         req = build_request(:admin_update_device_status, params)
         req.send_request(options)
       end
 
-      # Updates the specified user\'s attributes, including developer
+      # Updates the specified user's attributes, including developer
       # attributes, as an administrator. Works on any user.
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to update user
@@ -615,8 +615,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload admin_update_user_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_update_user_attributes(params = {}, options = {})
         req = build_request(:admin_update_user_attributes, params)
         req.send_request(options)
@@ -634,8 +634,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     username: "UsernameType", # required
       #   })
+      # @overload admin_user_global_sign_out(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def admin_user_global_sign_out(params = {}, options = {})
         req = build_request(:admin_user_global_sign_out, params)
         req.send_request(options)
@@ -656,8 +656,8 @@ module Aws
       #     proposed_password: "PasswordType", # required
       #     access_token: "TokenModelType",
       #   })
+      # @overload change_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def change_password(params = {}, options = {})
         req = build_request(:change_password, params)
         req.send_request(options)
@@ -690,8 +690,8 @@ module Aws
       #
       # @example Response structure
       #   resp.user_confirmation_necessary #=> Boolean
+      # @overload confirm_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_device(params = {}, options = {})
         req = build_request(:confirm_device, params)
         req.send_request(options)
@@ -709,10 +709,10 @@ module Aws
       #   The user name of the user for whom you want to enter a code to
       #   retrieve a forgotten password.
       # @option params [required, String] :confirmation_code
-      #   The confirmation code sent by a user\'s request to retrieve a
+      #   The confirmation code sent by a user's request to retrieve a
       #   forgotten password.
       # @option params [required, String] :password
-      #   The password sent by sent by a user\'s request to retrieve a forgotten
+      #   The password sent by sent by a user's request to retrieve a forgotten
       #   password.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -724,8 +724,8 @@ module Aws
       #     confirmation_code: "ConfirmationCodeType", # required
       #     password: "PasswordType", # required
       #   })
+      # @overload confirm_forgot_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_forgot_password(params = {}, options = {})
         req = build_request(:confirm_forgot_password, params)
         req.send_request(options)
@@ -742,7 +742,7 @@ module Aws
       # @option params [required, String] :username
       #   The user name of the user whose registration you wish to confirm.
       # @option params [required, String] :confirmation_code
-      #   The confirmation code sent by a user\'s request to confirm
+      #   The confirmation code sent by a user's request to confirm
       #   registration.
       # @option params [Boolean] :force_alias_creation
       #   Boolean to be specified to force user confirmation irrespective of
@@ -762,8 +762,8 @@ module Aws
       #     confirmation_code: "ConfirmationCodeType", # required
       #     force_alias_creation: false,
       #   })
+      # @overload confirm_sign_up(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_sign_up(params = {}, options = {})
         req = build_request(:confirm_sign_up, params)
         req.send_request(options)
@@ -803,8 +803,8 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      # @overload create_user_import_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_user_import_job(params = {}, options = {})
         req = build_request(:create_user_import_job, params)
         req.send_request(options)
@@ -934,8 +934,8 @@ module Aws
       #   resp.user_pool.sms_configuration.external_id #=> String
       #   resp.user_pool.sms_configuration_failure #=> String
       #   resp.user_pool.email_configuration_failure #=> String
+      # @overload create_user_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_user_pool(params = {}, options = {})
         req = build_request(:create_user_pool, params)
         req.send_request(options)
@@ -987,14 +987,14 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      # @overload create_user_pool_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_user_pool_client(params = {}, options = {})
         req = build_request(:create_user_pool_client, params)
         req.send_request(options)
       end
 
-      # Allows a user to delete one\'s self.
+      # Allows a user to delete one's self.
       # @option params [String] :access_token
       #   The access token from a request to delete a user.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1003,8 +1003,8 @@ module Aws
       #   resp = client.delete_user({
       #     access_token: "TokenModelType",
       #   })
+      # @overload delete_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user(params = {}, options = {})
         req = build_request(:delete_user, params)
         req.send_request(options)
@@ -1023,8 +1023,8 @@ module Aws
       #     user_attribute_names: ["AttributeNameType"], # required
       #     access_token: "TokenModelType",
       #   })
+      # @overload delete_user_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user_attributes(params = {}, options = {})
         req = build_request(:delete_user_attributes, params)
         req.send_request(options)
@@ -1039,8 +1039,8 @@ module Aws
       #   resp = client.delete_user_pool({
       #     user_pool_id: "UserPoolIdType", # required
       #   })
+      # @overload delete_user_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user_pool(params = {}, options = {})
         req = build_request(:delete_user_pool, params)
         req.send_request(options)
@@ -1059,8 +1059,8 @@ module Aws
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
       #   })
+      # @overload delete_user_pool_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_user_pool_client(params = {}, options = {})
         req = build_request(:delete_user_pool_client, params)
         req.send_request(options)
@@ -1096,8 +1096,8 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      # @overload describe_user_import_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_user_import_job(params = {}, options = {})
         req = build_request(:describe_user_import_job, params)
         req.send_request(options)
@@ -1163,8 +1163,8 @@ module Aws
       #   resp.user_pool.sms_configuration.external_id #=> String
       #   resp.user_pool.sms_configuration_failure #=> String
       #   resp.user_pool.email_configuration_failure #=> String
+      # @overload describe_user_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_user_pool(params = {}, options = {})
         req = build_request(:describe_user_pool, params)
         req.send_request(options)
@@ -1200,8 +1200,8 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      # @overload describe_user_pool_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_user_pool_client(params = {}, options = {})
         req = build_request(:describe_user_pool_client, params)
         req.send_request(options)
@@ -1219,8 +1219,8 @@ module Aws
       #     access_token: "TokenModelType",
       #     device_key: "DeviceKeyType", # required
       #   })
+      # @overload forget_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def forget_device(params = {}, options = {})
         req = build_request(:forget_device, params)
         req.send_request(options)
@@ -1251,8 +1251,8 @@ module Aws
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      # @overload forgot_password(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def forgot_password(params = {}, options = {})
         req = build_request(:forgot_password, params)
         req.send_request(options)
@@ -1277,8 +1277,8 @@ module Aws
       #   resp.user_pool_id #=> String
       #   resp.csv_header #=> Array
       #   resp.csv_header[0] #=> String
+      # @overload get_csv_header(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_csv_header(params = {}, options = {})
         req = build_request(:get_csv_header, params)
         req.send_request(options)
@@ -1307,8 +1307,8 @@ module Aws
       #   resp.device.device_create_date #=> Time
       #   resp.device.device_last_modified_date #=> Time
       #   resp.device.device_last_authenticated_date #=> Time
+      # @overload get_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_device(params = {}, options = {})
         req = build_request(:get_device, params)
         req.send_request(options)
@@ -1337,8 +1337,8 @@ module Aws
       #   resp.mfa_options #=> Array
       #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.mfa_options[0].attribute_name #=> String
+      # @overload get_user(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_user(params = {}, options = {})
         req = build_request(:get_user, params)
         req.send_request(options)
@@ -1366,8 +1366,8 @@ module Aws
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      # @overload get_user_attribute_verification_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_user_attribute_verification_code(params = {}, options = {})
         req = build_request(:get_user_attribute_verification_code, params)
         req.send_request(options)
@@ -1382,8 +1382,8 @@ module Aws
       #   resp = client.global_sign_out({
       #     access_token: "TokenModelType",
       #   })
+      # @overload global_sign_out(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def global_sign_out(params = {}, options = {})
         req = build_request(:global_sign_out, params)
         req.send_request(options)
@@ -1395,7 +1395,7 @@ module Aws
       # @option params [Hash<String,String>] :auth_parameters
       #   The authentication parameters.
       # @option params [Hash<String,String>] :client_metadata
-      #   The client app\'s metadata.
+      #   The client app's metadata.
       # @option params [required, String] :client_id
       #   The client ID.
       # @return [Types::InitiateAuthResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1429,8 +1429,8 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      # @overload initiate_auth(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def initiate_auth(params = {}, options = {})
         req = build_request(:initiate_auth, params)
         req.send_request(options)
@@ -1465,8 +1465,8 @@ module Aws
       #   resp.devices[0].device_last_modified_date #=> Time
       #   resp.devices[0].device_last_authenticated_date #=> Time
       #   resp.pagination_token #=> String
+      # @overload list_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_devices(params = {}, options = {})
         req = build_request(:list_devices, params)
         req.send_request(options)
@@ -1510,8 +1510,8 @@ module Aws
       #   resp.user_import_jobs[0].failed_users #=> Integer
       #   resp.user_import_jobs[0].completion_message #=> String
       #   resp.pagination_token #=> String
+      # @overload list_user_import_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_user_import_jobs(params = {}, options = {})
         req = build_request(:list_user_import_jobs, params)
         req.send_request(options)
@@ -1546,8 +1546,8 @@ module Aws
       #   resp.user_pool_clients[0].user_pool_id #=> String
       #   resp.user_pool_clients[0].client_name #=> String
       #   resp.next_token #=> String
+      # @overload list_user_pool_clients(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_user_pool_clients(params = {}, options = {})
         req = build_request(:list_user_pool_clients, params)
         req.send_request(options)
@@ -1588,8 +1588,8 @@ module Aws
       #   resp.user_pools[0].last_modified_date #=> Time
       #   resp.user_pools[0].creation_date #=> Time
       #   resp.next_token #=> String
+      # @overload list_user_pools(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_user_pools(params = {}, options = {})
         req = build_request(:list_user_pools, params)
         req.send_request(options)
@@ -1633,8 +1633,8 @@ module Aws
       #   resp.users[0].enabled #=> Boolean
       #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED"
       #   resp.pagination_token #=> String
+      # @overload list_users(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_users(params = {}, options = {})
         req = build_request(:list_users, params)
         req.send_request(options)
@@ -1666,8 +1666,8 @@ module Aws
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      # @overload resend_confirmation_code(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resend_confirmation_code(params = {}, options = {})
         req = build_request(:resend_confirmation_code, params)
         req.send_request(options)
@@ -1711,8 +1711,8 @@ module Aws
       #   resp.authentication_result.id_token #=> String
       #   resp.authentication_result.new_device_metadata.device_key #=> String
       #   resp.authentication_result.new_device_metadata.device_group_key #=> String
+      # @overload respond_to_auth_challenge(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def respond_to_auth_challenge(params = {}, options = {})
         req = build_request(:respond_to_auth_challenge, params)
         req.send_request(options)
@@ -1738,8 +1738,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload set_user_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_user_settings(params = {}, options = {})
         req = build_request(:set_user_settings, params)
         req.send_request(options)
@@ -1791,8 +1791,8 @@ module Aws
       #   resp.code_delivery_details.destination #=> String
       #   resp.code_delivery_details.delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details.attribute_name #=> String
+      # @overload sign_up(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def sign_up(params = {}, options = {})
         req = build_request(:sign_up, params)
         req.send_request(options)
@@ -1828,8 +1828,8 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      # @overload start_user_import_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def start_user_import_job(params = {}, options = {})
         req = build_request(:start_user_import_job, params)
         req.send_request(options)
@@ -1865,8 +1865,8 @@ module Aws
       #   resp.user_import_job.skipped_users #=> Integer
       #   resp.user_import_job.failed_users #=> Integer
       #   resp.user_import_job.completion_message #=> String
+      # @overload stop_user_import_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_user_import_job(params = {}, options = {})
         req = build_request(:stop_user_import_job, params)
         req.send_request(options)
@@ -1887,8 +1887,8 @@ module Aws
       #     device_key: "DeviceKeyType", # required
       #     device_remembered_status: "remembered", # accepts remembered, not_remembered
       #   })
+      # @overload update_device_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_device_status(params = {}, options = {})
         req = build_request(:update_device_status, params)
         req.send_request(options)
@@ -1919,8 +1919,8 @@ module Aws
       #   resp.code_delivery_details_list[0].destination #=> String
       #   resp.code_delivery_details_list[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.code_delivery_details_list[0].attribute_name #=> String
+      # @overload update_user_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_user_attributes(params = {}, options = {})
         req = build_request(:update_user_attributes, params)
         req.send_request(options)
@@ -2003,8 +2003,8 @@ module Aws
       #       external_id: "StringType",
       #     },
       #   })
+      # @overload update_user_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_user_pool(params = {}, options = {})
         req = build_request(:update_user_pool, params)
         req.send_request(options)
@@ -2056,8 +2056,8 @@ module Aws
       #   resp.user_pool_client.write_attributes[0] #=> String
       #   resp.user_pool_client.explicit_auth_flows #=> Array
       #   resp.user_pool_client.explicit_auth_flows[0] #=> String, one of "ADMIN_NO_SRP_AUTH", "CUSTOM_AUTH_FLOW_ONLY"
+      # @overload update_user_pool_client(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_user_pool_client(params = {}, options = {})
         req = build_request(:update_user_pool_client, params)
         req.send_request(options)
@@ -2078,8 +2078,8 @@ module Aws
       #     attribute_name: "AttributeNameType", # required
       #     code: "ConfirmationCodeType", # required
       #   })
+      # @overload verify_user_attribute(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def verify_user_attribute(params = {}, options = {})
         req = build_request(:verify_user_attribute, params)
         req.send_request(options)

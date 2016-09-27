@@ -133,7 +133,7 @@ module Aws
       #   that is more instances than Amazon EC2 can launch in the target
       #   Availability Zone, Amazon EC2 launches no instances.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 General FAQ.
@@ -147,7 +147,7 @@ module Aws
       #   Amazon EC2 launches the largest possible number of instances above
       #   `MinCount`.
       #
-      #   Constraints: Between 1 and the maximum number you\'re allowed for the
+      #   Constraints: Between 1 and the maximum number you're allowed for the
       #   specified instance type. For more information about the default
       #   limits, and how to request an increase, see [How many instances can I
       #   run in Amazon EC2][1] in the Amazon EC2 FAQ.
@@ -159,11 +159,9 @@ module Aws
       #   The name of the key pair. You can create a key pair using
       #   CreateKeyPair or ImportKeyPair.
       #
-      #   <important markdown="1"> If you do not specify a key pair, you can\'t connect to the instance
+      #   If you do not specify a key pair, you can't connect to the instance
       #   unless you choose an AMI that is configured to allow users another way
       #   to log in.
-      #
-      #    </important>
       # @option options [Array<String>] :security_groups
       #   \[EC2-Classic, default VPC\] One or more security group names. For a
       #   nondefault VPC, you must use security group IDs instead.
@@ -200,11 +198,9 @@ module Aws
       # @option options [String] :kernel_id
       #   The ID of the kernel.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -212,11 +208,9 @@ module Aws
       # @option options [String] :ramdisk_id
       #   The ID of the RAM disk.
       #
-      #   <important markdown="1"> We recommend that you use PV-GRUB instead of kernels and RAM disks.
+      #   We recommend that you use PV-GRUB instead of kernels and RAM disks.
       #   For more information, see [ PV-GRUB][1] in the *Amazon Elastic Compute
       #   Cloud User Guide*.
-      #
-      #    </important>
       #
       #
       #
@@ -224,18 +218,16 @@ module Aws
       # @option options [Array<Types::BlockDeviceMapping>] :block_device_mappings
       #   The block device mapping.
       #
-      #   <important markdown="1"> Supplying both a snapshot ID and an encryption value as arguments for
+      #   Supplying both a snapshot ID and an encryption value as arguments for
       #   block-device mapping results in an error. This is because only blank
       #   volumes can be encrypted on start, and these are not created from a
       #   snapshot. If a snapshot is the basis for the volume, it contains data
       #   by definition and its encryption status cannot be changed using this
       #   action.
-      #
-      #    </important>
       # @option options [Types::RunInstancesMonitoringEnabled] :monitoring
       #   The monitoring for the instance.
       # @option options [Boolean] :disable_api_termination
-      #   If you set this parameter to `true`, you can\'t terminate the instance
+      #   If you set this parameter to `true`, you can't terminate the instance
       #   using the Amazon EC2 console, CLI, or API; otherwise, you can. If you
       #   set this parameter to `true` and then later want to be able to
       #   terminate the instance, you must first change the value of the
@@ -256,7 +248,7 @@ module Aws
       #   IP address range of the subnet.
       #
       #   Only one private IP address can be designated as primary. Therefore,
-      #   you can\'t specify this parameter if `PrivateIpAddresses.n.Primary` is
+      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary` is
       #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
       #   IP address.
       #
@@ -282,7 +274,7 @@ module Aws
       #   Indicates whether the instance is optimized for EBS I/O. This
       #   optimization provides dedicated throughput to Amazon EBS and an
       #   optimized configuration stack to provide optimal EBS I/O performance.
-      #   This optimization isn\'t available with all instance types. Additional
+      #   This optimization isn't available with all instance types. Additional
       #   usage charges apply when using an EBS-optimized instance.
       #
       #   Default: `false`
@@ -305,7 +297,7 @@ module Aws
       # @option options [String] :description
       #   A description for the network interface.
       # @option options [String] :private_ip_address
-      #   The primary private IP address of the network interface. If you don\'t
+      #   The primary private IP address of the network interface. If you don't
       #   specify an IP address, Amazon EC2 selects one for you from the subnet
       #   range. If you specify an IP address, you cannot indicate any IP
       #   addresses specified in `privateIpAddresses` as primary (only one IP
@@ -317,7 +309,7 @@ module Aws
       # @option options [Integer] :secondary_private_ip_address_count
       #   The number of secondary private IP addresses to assign to a network
       #   interface. When you specify a number of secondary IP addresses, Amazon
-      #   EC2 selects these IP addresses within the subnet range. You can\'t
+      #   EC2 selects these IP addresses within the subnet range. You can't
       #   specify this option and specify more than one private IP address using
       #   `privateIpAddresses`.
       #
@@ -352,7 +344,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, Array<Types::Tag>] :tags
-      #   One or more tags. The `value` parameter is required, but if you don\'t
+      #   One or more tags. The `value` parameter is required, but if you don't
       #   want the tag to have a value, specify the parameter with no value, and
       #   we set the value to an empty string.
       # @return [Tag::Collection]

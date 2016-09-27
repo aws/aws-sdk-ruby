@@ -99,7 +99,7 @@ module Aws
       #
       #   If you have IAM resources, you can specify either capability. If you
       #   have IAM resources with custom names, you must specify
-      #   `CAPABILITY_NAMED_IAM`. If you don\'t specify this parameter, this
+      #   `CAPABILITY_NAMED_IAM`. If you don't specify this parameter, this
       #   action returns an `InsufficientCapabilities` error.
       #
       #   For more information, see [Acknowledging IAM Resources in AWS
@@ -125,7 +125,7 @@ module Aws
       #   particular AWS service), and `AWS::service_name::resource_logical_ID `
       #   (for a specific AWS resource).
       #
-      #   If the list of resource types doesn\'t include a resource that you\'re
+      #   If the list of resource types doesn't include a resource that you're
       #   creating, the stack creation fails. By default, AWS CloudFormation
       #   grants permissions to all resource types. AWS Identity and Access
       #   Management (IAM) uses this parameter for AWS CloudFormation-specific
@@ -193,7 +193,7 @@ module Aws
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
-      #   * Running stacks: You can specify either the stack\'s name or its
+      #   * Running stacks: You can specify either the stack's name or its
       #     unique stack ID.
       #
       #   * Deleted stacks: You must specify the unique stack ID.

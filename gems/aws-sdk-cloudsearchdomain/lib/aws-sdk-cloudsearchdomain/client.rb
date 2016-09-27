@@ -133,9 +133,9 @@ module Aws
       # CloudSearch Developer Guide*.
       #
       # The endpoint for submitting `Search` requests is domain-specific. You
-      # submit search requests to a domain\'s search endpoint. To get the
+      # submit search requests to a domain's search endpoint. To get the
       # search endpoint for your domain, use the Amazon CloudSearch
-      # configuration service `DescribeDomains` action. A domain\'s endpoints
+      # configuration service `DescribeDomains` action. A domain's endpoints
       # are also displayed on the domain dashboard in the Amazon CloudSearch
       # console.
       #
@@ -293,7 +293,7 @@ module Aws
       #   When you enable partial results, Amazon CloudSearch returns whatever
       #   results are available and includes the percentage of documents
       #   searched in the search results (percent-searched). This enables you to
-      #   more gracefully degrade your users\' search experience. For example,
+      #   more gracefully degrade your users' search experience. For example,
       #   rather than displaying no results, you could display the partial
       #   results and a message indicating that the results might be incomplete
       #   due to a temporary system outage.
@@ -353,7 +353,7 @@ module Aws
       #     parentheses. Disabling `near` disables the ability to use the ~
       #     operator to perform a sloppy phrase search. Disabling the `fuzzy`
       #     operator disables the ability to use the ~ operator to perform a
-      #     fuzzy search. `escape` disables the ability to use a backslash (`\`)
+      #     fuzzy search. `escape` disables the ability to use a backslash (``)
       #     to escape special characters within the search string. Disabling
       #     whitespace is an advanced option that prevents the parser from
       #     tokenizing on whitespace, which can be useful for Vietnamese. (It
@@ -375,7 +375,7 @@ module Aws
       #     `abstract` field, you could specify: `"phraseFields":["title^3",
       #     "plot"]` Valid values: The name of any `text` or `text-array` field
       #     and an optional numeric value greater than zero. Default: No fields.
-      #     If you don\'t specify any fields with `phraseFields`, proximity
+      #     If you don't specify any fields with `phraseFields`, proximity
       #     scoring is disabled even if `phraseSlop` is specified. Valid for:
       #     `dismax`.
       #   * `phraseSlop`\: An integer value that specifies how much matches can
@@ -392,12 +392,12 @@ module Aws
       #     `"explicitPhraseSlop":3`. Valid values: positive integers. Default:
       #     0. Valid for: `dismax`.
       #   * `tieBreaker`\: When a term in the search string is found in a
-      #     document\'s field, a score is calculated for that field based on how
+      #     document's field, a score is calculated for that field based on how
       #     common the word is in that field compared to other documents. If the
       #     term occurs in multiple fields within a document, by default only
-      #     the highest scoring field contributes to the document\'s overall
+      #     the highest scoring field contributes to the document's overall
       #     score. You can specify a `tieBreaker` value to enable the matches in
-      #     lower-scoring fields to contribute to the document\'s score. That
+      #     lower-scoring fields to contribute to the document's score. That
       #     way, if two documents have the same max field score for a particular
       #     term, the score for the document that has matches in more fields
       #     will be higher. The formula for calculating the score with a
@@ -542,8 +542,8 @@ module Aws
       #   resp.stats["String"].sum_of_squares #=> Float
       #   resp.stats["String"].mean #=> String
       #   resp.stats["String"].stddev #=> Float
+      # @overload search(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def search(params = {}, options = {})
         req = build_request(:search, params)
         req.send_request(options)
@@ -562,9 +562,9 @@ module Aws
       # Developer Guide*.
       #
       # The endpoint for submitting `Suggest` requests is domain-specific. You
-      # submit suggest requests to a domain\'s search endpoint. To get the
+      # submit suggest requests to a domain's search endpoint. To get the
       # search endpoint for your domain, use the Amazon CloudSearch
-      # configuration service `DescribeDomains` action. A domain\'s endpoints
+      # configuration service `DescribeDomains` action. A domain's endpoints
       # are also displayed on the domain dashboard in the Amazon CloudSearch
       # console.
       #
@@ -598,8 +598,8 @@ module Aws
       #   resp.suggest.suggestions[0].suggestion #=> String
       #   resp.suggest.suggestions[0].score #=> Integer
       #   resp.suggest.suggestions[0].id #=> String
+      # @overload suggest(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def suggest(params = {}, options = {})
         req = build_request(:suggest, params)
         req.send_request(options)
@@ -616,12 +616,12 @@ module Aws
       # data. The entire batch cannot exceed 5 MB. To get the best possible
       # upload performance, group add and delete operations in batches that
       # are close the 5 MB limit. Submitting a large volume of single-document
-      # batches can overload a domain\'s document service.
+      # batches can overload a domain's document service.
       #
       # The endpoint for submitting `UploadDocuments` requests is
       # domain-specific. To get the document endpoint for your domain, use the
       # Amazon CloudSearch configuration service `DescribeDomains` action. A
-      # domain\'s endpoints are also displayed on the domain dashboard in the
+      # domain's endpoints are also displayed on the domain dashboard in the
       # Amazon CloudSearch console.
       #
       # For more information about formatting your data for Amazon
@@ -661,8 +661,8 @@ module Aws
       #   resp.deletes #=> Integer
       #   resp.warnings #=> Array
       #   resp.warnings[0].message #=> String
+      # @overload upload_documents(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def upload_documents(params = {}, options = {})
         req = build_request(:upload_documents, params)
         req.send_request(options)

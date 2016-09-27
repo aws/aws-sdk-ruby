@@ -561,7 +561,7 @@ module Aws
       #
       # @!attribute [rw] actions_enabled
       #   Indicates whether actions should be executed during any changes to
-      #   the alarm\'s state.
+      #   the alarm's state.
       #   @return [Boolean]
       #
       # @!attribute [rw] ok_actions
@@ -581,9 +581,7 @@ module Aws
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
       #   specified as an Amazon Resource Name (ARN).
       #
-      #   <important markdown="1"> The current WSDL lists this attribute as `UnknownActions`.
-      #
-      #    </important>
+      #   The current WSDL lists this attribute as `UnknownActions`.
       #   @return [Array<String>]
       #
       # @!attribute [rw] state_value
@@ -591,32 +589,32 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] state_reason
-      #   A human-readable explanation for the alarm\'s state.
+      #   A human-readable explanation for the alarm's state.
       #   @return [String]
       #
       # @!attribute [rw] state_reason_data
-      #   An explanation for the alarm\'s state in machine-readable JSON
+      #   An explanation for the alarm's state in machine-readable JSON
       #   format
       #   @return [String]
       #
       # @!attribute [rw] state_updated_timestamp
-      #   The time stamp of the last update to the alarm\'s state.
+      #   The time stamp of the last update to the alarm's state.
       #   @return [Time]
       #
       # @!attribute [rw] metric_name
-      #   The name of the alarm\'s metric.
+      #   The name of the alarm's metric.
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   The namespace of alarm\'s associated metric.
+      #   The namespace of alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] statistic
-      #   The statistic to apply to the alarm\'s associated metric.
+      #   The statistic to apply to the alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   The list of dimensions associated with the alarm\'s associated
+      #   The list of dimensions associated with the alarm's associated
       #   metric.
       #   @return [Array<Types::Dimension>]
       #
@@ -625,7 +623,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] unit
-      #   The unit of the alarm\'s associated metric.
+      #   The unit of the alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] evaluation_periods
@@ -710,13 +708,11 @@ module Aws
       # @!attribute [rw] value
       #   The value for the metric.
       #
-      #   <important markdown="1"> Although the `Value` parameter accepts numbers of type `Double`,
+      #   Although the `Value` parameter accepts numbers of type `Double`,
       #   Amazon CloudWatch rejects values that are either too small or too
       #   large. Values must be in the range of 8.515920e-109 to 1.174271e+108
       #   (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
       #   (e.g., NaN, +Infinity, -Infinity) are not supported.
-      #
-      #    </important>
       #   @return [Float]
       #
       # @!attribute [rw] statistic_values
@@ -764,7 +760,7 @@ module Aws
       #       }
       # @!attribute [rw] alarm_name
       #   The descriptive name for the alarm. This name must be unique within
-      #   the user\'s AWS account
+      #   the user's AWS account
       #   @return [String]
       #
       # @!attribute [rw] alarm_description
@@ -773,7 +769,7 @@ module Aws
       #
       # @!attribute [rw] actions_enabled
       #   Indicates whether or not actions should be executed during any
-      #   changes to the alarm\'s state.
+      #   changes to the alarm's state.
       #   @return [Boolean]
       #
       # @!attribute [rw] ok_actions
@@ -846,19 +842,19 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] metric_name
-      #   The name for the alarm\'s associated metric.
+      #   The name for the alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   The namespace for the alarm\'s associated metric.
+      #   The namespace for the alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] statistic
-      #   The statistic to apply to the alarm\'s associated metric.
+      #   The statistic to apply to the alarm's associated metric.
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   The dimensions for the alarm\'s associated metric.
+      #   The dimensions for the alarm's associated metric.
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] period
@@ -866,7 +862,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] unit
-      #   The statistic\'s unit of measure. For example, the units for the
+      #   The statistic's unit of measure. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
       #   number of bytes that an instance receives on all network interfaces.
       #   You can also specify a unit when you create a custom metric. Units
@@ -942,8 +938,8 @@ module Aws
       # @!attribute [rw] namespace
       #   The namespace for the metric data.
       #
-      #   <note markdown="1"> You cannot specify a namespace that begins with \"AWS/\". Namespaces
-      #   that begin with \"AWS/\" are reserved for other Amazon Web Services
+      #   <note markdown="1"> You cannot specify a namespace that begins with "AWS/". Namespaces
+      #   that begin with "AWS/" are reserved for other Amazon Web Services
       #   products that send metrics to Amazon CloudWatch.
       #
       #    </note>
@@ -970,7 +966,7 @@ module Aws
       #       }
       # @!attribute [rw] alarm_name
       #   The descriptive name for the alarm. This name must be unique within
-      #   the user\'s AWS account. The maximum length is 255 characters.
+      #   the user's AWS account. The maximum length is 255 characters.
       #   @return [String]
       #
       # @!attribute [rw] state_value

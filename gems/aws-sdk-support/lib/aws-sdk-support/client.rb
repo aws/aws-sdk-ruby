@@ -172,8 +172,8 @@ module Aws
       # @example Response structure
       #   resp.attachment_set_id #=> String
       #   resp.expiry_time #=> String
+      # @overload add_attachments_to_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_attachments_to_set(params = {}, options = {})
         req = build_request(:add_attachments_to_set, params)
         req.send_request(options)
@@ -215,8 +215,8 @@ module Aws
       #
       # @example Response structure
       #   resp.result #=> Boolean
+      # @overload add_communication_to_case(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_communication_to_case(params = {}, options = {})
         req = build_request(:add_communication_to_case, params)
         req.send_request(options)
@@ -227,8 +227,8 @@ module Aws
       # page. Its parameters require you to specify the following information:
       #
       # 1.  **IssueType.** The type of issue for the case. You can specify
-      #     either \"customer-service\" or \"technical.\" If you do not
-      #     indicate a value, the default is \"technical.\"
+      #     either "customer-service" or "technical." If you do not
+      #     indicate a value, the default is "technical."
       # 2.  **ServiceCode.** The code for an AWS service. You obtain the
       #     `ServiceCode` by calling DescribeServices.
       # 3.  **CategoryCode.** The category for the service defined for the
@@ -275,7 +275,7 @@ module Aws
       #   The code for the severity level returned by the call to
       #   DescribeSeverityLevels.
       #
-      #   <note markdown="1">The availability of severity levels depends on each customer\'s
+      #   <note markdown="1">The availability of severity levels depends on each customer's
       #   support subscription. In other words, your subscription may not
       #   necessarily require the urgent level of response time.
       #
@@ -290,13 +290,13 @@ module Aws
       #   correspondence.
       # @option params [String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @option params [String] :issue_type
       #   The type of issue for the case. You can specify either
-      #   \"customer-service\" or \"technical.\" If you do not indicate a value,
-      #   the default is \"technical.\"
+      #   "customer-service" or "technical." If you do not indicate a value,
+      #   the default is "technical."
       # @option params [String] :attachment_set_id
       #   The ID of a set of one or more attachments for the case. Create the
       #   set by using AddAttachmentsToSet.
@@ -319,8 +319,8 @@ module Aws
       #
       # @example Response structure
       #   resp.case_id #=> String
+      # @overload create_case(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_case(params = {}, options = {})
         req = build_request(:create_case, params)
         req.send_request(options)
@@ -346,8 +346,8 @@ module Aws
       # @example Response structure
       #   resp.attachment.file_name #=> String
       #   resp.attachment.data #=> String
+      # @overload describe_attachment(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_attachment(params = {}, options = {})
         req = build_request(:describe_attachment, params)
         req.send_request(options)
@@ -390,7 +390,7 @@ module Aws
       #   The maximum number of results to return before paginating.
       # @option params [String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @option params [Boolean] :include_communications
@@ -438,8 +438,8 @@ module Aws
       #   resp.cases[0].cc_email_addresses[0] #=> String
       #   resp.cases[0].language #=> String
       #   resp.next_token #=> String
+      # @overload describe_cases(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_cases(params = {}, options = {})
         req = build_request(:describe_cases, params)
         req.send_request(options)
@@ -498,8 +498,8 @@ module Aws
       #   resp.communications[0].attachment_set[0].attachment_id #=> String
       #   resp.communications[0].attachment_set[0].file_name #=> String
       #   resp.next_token #=> String
+      # @overload describe_communications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_communications(params = {}, options = {})
         req = build_request(:describe_communications, params)
         req.send_request(options)
@@ -526,7 +526,7 @@ module Aws
       #   A JSON-formatted list of service codes available for AWS services.
       # @option params [String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -546,8 +546,8 @@ module Aws
       #   resp.services[0].categories #=> Array
       #   resp.services[0].categories[0].code #=> String
       #   resp.services[0].categories[0].name #=> String
+      # @overload describe_services(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_services(params = {}, options = {})
         req = build_request(:describe_services, params)
         req.send_request(options)
@@ -558,7 +558,7 @@ module Aws
       # CaseDetails data type included in any CreateCase request.
       # @option params [String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @return [Types::DescribeSeverityLevelsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -574,8 +574,8 @@ module Aws
       #   resp.severity_levels #=> Array
       #   resp.severity_levels[0].code #=> String
       #   resp.severity_levels[0].name #=> String
+      # @overload describe_severity_levels(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_severity_levels(params = {}, options = {})
         req = build_request(:describe_severity_levels, params)
         req.send_request(options)
@@ -600,8 +600,8 @@ module Aws
       #   resp.statuses[0].check_id #=> String
       #   resp.statuses[0].status #=> String
       #   resp.statuses[0].millis_until_next_refreshable #=> Integer
+      # @overload describe_trusted_advisor_check_refresh_statuses(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trusted_advisor_check_refresh_statuses(params = {}, options = {})
         req = build_request(:describe_trusted_advisor_check_refresh_statuses, params)
         req.send_request(options)
@@ -620,15 +620,15 @@ module Aws
       #
       # In addition, the response contains these fields:
       #
-      # * **Status.** The alert status of the check: \"ok\" (green),
-      #   \"warning\" (yellow), \"error\" (red), or \"not\_available\".
+      # * **Status.** The alert status of the check: "ok" (green),
+      #   "warning" (yellow), "error" (red), or "not\_available".
       # * **Timestamp.** The time of the last refresh of the check.
       # * **CheckId.** The unique identifier for the check.
       # @option params [required, String] :check_id
       #   The unique identifier for the Trusted Advisor check.
       # @option params [String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @return [Types::DescribeTrustedAdvisorCheckResultResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -658,8 +658,8 @@ module Aws
       #   resp.result.flagged_resources[0].is_suppressed #=> Boolean
       #   resp.result.flagged_resources[0].metadata #=> Array
       #   resp.result.flagged_resources[0].metadata[0] #=> String
+      # @overload describe_trusted_advisor_check_result(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trusted_advisor_check_result(params = {}, options = {})
         req = build_request(:describe_trusted_advisor_check_result, params)
         req.send_request(options)
@@ -693,8 +693,8 @@ module Aws
       #   resp.summaries[0].resources_summary.resources_suppressed #=> Integer
       #   resp.summaries[0].category_specific_summary.cost_optimizing.estimated_monthly_savings #=> Float
       #   resp.summaries[0].category_specific_summary.cost_optimizing.estimated_percent_monthly_savings #=> Float
+      # @overload describe_trusted_advisor_check_summaries(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trusted_advisor_check_summaries(params = {}, options = {})
         req = build_request(:describe_trusted_advisor_check_summaries, params)
         req.send_request(options)
@@ -702,12 +702,12 @@ module Aws
 
       # Returns information about all available Trusted Advisor checks,
       # including name, ID, category, description, and metadata. You must
-      # specify a language code; English (\"en\") and Japanese (\"ja\") are
+      # specify a language code; English ("en") and Japanese ("ja") are
       # currently supported. The response contains a
       # TrustedAdvisorCheckDescription for each check.
       # @option params [required, String] :language
       #   The ISO 639-1 code for the language in which AWS provides support. AWS
-      #   Support currently supports English (\"en\") and Japanese (\"ja\").
+      #   Support currently supports English ("en") and Japanese ("ja").
       #   Language parameters must be passed explicitly for operations that take
       #   them.
       # @return [Types::DescribeTrustedAdvisorChecksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -727,8 +727,8 @@ module Aws
       #   resp.checks[0].category #=> String
       #   resp.checks[0].metadata #=> Array
       #   resp.checks[0].metadata[0] #=> String
+      # @overload describe_trusted_advisor_checks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_trusted_advisor_checks(params = {}, options = {})
         req = build_request(:describe_trusted_advisor_checks, params)
         req.send_request(options)
@@ -741,8 +741,8 @@ module Aws
       # The response contains a TrustedAdvisorCheckRefreshStatus object, which
       # contains these fields:
       #
-      # * **Status.** The refresh status of the check: \"none\", \"enqueued\",
-      #   \"processing\", \"success\", or \"abandoned\".
+      # * **Status.** The refresh status of the check: "none", "enqueued",
+      #   "processing", "success", or "abandoned".
       # * **MillisUntilNextRefreshable.** The amount of time, in milliseconds,
       #   until the check is eligible for refresh.
       # * **CheckId.** The unique identifier for the check.
@@ -761,8 +761,8 @@ module Aws
       #   resp.status.check_id #=> String
       #   resp.status.status #=> String
       #   resp.status.millis_until_next_refreshable #=> Integer
+      # @overload refresh_trusted_advisor_check(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def refresh_trusted_advisor_check(params = {}, options = {})
         req = build_request(:refresh_trusted_advisor_check, params)
         req.send_request(options)
@@ -787,8 +787,8 @@ module Aws
       # @example Response structure
       #   resp.initial_case_status #=> String
       #   resp.final_case_status #=> String
+      # @overload resolve_case(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def resolve_case(params = {}, options = {})
         req = build_request(:resolve_case, params)
         req.send_request(options)

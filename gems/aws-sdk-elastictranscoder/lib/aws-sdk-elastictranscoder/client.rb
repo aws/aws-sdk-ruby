@@ -139,8 +139,8 @@ module Aws
       #   resp = client.cancel_job({
       #     id: "Id", # required
       #   })
+      # @overload cancel_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_job(params = {}, options = {})
         req = build_request(:cancel_job, params)
         req.send_request(options)
@@ -589,8 +589,8 @@ module Aws
       #   resp.job.timing.submit_time_millis #=> Integer
       #   resp.job.timing.start_time_millis #=> Integer
       #   resp.job.timing.finish_time_millis #=> Integer
+      # @overload create_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_job(params = {}, options = {})
         req = build_request(:create_job, params)
         req.send_request(options)
@@ -618,9 +618,9 @@ module Aws
       #     the transcoded files, thumbnails, and playlists.
       #   * You do not want to specify the permissions that Elastic Transcoder
       #     grants to the files.
-      #     <important>When Elastic Transcoder saves files in `OutputBucket`, it
-      #   grants full control over the files only to the AWS account that owns
-      #   the role that is specified by `Role`.</important>
+      #     When Elastic Transcoder saves files in `OutputBucket`, it grants
+      #     full control over the files only to the AWS account that owns the
+      #     role that is specified by `Role`.
       #
       #   * You want to associate the transcoded files and thumbnails with the
       #     Amazon S3 Standard storage class.
@@ -638,7 +638,7 @@ module Aws
       #   this pipeline.
       #
       #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
-      #   don\'t need to provide a key with your job because a default key,
+      #   don't need to provide a key with your job because a default key,
       #   known as an AWS-KMS key, is created for you automatically. You need to
       #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
       #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
@@ -647,7 +647,8 @@ module Aws
       #   The Amazon Simple Notification Service (Amazon SNS) topic that you
       #   want to notify to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic in
+      #   the Amazon SNS console.
       #
       #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
       #     Service (Amazon SNS) topic that you want to notify when Elastic
@@ -697,7 +698,7 @@ module Aws
       #       require that users use CloudFront URLs instead of Amazon S3 URLs,
       #       see Using an Origin Access Identity to Restrict Access to Your
       #       Amazon S3 Content.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -736,7 +737,7 @@ module Aws
       #   want to assign to the files.
       #
       #   If you specify values for `ContentConfig`, you must also specify
-      #   values for `ThumbnailConfig` even if you don\'t want to create
+      #   values for `ThumbnailConfig` even if you don't want to create
       #   thumbnails.
       #
       #   If you specify values for `ContentConfig` and `ThumbnailConfig`, omit
@@ -754,7 +755,7 @@ module Aws
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -856,8 +857,8 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      # @overload create_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_pipeline(params = {}, options = {})
         req = build_request(:create_pipeline, params)
         req.send_request(options)
@@ -866,7 +867,17 @@ module Aws
       # The CreatePreset operation creates a preset with settings that you
       # specify.
       #
-      # <important>Elastic Transcoder checks the CreatePreset settings to ensure that they meet Elastic Transcoder requirements and to determine whether they comply with H.264 standards. If your settings are not valid for Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response (`ValidationException`) and does not create the preset. If the settings are valid for Elastic Transcoder but aren't strictly compliant with the H.264 standard, Elastic Transcoder creates the preset and returns a warning message in the response. This helps you determine whether your settings comply with the H.264 standard while giving you greater flexibility with respect to the video that Elastic Transcoder produces.</important>
+      # Elastic Transcoder checks the CreatePreset settings to ensure that
+      # they meet Elastic Transcoder requirements and to determine whether
+      # they comply with H.264 standards. If your settings are not valid for
+      # Elastic Transcoder, Elastic Transcoder returns an HTTP 400 response
+      # (`ValidationException`) and does not create the preset. If the
+      # settings are valid for Elastic Transcoder but aren't strictly
+      # compliant with the H.264 standard, Elastic Transcoder creates the
+      # preset and returns a warning message in the response. This helps you
+      # determine whether your settings comply with the H.264 standard while
+      # giving you greater flexibility with respect to the video that Elastic
+      # Transcoder produces.
       #
       # Elastic Transcoder uses the H.264 video-compression format. For more
       # information, see the International Telecommunication Union publication
@@ -1006,8 +1017,8 @@ module Aws
       #   resp.preset.thumbnails.padding_policy #=> String
       #   resp.preset.type #=> String
       #   resp.warning #=> String
+      # @overload create_preset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_preset(params = {}, options = {})
         req = build_request(:create_preset, params)
         req.send_request(options)
@@ -1016,7 +1027,7 @@ module Aws
       # The DeletePipeline operation removes a pipeline.
       #
       # You can only delete a pipeline that has never been used or that is not
-      # currently in use (doesn\'t contain any active jobs). If the pipeline
+      # currently in use (doesn't contain any active jobs). If the pipeline
       # is currently in use, `DeletePipeline` returns an error.
       # @option params [required, String] :id
       #   The identifier of the pipeline that you want to delete.
@@ -1026,17 +1037,17 @@ module Aws
       #   resp = client.delete_pipeline({
       #     id: "Id", # required
       #   })
+      # @overload delete_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_pipeline(params = {}, options = {})
         req = build_request(:delete_pipeline, params)
         req.send_request(options)
       end
 
-      # The DeletePreset operation removes a preset that you\'ve added in an
+      # The DeletePreset operation removes a preset that you've added in an
       # AWS region.
       #
-      # <note markdown="1"> You can\'t delete the default presets that are included with Elastic
+      # <note markdown="1"> You can't delete the default presets that are included with Elastic
       # Transcoder.
       #
       #  </note>
@@ -1049,8 +1060,8 @@ module Aws
       #   resp = client.delete_preset({
       #     id: "Id", # required
       #   })
+      # @overload delete_preset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_preset(params = {}, options = {})
         req = build_request(:delete_preset, params)
         req.send_request(options)
@@ -1256,8 +1267,8 @@ module Aws
       #   resp.jobs[0].timing.start_time_millis #=> Integer
       #   resp.jobs[0].timing.finish_time_millis #=> Integer
       #   resp.next_page_token #=> String
+      # @overload list_jobs_by_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs_by_pipeline(params = {}, options = {})
         req = build_request(:list_jobs_by_pipeline, params)
         req.send_request(options)
@@ -1462,8 +1473,8 @@ module Aws
       #   resp.jobs[0].timing.start_time_millis #=> Integer
       #   resp.jobs[0].timing.finish_time_millis #=> Integer
       #   resp.next_page_token #=> String
+      # @overload list_jobs_by_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs_by_status(params = {}, options = {})
         req = build_request(:list_jobs_by_status, params)
         req.send_request(options)
@@ -1519,15 +1530,15 @@ module Aws
       #   resp.pipelines[0].thumbnail_config.permissions[0].access #=> Array
       #   resp.pipelines[0].thumbnail_config.permissions[0].access[0] #=> String
       #   resp.next_page_token #=> String
+      # @overload list_pipelines(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_pipelines(params = {}, options = {})
         req = build_request(:list_pipelines, params)
         req.send_request(options)
       end
 
       # The ListPresets operation gets a list of the default presets included
-      # with Elastic Transcoder and the presets that you\'ve added in an AWS
+      # with Elastic Transcoder and the presets that you've added in an AWS
       # region.
       # @option params [String] :ascending
       #   To list presets in chronological order by the date and time that they
@@ -1600,8 +1611,8 @@ module Aws
       #   resp.presets[0].thumbnails.padding_policy #=> String
       #   resp.presets[0].type #=> String
       #   resp.next_page_token #=> String
+      # @overload list_presets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_presets(params = {}, options = {})
         req = build_request(:list_presets, params)
         req.send_request(options)
@@ -1790,8 +1801,8 @@ module Aws
       #   resp.job.timing.submit_time_millis #=> Integer
       #   resp.job.timing.start_time_millis #=> Integer
       #   resp.job.timing.finish_time_millis #=> Integer
+      # @overload read_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def read_job(params = {}, options = {})
         req = build_request(:read_job, params)
         req.send_request(options)
@@ -1840,8 +1851,8 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      # @overload read_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def read_pipeline(params = {}, options = {})
         req = build_request(:read_pipeline, params)
         req.send_request(options)
@@ -1910,8 +1921,8 @@ module Aws
       #   resp.preset.thumbnails.sizing_policy #=> String
       #   resp.preset.thumbnails.padding_policy #=> String
       #   resp.preset.type #=> String
+      # @overload read_preset(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def read_preset(params = {}, options = {})
         req = build_request(:read_preset, params)
         req.send_request(options)
@@ -1954,18 +1965,18 @@ module Aws
       #   resp.success #=> String
       #   resp.messages #=> Array
       #   resp.messages[0] #=> String
+      # @overload test_role(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_role(params = {}, options = {})
         req = build_request(:test_role, params)
         req.send_request(options)
       end
 
       # Use the `UpdatePipeline` operation to update settings for a pipeline.
-      # <important>When you change pipeline settings, your changes take effect
+      # When you change pipeline settings, your changes take effect
       # immediately. Jobs that you have already submitted and that Elastic
       # Transcoder has not started to process are affected in addition to jobs
-      # that you submit after you change settings. </important>
+      # that you submit after you change settings.
       # @option params [required, String] :id
       #   The ID of the pipeline that you want to update.
       # @option params [String] :name
@@ -1984,7 +1995,7 @@ module Aws
       #   this pipeline.
       #
       #   If you use either `S3` or `S3-AWS-KMS` as your `Encryption:Mode`, you
-      #   don\'t need to provide a key with your job because a default key,
+      #   don't need to provide a key with your job because a default key,
       #   known as an AWS-KMS key, is created for you automatically. You need to
       #   provide an AWS-KMS key only if you want to use a non-default AWS-KMS
       #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
@@ -1993,7 +2004,8 @@ module Aws
       #   The Amazon Simple Notification Service (Amazon SNS) topic or topics to
       #   notify in order to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic in
+      #   the Amazon SNS console.
       # @option params [Types::PipelineOutputConfig] :content_config
       #   The optional `ContentConfig` object specifies information about the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -2024,7 +2036,7 @@ module Aws
       #       require that users use CloudFront URLs instead of Amazon S3 URLs,
       #       see Using an Origin Access Identity to Restrict Access to Your
       #       Amazon S3 Content.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -2063,7 +2075,7 @@ module Aws
       #   want to assign to the files.
       #
       #   If you specify values for `ContentConfig`, you must also specify
-      #   values for `ThumbnailConfig` even if you don\'t want to create
+      #   values for `ThumbnailConfig` even if you don't want to create
       #   thumbnails.
       #
       #   If you specify values for `ContentConfig` and `ThumbnailConfig`, omit
@@ -2081,7 +2093,7 @@ module Aws
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution.
-      #       <important>A canonical user ID is not the same as an AWS account number.</important>
+      #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
@@ -2183,8 +2195,8 @@ module Aws
       #   resp.warnings #=> Array
       #   resp.warnings[0].code #=> String
       #   resp.warnings[0].message #=> String
+      # @overload update_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_pipeline(params = {}, options = {})
         req = build_request(:update_pipeline, params)
         req.send_request(options)
@@ -2202,7 +2214,8 @@ module Aws
       #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
       #   topic that you want to notify to report job status.
       #
-      #   <important>To receive notifications, you must also subscribe to the new topic in the Amazon SNS console.</important>
+      #   To receive notifications, you must also subscribe to the new topic in
+      #   the Amazon SNS console.
       #
       #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
       #     Service (Amazon SNS) topic that you want to notify when Elastic
@@ -2260,8 +2273,8 @@ module Aws
       #   resp.pipeline.thumbnail_config.permissions[0].grantee #=> String
       #   resp.pipeline.thumbnail_config.permissions[0].access #=> Array
       #   resp.pipeline.thumbnail_config.permissions[0].access[0] #=> String
+      # @overload update_pipeline_notifications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_pipeline_notifications(params = {}, options = {})
         req = build_request(:update_pipeline_notifications, params)
         req.send_request(options)
@@ -2271,7 +2284,7 @@ module Aws
       # so that the pipeline stops or restarts the processing of jobs.
       #
       # Changing the pipeline status is useful if you want to cancel one or
-      # more jobs. You can\'t cancel jobs after Elastic Transcoder has started
+      # more jobs. You can't cancel jobs after Elastic Transcoder has started
       # processing them; if you pause the pipeline to which you submitted the
       # jobs, you have more time to get the job IDs for the jobs that you want
       # to cancel, and to send a CancelJob request.
@@ -2319,8 +2332,8 @@ module Aws
       #   resp.pipeline.thumbnail_config.permissions[0].grantee #=> String
       #   resp.pipeline.thumbnail_config.permissions[0].access #=> Array
       #   resp.pipeline.thumbnail_config.permissions[0].access[0] #=> String
+      # @overload update_pipeline_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_pipeline_status(params = {}, options = {})
         req = build_request(:update_pipeline_status, params)
         req.send_request(options)

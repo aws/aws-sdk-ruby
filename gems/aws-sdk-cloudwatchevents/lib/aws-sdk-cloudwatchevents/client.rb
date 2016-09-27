@@ -148,8 +148,8 @@ module Aws
       #   resp = client.delete_rule({
       #     name: "RuleName", # required
       #   })
+      # @overload delete_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_rule(params = {}, options = {})
         req = build_request(:delete_rule, params)
         req.send_request(options)
@@ -181,14 +181,14 @@ module Aws
       #   resp.state #=> String, one of "ENABLED", "DISABLED"
       #   resp.description #=> String
       #   resp.role_arn #=> String
+      # @overload describe_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_rule(params = {}, options = {})
         req = build_request(:describe_rule, params)
         req.send_request(options)
       end
 
-      # Disables a rule. A disabled rule won\'t match any events, and won\'t
+      # Disables a rule. A disabled rule won't match any events, and won't
       # self-trigger if it has a schedule expression.
       #
       # **Note:** When you disable a rule, incoming events might still
@@ -202,8 +202,8 @@ module Aws
       #   resp = client.disable_rule({
       #     name: "RuleName", # required
       #   })
+      # @overload disable_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def disable_rule(params = {}, options = {})
         req = build_request(:disable_rule, params)
         req.send_request(options)
@@ -222,8 +222,8 @@ module Aws
       #   resp = client.enable_rule({
       #     name: "RuleName", # required
       #   })
+      # @overload enable_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def enable_rule(params = {}, options = {})
         req = build_request(:enable_rule, params)
         req.send_request(options)
@@ -260,8 +260,8 @@ module Aws
       #   resp.rule_names #=> Array
       #   resp.rule_names[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_rule_names_by_target(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_rule_names_by_target(params = {}, options = {})
         req = build_request(:list_rule_names_by_target, params)
         req.send_request(options)
@@ -302,8 +302,8 @@ module Aws
       #   resp.rules[0].schedule_expression #=> String
       #   resp.rules[0].role_arn #=> String
       #   resp.next_token #=> String
+      # @overload list_rules(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_rules(params = {}, options = {})
         req = build_request(:list_rules, params)
         req.send_request(options)
@@ -336,8 +336,8 @@ module Aws
       #   resp.targets[0].input #=> String
       #   resp.targets[0].input_path #=> String
       #   resp.next_token #=> String
+      # @overload list_targets_by_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_targets_by_rule(params = {}, options = {})
         req = build_request(:list_targets_by_rule, params)
         req.send_request(options)
@@ -373,8 +373,8 @@ module Aws
       #   resp.entries[0].event_id #=> String
       #   resp.entries[0].error_code #=> String
       #   resp.entries[0].error_message #=> String
+      # @overload put_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_events(params = {}, options = {})
         req = build_request(:put_events, params)
         req.send_request(options)
@@ -403,8 +403,8 @@ module Aws
       # @option params [required, String] :name
       #   The name of the rule that you are creating or updating.
       # @option params [String] :schedule_expression
-      #   The scheduling expression. For example, \"cron(0 20 \* \* ? \*)\",
-      #   \"rate(5 minutes)\".
+      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   "rate(5 minutes)".
       # @option params [String] :event_pattern
       #   The event pattern.
       # @option params [String] :state
@@ -430,8 +430,8 @@ module Aws
       #
       # @example Response structure
       #   resp.rule_arn #=> String
+      # @overload put_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_rule(params = {}, options = {})
         req = build_request(:put_rule, params)
         req.send_request(options)
@@ -500,8 +500,8 @@ module Aws
       #   resp.failed_entries[0].target_id #=> String
       #   resp.failed_entries[0].error_code #=> String
       #   resp.failed_entries[0].error_message #=> String
+      # @overload put_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_targets(params = {}, options = {})
         req = build_request(:put_targets, params)
         req.send_request(options)
@@ -534,8 +534,8 @@ module Aws
       #   resp.failed_entries[0].target_id #=> String
       #   resp.failed_entries[0].error_code #=> String
       #   resp.failed_entries[0].error_message #=> String
+      # @overload remove_targets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_targets(params = {}, options = {})
         req = build_request(:remove_targets, params)
         req.send_request(options)
@@ -564,8 +564,8 @@ module Aws
       #
       # @example Response structure
       #   resp.result #=> Boolean
+      # @overload test_event_pattern(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_event_pattern(params = {}, options = {})
         req = build_request(:test_event_pattern, params)
         req.send_request(options)

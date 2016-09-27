@@ -101,11 +101,11 @@ module Aws
       #
       # @!attribute [rw] external_id
       #   A unique identifier that is used by third parties when assuming
-      #   roles in their customers\' accounts. For each role that the third
+      #   roles in their customers' accounts. For each role that the third
       #   party can assume, they should instruct their customers to ensure the
-      #   role\'s trust policy checks for the external ID that the third party
+      #   role's trust policy checks for the external ID that the third party
       #   generated. Each time the third party assumes the role, they should
-      #   pass the customer\'s external ID. The external ID is useful in order
+      #   pass the customer's external ID. The external ID is useful in order
       #   to help third parties bind a role to the customer who created it.
       #   For more information about the external ID, see [How to Use an
       #   External ID When Granting Access to Your AWS Resources to a Third
@@ -141,7 +141,7 @@ module Aws
       #   role being assumed requires MFA (that is, if the policy includes a
       #   condition that tests for MFA). If the role being assumed requires
       #   MFA and if the `TokenCode` value is missing or expired, the
-      #   `AssumeRole` call returns an \"access denied\" error.
+      #   `AssumeRole` call returns an "access denied" error.
       #
       #   The format for this parameter, as described by its regex pattern, is
       #   a sequence of six numeric digits.
@@ -261,7 +261,7 @@ module Aws
       #   The duration, in seconds, of the role session. The value can range
       #   from 900 seconds (15 minutes) to 3600 seconds (1 hour). By default,
       #   the value is set to 3600 seconds. An expiration can also be
-      #   specified in the SAML authentication response\'s
+      #   specified in the SAML authentication response's
       #   `SessionNotOnOrAfter` value. The actual expiration time is whichever
       #   value is shorter.
       #
@@ -499,7 +499,7 @@ module Aws
       #   identifier is typically unique to the user and the application that
       #   acquired the `WebIdentityToken` (pairwise identifier). For OpenID
       #   Connect ID tokens, this field contains the value returned by the
-      #   identity provider as the token\'s `sub` (Subject) claim.
+      #   identity provider as the token's `sub` (Subject) claim.
       #   @return [String]
       #
       # @!attribute [rw] assumed_role_user
@@ -763,7 +763,7 @@ module Aws
       # @!attribute [rw] federated_user
       #   Identifiers for the federated user associated with the credentials
       #   (such as `arn:aws:sts::123456789012:federated-user/Bob` or
-      #   `123456789012:Bob`). You can use the federated user\'s ARN in your
+      #   `123456789012:Bob`). You can use the federated user's ARN in your
       #   resource-based policies, such as an Amazon S3 bucket policy.
       #   @return [Types::FederatedUser]
       #
@@ -805,7 +805,7 @@ module Aws
       #   `GAHT12345678`) or an Amazon Resource Name (ARN) for a virtual
       #   device (such as `arn:aws:iam::123456789012:mfa/user`). You can find
       #   the device for an IAM user by going to the AWS Management Console
-      #   and viewing the user\'s security credentials.
+      #   and viewing the user's security credentials.
       #
       #   The format for this parameter, as described by its regex pattern, is
       #   a string of characters consisting of upper- and lower-case
@@ -818,7 +818,7 @@ module Aws
       #   policy requires the IAM user to submit an MFA code, specify this
       #   value. If MFA authentication is required, and the user does not
       #   provide a code when requesting a set of temporary security
-      #   credentials, the user will receive an \"access denied\" response
+      #   credentials, the user will receive an "access denied" response
       #   when requesting resources that require MFA authentication.
       #
       #   The format for this parameter, as described by its regex pattern, is

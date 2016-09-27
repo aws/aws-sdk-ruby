@@ -159,7 +159,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description of the ByteMatchSet. You can\'t change
+      #   A friendly name or description of the ByteMatchSet. You can't change
       #   `Name` after you create a `ByteMatchSet`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
@@ -184,8 +184,8 @@ module Aws
       #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
       #   resp.change_token #=> String
+      # @overload create_byte_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_byte_match_set(params = {}, options = {})
         req = build_request(:create_byte_match_set, params)
         req.send_request(options)
@@ -193,7 +193,7 @@ module Aws
 
       # Creates an IPSet, which you use to specify which web requests you want
       # to allow or block based on the IP addresses that the requests
-      # originate from. For example, if you\'re receiving a lot of requests
+      # originate from. For example, if you're receiving a lot of requests
       # from one or more individual IP addresses or one or more ranges of IP
       # addresses and you want to block the requests, you can create an
       # `IPSet` that contains those IP addresses and then configure AWS WAF to
@@ -216,7 +216,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description of the IPSet. You can\'t change `Name`
+      #   A friendly name or description of the IPSet. You can't change `Name`
       #   after you create the `IPSet`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
@@ -238,8 +238,8 @@ module Aws
       #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
       #   resp.change_token #=> String
+      # @overload create_ip_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_ip_set(params = {}, options = {})
         req = build_request(:create_ip_set, params)
         req.send_request(options)
@@ -281,12 +281,12 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description of the Rule. You can\'t change the name
+      #   A friendly name or description of the Rule. You can't change the name
       #   of a `Rule` after you create it.
       # @option params [required, String] :metric_name
       #   A friendly name or description for the metrics for this `Rule`. The
       #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-      #   name can\'t contain whitespace. You can\'t change the name of the
+      #   name can't contain whitespace. You can't change the name of the
       #   metric after you create the `Rule`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
@@ -311,8 +311,8 @@ module Aws
       #   resp.rule.predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
       #   resp.rule.predicates[0].data_id #=> String
       #   resp.change_token #=> String
+      # @overload create_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_rule(params = {}, options = {})
         req = build_request(:create_rule, params)
         req.send_request(options)
@@ -346,7 +346,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description of the SizeConstraintSet. You can\'t
+      #   A friendly name or description of the SizeConstraintSet. You can't
       #   change `Name` after you create a `SizeConstraintSet`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
@@ -371,8 +371,8 @@ module Aws
       #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
       #   resp.size_constraint_set.size_constraints[0].size #=> Integer
       #   resp.change_token #=> String
+      # @overload create_size_constraint_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_size_constraint_set(params = {}, options = {})
         req = build_request(:create_size_constraint_set, params)
         req.send_request(options)
@@ -404,7 +404,7 @@ module Aws
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
       #   A friendly name or description for the SqlInjectionMatchSet that
-      #   you\'re creating. You can\'t change `Name` after you create the
+      #   you're creating. You can't change `Name` after you create the
       #   `SqlInjectionMatchSet`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
@@ -427,8 +427,8 @@ module Aws
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.change_token #=> String
+      # @overload create_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_sql_injection_match_set(params = {}, options = {})
         req = build_request(:create_sql_injection_match_set, params)
         req.send_request(options)
@@ -440,7 +440,7 @@ module Aws
       # each `Rule`.
       #
       # You also specify a default action, either `ALLOW` or `BLOCK`. If a web
-      # request doesn\'t match any of the `Rules` in a `WebACL`, AWS WAF
+      # request doesn't match any of the `Rules` in a `WebACL`, AWS WAF
       # responds to the request with the default action.
       #
       # To create and configure a `WebACL`, perform the following steps:
@@ -467,15 +467,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description of the WebACL. You can\'t change `Name`
+      #   A friendly name or description of the WebACL. You can't change `Name`
       #   after you create the `WebACL`.
       # @option params [required, String] :metric_name
       #   A friendly name or description for the metrics for this `WebACL`. The
       #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
-      #   name can\'t contain whitespace. You can\'t change `MetricName` after
+      #   name can't contain whitespace. You can't change `MetricName` after
       #   you create the `WebACL`.
       # @option params [required, Types::WafAction] :default_action
-      #   The action that you want AWS WAF to take when a request doesn\'t match
+      #   The action that you want AWS WAF to take when a request doesn't match
       #   the criteria specified in any of the `Rule` objects that are
       #   associated with the `WebACL`.
       # @option params [required, String] :change_token
@@ -505,8 +505,8 @@ module Aws
       #   resp.web_acl.rules[0].rule_id #=> String
       #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
       #   resp.change_token #=> String
+      # @overload create_web_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_web_acl(params = {}, options = {})
         req = build_request(:create_web_acl, params)
         req.send_request(options)
@@ -535,8 +535,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/waf/latest/developerguide/
       # @option params [required, String] :name
-      #   A friendly name or description for the XssMatchSet that you\'re
-      #   creating. You can\'t change `Name` after you create the `XssMatchSet`.
+      #   A friendly name or description for the XssMatchSet that you're
+      #   creating. You can't change `Name` after you create the `XssMatchSet`.
       # @option params [required, String] :change_token
       #   The value returned by the most recent call to GetChangeToken.
       # @return [Types::CreateXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -558,15 +558,15 @@ module Aws
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
       #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.change_token #=> String
+      # @overload create_xss_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_xss_match_set(params = {}, options = {})
         req = build_request(:create_xss_match_set, params)
         req.send_request(options)
       end
 
-      # Permanently deletes a ByteMatchSet. You can\'t delete a `ByteMatchSet`
-      # if it\'s still used in any `Rules` or if it still includes any
+      # Permanently deletes a ByteMatchSet. You can't delete a `ByteMatchSet`
+      # if it's still used in any `Rules` or if it still includes any
       # ByteMatchTuple objects (any filters).
       #
       # If you just want to remove a `ByteMatchSet` from a `Rule`, use
@@ -597,14 +597,14 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_byte_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_byte_match_set(params = {}, options = {})
         req = build_request(:delete_byte_match_set, params)
         req.send_request(options)
       end
 
-      # Permanently deletes an IPSet. You can\'t delete an `IPSet` if it\'s
+      # Permanently deletes an IPSet. You can't delete an `IPSet` if it's
       # still used in any `Rules` or if it still includes any IP addresses.
       #
       # If you just want to remove an `IPSet` from a `Rule`, use UpdateRule.
@@ -634,14 +634,14 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_ip_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_ip_set(params = {}, options = {})
         req = build_request(:delete_ip_set, params)
         req.send_request(options)
       end
 
-      # Permanently deletes a Rule. You can\'t delete a `Rule` if it\'s still
+      # Permanently deletes a Rule. You can't delete a `Rule` if it's still
       # used in any `WebACL` objects or if it still includes any predicates,
       # such as `ByteMatchSet` objects.
       #
@@ -672,15 +672,15 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_rule(params = {}, options = {})
         req = build_request(:delete_rule, params)
         req.send_request(options)
       end
 
-      # Permanently deletes a SizeConstraintSet. You can\'t delete a
-      # `SizeConstraintSet` if it\'s still used in any `Rules` or if it still
+      # Permanently deletes a SizeConstraintSet. You can't delete a
+      # `SizeConstraintSet` if it's still used in any `Rules` or if it still
       # includes any SizeConstraint objects (any filters).
       #
       # If you just want to remove a `SizeConstraintSet` from a `Rule`, use
@@ -712,15 +712,15 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_size_constraint_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_size_constraint_set(params = {}, options = {})
         req = build_request(:delete_size_constraint_set, params)
         req.send_request(options)
       end
 
-      # Permanently deletes a SqlInjectionMatchSet. You can\'t delete a
-      # `SqlInjectionMatchSet` if it\'s still used in any `Rules` or if it
+      # Permanently deletes a SqlInjectionMatchSet. You can't delete a
+      # `SqlInjectionMatchSet` if it's still used in any `Rules` or if it
       # still contains any SqlInjectionMatchTuple objects.
       #
       # If you just want to remove a `SqlInjectionMatchSet` from a `Rule`, use
@@ -752,14 +752,14 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_sql_injection_match_set(params = {}, options = {})
         req = build_request(:delete_sql_injection_match_set, params)
         req.send_request(options)
       end
 
-      # Permanently deletes a WebACL. You can\'t delete a `WebACL` if it still
+      # Permanently deletes a WebACL. You can't delete a `WebACL` if it still
       # contains any `Rules`.
       #
       # To delete a `WebACL`, perform the following steps:
@@ -786,15 +786,15 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_web_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_web_acl(params = {}, options = {})
         req = build_request(:delete_web_acl, params)
         req.send_request(options)
       end
 
-      # Permanently deletes an XssMatchSet. You can\'t delete an `XssMatchSet`
-      # if it\'s still used in any `Rules` or if it still contains any
+      # Permanently deletes an XssMatchSet. You can't delete an `XssMatchSet`
+      # if it's still used in any `Rules` or if it still contains any
       # XssMatchTuple objects.
       #
       # If you just want to remove an `XssMatchSet` from a `Rule`, use
@@ -826,8 +826,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload delete_xss_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_xss_match_set(params = {}, options = {})
         req = build_request(:delete_xss_match_set, params)
         req.send_request(options)
@@ -856,8 +856,8 @@ module Aws
       #   resp.byte_match_set.byte_match_tuples[0].target_string #=> String
       #   resp.byte_match_set.byte_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.byte_match_set.byte_match_tuples[0].positional_constraint #=> String, one of "EXACTLY", "STARTS_WITH", "ENDS_WITH", "CONTAINS", "CONTAINS_WORD"
+      # @overload get_byte_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_byte_match_set(params = {}, options = {})
         req = build_request(:get_byte_match_set, params)
         req.send_request(options)
@@ -865,7 +865,7 @@ module Aws
 
       # When you want to create, update, or delete AWS WAF objects, get a
       # change token and include the change token in the create, update, or
-      # delete request. Change tokens ensure that your application doesn\'t
+      # delete request. Change tokens ensure that your application doesn't
       # submit conflicting requests to AWS WAF.
       #
       # Each create, update, or delete request must use a unique change token.
@@ -887,8 +887,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload get_change_token(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_change_token(params = {}, options = {})
         req = build_request(:get_change_token, params)
         req.send_request(options)
@@ -898,7 +898,7 @@ module Aws
       # GetChangeToken. `ChangeTokenStatus` is one of the following values:
       #
       # * `PROVISIONED`\: You requested the change token by calling
-      #   `GetChangeToken`, but you haven\'t used it yet in a call to create,
+      #   `GetChangeToken`, but you haven't used it yet in a call to create,
       #   update, or delete an AWS WAF object.
       # * `PENDING`\: AWS WAF is propagating the create, update, or delete
       #   request to all AWS WAF servers.
@@ -917,8 +917,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token_status #=> String, one of "PROVISIONED", "PENDING", "INSYNC"
+      # @overload get_change_token_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_change_token_status(params = {}, options = {})
         req = build_request(:get_change_token_status, params)
         req.send_request(options)
@@ -943,8 +943,8 @@ module Aws
       #   resp.ip_set.ip_set_descriptors #=> Array
       #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
+      # @overload get_ip_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_ip_set(params = {}, options = {})
         req = build_request(:get_ip_set, params)
         req.send_request(options)
@@ -972,8 +972,8 @@ module Aws
       #   resp.rule.predicates[0].negated #=> Boolean
       #   resp.rule.predicates[0].type #=> String, one of "IPMatch", "ByteMatch", "SqlInjectionMatch", "SizeConstraint", "XssMatch"
       #   resp.rule.predicates[0].data_id #=> String
+      # @overload get_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_rule(params = {}, options = {})
         req = build_request(:get_rule, params)
         req.send_request(options)
@@ -1000,7 +1000,7 @@ module Aws
       #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
       #     to return a sample of requests.
       #   * `Default_Action`, which causes `GetSampledRequests` to return a
-      #     sample of the requests that didn\'t match any of the rules in the
+      #     sample of the requests that didn't match any of the rules in the
       #     specified `WebACL`.
       # @option params [required, Types::TimeWindow] :time_window
       #   The start date and time and the end date and time of the range for
@@ -1046,8 +1046,8 @@ module Aws
       #   resp.population_size #=> Integer
       #   resp.time_window.start_time #=> Time
       #   resp.time_window.end_time #=> Time
+      # @overload get_sampled_requests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_sampled_requests(params = {}, options = {})
         req = build_request(:get_sampled_requests, params)
         req.send_request(options)
@@ -1076,8 +1076,8 @@ module Aws
       #   resp.size_constraint_set.size_constraints[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
       #   resp.size_constraint_set.size_constraints[0].comparison_operator #=> String, one of "EQ", "NE", "LE", "LT", "GE", "GT"
       #   resp.size_constraint_set.size_constraints[0].size #=> Integer
+      # @overload get_size_constraint_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_size_constraint_set(params = {}, options = {})
         req = build_request(:get_size_constraint_set, params)
         req.send_request(options)
@@ -1105,8 +1105,8 @@ module Aws
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].field_to_match.data #=> String
       #   resp.sql_injection_match_set.sql_injection_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+      # @overload get_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_sql_injection_match_set(params = {}, options = {})
         req = build_request(:get_sql_injection_match_set, params)
         req.send_request(options)
@@ -1134,8 +1134,8 @@ module Aws
       #   resp.web_acl.rules[0].priority #=> Integer
       #   resp.web_acl.rules[0].rule_id #=> String
       #   resp.web_acl.rules[0].action.type #=> String, one of "BLOCK", "ALLOW", "COUNT"
+      # @overload get_web_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_web_acl(params = {}, options = {})
         req = build_request(:get_web_acl, params)
         req.send_request(options)
@@ -1162,8 +1162,8 @@ module Aws
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.type #=> String, one of "URI", "QUERY_STRING", "HEADER", "METHOD", "BODY"
       #   resp.xss_match_set.xss_match_tuples[0].field_to_match.data #=> String
       #   resp.xss_match_set.xss_match_tuples[0].text_transformation #=> String, one of "NONE", "COMPRESS_WHITE_SPACE", "HTML_ENTITY_DECODE", "LOWERCASE", "CMD_LINE", "URL_DECODE"
+      # @overload get_xss_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_xss_match_set(params = {}, options = {})
         req = build_request(:get_xss_match_set, params)
         req.send_request(options)
@@ -1199,8 +1199,8 @@ module Aws
       #   resp.byte_match_sets #=> Array
       #   resp.byte_match_sets[0].byte_match_set_id #=> String
       #   resp.byte_match_sets[0].name #=> String
+      # @overload list_byte_match_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_byte_match_sets(params = {}, options = {})
         req = build_request(:list_byte_match_sets, params)
         req.send_request(options)
@@ -1235,8 +1235,8 @@ module Aws
       #   resp.ip_sets #=> Array
       #   resp.ip_sets[0].ip_set_id #=> String
       #   resp.ip_sets[0].name #=> String
+      # @overload list_ip_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_ip_sets(params = {}, options = {})
         req = build_request(:list_ip_sets, params)
         req.send_request(options)
@@ -1271,8 +1271,8 @@ module Aws
       #   resp.rules #=> Array
       #   resp.rules[0].rule_id #=> String
       #   resp.rules[0].name #=> String
+      # @overload list_rules(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_rules(params = {}, options = {})
         req = build_request(:list_rules, params)
         req.send_request(options)
@@ -1309,8 +1309,8 @@ module Aws
       #   resp.size_constraint_sets #=> Array
       #   resp.size_constraint_sets[0].size_constraint_set_id #=> String
       #   resp.size_constraint_sets[0].name #=> String
+      # @overload list_size_constraint_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_size_constraint_sets(params = {}, options = {})
         req = build_request(:list_size_constraint_sets, params)
         req.send_request(options)
@@ -1347,8 +1347,8 @@ module Aws
       #   resp.sql_injection_match_sets #=> Array
       #   resp.sql_injection_match_sets[0].sql_injection_match_set_id #=> String
       #   resp.sql_injection_match_sets[0].name #=> String
+      # @overload list_sql_injection_match_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_sql_injection_match_sets(params = {}, options = {})
         req = build_request(:list_sql_injection_match_sets, params)
         req.send_request(options)
@@ -1384,8 +1384,8 @@ module Aws
       #   resp.web_acls #=> Array
       #   resp.web_acls[0].web_acl_id #=> String
       #   resp.web_acls[0].name #=> String
+      # @overload list_web_acls(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_web_acls(params = {}, options = {})
         req = build_request(:list_web_acls, params)
         req.send_request(options)
@@ -1420,8 +1420,8 @@ module Aws
       #   resp.xss_match_sets #=> Array
       #   resp.xss_match_sets[0].xss_match_set_id #=> String
       #   resp.xss_match_sets[0].name #=> String
+      # @overload list_xss_match_sets(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_xss_match_sets(params = {}, options = {})
         req = build_request(:list_xss_match_sets, params)
         req.send_request(options)
@@ -1506,8 +1506,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_byte_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_byte_match_set(params = {}, options = {})
         req = build_request(:update_byte_match_set, params)
         req.send_request(options)
@@ -1530,7 +1530,7 @@ module Aws
       #
       # You use an `IPSet` to specify which web requests you want to allow or
       # block based on the IP addresses that the requests originated from. For
-      # example, if you\'re receiving a lot of requests from one or a small
+      # example, if you're receiving a lot of requests from one or a small
       # number of IP addresses and you want to block the requests, you can
       # create an `IPSet` that specifies those IP addresses, and then
       # configure AWS WAF to block the requests.
@@ -1588,8 +1588,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_ip_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_ip_set(params = {}, options = {})
         req = build_request(:update_ip_set, params)
         req.send_request(options)
@@ -1666,8 +1666,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_rule(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_rule(params = {}, options = {})
         req = build_request(:update_rule, params)
         req.send_request(options)
@@ -1759,8 +1759,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_size_constraint_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_size_constraint_set(params = {}, options = {})
         req = build_request(:update_size_constraint_set, params)
         req.send_request(options)
@@ -1781,7 +1781,7 @@ module Aws
       #   malicious SQL code.
       #
       # You use `SqlInjectionMatchSet` objects to specify which CloudFront
-      # requests you want to allow, block, or count. For example, if you\'re
+      # requests you want to allow, block, or count. For example, if you're
       # receiving requests that contain snippets of SQL code in the query
       # string and you want to block the requests, you can create a
       # `SqlInjectionMatchSet` with the applicable settings, and then
@@ -1843,8 +1843,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_sql_injection_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_sql_injection_match_set(params = {}, options = {})
         req = build_request(:update_sql_injection_match_set, params)
         req.send_request(options)
@@ -1855,7 +1855,7 @@ module Aws
       # you update a `WebACL`, you specify the following values:
       #
       # * A default action for the `WebACL`, either `ALLOW` or `BLOCK`. AWS
-      #   WAF performs the default action if a request doesn\'t match the
+      #   WAF performs the default action if a request doesn't match the
       #   criteria in any of the `Rules` in a `WebACL`.
       # * The `Rules` that you want to add and/or delete. If you want to
       #   replace one `Rule` with another, you delete the existing `Rule` and
@@ -1869,7 +1869,7 @@ module Aws
       #   `Priority` is evaluated first.) When a web request matches all of
       #   the predicates (such as `ByteMatchSets` and `IPSets`) in a `Rule`,
       #   AWS WAF immediately takes the corresponding action, allow or block,
-      #   and doesn\'t evaluate the request against the remaining `Rules` in
+      #   and doesn't evaluate the request against the remaining `Rules` in
       #   the `WebACL`, if any.
       # * The CloudFront distribution that you want to associate with the
       #   `WebACL`.
@@ -1915,7 +1915,7 @@ module Aws
       #   the action that you want AWS WAF to perform when a web request matches
       #   all of the conditions in a rule. For the default action in a `WebACL`,
       #   specifies the action that you want AWS WAF to take when a web request
-      #   doesn\'t match all of the conditions in any of the rules in a
+      #   doesn't match all of the conditions in any of the rules in a
       #   `WebACL`.
       # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1944,8 +1944,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_web_acl(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_web_acl(params = {}, options = {})
         req = build_request(:update_web_acl, params)
         req.send_request(options)
@@ -1965,7 +1965,7 @@ module Aws
       #   scripting attacks.
       #
       # You use `XssMatchSet` objects to specify which CloudFront requests you
-      # want to allow, block, or count. For example, if you\'re receiving
+      # want to allow, block, or count. For example, if you're receiving
       # requests that contain cross-site scripting attacks in the request body
       # and you want to block the requests, you can create an `XssMatchSet`
       # with the applicable settings, and then configure AWS WAF to block the
@@ -2024,8 +2024,8 @@ module Aws
       #
       # @example Response structure
       #   resp.change_token #=> String
+      # @overload update_xss_match_set(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_xss_match_set(params = {}, options = {})
         req = build_request(:update_xss_match_set, params)
         req.send_request(options)

@@ -25,7 +25,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] label
-      #   The unique identification of the permission you\'re setting (e.g.,
+      #   The unique identification of the permission you're setting (e.g.,
       #   `AliceSendMessage`). Constraints: Maximum 80 characters;
       #   alphanumeric characters, hyphens (-), and underscores (\_) are
       #   allowed.
@@ -76,7 +76,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] sender_fault
-      #   Whether the error happened due to the sender\'s fault.
+      #   Whether the error happened due to the sender's fault.
       #   @return [Boolean]
       #
       # @!attribute [rw] code
@@ -126,12 +126,10 @@ module Aws
       # Encloses a receipt handle and an entry id for each message in
       # ChangeMessageVisibilityBatch.
       #
-      # <important markdown="1"> All of the following parameters are list parameters that must be
+      # All of the following parameters are list parameters that must be
       # prefixed with `ChangeMessageVisibilityBatchRequestEntry.n`, where `n`
       # is an integer value starting with 1. For example, a parameter list for
       # this action might look like this:
-      #
-      #  </important>
       #
       # `<![CDATA[&ChangeMessageVisibilityBatchRequestEntry.1.Id=change_visibility_msg_2]]>`
       #
@@ -157,7 +155,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] visibility_timeout
-      #   The new value (in seconds) for the message\'s visibility timeout.
+      #   The new value (in seconds) for the message's visibility timeout.
       #   @return [Integer]
       class ChangeMessageVisibilityBatchRequestEntry < Struct.new(
         :id,
@@ -214,7 +212,7 @@ module Aws
       #
       # @!attribute [rw] visibility_timeout
       #   The new value (in seconds - from 0 to 43200 - maximum 12 hours) for
-      #   the message\'s visibility timeout.
+      #   the message's visibility timeout.
       #   @return [Integer]
       class ChangeMessageVisibilityRequest < Struct.new(
         :queue_url,
@@ -258,7 +256,7 @@ module Aws
       #     minute) to 1209600 (14 days). The default for this attribute is
       #     345600 (4 days).
       #
-      #   * `Policy` - The queue\'s policy. A valid AWS policy. For more
+      #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #
@@ -455,7 +453,7 @@ module Aws
       #   * `LastModifiedTimestamp` - returns the time when the queue was last
       #     changed (epoch time in seconds).
       #
-      #   * `Policy` - returns the queue\'s policy.
+      #   * `Policy` - returns the queue's policy.
       #
       #   * `MaximumMessageSize` - returns the limit of how many bytes a
       #     message can contain before Amazon SQS rejects it.
@@ -463,7 +461,7 @@ module Aws
       #   * `MessageRetentionPeriod` - returns the number of seconds Amazon
       #     SQS retains a message.
       #
-      #   * `QueueArn` - returns the queue\'s Amazon resource name (ARN).
+      #   * `QueueArn` - returns the queue's Amazon resource name (ARN).
       #
       #   * `ApproximateNumberOfMessagesDelayed` - returns the approximate
       #     number of messages that are pending to be added to the queue.
@@ -614,7 +612,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] body
-      #   The message\'s contents (not URL-encoded).
+      #   The message's contents (not URL-encoded).
       #   @return [String]
       #
       # @!attribute [rw] attributes
@@ -795,14 +793,14 @@ module Aws
       #   not start or end with a period, and it should not have successive
       #   periods. The name is case sensitive and must be unique among all
       #   attribute names for the message. The name can be up to 256
-      #   characters long. The name cannot start with \"AWS.\" or \"Amazon.\"
+      #   characters long. The name cannot start with "AWS." or "Amazon."
       #   (or any variations in casing), because these prefixes are reserved
       #   for use by Amazon Web Services.
       #
       #   When using `ReceiveMessage`, you can send a list of attribute names
       #   to receive, or you can return all of the attributes by specifying
-      #   \"All\" or \".\*\" in your request. You can also use \"bar.\*\" to
-      #   return all message attributes starting with the \"bar\" prefix.
+      #   "All" or ".\*" in your request. You can also use "bar.\*" to
+      #   return all message attributes starting with the "bar" prefix.
       #   @return [Array<String>]
       #
       # @!attribute [rw] max_number_of_messages
@@ -1041,7 +1039,7 @@ module Aws
       #   The number of seconds (0 to 900 - 15 minutes) to delay a specific
       #   message. Messages with a positive `DelaySeconds` value become
       #   available for processing after the delay time is finished. If you
-      #   don\'t specify a value, the default value for the queue applies.
+      #   don't specify a value, the default value for the queue applies.
       #   @return [Integer]
       #
       # @!attribute [rw] message_attributes
@@ -1136,7 +1134,7 @@ module Aws
       #     minute) to 1209600 (14 days). The default for this attribute is
       #     345600 (4 days).
       #
-      #   * `Policy` - The queue\'s policy. A valid AWS policy. For more
+      #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #

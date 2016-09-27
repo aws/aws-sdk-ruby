@@ -237,7 +237,7 @@ module Aws
       # Represents CPU utilization information from the specified instance
       # that belongs to the AWS Elastic Beanstalk environment. Use the
       # `instanceId` property to specify the application instance for which
-      # you\'d like to return data.
+      # you'd like to return data.
       # @!attribute [rw] user
       #   Percentage of time that the CPU has spent in the `User` state over
       #   the last 10 seconds.
@@ -333,7 +333,7 @@ module Aws
       # @!attribute [rw] group_name
       #   The name of the group to which the target environments belong.
       #   Specify a group name only if the environment name defined in each
-      #   target environment\'s manifest ends with a + (plus) character. See
+      #   target environment's manifest ends with a + (plus) character. See
       #   [Environment Manifest (env.yaml)][1] for details.
       #
       #
@@ -357,7 +357,7 @@ module Aws
 
       # Describes the possible values for a configuration option.
       # @!attribute [rw] namespace
-      #   A unique namespace identifying the option\'s associated AWS
+      #   A unique namespace identifying the option's associated AWS
       #   resource.
       #   @return [String]
       #
@@ -474,7 +474,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   A unique namespace identifying the option\'s associated AWS
+      #   A unique namespace identifying the option's associated AWS
       #   resource.
       #   @return [String]
       #
@@ -858,7 +858,7 @@ module Aws
       #
       # @!attribute [rw] group_name
       #   The name of the group to which the target environment belongs.
-      #   Specify a group name only if the environment\'s name is specified in
+      #   Specify a group name only if the environment's name is specified in
       #   an environment manifest and not with the environment name parameter.
       #   See [Environment Manifest (env.yaml)][1] for details.
       #
@@ -1367,7 +1367,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Request to list an environment\'s upcoming and in-progress managed
+      # Request to list an environment's upcoming and in-progress managed
       # actions.
       # @note When making an API call, pass DescribeEnvironmentManagedActionsRequest
       #   data as a hash:
@@ -1796,7 +1796,7 @@ module Aws
         include Aws::Structure
       end
 
-      # A link to another environment, defined in the environment\'s manifest.
+      # A link to another environment, defined in the environment's manifest.
       # Links provide connection information in system properties that can be
       # used to connect to another environment in the same group. See
       # [Environment Manifest (env.yaml)][1] for details.
@@ -2254,7 +2254,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   A unique namespace identifying the option\'s associated AWS
+      #   A unique namespace identifying the option's associated AWS
       #   resource.
       #   @return [String]
       #
@@ -2390,7 +2390,7 @@ module Aws
       #         info_type: "tail", # required, accepts tail, bundle
       #       }
       # @!attribute [rw] environment_id
-      #   The ID of the data\'s environment.
+      #   The ID of the data's environment.
       #
       #   If no such environment is found, returns an `InvalidParameterValue`
       #   error.
@@ -2401,7 +2401,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] environment_name
-      #   The name of the data\'s environment.
+      #   The name of the data's environment.
       #
       #   If no such environment is found, returns an `InvalidParameterValue`
       #   error.
@@ -2454,7 +2454,7 @@ module Aws
 
       # Represents health information from the specified instance that belongs
       # to the AWS Elastic Beanstalk environment. Use the `InstanceId`
-      # property to specify the application instance for which you\'d like to
+      # property to specify the application instance for which you'd like to
       # return data.
       # @!attribute [rw] instance_id
       #   The ID of the Amazon EC2 instance.
@@ -2506,7 +2506,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_type
-      #   The instance\'s type.
+      #   The instance's type.
       #   @return [String]
       class SingleInstanceHealth < Struct.new(
         :instance_id,
@@ -2650,7 +2650,7 @@ module Aws
       #   Represents CPU utilization information from the specified instance
       #   that belongs to the AWS Elastic Beanstalk environment. Use the
       #   `instanceId` property to specify the application instance for which
-      #   you\'d like to return data.
+      #   you'd like to return data.
       #   @return [Types::CPUUtilization]
       #
       # @!attribute [rw] load_average
@@ -2942,7 +2942,7 @@ module Aws
       #
       # @!attribute [rw] group_name
       #   The name of the group to which the target environment belongs.
-      #   Specify a group name only if the environment\'s name is specified in
+      #   Specify a group name only if the environment's name is specified in
       #   an environment manifest and not with the environment name or
       #   environment ID parameters. See [Environment Manifest (env.yaml)][1]
       #   for details.

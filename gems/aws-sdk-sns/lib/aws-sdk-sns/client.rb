@@ -125,7 +125,7 @@ module Aws
 
       # @!group API Operations
 
-      # Adds a statement to a topic\'s access control policy, granting access
+      # Adds a statement to a topic's access control policy, granting access
       # for the specified AWS accounts to the specified actions.
       # @option params [required, String] :topic_arn
       #   The ARN of the topic whose access control policy you wish to modify.
@@ -148,8 +148,8 @@ module Aws
       #     aws_account_id: ["delegate"], # required
       #     action_name: ["action"], # required
       #   })
+      # @overload add_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_permission(params = {}, options = {})
         req = build_request(:add_permission, params)
         req.send_request(options)
@@ -174,18 +174,18 @@ module Aws
       #
       # @example Response structure
       #   resp.is_opted_out #=> Boolean
+      # @overload check_if_phone_number_is_opted_out(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def check_if_phone_number_is_opted_out(params = {}, options = {})
         req = build_request(:check_if_phone_number_is_opted_out, params)
         req.send_request(options)
       end
 
-      # Verifies an endpoint owner\'s intent to receive messages by validating
+      # Verifies an endpoint owner's intent to receive messages by validating
       # the token sent to the endpoint by an earlier `Subscribe` action. If
       # the token is valid, the action creates a new subscription and returns
       # its Amazon Resource Name (ARN). This call requires an AWS signature
-      # only when the `AuthenticateOnUnsubscribe` flag is set to \"true\".
+      # only when the `AuthenticateOnUnsubscribe` flag is set to "true".
       # @option params [required, String] :topic_arn
       #   The ARN of the topic for which you wish to confirm a subscription.
       # @option params [required, String] :token
@@ -209,8 +209,8 @@ module Aws
       #
       # @example Response structure
       #   resp.subscription_arn #=> String
+      # @overload confirm_subscription(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def confirm_subscription(params = {}, options = {})
         req = build_request(:confirm_subscription, params)
         req.send_request(options)
@@ -222,18 +222,18 @@ module Aws
       # PlatformCredential attributes when using the
       # `CreatePlatformApplication` action. The PlatformPrincipal is received
       # from the notification service. For APNS/APNS\_SANDBOX,
-      # PlatformPrincipal is \"SSL certificate\". For GCM, PlatformPrincipal
-      # is not applicable. For ADM, PlatformPrincipal is \"client id\". The
+      # PlatformPrincipal is "SSL certificate". For GCM, PlatformPrincipal
+      # is not applicable. For ADM, PlatformPrincipal is "client id". The
       # PlatformCredential is also received from the notification service. For
-      # WNS, PlatformPrincipal is \"Package Security Identifier\". For MPNS,
-      # PlatformPrincipal is \"TLS certificate\". For Baidu, PlatformPrincipal
-      # is \"API key\".
+      # WNS, PlatformPrincipal is "Package Security Identifier". For MPNS,
+      # PlatformPrincipal is "TLS certificate". For Baidu, PlatformPrincipal
+      # is "API key".
       #
-      # For APNS/APNS\_SANDBOX, PlatformCredential is \"private key\". For
-      # GCM, PlatformCredential is \"API key\". For ADM, PlatformCredential is
-      # \"client secret\". For WNS, PlatformCredential is \"secret key\". For
-      # MPNS, PlatformCredential is \"private key\". For Baidu,
-      # PlatformCredential is \"secret key\". The PlatformApplicationArn that
+      # For APNS/APNS\_SANDBOX, PlatformCredential is "private key". For
+      # GCM, PlatformCredential is "API key". For ADM, PlatformCredential is
+      # "client secret". For WNS, PlatformCredential is "secret key". For
+      # MPNS, PlatformCredential is "private key". For Baidu,
+      # PlatformCredential is "secret key". The PlatformApplicationArn that
       # is returned when using `CreatePlatformApplication` is then used as an
       # attribute for the `CreatePlatformEndpoint` action. For more
       # information, see [Using Amazon SNS Mobile Push Notifications][1]. For
@@ -283,8 +283,8 @@ module Aws
       #
       # @example Response structure
       #   resp.platform_application_arn #=> String
+      # @overload create_platform_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_platform_application(params = {}, options = {})
         req = build_request(:create_platform_application, params)
         req.send_request(options)
@@ -299,7 +299,7 @@ module Aws
       # `Subscribe` action for subscription to a topic. The
       # `CreatePlatformEndpoint` action is idempotent, so if the requester
       # already owns an endpoint with the same device token and attributes,
-      # that endpoint\'s ARN is returned without creating a new endpoint. For
+      # that endpoint's ARN is returned without creating a new endpoint. For
       # more information, see [Using Amazon SNS Mobile Push Notifications][1].
       #
       # When using `CreatePlatformEndpoint` with Baidu, two attributes must be
@@ -346,8 +346,8 @@ module Aws
       #
       # @example Response structure
       #   resp.endpoint_arn #=> String
+      # @overload create_platform_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_platform_endpoint(params = {}, options = {})
         req = build_request(:create_platform_endpoint, params)
         req.send_request(options)
@@ -356,7 +356,7 @@ module Aws
       # Creates a topic to which notifications can be published. Users can
       # create at most 100,000 topics. For more information, see
       # [http://aws.amazon.com/sns][1]. This action is idempotent, so if the
-      # requester already owns a topic with the specified name, that topic\'s
+      # requester already owns a topic with the specified name, that topic's
       # ARN is returned without creating a new topic.
       #
       #
@@ -379,8 +379,8 @@ module Aws
       #
       # @example Response structure
       #   resp.topic_arn #=> String
+      # @overload create_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_topic(params = {}, options = {})
         req = build_request(:create_topic, params)
         req.send_request(options)
@@ -404,8 +404,8 @@ module Aws
       #   resp = client.delete_endpoint({
       #     endpoint_arn: "String", # required
       #   })
+      # @overload delete_endpoint(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_endpoint(params = {}, options = {})
         req = build_request(:delete_endpoint, params)
         req.send_request(options)
@@ -426,8 +426,8 @@ module Aws
       #   resp = client.delete_platform_application({
       #     platform_application_arn: "String", # required
       #   })
+      # @overload delete_platform_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_platform_application(params = {}, options = {})
         req = build_request(:delete_platform_application, params)
         req.send_request(options)
@@ -445,8 +445,8 @@ module Aws
       #   resp = client.delete_topic({
       #     topic_arn: "topicARN", # required
       #   })
+      # @overload delete_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_topic(params = {}, options = {})
         req = build_request(:delete_topic, params)
         req.send_request(options)
@@ -473,8 +473,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["String"] #=> String
+      # @overload get_endpoint_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_endpoint_attributes(params = {}, options = {})
         req = build_request(:get_endpoint_attributes, params)
         req.send_request(options)
@@ -501,8 +501,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["String"] #=> String
+      # @overload get_platform_application_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_platform_application_attributes(params = {}, options = {})
         req = build_request(:get_platform_application_attributes, params)
         req.send_request(options)
@@ -517,7 +517,7 @@ module Aws
       #
       #   For all attribute names, see [SetSMSAttributes][1].
       #
-      #   If you don\'t use this parameter, Amazon SNS returns all SMS
+      #   If you don't use this parameter, Amazon SNS returns all SMS
       #   attributes.
       #
       #
@@ -535,8 +535,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["String"] #=> String
+      # @overload get_sms_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_sms_attributes(params = {}, options = {})
         req = build_request(:get_sms_attributes, params)
         req.send_request(options)
@@ -557,8 +557,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["attributeName"] #=> String
+      # @overload get_subscription_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_subscription_attributes(params = {}, options = {})
         req = build_request(:get_subscription_attributes, params)
         req.send_request(options)
@@ -580,8 +580,8 @@ module Aws
       # @example Response structure
       #   resp.attributes #=> Hash
       #   resp.attributes["attributeName"] #=> String
+      # @overload get_topic_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_topic_attributes(params = {}, options = {})
         req = build_request(:get_topic_attributes, params)
         req.send_request(options)
@@ -625,8 +625,8 @@ module Aws
       #   resp.endpoints[0].attributes #=> Hash
       #   resp.endpoints[0].attributes["String"] #=> String
       #   resp.next_token #=> String
+      # @overload list_endpoints_by_platform_application(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_endpoints_by_platform_application(params = {}, options = {})
         req = build_request(:list_endpoints_by_platform_application, params)
         req.send_request(options)
@@ -660,8 +660,8 @@ module Aws
       #   resp.phone_numbers #=> Array
       #   resp.phone_numbers[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_phone_numbers_opted_out(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_phone_numbers_opted_out(params = {}, options = {})
         req = build_request(:list_phone_numbers_opted_out, params)
         req.send_request(options)
@@ -700,14 +700,14 @@ module Aws
       #   resp.platform_applications[0].attributes #=> Hash
       #   resp.platform_applications[0].attributes["String"] #=> String
       #   resp.next_token #=> String
+      # @overload list_platform_applications(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_platform_applications(params = {}, options = {})
         req = build_request(:list_platform_applications, params)
         req.send_request(options)
       end
 
-      # Returns a list of the requester\'s subscriptions. Each call returns a
+      # Returns a list of the requester's subscriptions. Each call returns a
       # limited list of subscriptions, up to 100. If there are more
       # subscriptions, a `NextToken` is also returned. Use the `NextToken`
       # parameter in a new `ListSubscriptions` call to get further results.
@@ -731,8 +731,8 @@ module Aws
       #   resp.subscriptions[0].endpoint #=> String
       #   resp.subscriptions[0].topic_arn #=> String
       #   resp.next_token #=> String
+      # @overload list_subscriptions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_subscriptions(params = {}, options = {})
         req = build_request(:list_subscriptions, params)
         req.send_request(options)
@@ -766,14 +766,14 @@ module Aws
       #   resp.subscriptions[0].endpoint #=> String
       #   resp.subscriptions[0].topic_arn #=> String
       #   resp.next_token #=> String
+      # @overload list_subscriptions_by_topic(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_subscriptions_by_topic(params = {}, options = {})
         req = build_request(:list_subscriptions_by_topic, params)
         req.send_request(options)
       end
 
-      # Returns a list of the requester\'s topics. Each call returns a limited
+      # Returns a list of the requester's topics. Each call returns a limited
       # list of topics, up to 100. If there are more topics, a `NextToken` is
       # also returned. Use the `NextToken` parameter in a new `ListTopics`
       # call to get further results.
@@ -793,8 +793,8 @@ module Aws
       #   resp.topics #=> Array
       #   resp.topics[0].topic_arn #=> String
       #   resp.next_token #=> String
+      # @overload list_topics(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_topics(params = {}, options = {})
         req = build_request(:list_topics, params)
         req.send_request(options)
@@ -812,16 +812,16 @@ module Aws
       #   resp = client.opt_in_phone_number({
       #     phone_number: "PhoneNumber", # required
       #   })
+      # @overload opt_in_phone_number(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def opt_in_phone_number(params = {}, options = {})
         req = build_request(:opt_in_phone_number, params)
         req.send_request(options)
       end
 
-      # Sends a message to all of a topic\'s subscribed endpoints. When a
+      # Sends a message to all of a topic's subscribed endpoints. When a
       # `messageId` is returned, the message has been saved and Amazon SNS
-      # will attempt to deliver it to the topic\'s subscribers shortly. The
+      # will attempt to deliver it to the topic's subscribers shortly. The
       # format of the outgoing message to each subscribed endpoint depends on
       # the notification protocol.
       #
@@ -840,18 +840,18 @@ module Aws
       # @option params [String] :topic_arn
       #   The topic you want to publish to.
       #
-      #   If you don\'t specify a value for the `TopicArn` parameter, you must
+      #   If you don't specify a value for the `TopicArn` parameter, you must
       #   specify a value for the `PhoneNumber` or `TargetArn` parameters.
       # @option params [String] :target_arn
       #   Either TopicArn or EndpointArn, but not both.
       #
-      #   If you don\'t specify a value for the `TargetArn` parameter, you must
+      #   If you don't specify a value for the `TargetArn` parameter, you must
       #   specify a value for the `PhoneNumber` or `TopicArn` parameters.
       # @option params [String] :phone_number
       #   The phone number to which you want to deliver an SMS message. Use
       #   E.164 format.
       #
-      #   If you don\'t specify a value for the `PhoneNumber` parameter, you
+      #   If you don't specify a value for the `PhoneNumber` parameter, you
       #   must specify a value for the `TargetArn` or `TopicArn` parameters.
       # @option params [required, String] :message
       #   The message you want to send to the topic.
@@ -877,7 +877,7 @@ module Aws
       #   * Outbound notifications are JSON encoded (meaning that the characters
       #     will be reescaped for sending).
       #
-      #   * Values have a minimum length of 0 (the empty string, \"\", is
+      #   * Values have a minimum length of 0 (the empty string, "", is
       #     allowed).
       #
       #   * Values have a maximum length bounded by the overall message size
@@ -893,7 +893,7 @@ module Aws
       #   * Failure to parse or validate any key or value in the message will
       #     cause the `Publish` call to return an error (no partial delivery).
       # @option params [String] :subject
-      #   Optional parameter to be used as the \"Subject\" line when the message
+      #   Optional parameter to be used as the "Subject" line when the message
       #   is delivered to email endpoints. This field will also be included, if
       #   present, in the standard JSON messages delivered to other endpoints.
       #
@@ -909,11 +909,11 @@ module Aws
       #
       #   * be a syntactically valid JSON object; and
       #
-      #   * contain at least a top-level JSON key of \"default\" with a value
+      #   * contain at least a top-level JSON key of "default" with a value
       #     that is a string.
       #
       #   You can define other top-level keys that define the message you want
-      #   to send to a specific transport protocol (e.g., \"http\").
+      #   to send to a specific transport protocol (e.g., "http").
       #
       #   For information about sending different messages for each protocol
       #   using the AWS Management Console, go to [Create Different Messages for
@@ -950,14 +950,14 @@ module Aws
       #
       # @example Response structure
       #   resp.message_id #=> String
+      # @overload publish(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def publish(params = {}, options = {})
         req = build_request(:publish, params)
         req.send_request(options)
       end
 
-      # Removes a statement from a topic\'s access control policy.
+      # Removes a statement from a topic's access control policy.
       # @option params [required, String] :topic_arn
       #   The ARN of the topic whose access control policy you wish to modify.
       # @option params [required, String] :label
@@ -969,8 +969,8 @@ module Aws
       #     topic_arn: "topicARN", # required
       #     label: "label", # required
       #   })
+      # @overload remove_permission(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_permission(params = {}, options = {})
         req = build_request(:remove_permission, params)
         req.send_request(options)
@@ -1011,8 +1011,8 @@ module Aws
       #       "String" => "String",
       #     },
       #   })
+      # @overload set_endpoint_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_endpoint_attributes(params = {}, options = {})
         req = build_request(:set_endpoint_attributes, params)
         req.send_request(options)
@@ -1037,13 +1037,13 @@ module Aws
       #
       #   * `PlatformCredential` -- The credential received from the
       #     notification service. For APNS/APNS\_SANDBOX, PlatformCredential is
-      #     private key. For GCM, PlatformCredential is \"API key\". For ADM,
-      #     PlatformCredential is \"client secret\".
+      #     private key. For GCM, PlatformCredential is "API key". For ADM,
+      #     PlatformCredential is "client secret".
       #
       #   * `PlatformPrincipal` -- The principal received from the notification
       #     service. For APNS/APNS\_SANDBOX, PlatformPrincipal is SSL
       #     certificate. For GCM, PlatformPrincipal is not applicable. For ADM,
-      #     PlatformPrincipal is \"client id\".
+      #     PlatformPrincipal is "client id".
       #
       #   * `EventEndpointCreated` -- Topic ARN to which EndpointCreated event
       #     notifications should be sent.
@@ -1056,7 +1056,7 @@ module Aws
       #
       #   * `EventDeliveryFailure` -- Topic ARN to which DeliveryFailure event
       #     notifications should be sent upon Direct Publish delivery failure
-      #     (permanent) to one of the application\'s endpoints.
+      #     (permanent) to one of the application's endpoints.
       #
       #   * `SuccessFeedbackRoleArn` -- IAM role ARN used to give Amazon SNS
       #     write access to use CloudWatch Logs on your behalf.
@@ -1075,8 +1075,8 @@ module Aws
       #       "String" => "String",
       #     },
       #   })
+      # @overload set_platform_application_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_platform_application_attributes(params = {}, options = {})
         req = build_request(:set_platform_application_attributes, params)
         req.send_request(options)
@@ -1102,11 +1102,9 @@ module Aws
       #   that sending an SMS message would incur a cost that exceeds this
       #   limit, it stops sending SMS messages within minutes.
       #
-      #   <important markdown="1"> Amazon SNS stops sending SMS messages within minutes of the limit
+      #   Amazon SNS stops sending SMS messages within minutes of the limit
       #   being crossed. During that interval, if you continue to send SMS
       #   messages, you will incur costs that exceed your limit.
-      #
-      #    </important>
       #
       #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
       #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
@@ -1178,8 +1176,8 @@ module Aws
       #       "String" => "String",
       #     },
       #   })
+      # @overload set_sms_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_sms_attributes(params = {}, options = {})
         req = build_request(:set_sms_attributes, params)
         req.send_request(options)
@@ -1204,8 +1202,8 @@ module Aws
       #     attribute_name: "attributeName", # required
       #     attribute_value: "attributeValue",
       #   })
+      # @overload set_subscription_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_subscription_attributes(params = {}, options = {})
         req = build_request(:set_subscription_attributes, params)
         req.send_request(options)
@@ -1216,7 +1214,7 @@ module Aws
       #   The ARN of the topic to modify.
       # @option params [required, String] :attribute_name
       #   The name of the attribute you want to set. Only a subset of the
-      #   topic\'s attributes are mutable.
+      #   topic's attributes are mutable.
       #
       #   Valid values: `Policy` \| `DisplayName` \| `DeliveryPolicy`
       # @option params [String] :attribute_value
@@ -1229,8 +1227,8 @@ module Aws
       #     attribute_name: "attributeName", # required
       #     attribute_value: "attributeValue",
       #   })
+      # @overload set_topic_attributes(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_topic_attributes(params = {}, options = {})
         req = build_request(:set_topic_attributes, params)
         req.send_request(options)
@@ -1268,10 +1266,10 @@ module Aws
       #   protocol:
       #
       #   * For the `http` protocol, the endpoint is an URL beginning with
-      #     \"http://\"
+      #     "http://"
       #
       #   * For the `https` protocol, the endpoint is a URL beginning with
-      #     \"https://\"
+      #     "https://"
       #
       #   * For the `email` protocol, the endpoint is an email address
       #
@@ -1301,15 +1299,15 @@ module Aws
       #
       # @example Response structure
       #   resp.subscription_arn #=> String
+      # @overload subscribe(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def subscribe(params = {}, options = {})
         req = build_request(:subscribe, params)
         req.send_request(options)
       end
 
       # Deletes a subscription. If the subscription requires authentication
-      # for deletion, only the owner of the subscription or the topic\'s owner
+      # for deletion, only the owner of the subscription or the topic's owner
       # can unsubscribe, and an AWS signature is required. If the
       # `Unsubscribe` call does not require authentication and the requester
       # is not the subscription owner, a final cancellation message is
@@ -1323,8 +1321,8 @@ module Aws
       #   resp = client.unsubscribe({
       #     subscription_arn: "subscriptionARN", # required
       #   })
+      # @overload unsubscribe(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def unsubscribe(params = {}, options = {})
         req = build_request(:unsubscribe, params)
         req.send_request(options)

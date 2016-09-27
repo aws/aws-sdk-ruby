@@ -333,7 +333,7 @@ module Aws
       #   * Cannot be a reserved word for the chosen database engine.
       # @option options [String] :master_user_password
       #   The password for the master database user. This password can contain
-      #   any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option options [String] :option_group_name
@@ -553,7 +553,7 @@ module Aws
       #   Default: The same port as the original DB cluster.
       # @option options [String] :master_user_password
       #   The new password for the master database user. This password can
-      #   contain any printable ASCII character except \"/\", \"\"\", or \"@\".
+      #   contain any printable ASCII character except "/", """, or "@".
       #
       #   Constraints: Must contain from 8 to 41 characters.
       # @option options [String] :option_group_name
@@ -835,16 +835,16 @@ module Aws
       #   * `public` - Return all DB cluster snapshots that have been marked as
       #     public.
       #
-      #   If you don\'t specify a `SnapshotType` value, then both automated and
+      #   If you don't specify a `SnapshotType` value, then both automated and
       #   manual DB cluster snapshots are returned. You can include shared DB
       #   cluster snapshots with these results by setting the `IncludeShared`
       #   parameter to `true`. You can include public DB cluster snapshots with
       #   these results by setting the `IncludePublic` parameter to `true`.
       #
-      #   The `IncludeShared` and `IncludePublic` parameters don\'t apply for
+      #   The `IncludeShared` and `IncludePublic` parameters don't apply for
       #   `SnapshotType` values of `manual` or `automated`. The `IncludePublic`
-      #   parameter doesn\'t apply when `SnapshotType` is set to `shared`. The
-      #   `IncludeShared` parameter doesn\'t apply when `SnapshotType` is set to
+      #   parameter doesn't apply when `SnapshotType` is set to `shared`. The
+      #   `IncludeShared` parameter doesn't apply when `SnapshotType` is set to
       #   `public`.
       # @option options [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.

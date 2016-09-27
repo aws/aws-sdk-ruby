@@ -162,8 +162,8 @@ module Aws
       #     ],
       #     start_timestamp: Time.now,
       #   })
+      # @overload activate_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def activate_pipeline(params = {}, options = {})
         req = build_request(:activate_pipeline, params)
         req.send_request(options)
@@ -186,8 +186,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload add_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def add_tags(params = {}, options = {})
         req = build_request(:add_tags, params)
         req.send_request(options)
@@ -209,7 +209,7 @@ module Aws
       #   pipeline name combination on a subsequent call to `CreatePipeline`.
       #   `CreatePipeline` ensures that if a pipeline already exists with the
       #   same name and unique identifier, a new pipeline is not created.
-      #   Instead, you\'ll receive the pipeline identifier from the previous
+      #   Instead, you'll receive the pipeline identifier from the previous
       #   attempt. The uniqueness of the name and unique identifier combination
       #   is scoped to the AWS account or IAM user credentials.
       # @option params [String] :description
@@ -242,8 +242,8 @@ module Aws
       #
       # @example Response structure
       #   resp.pipeline_id #=> String
+      # @overload create_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_pipeline(params = {}, options = {})
         req = build_request(:create_pipeline, params)
         req.send_request(options)
@@ -269,8 +269,8 @@ module Aws
       #     pipeline_id: "id", # required
       #     cancel_active: false,
       #   })
+      # @overload deactivate_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def deactivate_pipeline(params = {}, options = {})
         req = build_request(:deactivate_pipeline, params)
         req.send_request(options)
@@ -292,8 +292,8 @@ module Aws
       #   resp = client.delete_pipeline({
       #     pipeline_id: "id", # required
       #   })
+      # @overload delete_pipeline(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_pipeline(params = {}, options = {})
         req = build_request(:delete_pipeline, params)
         req.send_request(options)
@@ -340,8 +340,8 @@ module Aws
       #   resp.pipeline_objects[0].fields[0].ref_value #=> String
       #   resp.marker #=> String
       #   resp.has_more_results #=> Boolean
+      # @overload describe_objects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_objects(params = {}, options = {})
         req = build_request(:describe_objects, params)
         req.send_request(options)
@@ -382,8 +382,8 @@ module Aws
       #   resp.pipeline_description_list[0].tags #=> Array
       #   resp.pipeline_description_list[0].tags[0].key #=> String
       #   resp.pipeline_description_list[0].tags[0].value #=> String
+      # @overload describe_pipelines(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_pipelines(params = {}, options = {})
         req = build_request(:describe_pipelines, params)
         req.send_request(options)
@@ -411,8 +411,8 @@ module Aws
       #
       # @example Response structure
       #   resp.evaluated_expression #=> String
+      # @overload evaluate_expression(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def evaluate_expression(params = {}, options = {})
         req = build_request(:evaluate_expression, params)
         req.send_request(options)
@@ -455,8 +455,8 @@ module Aws
       #   resp.parameter_values #=> Array
       #   resp.parameter_values[0].id #=> String
       #   resp.parameter_values[0].string_value #=> String
+      # @overload get_pipeline_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_pipeline_definition(params = {}, options = {})
         req = build_request(:get_pipeline_definition, params)
         req.send_request(options)
@@ -486,8 +486,8 @@ module Aws
       #   resp.pipeline_id_list[0].name #=> String
       #   resp.marker #=> String
       #   resp.has_more_results #=> Boolean
+      # @overload list_pipelines(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_pipelines(params = {}, options = {})
         req = build_request(:list_pipelines, params)
         req.send_request(options)
@@ -554,8 +554,8 @@ module Aws
       #   resp.task_object.objects["id"].fields[0].key #=> String
       #   resp.task_object.objects["id"].fields[0].string_value #=> String
       #   resp.task_object.objects["id"].fields[0].ref_value #=> String
+      # @overload poll_for_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def poll_for_task(params = {}, options = {})
         req = build_request(:poll_for_task, params)
         req.send_request(options)
@@ -636,8 +636,8 @@ module Aws
       #   resp.validation_warnings[0].warnings #=> Array
       #   resp.validation_warnings[0].warnings[0] #=> String
       #   resp.errored #=> Boolean
+      # @overload put_pipeline_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_pipeline_definition(params = {}, options = {})
         req = build_request(:put_pipeline_definition, params)
         req.send_request(options)
@@ -693,8 +693,8 @@ module Aws
       #   resp.ids[0] #=> String
       #   resp.marker #=> String
       #   resp.has_more_results #=> Boolean
+      # @overload query_objects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def query_objects(params = {}, options = {})
         req = build_request(:query_objects, params)
         req.send_request(options)
@@ -712,8 +712,8 @@ module Aws
       #     pipeline_id: "id", # required
       #     tag_keys: ["string"], # required
       #   })
+      # @overload remove_tags(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def remove_tags(params = {}, options = {})
         req = build_request(:remove_tags, params)
         req.send_request(options)
@@ -756,8 +756,8 @@ module Aws
       #
       # @example Response structure
       #   resp.canceled #=> Boolean
+      # @overload report_task_progress(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def report_task_progress(params = {}, options = {})
         req = build_request(:report_task_progress, params)
         req.send_request(options)
@@ -796,8 +796,8 @@ module Aws
       #
       # @example Response structure
       #   resp.terminate #=> Boolean
+      # @overload report_task_runner_heartbeat(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def report_task_runner_heartbeat(params = {}, options = {})
         req = build_request(:report_task_runner_heartbeat, params)
         req.send_request(options)
@@ -826,8 +826,8 @@ module Aws
       #     object_ids: ["id"], # required
       #     status: "string", # required
       #   })
+      # @overload set_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_status(params = {}, options = {})
         req = build_request(:set_status, params)
         req.send_request(options)
@@ -849,7 +849,7 @@ module Aws
       #   If an error occurred during the task, this value specifies the error
       #   code. This value is set on the physical attempt object. It is used to
       #   display error information to the user. It should not start with string
-      #   \"Service\_\" which is reserved by the system.
+      #   "Service\_" which is reserved by the system.
       # @option params [String] :error_message
       #   If an error occurred during the task, this value specifies a text
       #   description of the error. This value is set on the physical attempt
@@ -870,8 +870,8 @@ module Aws
       #     error_message: "errorMessage",
       #     error_stack_trace: "string",
       #   })
+      # @overload set_task_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def set_task_status(params = {}, options = {})
         req = build_request(:set_task_status, params)
         req.send_request(options)
@@ -939,8 +939,8 @@ module Aws
       #   resp.validation_warnings[0].warnings #=> Array
       #   resp.validation_warnings[0].warnings[0] #=> String
       #   resp.errored #=> Boolean
+      # @overload validate_pipeline_definition(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def validate_pipeline_definition(params = {}, options = {})
         req = build_request(:validate_pipeline_definition, params)
         req.send_request(options)

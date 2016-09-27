@@ -165,12 +165,12 @@ module Aws
       # For more information, see [Launch a Job Flow on the MapR Distribution
       # for Hadoop][1]. Currently supported values are:
       #
-      # * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+      # * "mapr-m3" - launch the job flow using MapR M3 Edition.
       #
-      # * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
+      # * "mapr-m5" - launch the job flow using MapR M5 Edition.
       #
-      # * \"mapr\" with the user arguments specifying \"--edition,m3\" or
-      #   \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition,
+      # * "mapr" with the user arguments specifying "--edition,m3" or
+      #   "--edition,m5" - launch the job flow using MapR M3 or M5 Edition,
       #   respectively.
       #
       # <note markdown="1"> In Amazon EMR releases 4.0 and greater, the only accepted parameter is
@@ -428,7 +428,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the timeline of the cluster\'s lifecycle.
+      # Represents the timeline of the cluster's lifecycle.
       # @!attribute [rw] creation_date_time
       #   The creation date and time of the cluster.
       #   @return [Time]
@@ -689,7 +689,7 @@ module Aws
         include Aws::Structure
       end
 
-      # EBS block device that\'s attached to an EC2 instance.
+      # EBS block device that's attached to an EC2 instance.
       # @!attribute [rw] device
       #   The device name that is exposed to the instance, such as /dev/sdh.
       #   @return [String]
@@ -708,7 +708,7 @@ module Aws
       # so on.
       # @!attribute [rw] ec2_key_name
       #   The name of the Amazon EC2 key pair to use when connecting with SSH
-      #   into the master node as a user named \"hadoop\".
+      #   into the master node as a user named "hadoop".
       #   @return [String]
       #
       # @!attribute [rw] ec2_subnet_id
@@ -771,7 +771,7 @@ module Aws
       # @!attribute [rw] reason
       #   The reason for the step failure. In the case where the service
       #   cannot successfully determine the root cause of the failure, it
-      #   returns \"Unknown Error\" as a reason.
+      #   returns "Unknown Error" as a reason.
       #   @return [String]
       #
       # @!attribute [rw] message
@@ -824,7 +824,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] args
-      #   A list of command line arguments passed to the JAR file\'s main
+      #   A list of command line arguments passed to the JAR file's main
       #   function when executed.
       #   @return [Array<String>]
       class HadoopJarStepConfig < Struct.new(
@@ -854,7 +854,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] args
-      #   The list of command line arguments to pass to the JAR file\'s main
+      #   The list of command line arguments to pass to the JAR file's main
       #   function for execution.
       #   @return [Array<String>]
       class HadoopStepConfig < Struct.new(
@@ -1528,12 +1528,12 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] instance_groups
-      #   Configuration for the job flow\'s instance groups.
+      #   Configuration for the job flow's instance groups.
       #   @return [Array<Types::InstanceGroupConfig>]
       #
       # @!attribute [rw] ec2_key_name
       #   The name of the Amazon EC2 key pair that can be used to ssh to the
-      #   master node as the user called \"hadoop.\"
+      #   master node as the user called "hadoop."
       #   @return [String]
       #
       # @!attribute [rw] placement
@@ -1552,9 +1552,9 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] hadoop_version
-      #   The Hadoop version for the job flow. Valid inputs are \"0.18\"
-      #   (deprecated), \"0.20\" (deprecated), \"0.20.205\" (deprecated),
-      #   \"1.0.3\", \"2.2.0\", or \"2.4.0\". If you do not set this value,
+      #   The Hadoop version for the job flow. Valid inputs are "0.18"
+      #   (deprecated), "0.20" (deprecated), "0.20.205" (deprecated),
+      #   "1.0.3", "2.2.0", or "2.4.0". If you do not set this value,
       #   the default of 0.18 is used, unless the AmiVersion parameter is set
       #   in the RunJobFlow call, in which case the default version of Hadoop
       #   for that AMI version is used.
@@ -1639,7 +1639,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] instance_groups
-      #   Details about the job flow\'s instance groups.
+      #   Details about the job flow's instance groups.
       #   @return [Array<Types::InstanceGroupDetail>]
       #
       # @!attribute [rw] normalized_instance_hours
@@ -2171,7 +2171,7 @@ module Aws
       #   Amazon EC2 instances in the job flow. The following values are
       #   valid:
       #
-      #   * The version number of the AMI to use, for example, \"2.0.\"
+      #   * The version number of the AMI to use, for example, "2.0."
       #
       #   ^
       #
@@ -2182,7 +2182,7 @@ module Aws
       #
       #   For details about the AMI versions currently supported by Amazon
       #   Elastic MapReduce, go to [AMI Versions Supported in Elastic
-      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer\'s Guide.*
+      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer's Guide.*
       #
       #
       #
@@ -2222,9 +2222,9 @@ module Aws
       #   the job flow. For more information, go to [Use Third Party
       #   Applications with Amazon EMR][1]. Currently supported values are:
       #
-      #   * \"mapr-m3\" - launch the job flow using MapR M3 Edition.
+      #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
       #
-      #   * \"mapr-m5\" - launch the job flow using MapR M5 Edition.
+      #   * "mapr-m5" - launch the job flow using MapR M5 Edition.
       #
       #
       #
@@ -2244,24 +2244,24 @@ module Aws
       #   Job Flow on the MapR Distribution for Hadoop][1]. Currently
       #   supported values are:
       #
-      #   * \"mapr-m3\" - launch the cluster using MapR M3 Edition.
+      #   * "mapr-m3" - launch the cluster using MapR M3 Edition.
       #
-      #   * \"mapr-m5\" - launch the cluster using MapR M5 Edition.
+      #   * "mapr-m5" - launch the cluster using MapR M5 Edition.
       #
-      #   * \"mapr\" with the user arguments specifying \"--edition,m3\" or
-      #     \"--edition,m5\" - launch the job flow using MapR M3 or M5 Edition
+      #   * "mapr" with the user arguments specifying "--edition,m3" or
+      #     "--edition,m5" - launch the job flow using MapR M3 or M5 Edition
       #     respectively.
       #
-      #   * \"mapr-m7\" - launch the cluster using MapR M7 Edition.
+      #   * "mapr-m7" - launch the cluster using MapR M7 Edition.
       #
-      #   * \"hunk\" - launch the cluster with the Hunk Big Data Analtics
+      #   * "hunk" - launch the cluster with the Hunk Big Data Analtics
       #     Platform.
       #
-      #   * \"hue\"- launch the cluster with Hue installed.
+      #   * "hue"- launch the cluster with Hue installed.
       #
-      #   * \"spark\" - launch the cluster with Apache Spark installed.
+      #   * "spark" - launch the cluster with Apache Spark installed.
       #
-      #   * \"ganglia\" - launch the cluster with the Ganglia Monitoring
+      #   * "ganglia" - launch the cluster with the Ganglia Monitoring
       #     System installed.
       #
       #
@@ -2275,7 +2275,7 @@ module Aws
       #    </note>
       #
       #   A list of applications for the cluster. Valid values are:
-      #   \"Hadoop\", \"Hive\", \"Mahout\", \"Pig\", and \"Spark.\" They are
+      #   "Hadoop", "Hive", "Mahout", "Pig", and "Spark." They are
       #   case insensitive.
       #   @return [Array<Types::Application>]
       #
@@ -2544,7 +2544,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] last_state_change_reason
-      #   A description of the step\'s current state.
+      #   A description of the step's current state.
       #   @return [String]
       class StepExecutionStatusDetail < Struct.new(
         :state,

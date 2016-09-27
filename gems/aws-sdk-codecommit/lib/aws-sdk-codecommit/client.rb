@@ -170,8 +170,8 @@ module Aws
       #   resp.repositories[0].arn #=> String
       #   resp.repositories_not_found #=> Array
       #   resp.repositories_not_found[0] #=> String
+      # @overload batch_get_repositories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_repositories(params = {}, options = {})
         req = build_request(:batch_get_repositories, params)
         req.send_request(options)
@@ -180,7 +180,7 @@ module Aws
       # Creates a new branch in a repository and points the branch to a
       # commit.
       #
-      # <note markdown="1">Calling the create branch operation does not set a repository\'s
+      # <note markdown="1">Calling the create branch operation does not set a repository's
       # default branch. To do this, call the update default branch operation.
       #
       # </note>
@@ -198,8 +198,8 @@ module Aws
       #     branch_name: "BranchName", # required
       #     commit_id: "CommitId", # required
       #   })
+      # @overload create_branch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_branch(params = {}, options = {})
         req = build_request(:create_branch, params)
         req.send_request(options)
@@ -213,7 +213,7 @@ module Aws
       #   addition, repository names are limited to 100 alphanumeric, dash, and
       #   underscore characters, and cannot include certain characters. For a
       #   full description of the limits on repository names, see [Limits][1] in
-      #   the AWS CodeCommit User Guide. The suffix \".git\" is prohibited.
+      #   the AWS CodeCommit User Guide. The suffix ".git" is prohibited.
       #
       #   </note>
       #
@@ -252,8 +252,8 @@ module Aws
       #   resp.repository_metadata.clone_url_http #=> String
       #   resp.repository_metadata.clone_url_ssh #=> String
       #   resp.repository_metadata.arn #=> String
+      # @overload create_repository(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_repository(params = {}, options = {})
         req = build_request(:create_repository, params)
         req.send_request(options)
@@ -262,7 +262,9 @@ module Aws
       # Deletes a repository. If a specified repository was already deleted, a
       # null repository ID will be returned.
       #
-      # <important>Deleting a repository also deletes all associated objects and metadata. After a repository is deleted, all future push calls to the deleted repository will fail.</important>
+      # Deleting a repository also deletes all associated objects and
+      # metadata. After a repository is deleted, all future push calls to the
+      # deleted repository will fail.
       # @option params [required, String] :repository_name
       #   The name of the repository to delete.
       # @return [Types::DeleteRepositoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -276,8 +278,8 @@ module Aws
       #
       # @example Response structure
       #   resp.repository_id #=> String
+      # @overload delete_repository(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_repository(params = {}, options = {})
         req = build_request(:delete_repository, params)
         req.send_request(options)
@@ -303,8 +305,8 @@ module Aws
       # @example Response structure
       #   resp.branch.branch_name #=> String
       #   resp.branch.commit_id #=> String
+      # @overload get_branch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_branch(params = {}, options = {})
         req = build_request(:get_branch, params)
         req.send_request(options)
@@ -338,8 +340,8 @@ module Aws
       #   resp.commit.committer.email #=> String
       #   resp.commit.committer.date #=> String
       #   resp.commit.additional_data #=> String
+      # @overload get_commit(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_commit(params = {}, options = {})
         req = build_request(:get_commit, params)
         req.send_request(options)
@@ -377,8 +379,8 @@ module Aws
       #   resp.repository_metadata.clone_url_http #=> String
       #   resp.repository_metadata.clone_url_ssh #=> String
       #   resp.repository_metadata.arn #=> String
+      # @overload get_repository(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_repository(params = {}, options = {})
         req = build_request(:get_repository, params)
         req.send_request(options)
@@ -407,8 +409,8 @@ module Aws
       #   resp.triggers[0].branches[0] #=> String
       #   resp.triggers[0].events #=> Array
       #   resp.triggers[0].events[0] #=> String, one of "all", "updateReference", "createReference", "deleteReference"
+      # @overload get_repository_triggers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_repository_triggers(params = {}, options = {})
         req = build_request(:get_repository_triggers, params)
         req.send_request(options)
@@ -434,8 +436,8 @@ module Aws
       #   resp.branches #=> Array
       #   resp.branches[0] #=> String
       #   resp.next_token #=> String
+      # @overload list_branches(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_branches(params = {}, options = {})
         req = build_request(:list_branches, params)
         req.send_request(options)
@@ -470,8 +472,8 @@ module Aws
       #   resp.repositories[0].repository_name #=> String
       #   resp.repositories[0].repository_id #=> String
       #   resp.next_token #=> String
+      # @overload list_repositories(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_repositories(params = {}, options = {})
         req = build_request(:list_repositories, params)
         req.send_request(options)
@@ -504,8 +506,8 @@ module Aws
       #
       # @example Response structure
       #   resp.configuration_id #=> String
+      # @overload put_repository_triggers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_repository_triggers(params = {}, options = {})
         req = build_request(:put_repository_triggers, params)
         req.send_request(options)
@@ -544,8 +546,8 @@ module Aws
       #   resp.failed_executions #=> Array
       #   resp.failed_executions[0].trigger #=> String
       #   resp.failed_executions[0].failure_message #=> String
+      # @overload test_repository_triggers(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_repository_triggers(params = {}, options = {})
         req = build_request(:test_repository_triggers, params)
         req.send_request(options)
@@ -569,8 +571,8 @@ module Aws
       #     repository_name: "RepositoryName", # required
       #     default_branch_name: "BranchName", # required
       #   })
+      # @overload update_default_branch(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_default_branch(params = {}, options = {})
         req = build_request(:update_default_branch, params)
         req.send_request(options)
@@ -599,8 +601,8 @@ module Aws
       #     repository_name: "RepositoryName", # required
       #     repository_description: "RepositoryDescription",
       #   })
+      # @overload update_repository_description(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_repository_description(params = {}, options = {})
         req = build_request(:update_repository_description, params)
         req.send_request(options)
@@ -609,7 +611,7 @@ module Aws
       # Renames a repository. The repository name must be unique across the
       # calling AWS account. In addition, repository names are limited to 100
       # alphanumeric, dash, and underscore characters, and cannot include
-      # certain characters. The suffix \".git\" is prohibited. For a full
+      # certain characters. The suffix ".git" is prohibited. For a full
       # description of the limits on repository names, see [Limits][1] in the
       # AWS CodeCommit User Guide.
       #
@@ -627,8 +629,8 @@ module Aws
       #     old_name: "RepositoryName", # required
       #     new_name: "RepositoryName", # required
       #   })
+      # @overload update_repository_name(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_repository_name(params = {}, options = {})
         req = build_request(:update_repository_name, params)
         req.send_request(options)

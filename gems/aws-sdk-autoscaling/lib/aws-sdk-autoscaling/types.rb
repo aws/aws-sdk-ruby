@@ -257,7 +257,7 @@ module Aws
       #   @return [Array<Types::SuspendedProcess>]
       #
       # @!attribute [rw] placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1]
       #   in the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -388,9 +388,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] health_status
-      #   The last reported health status of this instance. \"Healthy\" means
+      #   The last reported health status of this instance. "Healthy" means
       #   that the instance is healthy and should remain in service.
-      #   \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+      #   "Unhealthy" means that the instance is unhealthy and Auto Scaling
       #   should terminate and replace it.
       #   @return [String]
       #
@@ -655,7 +655,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1]
       #   in the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -669,7 +669,7 @@ module Aws
       #   private cloud (VPC).
       #
       #   If you specify subnets and Availability Zones with this call, ensure
-      #   that the subnets\' Availability Zones match the Availability Zones
+      #   that the subnets' Availability Zones match the Availability Zones
       #   specified.
       #
       #   For more information, see [Launching Auto Scaling Instances in a
@@ -1743,7 +1743,7 @@ module Aws
       #   specify a snapshot, the volume size must be equal to or larger than
       #   the snapshot size.
       #
-      #   Default: If you create a volume from a snapshot and you don\'t
+      #   Default: If you create a volume from a snapshot and you don't
       #   specify a volume size, the default is the snapshot size.
       #   @return [Integer]
       #
@@ -1900,7 +1900,7 @@ module Aws
       #
       # @!attribute [rw] should_decrement_desired_capacity
       #   Specifies whether the instances moved to `Standby` mode count as
-      #   part of the Auto Scaling group\'s desired capacity. If set, the
+      #   part of the Auto Scaling group's desired capacity. If set, the
       #   desired capacity for the Auto Scaling group decrements by the number
       #   of instances moved to `Standby` mode.
       #   @return [Boolean]
@@ -1953,7 +1953,7 @@ module Aws
       #   you want to use a step adjustment with a lower bound of 0 and an
       #   upper bound of 10, you can set the metric value to 59.
       #
-      #   If you specify a metric value that doesn\'t correspond to a step
+      #   If you specify a metric value that doesn't correspond to a step
       #   adjustment for the policy, the call returns an error.
       #
       #   This parameter is required if the policy type is `StepScaling` and
@@ -2043,9 +2043,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] health_status
-      #   The last reported health status of the instance. \"Healthy\" means
+      #   The last reported health status of the instance. "Healthy" means
       #   that the instance is healthy and should remain in service.
-      #   \"Unhealthy\" means that the instance is unhealthy and Auto Scaling
+      #   "Unhealthy" means that the instance is unhealthy and Auto Scaling
       #   should terminate and replace it.
       #   @return [String]
       #
@@ -2856,7 +2856,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] start_time
-      #   The time for this action to start, in \"YYYY-MM-DDThh:mm:ssZ\"
+      #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ"
       #   format in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
       #   If you try to schedule your action in the past, Auto Scaling returns
@@ -3243,7 +3243,7 @@ module Aws
       end
 
       # Describes an adjustment based on the difference between the value of
-      # the aggregated CloudWatch metric and the breach threshold that you\'ve
+      # the aggregated CloudWatch metric and the breach threshold that you've
       # defined for the alarm.
       #
       # For the following examples, suppose that you have an alarm with a
@@ -3259,7 +3259,7 @@ module Aws
       #
       # There are a few rules for the step adjustments for your step policy:
       #
-      # * The ranges of your step adjustments can\'t overlap or have a gap.
+      # * The ranges of your step adjustments can't overlap or have a gap.
       #
       # * At most one step adjustment can have a null lower bound. If one step
       #   adjustment has a negative lower bound, then there must be a step
@@ -3269,7 +3269,7 @@ module Aws
       #   adjustment has a positive upper bound, then there must be a step
       #   adjustment with a null upper bound.
       #
-      # * The upper and lower bound can\'t be null in the same step
+      # * The upper and lower bound can't be null in the same step
       #   adjustment.
       # @note When making an API call, pass StepAdjustment
       #   data as a hash:
@@ -3512,7 +3512,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] placement_group
-      #   The name of the placement group into which you\'ll launch your
+      #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1]
       #   in the *Amazon Elastic Compute Cloud User Guide*.
       #
@@ -3526,7 +3526,7 @@ module Aws
       #   specify several subnets in a comma-separated list.
       #
       #   When you specify `VPCZoneIdentifier` with `AvailabilityZones`,
-      #   ensure that the subnets\' Availability Zones match the values you
+      #   ensure that the subnets' Availability Zones match the values you
       #   specify for `AvailabilityZones`.
       #
       #   For more information, see [Launching Auto Scaling Instances in a

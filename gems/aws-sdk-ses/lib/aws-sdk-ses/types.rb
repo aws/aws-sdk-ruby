@@ -33,7 +33,7 @@ module Aws
       #
       # @!attribute [rw] header_value
       #   Must be less than 2048 characters, and must not contain newline
-      #   characters (\"\\r\" or \"\\n\").
+      #   characters ("\\r" or "\\n").
       #   @return [String]
       class AddHeaderAction < Struct.new(
         :header_name,
@@ -371,7 +371,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] rule
-      #   A data structure that contains the specified rule\'s name, actions,
+      #   A data structure that contains the specified rule's name, actions,
       #   recipients, domains, enabled status, scan status, and TLS policy.
       #   @return [Types::ReceiptRule]
       class CreateReceiptRuleRequest < Struct.new(
@@ -625,7 +625,7 @@ module Aws
 
       # Represents the details of a receipt rule.
       # @!attribute [rw] rule
-      #   A data structure that contains the specified receipt rule\'s name,
+      #   A data structure that contains the specified receipt rule's name,
       #   actions, recipients, domains, enabled status, scan status, and
       #   Transport Layer Security (TLS) policy.
       #   @return [Types::ReceiptRule]
@@ -733,7 +733,7 @@ module Aws
       #
       # @!attribute [rw] value
       #   The value of the header to add. Must be less than 2048 characters,
-      #   and must not contain newline characters (\"\\r\" or \"\\n\").
+      #   and must not contain newline characters ("\\r" or "\\n").
       #   @return [String]
       class ExtensionField < Struct.new(
         :name,
@@ -927,9 +927,9 @@ module Aws
       #
       # @!attribute [rw] max_send_rate
       #   The maximum number of emails that Amazon SES can accept from the
-      #   user\'s account per second.
+      #   user's account per second.
       #
-      #   <note markdown="1"> The rate at which Amazon SES accepts the user\'s messages might be
+      #   <note markdown="1"> The rate at which Amazon SES accepts the user's messages might be
       #   less than the maximum send rate.
       #
       #    </note>
@@ -965,12 +965,12 @@ module Aws
       #
       # @!attribute [rw] dkim_verification_status
       #   Describes whether Amazon SES has successfully verified the DKIM DNS
-      #   records (tokens) published in the domain name\'s DNS. (This only
+      #   records (tokens) published in the domain name's DNS. (This only
       #   applies to domain identities, not email address identities.)
       #   @return [String]
       #
       # @!attribute [rw] dkim_tokens
-      #   A set of character strings that represent the domain\'s identity.
+      #   A set of character strings that represent the domain's identity.
       #   Using these tokens, you will need to create DNS CNAME records that
       #   point to DKIM public keys hosted by Amazon SES. Amazon Web Services
       #   will eventually detect that you have updated your DNS records; this
@@ -1091,8 +1091,8 @@ module Aws
 
       # Represents the verification attributes of a single identity.
       # @!attribute [rw] verification_status
-      #   The verification status of the identity: \"Pending\", \"Success\",
-      #   \"Failed\", or \"TemporaryFailure\".
+      #   The verification status of the identity: "Pending", "Success",
+      #   "Failed", or "TemporaryFailure".
       #   @return [String]
       #
       # @!attribute [rw] verification_token
@@ -1161,12 +1161,10 @@ module Aws
       #   `Event`. For information about AWS Lambda invocation types, see the
       #   [AWS Lambda Developer Guide][1].
       #
-      #   <important markdown="1"> There is a 30-second timeout on `RequestResponse` invocations. You
+      #   There is a 30-second timeout on `RequestResponse` invocations. You
       #   should use `Event` invocation in most cases. Use `RequestResponse`
       #   only when you want to make a mail flow decision, such as whether to
       #   stop the receipt rule or the receipt rule set.
-      #
-      #    </important>
       #
       #
       #
@@ -1192,7 +1190,7 @@ module Aws
       #       }
       # @!attribute [rw] identity_type
       #   The type of the identities to list. Possible values are
-      #   \"EmailAddress\" and \"Domain\". If this parameter is omitted, then
+      #   "EmailAddress" and "Domain". If this parameter is omitted, then
       #   all identities will be listed.
       #   @return [String]
       #
@@ -1361,7 +1359,7 @@ module Aws
       #       }
       # @!attribute [rw] subject
       #   The subject of the message: A short summary of the content, which
-      #   will appear in the recipient\'s inbox.
+      #   will appear in the recipient's inbox.
       #   @return [Types::Content]
       #
       # @!attribute [rw] body
@@ -1494,14 +1492,12 @@ module Aws
       #   group list.
       #
       #   If you are using `SendRawEmail` with sending authorization, you can
-      #   include X-headers in the raw message to specify the \"Source,\"
-      #   \"From,\" and \"Return-Path\" addresses. For more information, see
+      #   include X-headers in the raw message to specify the "Source,"
+      #   "From," and "Return-Path" addresses. For more information, see
       #   the documentation for `SendRawEmail`.
       #
-      #   <important markdown="1"> Do not include these X-headers in the DKIM signature, because they
+      #   Do not include these X-headers in the DKIM signature, because they
       #   are removed by Amazon SES before sending the email.
-      #
-      #    </important>
       #
       #   For more information, go to the [Amazon SES Developer Guide][1].
       #
@@ -1695,7 +1691,7 @@ module Aws
       # Each receipt rule defines a set of email addresses or domains to which
       # it applies. If the email addresses or domains match at least one
       # recipient address of the message, Amazon SES executes all of the
-      # receipt rule\'s actions on the message.
+      # receipt rule's actions on the message.
       #
       # For information about setting up receipt rules, see the [Amazon SES
       # Developer Guide][1].
@@ -1802,7 +1798,7 @@ module Aws
       # Information about a receipt rule set.
       #
       # A receipt rule set is a collection of rules that specify what Amazon
-      # SES should do with mail it receives on behalf of your account\'s
+      # SES should do with mail it receives on behalf of your account's
       # verified domains.
       #
       # For information about setting up receipt rule sets, see the [Amazon
@@ -1958,7 +1954,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] rule_names
-      #   A list of the specified receipt rule set\'s receipt rules in the
+      #   A list of the specified receipt rule set's receipt rules in the
       #   order that you want to put them.
       #   @return [Array<String>]
       class ReorderReceiptRuleSetRequest < Struct.new(
@@ -2037,12 +2033,12 @@ module Aws
       #     use the default master key in the US West (Oregon) region, the ARN
       #     of the default master key would be
       #     `arn:aws:kms:us-west-2:123456789012:alias/aws/ses`. If you use the
-      #     default master key, you don\'t need to perform any extra steps to
+      #     default master key, you don't need to perform any extra steps to
       #     give Amazon SES permission to use the key.
       #
       #   * To use a custom master key you created in AWS KMS, provide the ARN
       #     of the master key and ensure that you add a statement to your
-      #     key\'s policy to give Amazon SES permission to use it. For more
+      #     key's policy to give Amazon SES permission to use it. For more
       #     information about giving permissions, see the [Amazon SES
       #     Developer Guide][1].
       #
@@ -2050,7 +2046,7 @@ module Aws
       #   Guide][2]. If you do not specify a master key, Amazon SES will not
       #   encrypt your emails.
       #
-      #   <important markdown="1"> Your mail is encrypted by Amazon SES using the Amazon S3 encryption
+      #   Your mail is encrypted by Amazon SES using the Amazon S3 encryption
       #   client before the mail is submitted to Amazon S3 for storage. It is
       #   not encrypted using Amazon S3 server-side encryption. This means
       #   that you must use the Amazon S3 encryption client to decrypt the
@@ -2059,8 +2055,6 @@ module Aws
       #   client is currently available with the [AWS Java SDK][3] and [AWS
       #   Ruby SDK][4] only. For more information about client-side encryption
       #   using AWS KMS master keys, see the [Amazon S3 Developer Guide][5].
-      #
-      #    </important>
       #
       #
       #
@@ -2085,17 +2079,15 @@ module Aws
       # provide information about the email. They do not include the email
       # content itself.
       #
-      # If you own the Amazon SNS topic, you don\'t need to do anything to
+      # If you own the Amazon SNS topic, you don't need to do anything to
       # give Amazon SES permission to publish emails to it. However, if you
-      # don\'t own the Amazon SNS topic, you need to attach a policy to the
+      # don't own the Amazon SNS topic, you need to attach a policy to the
       # topic to give Amazon SES permissions to access it. For information
       # about giving permissions, see the [Amazon SES Developer Guide][1].
       #
-      # <important markdown="1"> You can only publish emails that are 150 KB or less (including the
+      # You can only publish emails that are 150 KB or less (including the
       # header) to Amazon SNS. Larger emails will bounce. If you anticipate
       # emails larger than 150 KB, use the S3 action instead.
-      #
-      #  </important>
       #
       # For information about using a receipt rule to publish an Amazon SNS
       # notification, see the [Amazon SES Developer Guide][2].
@@ -2182,7 +2174,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] bounce_sender
-      #   The address to use in the \"From\" header of the bounce message.
+      #   The address to use in the "From" header of the bounce message.
       #   This must be an identity that you have verified with Amazon SES.
       #   @return [String]
       #
@@ -2207,7 +2199,7 @@ module Aws
       # @!attribute [rw] bounce_sender_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
-      #   policy that permits you to use the address in the \"From\" header of
+      #   policy that permits you to use the address in the "From" header of
       #   the bounce. For more information about sending authorization, see
       #   the [Amazon SES Developer Guide][1].
       #
@@ -2345,7 +2337,7 @@ module Aws
       #   The email address to which bounces and complaints are to be
       #   forwarded when feedback forwarding is enabled. If the message cannot
       #   be delivered to the recipient, then an error message will be
-      #   returned from the recipient\'s ISP; this message will then be
+      #   returned from the recipient's ISP; this message will then be
       #   forwarded to the email address specified by the `ReturnPath`
       #   parameter. The `ReturnPath` parameter is never overwritten. This
       #   email address must be either individually verified with Amazon SES,
@@ -2433,8 +2425,8 @@ module Aws
       #         return_path_arn: "AmazonResourceName",
       #       }
       # @!attribute [rw] source
-      #   The identity\'s email address. If you do not provide a value for
-      #   this parameter, you must specify a \"From\" address in the raw text
+      #   The identity's email address. If you do not provide a value for
+      #   this parameter, you must specify a "From" address in the raw text
       #   of the message. (You can also specify both.)
       #
       #   By default, the string must be 7-bit ASCII. If the text must contain
@@ -2484,7 +2476,7 @@ module Aws
       # @!attribute [rw] from_arn
       #   This parameter is used only for sending authorization. It is the ARN
       #   of the identity that is associated with the sending authorization
-      #   policy that permits you to specify a particular \"From\" address in
+      #   policy that permits you to specify a particular "From" address in
       #   the header of the raw email.
       #
       #   Instead of using this parameter, you can use the X-header
@@ -2744,7 +2736,7 @@ module Aws
       # @!attribute [rw] mail_from_domain
       #   The custom MAIL FROM domain that you want the verified identity to
       #   use. The MAIL FROM domain must 1) be a subdomain of the verified
-      #   identity, 2) not be used in a \"From\" address if the MAIL FROM
+      #   identity, 2) not be used in a "From" address if the MAIL FROM
       #   domain is the destination of email feedback forwarding (for more
       #   information, see the [Amazon SES Developer Guide][1]), and 3) not be
       #   used to receive emails. A value of `null` disables the custom MAIL
@@ -2996,7 +2988,7 @@ module Aws
       # Returns CNAME records that you must publish to the DNS server of your
       # domain to set up Easy DKIM with Amazon SES.
       # @!attribute [rw] dkim_tokens
-      #   A set of character strings that represent the domain\'s identity. If
+      #   A set of character strings that represent the domain's identity. If
       #   the identity is an email address, the tokens represent the domain of
       #   that address.
       #

@@ -164,17 +164,15 @@ module Aws
       #
       # A single operation can retrieve up to 16 MB of data, which can contain
       # as many as 100 items. *BatchGetItem* will return a partial result if
-      # the response size limit is exceeded, the table\'s provisioned
+      # the response size limit is exceeded, the table's provisioned
       # throughput is exceeded, or an internal processing failure occurs. If a
       # partial result is returned, the operation returns a value for
       # *UnprocessedKeys*. You can use this value to retry the operation
       # starting with the next item to get.
       #
-      # <important markdown="1"> If you request more than 100 items *BatchGetItem* will return a
-      # *ValidationException* with the message \"Too many items requested for
-      # the BatchGetItem call\".
-      #
-      #  </important>
+      # If you request more than 100 items *BatchGetItem* will return a
+      # *ValidationException* with the message "Too many items requested for
+      # the BatchGetItem call".
       #
       # For example, if you ask to retrieve 100 items, but each individual
       # item is 300 KB in size, the system returns 52 items (so as not to
@@ -190,7 +188,7 @@ module Aws
       # *BatchGetItem* completes successfully, while returning the keys of the
       # unread items in *UnprocessedKeys*.
       #
-      # <important markdown="1"> If DynamoDB returns any unprocessed items, you should retry the batch
+      # If DynamoDB returns any unprocessed items, you should retry the batch
       # operation on those items. However, *we strongly recommend that you use
       # an exponential backoff algorithm*. If you retry the batch operation
       # immediately, the underlying read or write requests can still fail due
@@ -200,8 +198,6 @@ module Aws
       #
       #  For more information, see [Batch Operations and Error Handling][1] in
       # the *Amazon DynamoDB Developer Guide*.
-      #
-      #  </important>
       #
       # By default, *BatchGetItem* performs eventually consistent reads on
       # every table in the request. If you want strongly consistent reads
@@ -302,7 +298,7 @@ module Aws
       #
       #   * *AttributesToGet* -
       #
-      #     <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #     This is a legacy parameter, for backward compatibility. New
       #     applications should use *ProjectionExpression* instead. Do not
       #     combine legacy parameters and expression parameters in a single API
       #     call; otherwise, DynamoDB will return a *ValidationException*
@@ -311,8 +307,6 @@ module Aws
       #      This parameter allows you to retrieve attributes of type List or
       #     Map; however, it cannot retrieve individual elements within a List
       #     or a Map.
-      #
-      #      </important>
       #
       #     The names of one or more attributes to retrieve. If no attribute
       #     names are provided, then all attributes will be returned. If any of
@@ -393,8 +387,8 @@ module Aws
       #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
       #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+      # @overload batch_get_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_get_item(params = {}, options = {})
         req = build_request(:batch_get_item, params)
         req.send_request(options)
@@ -412,7 +406,7 @@ module Aws
       #
       # The individual *PutItem* and *DeleteItem* operations specified in
       # *BatchWriteItem* are atomic; however *BatchWriteItem* as a whole is
-      # not. If any requested operations fail because the table\'s provisioned
+      # not. If any requested operations fail because the table's provisioned
       # throughput is exceeded or an internal processing failure occurs, the
       # failed operations are returned in the *UnprocessedItems* response
       # parameter. You can investigate and optionally resend the requests.
@@ -426,7 +420,7 @@ module Aws
       # *BatchWriteItem* will return a
       # *ProvisionedThroughputExceededException*.
       #
-      # <important markdown="1"> If DynamoDB returns any unprocessed items, you should retry the batch
+      # If DynamoDB returns any unprocessed items, you should retry the batch
       # operation on those items. However, *we strongly recommend that you use
       # an exponential backoff algorithm*. If you retry the batch operation
       # immediately, the underlying read or write requests can still fail due
@@ -436,8 +430,6 @@ module Aws
       #
       #  For more information, see [Batch Operations and Error Handling][1] in
       # the *Amazon DynamoDB Developer Guide*.
-      #
-      #  </important>
       #
       # With *BatchWriteItem*, you can efficiently write or delete large
       # amounts of data, such as from Amazon Elastic MapReduce (EMR), or copy
@@ -450,7 +442,7 @@ module Aws
       #
       # If you use a programming language that supports concurrency, you can
       # use threads to write items in parallel. Your application must include
-      # the necessary logic to manage the threads. With languages that don\'t
+      # the necessary logic to manage the threads. With languages that don't
       # support threading, you must update or delete the specified items one
       # at a time. In both situations, *BatchWriteItem* provides an
       # alternative where the API performs the specified put and delete
@@ -469,7 +461,7 @@ module Aws
       #   not exist.
       #
       # * Primary key attributes specified on an item in the request do not
-      #   match those in the corresponding table\'s primary key schema.
+      #   match those in the corresponding table's primary key schema.
       #
       # * You try to perform multiple operations on the same item in the same
       #   *BatchWriteItem* request. For example, you cannot put and delete the
@@ -514,7 +506,7 @@ module Aws
       #
       #       If you specify any attributes that are part of an index key, then
       #       the data types for those attributes must match those of the schema
-      #       in the table\'s attribute definition.
+      #       in the table's attribute definition.
       # @option params [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -585,8 +577,8 @@ module Aws
       #   resp.consumed_capacity[0].local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity[0].global_secondary_indexes #=> Hash
       #   resp.consumed_capacity[0].global_secondary_indexes["IndexName"].capacity_units #=> Float
+      # @overload batch_write_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def batch_write_item(params = {}, options = {})
         req = build_request(:batch_write_item, params)
         req.send_request(options)
@@ -632,12 +624,12 @@ module Aws
       #     * `RANGE` - sort key
       #
       #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-      #   The term \"hash attribute\" derives from DynamoDB\' usage of an
+      #   The term "hash attribute" derives from DynamoDB' usage of an
       #   internal hash function to evenly distribute data items across
       #   partitions, based on their partition key values.
       #
       #    The sort key of an item is also known as its *range attribute*. The
-      #   term \"range attribute\" derives from the way DynamoDB stores items
+      #   term "range attribute" derives from the way DynamoDB stores items
       #   with the same partition key physically close together, in sorted order
       #   by the sort key value.
       #
@@ -758,7 +750,7 @@ module Aws
       #
       #   * *StreamViewType* - When an item in the table is modified,
       #     *StreamViewType* determines what information is written to the
-      #     table\'s stream. Valid values for *StreamViewType* are:
+      #     table's stream. Valid values for *StreamViewType* are:
       #
       #     * *KEYS\_ONLY* - Only the key attributes of the modified item are
       #       written to the stream.
@@ -885,8 +877,8 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      # @overload create_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_table(params = {}, options = {})
         req = build_request(:create_table, params)
         req.send_request(options)
@@ -896,7 +888,7 @@ module Aws
       # conditional delete operation that deletes the item if it exists, or if
       # it has an expected attribute value.
       #
-      # In addition to deleting an item, you can also return the item\'s
+      # In addition to deleting an item, you can also return the item's
       # attribute values in the same operation, using the *ReturnValues*
       # parameter.
       #
@@ -918,12 +910,10 @@ module Aws
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A map of attribute/condition pairs. *Expected* provides a conditional
       #   block for the *DeleteItem* operation.
@@ -1045,9 +1035,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the existence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NOT_NULL`, the result is a Boolean *true*. This
-      #       result is because the attribute \"`a`\" exists; its data type is
+      #       result is because the attribute "`a`" exists; its data type is
       #       not relevant to the `NOT_NULL` comparison operator.
       #
       #        </note>
@@ -1056,9 +1046,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the nonexistence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NULL`, the result is a Boolean *false*. This is
-      #       because the attribute \"`a`\" exists; its data type is not
+      #       because the attribute "`a`" exists; its data type is not
       #       relevant to the `NULL` comparison operator.
       #
       #        </note>
@@ -1071,12 +1061,12 @@ module Aws
       #       checks for a substring match. If the target attribute of the
       #       comparison is of type Binary, then the operator looks for a
       #       subsequence of the target that matches the input. If the target
-      #       attribute of the comparison is a set (\"`SS`\", \"`NS`\", or
-      #       \"`BS`\"), then the operator evaluates to true if it finds an
+      #       attribute of the comparison is a set ("`SS`", "`NS`", or
+      #       "`BS`"), then the operator evaluates to true if it finds an
       #       exact match with any member of the set.
       #
-      #       CONTAINS is supported for lists: When evaluating \"`a CONTAINS
-      #       b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a set, a
+      #       CONTAINS is supported for lists: When evaluating "`a CONTAINS
+      #       b`", "`a`" can be a list; however, "`b`" cannot be a set, a
       #       map, or a list.
       #
       #     * `NOT_CONTAINS`\: Checks for absence of a subsequence, or absence
@@ -1088,12 +1078,12 @@ module Aws
       #       for the absence of a substring match. If the target attribute of
       #       the comparison is Binary, then the operator checks for the absence
       #       of a subsequence of the target that matches the input. If the
-      #       target attribute of the comparison is a set (\"`SS`\", \"`NS`\",
-      #       or \"`BS`\"), then the operator evaluates to true if it *does not*
+      #       target attribute of the comparison is a set ("`SS`", "`NS`",
+      #       or "`BS`"), then the operator evaluates to true if it *does not*
       #       find an exact match with any member of the set.
       #
-      #       NOT\_CONTAINS is supported for lists: When evaluating \"`a NOT
-      #       CONTAINS b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a
+      #       NOT\_CONTAINS is supported for lists: When evaluating "`a NOT
+      #       CONTAINS b`", "`a`" can be a list; however, "`b`" cannot be a
       #       set, a map, or a list.
       #
       #     * `BEGINS_WITH`\: Checks for a prefix.
@@ -1166,12 +1156,10 @@ module Aws
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
       # @option params [String] :conditional_operator
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A logical operator to apply to the conditions in the *Expected* map:
       #
@@ -1374,8 +1362,8 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      # @overload delete_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_item(params = {}, options = {})
         req = build_request(:delete_item, params)
         req.send_request(options)
@@ -1465,8 +1453,8 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      # @overload delete_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_table(params = {}, options = {})
         req = build_request(:delete_table, params)
         req.send_request(options)
@@ -1554,8 +1542,8 @@ module Aws
       #   resp.account_max_write_capacity_units #=> Integer
       #   resp.table_max_read_capacity_units #=> Integer
       #   resp.table_max_write_capacity_units #=> Integer
+      # @overload describe_limits(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_limits(params = {}, options = {})
         req = build_request(:describe_limits, params)
         req.send_request(options)
@@ -1635,8 +1623,8 @@ module Aws
       #   resp.table.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table.latest_stream_label #=> String
       #   resp.table.latest_stream_arn #=> String
+      # @overload describe_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_table(params = {}, options = {})
         req = build_request(:describe_table, params)
         req.send_request(options)
@@ -1662,7 +1650,7 @@ module Aws
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
       # @option params [Array<String>] :attributes_to_get
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
@@ -1670,8 +1658,6 @@ module Aws
       #    This parameter allows you to retrieve attributes of type List or Map;
       #   however, it cannot retrieve individual elements within a List or a
       #   Map.
-      #
-      #    </important>
       #
       #   The names of one or more attributes to retrieve. If no attribute names
       #   are provided, then all attributes will be returned. If any of the
@@ -1802,8 +1788,8 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      # @overload get_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_item(params = {}, options = {})
         req = build_request(:get_item, params)
         req.send_request(options)
@@ -1834,8 +1820,8 @@ module Aws
       #   resp.table_names #=> Array
       #   resp.table_names[0] #=> String
       #   resp.last_evaluated_table_name #=> String
+      # @overload list_tables(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tables(params = {}, options = {})
         req = build_request(:list_tables, params)
         req.send_request(options)
@@ -1845,10 +1831,10 @@ module Aws
       # item that has the same primary key as the new item already exists in
       # the specified table, the new item completely replaces the existing
       # item. You can perform a conditional put operation (add a new item if
-      # one with the specified primary key doesn\'t exist), or replace an
+      # one with the specified primary key doesn't exist), or replace an
       # existing item if it has certain attribute values.
       #
-      # In addition to putting an item, you can also return the item\'s
+      # In addition to putting an item, you can also return the item's
       # attribute values in the same operation, using the *ReturnValues*
       # parameter.
       #
@@ -1892,7 +1878,7 @@ module Aws
       #
       #   If you specify any attributes that are part of an index key, then the
       #   data types for those attributes must match those of the schema in the
-      #   table\'s attribute definition.
+      #   table's attribute definition.
       #
       #   For more information about primary keys, see [Primary Key][1] in the
       #   *Amazon DynamoDB Developer Guide*.
@@ -1903,12 +1889,10 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataModel.html#DataModelPrimaryKey
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A map of attribute/condition pairs. *Expected* provides a conditional
       #   block for the *PutItem* operation.
@@ -2034,9 +2018,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the existence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NOT_NULL`, the result is a Boolean *true*. This
-      #       result is because the attribute \"`a`\" exists; its data type is
+      #       result is because the attribute "`a`" exists; its data type is
       #       not relevant to the `NOT_NULL` comparison operator.
       #
       #        </note>
@@ -2045,9 +2029,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the nonexistence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NULL`, the result is a Boolean *false*. This is
-      #       because the attribute \"`a`\" exists; its data type is not
+      #       because the attribute "`a`" exists; its data type is not
       #       relevant to the `NULL` comparison operator.
       #
       #        </note>
@@ -2060,12 +2044,12 @@ module Aws
       #       checks for a substring match. If the target attribute of the
       #       comparison is of type Binary, then the operator looks for a
       #       subsequence of the target that matches the input. If the target
-      #       attribute of the comparison is a set (\"`SS`\", \"`NS`\", or
-      #       \"`BS`\"), then the operator evaluates to true if it finds an
+      #       attribute of the comparison is a set ("`SS`", "`NS`", or
+      #       "`BS`"), then the operator evaluates to true if it finds an
       #       exact match with any member of the set.
       #
-      #       CONTAINS is supported for lists: When evaluating \"`a CONTAINS
-      #       b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a set, a
+      #       CONTAINS is supported for lists: When evaluating "`a CONTAINS
+      #       b`", "`a`" can be a list; however, "`b`" cannot be a set, a
       #       map, or a list.
       #
       #     * `NOT_CONTAINS`\: Checks for absence of a subsequence, or absence
@@ -2077,12 +2061,12 @@ module Aws
       #       for the absence of a substring match. If the target attribute of
       #       the comparison is Binary, then the operator checks for the absence
       #       of a subsequence of the target that matches the input. If the
-      #       target attribute of the comparison is a set (\"`SS`\", \"`NS`\",
-      #       or \"`BS`\"), then the operator evaluates to true if it *does not*
+      #       target attribute of the comparison is a set ("`SS`", "`NS`",
+      #       or "`BS`"), then the operator evaluates to true if it *does not*
       #       find an exact match with any member of the set.
       #
-      #       NOT\_CONTAINS is supported for lists: When evaluating \"`a NOT
-      #       CONTAINS b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a
+      #       NOT\_CONTAINS is supported for lists: When evaluating "`a NOT
+      #       CONTAINS b`", "`a`" can be a list; however, "`b`" cannot be a
       #       set, a map, or a list.
       #
       #     * `BEGINS_WITH`\: Checks for a prefix.
@@ -2189,12 +2173,10 @@ module Aws
       #   any, that were modified during the operation are returned in the
       #   response. If set to `NONE` (the default), no statistics are returned.
       # @option params [String] :conditional_operator
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A logical operator to apply to the conditions in the *Expected* map:
       #
@@ -2360,8 +2342,8 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      # @overload put_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_item(params = {}, options = {})
         req = build_request(:put_item, params)
         req.send_request(options)
@@ -2452,7 +2434,7 @@ module Aws
       #
       #    </note>
       # @option params [Array<String>] :attributes_to_get
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
@@ -2460,8 +2442,6 @@ module Aws
       #    This parameter allows you to retrieve attributes of type List or Map;
       #   however, it cannot retrieve individual elements within a List or a
       #   Map.
-      #
-      #    </important>
       #
       #   The names of one or more attributes to retrieve. If no attribute names
       #   are provided, then all attributes will be returned. If any of the
@@ -2512,20 +2492,18 @@ module Aws
       #   indexes. If you query a global secondary index with *ConsistentRead*
       #   set to `true`, you will receive a *ValidationException*.
       # @option params [Hash<String,Types::Condition>] :key_conditions
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *KeyConditionExpression* instead. Do not
       #   combine legacy parameters and expression parameters in a single API
       #   call; otherwise, DynamoDB will return a *ValidationException*
       #   exception.
-      #
-      #    </important>
       #
       #   The selection criteria for the query. For a query on a table, you can
       #   have conditions only on the table primary key attributes. You must
       #   provide the partition key name and value as an `EQ` condition. You can
       #   optionally provide a second condition, referring to the sort key.
       #
-      #   <note markdown="1"> If you don\'t provide a sort key condition, all of the items that
+      #   <note markdown="1"> If you don't provide a sort key condition, all of the items that
       #   match the partition key will be retrieved. If a *FilterExpression* or
       #   *QueryFilter* is present, it will be applied after the items are
       #   retrieved.
@@ -2651,12 +2629,10 @@ module Aws
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
       # @option params [Hash<String,Types::Condition>] :query_filter
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A condition that evaluates the query results after the items are read
       #   and returns only the desired values.
@@ -2717,12 +2693,10 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
       #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Condition.html
       # @option params [String] :conditional_operator
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A logical operator to apply to the conditions in a *QueryFilter* map:
       #
@@ -3043,8 +3017,8 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      # @overload query(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def query(params = {}, options = {})
         req = build_request(:query, params)
         req.send_request(options)
@@ -3084,7 +3058,7 @@ module Aws
       #   secondary index or global secondary index. Note that if you use the
       #   `IndexName` parameter, you must also provide `TableName`.
       # @option params [Array<String>] :attributes_to_get
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ProjectionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
@@ -3092,8 +3066,6 @@ module Aws
       #    This parameter allows you to retrieve attributes of type List or Map;
       #   however, it cannot retrieve individual elements within a List or a
       #   Map.
-      #
-      #    </important>
       #
       #   The names of one or more attributes to retrieve. If no attribute names
       #   are provided, then all attributes will be returned. If any of the
@@ -3143,12 +3115,10 @@ module Aws
       #   *Select* is `SPECIFIC_ATTRIBUTES`. (This usage is equivalent to
       #   specifying *AttributesToGet* without any value for *Select*.)
       # @option params [Hash<String,Types::Condition>] :scan_filter
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A condition that evaluates the scan results and returns only the
       #   desired values.
@@ -3202,12 +3172,10 @@ module Aws
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/DataFormat.html
       #   [3]: http://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Condition.html
       # @option params [String] :conditional_operator
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *FilterExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A logical operator to apply to the conditions in a *ScanFilter* map:
       #
@@ -3470,21 +3438,21 @@ module Aws
       #   resp.consumed_capacity.local_secondary_indexes["IndexName"].capacity_units #=> Float
       #   resp.consumed_capacity.global_secondary_indexes #=> Hash
       #   resp.consumed_capacity.global_secondary_indexes["IndexName"].capacity_units #=> Float
+      # @overload scan(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def scan(params = {}, options = {})
         req = build_request(:scan, params)
         req.send_request(options)
       end
 
-      # Edits an existing item\'s attributes, or adds a new item to the table
+      # Edits an existing item's attributes, or adds a new item to the table
       # if it does not already exist. You can put, delete, or add attribute
       # values. You can also perform a conditional update on an existing item
-      # (insert a new attribute name-value pair if it doesn\'t exist, or
+      # (insert a new attribute name-value pair if it doesn't exist, or
       # replace an existing name-value pair if it has certain expected
       # attribute values).
       #
-      # You can also return the item\'s attribute values in the same
+      # You can also return the item's attribute values in the same
       # *UpdateItem* operation using the *ReturnValues* parameter.
       # @option params [required, String] :table_name
       #   The name of the table containing the item to update.
@@ -3497,15 +3465,13 @@ module Aws
       #   for the partition key. For a composite primary key, you must provide
       #   values for both the partition key and the sort key.
       # @option params [Hash<String,Types::AttributeValueUpdate>] :attribute_updates
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *UpdateExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
       #
       #    This parameter can be used for modifying top-level attributes;
       #   however, it does not support individual list or map elements.
-      #
-      #    </important>
       #
       #   The names of attributes to be modified, the action to perform on each,
       #   and the new value for each. If you are updating an attribute that is
@@ -3536,7 +3502,7 @@ module Aws
       #
       #     * `DELETE` - Removes the attribute and its value, if no value is
       #       specified for `DELETE`. The data type of the specified value must
-      #       match the existing value\'s data type.
+      #       match the existing value's data type.
       #
       #       If a set of values is specified, then those values are subtracted
       #       from the old set. For example, if the attribute value was the set
@@ -3554,13 +3520,13 @@ module Aws
       #         subtracted from the existing attribute.
       #
       #         <note markdown="1"> If you use `ADD` to increment or decrement a number value for an
-      #         item that doesn\'t exist before the update, DynamoDB uses 0 as
+      #         item that doesn't exist before the update, DynamoDB uses 0 as
       #         the initial value.
       #
       #          Similarly, if you use `ADD` for an existing item to increment or
-      #         decrement an attribute value that doesn\'t exist before the
+      #         decrement an attribute value that doesn't exist before the
       #         update, DynamoDB uses `0` as the initial value. For example,
-      #         suppose that the item you want to update doesn\'t have an
+      #         suppose that the item you want to update doesn't have an
       #         attribute named *itemcount*, but you decide to `ADD` the number
       #         `3` to this attribute anyway. DynamoDB will create the
       #         *itemcount* attribute, set its initial value to `0`, and finally
@@ -3597,15 +3563,13 @@ module Aws
       #
       #   If you provide any attributes that are part of an index key, then the
       #   data types for those attributes must match those of the schema in the
-      #   table\'s attribute definition.
+      #   table's attribute definition.
       # @option params [Hash<String,Types::ExpectedAttributeValue>] :expected
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use <i> ConditionExpression </i> instead. Do not
       #   combine legacy parameters and expression parameters in a single API
       #   call; otherwise, DynamoDB will return a *ValidationException*
       #   exception.
-      #
-      #    </important>
       #
       #   A map of attribute/condition pairs. *Expected* provides a conditional
       #   block for the *UpdateItem* operation.
@@ -3727,9 +3691,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the existence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NOT_NULL`, the result is a Boolean *true*. This
-      #       result is because the attribute \"`a`\" exists; its data type is
+      #       result is because the attribute "`a`" exists; its data type is
       #       not relevant to the `NOT_NULL` comparison operator.
       #
       #        </note>
@@ -3738,9 +3702,9 @@ module Aws
       #       datatypes, including lists and maps.
       #
       #       <note markdown="1"> This operator tests for the nonexistence of an attribute, not its
-      #       data type. If the data type of attribute \"`a`\" is null, and you
+      #       data type. If the data type of attribute "`a`" is null, and you
       #       evaluate it using `NULL`, the result is a Boolean *false*. This is
-      #       because the attribute \"`a`\" exists; its data type is not
+      #       because the attribute "`a`" exists; its data type is not
       #       relevant to the `NULL` comparison operator.
       #
       #        </note>
@@ -3753,12 +3717,12 @@ module Aws
       #       checks for a substring match. If the target attribute of the
       #       comparison is of type Binary, then the operator looks for a
       #       subsequence of the target that matches the input. If the target
-      #       attribute of the comparison is a set (\"`SS`\", \"`NS`\", or
-      #       \"`BS`\"), then the operator evaluates to true if it finds an
+      #       attribute of the comparison is a set ("`SS`", "`NS`", or
+      #       "`BS`"), then the operator evaluates to true if it finds an
       #       exact match with any member of the set.
       #
-      #       CONTAINS is supported for lists: When evaluating \"`a CONTAINS
-      #       b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a set, a
+      #       CONTAINS is supported for lists: When evaluating "`a CONTAINS
+      #       b`", "`a`" can be a list; however, "`b`" cannot be a set, a
       #       map, or a list.
       #
       #     * `NOT_CONTAINS`\: Checks for absence of a subsequence, or absence
@@ -3770,12 +3734,12 @@ module Aws
       #       for the absence of a substring match. If the target attribute of
       #       the comparison is Binary, then the operator checks for the absence
       #       of a subsequence of the target that matches the input. If the
-      #       target attribute of the comparison is a set (\"`SS`\", \"`NS`\",
-      #       or \"`BS`\"), then the operator evaluates to true if it *does not*
+      #       target attribute of the comparison is a set ("`SS`", "`NS`",
+      #       or "`BS`"), then the operator evaluates to true if it *does not*
       #       find an exact match with any member of the set.
       #
-      #       NOT\_CONTAINS is supported for lists: When evaluating \"`a NOT
-      #       CONTAINS b`\", \"`a`\" can be a list; however, \"`b`\" cannot be a
+      #       NOT\_CONTAINS is supported for lists: When evaluating "`a NOT
+      #       CONTAINS b`", "`a`" can be a list; however, "`b`" cannot be a
       #       set, a map, or a list.
       #
       #     * `BEGINS_WITH`\: Checks for a prefix.
@@ -3848,12 +3812,10 @@ module Aws
       #   [1]: http://en.wikipedia.org/wiki/ASCII#ASCII_printable_characters
       #   [2]: http://docs.aws.amazon.com/amazondynamodb/latest/developerguide/LegacyConditionalParameters.html
       # @option params [String] :conditional_operator
-      #   <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #   This is a legacy parameter, for backward compatibility. New
       #   applications should use *ConditionExpression* instead. Do not combine
       #   legacy parameters and expression parameters in a single API call;
       #   otherwise, DynamoDB will return a *ValidationException* exception.
-      #
-      #    </important>
       #
       #   A logical operator to apply to the conditions in the *Expected* map:
       #
@@ -3954,13 +3916,13 @@ module Aws
       #       from the existing attribute.
       #
       #       <note markdown="1"> If you use `ADD` to increment or decrement a number value for an
-      #       item that doesn\'t exist before the update, DynamoDB uses `0` as
+      #       item that doesn't exist before the update, DynamoDB uses `0` as
       #       the initial value.
       #
       #        Similarly, if you use `ADD` for an existing item to increment or
-      #       decrement an attribute value that doesn\'t exist before the
+      #       decrement an attribute value that doesn't exist before the
       #       update, DynamoDB uses `0` as the initial value. For example,
-      #       suppose that the item you want to update doesn\'t have an
+      #       suppose that the item you want to update doesn't have an
       #       attribute named *itemcount*, but you decide to `ADD` the number
       #       `3` to this attribute anyway. DynamoDB will create the *itemcount*
       #       attribute, set its initial value to `0`, and finally add `3` to
@@ -3980,11 +3942,9 @@ module Aws
       #       the existing data type is a set of strings, the *Value* must also
       #       be a set of strings.
       #
-      #     <important markdown="1"> The `ADD` action only supports Number and set data types. In
+      #     The `ADD` action only supports Number and set data types. In
       #     addition, `ADD` can only be used on top-level attributes, not nested
       #     attributes.
-      #
-      #      </important>
       #
       #   * `DELETE` - Deletes an element from a set.
       #
@@ -3993,11 +3953,9 @@ module Aws
       #     `[a,b,c]` and the `DELETE` action specifies `[a,c]`, then the final
       #     attribute value is `[b]`. Specifying an empty set is an error.
       #
-      #     <important markdown="1"> The `DELETE` action only supports set data types. In addition,
+      #     The `DELETE` action only supports set data types. In addition,
       #     `DELETE` can only be used on top-level attributes, not nested
       #     attributes.
-      #
-      #      </important>
       #
       #   You can have many actions in a single expression, such as the
       #   following: `SET a=:value1, b=:value2 DELETE :value3, :value4, :value5`
@@ -4168,8 +4126,8 @@ module Aws
       #   resp.item_collection_metrics.item_collection_key["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
       #   resp.item_collection_metrics.size_estimate_range_gb #=> Array
       #   resp.item_collection_metrics.size_estimate_range_gb[0] #=> Float
+      # @overload update_item(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_item(params = {}, options = {})
         req = build_request(:update_item, params)
         req.send_request(options)
@@ -4343,8 +4301,8 @@ module Aws
       #   resp.table_description.stream_specification.stream_view_type #=> String, one of "NEW_IMAGE", "OLD_IMAGE", "NEW_AND_OLD_IMAGES", "KEYS_ONLY"
       #   resp.table_description.latest_stream_label #=> String
       #   resp.table_description.latest_stream_arn #=> String
+      # @overload update_table(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_table(params = {}, options = {})
         req = build_request(:update_table, params)
         req.send_request(options)

@@ -41,7 +41,7 @@ module Aws
 
       # The result of the DescribeRule operation.
       # @!attribute [rw] name
-      #   The rule\'s name.
+      #   The rule's name.
       #   @return [String]
       #
       # @!attribute [rw] arn
@@ -53,8 +53,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, \"cron(0 20 \* \* ? \*)\",
-      #   \"rate(5 minutes)\".
+      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   "rate(5 minutes)".
       #   @return [String]
       #
       # @!attribute [rw] state
@@ -62,7 +62,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The rule\'s description.
+      #   The rule's description.
       #   @return [String]
       #
       # @!attribute [rw] role_arn
@@ -366,8 +366,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, \"cron(0 20 \* \* ? \*)\",
-      #   \"rate(5 minutes)\".
+      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   "rate(5 minutes)".
       #   @return [String]
       #
       # @!attribute [rw] event_pattern
@@ -529,7 +529,7 @@ module Aws
       # Contains information about a rule in Amazon CloudWatch Events. A
       # ListRulesResult contains a list of Rules.
       # @!attribute [rw] name
-      #   The rule\'s name.
+      #   The rule's name.
       #   @return [String]
       #
       # @!attribute [rw] arn
@@ -541,7 +541,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] state
-      #   The rule\'s state.
+      #   The rule's state.
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -549,8 +549,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, \"cron(0 20 \* \* ? \*)\",
-      #   \"rate(5 minutes)\".
+      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   "rate(5 minutes)".
       #   @return [String]
       #
       # @!attribute [rw] role_arn

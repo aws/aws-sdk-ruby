@@ -203,7 +203,7 @@ module Aws
       #
       # @!attribute [rw] preferred_availability_zone
       #   The name of the Availability Zone in which the cache cluster is
-      #   located or \"Multiple\" if the cache nodes are located in different
+      #   located or "Multiple" if the cache nodes are located in different
       #   Availability Zones.
       #   @return [String]
       #
@@ -283,10 +283,8 @@ module Aws
       #   *SnapshotRetentionLimit* to 5, then a snapshot that was taken today
       #   will be retained for 5 days before being deleted.
       #
-      #   <important markdown="1"> If the value of SnapshotRetentionLimit is set to zero (0), backups
+      #   If the value of SnapshotRetentionLimit is set to zero (0), backups
       #   are turned off.
-      #
-      #    </important>
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
@@ -382,7 +380,7 @@ module Aws
       end
 
       # Represents an individual cache node within a cache cluster. Each cache
-      # node runs its own instance of the cluster\'s protocol-compliant
+      # node runs its own instance of the cluster's protocol-compliant
       # caching software - either Memcached or Redis.
       #
       # Valid node types are as follows:
@@ -429,7 +427,7 @@ module Aws
       # @!attribute [rw] cache_node_id
       #   The cache node identifier. A node ID is a numeric identifier (0001,
       #   0002, etc.). The combination of cluster ID and node ID uniquely
-      #   identifies every cache node used in a customer\'s AWS account.
+      #   identifies every cache node used in a customer's AWS account.
       #   @return [String]
       #
       # @!attribute [rw] cache_node_status
@@ -511,7 +509,7 @@ module Aws
       #   ChangeType indicates whether a change to the parameter will be
       #   applied immediately or requires a reboot for the change to be
       #   applied. You can force a reboot or wait until the next maintenance
-      #   window\'s reboot. For more information, see [Rebooting a
+      #   window's reboot. For more information, see [Rebooting a
       #   Cluster][1].
       #
       #
@@ -666,7 +664,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents a cache cluster\'s status within a particular cache
+      # Represents a cache cluster's status within a particular cache
       # security group.
       # @!attribute [rw] cache_security_group_name
       #   The name of the cache security group.
@@ -920,7 +918,7 @@ module Aws
       # @!attribute [rw] az_mode
       #   Specifies whether the nodes in this Memcached node group are created
       #   in a single Availability Zone or created across multiple
-      #   Availability Zones in the cluster\'s region.
+      #   Availability Zones in the cluster's region.
       #
       #   This parameter is only supported for Memcached cache clusters.
       #
@@ -1263,7 +1261,7 @@ module Aws
       #   lowercase string.
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Cannot be the word \"Default\".
+      #   Cannot be the word "Default".
       #
       #   Example: `mysecuritygroup`
       #   @return [String]
@@ -1432,7 +1430,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] preferred_cache_cluster_a_zs
-      #   A list of EC2 availability zones in which the replication group\'s
+      #   A list of EC2 availability zones in which the replication group's
       #   cache clusters will be created. The order of the availability zones
       #   in the list is not important.
       #
@@ -1880,7 +1878,7 @@ module Aws
       # @!attribute [rw] cache_cluster_id
       #   The user-supplied cluster identifier. If this parameter is
       #   specified, only information about that specific cache cluster is
-      #   returned. This parameter isn\'t case sensitive.
+      #   returned. This parameter isn't case sensitive.
       #   @return [String]
       #
       # @!attribute [rw] max_records
@@ -2220,7 +2218,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] duration
-      #   The number of minutes\' worth of events to retrieve.
+      #   The number of minutes' worth of events to retrieve.
       #   @return [Integer]
       #
       # @!attribute [rw] max_records
@@ -2726,10 +2724,8 @@ module Aws
       #   current node type of this cluster and from that to to create a list
       #   of node types you can scale up to.
       #
-      #   <important markdown="1"> You must provide a value for either the *CacheClusterId* or the
+      #   You must provide a value for either the *CacheClusterId* or the
       #   *ReplicationGroupId*.
-      #
-      #    </important>
       #   @return [String]
       #
       # @!attribute [rw] replication_group_id
@@ -2738,10 +2734,8 @@ module Aws
       #   current node type being used by this replication group, and from
       #   that to create a list of node types you can scale up to.
       #
-      #   <important markdown="1"> You must provide a value for either the *CacheClusterId* or the
+      #   You must provide a value for either the *CacheClusterId* or the
       #   *ReplicationGroupId*.
-      #
-      #    </important>
       #   @return [String]
       class ListAllowedNodeTypeModificationsMessage < Struct.new(
         :cache_cluster_id,
@@ -2824,7 +2818,7 @@ module Aws
       #    A pending action to modify the number of cache nodes in a cluster
       #   during its maintenance window, whether by adding or removing nodes
       #   in accordance with the scale out architecture, is not queued. The
-      #   customer\'s latest request to add or remove nodes to the cluster
+      #   customer's latest request to add or remove nodes to the cluster
       #   overrides any previous pending actions to modify the number of cache
       #   nodes in the cluster. For example, a request to remove 2 nodes would
       #   override a previous pending action to remove 3 nodes. Similarly, a
@@ -2957,12 +2951,10 @@ module Aws
       #
       #     * Result: The new create is added to the pending create.
       #
-      #       <important markdown="1"> **Important:** If the new create request is **Apply Immediately
+      #       **Important:** If the new create request is **Apply Immediately
       #       - Yes**, all creates are performed immediately. If the new
       #       create request is **Apply Immediately - No**, all creates are
       #       pending.
-      #
-      #        </important>
       #
       #   Example:
       #
@@ -2981,7 +2973,7 @@ module Aws
       #   outside of an Amazon Virtual Private Cloud (VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Must not be \"Default\".
+      #   Must not be "Default".
       #   @return [Array<String>]
       #
       # @!attribute [rw] security_group_ids
@@ -3047,11 +3039,9 @@ module Aws
       #   next maintenance reboot, or the next failure reboot, whichever
       #   occurs first.
       #
-      #   <important markdown="1"> If you perform a `ModifyCacheCluster` before a pending modification
+      #   If you perform a `ModifyCacheCluster` before a pending modification
       #   is applied, the pending modification is replaced by the newer
       #   modification.
-      #
-      #    </important>
       #
       #   Valid values: `true` \| `false`
       #
@@ -3272,7 +3262,7 @@ module Aws
       #   (VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Must not be \"Default\".
+      #   Must not be "Default".
       #   @return [Array<String>]
       #
       # @!attribute [rw] security_group_ids
@@ -3496,7 +3486,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] snapshot_create_time
-      #   The date and time when the source node\'s metadata and cache data
+      #   The date and time when the source node's metadata and cache data
       #   set was obtained for the snapshot.
       #   @return [Time]
       class NodeSnapshot < Struct.new(
@@ -3563,7 +3553,7 @@ module Aws
       #   ChangeType indicates whether a change to the parameter will be
       #   applied immediately or requires a reboot for the change to be
       #   applied. You can force a reboot or wait until the next maintenance
-      #   window\'s reboot. For more information, see [Rebooting a
+      #   window's reboot. For more information, see [Rebooting a
       #   Cluster][1].
       #
       #
@@ -4408,7 +4398,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] value
-      #   The tag\'s value. May not be null.
+      #   The tag's value. May not be null.
       #   @return [String]
       class Tag < Struct.new(
         :key,

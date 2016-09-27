@@ -86,7 +86,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @return [EmptyStructure]
       def enable(options = {})
@@ -103,7 +103,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @option options [required, Types::VersioningConfiguration] :versioning_configuration
       # @return [EmptyStructure]
@@ -116,7 +116,7 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa
-      #   The concatenation of the authentication device\'s serial number, a
+      #   The concatenation of the authentication device's serial number, a
       #   space, and the value that is displayed on your authentication device.
       # @return [EmptyStructure]
       def suspend(options = {})

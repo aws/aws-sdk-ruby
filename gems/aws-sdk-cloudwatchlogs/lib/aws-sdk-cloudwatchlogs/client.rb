@@ -143,8 +143,8 @@ module Aws
       #   resp = client.cancel_export_task({
       #     task_id: "ExportTaskId", # required
       #   })
+      # @overload cancel_export_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def cancel_export_task(params = {}, options = {})
         req = build_request(:cancel_export_task, params)
         req.send_request(options)
@@ -169,7 +169,7 @@ module Aws
       #   The name of the log group to export.
       # @option params [String] :log_stream_name_prefix
       #   Will only export log streams that match the provided
-      #   logStreamNamePrefix. If you don\'t specify a value, no prefix filter
+      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
       #   is applied.
       # @option params [required, Integer] :from
       #   A point in time expressed as the number of milliseconds since Jan 1,
@@ -187,7 +187,7 @@ module Aws
       #   **Note:** Only buckets in the same AWS region are supported.
       # @option params [String] :destination_prefix
       #   Prefix that will be used as the start of Amazon S3 key for every
-      #   object exported. If not specified, this defaults to \'exportedlogs\'.
+      #   object exported. If not specified, this defaults to 'exportedlogs'.
       # @return [Types::CreateExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateExportTaskResponse#task_id #taskId} => String
@@ -205,8 +205,8 @@ module Aws
       #
       # @example Response structure
       #   resp.task_id #=> String
+      # @overload create_export_task(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_export_task(params = {}, options = {})
         req = build_request(:create_export_task, params)
         req.send_request(options)
@@ -220,8 +220,8 @@ module Aws
       #
       # * Log group names can be between 1 and 512 characters long.
       #
-      # * Allowed characters are a-z, A-Z, 0-9, \'\_\' (underscore), \'-\'
-      #   (hyphen), \'/\' (forward slash), and \'.\' (period).
+      # * Allowed characters are a-z, A-Z, 0-9, '\_' (underscore), '-'
+      #   (hyphen), '/' (forward slash), and '.' (period).
       # @option params [required, String] :log_group_name
       #   The name of the log group to create.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -230,8 +230,8 @@ module Aws
       #   resp = client.create_log_group({
       #     log_group_name: "LogGroupName", # required
       #   })
+      # @overload create_log_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_log_group(params = {}, options = {})
         req = build_request(:create_log_group, params)
         req.send_request(options)
@@ -245,7 +245,7 @@ module Aws
       #
       # * Log stream names can be between 1 and 512 characters long.
       #
-      # * The \':\' colon character is not allowed.
+      # * The ':' colon character is not allowed.
       # @option params [required, String] :log_group_name
       #   The name of the log group under which the log stream is to be created.
       # @option params [required, String] :log_stream_name
@@ -257,8 +257,8 @@ module Aws
       #     log_group_name: "LogGroupName", # required
       #     log_stream_name: "LogStreamName", # required
       #   })
+      # @overload create_log_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_log_stream(params = {}, options = {})
         req = build_request(:create_log_stream, params)
         req.send_request(options)
@@ -275,8 +275,8 @@ module Aws
       #   resp = client.delete_destination({
       #     destination_name: "DestinationName", # required
       #   })
+      # @overload delete_destination(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_destination(params = {}, options = {})
         req = build_request(:delete_destination, params)
         req.send_request(options)
@@ -292,8 +292,8 @@ module Aws
       #   resp = client.delete_log_group({
       #     log_group_name: "LogGroupName", # required
       #   })
+      # @overload delete_log_group(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_log_group(params = {}, options = {})
         req = build_request(:delete_log_group, params)
         req.send_request(options)
@@ -313,8 +313,8 @@ module Aws
       #     log_group_name: "LogGroupName", # required
       #     log_stream_name: "LogStreamName", # required
       #   })
+      # @overload delete_log_stream(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_log_stream(params = {}, options = {})
         req = build_request(:delete_log_stream, params)
         req.send_request(options)
@@ -333,8 +333,8 @@ module Aws
       #     log_group_name: "LogGroupName", # required
       #     filter_name: "FilterName", # required
       #   })
+      # @overload delete_metric_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_metric_filter(params = {}, options = {})
         req = build_request(:delete_metric_filter, params)
         req.send_request(options)
@@ -352,8 +352,8 @@ module Aws
       #   resp = client.delete_retention_policy({
       #     log_group_name: "LogGroupName", # required
       #   })
+      # @overload delete_retention_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_retention_policy(params = {}, options = {})
         req = build_request(:delete_retention_policy, params)
         req.send_request(options)
@@ -372,8 +372,8 @@ module Aws
       #     log_group_name: "LogGroupName", # required
       #     filter_name: "FilterName", # required
       #   })
+      # @overload delete_subscription_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_subscription_filter(params = {}, options = {})
         req = build_request(:delete_subscription_filter, params)
         req.send_request(options)
@@ -390,7 +390,7 @@ module Aws
       # parameter in the request.
       # @option params [String] :destination_name_prefix
       #   Will only return destinations that match the provided
-      #   destinationNamePrefix. If you don\'t specify a value, no prefix is
+      #   destinationNamePrefix. If you don't specify a value, no prefix is
       #   applied.
       # @option params [String] :next_token
       #   A string token used for pagination that points to the next page of
@@ -419,8 +419,8 @@ module Aws
       #   resp.destinations[0].arn #=> String
       #   resp.destinations[0].creation_time #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_destinations(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_destinations(params = {}, options = {})
         req = build_request(:describe_destinations, params)
         req.send_request(options)
@@ -446,7 +446,7 @@ module Aws
       #   results. It must be a value obtained from the response of the previous
       #   `DescribeExportTasks` request.
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       # @return [Types::DescribeExportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -475,8 +475,8 @@ module Aws
       #   resp.export_tasks[0].execution_info.creation_time #=> Integer
       #   resp.export_tasks[0].execution_info.completion_time #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_export_tasks(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_export_tasks(params = {}, options = {})
         req = build_request(:describe_export_tasks, params)
         req.send_request(options)
@@ -493,14 +493,14 @@ module Aws
       # the request.
       # @option params [String] :log_group_name_prefix
       #   Will only return log groups that match the provided
-      #   logGroupNamePrefix. If you don\'t specify a value, no prefix filter is
+      #   logGroupNamePrefix. If you don't specify a value, no prefix filter is
       #   applied.
       # @option params [String] :next_token
       #   A string token used for pagination that points to the next page of
       #   results. It must be a value obtained from the response of the previous
       #   `DescribeLogGroups` request.
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -523,8 +523,8 @@ module Aws
       #   resp.log_groups[0].arn #=> String
       #   resp.log_groups[0].stored_bytes #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_log_groups(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_log_groups(params = {}, options = {})
         req = build_request(:describe_log_groups, params)
         req.send_request(options)
@@ -544,23 +544,23 @@ module Aws
       #   The log group name for which log streams are to be listed.
       # @option params [String] :log_stream_name_prefix
       #   Will only return log streams that match the provided
-      #   logStreamNamePrefix. If you don\'t specify a value, no prefix filter
+      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
       #   is applied.
       # @option params [String] :order_by
       #   Specifies what to order the returned log streams by. Valid arguments
-      #   are \'LogStreamName\' or \'LastEventTime\'. If you don\'t specify a
-      #   value, results are ordered by LogStreamName. If \'LastEventTime\' is
+      #   are 'LogStreamName' or 'LastEventTime'. If you don't specify a
+      #   value, results are ordered by LogStreamName. If 'LastEventTime' is
       #   chosen, the request cannot also contain a logStreamNamePrefix.
       # @option params [Boolean] :descending
       #   If set to true, results are returned in descending order. If you
-      #   don\'t specify a value or set it to false, results are returned in
+      #   don't specify a value or set it to false, results are returned in
       #   ascending order.
       # @option params [String] :next_token
       #   A string token used for pagination that points to the next page of
       #   results. It must be a value obtained from the response of the previous
       #   `DescribeLogStreams` request.
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       # @return [Types::DescribeLogStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -588,8 +588,8 @@ module Aws
       #   resp.log_streams[0].arn #=> String
       #   resp.log_streams[0].stored_bytes #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_log_streams(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_log_streams(params = {}, options = {})
         req = build_request(:describe_log_streams, params)
         req.send_request(options)
@@ -608,14 +608,14 @@ module Aws
       #   The log group name for which metric filters are to be listed.
       # @option params [String] :filter_name_prefix
       #   Will only return metric filters that match the provided
-      #   filterNamePrefix. If you don\'t specify a value, no prefix filter is
+      #   filterNamePrefix. If you don't specify a value, no prefix filter is
       #   applied.
       # @option params [String] :next_token
       #   A string token used for pagination that points to the next page of
       #   results. It must be a value obtained from the response of the previous
       #   `DescribeMetricFilters` request.
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don\'t
+      #   The maximum number of items returned in the response. If you don't
       #   specify a value, the request would return up to 50 items.
       # @return [Types::DescribeMetricFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -641,8 +641,8 @@ module Aws
       #   resp.metric_filters[0].metric_transformations[0].default_value #=> Float
       #   resp.metric_filters[0].creation_time #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_metric_filters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_metric_filters(params = {}, options = {})
         req = build_request(:describe_metric_filters, params)
         req.send_request(options)
@@ -661,7 +661,7 @@ module Aws
       #   The log group name for which subscription filters are to be listed.
       # @option params [String] :filter_name_prefix
       #   Will only return subscription filters that match the provided
-      #   filterNamePrefix. If you don\'t specify a value, no prefix filter is
+      #   filterNamePrefix. If you don't specify a value, no prefix filter is
       #   applied.
       # @option params [String] :next_token
       #   A string token used for pagination that points to the next page of
@@ -691,8 +691,8 @@ module Aws
       #   resp.subscription_filters[0].role_arn #=> String
       #   resp.subscription_filters[0].creation_time #=> Integer
       #   resp.next_token #=> String
+      # @overload describe_subscription_filters(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def describe_subscription_filters(params = {}, options = {})
         req = build_request(:describe_subscription_filters, params)
         req.send_request(options)
@@ -771,8 +771,8 @@ module Aws
       #   resp.searched_log_streams[0].log_stream_name #=> String
       #   resp.searched_log_streams[0].searched_completely #=> Boolean
       #   resp.next_token #=> String
+      # @overload filter_log_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def filter_log_events(params = {}, options = {})
         req = build_request(:filter_log_events, params)
         req.send_request(options)
@@ -806,7 +806,7 @@ module Aws
       #   `GetLogEvents` request.
       # @option params [Integer] :limit
       #   The maximum number of log events returned in the response. If you
-      #   don\'t specify a value, the request would return as many log events as
+      #   don't specify a value, the request would return as many log events as
       #   can fit in a response size of 1MB, up to 10,000 log events.
       # @option params [Boolean] :start_from_head
       #   If set to true, the earliest log events would be returned first. The
@@ -835,8 +835,8 @@ module Aws
       #   resp.events[0].ingestion_time #=> Integer
       #   resp.next_forward_token #=> String
       #   resp.next_backward_token #=> String
+      # @overload get_log_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_log_events(params = {}, options = {})
         req = build_request(:get_log_events, params)
         req.send_request(options)
@@ -880,8 +880,8 @@ module Aws
       #   resp.destination.access_policy #=> String
       #   resp.destination.arn #=> String
       #   resp.destination.creation_time #=> Integer
+      # @overload put_destination(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_destination(params = {}, options = {})
         req = build_request(:put_destination, params)
         req.send_request(options)
@@ -907,8 +907,8 @@ module Aws
       #     destination_name: "DestinationName", # required
       #     access_policy: "AccessPolicy", # required
       #   })
+      # @overload put_destination_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_destination_policy(params = {}, options = {})
         req = build_request(:put_destination_policy, params)
         req.send_request(options)
@@ -972,8 +972,8 @@ module Aws
       #   resp.rejected_log_events_info.too_new_log_event_start_index #=> Integer
       #   resp.rejected_log_events_info.too_old_log_event_end_index #=> Integer
       #   resp.rejected_log_events_info.expired_log_event_end_index #=> Integer
+      # @overload put_log_events(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_log_events(params = {}, options = {})
         req = build_request(:put_log_events, params)
         req.send_request(options)
@@ -1012,8 +1012,8 @@ module Aws
       #       },
       #     ],
       #   })
+      # @overload put_metric_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_metric_filter(params = {}, options = {})
         req = build_request(:put_metric_filter, params)
         req.send_request(options)
@@ -1035,8 +1035,8 @@ module Aws
       #     log_group_name: "LogGroupName", # required
       #     retention_in_days: 1, # required
       #   })
+      # @overload put_retention_policy(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_retention_policy(params = {}, options = {})
         req = build_request(:put_retention_policy, params)
         req.send_request(options)
@@ -1086,7 +1086,7 @@ module Aws
       #     subscription filter, for same-account delivery.
       # @option params [String] :role_arn
       #   The ARN of an IAM role that grants CloudWatch Logs permissions to
-      #   deliver ingested log events to the destination stream. You don\'t need
+      #   deliver ingested log events to the destination stream. You don't need
       #   to provide the ARN when you are working with a logical destination
       #   (used via an ARN of `Destination`) for cross-account delivery.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1099,8 +1099,8 @@ module Aws
       #     destination_arn: "DestinationArn", # required
       #     role_arn: "RoleArn",
       #   })
+      # @overload put_subscription_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def put_subscription_filter(params = {}, options = {})
         req = build_request(:put_subscription_filter, params)
         req.send_request(options)
@@ -1132,8 +1132,8 @@ module Aws
       #   resp.matches[0].event_message #=> String
       #   resp.matches[0].extracted_values #=> Hash
       #   resp.matches[0].extracted_values["Token"] #=> String
+      # @overload test_metric_filter(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def test_metric_filter(params = {}, options = {})
         req = build_request(:test_metric_filter, params)
         req.send_request(options)

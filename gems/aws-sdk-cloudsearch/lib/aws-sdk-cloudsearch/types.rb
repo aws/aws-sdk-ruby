@@ -9,10 +9,10 @@ module Aws
   module CloudSearch
     module Types
 
-      # The configured access rules for the domain\'s document and search
+      # The configured access rules for the domain's document and search
       # endpoints, and the current status of those rules.
       # @!attribute [rw] options
-      #   Access rules for a domain\'s document or search service endpoints.
+      #   Access rules for a domain's document or search service endpoints.
       #   For more information, see [Configuring Access for a Search
       #   Domain][1] in the *Amazon CloudSearch Developer Guide*. The maximum
       #   size of a policy document is 100 KB.
@@ -165,7 +165,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The status and configuration of the domain\'s availability options.
+      # The status and configuration of the domain's availability options.
       # @!attribute [rw] options
       #   The availability options configured for the domain.
       #   @return [Boolean]
@@ -251,7 +251,7 @@ module Aws
       #         return_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
@@ -296,17 +296,17 @@ module Aws
       #         sort_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
       # @!attribute [rw] source_field
       #   A string that represents the name of an index field. CloudSearch
       #   supports regular index fields as well as dynamic fields. A dynamic
-      #   field\'s name defines a pattern that begins or ends with a wildcard.
-      #   Any document fields that don\'t map to a regular index field but do
-      #   match a dynamic field\'s pattern are configured with the dynamic
-      #   field\'s indexing options.
+      #   field's name defines a pattern that begins or ends with a wildcard.
+      #   Any document fields that don't map to a regular index field but do
+      #   match a dynamic field's pattern are configured with the dynamic
+      #   field's indexing options.
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -316,7 +316,7 @@ module Aws
       #   supported.
       #
       #   The name `score` is reserved and cannot be used as a field name. To
-      #   reference a document\'s ID, you can use the name `_id`.
+      #   reference a document's ID, you can use the name `_id`.
       #   @return [String]
       #
       # @!attribute [rw] facet_enabled
@@ -721,7 +721,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] index_field_name
-      #   The name of the index field your want to remove from the domain\'s
+      #   The name of the index field your want to remove from the domain's
       #   indexing options.
       #   @return [String]
       class DeleteIndexFieldRequest < Struct.new(
@@ -991,7 +991,7 @@ module Aws
       # The result of a `DescribeScalingParameters` request. Contains the
       # scaling parameters configured for the domain specified in the request.
       # @!attribute [rw] scaling_parameters
-      #   The status and configuration of a search domain\'s scaling
+      #   The status and configuration of a search domain's scaling
       #   parameters.
       #   @return [Types::ScalingParametersStatus]
       class DescribeScalingParametersResponse < Struct.new(
@@ -1098,7 +1098,7 @@ module Aws
       # @!attribute [rw] sort_expression
       #   An expression that computes a score for each suggestion to control
       #   how they are sorted. The scores are rounded to the nearest integer,
-      #   with a floor of 0 and a ceiling of 2^31-1. A document\'s relevance
+      #   with a floor of 0 and a ceiling of 2^31-1. A document's relevance
       #   score is not computed for suggestions, so sort expressions cannot
       #   reference the `_score` value. To sort suggestions using a numeric
       #   field or existing expression, simply specify the name of the field
@@ -1214,7 +1214,7 @@ module Aws
       #         return_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [Float]
       #
@@ -1258,7 +1258,7 @@ module Aws
       #         sort_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document. This can be important if you are using the field in an
       #   expression and that field is not present in every document.
       #   @return [Float]
@@ -1464,10 +1464,10 @@ module Aws
       # @!attribute [rw] index_field_name
       #   A string that represents the name of an index field. CloudSearch
       #   supports regular index fields as well as dynamic fields. A dynamic
-      #   field\'s name defines a pattern that begins or ends with a wildcard.
-      #   Any document fields that don\'t map to a regular index field but do
-      #   match a dynamic field\'s pattern are configured with the dynamic
-      #   field\'s indexing options.
+      #   field's name defines a pattern that begins or ends with a wildcard.
+      #   Any document fields that don't map to a regular index field but do
+      #   match a dynamic field's pattern are configured with the dynamic
+      #   field's indexing options.
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -1477,7 +1477,7 @@ module Aws
       #   supported.
       #
       #   The name `score` is reserved and cannot be used as a field name. To
-      #   reference a document\'s ID, you can use the name `_id`.
+      #   reference a document's ID, you can use the name `_id`.
       #   @return [String]
       #
       # @!attribute [rw] index_field_type
@@ -1606,7 +1606,7 @@ module Aws
       #         return_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [Integer]
       #
@@ -1650,7 +1650,7 @@ module Aws
       #         sort_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document. This can be important if you are using the field in an
       #   expression and that field is not present in every document.
       #   @return [Integer]
@@ -1701,17 +1701,17 @@ module Aws
       #         sort_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
       # @!attribute [rw] source_field
       #   A string that represents the name of an index field. CloudSearch
       #   supports regular index fields as well as dynamic fields. A dynamic
-      #   field\'s name defines a pattern that begins or ends with a wildcard.
-      #   Any document fields that don\'t map to a regular index field but do
-      #   match a dynamic field\'s pattern are configured with the dynamic
-      #   field\'s indexing options.
+      #   field's name defines a pattern that begins or ends with a wildcard.
+      #   Any document fields that don't map to a regular index field but do
+      #   match a dynamic field's pattern are configured with the dynamic
+      #   field's indexing options.
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -1721,7 +1721,7 @@ module Aws
       #   supported.
       #
       #   The name `score` is reserved and cannot be used as a field name. To
-      #   reference a document\'s ID, you can use the name `_id`.
+      #   reference a document's ID, you can use the name `_id`.
       #   @return [String]
       #
       # @!attribute [rw] facet_enabled
@@ -1785,7 +1785,7 @@ module Aws
       #         return_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
@@ -1828,17 +1828,17 @@ module Aws
       #         sort_enabled: false,
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
       # @!attribute [rw] source_field
       #   A string that represents the name of an index field. CloudSearch
       #   supports regular index fields as well as dynamic fields. A dynamic
-      #   field\'s name defines a pattern that begins or ends with a wildcard.
-      #   Any document fields that don\'t map to a regular index field but do
-      #   match a dynamic field\'s pattern are configured with the dynamic
-      #   field\'s indexing options.
+      #   field's name defines a pattern that begins or ends with a wildcard.
+      #   Any document fields that don't map to a regular index field but do
+      #   match a dynamic field's pattern are configured with the dynamic
+      #   field's indexing options.
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -1848,7 +1848,7 @@ module Aws
       #   supported.
       #
       #   The name `score` is reserved and cannot be used as a field name. To
-      #   reference a document\'s ID, you can use the name `_id`.
+      #   reference a document's ID, you can use the name `_id`.
       #   @return [String]
       #
       # @!attribute [rw] facet_enabled
@@ -1893,14 +1893,14 @@ module Aws
       # @!attribute [rw] state
       #   The state of processing a change to an option. Possible values:
       #
-      #   * `RequiresIndexDocuments`\: the option\'s latest value will not be
+      #   * `RequiresIndexDocuments`\: the option's latest value will not be
       #     deployed until IndexDocuments has been called and indexing is
       #     complete.
-      #   * `Processing`\: the option\'s latest value is in the process of
+      #   * `Processing`\: the option's latest value is in the process of
       #     being activated.
-      #   * `Active`\: the option\'s latest value is completely deployed.
+      #   * `Active`\: the option's latest value is completely deployed.
       #   * `FailedToValidate`\: the option value is not compatible with the
-      #     domain\'s data and cannot be used to index the data. You must
+      #     domain's data and cannot be used to index the data. You must
       #     either modify the option value or update or remove the
       #     incompatible documents.
       #   @return [String]
@@ -1950,7 +1950,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The status and configuration of a search domain\'s scaling parameters.
+      # The status and configuration of a search domain's scaling parameters.
       # @!attribute [rw] options
       #   The desired instance type and desired number of replicas of each
       #   index partition.
@@ -2039,7 +2039,7 @@ module Aws
       #         analysis_scheme: "Word",
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
@@ -2083,17 +2083,17 @@ module Aws
       #         analysis_scheme: "Word",
       #       }
       # @!attribute [rw] default_value
-      #   A value to use for the field if the field isn\'t specified for a
+      #   A value to use for the field if the field isn't specified for a
       #   document.
       #   @return [String]
       #
       # @!attribute [rw] source_field
       #   A string that represents the name of an index field. CloudSearch
       #   supports regular index fields as well as dynamic fields. A dynamic
-      #   field\'s name defines a pattern that begins or ends with a wildcard.
-      #   Any document fields that don\'t map to a regular index field but do
-      #   match a dynamic field\'s pattern are configured with the dynamic
-      #   field\'s indexing options.
+      #   field's name defines a pattern that begins or ends with a wildcard.
+      #   Any document fields that don't map to a regular index field but do
+      #   match a dynamic field's pattern are configured with the dynamic
+      #   field's indexing options.
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
@@ -2103,7 +2103,7 @@ module Aws
       #   supported.
       #
       #   The name `score` is reserved and cannot be used as a field name. To
-      #   reference a document\'s ID, you can use the name `_id`.
+      #   reference a document's ID, you can use the name `_id`.
       #   @return [String]
       #
       # @!attribute [rw] return_enabled
@@ -2162,7 +2162,7 @@ module Aws
       end
 
       # The result of a `UpdateAvailabilityOptions` request. Contains the
-      # status of the domain\'s availability options.
+      # status of the domain's availability options.
       # @!attribute [rw] availability_options
       #   The newly-configured availability options. Indicates whether
       #   Multi-AZ is enabled for the domain.
@@ -2206,7 +2206,7 @@ module Aws
       # The result of a `UpdateScalingParameters` request. Contains the status
       # of the newly-configured scaling parameters.
       # @!attribute [rw] scaling_parameters
-      #   The status and configuration of a search domain\'s scaling
+      #   The status and configuration of a search domain's scaling
       #   parameters.
       #   @return [Types::ScalingParametersStatus]
       class UpdateScalingParametersResponse < Struct.new(

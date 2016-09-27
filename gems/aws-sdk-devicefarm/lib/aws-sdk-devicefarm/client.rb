@@ -138,11 +138,11 @@ module Aws
       # @option params [required, String] :project_arn
       #   The ARN of the project for the device pool.
       # @option params [required, String] :name
-      #   The device pool\'s name.
+      #   The device pool's name.
       # @option params [String] :description
-      #   The device pool\'s description.
+      #   The device pool's description.
       # @option params [required, Array<Types::Rule>] :rules
-      #   The device pool\'s rules.
+      #   The device pool's rules.
       # @return [Types::CreateDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateDevicePoolResult#device_pool #devicePool} => Types::DevicePool
@@ -170,8 +170,8 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      # @overload create_device_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_device_pool(params = {}, options = {})
         req = build_request(:create_device_pool, params)
         req.send_request(options)
@@ -179,7 +179,7 @@ module Aws
 
       # Creates a new project.
       # @option params [required, String] :name
-      #   The project\'s name.
+      #   The project's name.
       # @return [Types::CreateProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateProjectResult#project #project} => Types::Project
@@ -193,8 +193,8 @@ module Aws
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      # @overload create_project(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_project(params = {}, options = {})
         req = build_request(:create_project, params)
         req.send_request(options)
@@ -259,8 +259,8 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      # @overload create_remote_access_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_remote_access_session(params = {}, options = {})
         req = build_request(:create_remote_access_session, params)
         req.send_request(options)
@@ -270,10 +270,10 @@ module Aws
       # @option params [required, String] :project_arn
       #   The ARN of the project for the upload.
       # @option params [required, String] :name
-      #   The upload\'s file name. The name should not contain the \'/\'
+      #   The upload's file name. The name should not contain the '/'
       #   character.
       # @option params [required, String] :type
-      #   The upload\'s upload type.
+      #   The upload's upload type.
       #
       #   Must be one of the following values:
       #
@@ -317,8 +317,8 @@ module Aws
       #   **Note** If you call `CreateUpload` with `WEB_APP` specified, AWS
       #   Device Farm throws an `ArgumentException` error.
       # @option params [String] :content_type
-      #   The upload\'s content type (for example,
-      #   \"application/octet-stream\").
+      #   The upload's content type (for example,
+      #   "application/octet-stream").
       # @return [Types::CreateUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateUploadResult#upload #upload} => Types::Upload
@@ -341,8 +341,8 @@ module Aws
       #   resp.upload.metadata #=> String
       #   resp.upload.content_type #=> String
       #   resp.upload.message #=> String
+      # @overload create_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def create_upload(params = {}, options = {})
         req = build_request(:create_upload, params)
         req.send_request(options)
@@ -359,8 +359,8 @@ module Aws
       #   resp = client.delete_device_pool({
       #     arn: "AmazonResourceName", # required
       #   })
+      # @overload delete_device_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_device_pool(params = {}, options = {})
         req = build_request(:delete_device_pool, params)
         req.send_request(options)
@@ -378,8 +378,8 @@ module Aws
       #   resp = client.delete_project({
       #     arn: "AmazonResourceName", # required
       #   })
+      # @overload delete_project(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_project(params = {}, options = {})
         req = build_request(:delete_project, params)
         req.send_request(options)
@@ -395,8 +395,8 @@ module Aws
       #   resp = client.delete_remote_access_session({
       #     arn: "AmazonResourceName", # required
       #   })
+      # @overload delete_remote_access_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_remote_access_session(params = {}, options = {})
         req = build_request(:delete_remote_access_session, params)
         req.send_request(options)
@@ -413,8 +413,8 @@ module Aws
       #   resp = client.delete_run({
       #     arn: "AmazonResourceName", # required
       #   })
+      # @overload delete_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_run(params = {}, options = {})
         req = build_request(:delete_run, params)
         req.send_request(options)
@@ -430,8 +430,8 @@ module Aws
       #   resp = client.delete_upload({
       #     arn: "AmazonResourceName", # required
       #   })
+      # @overload delete_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def delete_upload(params = {}, options = {})
         req = build_request(:delete_upload, params)
         req.send_request(options)
@@ -452,8 +452,8 @@ module Aws
       #   resp.account_settings.unmetered_devices["DevicePlatform"] #=> Integer
       #   resp.account_settings.unmetered_remote_access_devices #=> Hash
       #   resp.account_settings.unmetered_remote_access_devices["DevicePlatform"] #=> Integer
+      # @overload get_account_settings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_account_settings(params = {}, options = {})
         req = build_request(:get_account_settings, params)
         req.send_request(options)
@@ -461,7 +461,7 @@ module Aws
 
       # Gets information about a unique device type.
       # @option params [required, String] :arn
-      #   The device type\'s ARN.
+      #   The device type's ARN.
       # @return [Types::GetDeviceResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDeviceResult#device #device} => Types::Device
@@ -492,8 +492,8 @@ module Aws
       #   resp.device.remote_access_enabled #=> Boolean
       #   resp.device.fleet_type #=> String
       #   resp.device.fleet_name #=> String
+      # @overload get_device(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_device(params = {}, options = {})
         req = build_request(:get_device, params)
         req.send_request(options)
@@ -501,7 +501,7 @@ module Aws
 
       # Gets information about a device pool.
       # @option params [required, String] :arn
-      #   The device pool\'s ARN.
+      #   The device pool's ARN.
       # @return [Types::GetDevicePoolResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDevicePoolResult#device_pool #devicePool} => Types::DevicePool
@@ -520,8 +520,8 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      # @overload get_device_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_device_pool(params = {}, options = {})
         req = build_request(:get_device_pool, params)
         req.send_request(options)
@@ -529,7 +529,7 @@ module Aws
 
       # Gets information about compatibility with a device pool.
       # @option params [required, String] :device_pool_arn
-      #   The device pool\'s ARN.
+      #   The device pool's ARN.
       # @option params [String] :app_arn
       #   The ARN of the app that is associated with the specified device pool.
       # @option params [String] :test_type
@@ -629,8 +629,8 @@ module Aws
       #   resp.incompatible_devices[0].incompatibility_messages #=> Array
       #   resp.incompatible_devices[0].incompatibility_messages[0].message #=> String
       #   resp.incompatible_devices[0].incompatibility_messages[0].type #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
+      # @overload get_device_pool_compatibility(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_device_pool_compatibility(params = {}, options = {})
         req = build_request(:get_device_pool_compatibility, params)
         req.send_request(options)
@@ -638,7 +638,7 @@ module Aws
 
       # Gets information about a job.
       # @option params [required, String] :arn
-      #   The job\'s ARN.
+      #   The job's ARN.
       # @return [Types::GetJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetJobResult#job #job} => Types::Job
@@ -688,8 +688,8 @@ module Aws
       #   resp.job.device_minutes.total #=> Float
       #   resp.job.device_minutes.metered #=> Float
       #   resp.job.device_minutes.unmetered #=> Float
+      # @overload get_job(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_job(params = {}, options = {})
         req = build_request(:get_job, params)
         req.send_request(options)
@@ -743,8 +743,8 @@ module Aws
       #   resp.next_period["OfferingIdentifier"].quantity #=> Integer
       #   resp.next_period["OfferingIdentifier"].effective_on #=> Time
       #   resp.next_token #=> String
+      # @overload get_offering_status(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_offering_status(params = {}, options = {})
         req = build_request(:get_offering_status, params)
         req.send_request(options)
@@ -752,7 +752,7 @@ module Aws
 
       # Gets information about a project.
       # @option params [required, String] :arn
-      #   The project\'s ARN.
+      #   The project's ARN.
       # @return [Types::GetProjectResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetProjectResult#project #project} => Types::Project
@@ -766,8 +766,8 @@ module Aws
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      # @overload get_project(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_project(params = {}, options = {})
         req = build_request(:get_project, params)
         req.send_request(options)
@@ -820,8 +820,8 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      # @overload get_remote_access_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_remote_access_session(params = {}, options = {})
         req = build_request(:get_remote_access_session, params)
         req.send_request(options)
@@ -829,7 +829,7 @@ module Aws
 
       # Gets information about a run.
       # @option params [required, String] :arn
-      #   The run\'s ARN.
+      #   The run's ARN.
       # @return [Types::GetRunResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetRunResult#run #run} => Types::Run
@@ -863,8 +863,8 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      # @overload get_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_run(params = {}, options = {})
         req = build_request(:get_run, params)
         req.send_request(options)
@@ -872,7 +872,7 @@ module Aws
 
       # Gets information about a suite.
       # @option params [required, String] :arn
-      #   The suite\'s ARN.
+      #   The suite's ARN.
       # @return [Types::GetSuiteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetSuiteResult#suite #suite} => Types::Suite
@@ -902,8 +902,8 @@ module Aws
       #   resp.suite.device_minutes.total #=> Float
       #   resp.suite.device_minutes.metered #=> Float
       #   resp.suite.device_minutes.unmetered #=> Float
+      # @overload get_suite(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_suite(params = {}, options = {})
         req = build_request(:get_suite, params)
         req.send_request(options)
@@ -911,7 +911,7 @@ module Aws
 
       # Gets information about a test.
       # @option params [required, String] :arn
-      #   The test\'s ARN.
+      #   The test's ARN.
       # @return [Types::GetTestResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetTestResult#test #test} => Types::Test
@@ -941,8 +941,8 @@ module Aws
       #   resp.test.device_minutes.total #=> Float
       #   resp.test.device_minutes.metered #=> Float
       #   resp.test.device_minutes.unmetered #=> Float
+      # @overload get_test(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_test(params = {}, options = {})
         req = build_request(:get_test, params)
         req.send_request(options)
@@ -950,7 +950,7 @@ module Aws
 
       # Gets information about an upload.
       # @option params [required, String] :arn
-      #   The upload\'s ARN.
+      #   The upload's ARN.
       # @return [Types::GetUploadResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetUploadResult#upload #upload} => Types::Upload
@@ -970,8 +970,8 @@ module Aws
       #   resp.upload.metadata #=> String
       #   resp.upload.content_type #=> String
       #   resp.upload.message #=> String
+      # @overload get_upload(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def get_upload(params = {}, options = {})
         req = build_request(:get_upload, params)
         req.send_request(options)
@@ -1006,8 +1006,8 @@ module Aws
       #   resp.app_upload.metadata #=> String
       #   resp.app_upload.content_type #=> String
       #   resp.app_upload.message #=> String
+      # @overload install_to_remote_access_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def install_to_remote_access_session(params = {}, options = {})
         req = build_request(:install_to_remote_access_session, params)
         req.send_request(options)
@@ -1017,7 +1017,7 @@ module Aws
       # @option params [required, String] :arn
       #   The Run, Job, Suite, or Test ARN.
       # @option params [required, String] :type
-      #   The artifacts\' type.
+      #   The artifacts' type.
       #
       #   Allowed values include:
       #
@@ -1048,8 +1048,8 @@ module Aws
       #   resp.artifacts[0].extension #=> String
       #   resp.artifacts[0].url #=> String
       #   resp.next_token #=> String
+      # @overload list_artifacts(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_artifacts(params = {}, options = {})
         req = build_request(:list_artifacts, params)
         req.send_request(options)
@@ -1059,7 +1059,7 @@ module Aws
       # @option params [required, String] :arn
       #   The project ARN.
       # @option params [String] :type
-      #   The device pools\' type.
+      #   The device pools' type.
       #
       #   Allowed values include:
       #
@@ -1095,8 +1095,8 @@ module Aws
       #   resp.device_pools[0].rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pools[0].rules[0].value #=> String
       #   resp.next_token #=> String
+      # @overload list_device_pools(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_device_pools(params = {}, options = {})
         req = build_request(:list_device_pools, params)
         req.send_request(options)
@@ -1104,7 +1104,7 @@ module Aws
 
       # Gets information about unique device types.
       # @option params [String] :arn
-      #   The device types\' ARNs.
+      #   The device types' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1143,8 +1143,8 @@ module Aws
       #   resp.devices[0].fleet_type #=> String
       #   resp.devices[0].fleet_name #=> String
       #   resp.next_token #=> String
+      # @overload list_devices(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_devices(params = {}, options = {})
         req = build_request(:list_devices, params)
         req.send_request(options)
@@ -1152,7 +1152,7 @@ module Aws
 
       # Gets information about jobs.
       # @option params [required, String] :arn
-      #   The jobs\' ARNs.
+      #   The jobs' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1210,8 +1210,8 @@ module Aws
       #   resp.jobs[0].device_minutes.metered #=> Float
       #   resp.jobs[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      # @overload list_jobs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_jobs(params = {}, options = {})
         req = build_request(:list_jobs, params)
         req.send_request(options)
@@ -1256,8 +1256,8 @@ module Aws
       #   resp.offering_transactions[0].cost.amount #=> Float
       #   resp.offering_transactions[0].cost.currency_code #=> String, one of "USD"
       #   resp.next_token #=> String
+      # @overload list_offering_transactions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_offering_transactions(params = {}, options = {})
         req = build_request(:list_offering_transactions, params)
         req.send_request(options)
@@ -1295,8 +1295,8 @@ module Aws
       #   resp.offerings[0].recurring_charges[0].cost.currency_code #=> String, one of "USD"
       #   resp.offerings[0].recurring_charges[0].frequency #=> String, one of "MONTHLY"
       #   resp.next_token #=> String
+      # @overload list_offerings(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_offerings(params = {}, options = {})
         req = build_request(:list_offerings, params)
         req.send_request(options)
@@ -1304,7 +1304,7 @@ module Aws
 
       # Gets information about projects.
       # @option params [String] :arn
-      #   The projects\' ARNs.
+      #   The projects' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1326,8 +1326,8 @@ module Aws
       #   resp.projects[0].name #=> String
       #   resp.projects[0].created #=> Time
       #   resp.next_token #=> String
+      # @overload list_projects(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_projects(params = {}, options = {})
         req = build_request(:list_projects, params)
         req.send_request(options)
@@ -1388,8 +1388,8 @@ module Aws
       #   resp.remote_access_sessions[0].device_minutes.unmetered #=> Float
       #   resp.remote_access_sessions[0].endpoint #=> String
       #   resp.next_token #=> String
+      # @overload list_remote_access_sessions(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_remote_access_sessions(params = {}, options = {})
         req = build_request(:list_remote_access_sessions, params)
         req.send_request(options)
@@ -1397,7 +1397,7 @@ module Aws
 
       # Gets information about runs.
       # @option params [required, String] :arn
-      #   The runs\' ARNs.
+      #   The runs' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1439,8 +1439,8 @@ module Aws
       #   resp.runs[0].device_minutes.metered #=> Float
       #   resp.runs[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      # @overload list_runs(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_runs(params = {}, options = {})
         req = build_request(:list_runs, params)
         req.send_request(options)
@@ -1448,7 +1448,7 @@ module Aws
 
       # Gets information about samples.
       # @option params [required, String] :arn
-      #   The samples\' ARNs.
+      #   The samples' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1470,8 +1470,8 @@ module Aws
       #   resp.samples[0].type #=> String, one of "CPU", "MEMORY", "THREADS", "RX_RATE", "TX_RATE", "RX", "TX", "NATIVE_FRAMES", "NATIVE_FPS", "NATIVE_MIN_DRAWTIME", "NATIVE_AVG_DRAWTIME", "NATIVE_MAX_DRAWTIME", "OPENGL_FRAMES", "OPENGL_FPS", "OPENGL_MIN_DRAWTIME", "OPENGL_AVG_DRAWTIME", "OPENGL_MAX_DRAWTIME"
       #   resp.samples[0].url #=> String
       #   resp.next_token #=> String
+      # @overload list_samples(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_samples(params = {}, options = {})
         req = build_request(:list_samples, params)
         req.send_request(options)
@@ -1479,7 +1479,7 @@ module Aws
 
       # Gets information about suites.
       # @option params [required, String] :arn
-      #   The suites\' ARNs.
+      #   The suites' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1517,8 +1517,8 @@ module Aws
       #   resp.suites[0].device_minutes.metered #=> Float
       #   resp.suites[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      # @overload list_suites(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_suites(params = {}, options = {})
         req = build_request(:list_suites, params)
         req.send_request(options)
@@ -1526,7 +1526,7 @@ module Aws
 
       # Gets information about tests.
       # @option params [required, String] :arn
-      #   The tests\' ARNs.
+      #   The tests' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1564,8 +1564,8 @@ module Aws
       #   resp.tests[0].device_minutes.metered #=> Float
       #   resp.tests[0].device_minutes.unmetered #=> Float
       #   resp.next_token #=> String
+      # @overload list_tests(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_tests(params = {}, options = {})
         req = build_request(:list_tests, params)
         req.send_request(options)
@@ -1573,7 +1573,7 @@ module Aws
 
       # Gets information about unique problems.
       # @option params [required, String] :arn
-      #   The unique problems\' ARNs.
+      #   The unique problems' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1625,8 +1625,8 @@ module Aws
       #   resp.unique_problems["ExecutionResult"][0].problems[0].result #=> String, one of "PENDING", "PASSED", "WARNED", "FAILED", "SKIPPED", "ERRORED", "STOPPED"
       #   resp.unique_problems["ExecutionResult"][0].problems[0].message #=> String
       #   resp.next_token #=> String
+      # @overload list_unique_problems(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_unique_problems(params = {}, options = {})
         req = build_request(:list_unique_problems, params)
         req.send_request(options)
@@ -1634,7 +1634,7 @@ module Aws
 
       # Gets information about uploads.
       # @option params [required, String] :arn
-      #   The uploads\' ARNs.
+      #   The uploads' ARNs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1662,8 +1662,8 @@ module Aws
       #   resp.uploads[0].content_type #=> String
       #   resp.uploads[0].message #=> String
       #   resp.next_token #=> String
+      # @overload list_uploads(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def list_uploads(params = {}, options = {})
         req = build_request(:list_uploads, params)
         req.send_request(options)
@@ -1706,8 +1706,8 @@ module Aws
       #   resp.offering_transaction.created_on #=> Time
       #   resp.offering_transaction.cost.amount #=> Float
       #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
+      # @overload purchase_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def purchase_offering(params = {}, options = {})
         req = build_request(:purchase_offering, params)
         req.send_request(options)
@@ -1749,8 +1749,8 @@ module Aws
       #   resp.offering_transaction.created_on #=> Time
       #   resp.offering_transaction.cost.amount #=> Float
       #   resp.offering_transaction.cost.currency_code #=> String, one of "USD"
+      # @overload renew_offering(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def renew_offering(params = {}, options = {})
         req = build_request(:renew_offering, params)
         req.send_request(options)
@@ -1830,8 +1830,8 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      # @overload schedule_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def schedule_run(params = {}, options = {})
         req = build_request(:schedule_run, params)
         req.send_request(options)
@@ -1884,8 +1884,8 @@ module Aws
       #   resp.remote_access_session.device_minutes.metered #=> Float
       #   resp.remote_access_session.device_minutes.unmetered #=> Float
       #   resp.remote_access_session.endpoint #=> String
+      # @overload stop_remote_access_session(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_remote_access_session(params = {}, options = {})
         req = build_request(:stop_remote_access_session, params)
         req.send_request(options)
@@ -1934,8 +1934,8 @@ module Aws
       #   resp.run.device_minutes.total #=> Float
       #   resp.run.device_minutes.metered #=> Float
       #   resp.run.device_minutes.unmetered #=> Float
+      # @overload stop_run(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def stop_run(params = {}, options = {})
         req = build_request(:stop_run, params)
         req.send_request(options)
@@ -1982,8 +1982,8 @@ module Aws
       #   resp.device_pool.rules[0].attribute #=> String, one of "ARN", "PLATFORM", "FORM_FACTOR", "MANUFACTURER", "REMOTE_ACCESS_ENABLED"
       #   resp.device_pool.rules[0].operator #=> String, one of "EQUALS", "LESS_THAN", "GREATER_THAN", "IN", "NOT_IN"
       #   resp.device_pool.rules[0].value #=> String
+      # @overload update_device_pool(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_device_pool(params = {}, options = {})
         req = build_request(:update_device_pool, params)
         req.send_request(options)
@@ -2011,8 +2011,8 @@ module Aws
       #   resp.project.arn #=> String
       #   resp.project.name #=> String
       #   resp.project.created #=> Time
+      # @overload update_project(params = {})
       # @param [Hash] params ({})
-      # @param [Hash] options ({})
       def update_project(params = {}, options = {})
         req = build_request(:update_project, params)
         req.send_request(options)

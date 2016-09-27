@@ -101,7 +101,7 @@ module Aws
       #
       #   * *AttributesToGet* -
       #
-      #     <important markdown="1"> This is a legacy parameter, for backward compatibility. New
+      #     This is a legacy parameter, for backward compatibility. New
       #     applications should use *ProjectionExpression* instead. Do not
       #     combine legacy parameters and expression parameters in a single API
       #     call; otherwise, DynamoDB will return a *ValidationException*
@@ -110,8 +110,6 @@ module Aws
       #      This parameter allows you to retrieve attributes of type List or
       #     Map; however, it cannot retrieve individual elements within a List
       #     or a Map.
-      #
-      #      </important>
       #
       #     The names of one or more attributes to retrieve. If no attribute
       #     names are provided, then all attributes will be returned. If any of
@@ -180,7 +178,7 @@ module Aws
       #
       #       If you specify any attributes that are part of an index key, then
       #       the data types for those attributes must match those of the schema
-      #       in the table\'s attribute definition.
+      #       in the table's attribute definition.
       # @option options [String] :return_consumed_capacity
       #   Determines the level of detail about provisioned throughput
       #   consumption that is returned in the response:
@@ -231,12 +229,12 @@ module Aws
       #     * `RANGE` - sort key
       #
       #   <note markdown="1"> The partition key of an item is also known as its *hash attribute*.
-      #   The term \"hash attribute\" derives from DynamoDB\' usage of an
+      #   The term "hash attribute" derives from DynamoDB' usage of an
       #   internal hash function to evenly distribute data items across
       #   partitions, based on their partition key values.
       #
       #    The sort key of an item is also known as its *range attribute*. The
-      #   term \"range attribute\" derives from the way DynamoDB stores items
+      #   term "range attribute" derives from the way DynamoDB stores items
       #   with the same partition key physically close together, in sorted order
       #   by the sort key value.
       #
@@ -357,7 +355,7 @@ module Aws
       #
       #   * *StreamViewType* - When an item in the table is modified,
       #     *StreamViewType* determines what information is written to the
-      #     table\'s stream. Valid values for *StreamViewType* are:
+      #     table's stream. Valid values for *StreamViewType* are:
       #
       #     * *KEYS\_ONLY* - Only the key attributes of the modified item are
       #       written to the stream.
