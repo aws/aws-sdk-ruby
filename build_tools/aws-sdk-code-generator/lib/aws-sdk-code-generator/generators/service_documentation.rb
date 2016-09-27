@@ -15,7 +15,8 @@ module AwsSdkCodeGenerator
 
       def docstring
         <<-MARKDOWN
-This module provides support for #{@product_name}.
+@service
+This module provides support for #{@product_name}, which shipped in `aws-sdk-#{@var_name}` gem.
 
 # #{@namespace}::Client
 

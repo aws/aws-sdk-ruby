@@ -18,7 +18,7 @@ def class_list(root = Registry.root, tree = TreeContext.new)
   # service classes
   out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
-  out << "<a class='toggle'></a> Services"
+  out << "<a class='toggle'></a> Service Gems"
   out << "</div><ul>"
   children = Registry.at('Aws').children.select { |c| c.has_tag?(:service) }
   tree.nest do
@@ -43,6 +43,7 @@ def class_list_children(children, options)
       out << "<a class='toggle'></a> " if is_parent
       out << linkify(child, name)
       out << " &lt; #{child.superclass.name}" if child.is_a?(CodeObjects::ClassObject) && child.superclass
+      out << " (aws-sdk-#{name.downcase})" if child.tag(:service)
       out << "<small class='search_info'>"
       out << child.namespace.title
       out << "</small>"
