@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
+
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::KMS - Updated the documentation for AWS Key Management Service.
+
+* Feature - Aws::Snowball - Updated the documentation for Amazon Import/Export Snowball.
+
 2.6.3 (2016-09-22)
 ------------------
 
