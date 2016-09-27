@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.4 (2016-09-27)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
 
 * Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
