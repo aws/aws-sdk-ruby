@@ -697,13 +697,23 @@ describe 'Interfaces' do
 
     describe 'batchActions' do
 
-      it 'supports one request per batch'
+      it 'invokes one client request per collection batch'
+
+      it 'supports batch actions with fixed params'
 
       it 'raises for actions that model a resource'
 
-      it 'suffixes dangerous operations with a bang!'
+      it 'prefixes batch operation names with batch_'
 
-      it 'validates batch args'
+      it 'suffixes batch delete operations with a bang(!)'
+
+      it 'suffixes batch terminate operations with a bang(!)'
+
+      it 'validates batch args, accepts 0 or 1 arguments'
+
+      it 'validates batch args, options must be a hash'
+
+      it 'has a #batches method that returns a collection enumerator that responds to batch actions'
 
     end
   end
