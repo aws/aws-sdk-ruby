@@ -1225,6 +1225,8 @@ module Aws
       end
 
       # Retrieves objects from Amazon S3.
+      # @option params [String, IO] :response_target
+      #   Where to write response data, file path, or IO object.
       # @option params [required, String] :bucket
       # @option params [String] :if_match
       #   Return the object only if its entity tag (ETag) is the same as the one
@@ -1435,6 +1437,8 @@ module Aws
       end
 
       # Return torrent files from a bucket.
+      # @option params [String, IO] :response_target
+      #   Where to write response data, file path, or IO object.
       # @option params [required, String] :bucket
       # @option params [required, String] :key
       # @option params [String] :request_payer

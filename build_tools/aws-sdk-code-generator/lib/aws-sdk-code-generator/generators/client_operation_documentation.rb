@@ -47,6 +47,19 @@ module AwsSdkCodeGenerator
       end
 
       def apply_option_tags(docstring)
+        # document the `:response_target` option if the response is streaming
+        if output = shape(@operation['output'])
+          if output['payload'] && output['members'][output['payload']]['streaming']
+            docstring.lines.concat(Dsl::OptionTag.new(
+              name: 'response_target',
+              type: 'String, IO',
+              param: 'params',
+              required: false,
+              docstring: 'Where to write response data, file path, or IO object.'
+            ).lines)
+          end
+        end
+
         if input_shape = shape(@operation['input'])
           required = input_shape['required'] || []
           input_shape['members'].each_pair do |member_name, member_ref|
