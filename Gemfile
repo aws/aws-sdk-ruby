@@ -27,7 +27,6 @@ group :test do
   gem 'rspec'
   gem 'cucumber'
   gem 'webmock'
-  gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
   gem 'multipart-post'

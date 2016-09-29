@@ -2,7 +2,6 @@ $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../../build_tools',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-code-generator/lib',  __FILE__))
 
-require 'simplecov'
 require 'rspec'
 require 'webmock/rspec'
 require 'build_tools'
@@ -10,8 +9,6 @@ require 'aws-sdk-code-generator'
 require 'api_helper'
 require 'aws-sdk-core'
 require 'shared_spec_helper'
-
-SimpleCov.command_name('test:unit:aws-sdk-core')
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.
