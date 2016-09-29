@@ -1,7 +1,7 @@
 require_relative '../spec_helper'
 
 module Aws
-  describe Client do
+  describe 'Client' do
     describe 'response stubbing' do
 
       ResponseStubbingExample = ApiHelper.sample_service

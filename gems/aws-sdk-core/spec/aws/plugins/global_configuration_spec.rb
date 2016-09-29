@@ -4,8 +4,17 @@ module Aws
   module Plugins
     describe GlobalConfiguration do
 
+      GlobalConfigClient = ApiHelper.sample_service::Client
+      GlobalConfigClient.instance_variable_set("@identifier", :svc)
+      GlobalConfigClient.add_plugin(Class.new(Seahorse::Client::Plugin) do
+        option(:endpoint, 'https://endpoint.com')
+        option(:property, 'plugin-default')
+      end)
+
       before(:each) do
         Aws.config.clear
+        Aws.config[:region] = 'us-east-1'
+        Aws.config[:credentials] = Credentials.new('akid', 'secret')
       end
 
       before(:all) do
@@ -13,16 +22,9 @@ module Aws
       end
 
       after(:all) do
+        Aws.config.clear
         GlobalConfiguration::IDENTIFIERS.delete(:svc)
       end
-
-      GlobalConfigClient = Class.new(Aws::Client)
-      GlobalConfigClient.identifier = :svc
-      GlobalConfigClient.add_plugin(GlobalConfiguration)
-      GlobalConfigClient.add_plugin(Class.new(Seahorse::Client::Plugin) do
-        option(:endpoint, 'https://endpoint.com')
-        option(:property, 'plugin-default')
-      end)
 
       it 'gives priority to Aws.config over plugin defaults' do
         Aws.config[:property] = 'aws-default'

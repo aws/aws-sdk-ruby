@@ -99,7 +99,6 @@ module Aws
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
   autoload :Checksums, 'aws-sdk-core/checksums'
-  autoload :Client, 'aws-sdk-core/client'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
   autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
