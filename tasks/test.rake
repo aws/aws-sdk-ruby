@@ -6,7 +6,7 @@ require 'rspec/core/rake_task'
 
 task 'test:spec:each' do
   failures = []
-  Dir.glob("**/spec").each do |spec_dir|
+  Dir.glob("**/spec/**/*_spec.rb").each do |spec_dir|
     sh("bundle exec rspec #{spec_dir}") do |ok, _|
       failures << File.basename(File.dirname(spec_dir)) if !ok
     end
