@@ -3,7 +3,13 @@ source 'https://rubygems.org'
 gem 'rake', require: false
 gem 'jmespath'
 
-group :optionaldeps do
+group :test do
+
+  gem 'rspec'
+  gem 'cucumber'
+  gem 'webmock'
+  gem 'json-schema'
+  gem 'multipart-post'
 
   # faster xml libraries
   gem 'ox' unless ENV['PURE_RUBY']
@@ -21,14 +27,6 @@ group :optionaldeps do
     end
   end
 
-end
-
-group :test do
-  gem 'rspec'
-  gem 'cucumber'
-  gem 'webmock'
-  gem 'json-schema'
-  gem 'multipart-post'
 end
 
 group :build do
