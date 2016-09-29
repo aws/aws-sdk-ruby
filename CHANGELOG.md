@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.5 (2016-09-29)
+------------------
+
 * Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
 
 * Feature - Aws::EC2 - Added support for the new 2016-09-15 API version of Amazon Elastic Compute Cloud.
