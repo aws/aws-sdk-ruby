@@ -2,6 +2,7 @@ require 'spec_helper'
 require 'ostruct'
 require 'stringio'
 require 'uri'
+require 'openssl'
 
 module Seahorse
   module Client
@@ -254,6 +255,17 @@ module Seahorse
               stub_request(:any, endpoint).to_raise(EOFError)
               resp = make_request
               expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
+            end
+
+            if OpenSSL::SSL.const_defined?(:SSLErrorWaitReadable)
+              it 'wraps OpenSSL::SSL::SSLErrorWaitReadable w/NetworkingError' do
+                stub_request(:any, endpoint).to_raise(
+                  OpenSSL::SSL::SSLErrorWaitReadable)
+                resp = make_request
+                expect(resp.error).to be_a(Seahorse::Client::NetworkingError)
+                expect(resp.error.original_error).to(
+                  be_kind_of(OpenSSL::SSL::SSLErrorWaitReadable))
+              end
             end
 
           end

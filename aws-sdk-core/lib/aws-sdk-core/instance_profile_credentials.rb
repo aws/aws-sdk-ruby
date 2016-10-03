@@ -119,7 +119,7 @@ module Aws
       retries = 0
       begin
         yield
-      rescue *error_classes => error
+      rescue *error_classes
         if retries < max_retries
           @backoff.call(retries)
           retries += 1

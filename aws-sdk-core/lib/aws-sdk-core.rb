@@ -54,6 +54,7 @@ module Aws
     ElastiCache
     ElasticBeanstalk
     ElasticLoadBalancing
+    ElasticLoadBalancingV2
     ElasticsearchService
     ElasticTranscoder
     EMR
@@ -66,6 +67,7 @@ module Aws
     IoT
     IoTDataPlane
     Kinesis
+    KinesisAnalytics
     KMS
     Lambda
     LambdaPreview
@@ -78,9 +80,11 @@ module Aws
     Route53
     Route53Domains
     S3
+    ServiceCatalog
     SES
     SimpleDB
     SNS
+    Snowball
     SQS
     SSM
     StorageGateway
@@ -90,6 +94,7 @@ module Aws
     WAF
     WorkSpaces
   )
+  # end services
 
   @config = {}
   @services = {}
@@ -100,6 +105,7 @@ module Aws
   end
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
+  autoload :Checksums, 'aws-sdk-core/checksums'
   autoload :Client, 'aws-sdk-core/client'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
@@ -108,9 +114,11 @@ module Aws
   autoload :Credentials, 'aws-sdk-core/credentials'
   autoload :Deprecations, 'aws-sdk-core/deprecations'
   autoload :EagerLoader, 'aws-sdk-core/eager_loader'
+  autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
   autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
   autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
   autoload :Errors, 'aws-sdk-core/errors'
+  autoload :IniParser, 'aws-sdk-core/ini_parser'
   autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
   autoload :Json, 'aws-sdk-core/json'
   autoload :PageableResponse, 'aws-sdk-core/pageable_response'
@@ -120,6 +128,7 @@ module Aws
   autoload :Partitions, 'aws-sdk-core/partitions'
   autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
   autoload :Service, 'aws-sdk-core/service'
+  autoload :SharedConfig, 'aws-sdk-core/shared_config'
   autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
   autoload :Structure, 'aws-sdk-core/structure'
   autoload :TreeHash, 'aws-sdk-core/tree_hash'
@@ -163,6 +172,7 @@ module Aws
     autoload :GlacierApiVersion, 'aws-sdk-core/plugins/glacier_api_version'
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
+    autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
@@ -174,6 +184,8 @@ module Aws
     autoload :Route53IdFix, 'aws-sdk-core/plugins/route_53_id_fix'
     autoload :S3Accelerate, 'aws-sdk-core/plugins/s3_accelerate'
     autoload :S3BucketDns, 'aws-sdk-core/plugins/s3_bucket_dns'
+    autoload :S3BucketNameRestrictions, 'aws-sdk-core/plugins/s3_bucket_name_restrictions'
+    autoload :S3Dualstack, 'aws-sdk-core/plugins/s3_dualstack'
     autoload :S3Expect100Continue, 'aws-sdk-core/plugins/s3_expect_100_continue'
     autoload :S3GetBucketLocationFix, 'aws-sdk-core/plugins/s3_get_bucket_location_fix'
     autoload :S3Http200Errors, 'aws-sdk-core/plugins/s3_http_200_errors'
@@ -269,6 +281,12 @@ module Aws
   end
 
   class << self
+
+    # @api private
+    def shared_config
+      enabled = ENV["AWS_SDK_CONFIG_OPT_OUT"] ? false : true
+      @shared_config ||= SharedConfig.new(config_enabled: enabled)
+    end
 
     # @return [Hash] Returns a hash of default configuration options shared
     #   by all constructed clients.

@@ -20,6 +20,11 @@ module Aws
         fetch("region", region)
     end
 
+    def dns_suffix_for(region)
+      partition = get_partition(region)
+      partition['dnsSuffix']
+    end
+
     private
 
     def endpoint_for(region, service)
@@ -82,6 +87,10 @@ module Aws
 
       def signing_region(region, service)
         default_provider.signing_region(region, service)
+      end
+
+      def dns_suffix_for(region)
+        default_provider.dns_suffix_for(region)
       end
 
       private

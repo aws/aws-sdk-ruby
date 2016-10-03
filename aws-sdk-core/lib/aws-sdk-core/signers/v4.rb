@@ -217,16 +217,7 @@ module Aws
       end
 
       def hexdigest(value)
-        digest = OpenSSL::Digest::SHA256.new
-        if value.respond_to?(:read)
-          chunk = nil
-          chunk_size = 1024 * 1024 # 1 megabyte
-          digest.update(chunk) while chunk = value.read(chunk_size)
-          value.rewind
-        else
-          digest.update(value)
-        end
-        digest.hexdigest
+        Aws::Checksums.sha256_hexdigest(value)
       end
 
       def hmac(key, value)

@@ -13,5 +13,5 @@ Feature: Amazon Simple Notification Service
     Then I expect the response error code to be "InvalidParameter"
     And I expect the response error message to include:
     """
-    Invalid parameter: TopicArn Reason: fake_topic does not start with arn
+    Invalid parameter
     """

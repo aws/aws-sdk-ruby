@@ -12,5 +12,5 @@ Feature: Amazon WorkSpaces
     Then I expect the response error code to be "ValidationException"
     And I expect the response error message to include:
     """
-    Value 'fake-id' at 'directoryId' failed to satisfy constraint
+    request is invalid
     """

@@ -312,10 +312,6 @@
         {
           "shape":"InvalidRequestException",
           "exception":true
-        },
-        {
-          "shape":"InvalidFleetStatusException",
-          "exception":true
         }
       ]
     },
@@ -658,6 +654,34 @@
         }
       ]
     },
+    "DescribeRuntimeConfiguration":{
+      "name":"DescribeRuntimeConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"DescribeRuntimeConfigurationInput"},
+      "output":{"shape":"DescribeRuntimeConfigurationOutput"},
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        }
+      ]
+    },
     "DescribeScalingPolicies":{
       "name":"DescribeScalingPolicies",
       "http":{
@@ -878,6 +902,38 @@
         }
       ]
     },
+    "SearchGameSessions":{
+      "name":"SearchGameSessions",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"SearchGameSessionsInput"},
+      "output":{"shape":"SearchGameSessionsOutput"},
+      "errors":[
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        },
+        {
+          "shape":"UnauthorizedException",
+          "exception":true
+        },
+        {
+          "shape":"TerminalRoutingStrategyException",
+          "exception":true
+        }
+      ]
+    },
     "UpdateAlias":{
       "name":"UpdateAlias",
       "http":{
@@ -1089,6 +1145,38 @@
           "exception":true
         }
       ]
+    },
+    "UpdateRuntimeConfiguration":{
+      "name":"UpdateRuntimeConfiguration",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"UpdateRuntimeConfigurationInput"},
+      "output":{"shape":"UpdateRuntimeConfigurationOutput"},
+      "errors":[
+        {
+          "shape":"UnauthorizedException",
+          "exception":true
+        },
+        {
+          "shape":"NotFoundException",
+          "exception":true
+        },
+        {
+          "shape":"InternalServiceException",
+          "exception":true,
+          "fault":true
+        },
+        {
+          "shape":"InvalidRequestException",
+          "exception":true
+        },
+        {
+          "shape":"InvalidFleetStatusException",
+          "exception":true
+        }
+      ]
     }
   },
   "shapes":{
@@ -1128,6 +1216,7 @@
         "Version":{"shape":"FreeText"},
         "Status":{"shape":"BuildStatus"},
         "SizeOnDisk":{"shape":"PositiveLong"},
+        "OperatingSystem":{"shape":"OperatingSystem"},
         "CreationTime":{"shape":"Timestamp"}
       }
     },
@@ -1186,7 +1275,8 @@
       "members":{
         "Name":{"shape":"NonZeroAndMaxString"},
         "Version":{"shape":"NonZeroAndMaxString"},
-        "StorageLocation":{"shape":"S3Location"}
+        "StorageLocation":{"shape":"S3Location"},
+        "OperatingSystem":{"shape":"OperatingSystem"}
       }
     },
     "CreateBuildOutput":{
@@ -1202,7 +1292,6 @@
       "required":[
         "Name",
         "BuildId",
-        "ServerLaunchPath",
         "EC2InstanceType"
       ],
       "members":{
@@ -1214,7 +1303,8 @@
         "LogPaths":{"shape":"StringList"},
         "EC2InstanceType":{"shape":"EC2InstanceType"},
         "EC2InboundPermissions":{"shape":"IpPermissionsList"},
-        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"}
+        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"},
+        "RuntimeConfiguration":{"shape":"RuntimeConfiguration"}
       }
     },
     "CreateFleetOutput":{
@@ -1474,6 +1564,19 @@
         "NextToken":{"shape":"NonZeroAndMaxString"}
       }
     },
+    "DescribeRuntimeConfigurationInput":{
+      "type":"structure",
+      "required":["FleetId"],
+      "members":{
+        "FleetId":{"shape":"FleetId"}
+      }
+    },
+    "DescribeRuntimeConfigurationOutput":{
+      "type":"structure",
+      "members":{
+        "RuntimeConfiguration":{"shape":"RuntimeConfiguration"}
+      }
+    },
     "DescribeScalingPoliciesInput":{
       "type":"structure",
       "required":["FleetId"],
@@ -1599,7 +1702,8 @@
         "ServerLaunchPath":{"shape":"NonZeroAndMaxString"},
         "ServerLaunchParameters":{"shape":"NonZeroAndMaxString"},
         "LogPaths":{"shape":"StringList"},
-        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"}
+        "NewGameSessionProtectionPolicy":{"shape":"ProtectionPolicy"},
+        "OperatingSystem":{"shape":"OperatingSystem"}
       }
     },
     "FleetAttributesList":{
@@ -1652,6 +1756,7 @@
       "type":"structure",
       "members":{
         "FleetId":{"shape":"FleetId"},
+        "ActiveServerProcessCount":{"shape":"WholeNumber"},
         "ActiveGameSessionCount":{"shape":"WholeNumber"},
         "CurrentPlayerSessionCount":{"shape":"WholeNumber"},
         "MaximumPlayerSessionCount":{"shape":"WholeNumber"}
@@ -1699,6 +1804,7 @@
         "Status":{"shape":"GameSessionStatus"},
         "GameProperties":{"shape":"GamePropertyList"},
         "IpAddress":{"shape":"IpAddress"},
+        "Port":{"shape":"PortNumber"},
         "PlayerSessionCreationPolicy":{"shape":"PlayerSessionCreationPolicy"}
       }
     },
@@ -1892,6 +1998,13 @@
       },
       "exception":true
     },
+    "OperatingSystem":{
+      "type":"string",
+      "enum":[
+        "WINDOWS_2012",
+        "AMAZON_LINUX"
+      ]
+    },
     "PlayerIdList":{
       "type":"list",
       "member":{"shape":"NonZeroAndMaxString"},
@@ -1908,7 +2021,8 @@
         "CreationTime":{"shape":"Timestamp"},
         "TerminationTime":{"shape":"Timestamp"},
         "Status":{"shape":"PlayerSessionStatus"},
-        "IpAddress":{"shape":"IpAddress"}
+        "IpAddress":{"shape":"IpAddress"},
+        "Port":{"shape":"PortNumber"}
       }
     },
     "PlayerSessionCreationPolicy":{
@@ -2026,6 +2140,12 @@
         "TERMINAL"
       ]
     },
+    "RuntimeConfiguration":{
+      "type":"structure",
+      "members":{
+        "ServerProcesses":{"shape":"ServerProcessList"}
+      }
+    },
     "S3Location":{
       "type":"structure",
       "members":{
@@ -2071,6 +2191,42 @@
         "DELETED",
         "ERROR"
       ]
+    },
+    "SearchGameSessionsInput":{
+      "type":"structure",
+      "members":{
+        "FleetId":{"shape":"FleetId"},
+        "AliasId":{"shape":"AliasId"},
+        "FilterExpression":{"shape":"NonZeroAndMaxString"},
+        "SortExpression":{"shape":"NonZeroAndMaxString"},
+        "Limit":{"shape":"PositiveInteger"},
+        "NextToken":{"shape":"NonZeroAndMaxString"}
+      }
+    },
+    "SearchGameSessionsOutput":{
+      "type":"structure",
+      "members":{
+        "GameSessions":{"shape":"GameSessionList"},
+        "NextToken":{"shape":"NonZeroAndMaxString"}
+      }
+    },
+    "ServerProcess":{
+      "type":"structure",
+      "required":[
+        "LaunchPath",
+        "ConcurrentExecutions"
+      ],
+      "members":{
+        "LaunchPath":{"shape":"NonZeroAndMaxString"},
+        "Parameters":{"shape":"NonZeroAndMaxString"},
+        "ConcurrentExecutions":{"shape":"PositiveInteger"}
+      }
+    },
+    "ServerProcessList":{
+      "type":"list",
+      "member":{"shape":"ServerProcess"},
+      "min":1,
+      "max":50
     },
     "StringList":{
       "type":"list",
@@ -2184,6 +2340,23 @@
       "type":"structure",
       "members":{
         "GameSession":{"shape":"GameSession"}
+      }
+    },
+    "UpdateRuntimeConfigurationInput":{
+      "type":"structure",
+      "required":[
+        "FleetId",
+        "RuntimeConfiguration"
+      ],
+      "members":{
+        "FleetId":{"shape":"FleetId"},
+        "RuntimeConfiguration":{"shape":"RuntimeConfiguration"}
+      }
+    },
+    "UpdateRuntimeConfigurationOutput":{
+      "type":"structure",
+      "members":{
+        "RuntimeConfiguration":{"shape":"RuntimeConfiguration"}
       }
     },
     "WholeNumber":{

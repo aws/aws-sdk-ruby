@@ -23,16 +23,16 @@ module Aws
       #   performance improvements on large objects. Amazon S3 does
       #   not accept multipart copies for objects smaller than 5MB.
       #
-      # @options options [Integer] :content_length Only used when
+      # @option options [Integer] :content_length Only used when
       #   `:multipart_copy` is `true`. Passing this options avoids a HEAD
       #   request to query the source object size.
       #
-      # @options options [S3::Client] :copy_source_client Only used when
+      # @option options [S3::Client] :copy_source_client Only used when
       #   `:multipart_copy` is `true` and the source object is in a
       #   different region. You do not need to specify this option
       #   if you have provided `:content_length`.
       #
-      # @options options [String] :copy_source_region Only used when
+      # @option options [String] :copy_source_region Only used when
       #   `:multipart_copy` is `true` and the source object is in a
       #   different region. You do not need to specify this option
       #   if you have provided a `:source_client` or a `:content_length`.
@@ -106,7 +106,7 @@ module Aws
       # Copies and deletes the current object. The object will only be
       # deleted if the copy operation succeeds.
       # @param (see Object#copy_to)
-      # @options (see Object#copy_to)
+      # @option (see Object#copy_to)
       # @return [void]
       # @see Object#copy_to
       # @see Object#delete

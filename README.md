@@ -8,13 +8,11 @@ This is version 2 of the `aws-sdk` gem.  **Version 1 can be found in the
 
 ## Links of Interest
 
-* [Documentation](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
+* [Developer Guide](http://docs.aws.amazon.com/sdk-for-ruby/latest/DeveloperGuide/aws-ruby-sdk-about-ruby-sdk.html)
+* [API Docs](http://docs.aws.amazon.com/sdkforruby/api/frames.html)
 * [Change Log](https://github.com/aws/aws-sdk-ruby/blob/master/CHANGELOG.md)
 * [Upgrading Notes](https://github.com/aws/aws-sdk-ruby/blob/master/UPGRADING.md)
-* [Issues](http://github.com/aws/aws-sdk-ruby/issues)
-* [Feature Requests](https://github.com/aws/aws-sdk-ruby/blob/master/FEATURE_REQUESTS.md)
 * [Gitter Channel](https://gitter.im/aws/aws-sdk-ruby)
-* [License](http://aws.amazon.com/apache2.0/)
 
 ## NameError: uninitialized constant AWS
 
@@ -41,12 +39,15 @@ You need to configure `:credentials` and a `:region` to make API calls. It is re
 The SDK searches the following locations for credentials:
 
 * `ENV['AWS_ACCESS_KEY_ID']` and `ENV['AWS_SECRET_ACCESS_KEY']`
+* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will be checked for a `role_arn` and `source_profile`, which if present will be used to attempt to assume a role.
 * The shared credentials ini file at `~/.aws/credentials` ([more information](http://blogs.aws.amazon.com/security/post/Tx3D6U6WSFGOK2H/A-New-and-Standardized-Way-to-Manage-Credentials-in-the-AWS-SDKs))
-* From an instance profile when running on EC2
+    * Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration ini file at `~/.aws/config` will also be parsed for credentials.
+* From an instance profile when running on EC2, or from the ECS credential provider when running in an ECS container with that feature enabled.
 
 The SDK searches the following locations for a region:
 
 * `ENV['AWS_REGION']`
+* Unless `ENV['AWS_SDK_CONFIG_OPT_OUT']` is set, the shared configuration files (`~/.aws/credentials` and `~/.aws/config`) will also be checked for a region selection.
 
 **The region is used to construct an SSL endpoint**. If you need to connect to a non-standard endpoint, you may specify the `:endpoint` option.
 
@@ -249,17 +250,18 @@ to be backwards compatible.
 | AWS IoT                                  | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                       | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service               | KMS                          | 2014-11-01  |
-| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
 | AWS Lambda                               | Lambda                       | 2015-03-31  |
+| AWS Lambda                               | LambdaPreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics       | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                             | OpsWorks                     | 2013-02-18  |
 | AWS Security Token Service               | STS                          | 2011-06-15  |
+| AWS Service Catalog                      | ServiceCatalog               | 2015-12-10  |
 | AWS Storage Gateway                      | StorageGateway               | 2013-06-30  |
 | AWS Support                              | Support                      | 2013-04-15  |
 | AWS WAF                                  | WAF                          | 2015-08-24  |
 | AWSMarketplace Metering                  | MarketplaceMetering          | 2016-01-14  |
 | Amazon API Gateway                       | APIGateway                   | 2015-07-09  |
-| Amazon CloudFront                        | CloudFront                   | 2016-01-28  |
+| Amazon CloudFront                        | CloudFront                   | 2016-09-07  |
 | Amazon CloudHSM                          | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                       | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain                | CloudSearchDomain            | 2013-01-01  |
@@ -274,15 +276,17 @@ to be backwards compatible.
 | Amazon EC2 Container Registry            | ECR                          | 2015-09-21  |
 | Amazon EC2 Container Service             | ECS                          | 2014-11-13  |
 | Amazon ElastiCache                       | ElastiCache                  | 2015-02-02  |
-| Amazon Elastic Compute Cloud             | EC2                          | 2015-10-01  |
+| Amazon Elastic Compute Cloud             | EC2                          | 2016-09-15  |
 | Amazon Elastic File System               | EFS                          | 2015-02-01  |
 | Amazon Elastic MapReduce                 | EMR                          | 2009-03-31  |
 | Amazon Elastic Transcoder                | ElasticTranscoder            | 2012-09-25  |
 | Amazon Elasticsearch Service             | ElasticsearchService         | 2015-01-01  |
 | Amazon GameLift                          | GameLift                     | 2015-10-01  |
 | Amazon Glacier                           | Glacier                      | 2012-06-01  |
+| Amazon Import/Export Snowball            | Snowball                     | 2016-06-30  |
 | Amazon Inspector                         | Inspector                    | 2016-02-16  |
 | Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
+| Amazon Kinesis Analytics                 | KinesisAnalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose                  | Firehose                     | 2015-08-04  |
 | Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
 | Amazon Redshift                          | Redshift                     | 2012-12-01  |
@@ -300,6 +304,7 @@ to be backwards compatible.
 | Application Auto Scaling                 | ApplicationAutoScaling       | 2016-02-06  |
 | Auto Scaling                             | AutoScaling                  | 2011-01-01  |
 | Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
+| Elastic Load Balancing                   | ElasticLoadBalancingV2       | 2015-12-01  |
 
 ## License
 

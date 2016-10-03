@@ -146,6 +146,20 @@
         {"shape":"PipelineVersionNotFoundException"}
       ]
     },
+    "GetPipelineExecution":{
+      "name":"GetPipelineExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"GetPipelineExecutionInput"},
+      "output":{"shape":"GetPipelineExecutionOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"PipelineExecutionNotFoundException"}
+      ]
+    },
     "GetPipelineState":{
       "name":"GetPipelineState",
       "http":{
@@ -240,6 +254,23 @@
         {"shape":"ValidationException"}
       ]
     },
+    "PutApprovalResult":{
+      "name":"PutApprovalResult",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"PutApprovalResultInput"},
+      "output":{"shape":"PutApprovalResultOutput"},
+      "errors":[
+        {"shape":"InvalidApprovalTokenException"},
+        {"shape":"ApprovalAlreadyCompletedException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"StageNotFoundException"},
+        {"shape":"ActionNotFoundException"},
+        {"shape":"ValidationException"}
+      ]
+    },
     "PutJobFailureResult":{
       "name":"PutJobFailureResult",
       "http":{
@@ -292,6 +323,22 @@
         {"shape":"JobNotFoundException"},
         {"shape":"InvalidJobStateException"},
         {"shape":"InvalidClientTokenException"}
+      ]
+    },
+    "RetryStageExecution":{
+      "name":"RetryStageExecution",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"RetryStageExecutionInput"},
+      "output":{"shape":"RetryStageExecutionOutput"},
+      "errors":[
+        {"shape":"ValidationException"},
+        {"shape":"PipelineNotFoundException"},
+        {"shape":"StageNotFoundException"},
+        {"shape":"StageNotRetryableException"},
+        {"shape":"NotLatestPipelineExecutionException"}
       ]
     },
     "StartPipelineExecution":{
@@ -387,7 +434,8 @@
         "Build",
         "Deploy",
         "Test",
-        "Invoke"
+        "Invoke",
+        "Approval"
       ]
     },
     "ActionConfiguration":{
@@ -445,7 +493,7 @@
     },
     "ActionConfigurationValue":{
       "type":"string",
-      "max":250,
+      "max":500,
       "min":1
     },
     "ActionContext":{
@@ -476,6 +524,8 @@
         "status":{"shape":"ActionExecutionStatus"},
         "summary":{"shape":"ExecutionSummary"},
         "lastStatusChange":{"shape":"Timestamp"},
+        "token":{"shape":"ActionExecutionToken"},
+        "lastUpdatedBy":{"shape":"LastUpdatedBy"},
         "externalExecutionId":{"shape":"ExecutionId"},
         "externalExecutionUrl":{"shape":"Url"},
         "percentComplete":{"shape":"Percentage"},
@@ -490,6 +540,7 @@
         "Failed"
       ]
     },
+    "ActionExecutionToken":{"type":"string"},
     "ActionName":{
       "type":"string",
       "max":100,
@@ -597,6 +648,39 @@
         "revisionUrlTemplate":{"shape":"UrlTemplate"}
       }
     },
+    "ApprovalAlreadyCompletedException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "ApprovalResult":{
+      "type":"structure",
+      "required":[
+        "summary",
+        "status"
+      ],
+      "members":{
+        "summary":{"shape":"ApprovalSummary"},
+        "status":{"shape":"ApprovalStatus"}
+      }
+    },
+    "ApprovalStatus":{
+      "type":"string",
+      "enum":[
+        "Approved",
+        "Rejected"
+      ]
+    },
+    "ApprovalSummary":{
+      "type":"string",
+      "max":512,
+      "min":0
+    },
+    "ApprovalToken":{
+      "type":"string",
+      "pattern":"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    },
     "Artifact":{
       "type":"structure",
       "members":{
@@ -636,6 +720,21 @@
       "max":100,
       "min":1,
       "pattern":"[a-zA-Z0-9_\\-]+"
+    },
+    "ArtifactRevision":{
+      "type":"structure",
+      "members":{
+        "name":{"shape":"ArtifactName"},
+        "revisionId":{"shape":"Revision"},
+        "revisionChangeIdentifier":{"shape":"RevisionChangeIdentifier"},
+        "revisionSummary":{"shape":"RevisionSummary"},
+        "created":{"shape":"Timestamp"},
+        "revisionUrl":{"shape":"Url"}
+      }
+    },
+    "ArtifactRevisionList":{
+      "type":"list",
+      "member":{"shape":"ArtifactRevision"}
     },
     "ArtifactStore":{
       "type":"structure",
@@ -734,7 +833,9 @@
       ],
       "members":{
         "revision":{"shape":"Revision"},
-        "changeIdentifier":{"shape":"RevisionChangeIdentifier"}
+        "changeIdentifier":{"shape":"RevisionChangeIdentifier"},
+        "created":{"shape":"Time"},
+        "revisionSummary":{"shape":"RevisionSummary"}
       }
     },
     "DeleteCustomActionTypeInput":{
@@ -874,6 +975,23 @@
         "jobDetails":{"shape":"JobDetails"}
       }
     },
+    "GetPipelineExecutionInput":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "pipelineExecutionId"
+      ],
+      "members":{
+        "pipelineName":{"shape":"PipelineName"},
+        "pipelineExecutionId":{"shape":"PipelineExecutionId"}
+      }
+    },
+    "GetPipelineExecutionOutput":{
+      "type":"structure",
+      "members":{
+        "pipelineExecution":{"shape":"PipelineExecution"}
+      }
+    },
     "GetPipelineInput":{
       "type":"structure",
       "required":["name"],
@@ -934,6 +1052,12 @@
       "member":{"shape":"InputArtifact"}
     },
     "InvalidActionDeclarationException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "InvalidApprovalTokenException":{
       "type":"structure",
       "members":{
       },
@@ -1045,6 +1169,7 @@
     },
     "LastChangedAt":{"type":"timestamp"},
     "LastChangedBy":{"type":"string"},
+    "LastUpdatedBy":{"type":"string"},
     "LimitExceededException":{
       "type":"structure",
       "members":{
@@ -1096,6 +1221,12 @@
     },
     "NextToken":{"type":"string"},
     "Nonce":{"type":"string"},
+    "NotLatestPipelineExecutionException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
     "OutputArtifact":{
       "type":"structure",
       "required":["name"],
@@ -1136,9 +1267,34 @@
         "version":{"shape":"PipelineVersion"}
       }
     },
+    "PipelineExecution":{
+      "type":"structure",
+      "members":{
+        "pipelineName":{"shape":"PipelineName"},
+        "pipelineVersion":{"shape":"PipelineVersion"},
+        "pipelineExecutionId":{"shape":"PipelineExecutionId"},
+        "status":{"shape":"PipelineExecutionStatus"},
+        "artifactRevisions":{"shape":"ArtifactRevisionList"}
+      }
+    },
     "PipelineExecutionId":{
       "type":"string",
       "pattern":"[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}"
+    },
+    "PipelineExecutionNotFoundException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "PipelineExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Succeeded",
+        "Superseded",
+        "Failed"
+      ]
     },
     "PipelineList":{
       "type":"list",
@@ -1236,6 +1392,29 @@
         "pipelineExecutionId":{"shape":"PipelineExecutionId"}
       }
     },
+    "PutApprovalResultInput":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "stageName",
+        "actionName",
+        "result",
+        "token"
+      ],
+      "members":{
+        "pipelineName":{"shape":"PipelineName"},
+        "stageName":{"shape":"StageName"},
+        "actionName":{"shape":"ActionName"},
+        "result":{"shape":"ApprovalResult"},
+        "token":{"shape":"ApprovalToken"}
+      }
+    },
+    "PutApprovalResultOutput":{
+      "type":"structure",
+      "members":{
+        "approvedAt":{"shape":"Timestamp"}
+      }
+    },
     "PutJobFailureResultInput":{
       "type":"structure",
       "required":[
@@ -1291,6 +1470,27 @@
       "max":1,
       "min":0
     },
+    "RetryStageExecutionInput":{
+      "type":"structure",
+      "required":[
+        "pipelineName",
+        "stageName",
+        "pipelineExecutionId",
+        "retryMode"
+      ],
+      "members":{
+        "pipelineName":{"shape":"PipelineName"},
+        "stageName":{"shape":"StageName"},
+        "pipelineExecutionId":{"shape":"PipelineExecutionId"},
+        "retryMode":{"shape":"StageRetryMode"}
+      }
+    },
+    "RetryStageExecutionOutput":{
+      "type":"structure",
+      "members":{
+        "pipelineExecutionId":{"shape":"PipelineExecutionId"}
+      }
+    },
     "Revision":{
       "type":"string",
       "max":1500,
@@ -1301,9 +1501,15 @@
       "max":100,
       "min":1
     },
+    "RevisionSummary":{
+      "type":"string",
+      "max":2048,
+      "min":1
+    },
     "RoleArn":{
       "type":"string",
-      "pattern":"arn:[^:]+:iam::[0-9]{12}:role/.*"
+      "max":1024,
+      "pattern":"arn:aws(-[\\w]+)*:iam::[0-9]{12}:role/.*"
     },
     "S3ArtifactLocation":{
       "type":"structure",
@@ -1346,6 +1552,25 @@
         "actions":{"shape":"StageActionDeclarationList"}
       }
     },
+    "StageExecution":{
+      "type":"structure",
+      "required":[
+        "pipelineExecutionId",
+        "status"
+      ],
+      "members":{
+        "pipelineExecutionId":{"shape":"PipelineExecutionId"},
+        "status":{"shape":"StageExecutionStatus"}
+      }
+    },
+    "StageExecutionStatus":{
+      "type":"string",
+      "enum":[
+        "InProgress",
+        "Failed",
+        "Succeeded"
+      ]
+    },
     "StageName":{
       "type":"string",
       "max":100,
@@ -1358,12 +1583,23 @@
       },
       "exception":true
     },
+    "StageNotRetryableException":{
+      "type":"structure",
+      "members":{
+      },
+      "exception":true
+    },
+    "StageRetryMode":{
+      "type":"string",
+      "enum":["FAILED_ACTIONS"]
+    },
     "StageState":{
       "type":"structure",
       "members":{
         "stageName":{"shape":"StageName"},
         "inboundTransitionState":{"shape":"TransitionState"},
-        "actionStates":{"shape":"ActionStateList"}
+        "actionStates":{"shape":"ActionStateList"},
+        "latestExecution":{"shape":"StageExecution"}
       }
     },
     "StageStateList":{
@@ -1427,6 +1663,7 @@
       "type":"list",
       "member":{"shape":"ThirdPartyJob"}
     },
+    "Time":{"type":"timestamp"},
     "Timestamp":{"type":"timestamp"},
     "TransitionState":{
       "type":"structure",

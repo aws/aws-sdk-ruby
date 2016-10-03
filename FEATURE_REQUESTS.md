@@ -10,6 +10,27 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Handle S3 #exists? Edge Cases
+
+See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267).
+
+### Retry S3 Transfers on BadDigest Error
+
+See [related GitHub issue #1264](https://github.com/aws/aws-sdk-ruby/issues/1264).
+
+### Add Waiters for Aws::ElasticBeanstalk
+
+See [related GitHub issue #1259](https://github.com/aws/aws-sdk-ruby/issues/1259).
+
+### Provide an Interface to Interact With Shared Configuration Values
+
+The SDK uses the Shared Credential and Configuration files at various points
+within the default credential provider chain, and other places. However, there
+is not currently a way to interact with these raw configuration values. This
+request is to expose these values in a consistent and usable way.
+
+See [related GitHub issue #1256](https://github.com/aws/aws-sdk-ruby/issues/1256).
+
 ### Expose Raw Exception Response Bodies
 
 The SDK uses first the exception response `__type` field, then the `ErrorCode`
@@ -130,16 +151,6 @@ to the `Aws::S3::Resource` interface.
 
 See [related GitHub issue #969](https://github.com/aws/aws-sdk-ruby/issues/969).
 
-### Add to Param Validation Error Message
-
-Currently, parameter validation errors come in the following form:
-`expected params[:pipeline_objects][1][:fields][5][:string_value] to be a string`
-
-This could be enhanced by printing the actual value and type of what was passed
-to the client.
-
-See [related GitHub issue #991](https://github.com/aws/aws-sdk-ruby/issues/991).
-
 ### Add Multipart Download Helper(s)
 
 The SDK already has a multipart upload helper for Amazon S3, but doing a GET request
@@ -153,6 +164,12 @@ for an example related to Amazon S3.
 See [related GitHub issue #987](https://github.com/aws/aws-sdk-ruby/issues/987)
 for an example related to the Amazon RDS client (similar, not identical,
 pattern).
+
+### Add accelerate endpoint support to presigned POST requests
+
+The presigned POST utility does not support pre-signing Amazon S3 acclerated
+bucket endpoints. Explore adding an explicit configuration option to enable this,
+or determine this by looking at the client configuration.
 
 ### Add ability to pre-sign a request
 
@@ -185,24 +202,6 @@ Adding a retry limit for instance profile credentials might be a possible soluti
 
 See [related GitHub issue #717](https://github.com/aws/aws-sdk-ruby/issues/717).
 
-### Add Region Enumeration
-
-Add the ability to programmatically determine what region a specific service is available in. Some useful interfaces include:
-
-* pass the service name; return a list of supported regions
-* pass a region; return a list of supported services.
-* pass service_name and region; return true/false if region supports that service
-
-This feature would be an interface for the information provided here http://docs.aws.amazon.com/general/latest/gr/rande.html#ct_region
-
-See [related GitHub issue #926](https://github.com/aws/aws-sdk-ruby/issues/926).
-
-### Signed CloudFront URLs
-
-Amazon CloudFront supports pre-signed URLs, similar to those used by Amazon S3. It would be helpful to have a pre-signed url builder for SDK users.
-
-See [related GitHub issue #700](https://github.com/aws/aws-sdk-ruby/issues/700).
-
 ### Progress callbacks for Amazon S3 Object uploads
 
 To enable users to track file upload process, it would be helpful to support a progress callback for `Aws::S3::Object#upload_file`.
@@ -215,12 +214,10 @@ The `#predict` operation of `Aws::MachineLearning::Client` accepts a map of stri
 
 See [related GitHub issue #878](https://github.com/aws/aws-sdk-ruby/issues/878).
 
-### Support Assume Role Credentials from Shared Credentials File
-
-You can currently only configure an access key id, secret access key, and session token in the shared credentials file, `~/.aws/credentials`. It would be useful if you could also specify a role to assume similar to how the CLI supports.
-
-See [related GitHub issue #910](https://github.com/aws/aws-sdk-ruby/issues/910).
-
-### Support Raw crednetial objects from AWS API responses in config
+### Support Raw credential objects from AWS API responses in config
 
 See [related GitHub issue #1009](https://github.com/aws/aws-sdk-ruby/issues/1009).
+
+### Add a helper for parsing DynamoDB stream events
+
+See [related GitHub issue #1212](https://github.com/aws/aws-sdk-ruby/issues/1212).

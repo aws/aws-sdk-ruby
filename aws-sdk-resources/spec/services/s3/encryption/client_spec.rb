@@ -1,5 +1,6 @@
 require 'spec_helper'
 require 'base64'
+require 'openssl'
 
 module Aws
   module S3
@@ -321,7 +322,7 @@ module Aws
                 to_return(status: 404)
               expect {
                 client.get_object(bucket:'bucket', key:'key')
-              }.to raise_error(Errors::DecryptionError, 'unable to locate encyrption envelope')
+              }.to raise_error(Errors::DecryptionError, 'unable to locate encryption envelope')
             end
 
             it 'resets the cipher during decryption on error' do
@@ -384,7 +385,7 @@ module Aws
           end
         end
 
-        describe 'kms' do
+        describe 'kms_CBC' do
 
           let(:kms_client) { KMS::Client.new(stub_responses:true) }
 
@@ -432,7 +433,7 @@ module Aws
             expect(Base64.encode64(resp.context.http_request.body_contents)).to eq("4FAj3kTOIisQ+9b8/kia8g==\n")
           end
 
-          it 'supports decryption via KMS' do
+          it 'supports decryption via KMS w/ CBC' do
             kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
             client.client.stub_responses(:get_object, {
               body: Base64.decode64("4FAj3kTOIisQ+9b8/kia8g==\n"),
@@ -440,6 +441,61 @@ module Aws
             })
             resp = client.get_object(bucket:'aws-sdk', key:'foo')
             expect(resp.body.read).to eq('plain-text')
+          end
+
+        end
+
+        describe 'kms_GCM' do
+
+          let(:kms_client) { KMS::Client.new(stub_responses:true) }
+
+          let(:client) do
+            Encryption::Client.new({
+                                       kms_key_id: 'kms-key-id',
+                                       kms_client: kms_client,
+                                       stub_responses: true,
+                                   })
+          end
+
+          let(:headers) {{
+              "x-amz-meta-x-amz-wrap-alg" => "kms",
+              "x-amz-meta-x-amz-cek-alg" => "AES/GCM/NoPadding",
+              "x-amz-meta-x-amz-iv" => "XujE1oWCO83rw1PU",
+              "x-amz-meta-x-amz-key-v2" => Base64.strict_encode64("encrypted-object-key"),
+              "x-amz-meta-x-amz-matdesc" => "{\"kms_cmk_id\":\"kms-key-id\"}",
+              "x-amz-meta-x-amz-tag-len" => "128",
+              "content-length" => body.bytesize,
+          }}
+
+          let(:body) { Base64.decode64("ZpPUtKX0PPupGaE0o7FbJw2Ov53MXfqenLA=") }
+
+          let(:plaintext_object_key) {
+            "\xACb.\xEB\x16\x19(\x9AJ\xE0uCA\x034z\xF6&\x7F\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
+          }
+
+          if !ENV['TRAVIS']
+            it 'supports decryption via KMS w/ GCM' do
+              if !OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
+                pending('aes-256-gcm not supported')
+              end
+              kms_client.stub_responses(:decrypt, plaintext: plaintext_object_key)
+              client.client.stub_responses(:get_object, [
+                # get_object resp
+                {
+                  status_code: 200,
+                  headers: headers,
+                  body: body,
+                },
+                # get_object w/range header resp
+                {
+                  status_code: 200,
+                  headers: headers.merge('content-length' => '16'),
+                  body: body.bytes.to_a[-16..-1].pack("C*"),
+                },
+              ])
+              resp = client.get_object(bucket:'aws-sdk', key:'foo')
+              expect(resp.body.read).to eq('plain-text')
+            end
           end
 
         end

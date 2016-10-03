@@ -12,5 +12,5 @@ Feature: AWS Storage Gateway
     Then I expect the response error code to be "ValidationException"
     And I expect the response error message to include:
     """
-    Value 'fake_gateway' at 'gatewayARN' failed to satisfy constraint
+    invalid input
     """

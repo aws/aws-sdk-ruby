@@ -157,6 +157,23 @@ module Aws
             end
           end
         end
+
+        api['shapes']['ExpiresString'] = { 'type' => 'string' }
+        %w(HeadObjectOutput GetObjectOutput).each do |shape|
+          members = api['shapes'][shape]['members']
+          # inject ExpiresString directly after Expires
+          api['shapes'][shape]['members'] = members.inject({}) do |h, (k,v)|
+            h[k] = v
+            if k == 'Expires'
+              h['ExpiresString'] = {
+                'shape' => 'ExpiresString',
+                'location' => 'header',
+                'locationName' => 'Expires',
+              }
+            end
+            h
+          end
+        end
       end
 
       doc('s3') do |docs|
@@ -169,7 +186,9 @@ module Aws
 
       plugins('s3', add: %w(
         Aws::Plugins::S3Accelerate
+        Aws::Plugins::S3Dualstack
         Aws::Plugins::S3BucketDns
+        Aws::Plugins::S3BucketNameRestrictions
         Aws::Plugins::S3Expect100Continue
         Aws::Plugins::S3Http200Errors
         Aws::Plugins::S3GetBucketLocationFix

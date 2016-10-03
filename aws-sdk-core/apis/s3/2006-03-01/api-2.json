@@ -753,6 +753,7 @@
         "eu-west-1",
         "us-west-1",
         "us-west-2",
+        "ap-south-1",
         "ap-southeast-1",
         "ap-southeast-2",
         "ap-northeast-1",
@@ -963,7 +964,7 @@
     "ContentDisposition":{"type":"string"},
     "ContentEncoding":{"type":"string"},
     "ContentLanguage":{"type":"string"},
-    "ContentLength":{"type":"integer"},
+    "ContentLength":{"type":"long"},
     "ContentMD5":{"type":"string"},
     "ContentRange":{"type":"string"},
     "ContentType":{"type":"string"},
@@ -2185,6 +2186,11 @@
           "shape":"ReplicationStatus",
           "location":"header",
           "locationName":"x-amz-replication-status"
+        },
+        "PartsCount":{
+          "shape":"PartsCount",
+          "location":"header",
+          "locationName":"x-amz-mp-parts-count"
         }
       },
       "payload":"Body"
@@ -2285,6 +2291,11 @@
           "shape":"RequestPayer",
           "location":"header",
           "locationName":"x-amz-request-payer"
+        },
+        "PartNumber":{
+          "shape":"PartNumber",
+          "location":"querystring",
+          "locationName":"partNumber"
         }
       }
     },
@@ -2498,6 +2509,11 @@
           "shape":"ReplicationStatus",
           "location":"header",
           "locationName":"x-amz-replication-status"
+        },
+        "PartsCount":{
+          "shape":"PartsCount",
+          "location":"header",
+          "locationName":"x-amz-mp-parts-count"
         }
       }
     },
@@ -2567,6 +2583,11 @@
           "shape":"RequestPayer",
           "location":"header",
           "locationName":"x-amz-request-payer"
+        },
+        "PartNumber":{
+          "shape":"PartNumber",
+          "location":"querystring",
+          "locationName":"partNumber"
         }
       }
     },
@@ -2851,6 +2872,11 @@
           "shape":"Prefix",
           "location":"querystring",
           "locationName":"prefix"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -2913,7 +2939,12 @@
         "StartAfter":{
           "shape":"StartAfter",
           "location":"querystring",
-          "locationName":"start-key"
+          "locationName":"start-after"
+        },
+        "RequestPayer":{
+          "shape":"RequestPayer",
+          "location":"header",
+          "locationName":"x-amz-request-payer"
         }
       }
     },
@@ -3241,6 +3272,7 @@
       "member":{"shape":"Part"},
       "flattened":true
     },
+    "PartsCount":{"type":"integer"},
     "Payer":{
       "type":"string",
       "enum":[

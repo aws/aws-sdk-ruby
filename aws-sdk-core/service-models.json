@@ -24,7 +24,7 @@
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-01-28",
+    "models": "cloudfront/2016-09-07",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
@@ -111,7 +111,7 @@
     "endpoint": "streams.dynamodb"
   },
   "EC2": {
-    "models": "ec2/2015-10-01",
+    "models": "ec2/2016-09-15",
     "endpoint": "ec2"
   },
   "ECR": {
@@ -136,6 +136,10 @@
   },
   "ElasticLoadBalancing": {
     "models": "elasticloadbalancing/2012-06-01",
+    "endpoint": "elasticloadbalancing"
+  },
+  "ElasticLoadBalancingV2": {
+    "models": "elasticloadbalancingv2/2015-12-01",
     "endpoint": "elasticloadbalancing"
   },
   "ElasticsearchService": {
@@ -186,6 +190,10 @@
     "models": "kinesis/2013-12-02",
     "endpoint": "kinesis"
   },
+  "KinesisAnalytics": {
+    "models": "kinesisanalytics/2015-08-14",
+    "endpoint": "kinesisanalytics"
+  },
   "KMS": {
     "models": "kms/2014-11-01",
     "endpoint": "kms"
@@ -234,6 +242,10 @@
     "models": "s3/2006-03-01",
     "endpoint": "s3"
   },
+  "ServiceCatalog": {
+    "models": "servicecatalog/2015-12-10",
+    "endpoint": "servicecatalog"
+  },
   "SES": {
     "models": "email/2010-12-01",
     "endpoint": "email"
@@ -245,6 +257,10 @@
   "SNS": {
     "models": "sns/2010-03-31",
     "endpoint": "sns"
+  },
+  "Snowball": {
+    "models": "snowball/2016-06-30",
+    "endpoint": "snowball"
   },
   "SQS": {
     "models": "sqs/2012-11-05",

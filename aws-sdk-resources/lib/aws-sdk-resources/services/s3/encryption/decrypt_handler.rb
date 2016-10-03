@@ -22,6 +22,11 @@ module Aws
 
         POSSIBLE_ENVELOPE_KEYS = (V1_ENVELOPE_KEYS + V2_ENVELOPE_KEYS).uniq
 
+        POSSIBLE_ENCRYPTION_FORMATS = %w(
+          AES/GCM/NoPadding
+          AES/CBC/PKCS5Padding
+        )
+
         def call(context)
           attach_http_event_listeners(context)
           @handler.call(context)
@@ -30,10 +35,13 @@ module Aws
         private
 
         def attach_http_event_listeners(context)
+
           context.http_response.on_headers(200) do
             cipher = decryption_cipher(context)
-            body = context.http_response.body
-            context.http_response.body = IODecrypter.new(cipher, body)
+            decrypter = body_contains_auth_tag?(context) ?
+              authenticated_decrypter(context, cipher) :
+              IODecrypter.new(cipher, context.http_response.body)
+            context.http_response.body = decrypter
           end
 
           context.http_response.on_success(200) do
@@ -44,7 +52,7 @@ module Aws
           end
 
           context.http_response.on_error do
-            if context.http_response.body.is_a?(IODecrypter)
+            if context.http_response.body.respond_to?(:io)
               context.http_response.body = context.http_response.body.io
             end
           end
@@ -54,7 +62,7 @@ module Aws
           if envelope = get_encryption_envelope(context)
             context[:encryption][:cipher_provider].decryption_cipher(envelope)
           else
-            raise Errors::DecryptionError, "unable to locate encyrption envelope"
+            raise Errors::DecryptionError, "unable to locate encryption envelope"
           end
         end
 
@@ -103,7 +111,7 @@ module Aws
         end
 
         def v2_envelope(envelope)
-          unless envelope['x-amz-cek-alg'] == 'AES/CBC/PKCS5Padding'
+          unless POSSIBLE_ENCRYPTION_FORMATS.include? envelope['x-amz-cek-alg']
             alg = envelope['x-amz-cek-alg'].inspect
             msg = "unsupported content encrypting key (cek) format: #{alg}"
             raise Errors::DecryptionError, msg
@@ -122,6 +130,42 @@ module Aws
             raise Errors::DecryptionError, msg
           end
           envelope
+        end
+
+        # When the x-amz-meta-x-amz-tag-len header is present, it indicates
+        # that the body of this object has a trailing auth tag. The header
+        # indicates the length of that tag.
+        #
+        # This method fetches the tag from the end of the object by
+        # making a GET Object w/range request. This auth tag is used
+        # to initialize the cipher, and the decrypter truncates the
+        # auth tag from the body when writing the final bytes.
+        def authenticated_decrypter(context, cipher)
+          http_resp = context.http_response
+          content_length = http_resp.headers['content-length'].to_i
+          auth_tag_length = http_resp.headers['x-amz-meta-x-amz-tag-len']
+          auth_tag_length = auth_tag_length.to_i / 8
+
+          auth_tag = context.client.get_object(
+            bucket: context.params[:bucket],
+            key: context.params[:key],
+            range: "bytes=-#{auth_tag_length}"
+          ).body.read
+
+          cipher.auth_tag = auth_tag
+          cipher.auth_data = ''
+
+          # The encrypted object contains both the cipher text
+          # plus a trailing auth tag. This decrypter will the body
+          # expect for the trailing auth tag.
+          decrypter = IOAuthDecrypter.new(
+            io: http_resp.body,
+            encrypted_content_length: content_length - auth_tag_length,
+            cipher: cipher)
+        end
+
+        def body_contains_auth_tag?(context)
+          context.http_response.headers['x-amz-meta-x-amz-tag-len']
         end
 
       end

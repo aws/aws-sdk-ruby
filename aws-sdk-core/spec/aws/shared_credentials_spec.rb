@@ -13,11 +13,10 @@ module Aws
         '..', 'fixtures', 'credentials', 'mock_shared_credentials'))
     }
 
-    it 'defaults path to Dir.home/.aws/credentials' do
-      expect(Dir).to receive(:home).and_return('HOME')
-      credentials = SharedCredentials.new
-      expect(credentials.path).to eq(File.join('HOME', '.aws', 'credentials'))
-    end
+    let(:mock_config_file) {
+      File.expand_path(File.join(File.dirname(__FILE__),
+        '..', 'fixtures', 'credentials', 'mock_shared_config'))
+    }
 
     it 'reads the correct default credentials from a credentials file' do
       creds = SharedCredentials.new(path:mock_credential_file).credentials
@@ -74,7 +73,52 @@ aws_secret_access_key=commented-secret
       creds = SharedCredentials.new(path:mock_credential_file).credentials
       expect(creds.access_key_id).to eq('commented-akid')
       expect(creds.secret_access_key).to eq('commented-secret')
+    end
 
+    it 'supports fetching credentials from config' do
+      Aws.shared_config.fresh(
+        config_enabled: true,
+        credentials_path: mock_credential_file,
+        config_path: mock_config_file,
+        profile_name: "creds_from_cfg"
+      )
+      creds = SharedCredentials.new.credentials
+      expect(creds.access_key_id).to eq("ACCESS_KEY_SC0")
+      expect(creds.secret_access_key).to eq("SECRET_KEY_SC0")
+    end
+
+    it 'properly falls back when credentials incomplete' do
+      Aws.shared_config.fresh(
+        config_enabled: true,
+        credentials_path: mock_credential_file,
+        config_path: mock_config_file,
+        profile_name: "incomplete_cred"
+      )
+      creds = SharedCredentials.new.credentials
+      expect(creds.access_key_id).to eq("ACCESS_KEY_SC1")
+      expect(creds.secret_access_key).to eq("SECRET_KEY_SC1")
+    end
+
+    it 'will source from credentials over config' do
+      Aws.shared_config.fresh(
+        config_enabled: true,
+        credentials_path: mock_credential_file,
+        config_path: mock_config_file
+      )
+      creds = SharedCredentials.new.credentials
+      expect(creds.access_key_id).to eq("ACCESS_KEY_0")
+      expect(creds.secret_access_key).to eq("SECRET_KEY_0")
+    end
+
+    it 'will ignore incomplete credentials' do
+      Aws.shared_config.fresh(
+        config_enabled: true,
+        credentials_path: mock_credential_file,
+        config_path: mock_config_file,
+        profile_name: "incomplete_cfg"
+      )
+      creds = SharedCredentials.new.credentials
+      expect(creds).to eq(nil)
     end
 
   end

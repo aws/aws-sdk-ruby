@@ -4,6 +4,8 @@ module Aws
 
     include Seahorse::Model::Shapes
 
+    EXPECTED_GOT = "expected %s to be %s, got value %s (class: %s) instead."
+
     # @param [Seahorse::Model::Shapes::ShapeRef] rules
     # @param [Hash] params
     # @return [void]
@@ -60,7 +62,7 @@ module Aws
     def list(ref, values, errors, context)
       # ensure the value is an array
       unless values.is_a?(Array)
-        errors << "expected #{context} to be an array"
+        errors << expected_got(context, "an Array", values)
         return
       end
 
@@ -91,27 +93,27 @@ module Aws
       when MapShape then map(ref, value, errors, context)
       when StringShape
         unless value.is_a?(String)
-          errors << "expected #{context} to be a string"
+          errors << expected_got(context, "a String", value)
         end
       when IntegerShape
         unless value.is_a?(Integer)
-          errors << "expected #{context} to be an integer"
+          errors << expected_got(context, "an Integer", value)
         end
       when FloatShape
         unless value.is_a?(Float)
-          errors << "expected #{context} to be a float"
+          errors << expected_got(context, "a Float", value)
         end
       when TimestampShape
         unless value.is_a?(Time)
-          errors << "expected #{context} to be a Time object"
+          errors << expected_got(context, "a Time object", value)
         end
       when BooleanShape
         unless [true, false].include?(value)
-          errors << "expected #{context} to be true or false"
+          errors << expected_got(context, "true or false", value)
         end
       when BlobShape
         unless io_like?(value) or value.is_a?(String)
-          errors << "expected #{context} to be a string or IO object"
+          errors << expected_got(context, "a String or IO object", value)
         end
       else
         raise "unhandled shape type: #{ref.shape.class.name}"
@@ -123,7 +125,7 @@ module Aws
       when Hash then true
       when ref[:struct_class] then true
       else
-        errors << "expected #{context} to be a hash"
+        errors << expected_got(context, "a hash", value)
         false
       end
     end
@@ -142,6 +144,10 @@ module Aws
         "parameter validator found #{errors.size} errors:" +
           prefix + errors.join(prefix)
       end
+    end
+
+    def expected_got(context, expected, got)
+      EXPECTED_GOT % [context, expected, got.inspect, got.class.name]
     end
 
   end

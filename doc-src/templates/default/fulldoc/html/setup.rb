@@ -1,7 +1,11 @@
+def javascripts_full_list
+  super + ['js/nolink.js']
+end
+
 def class_list(root = Registry.root, tree = TreeContext.new)
   out = ''
   # non-service classes
-  out << "<li class='#{tree.classes.join(' ')}'>"
+  out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
   out << "<a class='toggle'></a> Non-Service Classes"
   out << "</div><ul>"
@@ -12,7 +16,7 @@ def class_list(root = Registry.root, tree = TreeContext.new)
   out << '</ul></li>'
 
   # service classes
-  out << "<li class='#{tree.classes.join(' ')}'>"
+  out << "<li class='#{tree.classes.join(' ')} nolink'>"
   out << "<div class='item' style='padding-left:#{tree.indent}'>"
   out << "<a class='toggle'></a> Services"
   out << "</div><ul>"
