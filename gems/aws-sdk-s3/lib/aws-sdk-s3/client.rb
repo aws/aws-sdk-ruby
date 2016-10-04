@@ -32,6 +32,8 @@ require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-s3/plugins/request_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :s3
+
 module Aws
   module S3
     class Client < Seahorse::Client::Base
@@ -1314,7 +1316,7 @@ module Aws
       #     response_target: '/path/to/file',
       #     bucket: 'bucket-name',
       #     key: 'object-key')
-      #
+      # 
       #   # you can still access other response data
       #   resp.metadata #=> { ... }
       #   resp.etag #=> "..."
@@ -1322,7 +1324,7 @@ module Aws
       # @example Download object into memory
       #   # omit :response_target to download to a StringIO in memory
       #   resp = s3.get_object(bucket: 'bucket-name', key: 'object-key')
-      #
+      # 
       #   # call #read or #string on the response body
       #   resp.body.read
       #   #=> '...'

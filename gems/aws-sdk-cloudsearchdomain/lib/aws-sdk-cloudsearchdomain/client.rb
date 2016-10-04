@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/conditional_signing.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :cloudsearchdomain
+
 module Aws
   module CloudSearchDomain
     class Client < Seahorse::Client::Base

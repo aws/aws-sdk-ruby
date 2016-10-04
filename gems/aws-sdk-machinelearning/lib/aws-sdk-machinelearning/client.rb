@@ -20,6 +20,8 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-machinelearning/plugins/predict_endpoint.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :machinelearning
+
 module Aws
   module MachineLearning
     class Client < Seahorse::Client::Base

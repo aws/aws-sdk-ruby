@@ -20,6 +20,8 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :apigateway
+
 module Aws
   module APIGateway
     class Client < Seahorse::Client::Base

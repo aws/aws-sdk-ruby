@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :cloudsearch
+
 module Aws
   module CloudSearch
     class Client < Seahorse::Client::Base

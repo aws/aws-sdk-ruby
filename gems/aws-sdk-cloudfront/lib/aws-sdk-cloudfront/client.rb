@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :cloudfront
+
 module Aws
   module CloudFront
     class Client < Seahorse::Client::Base

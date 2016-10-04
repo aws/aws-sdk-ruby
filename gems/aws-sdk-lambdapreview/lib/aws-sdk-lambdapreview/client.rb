@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :lambdapreview
+
 module Aws
   module LambdaPreview
     class Client < Seahorse::Client::Base

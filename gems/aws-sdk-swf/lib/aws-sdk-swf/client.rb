@@ -20,6 +20,8 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-swf/plugins/read_timeouts.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :swf
+
 module Aws
   module SWF
     class Client < Seahorse::Client::Base

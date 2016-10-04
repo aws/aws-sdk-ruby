@@ -20,6 +20,8 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-route53/plugins/id_fix.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :route53
+
 module Aws
   module Route53
     class Client < Seahorse::Client::Base

@@ -21,6 +21,8 @@ require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
 require 'aws-sdk-sqs/plugins/md5s.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :sqs
+
 module Aws
   module SQS
     class Client < Seahorse::Client::Base

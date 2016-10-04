@@ -19,6 +19,8 @@ require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :directoryservice
+
 module Aws
   module DirectoryService
     class Client < Seahorse::Client::Base

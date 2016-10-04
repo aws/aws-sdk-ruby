@@ -22,6 +22,8 @@ require 'aws-sdk-dynamodb/plugins/extended_retries.rb'
 require 'aws-sdk-dynamodb/plugins/simple_attributes.rb'
 require 'aws-sdk-dynamodb/plugins/crc32_validation.rb'
 
+Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :dynamodb
+
 module Aws
   module DynamoDB
     class Client < Seahorse::Client::Base
