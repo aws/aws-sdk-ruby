@@ -50,12 +50,6 @@ module Aws
         expect(GlobalConfigClient.new.config.property).to eq('svc-default')
       end
 
-      it 'keeps a map of service identifiers' do
-        Aws::SERVICE_MODULE_NAMES.each do |svc|
-          expect(GlobalConfiguration::IDENTIFIERS).to include(svc.downcase.to_sym)
-        end
-      end
-
     end
   end
 end
