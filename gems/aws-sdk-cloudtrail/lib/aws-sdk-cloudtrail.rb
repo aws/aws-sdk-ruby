@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudtrail/waiters'
 require_relative 'aws-sdk-cloudtrail/resource'
 
 module Aws
-  # This module provides support for AWS CloudTrail.
+  # @service
+  # This module provides support for AWS CloudTrail, which shipped in `aws-sdk-cloudtrail` gem.
   #
   # # Aws::CloudTrail::Client
   #

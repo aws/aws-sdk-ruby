@@ -14,7 +14,8 @@ require_relative 'aws-sdk-elastictranscoder/waiters'
 require_relative 'aws-sdk-elastictranscoder/resource'
 
 module Aws
-  # This module provides support for Amazon Elastic Transcoder.
+  # @service
+  # This module provides support for Amazon Elastic Transcoder, which shipped in `aws-sdk-elastictranscoder` gem.
   #
   # # Aws::ElasticTranscoder::Client
   #

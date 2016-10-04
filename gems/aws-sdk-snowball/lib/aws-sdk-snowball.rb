@@ -14,7 +14,8 @@ require_relative 'aws-sdk-snowball/waiters'
 require_relative 'aws-sdk-snowball/resource'
 
 module Aws
-  # This module provides support for Amazon Import/Export Snowball.
+  # @service
+  # This module provides support for Amazon Import/Export Snowball, which shipped in `aws-sdk-snowball` gem.
   #
   # # Aws::Snowball::Client
   #

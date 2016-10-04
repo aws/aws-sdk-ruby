@@ -14,7 +14,8 @@ require_relative 'aws-sdk-iot/waiters'
 require_relative 'aws-sdk-iot/resource'
 
 module Aws
-  # This module provides support for AWS IoT.
+  # @service
+  # This module provides support for AWS IoT, which shipped in `aws-sdk-iot` gem.
   #
   # # Aws::IoT::Client
   #

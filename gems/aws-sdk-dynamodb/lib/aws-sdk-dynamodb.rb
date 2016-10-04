@@ -18,7 +18,8 @@ require_relative 'aws-sdk-dynamodb/table'
 require_relative 'aws-sdk-dynamodb/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon DynamoDB.
+  # @service
+  # This module provides support for Amazon DynamoDB, which shipped in `aws-sdk-dynamodb` gem.
   #
   # # Aws::DynamoDB::Client
   #

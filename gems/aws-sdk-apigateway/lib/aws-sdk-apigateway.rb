@@ -14,7 +14,8 @@ require_relative 'aws-sdk-apigateway/waiters'
 require_relative 'aws-sdk-apigateway/resource'
 
 module Aws
-  # This module provides support for Amazon API Gateway.
+  # @service
+  # This module provides support for Amazon API Gateway, which shipped in `aws-sdk-apigateway` gem.
   #
   # # Aws::APIGateway::Client
   #

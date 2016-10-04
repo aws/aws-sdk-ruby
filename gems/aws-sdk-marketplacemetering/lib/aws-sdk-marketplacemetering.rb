@@ -14,7 +14,8 @@ require_relative 'aws-sdk-marketplacemetering/waiters'
 require_relative 'aws-sdk-marketplacemetering/resource'
 
 module Aws
-  # This module provides support for AWSMarketplace Metering.
+  # @service
+  # This module provides support for AWSMarketplace Metering, which shipped in `aws-sdk-marketplacemetering` gem.
   #
   # # Aws::MarketplaceMetering::Client
   #

@@ -17,7 +17,8 @@ require_relative 'aws-sdk-cloudfront/resource'
 require_relative 'aws-sdk-cloudfront/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon CloudFront.
+  # @service
+  # This module provides support for Amazon CloudFront, which shipped in `aws-sdk-cloudfront` gem.
   #
   # # Aws::CloudFront::Client
   #

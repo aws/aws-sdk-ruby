@@ -14,7 +14,8 @@ require_relative 'aws-sdk-inspector/waiters'
 require_relative 'aws-sdk-inspector/resource'
 
 module Aws
-  # This module provides support for Amazon Inspector.
+  # @service
+  # This module provides support for Amazon Inspector, which shipped in `aws-sdk-inspector` gem.
   #
   # # Aws::Inspector::Client
   #

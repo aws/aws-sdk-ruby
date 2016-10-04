@@ -13,7 +13,8 @@ require_relative 'aws-sdk-sts/waiters'
 require_relative 'aws-sdk-sts/resource'
 
 module Aws
-  # This module provides support for AWS Security Token Service.
+  # @service
+  # This module provides support for AWS Security Token Service, which shipped in `aws-sdk-sts` gem.
   #
   # # Aws::STS::Client
   #

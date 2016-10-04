@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudsearchdomain/waiters'
 require_relative 'aws-sdk-cloudsearchdomain/resource'
 
 module Aws
-  # This module provides support for Amazon CloudSearch Domain.
+  # @service
+  # This module provides support for Amazon CloudSearch Domain, which shipped in `aws-sdk-cloudsearchdomain` gem.
   #
   # # Aws::CloudSearchDomain::Client
   #

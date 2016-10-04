@@ -14,7 +14,8 @@ require_relative 'aws-sdk-firehose/waiters'
 require_relative 'aws-sdk-firehose/resource'
 
 module Aws
-  # This module provides support for Amazon Kinesis Firehose.
+  # @service
+  # This module provides support for Amazon Kinesis Firehose, which shipped in `aws-sdk-firehose` gem.
   #
   # # Aws::Firehose::Client
   #

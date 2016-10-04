@@ -14,7 +14,8 @@ require_relative 'aws-sdk-acm/waiters'
 require_relative 'aws-sdk-acm/resource'
 
 module Aws
-  # This module provides support for AWS Certificate Manager.
+  # @service
+  # This module provides support for AWS Certificate Manager, which shipped in `aws-sdk-acm` gem.
   #
   # # Aws::ACM::Client
   #

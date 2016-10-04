@@ -38,7 +38,8 @@ require_relative 'aws-sdk-iam/virtual_mfa_device'
 require_relative 'aws-sdk-iam/customizations.rb'
 
 module Aws
-  # This module provides support for AWS Identity and Access Management.
+  # @service
+  # This module provides support for AWS Identity and Access Management, which shipped in `aws-sdk-iam` gem.
   #
   # # Aws::IAM::Client
   #

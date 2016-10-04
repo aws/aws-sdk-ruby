@@ -14,7 +14,8 @@ require_relative 'aws-sdk-databasemigrationservice/waiters'
 require_relative 'aws-sdk-databasemigrationservice/resource'
 
 module Aws
-  # This module provides support for AWS Database Migration Service.
+  # @service
+  # This module provides support for AWS Database Migration Service, which shipped in `aws-sdk-databasemigrationservice` gem.
   #
   # # Aws::DatabaseMigrationService::Client
   #

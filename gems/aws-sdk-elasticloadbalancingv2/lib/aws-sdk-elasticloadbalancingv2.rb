@@ -14,7 +14,8 @@ require_relative 'aws-sdk-elasticloadbalancingv2/waiters'
 require_relative 'aws-sdk-elasticloadbalancingv2/resource'
 
 module Aws
-  # This module provides support for Elastic Load Balancing.
+  # @service
+  # This module provides support for Elastic Load Balancing, which shipped in `aws-sdk-elasticloadbalancingv2` gem.
   #
   # # Aws::ElasticLoadBalancingV2::Client
   #

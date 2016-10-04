@@ -14,7 +14,8 @@ require_relative 'aws-sdk-ses/waiters'
 require_relative 'aws-sdk-ses/resource'
 
 module Aws
-  # This module provides support for Amazon Simple Email Service.
+  # @service
+  # This module provides support for Amazon Simple Email Service, which shipped in `aws-sdk-ses` gem.
   #
   # # Aws::SES::Client
   #

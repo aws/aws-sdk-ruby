@@ -14,7 +14,8 @@ require_relative 'aws-sdk-datapipeline/waiters'
 require_relative 'aws-sdk-datapipeline/resource'
 
 module Aws
-  # This module provides support for AWS Data Pipeline.
+  # @service
+  # This module provides support for AWS Data Pipeline, which shipped in `aws-sdk-datapipeline` gem.
   #
   # # Aws::DataPipeline::Client
   #

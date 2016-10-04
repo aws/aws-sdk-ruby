@@ -35,7 +35,8 @@ require_relative 'aws-sdk-s3/object_version'
 require_relative 'aws-sdk-s3/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon Simple Storage Service.
+  # @service
+  # This module provides support for Amazon Simple Storage Service, which shipped in `aws-sdk-s3` gem.
   #
   # # Aws::S3::Client
   #

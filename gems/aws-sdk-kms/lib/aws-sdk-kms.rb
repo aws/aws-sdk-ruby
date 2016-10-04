@@ -14,7 +14,8 @@ require_relative 'aws-sdk-kms/waiters'
 require_relative 'aws-sdk-kms/resource'
 
 module Aws
-  # This module provides support for AWS Key Management Service.
+  # @service
+  # This module provides support for AWS Key Management Service, which shipped in `aws-sdk-kms` gem.
   #
   # # Aws::KMS::Client
   #

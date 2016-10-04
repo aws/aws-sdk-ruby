@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudsearch/waiters'
 require_relative 'aws-sdk-cloudsearch/resource'
 
 module Aws
-  # This module provides support for Amazon CloudSearch.
+  # @service
+  # This module provides support for Amazon CloudSearch, which shipped in `aws-sdk-cloudsearch` gem.
   #
   # # Aws::CloudSearch::Client
   #

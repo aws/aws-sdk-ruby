@@ -14,7 +14,8 @@ require_relative 'aws-sdk-codecommit/waiters'
 require_relative 'aws-sdk-codecommit/resource'
 
 module Aws
-  # This module provides support for AWS CodeCommit.
+  # @service
+  # This module provides support for AWS CodeCommit, which shipped in `aws-sdk-codecommit` gem.
   #
   # # Aws::CodeCommit::Client
   #

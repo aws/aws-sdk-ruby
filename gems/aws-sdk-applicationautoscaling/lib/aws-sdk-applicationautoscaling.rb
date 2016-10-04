@@ -14,7 +14,8 @@ require_relative 'aws-sdk-applicationautoscaling/waiters'
 require_relative 'aws-sdk-applicationautoscaling/resource'
 
 module Aws
-  # This module provides support for Application Auto Scaling.
+  # @service
+  # This module provides support for Application Auto Scaling, which shipped in `aws-sdk-applicationautoscaling` gem.
   #
   # # Aws::ApplicationAutoScaling::Client
   #

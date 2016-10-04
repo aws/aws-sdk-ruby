@@ -14,7 +14,8 @@ require_relative 'aws-sdk-directconnect/waiters'
 require_relative 'aws-sdk-directconnect/resource'
 
 module Aws
-  # This module provides support for AWS Direct Connect.
+  # @service
+  # This module provides support for AWS Direct Connect, which shipped in `aws-sdk-directconnect` gem.
   #
   # # Aws::DirectConnect::Client
   #

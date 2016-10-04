@@ -14,7 +14,8 @@ require_relative 'aws-sdk-swf/waiters'
 require_relative 'aws-sdk-swf/resource'
 
 module Aws
-  # This module provides support for Amazon Simple Workflow Service.
+  # @service
+  # This module provides support for Amazon Simple Workflow Service, which shipped in `aws-sdk-swf` gem.
   #
   # # Aws::SWF::Client
   #

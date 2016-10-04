@@ -14,7 +14,8 @@ require_relative 'aws-sdk-configservice/waiters'
 require_relative 'aws-sdk-configservice/resource'
 
 module Aws
-  # This module provides support for AWS Config.
+  # @service
+  # This module provides support for AWS Config, which shipped in `aws-sdk-configservice` gem.
   #
   # # Aws::ConfigService::Client
   #

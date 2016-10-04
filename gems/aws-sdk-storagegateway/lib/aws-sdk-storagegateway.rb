@@ -14,7 +14,8 @@ require_relative 'aws-sdk-storagegateway/waiters'
 require_relative 'aws-sdk-storagegateway/resource'
 
 module Aws
-  # This module provides support for AWS Storage Gateway.
+  # @service
+  # This module provides support for AWS Storage Gateway, which shipped in `aws-sdk-storagegateway` gem.
   #
   # # Aws::StorageGateway::Client
   #

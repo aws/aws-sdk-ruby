@@ -39,7 +39,8 @@ require_relative 'aws-sdk-ec2/vpc_address'
 require_relative 'aws-sdk-ec2/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon Elastic Compute Cloud.
+  # @service
+  # This module provides support for Amazon Elastic Compute Cloud, which shipped in `aws-sdk-ec2` gem.
   #
   # # Aws::EC2::Client
   #

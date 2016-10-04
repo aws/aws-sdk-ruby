@@ -14,7 +14,8 @@ require_relative 'aws-sdk-lambdapreview/waiters'
 require_relative 'aws-sdk-lambdapreview/resource'
 
 module Aws
-  # This module provides support for AWS Lambda.
+  # @service
+  # This module provides support for AWS Lambda, which shipped in `aws-sdk-lambdapreview` gem.
   #
   # # Aws::LambdaPreview::Client
   #

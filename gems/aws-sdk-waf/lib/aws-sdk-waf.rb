@@ -14,7 +14,8 @@ require_relative 'aws-sdk-waf/waiters'
 require_relative 'aws-sdk-waf/resource'
 
 module Aws
-  # This module provides support for AWS WAF.
+  # @service
+  # This module provides support for AWS WAF, which shipped in `aws-sdk-waf` gem.
   #
   # # Aws::WAF::Client
   #

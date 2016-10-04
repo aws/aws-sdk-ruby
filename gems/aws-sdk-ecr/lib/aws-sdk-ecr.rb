@@ -14,7 +14,8 @@ require_relative 'aws-sdk-ecr/waiters'
 require_relative 'aws-sdk-ecr/resource'
 
 module Aws
-  # This module provides support for Amazon EC2 Container Registry.
+  # @service
+  # This module provides support for Amazon EC2 Container Registry, which shipped in `aws-sdk-ecr` gem.
   #
   # # Aws::ECR::Client
   #

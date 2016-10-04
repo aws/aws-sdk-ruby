@@ -20,7 +20,8 @@ require_relative 'aws-sdk-glacier/notification'
 require_relative 'aws-sdk-glacier/vault'
 
 module Aws
-  # This module provides support for Amazon Glacier.
+  # @service
+  # This module provides support for Amazon Glacier, which shipped in `aws-sdk-glacier` gem.
   #
   # # Aws::Glacier::Client
   #

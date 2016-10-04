@@ -39,7 +39,8 @@ require_relative 'aws-sdk-rds/reserved_db_instances_offering'
 require_relative 'aws-sdk-rds/resource_pending_maintenance_action_list'
 
 module Aws
-  # This module provides support for Amazon Relational Database Service.
+  # @service
+  # This module provides support for Amazon Relational Database Service, which shipped in `aws-sdk-rds` gem.
   #
   # # Aws::RDS::Client
   #

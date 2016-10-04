@@ -14,7 +14,8 @@ require_relative 'aws-sdk-efs/waiters'
 require_relative 'aws-sdk-efs/resource'
 
 module Aws
-  # This module provides support for Amazon Elastic File System.
+  # @service
+  # This module provides support for Amazon Elastic File System, which shipped in `aws-sdk-efs` gem.
   #
   # # Aws::EFS::Client
   #

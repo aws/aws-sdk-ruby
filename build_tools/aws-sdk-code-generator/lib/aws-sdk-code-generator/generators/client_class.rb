@@ -21,6 +21,7 @@ module AwsSdkCodeGenerator
         apply_api(self)
         apply_plugins(self)
         apply_initialize_method(self)
+        top("\nAws::Plugins::GlobalConfiguration::IDENTIFIERS << :#{@identifier}")
         apply_operations(self)
         apply_waiter_methods(self)
         eigenclass do |eigenclass|

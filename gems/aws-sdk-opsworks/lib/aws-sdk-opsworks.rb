@@ -17,7 +17,8 @@ require_relative 'aws-sdk-opsworks/stack'
 require_relative 'aws-sdk-opsworks/stack_summary'
 
 module Aws
-  # This module provides support for AWS OpsWorks.
+  # @service
+  # This module provides support for AWS OpsWorks, which shipped in `aws-sdk-opsworks` gem.
   #
   # # Aws::OpsWorks::Client
   #

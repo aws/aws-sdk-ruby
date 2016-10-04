@@ -14,7 +14,8 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/waiters'
 require_relative 'aws-sdk-marketplacecommerceanalytics/resource'
 
 module Aws
-  # This module provides support for AWS Marketplace Commerce Analytics.
+  # @service
+  # This module provides support for AWS Marketplace Commerce Analytics, which shipped in `aws-sdk-marketplacecommerceanalytics` gem.
   #
   # # Aws::MarketplaceCommerceAnalytics::Client
   #

@@ -14,7 +14,8 @@ require_relative 'aws-sdk-elasticache/waiters'
 require_relative 'aws-sdk-elasticache/resource'
 
 module Aws
-  # This module provides support for Amazon ElastiCache.
+  # @service
+  # This module provides support for Amazon ElastiCache, which shipped in `aws-sdk-elasticache` gem.
   #
   # # Aws::ElastiCache::Client
   #

@@ -16,7 +16,8 @@ require_relative 'aws-sdk-cloudwatch/alarm'
 require_relative 'aws-sdk-cloudwatch/metric'
 
 module Aws
-  # This module provides support for Amazon CloudWatch.
+  # @service
+  # This module provides support for Amazon CloudWatch, which shipped in `aws-sdk-cloudwatch` gem.
   #
   # # Aws::CloudWatch::Client
   #

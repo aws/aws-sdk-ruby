@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cognitoidentityprovider/waiters'
 require_relative 'aws-sdk-cognitoidentityprovider/resource'
 
 module Aws
-  # This module provides support for Amazon Cognito Identity Provider.
+  # @service
+  # This module provides support for Amazon Cognito Identity Provider, which shipped in `aws-sdk-cognitoidentityprovider` gem.
   #
   # # Aws::CognitoIdentityProvider::Client
   #

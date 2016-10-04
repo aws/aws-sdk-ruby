@@ -14,7 +14,8 @@ require_relative 'aws-sdk-lambda/waiters'
 require_relative 'aws-sdk-lambda/resource'
 
 module Aws
-  # This module provides support for AWS Lambda.
+  # @service
+  # This module provides support for AWS Lambda, which shipped in `aws-sdk-lambda` gem.
   #
   # # Aws::Lambda::Client
   #

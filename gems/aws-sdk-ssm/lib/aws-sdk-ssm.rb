@@ -14,7 +14,8 @@ require_relative 'aws-sdk-ssm/waiters'
 require_relative 'aws-sdk-ssm/resource'
 
 module Aws
-  # This module provides support for Amazon Simple Systems Management Service.
+  # @service
+  # This module provides support for Amazon Simple Systems Management Service, which shipped in `aws-sdk-ssm` gem.
   #
   # # Aws::SSM::Client
   #

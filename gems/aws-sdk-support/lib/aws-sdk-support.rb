@@ -14,7 +14,8 @@ require_relative 'aws-sdk-support/waiters'
 require_relative 'aws-sdk-support/resource'
 
 module Aws
-  # This module provides support for AWS Support.
+  # @service
+  # This module provides support for AWS Support, which shipped in `aws-sdk-support` gem.
   #
   # # Aws::Support::Client
   #

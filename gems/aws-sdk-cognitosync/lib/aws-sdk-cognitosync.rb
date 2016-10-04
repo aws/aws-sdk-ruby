@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cognitosync/waiters'
 require_relative 'aws-sdk-cognitosync/resource'
 
 module Aws
-  # This module provides support for Amazon Cognito Sync.
+  # @service
+  # This module provides support for Amazon Cognito Sync, which shipped in `aws-sdk-cognitosync` gem.
   #
   # # Aws::CognitoSync::Client
   #

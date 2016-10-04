@@ -21,7 +21,8 @@ require_relative 'aws-sdk-sns/topic'
 require_relative 'aws-sdk-sns/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon Simple Notification Service.
+  # @service
+  # This module provides support for Amazon Simple Notification Service, which shipped in `aws-sdk-sns` gem.
   #
   # # Aws::SNS::Client
   #

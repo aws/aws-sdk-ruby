@@ -14,7 +14,8 @@ require_relative 'aws-sdk-machinelearning/waiters'
 require_relative 'aws-sdk-machinelearning/resource'
 
 module Aws
-  # This module provides support for Amazon Machine Learning.
+  # @service
+  # This module provides support for Amazon Machine Learning, which shipped in `aws-sdk-machinelearning` gem.
   #
   # # Aws::MachineLearning::Client
   #

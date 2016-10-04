@@ -14,7 +14,8 @@ require_relative 'aws-sdk-route53domains/waiters'
 require_relative 'aws-sdk-route53domains/resource'
 
 module Aws
-  # This module provides support for Amazon Route 53 Domains.
+  # @service
+  # This module provides support for Amazon Route 53 Domains, which shipped in `aws-sdk-route53domains` gem.
   #
   # # Aws::Route53Domains::Client
   #

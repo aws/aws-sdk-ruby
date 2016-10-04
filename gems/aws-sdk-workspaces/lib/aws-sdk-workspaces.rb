@@ -14,7 +14,8 @@ require_relative 'aws-sdk-workspaces/waiters'
 require_relative 'aws-sdk-workspaces/resource'
 
 module Aws
-  # This module provides support for Amazon WorkSpaces.
+  # @service
+  # This module provides support for Amazon WorkSpaces, which shipped in `aws-sdk-workspaces` gem.
   #
   # # Aws::WorkSpaces::Client
   #

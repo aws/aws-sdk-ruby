@@ -14,7 +14,8 @@ require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
 
 module Aws
-  # This module provides support for Amazon Kinesis.
+  # @service
+  # This module provides support for Amazon Kinesis, which shipped in `aws-sdk-kinesis` gem.
   #
   # # Aws::Kinesis::Client
   #

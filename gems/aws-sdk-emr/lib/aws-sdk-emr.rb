@@ -14,7 +14,8 @@ require_relative 'aws-sdk-emr/waiters'
 require_relative 'aws-sdk-emr/resource'
 
 module Aws
-  # This module provides support for Amazon Elastic MapReduce.
+  # @service
+  # This module provides support for Amazon Elastic MapReduce, which shipped in `aws-sdk-emr` gem.
   #
   # # Aws::EMR::Client
   #

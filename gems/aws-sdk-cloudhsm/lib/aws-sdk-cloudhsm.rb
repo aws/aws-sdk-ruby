@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudhsm/waiters'
 require_relative 'aws-sdk-cloudhsm/resource'
 
 module Aws
-  # This module provides support for Amazon CloudHSM.
+  # @service
+  # This module provides support for Amazon CloudHSM, which shipped in `aws-sdk-cloudhsm` gem.
   #
   # # Aws::CloudHSM::Client
   #

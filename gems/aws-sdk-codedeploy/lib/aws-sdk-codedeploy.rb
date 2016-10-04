@@ -14,7 +14,8 @@ require_relative 'aws-sdk-codedeploy/waiters'
 require_relative 'aws-sdk-codedeploy/resource'
 
 module Aws
-  # This module provides support for AWS CodeDeploy.
+  # @service
+  # This module provides support for AWS CodeDeploy, which shipped in `aws-sdk-codedeploy` gem.
   #
   # # Aws::CodeDeploy::Client
   #

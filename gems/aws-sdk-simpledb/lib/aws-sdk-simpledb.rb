@@ -14,7 +14,8 @@ require_relative 'aws-sdk-simpledb/waiters'
 require_relative 'aws-sdk-simpledb/resource'
 
 module Aws
-  # This module provides support for Amazon SimpleDB.
+  # @service
+  # This module provides support for Amazon SimpleDB, which shipped in `aws-sdk-simpledb` gem.
   #
   # # Aws::SimpleDB::Client
   #

@@ -17,7 +17,8 @@ require_relative 'aws-sdk-sqs/resource'
 require_relative 'aws-sdk-sqs/customizations.rb'
 
 module Aws
-  # This module provides support for Amazon Simple Queue Service.
+  # @service
+  # This module provides support for Amazon Simple Queue Service, which shipped in `aws-sdk-sqs` gem.
   #
   # # Aws::SQS::Client
   #

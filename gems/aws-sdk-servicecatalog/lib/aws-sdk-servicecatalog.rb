@@ -14,7 +14,8 @@ require_relative 'aws-sdk-servicecatalog/waiters'
 require_relative 'aws-sdk-servicecatalog/resource'
 
 module Aws
-  # This module provides support for AWS Service Catalog.
+  # @service
+  # This module provides support for AWS Service Catalog, which shipped in `aws-sdk-servicecatalog` gem.
   #
   # # Aws::ServiceCatalog::Client
   #

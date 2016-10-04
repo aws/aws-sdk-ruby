@@ -14,7 +14,8 @@ require_relative 'aws-sdk-devicefarm/waiters'
 require_relative 'aws-sdk-devicefarm/resource'
 
 module Aws
-  # This module provides support for AWS Device Farm.
+  # @service
+  # This module provides support for AWS Device Farm, which shipped in `aws-sdk-devicefarm` gem.
   #
   # # Aws::DeviceFarm::Client
   #

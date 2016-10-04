@@ -14,7 +14,8 @@ require_relative 'aws-sdk-gamelift/waiters'
 require_relative 'aws-sdk-gamelift/resource'
 
 module Aws
-  # This module provides support for Amazon GameLift.
+  # @service
+  # This module provides support for Amazon GameLift, which shipped in `aws-sdk-gamelift` gem.
   #
   # # Aws::GameLift::Client
   #

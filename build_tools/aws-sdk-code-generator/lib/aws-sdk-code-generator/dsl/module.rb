@@ -44,8 +44,8 @@ module AwsSdkCodeGenerator
         method(:initialize, **options, &block)
       end
 
-      def attr_accessor(name, &block)
-        a = Dsl::AttributeAccessor.new(name)
+      def attr_accessor(name, **options, &block)
+        a = Dsl::AttributeAccessor.new(name, **options)
         yield(a) if block
         add(a)
       end

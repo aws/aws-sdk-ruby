@@ -14,7 +14,8 @@ require_relative 'aws-sdk-codepipeline/waiters'
 require_relative 'aws-sdk-codepipeline/resource'
 
 module Aws
-  # This module provides support for AWS CodePipeline.
+  # @service
+  # This module provides support for AWS CodePipeline, which shipped in `aws-sdk-codepipeline` gem.
   #
   # # Aws::CodePipeline::Client
   #

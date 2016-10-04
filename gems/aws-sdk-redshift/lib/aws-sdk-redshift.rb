@@ -14,7 +14,8 @@ require_relative 'aws-sdk-redshift/waiters'
 require_relative 'aws-sdk-redshift/resource'
 
 module Aws
-  # This module provides support for Amazon Redshift.
+  # @service
+  # This module provides support for Amazon Redshift, which shipped in `aws-sdk-redshift` gem.
   #
   # # Aws::Redshift::Client
   #

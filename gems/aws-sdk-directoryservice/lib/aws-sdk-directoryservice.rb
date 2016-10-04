@@ -14,7 +14,8 @@ require_relative 'aws-sdk-directoryservice/waiters'
 require_relative 'aws-sdk-directoryservice/resource'
 
 module Aws
-  # This module provides support for AWS Directory Service.
+  # @service
+  # This module provides support for AWS Directory Service, which shipped in `aws-sdk-directoryservice` gem.
   #
   # # Aws::DirectoryService::Client
   #

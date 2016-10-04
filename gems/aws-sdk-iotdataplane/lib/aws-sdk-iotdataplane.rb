@@ -14,7 +14,8 @@ require_relative 'aws-sdk-iotdataplane/waiters'
 require_relative 'aws-sdk-iotdataplane/resource'
 
 module Aws
-  # This module provides support for AWS IoT Data Plane.
+  # @service
+  # This module provides support for AWS IoT Data Plane, which shipped in `aws-sdk-iotdataplane` gem.
   #
   # # Aws::IoTDataPlane::Client
   #

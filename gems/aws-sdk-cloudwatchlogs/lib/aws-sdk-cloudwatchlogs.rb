@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudwatchlogs/waiters'
 require_relative 'aws-sdk-cloudwatchlogs/resource'
 
 module Aws
-  # This module provides support for Amazon CloudWatch Logs.
+  # @service
+  # This module provides support for Amazon CloudWatch Logs, which shipped in `aws-sdk-cloudwatchlogs` gem.
   #
   # # Aws::CloudWatchLogs::Client
   #

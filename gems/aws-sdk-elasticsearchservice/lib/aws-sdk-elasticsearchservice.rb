@@ -14,7 +14,8 @@ require_relative 'aws-sdk-elasticsearchservice/waiters'
 require_relative 'aws-sdk-elasticsearchservice/resource'
 
 module Aws
-  # This module provides support for Amazon Elasticsearch Service.
+  # @service
+  # This module provides support for Amazon Elasticsearch Service, which shipped in `aws-sdk-elasticsearchservice` gem.
   #
   # # Aws::ElasticsearchService::Client
   #

@@ -14,7 +14,8 @@ require_relative 'aws-sdk-elasticbeanstalk/waiters'
 require_relative 'aws-sdk-elasticbeanstalk/resource'
 
 module Aws
-  # This module provides support for AWS Elastic Beanstalk.
+  # @service
+  # This module provides support for AWS Elastic Beanstalk, which shipped in `aws-sdk-elasticbeanstalk` gem.
   #
   # # Aws::ElasticBeanstalk::Client
   #

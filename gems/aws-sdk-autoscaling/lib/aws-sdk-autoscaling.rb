@@ -24,7 +24,8 @@ require_relative 'aws-sdk-autoscaling/scheduled_action'
 require_relative 'aws-sdk-autoscaling/tag'
 
 module Aws
-  # This module provides support for Auto Scaling.
+  # @service
+  # This module provides support for Auto Scaling, which shipped in `aws-sdk-autoscaling` gem.
   #
   # # Aws::AutoScaling::Client
   #

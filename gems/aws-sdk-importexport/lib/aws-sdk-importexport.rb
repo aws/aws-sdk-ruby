@@ -14,7 +14,8 @@ require_relative 'aws-sdk-importexport/waiters'
 require_relative 'aws-sdk-importexport/resource'
 
 module Aws
-  # This module provides support for AWS Import/Export.
+  # @service
+  # This module provides support for AWS Import/Export, which shipped in `aws-sdk-importexport` gem.
   #
   # # Aws::ImportExport::Client
   #

@@ -14,7 +14,8 @@ require_relative 'aws-sdk-ecs/waiters'
 require_relative 'aws-sdk-ecs/resource'
 
 module Aws
-  # This module provides support for Amazon EC2 Container Service.
+  # @service
+  # This module provides support for Amazon EC2 Container Service, which shipped in `aws-sdk-ecs` gem.
   #
   # # Aws::ECS::Client
   #

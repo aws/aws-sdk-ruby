@@ -18,7 +18,8 @@ require_relative 'aws-sdk-cloudformation/stack_resource'
 require_relative 'aws-sdk-cloudformation/stack_resource_summary'
 
 module Aws
-  # This module provides support for AWS CloudFormation.
+  # @service
+  # This module provides support for AWS CloudFormation, which shipped in `aws-sdk-cloudformation` gem.
   #
   # # Aws::CloudFormation::Client
   #

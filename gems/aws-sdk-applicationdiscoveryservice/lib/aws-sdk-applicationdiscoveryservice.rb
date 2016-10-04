@@ -14,7 +14,8 @@ require_relative 'aws-sdk-applicationdiscoveryservice/waiters'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
 
 module Aws
-  # This module provides support for AWS Application Discovery Service.
+  # @service
+  # This module provides support for AWS Application Discovery Service, which shipped in `aws-sdk-applicationdiscoveryservice` gem.
   #
   # # Aws::ApplicationDiscoveryService::Client
   #

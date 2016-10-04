@@ -14,7 +14,8 @@ require_relative 'aws-sdk-kinesisanalytics/waiters'
 require_relative 'aws-sdk-kinesisanalytics/resource'
 
 module Aws
-  # This module provides support for Amazon Kinesis Analytics.
+  # @service
+  # This module provides support for Amazon Kinesis Analytics, which shipped in `aws-sdk-kinesisanalytics` gem.
   #
   # # Aws::KinesisAnalytics::Client
   #

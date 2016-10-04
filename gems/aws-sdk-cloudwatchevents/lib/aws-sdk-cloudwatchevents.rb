@@ -14,7 +14,8 @@ require_relative 'aws-sdk-cloudwatchevents/waiters'
 require_relative 'aws-sdk-cloudwatchevents/resource'
 
 module Aws
-  # This module provides support for Amazon CloudWatch Events.
+  # @service
+  # This module provides support for Amazon CloudWatch Events, which shipped in `aws-sdk-cloudwatchevents` gem.
   #
   # # Aws::CloudWatchEvents::Client
   #

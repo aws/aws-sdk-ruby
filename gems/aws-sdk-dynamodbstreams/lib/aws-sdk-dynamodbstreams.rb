@@ -14,7 +14,8 @@ require_relative 'aws-sdk-dynamodbstreams/waiters'
 require_relative 'aws-sdk-dynamodbstreams/resource'
 
 module Aws
-  # This module provides support for Amazon DynamoDB Streams.
+  # @service
+  # This module provides support for Amazon DynamoDB Streams, which shipped in `aws-sdk-dynamodbstreams` gem.
   #
   # # Aws::DynamoDBStreams::Client
   #
