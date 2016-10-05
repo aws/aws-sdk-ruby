@@ -88,6 +88,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   platform_endpoint.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -96,6 +99,22 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   platform_endpoint.publish({
+      #     topic_arn: "topicARN",
+      #     phone_number: "String",
+      #     message: "message", # required
+      #     subject: "subject",
+      #     message_structure: "messageStructure",
+      #     message_attributes: {
+      #       "String" => {
+      #         data_type: "String", # required
+      #         string_value: "String",
+      #         binary_value: "data",
+      #       },
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :topic_arn
       #   The topic you want to publish to.
@@ -189,6 +208,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   platform_endpoint.set_attributes({
+      #     attributes: { # required
+      #       "String" => "String",
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,String>] :attributes
       #   A map of the endpoint attributes. Attributes in this map include the

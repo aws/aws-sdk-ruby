@@ -81,6 +81,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dhcp_options.associate_with_vpc({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -96,6 +102,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = dhcp_options.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -122,6 +139,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dhcp_options.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

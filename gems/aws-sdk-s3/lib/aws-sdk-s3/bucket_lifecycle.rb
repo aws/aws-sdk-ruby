@@ -73,6 +73,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_lifecycle.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -81,6 +84,40 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_lifecycle.put({
+      #     content_md5: "ContentMD5",
+      #     lifecycle_configuration: {
+      #       rules: [ # required
+      #         {
+      #           expiration: {
+      #             date: Time.now,
+      #             days: 1,
+      #             expired_object_delete_marker: false,
+      #           },
+      #           id: "ID",
+      #           prefix: "Prefix", # required
+      #           status: "Enabled", # required, accepts Enabled, Disabled
+      #           transition: {
+      #             date: Time.now,
+      #             days: 1,
+      #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+      #           },
+      #           noncurrent_version_transition: {
+      #             noncurrent_days: 1,
+      #             storage_class: "GLACIER", # accepts GLACIER, STANDARD_IA
+      #           },
+      #           noncurrent_version_expiration: {
+      #             noncurrent_days: 1,
+      #           },
+      #           abort_incomplete_multipart_upload: {
+      #             days_after_initiation: 1,
+      #           },
+      #         },
+      #       ],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [Types::LifecycleConfiguration] :lifecycle_configuration

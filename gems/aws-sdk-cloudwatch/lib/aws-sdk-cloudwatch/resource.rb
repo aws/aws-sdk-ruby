@@ -31,6 +31,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarms = cloud_watch.alarms({
+      #     alarm_names: ["AlarmName"],
+      #     alarm_name_prefix: "AlarmNamePrefix",
+      #     state_value: "OK", # accepts OK, ALARM, INSUFFICIENT_DATA
+      #     action_prefix: "ActionPrefix",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :alarm_names
       #   A list of alarm names to retrieve information for.
@@ -71,6 +79,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   metrics = cloud_watch.metrics({
+      #     namespace: "Namespace",
+      #     metric_name: "MetricName",
+      #     dimensions: [
+      #       {
+      #         name: "DimensionName", # required
+      #         value: "DimensionValue",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :namespace
       #   The namespace to filter against.

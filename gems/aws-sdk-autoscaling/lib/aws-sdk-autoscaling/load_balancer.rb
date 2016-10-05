@@ -95,6 +95,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   load_balancer.attach()
       # @param [Hash] options ({})
       # @return [Types::AttachLoadBalancersResultType]
       def attach(options = {})
@@ -106,6 +109,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   load_balancer.detach()
       # @param [Hash] options ({})
       # @return [Types::DetachLoadBalancersResultType]
       def detach(options = {})

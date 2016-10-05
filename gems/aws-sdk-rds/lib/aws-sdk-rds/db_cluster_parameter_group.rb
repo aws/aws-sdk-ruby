@@ -89,6 +89,18 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusterparametergroup = db_cluster_parameter_group.create({
+      #     db_parameter_group_family: "String", # required
+      #     description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_parameter_group_family
       #   The DB cluster parameter group family name. A DB cluster parameter
@@ -111,6 +123,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_cluster_parameter_group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -119,6 +134,24 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusterparametergroup = db_cluster_parameter_group.modify({
+      #     parameters: [ # required
+      #       {
+      #         parameter_name: "String",
+      #         parameter_value: "String",
+      #         description: "String",
+      #         source: "String",
+      #         apply_type: "String",
+      #         data_type: "String",
+      #         allowed_values: "String",
+      #         is_modifiable: false,
+      #         minimum_engine_version: "String",
+      #         apply_method: "immediate", # accepts immediate, pending-reboot
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Array<Types::Parameter>] :parameters
       #   A list of parameters in the DB cluster parameter group to modify.
@@ -132,6 +165,25 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusterparametergroup = db_cluster_parameter_group.reset({
+      #     reset_all_parameters: false,
+      #     parameters: [
+      #       {
+      #         parameter_name: "String",
+      #         parameter_value: "String",
+      #         description: "String",
+      #         source: "String",
+      #         apply_type: "String",
+      #         data_type: "String",
+      #         allowed_values: "String",
+      #         is_modifiable: false,
+      #         minimum_engine_version: "String",
+      #         apply_method: "immediate", # accepts immediate, pending-reboot
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :reset_all_parameters
       #   A value that is set to `true` to reset all parameters in the DB

@@ -61,6 +61,17 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroupoptions = db_engine.option_group_options({
+      #     major_engine_version: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :major_engine_version
       #   If specified, filters the results to include only options for the
@@ -87,6 +98,18 @@ module Aws
         OptionGroupOption::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroups = db_engine.option_groups({
+      #     option_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     major_engine_version: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :option_group_name
       #   The name of the option group to describe. Cannot be supplied together
@@ -127,6 +150,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   versions = db_engine.versions({
+      #     engine_version: "String",
+      #     db_parameter_group_family: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     default_only: false,
+      #     list_supported_character_sets: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :engine_version
       #   The database engine version to return.

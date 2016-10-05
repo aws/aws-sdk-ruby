@@ -22,6 +22,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   vault = glacier.create_vault({
+      #     vault_name: "string", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :vault_name
       #   The name of the vault.
@@ -47,6 +52,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vaults = glacier.vaults()
       # @param [Hash] options ({})
       # @return [Vault::Collection]
       def vaults(options = {})

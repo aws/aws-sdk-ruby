@@ -120,6 +120,75 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance = subnet.create_instances({
+      #     dry_run: false,
+      #     image_id: "String", # required
+      #     min_count: 1, # required
+      #     max_count: 1, # required
+      #     key_name: "String",
+      #     security_groups: ["String"],
+      #     security_group_ids: ["String"],
+      #     user_data: "String",
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     placement: {
+      #       availability_zone: "String",
+      #       group_name: "String",
+      #       tenancy: "default", # accepts default, dedicated, host
+      #       host_id: "String",
+      #       affinity: "String",
+      #     },
+      #     kernel_id: "String",
+      #     ramdisk_id: "String",
+      #     block_device_mappings: [
+      #       {
+      #         virtual_name: "String",
+      #         device_name: "String",
+      #         ebs: {
+      #           snapshot_id: "String",
+      #           volume_size: 1,
+      #           delete_on_termination: false,
+      #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+      #           iops: 1,
+      #           encrypted: false,
+      #         },
+      #         no_device: "String",
+      #       },
+      #     ],
+      #     monitoring: {
+      #       enabled: false, # required
+      #     },
+      #     disable_api_termination: false,
+      #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+      #     private_ip_address: "String",
+      #     client_token: "String",
+      #     additional_info: "String",
+      #     network_interfaces: [
+      #       {
+      #         network_interface_id: "String",
+      #         device_index: 1,
+      #         subnet_id: "String",
+      #         description: "String",
+      #         private_ip_address: "String",
+      #         groups: ["String"],
+      #         delete_on_termination: false,
+      #         private_ip_addresses: [
+      #           {
+      #             private_ip_address: "String", # required
+      #             primary: false,
+      #           },
+      #         ],
+      #         secondary_private_ip_address_count: 1,
+      #         associate_public_ip_address: false,
+      #       },
+      #     ],
+      #     iam_instance_profile: {
+      #       arn: "String",
+      #       name: "String",
+      #     },
+      #     ebs_optimized: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -293,6 +362,21 @@ module Aws
         Instance::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkinterface = subnet.create_network_interface({
+      #     description: "String",
+      #     private_ip_address: "String",
+      #     groups: ["String"],
+      #     private_ip_addresses: [
+      #       {
+      #         private_ip_address: "String", # required
+      #         primary: false,
+      #       },
+      #     ],
+      #     secondary_private_ip_address_count: 1,
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :description
       #   A description for the network interface.
@@ -337,6 +421,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = subnet.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -363,6 +458,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subnet.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -378,6 +478,12 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   instances = subnet.instances({
+      #     dry_run: false,
+      #     instance_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -413,6 +519,12 @@ module Aws
         Instance::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkinterfaces = subnet.network_interfaces({
+      #     dry_run: false,
+      #     network_interface_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

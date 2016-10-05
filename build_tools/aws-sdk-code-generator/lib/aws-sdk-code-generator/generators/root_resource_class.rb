@@ -4,14 +4,15 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(api:, resources:nil, paginators:nil)
+      def initialize(api:, resources:nil, paginators:nil, var_name:)
         resources ||= {}
         super(
           api: api,
           name: 'Resource',
           resource: resources['service'] || {},
           paginators: paginators,
-          waiters:nil
+          waiters:nil,
+          var_name: var_name
         )
       end
 

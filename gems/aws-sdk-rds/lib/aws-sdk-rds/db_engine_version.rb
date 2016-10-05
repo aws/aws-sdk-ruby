@@ -128,6 +128,16 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroupoptions = db_engine_version.option_group_options({
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
@@ -154,6 +164,17 @@ module Aws
         OptionGroupOption::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroups = db_engine_version.option_groups({
+      #     option_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :option_group_name
       #   The name of the option group to describe. Cannot be supplied together

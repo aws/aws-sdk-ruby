@@ -73,6 +73,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_cors.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -81,6 +84,22 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_cors.put({
+      #     cors_configuration: { # required
+      #       cors_rules: [ # required
+      #         {
+      #           allowed_headers: ["AllowedHeader"],
+      #           allowed_methods: ["AllowedMethod"], # required
+      #           allowed_origins: ["AllowedOrigin"], # required
+      #           expose_headers: ["ExposeHeader"],
+      #           max_age_seconds: 1,
+      #         },
+      #       ],
+      #     },
+      #     content_md5: "ContentMD5",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Types::CORSConfiguration] :cors_configuration
       # @option options [String] :content_md5

@@ -91,6 +91,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   virtual_mfa_device.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

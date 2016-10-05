@@ -74,6 +74,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_policy.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -82,6 +85,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_policy.put({
+      #     content_md5: "ContentMD5",
+      #     policy: "Policy", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [required, String] :policy

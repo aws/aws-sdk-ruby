@@ -99,6 +99,24 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_acl.create_entry({
+      #     dry_run: false,
+      #     rule_number: 1, # required
+      #     protocol: "String", # required
+      #     rule_action: "allow", # required, accepts allow, deny
+      #     egress: false, # required
+      #     cidr_block: "String", # required
+      #     icmp_type_code: {
+      #       type: 1,
+      #       code: 1,
+      #     },
+      #     port_range: {
+      #       from: 1,
+      #       to: 1,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -133,6 +151,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = network_acl.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -159,6 +188,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_acl.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -172,6 +206,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_acl.delete_entry({
+      #     dry_run: false,
+      #     rule_number: 1, # required
+      #     egress: false, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -189,6 +230,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_acl.replace_association({
+      #     dry_run: false,
+      #     association_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -205,6 +252,24 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_acl.replace_entry({
+      #     dry_run: false,
+      #     rule_number: 1, # required
+      #     protocol: "String", # required
+      #     rule_action: "allow", # required, accepts allow, deny
+      #     egress: false, # required
+      #     cidr_block: "String", # required
+      #     icmp_type_code: {
+      #       type: 1,
+      #       code: 1,
+      #     },
+      #     port_range: {
+      #       from: 1,
+      #       to: 1,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

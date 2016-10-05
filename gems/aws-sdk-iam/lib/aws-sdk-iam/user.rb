@@ -169,6 +169,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   user.add_group({
+      #     group_name: "groupNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :group_name
       #   The name of the group to update.
@@ -187,6 +192,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user.attach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
@@ -204,6 +214,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user = user.create({
+      #     path: "pathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path
       #   The path for the user name. For more information about paths, see [IAM
@@ -234,6 +249,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   accesskeypair = user.create_access_key_pair()
       # @param [Hash] options ({})
       # @return [AccessKeyPair]
       def create_access_key_pair(options = {})
@@ -248,6 +266,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   loginprofile = user.create_login_profile({
+      #     password: "passwordType", # required
+      #     password_reset_required: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :password
       #   The new password for the user.
@@ -278,6 +302,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   userpolicy = user.create_policy({
+      #     policy_name: "policyNameType", # required
+      #     policy_document: "policyDocumentType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_name
       #   The name of the policy document.
@@ -312,6 +342,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -320,6 +353,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user.detach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
@@ -337,6 +375,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfadevice = user.enable_mfa({
+      #     serial_number: "serialNumberType", # required
+      #     authentication_code_1: "authenticationCodeType", # required
+      #     authentication_code_2: "authenticationCodeType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :serial_number
       #   The serial number that uniquely identifies the MFA device. For virtual
@@ -368,6 +413,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user.remove_group({
+      #     group_name: "groupNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :group_name
       #   The name of the group to update.
@@ -386,6 +436,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user = user.update({
+      #     new_path: "pathType",
+      #     new_user_name: "userNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :new_path
       #   New path for the IAM user. Include this parameter only if you're
@@ -434,6 +490,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   accesskeys = user.access_keys()
       # @param [Hash] options ({})
       # @return [AccessKey::Collection]
       def access_keys(options = {})
@@ -456,6 +515,11 @@ module Aws
         AccessKey::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedpolicies = user.attached_policies({
+      #     path_prefix: "policyPathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -491,6 +555,9 @@ module Aws
         Policy::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   groups = user.groups()
       # @param [Hash] options ({})
       # @return [Group::Collection]
       def groups(options = {})
@@ -530,6 +597,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfadevices = user.mfa_devices()
       # @param [Hash] options ({})
       # @return [MfaDevice::Collection]
       def mfa_devices(options = {})
@@ -552,6 +622,9 @@ module Aws
         MfaDevice::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policies = user.policies()
       # @param [Hash] options ({})
       # @return [UserPolicy::Collection]
       def policies(options = {})
@@ -593,6 +666,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   signingcertificates = user.signing_certificates()
       # @param [Hash] options ({})
       # @return [SigningCertificate::Collection]
       def signing_certificates(options = {})

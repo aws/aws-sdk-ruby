@@ -157,6 +157,13 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.attach_to_instance({
+      #     dry_run: false,
+      #     instance_id: "String", # required
+      #     device: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -175,6 +182,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot = volume.create_snapshot({
+      #     dry_run: false,
+      #     description: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -194,6 +207,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = volume.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -220,6 +244,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -233,6 +262,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "autoEnableIO", # accepts autoEnableIO, productCodes
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -248,6 +283,19 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.describe_status({
+      #     dry_run: false,
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #     next_token: "String",
+      #     max_results: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -311,6 +359,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.detach_from_instance({
+      #     dry_run: false,
+      #     instance_id: "String",
+      #     device: "String",
+      #     force: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -337,6 +393,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.enable_io({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -350,6 +411,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume.modify_attribute({
+      #     dry_run: false,
+      #     auto_enable_io: {
+      #       value: false,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -368,6 +437,14 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshots = volume.snapshots({
+      #     dry_run: false,
+      #     snapshot_ids: ["String"],
+      #     owner_ids: ["String"],
+      #     restorable_by_user_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

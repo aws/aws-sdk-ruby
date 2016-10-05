@@ -83,6 +83,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   route_table_association.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -96,6 +101,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetableassociation = route_table_association.replace_subnet({
+      #     dry_run: false,
+      #     route_table_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

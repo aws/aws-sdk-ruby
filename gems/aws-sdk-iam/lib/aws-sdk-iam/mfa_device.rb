@@ -77,6 +77,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfa_device.associate({
+      #     authentication_code_1: "authenticationCodeType", # required
+      #     authentication_code_2: "authenticationCodeType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :authentication_code_1
       #   An authentication code emitted by the device.
@@ -96,6 +102,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfa_device.disassociate()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def disassociate(options = {})
@@ -107,6 +116,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfa_device.resync({
+      #     authentication_code_1: "authenticationCodeType", # required
+      #     authentication_code_2: "authenticationCodeType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :authentication_code_1
       #   An authentication code emitted by the device.

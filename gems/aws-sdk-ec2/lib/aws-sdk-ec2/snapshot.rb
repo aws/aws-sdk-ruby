@@ -181,6 +181,17 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot.copy({
+      #     dry_run: false,
+      #     source_region: "String", # required
+      #     description: "String",
+      #     destination_region: "String",
+      #     presigned_url: "String",
+      #     encrypted: false,
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -252,6 +263,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = snapshot.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -278,6 +300,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -291,6 +318,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -306,6 +339,29 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot.modify_attribute({
+      #     dry_run: false,
+      #     attribute: "productCodes", # accepts productCodes, createVolumePermission
+      #     operation_type: "add", # accepts add, remove
+      #     user_ids: ["String"],
+      #     group_names: ["String"],
+      #     create_volume_permission: {
+      #       add: [
+      #         {
+      #           user_id: "String",
+      #           group: "all", # accepts all
+      #         },
+      #       ],
+      #       remove: [
+      #         {
+      #           user_id: "String",
+      #           group: "all", # accepts all
+      #         },
+      #       ],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -334,6 +390,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot.reset_attribute({
+      #     dry_run: false,
+      #     attribute: "productCodes", # required, accepts productCodes, createVolumePermission
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

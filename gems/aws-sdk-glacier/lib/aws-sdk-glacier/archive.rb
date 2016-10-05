@@ -77,6 +77,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   archive.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -89,6 +92,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   job = archive.initiate_archive_retrieval()
       # @param [Hash] options ({})
       # @return [Job]
       def initiate_archive_retrieval(options = {})

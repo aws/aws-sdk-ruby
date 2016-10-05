@@ -73,6 +73,29 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_logging.put({
+      #     bucket_logging_status: { # required
+      #       logging_enabled: {
+      #         target_bucket: "TargetBucket",
+      #         target_grants: [
+      #           {
+      #             grantee: {
+      #               display_name: "DisplayName",
+      #               email_address: "EmailAddress",
+      #               id: "ID",
+      #               type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+      #               uri: "URI",
+      #             },
+      #             permission: "FULL_CONTROL", # accepts FULL_CONTROL, READ, WRITE
+      #           },
+      #         ],
+      #         target_prefix: "TargetPrefix",
+      #       },
+      #     },
+      #     content_md5: "ContentMD5",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Types::BucketLoggingStatus] :bucket_logging_status
       # @option options [String] :content_md5

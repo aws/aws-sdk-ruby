@@ -87,6 +87,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   server_certificate.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -95,6 +98,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   servercertificate = server_certificate.update({
+      #     new_path: "pathType",
+      #     new_server_certificate_name: "serverCertificateNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :new_path
       #   The new path for the server certificate. Include this only if you are

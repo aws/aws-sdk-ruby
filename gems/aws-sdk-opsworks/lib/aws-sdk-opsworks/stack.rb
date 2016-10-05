@@ -252,6 +252,48 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   layer = stack.create_layer({
+      #     type: "aws-flow-ruby", # required, accepts aws-flow-ruby, ecs-cluster, java-app, lb, web, php-app, rails-app, nodejs-app, memcached, db-master, monitoring-master, custom
+      #     name: "String", # required
+      #     shortname: "String", # required
+      #     attributes: {
+      #       "EcsClusterArn" => "String",
+      #     },
+      #     custom_instance_profile_arn: "String",
+      #     custom_json: "String",
+      #     custom_security_group_ids: ["String"],
+      #     packages: ["String"],
+      #     volume_configurations: [
+      #       {
+      #         mount_point: "String", # required
+      #         raid_level: 1,
+      #         number_of_disks: 1, # required
+      #         size: 1, # required
+      #         volume_type: "String",
+      #         iops: 1,
+      #       },
+      #     ],
+      #     enable_auto_healing: false,
+      #     auto_assign_elastic_ips: false,
+      #     auto_assign_public_ips: false,
+      #     custom_recipes: {
+      #       setup: ["String"],
+      #       configure: ["String"],
+      #       deploy: ["String"],
+      #       undeploy: ["String"],
+      #       shutdown: ["String"],
+      #     },
+      #     install_updates_on_boot: false,
+      #     use_ebs_optimized_instances: false,
+      #     lifecycle_event_configuration: {
+      #       shutdown: {
+      #         execution_timeout: 1,
+      #         delay_until_elb_connections_drained: false,
+      #       },
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :type
       #   The layer type. A stack cannot have more than one built-in layer of
@@ -351,6 +393,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -361,6 +406,11 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   layers = stack.layers({
+      #     layer_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :layer_ids
       #   An array of layer IDs that specify the layers to be described. If you

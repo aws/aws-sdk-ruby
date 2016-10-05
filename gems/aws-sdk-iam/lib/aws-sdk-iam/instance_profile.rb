@@ -139,6 +139,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance_profile.add_role({
+      #     role_name: "roleNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :role_name
       #   The name of the role to add.
@@ -157,6 +162,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance_profile.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -165,6 +173,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance_profile.remove_role({
+      #     role_name: "roleNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :role_name
       #   The name of the role to remove.

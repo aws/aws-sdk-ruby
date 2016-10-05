@@ -83,6 +83,63 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_notification.put({
+      #     notification_configuration: { # required
+      #       topic_configurations: [
+      #         {
+      #           id: "NotificationId",
+      #           topic_arn: "TopicArn", # required
+      #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+      #           filter: {
+      #             key: {
+      #               filter_rules: [
+      #                 {
+      #                   name: "prefix", # accepts prefix, suffix
+      #                   value: "FilterRuleValue",
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #         },
+      #       ],
+      #       queue_configurations: [
+      #         {
+      #           id: "NotificationId",
+      #           queue_arn: "QueueArn", # required
+      #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+      #           filter: {
+      #             key: {
+      #               filter_rules: [
+      #                 {
+      #                   name: "prefix", # accepts prefix, suffix
+      #                   value: "FilterRuleValue",
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #         },
+      #       ],
+      #       lambda_function_configurations: [
+      #         {
+      #           id: "NotificationId",
+      #           lambda_function_arn: "LambdaFunctionArn", # required
+      #           events: ["s3:ReducedRedundancyLostObject"], # required, accepts s3:ReducedRedundancyLostObject, s3:ObjectCreated:*, s3:ObjectCreated:Put, s3:ObjectCreated:Post, s3:ObjectCreated:Copy, s3:ObjectCreated:CompleteMultipartUpload, s3:ObjectRemoved:*, s3:ObjectRemoved:Delete, s3:ObjectRemoved:DeleteMarkerCreated
+      #           filter: {
+      #             key: {
+      #               filter_rules: [
+      #                 {
+      #                   name: "prefix", # accepts prefix, suffix
+      #                   value: "FilterRuleValue",
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #         },
+      #       ],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Types::NotificationConfiguration] :notification_configuration
       #   Container for specifying the notification configuration of the bucket.

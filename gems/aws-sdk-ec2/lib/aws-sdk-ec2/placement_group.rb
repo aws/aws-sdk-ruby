@@ -81,6 +81,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   placement_group.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -96,6 +101,12 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   instances = placement_group.instances({
+      #     dry_run: false,
+      #     instance_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

@@ -181,6 +181,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack.cancel_update()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def cancel_update(options = {})
@@ -189,6 +192,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack.delete({
+      #     retain_resources: ["LogicalResourceId"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :retain_resources
       #   For stacks in the `DELETE_FAILED` state, a list of resource logical
@@ -205,6 +213,33 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack.update({
+      #     template_body: "TemplateBody",
+      #     template_url: "TemplateURL",
+      #     use_previous_template: false,
+      #     stack_policy_during_update_body: "StackPolicyDuringUpdateBody",
+      #     stack_policy_during_update_url: "StackPolicyDuringUpdateURL",
+      #     parameters: [
+      #       {
+      #         parameter_key: "ParameterKey",
+      #         parameter_value: "ParameterValue",
+      #         use_previous_value: false,
+      #       },
+      #     ],
+      #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
+      #     resource_types: ["ResourceType"],
+      #     stack_policy_body: "StackPolicyBody",
+      #     stack_policy_url: "StackPolicyURL",
+      #     notification_arns: ["NotificationARN"],
+      #     tags: [
+      #       {
+      #         key: "TagKey",
+      #         value: "TagValue",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
@@ -347,6 +382,9 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = stack.events()
       # @param [Hash] options ({})
       # @return [Event::Collection]
       def events(options = {})
@@ -378,6 +416,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   resourcesummaries = stack.resource_summaries()
       # @param [Hash] options ({})
       # @return [StackResourceSummary::Collection]
       def resource_summaries(options = {})

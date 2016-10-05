@@ -100,6 +100,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag.create()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def create(options = {})
@@ -112,6 +115,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

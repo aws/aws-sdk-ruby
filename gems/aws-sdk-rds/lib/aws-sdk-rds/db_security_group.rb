@@ -105,6 +105,14 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsecuritygroup = db_security_group.authorize_ingress({
+      #     cidrip: "String",
+      #     ec2_security_group_name: "String",
+      #     ec2_security_group_id: "String",
+      #     ec2_security_group_owner_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :cidrip
       #   The IP range to authorize.
@@ -135,6 +143,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsecuritygroup = db_security_group.create({
+      #     db_security_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_security_group_description
       #   The description for the DB security group.
@@ -151,6 +170,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_security_group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -159,6 +181,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsecuritygroup = db_security_group.revoke_ingress({
+      #     cidrip: "String",
+      #     ec2_security_group_name: "String",
+      #     ec2_security_group_id: "String",
+      #     ec2_security_group_owner_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :cidrip
       #   The IP range to revoke access from. Must be a valid CIDR range. If
@@ -192,6 +222,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_security_group.subscribe_to({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to add a
@@ -207,6 +242,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_security_group.unsubscribe_from({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to remove
@@ -224,6 +264,20 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_security_group.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified

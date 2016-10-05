@@ -4,6 +4,7 @@ require 'aws-sdk-code-generator'
 
 require_relative 'builder'
 require_relative 'customizations'
+require_relative 'deep_copy'
 require_relative 'file_writer'
 require_relative 'replace_lines'
 require_relative 'services'

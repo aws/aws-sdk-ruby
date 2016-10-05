@@ -108,6 +108,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy_version.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -119,6 +122,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy_version.set_as_default()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def set_as_default(options = {})

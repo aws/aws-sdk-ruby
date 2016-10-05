@@ -86,6 +86,21 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   metric.get_statistics({
+      #     dimensions: [
+      #       {
+      #         name: "DimensionName", # required
+      #         value: "DimensionValue", # required
+      #       },
+      #     ],
+      #     start_time: Time.now, # required
+      #     end_time: Time.now, # required
+      #     period: 1, # required
+      #     statistics: ["SampleCount"], # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Dimension>] :dimensions
       #   A list of dimensions describing qualities of the metric.
@@ -138,6 +153,28 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm = metric.put_alarm({
+      #     alarm_name: "AlarmName", # required
+      #     alarm_description: "AlarmDescription",
+      #     actions_enabled: false,
+      #     ok_actions: ["ResourceName"],
+      #     alarm_actions: ["ResourceName"],
+      #     insufficient_data_actions: ["ResourceName"],
+      #     statistic: "SampleCount", # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     dimensions: [
+      #       {
+      #         name: "DimensionName", # required
+      #         value: "DimensionValue", # required
+      #       },
+      #     ],
+      #     period: 1, # required
+      #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+      #     evaluation_periods: 1, # required
+      #     threshold: 1.0, # required
+      #     comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :alarm_name
       #   The descriptive name for the alarm. This name must be unique within
@@ -249,6 +286,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   metric.put_data()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def put_data(options = {})
@@ -262,6 +302,19 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarms = metric.alarms({
+      #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     dimensions: [
+      #       {
+      #         name: "DimensionName", # required
+      #         value: "DimensionValue", # required
+      #       },
+      #     ],
+      #     period: 1,
+      #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :statistic
       #   The statistic for the metric.

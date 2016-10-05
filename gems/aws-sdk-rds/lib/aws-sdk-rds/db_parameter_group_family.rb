@@ -61,6 +61,18 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   enginedefaultclusterparameters = db_parameter_group_family.engine_default_cluster_parameters({
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Filter>] :filters
       #   This parameter is not currently supported.
@@ -96,6 +108,16 @@ module Aws
         Parameter::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   enginedefaultparameters = db_parameter_group_family.engine_default_parameters({
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Filter>] :filters
       #   Not currently supported.

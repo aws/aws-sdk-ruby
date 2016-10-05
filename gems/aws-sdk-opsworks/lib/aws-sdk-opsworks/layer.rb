@@ -247,6 +247,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   layer.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

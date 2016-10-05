@@ -22,6 +22,15 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   platformapplication = sns.create_platform_application({
+      #     name: "String", # required
+      #     platform: "String", # required
+      #     attributes: { # required
+      #       "String" => "String",
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :name
       #   Application names must be made up of only uppercase and lowercase
@@ -46,6 +55,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic = sns.create_topic({
+      #     name: "topicName", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :name
       #   The name of the topic you want to create.
@@ -73,6 +87,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   platformapplications = sns.platform_applications()
       # @param [Hash] options ({})
       # @return [PlatformApplication::Collection]
       def platform_applications(options = {})
@@ -110,6 +127,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscriptions = sns.subscriptions()
       # @param [Hash] options ({})
       # @return [Subscription::Collection]
       def subscriptions(options = {})
@@ -138,6 +158,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topics = sns.topics()
       # @param [Hash] options ({})
       # @return [Topic::Collection]
       def topics(options = {})

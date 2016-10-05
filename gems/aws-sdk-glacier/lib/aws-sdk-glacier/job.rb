@@ -223,6 +223,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   job.get_output({
+      #     range: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :range
       #   The range of bytes to retrieve from the output. For example, if you

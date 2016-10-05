@@ -146,6 +146,41 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_summary.copy_from({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+      #     cache_control: "CacheControl",
+      #     content_disposition: "ContentDisposition",
+      #     content_encoding: "ContentEncoding",
+      #     content_language: "ContentLanguage",
+      #     content_type: "ContentType",
+      #     copy_source: "CopySource", # required
+      #     copy_source_if_match: "CopySourceIfMatch",
+      #     copy_source_if_modified_since: Time.now,
+      #     copy_source_if_none_match: "CopySourceIfNoneMatch",
+      #     copy_source_if_unmodified_since: Time.now,
+      #     expires: Time.now,
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write_acp: "GrantWriteACP",
+      #     metadata: {
+      #       "MetadataKey" => "MetadataValue",
+      #     },
+      #     metadata_directive: "COPY", # accepts COPY, REPLACE
+      #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+      #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+      #     website_redirect_location: "WebsiteRedirectLocation",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     ssekms_key_id: "SSEKMSKeyId",
+      #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
+      #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
+      #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the object.
@@ -245,6 +280,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_summary.delete({
+      #     mfa: "MFA",
+      #     version_id: "ObjectVersionId",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
@@ -267,6 +309,26 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_summary.get({
+      #     if_match: "IfMatch",
+      #     if_modified_since: Time.now,
+      #     if_none_match: "IfNoneMatch",
+      #     if_unmodified_since: Time.now,
+      #     range: "Range",
+      #     response_cache_control: "ResponseCacheControl",
+      #     response_content_disposition: "ResponseContentDisposition",
+      #     response_content_encoding: "ResponseContentEncoding",
+      #     response_content_language: "ResponseContentLanguage",
+      #     response_content_type: "ResponseContentType",
+      #     response_expires: Time.now,
+      #     version_id: "ObjectVersionId",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :if_match
       #   Return the object only if its entity tag (ETag) is the same as the one
@@ -327,6 +389,32 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipartupload = object_summary.initiate_multipart_upload({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+      #     cache_control: "CacheControl",
+      #     content_disposition: "ContentDisposition",
+      #     content_encoding: "ContentEncoding",
+      #     content_language: "ContentLanguage",
+      #     content_type: "ContentType",
+      #     expires: Time.now,
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write_acp: "GrantWriteACP",
+      #     metadata: {
+      #       "MetadataKey" => "MetadataValue",
+      #     },
+      #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+      #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+      #     website_redirect_location: "WebsiteRedirectLocation",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     ssekms_key_id: "SSEKMSKeyId",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the object.
@@ -404,6 +492,35 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_summary.put({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+      #     body: source_file,
+      #     cache_control: "CacheControl",
+      #     content_disposition: "ContentDisposition",
+      #     content_encoding: "ContentEncoding",
+      #     content_language: "ContentLanguage",
+      #     content_length: 1,
+      #     content_md5: "ContentMD5",
+      #     content_type: "ContentType",
+      #     expires: Time.now,
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write_acp: "GrantWriteACP",
+      #     metadata: {
+      #       "MetadataKey" => "MetadataValue",
+      #     },
+      #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+      #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+      #     website_redirect_location: "WebsiteRedirectLocation",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     ssekms_key_id: "SSEKMSKeyId",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the object.
@@ -483,6 +600,15 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_summary.restore_object({
+      #     version_id: "ObjectVersionId",
+      #     restore_request: {
+      #       days: 1, # required
+      #     },
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :version_id
       # @option options [Types::RestoreRequest] :restore_request

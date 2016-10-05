@@ -157,6 +157,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.attach_group({
+      #     group_name: "groupNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :group_name
       #   The name (friendly name, not ARN) of the group to attach the policy
@@ -176,6 +181,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.attach_role({
+      #     role_name: "roleNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :role_name
       #   The name (friendly name, not ARN) of the role to attach the policy to.
@@ -194,6 +204,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.attach_user({
+      #     user_name: "userNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :user_name
       #   The name (friendly name, not ARN) of the IAM user to attach the policy
@@ -213,6 +228,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policyversion = policy.create_version({
+      #     policy_document: "policyDocumentType", # required
+      #     set_as_default: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_document
       #   The JSON policy document that you want to use as the content for this
@@ -252,6 +273,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -260,6 +284,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.detach_group({
+      #     group_name: "groupNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :group_name
       #   The name (friendly name, not ARN) of the IAM group to detach the
@@ -279,6 +308,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.detach_role({
+      #     role_name: "roleNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :role_name
       #   The name (friendly name, not ARN) of the IAM role to detach the policy
@@ -298,6 +332,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policy.detach_user({
+      #     user_name: "userNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :user_name
       #   The name (friendly name, not ARN) of the IAM user to detach the policy
@@ -319,6 +358,11 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedgroups = policy.attached_groups({
+      #     path_prefix: "pathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -358,6 +402,11 @@ module Aws
         Group::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedroles = policy.attached_roles({
+      #     path_prefix: "pathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -397,6 +446,11 @@ module Aws
         Role::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedusers = policy.attached_users({
+      #     path_prefix: "pathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -449,6 +503,9 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   versions = policy.versions()
       # @param [Hash] options ({})
       # @return [PolicyVersion::Collection]
       def versions(options = {})

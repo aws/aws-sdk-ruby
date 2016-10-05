@@ -151,6 +151,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.associate_dhcp_options({
+      #     dry_run: false,
+      #     dhcp_options_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -167,6 +173,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.attach_classic_link_instance({
+      #     dry_run: false,
+      #     instance_id: "String", # required
+      #     groups: ["String"], # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -186,6 +199,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.attach_internet_gateway({
+      #     dry_run: false,
+      #     internet_gateway_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -201,6 +220,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkacl = vpc.create_network_acl({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -218,6 +242,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetable = vpc.create_route_table({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -235,6 +264,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   securitygroup = vpc.create_security_group({
+      #     dry_run: false,
+      #     group_name: "String", # required
+      #     description: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -269,6 +305,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subnet = vpc.create_subnet({
+      #     dry_run: false,
+      #     cidr_block: "String", # required
+      #     availability_zone: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -295,6 +338,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = vpc.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -321,6 +375,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -334,6 +393,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "enableDnsSupport", # required, accepts enableDnsSupport, enableDnsHostnames
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -349,6 +414,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.detach_classic_link_instance({
+      #     dry_run: false,
+      #     instance_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -364,6 +435,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.detach_internet_gateway({
+      #     dry_run: false,
+      #     internet_gateway_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -379,6 +456,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.disable_classic_link({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -392,6 +474,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.enable_classic_link({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -405,6 +492,16 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc.modify_attribute({
+      #     enable_dns_support: {
+      #       value: false,
+      #     },
+      #     enable_dns_hostnames: {
+      #       value: false,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Types::AttributeBooleanValue] :enable_dns_support
       #   Indicates whether the DNS resolution is supported for the VPC. If
@@ -431,6 +528,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcpeeringconnection = vpc.request_vpc_peering_connection({
+      #     dry_run: false,
+      #     peer_vpc_id: "String",
+      #     peer_owner_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -457,6 +561,12 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   acceptedvpcpeeringconnections = vpc.accepted_vpc_peering_connections({
+      #     dry_run: false,
+      #     vpc_peering_connection_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -500,6 +610,12 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instances = vpc.instances({
+      #     dry_run: false,
+      #     instance_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -535,6 +651,12 @@ module Aws
         Instance::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   internetgateways = vpc.internet_gateways({
+      #     dry_run: false,
+      #     internet_gateway_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -566,6 +688,12 @@ module Aws
         InternetGateway::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkacls = vpc.network_acls({
+      #     dry_run: false,
+      #     network_acl_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -597,6 +725,12 @@ module Aws
         NetworkAcl::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkinterfaces = vpc.network_interfaces({
+      #     dry_run: false,
+      #     network_interface_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -628,6 +762,12 @@ module Aws
         NetworkInterface::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   requestedvpcpeeringconnections = vpc.requested_vpc_peering_connections({
+      #     dry_run: false,
+      #     vpc_peering_connection_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -659,6 +799,12 @@ module Aws
         VpcPeeringConnection::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetables = vpc.route_tables({
+      #     dry_run: false,
+      #     route_table_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -690,6 +836,13 @@ module Aws
         RouteTable::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   securitygroups = vpc.security_groups({
+      #     dry_run: false,
+      #     group_names: ["String"],
+      #     group_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -729,6 +882,12 @@ module Aws
         SecurityGroup::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subnets = vpc.subnets({
+      #     dry_run: false,
+      #     subnet_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

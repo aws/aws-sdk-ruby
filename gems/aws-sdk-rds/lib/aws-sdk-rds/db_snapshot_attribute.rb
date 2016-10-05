@@ -84,6 +84,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_snapshot_attribute.modify({
+      #     values_to_add: ["String"],
+      #     values_to_remove: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :values_to_add
       #   A list of DB snapshot attributes to add to the attribute specified by

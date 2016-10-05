@@ -119,6 +119,19 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroup = option_group.create({
+      #     engine_name: "String", # required
+      #     major_engine_version: "String", # required
+      #     option_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :engine_name
       #   Specifies the name of the engine that this option group should be
@@ -141,6 +154,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroup = option_group.copy({
+      #     target_option_group_identifier: "String", # required
+      #     target_option_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :target_option_group_identifier
       #   The identifier for the copied option group.
@@ -171,6 +196,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   option_group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -179,6 +207,34 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroup = option_group.modify({
+      #     options_to_include: [
+      #       {
+      #         option_name: "String", # required
+      #         port: 1,
+      #         option_version: "String",
+      #         db_security_group_memberships: ["String"],
+      #         vpc_security_group_memberships: ["String"],
+      #         option_settings: [
+      #           {
+      #             name: "String",
+      #             value: "String",
+      #             default_value: "String",
+      #             description: "String",
+      #             apply_type: "String",
+      #             data_type: "String",
+      #             allowed_values: "String",
+      #             is_modifiable: false,
+      #             is_collection: false,
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #     options_to_remove: ["String"],
+      #     apply_immediately: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::OptionConfiguration>] :options_to_include
       #   Options in this list are added to the option group or, if already

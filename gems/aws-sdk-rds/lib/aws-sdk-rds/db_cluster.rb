@@ -258,6 +258,34 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster.create({
+      #     availability_zones: ["String"],
+      #     backup_retention_period: 1,
+      #     character_set_name: "String",
+      #     database_name: "String",
+      #     db_cluster_parameter_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     db_subnet_group_name: "String",
+      #     engine: "String", # required
+      #     engine_version: "String",
+      #     port: 1,
+      #     master_username: "String",
+      #     master_user_password: "String",
+      #     option_group_name: "String",
+      #     preferred_backup_window: "String",
+      #     preferred_maintenance_window: "String",
+      #     replication_source_identifier: "String",
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     storage_encrypted: false,
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :availability_zones
       #   A list of EC2 Availability Zones that instances in the DB cluster can
@@ -415,6 +443,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclustersnapshot = db_cluster.create_snapshot({
+      #     db_cluster_snapshot_identifier: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_cluster_snapshot_identifier
       #   The identifier of the DB cluster snapshot. This parameter is stored as
@@ -443,6 +482,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster.delete({
+      #     skip_final_snapshot: false,
+      #     final_db_snapshot_identifier: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :skip_final_snapshot
       #   Determines whether a final DB cluster snapshot is created before the
@@ -483,6 +528,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster.failover({
+      #     target_db_instance_identifier: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :target_db_instance_identifier
       #   The name of the instance to promote to the primary instance.
@@ -500,6 +550,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster.modify({
+      #     new_db_cluster_identifier: "String",
+      #     apply_immediately: false,
+      #     backup_retention_period: 1,
+      #     db_cluster_parameter_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     port: 1,
+      #     master_user_password: "String",
+      #     option_group_name: "String",
+      #     preferred_backup_window: "String",
+      #     preferred_maintenance_window: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :new_db_cluster_identifier
       #   The new DB cluster identifier for the DB cluster when renaming a DB
@@ -620,6 +684,24 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster.restore({
+      #     db_cluster_identifier: "String", # required
+      #     restore_to_time: Time.now,
+      #     use_latest_restorable_time: false,
+      #     port: 1,
+      #     db_subnet_group_name: "String",
+      #     option_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_cluster_identifier
       #   The name of the new DB cluster to be created.
@@ -711,6 +793,20 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_cluster.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified
@@ -803,6 +899,22 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshots = db_cluster.snapshots({
+      #     db_cluster_snapshot_identifier: "String",
+      #     snapshot_type: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #     include_shared: false,
+      #     include_public: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_cluster_snapshot_identifier
       #   A specific DB cluster snapshot identifier to describe. This parameter

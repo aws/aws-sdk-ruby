@@ -22,6 +22,17 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dhcpoptions = ec2.create_dhcp_options({
+      #     dry_run: false,
+      #     dhcp_configurations: [ # required
+      #       {
+      #         key: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -40,6 +51,76 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance = ec2.create_instances({
+      #     dry_run: false,
+      #     image_id: "String", # required
+      #     min_count: 1, # required
+      #     max_count: 1, # required
+      #     key_name: "String",
+      #     security_groups: ["String"],
+      #     security_group_ids: ["String"],
+      #     user_data: "String",
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     placement: {
+      #       availability_zone: "String",
+      #       group_name: "String",
+      #       tenancy: "default", # accepts default, dedicated, host
+      #       host_id: "String",
+      #       affinity: "String",
+      #     },
+      #     kernel_id: "String",
+      #     ramdisk_id: "String",
+      #     block_device_mappings: [
+      #       {
+      #         virtual_name: "String",
+      #         device_name: "String",
+      #         ebs: {
+      #           snapshot_id: "String",
+      #           volume_size: 1,
+      #           delete_on_termination: false,
+      #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+      #           iops: 1,
+      #           encrypted: false,
+      #         },
+      #         no_device: "String",
+      #       },
+      #     ],
+      #     monitoring: {
+      #       enabled: false, # required
+      #     },
+      #     subnet_id: "String",
+      #     disable_api_termination: false,
+      #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
+      #     private_ip_address: "String",
+      #     client_token: "String",
+      #     additional_info: "String",
+      #     network_interfaces: [
+      #       {
+      #         network_interface_id: "String",
+      #         device_index: 1,
+      #         subnet_id: "String",
+      #         description: "String",
+      #         private_ip_address: "String",
+      #         groups: ["String"],
+      #         delete_on_termination: false,
+      #         private_ip_addresses: [
+      #           {
+      #             private_ip_address: "String", # required
+      #             primary: false,
+      #           },
+      #         ],
+      #         secondary_private_ip_address_count: 1,
+      #         associate_public_ip_address: false,
+      #       },
+      #     ],
+      #     iam_instance_profile: {
+      #       arn: "String",
+      #       name: "String",
+      #     },
+      #     ebs_optimized: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -214,6 +295,11 @@ module Aws
         Instance::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   internetgateway = ec2.create_internet_gateway({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -230,6 +316,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   keypair = ec2.create_key_pair({
+      #     dry_run: false,
+      #     key_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -250,6 +342,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkacl = ec2.create_network_acl({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -268,6 +366,22 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkinterface = ec2.create_network_interface({
+      #     subnet_id: "String", # required
+      #     description: "String",
+      #     private_ip_address: "String",
+      #     groups: ["String"],
+      #     private_ip_addresses: [
+      #       {
+      #         private_ip_address: "String", # required
+      #         primary: false,
+      #       },
+      #     ],
+      #     secondary_private_ip_address_count: 1,
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subnet_id
       #   The ID of the subnet to associate with the network interface.
@@ -313,6 +427,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   placementgroup = ec2.create_placement_group({
+      #     dry_run: false,
+      #     group_name: "String", # required
+      #     strategy: "cluster", # required, accepts cluster
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -334,6 +455,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetable = ec2.create_route_table({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -352,6 +479,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   securitygroup = ec2.create_security_group({
+      #     dry_run: false,
+      #     group_name: "String", # required
+      #     description: "String", # required
+      #     vpc_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -387,6 +522,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshot = ec2.create_snapshot({
+      #     dry_run: false,
+      #     volume_id: "String", # required
+      #     description: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -407,6 +549,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subnet = ec2.create_subnet({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #     cidr_block: "String", # required
+      #     availability_zone: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -434,6 +584,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   ec2.create_tags({
+      #     dry_run: false,
+      #     resources: ["String"], # required
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -452,6 +614,18 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volume = ec2.create_volume({
+      #     dry_run: false,
+      #     size: 1,
+      #     snapshot_id: "String",
+      #     availability_zone: "String", # required
+      #     volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+      #     iops: 1,
+      #     encrypted: false,
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -519,6 +693,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc = ec2.create_vpc({
+      #     dry_run: false,
+      #     cidr_block: "String", # required
+      #     instance_tenancy: "default", # accepts default, dedicated, host
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -550,6 +731,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcpeeringconnection = ec2.create_vpc_peering_connection({
+      #     dry_run: false,
+      #     vpc_id: "String",
+      #     peer_vpc_id: "String",
+      #     peer_owner_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -575,6 +764,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   ec2.disassociate_route_table({
+      #     dry_run: false,
+      #     association_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -590,6 +785,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   keypairinfo = ec2.import_key_pair({
+      #     dry_run: false,
+      #     key_name: "String", # required
+      #     public_key_material: "data", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -610,6 +812,36 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image = ec2.register_image({
+      #     dry_run: false,
+      #     image_location: "String",
+      #     name: "String", # required
+      #     description: "String",
+      #     architecture: "i386", # accepts i386, x86_64
+      #     kernel_id: "String",
+      #     ramdisk_id: "String",
+      #     root_device_name: "String",
+      #     block_device_mappings: [
+      #       {
+      #         virtual_name: "String",
+      #         device_name: "String",
+      #         ebs: {
+      #           snapshot_id: "String",
+      #           volume_size: 1,
+      #           delete_on_termination: false,
+      #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+      #           iops: 1,
+      #           encrypted: false,
+      #         },
+      #         no_device: "String",
+      #       },
+      #     ],
+      #     virtualization_type: "String",
+      #     sriov_net_support: "String",
+      #     ena_support: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -670,6 +902,13 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   classicaddresses = ec2.classic_addresses({
+      #     dry_run: false,
+      #     public_ips: ["String"],
+      #     allocation_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -714,6 +953,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dhcpoptionssets = ec2.dhcp_options_sets({
+      #     dry_run: false,
+      #     dhcp_options_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -772,6 +1023,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   images = ec2.images({
+      #     dry_run: false,
+      #     image_ids: ["String"],
+      #     owners: ["String"],
+      #     executable_users: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -902,6 +1167,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instances = ec2.instances({
+      #     dry_run: false,
+      #     instance_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1194,6 +1471,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   internetgateways = ec2.internet_gateways({
+      #     dry_run: false,
+      #     internet_gateway_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1254,6 +1543,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   keypairs = ec2.key_pairs({
+      #     dry_run: false,
+      #     key_names: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1296,6 +1597,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkacls = ec2.network_acls({
+      #     dry_run: false,
+      #     network_acl_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1388,6 +1701,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   networkinterfaces = ec2.network_interfaces({
+      #     dry_run: false,
+      #     network_interface_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1535,6 +1860,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   placementgroups = ec2.placement_groups({
+      #     dry_run: false,
+      #     group_names: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1590,6 +1927,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetables = ec2.route_tables({
+      #     dry_run: false,
+      #     route_table_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1688,6 +2037,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   securitygroups = ec2.security_groups({
+      #     dry_run: false,
+      #     group_names: ["String"],
+      #     group_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1775,6 +2137,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshots = ec2.snapshots({
+      #     dry_run: false,
+      #     snapshot_ids: ["String"],
+      #     owner_ids: ["String"],
+      #     restorable_by_user_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1858,6 +2234,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subnets = ec2.subnets({
+      #     dry_run: false,
+      #     subnet_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -1931,6 +2319,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volumes = ec2.volumes({
+      #     dry_run: false,
+      #     volume_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -2019,6 +2419,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcaddresses = ec2.vpc_addresses({
+      #     dry_run: false,
+      #     public_ips: ["String"],
+      #     allocation_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -2063,6 +2470,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcpeeringconnections = ec2.vpc_peering_connections({
+      #     dry_run: false,
+      #     vpc_peering_connection_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -2133,6 +2552,18 @@ module Aws
         VpcPeeringConnection::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcs = ec2.vpcs({
+      #     dry_run: false,
+      #     vpc_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

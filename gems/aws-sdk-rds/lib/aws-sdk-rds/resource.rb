@@ -22,6 +22,35 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = rds.create_db_cluster({
+      #     availability_zones: ["String"],
+      #     backup_retention_period: 1,
+      #     character_set_name: "String",
+      #     database_name: "String",
+      #     db_cluster_identifier: "String", # required
+      #     db_cluster_parameter_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     db_subnet_group_name: "String",
+      #     engine: "String", # required
+      #     engine_version: "String",
+      #     port: 1,
+      #     master_username: "String",
+      #     master_user_password: "String",
+      #     option_group_name: "String",
+      #     preferred_backup_window: "String",
+      #     preferred_maintenance_window: "String",
+      #     replication_source_identifier: "String",
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     storage_encrypted: false,
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :availability_zones
       #   A list of EC2 Availability Zones that instances in the DB cluster can
@@ -191,6 +220,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusterparametergroup = rds.create_db_cluster_parameter_group({
+      #     db_cluster_parameter_group_name: "String", # required
+      #     db_parameter_group_family: "String", # required
+      #     description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_cluster_parameter_group_name
       #   The name of the DB cluster parameter group.
@@ -226,6 +268,52 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = rds.create_db_instance({
+      #     db_name: "String",
+      #     db_instance_identifier: "String", # required
+      #     allocated_storage: 1,
+      #     db_instance_class: "String", # required
+      #     engine: "String", # required
+      #     master_username: "String",
+      #     master_user_password: "String",
+      #     db_security_groups: ["String"],
+      #     vpc_security_group_ids: ["String"],
+      #     availability_zone: "String",
+      #     db_subnet_group_name: "String",
+      #     preferred_maintenance_window: "String",
+      #     db_parameter_group_name: "String",
+      #     backup_retention_period: 1,
+      #     preferred_backup_window: "String",
+      #     port: 1,
+      #     multi_az: false,
+      #     engine_version: "String",
+      #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     character_set_name: "String",
+      #     publicly_accessible: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     db_cluster_identifier: "String",
+      #     storage_type: "String",
+      #     tde_credential_arn: "String",
+      #     tde_credential_password: "String",
+      #     storage_encrypted: false,
+      #     kms_key_id: "String",
+      #     domain: "String",
+      #     copy_tags_to_snapshot: false,
+      #     monitoring_interval: 1,
+      #     monitoring_role_arn: "String",
+      #     domain_iam_role_name: "String",
+      #     promotion_tier: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_name
       #   The meaning of this parameter differs according to the database engine
@@ -902,6 +990,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroup = rds.create_db_parameter_group({
+      #     db_parameter_group_name: "String", # required
+      #     db_parameter_group_family: "String", # required
+      #     description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_parameter_group_name
       #   The name of the DB parameter group.
@@ -936,6 +1037,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsecuritygroup = rds.create_db_security_group({
+      #     db_security_group_name: "String", # required
+      #     db_security_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_security_group_name
       #   The name for the DB security group. This value is stored as a
@@ -966,6 +1079,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsubnetgroup = rds.create_db_subnet_group({
+      #     db_subnet_group_name: "String", # required
+      #     db_subnet_group_description: "String", # required
+      #     subnet_ids: ["String"], # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_subnet_group_name
       #   The name for the DB subnet group. This value is stored as a lowercase
@@ -991,6 +1117,22 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = rds.create_event_subscription({
+      #     subscription_name: "String", # required
+      #     sns_topic_arn: "String", # required
+      #     source_type: "String",
+      #     event_categories: ["String"],
+      #     source_ids: ["String"],
+      #     enabled: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the subscription.
@@ -1054,6 +1196,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroup = rds.create_option_group({
+      #     option_group_name: "String", # required
+      #     engine_name: "String", # required
+      #     major_engine_version: "String", # required
+      #     option_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :option_group_name
       #   Specifies the name of the option group to be created.
@@ -1089,6 +1245,9 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   accountquotas = rds.account_quotas()
       # @param [Hash] options ({})
       # @return [AccountQuota::Collection]
       def account_quotas(options = {})
@@ -1116,6 +1275,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   certificates = rds.certificates({
+      #     certificate_identifier: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :certificate_identifier
       #   The user-supplied certificate identifier. If this parameter is
@@ -1180,6 +1352,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusterparametergroups = rds.db_cluster_parameter_groups({
+      #     db_cluster_parameter_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_cluster_parameter_group_name
       #   The name of a specific DB cluster parameter group to return details
@@ -1225,6 +1410,19 @@ module Aws
         DBClusterParameterGroup::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclusters = rds.db_clusters({
+      #     db_cluster_identifier: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     max_records: 1,
+      #     marker: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_cluster_identifier
       #   The user-supplied DB cluster identifier. If this parameter is
@@ -1290,6 +1488,21 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbengineversions = rds.db_engine_versions({
+      #     engine: "String",
+      #     engine_version: "String",
+      #     db_parameter_group_family: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     default_only: false,
+      #     list_supported_character_sets: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :engine
       #   The database engine to return.
@@ -1346,6 +1559,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstances = rds.db_instances({
+      #     db_instance_identifier: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_instance_identifier
       #   The user-supplied instance identifier. If this parameter is specified,
@@ -1398,6 +1622,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroups = rds.db_parameter_groups({
+      #     db_parameter_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_parameter_group_name
       #   The name of a specific DB parameter group to return details for.
@@ -1439,6 +1674,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsecuritygroups = rds.db_security_groups({
+      #     db_security_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_security_group_name
       #   The name of the DB security group to return details for.
@@ -1463,6 +1709,21 @@ module Aws
         DBSecurityGroup::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsnapshots = rds.db_snapshots({
+      #     db_instance_identifier: "String",
+      #     db_snapshot_identifier: "String",
+      #     snapshot_type: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     include_shared: false,
+      #     include_public: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_instance_identifier
       #   The ID of the DB instance to retrieve the list of DB snapshots for.
@@ -1565,6 +1826,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsubnetgroups = rds.db_subnet_groups({
+      #     db_subnet_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_subnet_group_name
       #   The name of the DB subnet group to return details for.
@@ -1598,6 +1870,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventcategorymaps = rds.event_category_maps({
+      #     source_type: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :source_type
       #   The type of source that will be generating the events.
@@ -1632,6 +1915,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscriptions = rds.event_subscriptions({
+      #     subscription_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :subscription_name
       #   The name of the RDS event notification subscription you want to
@@ -1657,6 +1951,22 @@ module Aws
         EventSubscription::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = rds.events({
+      #     source_identifier: "String",
+      #     source_type: "db-instance", # accepts db-instance, db-parameter-group, db-security-group, db-snapshot, db-cluster, db-cluster-snapshot
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :source_identifier
       #   The identifier of the event source for which events will be returned.
@@ -1740,6 +2050,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   optiongroups = rds.option_groups({
+      #     option_group_name: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     engine_name: "String",
+      #     major_engine_version: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :option_group_name
       #   The name of the option group to describe. Cannot be supplied together
@@ -1792,6 +2115,23 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   reserveddbinstances = rds.reserved_db_instances({
+      #     reserved_db_instance_id: "String",
+      #     reserved_db_instances_offering_id: "String",
+      #     db_instance_class: "String",
+      #     duration: "String",
+      #     product_description: "String",
+      #     offering_type: "String",
+      #     multi_az: false,
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :reserved_db_instance_id
       #   The reserved DB instance identifier filter value. Specify this
@@ -1850,6 +2190,22 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   reserveddbinstancesofferings = rds.reserved_db_instances_offerings({
+      #     reserved_db_instances_offering_id: "String",
+      #     db_instance_class: "String",
+      #     duration: "String",
+      #     product_description: "String",
+      #     offering_type: "String",
+      #     multi_az: false,
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :reserved_db_instances_offering_id
       #   The offering identifier filter value. Specify this parameter to show
@@ -1906,6 +2262,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   resourceswithpendingmaintenanceactions = rds.resources_with_pending_maintenance_actions({
+      #     resource_identifier: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     marker: "String",
+      #     max_records: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :resource_identifier
       #   The ARN of a resource to return pending maintenance actions for.

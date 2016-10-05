@@ -93,6 +93,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   notification.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -104,6 +107,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   notification.set({
+      #     vault_notification_config: {
+      #       sns_topic: "string",
+      #       events: ["string"],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Types::VaultNotificationConfig] :vault_notification_config
       #   Provides options for specifying notification configuration.

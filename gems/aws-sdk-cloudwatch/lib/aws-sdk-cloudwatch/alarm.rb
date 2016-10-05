@@ -230,6 +230,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -238,6 +241,15 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm.describe_history({
+      #     history_item_type: "ConfigurationUpdate", # accepts ConfigurationUpdate, StateUpdate, Action
+      #     start_date: Time.now,
+      #     end_date: Time.now,
+      #     max_records: 1,
+      #     next_token: "NextToken",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :history_item_type
       #   The type of alarm histories to retrieve.
@@ -257,6 +269,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm.disable_actions()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def disable_actions(options = {})
@@ -265,6 +280,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm.enable_actions()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def enable_actions(options = {})
@@ -273,6 +291,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   alarm.set_state({
+      #     state_value: "OK", # required, accepts OK, ALARM, INSUFFICIENT_DATA
+      #     state_reason: "StateReason", # required
+      #     state_reason_data: "StateReasonData",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :state_value
       #   The value of the state.

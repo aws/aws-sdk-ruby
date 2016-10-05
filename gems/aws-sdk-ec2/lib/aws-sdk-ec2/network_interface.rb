@@ -172,6 +172,13 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.assign_private_ip_addresses({
+      #     private_ip_addresses: ["String"],
+      #     secondary_private_ip_address_count: 1,
+      #     allow_reassignment: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :private_ip_addresses
       #   One or more IP addresses to be assigned as a secondary private IP
@@ -195,6 +202,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.attach({
+      #     dry_run: false,
+      #     instance_id: "String", # required
+      #     device_index: 1, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -212,6 +226,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = network_interface.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -238,6 +263,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -251,6 +281,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "description", # accepts description, groupSet, sourceDestCheck, attachment
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -266,6 +302,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.detach({
+      #     dry_run: false,
+      #     force: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -281,6 +323,20 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.modify_attribute({
+      #     dry_run: false,
+      #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     source_dest_check: {
+      #       value: false,
+      #     },
+      #     groups: ["String"],
+      #     attachment: {
+      #       attachment_id: "String",
+      #       delete_on_termination: false,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -315,6 +371,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.reset_attribute({
+      #     dry_run: false,
+      #     source_dest_check: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -330,6 +392,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   network_interface.unassign_private_ip_addresses({
+      #     private_ip_addresses: ["String"], # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Array<String>] :private_ip_addresses
       #   The secondary private IP addresses to unassign from the network

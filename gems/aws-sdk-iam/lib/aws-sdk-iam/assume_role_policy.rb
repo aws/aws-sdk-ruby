@@ -61,6 +61,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   assume_role_policy.update({
+      #     policy_document: "policyDocumentType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_document
       #   The policy that grants an entity permission to assume the role.

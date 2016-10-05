@@ -128,6 +128,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   scheduled_action.delete({
+      #     auto_scaling_group_name: "ResourceName", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.

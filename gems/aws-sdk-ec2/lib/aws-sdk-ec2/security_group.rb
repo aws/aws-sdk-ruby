@@ -112,6 +112,44 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   security_group.authorize_egress({
+      #     dry_run: false,
+      #     source_security_group_name: "String",
+      #     source_security_group_owner_id: "String",
+      #     ip_protocol: "String",
+      #     from_port: 1,
+      #     to_port: 1,
+      #     cidr_ip: "String",
+      #     ip_permissions: [
+      #       {
+      #         ip_protocol: "String",
+      #         from_port: 1,
+      #         to_port: 1,
+      #         user_id_group_pairs: [
+      #           {
+      #             user_id: "String",
+      #             group_name: "String",
+      #             group_id: "String",
+      #             vpc_id: "String",
+      #             vpc_peering_connection_id: "String",
+      #             peering_status: "String",
+      #           },
+      #         ],
+      #         ip_ranges: [
+      #           {
+      #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         prefix_list_ids: [
+      #           {
+      #             prefix_list_id: "String",
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -150,6 +188,45 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   security_group.authorize_ingress({
+      #     dry_run: false,
+      #     group_name: "String",
+      #     source_security_group_name: "String",
+      #     source_security_group_owner_id: "String",
+      #     ip_protocol: "String",
+      #     from_port: 1,
+      #     to_port: 1,
+      #     cidr_ip: "String",
+      #     ip_permissions: [
+      #       {
+      #         ip_protocol: "String",
+      #         from_port: 1,
+      #         to_port: 1,
+      #         user_id_group_pairs: [
+      #           {
+      #             user_id: "String",
+      #             group_name: "String",
+      #             group_id: "String",
+      #             vpc_id: "String",
+      #             vpc_peering_connection_id: "String",
+      #             peering_status: "String",
+      #           },
+      #         ],
+      #         ip_ranges: [
+      #           {
+      #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         prefix_list_ids: [
+      #           {
+      #             prefix_list_id: "String",
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -203,6 +280,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = security_group.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -229,6 +317,12 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   security_group.delete({
+      #     dry_run: false,
+      #     group_name: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -245,6 +339,44 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   security_group.revoke_egress({
+      #     dry_run: false,
+      #     source_security_group_name: "String",
+      #     source_security_group_owner_id: "String",
+      #     ip_protocol: "String",
+      #     from_port: 1,
+      #     to_port: 1,
+      #     cidr_ip: "String",
+      #     ip_permissions: [
+      #       {
+      #         ip_protocol: "String",
+      #         from_port: 1,
+      #         to_port: 1,
+      #         user_id_group_pairs: [
+      #           {
+      #             user_id: "String",
+      #             group_name: "String",
+      #             group_id: "String",
+      #             vpc_id: "String",
+      #             vpc_peering_connection_id: "String",
+      #             peering_status: "String",
+      #           },
+      #         ],
+      #         ip_ranges: [
+      #           {
+      #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         prefix_list_ids: [
+      #           {
+      #             prefix_list_id: "String",
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -283,6 +415,45 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   security_group.revoke_ingress({
+      #     dry_run: false,
+      #     group_name: "String",
+      #     source_security_group_name: "String",
+      #     source_security_group_owner_id: "String",
+      #     ip_protocol: "String",
+      #     from_port: 1,
+      #     to_port: 1,
+      #     cidr_ip: "String",
+      #     ip_permissions: [
+      #       {
+      #         ip_protocol: "String",
+      #         from_port: 1,
+      #         to_port: 1,
+      #         user_id_group_pairs: [
+      #           {
+      #             user_id: "String",
+      #             group_name: "String",
+      #             group_id: "String",
+      #             vpc_id: "String",
+      #             vpc_peering_connection_id: "String",
+      #             peering_status: "String",
+      #           },
+      #         ],
+      #         ip_ranges: [
+      #           {
+      #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         prefix_list_ids: [
+      #           {
+      #             prefix_list_id: "String",
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

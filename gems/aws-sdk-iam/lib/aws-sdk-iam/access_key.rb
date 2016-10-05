@@ -85,6 +85,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   access_key.activate()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def activate(options = {})
@@ -97,6 +100,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   access_key.deactivate()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def deactivate(options = {})
@@ -109,6 +115,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   access_key.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

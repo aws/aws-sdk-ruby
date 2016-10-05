@@ -218,6 +218,16 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsnapshot = db_snapshot.create({
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Tag>] :tags
       #   A list of tags.
@@ -236,6 +246,19 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsnapshot = db_snapshot.copy({
+      #     target_db_snapshot_identifier: "String", # required
+      #     kms_key_id: "String",
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     copy_tags: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :target_db_snapshot_identifier
       #   The identifier for the copied snapshot.
@@ -285,6 +308,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsnapshot = db_snapshot.delete()
       # @param [Hash] options ({})
       # @return [DBSnapshot]
       def delete(options = {})
@@ -298,6 +324,35 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_snapshot.restore({
+      #     db_instance_identifier: "String", # required
+      #     db_instance_class: "String",
+      #     port: 1,
+      #     availability_zone: "String",
+      #     db_subnet_group_name: "String",
+      #     multi_az: false,
+      #     publicly_accessible: false,
+      #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
+      #     db_name: "String",
+      #     engine: "String",
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     storage_type: "String",
+      #     tde_credential_arn: "String",
+      #     tde_credential_password: "String",
+      #     domain: "String",
+      #     copy_tags_to_snapshot: false,
+      #     domain_iam_role_name: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_instance_identifier
       #   Name of the DB instance to create from the DB snapshot. This parameter
@@ -457,6 +512,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_snapshot.subscribe_to({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to add a
@@ -472,6 +532,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_snapshot.unsubscribe_from({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to remove
@@ -489,6 +554,9 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   attributes = db_snapshot.attributes()
       # @param [Hash] options ({})
       # @return [DBSnapshotAttribute::Collection]
       def attributes(options = {})
@@ -509,6 +577,20 @@ module Aws
         DBSnapshotAttribute::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_snapshot.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified

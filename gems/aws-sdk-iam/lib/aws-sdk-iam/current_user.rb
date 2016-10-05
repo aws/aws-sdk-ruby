@@ -135,6 +135,11 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   accesskeys = current_user.access_keys({
+      #     user_name: "existingUserNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :user_name
       #   The name of the user.
@@ -166,6 +171,11 @@ module Aws
         AccessKey::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   mfadevices = current_user.mfa_devices({
+      #     user_name: "existingUserNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :user_name
       #   The name of the user whose MFA devices you want to list.
@@ -197,6 +207,11 @@ module Aws
         MfaDevice::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   signingcertificates = current_user.signing_certificates({
+      #     user_name: "existingUserNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :user_name
       #   The name of the IAM user whose signing certificates you want to

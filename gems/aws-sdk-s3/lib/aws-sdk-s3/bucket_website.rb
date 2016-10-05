@@ -88,6 +88,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_website.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -96,6 +99,38 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_website.put({
+      #     content_md5: "ContentMD5",
+      #     website_configuration: { # required
+      #       error_document: {
+      #         key: "ObjectKey", # required
+      #       },
+      #       index_document: {
+      #         suffix: "Suffix", # required
+      #       },
+      #       redirect_all_requests_to: {
+      #         host_name: "HostName", # required
+      #         protocol: "http", # accepts http, https
+      #       },
+      #       routing_rules: [
+      #         {
+      #           condition: {
+      #             http_error_code_returned_equals: "HttpErrorCodeReturnedEquals",
+      #             key_prefix_equals: "KeyPrefixEquals",
+      #           },
+      #           redirect: { # required
+      #             host_name: "HostName",
+      #             http_redirect_code: "HttpRedirectCode",
+      #             protocol: "http", # accepts http, https
+      #             replace_key_prefix_with: "ReplaceKeyPrefixWith",
+      #             replace_key_with: "ReplaceKeyWith",
+      #           },
+      #         },
+      #       ],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [required, Types::WebsiteConfiguration] :website_configuration

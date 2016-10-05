@@ -136,6 +136,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   route.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -152,6 +157,16 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   route.replace({
+      #     dry_run: false,
+      #     gateway_id: "String",
+      #     instance_id: "String",
+      #     network_interface_id: "String",
+      #     vpc_peering_connection_id: "String",
+      #     nat_gateway_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

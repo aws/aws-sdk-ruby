@@ -86,6 +86,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   user_policy.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -97,6 +100,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   user_policy.put({
+      #     policy_document: "policyDocumentType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_document
       #   The policy document.

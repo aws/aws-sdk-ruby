@@ -7,10 +7,11 @@ module AwsSdkCodeGenerator
       # TODO : don't filter @option tags that can be merged, e.g. EC2 Filters
       class HasManyAssociation < Dsl::Method
 
-        def initialize(name:, has_many:, api:, paginators:)
+        def initialize(name:, has_many:, api:, paginators:, var_name:)
 
           @has_many = has_many
           @paginators = paginators
+          @var_name = var_name
 
           super(underscore(name))
 
@@ -20,6 +21,8 @@ module AwsSdkCodeGenerator
             request: has_many['request'],
             api: api,
             skip: paging_options,
+            var_name: @var_name,
+            returns: name.downcase,
           ).apply(self)
 
           paginated? ? paginated_reqeust : non_paginated_request

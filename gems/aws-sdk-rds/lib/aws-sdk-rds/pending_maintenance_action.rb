@@ -114,6 +114,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   resourcependingmaintenanceactionlist = pending_maintenance_action.apply_immediately()
       # @param [Hash] options ({})
       # @return [ResourcePendingMaintenanceActionList]
       def apply_immediately(options = {})
@@ -130,6 +133,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   resourcependingmaintenanceactionlist = pending_maintenance_action.undo_opt_in()
       # @param [Hash] options ({})
       # @return [ResourcePendingMaintenanceActionList]
       def undo_opt_in(options = {})
@@ -146,6 +152,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   resourcependingmaintenanceactionlist = pending_maintenance_action.apply_on_next_maintenance()
       # @param [Hash] options ({})
       # @return [ResourcePendingMaintenanceActionList]
       def apply_on_next_maintenance(options = {})

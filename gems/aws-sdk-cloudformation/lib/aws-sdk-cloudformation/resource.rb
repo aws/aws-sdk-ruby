@@ -22,6 +22,34 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack = cloud_formation.create_stack({
+      #     stack_name: "StackName", # required
+      #     template_body: "TemplateBody",
+      #     template_url: "TemplateURL",
+      #     parameters: [
+      #       {
+      #         parameter_key: "ParameterKey",
+      #         parameter_value: "ParameterValue",
+      #         use_previous_value: false,
+      #       },
+      #     ],
+      #     disable_rollback: false,
+      #     timeout_in_minutes: 1,
+      #     notification_arns: ["NotificationARN"],
+      #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
+      #     resource_types: ["ResourceType"],
+      #     on_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
+      #     stack_policy_body: "StackPolicyBody",
+      #     stack_policy_url: "StackPolicyURL",
+      #     tags: [
+      #       {
+      #         key: "TagKey",
+      #         value: "TagValue",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :stack_name
       #   The name that is associated with the stack. The name must be unique in
@@ -188,6 +216,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   stacks = cloud_formation.stacks({
+      #     stack_name: "StackName",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,

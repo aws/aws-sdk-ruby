@@ -123,6 +123,18 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   reserveddbinstance = reserved_db_instances_offering.purchase({
+      #     reserved_db_instance_id: "String",
+      #     db_instance_count: 1,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :reserved_db_instance_id
       #   Customer-specified identifier to track this reservation.

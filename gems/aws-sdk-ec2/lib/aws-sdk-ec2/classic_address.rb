@@ -113,6 +113,16 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   classic_address.associate({
+      #     dry_run: false,
+      #     instance_id: "String",
+      #     allocation_id: "String",
+      #     network_interface_id: "String",
+      #     private_ip_address: "String",
+      #     allow_reassociation: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -149,6 +159,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   classic_address.disassociate({
+      #     dry_run: false,
+      #     association_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -164,6 +180,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   classic_address.release({
+      #     dry_run: false,
+      #     allocation_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

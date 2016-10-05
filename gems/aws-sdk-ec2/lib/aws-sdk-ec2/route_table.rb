@@ -87,6 +87,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   routetableassociation = route_table.associate_with_subnet({
+      #     dry_run: false,
+      #     subnet_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -105,6 +111,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   route = route_table.create_route({
+      #     dry_run: false,
+      #     destination_cidr_block: "String", # required
+      #     gateway_id: "String",
+      #     instance_id: "String",
+      #     network_interface_id: "String",
+      #     vpc_peering_connection_id: "String",
+      #     nat_gateway_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -138,6 +155,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = route_table.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -164,6 +192,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   route_table.delete({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

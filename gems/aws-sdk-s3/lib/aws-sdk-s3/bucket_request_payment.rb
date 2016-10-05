@@ -74,6 +74,14 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_request_payment.put({
+      #     content_md5: "ContentMD5",
+      #     request_payment_configuration: { # required
+      #       payer: "Requester", # required, accepts Requester, BucketOwner
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [required, Types::RequestPaymentConfiguration] :request_payment_configuration

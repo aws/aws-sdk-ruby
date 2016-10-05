@@ -91,6 +91,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   signing_certificate.activate()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def activate(options = {})
@@ -103,6 +106,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   signing_certificate.deactivate()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def deactivate(options = {})
@@ -115,6 +121,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   signing_certificate.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

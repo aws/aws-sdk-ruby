@@ -261,6 +261,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.attach_instances({
+      #     instance_ids: ["XmlStringMaxLen19"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :instance_ids
       #   One or more instance IDs.
@@ -271,6 +276,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.delete({
+      #     force_delete: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :force_delete
       #   Specifies that the group will be deleted along with all instances
@@ -284,6 +294,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   activity = auto_scaling_group.detach_instances({
+      #     instance_ids: ["XmlStringMaxLen19"],
+      #     should_decrement_desired_capacity: false, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :instance_ids
       #   One or more instance IDs.
@@ -305,6 +321,11 @@ module Aws
         Activity::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.disable_metrics_collection({
+      #     metrics: ["XmlStringMaxLen255"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :metrics
       #   One or more of the following metrics. If you omit this parameter, all
@@ -332,6 +353,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.enable_metrics_collection({
+      #     metrics: ["XmlStringMaxLen255"],
+      #     granularity: "XmlStringMaxLen255", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :metrics
       #   One or more of the following metrics. If you omit this parameter, all
@@ -362,6 +389,26 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   scalingpolicy = auto_scaling_group.put_scaling_policy({
+      #     policy_name: "XmlStringMaxLen255", # required
+      #     policy_type: "XmlStringMaxLen64",
+      #     adjustment_type: "XmlStringMaxLen255", # required
+      #     min_adjustment_step: 1,
+      #     min_adjustment_magnitude: 1,
+      #     scaling_adjustment: 1,
+      #     cooldown: 1,
+      #     metric_aggregation_type: "XmlStringMaxLen32",
+      #     step_adjustments: [
+      #       {
+      #         metric_interval_lower_bound: 1.0,
+      #         metric_interval_upper_bound: 1.0,
+      #         scaling_adjustment: 1, # required
+      #       },
+      #     ],
+      #     estimated_instance_warmup: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_name
       #   The name of the policy.
@@ -435,6 +482,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   scheduledaction = auto_scaling_group.put_scheduled_update_group_action({
+      #     scheduled_action_name: "XmlStringMaxLen255", # required
+      #     time: Time.now,
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     recurrence: "XmlStringMaxLen255",
+      #     min_size: 1,
+      #     max_size: 1,
+      #     desired_capacity: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :scheduled_action_name
       #   The name of this scaling action.
@@ -478,6 +537,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.resume_processes({
+      #     scaling_processes: ["XmlStringMaxLen255"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :scaling_processes
       #   One or more of the following processes. If you omit this parameter,
@@ -505,6 +569,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.set_desired_capacity({
+      #     desired_capacity: 1, # required
+      #     honor_cooldown: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Integer] :desired_capacity
       #   The number of EC2 instances that should be running in the Auto Scaling
@@ -522,6 +592,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   auto_scaling_group.suspend_processes({
+      #     scaling_processes: ["XmlStringMaxLen255"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :scaling_processes
       #   One or more of the following processes. If you omit this parameter,
@@ -549,6 +624,22 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   autoscalinggroup = auto_scaling_group.update({
+      #     launch_configuration_name: "ResourceName",
+      #     min_size: 1,
+      #     max_size: 1,
+      #     desired_capacity: 1,
+      #     default_cooldown: 1,
+      #     availability_zones: ["XmlStringMaxLen255"],
+      #     health_check_type: "XmlStringMaxLen32",
+      #     health_check_grace_period: 1,
+      #     placement_group: "XmlStringMaxLen255",
+      #     vpc_zone_identifier: "XmlStringMaxLen2047",
+      #     termination_policies: ["XmlStringMaxLen1600"],
+      #     new_instances_protected_from_scale_in: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :launch_configuration_name
       #   The name of the launch configuration.
@@ -634,6 +725,11 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   activities = auto_scaling_group.activities({
+      #     activity_ids: ["XmlString"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :activity_ids
       #   The activity IDs of the desired scaling activities. If you omit this
@@ -697,6 +793,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   lifecyclehooks = auto_scaling_group.lifecycle_hooks({
+      #     lifecycle_hook_names: ["AsciiStringMaxLen255"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :lifecycle_hook_names
       #   The names of one or more lifecycle hooks. If you omit this parameter,
@@ -730,6 +831,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   loadbalancers = auto_scaling_group.load_balancers({
+      #     next_token: "XmlString",
+      #     max_records: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :next_token
       #   The token for the next set of items to return. (You received this
@@ -755,6 +862,9 @@ module Aws
         LoadBalancer::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   notificationconfigurations = auto_scaling_group.notification_configurations()
       # @param [Hash] options ({})
       # @return [NotificationConfiguration::Collection]
       def notification_configurations(options = {})
@@ -778,6 +888,12 @@ module Aws
         NotificationConfiguration::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policies = auto_scaling_group.policies({
+      #     policy_names: ["ResourceName"],
+      #     policy_types: ["XmlStringMaxLen64"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :policy_names
       #   One or more policy names or policy ARNs to be described. If you omit
@@ -808,6 +924,13 @@ module Aws
         ScalingPolicy::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   scheduledactions = auto_scaling_group.scheduled_actions({
+      #     scheduled_action_names: ["ResourceName"],
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :scheduled_action_names
       #   Describes one or more scheduled actions. If you omit this parameter,

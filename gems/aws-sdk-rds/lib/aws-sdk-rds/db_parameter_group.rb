@@ -89,6 +89,18 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroup = db_parameter_group.create({
+      #     db_parameter_group_family: "String", # required
+      #     description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_parameter_group_family
       #   The DB parameter group family name. A DB parameter group can be
@@ -110,6 +122,18 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroup = db_parameter_group.copy({
+      #     target_db_parameter_group_identifier: "String", # required
+      #     target_db_parameter_group_description: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :target_db_parameter_group_identifier
       #   The identifier for the copied DB parameter group.
@@ -140,6 +164,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_parameter_group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -148,6 +175,24 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroup = db_parameter_group.modify({
+      #     parameters: [ # required
+      #       {
+      #         parameter_name: "String",
+      #         parameter_value: "String",
+      #         description: "String",
+      #         source: "String",
+      #         apply_type: "String",
+      #         data_type: "String",
+      #         allowed_values: "String",
+      #         is_modifiable: false,
+      #         minimum_engine_version: "String",
+      #         apply_method: "immediate", # accepts immediate, pending-reboot
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Array<Types::Parameter>] :parameters
       #   An array of parameter names, values, and the apply method for the
@@ -174,6 +219,25 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbparametergroup = db_parameter_group.reset({
+      #     reset_all_parameters: false,
+      #     parameters: [
+      #       {
+      #         parameter_name: "String",
+      #         parameter_value: "String",
+      #         description: "String",
+      #         source: "String",
+      #         apply_type: "String",
+      #         data_type: "String",
+      #         allowed_values: "String",
+      #         is_modifiable: false,
+      #         minimum_engine_version: "String",
+      #         apply_method: "immediate", # accepts immediate, pending-reboot
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :reset_all_parameters
       #   Specifies whether (`true`) or not (`false`) to reset all parameters in
@@ -215,6 +279,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_parameter_group.subscribe_to({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to add a
@@ -230,6 +299,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_parameter_group.unsubscribe_from({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to remove
@@ -247,6 +321,20 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_parameter_group.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified
@@ -301,6 +389,17 @@ module Aws
         Event::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   parameters = db_parameter_group.parameters({
+      #     source: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :source
       #   The parameter types to return.

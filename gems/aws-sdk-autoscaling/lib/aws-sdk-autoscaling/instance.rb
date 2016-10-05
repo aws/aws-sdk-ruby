@@ -117,6 +117,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.attach()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def attach(options = {})
@@ -128,6 +131,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   activity = instance.detach({
+      #     should_decrement_desired_capacity: false, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
       #   If `True`, the Auto Scaling group decrements the desired capacity
@@ -150,6 +158,11 @@ module Aws
         Activity::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   activity = instance.enter_standby({
+      #     should_decrement_desired_capacity: false, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
       #   Specifies whether the instances moved to `Standby` mode count as part
@@ -174,6 +187,9 @@ module Aws
         Activity::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   activity = instance.exit_standby()
       # @param [Hash] options ({})
       # @return [Activity::Collection]
       def exit_standby(options = {})
@@ -193,6 +209,12 @@ module Aws
         Activity::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.set_health({
+      #     health_status: "XmlStringMaxLen32", # required
+      #     should_respect_grace_period: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :health_status
       #   The health status of the instance. Set to `Healthy` if you want the
@@ -214,6 +236,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   activity = instance.terminate({
+      #     should_decrement_desired_capacity: false, # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Boolean] :should_decrement_desired_capacity
       #   If `true`, terminating the instance also decrements the size of the

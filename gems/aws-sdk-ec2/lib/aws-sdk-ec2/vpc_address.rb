@@ -112,6 +112,16 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc_address.associate({
+      #     dry_run: false,
+      #     instance_id: "String",
+      #     public_ip: "String",
+      #     network_interface_id: "String",
+      #     private_ip_address: "String",
+      #     allow_reassociation: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -148,6 +158,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpc_address.release({
+      #     dry_run: false,
+      #     public_ip: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

@@ -117,6 +117,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   vault.create()
       # @param [Hash] options ({})
       # @return [Types::CreateVaultOutput]
       def create(options = {})
@@ -128,6 +131,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vault.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -139,6 +145,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   job = vault.initiate_inventory_retrieval()
       # @param [Hash] options ({})
       # @return [Job]
       def initiate_inventory_retrieval(options = {})
@@ -158,6 +167,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipartupload = vault.initiate_multipart_upload({
+      #     archive_description: "string",
+      #     part_size: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :archive_description
       #   The archive description that you are uploading in parts.
@@ -184,6 +199,13 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   archive = vault.upload_archive({
+      #     archive_description: "string",
+      #     checksum: "string",
+      #     body: "data",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :archive_description
       #   The optional description of the archive you are uploading.
@@ -227,6 +249,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   completedjobs = vault.completed_jobs({
+      #     statuscode: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :statuscode
       #   Specifies the type of job status to return. You can specify the
@@ -257,6 +284,11 @@ module Aws
         Job::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   failedjobs = vault.failed_jobs({
+      #     completed: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
       #   Specifies the state of the jobs to return. You can specify `true` or
@@ -298,6 +330,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   jobs = vault.jobs({
+      #     statuscode: "string",
+      #     completed: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :statuscode
       #   Specifies the type of job status to return. You can specify the
@@ -330,6 +368,11 @@ module Aws
         Job::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   jobsinprogress = vault.jobs_in_progress({
+      #     completed: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
       #   Specifies the state of the jobs to return. You can specify `true` or
@@ -360,6 +403,9 @@ module Aws
         Job::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipartuplaods = vault.multipart_uplaods()
       # @param [Hash] options ({})
       # @return [MultipartUpload::Collection]
       def multipart_uplaods(options = {})
@@ -406,6 +452,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   succeededjobs = vault.succeeded_jobs({
+      #     completed: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
       #   Specifies the state of the jobs to return. You can specify `true` or

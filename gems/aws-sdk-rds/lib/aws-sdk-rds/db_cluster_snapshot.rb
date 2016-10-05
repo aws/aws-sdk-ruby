@@ -181,6 +181,16 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclustersnapshot = db_cluster_snapshot.create({
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Tag>] :tags
       #   The tags to be assigned to the DB cluster snapshot.
@@ -199,6 +209,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclustersnapshot = db_cluster_snapshot.copy({
+      #     target_db_cluster_snapshot_identifier: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :target_db_cluster_snapshot_identifier
       #   The identifier of the new DB cluster snapshot to create from the
@@ -227,6 +248,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbclustersnapshot = db_cluster_snapshot.delete()
       # @param [Hash] options ({})
       # @return [DBClusterSnapshot]
       def delete(options = {})
@@ -240,6 +264,26 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbcluster = db_cluster_snapshot.restore({
+      #     availability_zones: ["String"],
+      #     db_cluster_identifier: "String", # required
+      #     engine: "String", # required
+      #     engine_version: "String",
+      #     port: 1,
+      #     db_subnet_group_name: "String",
+      #     database_name: "String",
+      #     option_group_name: "String",
+      #     vpc_security_group_ids: ["String"],
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     kms_key_id: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :availability_zones
       #   Provides the list of EC2 Availability Zones that instances in the
@@ -326,6 +370,20 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_cluster_snapshot.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified

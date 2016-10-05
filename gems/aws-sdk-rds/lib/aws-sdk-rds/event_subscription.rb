@@ -136,6 +136,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = event_subscription.add_subscriber({
+      #     source_identifier: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :source_identifier
       #   The identifier of the event source to be added. An identifier must
@@ -167,6 +172,21 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = event_subscription.create({
+      #     sns_topic_arn: "String", # required
+      #     source_type: "String",
+      #     event_categories: ["String"],
+      #     source_ids: ["String"],
+      #     enabled: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :sns_topic_arn
       #   The Amazon Resource Name (ARN) of the SNS topic created for event
@@ -227,6 +247,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = event_subscription.delete()
       # @param [Hash] options ({})
       # @return [EventSubscription]
       def delete(options = {})
@@ -239,6 +262,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = event_subscription.modify({
+      #     sns_topic_arn: "String",
+      #     source_type: "String",
+      #     event_categories: ["String"],
+      #     enabled: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :sns_topic_arn
       #   The Amazon Resource Name (ARN) of the SNS topic created for event
@@ -274,6 +305,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = event_subscription.remove_subscriber({
+      #     source_identifier: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :source_identifier
       #   The source identifier to be removed from the subscription, such as the

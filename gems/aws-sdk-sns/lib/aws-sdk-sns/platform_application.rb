@@ -87,6 +87,15 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   platformendpoint = platform_application.create_platform_endpoint({
+      #     token: "String", # required
+      #     custom_user_data: "String",
+      #     attributes: {
+      #       "String" => "String",
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :token
       #   Unique identifier created by the notification service for an app on a
@@ -114,6 +123,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   platform_application.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -122,6 +134,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   platform_application.set_attributes({
+      #     attributes: { # required
+      #       "String" => "String",
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,String>] :attributes
       #   A map of the platform application attributes. Attributes in this map
@@ -167,6 +186,9 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   endpoints = platform_application.endpoints()
       # @param [Hash] options ({})
       # @return [PlatformEndpoint::Collection]
       def endpoints(options = {})

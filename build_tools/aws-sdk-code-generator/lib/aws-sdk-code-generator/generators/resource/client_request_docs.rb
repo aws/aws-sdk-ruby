@@ -7,14 +7,23 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(api:, request:, skip:[])
+        def initialize(api:, request:, skip:[], var_name:, returns:)
           @api = api
           @request = request
           @skip = Set.new(skip)
+          @var_name = var_name
+          @returns = returns
         end
 
         # @param [Dsl::Method] method
         def apply(method)
+          apply_request_syntax_example(method)
+          apply_option_tags(method)
+        end
+
+        private
+
+        def apply_option_tags(method)
           input_members.each do |member_name, member_ref, required|
             next if @skip.include?(member_name)
             method.option(
@@ -26,23 +35,49 @@ module AwsSdkCodeGenerator
           end
         end
 
-        private
+        def apply_request_syntax_example(method)
+          if input_shape
+            syntax = SyntaxExample.new(
+              struct_shape: input_shape,
+              api: @api,
+              indent: '  '
+            ).format.strip
+            method.docstring.append("@example Request syntax with placeholder values")
+            if @returns
+              method.docstring.append("\n  #{@returns} = #{@var_name}.#{method.name}(#{syntax})")
+            else
+              method.docstring.append("\n  #{@var_name}.#{method.name}(#{syntax})")
+            end
+          end
+        end
 
         def input_members
-          operation = @api['operations'][@request['operation']]
-          shape = shape(operation['input'])
-          if shape
+          if input_shape
             Enumerator.new do |y|
-              shape['members'].each_pair do |member_name, member_ref|
-                next if request_param?(member_name)
-                next if @skip.include?(member_name)
-                required = (shape['required'] || []).include?(member_name)
+              input_shape['members'].each_pair do |member_name, member_ref|
+                required = (input_shape['required'] || []).include?(member_name)
                 y.yield(member_name, member_ref, required)
               end
             end
           else
             []
           end
+        end
+
+        def operation
+          @api['operations'][@request['operation']]
+        end
+
+        def input_shape
+          struct = shape(operation['input'])
+          if struct
+            struct = BuildTools.deep_copy(struct)
+            struct['members'].keys.each do |member_name|
+              struct['members'].delete(member_name) if request_param?(member_name)
+              struct['members'].delete(member_name) if @skip.include?(member_name)
+            end
+          end
+          struct
         end
 
         def request_param?(member_name)

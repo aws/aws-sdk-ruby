@@ -153,6 +153,13 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   lifecycle_hook.complete({
+      #     lifecycle_action_token: "LifecycleActionToken",
+      #     lifecycle_action_result: "LifecycleActionResult", # required
+      #     instance_id: "XmlStringMaxLen19",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :lifecycle_action_token
       #   A universally unique identifier (UUID) that identifies a specific
@@ -174,6 +181,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   lifecycle_hook.delete()
       # @param [Hash] options ({})
       # @return [Types::DeleteLifecycleHookAnswer]
       def delete(options = {})
@@ -185,6 +195,16 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   lifecycle_hook.put({
+      #     lifecycle_transition: "LifecycleTransition",
+      #     role_arn: "ResourceName",
+      #     notification_target_arn: "NotificationTargetResourceName",
+      #     notification_metadata: "XmlStringMaxLen1023",
+      #     heartbeat_timeout: 1,
+      #     default_result: "LifecycleActionResult",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :lifecycle_transition
       #   The instance state to which you want to attach the lifecycle hook. For
@@ -252,6 +272,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   lifecycle_hook.record_heartbeat({
+      #     lifecycle_action_token: "LifecycleActionToken",
+      #     instance_id: "XmlStringMaxLen19",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :lifecycle_action_token
       #   A token that uniquely identifies a specific lifecycle action

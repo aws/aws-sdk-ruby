@@ -105,6 +105,23 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload_part.copy_from({
+      #     copy_source: "CopySource", # required
+      #     copy_source_if_match: "CopySourceIfMatch",
+      #     copy_source_if_modified_since: Time.now,
+      #     copy_source_if_none_match: "CopySourceIfNoneMatch",
+      #     copy_source_if_unmodified_since: Time.now,
+      #     copy_source_range: "CopySourceRange",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     copy_source_sse_customer_algorithm: "CopySourceSSECustomerAlgorithm",
+      #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
+      #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :copy_source
       #   The name of the source bucket and key name of the source object,
@@ -169,6 +186,17 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload_part.upload({
+      #     body: source_file,
+      #     content_length: 1,
+      #     content_md5: "ContentMD5",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String, IO] :body
       #   Object data.

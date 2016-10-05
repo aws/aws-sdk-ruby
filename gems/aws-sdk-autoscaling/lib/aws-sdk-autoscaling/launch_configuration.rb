@@ -199,6 +199,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   launch_configuration.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})

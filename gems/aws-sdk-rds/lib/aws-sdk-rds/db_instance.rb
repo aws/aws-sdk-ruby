@@ -413,6 +413,51 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.create({
+      #     db_name: "String",
+      #     allocated_storage: 1,
+      #     db_instance_class: "String", # required
+      #     engine: "String", # required
+      #     master_username: "String",
+      #     master_user_password: "String",
+      #     db_security_groups: ["String"],
+      #     vpc_security_group_ids: ["String"],
+      #     availability_zone: "String",
+      #     db_subnet_group_name: "String",
+      #     preferred_maintenance_window: "String",
+      #     db_parameter_group_name: "String",
+      #     backup_retention_period: 1,
+      #     preferred_backup_window: "String",
+      #     port: 1,
+      #     multi_az: false,
+      #     engine_version: "String",
+      #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     character_set_name: "String",
+      #     publicly_accessible: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     db_cluster_identifier: "String",
+      #     storage_type: "String",
+      #     tde_credential_arn: "String",
+      #     tde_credential_password: "String",
+      #     storage_encrypted: false,
+      #     kms_key_id: "String",
+      #     domain: "String",
+      #     copy_tags_to_snapshot: false,
+      #     monitoring_interval: 1,
+      #     monitoring_role_arn: "String",
+      #     domain_iam_role_name: "String",
+      #     promotion_tier: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_name
       #   The meaning of this parameter differs according to the database engine
@@ -1076,6 +1121,29 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.create_read_replica({
+      #     db_instance_identifier: "String", # required
+      #     db_instance_class: "String",
+      #     availability_zone: "String",
+      #     port: 1,
+      #     auto_minor_version_upgrade: false,
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     publicly_accessible: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     db_subnet_group_name: "String",
+      #     storage_type: "String",
+      #     copy_tags_to_snapshot: false,
+      #     monitoring_interval: 1,
+      #     monitoring_role_arn: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_instance_identifier
       #   The DB instance identifier of the Read Replica. This identifier is the
@@ -1213,6 +1281,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsnapshot = db_instance.create_snapshot({
+      #     db_snapshot_identifier: "String", # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_snapshot_identifier
       #   The identifier for the DB snapshot.
@@ -1242,6 +1321,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.delete({
+      #     skip_final_snapshot: false,
+      #     final_db_snapshot_identifier: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :skip_final_snapshot
       #   Determines whether a final DB snapshot is created before the DB
@@ -1291,6 +1376,41 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.modify({
+      #     allocated_storage: 1,
+      #     db_instance_class: "String",
+      #     db_subnet_group_name: "String",
+      #     db_security_groups: ["String"],
+      #     vpc_security_group_ids: ["String"],
+      #     apply_immediately: false,
+      #     master_user_password: "String",
+      #     db_parameter_group_name: "String",
+      #     backup_retention_period: 1,
+      #     preferred_backup_window: "String",
+      #     preferred_maintenance_window: "String",
+      #     multi_az: false,
+      #     engine_version: "String",
+      #     allow_major_version_upgrade: false,
+      #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     new_db_instance_identifier: "String",
+      #     storage_type: "String",
+      #     tde_credential_arn: "String",
+      #     tde_credential_password: "String",
+      #     ca_certificate_identifier: "String",
+      #     domain: "String",
+      #     copy_tags_to_snapshot: false,
+      #     monitoring_interval: 1,
+      #     db_port_number: 1,
+      #     publicly_accessible: false,
+      #     monitoring_role_arn: "String",
+      #     domain_iam_role_name: "String",
+      #     promotion_tier: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [Integer] :allocated_storage
       #   The new storage capacity of the RDS instance. Changing this setting
@@ -1787,6 +1907,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.promote({
+      #     backup_retention_period: 1,
+      #     preferred_backup_window: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Integer] :backup_retention_period
       #   The number of days to retain automated backups. Setting this parameter
@@ -1833,6 +1959,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.reboot({
+      #     force_failover: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :force_failover
       #   When `true`, the reboot will be conducted through a MultiAZ failover.
@@ -1850,6 +1981,37 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbinstance = db_instance.restore({
+      #     target_db_instance_identifier: "String", # required
+      #     restore_time: Time.now,
+      #     use_latest_restorable_time: false,
+      #     db_instance_class: "String",
+      #     port: 1,
+      #     availability_zone: "String",
+      #     db_subnet_group_name: "String",
+      #     multi_az: false,
+      #     publicly_accessible: false,
+      #     auto_minor_version_upgrade: false,
+      #     license_model: "String",
+      #     db_name: "String",
+      #     engine: "String",
+      #     iops: 1,
+      #     option_group_name: "String",
+      #     copy_tags_to_snapshot: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #     storage_type: "String",
+      #     tde_credential_arn: "String",
+      #     tde_credential_password: "String",
+      #     domain: "String",
+      #     domain_iam_role_name: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :target_db_instance_identifier
       #   The name of the new database instance to be created.
@@ -2021,6 +2183,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_instance.subscribe_to({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to add a
@@ -2036,6 +2203,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   eventsubscription = db_instance.unsubscribe_from({
+      #     subscription_name: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :subscription_name
       #   The name of the RDS event notification subscription you want to remove
@@ -2077,6 +2249,20 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   events = db_instance.events({
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     duration: 1,
+      #     event_categories: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Time,DateTime,Date,Integer,String] :start_time
       #   The beginning of the time interval to retrieve events for, specified
@@ -2131,6 +2317,19 @@ module Aws
         Event::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   logfiles = db_instance.log_files({
+      #     filename_contains: "String",
+      #     file_last_written: 1,
+      #     file_size: 1,
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :filename_contains
       #   Filters the available log files for log file names that contain the
@@ -2188,6 +2387,13 @@ module Aws
         DBParameterGroup::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   pendingmaintenanceactions = db_instance.pending_maintenance_actions({
+      #     resource_identifier: "String",
+      #     marker: "String",
+      #     max_records: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :resource_identifier
       #   The ARN of a resource to return pending maintenance actions for.
@@ -2251,6 +2457,20 @@ module Aws
         DBSecurityGroup::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   snapshots = db_instance.snapshots({
+      #     db_snapshot_identifier: "String",
+      #     snapshot_type: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
+      #     include_shared: false,
+      #     include_public: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_snapshot_identifier
       #   A specific DB snapshot identifier to describe. This parameter cannot

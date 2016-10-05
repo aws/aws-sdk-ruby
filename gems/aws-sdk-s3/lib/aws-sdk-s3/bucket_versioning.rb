@@ -83,6 +83,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_versioning.enable({
+      #     content_md5: "ContentMD5",
+      #     mfa: "MFA",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa
@@ -100,6 +106,16 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_versioning.put({
+      #     content_md5: "ContentMD5",
+      #     mfa: "MFA",
+      #     versioning_configuration: { # required
+      #       mfa_delete: "Enabled", # accepts Enabled, Disabled
+      #       status: "Enabled", # accepts Enabled, Suspended
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa
@@ -113,6 +129,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_versioning.suspend({
+      #     content_md5: "ContentMD5",
+      #     mfa: "MFA",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [String] :mfa

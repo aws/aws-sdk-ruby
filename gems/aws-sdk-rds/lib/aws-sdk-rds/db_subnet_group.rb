@@ -99,6 +99,18 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsubnetgroup = db_subnet_group.create({
+      #     db_subnet_group_description: "String", # required
+      #     subnet_ids: ["String"], # required
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :db_subnet_group_description
       #   The description for the DB subnet group.
@@ -117,6 +129,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_subnet_group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -125,6 +140,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dbsubnetgroup = db_subnet_group.modify({
+      #     db_subnet_group_description: "String",
+      #     subnet_ids: ["String"], # required
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :db_subnet_group_description
       #   The description for the DB subnet group.

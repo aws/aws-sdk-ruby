@@ -131,6 +131,19 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   account_password_policy.update({
+      #     minimum_password_length: 1,
+      #     require_symbols: false,
+      #     require_numbers: false,
+      #     require_uppercase_characters: false,
+      #     require_lowercase_characters: false,
+      #     allow_users_to_change_password: false,
+      #     max_password_age: 1,
+      #     password_reuse_prevention: 1,
+      #     hard_expiry: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Integer] :minimum_password_length
       #   The minimum number of characters allowed in an IAM user password.

@@ -115,6 +115,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   group.add_user({
+      #     user_name: "existingUserNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :user_name
       #   The name of the user to add.
@@ -133,6 +138,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group.attach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
@@ -150,6 +160,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group = group.create({
+      #     path: "pathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path
       #   The path to the group. For more information about paths, see [IAM
@@ -180,6 +195,12 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   grouppolicy = group.create_policy({
+      #     policy_name: "policyNameType", # required
+      #     policy_document: "policyDocumentType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_name
       #   The name of the policy document.
@@ -214,6 +235,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -222,6 +246,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group.detach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
@@ -239,6 +268,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group.remove_user({
+      #     user_name: "existingUserNameType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :user_name
       #   The name of the user to remove.
@@ -257,6 +291,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   group = group.update({
+      #     new_path: "pathType",
+      #     new_group_name: "groupNameType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :new_path
       #   New path for the IAM group. Only include this if changing the group's
@@ -295,6 +335,11 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedpolicies = group.attached_policies({
+      #     path_prefix: "policyPathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -330,6 +375,9 @@ module Aws
         Policy::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policies = group.policies()
       # @param [Hash] options ({})
       # @return [GroupPolicy::Collection]
       def policies(options = {})
@@ -361,6 +409,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   users = group.users()
       # @param [Hash] options ({})
       # @return [User::Collection]
       def users(options = {})

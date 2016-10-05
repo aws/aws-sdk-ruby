@@ -6,12 +6,13 @@ module AwsSdkCodeGenerator
 
       extend Helper
 
-      def initialize(name:, resource:, api:, paginators:nil, waiters:nil)
+      def initialize(name:, resource:, api:, paginators:nil, waiters:nil, var_name:nil)
         @api = api
         @name = name
         @resource = resource
         @paginators = paginators
         @waiters = waiters
+        @var_name = var_name || underscore(name)
         super(@name)
         build
         check_for_method_name_conflicts!
@@ -114,7 +115,8 @@ module AwsSdkCodeGenerator
           add(Resource::Action.new(
             api: @api,
             name: name,
-            action: action
+            action: action,
+            var_name: @var_name,
           ))
         end
       end
@@ -148,7 +150,8 @@ module AwsSdkCodeGenerator
             name: name,
             has_many: has_many,
             api: @api,
-            paginators: @paginators
+            paginators: @paginators,
+            var_name: @var_name,
           )
         end
       end
@@ -256,8 +259,6 @@ module AwsSdkCodeGenerator
       def check_for_duplicate_method!(method_name, names)
         method_name = method_name.to_s
         if names.include?(method_name)
-          # uncomment to see generated class with method conflicts
-          # puts self.to_s
           raise Errors::ResourceMethodConflict.new(
             resource_name: @name,
             method_name: method_name

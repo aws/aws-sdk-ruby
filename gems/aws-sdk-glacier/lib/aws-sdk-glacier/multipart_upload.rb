@@ -107,6 +107,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload.abort()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def abort(options = {})
@@ -119,6 +122,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload.complete({
+      #     archive_size: 1,
+      #     checksum: "string",
+      #   })
       # @param [Hash] options ({})
       # @option options [Integer] :archive_size
       #   The total size, in bytes, of the entire archive. This value should be
@@ -140,6 +149,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload.parts({
+      #     marker: "string",
+      #     limit: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :marker
       #   An opaque string used for pagination. This value specifies the part at
@@ -162,6 +177,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload.upload_part({
+      #     checksum: "string",
+      #     range: "string",
+      #     body: "data",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :checksum
       #   The SHA256 tree hash of the data being uploaded.

@@ -73,6 +73,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_tagging.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -81,6 +84,19 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket_tagging.put({
+      #     content_md5: "ContentMD5",
+      #     tagging: { # required
+      #       tag_set: [ # required
+      #         {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #       ],
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :content_md5
       # @option options [required, Types::Tagging] :tagging

@@ -137,7 +137,8 @@ module AwsSdkCodeGenerator
       Generators::RootResourceClass.new({
         api: @api,
         resources: @resources,
-        paginators: @paginators
+        paginators: @paginators,
+        var_name: underscore(@module_names.last),
       })
     end
 
@@ -147,7 +148,7 @@ module AwsSdkCodeGenerator
         name: resource_name,
         resource: resource_definition,
         paginators: @paginators,
-        waiters: @waiters
+        waiters: @waiters,
       )
     end
 

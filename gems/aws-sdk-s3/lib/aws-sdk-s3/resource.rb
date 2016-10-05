@@ -22,6 +22,20 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket = s3.create_bucket({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read
+      #     bucket: "BucketName", # required
+      #     create_bucket_configuration: {
+      #       location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+      #     },
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write: "GrantWrite",
+      #     grant_write_acp: "GrantWriteACP",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the bucket.

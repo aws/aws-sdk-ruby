@@ -22,6 +22,35 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   autoscalinggroup = auto_scaling.create_group({
+      #     auto_scaling_group_name: "XmlStringMaxLen255", # required
+      #     launch_configuration_name: "ResourceName",
+      #     instance_id: "XmlStringMaxLen19",
+      #     min_size: 1, # required
+      #     max_size: 1, # required
+      #     desired_capacity: 1,
+      #     default_cooldown: 1,
+      #     availability_zones: ["XmlStringMaxLen255"],
+      #     load_balancer_names: ["XmlStringMaxLen255"],
+      #     target_group_arns: ["XmlStringMaxLen511"],
+      #     health_check_type: "XmlStringMaxLen32",
+      #     health_check_grace_period: 1,
+      #     placement_group: "XmlStringMaxLen255",
+      #     vpc_zone_identifier: "XmlStringMaxLen2047",
+      #     termination_policies: ["XmlStringMaxLen1600"],
+      #     new_instances_protected_from_scale_in: false,
+      #     tags: [
+      #       {
+      #         resource_id: "XmlString",
+      #         resource_type: "XmlString",
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #         propagate_at_launch: false,
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :auto_scaling_group_name
       #   The name of the group. This name must be unique within the scope of
@@ -157,6 +186,44 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   launchconfiguration = auto_scaling.create_launch_configuration({
+      #     launch_configuration_name: "XmlStringMaxLen255", # required
+      #     image_id: "XmlStringMaxLen255",
+      #     key_name: "XmlStringMaxLen255",
+      #     security_groups: ["XmlString"],
+      #     classic_link_vpc_id: "XmlStringMaxLen255",
+      #     classic_link_vpc_security_groups: ["XmlStringMaxLen255"],
+      #     user_data: "XmlStringUserData",
+      #     instance_id: "XmlStringMaxLen19",
+      #     instance_type: "XmlStringMaxLen255",
+      #     kernel_id: "XmlStringMaxLen255",
+      #     ramdisk_id: "XmlStringMaxLen255",
+      #     block_device_mappings: [
+      #       {
+      #         virtual_name: "XmlStringMaxLen255",
+      #         device_name: "XmlStringMaxLen255", # required
+      #         ebs: {
+      #           snapshot_id: "XmlStringMaxLen255",
+      #           volume_size: 1,
+      #           volume_type: "BlockDeviceEbsVolumeType",
+      #           delete_on_termination: false,
+      #           iops: 1,
+      #           encrypted: false,
+      #         },
+      #         no_device: false,
+      #       },
+      #     ],
+      #     instance_monitoring: {
+      #       enabled: false,
+      #     },
+      #     spot_price: "SpotPrice",
+      #     iam_instance_profile: "XmlStringMaxLen1600",
+      #     ebs_optimized: false,
+      #     associate_public_ip_address: false,
+      #     placement_tenancy: "XmlStringMaxLen64",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :launch_configuration_name
       #   The name of the launch configuration. This name must be unique within
@@ -342,6 +409,12 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   activities = auto_scaling.activities({
+      #     activity_ids: ["XmlString"],
+      #     auto_scaling_group_name: "ResourceName",
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :activity_ids
       #   The activity IDs of the desired scaling activities. If you omit this
@@ -388,6 +461,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   groups = auto_scaling.groups({
+      #     auto_scaling_group_names: ["ResourceName"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :auto_scaling_group_names
       #   The group names. If you omit this parameter, all Auto Scaling groups
@@ -411,6 +489,11 @@ module Aws
         AutoScalingGroup::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instances = auto_scaling.instances({
+      #     instance_ids: ["XmlStringMaxLen19"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :instance_ids
       #   The instances to describe; up to 50 instance IDs. If you omit this
@@ -445,6 +528,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   launchconfigurations = auto_scaling.launch_configurations({
+      #     launch_configuration_names: ["ResourceName"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :launch_configuration_names
       #   The launch configuration names. If you omit this parameter, all launch
@@ -468,6 +556,13 @@ module Aws
         LaunchConfiguration::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policies = auto_scaling.policies({
+      #     auto_scaling_group_name: "ResourceName",
+      #     policy_names: ["ResourceName"],
+      #     policy_types: ["XmlStringMaxLen64"],
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :auto_scaling_group_name
       #   The name of the group.
@@ -517,6 +612,14 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   scheduledactions = auto_scaling.scheduled_actions({
+      #     auto_scaling_group_name: "ResourceName",
+      #     scheduled_action_names: ["ResourceName"],
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :auto_scaling_group_name
       #   The name of the group.
@@ -553,6 +656,16 @@ module Aws
         ScheduledAction::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tags = auto_scaling.tags({
+      #     filters: [
+      #       {
+      #         name: "XmlString",
+      #         values: ["XmlString"],
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Filter>] :filters
       #   A filter used to scope the tags to return.

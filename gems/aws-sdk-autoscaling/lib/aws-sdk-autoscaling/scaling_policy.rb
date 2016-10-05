@@ -154,6 +154,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   scaling_policy.delete({
+      #     auto_scaling_group_name: "ResourceName",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
@@ -164,6 +169,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   scaling_policy.execute({
+      #     auto_scaling_group_name: "ResourceName",
+      #     honor_cooldown: false,
+      #     metric_value: 1.0,
+      #     breach_threshold: 1.0,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.

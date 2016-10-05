@@ -114,6 +114,19 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket.create({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read
+      #     create_bucket_configuration: {
+      #       location_constraint: "EU", # accepts EU, eu-west-1, us-west-1, us-west-2, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1, cn-north-1, eu-central-1
+      #     },
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write: "GrantWrite",
+      #     grant_write_acp: "GrantWriteACP",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the bucket.
@@ -137,6 +150,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -145,6 +161,21 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   bucket.delete_objects({
+      #     delete: { # required
+      #       objects: [ # required
+      #         {
+      #           key: "ObjectKey", # required
+      #           version_id: "ObjectVersionId",
+      #         },
+      #       ],
+      #       quiet: false,
+      #     },
+      #     mfa: "MFA",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Types::Delete] :delete
       # @option options [String] :mfa
@@ -163,6 +194,36 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object = bucket.put_object({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+      #     body: source_file,
+      #     cache_control: "CacheControl",
+      #     content_disposition: "ContentDisposition",
+      #     content_encoding: "ContentEncoding",
+      #     content_language: "ContentLanguage",
+      #     content_length: 1,
+      #     content_md5: "ContentMD5",
+      #     content_type: "ContentType",
+      #     expires: Time.now,
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write_acp: "GrantWriteACP",
+      #     key: "ObjectKey", # required
+      #     metadata: {
+      #       "MetadataKey" => "MetadataValue",
+      #     },
+      #     server_side_encryption: "AES256", # accepts AES256, aws:kms
+      #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
+      #     website_redirect_location: "WebsiteRedirectLocation",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     ssekms_key_id: "SSEKMSKeyId",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the object.
@@ -279,6 +340,15 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipartuploads = bucket.multipart_uploads({
+      #     delimiter: "Delimiter",
+      #     encoding_type: "url", # accepts url
+      #     key_marker: "KeyMarker",
+      #     prefix: "Prefix",
+      #     upload_id_marker: "UploadIdMarker",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :delimiter
       #   Character you use to group keys.
@@ -339,6 +409,15 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   objectversions = bucket.object_versions({
+      #     delimiter: "Delimiter",
+      #     encoding_type: "url", # accepts url
+      #     key_marker: "KeyMarker",
+      #     prefix: "Prefix",
+      #     version_id_marker: "VersionIdMarker",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :delimiter
       #   A delimiter is a character you use to group keys.
@@ -377,6 +456,13 @@ module Aws
         ObjectVersion::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   objects = bucket.objects({
+      #     delimiter: "Delimiter",
+      #     encoding_type: "url", # accepts url
+      #     prefix: "Prefix",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :delimiter
       #   A delimiter is a character you use to group keys.

@@ -22,6 +22,26 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   dynamo_db.batch_get_item({
+      #     request_items: { # required
+      #       "TableName" => {
+      #         keys: [ # required
+      #           {
+      #             "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #           },
+      #         ],
+      #         attributes_to_get: ["AttributeName"],
+      #         consistent_read: false,
+      #         projection_expression: "ProjectionExpression",
+      #         expression_attribute_names: {
+      #           "ExpressionAttributeNameVariable" => "AttributeName",
+      #         },
+      #       },
+      #     },
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Types::KeysAndAttributes>] :request_items
       #   A map of one or more table names and, for each table, a map that
@@ -147,6 +167,28 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   dynamo_db.batch_write_item({
+      #     request_items: { # required
+      #       "TableName" => [
+      #         {
+      #           put_request: {
+      #             item: { # required
+      #               "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #             },
+      #           },
+      #           delete_request: {
+      #             key: { # required
+      #               "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #             },
+      #           },
+      #         },
+      #       ],
+      #     },
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Array>] :request_items
       #   A map of one or more table names and, for each table, a list of
@@ -206,6 +248,65 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table = dynamo_db.create_table({
+      #     attribute_definitions: [ # required
+      #       {
+      #         attribute_name: "KeySchemaAttributeName", # required
+      #         attribute_type: "S", # required, accepts S, N, B
+      #       },
+      #     ],
+      #     table_name: "TableName", # required
+      #     key_schema: [ # required
+      #       {
+      #         attribute_name: "KeySchemaAttributeName", # required
+      #         key_type: "HASH", # required, accepts HASH, RANGE
+      #       },
+      #     ],
+      #     local_secondary_indexes: [
+      #       {
+      #         index_name: "IndexName", # required
+      #         key_schema: [ # required
+      #           {
+      #             attribute_name: "KeySchemaAttributeName", # required
+      #             key_type: "HASH", # required, accepts HASH, RANGE
+      #           },
+      #         ],
+      #         projection: { # required
+      #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+      #           non_key_attributes: ["NonKeyAttributeName"],
+      #         },
+      #       },
+      #     ],
+      #     global_secondary_indexes: [
+      #       {
+      #         index_name: "IndexName", # required
+      #         key_schema: [ # required
+      #           {
+      #             attribute_name: "KeySchemaAttributeName", # required
+      #             key_type: "HASH", # required, accepts HASH, RANGE
+      #           },
+      #         ],
+      #         projection: { # required
+      #           projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+      #           non_key_attributes: ["NonKeyAttributeName"],
+      #         },
+      #         provisioned_throughput: { # required
+      #           read_capacity_units: 1, # required
+      #           write_capacity_units: 1, # required
+      #         },
+      #       },
+      #     ],
+      #     provisioned_throughput: { # required
+      #       read_capacity_units: 1, # required
+      #       write_capacity_units: 1, # required
+      #     },
+      #     stream_specification: {
+      #       stream_enabled: false,
+      #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Array<Types::AttributeDefinition>] :attribute_definitions
       #   An array of attributes that describe the key schema for the table and
@@ -389,6 +490,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tables = dynamo_db.tables()
       # @param [Hash] options ({})
       # @return [Table::Collection]
       def tables(options = {})

@@ -84,6 +84,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   db_log_file.download({
+      #     marker: "String",
+      #     number_of_lines: 1,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :marker
       #   The pagination token provided in the previous request or "0". If the

@@ -114,6 +114,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   multipart_upload.abort({
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for
@@ -132,6 +137,19 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object = multipart_upload.complete({
+      #     multipart_upload: {
+      #       parts: [
+      #         {
+      #           etag: "ETag",
+      #           part_number: 1,
+      #         },
+      #       ],
+      #     },
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [Types::CompletedMultipartUpload] :multipart_upload
       # @option options [String] :request_payer
@@ -178,6 +196,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   parts = multipart_upload.parts({
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :request_payer
       #   Confirms that the requester knows that she or he will be charged for

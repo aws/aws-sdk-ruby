@@ -121,6 +121,11 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   role.attach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to attach.
@@ -138,6 +143,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   role.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -146,6 +154,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   role.detach_policy({
+      #     policy_arn: "arnType", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :policy_arn
       #   The Amazon Resource Name (ARN) of the IAM policy you want to detach.
@@ -173,6 +186,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   attachedpolicies = role.attached_policies({
+      #     path_prefix: "policyPathType",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :path_prefix
       #   The path prefix for filtering the results. This parameter is optional.
@@ -208,6 +226,9 @@ module Aws
         Policy::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instanceprofiles = role.instance_profiles()
       # @param [Hash] options ({})
       # @return [InstanceProfile::Collection]
       def instance_profiles(options = {})
@@ -229,6 +250,9 @@ module Aws
         InstanceProfile::Collection.new(batches)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   policies = role.policies()
       # @param [Hash] options ({})
       # @return [RolePolicy::Collection]
       def policies(options = {})

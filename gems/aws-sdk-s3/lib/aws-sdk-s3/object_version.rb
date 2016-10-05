@@ -126,6 +126,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_version.delete({
+      #     mfa: "MFA",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :mfa
       #   The concatenation of the authentication device's serial number, a
@@ -147,6 +153,25 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_version.get({
+      #     if_match: "IfMatch",
+      #     if_modified_since: Time.now,
+      #     if_none_match: "IfNoneMatch",
+      #     if_unmodified_since: Time.now,
+      #     range: "Range",
+      #     response_cache_control: "ResponseCacheControl",
+      #     response_content_disposition: "ResponseContentDisposition",
+      #     response_content_encoding: "ResponseContentEncoding",
+      #     response_content_language: "ResponseContentLanguage",
+      #     response_content_type: "ResponseContentType",
+      #     response_expires: Time.now,
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :if_match
       #   Return the object only if its entity tag (ETag) is the same as the one
@@ -206,6 +231,19 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_version.head({
+      #     if_match: "IfMatch",
+      #     if_modified_since: Time.now,
+      #     if_none_match: "IfNoneMatch",
+      #     if_unmodified_since: Time.now,
+      #     range: "Range",
+      #     sse_customer_algorithm: "SSECustomerAlgorithm",
+      #     sse_customer_key: "SSECustomerKey",
+      #     sse_customer_key_md5: "SSECustomerKeyMD5",
+      #     request_payer: "requester", # accepts requester
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :if_match
       #   Return the object only if its entity tag (ETag) is the same as the one

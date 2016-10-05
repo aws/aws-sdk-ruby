@@ -246,6 +246,17 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = image.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -272,6 +283,11 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image.deregister({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -285,6 +301,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "description", # required, accepts description, kernel, ramdisk, launchPermission, productCodes, blockDeviceMapping, sriovNetSupport
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -305,6 +327,32 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image.modify_attribute({
+      #     dry_run: false,
+      #     attribute: "String",
+      #     operation_type: "add", # accepts add, remove
+      #     user_ids: ["String"],
+      #     user_groups: ["String"],
+      #     product_codes: ["String"],
+      #     value: "String",
+      #     launch_permission: {
+      #       add: [
+      #         {
+      #           user_id: "String",
+      #           group: "all", # accepts all
+      #         },
+      #       ],
+      #       remove: [
+      #         {
+      #           user_id: "String",
+      #           group: "all", # accepts all
+      #         },
+      #       ],
+      #     },
+      #     description: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -339,6 +387,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image.reset_attribute({
+      #     dry_run: false,
+      #     attribute: "launchPermission", # required, accepts launchPermission
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

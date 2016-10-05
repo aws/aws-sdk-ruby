@@ -5,10 +5,11 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(name:, action:, api:)
+        def initialize(name:, action:, api:, var_name:)
           @api = api
           @request = action['request']
           @resource = action['resource']
+          @var_name = var_name
           super(underscore(name))
           param('options', type:Hash, default:{})
           apply_client_request_docs
@@ -21,7 +22,9 @@ module AwsSdkCodeGenerator
         def apply_client_request_docs
           ClientRequestDocs.new(
             request: @request,
-            api: @api
+            api: @api,
+            var_name: @var_name,
+            returns: @resource ? @resource['type'].downcase : nil
           ).apply(self)
         end
 

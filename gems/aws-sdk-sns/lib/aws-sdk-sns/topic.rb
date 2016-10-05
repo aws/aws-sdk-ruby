@@ -100,6 +100,13 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic.add_permission({
+      #     label: "label", # required
+      #     aws_account_id: ["delegate"], # required
+      #     action_name: ["action"], # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :label
       #   A unique identifier for the new policy statement.
@@ -118,6 +125,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscription = topic.confirm_subscription({
+      #     token: "token", # required
+      #     authenticate_on_unsubscribe: "authenticateOnUnsubscribe",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :token
       #   Short-lived token sent to an endpoint during the `Subscribe` action.
@@ -137,6 +150,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -145,6 +161,22 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic.publish({
+      #     target_arn: "String",
+      #     phone_number: "String",
+      #     message: "message", # required
+      #     subject: "subject",
+      #     message_structure: "messageStructure",
+      #     message_attributes: {
+      #       "String" => {
+      #         data_type: "String", # required
+      #         string_value: "String",
+      #         binary_value: "data",
+      #       },
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :target_arn
       #   Either TopicArn or EndpointArn, but not both.
@@ -238,6 +270,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic.remove_permission({
+      #     label: "label", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :label
       #   The unique label of the statement you want to remove.
@@ -248,6 +285,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   topic.set_attributes({
+      #     attribute_name: "attributeName", # required
+      #     attribute_value: "attributeValue",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :attribute_name
       #   The name of the attribute you want to set. Only a subset of the
@@ -263,6 +306,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscription = topic.subscribe({
+      #     protocol: "protocol", # required
+      #     endpoint: "endpoint",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :protocol
       #   The protocol you want to use. Supported protocols include:
@@ -321,6 +370,9 @@ module Aws
 
       # @!group Associations
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscriptions = topic.subscriptions()
       # @param [Hash] options ({})
       # @return [Subscription::Collection]
       def subscriptions(options = {})

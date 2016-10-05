@@ -323,6 +323,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.delete()
       # @param [Hash] options ({})
       # @return [Types::DeleteTableOutput]
       def delete(options = {})
@@ -331,6 +334,32 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.delete_item({
+      #     key: { # required
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     expected: {
+      #       "AttributeName" => {
+      #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         exists: false,
+      #         comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #       },
+      #     },
+      #     conditional_operator: "AND", # accepts AND, OR
+      #     return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+      #     condition_expression: "ConditionExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #     expression_attribute_values: {
+      #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Types::AttributeValue>] :key
       #   A map of attribute names to *AttributeValue* objects, representing the
@@ -753,6 +782,20 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.get_item({
+      #     key: { # required
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     attributes_to_get: ["AttributeName"],
+      #     consistent_read: false,
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     projection_expression: "ProjectionExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Types::AttributeValue>] :key
       #   A map of attribute names to *AttributeValue* objects, representing the
@@ -878,6 +921,32 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.put_item({
+      #     item: { # required
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     expected: {
+      #       "AttributeName" => {
+      #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         exists: false,
+      #         comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #       },
+      #     },
+      #     return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+      #     conditional_operator: "AND", # accepts AND, OR
+      #     condition_expression: "ConditionExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #     expression_attribute_values: {
+      #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Types::AttributeValue>] :item
       #   A map of attribute name/value pairs, one for each attribute. Only the
@@ -1315,6 +1384,42 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.query({
+      #     index_name: "IndexName",
+      #     select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
+      #     attributes_to_get: ["AttributeName"],
+      #     limit: 1,
+      #     consistent_read: false,
+      #     key_conditions: {
+      #       "AttributeName" => {
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #       },
+      #     },
+      #     query_filter: {
+      #       "AttributeName" => {
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #       },
+      #     },
+      #     conditional_operator: "AND", # accepts AND, OR
+      #     scan_index_forward: false,
+      #     exclusive_start_key: {
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     projection_expression: "ProjectionExpression",
+      #     filter_expression: "ConditionExpression",
+      #     key_condition_expression: "KeyExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #     expression_attribute_values: {
+      #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :index_name
       #   The name of an index to query. This index can be any local secondary
@@ -1900,6 +2005,36 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.scan({
+      #     index_name: "IndexName",
+      #     attributes_to_get: ["AttributeName"],
+      #     limit: 1,
+      #     select: "ALL_ATTRIBUTES", # accepts ALL_ATTRIBUTES, ALL_PROJECTED_ATTRIBUTES, SPECIFIC_ATTRIBUTES, COUNT
+      #     scan_filter: {
+      #       "AttributeName" => {
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         comparison_operator: "EQ", # required, accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #       },
+      #     },
+      #     conditional_operator: "AND", # accepts AND, OR
+      #     exclusive_start_key: {
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     total_segments: 1,
+      #     segment: 1,
+      #     projection_expression: "ProjectionExpression",
+      #     filter_expression: "ConditionExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #     expression_attribute_values: {
+      #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     consistent_read: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :index_name
       #   The name of a secondary index to scan. This index can be any local
@@ -2239,6 +2374,55 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table = table.update({
+      #     attribute_definitions: [
+      #       {
+      #         attribute_name: "KeySchemaAttributeName", # required
+      #         attribute_type: "S", # required, accepts S, N, B
+      #       },
+      #     ],
+      #     provisioned_throughput: {
+      #       read_capacity_units: 1, # required
+      #       write_capacity_units: 1, # required
+      #     },
+      #     global_secondary_index_updates: [
+      #       {
+      #         update: {
+      #           index_name: "IndexName", # required
+      #           provisioned_throughput: { # required
+      #             read_capacity_units: 1, # required
+      #             write_capacity_units: 1, # required
+      #           },
+      #         },
+      #         create: {
+      #           index_name: "IndexName", # required
+      #           key_schema: [ # required
+      #             {
+      #               attribute_name: "KeySchemaAttributeName", # required
+      #               key_type: "HASH", # required, accepts HASH, RANGE
+      #             },
+      #           ],
+      #           projection: { # required
+      #             projection_type: "ALL", # accepts ALL, KEYS_ONLY, INCLUDE
+      #             non_key_attributes: ["NonKeyAttributeName"],
+      #           },
+      #           provisioned_throughput: { # required
+      #             read_capacity_units: 1, # required
+      #             write_capacity_units: 1, # required
+      #           },
+      #         },
+      #         delete: {
+      #           index_name: "IndexName", # required
+      #         },
+      #       },
+      #     ],
+      #     stream_specification: {
+      #       stream_enabled: false,
+      #       stream_view_type: "NEW_IMAGE", # accepts NEW_IMAGE, OLD_IMAGE, NEW_AND_OLD_IMAGES, KEYS_ONLY
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::AttributeDefinition>] :attribute_definitions
       #   An array of attributes that describe the key schema for the table and
@@ -2292,6 +2476,39 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   table.update_item({
+      #     key: { # required
+      #       "AttributeName" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #     attribute_updates: {
+      #       "AttributeName" => {
+      #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         action: "ADD", # accepts ADD, PUT, DELETE
+      #       },
+      #     },
+      #     expected: {
+      #       "AttributeName" => {
+      #         value: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #         exists: false,
+      #         comparison_operator: "EQ", # accepts EQ, NE, IN, LE, LT, GE, GT, BETWEEN, NOT_NULL, NULL, CONTAINS, NOT_CONTAINS, BEGINS_WITH
+      #         attribute_value_list: ["value"], # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #       },
+      #     },
+      #     conditional_operator: "AND", # accepts AND, OR
+      #     return_values: "NONE", # accepts NONE, ALL_OLD, UPDATED_OLD, ALL_NEW, UPDATED_NEW
+      #     return_consumed_capacity: "INDEXES", # accepts INDEXES, TOTAL, NONE
+      #     return_item_collection_metrics: "SIZE", # accepts SIZE, NONE
+      #     update_expression: "UpdateExpression",
+      #     condition_expression: "ConditionExpression",
+      #     expression_attribute_names: {
+      #       "ExpressionAttributeNameVariable" => "AttributeName",
+      #     },
+      #     expression_attribute_values: {
+      #       "ExpressionAttributeValueVariable" => "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [required, Hash<String,Types::AttributeValue>] :key
       #   The primary key of the item to be updated. Each element consists of an

@@ -81,6 +81,12 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   loginprofile = login_profile.create({
+      #     password: "passwordType", # required
+      #     password_reset_required: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :password
       #   The new password for the user.
@@ -111,6 +117,9 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   login_profile.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -119,6 +128,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   login_profile.update({
+      #     password: "passwordType",
+      #     password_reset_required: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :password
       #   The new password for the specified IAM user.

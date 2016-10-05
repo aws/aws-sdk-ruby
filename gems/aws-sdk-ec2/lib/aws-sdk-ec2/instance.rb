@@ -391,6 +391,13 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.attach_classic_link_vpc({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #     groups: ["String"], # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -409,6 +416,13 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.attach_volume({
+      #     dry_run: false,
+      #     volume_id: "String", # required
+      #     device: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -428,6 +442,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.console_output({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -441,6 +460,29 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   image = instance.create_image({
+      #     dry_run: false,
+      #     name: "String", # required
+      #     description: "String",
+      #     no_reboot: false,
+      #     block_device_mappings: [
+      #       {
+      #         virtual_name: "String",
+      #         device_name: "String",
+      #         ebs: {
+      #           snapshot_id: "String",
+      #           volume_size: 1,
+      #           delete_on_termination: false,
+      #           volume_type: "standard", # accepts standard, io1, gp2, sc1, st1
+      #           iops: 1,
+      #           encrypted: false,
+      #         },
+      #         no_device: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -473,6 +515,17 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   tag = instance.create_tags({
+      #     dry_run: false,
+      #     tags: [ # required
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -499,6 +552,12 @@ module Aws
         Tag::Collection.new([batch], size: batch.size)
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.describe_attribute({
+      #     dry_run: false,
+      #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -516,6 +575,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.detach_classic_link_vpc({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -531,6 +596,14 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.detach_volume({
+      #     dry_run: false,
+      #     volume_id: "String", # required
+      #     device: "String",
+      #     force: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -557,6 +630,45 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.modify_attribute({
+      #     dry_run: false,
+      #     attribute: "instanceType", # accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+      #     value: "String",
+      #     block_device_mappings: [
+      #       {
+      #         device_name: "String",
+      #         ebs: {
+      #           volume_id: "String",
+      #           delete_on_termination: false,
+      #         },
+      #         virtual_name: "String",
+      #         no_device: "String",
+      #       },
+      #     ],
+      #     source_dest_check: {
+      #       value: false,
+      #     },
+      #     disable_api_termination: {
+      #       value: false,
+      #     },
+      #     instance_type: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     kernel: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     ramdisk: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     user_data: {
+      #       value: "data",
+      #     },
+      #     instance_initiated_shutdown_behavior: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     groups: ["String"],
+      #     ebs_optimized: {
+      #       value: false,
+      #     },
+      #     sriov_net_support: "value", # value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #     ena_support: {
+      #       value: false,
+      #     },
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -657,6 +769,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.monitor({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -670,6 +787,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.password_data({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -683,6 +805,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.reboot({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -696,6 +823,16 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.report_status({
+      #     dry_run: false,
+      #     status: "ok", # required, accepts ok, impaired
+      #     start_time: Time.now,
+      #     end_time: Time.now,
+      #     reason_codes: ["instance-stuck-in-state"], # required, accepts instance-stuck-in-state, unresponsive, not-accepting-credentials, password-not-available, performance-network, performance-instance-store, performance-ebs-volume, performance-other, other
+      #     description: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -745,6 +882,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.reset_attribute({
+      #     dry_run: false,
+      #     attribute: "instanceType", # required, accepts instanceType, kernel, ramdisk, userData, disableApiTermination, instanceInitiatedShutdownBehavior, rootDeviceName, blockDeviceMapping, productCodes, sourceDestCheck, groupSet, ebsOptimized, sriovNetSupport, enaSupport
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -764,6 +907,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.reset_kernel({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -780,6 +928,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.reset_ramdisk({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -796,6 +949,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.reset_source_dest_check({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -812,6 +970,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.start({
+      #     additional_info: "String",
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :additional_info
       #   Reserved.
@@ -827,6 +991,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.stop({
+      #     dry_run: false,
+      #     force: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -847,6 +1017,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.terminate({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -860,6 +1035,11 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   instance.unmonitor({
+      #     dry_run: false,
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -948,6 +1128,12 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   volumes = instance.volumes({
+      #     dry_run: false,
+      #     volume_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
@@ -991,6 +1177,13 @@ module Aws
         end
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   vpcaddresses = instance.vpc_addresses({
+      #     dry_run: false,
+      #     public_ips: ["String"],
+      #     allocation_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,

@@ -91,6 +91,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscription.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -99,6 +102,12 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   subscription.set_attributes({
+      #     attribute_name: "attributeName", # required
+      #     attribute_value: "attributeValue",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :attribute_name
       #   The name of the attribute you want to set. Only a subset of the

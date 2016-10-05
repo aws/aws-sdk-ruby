@@ -97,6 +97,37 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   object_acl.put({
+      #     acl: "private", # accepts private, public-read, public-read-write, authenticated-read, aws-exec-read, bucket-owner-read, bucket-owner-full-control
+      #     access_control_policy: {
+      #       grants: [
+      #         {
+      #           grantee: {
+      #             display_name: "DisplayName",
+      #             email_address: "EmailAddress",
+      #             id: "ID",
+      #             type: "CanonicalUser", # required, accepts CanonicalUser, AmazonCustomerByEmail, Group
+      #             uri: "URI",
+      #           },
+      #           permission: "FULL_CONTROL", # accepts FULL_CONTROL, WRITE, WRITE_ACP, READ, READ_ACP
+      #         },
+      #       ],
+      #       owner: {
+      #         display_name: "DisplayName",
+      #         id: "ID",
+      #       },
+      #     },
+      #     content_md5: "ContentMD5",
+      #     grant_full_control: "GrantFullControl",
+      #     grant_read: "GrantRead",
+      #     grant_read_acp: "GrantReadACP",
+      #     grant_write: "GrantWrite",
+      #     grant_write_acp: "GrantWriteACP",
+      #     request_payer: "requester", # accepts requester
+      #     version_id: "ObjectVersionId",
+      #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
       #   The canned ACL to apply to the object.

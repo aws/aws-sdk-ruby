@@ -81,6 +81,9 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   notification_configuration.delete()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def delete(options = {})
@@ -92,6 +95,9 @@ module Aws
         resp.data
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   notification_configuration.put()
       # @param [Hash] options ({})
       # @return [EmptyStructure]
       def put(options = {})

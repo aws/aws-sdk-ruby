@@ -22,6 +22,44 @@ module Aws
 
       # @!group Actions
 
+      # @example Request syntax with placeholder values
+      #
+      #   stack = ops_works.create_stack({
+      #     name: "String", # required
+      #     region: "String", # required
+      #     vpc_id: "String",
+      #     attributes: {
+      #       "Color" => "String",
+      #     },
+      #     service_role_arn: "String", # required
+      #     default_instance_profile_arn: "String", # required
+      #     default_os: "String",
+      #     hostname_theme: "String",
+      #     default_availability_zone: "String",
+      #     default_subnet_id: "String",
+      #     custom_json: "String",
+      #     configuration_manager: {
+      #       name: "String",
+      #       version: "String",
+      #     },
+      #     chef_configuration: {
+      #       manage_berkshelf: false,
+      #       berkshelf_version: "String",
+      #     },
+      #     use_custom_cookbooks: false,
+      #     use_opsworks_security_groups: false,
+      #     custom_cookbooks_source: {
+      #       type: "git", # accepts git, svn, archive, s3
+      #       url: "String",
+      #       username: "String",
+      #       password: "String",
+      #       ssh_key: "String",
+      #       revision: "String",
+      #     },
+      #     default_ssh_key_name: "String",
+      #     default_root_device_type: "ebs", # accepts ebs, instance-store
+      #     agent_version: "String",
+      #   })
       # @param [Hash] options ({})
       # @option options [required, String] :name
       #   The stack name.
@@ -307,6 +345,11 @@ module Aws
         )
       end
 
+      # @example Request syntax with placeholder values
+      #
+      #   stacks = ops_works.stacks({
+      #     stack_ids: ["String"],
+      #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :stack_ids
       #   An array of stack IDs that specify the stacks to be described. If you
