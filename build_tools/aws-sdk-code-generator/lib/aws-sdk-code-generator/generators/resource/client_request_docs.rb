@@ -25,7 +25,6 @@ module AwsSdkCodeGenerator
 
         def apply_option_tags(method)
           input_members.each do |member_name, member_ref, required|
-            next if @skip.include?(member_name)
             method.option(
               name: underscore(member_name),
               type: ruby_input_type(member_ref),
@@ -83,7 +82,7 @@ module AwsSdkCodeGenerator
         def request_param?(member_name)
           params = @request['params'] || []
           params.any? do |param|
-            param['target'].match(/^#{member_name}\b/)
+            param['target'].match(/^#{member_name}\b/) && !(param['target'].include?('[') && param['target'].include?('.'))
           end
         end
 

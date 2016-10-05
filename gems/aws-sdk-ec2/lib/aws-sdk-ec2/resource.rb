@@ -907,6 +907,12 @@ module Aws
       #   classicaddresses = ec2.classic_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
       #     allocation_ids: ["String"],
       #   })
       # @param [Hash] options ({})
@@ -919,6 +925,28 @@ module Aws
       #   \[EC2-Classic\] One or more Elastic IP addresses.
       #
       #   Default: Describes all your Elastic IP addresses.
+      # @option options [Array<Types::Filter>] :filters
+      #   One or more filters. Filter names and values are case-sensitive.
+      #
+      #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+      #
+      #   * `association-id` - \[EC2-VPC\] The association ID for the address.
+      #
+      #   * `domain` - Indicates whether the address is for use in EC2-Classic
+      #     (`standard`) or in a VPC (`vpc`).
+      #
+      #   * `instance-id` - The ID of the instance the address is associated
+      #     with, if any.
+      #
+      #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
+      #     that the address is associated with, if any.
+      #
+      #   * `network-interface-owner-id` - The AWS account ID of the owner.
+      #
+      #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
+      #     with the Elastic IP address.
+      #
+      #   * `public-ip` - The Elastic IP address.
       # @option options [Array<String>] :allocation_ids
       #   \[EC2-VPC\] One or more allocation IDs.
       #
@@ -2424,6 +2452,12 @@ module Aws
       #   vpcaddresses = ec2.vpc_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
       #     allocation_ids: ["String"],
       #   })
       # @param [Hash] options ({})
@@ -2436,6 +2470,28 @@ module Aws
       #   \[EC2-Classic\] One or more Elastic IP addresses.
       #
       #   Default: Describes all your Elastic IP addresses.
+      # @option options [Array<Types::Filter>] :filters
+      #   One or more filters. Filter names and values are case-sensitive.
+      #
+      #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+      #
+      #   * `association-id` - \[EC2-VPC\] The association ID for the address.
+      #
+      #   * `domain` - Indicates whether the address is for use in EC2-Classic
+      #     (`standard`) or in a VPC (`vpc`).
+      #
+      #   * `instance-id` - The ID of the instance the address is associated
+      #     with, if any.
+      #
+      #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
+      #     that the address is associated with, if any.
+      #
+      #   * `network-interface-owner-id` - The AWS account ID of the owner.
+      #
+      #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
+      #     with the Elastic IP address.
+      #
+      #   * `public-ip` - The Elastic IP address.
       # @option options [Array<String>] :allocation_ids
       #   \[EC2-VPC\] One or more allocation IDs.
       #

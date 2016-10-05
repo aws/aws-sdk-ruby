@@ -102,8 +102,20 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   tag.create()
+      #   tag.create({
+      #     tags: [ # required
+      #       {
+      #         resource_id: "XmlString",
+      #         resource_type: "XmlString",
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #         propagate_at_launch: false,
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
+      # @option options [required, Array<Types::Tag>] :tags
+      #   One or more tags.
       # @return [EmptyStructure]
       def create(options = {})
         options = Aws::Util.deep_merge(options, tags: [{
@@ -117,8 +129,20 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   tag.delete()
+      #   tag.delete({
+      #     tags: [ # required
+      #       {
+      #         resource_id: "XmlString",
+      #         resource_type: "XmlString",
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #         propagate_at_launch: false,
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
+      # @option options [required, Array<Types::Tag>] :tags
+      #   One or more tags.
       # @return [EmptyStructure]
       def delete(options = {})
         options = Aws::Util.deep_merge(options, tags: [{
@@ -189,30 +213,14 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
-        def batch_create
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_create(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_delete!
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_delete!(options = {})
         end
 
         # @!endgroup

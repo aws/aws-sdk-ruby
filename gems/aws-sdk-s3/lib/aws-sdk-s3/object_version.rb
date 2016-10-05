@@ -361,6 +361,7 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
           batches.each do |batch|

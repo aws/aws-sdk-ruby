@@ -103,6 +103,12 @@ module Aws
       #
       #   tag.delete({
       #     dry_run: false,
+      #     tags: [
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       },
+      #     ],
       #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
@@ -110,6 +116,11 @@ module Aws
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option options [Array<Types::Tag>] :tags
+      #   One or more tags to delete. If you omit the `value` parameter, we
+      #   delete the tag regardless of its value. If you specify this parameter
+      #   with an empty string as the value, we delete the key only if its value
+      #   is an empty string.
       # @return [EmptyStructure]
       def delete(options = {})
         options = Aws::Util.deep_merge(options,
@@ -182,17 +193,9 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
-        def batch_delete!
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_delete!(options = {})
         end
 
         # @!endgroup

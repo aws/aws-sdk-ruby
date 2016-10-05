@@ -2391,12 +2391,30 @@ module Aws
       #
       #   pendingmaintenanceactions = db_instance.pending_maintenance_actions({
       #     resource_identifier: "String",
+      #     filters: [
+      #       {
+      #         name: "String", # required
+      #         values: ["String"], # required
+      #       },
+      #     ],
       #     marker: "String",
       #     max_records: 1,
       #   })
       # @param [Hash] options ({})
       # @option options [String] :resource_identifier
       #   The ARN of a resource to return pending maintenance actions for.
+      # @option options [Array<Types::Filter>] :filters
+      #   A filter that specifies one or more resources to return pending
+      #   maintenance actions for.
+      #
+      #   Supported filters:
+      #
+      #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+      #     Amazon Resource Names (ARNs). The results list will only include
+      #     pending maintenance actions for the DB instances identified by these
+      #     ARNs.
+      #
+      #   ^
       # @option options [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribePendingMaintenanceActions` request. If this parameter is

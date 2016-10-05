@@ -288,8 +288,31 @@ module Aws
 
       # @example Request syntax with placeholder values
       #
-      #   metric.put_data()
+      #   metric.put_data({
+      #     metric_data: [ # required
+      #       {
+      #         metric_name: "MetricName", # required
+      #         dimensions: [
+      #           {
+      #             name: "DimensionName", # required
+      #             value: "DimensionValue", # required
+      #           },
+      #         ],
+      #         timestamp: Time.now,
+      #         value: 1.0,
+      #         statistic_values: {
+      #           sample_count: 1.0, # required
+      #           sum: 1.0, # required
+      #           minimum: 1.0, # required
+      #           maximum: 1.0, # required
+      #         },
+      #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
+      #       },
+      #     ],
+      #   })
       # @param [Hash] options ({})
+      # @option options [required, Array<Types::MetricDatum>] :metric_data
+      #   A list of data describing the metric.
       # @return [EmptyStructure]
       def put_data(options = {})
         options = Aws::Util.deep_merge(options,

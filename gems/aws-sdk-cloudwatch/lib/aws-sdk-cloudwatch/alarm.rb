@@ -372,43 +372,19 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
-        def batch_delete!
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_delete!(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_disable_actions
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_disable_actions(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_enable_actions
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_enable_actions(options = {})
         end
 
         # @!endgroup

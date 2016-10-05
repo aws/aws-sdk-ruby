@@ -1133,6 +1133,12 @@ module Aws
       #   volumes = instance.volumes({
       #     dry_run: false,
       #     volume_ids: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
       #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
@@ -1142,6 +1148,58 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [Array<String>] :volume_ids
       #   One or more volume IDs.
+      # @option options [Array<Types::Filter>] :filters
+      #   One or more filters.
+      #
+      #   * `attachment.attach-time` - The time stamp when the attachment
+      #     initiated.
+      #
+      #   * `attachment.delete-on-termination` - Whether the volume is deleted
+      #     on instance termination.
+      #
+      #   * `attachment.device` - The device name that is exposed to the
+      #     instance (for example, `/dev/sda1`).
+      #
+      #   * `attachment.instance-id` - The ID of the instance the volume is
+      #     attached to.
+      #
+      #   * `attachment.status` - The attachment state (`attaching` \|
+      #     `attached` \| `detaching` \| `detached`).
+      #
+      #   * `availability-zone` - The Availability Zone in which the volume was
+      #     created.
+      #
+      #   * `create-time` - The time stamp when the volume was created.
+      #
+      #   * `encrypted` - The encryption status of the volume.
+      #
+      #   * `size` - The size of the volume, in GiB.
+      #
+      #   * `snapshot-id` - The snapshot from which the volume was created.
+      #
+      #   * `status` - The status of the volume (`creating` \| `available` \|
+      #     `in-use` \| `deleting` \| `deleted` \| `error`).
+      #
+      #   * `tag`\:*key*=*value* - The key/value combination of a tag assigned
+      #     to the resource.
+      #
+      #   * `tag-key` - The key of a tag assigned to the resource. This filter
+      #     is independent of the `tag-value` filter. For example, if you use
+      #     both the filter "tag-key=Purpose" and the filter "tag-value=X",
+      #     you get any resources assigned both the tag key Purpose (regardless
+      #     of what the tag's value is), and the tag value X (regardless of
+      #     what the tag's key is). If you want to list only resources where
+      #     Purpose is X, see the `tag`\:*key*=*value* filter.
+      #
+      #   * `tag-value` - The value of a tag assigned to the resource. This
+      #     filter is independent of the `tag-key` filter.
+      #
+      #   * `volume-id` - The volume ID.
+      #
+      #   * `volume-type` - The Amazon EBS volume type. This can be `gp2` for
+      #     General Purpose SSD, `io1` for Provisioned IOPS SSD, `st1` for
+      #     Throughput Optimized HDD, `sc1` for Cold HDD, or `standard` for
+      #     Magnetic volumes.
       # @return [Volume::Collection]
       def volumes(options = {})
         batches = Enumerator.new do |y|
@@ -1182,6 +1240,12 @@ module Aws
       #   vpcaddresses = instance.vpc_addresses({
       #     dry_run: false,
       #     public_ips: ["String"],
+      #     filters: [
+      #       {
+      #         name: "String",
+      #         values: ["String"],
+      #       },
+      #     ],
       #     allocation_ids: ["String"],
       #   })
       # @param [Hash] options ({})
@@ -1194,6 +1258,28 @@ module Aws
       #   \[EC2-Classic\] One or more Elastic IP addresses.
       #
       #   Default: Describes all your Elastic IP addresses.
+      # @option options [Array<Types::Filter>] :filters
+      #   One or more filters. Filter names and values are case-sensitive.
+      #
+      #   * `allocation-id` - \[EC2-VPC\] The allocation ID for the address.
+      #
+      #   * `association-id` - \[EC2-VPC\] The association ID for the address.
+      #
+      #   * `domain` - Indicates whether the address is for use in EC2-Classic
+      #     (`standard`) or in a VPC (`vpc`).
+      #
+      #   * `instance-id` - The ID of the instance the address is associated
+      #     with, if any.
+      #
+      #   * `network-interface-id` - \[EC2-VPC\] The ID of the network interface
+      #     that the address is associated with, if any.
+      #
+      #   * `network-interface-owner-id` - The AWS account ID of the owner.
+      #
+      #   * `private-ip-address` - \[EC2-VPC\] The private IP address associated
+      #     with the Elastic IP address.
+      #
+      #   * `public-ip` - The Elastic IP address.
       # @option options [Array<String>] :allocation_ids
       #   \[EC2-VPC\] One or more allocation IDs.
       #
@@ -1262,95 +1348,39 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
-        def batch_create_tags
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_create_tags(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_monitor
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_monitor(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_reboot
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_reboot(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_start
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_start(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_stop
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_stop(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_terminate!
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_terminate!(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_unmonitor
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_unmonitor(options = {})
         end
 
         # @!endgroup

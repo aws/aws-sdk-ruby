@@ -325,56 +325,24 @@ module Aws
 
         # @!group Batch Actions
 
+        # @param options ({})
         # @return [void]
-        def batch_attach
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_attach(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_detach
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_detach(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_enter_standby
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_enter_standby(options = {})
         end
 
+        # @param options ({})
         # @return [void]
-        def batch_exit_standby
-          batches.each do |batch|
-            params = {}
-            batch.each.with_index do |item, n|
-              Aws::Util.deep_merge(params, {
-              })
-            end
-            @client.operation_name(params)
-          end
-          nil
+        def batch_exit_standby(options = {})
         end
 
         # @!endgroup

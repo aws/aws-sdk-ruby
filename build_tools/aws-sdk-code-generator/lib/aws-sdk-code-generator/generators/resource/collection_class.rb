@@ -42,17 +42,7 @@ enum
             @resource['batchActions'].each do |name, action|
               actions << Dsl::Method.new(batch_action_name(name, action)) do |m|
                 m.returns('void')
-                m.code(<<-CODE)
-batches.each do |batch|
-  params = {}
-  batch.each.with_index do |item, n|
-    Aws::Util.deep_merge(params, {
-    })
-  end
-  @client.operation_name(params)
-end
-nil
-                CODE
+                m.param('options', default: {})
               end
             end
             actions << '# @!endgroup'
