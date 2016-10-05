@@ -5,7 +5,7 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(name:, action:, api:, var_name:)
+        def initialize(name:, action:, api:, var_name:'')
           @api = api
           @request = action['request']
           @resource = action['resource']
