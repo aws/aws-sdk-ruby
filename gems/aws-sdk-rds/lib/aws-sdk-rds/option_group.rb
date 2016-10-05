@@ -277,9 +277,7 @@ module Aws
         end
       end
 
-      class Collection
-
-        include Aws::Resources::Collection
+      class Collection < Resources::Collection
 
         # @return [Enumerator<OptionGroup>]
         def each(&block)

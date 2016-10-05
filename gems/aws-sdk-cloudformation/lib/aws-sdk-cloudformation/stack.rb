@@ -471,9 +471,7 @@ module Aws
         yield(waiter.waiter)
       end
 
-      class Collection
-
-        include Aws::Resources::Collection
+      class Collection < Resources::Collection
 
         # @return [Enumerator<Stack>]
         def each(&block)

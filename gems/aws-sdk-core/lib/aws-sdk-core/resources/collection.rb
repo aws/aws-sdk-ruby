@@ -1,10 +1,9 @@
 module Aws
   module Resources
-    module Collection
+    class Collection
 
-      def self.included(base)
-        base.send(:include, Enumerable)
-      end
+      extend Aws::Deprecations
+      include Enumerable
 
       # @param [Enumerator<Array>] batches
       # @option options [Integer] :limit
@@ -24,14 +23,49 @@ module Aws
       end
       alias :length :size
 
+      # @deprecated
+      # @api private
+      def batches
+        Enumerator.new do |y|
+          each_batch do |batch|
+            y << self.class.new([batch], size: batch.size)
+          end
+        end
+      end
+      deprecated :batches
+
+      # @deprecated
+      # @api private
+      def [](index)
+        if @size
+          @batches[0][index]
+        else
+          raise "unabled to index into a lazy loaded collection"
+        end
+      end
+      deprecated :[]
+
       # @return [Enumerator<Band>]
       def each(&block)
-        Enumerator.new(@limit) do |y|
-          batches.each do |batch|
+        enum = Enumerator.new(@limit) do |y|
+          each_batch do |batch|
             batch.each do |band|
               y.yield(band)
             end
           end
+        end
+        enum.each(&block) if block
+        enum
+      end
+
+      # @param [Integer] count
+      # @return [Resource, Collection]
+      def first(count = nil)
+        if count
+          items = limit(count).to_a
+          self.class.new([items], size: items.size)
+        else
+          each.next
         end
       end
 
@@ -49,11 +83,11 @@ module Aws
 
       private
 
-      def batches
+      def each_batch(&block)
         case @limit
-        when 0 then []
-        when nil then @batches
-        else limited_batches
+        when 0 then # don't yield
+        when nil then @batches.each(&block)
+        else limited_batches.each(&block)
         end
       end
 
@@ -66,7 +100,7 @@ module Aws
               y.yield(batch)
               yielded += batch.size
             end
-            break if remaining == 0
+            break if yielded == @limit
           end
         end
       end

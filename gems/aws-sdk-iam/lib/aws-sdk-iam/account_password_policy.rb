@@ -210,9 +210,7 @@ module Aws
       end
       deprecated(:identifiers)
 
-      class Collection
-
-        include Aws::Resources::Collection
+      class Collection < Resources::Collection
 
         # @return [Enumerator<AccountPasswordPolicy>]
         def each(&block)

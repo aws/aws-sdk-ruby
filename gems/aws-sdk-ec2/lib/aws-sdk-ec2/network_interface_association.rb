@@ -145,9 +145,7 @@ module Aws
         end
       end
 
-      class Collection
-
-        include Aws::Resources::Collection
+      class Collection < Resources::Collection
 
         # @return [Enumerator<NetworkInterfaceAssociation>]
         def each(&block)
