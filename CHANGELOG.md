@@ -1,6 +1,20 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
+
+* Feature - Aws::KMS - Updated the API for AWS Key Management Service.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
 2.6.5 (2016-09-29)
 ------------------
 
