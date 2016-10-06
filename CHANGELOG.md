@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.6 (2016-10-06)
+------------------
+
 * Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
 
 * Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
