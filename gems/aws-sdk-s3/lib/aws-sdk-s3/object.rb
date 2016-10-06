@@ -864,21 +864,14 @@ module Aws
         yield(waiter.waiter)
       end
 
-      class Collection < Resources::Collection
-
-        # @return [Enumerator<Object>]
-        def each(&block)
-          enum = super
-          enum.each(&block) if block
-          enum
-        end
+      class Collection < Aws::Resources::Collection
 
         # @!group Batch Actions
 
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
-          each_batch do |batch|
+          batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               bucket: batch[0].bucket_name,
               delete: {

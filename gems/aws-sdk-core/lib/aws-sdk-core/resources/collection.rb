@@ -27,7 +27,7 @@ module Aws
       # @api private
       def batches
         Enumerator.new do |y|
-          each_batch do |batch|
+          batch_enum.each do |batch|
             y << self.class.new([batch], size: batch.size)
           end
         end
@@ -48,7 +48,7 @@ module Aws
       # @return [Enumerator<Band>]
       def each(&block)
         enum = Enumerator.new(@limit) do |y|
-          each_batch do |batch|
+          batch_enum.each do |batch|
             batch.each do |band|
               y.yield(band)
             end
@@ -83,11 +83,11 @@ module Aws
 
       private
 
-      def each_batch(&block)
+      def batch_enum
         case @limit
-        when 0 then # don't yield
-        when nil then @batches.each(&block)
-        else limited_batches.each(&block)
+        when 0 then []
+        when nil then @batches
+        else limited_batches
         end
       end
 

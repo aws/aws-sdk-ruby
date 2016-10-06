@@ -143,16 +143,7 @@ module Aws
         end
       end
 
-      class Collection < Resources::Collection
-
-        # @return [Enumerator<Subscription>]
-        def each(&block)
-          enum = super
-          enum.each(&block) if block
-          enum
-        end
-
-      end
+      class Collection < Aws::Resources::Collection; end
     end
   end
 end

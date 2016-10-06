@@ -9,8 +9,7 @@ module AwsSdkCodeGenerator
           @resource_name = resource_name
           @resource = resource
           @variable_name = underscore(resource_name)
-          super('Collection', extends: 'Resources::Collection')
-          add(each_method)
+          super('Collection', extends: 'Aws::Resources::Collection')
           add(*batch_actions)
         end
 
@@ -21,18 +20,6 @@ module AwsSdkCodeGenerator
         end
 
         private
-
-        def each_method
-          Dsl::Method.new('each') do |m|
-            m.returns("Enumerator<#{@resource_name}>")
-            m.block_param
-            m.code(<<-CODE)
-enum = super
-enum.each(&block) if block
-enum
-            CODE
-          end
-        end
 
         def batch_actions
           if @resource['batchActions']

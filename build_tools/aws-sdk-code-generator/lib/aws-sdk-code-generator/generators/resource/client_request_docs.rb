@@ -70,7 +70,7 @@ module AwsSdkCodeGenerator
         def input_shape
           struct = shape(operation['input'])
           if struct
-            struct = BuildTools.deep_copy(struct)
+            struct = deep_copy(struct)
             struct['members'].keys.each do |member_name|
               struct['members'].delete(member_name) if request_param?(member_name)
               struct['members'].delete(member_name) if @skip.include?(member_name)
