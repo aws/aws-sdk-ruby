@@ -51,26 +51,22 @@ module Aws
         file_size = resp.content_length
         if file_size < MIN_CHUNK_SIZE
           single_request
-        elsif resp.parts_count == 1 #TODO
+        elsif resp.parts_count.nil? || resp.parts_count <= 1
           get_range(construct_chunks(file_size))
         else
           chunk_size = compute_chunk(file_size)
-          part_size = (file_size.to_f / resp.parts_count.to_f).ceil #TODO
+          part_size = (file_size.to_f / resp.parts_count.to_f).ceil
           if chunk_size < part_size
             get_range(construct_chunks(file_size))
           else
-            get_part(resp.parts_count) #TODO
+            get_part(resp.parts_count)
           end
         end
       end
  
       def construct_chunks(file_size)
         offset = 0
-        if @chunk_size && @chunk_size > file_size
-          raise ArgumentError, ":chunk_size shouldn't exceed total file size."
-        else
-          default_chunk_size = @chunk_size || compute_chunk(file_size)
-        end
+        default_chunk_size = compute_chunk(file_size)
         chunks = []
         while offset <= file_size
           progress = offset + default_chunk_size
@@ -85,7 +81,11 @@ module Aws
       end
 
       def compute_chunk(file_size)
-        [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
+        if @chunk_size && @chunk_size > file_size
+          raise ArgumentError, ":chunk_size shouldn't exceed total file size."
+        else
+          default_chunk_size = @chunk_size || [(file_size.to_f / MAX_PARTS).ceil, MIN_CHUNK_SIZE].max.to_i
+        end
       end
 
       def get_range(chunks)

@@ -1,5 +1,4 @@
 require 'base64'
-require 'rest-client'
 require 'tempfile'
 require 'fileutils'
 require 'net/https'
