@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.7 (2016-10-12)
+------------------
+
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
 
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
