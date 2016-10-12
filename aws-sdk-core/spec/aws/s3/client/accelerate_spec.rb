@@ -11,6 +11,14 @@ module Aws
 
       let(:accelerated_client) { Client.new(options.merge(use_accelerate_endpoint: true)) }
 
+      let(:accel_dualstack_client) {
+        Client.new(
+          options.merge(
+            use_accelerate_endpoint: true, use_dualstack_endpoint: true
+          )
+        )
+      }
+
       describe ':use_accelerate_endpoint' do
 
         it 'defaults to false' do
@@ -58,6 +66,32 @@ module Aws
         end
 
       end
+
+      describe ':use_accelerate_endpoint with :use_dualstack_endpoint' do
+
+        it 'properly uses the combined endpoint' do
+          resp = accel_dualstack_client.put_object(bucket:'bucket-name', key:'key', use_accelerate_endpoint: true)
+          expect(resp.context.http_request.endpoint.to_s).to eq(
+            'https://bucket-name.s3-accelerate.dualstack.amazonaws.com/key')
+        end
+
+        it 'does not apply to #create_bucket' do
+          resp = accel_dualstack_client.create_bucket(bucket:'bucket-name')
+          expect(resp.context.http_request.endpoint.to_s).to eq('https://bucket-name.s3.dualstack.us-east-1.amazonaws.com/')
+        end
+
+        it 'does not apply to #list_buckets' do
+          resp = accel_dualstack_client.list_buckets
+          expect(resp.context.http_request.endpoint.to_s).to eq('https://s3.dualstack.us-east-1.amazonaws.com/')
+        end
+
+        it 'does not apply to #delete_bucket' do
+          resp = accel_dualstack_client.delete_bucket(bucket:'bucket-name')
+          expect(resp.context.http_request.endpoint.to_s).to eq('https://bucket-name.s3.dualstack.us-east-1.amazonaws.com/')
+        end
+        
+      end
+
     end
   end
 end
