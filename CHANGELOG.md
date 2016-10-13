@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
 * Feature - Aws::S3 - Adds support for Amazon S3 Accelerate with dualstack endpoints.
 
 2.6.8 (2016-10-12)
