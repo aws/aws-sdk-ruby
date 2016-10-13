@@ -40,9 +40,7 @@
       "input":{"shape":"ResolveCustomerRequest"},
       "output":{"shape":"ResolveCustomerResult"},
       "errors":[
-        {"shape":"ExpiredTokenException"},
         {"shape":"InternalServiceErrorException"},
-        {"shape":"InvalidTokenException"},
         {"shape":"ThrottlingException"}
       ]
     }
