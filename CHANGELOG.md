@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::S3 - Adds support for Amazon S3 Accelerate with dualstack endpoints.
+
 2.6.8 (2016-10-12)
 ------------------
 
