@@ -79,14 +79,6 @@ module Aws
           )
         end
 
-        it 'throws an exception if both :use_dualstack_endpoint and :use_accelerate_endpoint are set' do
-          expect {
-            Client.new(options.merge(
-              use_dualstack_endpoint: true, use_accelerate_endpoint: true
-            ))
-          }.to raise_error(ArgumentError)
-        end
-
         it 'uses the correct endpoint pattern for us-east-1' do
           client = Client.new(stub_responses: true, region: "us-east-1", use_dualstack_endpoint: true)
           resp = client.put_object(bucket: 'bucket-name', key: 'key')
