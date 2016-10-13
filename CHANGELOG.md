@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.9 (2016-10-13)
+------------------
+
 * Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
 
 * Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
