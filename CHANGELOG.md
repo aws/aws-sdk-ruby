@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.10 (2016-10-17)
+------------------
+
 * Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
 
 2.6.9 (2016-10-13)
