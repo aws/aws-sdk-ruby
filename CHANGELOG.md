@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.11 (2016-10-18)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the resource interfaces for AWS CloudFormation.
 
 * Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
