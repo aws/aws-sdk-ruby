@@ -36,8 +36,7 @@
           "type": "Stack",
           "identifiers": [
             { "target": "Name", "source": "response", "path": "Stacks[].StackName" }
-          ],
-          "path": "Stacks[]"
+          ]
         }
       }
     }

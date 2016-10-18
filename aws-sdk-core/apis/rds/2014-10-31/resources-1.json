@@ -1813,7 +1813,7 @@
                                 "value": "db-instance-id"
                             },
                             {
-                                "target": "Filters[0].Values[]",
+                                "target": "Filters[0].Value",
                                 "source": "identifier",
                                 "name": "Id"
                             }

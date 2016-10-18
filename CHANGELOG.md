@@ -1,6 +1,18 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the resource interfaces for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::RDS - Updated the API, documentation, and resource interfaces for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-09-29 API version of Amazon CloudFront.
+
 2.6.10 (2016-10-17)
 ------------------
 
