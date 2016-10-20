@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::WAF - Updated the documentation for AWS WAF.
+
+* Feature - Aws::Budgets - Added support for a new service, AWS Budgets.
+
 2.6.11 (2016-10-18)
 ------------------
 

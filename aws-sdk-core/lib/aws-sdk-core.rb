@@ -24,6 +24,7 @@ module Aws
     ApplicationAutoScaling
     ApplicationDiscoveryService
     AutoScaling
+    Budgets
     CloudFormation
     CloudFront
     CloudHSM
