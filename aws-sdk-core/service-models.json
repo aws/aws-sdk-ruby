@@ -19,6 +19,10 @@
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
   },
+  "Budgets": {
+    "models": "budgets/2016-10-20",
+    "endpoint": "budgets"
+  },
   "CloudFormation": {
     "models": "cloudformation/2010-05-15",
     "endpoint": "cloudformation"
