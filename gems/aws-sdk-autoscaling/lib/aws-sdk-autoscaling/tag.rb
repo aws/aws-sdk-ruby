@@ -207,11 +207,43 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_create(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              create: {
+                tags: []
+              }
+            })
+            batch.each do |item|
+              params[:create][:tags] << {
+                resource_type: item.resource_type,
+                resource_id: item.resource_id,
+                key: item.key
+              }
+            end
+            batch[0].client.create_or_update_tags(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              delete: {
+                tags: []
+              }
+            })
+            batch.each do |item|
+              params[:delete][:tags] << {
+                resource_type: item.resource_type,
+                resource_id: item.resource_id,
+                key: item.key
+              }
+            end
+            batch[0].client.delete_tags(params)
+          end
+          nil
         end
 
         # @!endgroup

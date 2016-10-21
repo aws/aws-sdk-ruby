@@ -187,6 +187,22 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              delete: {
+                resources: [],
+                tags: []
+              }
+            })
+            batch.each do |item|
+              params[:delete][:tags] << {
+                key: item.key,
+                value: item.value
+              }
+            end
+            batch[0].client.delete_tags(params)
+          end
+          nil
         end
 
         # @!endgroup

@@ -366,16 +366,43 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              delete: {
+                alarm_names: []
+              }
+            })
+            batch[0].client.delete_alarms(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_disable_actions(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              disable_actions: {
+                alarm_names: []
+              }
+            })
+            batch[0].client.disable_alarm_actions(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_enable_actions(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              enable_actions: {
+                alarm_names: []
+              }
+            })
+            batch[0].client.enable_alarm_actions(params)
+          end
+          nil
         end
 
         # @!endgroup

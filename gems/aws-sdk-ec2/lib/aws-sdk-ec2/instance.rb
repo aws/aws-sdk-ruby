@@ -1342,36 +1342,99 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_create_tags(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              create_tags: {
+                resources: []
+              }
+            })
+            batch[0].client.create_tags(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_monitor(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              monitor: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.monitor_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_reboot(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              reboot: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.reboot_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_start(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              start: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.start_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_stop(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              stop: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.stop_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_terminate!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              terminate: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.terminate_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_unmonitor(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              unmonitor: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.unmonitor_instances(params)
+          end
+          nil
         end
 
         # @!endgroup

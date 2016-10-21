@@ -697,20 +697,22 @@ describe 'Interfaces' do
 
     describe 'batchActions' do
 
-      it 'invokes one client request per collection batch'
+      # TODO
+      it 'invokes one client request per collection batch' do
+        band = Sample::Band.new(name: 'band-name', client: client)
+        expect(client).to receive(:batch_delete!).once
+      end
 
-      it 'supports batch actions with fixed params'
+      it 'raises for actions that model a resource' do
+        svc = Sample::Resource.new(client: client)
+        band = svc.band('band-name')
+        expect(band).to respond_to(:batch_delete!) 
+      end
 
-      it 'raises for actions that model a resource'
+      it 'it validates batch args, accepts 0 or 1 arguments' do
 
-      it 'prefixes batch operation names with batch_'
-
-      it 'suffixes batch delete operations with a bang(!)'
-
-      it 'suffixes batch terminate operations with a bang(!)'
-
-      it 'validates batch args, accepts 0 or 1 arguments'
-
+      it 'supports batch actions with fixed params' do
+ 
       it 'validates batch args, options must be a hash'
 
       it 'has a #batches method that returns a collection enumerator that responds to batch actions'

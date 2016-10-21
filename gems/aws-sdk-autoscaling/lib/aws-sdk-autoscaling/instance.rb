@@ -319,21 +319,61 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              autoscalinggroupname: batch[0].group_name,
+              attach: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.attach_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              autoscalinggroupname: batch[0].group_name,
+              detach: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.detach_instances(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_enter_standby(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              autoscalinggroupname: batch[0].group_name,
+              enter_standby: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.enter_standby(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_exit_standby(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.deep_merge(options, {
+              autoscalinggroupname: batch[0].group_name,
+              exit_standby: {
+                instance_ids: []
+              }
+            })
+            batch[0].client.exit_standby(params)
+          end
+          nil
         end
 
         # @!endgroup
