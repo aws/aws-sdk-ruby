@@ -84,6 +84,7 @@ module Aws
     ServiceCatalog
     SES
     SimpleDB
+    SMS
     SNS
     Snowball
     SQS
