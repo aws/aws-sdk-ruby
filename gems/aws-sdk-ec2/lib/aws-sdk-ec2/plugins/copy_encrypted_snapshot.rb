@@ -53,31 +53,28 @@ module Aws
         class PresignHandler < Seahorse::Client::Handler
 
           def call(context)
-            convert_post_2_get(context)
             Seahorse::Client::Response.new(
               context: context,
-              data: presigned_url(context.http_request, context.config))
+              data: presigned_url(context.http_request, context.config)
+            )
           end
 
           private
 
-          def convert_post_2_get(context)
-            context.http_request.http_method = 'GET'
-            context.http_request.endpoint = new_endpoint(context)
-            context.http_request.body = ''
-            context.http_request.headers.delete('Content-Type')
-          end
-
-          def new_endpoint(context)
-            body = context.http_request.body_contents
-            endpoint = context.http_request.endpoint
-            endpoint.query = body
-            endpoint
-          end
-
-          def presigned_url(http_request, config)
-            signer = Signers::V4.new(config.credentials, 'ec2', config.region)
-            signer.presigned_url(http_request, expires_in: 3600)
+          def presigned_url(req, config)
+            signer = Aws::Sigv4::Signer.new(
+              service: 'ec2',
+              region: config.region,
+              credentials_provider: config.credentials,
+              unsigned_headers: ['content-type', 'user-agent']
+            )
+            signer.presign_url(
+              http_method: 'GET',
+              url: "#{req.endpoint}?#{req.body_contents}",
+              headers: req.headers,
+              body: '',
+              expires_in: 3600,
+            ).to_s
           end
 
         end

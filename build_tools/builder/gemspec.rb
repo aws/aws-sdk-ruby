@@ -54,11 +54,12 @@ end
       end
 
       def dependencies
-        @service.dependencies.map do |gem, version|
+        deps = {}
+        deps.update(@service.dependencies)
+        deps.map do |gem, version|
           "spec.add_dependency('#{gem}', '#{version}')"
         end.join("\n  ")
       end
-
 
     end
   end

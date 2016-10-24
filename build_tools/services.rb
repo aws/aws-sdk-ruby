@@ -97,6 +97,11 @@ module BuildTools
         api['metadata']['apiVersion']
       end
 
+      # @return [String]
+      def signature_version
+        api['metadata']['signatureVersion']
+      end
+
       # @return [String] Something like "Amazon Simple Storage Service"
       def full_name
         api['metadata']['serviceFullName']

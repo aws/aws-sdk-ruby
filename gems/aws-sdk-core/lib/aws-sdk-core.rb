@@ -207,14 +207,6 @@ module Aws
   end
 
   # @api private
-  module Signers
-    autoload :Base, 'aws-sdk-core/signers/base'
-    autoload :V2, 'aws-sdk-core/signers/v2'
-    autoload :V3, 'aws-sdk-core/signers/v3'
-    autoload :V4, 'aws-sdk-core/signers/v4'
-  end
-
-  # @api private
   module Stubbing
     autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
     autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'

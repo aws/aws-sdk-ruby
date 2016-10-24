@@ -38,6 +38,7 @@ def each_test_case(context, fixture_path)
     describe(suite['description'].inspect) do
       suite['cases'].each.with_index do |test_case, case_n|
         describe("case: #{case_n}") do
+          suite['metadata']['endpointPrefix'] ||= 'svc'
           test_case_name = suite['metadata']['protocol'].gsub(/-/, '_')
           test_case_name += "_#{suite_n}_#{case_n}"
           yield(self, suite, test_case, test_case_name)

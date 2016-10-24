@@ -1,4 +1,6 @@
 require 'set'
+$:.unshift(File.expand_path('../../../../../aws-sigv4/lib', __FILE__))
+require 'aws-sigv4'
 
 module Aws
   module S3
@@ -7,12 +9,14 @@ module Aws
       # @api private
       class RequestSigner < Seahorse::Client::Plugin
 
+        # @api private
+        UNSIGNED_HEADERS = ['content-length']
+
         option(:signature_version, 'v4')
 
         class SigningHandler < Aws::Plugins::RequestSigner::Handler
 
           def call(context)
-            require_credentials(context)
             version = context.config.signature_version
             case version
             when 'v4' then apply_v4_signature(context)
@@ -27,11 +31,14 @@ module Aws
 
           private
 
-          def apply_v4_signature(context)
-            Signers::V4.new(
-              context.config.credentials, 's3',
-              context[:cached_sigv4_region] || context.config.sigv4_region,
-            ).sign(context.http_request)
+          def sigv4_signer(context)
+            Aws::Sigv4::Signer.new({
+              service: 's3',
+              region: context[:cached_sigv4_region] || context.config.sigv4_region,
+              credentials_provider: credentials_provider(context),
+              uri_escape_path: false,
+              unsigned_headers: UNSIGNED_HEADERS,
+            })
           end
 
           def apply_s3_legacy_signature(context)
@@ -126,9 +133,30 @@ module Aws
             context.http_response.body.truncate(0)
             context.http_request.headers.delete('authorization')
             context.http_request.headers.delete('x-amz-security-token')
+            context.http_request.headers.delete('x-amz-date')
             context.http_request.endpoint.host = new_hostname(context, region)
-            signer = Signers::V4.new(context.config.credentials, 's3', region)
-            signer.sign(context.http_request)
+            signer = Aws::Sigv4::Signer.new({
+              service: 's3',
+              region: region,
+              credentials_provider: context.config.credentials,
+              uri_escape_path: false,
+              unsigned_headers: UNSIGNED_HEADERS,
+            })
+
+            # compute the signature
+            signature = signer.sign_request(
+              http_method: context.http_request.http_method,
+              url: context.http_request.endpoint,
+              headers: context.http_request.headers,
+              body: context.http_request.body
+            )
+
+            # apply signature headers
+            context.http_request.headers.update(signature.headers)
+
+            # add request metadata with signature components for debugging
+            context[:canonical_request] = signature.canonical_request
+            context[:string_to_sign] = signature.string_to_sign
           end
 
           def region_from_body(body)

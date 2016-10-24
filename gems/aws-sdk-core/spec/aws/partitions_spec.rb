@@ -96,12 +96,12 @@ module Aws
 
         describe '#service' do
 
-          BuildTools::Services.each do |svc|
-            next if svc.name == 'CloudSearchDomain'
-            it "can return a service by name: #{svc.name}" do
-              service = Aws.partition('aws').service(svc.name)
+          Aws::SERVICE_MODULE_NAMES.each do |svc|
+            next if svc == 'CloudSearchDomain'
+            it "can return a service by name: #{svc}" do
+              service = Aws.partition('aws').service(svc)
               expect(service).to be_kind_of(Partitions::Service)
-              expect(service.name).to eq(svc.name)
+              expect(service.name).to eq(svc)
             end
           end
 

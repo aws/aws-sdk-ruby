@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sdk-kms'
+require 'aws-sigv4'
 require_relative 'aws-sdk-s3/types'
 require_relative 'aws-sdk-s3/client_api'
 require_relative 'aws-sdk-s3/client'

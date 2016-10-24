@@ -1,5 +1,6 @@
 $:.unshift(File.expand_path('../../lib', __FILE__))
 $:.unshift(File.expand_path('../../../../gems/aws-sdk-core/lib', __FILE__))
+$:.unshift(File.expand_path('../../../../gems/aws-sigv4/lib', __FILE__))
 
 require 'tmpdir'
 require 'json'

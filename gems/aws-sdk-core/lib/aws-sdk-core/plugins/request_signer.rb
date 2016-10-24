@@ -1,3 +1,5 @@
+require 'aws-sigv4'
+
 module Aws
   module Plugins
     class RequestSigner < Seahorse::Client::Plugin
@@ -51,12 +53,6 @@ locations will be searched for credentials:
         CredentialProviderChain.new(config).resolve
       end
 
-      # Intentionally not documented - this should go away when all
-      # services support signature version 4 in every region.
-      option(:signature_version) do |cfg|
-        cfg.api.metadata['signatureVersion']
-      end
-
       option(:sigv4_name) do |cfg|
         cfg.api.metadata['signingName'] || cfg.api.metadata['endpointPrefix']
       end
@@ -74,12 +70,6 @@ locations will be searched for credentials:
 
       class Handler < Seahorse::Client::Handler
 
-        SIGNERS = {
-          'v4'      => Signers::V4,
-          'v3https' => Signers::V3,
-          'v2'      => Signers::V2,
-        }
-
         STS_UNSIGNED_REQUESTS = Set.new(%w(
           AssumeRoleWithSAML
           AssumeRoleWithWebIdentity
@@ -93,24 +83,51 @@ locations will be searched for credentials:
         ))
 
         def call(context)
-          sign_authenticated_requests(context) unless unsigned_request?(context)
+          unless unsigned_request?(context)
+            apply_v4_signature(context)
+          end
           @handler.call(context)
         end
 
         private
 
-        def sign_authenticated_requests(context)
-          require_credentials(context)
-          if signer = SIGNERS[context.config.signature_version]
-            require_credentials(context)
-            signer.sign(context)
-          end
+        def apply_v4_signature(context)
+          req = context.http_request
+          req.headers.delete('X-Amz-Date') # in case this is a retry
+
+          # compute the signature
+          signature = sigv4_signer(context).sign_request(
+            http_method: req.http_method,
+            url: req.endpoint,
+            headers: req.headers,
+            body: req.body
+          )
+
+          # apply signature headers
+          req.headers.update(signature.headers)
+
+          # add request metadata with signature components for debugging
+          context[:canonical_request] = signature.canonical_request
+          context[:string_to_sign] = signature.string_to_sign
         end
 
-        def require_credentials(context)
+        def sigv4_signer(context)
+          service = context.config.sigv4_name
+          region = context.config.sigv4_region
+          Aws::Sigv4::Signer.new(
+            service: service,
+            region: EndpointProvider.signing_region(region, service),
+            credentials_provider: credentials_provider(context),
+            unsigned_headers: ['content-length']
+          )
+        end
+
+        def credentials_provider(context)
           if missing_credentials?(context)
             msg = 'unable to sign request without credentials set'
             raise Errors::MissingCredentialsError, msg
+          else
+            context.config.credentials
           end
         end
 
