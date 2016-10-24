@@ -258,6 +258,10 @@
     "models": "sdb/2009-04-15",
     "endpoint": "sdb"
   },
+  "SMS": {
+    "models": "sms/2016-10-24",
+    "endpoint": "sms"
+  },
   "SNS": {
     "models": "sns/2010-03-31",
     "endpoint": "sns"

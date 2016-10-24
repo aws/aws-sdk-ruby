@@ -151,6 +151,8 @@
           }
         },
         "budgets": {
+          "partitionEndpoint": "aws-global",
+          "isRegionalized": false,
           "endpoints": {
             "aws-global": {
               "hostname": "budgets.amazonaws.com",
@@ -987,6 +989,13 @@
             "ap-southeast-2": {},
             "eu-central-1": {},
             "eu-west-1": {}
+          }
+        },
+        "sms": {
+          "endpoints": {
+            "us-east-1": {},
+            "eu-west-1": {},
+            "ap-southeast-2": {}
           }
         },
         "sns": {
