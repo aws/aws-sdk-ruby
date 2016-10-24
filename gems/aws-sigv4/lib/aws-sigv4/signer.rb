@@ -133,7 +133,7 @@ module Aws
       # signature as a hash of headers to apply to your HTTP request. The given
       # request is not modified.
       #
-      #     signature = signer.sign(
+      #     signature = signer.sign_request(
       #       http_method: 'PUT',
       #       url: 'https://domain.com',
       #       headers: {

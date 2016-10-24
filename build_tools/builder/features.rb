@@ -24,6 +24,7 @@ module BuildTools
       def env
         <<-RUBY
 $:.unshift(File.expand_path('../../lib', __FILE__))
+$:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 #{load_paths}
 
