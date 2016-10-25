@@ -7,13 +7,13 @@ Gem::Specification.new do |spec|
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
-  spec.email         = ['trevrowe@amazon.com']
   spec.require_paths = ['lib']
   spec.files         = ['endpoints.json', 'ca-bundle.crt']
   spec.files         += Dir['lib/**/*.rb']
   spec.bindir        = 'bin'
   spec.executables   << 'aws.rb'
 
+  spec.add_dependency('aws-sigv4', '~> 1.0')
   spec.add_dependency('jmespath', '~> 1.0')
 
 end

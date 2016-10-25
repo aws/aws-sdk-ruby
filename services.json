@@ -130,7 +130,10 @@
     "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
       "Aws::EC2::Plugins::RegionValidation"
-    ]
+    ],
+    "dependencies": {
+      "aws-sigv4": "~> 1.0"
+    }
   },
   "ECR": {
     "models": "ecr/2015-09-21",
@@ -271,7 +274,8 @@
     "models": "s3/2006-03-01",
     "endpoint": "s3",
     "dependencies": {
-      "aws-sdk-kms": "~> 1.0"
+      "aws-sdk-kms": "~> 1.0",
+      "aws-sigv4": "~> 1.0"
     },
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",

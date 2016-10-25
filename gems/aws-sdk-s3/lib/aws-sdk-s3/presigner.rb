@@ -96,15 +96,37 @@ module Aws
             endpoint.port = (scheme == 'http' ? 80 : 443)
             context.http_request.endpoint = URI.parse(endpoint.to_s)
           end
-          signer = Signers::V4.new(
-            context.config.credentials, 's3',
-            context.config.region
+          signer = Aws::Sigv4::Signer.new(
+            service: 's3',
+            region: context.config.region,
+            credentials_provider: context.config.credentials,
+            unsigned_headers: [
+              'cache-control',
+              'content-length', # due to a ELB bug
+              'expect',
+              'max-forwards',
+              'pragma',
+              'te',
+              'if-match',
+              'if-none-match',
+              'if-modified-since',
+              'if-unmodified-since',
+              'if-range',
+              'accept',
+              'proxy-authorization',
+              'from',
+              'referer',
+              'user-agent'
+            ],
+            uri_escape_path: false
           )
-          url = signer.presigned_url(
-            context.http_request,
-            expires_in: expires_in,
-            body_digest: "UNSIGNED-PAYLOAD"
-          )
+          url = signer.presign_url(
+            http_method: context.http_request.http_method,
+            url: context.http_request.endpoint,
+            headers: context.http_request.headers,
+            body_digest: 'UNSIGNED-PAYLOAD',
+            expires_in: expires_in
+          ).to_s
           Seahorse::Client::Response.new(context: context, data: url)
         end
       end

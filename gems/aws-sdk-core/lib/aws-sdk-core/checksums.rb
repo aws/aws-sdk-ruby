@@ -10,20 +10,6 @@ module Aws
     class << self
 
       # @param [File, Tempfile, IO#read, String] value
-      # @return [String<SHA256 Hexdigest>]
-      def sha256_hexdigest(value)
-        if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
-          OpenSSL::Digest::SHA256.file(value).hexdigest
-        elsif value.respond_to?(:read)
-          sha256 = OpenSSL::Digest::SHA256.new
-          update_in_chunks(sha256, value)
-          sha256.hexdigest
-        else
-          OpenSSL::Digest::SHA256.hexdigest(value)
-        end
-      end
-
-      # @param [File, Tempfile, IO#read, String] value
       # @return [String<MD5>]
       def md5(value)
         if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)

@@ -1,11 +1,10 @@
 $LOAD_PATH.unshift(File.dirname(__FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../lib',  __FILE__))
-$LOAD_PATH.unshift(File.expand_path('../../../../build_tools',  __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-code-generator/lib',  __FILE__))
 
 require 'rspec'
 require 'webmock/rspec'
-require 'build_tools'
 require 'aws-sdk-code-generator'
 require 'api_helper'
 require 'aws-sdk-core'
