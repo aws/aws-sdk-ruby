@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.14 (2016-10-25)
+------------------
+
 * Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
 
 * Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
