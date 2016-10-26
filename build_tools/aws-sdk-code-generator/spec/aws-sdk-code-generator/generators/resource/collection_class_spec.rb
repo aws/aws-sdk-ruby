@@ -32,11 +32,11 @@ module AwsSdkCodeGenerator
               'request' => {
                 'operation' => 'TerminateConcerts',
                 'params' => [
-                  { 'target' => 'Concerts[*].ConertName',
+                  { 'target' => 'Concerts[*].ConcertName',
                     'source' => 'identifier',
                     'name' => 'ConcertName',
                   },
-                  { 'target' => 'Concerts[*].ConertLocation',
+                  { 'target' => 'Concerts[*].ConcertLocation',
                     'source' => 'identifier',
                     'name' => 'ConcertLocation',
                   },
@@ -70,8 +70,8 @@ class Collection < Aws::Resources::Collection
       })
       batch.each do |item|
         params[:terminate][:concerts] << {
-          conert_name: item.conert_name,
-          conert_location: item.conert_location
+          concert_name: item.concert_name,
+          concert_location: item.concert_location
         }
       end
       batch[0].client.terminate_concerts(params)
