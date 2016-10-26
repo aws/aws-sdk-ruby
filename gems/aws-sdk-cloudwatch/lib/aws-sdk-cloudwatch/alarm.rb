@@ -366,6 +366,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               delete: {
@@ -380,6 +383,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_disable_actions(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               disable_actions: {
@@ -394,6 +400,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_enable_actions(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               enable_actions: {

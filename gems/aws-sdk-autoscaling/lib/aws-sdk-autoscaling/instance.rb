@@ -319,6 +319,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               autoscalinggroupname: batch[0].group_name,
@@ -334,6 +337,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               autoscalinggroupname: batch[0].group_name,
@@ -349,6 +355,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_enter_standby(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               autoscalinggroupname: batch[0].group_name,
@@ -364,6 +373,9 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_exit_standby(options = {})
+          if ! options.is_a? Hash
+            raise ArgumentError, 'expected :options to be a Hash.'
+          end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
               autoscalinggroupname: batch[0].group_name,

@@ -30,6 +30,7 @@ module AwsSdkCodeGenerator
                 name = underscore(name).downcase
                 m.returns('void')
                 m.param('options', default: {})
+                m.code(validate_param)
                 m.code('batch_enum.each do |batch|')
                 m.code(batch_params(name, action))
                 m.code(batch_request(action))
@@ -42,6 +43,15 @@ module AwsSdkCodeGenerator
           else
             []
           end
+        end
+
+        def validate_param
+          block = []
+          block << "if ! options.is_a? Hash"
+          $msg = "expected :options to be a Hash."
+          block << "  raise ArgumentError, \'#{$msg}\'"
+          block << "end"
+          block.join("\n")
         end
 
         def batch_params(name, action)
