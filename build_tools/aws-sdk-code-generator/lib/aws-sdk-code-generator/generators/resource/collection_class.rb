@@ -69,11 +69,12 @@ module AwsSdkCodeGenerator
           action['request']['params'].each do |param|
             if param['target'].include?('[')
               parts = param['target'].split('[')
-              batch_name = underscore(parts[0].sub(/.*?\./, '')).downcase
-              batch_param = underscore(parts[1].sub(/.*?\./, '')).downcase
+              batch_name = underscore(parts[0].sub(/.*?\./, ''))
+              batch_param = underscore(parts[1].sub(/.*?\./, ''))
+              batch_param = batch_param == "" ? underscore(param['name']) : batch_param
               (@batch_obj[batch_name.to_sym] ||= []) << batch_param
             else
-              hash[param['target'].downcase.to_sym] = "batch[0].#{underscore(param['name'])}"
+              hash[underscore(param['target']).to_sym] = "batch[0].#{underscore(param['name'])}"
             end
           end
           @batch_obj.keys.each do |key|
@@ -105,13 +106,7 @@ module AwsSdkCodeGenerator
             end
           end
           each_batch << "  end"
-
-          if each_batch.size == 2
-            # no extra param detail added
-            []
-          else
-            each_batch
-          end
+          each_batch
         end
 
         def batch_request(action)

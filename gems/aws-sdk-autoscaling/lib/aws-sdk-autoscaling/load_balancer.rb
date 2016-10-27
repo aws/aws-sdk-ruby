@@ -179,11 +179,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               attach: {
                 load_balancer_names: []
               }
             })
+            batch.each do |item|
+              params[:attach][:load_balancer_names] << {
+                name: item.name
+              }
+            end
             batch[0].client.attach_load_balancers(params)
           end
           nil
@@ -197,11 +202,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               detach: {
                 load_balancer_names: []
               }
             })
+            batch.each do |item|
+              params[:detach][:load_balancer_names] << {
+                name: item.name
+              }
+            end
             batch[0].client.detach_load_balancers(params)
           end
           nil

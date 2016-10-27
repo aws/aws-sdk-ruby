@@ -178,12 +178,17 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].name,
-              topicarn: batch[0].topic_arn,
+              auto_scaling_group_name: batch[0].name,
+              topic_arn: batch[0].topic_arn,
               put: {
                 notification_types: []
               }
             })
+            batch.each do |item|
+              params[:put][:notification_types] << {
+                notification_type: item.notification_type
+              }
+            end
             batch[0].client.put_notification_configuration(params)
           end
           nil

@@ -324,11 +324,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               attach: {
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:attach][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.attach_instances(params)
           end
           nil
@@ -342,11 +347,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               detach: {
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:detach][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.detach_instances(params)
           end
           nil
@@ -360,11 +370,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               enter_standby: {
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:enter_standby][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.enter_standby(params)
           end
           nil
@@ -378,11 +393,16 @@ module Aws
           end
           batch_enum.each do |batch|
             params = Aws::Util.deep_merge(options, {
-              autoscalinggroupname: batch[0].group_name,
+              auto_scaling_group_name: batch[0].group_name,
               exit_standby: {
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:exit_standby][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.exit_standby(params)
           end
           nil

@@ -16,7 +16,7 @@ module AwsSdkCodeGenerator
                     'source' => 'identifier',
                     'name' => 'GroupName'
                   },
-                  { 'target' => 'Band[].BandName',
+                  { 'target' => 'Band[]',
                     'source' => 'identifier',
                     'name' => 'BandName',
                   },
@@ -103,7 +103,7 @@ class Collection < Aws::Resources::Collection
     end
     batch_enum.each do |batch|
       params = Aws::Util.deep_merge(options, {
-        bandgroup: batch[0].group_name,
+        band_group: batch[0].group_name,
         delete: {
           band: []
         }

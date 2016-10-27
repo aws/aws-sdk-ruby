@@ -1351,6 +1351,11 @@ module Aws
                 resources: []
               }
             })
+            batch.each do |item|
+              params[:create_tags][:resources] << {
+                id: item.id
+              }
+            end
             batch[0].client.create_tags(params)
           end
           nil
@@ -1368,6 +1373,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:monitor][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.monitor_instances(params)
           end
           nil
@@ -1385,6 +1395,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:reboot][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.reboot_instances(params)
           end
           nil
@@ -1402,6 +1417,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:start][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.start_instances(params)
           end
           nil
@@ -1419,6 +1439,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:stop][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.stop_instances(params)
           end
           nil
@@ -1436,6 +1461,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:terminate][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.terminate_instances(params)
           end
           nil
@@ -1453,6 +1483,11 @@ module Aws
                 instance_ids: []
               }
             })
+            batch.each do |item|
+              params[:unmonitor][:instance_ids] << {
+                id: item.id
+              }
+            end
             batch[0].client.unmonitor_instances(params)
           end
           nil

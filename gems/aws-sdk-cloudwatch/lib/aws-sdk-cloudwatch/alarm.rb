@@ -375,6 +375,11 @@ module Aws
                 alarm_names: []
               }
             })
+            batch.each do |item|
+              params[:delete][:alarm_names] << {
+                name: item.name
+              }
+            end
             batch[0].client.delete_alarms(params)
           end
           nil
@@ -392,6 +397,11 @@ module Aws
                 alarm_names: []
               }
             })
+            batch.each do |item|
+              params[:disable_actions][:alarm_names] << {
+                name: item.name
+              }
+            end
             batch[0].client.disable_alarm_actions(params)
           end
           nil
@@ -409,6 +419,11 @@ module Aws
                 alarm_names: []
               }
             })
+            batch.each do |item|
+              params[:enable_actions][:alarm_names] << {
+                name: item.name
+              }
+            end
             batch[0].client.enable_alarm_actions(params)
           end
           nil

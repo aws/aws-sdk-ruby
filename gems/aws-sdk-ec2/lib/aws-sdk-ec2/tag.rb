@@ -198,6 +198,9 @@ module Aws
               }
             })
             batch.each do |item|
+              params[:delete][:resources] << {
+                resource_id: item.resource_id
+              }
               params[:delete][:tags] << {
                 key: item.key,
                 value: item.value
