@@ -1,14 +1,13 @@
+require_relative 'shared_spec_helper'
+
 $LOAD_PATH.unshift(File.dirname(__FILE__))
-$LOAD_PATH.unshift(File.expand_path('../../lib',  __FILE__))
-$LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
-$LOAD_PATH.unshift(File.expand_path('../../../aws-sdk-code-generator/lib',  __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../../build_tools/aws-sdk-code-generator/lib',  __FILE__))
 
 require 'rspec'
 require 'webmock/rspec'
 require 'aws-sdk-code-generator'
 require 'api_helper'
 require 'aws-sdk-core'
-require 'shared_spec_helper'
 
 # A helper :send_handler that does not send the request, it simply
 # returns an empty response.

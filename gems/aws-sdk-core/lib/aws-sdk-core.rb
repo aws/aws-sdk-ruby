@@ -158,6 +158,7 @@ module Aws
   end
 
   module Plugins
+    autoload :CredentialsConfiguration, 'aws-sdk-core/plugins/credentials_configuration'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
@@ -165,8 +166,8 @@ module Aws
     autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
     autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
     autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
-    autoload :RequestSigner, 'aws-sdk-core/plugins/request_signer'
     autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
+    autoload :SignatureV4, 'aws-sdk-core/plugins/signature_v4'
     autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
     autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'
 

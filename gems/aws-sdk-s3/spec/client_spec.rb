@@ -195,13 +195,12 @@ module Aws
         end
 
         it 'raises a runtime error on unsupported signature version' do
-          client = Client.new(
-            signature_version: 'v2',
-            stub_responses: true,
-            region: 'us-east-1'
-          )
           expect {
-            client.head_object(bucket:'name', key:'key')
+            client = Client.new(
+              signature_version: 'v2',
+              stub_responses: true,
+              region: 'us-east-1'
+            )
           }.to raise_error(ArgumentError, /unsupported/)
         end
 

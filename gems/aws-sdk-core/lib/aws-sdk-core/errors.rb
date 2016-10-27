@@ -48,10 +48,21 @@ module Aws
 
     # Raised when a {Service} is constructed and credentials are not
     # set, or the set credentials are empty.
-    class MissingCredentialsError < RuntimeError; end
+    class MissingCredentialsError < RuntimeError
+      def initialize(*args)
+        msg = 'unable to sign request without credentials set'
+        super(msg)
+      end
+    end
 
     # Raised when a {Service} is constructed and region is not specified.
-    class MissingRegionError < ArgumentError; end
+    class MissingRegionError < ArgumentError
+      def initialize(*args)
+        msg = "missing region; use :region option or "
+        msg << "export region name to ENV['AWS_REGION']"
+        super(msg)
+      end
+    end
 
     # Raised when attempting to connect to an endpoint and a `SocketError`
     # is received from the HTTP client. This error is typically the result

@@ -2,11 +2,11 @@ require_relative '../../spec_helper'
 
 module Aws
   module Plugins
-    describe RequestSigner do
+    describe SignatureV4 do
 
-      RequestSignerClient = ApiHelper.sample_service.const_get(:Client)
+      Sigv4Client = ApiHelper.sample_service.const_get(:Client)
 
-      let(:plugin) { RequestSigner.new }
+      let(:plugin) { SignatureV4.new }
 
       let(:config) {
         api = Api::Builder.build(
@@ -27,7 +27,7 @@ module Aws
       }}
 
       it 'raises an error when attempting to sign a request w/out credentials' do
-        client = RequestSignerClient.new(region: 'us-west-1')
+        client = Sigv4Client.new(region: 'us-west-1')
         expect {
           client.example_operation
         }.to raise_error(Errors::MissingCredentialsError)
@@ -36,7 +36,7 @@ module Aws
       describe 'sigv4 signing name' do
 
         it 'accepts a sigv4 signing name configuration option' do
-          client = RequestSignerClient.new(options.merge(
+          client = Sigv4Client.new(options.merge(
             sigv4_name: 'name',
           ))
           expect(client.config.sigv4_name).to eq('name')
@@ -64,7 +64,7 @@ module Aws
       describe 'sigv4 signing region' do
 
         it 'defaults to us-east-1 for global endpoints' do
-          client = RequestSignerClient.new(options.merge(
+          client = Sigv4Client.new(options.merge(
             region: 'other-region',
             endpoint: 'https://svc.amazonaws.com'
           ))
@@ -72,7 +72,7 @@ module Aws
         end
 
         it 'defaults to configured region if it can not be extracted' do
-          client = RequestSignerClient.new(options.merge(
+          client = Sigv4Client.new(options.merge(
             region: 'other-region',
             endpoint: 'https://localhost:3000'
           ))

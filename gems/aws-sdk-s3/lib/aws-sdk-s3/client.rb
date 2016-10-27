@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
 require 'aws-sdk-core/plugins/param_validator.rb'
@@ -14,7 +15,6 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/request_signer.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
@@ -29,7 +29,7 @@ require 'aws-sdk-s3/plugins/md5s.rb'
 require 'aws-sdk-s3/plugins/redirects.rb'
 require 'aws-sdk-s3/plugins/sse_cpk.rb'
 require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
-require 'aws-sdk-s3/plugins/request_signer.rb'
+require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
 
 Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :s3
@@ -46,6 +46,7 @@ module Aws
       set_api(ClientApi::API)
 
       add_plugin(Seahorse::Client::Plugins::ContentLength)
+      add_plugin(Aws::Plugins::CredentialsConfiguration)
       add_plugin(Aws::Plugins::Logging)
       add_plugin(Aws::Plugins::ParamConverter)
       add_plugin(Aws::Plugins::ParamValidator)
@@ -54,7 +55,6 @@ module Aws
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
       add_plugin(Aws::Plugins::RegionalEndpoint)
-      add_plugin(Aws::Plugins::RequestSigner)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
       add_plugin(Aws::Plugins::Protocols::RestXml)
@@ -69,7 +69,7 @@ module Aws
       add_plugin(Aws::S3::Plugins::Redirects)
       add_plugin(Aws::S3::Plugins::SseCpk)
       add_plugin(Aws::S3::Plugins::UrlEncodedKeys)
-      add_plugin(Aws::S3::Plugins::RequestSigner)
+      add_plugin(Aws::S3::Plugins::S3Signer)
       add_plugin(Aws::S3::Plugins::BucketNameRestrictions)
 
       # @option options [required, Aws::CredentialProvider] :credentials

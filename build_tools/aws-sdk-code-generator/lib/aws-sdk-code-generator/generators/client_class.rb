@@ -182,6 +182,7 @@ end
       def default_plugins
         {
           'Seahorse::Client::Plugins::ContentLength' => 'gems/aws-sdk-core/lib/seahorse/client/plugins/content_length.rb',
+          'Aws::Plugins::CredentialsConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/credentials_configuration.rb',
           'Aws::Plugins::Logging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/logging.rb',
           'Aws::Plugins::ParamConverter' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_converter.rb',
           'Aws::Plugins::ParamValidator' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_validator.rb',
@@ -190,7 +191,7 @@ end
           'Aws::Plugins::RetryErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors.rb',
           'Aws::Plugins::GlobalConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb',
           'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
-          'Aws::Plugins::RequestSigner' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/request_signer.rb',
+          'Aws::Plugins::SignatureV4' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v4.rb',
           'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
           'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
         }

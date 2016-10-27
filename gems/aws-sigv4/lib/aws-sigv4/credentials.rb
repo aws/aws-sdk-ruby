@@ -25,6 +25,11 @@ module Aws
       # @return [String, nil]
       attr_reader :session_token
 
+      # @return [Boolean]
+      def set?
+        !!(access_key_id && secret_access_key)
+      end
+
     end
 
     # The default credential provider class.

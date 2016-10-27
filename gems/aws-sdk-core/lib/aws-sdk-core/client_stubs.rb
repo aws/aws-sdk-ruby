@@ -16,7 +16,6 @@ module Aws
         @config.stub_responses.each do |operation_name, stubs|
           apply_stubs(operation_name, Array === stubs ? stubs : [stubs])
         end
-        @config.stub_responses = true
       end
     end
 

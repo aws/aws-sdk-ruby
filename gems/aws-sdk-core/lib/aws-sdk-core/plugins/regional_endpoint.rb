@@ -44,9 +44,7 @@ to test endpoints. This should be avalid HTTP(S) URI.
 
       def after_initialize(client)
         if client.config.region.nil? or client.config.region == ''
-          msg = "missing region; use :region option or "
-          msg << "export region name to ENV['AWS_REGION']"
-          raise Errors::MissingRegionError, msg
+          raise Errors::MissingRegionError
         end
       end
 

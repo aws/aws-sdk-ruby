@@ -178,7 +178,7 @@ module Aws
       #
       def sign_request(request)
 
-        creds = @credentials_provider.credentials
+        creds = get_credentials
 
         http_method = extract_http_method(request)
         url = extract_url(request)
@@ -200,14 +200,13 @@ module Aws
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
 
         # compute signature parts
-        credential = "#{creds.access_key_id}/#{credential_scope(date)}"
         creq = canonical_request(http_method, url, headers, content_sha256)
         sts = string_to_sign(datetime, creq)
         sig = signature(creds.secret_access_key, date, sts)
 
         # apply signature
         sigv4_headers['Authorization'] = [
-          "AWS4-HMAC-SHA256 Credential=#{credential}",
+          "AWS4-HMAC-SHA256 Credential=#{credential(creds, date)}",
           "SignedHeaders=#{signed_headers(headers)}",
           "Signature=#{sig}",
         ].join(', ')
@@ -291,7 +290,7 @@ module Aws
       #
       def presign_url(options)
 
-        creds = @credentials_provider.credentials
+        creds = get_credentials
 
         http_method = extract_http_method(options)
         url = extract_url(options)
@@ -363,8 +362,8 @@ module Aws
         ].join('/')
       end
 
-      def credential(creds, date)
-        [creds.access_key_id, credential_scope(date)].join('/')
+      def credential(credentials, date)
+        "#{credentials.access_key_id}/#{credential_scope(date)}"
       end
 
       def signature(secret_access_key, date, string_to_sign)
@@ -485,8 +484,7 @@ module Aws
         if options[:region]
           options[:region]
         else
-          msg = "missing required option :region"
-          raise ArgumentError, msg
+          raise Errors::MissingRegionError
         end
       end
 
@@ -496,12 +494,7 @@ module Aws
         elsif options.key?(:credentials) || options.key?(:access_key_id)
           StaticCredentialsProvider.new(options)
         else
-          raise ArgumentError, <<-MSG
-missing credentials, provide credentials with one of the following options:
-  - :access_key_id and :secret_access_key
-  - :credentials
-  - :credentials_provider
-          MSG
+          raise Errors::MissingCredentialsError
         end
       end
 
@@ -539,6 +532,20 @@ missing credentials, provide credentials with one of the following options:
 
       def uri_escape_path(string)
         self.class.uri_escape_path(string)
+      end
+
+      def get_credentials
+        credentials = @credentials_provider.credentials
+        if credentials_set?(credentials)
+          credentials
+        else
+          msg = 'unable to sign request without credentials set'
+          raise Errors::MissingCredentialsError.new(msg)
+        end
+      end
+
+      def credentials_set?(credentials)
+        credentials.access_key_id && credentials.secret_access_key
       end
 
       class << self

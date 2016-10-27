@@ -18,14 +18,14 @@ module BuildTools
 
       def spec_helper
         <<-SPEC_HELPER
+require_relative '../../aws-sdk-core/spec/shared_spec_helper'
+
 $:.unshift(File.expand_path('../../lib', __FILE__))
 #{load_paths}
 
 require 'rspec'
 require 'webmock/rspec'
 require '#{gem_name}'
-
-require_relative '../../aws-sdk-core/spec/shared_spec_helper'
         SPEC_HELPER
       end
 

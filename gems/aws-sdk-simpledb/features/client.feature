@@ -9,7 +9,7 @@ Feature: Amazon SimpleDB
   Scenario: Error handling
     When I attempt to call the "DomainMetadata" API with:
     | DomainName | fake-domain |
-    Then I expect the response error code to be "NoSuchDomain"
+    Then I expect the response error code to be "AuthFailure"
     And I expect the response error message to include:
     """
     The specified domain does not exist.

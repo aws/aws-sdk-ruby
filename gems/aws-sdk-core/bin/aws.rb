@@ -92,14 +92,16 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-# when running locally, ensure the local aws-sigv4 gem is loaded
-File.expand_path('../../../aws-sigv4/lib', __FILE__).tap do |local_sigv4|
-  if File.directory?(local_sigv4)
-    $:.unshift(local_sigv4)
+# when running locally, ensure the local signature gems are loaded
+%w(v2 v4).each do |version|
+  File.expand_path("../../../aws-sig#{version}/lib", __FILE__).tap do |dir|
+    if File.directory?(dir)
+      $:.unshift(dir)
+    end
   end
+  require "aws-sig#{version}"
 end
 
-require 'aws-sigv4'
 require 'aws-sdk-core'
 
 module Aws

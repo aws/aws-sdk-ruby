@@ -277,6 +277,9 @@
       "aws-sdk-kms": "~> 1.0",
       "aws-sigv4": "~> 1.0"
     },
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ],
     "addPlugins": [
       "Aws::S3::Plugins::Accelerate",
       "Aws::S3::Plugins::Dualstack",
@@ -289,7 +292,7 @@
       "Aws::S3::Plugins::Redirects",
       "Aws::S3::Plugins::SseCpk",
       "Aws::S3::Plugins::UrlEncodedKeys",
-      "Aws::S3::Plugins::RequestSigner",
+      "Aws::S3::Plugins::S3Signer",
       "Aws::S3::Plugins::BucketNameRestrictions"
     ]
   },
@@ -303,7 +306,16 @@
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
-    "endpoint": "sdb"
+    "endpoint": "sdb",
+    "dependencies": {
+      "aws-sigv2": "~> 1.0"
+    },
+    "addPlugins": [
+      "Aws::SimpleDB::Plugins::SignatureV2"
+    ],
+    "removePlugins": [
+      "Aws::Plugins::SignatureV4"
+    ]
   },
   "SNS": {
     "models": "sns/2010-03-31",

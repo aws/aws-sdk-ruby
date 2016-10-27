@@ -37,6 +37,10 @@ module Seahorse
         @operations[name.to_sym] = operation
       end
 
+      def inspect(*args)
+        "#<#{self.class.name}>"
+      end
+
     end
   end
 end

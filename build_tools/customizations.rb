@@ -121,5 +121,24 @@ module BuildTools
       api['shapes']['MessageAttributeValue']['members']['BinaryListValues'].delete('flattened')
     end
 
+    api('STS') do |api|
+      operations = %w(AssumeRoleWithSAML AssumeRoleWithWebIdentity)
+      operations.each do |operation|
+        api['operations'][operation]['authtype'] = 'none'
+      end
+    end
+
+    api('CognitoIdentity') do |api|
+      operations = %w(
+        GetCredentialsForIdentity
+        GetId
+        GetOpenIdToken
+        UnlinkIdentity
+      )
+      operations.each do |operation|
+        api['operations'][operation]['authtype'] = 'none'
+      end
+    end
+
   end
 end

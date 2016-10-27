@@ -5,6 +5,7 @@ require 'webrick/httputils'
 
 module Aws
   module S3
+    # @api private
     class LegacySigner
 
       SIGNED_QUERYSTRING_PARAMS = Set.new(%w(

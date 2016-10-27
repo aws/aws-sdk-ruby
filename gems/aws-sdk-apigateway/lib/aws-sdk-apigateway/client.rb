@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 require 'seahorse/client/plugins/content_length.rb'
+require 'aws-sdk-core/plugins/credentials_configuration.rb'
 require 'aws-sdk-core/plugins/logging.rb'
 require 'aws-sdk-core/plugins/param_converter.rb'
 require 'aws-sdk-core/plugins/param_validator.rb'
@@ -14,7 +15,7 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/request_signer.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
@@ -34,6 +35,7 @@ module Aws
       set_api(ClientApi::API)
 
       add_plugin(Seahorse::Client::Plugins::ContentLength)
+      add_plugin(Aws::Plugins::CredentialsConfiguration)
       add_plugin(Aws::Plugins::Logging)
       add_plugin(Aws::Plugins::ParamConverter)
       add_plugin(Aws::Plugins::ParamValidator)
@@ -42,7 +44,7 @@ module Aws
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
       add_plugin(Aws::Plugins::RegionalEndpoint)
-      add_plugin(Aws::Plugins::RequestSigner)
+      add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
       add_plugin(Aws::Plugins::Protocols::RestJson)

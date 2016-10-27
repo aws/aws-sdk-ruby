@@ -60,7 +60,7 @@ module Aws
         it 'requires credentials' do
           expect do
             Signer.new(options)
-          end.to raise_error(ArgumentError, /:credentials/)
+          end.to raise_error(ArgumentError, /missing credentials/)
         end
 
         it 'accepts :access_key_id and :secret_access_key' do

@@ -86,8 +86,8 @@ module Aws
       end
 
       def sign_but_dont_send(req, expires_in, scheme)
-        req.handlers.remove(Aws::Plugins::RequestSigner::Handler)
-        req.handlers.remove(Aws::S3::Plugins::RequestSigner::SigningHandler)
+        req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
+        req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
         req.handle(step: :send) do |context|
           if scheme != context.http_request.endpoint.scheme
