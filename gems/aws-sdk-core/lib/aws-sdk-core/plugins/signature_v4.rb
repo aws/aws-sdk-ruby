@@ -13,12 +13,27 @@ module Aws
       end
 
       option(:sigv4_region) do |cfg|
+
+        # The signature version 4 signing region is most
+        # commonly the configured region. There are a few
+        # notable exceptions:
+        #
+        # * Some services have a global endpoint to the entire
+        #   partition. For example, when constructing a route53
+        #   client for a region like "us-west-2", we will
+        #   always use "route53.amazonaws.com". This endpoint
+        #   is actually global to the entire partition,
+        #   and must be signed as "us-east-1".
+        #
+        # * When the region is configured, but it is configured
+        #   to a non region, such as "aws-global". This is similar
+        #   to the previous case. We use the EndpointProvider
+        #   to resolve to the actual signing region.
+        #
         prefix = cfg.api.metadata['endpointPrefix']
-        if cfg.region.nil?
-          nil
-        elsif prefix && cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
-          EndpointProvider.signing_region('us-east-1', cfg.sigv4_name)
-        else
+        if prefix && cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
+          'us-east-1'
+        elsif cfg.region
           EndpointProvider.signing_region(cfg.region, cfg.sigv4_name)
         end
       end
