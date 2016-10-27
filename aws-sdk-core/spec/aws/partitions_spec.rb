@@ -4,15 +4,6 @@ module Aws
   module Partitions
     describe 'Partitions' do
 
-      let(:us_east_1_services) do
-        services = Aws::SERVICE_MODULE_NAMES.sort
-        services -= ['CloudSearchDomain'] # user endpoints only
-        services -= ['DeviceFarm'] # us-west-2 only
-        services -= ['ApplicationDiscoveryService'] # us-west-2 only
-        services -= ['EFS'] # us-west-2 only
-        services
-      end
-
       describe '.partition' do
 
         %w(aws aws-cn aws-us-gov).each do |p|
@@ -63,7 +54,8 @@ module Aws
 
           it 'returns a list of supported services with the region' do
             region = Aws.partition('aws').region('us-east-1')
-            expect(region.services.sort).to eq(us_east_1_services)
+            expect(region.services).to include('EC2')
+            expect(region.services).not_to include('Route53')
           end
 
           it 'raises ArgumentError for unknown regions' do
@@ -130,8 +122,10 @@ module Aws
         describe '#services' do
 
           it 'returns a list of supported services' do
-            services = Aws.partition('aws').services
-            expect(services.map(&:name).sort).to eq(Aws::SERVICE_MODULE_NAMES.sort)
+            services = Aws.partition('aws').services.map(&:name)
+            Aws::SERVICE_MODULE_NAMES.each do |svc_name|
+              expect(services).to include(svc_name)
+            end
           end
 
         end
@@ -157,7 +151,8 @@ module Aws
 
         it '#services returns the list of services available in region' do
           region = Aws.partition('aws').region('us-east-1')
-          expect(region.services.sort).to eq(us_east_1_services)
+          expect(region.services).to include('EC2')
+          expect(region.services).not_to include('Route53')
         end
 
       end
@@ -178,9 +173,9 @@ module Aws
 
         it '#partition_region returns the partition global endpoint region' do
           svc = Aws.partition('aws').service('IAM')
-          expect(svc.partition_region).to eq('us-east-1')
+          expect(svc.partition_region).to eq('aws-global')
           svc = Aws.partition('aws-cn').service('IAM')
-          expect(svc.partition_region).to eq('cn-north-1')
+          expect(svc.partition_region).to eq('aws-cn-global')
           svc = Aws.partition('aws').service('EC2')
           expect(svc.partition_region).to be(nil)
         end
@@ -194,8 +189,10 @@ module Aws
 
         it '#regions returns the list of regions the service is available in' do
           svc = Aws.partition('aws').service('IAM')
-          expect(svc.regions.sort).to eq(%w(us-east-1))
+          expect(svc.regions.sort).to eq([])
+          expect(svc.partition_region).to eq('aws-global')
           svc = Aws.partition('aws').service('EC2')
+          expect(svc.regions).not_to include('aws-global')
           expect(svc.regions).to include('us-east-1')
           expect(svc.regions).to include('us-west-1')
           expect(svc.regions).to include('us-west-2')

@@ -24,6 +24,7 @@ module Aws
     ApplicationAutoScaling
     ApplicationDiscoveryService
     AutoScaling
+    Budgets
     CloudFormation
     CloudFront
     CloudHSM
@@ -83,6 +84,7 @@ module Aws
     ServiceCatalog
     SES
     SimpleDB
+    SMS
     SNS
     Snowball
     SQS

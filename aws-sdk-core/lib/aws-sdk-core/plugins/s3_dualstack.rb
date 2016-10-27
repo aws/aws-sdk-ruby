@@ -8,6 +8,7 @@ module Aws
     class S3Dualstack < Seahorse::Client::Plugin
 
       option(:use_dualstack_endpoint, false)
+      option(:use_accelerate_endpoint, false)
 
       def add_handlers(handlers, config)
         handlers.add(OptionHandler, step: :initialize)
@@ -27,12 +28,12 @@ module Aws
       # @api private
       class DualstackHandler < Seahorse::Client::Handler
         def call(context)
-          use_dualstack_endpoint(context) if context[:use_dualstack_endpoint]
+          apply_dualstack_endpoint(context) if use_dualstack_endpoint?(context)
           @handler.call(context)
         end
 
         private
-        def use_dualstack_endpoint(context)
+        def apply_dualstack_endpoint(context)
           bucket_name = context.params[:bucket]
           region = context.config.region
           force_path_style = context.config.force_path_style
@@ -55,16 +56,12 @@ module Aws
           bucket_name && S3BucketDns.dns_compatible?(bucket_name, ssl) &&
             !context.config.force_path_style
         end
-      end
 
-      def after_initialize(client)
-        cfg = client.config
-        if cfg.use_accelerate_endpoint && cfg.use_dualstack_endpoint
-          msg = "Use of the :use_accelerate_endpoint and :use_dualstack_endpoint"\
-            " options together is not currently supported."
-          raise ArgumentError, msg
+        def use_dualstack_endpoint?(context)
+          context[:use_dualstack_endpoint] && !context[:use_accelerate_endpoint]
         end
       end
+
     end
   end
 end
