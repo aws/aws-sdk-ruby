@@ -6,6 +6,7 @@
 # WARNING ABOUT GENERATED CODE
 
 require 'aws-sdk-core'
+require 'aws-sigv4'
 require_relative 'aws-sdk-lambdapreview/types'
 require_relative 'aws-sdk-lambdapreview/client_api'
 require_relative 'aws-sdk-lambdapreview/client'

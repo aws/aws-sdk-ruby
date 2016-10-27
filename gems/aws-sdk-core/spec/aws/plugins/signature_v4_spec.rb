@@ -4,21 +4,12 @@ module Aws
   module Plugins
     describe SignatureV4 do
 
-      Sigv4Client = ApiHelper.sample_service.const_get(:Client)
+      Sigv4Client = ApiHelper.sample_service(metadata: {
+        'signatureVersion' => 'v4',
+        'endpointPrefix' => 'svc-name',
+      }).const_get(:Client)
 
       let(:plugin) { SignatureV4.new }
-
-      let(:config) {
-        api = Api::Builder.build(
-          'metadata' => { 'endpointPrefix' => 'svc-name' }
-        )
-        cfg = Seahorse::Client::Configuration.new
-        cfg.add_option(:endpoint, 'http://svc-name.us-west-2.amazonaws.com')
-        cfg.add_option(:api, api)
-        cfg.add_option(:region) { 'region-name' }
-        cfg.add_option(:region_defaults) {{}}
-        cfg
-      }
 
       let(:options) {{
         region: 'us-east-1',
@@ -44,6 +35,7 @@ module Aws
 
         it 'defaults the sigv4 name to the endpoint prefix' do
           svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
             'endpointPrefix' => 'endpoint-prefix',
           })
           client = svc::Client.new(options)
@@ -52,6 +44,7 @@ module Aws
 
         it 'prefers the signingName over endpointPrefix' do
           svc = ApiHelper.sample_service(metadata: {
+            'signatureVersion' => 'v4',
             'endpointPrefix' => 'endpoint-prefix',
             'signingName' => 'signing-name',
           })
@@ -66,7 +59,7 @@ module Aws
         it 'defaults to us-east-1 for global endpoints' do
           client = Sigv4Client.new(options.merge(
             region: 'other-region',
-            endpoint: 'https://svc.amazonaws.com'
+            endpoint: 'https://svc-name.amazonaws.com'
           ))
           expect(client.config.sigv4_region).to eq('us-east-1')
         end
@@ -81,8 +74,9 @@ module Aws
 
         it 'uses the specified region when no endpointPrefix is present' do
           svc = ApiHelper.sample_service(metadata: {
-            'endpointPrefix' => nil,
+            'signatureVersion' => 'v4',
             'signingName' => 'signing-name',
+            'endpointPrefix' => nil,
           })
           client = svc::Client.new(options.merge(
             region: 'eu-west-1',

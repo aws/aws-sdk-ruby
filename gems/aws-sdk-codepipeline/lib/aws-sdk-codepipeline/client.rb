@@ -15,9 +15,9 @@ require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
 Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :codepipeline
@@ -43,9 +43,9 @@ module Aws
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
       add_plugin(Aws::Plugins::RegionalEndpoint)
-      add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
       # @option options [required, Aws::CredentialProvider] :credentials

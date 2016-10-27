@@ -123,7 +123,7 @@ module Aws
             http_method: 'GET',
             url: 'http://domain.com'
           )
-          expect(signature.headers['Host']).to eq('domain.com')
+          expect(signature.headers['host']).to eq('domain.com')
         end
 
         it 'includes HTTP port in Host when not 80' do
@@ -131,7 +131,7 @@ module Aws
             http_method: 'GET',
             url: 'http://domain.com:123'
           )
-          expect(signature.headers['Host']).to eq('domain.com:123')
+          expect(signature.headers['host']).to eq('domain.com:123')
         end
 
         it 'includes HTTPS port in Host when not 443' do
@@ -139,7 +139,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com:123'
           )
-          expect(signature.headers['Host']).to eq('domain.com:123')
+          expect(signature.headers['host']).to eq('domain.com:123')
         end
 
         it 'sets the X-Amz-Date header' do
@@ -149,7 +149,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com:123'
           )
-          expect(signature.headers['X-Amz-Date']).to eq(now.utc.strftime("%Y%m%dT%H%M%SZ"))
+          expect(signature.headers['x-amz-date']).to eq(now.utc.strftime("%Y%m%dT%H%M%SZ"))
         end
 
         it 'uses the X-Amz-Date header of the request if present' do
@@ -161,7 +161,7 @@ module Aws
               'X-Amz-Date' => now
             }
           )
-          expect(signature.headers['X-Amz-Date']).to eq(now)
+          expect(signature.headers['x-amz-date']).to eq(now)
         end
 
         it "populates the 'X-Amz-Security-Token' header with session token" do
@@ -170,7 +170,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com'
           )
-          expect(signature.headers['X-Amz-Security-Token']).to eq('token')
+          expect(signature.headers['x-amz-security-token']).to eq('token')
         end
 
         it "omits 'X-Amz-Security-Token' header when session token is nil" do
@@ -179,7 +179,7 @@ module Aws
             http_method: 'GET',
             url: 'https://domain.com'
           )
-          expect(signature.headers['X-Amz-Security-Token']).to be(nil)
+          expect(signature.headers['x-amz-security-token']).to be(nil)
         end
 
         it 'adds the X-Amz-Content-Sha256 header by default' do
@@ -188,7 +188,7 @@ module Aws
             url: 'https://domain.com',
             body: 'abc'
           )
-          expect(signature.headers['X-Amz-Content-Sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
         it 'can omit the X-Amz-Content-Sha256 header' do
@@ -198,7 +198,7 @@ module Aws
             url: 'https://domain.com',
             body: 'abc'
           )
-          expect(signature.headers['X-Amz-Content-Sha256']).to be(nil)
+          expect(signature.headers['x-amz-content-sha256']).to be(nil)
         end
 
         it 'computes the checksum of files without loading them into memory' do
@@ -212,7 +212,7 @@ module Aws
             url: 'https://domain.com',
             body: body
           )
-          expect(signature.headers['X-Amz-Content-Sha256']).to eq(Digest::SHA256.hexdigest('abc'))
+          expect(signature.headers['x-amz-content-sha256']).to eq(Digest::SHA256.hexdigest('abc'))
         end
 
         it 'reads non-file IO objects into  memory to compute checksusm' do
@@ -236,7 +236,7 @@ module Aws
             },
             body: body
           )
-          expect(signature.headers['X-Amz-Content-Sha256']).to eq('hexdigest')
+          expect(signature.headers['x-amz-content-sha256']).to eq('hexdigest')
         end
 
         it "populates the 'Authorization' header" do
@@ -247,8 +247,8 @@ module Aws
             headers: headers
           )
           # applied to the signature headers, not the request
-          expect(headers['Authorization']).to be(nil)
-          expect(signature.headers['Authorization']).to_not be(nil)
+          expect(headers['authorization']).to be(nil)
+          expect(signature.headers['authorization']).to_not be(nil)
         end
 
         it 'signs the request' do
@@ -265,7 +265,7 @@ module Aws
             },
             body: StringIO.new('http-body')
           )
-          expect(signature.headers['Authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
+          expect(signature.headers['authorization']).to eq('AWS4-HMAC-SHA256 Credential=akid/20120101/REGION/SERVICE/aws4_request, SignedHeaders=bar;bar2;foo;host;x-amz-content-sha256;x-amz-date, Signature=4a7d3e06d1950eb64a3daa1becaa8ba030d9099858516cb2fa4533fab4e8937d')
         end
 
       end

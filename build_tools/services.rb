@@ -132,15 +132,24 @@ module BuildTools
           svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
           svc.gem_dir = definition['gem_dir'] || File.join('gems', svc.gem_name)
           svc.endpoints_key = definition['endpoint']
-          svc.dependencies = {}
-          svc.dependencies['aws-sdk-core'] = '~> 3.0'
-          svc.dependencies.update(definition['dependencies'] || {})
+          svc.dependencies = dependencies(svc, definition)
           svc.add_plugins = add_plugins(svc, definition)
           svc.remove_plugins = Array(definition['removePlugins'])
           svc
         end
 
         private
+
+        def dependencies(svc, definition)
+          dependencies = {}
+          dependencies['aws-sdk-core'] = '~> 3.0'
+          case svc.signature_version
+          when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
+          when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
+          end
+          dependencies.update(definition['dependencies'] || {})
+          dependencies
+        end
 
         def models(prefix)
           Dir.glob("#{API_DIR}/#{prefix}/*").inject({}) do |paths, model_path|

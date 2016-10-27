@@ -306,16 +306,7 @@
   },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
-    "endpoint": "sdb",
-    "dependencies": {
-      "aws-sigv2": "~> 1.0"
-    },
-    "addPlugins": [
-      "Aws::SimpleDB::Plugins::SignatureV2"
-    ],
-    "removePlugins": [
-      "Aws::Plugins::SignatureV4"
-    ]
+    "endpoint": "sdb"
   },
   "SNS": {
     "models": "sns/2010-03-31",

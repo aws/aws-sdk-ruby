@@ -14,9 +14,9 @@ require 'aws-sdk-core/plugins/user_agent.rb'
 require 'aws-sdk-core/plugins/helpful_socket_errors.rb'
 require 'aws-sdk-core/plugins/retry_errors.rb'
 require 'aws-sdk-core/plugins/global_configuration.rb'
-require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/conditional_signing.rb'
 
@@ -42,9 +42,9 @@ module Aws
       add_plugin(Aws::Plugins::HelpfulSocketErrors)
       add_plugin(Aws::Plugins::RetryErrors)
       add_plugin(Aws::Plugins::GlobalConfiguration)
-      add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::RestJson)
       add_plugin(Aws::CloudSearchDomain::Plugins::ConditionalSigning)
 

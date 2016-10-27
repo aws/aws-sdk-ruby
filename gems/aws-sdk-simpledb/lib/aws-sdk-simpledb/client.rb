@@ -17,8 +17,8 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/signature_v2.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
-require 'aws-sdk-simpledb/plugins/signature_v2.rb'
 
 Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :simpledb
 
@@ -45,8 +45,8 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::SignatureV2)
       add_plugin(Aws::Plugins::Protocols::Query)
-      add_plugin(Aws::SimpleDB::Plugins::SignatureV2)
 
       # @option options [required, Aws::CredentialProvider] :credentials
       #   Your AWS credentials. This can be an instance of any one of the

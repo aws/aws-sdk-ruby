@@ -182,20 +182,20 @@ module Aws
 
         http_method = extract_http_method(request)
         url = extract_url(request)
-        headers = request.key?(:headers) ? request[:headers].to_hash : {}
+        headers = downcase_headers(request[:headers])
 
-        datetime = headers['X-Amz-Date']
+        datetime = headers['x-amz-date']
         datetime ||= Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
         date = datetime[0,8]
 
-        content_sha256 = headers['X-Amz-Content-Sha256']
+        content_sha256 = headers['x-amz-content-sha256']
         content_sha256 ||= sha256_hexdigest(request[:body] || '')
 
         sigv4_headers = {}
-        sigv4_headers['Host'] = host(url)
-        sigv4_headers['X-Amz-Date'] = datetime
-        sigv4_headers['X-Amz-Security-Token'] = creds.session_token if creds.session_token
-        sigv4_headers['X-Amz-Content-Sha256'] ||= content_sha256 if @apply_checksum_header
+        sigv4_headers['host'] = host(url)
+        sigv4_headers['x-amz-date'] = datetime
+        sigv4_headers['x-amz-security-token'] = creds.session_token if creds.session_token
+        sigv4_headers['x-amz-content-sha256'] ||= content_sha256 if @apply_checksum_header
 
         headers = headers.merge(sigv4_headers) # merge so we do not modify given headers hash
 
@@ -205,7 +205,7 @@ module Aws
         sig = signature(creds.secret_access_key, date, sts)
 
         # apply signature
-        sigv4_headers['Authorization'] = [
+        sigv4_headers['authorization'] = [
           "AWS4-HMAC-SHA256 Credential=#{credential(creds, date)}",
           "SignedHeaders=#{signed_headers(headers)}",
           "Signature=#{sig}",
@@ -295,14 +295,14 @@ module Aws
         http_method = extract_http_method(options)
         url = extract_url(options)
 
-        headers = options.key?(:headers) ? options[:headers].to_hash.dup : {}
-        headers['Host'] = host(url)
+        headers = downcase_headers(options[:headers])
+        headers['host'] = host(url)
 
-        datetime = headers['X-Amz-Date']
+        datetime = headers['x-amz-date']
         datetime ||= (options[:time] || Time.now).utc.strftime("%Y%m%dT%H%M%SZ")
         date = datetime[0,8]
 
-        content_sha256 = headers['X-Amz-Content-Sha256']
+        content_sha256 = headers['x-amz-content-sha256']
         content_sha256 ||= options[:body_digest]
         content_sha256 ||= sha256_hexdigest(options[:body] || '')
 
@@ -407,7 +407,6 @@ module Aws
 
       def signed_headers(headers)
         headers.inject([]) do |signed_headers, (header, _)|
-          header = header.downcase
           if @unsigned_headers.include?(header)
             signed_headers
           else
@@ -418,7 +417,6 @@ module Aws
 
       def canonical_headers(headers)
         headers = headers.inject([]) do |headers, (k,v)|
-          k = k.downcase
           if @unsigned_headers.include?(k)
             headers
           else
@@ -513,6 +511,13 @@ module Aws
         else
           msg = "missing required option :url"
           raise ArgumentError, msg
+        end
+      end
+
+      def downcase_headers(headers)
+        (headers || {}).to_hash.inject({}) do |hash, (key, value)|
+          hash[key.downcase] = value
+          hash
         end
       end
 

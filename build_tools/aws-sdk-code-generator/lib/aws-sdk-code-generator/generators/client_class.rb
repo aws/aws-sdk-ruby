@@ -39,6 +39,7 @@ module AwsSdkCodeGenerator
         @client_plugins ||= begin
           plugins = {}
           plugins.update(default_plugins)
+          plugins.update(signature_plugins)
           plugins.update(protocol_plugins(@api['metadata']['protocol']))
           plugins.update(@add_plugins)
           @remove_plugins.each do |plugin_name|
@@ -191,7 +192,6 @@ end
           'Aws::Plugins::RetryErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors.rb',
           'Aws::Plugins::GlobalConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb',
           'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
-          'Aws::Plugins::SignatureV4' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v4.rb',
           'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
           'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
         }
@@ -206,6 +206,17 @@ end
           'ec2'       => { 'Aws::Plugins::Protocols::EC2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/ec2.rb' },
           nil         => {}
         }[protocol]
+      end
+
+      def signature_plugins
+        case @api['metadata']['signatureVersion']
+        when 'v4'
+          { 'Aws::Plugins::SignatureV4' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v4.rb' }
+        when 'v2'
+          { 'Aws::Plugins::SignatureV2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v2.rb' }
+        else
+          {}
+        end
       end
 
       # @api private

@@ -53,7 +53,7 @@ module Aws
 
             it 'computes the authorization header' do # authz
               signature = signer.sign_request(request)
-              computed = signature.headers['Authorization']
+              computed = signature.headers['authorization']
               expected = File.read("#{prefix}.authz")
               SpecHelper.debug("EXPECTED AUTHORIZATION: |#{expected}|")
               SpecHelper.debug("COMPUTED AUTHORIZATION: |#{computed}|")

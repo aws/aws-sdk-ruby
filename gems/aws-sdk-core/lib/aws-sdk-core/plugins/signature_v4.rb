@@ -1,8 +1,5 @@
 require 'aws-sigv4'
 
-# TODO : CloudSearch domain needs custom signature apply
-# TODO : S3 domain needs custom signature apply
-
 module Aws
   module Plugins
     class SignatureV4 < Seahorse::Client::Plugin
@@ -12,9 +9,7 @@ module Aws
       end
 
       option(:sigv4_name) do |cfg|
-        name = cfg.api.metadata['signingName']
-        name ||= cfg.api.metadata['endpointPrefix']
-        name
+        cfg.api.metadata['signingName'] || cfg.api.metadata['endpointPrefix']
       end
 
       option(:sigv4_region) do |cfg|

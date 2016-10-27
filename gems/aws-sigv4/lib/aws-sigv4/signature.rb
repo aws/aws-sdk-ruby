@@ -10,7 +10,15 @@ module Aws
       end
 
       # @return [Hash<String,String>] A hash of headers that should
-      #   be applied to the HTTP request.
+      #   be applied to the HTTP request. Header keys are lower
+      #   cased strings and may include the following:
+      #
+      #   * 'host'
+      #   * 'x-amz-date'
+      #   * 'x-amz-security-token'
+      #   * 'x-amz-content-sha256'
+      #   * 'authorization'
+      #
       attr_accessor :headers
 
       # @return [String] For debugging purposes.
