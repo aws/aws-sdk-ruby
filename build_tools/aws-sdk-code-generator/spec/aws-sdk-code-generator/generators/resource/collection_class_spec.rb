@@ -123,10 +123,6 @@ class Collection < Aws::Resources::Collection
 end
           CODE
         end
-
-        it 'it validates batch args, accepts 0 or 1 arguments' do
-
-        end
       end
     end
   end
