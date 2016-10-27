@@ -60,6 +60,14 @@ module Aws
         object.upload_file(source, options)
       end
 
+      # @param (see Object#download_file)
+      # @options (see Object#download_file)
+      # @return (see Object#download_file)
+      # @see Object#download_file
+      def download_file(destination, options = {})
+        object.download_file(destination, options)
+      end
+
     end
   end
 end
