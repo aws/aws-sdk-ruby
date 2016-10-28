@@ -85,50 +85,74 @@ module Aws
         end
       end
 
+      # @param [Seahorse::Client::Request] req
       def sign_but_dont_send(req, expires_in, scheme)
+
+        http_req = req.context.http_request
+
         req.handlers.remove(Aws::S3::Plugins::S3Signer::LegacyHandler)
         req.handlers.remove(Aws::S3::Plugins::S3Signer::V4Handler)
         req.handlers.remove(Seahorse::Client::Plugins::ContentLength::Handler)
+
+        signer = build_signer(req.context.config)
+
         req.handle(step: :send) do |context|
-          if scheme != context.http_request.endpoint.scheme
-            endpoint = context.http_request.endpoint.dup
+
+          if scheme != http_req.endpoint.scheme
+            endpoint = http_req.endpoint.dup
             endpoint.scheme = scheme
             endpoint.port = (scheme == 'http' ? 80 : 443)
-            context.http_request.endpoint = URI.parse(endpoint.to_s)
+            http_req.endpoint = URI.parse(endpoint.to_s)
           end
-          signer = Aws::Sigv4::Signer.new(
-            service: 's3',
-            region: context.config.region,
-            credentials_provider: context.config.credentials,
-            unsigned_headers: [
-              'cache-control',
-              'content-length', # due to a ELB bug
-              'expect',
-              'max-forwards',
-              'pragma',
-              'te',
-              'if-match',
-              'if-none-match',
-              'if-modified-since',
-              'if-unmodified-since',
-              'if-range',
-              'accept',
-              'proxy-authorization',
-              'from',
-              'referer',
-              'user-agent'
-            ],
-            uri_escape_path: false
-          )
+
+          # hoist x-amz-* headers to the querystring
+          query = http_req.endpoint.query ? http_req.endpoint.query.split('&') : []
+          http_req.headers.keys.each do |key|
+            if key.match(/^x-amz/i)
+              value = Aws::Sigv4::Signer.uri_escape(http_req.headers.delete(key))
+              key = Aws::Sigv4::Signer.uri_escape(key)
+              query << "#{key}=#{value}"
+            end
+          end
+          http_req.endpoint.query = query.join('&') unless query.empty?
+
           url = signer.presign_url(
-            http_method: context.http_request.http_method,
-            url: context.http_request.endpoint,
-            headers: context.http_request.headers,
+            http_method: http_req.http_method,
+            url: http_req.endpoint,
+            headers: http_req.headers,
             body_digest: 'UNSIGNED-PAYLOAD',
             expires_in: expires_in
           ).to_s
+
           Seahorse::Client::Response.new(context: context, data: url)
         end
+      end
+
+      def build_signer(cfg)
+        signer = Aws::Sigv4::Signer.new(
+          service: 's3',
+          region: cfg.region,
+          credentials_provider: cfg.credentials,
+          unsigned_headers: [
+            'cache-control',
+            'content-length', # due to a ELB bug
+            'expect',
+            'max-forwards',
+            'pragma',
+            'te',
+            'if-match',
+            'if-none-match',
+            'if-modified-since',
+            'if-unmodified-since',
+            'if-range',
+            'accept',
+            'proxy-authorization',
+            'from',
+            'referer',
+            'user-agent'
+          ],
+          uri_escape_path: false
+        )
       end
 
     end

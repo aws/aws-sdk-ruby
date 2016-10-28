@@ -326,7 +326,6 @@ module Aws
 
         creq = canonical_request(http_method, url, headers, content_sha256)
         sts = string_to_sign(datetime, creq)
-
         url.query += '&X-Amz-Signature=' + signature(creds.secret_access_key, date, sts)
         url
       end

@@ -51,8 +51,8 @@ module Aws
 
           def call(context)
             Aws::Plugins::SignatureV4.apply_signature(
-              sigv4_signer(context),
-              context
+              context: context,
+              signer: sigv4_signer(context)
             )
             @handler.call(context)
           end
@@ -67,7 +67,7 @@ module Aws
               context[:cached_sigv4_region] != context.config.sigv4_signer.region
             then
               S3Signer.build_v4_signer(
-                region: context[:cached_sig4_region],
+                region: context[:cached_sigv4_region],
                 credentials: context.config.credentials
               )
             else
@@ -125,7 +125,7 @@ module Aws
             actual_region ||= region_from_body(context.http_response.body_contents)
             update_bucket_cache(context, actual_region)
             log_warning(context, actual_region)
-            update_region_header(context, actual_region)
+            resign_with_new_region(context, actual_region)
             @handler.call(context)
           end
 
@@ -141,14 +141,16 @@ module Aws
             )
           end
 
-          def update_region_header(context, region)
+          def resign_with_new_region(context, actual_region)
             context.http_response.body.truncate(0)
-            context.http_request.endpoint.host = S3Signer.new_hostname(context, region)
-            signer = S3Signer.build_v4_signer(
-              region: context.config.sigv4_region,
-              credentials: context.config.credentials
+            context.http_request.endpoint.host = S3Signer.new_hostname(context, actual_region)
+            Aws::Plugins::SignatureV4.apply_signature(
+              context: context,
+              signer: S3Signer.build_v4_signer(
+                region: actual_region,
+                credentials: context.config.credentials
+              )
             )
-            Aws::Plugins::SignatureV4.apply_signature(signer, context)
           end
 
           def region_from_body(body)

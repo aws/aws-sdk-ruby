@@ -214,6 +214,7 @@ When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do 
   req = Net::HTTP::Put.new(uri)
   req.body = body
   @resp = http.request(req)
+  puts @resp.body
   expect(@resp.code).to eq('200')
 end
 

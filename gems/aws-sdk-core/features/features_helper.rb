@@ -1,5 +1,3 @@
-require 'seahorse'
-
 ##
 ## API Call Tracker
 ##

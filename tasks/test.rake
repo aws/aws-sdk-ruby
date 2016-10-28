@@ -42,23 +42,6 @@ task 'test:features' do
   abort("one or more test suites failed: %s" % [failures.join(', ')])
 end
 
-
-
-
-
-
-
-
-task 'test:coverage:clear' do
-  sh("rm -rf #{File.join($REPO_ROOT, 'coverage')}")
-end
-
-desc 'Runs spec (unit) tests'
-task 'test:spec' => 'test:coverage:clear'
-
-desc 'Runs feature (integration) tests'
-task 'test:features' => 'test:coverage:clear'
-
 desc 'Runs unit and integration tests'
 task 'test' => ['test:spec', 'test:features']
 
