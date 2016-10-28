@@ -27,12 +27,11 @@ module AwsSdkCodeGenerator
             actions << '# @!group Batch Actions'
             @resource['batchActions'].each do |name, action|
               actions << Dsl::Method.new(batch_action_name(name, action)) do |m|
-                name = underscore(name).downcase
                 m.returns('void')
                 m.param('options', default: {})
                 m.code('batch_enum.each do |batch|')
-                m.code(initialize_params(name, action))
-                m.code(batch_params_formatter(name, action))
+                m.code(initialize_params(action))
+                m.code(batch_params_formatter(action))
                 m.code(batch_request(action))
                 m.code('end')
                 m.code(batch_response)
@@ -45,14 +44,14 @@ module AwsSdkCodeGenerator
           end
         end
 
-        def initialize_params(name, action)
+        def initialize_params(action)
           param_block = []
           param_block << "  params = Aws::Util.copy_hash(options)"
-          param_block << param_hash(name, action)
+          param_block << param_hash(action)
           param_block.join("\n")
         end
 
-        def param_hash(name, action)
+        def param_hash(action)
           @batch_obj = {}
           per_batch = {}
           @action_prefix = false
@@ -89,16 +88,7 @@ module AwsSdkCodeGenerator
           block.join("\n")
         end
 
-        def batch_params(name, action)
-          param_block = []
-          param_block << "  params = Aws::Util.deep_merge(options, {"
-          param_block << params_formatter(name, action)
-          param_block << "  })"
-          param_block << batch_params_formatter(name, action)
-          param_block.join("\n")
-        end
-
-        def batch_params_formatter(name, action)
+        def batch_params_formatter(action)
           each_batch = []
           each_batch << "  batch.each do |item|"
           @batch_obj.each do |key, value|
