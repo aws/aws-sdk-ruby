@@ -65,7 +65,11 @@ module Aws
           items = limit(count).to_a
           self.class.new([items], size: items.size)
         else
-          each.next
+          begin
+            each.next
+          rescue StopIteration
+            nil
+          end
         end
       end
 

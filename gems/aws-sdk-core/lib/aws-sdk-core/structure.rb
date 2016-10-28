@@ -50,7 +50,7 @@ module Aws
       # @api private
       def new(*args)
         if args.empty?
-          Aws::EmptyStruct
+          Aws::EmptyStructure
         else
           struct = Struct.new(*args)
           struct.send(:include, Aws::Structure)
