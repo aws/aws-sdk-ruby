@@ -1344,10 +1344,9 @@ module Aws
         def batch_create_tags(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:create_tags] ||= {}
-            params[:create_tags][:resources] ||= []
+            params[:resources] ||= []
             batch.each do |item|
-              params[:create_tags][:resources] << {
+              params[:resources] << {
                 id: item.id
               }
             end
@@ -1361,10 +1360,9 @@ module Aws
         def batch_monitor(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:monitor] ||= {}
-            params[:monitor][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:monitor][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -1378,10 +1376,9 @@ module Aws
         def batch_reboot(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:reboot] ||= {}
-            params[:reboot][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:reboot][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -1395,10 +1392,9 @@ module Aws
         def batch_start(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:start] ||= {}
-            params[:start][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:start][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -1412,10 +1408,9 @@ module Aws
         def batch_stop(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:stop] ||= {}
-            params[:stop][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:stop][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -1429,10 +1424,9 @@ module Aws
         def batch_terminate!(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:terminate] ||= {}
-            params[:terminate][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:terminate][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -1446,10 +1440,9 @@ module Aws
         def batch_unmonitor(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:unmonitor] ||= {}
-            params[:unmonitor][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:unmonitor][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end

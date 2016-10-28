@@ -16,7 +16,7 @@ module AwsSdkCodeGenerator
                     'source' => 'identifier',
                     'name' => 'GroupName'
                   },
-                  { 'target' => 'Band[]',
+                  { 'target' => 'Delete.Band[]',
                     'source' => 'identifier',
                     'name' => 'BandName',
                   },
@@ -61,10 +61,9 @@ class Collection < Aws::Resources::Collection
   def batch_terminate!(options = {})
     batch_enum.each do |batch|
       params = Aws::Util.copy_hash(options)
-      params[:terminate] ||= {}
-      params[:terminate][:concerts] ||= []
+      params[:concerts] ||= []
       batch.each do |item|
-        params[:terminate][:concerts] << {
+        params[:concerts] << {
           concert_name: item.concert_name,
           concert_location: item.concert_location
         }

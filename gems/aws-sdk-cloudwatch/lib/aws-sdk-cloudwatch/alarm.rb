@@ -368,10 +368,9 @@ module Aws
         def batch_delete!(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:delete] ||= {}
-            params[:delete][:alarm_names] ||= []
+            params[:alarm_names] ||= []
             batch.each do |item|
-              params[:delete][:alarm_names] << {
+              params[:alarm_names] << {
                 name: item.name
               }
             end
@@ -385,10 +384,9 @@ module Aws
         def batch_disable_actions(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:disable_actions] ||= {}
-            params[:disable_actions][:alarm_names] ||= []
+            params[:alarm_names] ||= []
             batch.each do |item|
-              params[:disable_actions][:alarm_names] << {
+              params[:alarm_names] << {
                 name: item.name
               }
             end
@@ -402,10 +400,9 @@ module Aws
         def batch_enable_actions(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:enable_actions] ||= {}
-            params[:enable_actions][:alarm_names] ||= []
+            params[:alarm_names] ||= []
             batch.each do |item|
-              params[:enable_actions][:alarm_names] << {
+              params[:alarm_names] << {
                 name: item.name
               }
             end

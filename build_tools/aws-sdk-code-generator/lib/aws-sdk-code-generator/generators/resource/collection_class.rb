@@ -55,10 +55,15 @@ module AwsSdkCodeGenerator
         def param_hash(name, action)
           @batch_obj = {}
           per_batch = {}
+          @action_prefix = false
           action['request']['params'].each do |param|
             if param['target'].include?('[')
               parts = param['target'].split('[')
-              batch_name = underscore(parts[0].sub(/.*?\./, ''))
+              pair = parts[0].split('.')
+              if pair.length > 1
+                @action_prefix = underscore(pair.first)
+              end
+              batch_name = underscore(pair.last)
               batch_param = underscore(parts[1].sub(/.*?\./, ''))
               batch_param = batch_param == "" ? underscore(param['name']) : batch_param
               (@batch_obj[batch_name.to_sym] ||= []) << {
@@ -68,13 +73,18 @@ module AwsSdkCodeGenerator
               per_batch[underscore(param['target']).to_sym] = underscore(param['name'])
             end
           end
+          # Construct code block
           block = []
           per_batch.each do |key, value|
             block << "  params[:#{key}] = batch[0].#{value}"
           end
-          block << "  params[:#{name}] ||= {}"
-          @batch_obj.keys.each do |key|
-            block << "  params[:#{name}][:#{key}] ||= []"
+          if @action_prefix
+            block << "  params[:#{@action_prefix}] ||= {}"
+            @batch_obj.keys.each do |key|
+              block << "  params[:#{@action_prefix}][:#{key}] ||= []"
+            end
+          else
+            @batch_obj.keys.each {|key| block << "  params[:#{key}] ||= []"}
           end
           block.join("\n")
         end
@@ -97,7 +107,12 @@ module AwsSdkCodeGenerator
               param, identifier = v.first
               hash[param.to_sym] = "item.#{identifier}"
             end
-            each_batch << "    params[:#{name}][:#{key}] << {"
+            # Construct hash block
+            if @action_prefix
+              each_batch << "    params[:#{@action_prefix}][:#{key}] << {"
+            else
+              each_batch << "    params[:#{key}] << {"
+            end
             # hashformatter treats this as inline, need extra indent
             indent_count = hash.size == 1 ? 3 : 2
             each_batch << indent_helper(HashFormatter.new(wrap: false).format(hash), indent_count)

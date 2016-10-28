@@ -177,10 +177,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:attach] ||= {}
-            params[:attach][:load_balancer_names] ||= []
+            params[:load_balancer_names] ||= []
             batch.each do |item|
-              params[:attach][:load_balancer_names] << {
+              params[:load_balancer_names] << {
                 name: item.name
               }
             end
@@ -195,10 +194,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:detach] ||= {}
-            params[:detach][:load_balancer_names] ||= []
+            params[:load_balancer_names] ||= []
             batch.each do |item|
-              params[:detach][:load_balancer_names] << {
+              params[:load_balancer_names] << {
                 name: item.name
               }
             end

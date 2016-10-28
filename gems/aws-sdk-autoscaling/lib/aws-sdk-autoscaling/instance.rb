@@ -322,10 +322,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:attach] ||= {}
-            params[:attach][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:attach][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -340,10 +339,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:detach] ||= {}
-            params[:detach][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:detach][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -358,10 +356,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:enter_standby] ||= {}
-            params[:enter_standby][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:enter_standby][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end
@@ -376,10 +373,9 @@ module Aws
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].group_name
-            params[:exit_standby] ||= {}
-            params[:exit_standby][:instance_ids] ||= []
+            params[:instance_ids] ||= []
             batch.each do |item|
-              params[:exit_standby][:instance_ids] << {
+              params[:instance_ids] << {
                 id: item.id
               }
             end

@@ -209,10 +209,9 @@ module Aws
         def batch_create(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:create] ||= {}
-            params[:create][:tags] ||= []
+            params[:tags] ||= []
             batch.each do |item|
-              params[:create][:tags] << {
+              params[:tags] << {
                 resource_type: item.resource_type,
                 resource_id: item.resource_id,
                 key: item.key
@@ -228,10 +227,9 @@ module Aws
         def batch_delete!(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:delete] ||= {}
-            params[:delete][:tags] ||= []
+            params[:tags] ||= []
             batch.each do |item|
-              params[:delete][:tags] << {
+              params[:tags] << {
                 resource_type: item.resource_type,
                 resource_id: item.resource_id,
                 key: item.key

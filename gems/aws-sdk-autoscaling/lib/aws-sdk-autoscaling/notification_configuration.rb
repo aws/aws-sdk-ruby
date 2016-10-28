@@ -177,10 +177,9 @@ module Aws
             params = Aws::Util.copy_hash(options)
             params[:auto_scaling_group_name] = batch[0].name
             params[:topic_arn] = batch[0].topic_arn
-            params[:put] ||= {}
-            params[:put][:notification_types] ||= []
+            params[:notification_types] ||= []
             batch.each do |item|
-              params[:put][:notification_types] << {
+              params[:notification_types] << {
                 notification_type: item.notification_type
               }
             end

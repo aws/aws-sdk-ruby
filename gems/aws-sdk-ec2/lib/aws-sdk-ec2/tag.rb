@@ -189,14 +189,13 @@ module Aws
         def batch_delete!(options = {})
           batch_enum.each do |batch|
             params = Aws::Util.copy_hash(options)
-            params[:delete] ||= {}
-            params[:delete][:resources] ||= []
-            params[:delete][:tags] ||= []
+            params[:resources] ||= []
+            params[:tags] ||= []
             batch.each do |item|
-              params[:delete][:resources] << {
+              params[:resources] << {
                 resource_id: item.resource_id
               }
-              params[:delete][:tags] << {
+              params[:tags] << {
                 key: item.key,
                 value: item.value
               }
