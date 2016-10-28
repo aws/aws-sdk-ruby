@@ -13,3 +13,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-s3'
 require 'features_helper'
+
+Aws::S3::Client.add_plugin(ApiCallTracker)

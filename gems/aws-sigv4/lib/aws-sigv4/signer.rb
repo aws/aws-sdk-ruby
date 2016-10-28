@@ -129,6 +129,14 @@ module Aws
       #   to `#credentials` returning a {Credentials} object.
       attr_reader :credentials_provider
 
+      # @return [Set<String>] Returns a set of header names that should not be signed.
+      #   All header names have been downcased.
+      attr_reader :unsigned_headers
+
+      # @return [Boolean] When `true` the `x-amz-content-sha256` header will be signed and
+      #   returned in the signature headers.
+      attr_reader :apply_checksum_header
+
       # Computes a version 4 signature signature. Returns the resultant
       # signature as a hash of headers to apply to your HTTP request. The given
       # request is not modified.

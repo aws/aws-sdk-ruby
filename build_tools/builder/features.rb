@@ -29,6 +29,8 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 
 require 'aws-sdk-#{var_name}'
 require 'features_helper'
+
+Aws::#{@service.name}::Client.add_plugin(ApiCallTracker)
         RUBY
       end
 

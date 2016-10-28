@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-kinesis'
 require 'features_helper'
+
+Aws::Kinesis::Client.add_plugin(ApiCallTracker)

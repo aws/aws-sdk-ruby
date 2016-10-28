@@ -42,7 +42,7 @@ module BuildTools
       if File.exists?(path)
         log(SKIP)
       else
-        _write(data)
+        write(data)
       end
     end
 

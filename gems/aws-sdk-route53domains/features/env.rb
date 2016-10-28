@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-route53domains'
 require 'features_helper'
+
+Aws::Route53Domains::Client.add_plugin(ApiCallTracker)

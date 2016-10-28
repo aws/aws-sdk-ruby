@@ -32,6 +32,10 @@ Feature: S3 Objects
 
   @kms
   Scenario: Decrypting objects encrypted using the Java SDK
-    Given I have an encryption client configured to read a Java encrypted object
+    Given a "kms_key_id" is set in cfg["java_cse_kms"]["kms_key_id"]
+    And a "profile" is set in cfg["java_cse_kms"]["profile"]
+    And a "bucket_name" is set in cfg["java_cse_kms"]["bucket_name"]
+    And a "key" is set in cfg["java_cse_kms"]["key"]
+    And Given I have an encryption client configured to read a Java encrypted object
     When I GET the object with an encryption client
     Then the object data should be "raw-body"

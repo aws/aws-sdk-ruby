@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-ec2'
 require 'features_helper'
+
+Aws::EC2::Client.add_plugin(ApiCallTracker)

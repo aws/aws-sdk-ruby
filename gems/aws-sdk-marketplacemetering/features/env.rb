@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-marketplacemetering'
 require 'features_helper'
+
+Aws::MarketplaceMetering::Client.add_plugin(ApiCallTracker)

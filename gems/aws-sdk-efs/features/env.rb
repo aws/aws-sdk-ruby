@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-efs'
 require 'features_helper'
+
+Aws::EFS::Client.add_plugin(ApiCallTracker)

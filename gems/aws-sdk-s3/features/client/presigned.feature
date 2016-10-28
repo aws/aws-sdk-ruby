@@ -19,7 +19,6 @@ Feature: S3 Presigned Operations
     And I send an HTTP get request for the presigned url
     Then the response should be "signed"
 
-  @foo
   Scenario: Presigning a put object request
     When I create a presigned url for "put_object" with:
     | key | test        |

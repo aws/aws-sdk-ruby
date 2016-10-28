@@ -115,10 +115,6 @@ Then(/^I should be able to POST an object to the form url$/) do
 end
 
 Given(/^I have an encryption client configured to read a Java encrypted object$/) do
-  step('a "kms_key_id" is set in cfg["java_cse_kms"]["kms_key_id"]')
-  step('a "profile" is set in cfg["java_cse_kms"]["profile"]')
-  step('a "bucket_name" is set in cfg["java_cse_kms"]["bucket_name"]')
-  step('a "key" is set in cfg["java_cse_kms"]["key"]')
   @cse = Aws::S3::Encryption::Client.new(
     profile: @profile,
     kms_key_id: @kms_key_id,

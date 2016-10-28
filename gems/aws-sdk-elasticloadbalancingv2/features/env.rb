@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-elasticloadbalancingv2'
 require 'features_helper'
+
+Aws::ElasticLoadBalancingV2::Client.add_plugin(ApiCallTracker)

@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-directconnect'
 require 'features_helper'
+
+Aws::DirectConnect::Client.add_plugin(ApiCallTracker)

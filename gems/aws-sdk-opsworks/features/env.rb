@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-opsworks'
 require 'features_helper'
+
+Aws::OpsWorks::Client.add_plugin(ApiCallTracker)

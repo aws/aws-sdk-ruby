@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-elastictranscoder'
 require 'features_helper'
+
+Aws::ElasticTranscoder::Client.add_plugin(ApiCallTracker)

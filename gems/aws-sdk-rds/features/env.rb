@@ -12,3 +12,5 @@ $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
 require 'aws-sdk-rds'
 require 'features_helper'
+
+Aws::RDS::Client.add_plugin(ApiCallTracker)
