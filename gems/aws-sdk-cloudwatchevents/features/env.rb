@@ -10,7 +10,7 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
-require 'aws-sdk-cloudwatchevents'
 require 'features_helper'
+require 'aws-sdk-cloudwatchevents'
 
 Aws::CloudWatchEvents::Client.add_plugin(ApiCallTracker)

@@ -27,8 +27,8 @@ $:.unshift(File.expand_path('../../lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 #{load_paths}
 
-require 'aws-sdk-#{var_name}'
 require 'features_helper'
+require 'aws-sdk-#{var_name}'
 
 Aws::#{@service.name}::Client.add_plugin(ApiCallTracker)
         RUBY

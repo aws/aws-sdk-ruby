@@ -10,7 +10,7 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
-require 'aws-sdk-workspaces'
 require 'features_helper'
+require 'aws-sdk-workspaces'
 
 Aws::WorkSpaces::Client.add_plugin(ApiCallTracker)

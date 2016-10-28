@@ -10,7 +10,7 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/features', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
-require 'aws-sdk-storagegateway'
 require 'features_helper'
+require 'aws-sdk-storagegateway'
 
 Aws::StorageGateway::Client.add_plugin(ApiCallTracker)

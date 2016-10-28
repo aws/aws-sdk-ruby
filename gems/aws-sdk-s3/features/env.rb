@@ -11,7 +11,7 @@ $:.unshift(File.expand_path('../../../aws-sdk-core/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sdk-kms/lib', __FILE__))
 $:.unshift(File.expand_path('../../../aws-sigv4/lib', __FILE__))
 
-require 'aws-sdk-s3'
 require 'features_helper'
+require 'aws-sdk-s3'
 
 Aws::S3::Client.add_plugin(ApiCallTracker)
