@@ -43,13 +43,6 @@ module Aws
         expect(GlobalConfigClient.new(property: 'arg').config.property).to eq('arg')
       end
 
-      it 'ignores configuration for others services in Aws.config' do
-        Aws.config[:property] = 'aws-default'
-        Aws.config[:svc] = { property: 'svc-default' }
-        Aws.config[:s3] = { property: 's3-default' }
-        expect(GlobalConfigClient.new.config.property).to eq('svc-default')
-      end
-
     end
   end
 end

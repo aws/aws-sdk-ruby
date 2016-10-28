@@ -13,7 +13,6 @@ Gem::Specification.new do |spec|
   spec.bindir        = 'bin'
   spec.executables   << 'aws.rb'
 
-  spec.add_dependency('aws-sigv4', '~> 1.0')
   spec.add_dependency('jmespath', '~> 1.0')
 
 end
