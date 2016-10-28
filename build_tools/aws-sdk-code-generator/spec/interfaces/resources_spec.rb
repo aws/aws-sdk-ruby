@@ -734,7 +734,7 @@ describe 'Interfaces' do
         bands = svc.bands
         expect{
           bands.batch_delete!('not_hash')
-        }.to raise_error(ArgumentError, "expected :options to be a Hash.")
+        }.to raise_error(ArgumentError, "expected hash, got `String`")
       end
     end
   end

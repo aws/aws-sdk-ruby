@@ -173,17 +173,12 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_put(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].name,
-              topic_arn: batch[0].topic_arn,
-              put: {
-                notification_types: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].name
+            params[:topic_arn] = batch[0].topic_arn
+            params[:put] ||= {}
+            params[:put][:notification_types] ||= []
             batch.each do |item|
               params[:put][:notification_types] << {
                 notification_type: item.notification_type

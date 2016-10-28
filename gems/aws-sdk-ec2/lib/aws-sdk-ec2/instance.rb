@@ -1342,15 +1342,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_create_tags(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              create_tags: {
-                resources: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:create_tags] ||= {}
+            params[:create_tags][:resources] ||= []
             batch.each do |item|
               params[:create_tags][:resources] << {
                 id: item.id
@@ -1364,15 +1359,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_monitor(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              monitor: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:monitor] ||= {}
+            params[:monitor][:instance_ids] ||= []
             batch.each do |item|
               params[:monitor][:instance_ids] << {
                 id: item.id
@@ -1386,15 +1376,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_reboot(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              reboot: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:reboot] ||= {}
+            params[:reboot][:instance_ids] ||= []
             batch.each do |item|
               params[:reboot][:instance_ids] << {
                 id: item.id
@@ -1408,15 +1393,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_start(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              start: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:start] ||= {}
+            params[:start][:instance_ids] ||= []
             batch.each do |item|
               params[:start][:instance_ids] << {
                 id: item.id
@@ -1430,15 +1410,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_stop(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              stop: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:stop] ||= {}
+            params[:stop][:instance_ids] ||= []
             batch.each do |item|
               params[:stop][:instance_ids] << {
                 id: item.id
@@ -1452,15 +1427,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_terminate!(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              terminate: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:terminate] ||= {}
+            params[:terminate][:instance_ids] ||= []
             batch.each do |item|
               params[:terminate][:instance_ids] << {
                 id: item.id
@@ -1474,15 +1444,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_unmonitor(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              unmonitor: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:unmonitor] ||= {}
+            params[:unmonitor][:instance_ids] ||= []
             batch.each do |item|
               params[:unmonitor][:instance_ids] << {
                 id: item.id

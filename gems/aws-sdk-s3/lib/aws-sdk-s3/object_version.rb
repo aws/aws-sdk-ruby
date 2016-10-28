@@ -355,20 +355,15 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              bucket: batch[0].bucket_name,
-              delete: {
-                objects: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:bucket] = batch[0].bucket_name
+            params[:delete] ||= {}
+            params[:delete][:objects] ||= []
             batch.each do |item|
               params[:delete][:objects] << {
-                key: item.key,
-                version_id: item.version_id
+                key: item.object_key,
+                version_id: item.id
               }
             end
             batch[0].client.delete_objects(params)

@@ -366,15 +366,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              delete: {
-                alarm_names: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:delete] ||= {}
+            params[:delete][:alarm_names] ||= []
             batch.each do |item|
               params[:delete][:alarm_names] << {
                 name: item.name
@@ -388,15 +383,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_disable_actions(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              disable_actions: {
-                alarm_names: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:disable_actions] ||= {}
+            params[:disable_actions][:alarm_names] ||= []
             batch.each do |item|
               params[:disable_actions][:alarm_names] << {
                 name: item.name
@@ -410,15 +400,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_enable_actions(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              enable_actions: {
-                alarm_names: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:enable_actions] ||= {}
+            params[:enable_actions][:alarm_names] ||= []
             batch.each do |item|
               params[:enable_actions][:alarm_names] << {
                 name: item.name

@@ -319,16 +319,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              attach: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:attach] ||= {}
+            params[:attach][:instance_ids] ||= []
             batch.each do |item|
               params[:attach][:instance_ids] << {
                 id: item.id
@@ -342,16 +337,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              detach: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:detach] ||= {}
+            params[:detach][:instance_ids] ||= []
             batch.each do |item|
               params[:detach][:instance_ids] << {
                 id: item.id
@@ -365,16 +355,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_enter_standby(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              enter_standby: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:enter_standby] ||= {}
+            params[:enter_standby][:instance_ids] ||= []
             batch.each do |item|
               params[:enter_standby][:instance_ids] << {
                 id: item.id
@@ -388,16 +373,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_exit_standby(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              exit_standby: {
-                instance_ids: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:exit_standby] ||= {}
+            params[:exit_standby][:instance_ids] ||= []
             batch.each do |item|
               params[:exit_standby][:instance_ids] << {
                 id: item.id

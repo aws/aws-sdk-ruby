@@ -59,15 +59,10 @@ class Collection < Aws::Resources::Collection
   # @param options ({})
   # @return [void]
   def batch_terminate!(options = {})
-    if ! options.is_a? Hash
-      raise ArgumentError, 'expected :options to be a Hash.'
-    end
     batch_enum.each do |batch|
-      params = Aws::Util.deep_merge(options, {
-        terminate: {
-          concerts: []
-        }
-      })
+      params = Aws::Util.copy_hash(options)
+      params[:terminate] ||= {}
+      params[:terminate][:concerts] ||= []
       batch.each do |item|
         params[:terminate][:concerts] << {
           concert_name: item.concert_name,
@@ -98,16 +93,11 @@ class Collection < Aws::Resources::Collection
   # @param options ({})
   # @return [void]
   def batch_delete!(options = {})
-    if ! options.is_a? Hash
-      raise ArgumentError, 'expected :options to be a Hash.'
-    end
     batch_enum.each do |batch|
-      params = Aws::Util.deep_merge(options, {
-        band_group: batch[0].group_name,
-        delete: {
-          band: []
-        }
-      })
+      params = Aws::Util.copy_hash(options)
+      params[:band_group] = batch[0].group_name
+      params[:delete] ||= {}
+      params[:delete][:band] ||= []
       batch.each do |item|
         params[:delete][:band] << {
           band_name: item.band_name

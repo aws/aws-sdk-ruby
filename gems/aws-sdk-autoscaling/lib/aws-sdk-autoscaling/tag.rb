@@ -207,15 +207,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_create(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              create: {
-                tags: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:create] ||= {}
+            params[:create][:tags] ||= []
             batch.each do |item|
               params[:create][:tags] << {
                 resource_type: item.resource_type,
@@ -231,15 +226,10 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              delete: {
-                tags: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:delete] ||= {}
+            params[:delete][:tags] ||= []
             batch.each do |item|
               params[:delete][:tags] << {
                 resource_type: item.resource_type,

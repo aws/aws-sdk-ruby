@@ -174,16 +174,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              attach: {
-                load_balancer_names: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:attach] ||= {}
+            params[:attach][:load_balancer_names] ||= []
             batch.each do |item|
               params[:attach][:load_balancer_names] << {
                 name: item.name
@@ -197,16 +192,11 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})
-          if ! options.is_a? Hash
-            raise ArgumentError, 'expected :options to be a Hash.'
-          end
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              auto_scaling_group_name: batch[0].group_name,
-              detach: {
-                load_balancer_names: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:detach] ||= {}
+            params[:detach][:load_balancer_names] ||= []
             batch.each do |item|
               params[:detach][:load_balancer_names] << {
                 name: item.name
