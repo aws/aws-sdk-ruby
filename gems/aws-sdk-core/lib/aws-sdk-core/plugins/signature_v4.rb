@@ -96,7 +96,7 @@ module Aws
         # @api private
         def apply_signature(options = {})
           context = options[:context]
-          signer = options[:signer] || context.sigv4_signer
+          signer = options[:signer] || context.config.sigv4_signer
           req = context.http_request
 
           # in case this request is being re-signed

@@ -86,8 +86,16 @@ module Aws
       def batch_enum
         case @limit
         when 0 then []
-        when nil then @batches
+        when nil then non_empty_batches
         else limited_batches
+        end
+      end
+
+      def non_empty_batches
+        Enumerator.new do |y|
+          @batches.each do |batch|
+            y.yield(batch) if batch.size > 0
+          end
         end
       end
 
