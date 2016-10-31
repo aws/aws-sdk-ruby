@@ -140,6 +140,11 @@ def param_value(value)
   end
 end
 
+# loads configuration values from the integration test configuration file
+Given(/^a "([^"]*)" is set in cfg(\[.*\])$/) do |name, path|
+  instance_variable_set("@#{name}", cfg_value(*path.scan(/\w+/)))
+end
+
 When(/^I call the "(.*?)" API$/) do |api|
   @response = @client.send(underscore(api))
 end
