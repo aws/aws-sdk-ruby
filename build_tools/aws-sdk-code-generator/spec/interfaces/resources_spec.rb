@@ -697,24 +697,13 @@ describe 'Interfaces' do
 
     describe 'batchActions' do
 
-      it 'invokes one client request per collection batch' do
-        client.stub_responses(:list_bands, [
-          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
-          { bands: [{ band_name: 'band-2' }] },
-        ])
-        svc = Sample::Resource.new(client: client)
-        bands = svc.bands.to_a # force enumeration
-        expect(bands[0].client).to be(client)
-        expect(bands[1].client).to be(client)
-      end
-
       it 'raises for actions that model a resource' do
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         expect(bands).to respond_to(:batch_delete!) 
       end
 
-      it 'performs batch action and returns nil as response' do
+      it 'invokes one client request per collection batch and returns nil as response' do
         client.stub_responses(:list_bands, [
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
           { bands: [{ band_name: 'band-2' }] },
@@ -723,6 +712,20 @@ describe 'Interfaces' do
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         bands.batch_delete!
+      end
+
+      it 'has a #batches method that returns a collection enumerator that responds to batch actions' do
+        client.stub_responses(:list_bands, [
+          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
+          { bands: [{ band_name: 'band-2' }] },
+        ])
+        expect(client).to receive(:delete_bands).with({bands:[{band_name: 'band-1'}]}).once.and_return(nil)
+        expect(client).to receive(:delete_bands).with({bands:[{band_name: 'band-2'}]}).once.and_return(nil)
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        bands.batches.each do |batch|
+          batch.batch_delete!
+        end
       end
 
       it 'validates batch args, options must be a hash' do
