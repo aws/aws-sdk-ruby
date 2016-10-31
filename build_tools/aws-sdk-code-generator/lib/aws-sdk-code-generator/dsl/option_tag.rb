@@ -2,13 +2,19 @@ module AwsSdkCodeGenerator
   module Dsl
     class OptionTag
 
-      def initialize(name:, type:, param:'options', required:false, docstring:nil, default:nil)
-        @name = name
-        @type = type
-        @param = param
-        @required = required ? 'required, ' : ''
-        @docstring = Dsl::TagDocstring.new(docstring)
-        @default = Dsl::TagDefault.new(default)
+      # @option options [required, String] :name
+      # @option options [required, String] :type
+      # @option options [String] :param ('options')
+      # @option options [Boolean] :required (false)
+      # @option options [String, nil] :docstring (nil)
+      # @option options [Object] :default
+      def initialize(options)
+        @name = options.fetch(:name)
+        @type = options.fetch(:type)
+        @param = options.fetch(:param, 'options')
+        @required = options.fetch(:required, false) ? 'required, ' : ''
+        @docstring = Dsl::TagDocstring.new(options.fetch(:docstring, nil))
+        @default = Dsl::TagDefault.new(options.fetch(:default, nil))
       end
 
       def lines

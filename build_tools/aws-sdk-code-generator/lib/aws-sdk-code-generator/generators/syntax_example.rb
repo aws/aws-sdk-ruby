@@ -4,11 +4,13 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(struct_shape:, api:, indent: '')
-        @indent = indent
-        @api = api
-        @struct_shape = struct_shape
-        @recursive_shapes = compute_recursive_shapes(@shape)
+      # @option options [required, Hash] :struct_shape
+      # @option options [required, Hash] :api
+      # @option options [String] :indent ('')
+      def initialize(options = {})
+        @indent = options.fetch(:indent, '')
+        @api = options.fetch(:api)
+        @struct_shape = options.fetch(:struct_shape)
       end
 
       def format
@@ -104,7 +106,8 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def apply_comments(ref, text, required:)
+      def apply_comments(ref, text, options = {})
+        required = options.fetch(:required)
         lines = text.lines.to_a
         if lines[0].match(/\n$/)
           lines[0] = lines[0].sub(/\n$/, comments(ref, required) + "\n")
@@ -132,10 +135,6 @@ module AwsSdkCodeGenerator
           comments << 'value <Hash,Array,String,Numeric,Boolean,IO,Set,nil>'
         end
         comments == [] ? '' : " # #{comments.join(', ')}"
-      end
-
-      def recursive?(ref)
-        @recursive_shapes.include?(ref['shape'])
       end
 
       def enum_values(ref)

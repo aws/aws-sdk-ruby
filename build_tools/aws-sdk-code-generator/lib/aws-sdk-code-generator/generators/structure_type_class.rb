@@ -4,17 +4,17 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      # @param [String] name
-      # @param [Hash] api
-      # @param [Boolean] used_as_input
-      def initialize(name:, api:, used_as_input:)
-        @name = name
-        @api = api
-        @shape = api['shapes'][name]
+      # @option options [required, String] :name
+      # @option options [required, Hash] :api
+      # @option options [required, Boolean] :used_as_input
+      def initialize(options)
+        @name = options.fetch(:name)
+        @api = options.fetch(:api)
+        @shape = @api['shapes'][@name]
         super()
 
         apply_class_docs
-        apply_input_example if used_as_input
+        apply_input_example if options.fetch(:used_as_input)
         apply_returned_by
         document_members
         if @shape['members'].empty?

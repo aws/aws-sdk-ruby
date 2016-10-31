@@ -4,30 +4,26 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def self.apply(api:, service_identifier:, operation_name:, operation:, method:, examples:)
-        new(
-          api: api,
-          service_identifier: service_identifier,
-          operation_name: operation_name,
-          operation: operation,
-          examples: examples
-        ).apply(method:method)
+      def self.apply(options)
+        new(options).apply(options)
       end
 
-      def initialize(api:, service_identifier:, operation_name:, operation:, examples:)
-        @api = api
-        @service_id = service_identifier
-        @operation_name = operation_name
-        @method_name = underscore(operation_name)
-        @operation = operation
-        @examples = examples || { 'examples' => {} }
+      # @option options [required, Hash] :api
+      # @option options [required, String] :service_identifier
+      # @option options [required, String] :operation_name
+      # @option options [required, Hash] :operation
+      # @option options [Hash] :examples
+      def initialize(options)
+        @api = options.fetch(:api)
+        @service_id = options.fetch(:service_identifier)
+        @operation_name = options.fetch(:operation_name)
+        @method_name = underscore(@operation_name)
+        @operation = options.fetch(:operation)
+        @examples = options.fetch(:examples, nil) || { 'examples' => {} }
       end
 
-      # @param [String] service_identifier
-      # @param [String] operation_name
-      # @param [Hash] operation
-      # @param [Dsl::Method] method
-      def apply(method:)
+      def apply(options)
+        method = options.fetch(:method)
         method.docstring do |docstring|
           apply_operation_docs(docstring)
           apply_option_tags(docstring)

@@ -7,9 +7,11 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(resource:, resp_var_name:'resp')
-          @resource = resource
-          @resp_var_name = resp_var_name
+        # @option options [required, Hash] :resource
+        # @option options [String] :resp_var_name ('resp')
+        def initialize(options)
+          @resource = options.fetch(:resource)
+          @resp_var_name = options.fetch(:resp_var_name, 'resp')
           verify_resource!
           @context = loop_context
           super()

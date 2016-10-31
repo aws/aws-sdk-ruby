@@ -5,7 +5,9 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(resource:)
+        # @option options [required, Hash] :resource]
+        def initialize(options = {})
+          resource = options.fetch(:resource)
           @identifiers = resource["identifiers"] || []
           @shape_name = resource["shape"]
           super('initialize')
@@ -52,7 +54,7 @@ module AwsSdkCodeGenerator
         end
 
         def identifiers
-          Enumerator.new(@identifiers.length) do |y|
+          Enumerator.new do |y|
             @identifiers.each.with_index do |i, n|
               y.yield(underscore(i['name']), identifier_type(i), n)
             end

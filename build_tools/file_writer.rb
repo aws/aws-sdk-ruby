@@ -9,9 +9,10 @@ module BuildTools
     SKIP = '.'
 
     # @param [String] path
-    def initialize(path, logger:default_logger)
+    # @option options [Logger] :logger (Logger.new($stdout))
+    def initialize(path, options = {})
       @path = path
-      @logger = logger
+      @logger = options[:logger] || default_logger
     end
 
     # @return [String]

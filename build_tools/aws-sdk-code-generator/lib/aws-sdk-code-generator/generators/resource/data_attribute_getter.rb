@@ -5,9 +5,13 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(api:, member_name:, member_ref:)
-          @api = api
-          name = underscore(member_name)
+        # @option options [required, Hash] :api
+        # @option options [required, String] :member_name
+        # @option options [required, Hash] :member_ref
+        def initialize(options = {})
+          @api = options.fetch(:api)
+          name = underscore(options.fetch(:member_name))
+          member_ref = options.fetch(:member_ref)
           super(name)
           docstring(documentation(member_ref))
           returns(ruby_type(member_ref))

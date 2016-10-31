@@ -5,13 +5,13 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        # @param [Hash] resource
-        # @param [Boolean] request_made
-        def initialize(resource:, request_made:)
+        # @option options [required, Hash] :resource
+        # @option options [required, Boolean] :request_made
+        def initialize(options = {})
           super()
-          @resource = resource
-          @request_made = request_made
-          append("#{resource_class}.new(#{options})")
+          @resource = options.fetch(:resource)
+          @request_made = options.fetch(:request_made)
+          append("#{resource_class}.new(#{constructor_options})")
         end
 
         private
@@ -20,7 +20,7 @@ module AwsSdkCodeGenerator
           @resource['type']
         end
 
-        def options
+        def constructor_options
           options = {}
           options.update(identifiers)
           options[:data] = data_path if @resource['path']

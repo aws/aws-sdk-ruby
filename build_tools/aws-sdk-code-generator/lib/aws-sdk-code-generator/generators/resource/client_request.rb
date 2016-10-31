@@ -5,12 +5,15 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(request:, resp:false, merge:true)
-          @request = request
-          @params = ClientRequestParams.new(params: request['params'])
-          @resp = resp
-          if merge
-            super("#{options}#{assignement}@client.#{operation_name}(options)")
+        # @option options [required, Hash] :request
+        # @option options [Boolean] :resp (false)
+        # @option options [Boolean] :merge (true)
+        def initialize(options = {})
+          @request = options.fetch(:request)
+          @params = ClientRequestParams.new(params: @request['params'])
+          @resp = options.fetch(:resp, false)
+          if options.fetch(:merge, true)
+            super("#{request_options}#{assignement}@client.#{operation_name}(options)")
           else
             super("#{assignement}@client.#{operation_name}#{params}")
           end
@@ -18,7 +21,7 @@ module AwsSdkCodeGenerator
 
         private
 
-        def options
+        def request_options
           if @params.empty?
             ''
           elsif @params.simple?

@@ -3,8 +3,11 @@ module AwsSdkCodeGenerator
     module Resource
       class DataMethod < Dsl::Method
 
-        def initialize(resource_name:, resource:)
-          @resource_name = resource_name
+        # @option options [required, String] :resource_name
+        # @option options [required, Hash] :resource
+        def initialize(options = {})
+          @resource_name = options.fetch(:resource_name)
+          resource = options.fetch(:resource)
           @shape_name = resource['shape']
           @load = resource['load'] && resource['load']['request']['operation']
           super('data')

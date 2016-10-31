@@ -8,14 +8,21 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(parent:, identifier:, api:, waiters:, examples:, add_plugins:{}, remove_plugins:[])
-        @identifier = identifier
-        @api = api
-        @waiters = waiters
-        @examples = examples
-        @add_plugins = add_plugins
-        @remove_plugins = remove_plugins
-        super('Client', extends: 'Seahorse::Client::Base', parent: parent)
+      # @option options [required, Main, Module] :parent
+      # @option options [required, String] :identifier
+      # @option options [required, Hash] :api
+      # @option options [required, Hash, nil] :waiters
+      # @option options [required, Hash, nil] :examples
+      # @option options [Hash] :add_plugins ({})
+      # @option options [Array<String>] :remove_plugins ([])
+      def initialize(options)
+        @identifier = options.fetch(:identifier)
+        @api = options.fetch(:api)
+        @waiters = options.fetch(:waiters)
+        @examples = options.fetch(:examples)
+        @add_plugins = options.fetch(:add_plugins, {})
+        @remove_plugins = options.fetch(:remove_plugins, [])
+        super('Client', extends: 'Seahorse::Client::Base', parent: options.fetch(:parent))
         apply_modules(self)
         apply_identifier(self)
         apply_api(self)
@@ -50,9 +57,16 @@ module AwsSdkCodeGenerator
             Kernel.require(path)
             ClientPlugin.new(
               class_name: class_name,
-              options: Kernel.const_get(class_name).options,
+              options: const_get(class_name).options,
               path: path)
           end
+        end
+      end
+
+      def const_get(class_name)
+        const_names = class_name.split('::')
+        const_names.inject(Kernel) do |const, const_name|
+          const.const_get(const_name)
         end
       end
 
@@ -222,10 +236,10 @@ end
       # @api private
       class ClientPlugin
 
-        def initialize(class_name:, options:, path:)
-          @class_name = class_name
-          @options = options
-          @require_path = path.split('/lib/').last
+        def initialize(options)
+          @class_name = options.fetch(:class_name)
+          @options = options.fetch(:options)
+          @require_path = options.fetch(:path).split('/lib/').last
         end
 
         # @return [String]

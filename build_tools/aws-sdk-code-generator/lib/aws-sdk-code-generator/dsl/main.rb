@@ -4,11 +4,12 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(parent:nil, &block)
+      # @option options [Main, Module] :parent (nil)
+      def initialize(options = {}, &block)
         @comments = Docstring.new(nil)
         @top_content = []
         @code_objects = []
-        @parent = parent
+        @parent = options.fetch(:parent, nil)
         yield(self) if block
       end
 
@@ -59,8 +60,8 @@ module AwsSdkCodeGenerator
         @top_content << "require_relative '#{path}'"
       end
 
-      def method(name, **options, &block)
-        m = Dsl::Method.new(name, **options)
+      def method(name, options = {}, &block)
+        m = Dsl::Method.new(name, options)
         yield(m) if block
         add(m)
       end
@@ -72,8 +73,8 @@ module AwsSdkCodeGenerator
         m
       end
 
-      def class(name, **options, &block)
-        c = Dsl::Class.new(name, parent: self, **options)
+      def class(name, options = {}, &block)
+        c = Dsl::Class.new(name, options.merge(parent: self))
         yield(c) if block
         add(c)
         c

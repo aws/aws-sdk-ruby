@@ -4,11 +4,12 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(name, parent:nil, &block)
+      # @option options [Main, Module] :parent (nil)
+      def initialize(name, options = {}, &block)
         @name = name
         @code_objects = []
         @access = :public
-        @parent = parent
+        @parent = options.fetch(:parent, nil)
         @docstring = Dsl::Docstring.new(nil)
         yield(self) if block
       end
@@ -40,12 +41,12 @@ module AwsSdkCodeGenerator
         root.require_relative(path)
       end
 
-      def constructor(**options, &block)
-        method(:initialize, **options, &block)
+      def constructor(options = {}, &block)
+        method(:initialize, options, &block)
       end
 
-      def attr_accessor(name, **options, &block)
-        a = Dsl::AttributeAccessor.new(name, **options)
+      def attr_accessor(name, options = {}, &block)
+        a = Dsl::AttributeAccessor.new(name, options)
         yield(a) if block
         add(a)
       end

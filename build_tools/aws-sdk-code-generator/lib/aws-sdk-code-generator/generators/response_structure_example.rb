@@ -6,9 +6,11 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(shape_ref:, api:)
-        @shape_ref = shape_ref
-        @api = api
+      # @option options [required, Hash] :shape_ref
+      # @option options [required, Hash] :api
+      def initialize(options = {})
+        @shape_ref = options.fetch(:shape_ref)
+        @api = options.fetch(:api)
       end
 
       def to_str

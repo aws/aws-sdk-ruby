@@ -3,10 +3,14 @@ require 'json'
 module BuildTools
   class << self
 
-    # @param [Array<String>] items
-    # @param [String] indent
+    # @option options [required, Array] :items
+    # @option options [required, String] :indent
+    # @option options [Integer] :max_length (80)
     # @return [String]
-    def wrap_list(items:, indent:, max_length: 80)
+    def wrap_list(options = {})
+      items = options.fetch(:items)
+      indent = options.fetch(:indent)
+      max_length = options.fetch(:max_length, 80)
       lines = [indent]
       items.each.with_index do |item, n|
         if n == 0

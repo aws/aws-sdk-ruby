@@ -1,32 +1,34 @@
 module AwsSdkCodeGenerator
   class HashFormatter
 
-    # @param [Boolean] wrap (true) When `true`, the formatted hash will
+    # @option options [Boolean] :wrap (true) When `true`, the formatted hash will
     #   be wrapped with curly braces.
     #
-    # @param [Boolean] inline (false) When `true` the formatted hash will
+    # @option options [Boolean] :inline (false) When `true` the formatted hash will
     #   contain no newlines.
     #
-    # @param [Boolean] quote_strings (false) By default, all hash string values
+    # @option options [Boolean] :quote_strings (false) By default, all hash string values
     #   must contain their own quotes. If you pass `true`, then all hash string
     #   values will be inspected via `#inspect` which will auto-quote them.
     #
-    def initialize(wrap:true, inline:false, quote_strings:false)
-      @wrap = wrap
-      @inline = inline
-      @quote_strings = quote_strings
+    def initialize(options = {})
+      @wrap = options.fetch(:wrap, true)
+      @inline = options.fetch(:inline, false)
+      @quote_strings = options.fetch(:quote_strings, false)
     end
 
     def format(obj)
       result = hash(obj, i:'', inline:@inline)
       result = unwrap(result, obj.size) if !@wrap
-      result = result.strip if @inline && result.lines.length == 1
+      result = result.strip if @inline && result.lines.to_a.length == 1
       result
     end
 
     private
 
-    def value(obj, i:, inline:)
+    def value(obj, options)
+      i = options.fetch(:i)
+      inline = options.fetch(:inline)
       case obj
       when Hash then hash(obj, i:i, inline:inline)
       when Array then array(obj, i:i)
@@ -36,7 +38,9 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def hash(hash, i:, inline:)
+    def hash(hash, options)
+      i = options.fetch(:i)
+      inline = options.fetch(:inline)
       if hash.empty?
         '{}'
       elsif inline_hash?(hash, inline)
@@ -50,7 +54,8 @@ module AwsSdkCodeGenerator
       "{ #{hash_entry(hash.keys[0], hash.values[0], i:'')} }"
     end
 
-    def multiline_hash(hash, i:)
+    def multiline_hash(hash, options)
+      i = options.fetch(:i)
       str = "{\n"
       hash.each.with_index do |(key, value), n|
         str += "#{i}  #{hash_entry(key, value, i:i)}"
@@ -60,7 +65,8 @@ module AwsSdkCodeGenerator
       str + "#{i}}"
     end
 
-    def hash_entry(key, value, i:)
+    def hash_entry(key, value, options)
+      i = options.fetch(:i)
       value = value(value, i: i + '  ', inline:false)
       if Symbol === key
         "#{key}: #{value}"
@@ -69,7 +75,8 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def array(array, i:)
+    def array(array, options)
+      i = options.fetch(:i)
       if array.empty?
         '[]'
       elsif inline_array?(array)
@@ -79,7 +86,8 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def format_multiline_array(array, i:)
+    def format_multiline_array(array, options)
+      i = options.fetch(:i)
       str = "[\n"
       array.each.with_index do |value, n|
         str += "#{i}  #{value(value, i:i + '  ', inline:true)}"

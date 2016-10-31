@@ -37,7 +37,9 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def ruby_input_type(shape_ref, nested:false)
+    # @option options [Boolean] :nested (false)
+    def ruby_input_type(shape_ref, options = {})
+      nested = options.fetch(:nested, false)
       shape = @api['shapes'][shape_ref['shape']]
       case shape['type']
       when 'byte' then 'Integer<byte>'
@@ -93,7 +95,9 @@ module AwsSdkCodeGenerator
       ref['streaming'] || shape['streaming']
     end
 
-    def documentation(ref_or_shape, line_width:70)
+    # @option options [Integer] :line_width (70)
+    def documentation(ref_or_shape, options = {})
+      line_width = options.fetch(:line_width, 70)
       shape = ref_or_shape.key?('type') ? ref_or_shape : shape(ref_or_shape)
       docstring = ref_or_shape['documentation'] || shape['documentation']
       if docstring
@@ -119,7 +123,9 @@ module AwsSdkCodeGenerator
       end
     end
 
-    def markdown(html, line_width: 70)
+    # @option options [Integer] :line_width (70)
+    def markdown(html, options = {})
+      line_width = options.fetch(:line_width, 70)
       # TODO : this section of code is **very slow** and runs many times
       #   while building a service.
       if html
@@ -155,29 +161,6 @@ module AwsSdkCodeGenerator
         # remove extra escape
         markdown.gsub(/\\(`|'|")/, '\1')
       end
-    end
-
-    # Given a shape reference, this function returns a Set of all
-    # of the recursive shapes found in tree.
-    def compute_recursive_shapes(ref, stack = [], recursive = Set.new)
-      if ref && !stack.include?(ref['shape'])
-        stack.push(ref['shape'])
-        s = shape(ref)
-        case s['type']
-        when 'structure'
-          s['members'].each_pair do |_, member_ref|
-            compute_recursive_shapes(member_ref, stack, recursive)
-          end
-        when 'list'
-          compute_recursive_shapes(s['member'], stack, recursive)
-        when 'map'
-          compute_recursive_shapes(s['value'], stack, recursive)
-        end
-        stack.pop
-      elsif ref
-        recursive << ref.shape
-      end
-      recursive
     end
 
     def deep_copy(obj)

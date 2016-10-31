@@ -2,7 +2,7 @@ module AwsSdkCodeGenerator
   module Dsl
     class BlockParam < Param
 
-      def initialize(type:nil, default:nil, docstring:nil)
+      def initialize(options = {})
         super('&block')
       end
 

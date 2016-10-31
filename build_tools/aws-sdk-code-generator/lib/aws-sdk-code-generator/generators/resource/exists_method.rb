@@ -5,7 +5,9 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(resource_name:, resource:, waiters:)
+        # @option options [required, String] :resource_name
+        def initialize(options)
+          resource_name = options.fetch(:resource_name)
           super('exists?')
           returns('Boolean', docstring: "Returns `true` if the #{resource_name} exists.")
           code <<-CODE

@@ -7,12 +7,17 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(api:, request:, skip:[], var_name:, returns:)
-          @api = api
-          @request = request
-          @skip = Set.new(skip)
-          @var_name = var_name
-          @returns = returns
+        # @option options [required, Hash] :api
+        # @option options [required, Hash] :request
+        # @option options [Array<String>] :skip ([])
+        # @option options [required, String] :var_name
+        # @option options [required, String] :returns
+        def initialize(options)
+          @api = options.fetch(:api)
+          @request = options.fetch(:request)
+          @skip = Set.new(options.fetch(:skip, []))
+          @var_name = options.fetch(:var_name)
+          @returns = options.fetch(:returns)
         end
 
         # @param [Dsl::Method] method

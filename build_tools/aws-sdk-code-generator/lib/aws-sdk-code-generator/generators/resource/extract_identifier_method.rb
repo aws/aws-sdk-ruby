@@ -5,14 +5,17 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(identifier:, index:)
+        # @option options [required, String] :identifier
+        # @option options [required, Integer] :index
+        def initialize(options = {})
+          identifier = options.fetch(:identifier)
           name = underscore(identifier['name'])
           type = identifier_type(identifier)
           super("extract_#{name}", access: :private)
           param('args')
           param('options')
           code(<<-CODE)
-value = args[#{index}] || options.delete(:#{name})
+value = args[#{options.fetch(:index)}] || options.delete(:#{name})
 case value
 when #{type} then value
 when nil then raise ArgumentError, "missing required option :#{name}"

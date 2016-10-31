@@ -3,9 +3,19 @@ require 'json'
 module BuildTools
   class << self
 
+    # @option [required, String] :filename
+    # @option [required, String] :start
+    # @option [required, String] :stop
+    # @option [required, String] :new_lines
+    # @option [required, Boolean] :padding (false)
     # @return [Boolean] Returns `true` if the target file was changed.
     #   Returns `false` otherwise.
-    def replace_lines(filename:, start:, stop:, new_lines:, padding: false)
+    def replace_lines(options = {})
+      filename = options.fetch(:filename)
+      start = options.fetch(:start)
+      stop = options.fetch(:stop)
+      new_lines = options.fetch(:new_lines)
+      padding = options.fetch(:padding, false)
 
       orig_file = File.open(filename, 'rb') { |file| file.read }
 

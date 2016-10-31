@@ -47,7 +47,7 @@ module Aws
 
       # @return [Enumerator<Band>]
       def each(&block)
-        enum = Enumerator.new(@limit) do |y|
+        enum = Enumerator.new do |y|
           batch_enum.each do |batch|
             batch.each do |band|
               y.yield(band)

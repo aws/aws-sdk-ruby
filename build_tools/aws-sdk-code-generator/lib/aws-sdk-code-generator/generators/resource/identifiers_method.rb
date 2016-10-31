@@ -3,7 +3,9 @@ module AwsSdkCodeGenerator
     module Resource
       class IdentifiersMethod < Dsl::Method
 
-        def initialize(identifiers:)
+        # @option options [required, Array<Hash>] :identifiers
+        def initialize(options = {})
+          identifiers = options.fetch(:identifiers)
           super('identifiers')
           docstring('@deprecated')
           docstring('@api private')

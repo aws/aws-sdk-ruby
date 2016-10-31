@@ -4,15 +4,19 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(api:, resources:nil, paginators:nil, var_name:)
-        resources ||= {}
+      # @option options [required, Hash] :api
+      # @option options [required, String] :var_name
+      # @option options [Hash] :resources
+      # @option options [Hash] :paginators
+      def initialize(options)
+        resources = options.fetch(:resources) || {}
         super(
-          api: api,
+          api: options.fetch(:api),
           name: 'Resource',
-          resource: resources['service'] || {},
-          paginators: paginators,
+          resource: resources.fetch('service', {}),
+          paginators: options.fetch(:paginators, nil) || {},
           waiters:nil,
-          var_name: var_name
+          var_name: options.fetch(:var_name)
         )
       end
 

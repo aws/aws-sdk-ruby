@@ -4,7 +4,9 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(waiters:)
+      # @option options [required, Hash, nil] :waiters
+      def initialize(options)
+        waiters = options.fetch(:waiters)
         super('Waiters')
         if waiters
           waiters['waiters'].each do |waiter_name, waiter|

@@ -7,19 +7,25 @@ module AwsSdkCodeGenerator
       # TODO : don't filter @option tags that can be merged, e.g. EC2 Filters
       class HasManyAssociation < Dsl::Method
 
-        def initialize(name:, has_many:, api:, paginators:, var_name:'')
+        # @option options [required, String] :name
+        # @option options [required, Hash] :has_many
+        # @option options [required, Hash] :api
+        # @option options [required, Hash] :paginators
+        # @option options [String] :var_name ('')
+        def initialize(options = {})
 
-          @has_many = has_many
-          @paginators = paginators
-          @var_name = var_name
+          name = options.fetch(:name)
+          @has_many = options.fetch(:has_many)
+          @paginators = options.fetch(:paginators)
+          @var_name = options.fetch(:var_name, '')
 
           super(underscore(name))
 
           param('options', type:Hash, default:{})
 
           ClientRequestDocs.new(
-            request: has_many['request'],
-            api: api,
+            request: @has_many['request'],
+            api: options.fetch(:api),
             skip: paging_options,
             var_name: @var_name,
             returns: name.downcase,

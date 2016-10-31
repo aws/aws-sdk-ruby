@@ -6,9 +6,11 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(prefix:, resources:)
-        @prefix = prefix
-        @resources = resources
+      # @option options [required, String] :prefix
+      # @option options [required, Hash] :resources
+      def initialize(options)
+        @prefix = options.fetch(:prefix)
+        @resources = options.fetch(:resources)
       end
 
       # @param [Dsl::Module] mod

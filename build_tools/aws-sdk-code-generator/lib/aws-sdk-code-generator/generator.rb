@@ -3,36 +3,27 @@ module AwsSdkCodeGenerator
 
     include Helper
 
-    # @param [required, Array<String>] module_names
-    # @param [required, Hash] api
-    # @param [Hash] docs
-    # @param [Hash] paginators
-    # @param [Hash] waiters
-    # @param [Hash] resources
-    # @param [Hash] examples
-    def initialize(
-      module_names:,
-      api:nil,
-      docs: nil,
-      paginators: nil,
-      waiters: nil,
-      resources: nil,
-      examples: nil,
-      gem_requires:[],
-      add_plugins:{},
-      remove_plugins:[],
-      &block
-    )
-      @module_names = module_names
-      apply_docs(api, docs) if docs
-      @api = api || {}
-      @paginators = paginators
-      @waiters = waiters
-      @resources = resources
-      @examples = examples
-      @gem_requires = gem_requires
-      @add_plugins = add_plugins
-      @remove_plugins = remove_plugins
+    # @option options [required, Array<String>] :module_names
+    # @option options [Hash] :api
+    # @option options [Hash] :docs
+    # @option options [Hash] :paginators
+    # @option options [Hash] :waiters
+    # @option options [Hash] :resources
+    # @option options [Hash] :examples
+    # @option options [Array<String>] :gem_requires ([])
+    # @option options [Hash] :add_plugins ({})
+    # @option options [Hash] :remove_plugins ([])
+    def initialize(options, &block)
+      @module_names = options.fetch(:module_names)
+      @api = options.fetch(:api, {})
+      apply_docs(@api, options.fetch(:docs)) if options[:docs]
+      @paginators = options.fetch(:paginators, nil)
+      @waiters = options.fetch(:waiters, nil)
+      @resources = options.fetch(:resources, nil)
+      @examples = options.fetch(:examples, nil)
+      @gem_requires = options.fetch(:gem_requires, [])
+      @add_plugins = options.fetch(:add_plugins, {})
+      @remove_plugins = options.fetch(:remove_plugins, [])
       @callback = block
     end
 
@@ -47,7 +38,9 @@ module AwsSdkCodeGenerator
       svc_mod.root.to_s
     end
 
-    def generate_src_files(prefix: nil)
+    # @option options [String] :prefix
+    def generate_src_files(options = {})
+      prefix = options.fetch(:prefix, nil)
       prefix ||= @module_names.map { |n| underscore(n) }.join('/')
       Enumerator.new do |y|
         y.yield("#{prefix}.rb", service_module(prefix))

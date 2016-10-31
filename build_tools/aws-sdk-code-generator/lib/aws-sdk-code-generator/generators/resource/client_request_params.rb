@@ -5,8 +5,9 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(params:)
-          @params = params || []
+        # @option options [Array] :params ([])
+        def initialize(options = {})
+          @params = options.fetch(:params, nil) || []
           super(format_params)
         end
 
@@ -54,7 +55,8 @@ module AwsSdkCodeGenerator
           # @return [String] target
           attr_reader :target
 
-          def apply(hash, value, resource_index:0)
+          def apply(hash, value, options = {})
+            resource_index = options.fetch(:resource_index, 0)
             if @final == -1
               build_context(hash, resource_index) << value
             else

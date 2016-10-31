@@ -3,12 +3,14 @@ module AwsSdkCodeGenerator
     module Resource
       class HasAssociation < Dsl::Method
 
-        def initialize(api:, name:, has:)
-          @has = has
+        # @option options [required, String] :name
+        # @option options [required, Hash] :has
+        def initialize(options = {})
+          @has = options.fetch(:has)
           @data_identifiers = data_identifiers
           @nullable = !@data_identifiers.empty?
           @plural = plural?
-          super(underscore(name))
+          super(underscore(options.fetch(:name)))
           apply_params
           apply_code
           returns(return_type)

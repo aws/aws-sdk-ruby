@@ -3,12 +3,18 @@ module AwsSdkCodeGenerator
     module Resource
       class WaiterMethod < Dsl::Method
 
-        def initialize(resource_name:, resource:, resource_waiter_name:, resource_waiter:, waiter:)
-          @resource = resource
-          @resource_waiter = resource_waiter
-          @waiter_name = resource_waiter['waiterName']
-
-          super("wait_until_#{underscore(resource_waiter_name)}")
+        # @option options [required, String] :resource_name
+        # @option options [required, Hash] :resource
+        # @option options [required, String] :resource_waiter_name
+        # @option options [required, Hash] :resource_waiter
+        # @option options [required, Hash] :waiter
+        def initialize(options)
+          resource_name = options.fetch(:resource_name)
+          @resource = options.fetch(:resource)
+          @resource_waiter = options.fetch(:resource_waiter)
+          @waiter_name = @resource_waiter['waiterName']
+          waiter = options.fetch(:waiter)
+          super("wait_until_#{underscore(options.fetch(:resource_waiter_name))}")
           param('options', default:{})
           option(name: 'max_attempts', type:Integer, default: waiter['maxAttempts'])
           option(name: 'delay', type:Float, default: waiter['delay'])

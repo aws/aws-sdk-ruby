@@ -5,9 +5,10 @@ module AwsSdkCodeGenerator
       include Dsl::CodeObject
 
       # @param [String] code
-      def initialize(code = nil, nesting:0, &block)
+      # @option options [Integer] :nesting (0)
+      def initialize(code = nil, options = {}, &block)
         @code_objects = []
-        @nesting = nesting
+        @nesting = options.fetch(:nesting, 0)
         append(code) if code
         yield(self) if block
       end

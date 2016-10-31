@@ -2,12 +2,16 @@ module AwsSdkCodeGenerator
   module Dsl
     class Param
 
-      def initialize(name, type:nil, default:nil, docstring:nil, documented: true)
+      # @option options [String] :type
+      # @option options [Object] :default
+      # @option options [String] :docstring
+      # @option options [Boolean] :documented (true)
+      def initialize(name, options = {})
         @name = name.to_s
-        @type = TagType.new(type)
-        @default = TagDefault.new(default)
-        @docstring = TagDocstring.new(docstring)
-        @documented = documented
+        @type = TagType.new(options.fetch(:type, nil))
+        @default = TagDefault.new(options.fetch(:default, nil))
+        @docstring = TagDocstring.new(options.fetch(:docstring, nil))
+        @documented = options.fetch(:documented, true)
       end
 
       attr_reader :name, :default

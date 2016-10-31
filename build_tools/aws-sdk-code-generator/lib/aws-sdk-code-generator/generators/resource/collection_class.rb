@@ -5,10 +5,12 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(resource_name:, resource:)
-          @resource_name = resource_name
-          @resource = resource
-          @variable_name = underscore(resource_name)
+        # @option options [required, String] :resource_name
+        # @option options [required, Hash] :resource
+        def initialize(options)
+          @resource_name = options.fetch(:resource_name)
+          @resource = options.fetch(:resource)
+          @variable_name = underscore(@resource_name)
           super('Collection', extends: 'Aws::Resources::Collection')
           add(*batch_actions)
         end

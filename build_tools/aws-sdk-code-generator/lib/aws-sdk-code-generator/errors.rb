@@ -16,7 +16,11 @@ module AwsSdkCodeGenerator
     # redefine methods from Ruby Object.
     class ResourceMethodConflict < RuntimeError
 
-      def initialize(resource_name:, method_name:)
+      # @option options [required, String] :resource_name
+      # @option options [required, String] :method_name
+      def initialize(options)
+        resource_name = options.fetch(:resource_name)
+        method_name = options.fetch(:method_name)
         super("#{resource_name} is attempting to redefine ##{method_name}")
       end
 

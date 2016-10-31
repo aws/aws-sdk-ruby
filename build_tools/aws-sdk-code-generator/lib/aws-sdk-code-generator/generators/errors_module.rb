@@ -4,8 +4,8 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(api:)
-        @api = api
+      def initialize(options)
+        @api = options.fetch(:api)
         super('Errors')
         self.extend('Aws::Errors::DynamicErrors')
         self.class('ResourceNotLoadable', extends: 'RuntimeError') do |c|

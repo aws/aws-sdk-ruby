@@ -6,13 +6,19 @@ module AwsSdkCodeGenerator
 
       extend Helper
 
-      def initialize(name:, resource:, api:, paginators:nil, waiters:nil, var_name:nil)
-        @api = api
-        @name = name
-        @resource = resource
-        @paginators = paginators
-        @waiters = waiters
-        @var_name = var_name || underscore(name)
+      # @option options [required, String] :name
+      # @option options [required, Hash] :resource
+      # @option options [required, Hash] :api
+      # @option options [Hash] :paginators
+      # @option options [Hash] :waiters
+      # @option options [String] :var_name (underscore(name))
+      def initialize(options)
+        @api = options.fetch(:api)
+        @name = options.fetch(:name)
+        @resource = options.fetch(:resource)
+        @paginators = options.fetch(:paginators, nil)
+        @waiters = options.fetch(:waiters, nil)
+        @var_name = options.fetch(:var_name, underscore(@name))
         super(@name)
         build
         check_for_method_name_conflicts!

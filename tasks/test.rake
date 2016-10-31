@@ -14,6 +14,11 @@ task 'test:spec:each' do
   abort("one or more test suites failed: %s" % [failures.join(', ')])
 end
 
+rule /test:spec:aws-sdk-code-generator$/ do |task|
+  # this package is outside of the gems folder
+  sh('bundle exec rspec build_tools/aws-sdk-code-generator/spec')
+end
+
 rule /test:spec:.+$/ do |task|
   spec_dir = "gems/#{task.name.split(':').last}/spec"
   sh("bundle exec rspec #{spec_dir}")

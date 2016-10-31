@@ -2,9 +2,12 @@ module AwsSdkCodeGenerator
   module Generators
     class WaiterClass < Dsl::Class
 
-      def initialize(waiter_name:, waiter:)
+      # @option options [required, String] :waiter_name
+      # @option options [required, Hash] :waiter
+      def initialize(options)
+        waiter = options.fetch(:waiter)
         client_method = underscore(waiter['operation'])
-        super(waiter_name)
+        super(options.fetch(:waiter_name))
         code <<-CODE
 # @option options [required, Client] :client
 # @option options [Integer] :max_attempts (#{waiter['maxAttempts']})

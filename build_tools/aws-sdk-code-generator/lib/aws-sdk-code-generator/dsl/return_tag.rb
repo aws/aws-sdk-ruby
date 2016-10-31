@@ -3,9 +3,11 @@ module AwsSdkCodeGenerator
     # @api private
     class ReturnTag
 
-      def initialize(type:, docstring:nil)
-        @type = Dsl::TagType.new(type)
-        @docstring = Dsl::TagDocstring.new(docstring)
+      # @option options [required, String] :type
+      # @option options [String] :docstring
+      def initialize(options)
+        @type = Dsl::TagType.new(options.fetch(:type))
+        @docstring = Dsl::TagDocstring.new(options.fetch(:docstring, nil))
       end
 
       def lines

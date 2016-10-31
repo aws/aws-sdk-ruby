@@ -4,15 +4,17 @@ module AwsSdkCodeGenerator
 
       include Dsl::CodeObject
 
-      def initialize(name, access: :public, docstring:nil, &block)
+      # @option options [Symbol] :access (:public)
+      # @option options [String, nil] :docstring (nil)
+      def initialize(name, options = {}, &block)
         @name = name.to_s
-        @access = access
+        @access = options.fetch(:access, :public)
         @code_objects = []
         @params = []
         @option_tags = []
         @return_tags = []
         @aliases = []
-        @docstring = Dsl::Docstring.new(docstring)
+        @docstring = Dsl::Docstring.new(options.fetch(:docstring, nil))
         yield(self) if block
       end
 
@@ -22,16 +24,16 @@ module AwsSdkCodeGenerator
 
       attr_reader :aliases
 
-      def param(name, **options)
-        @params << Param.new(name, **options)
+      def param(name, options = {})
+        @params << Param.new(name, options)
       end
 
-      def option(**options)
-        @option_tags << OptionTag.new(**options)
+      def option(options)
+        @option_tags << OptionTag.new(options)
       end
 
-      def returns(type, docstring:nil)
-        @return_tags << ReturnTag.new(type:type, docstring:docstring)
+      def returns(type, options = {})
+        @return_tags << ReturnTag.new(options.merge(type:type))
       end
 
       def add(*code_objects)
@@ -80,7 +82,7 @@ module AwsSdkCodeGenerator
         tags.concat(@option_tags)
         tags.concat(@return_tags)
         tags.each.with_index do |tag, n|
-          docs.concat(tag.lines)
+          docs.concat(tag.lines.to_a)
         end
         docs.compact
       end

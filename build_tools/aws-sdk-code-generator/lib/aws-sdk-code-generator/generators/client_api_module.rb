@@ -72,9 +72,11 @@ module AwsSdkCodeGenerator
         'serviceAbbreviation' => false,
       }
 
-      def initialize(api:, paginators:)
-        @api = api
-        @paginators = paginators
+      # @option options [required, Hash] :api
+      # @option options [required, Hash, nil] :paginators
+      def initialize(options)
+        @api = options.fetch(:api)
+        @paginators = options.fetch(:paginators)
         super('ClientApi')
         docstring("@api private")
         include('Seahorse::Model')

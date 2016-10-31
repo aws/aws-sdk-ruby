@@ -6,9 +6,11 @@ module AwsSdkCodeGenerator
         LOAD_NOT_IMPLEMENTED =
           "#load is not implemented, data only available via enumeration"
 
-        def initialize(resource_name:, definition:)
-          @resource_name = resource_name
-          @load = definition
+        # @option options [required, String] :resource_name
+        # @option options [required, Hash] :definition
+        def initialize(options = {})
+          @resource_name = options.fetch(:resource_name)
+          @load = options.fetch(:definition)
           super('load')
           alias_as('reload')
           if @load

@@ -52,10 +52,15 @@ module SpecHelper
     #
     #       tmp_dir = generate_service(['Aws', 'S3'])
     #
+    # @option options [Boolean] :multiple_files (true)
+    #
     # @return [String] Returns a path to the tmp directory where
     #   the src code was generated into.
     #
-    def generate_service(module_names, multiple_files:true)
+    def generate_service(module_names, options = {})
+
+      multiple_files = options.fetch(:multiple_files, true)
+
       path = module_names.map(&:downcase).join('/')
       dir = File.join(File.dirname(__FILE__), 'fixtures', 'interfaces', path)
       generator = AwsSdkCodeGenerator::Generator.new({

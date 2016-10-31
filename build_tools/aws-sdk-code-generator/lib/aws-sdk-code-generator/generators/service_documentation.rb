@@ -6,11 +6,14 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(api:, product_name:, namespace:)
-        @api = api
-        @product_name = product_name
-        @namespace = namespace
-        @var_name = namespace.split('::').last.downcase
+      # @option options [required, Hash] :api
+      # @option options [required, Hash] :product_name
+      # @option options [required, Hash] :namespace
+      def initialize(options = {})
+        @api = options.fetch(:api)
+        @product_name = options.fetch(:product_name)
+        @namespace = options.fetch(:namespace)
+        @var_name = @namespace.split('::').last.downcase
       end
 
       def docstring

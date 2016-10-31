@@ -6,14 +6,15 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      def initialize(api:)
-        @api = api
+      # @option options [required, Hash] :api
+      def initialize(options)
+        @api = options.fetch(:api)
         super('Types')
-        input_shapes = compute_input_shapes(api)
+        input_shapes = compute_input_shapes(@api)
         structures.each do |shape_name, shape|
           add(StructureTypeClass.new(
             name: shape_name,
-            api: api,
+            api: @api,
             used_as_input: input_shapes.include?(shape_name)
           ))
         end

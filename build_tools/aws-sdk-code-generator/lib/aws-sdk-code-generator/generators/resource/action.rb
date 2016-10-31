@@ -5,12 +5,16 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(name:, action:, api:, var_name:'')
-          @api = api
-          @request = action['request']
-          @resource = action['resource']
-          @var_name = var_name
-          super(underscore(name))
+        # @option options [required, String] :name
+        # @option options [required, Hash] :action
+        # @option options [required, Hash] :api
+        # @option options [String] :var_name ('')
+        def initialize(options = {})
+          @api = options.fetch(:api)
+          @request = options.fetch(:action).fetch('request')
+          @resource = options.fetch(:action).fetch('resource', nil)
+          @var_name = options.fetch(:var_name, '')
+          super(underscore(options.fetch(:name)))
           param('options', type:Hash, default:{})
           apply_client_request_docs
           apply_response

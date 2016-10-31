@@ -4,16 +4,16 @@ module AwsSdkCodeGenerator
 
       include Helper
 
-      # @param [String] operation_name
-      # @param [Hash] api
-      # @param [Hash] examples
-      # @param [Integer] example
-      def initialize(operation_name:, api:, examples:, example:)
-        @operation_name = operation_name
-        @operation = api['operations'][operation_name]
-        @example = examples['examples'][operation_name][example]
-        @api = api
-        @method_name = underscore(operation_name)
+      # @option options [required, String] :operation_name
+      # @option options [required, Hash] api
+      # @option options [required, Hash] examples
+      # @option options [required, Integer] example
+      def initialize(options = {})
+        @operation_name = options.fetch(:operation_name)
+        @operation = options.fetch(:api)['operations'][@operation_name]
+        @example = options.fetch(:examples)['examples'][@operation_name][options.fetch(:example)]
+        @api = options.fetch(:api)
+        @method_name = underscore(@operation_name)
       end
 
       def to_s

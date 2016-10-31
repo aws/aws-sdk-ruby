@@ -473,7 +473,7 @@ module Aws
             "\xACb.\xEB\x16\x19(\x9AJ\xE0uCA\x034z\xF6&\x7F\x8E\x0E\xC0\xD5\x1A\x88\xAF2\xB1\xEEg#\x15"
           }
 
-          if !ENV['TRAVIS']
+          if !ENV['TRAVIS'] && RUBY_VERSION > '1.9.3'
             it 'supports decryption via KMS w/ GCM' do
               if !OpenSSL::Cipher.ciphers.include?('aes-256-gcm')
                 pending('aes-256-gcm not supported')

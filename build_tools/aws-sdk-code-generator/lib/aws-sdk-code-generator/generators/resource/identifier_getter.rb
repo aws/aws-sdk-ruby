@@ -5,8 +5,10 @@ module AwsSdkCodeGenerator
 
         include Helper
 
-        def initialize(identifier:)
-          name = underscore(identifier['name'])
+        # @option options [required, Hash] :identifier
+        def initialize(options)
+          identifier = options.fetch(:identifier)
+          name = underscore(identifier.fetch('name'))
           super(name)
           returns(identifier_type(identifier))
           code("@#{name}")
