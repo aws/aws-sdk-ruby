@@ -1,5 +1,5 @@
 Before("@sqs") do
-  @client = Aws::SQS::Client.new(http_wire_trace:true)
+  @client = Aws::SQS::Client.new
   @sqs_created_queues = []
 end
 
