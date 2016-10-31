@@ -719,8 +719,16 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
           { bands: [{ band_name: 'band-2' }] },
         ])
-        expect(client).to receive(:delete_bands).with({bands:[{band_name: 'band-1'}]}).once.and_return(nil)
-        expect(client).to receive(:delete_bands).with({bands:[{band_name: 'band-2'}]}).once.and_return(nil)
+        expect(client).to receive(:delete_bands).with({
+          bands: [
+            { band_name: 'band-1' }
+          ]
+        }).once.and_return(nil)
+        expect(client).to receive(:delete_bands).with({
+          bands: [
+            { band_name: 'band-2' }
+          ]
+        }).once.and_return(nil)
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         bands.batches.each do |batch|
