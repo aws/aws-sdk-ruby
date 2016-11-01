@@ -137,11 +137,10 @@ module Aws
       # created a private hosted zone. You cannot convert a public hosted zone
       # into a private hosted zone.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/hostedzone/hosted zone ID/associatevpc` resource. The request
-      # body must include an XML document with a
-      # `AssociateVPCWithHostedZoneRequest` element. The response returns the
-      # `AssociateVPCWithHostedZoneResponse` element.
+      # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/associatevpc` resource. The request body must include an XML
+      # document with a `AssociateVPCWithHostedZoneRequest` element. The
+      # response returns the `AssociateVPCWithHostedZoneResponse` element.
       #
       # <note markdown="1"> If you used different accounts to create the hosted zone and to create
       # the Amazon VPCs that you want to associate with the hosted zone, we
@@ -172,7 +171,7 @@ module Aws
       #   resp = client.associate_vpc_with_hosted_zone({
       #     hosted_zone_id: "ResourceId", # required
       #     vpc: { # required
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     comment: "AssociateVPCComment",
@@ -205,8 +204,8 @@ module Aws
       # Amazon Route 53 never partially implements the intended changes to the
       # resource record sets in a hosted zone.
       #
-      # For example, a change batch request that deletes the `CNAME`record for
-      # www.example.com and creates an alias resource record set for
+      # For example, a change batch request that deletes the `CNAME` record
+      # for www.example.com and creates an alias resource record set for
       # www.example.com. Amazon Route 53 deletes the first resource record set
       # and creates the second resource record set in a single operation. If
       # either the `DELETE` or the `CREATE` action fails, then both changes
@@ -226,16 +225,15 @@ module Aws
       # subdomain names (such as www.example.com), in the same hosted zone or
       # in multiple hosted zones. You can roll back the updates if the new
       # configuration isn't performing as expected. For more information, see
-      # [Using Traffic Flow to Route DNS Traffic][1] in the Amazon Route 53
-      # API Reference or [Actions on Traffic Policies and Traffic Policy
-      # Instances][2] in this guide.
+      # [Using Traffic Flow to Route DNS Traffic][1] in the *Amazon Route 53
+      # Developer Guide*.
       #
       #  </note>
       #
       # Use `ChangeResourceRecordsSetsRequest` to perform the following
       # actions:
       #
-      # * `CREATE`\:Creates a resource record set that has the specified
+      # * `CREATE`\: Creates a resource record set that has the specified
       #   values.
       #
       # * `DELETE`\: Deletes an existing resource record set that has the
@@ -263,50 +261,13 @@ module Aws
       # propagation can take up to 30 minutes. For more information, see
       # GetChange.
       #
-      # Note the following limitations on a `ChangeResourceRecordSets`
-      # request:
-      #
-      # * A request cannot contain more than 100 Change elements.
-      #
-      # * A request cannot contain more than 1000 ResourceRecord elements.
-      #
-      # * The sum of the number of characters (including spaces) in all
-      #   `Value` elements in a request cannot exceed 32,000 characters.
-      #
-      # * <note markdown="1"> If the value of the Action element in a ChangeResourceRecordSets
-      #   request is `UPSERT` and the resource record set already exists,
-      #   Amazon Route 53 automatically performs a `DELETE` request and a
-      #   `CREATE` request. When Amazon Route 53 calculates the number of
-      #   characters in the Value elements of a change batch request, it adds
-      #   the number of characters in the Value element of the resource record
-      #   set being deleted and the number of characters in the Value element
-      #   of the resource record set being created.
-      # 
-      #    </note>
-      #
-      # * The same resource cannot be deleted more than once in a single
-      #   batch.
-      #
-      # ^
-      #
-      # <note markdown="1"> If the value of the Action element in a ChangeResourceRecordSets
-      # request is `UPSERT` and the resource record set already exists, Amazon
-      # Route 53 automatically performs a `DELETE` request and a `CREATE`
-      # request. When Amazon Route 53 calculates the number of characters in
-      # the Value elements of a change batch request, it adds the number of
-      # characters in the Value element of the resource record set being
-      # deleted and the number of characters in the Value element of the
-      # resource record set being created.
-      #
-      #  </note>
-      #
-      # For more information on transactional changes, see
-      # ChangeResourceRecordSets.
+      # For information about the limits on a `ChangeResourceRecordSets`
+      # request, see [Limits][2] in the *Amazon Route 53 Developer Guide*.
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/traffic-flow.html
-      # [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/actions-on-polices
+      # [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DNSLimitations.html
       # @option params [required, String] :hosted_zone_id
       #   The ID of the hosted zone that contains the resource record sets that
       #   you want to change.
@@ -330,7 +291,7 @@ module Aws
       #             type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #             set_identifier: "ResourceRecordSetIdentifier",
       #             weight: 1,
-      #             region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+      #             region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #             geo_location: {
       #               continent_code: "GeoLocationContinentCode",
       #               country_code: "GeoLocationCountryCode",
@@ -368,6 +329,15 @@ module Aws
         req.send_request(options)
       end
 
+      # Adds, edits, or deletes tags for a health check or a hosted zone.
+      #
+      # For information about using tags for cost allocation, see [Using Cost
+      # Allocation Tags][1] in the *AWS Billing and Cost Management User
+      # Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
       # @option params [required, String] :resource_type
       #   The type of the resource.
       #
@@ -536,14 +506,14 @@ module Aws
       # vice versa. Instead, create a new hosted zone with the same name and
       # create new resource record sets.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API version/hostedzone`
-      # resource. The request body must include an XML document with a
+      # Send a `POST` request to the `/2013-04-01/hostedzone` resource. The
+      # request body must include an XML document with a
       # `CreateHostedZoneRequest` element. The response returns the
       # `CreateHostedZoneResponse` element containing metadata about the
       # hosted zone.
       #
-      # Fore more information about charges for hosted zones, see
-      # [AmazonAmazon Route 53 Pricing][1].
+      # Fore more information about charges for hosted zones, see [Amazon
+      # Route 53 Pricing][1].
       #
       # Note the following:
       #
@@ -567,11 +537,11 @@ module Aws
       #
       # When trying to create a hosted zone using a reusable delegation set,
       # specify an optional DelegationSetId, and Amazon Route 53 would assign
-      # those 4 NS records for the zone, instead of alloting a new one.
+      # those 4 NS records for the zone, instead of allotting a new one.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/pricing/
+      # [1]: http://aws.amazon.com/route53/pricing/
       # [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/SOA-NSrecords.html
       # [3]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/creating-migrating.html
       # @option params [required, String] :name
@@ -630,7 +600,7 @@ module Aws
       #   resp = client.create_hosted_zone({
       #     name: "DNSName", # required
       #     vpc: {
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     caller_reference: "Nonce", # required
@@ -656,7 +626,7 @@ module Aws
       #   resp.delegation_set.caller_reference #=> String
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
-      #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vpc.vpc_id #=> String
       #   resp.location #=> String
       # @overload create_hosted_zone(params = {})
@@ -666,14 +636,14 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a delegation set (a group of four anem servers) that can be
+      # Creates a delegation set (a group of four name servers) that can be
       # reused by multiple hosted zones. If a hosted zoned ID is specified,
       # `CreateReusableDelegationSet` marks the delegation set associated with
       # that zone as reusable
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/delegationset` resource. The request body must include an XML
-      # document with a `CreateReusableDelegationSetRequest` element.
+      # Send a `POST` request to the `/2013-04-01/delegationset` resource. The
+      # request body must include an XML document with a
+      # `CreateReusableDelegationSetRequest` element.
       #
       # <note markdown="1"> A reusable delegation set cannot be associated with a private hosted
       # zone/
@@ -725,11 +695,11 @@ module Aws
       # resource record sets for one domain name (such as example.com) or one
       # subdomain name (such as www.example.com).
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/trafficpolicy` resource. The request body must include a
-      # document with a `CreateTrafficPolicyRequest` element. The response
-      # includes the `CreateTrafficPolicyResponse` element, which contains
-      # information about the new traffic policy.
+      # Send a `POST` request to the `/2013-04-01/trafficpolicy` resource. The
+      # request body must include a document with a
+      # `CreateTrafficPolicyRequest` element. The response includes the
+      # `CreateTrafficPolicyResponse` element, which contains information
+      # about the new traffic policy.
       # @option params [required, String] :name
       #   The name of the traffic policy.
       # @option params [required, String] :document
@@ -778,11 +748,11 @@ module Aws
       # domain or subdomain name by using the resource record sets that
       # `CreateTrafficPolicyInstance` created.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/trafficpolicyinstance` resource. The request body must include
-      # a document with a `CreateTrafficPolicyRequest` element. The response
-      # returns the `CreateTrafficPolicyInstanceResponse` element, which
-      # contains information about the traffic policy instance.
+      # Send a `POST` request to the `/2013-04-01/trafficpolicyinstance`
+      # resource. The request body must include a document with a
+      # `CreateTrafficPolicyRequest` element. The response returns the
+      # `CreateTrafficPolicyInstanceResponse` element, which contains
+      # information about the traffic policy instance.
       # @option params [required, String] :hosted_zone_id
       #   The ID of the hosted zone in which you want Amazon Route 53 to create
       #   resource record sets by using the configuration in a traffic policy.
@@ -841,8 +811,8 @@ module Aws
       # of 1000 versions of a traffic policy. If you reach the limit and need
       # to create another version, you'll need to start a new traffic policy.
       #
-      # Send a `POST` request to the `/Amazon Route 53 version/trafficpolicy/`
-      # resource. The request body includes a document with a
+      # Send a `POST` request to the `/2013-04-01/trafficpolicy/` resource.
+      # The request body includes a document with a
       # `CreateTrafficPolicyVersionRequest` element. The response returns the
       # `CreateTrafficPolicyVersionResponse` element, which contains
       # information about the new version of the traffic policy.
@@ -899,6 +869,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/health-checks-creating-deleting.html#health-checks-deleting.html
       # @option params [required, String] :health_check_id
+      #   The ID of the health check that you want to delete.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1022,11 +993,10 @@ module Aws
 
       # Disassociates a VPC from a Amazon Route 53 private hosted zone.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/hostedzone/hosted zone ID/disassociatevpc` resource. The
-      # request body must include an XML document with a
-      # `DisassociateVPCFromHostedZoneRequest` element. The response returns
-      # the `DisassociateVPCFromHostedZoneResponse` element.
+      # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/disassociatevpc` resource. The request body must include an XML
+      # document with a `DisassociateVPCFromHostedZoneRequest` element. The
+      # response returns the `DisassociateVPCFromHostedZoneResponse` element.
       #
       # You can only disassociate a VPC from a private hosted zone when two or
       # more VPCs are associated with that hosted zone. You cannot convert a
@@ -1047,7 +1017,7 @@ module Aws
       #   resp = client.disassociate_vpc_from_hosted_zone({
       #     hosted_zone_id: "ResourceId", # required
       #     vpc: { # required
-      #       vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #       vpc_id: "VPCId",
       #     },
       #     comment: "DisassociateVPCComment",
@@ -1124,7 +1094,7 @@ module Aws
       #   resp.change_batch_record.changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_record.changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_record.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
+      #   resp.change_batch_record.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_record.changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -1170,7 +1140,7 @@ module Aws
       # `/2013-04-01/geolocation` resource with one of these options:
       # continentcode \| countrycode \| countrycode and subdivisioncode.
       # @option params [String] :continent_code
-      #   Amazon Route 53 supports the following contintent codes:
+      #   Amazon Route 53 supports the following continent codes:
       #
       #   * **AF**\: Africa
       #
@@ -1455,7 +1425,7 @@ module Aws
       #   resp.delegation_set.name_servers #=> Array
       #   resp.delegation_set.name_servers[0] #=> String
       #   resp.vp_cs #=> Array
-      #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
       #   resp.vp_cs[0].vpc_id #=> String
       # @overload get_hosted_zone(params = {})
       # @param [Hash] params ({})
@@ -1653,7 +1623,7 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
+      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -1728,7 +1698,7 @@ module Aws
       #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
+      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
       #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
@@ -1945,13 +1915,13 @@ module Aws
       # that help navigate from one group of `maxitems` hosted zones to the
       # next:
       #
-      # * `MaxItems`is the value specified for the `maxitems` parameter in the
-      #   request that produced the current response.
+      # * `MaxItems` is the value specified for the `maxitems` parameter in
+      #   the request that produced the current response.
       #
       # * If the value of `IsTruncated` in the response is true, there are
       #   more hosted zones associated with the current AWS account.
       #
-      # * `NextMarker`is the hosted zone ID of the next hosted zone that is
+      # * `NextMarker` is the hosted zone ID of the next hosted zone that is
       #   associated with the current AWS account. If you want to list more
       #   hosted zones, make another call to `ListHostedZones`, and specify
       #   the value of the `NextMarker` element in the marker parameter.
@@ -1978,6 +1948,9 @@ module Aws
       #   zone ID of the first hosted zone in the next group of `maxitems`
       #   hosted zones.
       # @option params [String] :delegation_set_id
+      #   If you're using reusable delegation sets and you want to list all of
+      #   the hosted zones that are associated with a reusable delegation set,
+      #   specify the ID of that reusable delegation set.
       # @return [Types::ListHostedZonesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListHostedZonesResponse#hosted_zones #HostedZones} => Array&lt;Types::HostedZone&gt;
@@ -2139,6 +2112,54 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists the resource record sets in a specified hosted zone.
+      #
+      # `ListResourceRecordSets` returns up to 100 resource record sets at a
+      # time in ASCII order, beginning at a position specified by the `name`
+      # and `type` elements. The action sorts results first by DNS name with
+      # the labels reversed, for example:
+      #
+      # `com.example.www.`
+      #
+      # Note the trailing dot, which can change the sort order in some
+      # circumstances.
+      #
+      # When multiple records have the same DNS name, the action sorts results
+      # by the record type.
+      #
+      # You can use the name and type elements to adjust the beginning
+      # position of the list of resource record sets returned:
+      #
+      # If you do not specify Name or Type
+      #
+      # : The results begin with the first resource record set that the hosted
+      #   zone contains.
+      #
+      # If you specify Name but not Type
+      #
+      # : The results begin with the first resource record set in the list
+      #   whose name is greater than or equal to `Name`.
+      #
+      # If you specify Type but not Name
+      #
+      # : Amazon Route 53 returns the `InvalidInput` error.
+      #
+      # If you specify both Name and Type
+      #
+      # : The results begin with the first resource record set in the list
+      #   whose name is greater than or equal to `Name`, and whose type is
+      #   greater than or equal to `Type`.
+      #
+      # This action returns the most current version of the records. This
+      # includes records that are `PENDING`, and that are not yet available on
+      # all Amazon Route 53 DNS servers.
+      #
+      # To ensure that you get an accurate listing of the resource record sets
+      # for a hosted zone at a point in time, do not submit a
+      # `ChangeResourceRecordSets` request while you're paging through the
+      # results of a `ListResourceRecordSets` request. If you do, some pages
+      # may display results without the latest changes while other pages
+      # display results with the latest changes.
       # @option params [required, String] :hosted_zone_id
       #   The ID of the hosted zone that contains the resource record sets that
       #   you want to get.
@@ -2206,7 +2227,7 @@ module Aws
       #   resp.resource_record_sets[0].type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
       #   resp.resource_record_sets[0].set_identifier #=> String
       #   resp.resource_record_sets[0].weight #=> Integer
-      #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
+      #   resp.resource_record_sets[0].region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
       #   resp.resource_record_sets[0].geo_location.continent_code #=> String
       #   resp.resource_record_sets[0].geo_location.country_code #=> String
       #   resp.resource_record_sets[0].geo_location.subdivision_code #=> String
@@ -2282,6 +2303,15 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists tags for one health check or hosted zone.
+      #
+      # For information about using tags for cost allocation, see [Using Cost
+      # Allocation Tags][1] in the *AWS Billing and Cost Management User
+      # Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
       # @option params [required, String] :resource_type
       #   The type of the resource.
       #
@@ -2313,6 +2343,15 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists tags for up to 10 health checks or hosted zones.
+      #
+      # For information about using tags for cost allocation, see [Using Cost
+      # Allocation Tags][1] in the *AWS Billing and Cost Management User
+      # Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/awsaccountbilling/latest/aboutv2/cost-alloc-tags.html
       # @option params [required, String] :resource_type
       #   The type of the resources.
       #
@@ -2834,7 +2873,7 @@ module Aws
       # parameter to list them in groups of up to 100.
       #
       # The response includes three values that help you navigate from one
-      # group of `maxitems`maxitems traffic policies to the next:
+      # group of `maxitems` traffic policies to the next:
       #
       # * **IsTruncated**
       # 
@@ -2915,12 +2954,33 @@ module Aws
         req.send_request(options)
       end
 
+      # Gets the value that Amazon Route 53 returns in response to a DNS
+      # request for a specified record name and type. You can optionally
+      # specify the IP address of a DNS resolver, an EDNS0 client subnet IP
+      # address, and a subnet mask.
       # @option params [required, String] :hosted_zone_id
+      #   The ID of the hosted zone that you want Amazon Route 53 to simulate a
+      #   query for.
       # @option params [required, String] :record_name
+      #   The name of the resource record set that you want Amazon Route 53 to
+      #   simulate a query for.
       # @option params [required, String] :record_type
+      #   The type of the resource record set.
       # @option params [String] :resolver_ip
+      #   If you want to simulate a request from a specific DNS resolver,
+      #   specify the IP address for that resolver. If you omit this value,
+      #   `TestDnsAnswer` uses the IP address of a DNS resolver in the AWS US
+      #   East region.
       # @option params [String] :edns0_client_subnet_ip
+      #   If the resolver that you specified for resolverip supports EDNS0,
+      #   specify the IP address of a client in the applicable location.
       # @option params [String] :edns0_client_subnet_mask
+      #   If you specify an IP address for `edns0clientsubnetip`, you can
+      #   optionally specify the number of bits of the IP address that you want
+      #   the checking tool to include in the DNS query. For example, if you
+      #   specify `192.0.2.44` for `edns0clientsubnetip` and `24` for
+      #   `edns0clientsubnetmask`, the checking tool will simulate a request
+      #   from 192.0.2.0/24. The default value is 24 bits.
       # @return [Types::TestDNSAnswerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::TestDNSAnswerResponse#nameserver #Nameserver} => String
@@ -2957,12 +3017,11 @@ module Aws
 
       # Updates an existing health check.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/healthcheck/health check ID ` resource. The request body must
-      # include an XML document with an `UpdateHealthCheckRequest` element.
-      # For more information about updating health checks, see [Creating,
-      # Updating, and Deleting Health Checks][1] in the Amazon Route 53
-      # Developer Guide.
+      # Send a `POST` request to the `/2013-04-01/healthcheck/health check ID
+      # ` resource. The request body must include an XML document with an
+      # `UpdateHealthCheckRequest` element. For more information about
+      # updating health checks, see [Creating, Updating, and Deleting Health
+      # Checks][1] in the Amazon Route 53 Developer Guide.
       #
       #
       #
@@ -3162,6 +3221,20 @@ module Aws
       #   Amazon Route 53 health checkers to use to determine whether this
       #   health check is healthy.
       # @option params [String] :insufficient_data_health_status
+      #   When CloudWatch has insufficient data about the metric to determine
+      #   the alarm state, the status that you want Amazon Route 53 to assign to
+      #   the health check:
+      #
+      #   * `Healthy`\: Amazon Route 53 considers the health check to be
+      #     healthy.
+      #
+      #   * `Unhealthy`\: Amazon Route 53 considers the health check to be
+      #     unhealthy.
+      #
+      #   * `LastKnownStatus`\: Amazon Route 53 uses the status of the health
+      #     check from the last time CloudWatch had sufficient data to determine
+      #     the alarm state. For new health checks that have no last known
+      #     status, the default status for the health check is healthy.
       # @return [Types::UpdateHealthCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateHealthCheckResponse#health_check #HealthCheck} => Types::HealthCheck
@@ -3262,8 +3335,7 @@ module Aws
 
       # Updates the comment for a specified traffic policy version.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/trafficpolicy/` resource.
+      # Send a `POST` request to the `/2013-04-01/trafficpolicy/` resource.
       #
       # The request body must include a document with an
       # `UpdateTrafficPolicyCommentRequest` element.
@@ -3303,8 +3375,8 @@ module Aws
       # Updates the resource record sets in a specified hosted zone that were
       # created based on the settings in a specified traffic policy version.
       #
-      # Send a `POST` request to the `/Amazon Route 53 API
-      # version/trafficpolicyinstance/traffic policy ID ` resource. The
+      # Send a `POST` request to the
+      # `/2013-04-01/trafficpolicyinstance/traffic policy ID ` resource. The
       # request body must include a document with an
       # `UpdateTrafficPolicyInstanceRequest` element.
       #

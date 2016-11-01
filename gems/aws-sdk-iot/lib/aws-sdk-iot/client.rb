@@ -500,6 +500,12 @@ module Aws
       #             range_key_type: "STRING", # accepts STRING, NUMBER
       #             payload_field: "PayloadField",
       #           },
+      #           dynamo_d_bv_2: {
+      #             role_arn: "AwsArn",
+      #             put_item: {
+      #               table_name: "TableName", # required
+      #             },
+      #           },
       #           lambda: {
       #             function_arn: "FunctionArn", # required
       #           },
@@ -526,6 +532,7 @@ module Aws
       #             role_arn: "AwsArn", # required
       #             bucket_name: "BucketName", # required
       #             key: "Key", # required
+      #             canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #           },
       #           firehose: {
       #             role_arn: "AwsArn", # required
@@ -1085,6 +1092,8 @@ module Aws
       #   resp.rule.actions[0].dynamo_db.range_key_value #=> String
       #   resp.rule.actions[0].dynamo_db.range_key_type #=> String, one of "STRING", "NUMBER"
       #   resp.rule.actions[0].dynamo_db.payload_field #=> String
+      #   resp.rule.actions[0].dynamo_d_bv_2.role_arn #=> String
+      #   resp.rule.actions[0].dynamo_d_bv_2.put_item.table_name #=> String
       #   resp.rule.actions[0].lambda.function_arn #=> String
       #   resp.rule.actions[0].sns.target_arn #=> String
       #   resp.rule.actions[0].sns.role_arn #=> String
@@ -1100,6 +1109,7 @@ module Aws
       #   resp.rule.actions[0].s3.role_arn #=> String
       #   resp.rule.actions[0].s3.bucket_name #=> String
       #   resp.rule.actions[0].s3.key #=> String
+      #   resp.rule.actions[0].s3.canned_acl #=> String, one of "private", "public-read", "public-read-write", "aws-exec-read", "authenticated-read", "bucket-owner-read", "bucket-owner-full-control", "log-delivery-write"
       #   resp.rule.actions[0].firehose.role_arn #=> String
       #   resp.rule.actions[0].firehose.delivery_stream_name #=> String
       #   resp.rule.actions[0].firehose.separator #=> String
@@ -1629,6 +1639,7 @@ module Aws
       #   registered.
       # @option params [Boolean] :set_as_active
       #   A boolean value that specifies if the CA certificate is set to active.
+      # @option params [String] :status
       # @return [Types::RegisterCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RegisterCertificateResponse#certificate_arn #certificateArn} => String
@@ -1639,6 +1650,7 @@ module Aws
       #     certificate_pem: "CertificatePem", # required
       #     ca_certificate_pem: "CertificatePem",
       #     set_as_active: false,
+      #     status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #   })
       #
       # @example Response structure
@@ -1709,6 +1721,12 @@ module Aws
       #             range_key_type: "STRING", # accepts STRING, NUMBER
       #             payload_field: "PayloadField",
       #           },
+      #           dynamo_d_bv_2: {
+      #             role_arn: "AwsArn",
+      #             put_item: {
+      #               table_name: "TableName", # required
+      #             },
+      #           },
       #           lambda: {
       #             function_arn: "FunctionArn", # required
       #           },
@@ -1735,6 +1753,7 @@ module Aws
       #             role_arn: "AwsArn", # required
       #             bucket_name: "BucketName", # required
       #             key: "Key", # required
+      #             canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #           },
       #           firehose: {
       #             role_arn: "AwsArn", # required

@@ -121,21 +121,38 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cluster_status
-      #   The current state of the cluster. Possible values are: * `available`
+      #   The current state of the cluster. Possible values are the following:
+      #
+      #   * `available`
+      #
       #   * `creating`
+      #
       #   * `deleting`
+      #
       #   * `final-snapshot`
+      #
       #   * `hardware-failure`
+      #
       #   * `incompatible-hsm`
+      #
       #   * `incompatible-network`
+      #
       #   * `incompatible-parameters`
+      #
       #   * `incompatible-restore`
+      #
       #   * `modifying`
+      #
       #   * `rebooting`
+      #
       #   * `renaming`
+      #
       #   * `resizing`
+      #
       #   * `rotating-keys`
+      #
       #   * `storage-full`
+      #
       #   * `updating-hsm`
       #   @return [String]
       #
@@ -145,13 +162,13 @@ module Aws
       #
       # @!attribute [rw] master_username
       #   The master user name for the cluster. This name is used to connect
-      #   to the database that is specified in **DBName**.
+      #   to the database that is specified in the **DBName** parameter.
       #   @return [String]
       #
       # @!attribute [rw] db_name
       #   The name of the initial database that was created when the cluster
       #   was created. This same name is returned for the life of the cluster.
-      #   If an initial database was not specified, a database named "dev"
+      #   If an initial database was not specified, a database named `dev`dev
       #   was created by default.
       #   @return [String]
       #
@@ -174,14 +191,15 @@ module Aws
       #   `ClusterSecurityGroup.Status` subelements.
       #
       #   Cluster security groups are used when the cluster is not created in
-      #   a VPC. Clusters that are created in a VPC use VPC security groups,
-      #   which are listed by the **VpcSecurityGroups** parameter.
+      #   an Amazon Virtual Private Cloud (VPC). Clusters that are created in
+      #   a VPC use VPC security groups, which are listed by the
+      #   **VpcSecurityGroups** parameter.
       #   @return [Array<Types::ClusterSecurityGroupMembership>]
       #
       # @!attribute [rw] vpc_security_groups
-      #   A list of Virtual Private Cloud (VPC) security groups that are
-      #   associated with the cluster. This parameter is returned only if the
-      #   cluster is in a VPC.
+      #   A list of Amazon Virtual Private Cloud (Amazon VPC) security groups
+      #   that are associated with the cluster. This parameter is returned
+      #   only if the cluster is in a VPC.
       #   @return [Array<Types::VpcSecurityGroupMembership>]
       #
       # @!attribute [rw] cluster_parameter_groups
@@ -205,13 +223,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] preferred_maintenance_window
-      #   The weekly time range (in UTC) during which system maintenance can
-      #   occur.
+      #   The weekly time range, in Universal Coordinated Time (UTC), during
+      #   which system maintenance can occur.
       #   @return [String]
       #
       # @!attribute [rw] pending_modified_values
-      #   If present, changes to the cluster are pending. Specific pending
-      #   changes are identified by subelements.
+      #   A value that, if present, indicates that changes to the cluster are
+      #   pending. Specific pending changes are identified by subelements.
       #   @return [Types::PendingModifiedValues]
       #
       # @!attribute [rw] cluster_version
@@ -220,8 +238,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] allow_version_upgrade
-      #   If `true`, major version upgrades will be applied automatically to
-      #   the cluster during the maintenance window.
+      #   A Boolean value that, if `true`, indicates that major version
+      #   upgrades will be applied automatically to the cluster during the
+      #   maintenance window.
       #   @return [Boolean]
       #
       # @!attribute [rw] number_of_nodes
@@ -229,28 +248,32 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] publicly_accessible
-      #   If `true`, the cluster can be accessed from a public network.
+      #   A Boolean value that, if `true`, indicates that the cluster can be
+      #   accessed from a public network.
       #   @return [Boolean]
       #
       # @!attribute [rw] encrypted
-      #   If `true`, data in the cluster is encrypted at rest.
+      #   A Boolean value that, if `true`, indicates that data in the cluster
+      #   is encrypted at rest.
       #   @return [Boolean]
       #
       # @!attribute [rw] restore_status
-      #   Describes the status of a cluster restore action. Returns null if
-      #   the cluster was not created by restoring a snapshot.
+      #   A value that describes the status of a cluster restore action. This
+      #   parameter returns null if the cluster was not created by restoring a
+      #   snapshot.
       #   @return [Types::RestoreStatus]
       #
       # @!attribute [rw] hsm_status
-      #   Reports whether the Amazon Redshift cluster has finished applying
-      #   any HSM settings changes specified in a modify cluster command.
+      #   A value that reports whether the Amazon Redshift cluster has
+      #   finished applying any hardware security module (HSM) settings
+      #   changes specified in a modify cluster command.
       #
       #   Values: active, applying
       #   @return [Types::HsmStatus]
       #
       # @!attribute [rw] cluster_snapshot_copy_status
-      #   Returns the destination region and retention period that are
-      #   configured for cross-region snapshot copy.
+      #   A value that returns the destination region and retention period
+      #   that are configured for cross-region snapshot copy.
       #   @return [Types::ClusterSnapshotCopyStatus]
       #
       # @!attribute [rw] cluster_public_key
@@ -258,7 +281,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cluster_nodes
-      #   The nodes in a cluster.
+      #   The nodes in the cluster.
       #   @return [Array<Types::ClusterNode>]
       #
       # @!attribute [rw] elastic_ip_status
@@ -274,9 +297,25 @@ module Aws
       #   @return [Array<Types::Tag>]
       #
       # @!attribute [rw] kms_key_id
-      #   The AWS Key Management Service (KMS) key ID of the encryption key
-      #   used to encrypt data in the cluster.
+      #   The AWS Key Management Service (AWS KMS) key ID of the encryption
+      #   key used to encrypt data in the cluster.
       #   @return [String]
+      #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
       #
       # @!attribute [rw] iam_roles
       #   A list of AWS Identity and Access Management (IAM) roles that can be
@@ -314,6 +353,7 @@ module Aws
         :cluster_revision_number,
         :tags,
         :kms_key_id,
+        :enhanced_vpc_routing,
         :iam_roles)
         include Aws::Structure
       end
@@ -321,18 +361,21 @@ module Aws
       # An AWS Identity and Access Management (IAM) role that can be used by
       # the associated Amazon Redshift cluster to access other AWS services.
       # @!attribute [rw] iam_role_arn
-      #   The Amazon Resource Name (ARN) of the IAM role. For example,
+      #   The Amazon Resource Name (ARN) of the IAM role, for example,
       #   `arn:aws:iam::123456789012:role/RedshiftCopyUnload`.
       #   @return [String]
       #
       # @!attribute [rw] apply_status
-      #   Describes the status of the IAM role's association with an Amazon
-      #   Redshift cluster.
+      #   A value that describes the status of the IAM role's association
+      #   with an Amazon Redshift cluster.
       #
-      #   The following are possible statuses and descriptions.* `in-sync`\:
-      #   The role is available for use by the cluster.
+      #   The following are possible statuses and descriptions.
+      #
+      #   * `in-sync`\: The role is available for use by the cluster.
+      #
       #   * `adding`\: The role is in the process of being associated with the
       #     cluster.
+      #
       #   * `removing`\: The role is in the process of being disassociated
       #     with the cluster.
       #   @return [String]
@@ -478,17 +521,24 @@ module Aws
       #   in sync with the database, waiting for a cluster reboot, or
       #   encountered an error when being applied.
       #
-      #   The following are possible statuses and descriptions.* `in-sync`\:
-      #   The parameter value is in sync with the database.
+      #   The following are possible statuses and descriptions.
+      #
+      #   * `in-sync`\: The parameter value is in sync with the database.
+      #
       #   * `pending-reboot`\: The parameter value will be applied after the
       #     cluster reboots.
+      #
       #   * `applying`\: The parameter value is being applied to the database.
+      #
       #   * `invalid-parameter`\: Cannot apply the parameter value because it
       #     has an invalid value or syntax.
+      #
       #   * `apply-deferred`\: The parameter contains static property changes.
       #     The changes are deferred until the cluster reboots.
+      #
       #   * `apply-error`\: Cannot connect to the cluster. The parameter
       #     change will be applied after the cluster reboots.
+      #
       #   * `unknown-error`\: Cannot apply the parameter change right now. The
       #     change will be applied after the cluster reboots.
       #   @return [String]
@@ -718,6 +768,8 @@ module Aws
       #
       #   * Must be the identifier for a valid automated snapshot whose state
       #     is `available`.
+      #
+      #   ^
       #   @return [String]
       #
       # @!attribute [rw] source_snapshot_cluster_identifier
@@ -729,6 +781,8 @@ module Aws
       #   Constraints:
       #
       #   * Must be the identifier for a valid cluster.
+      #
+      #   ^
       #   @return [String]
       #
       # @!attribute [rw] target_snapshot_identifier
@@ -737,9 +791,13 @@ module Aws
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank.
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for the AWS account that is making the request.
       #   @return [String]
       class CopyClusterSnapshotMessage < Struct.new(
@@ -790,6 +848,7 @@ module Aws
       #           },
       #         ],
       #         kms_key_id: "String",
+      #         enhanced_vpc_routing: false,
       #         additional_info: "String",
       #         iam_roles: ["String"],
       #       }
@@ -807,7 +866,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain 1 to 64 alphanumeric characters.
+      #
       #   * Must contain only lowercase letters.
+      #
       #   * Cannot be a word that is reserved by the service. A list of
       #     reserved words can be found in [Reserved Words][2] in the Amazon
       #     Redshift Database Developer Guide.
@@ -827,17 +888,23 @@ module Aws
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #
       #   Example: `myexamplecluster`
       #   @return [String]
       #
       # @!attribute [rw] cluster_type
-      #   The type of the cluster. When cluster type is specified as *
-      #   `single-node`, the **NumberOfNodes** parameter is not required.
+      #   The type of the cluster. When cluster type is specified as
+      #
+      #   * `single-node`, the **NumberOfNodes** parameter is not required.
+      #
       #   * `multi-node`, the **NumberOfNodes** parameter is required.
       #
       #   Valid Values: `multi-node` \| `single-node`
@@ -865,7 +932,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 - 128 alphanumeric characters.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot be a reserved word. A list of reserved words can be found
       #     in [Reserved Words][1] in the Amazon Redshift Database Developer
       #     Guide.
@@ -882,9 +951,13 @@ module Aws
       #   Constraints:
       #
       #   * Must be between 8 and 64 characters in length.
+      #
       #   * Must contain at least one uppercase letter.
+      #
       #   * Must contain at least one lowercase letter.
+      #
       #   * Must contain one number.
+      #
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
       #     ' (single quote), " (double quote), \\, /, @, or space.
       #   @return [String]
@@ -957,7 +1030,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #
@@ -1078,6 +1153,22 @@ module Aws
       #   that you want to use to encrypt data in the cluster.
       #   @return [String]
       #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
+      #
       # @!attribute [rw] additional_info
       #   Reserved.
       #   @return [String]
@@ -1088,7 +1179,8 @@ module Aws
       #   the IAM roles in their Amazon Resource Name (ARN) format. You can
       #   supply up to 10 IAM roles in a single request.
       #
-      #   A cluster can have up to 10 IAM roles associated at any time.
+      #   A cluster can have up to 10 IAM roles associated with it at any
+      #   time.
       #   @return [Array<String>]
       class CreateClusterMessage < Struct.new(
         :db_name,
@@ -1115,6 +1207,7 @@ module Aws
         :elastic_ip,
         :tags,
         :kms_key_id,
+        :enhanced_vpc_routing,
         :additional_info,
         :iam_roles)
         include Aws::Structure
@@ -1140,11 +1233,16 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique withing your AWS account.
       #
-      #   <note>This value is stored as a lower-case string.</note>
+      #   <note markdown="1"> This value is stored as a lower-case string.
+      #
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] parameter_group_family
@@ -1212,7 +1310,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
+      #
       #   * Must not be "Default".
+      #
       #   * Must be unique for all security groups that are created by your
       #     AWS account.
       #
@@ -1261,8 +1361,11 @@ module Aws
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-snapshot-id`
@@ -1311,7 +1414,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
+      #
       #   * Must not be "Default".
+      #
       #   * Must be unique for all subnet groups that are created by your AWS
       #     account.
       #
@@ -1370,8 +1475,11 @@ module Aws
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank.
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #   @return [String]
       #
@@ -1575,10 +1683,14 @@ module Aws
       #
       #   Constraints:
       #
-      #    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #   @return [String]
       #
@@ -1689,8 +1801,11 @@ module Aws
       #   Constraints:
       #
       #   * Must contain lowercase characters.
+      #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #   @return [String]
       #
@@ -1700,7 +1815,10 @@ module Aws
       #   snapshot is not created. If `false`, a final cluster snapshot is
       #   created before the cluster is deleted.
       #
-      #   <note>The *FinalClusterSnapshotIdentifier* parameter must be specified if *SkipFinalClusterSnapshot* is `false`.</note>
+      #   <note markdown="1"> The *FinalClusterSnapshotIdentifier* parameter must be specified if
+      #   *SkipFinalClusterSnapshot* is `false`.
+      #
+      #    </note>
       #
       #   Default: `false`
       #   @return [Boolean]
@@ -1713,7 +1831,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #   @return [String]
       class DeleteClusterMessage < Struct.new(
@@ -1735,6 +1855,7 @@ module Aws
       #   Constraints:
       #
       #   * Must be the name of an existing cluster parameter group.
+      #
       #   * Cannot delete a default cluster parameter group.
       #   @return [String]
       class DeleteClusterParameterGroupMessage < Struct.new(
@@ -2293,7 +2414,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #   @return [String]
       #
@@ -2526,10 +2649,13 @@ module Aws
       #   provided.
       #
       #   * Specify a cluster identifier when *SourceType* is `cluster`.
+      #
       #   * Specify a cluster security group name when *SourceType* is
       #     `cluster-security-group`.
+      #
       #   * Specify a cluster parameter group name when *SourceType* is
       #     `cluster-parameter-group`.
+      #
       #   * Specify a cluster snapshot identifier when *SourceType* is
       #     `cluster-snapshot`.
       #   @return [String]
@@ -2544,10 +2670,13 @@ module Aws
       #   provided.
       #
       #   * Specify `cluster` when *SourceIdentifier* is a cluster identifier.
+      #
       #   * Specify `cluster-security-group` when *SourceIdentifier* is a
       #     cluster security group name.
+      #
       #   * Specify `cluster-parameter-group` when *SourceIdentifier* is a
       #     cluster parameter group name.
+      #
       #   * Specify `cluster-snapshot` when *SourceIdentifier* is a cluster
       #     snapshot identifier.
       #   @return [String]
@@ -3042,15 +3171,26 @@ module Aws
       #
       # @!attribute [rw] resource_type
       #   The type of resource with which you want to view tags. Valid
-      #   resource types are: * Cluster
+      #   resource types are:
+      #
+      #   * Cluster
+      #
       #   * CIDR/IP
+      #
       #   * EC2 security group
+      #
       #   * Snapshot
+      #
       #   * Cluster security group
+      #
       #   * Subnet group
+      #
       #   * HSM connection
+      #
       #   * HSM certificate
+      #
       #   * Parameter group
+      #
       #   * Snapshot copy grant
       #
       #   For more information about Amazon Redshift resource types and
@@ -3210,6 +3350,7 @@ module Aws
       #   Constraints:
       #
       #   * Must be in the same region as the cluster
+      #
       #   * The cluster must have read bucket and put object permissions
       #   @return [String]
       #
@@ -3219,13 +3360,19 @@ module Aws
       #   Constraints:
       #
       #   * Cannot exceed 512 characters
+      #
       #   * Cannot contain spaces( ), double quotes ("), single quotes ('),
       #     a backslash (\\), or control characters. The hexadecimal codes for
       #     invalid characters are:
+      #
       #     * x00 to x20
+      #
       #     * x22
+      #
       #     * x27
+      #
       #     * x5c
+      #
       #     * x7f or larger
       #   @return [String]
       class EnableLoggingMessage < Struct.new(
@@ -3420,6 +3567,7 @@ module Aws
       #
       #   * Can be one of the following: active \| no-permission \|
       #     topic-not-exist
+      #
       #   * The status "no-permission" indicates that Amazon Redshift no
       #     longer has permission to post to the Amazon SNS topic. The status
       #     "topic-not-exist" indicates that the topic was deleted after the
@@ -3700,14 +3848,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] add_iam_roles
-      #   Zero or more IAM roles (in their ARN format) to associate with the
-      #   cluster. You can associate up to 10 IAM roles with a single cluster
-      #   in a single request.
+      #   Zero or more IAM roles to associate with the cluster. The roles must
+      #   be in their Amazon Resource Name (ARN) format. You can associate up
+      #   to 10 IAM roles with a single cluster in a single request.
       #   @return [Array<String>]
       #
       # @!attribute [rw] remove_iam_roles
-      #   Zero or more IAM roles (in their ARN format) to disassociate from
-      #   the cluster. You can disassociate up to 10 IAM roles from a single
+      #   Zero or more IAM roles in ARN format to disassociate from the
+      #   cluster. You can disassociate up to 10 IAM roles from a single
       #   cluster in a single request.
       #   @return [Array<String>]
       class ModifyClusterIamRolesMessage < Struct.new(
@@ -3746,6 +3894,7 @@ module Aws
       #         new_cluster_identifier: "String",
       #         publicly_accessible: false,
       #         elastic_ip: "String",
+      #         enhanced_vpc_routing: false,
       #       }
       # @!attribute [rw] cluster_identifier
       #   The unique identifier of the cluster to be modified.
@@ -3809,7 +3958,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #   @return [Array<String>]
       #
@@ -3823,18 +3974,26 @@ module Aws
       #   asynchronously applied as soon as possible. Between the time of the
       #   request and the completion of the request, the `MasterUserPassword`
       #   element exists in the `PendingModifiedValues` element of the
-      #   operation response. <note> Operations never return the password, so
-      #   this operation provides a way to regain access to the master user
-      #   account for a cluster if the password is lost. </note>
+      #   operation response.
+      #
+      #   <note markdown="1"> Operations never return the password, so this operation provides a
+      #   way to regain access to the master user account for a cluster if the
+      #   password is lost.
+      #
+      #    </note>
       #
       #   Default: Uses existing setting.
       #
       #   Constraints:
       #
       #   * Must be between 8 and 64 characters in length.
+      #
       #   * Must contain at least one uppercase letter.
+      #
       #   * Must contain at least one lowercase letter.
+      #
       #   * Must contain one number.
+      #
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
       #     ' (single quote), " (double quote), \\, /, @, or space.
       #   @return [String]
@@ -3926,9 +4085,13 @@ module Aws
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #
       #   Example: `examplecluster`
@@ -3952,6 +4115,22 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
       #   @return [String]
+      #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
       class ModifyClusterMessage < Struct.new(
         :cluster_identifier,
         :cluster_type,
@@ -3969,7 +4148,8 @@ module Aws
         :hsm_configuration_identifier,
         :new_cluster_identifier,
         :publicly_accessible,
-        :elastic_ip)
+        :elastic_ip,
+        :enhanced_vpc_routing)
         include Aws::Structure
       end
 
@@ -4339,6 +4519,22 @@ module Aws
       #   The pending or in-progress change of the ability to connect to the
       #   cluster from the public network.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
       class PendingModifiedValues < Struct.new(
         :master_user_password,
         :node_type,
@@ -4347,7 +4543,8 @@ module Aws
         :cluster_version,
         :automated_snapshot_retention_period,
         :cluster_identifier,
-        :publicly_accessible)
+        :publicly_accessible,
+        :enhanced_vpc_routing)
         include Aws::Structure
       end
 
@@ -4469,8 +4666,10 @@ module Aws
       #   * pending-payment-This reserved node has recently been purchased,
       #     and the sale has been approved, but payment has not yet been
       #     confirmed.
+      #
       #   * active-This reserved node is owned by the caller and is available
       #     for use.
+      #
       #   * payment-failed-Payment failed for the purchase attempt.
       #   @return [String]
       #
@@ -4743,6 +4942,7 @@ module Aws
       #         automated_snapshot_retention_period: 1,
       #         kms_key_id: "String",
       #         node_type: "String",
+      #         enhanced_vpc_routing: false,
       #         additional_info: "String",
       #         iam_roles: ["String"],
       #       }
@@ -4752,10 +4952,14 @@ module Aws
       #
       #   Constraints:
       #
-      #    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #   @return [String]
       #
@@ -4840,7 +5044,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #
@@ -4923,6 +5129,22 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
       #   @return [String]
       #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
+      #
       # @!attribute [rw] additional_info
       #   Reserved.
       #   @return [String]
@@ -4955,6 +5177,7 @@ module Aws
         :automated_snapshot_retention_period,
         :kms_key_id,
         :node_type,
+        :enhanced_vpc_routing,
         :additional_info,
         :iam_roles)
         include Aws::Structure
@@ -5211,11 +5434,14 @@ module Aws
       #
       # @!attribute [rw] status
       #   The snapshot status. The value of the status depends on the API
-      #   operation used. * CreateClusterSnapshot and CopyClusterSnapshot
-      #   returns status as
+      #   operation used.
+      #
+      #   * CreateClusterSnapshot and CopyClusterSnapshot returns status as
       #     "creating".
+      #
       #   * DescribeClusterSnapshots returns status as "creating",
       #     "available", "final snapshot", or "failed".
+      #
       #   * DeleteClusterSnapshot returns status as "deleted".
       #   @return [String]
       #
@@ -5333,6 +5559,22 @@ module Aws
       #   The list of node types that this cluster snapshot is able to restore
       #   into.
       #   @return [Array<String>]
+      #
+      # @!attribute [rw] enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
+      #   @return [Boolean]
       class Snapshot < Struct.new(
         :snapshot_identifier,
         :cluster_identifier,
@@ -5361,7 +5603,8 @@ module Aws
         :elapsed_time_in_seconds,
         :source_region,
         :tags,
-        :restorable_node_types)
+        :restorable_node_types,
+        :enhanced_vpc_routing)
         include Aws::Structure
       end
 
@@ -5590,14 +5833,24 @@ module Aws
       #
       # @!attribute [rw] resource_type
       #   The type of resource with which the tag is associated. Valid
-      #   resource types are: * Cluster
+      #   resource types are:
+      #
+      #   * Cluster
+      #
       #   * CIDR/IP
+      #
       #   * EC2 security group
+      #
       #   * Snapshot
+      #
       #   * Cluster security group
+      #
       #   * Subnet group
+      #
       #   * HSM connection
+      #
       #   * HSM certificate
+      #
       #   * Parameter group
       #
       #   For more information about Amazon Redshift resource types and

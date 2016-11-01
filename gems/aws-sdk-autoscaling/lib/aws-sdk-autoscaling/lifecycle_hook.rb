@@ -97,8 +97,9 @@ module Aws
       end
 
       # The maximum time, in seconds, that an instance can remain in a
-      # `Pending:Wait` or `Terminating:Wait` state. The default is 172800
-      # seconds (48 hours).
+      # `Pending:Wait` or `Terminating:Wait` state. The maximum is 172800
+      # seconds (48 hours) or 100 times `HeartbeatTimeout`, whichever is
+      # smaller.
       # @return [Integer]
       def global_timeout
         data.global_timeout
@@ -223,23 +224,6 @@ module Aws
       #   notify you when an instance is in the transition state for the
       #   lifecycle hook. This target can be either an SQS queue or an SNS
       #   topic. If you specify an empty string, this overrides the current ARN.
-      #
-      #   The notification messages sent to the target include the following
-      #   information:
-      #
-      #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
-      #
-      #   * **AccountId**. The AWS account ID.
-      #
-      #   * **LifecycleTransition**. The lifecycle hook type.
-      #
-      #   * **LifecycleActionToken**. The lifecycle action token.
-      #
-      #   * **EC2InstanceId**. The EC2 instance ID.
-      #
-      #   * **LifecycleHookName**. The name of the lifecycle hook.
-      #
-      #   * **NotificationMetadata**. User-defined information.
       #
       #   This operation uses the JSON format when sending notifications to an
       #   Amazon SQS queue, and an email key/value pair format when sending

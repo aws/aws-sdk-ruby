@@ -345,6 +345,7 @@ module Aws
       #   resp.repository.registry_id #=> String
       #   resp.repository.repository_name #=> String
       #   resp.repository.repository_uri #=> String
+      #   resp.repository.created_at #=> Time
       # @overload create_repository(params = {})
       # @param [Hash] params ({})
       def create_repository(params = {}, options = {})
@@ -378,6 +379,7 @@ module Aws
       #   resp.repository.registry_id #=> String
       #   resp.repository.repository_name #=> String
       #   resp.repository.repository_uri #=> String
+      #   resp.repository.created_at #=> Time
       # @overload delete_repository(params = {})
       # @param [Hash] params ({})
       def delete_repository(params = {}, options = {})
@@ -413,6 +415,82 @@ module Aws
       # @param [Hash] params ({})
       def delete_repository_policy(params = {}, options = {})
         req = build_request(:delete_repository_policy, params)
+        req.send_request(options)
+      end
+
+      # Returns metadata about the images in a repository, including image
+      # size and creation date.
+      #
+      # <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses image
+      # layers before pushing them to a V2 Docker registry. The output of the
+      # `docker images` command shows the uncompressed image size, so it may
+      # return a larger image size than the image sizes returned by
+      # DescribeImages.
+      #
+      #  </note>
+      # @option params [String] :registry_id
+      #   The AWS account ID associated with the registry that contains the
+      #   repository in which to list images. If you do not specify a registry,
+      #   the default registry is assumed.
+      # @option params [required, String] :repository_name
+      #   A list of repositories to describe. If this parameter is omitted, then
+      #   all repositories in a registry are described.
+      # @option params [Array<Types::ImageIdentifier>] :image_ids
+      #   The list of image IDs for the requested repository.
+      # @option params [String] :next_token
+      #   The `nextToken` value returned from a previous paginated
+      #   `DescribeImages` request where `maxResults` was used and the results
+      #   exceeded the value of that parameter. Pagination continues from the
+      #   end of the previous results that returned the `nextToken` value. This
+      #   value is `null` when there are no more results to return.
+      # @option params [Integer] :max_results
+      #   The maximum number of repository results returned by `DescribeImages`
+      #   in paginated output. When this parameter is used, `DescribeImages`
+      #   only returns `maxResults` results in a single page along with a
+      #   `nextToken` response element. The remaining results of the initial
+      #   request can be seen by sending another `DescribeImages` request with
+      #   the returned `nextToken` value. This value can be between 1 and 100.
+      #   If this parameter is not used, then `DescribeImages` returns up to 100
+      #   results and a `nextToken` value, if applicable.
+      # @option params [Types::DescribeImagesFilter] :filter
+      #   The filter key and value with which to filter your `DescribeImages`
+      #   results.
+      # @return [Types::DescribeImagesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeImagesResponse#image_details #imageDetails} => Array&lt;Types::ImageDetail&gt;
+      #   * {Types::DescribeImagesResponse#next_token #nextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_images({
+      #     registry_id: "RegistryId",
+      #     repository_name: "RepositoryName", # required
+      #     image_ids: [
+      #       {
+      #         image_digest: "ImageDigest",
+      #         image_tag: "ImageTag",
+      #       },
+      #     ],
+      #     next_token: "NextToken",
+      #     max_results: 1,
+      #     filter: {
+      #       tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.image_details #=> Array
+      #   resp.image_details[0].registry_id #=> String
+      #   resp.image_details[0].repository_name #=> String
+      #   resp.image_details[0].image_digest #=> String
+      #   resp.image_details[0].image_tags #=> Array
+      #   resp.image_details[0].image_tags[0] #=> String
+      #   resp.image_details[0].image_size_in_bytes #=> Integer
+      #   resp.image_details[0].image_pushed_at #=> Time
+      #   resp.next_token #=> String
+      # @overload describe_images(params = {})
+      # @param [Hash] params ({})
+      def describe_images(params = {}, options = {})
+        req = build_request(:describe_images, params)
         req.send_request(options)
       end
 
@@ -465,6 +543,7 @@ module Aws
       #   resp.repositories[0].registry_id #=> String
       #   resp.repositories[0].repository_name #=> String
       #   resp.repositories[0].repository_uri #=> String
+      #   resp.repositories[0].created_at #=> Time
       #   resp.next_token #=> String
       # @overload describe_repositories(params = {})
       # @param [Hash] params ({})

@@ -5,6 +5,8 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sdk-core'
+require 'aws-sigv4'
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
 require_relative 'aws-sdk-sts/client'
@@ -40,5 +42,9 @@ module Aws
   #     end
   #
   # See {Errors} for more information.
-  module STS; end
+  module STS
+
+    GEM_VERSION = '3.0.0'
+
+  end
 end

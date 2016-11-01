@@ -9,6 +9,35 @@ module Aws
   module ServiceCatalog
     module Types
 
+      # The access level to limit results.
+      # @note When making an API call, pass AccessLevelFilter
+      #   data as a hash:
+      #
+      #       {
+      #         key: "Account", # accepts Account, Role, User
+      #         value: "AccessLevelFilterValue",
+      #       }
+      # @!attribute [rw] key
+      #   Specifies the access level.
+      #
+      #   `Account` allows results at the account level.
+      #
+      #   `Role` allows results based on the federated role of the specified
+      #   user.
+      #
+      #   `User` allows results limited to the specified user.
+      #   @return [String]
+      #
+      # @!attribute [rw] value
+      #   Specifies the user to which the access level applies. A value of
+      #   `Self` is currently supported.
+      #   @return [String]
+      class AccessLevelFilter < Struct.new(
+        :key,
+        :value)
+        include Aws::Structure
+      end
+
       # An administrator-specified constraint to apply when provisioning a
       # product.
       # @!attribute [rw] type
@@ -32,7 +61,8 @@ module Aws
       #         id: "Id", # required
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -75,7 +105,8 @@ module Aws
       #         id: "Id", # required
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -120,7 +151,8 @@ module Aws
       #         path_id: "Id",
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -185,7 +217,8 @@ module Aws
       #         page_size: 1,
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -203,7 +236,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] page_token
-      #   The page token of the first page retrieve. If null, this retrieves
+      #   The page token of the first page retrieved. If null, this retrieves
       #   the first page of size `PageSize`.
       #   @return [String]
       #
@@ -278,7 +311,8 @@ module Aws
       #         page_token: "PageToken",
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -301,7 +335,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] page_token
-      #   The page token of the first page retrieve. If null, this retrieves
+      #   The page token of the first page retrieved. If null, this retrieves
       #   the first page of size `PageSize`.
       #   @return [String]
       class ListLaunchPathsInput < Struct.new(
@@ -332,6 +366,10 @@ module Aws
       #
       #       {
       #         accept_language: "AcceptLanguage",
+      #         access_level_filter: {
+      #           key: "Account", # accepts Account, Role, User
+      #           value: "AccessLevelFilterValue",
+      #         },
       #         search_filter: {
       #           key: "SearchFilterKey",
       #           value: "SearchFilterValue",
@@ -340,7 +378,8 @@ module Aws
       #         page_token: "PageToken",
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -351,8 +390,13 @@ module Aws
       #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
+      # @!attribute [rw] access_level_filter
+      #   The access level for obtaining results. If left unspecified, `User`
+      #   level access is used.
+      #   @return [Types::AccessLevelFilter]
+      #
       # @!attribute [rw] search_filter
-      #   (Optional) The filter to limit search results.
+      #   The filter to limit search results.
       #   @return [Types::ListRecordHistorySearchFilter]
       #
       # @!attribute [rw] page_size
@@ -362,11 +406,12 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] page_token
-      #   The page token of the first page retrieve. If null, this retrieves
+      #   The page token of the first page retrieved. If null, this retrieves
       #   the first page of size `PageSize`.
       #   @return [String]
       class ListRecordHistoryInput < Struct.new(
         :accept_language,
+        :access_level_filter,
         :search_filter,
         :page_size,
         :page_token)
@@ -526,7 +571,8 @@ module Aws
       #         provision_token: "IdempotencyToken", # required
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -563,7 +609,7 @@ module Aws
       #   @return [Array<Types::ProvisioningParameter>]
       #
       # @!attribute [rw] tags
-      #   (Optional) A list of tags to use as provisioning options.
+      #   A list of tags to use as provisioning options.
       #   @return [Array<Types::Tag>]
       #
       # @!attribute [rw] notification_arns
@@ -861,11 +907,16 @@ module Aws
       #
       #       {
       #         accept_language: "AcceptLanguage",
+      #         access_level_filter: {
+      #           key: "Account", # accepts Account, Role, User
+      #           value: "AccessLevelFilterValue",
+      #         },
       #         page_size: 1,
       #         page_token: "PageToken",
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -876,6 +927,11 @@ module Aws
       #   If no code is specified, "en" is used as the default.
       #   @return [String]
       #
+      # @!attribute [rw] access_level_filter
+      #   The access level for obtaining results. If left unspecified, `User`
+      #   level access is used.
+      #   @return [Types::AccessLevelFilter]
+      #
       # @!attribute [rw] page_size
       #   The maximum number of items to return in the results. If more
       #   results exist than fit in the specified `PageSize`, the value of
@@ -883,11 +939,12 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] page_token
-      #   The page token of the first page retrieve. If null, this retrieves
+      #   The page token of the first page retrieved. If null, this retrieves
       #   the first page of size `PageSize`.
       #   @return [String]
       class ScanProvisionedProductsInput < Struct.new(
         :accept_language,
+        :access_level_filter,
         :page_size,
         :page_token)
         include Aws::Structure
@@ -921,7 +978,8 @@ module Aws
       #         page_token: "PageToken",
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -933,9 +991,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] filters
-      #   (Optional) The list of filters with which to limit search results.
-      #   If no search filters are specified, the output is all the products
-      #   to which the calling user has access.
+      #   The list of filters with which to limit search results. If no search
+      #   filters are specified, the output is all the products to which the
+      #   calling user has access.
       #   @return [Hash<String,Array<String>>]
       #
       # @!attribute [rw] page_size
@@ -945,17 +1003,17 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] sort_by
-      #   (Optional) The sort field specifier. If no value is specified,
-      #   results are not sorted.
+      #   The sort field specifier. If no value is specified, results are not
+      #   sorted.
       #   @return [String]
       #
       # @!attribute [rw] sort_order
-      #   (Optional) The sort order specifier. If no value is specified,
-      #   results are not sorted.
+      #   The sort order specifier. If no value is specified, results are not
+      #   sorted.
       #   @return [String]
       #
       # @!attribute [rw] page_token
-      #   The page token of the first page retrieve. If null, this retrieves
+      #   The page token of the first page retrieved. If null, this retrieves
       #   the first page of size `PageSize`.
       #   @return [String]
       class SearchProductsInput < Struct.new(
@@ -987,8 +1045,9 @@ module Aws
         include Aws::Structure
       end
 
-      # Optional key/value pairs to associate with this provisioning. These
-      # tags are propagated to the resources created in the provisioning.
+      # Key/value pairs to associate with this provisioning. These tags are
+      # entirely discretionary and are propagated to the resources created in
+      # the provisioning.
       # @note When making an API call, pass Tag
       #   data as a hash:
       #
@@ -1041,13 +1100,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ignore_errors
-      #   Optional Boolean parameter. If set to true, AWS Service Catalog
-      #   stops managing the specified ProvisionedProduct object even if it
-      #   cannot delete the underlying resources.
+      #   If set to true, AWS Service Catalog stops managing the specified
+      #   ProvisionedProduct object even if it cannot delete the underlying
+      #   resources.
       #   @return [Boolean]
       #
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #
@@ -1097,7 +1157,8 @@ module Aws
       #         update_token: "IdempotencyToken", # required
       #       }
       # @!attribute [rw] accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
       #
       #   "en" (English)
       #

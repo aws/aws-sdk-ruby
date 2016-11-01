@@ -303,6 +303,51 @@ module Aws
         req.send_request(options)
       end
 
+      # Creates a security configuration using EMR Security Configurations,
+      # which are stored in the service. Security Configurations enable you to
+      # more easily create a configuration, reuse it, and apply it whenever a
+      # cluster is created.
+      # @option params [required, String] :name
+      #   The name of the security configuration.
+      # @option params [required, String] :security_configuration
+      #   The security configuration details in JSON format.
+      # @return [Types::CreateSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateSecurityConfigurationOutput#name #Name} => String
+      #   * {Types::CreateSecurityConfigurationOutput#creation_date_time #CreationDateTime} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_security_configuration({
+      #     name: "XmlString", # required
+      #     security_configuration: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.name #=> String
+      #   resp.creation_date_time #=> Time
+      # @overload create_security_configuration(params = {})
+      # @param [Hash] params ({})
+      def create_security_configuration(params = {}, options = {})
+        req = build_request(:create_security_configuration, params)
+        req.send_request(options)
+      end
+
+      # Deletes a security configuration.
+      # @option params [required, String] :name
+      #   The name of the security configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_security_configuration({
+      #     name: "XmlString", # required
+      #   })
+      # @overload delete_security_configuration(params = {})
+      # @param [Hash] params ({})
+      def delete_security_configuration(params = {}, options = {})
+        req = build_request(:delete_security_configuration, params)
+        req.send_request(options)
+      end
+
       # Provides cluster-level details including status, hardware and software
       # configuration, VPC settings, and so on. For information about the
       # cluster steps, see ListSteps.
@@ -362,6 +407,7 @@ module Aws
       #   resp.cluster.configurations[0].configurations #=> Types::ConfigurationList
       #   resp.cluster.configurations[0].properties #=> Hash
       #   resp.cluster.configurations[0].properties["String"] #=> String
+      #   resp.cluster.security_configuration #=> String
       # @overload describe_cluster(params = {})
       # @param [Hash] params ({})
       def describe_cluster(params = {}, options = {})
@@ -482,6 +528,32 @@ module Aws
         req.send_request(options)
       end
 
+      # Provides the details of a security configuration by returning the
+      # configuration JSON.
+      # @option params [required, String] :name
+      #   The name of the security configuration.
+      # @return [Types::DescribeSecurityConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeSecurityConfigurationOutput#name #Name} => String
+      #   * {Types::DescribeSecurityConfigurationOutput#security_configuration #SecurityConfiguration} => String
+      #   * {Types::DescribeSecurityConfigurationOutput#creation_date_time #CreationDateTime} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_security_configuration({
+      #     name: "XmlString", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.name #=> String
+      #   resp.security_configuration #=> String
+      #   resp.creation_date_time #=> Time
+      # @overload describe_security_configuration(params = {})
+      # @param [Hash] params ({})
+      def describe_security_configuration(params = {}, options = {})
+        req = build_request(:describe_security_configuration, params)
+        req.send_request(options)
+      end
+
       # Provides more detail about the cluster step.
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster with steps to describe.
@@ -529,7 +601,7 @@ module Aws
       #   The cluster identifier for the bootstrap actions to list .
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
-      #   retrieve .
+      #   retrieve.
       # @return [Types::ListBootstrapActionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListBootstrapActionsOutput#bootstrap_actions #BootstrapActions} => Array&lt;Types::Command&gt;
@@ -715,6 +787,35 @@ module Aws
       # @param [Hash] params ({})
       def list_instances(params = {}, options = {})
         req = build_request(:list_instances, params)
+        req.send_request(options)
+      end
+
+      # Lists all the security configurations visible to this account,
+      # providing their creation dates and times, and their names. This call
+      # returns a maximum of 50 clusters per call, but returns a marker to
+      # track the paging of the cluster list across multiple
+      # ListSecurityConfigurations calls.
+      # @option params [String] :marker
+      #   The pagination token that indicates the set of results to retrieve.
+      # @return [Types::ListSecurityConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListSecurityConfigurationsOutput#security_configurations #SecurityConfigurations} => Array&lt;Types::SecurityConfigurationSummary&gt;
+      #   * {Types::ListSecurityConfigurationsOutput#marker #Marker} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_security_configurations({
+      #     marker: "Marker",
+      #   })
+      #
+      # @example Response structure
+      #   resp.security_configurations #=> Array
+      #   resp.security_configurations[0].name #=> String
+      #   resp.security_configurations[0].creation_date_time #=> Time
+      #   resp.marker #=> String
+      # @overload list_security_configurations(params = {})
+      # @param [Hash] params ({})
+      def list_security_configurations(params = {}, options = {})
+        req = build_request(:list_security_configurations, params)
         req.send_request(options)
       end
 
@@ -995,6 +1096,8 @@ module Aws
       # @option params [Array<Types::Tag>] :tags
       #   A list of tags to associate with a cluster and propagate to Amazon EC2
       #   instances.
+      # @option params [String] :security_configuration
+      #   The name of a security configuration to apply to the cluster.
       # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RunJobFlowOutput#job_flow_id #JobFlowId} => String
@@ -1121,6 +1224,7 @@ module Aws
       #         value: "String",
       #       },
       #     ],
+      #     security_configuration: "XmlString",
       #   })
       #
       # @example Response structure

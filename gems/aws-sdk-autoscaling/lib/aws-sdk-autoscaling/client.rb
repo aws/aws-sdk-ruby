@@ -147,7 +147,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-instance-asg.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-instance-asg.html
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs.
       # @option params [required, String] :auto_scaling_group_name
@@ -178,7 +178,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
       # @option params [required, Array<String>] :target_group_arns
@@ -212,7 +212,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/attach-load-balancer-asg.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/attach-load-balancer-asg.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group.
       # @option params [required, Array<String>] :load_balancer_names
@@ -260,7 +260,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
       # @option params [required, String] :auto_scaling_group_name
@@ -303,7 +303,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroup.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroup.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the group. This name must be unique within the scope of
       #   your AWS account.
@@ -325,7 +325,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       # @option params [required, Integer] :min_size
       #   The minimum size of the group.
       # @option params [required, Integer] :max_size
@@ -343,7 +343,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones for the group. This parameter is
       #   optional if you specify one or more subnets.
@@ -356,7 +356,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       # @option params [Array<String>] :target_group_arns
       #   The Amazon Resource Names (ARN) of the target groups.
       # @option params [String] :health_check_type
@@ -369,7 +369,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option params [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
@@ -383,7 +383,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option params [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -405,7 +405,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @option params [Array<String>] :termination_policies
       #   One or more termination policies used to select the instance to
       #   terminate. These policies are executed in the order that they are
@@ -416,7 +416,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       # @option params [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.
@@ -428,7 +428,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -477,7 +477,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/LaunchConfiguration.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/LaunchConfiguration.html
       # @option params [required, String] :launch_configuration_name
       #   The name of the launch configuration. This name must be unique within
       #   the scope of your AWS account.
@@ -554,7 +554,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
       # @option params [String] :instance_type
       #   The instance type of the EC2 instance. For information about available
       #   instance types, see [ Available Instance Types][1] in the *Amazon
@@ -587,7 +587,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html
       # @option params [String] :iam_instance_profile
       #   The name or the Amazon Resource Name (ARN) of the instance profile
       #   associated with the IAM role for the instance.
@@ -601,7 +601,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html
       # @option params [Boolean] :ebs_optimized
       #   Indicates whether the instance is optimized for Amazon EBS I/O. By
       #   default, the instance is not optimized for EBS I/O. The optimization
@@ -630,7 +630,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
       # @option params [String] :placement_tenancy
       #   The tenancy of the instance. An instance with a tenancy of `dedicated`
@@ -650,7 +650,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -708,7 +708,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
       # @option params [required, Array<Types::Tag>] :tags
       #   One or more tags.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -1566,7 +1566,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/detach-instance-asg.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/detach-instance-asg.html
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs.
       # @option params [required, String] :auto_scaling_group_name
@@ -1695,7 +1695,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/userguide/as-instance-monitoring.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-monitoring.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name or ARN of the Auto Scaling group.
       # @option params [Array<String>] :metrics
@@ -1742,7 +1742,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @option params [Array<String>] :instance_ids
       #   One or more instances to move into `Standby` mode. You must specify at
       #   least one instance ID.
@@ -1801,7 +1801,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option params [Float] :metric_value
       #   The metric value to compare to `BreachThreshold`. This enables you to
       #   execute a policy of type `StepScaling` and determine which step
@@ -1843,7 +1843,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @option params [Array<String>] :instance_ids
       #   One or more instance IDs. You must specify at least one instance ID.
       # @option params [required, String] :auto_scaling_group_name
@@ -1905,8 +1905,8 @@ module Aws
       # 5.  If you finish before the timeout period ends, complete the
       #     lifecycle action.
       #
-      # For more information, see [Auto Scaling Lifecycle][1] in the *Auto
-      # Scaling User Guide*.
+      # For more information, see [Auto Scaling Lifecycle Hooks][1] in the
+      # *Auto Scaling User Guide*.
       #
       # If you exceed your maximum limit of lifecycle hooks, which by default
       # is 50 per Auto Scaling group, the call fails. For information about
@@ -1915,7 +1915,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/lifecycle-hooks.html
       # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
@@ -1939,23 +1939,6 @@ module Aws
       #   notify you when an instance is in the transition state for the
       #   lifecycle hook. This target can be either an SQS queue or an SNS
       #   topic. If you specify an empty string, this overrides the current ARN.
-      #
-      #   The notification messages sent to the target include the following
-      #   information:
-      #
-      #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
-      #
-      #   * **AccountId**. The AWS account ID.
-      #
-      #   * **LifecycleTransition**. The lifecycle hook type.
-      #
-      #   * **LifecycleActionToken**. The lifecycle action token.
-      #
-      #   * **EC2InstanceId**. The EC2 instance ID.
-      #
-      #   * **LifecycleHookName**. The name of the lifecycle hook.
-      #
-      #   * **NotificationMetadata**. User-defined information.
       #
       #   This operation uses the JSON format when sending notifications to an
       #   Amazon SQS queue, and an email key/value pair format when sending
@@ -2010,7 +1993,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASGettingNotifications.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/ASGettingNotifications.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
       # @option params [required, String] :topic_arn
@@ -2064,7 +2047,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html
       # @option params [Integer] :min_adjustment_step
       #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
       #   instead.
@@ -2093,7 +2076,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option params [String] :metric_aggregation_type
       #   The aggregation type for the CloudWatch metrics. Valid values are
       #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
@@ -2148,15 +2131,14 @@ module Aws
 
       # Creates or updates a scheduled scaling action for an Auto Scaling
       # group. When updating a scheduled scaling action, if you leave a
-      # parameter unspecified, the corresponding value remains unchanged in
-      # the affected Auto Scaling group.
+      # parameter unspecified, the corresponding value remains unchanged.
       #
       # For more information, see [Scheduled Scaling][1] in the *Auto Scaling
       # User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/schedule_time.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/schedule_time.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
       # @option params [required, String] :scheduled_action_name
@@ -2167,20 +2149,18 @@ module Aws
       #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
       #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
+      #   If you specify `Recurrence` and `StartTime`, Auto Scaling performs the
+      #   action at this time, and then performs the action based on the
+      #   specified recurrence.
+      #
       #   If you try to schedule your action in the past, Auto Scaling returns
       #   an error message.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action starts and stops.
       # @option params [Time,DateTime,Date,Integer,String] :end_time
-      #   The time for this action to end.
+      #   The time for the recurring schedule to end. Auto Scaling does not
+      #   perform the action after this time.
       # @option params [String] :recurrence
-      #   The time when recurring future actions will start. Start time is
-      #   specified by the user following the Unix cron syntax format. For more
-      #   information, see [Cron][1] in Wikipedia.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action will start and stop.
+      #   The recurring schedule for this action, in Unix cron syntax format.
+      #   For more information, see [Cron][1] in Wikipedia.
       #
       #
       #
@@ -2242,7 +2222,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @option params [required, String] :lifecycle_hook_name
       #   The name of the lifecycle hook.
       # @option params [required, String] :auto_scaling_group_name
@@ -2277,7 +2257,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
       # @option params [Array<String>] :scaling_processes
@@ -2320,7 +2300,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/WhatIsAutoScaling.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/WhatIsAutoScaling.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name of the Auto Scaling group.
       # @option params [required, Integer] :desired_capacity
@@ -2354,7 +2334,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option params [required, String] :instance_id
       #   The ID of the instance.
       # @option params [required, String] :health_status
@@ -2392,7 +2372,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html#instance-protection
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html#instance-protection
       # @option params [required, Array<String>] :instance_ids
       #   One or more instance IDs.
       # @option params [required, String] :auto_scaling_group_name
@@ -2428,7 +2408,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html
       # @option params [required, String] :auto_scaling_group_name
       #   The name or Amazon Resource Name (ARN) of the Auto Scaling group.
       # @option params [Array<String>] :scaling_processes
@@ -2549,7 +2529,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option params [Array<String>] :availability_zones
       #   One or more Availability Zones for the group.
       # @option params [String] :health_check_type
@@ -2565,7 +2545,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option params [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -2587,7 +2567,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @option params [Array<String>] :termination_policies
       #   A standalone termination policy or a list of termination policies used
       #   to select the instance to terminate. The policies are executed in the
@@ -2598,7 +2578,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       # @option params [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.

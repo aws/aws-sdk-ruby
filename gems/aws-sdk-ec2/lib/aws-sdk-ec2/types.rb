@@ -9,6 +9,53 @@ module Aws
   module EC2
     module Types
 
+      # Contains the parameters for accepting the quote.
+      # @note When making an API call, pass AcceptReservedInstancesExchangeQuoteRequest
+      #   data as a hash:
+      #
+      #       {
+      #         dry_run: false,
+      #         reserved_instance_ids: ["String"], # required
+      #         target_configurations: [
+      #           {
+      #             offering_id: "String", # required
+      #             instance_count: 1,
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] reserved_instance_ids
+      #   The IDs of the Convertible Reserved Instances that you want to
+      #   exchange for other Convertible Reserved Instances of the same or
+      #   higher value.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] target_configurations
+      #   The configurations of the Convertible Reserved Instance offerings
+      #   you are purchasing in this exchange.
+      #   @return [Array<Types::TargetConfigurationRequest>]
+      class AcceptReservedInstancesExchangeQuoteRequest < Struct.new(
+        :dry_run,
+        :reserved_instance_ids,
+        :target_configurations)
+        include Aws::Structure
+      end
+
+      # The result of the exchange and whether it was `successful`.
+      # @!attribute [rw] exchange_id
+      #   The ID of the successful exchange.
+      #   @return [String]
+      class AcceptReservedInstancesExchangeQuoteResult < Struct.new(
+        :exchange_id)
+        include Aws::Structure
+      end
+
       # Contains the parameters for AcceptVpcPeeringConnection.
       # @note When making an API call, pass AcceptVpcPeeringConnectionRequest
       #   data as a hash:
@@ -2422,7 +2469,7 @@ module Aws
       #         client_token: "String", # required
       #       }
       # @!attribute [rw] reserved_instances_id
-      #   The ID of the active Reserved Instance.
+      #   The ID of the active Standard Reserved Instance.
       #   @return [String]
       #
       # @!attribute [rw] instance_count
@@ -2433,8 +2480,8 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] price_schedules
-      #   A list specifying the price of the Reserved Instance for each month
-      #   remaining in the Reserved Instance term.
+      #   A list specifying the price of the Standard Reserved Instance for
+      #   each month remaining in the Reserved Instance term.
       #   @return [Array<Types::PriceScheduleSpecification>]
       #
       # @!attribute [rw] client_token
@@ -2456,7 +2503,7 @@ module Aws
 
       # Contains the output of CreateReservedInstancesListing.
       # @!attribute [rw] reserved_instances_listings
-      #   Information about the Reserved Instance listing.
+      #   Information about the Standard Reserved Instance listing.
       #   @return [Array<Types::ReservedInstancesListing>]
       class CreateReservedInstancesListingResult < Struct.new(
         :reserved_instances_listings)
@@ -4251,12 +4298,6 @@ module Aws
       #
       #       {
       #         dry_run: false,
-      #         filters: [
-      #           {
-      #             name: "String",
-      #             values: ["String"],
-      #           },
-      #         ],
       #         conversion_task_ids: ["String"],
       #       }
       # @!attribute [rw] dry_run
@@ -4266,16 +4307,11 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       #   @return [Boolean]
       #
-      # @!attribute [rw] filters
-      #   One or more filters.
-      #   @return [Array<Types::Filter>]
-      #
       # @!attribute [rw] conversion_task_ids
       #   One or more conversion task IDs.
       #   @return [Array<String>]
       class DescribeConversionTasksRequest < Struct.new(
         :dry_run,
-        :filters,
         :conversion_task_ids)
         include Aws::Structure
       end
@@ -6498,7 +6534,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         reserved_instances_offering_ids: ["String"],
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         availability_zone: "String",
       #         product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
       #         filters: [
@@ -6515,6 +6551,7 @@ module Aws
       #         min_duration: 1,
       #         max_duration: 1,
       #         max_instance_count: 1,
+      #         offering_class: "standard", # accepts standard, convertible
       #       }
       # @!attribute [rw] dry_run
       #   Checks whether you have the required permissions for the action,
@@ -6582,6 +6619,9 @@ module Aws
       #   * `reserved-instances-offering-id` - The Reserved Instances offering
       #     ID.
       #
+      #   * `scope` - The scope of the Reserved Instance (`Availability Zone`
+      #     or `Region`).
+      #
       #   * `usage-price` - The usage price of the Reserved Instance, per hour
       #     (for example, 0.84).
       #   @return [Array<Types::Filter>]
@@ -6637,6 +6677,11 @@ module Aws
       #
       #   Default: 20
       #   @return [Integer]
+      #
+      # @!attribute [rw] offering_class
+      #   The offering class of the Reserved Instance. Can be `standard` or
+      #   `convertible`.
+      #   @return [String]
       class DescribeReservedInstancesOfferingsRequest < Struct.new(
         :dry_run,
         :reserved_instances_offering_ids,
@@ -6651,7 +6696,8 @@ module Aws
         :include_marketplace,
         :min_duration,
         :max_duration,
-        :max_instance_count)
+        :max_instance_count,
+        :offering_class)
         include Aws::Structure
       end
 
@@ -6684,6 +6730,7 @@ module Aws
       #           },
       #         ],
       #         offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
+      #         offering_class: "standard", # accepts standard, convertible
       #       }
       # @!attribute [rw] dry_run
       #   Checks whether you have the required permissions for the action,
@@ -6716,6 +6763,9 @@ module Aws
       #
       #   * `instance-type` - The instance type that is covered by the
       #     reservation.
+      #
+      #   * `scope` - The scope of the Reserved Instance (`Region` or
+      #     `Availability Zone`).
       #
       #   * `product-description` - The Reserved Instance product platform
       #     description. Instances that include `(Amazon VPC)` in the product
@@ -6761,11 +6811,16 @@ module Aws
       #   predate the 2011-11-01 API version, you only have access to the
       #   `Medium Utilization` Reserved Instance offering type.
       #   @return [String]
+      #
+      # @!attribute [rw] offering_class
+      #   Describes whether the Reserved Instance is Standard or Convertible.
+      #   @return [String]
       class DescribeReservedInstancesRequest < Struct.new(
         :dry_run,
         :reserved_instances_ids,
         :filters,
-        :offering_type)
+        :offering_type,
+        :offering_class)
         include Aws::Structure
       end
 
@@ -7795,7 +7850,7 @@ module Aws
       #         dry_run: false,
       #         start_time: Time.now,
       #         end_time: Time.now,
-      #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         product_descriptions: ["String"],
       #         filters: [
       #           {
@@ -10133,6 +10188,93 @@ module Aws
         include Aws::Structure
       end
 
+      # Contains the parameters for GetReservedInstanceExchangeQuote.
+      # @note When making an API call, pass GetReservedInstancesExchangeQuoteRequest
+      #   data as a hash:
+      #
+      #       {
+      #         dry_run: false,
+      #         reserved_instance_ids: ["String"], # required
+      #         target_configurations: [
+      #           {
+      #             offering_id: "String", # required
+      #             instance_count: 1,
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] reserved_instance_ids
+      #   The ID/s of the Convertible Reserved Instances you want to exchange.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] target_configurations
+      #   The configuration requirements of the Convertible Reserved Instances
+      #   you want in exchange for your current Convertible Reserved
+      #   Instances.
+      #   @return [Array<Types::TargetConfigurationRequest>]
+      class GetReservedInstancesExchangeQuoteRequest < Struct.new(
+        :dry_run,
+        :reserved_instance_ids,
+        :target_configurations)
+        include Aws::Structure
+      end
+
+      # Contains the output of GetReservedInstancesExchangeQuote.
+      # @!attribute [rw] reserved_instance_value_set
+      #   The configuration of your Convertible Reserved Instances.
+      #   @return [Array<Types::ReservedInstanceReservationValue>]
+      #
+      # @!attribute [rw] reserved_instance_value_rollup
+      #   The cost associated with the Reserved Instance.
+      #   @return [Types::ReservationValue]
+      #
+      # @!attribute [rw] target_configuration_value_set
+      #   The values of the target Convertible Reserved Instances.
+      #   @return [Array<Types::TargetReservationValue>]
+      #
+      # @!attribute [rw] target_configuration_value_rollup
+      #   The cost associated with the Reserved Instance.
+      #   @return [Types::ReservationValue]
+      #
+      # @!attribute [rw] payment_due
+      #   The total true upfront charge for the exchange.
+      #   @return [String]
+      #
+      # @!attribute [rw] currency_code
+      #   The currency of the transaction.
+      #   @return [String]
+      #
+      # @!attribute [rw] output_reserved_instances_will_expire_at
+      #   The new end date of the reservation term.
+      #   @return [Time]
+      #
+      # @!attribute [rw] is_valid_exchange
+      #   If `true`, the exchange is valid. If `false`, the exchange cannot be
+      #   performed.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] validation_failure_reason
+      #   Describes the reason why the exchange can not be completed.
+      #   @return [String]
+      class GetReservedInstancesExchangeQuoteResult < Struct.new(
+        :reserved_instance_value_set,
+        :reserved_instance_value_rollup,
+        :target_configuration_value_set,
+        :target_configuration_value_rollup,
+        :payment_due,
+        :currency_code,
+        :output_reserved_instances_will_expire_at,
+        :is_valid_exchange,
+        :validation_failure_reason)
+        include Aws::Structure
+      end
+
       # Describes a security group.
       # @note When making an API call, pass GroupIdentifier
       #   data as a hash:
@@ -10948,7 +11090,7 @@ module Aws
       #         user_data: {
       #           data: "String",
       #         },
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -11046,7 +11188,7 @@ module Aws
       #           user_data: {
       #             data: "String",
       #           },
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -12005,7 +12147,9 @@ module Aws
       #
       # @!attribute [rw] private_ip_address
       #   The private IP address of the network interface. Applies only if
-      #   creating a network interface when launching an instance.
+      #   creating a network interface when launching an instance. You cannot
+      #   specify this option if you're launching more than one instance in a
+      #   RunInstances request.
       #   @return [String]
       #
       # @!attribute [rw] groups
@@ -12021,13 +12165,16 @@ module Aws
       #
       # @!attribute [rw] private_ip_addresses
       #   One or more private IP addresses to assign to the network interface.
-      #   Only one private IP address can be designated as primary.
+      #   Only one private IP address can be designated as primary. You cannot
+      #   specify this option if you're launching more than one instance in a
+      #   RunInstances request.
       #   @return [Array<Types::PrivateIpAddressSpecification>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
       #   The number of secondary private IP addresses. You can't specify
       #   this option and specify more than one private IP address using the
-      #   private IP addresses option.
+      #   private IP addresses option. You cannot specify this option if
+      #   you're launching more than one instance in a RunInstances request.
       #   @return [Integer]
       #
       # @!attribute [rw] associate_public_ip_address
@@ -13027,7 +13174,8 @@ module Aws
       #             availability_zone: "String",
       #             platform: "String",
       #             instance_count: 1,
-      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             scope: "Availability Zone", # accepts Availability Zone, Region
       #           },
       #         ],
       #       }
@@ -15169,7 +15317,7 @@ module Aws
       #               ],
       #               user_data: "String",
       #               addressing_type: "String",
-      #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #               placement: {
       #                 availability_zone: "String",
       #                 group_name: "String",
@@ -15275,7 +15423,7 @@ module Aws
       #           security_groups: ["String"],
       #           user_data: "String",
       #           addressing_type: "String",
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -15467,7 +15615,7 @@ module Aws
       #         security_groups: ["String"],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -15643,6 +15791,26 @@ module Aws
         include Aws::Structure
       end
 
+      # The cost associated with the Reserved Instance.
+      # @!attribute [rw] remaining_total_value
+      #   The balance of the total value (the sum of remainingUpfrontValue +
+      #   hourlyPrice \* number of hours remaining).
+      #   @return [String]
+      #
+      # @!attribute [rw] remaining_upfront_value
+      #   The remaining upfront cost of the reservation.
+      #   @return [String]
+      #
+      # @!attribute [rw] hourly_price
+      #   The hourly rate of the reservation.
+      #   @return [String]
+      class ReservationValue < Struct.new(
+        :remaining_total_value,
+        :remaining_upfront_value,
+        :hourly_price)
+        include Aws::Structure
+      end
+
       # Describes the limit price of a Reserved Instance offering.
       # @note When making an API call, pass ReservedInstanceLimitPrice
       #   data as a hash:
@@ -15663,6 +15831,21 @@ module Aws
       class ReservedInstanceLimitPrice < Struct.new(
         :amount,
         :currency_code)
+        include Aws::Structure
+      end
+
+      # The total value of the Convertible Reserved Instance.
+      # @!attribute [rw] reserved_instance_id
+      #   The ID of the Convertible Reserved Instance that you are exchanging.
+      #   @return [String]
+      #
+      # @!attribute [rw] reservation_value
+      #   The total value of the Convertible Reserved Instance that you are
+      #   exchanging.
+      #   @return [Types::ReservationValue]
+      class ReservedInstanceReservationValue < Struct.new(
+        :reserved_instance_id,
+        :reservation_value)
         include Aws::Structure
       end
 
@@ -15732,6 +15915,14 @@ module Aws
       # @!attribute [rw] recurring_charges
       #   The recurring charge tag assigned to the resource.
       #   @return [Array<Types::RecurringCharge>]
+      #
+      # @!attribute [rw] offering_class
+      #   The offering class of the Reserved Instance.
+      #   @return [String]
+      #
+      # @!attribute [rw] scope
+      #   The scope of the Reserved Instance.
+      #   @return [String]
       class ReservedInstances < Struct.new(
         :reserved_instances_id,
         :instance_type,
@@ -15748,7 +15939,9 @@ module Aws
         :instance_tenancy,
         :currency_code,
         :offering_type,
-        :recurring_charges)
+        :recurring_charges,
+        :offering_class,
+        :scope)
         include Aws::Structure
       end
 
@@ -15761,7 +15954,8 @@ module Aws
       #         availability_zone: "String",
       #         platform: "String",
       #         instance_count: 1,
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         scope: "Availability Zone", # accepts Availability Zone, Region
       #       }
       # @!attribute [rw] availability_zone
       #   The Availability Zone for the modified Reserved Instances.
@@ -15779,11 +15973,16 @@ module Aws
       # @!attribute [rw] instance_type
       #   The instance type for the modified Reserved Instances.
       #   @return [String]
+      #
+      # @!attribute [rw] scope
+      #   Whether the Reserved Instance is `standard` or `convertible`.
+      #   @return [String]
       class ReservedInstancesConfiguration < Struct.new(
         :availability_zone,
         :platform,
         :instance_count,
-        :instance_type)
+        :instance_type,
+        :scope)
         include Aws::Structure
       end
 
@@ -15932,7 +16131,9 @@ module Aws
 
       # Describes a Reserved Instance offering.
       # @!attribute [rw] reserved_instances_offering_id
-      #   The ID of the Reserved Instance offering.
+      #   The ID of the Reserved Instance offering. This is the offering ID
+      #   used in GetReservedInstancesExchangeQuote to confirm that an
+      #   exchange can be made.
       #   @return [String]
       #
       # @!attribute [rw] instance_type
@@ -15986,6 +16187,17 @@ module Aws
       # @!attribute [rw] pricing_details
       #   The pricing details of the Reserved Instance offering.
       #   @return [Array<Types::PricingDetail>]
+      #
+      # @!attribute [rw] offering_class
+      #   If `convertible` it can be exchanged for Reserved Instances of the
+      #   same or higher monetary value, with different configurations. If
+      #   `standard`, it is not possible to perform an exchange.
+      #   @return [String]
+      #
+      # @!attribute [rw] scope
+      #   Whether the Reserved Instance is applied to instances in a region or
+      #   an Availability Zone.
+      #   @return [String]
       class ReservedInstancesOffering < Struct.new(
         :reserved_instances_offering_id,
         :instance_type,
@@ -15999,7 +16211,9 @@ module Aws
         :offering_type,
         :recurring_charges,
         :marketplace,
-        :pricing_details)
+        :pricing_details,
+        :offering_class,
+        :scope)
         include Aws::Structure
       end
 
@@ -16544,7 +16758,7 @@ module Aws
       #         security_groups: ["String"],
       #         security_group_ids: ["String"],
       #         user_data: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -16770,6 +16984,9 @@ module Aws
       #   you can't specify this parameter if `PrivateIpAddresses.n.Primary`
       #   is set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set
       #   to an IP address.
+      #
+      #   You cannot specify this option if you're launching more than one
+      #   instance in the request.
       #
       #   Default: We select an IP address from the IP address range of the
       #   subnet.
@@ -18053,7 +18270,7 @@ module Aws
       #         ],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -18294,7 +18511,7 @@ module Aws
       #             ],
       #             user_data: "String",
       #             addressing_type: "String",
-      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #             placement: {
       #               availability_zone: "String",
       #               group_name: "String",
@@ -18983,6 +19200,64 @@ module Aws
         include Aws::Structure
       end
 
+      # Information about the Convertible Reserved Instance offering.
+      # @!attribute [rw] offering_id
+      #   The ID of the Convertible Reserved Instance offering.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_count
+      #   The number of instances the Convertible Reserved Instance offering
+      #   can be applied to. This parameter is reserved and cannot be
+      #   specified in a request
+      #   @return [Integer]
+      class TargetConfiguration < Struct.new(
+        :offering_id,
+        :instance_count)
+        include Aws::Structure
+      end
+
+      # Details about the target configuration.
+      # @note When making an API call, pass TargetConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         offering_id: "String", # required
+      #         instance_count: 1,
+      #       }
+      # @!attribute [rw] offering_id
+      #   The Convertible Reserved Instance offering ID. If this isn't
+      #   included in the request, the response lists your current Convertible
+      #   Reserved Instance/s and their value/s.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_count
+      #   The number of instances the Covertible Reserved Instance offering
+      #   can be applied to. This parameter is reserved and cannot be
+      #   specified in a request
+      #   @return [Integer]
+      class TargetConfigurationRequest < Struct.new(
+        :offering_id,
+        :instance_count)
+        include Aws::Structure
+      end
+
+      # The total value of the new Convertible Reserved Instances.
+      # @!attribute [rw] target_configuration
+      #   The configuration of the Convertible Reserved Instances that make up
+      #   the exchange.
+      #   @return [Types::TargetConfiguration]
+      #
+      # @!attribute [rw] reservation_value
+      #   The total value of the Convertible Reserved Instances that make up
+      #   the exchange. This is the sum of the list value, remaining upfront
+      #   price, and additional upfront cost of the exchange.
+      #   @return [Types::ReservationValue]
+      class TargetReservationValue < Struct.new(
+        :target_configuration,
+        :reservation_value)
+        include Aws::Structure
+      end
+
       # Contains the parameters for TerminateInstances.
       # @note When making an API call, pass TerminateInstancesRequest
       #   data as a hash:
@@ -19000,6 +19275,9 @@ module Aws
       #
       # @!attribute [rw] instance_ids
       #   One or more instance IDs.
+      #
+      #   Constraints: Up to 1000 instance IDs. We recommend breaking up this
+      #   request into smaller batches.
       #   @return [Array<String>]
       class TerminateInstancesRequest < Struct.new(
         :dry_run,
@@ -19074,16 +19352,16 @@ module Aws
 
       # Information about items that were not successfully processed in a
       # batch call.
-      # @!attribute [rw] resource_id
-      #   The ID of the resource.
-      #   @return [String]
-      #
       # @!attribute [rw] error
       #   Information about the error.
       #   @return [Types::UnsuccessfulItemError]
+      #
+      # @!attribute [rw] resource_id
+      #   The ID of the resource.
+      #   @return [String]
       class UnsuccessfulItem < Struct.new(
-        :resource_id,
-        :error)
+        :error,
+        :resource_id)
         include Aws::Structure
       end
 

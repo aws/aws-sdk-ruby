@@ -76,6 +76,189 @@ module Aws
       # registration.
       class AdminConfirmSignUpResponse < Aws::EmptyStructure; end
 
+      # The type of configuration for creating a new user profile.
+      # @note When making an API call, pass AdminCreateUserConfigType
+      #   data as a hash:
+      #
+      #       {
+      #         allow_admin_create_user_only: false,
+      #         unused_account_validity_days: 1,
+      #         invite_message_template: {
+      #           sms_message: "SmsVerificationMessageType",
+      #           email_message: "EmailVerificationMessageType",
+      #           email_subject: "EmailVerificationSubjectType",
+      #         },
+      #       }
+      # @!attribute [rw] allow_admin_create_user_only
+      #   Set to True if only the administrator is allowed to create user
+      #   profiles. Set to False if users can sign themselves up via an app.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] unused_account_validity_days
+      #   The user account expiration limit, in days, after which the account
+      #   is no longer usable. To reset the account after that time limit, you
+      #   must call AdminCreateUser again, specifying "RESEND" for the
+      #   MessageAction parameter.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] invite_message_template
+      #   The message template to be used for the welcome message to new
+      #   users.
+      #   @return [Types::MessageTemplateType]
+      class AdminCreateUserConfigType < Struct.new(
+        :allow_admin_create_user_only,
+        :unused_account_validity_days,
+        :invite_message_template)
+        include Aws::Structure
+      end
+
+      # Represents the request to create a user in the specified user pool.
+      # @note When making an API call, pass AdminCreateUserRequest
+      #   data as a hash:
+      #
+      #       {
+      #         user_pool_id: "UserPoolIdType", # required
+      #         username: "UsernameType", # required
+      #         user_attributes: [
+      #           {
+      #             name: "AttributeNameType", # required
+      #             value: "AttributeValueType",
+      #           },
+      #         ],
+      #         validation_data: [
+      #           {
+      #             name: "AttributeNameType", # required
+      #             value: "AttributeValueType",
+      #           },
+      #         ],
+      #         temporary_password: "PasswordType",
+      #         force_alias_creation: false,
+      #         message_action: "RESEND", # accepts RESEND, SUPPRESS
+      #         desired_delivery_mediums: ["SMS"], # accepts SMS, EMAIL
+      #       }
+      # @!attribute [rw] user_pool_id
+      #   The user pool ID for the user pool where the user will be created.
+      #   @return [String]
+      #
+      # @!attribute [rw] username
+      #   The username for the user. Must be unique within the user pool. Must
+      #   be a UTF-8 string between 1 and 128 characters. After the user is
+      #   created, the username cannot be changed.
+      #   @return [String]
+      #
+      # @!attribute [rw] user_attributes
+      #   An array of name-value pairs that contain user attributes and
+      #   attribute values to be set for the user to be created. You can
+      #   create a user without specifying any attributes other than Username.
+      #   However, any attributes that you specify as required (in
+      #   CreateUserPool or in the **Attributes** tab of the console) must be
+      #   supplied either by you (in your call to AdminCreateUser) or by the
+      #   user (when he or she signs up in response to your welcome message).
+      #
+      #   To send a message inviting the user to sign up, you must specify the
+      #   user's email address or phone number. This can be done in your call
+      #   to AdminCreateUser or in the **Users** tab of the Amazon Cognito
+      #   console for managing your user pools.
+      #
+      #   In your call to AdminCreateUser, you can set the email\_verified
+      #   attribute to True, and you can set the phone\_number\_verified
+      #   attribute to True. (You cannot do this by calling other operations
+      #   such as AdminUpdateUserAttributes.)
+      #
+      #   * **email**\: The email address of the user to whom the message that
+      #     contains the code and username will be sent. Required if the
+      #     email\_verified attribute is set to True, or if "EMAIL" is
+      #     specified in the DesiredDeliveryMediums parameter.
+      #
+      #   * **phone\_number**\: The phone number of the user to whom the
+      #     message that contains the code and username will be sent. Required
+      #     if the phone\_number\_verified attribute is set to True, or if
+      #     "SMS" is specified in the DesiredDeliveryMediums parameter.
+      #   @return [Array<Types::AttributeType>]
+      #
+      # @!attribute [rw] validation_data
+      #   The user's validation data. This is an array of name-value pairs
+      #   that contain user attributes and attribute values that you can use
+      #   for custom validation, such as restricting the types of user
+      #   accounts that can be registered. For example, you might choose to
+      #   allow or disallow user sign-up based on the user's domain.
+      #
+      #   To configure custom validation, you must create a Pre Sign-up Lambda
+      #   trigger for the user pool as described in the Amazon Cognito
+      #   Developer Guide. The Lambda trigger receives the validation data and
+      #   uses it in the validation process.
+      #
+      #   The user's validation data is not persisted.
+      #   @return [Array<Types::AttributeType>]
+      #
+      # @!attribute [rw] temporary_password
+      #   The user's temporary password. This password must conform to the
+      #   password policy that you specified when you created the user pool.
+      #
+      #   The temporary password is valid only once. To complete the Admin
+      #   Create User flow, the user must enter the temporary password in the
+      #   sign-in page along with a new password to be used in all future
+      #   sign-ins.
+      #
+      #   This parameter is not required. If you do not specify a value,
+      #   Amazon Cognito generates one for you.
+      #
+      #   The temporary password can only be used until the user account
+      #   expiration limit that you specified when you created the user pool.
+      #   To reset the account after that time limit, you must call
+      #   AdminCreateUser again, specifying "RESEND" for the MessageAction
+      #   parameter.
+      #   @return [String]
+      #
+      # @!attribute [rw] force_alias_creation
+      #   This parameter is only used if the phone\_number\_verified or
+      #   email\_verified attribute is set to True. Otherwise, it is ignored.
+      #
+      #   If this parameter is set to True and the phone number or email
+      #   address specified in the UserAttributes parameter already exists as
+      #   an alias with a different user, the API call will migrate the alias
+      #   from the previous user to the newly created user. The previous user
+      #   will no longer be able to log in using that alias.
+      #
+      #   If this parameter is set to False, the API throws an
+      #   AliasExistsException error if the alias already exists. The default
+      #   value is False.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] message_action
+      #   Set to "RESEND" to resend the invitation message to a user that
+      #   already exists and reset the expiration limit on the user's
+      #   account. Set to "SUPPRESS" to suppress sending the message. Only
+      #   one value can be specified.
+      #   @return [String]
+      #
+      # @!attribute [rw] desired_delivery_mediums
+      #   Specify "EMAIL" if email will be used to send the welcome message.
+      #   Specify "SMS" if the phone number will be used. The default value
+      #   is "SMS". More than one value can be specified.
+      #   @return [Array<String>]
+      class AdminCreateUserRequest < Struct.new(
+        :user_pool_id,
+        :username,
+        :user_attributes,
+        :validation_data,
+        :temporary_password,
+        :force_alias_creation,
+        :message_action,
+        :desired_delivery_mediums)
+        include Aws::Structure
+      end
+
+      # Represents the response from the server to the request to create the
+      # user.
+      # @!attribute [rw] user
+      #   The user returned in the request to create a new user.
+      #   @return [Types::UserType]
+      class AdminCreateUserResponse < Struct.new(
+        :user)
+        include Aws::Structure
+      end
+
       # Represents the request to delete user attributes as an administrator.
       # @note When making an API call, pass AdminDeleteUserAttributesRequest
       #   data as a hash:
@@ -295,9 +478,13 @@ module Aws
       #   The user status. Can be one of the following:
       #
       #   * UNCONFIRMED - User has been created but not confirmed.
+      #
       #   * CONFIRMED - User has been confirmed.
+      #
       #   * ARCHIVED - User is no longer active.
+      #
       #   * COMPROMISED - User is disabled due to a potential security threat.
+      #
       #   * UNKNOWN - User status is not known.
       #   @return [String]
       #
@@ -464,7 +651,7 @@ module Aws
       #       {
       #         user_pool_id: "UserPoolIdType", # required
       #         client_id: "ClientIdType", # required
-      #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH
+      #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
       #         challenge_responses: {
       #           "StringType" => "StringType",
       #         },
@@ -570,7 +757,7 @@ module Aws
       #         device_remembered_status: "remembered", # accepts remembered, not_remembered
       #       }
       # @!attribute [rw] user_pool_id
-      #   The user pool ID>
+      #   The user pool ID&gt;
       #   @return [String]
       #
       # @!attribute [rw] username
@@ -1054,6 +1241,15 @@ module Aws
       #           sns_caller_arn: "ArnType",
       #           external_id: "StringType",
       #         },
+      #         admin_create_user_config: {
+      #           allow_admin_create_user_only: false,
+      #           unused_account_validity_days: 1,
+      #           invite_message_template: {
+      #             sms_message: "SmsVerificationMessageType",
+      #             email_message: "EmailVerificationMessageType",
+      #             email_subject: "EmailVerificationSubjectType",
+      #           },
+      #         },
       #       }
       # @!attribute [rw] pool_name
       #   A string used to name the user pool.
@@ -1108,6 +1304,10 @@ module Aws
       # @!attribute [rw] sms_configuration
       #   The SMS configuration.
       #   @return [Types::SmsConfigurationType]
+      #
+      # @!attribute [rw] admin_create_user_config
+      #   The configuration for AdminCreateUser requests.
+      #   @return [Types::AdminCreateUserConfigType]
       class CreateUserPoolRequest < Struct.new(
         :pool_name,
         :policies,
@@ -1121,7 +1321,8 @@ module Aws
         :mfa_configuration,
         :device_configuration,
         :email_configuration,
-        :sms_configuration)
+        :sms_configuration,
+        :admin_create_user_config)
         include Aws::Structure
       end
 
@@ -1785,9 +1986,9 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] pagination_token
-      #   An identifier that was returned from the previous call to this
-      #   operation, which can be used to return the next set of import jobs
-      #   in the list.
+      #   An identifier that was returned from the previous call to
+      #   ListUserImportJobs, which can be used to return the next set of
+      #   import jobs in the list.
       #   @return [String]
       class ListUserImportJobsRequest < Struct.new(
         :user_pool_id,
@@ -1979,6 +2180,33 @@ module Aws
         include Aws::Structure
       end
 
+      # The message template structure.
+      # @note When making an API call, pass MessageTemplateType
+      #   data as a hash:
+      #
+      #       {
+      #         sms_message: "SmsVerificationMessageType",
+      #         email_message: "EmailVerificationMessageType",
+      #         email_subject: "EmailVerificationSubjectType",
+      #       }
+      # @!attribute [rw] sms_message
+      #   The message template for SMS messages.
+      #   @return [String]
+      #
+      # @!attribute [rw] email_message
+      #   The message template for email messages.
+      #   @return [String]
+      #
+      # @!attribute [rw] email_subject
+      #   The subject line for email messages.
+      #   @return [String]
+      class MessageTemplateType < Struct.new(
+        :sms_message,
+        :email_message,
+        :email_subject)
+        include Aws::Structure
+      end
+
       # The new device metadata type.
       # @!attribute [rw] device_key
       #   The device key.
@@ -2107,7 +2335,7 @@ module Aws
       #
       #       {
       #         client_id: "ClientIdType", # required
-      #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH
+      #         challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
       #         session: "SessionType",
       #         challenge_responses: {
       #           "StringType" => "StringType",
@@ -2602,6 +2830,15 @@ module Aws
       #           sns_caller_arn: "ArnType",
       #           external_id: "StringType",
       #         },
+      #         admin_create_user_config: {
+      #           allow_admin_create_user_only: false,
+      #           unused_account_validity_days: 1,
+      #           invite_message_template: {
+      #             sms_message: "SmsVerificationMessageType",
+      #             email_message: "EmailVerificationMessageType",
+      #             email_subject: "EmailVerificationSubjectType",
+      #           },
+      #         },
       #       }
       # @!attribute [rw] user_pool_id
       #   The user pool ID for the user pool you want to update.
@@ -2630,7 +2867,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] email_verification_subject
-      #   The subject of the email verfication message
+      #   The subject of the email verfication message.
       #   @return [String]
       #
       # @!attribute [rw] sms_authentication_message
@@ -2642,8 +2879,10 @@ module Aws
       #
       #   * `OFF` - MFA tokens are not required and cannot be specified during
       #     user registration.
+      #
       #   * `ON` - MFA tokens are required for all user registrations. You can
       #     only specify required when you are initially creating a user pool.
+      #
       #   * `OPTIONAL` - Users have the option when registering to create an
       #     MFA token.
       #   @return [String]
@@ -2659,6 +2898,10 @@ module Aws
       # @!attribute [rw] sms_configuration
       #   SMS configuration.
       #   @return [Types::SmsConfigurationType]
+      #
+      # @!attribute [rw] admin_create_user_config
+      #   The configuration for AdminCreateUser requests.
+      #   @return [Types::AdminCreateUserConfigType]
       class UpdateUserPoolRequest < Struct.new(
         :user_pool_id,
         :policies,
@@ -2671,7 +2914,8 @@ module Aws
         :mfa_configuration,
         :device_configuration,
         :email_configuration,
-        :sms_configuration)
+        :sms_configuration,
+        :admin_create_user_config)
         include Aws::Structure
       end
 
@@ -2713,15 +2957,22 @@ module Aws
       #   The status of the user import job. One of the following:
       #
       #   * Created - The job was created but not started.
+      #
       #   * Pending - A transition state. You have started the job, but it has
       #     not begun importing users yet.
+      #
       #   * InProgress - The job has started, and users are being imported.
+      #
       #   * Stopping - You have stopped the job, but the job has not stopped
       #     importing users yet.
+      #
       #   * Stopped - You have stopped the job, and the job has stopped
       #     importing users.
+      #
       #   * Succeeded - The job has completed successfully.
+      #
       #   * Failed - The job has stopped due to an error.
+      #
       #   * Expired - You created a job, but did not start the job within
       #     24-48 hours. All data associated with the job was deleted, and the
       #     job cannot be started.
@@ -2958,8 +3209,10 @@ module Aws
       #
       #   * `OFF` - MFA tokens are not required and cannot be specified during
       #     user registration.
+      #
       #   * `ON` - MFA tokens are required for all user registrations. You can
       #     only specify required when you are initially creating a user pool.
+      #
       #   * `OPTIONAL` - Users have the option when registering to create an
       #     MFA token.
       #   @return [String]
@@ -2989,6 +3242,10 @@ module Aws
       #   The reason why the email configuration cannot send the messages to
       #   your users.
       #   @return [String]
+      #
+      # @!attribute [rw] admin_create_user_config
+      #   The configuration for AdminCreateUser requests.
+      #   @return [Types::AdminCreateUserConfigType]
       class UserPoolType < Struct.new(
         :id,
         :name,
@@ -3010,7 +3267,8 @@ module Aws
         :email_configuration,
         :sms_configuration,
         :sms_configuration_failure,
-        :email_configuration_failure)
+        :email_configuration_failure,
+        :admin_create_user_config)
         include Aws::Structure
       end
 
@@ -3039,18 +3297,27 @@ module Aws
       #   The user status. Can be one of the following:
       #
       #   * UNCONFIRMED - User has been created but not confirmed.
+      #
       #   * CONFIRMED - User has been confirmed.
+      #
       #   * ARCHIVED - User is no longer active.
+      #
       #   * COMPROMISED - User is disabled due to a potential security threat.
+      #
       #   * UNKNOWN - User status is not known.
       #   @return [String]
+      #
+      # @!attribute [rw] mfa_options
+      #   The MFA options for the user.
+      #   @return [Array<Types::MFAOptionType>]
       class UserType < Struct.new(
         :username,
         :attributes,
         :user_create_date,
         :user_last_modified_date,
         :enabled,
-        :user_status)
+        :user_status,
+        :mfa_options)
         include Aws::Structure
       end
 

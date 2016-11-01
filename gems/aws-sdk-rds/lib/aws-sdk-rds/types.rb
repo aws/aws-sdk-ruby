@@ -40,6 +40,28 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass AddRoleToDBClusterMessage
+      #   data as a hash:
+      #
+      #       {
+      #         db_cluster_identifier: "String", # required
+      #         role_arn: "String", # required
+      #       }
+      # @!attribute [rw] db_cluster_identifier
+      #   The name of the DB cluster to associate the IAM role with.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The Amazon Resource Name (ARN) of the IAM role to associate with the
+      #   Aurora DB cluster, for example
+      #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
+      #   @return [String]
+      class AddRoleToDBClusterMessage < Struct.new(
+        :db_cluster_identifier,
+        :role_arn)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass AddSourceIdentifierToSubscriptionMessage
       #   data as a hash:
       #
@@ -1187,6 +1209,7 @@ module Aws
       #         monitoring_role_arn: "String",
       #         domain_iam_role_name: "String",
       #         promotion_tier: 1,
+      #         timezone: "String",
       #       }
       # @!attribute [rw] db_name
       #   The meaning of this parameter differs according to the database
@@ -1322,9 +1345,9 @@ module Aws
       # @!attribute [rw] engine
       #   The name of the database engine to be used for this instance.
       #
-      #   Valid Values: `MySQL` \| `mariadb` \| `oracle-se1` \| `oracle-se` \|
-      #   `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \| `sqlserver-ex` \|
-      #   `sqlserver-web` \| `postgres` \| `aurora`
+      #   Valid Values: `mysql` \| `mariadb` \| `oracle-se1` \| `oracle-se2`
+      #   \| `oracle-se` \| `oracle-ee` \| `sqlserver-ee` \| `sqlserver-se` \|
+      #   `sqlserver-ex` \| `sqlserver-web` \| `postgres` \| `aurora`
       #
       #   Not every database engine is available for every AWS region.
       #   @return [String]
@@ -1593,7 +1616,7 @@ module Aws
       #
       #   **Amazon Aurora**
       #
-      #   * **Version 5.6 (only available in AWS regions ap-northeast-1,
+      #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
       #     us-west-2):** ` 5.6.10a`
       #
@@ -1601,11 +1624,173 @@ module Aws
       #
       #   **MariaDB**
       #
-      #   * **Version 10.1 (available in all AWS regions except
-      #     us-gov-west-1):** ` 10.1.14`
+      #   * **Version 10.1 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
+      #     us-west-2):** ` 10.1.14`
       #
       #   * **Version 10.0 (available in all AWS regions):** ` 10.0.17 |
       #     10.0.24`
+      #
+      #   **MySQL**
+      #
+      #   * **Version 5.7 (available in all AWS regions):** ` 5.7.10 | 5.7.11`
+      #
+      #   * **Version 5.6 (available in all AWS regions):** ` 5.6.27 | 5.6.29`
+      #
+      #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 5.6.23`
+      #
+      #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+      #     sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):** `
+      #     5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b | 5.6.22`
+      #
+      #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
+      #
+      #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 5.5.42`
+      #
+      #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+      #     sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):** `
+      #     5.5.40b | 5.5.41`
+      #
+      #   * **Version 5.5 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+      #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
+      #
+      #   **Oracle Database Enterprise Edition (oracle-ee)**
+      #
+      #   * **Version 12.1.0.2 (available in these AWS regions:
+      #     ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
+      #     ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1,
+      #     us-west-1, us-west-2):** ` 12.1.0.2.v5`
+      #
+      #   * **Version 12.1.0.2 (available in all AWS regions):** ` 12.1.0.2.v1
+      #     | 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):** `
+      #     12.1.0.1.v6`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+      #
+      #   * **Version 11.2.0.4 (available in these AWS regions:
+      #     ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
+      #     ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1,
+      #     us-west-1, us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #
+      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1
+      #     | 11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 |
+      #     11.2.0.4.v8`
+      #
+      #   **Oracle Database Standard Edition Two (oracle-se2)**
+      #
+      #   * **Version 12.1.0.2 (available in these AWS regions:
+      #     ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
+      #     ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1,
+      #     us-west-1, us-west-2):** ` 12.1.0.2.v5`
+      #
+      #   * **Version 12.1.0.2 (available in all AWS regions):** ` 12.1.0.2.v2
+      #     | 12.1.0.2.v3 | 12.1.0.2.v4`
+      #
+      #   **Oracle Database Standard Edition One (oracle-se1)**
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):** `
+      #     12.1.0.1.v6`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+      #
+      #   * **Version 11.2.0.4 (available in these AWS regions:
+      #     ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
+      #     ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1,
+      #     us-west-1, us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #
+      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1
+      #     | 11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 |
+      #     11.2.0.4.v8`
+      #
+      #   **Oracle Database Standard Edition (oracle-se)**
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-west-1, us-west-2):** `
+      #     12.1.0.1.v6`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 12.1.0.1.v3 | 12.1.0.1.v4 | 12.1.0.1.v5`
+      #
+      #   * **Version 12.1.0.1 (available in these AWS regions:
+      #     ap-northeast-1, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
+      #
+      #   * **Version 11.2.0.4 (available in these AWS regions:
+      #     ap-northeast-1, ap-northeast-2, ap-south-1, ap-southeast-1,
+      #     ap-southeast-2, eu-central-1, eu-west-1, sa-east-1, us-east-1,
+      #     us-west-1, us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #
+      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1
+      #     | 11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 |
+      #     11.2.0.4.v8`
+      #
+      #   **PostgreSQL**
+      #
+      #   * **Version 9.5 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
+      #     us-west-2):** ` 9.5.2 | 9.5.4`
+      #
+      #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
+      #     us-west-2):** ` 9.4.7 | 9.4.9`
+      #
+      #   * **Version 9.4 (available in all AWS regions):** ` 9.4.5`
+      #
+      #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
+      #     us-west-2):** ` 9.4.1 | 9.4.4`
+      #
+      #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+      #     sa-east-1, us-east-1, us-gov-west-1, us-west-1, us-west-2):** `
+      #     9.3.10 | 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9`
+      #
+      #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
+      #     us-gov-west-1, us-west-1, us-west-2):** ` 9.3.1 | 9.3.2`
+      #
+      #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
+      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
+      #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 9.3.12 | 9.3.14`
       #
       #   **Microsoft SQL Server Enterprise Edition (sqlserver-ee)**
       #
@@ -1647,118 +1832,6 @@ module Aws
       #
       #   * **Version 10.50 (available in all AWS regions):** `
       #     10.50.2789.0.v1 | 10.50.6000.34.v1 | 10.50.6529.0.v1`
-      #
-      #   **MySQL**
-      #
-      #   * **Version 5.7 (available in all AWS regions):** ` 5.7.10 | 5.7.11`
-      #
-      #   * **Version 5.6 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 5.6.19a | 5.6.19b | 5.6.21 | 5.6.21b |
-      #     5.6.22`
-      #
-      #   * **Version 5.6 (available in all AWS regions except ap-south-1):**
-      #     ` 5.6.23`
-      #
-      #   * **Version 5.6 (available in all AWS regions):** ` 5.6.27 | 5.6.29`
-      #
-      #   * **Version 5.5 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
-      #
-      #   * **Version 5.5 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 5.5.40b | 5.5.41`
-      #
-      #   * **Version 5.5 (available in all AWS regions except ap-south-1):**
-      #     ` 5.5.42`
-      #
-      #   * **Version 5.5 (available in all AWS regions):** ` 5.5.46`
-      #
-      #   **Oracle Database Enterprise Edition (oracle-ee)**
-      #
-      #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-      #
-      #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-      #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
-      #
-      #   * **Version 12.1 (available in all AWS regions):** ` 12.1.0.2.v1`
-      #
-      #   * **Version 12.1 (available in all AWS regions except
-      #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-      #
-      #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4`
-      #
-      #   * **Version 11.2 (available in all AWS regions except
-      #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-      #     11.2.0.4.v8`
-      #
-      #   **Oracle Database Standard Edition (oracle-se)**
-      #
-      #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-      #
-      #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-      #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
-      #
-      #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4`
-      #
-      #   * **Version 11.2 (available in all AWS regions except
-      #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-      #     11.2.0.4.v8`
-      #
-      #   **Oracle Database Standard Edition One (oracle-se1)**
-      #
-      #   * **Version 12.1 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 12.1.0.1.v1 | 12.1.0.1.v2`
-      #
-      #   * **Version 12.1 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-      #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
-      #
-      #   * **Version 11.2 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4`
-      #
-      #   * **Version 11.2 (available in all AWS regions except
-      #     us-gov-west-1):** ` 11.2.0.4.v5 | 11.2.0.4.v6 | 11.2.0.4.v7 |
-      #     11.2.0.4.v8`
-      #
-      #   **Oracle Database Standard Edition Two (oracle-se2)**
-      #
-      #   * **Version 12.1 (available in all AWS regions except
-      #     us-gov-west-1):** ` 12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
-      #
-      #   ^
-      #
-      #   **PostgreSQL**
-      #
-      #   * **Version 9.5 (available in all AWS regions except
-      #     us-gov-west-1):** ` 9.5.2`
-      #
-      #   * **Version 9.4 (available in all AWS regions except ap-south-1):**
-      #     ` 9.4.1 | 9.4.4`
-      #
-      #   * **Version 9.4 (available in all AWS regions):** ` 9.4.5`
-      #
-      #   * **Version 9.4 (available in all AWS regions except
-      #     us-gov-west-1):** ` 9.4.7`
-      #
-      #   * **Version 9.3 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
-      #     us-gov-west-1, us-west-1, us-west-2):** ` 9.3.1 | 9.3.2`
-      #
-      #   * **Version 9.3 (available in all AWS regions except ap-south-1,
-      #     ap-northeast-2):** ` 9.3.10 | 9.3.3 | 9.3.5 | 9.3.6 | 9.3.9`
-      #
-      #   * **Version 9.3 (only available in AWS regions ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1,
-      #     sa-east-1, us-east-1, us-west-1, us-west-2):** ` 9.3.12`
       #   @return [String]
       #
       # @!attribute [rw] auto_minor_version_upgrade
@@ -1932,6 +2005,15 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/Aurora.Managing.html#Aurora.Managing.FaultTolerance
       #   @return [Integer]
+      #
+      # @!attribute [rw] timezone
+      #   The time zone of the DB instance. The time zone parameter is
+      #   currently supported only by [Microsoft SQL Server][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonRDS/latest/UserGuide/CHAP_SQLServer.html#SQLServer.Concepts.General.TimeZone
+      #   @return [String]
       class CreateDBInstanceMessage < Struct.new(
         :db_name,
         :db_instance_identifier,
@@ -1969,7 +2051,8 @@ module Aws
         :monitoring_interval,
         :monitoring_role_arn,
         :domain_iam_role_name,
-        :promotion_tier)
+        :promotion_tier,
+        :timezone)
         include Aws::Structure
       end
 
@@ -2738,6 +2821,22 @@ module Aws
       #   cluster.
       #   @return [String]
       #
+      # @!attribute [rw] reader_endpoint
+      #   The reader endpoint for the DB cluster. The reader endpoint for a DB
+      #   cluster load-balances connections across the Aurora Replicas that
+      #   are available in a DB cluster. As clients request new connections to
+      #   the reader endpoint, Aurora distributes the connection requests
+      #   among the Aurora Replicas in the DB cluster. This functionality can
+      #   help balance your read workload across multiple Aurora Replicas in
+      #   your DB cluster.
+      #
+      #   If a failover occurs, and the Aurora Replica that you are connected
+      #   to is promoted to be the primary instance, your connection will be
+      #   dropped. To continue sending your read workload to other Aurora
+      #   Replicas in the cluster, you can then recoonect to the reader
+      #   endpoint.
+      #   @return [String]
+      #
       # @!attribute [rw] engine
       #   Provides the name of the database engine to be used for this DB
       #   cluster.
@@ -2817,6 +2916,13 @@ module Aws
       # @!attribute [rw] db_cluster_arn
       #   The Amazon Resource Name (ARN) for the DB cluster.
       #   @return [String]
+      #
+      # @!attribute [rw] associated_roles
+      #   Provides a list of the AWS Identity and Access Management (IAM)
+      #   roles that are associated with the DB cluster. IAM roles that are
+      #   associated with a DB cluster grant permission for the DB cluster to
+      #   access other AWS services on your behalf.
+      #   @return [Array<Types::DBClusterRole>]
       class DBCluster < Struct.new(
         :allocated_storage,
         :availability_zones,
@@ -2830,6 +2936,7 @@ module Aws
         :percent_progress,
         :earliest_restorable_time,
         :endpoint,
+        :reader_endpoint,
         :engine,
         :engine_version,
         :latest_restorable_time,
@@ -2846,7 +2953,8 @@ module Aws
         :storage_encrypted,
         :kms_key_id,
         :db_cluster_resource_id,
-        :db_cluster_arn)
+        :db_cluster_arn,
+        :associated_roles)
         include Aws::Structure
       end
 
@@ -2995,6 +3103,33 @@ module Aws
       class DBClusterParameterGroupsMessage < Struct.new(
         :marker,
         :db_cluster_parameter_groups)
+        include Aws::Structure
+      end
+
+      # Describes an AWS Identity and Access Management (IAM) role that is
+      # associated with a DB cluster.
+      # @!attribute [rw] role_arn
+      #   The Amazon Resource Name (ARN) of the IAM role that is associated
+      #   with the DB cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   Describes the state of association between the IAM role and the DB
+      #   cluster. The Status property returns one of the following values:
+      #
+      #   * `ACTIVE` - the IAM role ARN is associated with the DB cluster and
+      #     can be used to access other AWS services on your behalf.
+      #
+      #   * `PENDING` - the IAM role ARN is being associated with the DB
+      #     cluster.
+      #
+      #   * `INVALID` - the IAM role ARN is associated with the DB cluster,
+      #     but the DB cluster is unable to assume the IAM role in order to
+      #     access other AWS services on your behalf.
+      #   @return [String]
+      class DBClusterRole < Struct.new(
+        :role_arn,
+        :status)
         include Aws::Structure
       end
 
@@ -3207,13 +3342,18 @@ module Aws
       #
       # @!attribute [rw] supported_character_sets
       #   A list of the character sets supported by this engine for the
-      #   `CharacterSetName` parameter of the CreateDBInstance API.
+      #   `CharacterSetName` parameter of the `CreateDBInstance` action.
       #   @return [Array<Types::CharacterSet>]
       #
       # @!attribute [rw] valid_upgrade_target
       #   A list of engine versions that this database engine version can be
       #   upgraded to.
       #   @return [Array<Types::UpgradeTarget>]
+      #
+      # @!attribute [rw] supported_timezones
+      #   A list of the time zones supported by this engine for the `Timezone`
+      #   parameter of the `CreateDBInstance` action.
+      #   @return [Array<Types::Timezone>]
       class DBEngineVersion < Struct.new(
         :engine,
         :engine_version,
@@ -3222,7 +3362,8 @@ module Aws
         :db_engine_version_description,
         :default_character_set,
         :supported_character_sets,
-        :valid_upgrade_target)
+        :valid_upgrade_target,
+        :supported_timezones)
         include Aws::Structure
       end
 
@@ -3329,7 +3470,7 @@ module Aws
       #   @return [Array<Types::DBSecurityGroupMembership>]
       #
       # @!attribute [rw] vpc_security_groups
-      #   Provides List of VPC security group elements that the DB instance
+      #   Provides a list of VPC security group elements that the DB instance
       #   belongs to.
       #   @return [Array<Types::VpcSecurityGroupMembership>]
       #
@@ -3441,7 +3582,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] tde_credential_arn
-      #   The ARN from the Key Store with which the instance is associated for
+      #   The ARN from the key store with which the instance is associated for
       #   TDE encryption.
       #   @return [String]
       #
@@ -3515,6 +3656,12 @@ module Aws
       # @!attribute [rw] db_instance_arn
       #   The Amazon Resource Name (ARN) for the DB instance.
       #   @return [String]
+      #
+      # @!attribute [rw] timezone
+      #   The time zone of the DB instance. In most cases, the `Timezone`
+      #   element is empty. `Timezone` content appears only for Microsoft SQL
+      #   Server DB instances that were created with a time zone specified.
+      #   @return [String]
       class DBInstance < Struct.new(
         :db_instance_identifier,
         :db_instance_class,
@@ -3561,7 +3708,8 @@ module Aws
         :enhanced_monitoring_resource_arn,
         :monitoring_role_arn,
         :promotion_tier,
-        :db_instance_arn)
+        :db_instance_arn,
+        :timezone)
         include Aws::Structure
       end
 
@@ -3895,11 +4043,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] storage_type
-      #   Specifies the storage type associated with DB Snapshot.
+      #   Specifies the storage type associated with DB snapshot.
       #   @return [String]
       #
       # @!attribute [rw] tde_credential_arn
-      #   The ARN from the Key Store with which to associate the instance for
+      #   The ARN from the key store with which to associate the instance for
       #   TDE encryption.
       #   @return [String]
       #
@@ -3914,6 +4062,13 @@ module Aws
       #
       # @!attribute [rw] db_snapshot_arn
       #   The Amazon Resource Name (ARN) for the DB snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] timezone
+      #   The time zone of the DB snapshot. In most cases, the `Timezone`
+      #   element is empty. `Timezone` content appears only for snapshots
+      #   taken from Microsoft SQL Server DB instances that were created with
+      #   a time zone specified.
       #   @return [String]
       class DBSnapshot < Struct.new(
         :db_snapshot_identifier,
@@ -3939,7 +4094,8 @@ module Aws
         :tde_credential_arn,
         :encrypted,
         :kms_key_id,
-        :db_snapshot_arn)
+        :db_snapshot_arn,
+        :timezone)
         include Aws::Structure
       end
 
@@ -4863,6 +5019,7 @@ module Aws
       #         marker: "String",
       #         default_only: false,
       #         list_supported_character_sets: false,
+      #         list_supported_timezones: false,
       #       }
       # @!attribute [rw] engine
       #   The database engine to return.
@@ -4914,9 +5071,15 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] list_supported_character_sets
-      #   If this parameter is specified, and if the requested engine supports
-      #   the CharacterSetName parameter for CreateDBInstance, the response
+      #   If this parameter is specified and the requested engine supports the
+      #   `CharacterSetName` parameter for `CreateDBInstance`, the response
       #   includes a list of supported character sets for each engine version.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] list_supported_timezones
+      #   If this parameter is specified and the requested engine supports the
+      #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
+      #   list of supported time zones for each engine version.
       #   @return [Boolean]
       class DescribeDBEngineVersionsMessage < Struct.new(
         :engine,
@@ -4926,7 +5089,8 @@ module Aws
         :max_records,
         :marker,
         :default_only,
-        :list_supported_character_sets)
+        :list_supported_character_sets,
+        :list_supported_timezones)
         include Aws::Structure
       end
 
@@ -6223,12 +6387,11 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] region_name
-      #   The source region name, for example US West (Oregon).
+      #   The source region name. For example, `us-east-1`.
       #
       #   Constraints:
       #
-      #   * Must specify a valid AWS Region name, for example US West
-      #     (Oregon).
+      #   * Must specify a valid AWS Region name.
       #
       #   ^
       #   @return [String]
@@ -7195,11 +7358,10 @@ module Aws
       #
       # @!attribute [rw] db_subnet_group_name
       #   The new DB subnet group for the DB instance. You can use this
-      #   parameter to move your DB instance to a different VPC, or to a
-      #   different subnet group in the same VPC. If your DB instance is not
-      #   in a VPC, you can also use this parameter to move your DB instance
-      #   into a VPC. For more information, see [Updating the VPC for a DB
-      #   Instance][1].
+      #   parameter to move your DB instance to a different VPC. If your DB
+      #   instance is not in a VPC, you can also use this parameter to move
+      #   your DB instance into a VPC. For more information, see [Updating the
+      #   VPC for a DB Instance][1].
       #
       #   Changing the subnet group causes an outage during the change. The
       #   change is applied during the next maintenance window, unless you
@@ -7519,11 +7681,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] domain
-      #   Specify the Active Directory Domain to move the instance to.
-      #
-      #   The specified Active Directory Domain must be created prior to this
-      #   operation. Currently only a SQL Server instance can be created in a
-      #   Active Directory Domain.
+      #   The Active Directory Domain to move the instance to. Specify `none`
+      #   to remove the instance from its current domain. The domain must be
+      #   created prior to this operation. Currently only a Microsoft SQL
+      #   Server instance can be created in a Active Directory Domain.
       #   @return [String]
       #
       # @!attribute [rw] copy_tags_to_snapshot
@@ -7626,8 +7787,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] domain_iam_role_name
-      #   Specify the name of the IAM role to be used when making API calls to
-      #   the Directory Service.
+      #   The name of the IAM role to use when making API calls to the
+      #   Directory Service.
       #   @return [String]
       #
       # @!attribute [rw] promotion_tier
@@ -8973,6 +9134,28 @@ module Aws
       class RecurringCharge < Struct.new(
         :recurring_charge_amount,
         :recurring_charge_frequency)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass RemoveRoleFromDBClusterMessage
+      #   data as a hash:
+      #
+      #       {
+      #         db_cluster_identifier: "String", # required
+      #         role_arn: "String", # required
+      #       }
+      # @!attribute [rw] db_cluster_identifier
+      #   The name of the DB cluster to disassociate the IAM role rom.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The Amazon Resource Name (ARN) of the IAM role to disassociate from
+      #   the Aurora DB cluster, for example
+      #   `arn:aws:iam::123456789012:role/AuroraAccessRole`.
+      #   @return [String]
+      class RemoveRoleFromDBClusterMessage < Struct.new(
+        :db_cluster_identifier,
+        :role_arn)
         include Aws::Structure
       end
 
@@ -10714,6 +10897,17 @@ module Aws
       #   @return [Array<Types::Tag>]
       class TagListMessage < Struct.new(
         :tag_list)
+        include Aws::Structure
+      end
+
+      # A time zone associated with a DBInstance or a DBSnapshot. This data
+      # type is an element in the response to the DescribeDBInstances, the
+      # DescribeDBSnapshots, and the DescribeDBEngineVersions actions.
+      # @!attribute [rw] timezone_name
+      #   The name of the time zone.
+      #   @return [String]
+      class Timezone < Struct.new(
+        :timezone_name)
         include Aws::Structure
       end
 

@@ -218,7 +218,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Configuration of a bootstrap action.
       # @note When making an API call, pass BootstrapActionConfig
       #   data as a hash:
       #
@@ -230,11 +229,9 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] name
-      #   The name of the bootstrap action.
       #   @return [String]
       #
       # @!attribute [rw] script_bootstrap_action
-      #   The script run by the bootstrap action.
       #   @return [Types::ScriptBootstrapActionConfig]
       class BootstrapActionConfig < Struct.new(
         :name,
@@ -343,6 +340,10 @@ module Aws
       #
       #   The list of Configurations supplied to the EMR cluster.
       #   @return [Array<Types::Configuration>]
+      #
+      # @!attribute [rw] security_configuration
+      #   The name of the security configuration applied to the cluster.
+      #   @return [String]
       class Cluster < Struct.new(
         :id,
         :name,
@@ -360,7 +361,8 @@ module Aws
         :service_role,
         :normalized_instance_hours,
         :master_public_dns_name,
-        :configurations)
+        :configurations,
+        :security_configuration)
         include Aws::Structure
       end
 
@@ -519,6 +521,55 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass CreateSecurityConfigurationInput
+      #   data as a hash:
+      #
+      #       {
+      #         name: "XmlString", # required
+      #         security_configuration: "String", # required
+      #       }
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] security_configuration
+      #   The security configuration details in JSON format.
+      #   @return [String]
+      class CreateSecurityConfigurationInput < Struct.new(
+        :name,
+        :security_configuration)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date_time
+      #   The date and time the security configuration was created.
+      #   @return [Time]
+      class CreateSecurityConfigurationOutput < Struct.new(
+        :name,
+        :creation_date_time)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DeleteSecurityConfigurationInput
+      #   data as a hash:
+      #
+      #       {
+      #         name: "XmlString", # required
+      #       }
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      class DeleteSecurityConfigurationInput < Struct.new(
+        :name)
+        include Aws::Structure
+      end
+
+      class DeleteSecurityConfigurationOutput < Aws::EmptyStructure; end
+
       # This input determines which cluster to describe.
       # @note When making an API call, pass DescribeClusterInput
       #   data as a hash:
@@ -582,6 +633,38 @@ module Aws
       #   @return [Array<Types::JobFlowDetail>]
       class DescribeJobFlowsOutput < Struct.new(
         :job_flows)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DescribeSecurityConfigurationInput
+      #   data as a hash:
+      #
+      #       {
+      #         name: "XmlString", # required
+      #       }
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      class DescribeSecurityConfigurationInput < Struct.new(
+        :name)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] security_configuration
+      #   The security configuration details in JSON format.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date_time
+      #   The date and time the security configuration was created
+      #   @return [Time]
+      class DescribeSecurityConfigurationOutput < Struct.new(
+        :name,
+        :security_configuration,
+        :creation_date_time)
         include Aws::Structure
       end
 
@@ -1733,7 +1816,7 @@ module Aws
       #
       # @!attribute [rw] marker
       #   The pagination token that indicates the next set of results to
-      #   retrieve .
+      #   retrieve.
       #   @return [String]
       class ListBootstrapActionsInput < Struct.new(
         :cluster_id,
@@ -1748,7 +1831,7 @@ module Aws
       #
       # @!attribute [rw] marker
       #   The pagination token that indicates the next set of results to
-      #   retrieve .
+      #   retrieve.
       #   @return [String]
       class ListBootstrapActionsOutput < Struct.new(
         :bootstrap_actions,
@@ -1898,6 +1981,36 @@ module Aws
       #   @return [String]
       class ListInstancesOutput < Struct.new(
         :instances,
+        :marker)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListSecurityConfigurationsInput
+      #   data as a hash:
+      #
+      #       {
+      #         marker: "Marker",
+      #       }
+      # @!attribute [rw] marker
+      #   The pagination token that indicates the set of results to retrieve.
+      #   @return [String]
+      class ListSecurityConfigurationsInput < Struct.new(
+        :marker)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] security_configurations
+      #   The creation date and time, and name, of each security
+      #   configuration.
+      #   @return [Array<Types::SecurityConfigurationSummary>]
+      #
+      # @!attribute [rw] marker
+      #   A pagination token that indicates the next set of results to
+      #   retrieve. Include the marker in the next ListSecurityConfiguration
+      #   call to retrieve the next page of results, if required.
+      #   @return [String]
+      class ListSecurityConfigurationsOutput < Struct.new(
+        :security_configurations,
         :marker)
         include Aws::Structure
       end
@@ -2147,6 +2260,7 @@ module Aws
       #             value: "String",
       #           },
       #         ],
+      #         security_configuration: "XmlString",
       #       }
       # @!attribute [rw] name
       #   The name of the job flow.
@@ -2313,6 +2427,10 @@ module Aws
       #   A list of tags to associate with a cluster and propagate to Amazon
       #   EC2 instances.
       #   @return [Array<Types::Tag>]
+      #
+      # @!attribute [rw] security_configuration
+      #   The name of a security configuration to apply to the cluster.
+      #   @return [String]
       class RunJobFlowInput < Struct.new(
         :name,
         :log_uri,
@@ -2329,7 +2447,8 @@ module Aws
         :visible_to_all_users,
         :job_flow_role,
         :service_role,
-        :tags)
+        :tags,
+        :security_configuration)
         include Aws::Structure
       end
 
@@ -2342,7 +2461,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Configuration of the script to run during a bootstrap action.
       # @note When making an API call, pass ScriptBootstrapActionConfig
       #   data as a hash:
       #
@@ -2351,17 +2469,27 @@ module Aws
       #         args: ["XmlString"],
       #       }
       # @!attribute [rw] path
-      #   Location of the script to run during a bootstrap action. Can be
-      #   either a location in Amazon S3 or on a local file system.
       #   @return [String]
       #
       # @!attribute [rw] args
-      #   A list of command line arguments to pass to the bootstrap action
-      #   script.
       #   @return [Array<String>]
       class ScriptBootstrapActionConfig < Struct.new(
         :path,
         :args)
+        include Aws::Structure
+      end
+
+      # The creation date and time, and name, of a security configuration.
+      # @!attribute [rw] name
+      #   The name of the security configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date_time
+      #   The date and time the security configuration was created.
+      #   @return [Time]
+      class SecurityConfigurationSummary < Struct.new(
+        :name,
+        :creation_date_time)
         include Aws::Structure
       end
 

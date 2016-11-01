@@ -197,7 +197,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       #   @return [Types::GrantConstraints]
       #
       # @!attribute [rw] grant_tokens
@@ -396,7 +396,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] grant_tokens
@@ -637,14 +637,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] encryption_context
-      #   Name/value pair that specifies the encryption context to be used for
+      #   Name-value pair that specifies the encryption context to be used for
       #   authenticated encryption. If used here, the same value must be
       #   supplied to the `Decrypt` API or decryption will fail. For more
       #   information, see [Encryption Context][1].
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] grant_tokens
@@ -692,38 +692,46 @@ module Aws
       #         grant_tokens: ["GrantTokenType"],
       #       }
       # @!attribute [rw] key_id
-      #   A unique identifier for the customer master key. This value can be a
-      #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by "alias/".
+      #   The identifier of the CMK under which to generate and encrypt the
+      #   data encryption key.
       #
-      #   * Key ARN Example -
-      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK, or the alias name or ARN of an alias that points
+      #   to the CMK. Examples:
       #
-      #   * Alias ARN Example -
-      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
       #
-      #   * Globally Unique Key ID Example -
-      #     12345678-1234-1234-1234-123456789012
+      #   * CMK ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
       #
-      #   * Alias Name Example - alias/MyAliasName
+      #   * Alias name: `alias/ExampleAlias`
+      #
+      #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
       #   @return [String]
       #
       # @!attribute [rw] encryption_context
-      #   Name/value pair that contains additional data to be authenticated
-      #   during the encryption and decryption processes that use the key.
-      #   This value is logged by AWS CloudTrail to provide context around the
-      #   data encrypted by the key.
+      #   A set of key-value pairs that represents additional authenticated
+      #   data.
+      #
+      #   For more information, see [Encryption Context][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] number_of_bytes
-      #   Integer that contains the number of bytes to generate. Common values
-      #   are 128, 256, 512, and 1024. 1024 is the current limit. We recommend
-      #   that you use the `KeySpec` parameter instead.
+      #   The length of the data encryption key in bytes. For example, use the
+      #   value 64 to generate a 512-bit data key (64 bytes is 512 bits). For
+      #   common key lengths (128-bit and 256-bit symmetric keys), we
+      #   recommend that you use the `KeySpec` field instead of this one.
       #   @return [Integer]
       #
       # @!attribute [rw] key_spec
-      #   Value that identifies the encryption algorithm and key size to
-      #   generate a data key for. Currently this can be AES\_128 or AES\_256.
+      #   The length of the data encryption key. Use `AES_128` to generate a
+      #   128-bit symmetric key, or `AES_256` to generate a 256-bit symmetric
+      #   key.
       #   @return [String]
       #
       # @!attribute [rw] grant_tokens
@@ -746,25 +754,17 @@ module Aws
       end
 
       # @!attribute [rw] ciphertext_blob
-      #   Ciphertext that contains the encrypted data key. You must store the
-      #   blob and enough information to reconstruct the encryption context so
-      #   that the data encrypted by using the key can later be decrypted. You
-      #   must provide both the ciphertext blob and the encryption context to
-      #   the Decrypt API to recover the plaintext data key and decrypt the
-      #   object.
-      #
-      #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
-      #   is not encoded.
+      #   The encrypted data encryption key.
       #   @return [String]
       #
       # @!attribute [rw] plaintext
-      #   Plaintext that contains the data key. Use this for encryption and
-      #   decryption and then remove it from memory as soon as possible.
+      #   The data encryption key. Use this data key for local encryption and
+      #   decryption, then remove it from memory as soon as possible.
       #   @return [String]
       #
       # @!attribute [rw] key_id
-      #   System generated unique identifier of the key to be used to decrypt
-      #   the encrypted copy of the data key.
+      #   The identifier of the CMK under which the data encryption key was
+      #   generated and encrypted.
       #   @return [String]
       class GenerateDataKeyResponse < Struct.new(
         :ciphertext_blob,
@@ -786,36 +786,46 @@ module Aws
       #         grant_tokens: ["GrantTokenType"],
       #       }
       # @!attribute [rw] key_id
-      #   A unique identifier for the customer master key. This value can be a
-      #   globally unique identifier, a fully specified ARN to either an alias
-      #   or a key, or an alias name prefixed by "alias/".
+      #   The identifier of the CMK under which to generate and encrypt the
+      #   data encryption key.
       #
-      #   * Key ARN Example -
-      #     arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012
+      #   A valid identifier is the unique key ID or the Amazon Resource Name
+      #   (ARN) of the CMK, or the alias name or ARN of an alias that points
+      #   to the CMK. Examples:
       #
-      #   * Alias ARN Example -
-      #     arn:aws:kms:us-east-1:123456789012:alias/MyAliasName
+      #   * Unique key ID: `1234abcd-12ab-34cd-56ef-1234567890ab`
       #
-      #   * Globally Unique Key ID Example -
-      #     12345678-1234-1234-1234-123456789012
+      #   * CMK ARN:
+      #     `arn:aws:kms:us-west-2:111122223333:key/1234abcd-12ab-34cd-56ef-1234567890ab`
       #
-      #   * Alias Name Example - alias/MyAliasName
+      #   * Alias name: `alias/ExampleAlias`
+      #
+      #   * Alias ARN: `arn:aws:kms:us-west-2:111122223333:alias/ExampleAlias`
       #   @return [String]
       #
       # @!attribute [rw] encryption_context
-      #   Name:value pair that contains additional data to be authenticated
-      #   during the encryption and decryption processes.
+      #   A set of key-value pairs that represents additional authenticated
+      #   data.
+      #
+      #   For more information, see [Encryption Context][1] in the *AWS Key
+      #   Management Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] key_spec
-      #   Value that identifies the encryption algorithm and key size.
-      #   Currently this can be AES\_128 or AES\_256.
+      #   The length of the data encryption key. Use `AES_128` to generate a
+      #   128-bit symmetric key, or `AES_256` to generate a 256-bit symmetric
+      #   key.
       #   @return [String]
       #
       # @!attribute [rw] number_of_bytes
-      #   Integer that contains the number of bytes to generate. Common values
-      #   are 128, 256, 512, 1024 and so on. We recommend that you use the
-      #   `KeySpec` parameter instead.
+      #   The length of the data encryption key in bytes. For example, use the
+      #   value 64 to generate a 512-bit data key (64 bytes is 512 bits). For
+      #   common key lengths (128-bit and 256-bit symmetric keys), we
+      #   recommend that you use the `KeySpec` field instead of this one.
       #   @return [Integer]
       #
       # @!attribute [rw] grant_tokens
@@ -838,17 +848,12 @@ module Aws
       end
 
       # @!attribute [rw] ciphertext_blob
-      #   Ciphertext that contains the wrapped data key. You must store the
-      #   blob and encryption context so that the key can be used in a future
-      #   decrypt operation.
-      #
-      #   If you are using the CLI, the value is Base64 encoded. Otherwise, it
-      #   is not encoded.
+      #   The encrypted data encryption key.
       #   @return [String]
       #
       # @!attribute [rw] key_id
-      #   System generated unique identifier of the key to be used to decrypt
-      #   the encrypted copy of the data key.
+      #   The identifier of the CMK under which the data encryption key was
+      #   generated and encrypted.
       #   @return [String]
       class GenerateDataKeyWithoutPlaintextResponse < Struct.new(
         :ciphertext_blob,
@@ -863,8 +868,7 @@ module Aws
       #         number_of_bytes: 1,
       #       }
       # @!attribute [rw] number_of_bytes
-      #   Integer that contains the number of bytes to generate. Common values
-      #   are 128, 256, 512, 1024 and so on. The current limit is 1024 bytes.
+      #   The length of the byte string.
       #   @return [Integer]
       class GenerateRandomRequest < Struct.new(
         :number_of_bytes)
@@ -872,7 +876,7 @@ module Aws
       end
 
       # @!attribute [rw] plaintext
-      #   Plaintext that contains the unpredictable byte string.
+      #   The unpredictable byte string.
       #   @return [String]
       class GenerateRandomResponse < Struct.new(
         :plaintext)
@@ -1027,7 +1031,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encrypt-context.html
+      # [1]: http://docs.aws.amazon.com/kms/latest/developerguide/encryption-context.html
       # @note When making an API call, pass GrantConstraints
       #   data as a hash:
       #

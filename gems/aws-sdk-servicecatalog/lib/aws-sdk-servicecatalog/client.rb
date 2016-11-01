@@ -143,7 +143,8 @@ module Aws
       # This operation is functionally identical to DescribeProductView except
       # that it takes as input `ProductId` instead of `ProductViewId`.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -194,7 +195,8 @@ module Aws
       # This operation is functionally identical to DescribeProduct except
       # that it takes as input `ProductViewId` instead of `ProductId`.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -245,7 +247,8 @@ module Aws
       # the list of `ProvisioningArtifactParameters` parameters available to
       # call the ProvisionProduct operation for the specified product.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -303,7 +306,8 @@ module Aws
       # (ProvisionProduct, TerminateProvisionedProduct, or
       # UpdateProvisionedProduct).
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -317,8 +321,8 @@ module Aws
       #   retrieve output information. This is the `RecordDetail.RecordId`
       #   obtained from the request operation's response.
       # @option params [String] :page_token
-      #   The page token of the first page retrieve. If null, this retrieves the
-      #   first page of size `PageSize`.
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
@@ -372,7 +376,8 @@ module Aws
       # when provisioning a product. A path also determines the constraints
       # put on the product.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -389,8 +394,8 @@ module Aws
       #   exist than fit in the specified `PageSize`, the value of
       #   `NextPageToken` in the response is non-null.
       # @option params [String] :page_token
-      #   The page token of the first page retrieve. If null, this retrieves the
-      #   first page of size `PageSize`.
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
       # @return [Types::ListLaunchPathsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListLaunchPathsOutput#launch_path_summaries #LaunchPathSummaries} => Array&lt;Types::LaunchPathSummary&gt;
@@ -425,7 +430,8 @@ module Aws
       # Returns a paginated list of all performed requests, in the form of
       # RecordDetails objects that are filtered as specified.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -434,15 +440,18 @@ module Aws
       #   "zh" (Chinese)
       #
       #   If no code is specified, "en" is used as the default.
+      # @option params [Types::AccessLevelFilter] :access_level_filter
+      #   The access level for obtaining results. If left unspecified, `User`
+      #   level access is used.
       # @option params [Types::ListRecordHistorySearchFilter] :search_filter
-      #   (Optional) The filter to limit search results.
+      #   The filter to limit search results.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
       #   `NextPageToken` in the response is non-null.
       # @option params [String] :page_token
-      #   The page token of the first page retrieve. If null, this retrieves the
-      #   first page of size `PageSize`.
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
       # @return [Types::ListRecordHistoryOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListRecordHistoryOutput#record_details #RecordDetails} => Array&lt;Types::RecordDetail&gt;
@@ -451,6 +460,10 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_record_history({
       #     accept_language: "AcceptLanguage",
+      #     access_level_filter: {
+      #       key: "Account", # accepts Account, Role, User
+      #       value: "AccessLevelFilterValue",
+      #     },
       #     search_filter: {
       #       key: "SearchFilterKey",
       #       value: "SearchFilterValue",
@@ -495,7 +508,8 @@ module Aws
       # You can check the status of this request using the DescribeRecord
       # operation.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -520,7 +534,7 @@ module Aws
       #   Parameters specified by the administrator that are required for
       #   provisioning the product.
       # @option params [Array<Types::Tag>] :tags
-      #   (Optional) A list of tags to use as provisioning options.
+      #   A list of tags to use as provisioning options.
       # @option params [Array<String>] :notification_arns
       #   Passed to CloudFormation. The SNS topic ARNs to which to publish
       #   stack-related events.
@@ -582,7 +596,8 @@ module Aws
       # Returns a paginated list of all the ProvisionedProduct objects that
       # are currently available (not terminated).
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -591,13 +606,16 @@ module Aws
       #   "zh" (Chinese)
       #
       #   If no code is specified, "en" is used as the default.
+      # @option params [Types::AccessLevelFilter] :access_level_filter
+      #   The access level for obtaining results. If left unspecified, `User`
+      #   level access is used.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
       #   `NextPageToken` in the response is non-null.
       # @option params [String] :page_token
-      #   The page token of the first page retrieve. If null, this retrieves the
-      #   first page of size `PageSize`.
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
       # @return [Types::ScanProvisionedProductsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ScanProvisionedProductsOutput#provisioned_products #ProvisionedProducts} => Array&lt;Types::ProvisionedProductDetail&gt;
@@ -606,6 +624,10 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.scan_provisioned_products({
       #     accept_language: "AcceptLanguage",
+      #     access_level_filter: {
+      #       key: "Account", # accepts Account, Role, User
+      #       value: "AccessLevelFilterValue",
+      #     },
       #     page_size: 1,
       #     page_token: "PageToken",
       #   })
@@ -635,7 +657,8 @@ module Aws
       # The output of this operation can be used as input for other
       # operations, such as DescribeProductView.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -645,22 +668,22 @@ module Aws
       #
       #   If no code is specified, "en" is used as the default.
       # @option params [Hash<String,Array>] :filters
-      #   (Optional) The list of filters with which to limit search results. If
-      #   no search filters are specified, the output is all the products to
-      #   which the calling user has access.
+      #   The list of filters with which to limit search results. If no search
+      #   filters are specified, the output is all the products to which the
+      #   calling user has access.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
       #   `NextPageToken` in the response is non-null.
       # @option params [String] :sort_by
-      #   (Optional) The sort field specifier. If no value is specified, results
-      #   are not sorted.
+      #   The sort field specifier. If no value is specified, results are not
+      #   sorted.
       # @option params [String] :sort_order
-      #   (Optional) The sort order specifier. If no value is specified, results
-      #   are not sorted.
+      #   The sort order specifier. If no value is specified, results are not
+      #   sorted.
       # @option params [String] :page_token
-      #   The page token of the first page retrieve. If null, this retrieves the
-      #   first page of size `PageSize`.
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
       # @return [Types::SearchProductsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SearchProductsOutput#product_view_summaries #ProductViewSummaries} => Array&lt;Types::ProductViewSummary&gt;
@@ -728,11 +751,12 @@ module Aws
       #   the same ProvisionedProduct object always return **ResourceNotFound**
       #   regardless of the value of `TerminateToken`.
       # @option params [Boolean] :ignore_errors
-      #   Optional Boolean parameter. If set to true, AWS Service Catalog stops
-      #   managing the specified ProvisionedProduct object even if it cannot
-      #   delete the underlying resources.
+      #   If set to true, AWS Service Catalog stops managing the specified
+      #   ProvisionedProduct object even if it cannot delete the underlying
+      #   resources.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #
@@ -789,7 +813,8 @@ module Aws
       # You can check the status of this request using the DescribeRecord
       # operation.
       # @option params [String] :accept_language
-      #   Optional language code. Supported language codes are as follows:
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
       #
       #   "en" (English)
       #

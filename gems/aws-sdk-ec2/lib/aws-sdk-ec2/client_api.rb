@@ -12,6 +12,8 @@ module Aws
 
       include Seahorse::Model
 
+      AcceptReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteRequest')
+      AcceptReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'AcceptReservedInstancesExchangeQuoteResult')
       AcceptVpcPeeringConnectionRequest = Shapes::StructureShape.new(name: 'AcceptVpcPeeringConnectionRequest')
       AcceptVpcPeeringConnectionResult = Shapes::StructureShape.new(name: 'AcceptVpcPeeringConnectionResult')
       AccountAttribute = Shapes::StructureShape.new(name: 'AccountAttribute')
@@ -388,6 +390,8 @@ module Aws
       GetHostReservationPurchasePreviewResult = Shapes::StructureShape.new(name: 'GetHostReservationPurchasePreviewResult')
       GetPasswordDataRequest = Shapes::StructureShape.new(name: 'GetPasswordDataRequest')
       GetPasswordDataResult = Shapes::StructureShape.new(name: 'GetPasswordDataResult')
+      GetReservedInstancesExchangeQuoteRequest = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteRequest')
+      GetReservedInstancesExchangeQuoteResult = Shapes::StructureShape.new(name: 'GetReservedInstancesExchangeQuoteResult')
       GroupIdStringList = Shapes::ListShape.new(name: 'GroupIdStringList')
       GroupIdentifier = Shapes::StructureShape.new(name: 'GroupIdentifier')
       GroupIdentifierList = Shapes::ListShape.new(name: 'GroupIdentifierList')
@@ -559,6 +563,7 @@ module Aws
       NextToken = Shapes::StringShape.new(name: 'NextToken')
       OccurrenceDayRequestSet = Shapes::ListShape.new(name: 'OccurrenceDayRequestSet')
       OccurrenceDaySet = Shapes::ListShape.new(name: 'OccurrenceDaySet')
+      OfferingClassType = Shapes::StringShape.new(name: 'OfferingClassType')
       OfferingTypeValues = Shapes::StringShape.new(name: 'OfferingTypeValues')
       OperationType = Shapes::StringShape.new(name: 'OperationType')
       OwnerStringList = Shapes::ListShape.new(name: 'OwnerStringList')
@@ -644,7 +649,11 @@ module Aws
       Reservation = Shapes::StructureShape.new(name: 'Reservation')
       ReservationList = Shapes::ListShape.new(name: 'ReservationList')
       ReservationState = Shapes::StringShape.new(name: 'ReservationState')
+      ReservationValue = Shapes::StructureShape.new(name: 'ReservationValue')
+      ReservedInstanceIdSet = Shapes::ListShape.new(name: 'ReservedInstanceIdSet')
       ReservedInstanceLimitPrice = Shapes::StructureShape.new(name: 'ReservedInstanceLimitPrice')
+      ReservedInstanceReservationValue = Shapes::StructureShape.new(name: 'ReservedInstanceReservationValue')
+      ReservedInstanceReservationValueSet = Shapes::ListShape.new(name: 'ReservedInstanceReservationValueSet')
       ReservedInstanceState = Shapes::StringShape.new(name: 'ReservedInstanceState')
       ReservedInstances = Shapes::StructureShape.new(name: 'ReservedInstances')
       ReservedInstancesConfiguration = Shapes::StructureShape.new(name: 'ReservedInstancesConfiguration')
@@ -767,6 +776,11 @@ module Aws
       TagDescription = Shapes::StructureShape.new(name: 'TagDescription')
       TagDescriptionList = Shapes::ListShape.new(name: 'TagDescriptionList')
       TagList = Shapes::ListShape.new(name: 'TagList')
+      TargetConfiguration = Shapes::StructureShape.new(name: 'TargetConfiguration')
+      TargetConfigurationRequest = Shapes::StructureShape.new(name: 'TargetConfigurationRequest')
+      TargetConfigurationRequestSet = Shapes::ListShape.new(name: 'TargetConfigurationRequestSet')
+      TargetReservationValue = Shapes::StructureShape.new(name: 'TargetReservationValue')
+      TargetReservationValueSet = Shapes::ListShape.new(name: 'TargetReservationValueSet')
       TelemetryStatus = Shapes::StringShape.new(name: 'TelemetryStatus')
       Tenancy = Shapes::StringShape.new(name: 'Tenancy')
       TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
@@ -843,6 +857,15 @@ module Aws
       VpnStaticRouteList = Shapes::ListShape.new(name: 'VpnStaticRouteList')
       VpnStaticRouteSource = Shapes::StringShape.new(name: 'VpnStaticRouteSource')
       ZoneNameStringList = Shapes::ListShape.new(name: 'ZoneNameStringList')
+      scope = Shapes::StringShape.new(name: 'scope')
+
+      AcceptReservedInstancesExchangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+      AcceptReservedInstancesExchangeQuoteRequest.add_member(:reserved_instance_ids, Shapes::ShapeRef.new(shape: ReservedInstanceIdSet, required: true, location_name: "ReservedInstanceId"))
+      AcceptReservedInstancesExchangeQuoteRequest.add_member(:target_configurations, Shapes::ShapeRef.new(shape: TargetConfigurationRequestSet, location_name: "TargetConfiguration"))
+      AcceptReservedInstancesExchangeQuoteRequest.struct_class = Types::AcceptReservedInstancesExchangeQuoteRequest
+
+      AcceptReservedInstancesExchangeQuoteResult.add_member(:exchange_id, Shapes::ShapeRef.new(shape: String, location_name: "exchangeId"))
+      AcceptReservedInstancesExchangeQuoteResult.struct_class = Types::AcceptReservedInstancesExchangeQuoteResult
 
       AcceptVpcPeeringConnectionRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       AcceptVpcPeeringConnectionRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
@@ -1606,7 +1629,6 @@ module Aws
       DescribeConversionTaskList.member = Shapes::ShapeRef.new(shape: ConversionTask, location_name: "item")
 
       DescribeConversionTasksRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
-      DescribeConversionTasksRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filter"))
       DescribeConversionTasksRequest.add_member(:conversion_task_ids, Shapes::ShapeRef.new(shape: ConversionIdStringList, location_name: "conversionTaskId"))
       DescribeConversionTasksRequest.struct_class = Types::DescribeConversionTasksRequest
 
@@ -1849,7 +1871,7 @@ module Aws
 
       DescribeReservedInstancesListingsRequest.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
       DescribeReservedInstancesListingsRequest.add_member(:reserved_instances_listing_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesListingId"))
-      DescribeReservedInstancesListingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "filters"))
+      DescribeReservedInstancesListingsRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
       DescribeReservedInstancesListingsRequest.struct_class = Types::DescribeReservedInstancesListingsRequest
 
       DescribeReservedInstancesListingsResult.add_member(:reserved_instances_listings, Shapes::ShapeRef.new(shape: ReservedInstancesListingList, location_name: "reservedInstancesListingsSet"))
@@ -1878,6 +1900,7 @@ module Aws
       DescribeReservedInstancesOfferingsRequest.add_member(:min_duration, Shapes::ShapeRef.new(shape: Long, location_name: "MinDuration"))
       DescribeReservedInstancesOfferingsRequest.add_member(:max_duration, Shapes::ShapeRef.new(shape: Long, location_name: "MaxDuration"))
       DescribeReservedInstancesOfferingsRequest.add_member(:max_instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxInstanceCount"))
+      DescribeReservedInstancesOfferingsRequest.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClassType, location_name: "OfferingClass"))
       DescribeReservedInstancesOfferingsRequest.struct_class = Types::DescribeReservedInstancesOfferingsRequest
 
       DescribeReservedInstancesOfferingsResult.add_member(:reserved_instances_offerings, Shapes::ShapeRef.new(shape: ReservedInstancesOfferingList, location_name: "reservedInstancesOfferingsSet"))
@@ -1888,6 +1911,7 @@ module Aws
       DescribeReservedInstancesRequest.add_member(:reserved_instances_ids, Shapes::ShapeRef.new(shape: ReservedInstancesIdStringList, location_name: "ReservedInstancesId"))
       DescribeReservedInstancesRequest.add_member(:filters, Shapes::ShapeRef.new(shape: FilterList, location_name: "Filter"))
       DescribeReservedInstancesRequest.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingTypeValues, location_name: "offeringType"))
+      DescribeReservedInstancesRequest.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClassType, location_name: "OfferingClass"))
       DescribeReservedInstancesRequest.struct_class = Types::DescribeReservedInstancesRequest
 
       DescribeReservedInstancesResult.add_member(:reserved_instances, Shapes::ShapeRef.new(shape: ReservedInstancesList, location_name: "reservedInstancesSet"))
@@ -2390,6 +2414,22 @@ module Aws
       GetPasswordDataResult.add_member(:timestamp, Shapes::ShapeRef.new(shape: DateTime, location_name: "timestamp"))
       GetPasswordDataResult.add_member(:password_data, Shapes::ShapeRef.new(shape: String, location_name: "passwordData"))
       GetPasswordDataResult.struct_class = Types::GetPasswordDataResult
+
+      GetReservedInstancesExchangeQuoteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+      GetReservedInstancesExchangeQuoteRequest.add_member(:reserved_instance_ids, Shapes::ShapeRef.new(shape: ReservedInstanceIdSet, required: true, location_name: "ReservedInstanceId"))
+      GetReservedInstancesExchangeQuoteRequest.add_member(:target_configurations, Shapes::ShapeRef.new(shape: TargetConfigurationRequestSet, location_name: "TargetConfiguration"))
+      GetReservedInstancesExchangeQuoteRequest.struct_class = Types::GetReservedInstancesExchangeQuoteRequest
+
+      GetReservedInstancesExchangeQuoteResult.add_member(:reserved_instance_value_set, Shapes::ShapeRef.new(shape: ReservedInstanceReservationValueSet, location_name: "reservedInstanceValueSet"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:reserved_instance_value_rollup, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "reservedInstanceValueRollup"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:target_configuration_value_set, Shapes::ShapeRef.new(shape: TargetReservationValueSet, location_name: "targetConfigurationValueSet"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:target_configuration_value_rollup, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "targetConfigurationValueRollup"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:payment_due, Shapes::ShapeRef.new(shape: String, location_name: "paymentDue"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:currency_code, Shapes::ShapeRef.new(shape: String, location_name: "currencyCode"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:output_reserved_instances_will_expire_at, Shapes::ShapeRef.new(shape: DateTime, location_name: "outputReservedInstancesWillExpireAt"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:is_valid_exchange, Shapes::ShapeRef.new(shape: Boolean, location_name: "isValidExchange"))
+      GetReservedInstancesExchangeQuoteResult.add_member(:validation_failure_reason, Shapes::ShapeRef.new(shape: String, location_name: "validationFailureReason"))
+      GetReservedInstancesExchangeQuoteResult.struct_class = Types::GetReservedInstancesExchangeQuoteResult
 
       GroupIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "groupId")
 
@@ -3495,9 +3535,22 @@ module Aws
 
       ReservationList.member = Shapes::ShapeRef.new(shape: Reservation, location_name: "item")
 
+      ReservationValue.add_member(:remaining_total_value, Shapes::ShapeRef.new(shape: String, location_name: "remainingTotalValue"))
+      ReservationValue.add_member(:remaining_upfront_value, Shapes::ShapeRef.new(shape: String, location_name: "remainingUpfrontValue"))
+      ReservationValue.add_member(:hourly_price, Shapes::ShapeRef.new(shape: String, location_name: "hourlyPrice"))
+      ReservationValue.struct_class = Types::ReservationValue
+
+      ReservedInstanceIdSet.member = Shapes::ShapeRef.new(shape: String, location_name: "ReservedInstanceId")
+
       ReservedInstanceLimitPrice.add_member(:amount, Shapes::ShapeRef.new(shape: Double, location_name: "amount"))
       ReservedInstanceLimitPrice.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
       ReservedInstanceLimitPrice.struct_class = Types::ReservedInstanceLimitPrice
+
+      ReservedInstanceReservationValue.add_member(:reserved_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstanceId"))
+      ReservedInstanceReservationValue.add_member(:reservation_value, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "reservationValue"))
+      ReservedInstanceReservationValue.struct_class = Types::ReservedInstanceReservationValue
+
+      ReservedInstanceReservationValueSet.member = Shapes::ShapeRef.new(shape: ReservedInstanceReservationValue, location_name: "item")
 
       ReservedInstances.add_member(:reserved_instances_id, Shapes::ShapeRef.new(shape: String, location_name: "reservedInstancesId"))
       ReservedInstances.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
@@ -3515,12 +3568,15 @@ module Aws
       ReservedInstances.add_member(:currency_code, Shapes::ShapeRef.new(shape: CurrencyCodeValues, location_name: "currencyCode"))
       ReservedInstances.add_member(:offering_type, Shapes::ShapeRef.new(shape: OfferingTypeValues, location_name: "offeringType"))
       ReservedInstances.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargesList, location_name: "recurringCharges"))
+      ReservedInstances.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClassType, location_name: "offeringClass"))
+      ReservedInstances.add_member(:scope, Shapes::ShapeRef.new(shape: scope, location_name: "scope"))
       ReservedInstances.struct_class = Types::ReservedInstances
 
       ReservedInstancesConfiguration.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
       ReservedInstancesConfiguration.add_member(:platform, Shapes::ShapeRef.new(shape: String, location_name: "platform"))
       ReservedInstancesConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
       ReservedInstancesConfiguration.add_member(:instance_type, Shapes::ShapeRef.new(shape: InstanceType, location_name: "instanceType"))
+      ReservedInstancesConfiguration.add_member(:scope, Shapes::ShapeRef.new(shape: scope, location_name: "scope"))
       ReservedInstancesConfiguration.struct_class = Types::ReservedInstancesConfiguration
 
       ReservedInstancesConfigurationList.member = Shapes::ShapeRef.new(shape: ReservedInstancesConfiguration, location_name: "item")
@@ -3580,6 +3636,8 @@ module Aws
       ReservedInstancesOffering.add_member(:recurring_charges, Shapes::ShapeRef.new(shape: RecurringChargesList, location_name: "recurringCharges"))
       ReservedInstancesOffering.add_member(:marketplace, Shapes::ShapeRef.new(shape: Boolean, location_name: "marketplace"))
       ReservedInstancesOffering.add_member(:pricing_details, Shapes::ShapeRef.new(shape: PricingDetailsList, location_name: "pricingDetailsSet"))
+      ReservedInstancesOffering.add_member(:offering_class, Shapes::ShapeRef.new(shape: OfferingClassType, location_name: "offeringClass"))
+      ReservedInstancesOffering.add_member(:scope, Shapes::ShapeRef.new(shape: scope, location_name: "scope"))
       ReservedInstancesOffering.struct_class = Types::ReservedInstancesOffering
 
       ReservedInstancesOfferingIdStringList.member = Shapes::ShapeRef.new(shape: String)
@@ -4091,6 +4149,22 @@ module Aws
 
       TagList.member = Shapes::ShapeRef.new(shape: Tag, location_name: "item")
 
+      TargetConfiguration.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, location_name: "offeringId"))
+      TargetConfiguration.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "instanceCount"))
+      TargetConfiguration.struct_class = Types::TargetConfiguration
+
+      TargetConfigurationRequest.add_member(:offering_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "OfferingId"))
+      TargetConfigurationRequest.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, location_name: "InstanceCount"))
+      TargetConfigurationRequest.struct_class = Types::TargetConfigurationRequest
+
+      TargetConfigurationRequestSet.member = Shapes::ShapeRef.new(shape: TargetConfigurationRequest, location_name: "TargetConfigurationRequest")
+
+      TargetReservationValue.add_member(:target_configuration, Shapes::ShapeRef.new(shape: TargetConfiguration, location_name: "targetConfiguration"))
+      TargetReservationValue.add_member(:reservation_value, Shapes::ShapeRef.new(shape: ReservationValue, location_name: "reservationValue"))
+      TargetReservationValue.struct_class = Types::TargetReservationValue
+
+      TargetReservationValueSet.member = Shapes::ShapeRef.new(shape: TargetReservationValue, location_name: "item")
+
       TerminateInstancesRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       TerminateInstancesRequest.add_member(:instance_ids, Shapes::ShapeRef.new(shape: InstanceIdStringList, required: true, location_name: "InstanceId"))
       TerminateInstancesRequest.struct_class = Types::TerminateInstancesRequest
@@ -4109,8 +4183,8 @@ module Aws
       UnmonitorInstancesResult.add_member(:instance_monitorings, Shapes::ShapeRef.new(shape: InstanceMonitoringList, location_name: "instancesSet"))
       UnmonitorInstancesResult.struct_class = Types::UnmonitorInstancesResult
 
-      UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
       UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
+      UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
       UnsuccessfulItem.struct_class = Types::UnsuccessfulItem
 
       UnsuccessfulItemError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -4337,15 +4411,23 @@ module Aws
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
 
-        api.version = "2016-04-01"
+        api.version = "2016-09-15"
 
         api.metadata = {
           "endpointPrefix" => "ec2",
           "protocol" => "ec2",
           "serviceFullName" => "Amazon Elastic Compute Cloud",
           "signatureVersion" => "v4",
-          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-04-01",
+          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-09-15",
         }
+
+        api.add_operation(:accept_reserved_instances_exchange_quote, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AcceptReservedInstancesExchangeQuote"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AcceptReservedInstancesExchangeQuoteRequest)
+          o.output = Shapes::ShapeRef.new(shape: AcceptReservedInstancesExchangeQuoteResult)
+        end)
 
         api.add_operation(:accept_vpc_peering_connection, Seahorse::Model::Operation.new.tap do |o|
           o.name = "AcceptVpcPeeringConnection"
@@ -5701,6 +5783,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetPasswordDataRequest)
           o.output = Shapes::ShapeRef.new(shape: GetPasswordDataResult)
+        end)
+
+        api.add_operation(:get_reserved_instances_exchange_quote, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetReservedInstancesExchangeQuote"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetReservedInstancesExchangeQuoteResult)
         end)
 
         api.add_operation(:import_image, Seahorse::Model::Operation.new.tap do |o|

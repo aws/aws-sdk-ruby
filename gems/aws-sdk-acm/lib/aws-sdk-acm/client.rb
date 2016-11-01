@@ -272,16 +272,18 @@ module Aws
       #   resp.certificate.issuer #=> String
       #   resp.certificate.created_at #=> Time
       #   resp.certificate.issued_at #=> Time
+      #   resp.certificate.imported_at #=> Time
       #   resp.certificate.status #=> String, one of "PENDING_VALIDATION", "ISSUED", "INACTIVE", "EXPIRED", "VALIDATION_TIMED_OUT", "REVOKED", "FAILED"
       #   resp.certificate.revoked_at #=> Time
       #   resp.certificate.revocation_reason #=> String, one of "UNSPECIFIED", "KEY_COMPROMISE", "CA_COMPROMISE", "AFFILIATION_CHANGED", "SUPERCEDED", "CESSATION_OF_OPERATION", "CERTIFICATE_HOLD", "REMOVE_FROM_CRL", "PRIVILEGE_WITHDRAWN", "A_A_COMPROMISE"
       #   resp.certificate.not_before #=> Time
       #   resp.certificate.not_after #=> Time
-      #   resp.certificate.key_algorithm #=> String, one of "RSA_2048", "EC_prime256v1"
+      #   resp.certificate.key_algorithm #=> String, one of "RSA_2048", "RSA_1024", "EC_prime256v1"
       #   resp.certificate.signature_algorithm #=> String
       #   resp.certificate.in_use_by #=> Array
       #   resp.certificate.in_use_by[0] #=> String
       #   resp.certificate.failure_reason #=> String, one of "NO_AVAILABLE_CONTACTS", "ADDITIONAL_VERIFICATION_REQUIRED", "DOMAIN_NOT_ALLOWED", "INVALID_PUBLIC_DOMAIN", "OTHER"
+      #   resp.certificate.type #=> String, one of "IMPORTED", "AMAZON_ISSUED"
       # @overload describe_certificate(params = {})
       # @param [Hash] params ({})
       def describe_certificate(params = {}, options = {})
@@ -329,6 +331,91 @@ module Aws
       # @param [Hash] params ({})
       def get_certificate(params = {}, options = {})
         req = build_request(:get_certificate, params)
+        req.send_request(options)
+      end
+
+      # Imports an SSL/TLS certificate into AWS Certificate Manager (ACM) to
+      # use with [ACM's integrated AWS services][1].
+      #
+      # <note markdown="1"> ACM does not provide [managed renewal][2] for certificates that you
+      # import.
+      #
+      #  </note>
+      #
+      # For more information about importing certificates into ACM, including
+      # the differences between certificates that you import and those that
+      # ACM provides, see [Importing Certificates][3] in the *AWS Certificate
+      # Manager User Guide*.
+      #
+      # To import a certificate, you must provide the certificate and the
+      # matching private key. When the certificate is not self-signed, you
+      # must also provide a certificate chain. You can omit the certificate
+      # chain when importing a self-signed certificate.
+      #
+      # The certificate, private key, and certificate chain must be
+      # PEM-encoded. For more information about converting these items to PEM
+      # format, see [Importing Certificates Troubleshooting][4] in the *AWS
+      # Certificate Manager User Guide*.
+      #
+      # To import a new certificate, omit the `CertificateArn` field. Include
+      # this field only when you want to replace a previously imported
+      # certificate.
+      #
+      # This operation returns the [Amazon Resource Name (ARN)][5] of the
+      # imported certificate.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-services.html
+      # [2]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+      # [3]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
+      # [4]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html#import-certificate-troubleshooting
+      # [5]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      # @option params [String] :certificate_arn
+      #   The [Amazon Resource Name (ARN)][1] of an imported certificate to
+      #   replace. To import a new certificate, omit this field.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      # @option params [required, String, IO] :certificate
+      #   The certificate to import. It must meet the following requirements:
+      #
+      #   * Must be PEM-encoded.
+      #
+      #   * Must contain a 1024-bit or 2048-bit RSA public key.
+      #
+      #   * Must be valid at the time of import. You cannot import a certificate
+      #     before its validity period begins (the certificate's `NotBefore`
+      #     date) or after it expires (the certificate's `NotAfter` date).
+      # @option params [required, String, IO] :private_key
+      #   The private key that matches the public key in the certificate. It
+      #   must meet the following requirements:
+      #
+      #   * Must be PEM-encoded.
+      #
+      #   * Must be unencrypted. You cannot import a private key that is
+      #     protected by a password or passphrase.
+      # @option params [String, IO] :certificate_chain
+      #   The certificate chain. It must be PEM-encoded.
+      # @return [Types::ImportCertificateResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ImportCertificateResponse#certificate_arn #CertificateArn} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.import_certificate({
+      #     certificate_arn: "Arn",
+      #     certificate: "data", # required
+      #     private_key: "data", # required
+      #     certificate_chain: "data",
+      #   })
+      #
+      # @example Response structure
+      #   resp.certificate_arn #=> String
+      # @overload import_certificate(params = {})
+      # @param [Hash] params ({})
+      def import_certificate(params = {}, options = {})
+        req = build_request(:import_certificate, params)
         req.send_request(options)
       end
 
@@ -458,11 +545,11 @@ module Aws
       # domain name you specify, email is sent to the domain owner to request
       # approval to issue the certificate. After receiving approval from the
       # domain owner, the ACM Certificate is issued. For more information, see
-      # the [AWS Certificate Manager User Guide ][1].
+      # the [AWS Certificate Manager User Guide][1].
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/acm/latest/userguide/overview.html
+      # [1]: http://docs.aws.amazon.com/acm/latest/userguide/
       # @option params [required, String] :domain_name
       #   Fully qualified domain name (FQDN), such as www.example.com, of the
       #   site you want to secure with an ACM Certificate. Use an asterisk (\*)

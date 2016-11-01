@@ -88,8 +88,8 @@ module Aws
         data.description
       end
 
-      # The JSON format content of the `Metadata` attribute declared for the
-      # resource. For more information, see [Metadata Attribute][1] in the AWS
+      # The content of the `Metadata` attribute declared for the resource. For
+      # more information, see [Metadata Attribute][1] in the AWS
       # CloudFormation User Guide.
       #
       #

@@ -424,7 +424,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html
       # @option options [Integer] :min_adjustment_step
       #   Available for backward compatibility. Use `MinAdjustmentMagnitude`
       #   instead.
@@ -453,7 +453,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option options [String] :metric_aggregation_type
       #   The aggregation type for the CloudWatch metrics. Valid values are
       #   `Minimum`, `Maximum`, and `Average`. If the aggregation type is null,
@@ -503,20 +503,18 @@ module Aws
       #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ" format
       #   in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
+      #   If you specify `Recurrence` and `StartTime`, Auto Scaling performs the
+      #   action at this time, and then performs the action based on the
+      #   specified recurrence.
+      #
       #   If you try to schedule your action in the past, Auto Scaling returns
       #   an error message.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action starts and stops.
       # @option options [Time,DateTime,Date,Integer,String] :end_time
-      #   The time for this action to end.
+      #   The time for the recurring schedule to end. Auto Scaling does not
+      #   perform the action after this time.
       # @option options [String] :recurrence
-      #   The time when recurring future actions will start. Start time is
-      #   specified by the user following the Unix cron syntax format. For more
-      #   information, see [Cron][1] in Wikipedia.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action will start and stop.
+      #   The recurring schedule for this action, in Unix cron syntax format.
+      #   For more information, see [Cron][1] in Wikipedia.
       #
       #
       #
@@ -660,7 +658,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option options [Array<String>] :availability_zones
       #   One or more Availability Zones for the group.
       # @option options [String] :health_check_type
@@ -676,7 +674,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option options [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -698,7 +696,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @option options [Array<String>] :termination_policies
       #   A standalone termination policy or a list of termination policies used
       #   to select the instance to terminate. The policies are executed in the
@@ -709,7 +707,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       # @option options [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.

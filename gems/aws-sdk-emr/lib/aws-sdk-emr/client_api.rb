@@ -41,11 +41,17 @@ module Aws
       CommandList = Shapes::ListShape.new(name: 'CommandList')
       Configuration = Shapes::StructureShape.new(name: 'Configuration')
       ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
+      CreateSecurityConfigurationInput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationInput')
+      CreateSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationOutput')
       Date = Shapes::TimestampShape.new(name: 'Date')
+      DeleteSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationInput')
+      DeleteSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'DeleteSecurityConfigurationOutput')
       DescribeClusterInput = Shapes::StructureShape.new(name: 'DescribeClusterInput')
       DescribeClusterOutput = Shapes::StructureShape.new(name: 'DescribeClusterOutput')
       DescribeJobFlowsInput = Shapes::StructureShape.new(name: 'DescribeJobFlowsInput')
       DescribeJobFlowsOutput = Shapes::StructureShape.new(name: 'DescribeJobFlowsOutput')
+      DescribeSecurityConfigurationInput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationInput')
+      DescribeSecurityConfigurationOutput = Shapes::StructureShape.new(name: 'DescribeSecurityConfigurationOutput')
       DescribeStepInput = Shapes::StructureShape.new(name: 'DescribeStepInput')
       DescribeStepOutput = Shapes::StructureShape.new(name: 'DescribeStepOutput')
       EC2InstanceIdsList = Shapes::ListShape.new(name: 'EC2InstanceIdsList')
@@ -113,6 +119,8 @@ module Aws
       ListInstanceGroupsOutput = Shapes::StructureShape.new(name: 'ListInstanceGroupsOutput')
       ListInstancesInput = Shapes::StructureShape.new(name: 'ListInstancesInput')
       ListInstancesOutput = Shapes::StructureShape.new(name: 'ListInstancesOutput')
+      ListSecurityConfigurationsInput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsInput')
+      ListSecurityConfigurationsOutput = Shapes::StructureShape.new(name: 'ListSecurityConfigurationsOutput')
       ListStepsInput = Shapes::StructureShape.new(name: 'ListStepsInput')
       ListStepsOutput = Shapes::StructureShape.new(name: 'ListStepsOutput')
       Marker = Shapes::StringShape.new(name: 'Marker')
@@ -126,6 +134,8 @@ module Aws
       RunJobFlowInput = Shapes::StructureShape.new(name: 'RunJobFlowInput')
       RunJobFlowOutput = Shapes::StructureShape.new(name: 'RunJobFlowOutput')
       ScriptBootstrapActionConfig = Shapes::StructureShape.new(name: 'ScriptBootstrapActionConfig')
+      SecurityConfigurationList = Shapes::ListShape.new(name: 'SecurityConfigurationList')
+      SecurityConfigurationSummary = Shapes::StructureShape.new(name: 'SecurityConfigurationSummary')
       SecurityGroupsList = Shapes::ListShape.new(name: 'SecurityGroupsList')
       SetTerminationProtectionInput = Shapes::StructureShape.new(name: 'SetTerminationProtectionInput')
       SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
@@ -217,6 +227,7 @@ module Aws
       Cluster.add_member(:normalized_instance_hours, Shapes::ShapeRef.new(shape: Integer, location_name: "NormalizedInstanceHours"))
       Cluster.add_member(:master_public_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "MasterPublicDnsName"))
       Cluster.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
+      Cluster.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
       Cluster.struct_class = Types::Cluster
 
       ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -257,6 +268,19 @@ module Aws
 
       ConfigurationList.member = Shapes::ShapeRef.new(shape: Configuration)
 
+      CreateSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
+      CreateSecurityConfigurationInput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SecurityConfiguration"))
+      CreateSecurityConfigurationInput.struct_class = Types::CreateSecurityConfigurationInput
+
+      CreateSecurityConfigurationOutput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
+      CreateSecurityConfigurationOutput.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, required: true, location_name: "CreationDateTime"))
+      CreateSecurityConfigurationOutput.struct_class = Types::CreateSecurityConfigurationOutput
+
+      DeleteSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
+      DeleteSecurityConfigurationInput.struct_class = Types::DeleteSecurityConfigurationInput
+
+      DeleteSecurityConfigurationOutput.struct_class = Types::DeleteSecurityConfigurationOutput
+
       DescribeClusterInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
       DescribeClusterInput.struct_class = Types::DescribeClusterInput
 
@@ -271,6 +295,14 @@ module Aws
 
       DescribeJobFlowsOutput.add_member(:job_flows, Shapes::ShapeRef.new(shape: JobFlowDetailList, location_name: "JobFlows"))
       DescribeJobFlowsOutput.struct_class = Types::DescribeJobFlowsOutput
+
+      DescribeSecurityConfigurationInput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Name"))
+      DescribeSecurityConfigurationInput.struct_class = Types::DescribeSecurityConfigurationInput
+
+      DescribeSecurityConfigurationOutput.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, location_name: "Name"))
+      DescribeSecurityConfigurationOutput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: String, location_name: "SecurityConfiguration"))
+      DescribeSecurityConfigurationOutput.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
+      DescribeSecurityConfigurationOutput.struct_class = Types::DescribeSecurityConfigurationOutput
 
       DescribeStepInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
       DescribeStepInput.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, required: true, location_name: "StepId"))
@@ -541,6 +573,13 @@ module Aws
       ListInstancesOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
       ListInstancesOutput.struct_class = Types::ListInstancesOutput
 
+      ListSecurityConfigurationsInput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+      ListSecurityConfigurationsInput.struct_class = Types::ListSecurityConfigurationsInput
+
+      ListSecurityConfigurationsOutput.add_member(:security_configurations, Shapes::ShapeRef.new(shape: SecurityConfigurationList, location_name: "SecurityConfigurations"))
+      ListSecurityConfigurationsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
+      ListSecurityConfigurationsOutput.struct_class = Types::ListSecurityConfigurationsOutput
+
       ListStepsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
       ListStepsInput.add_member(:step_states, Shapes::ShapeRef.new(shape: StepStateList, location_name: "StepStates"))
       ListStepsInput.add_member(:step_ids, Shapes::ShapeRef.new(shape: XmlStringList, location_name: "StepIds"))
@@ -581,6 +620,7 @@ module Aws
       RunJobFlowInput.add_member(:job_flow_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "JobFlowRole"))
       RunJobFlowInput.add_member(:service_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "ServiceRole"))
       RunJobFlowInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
+      RunJobFlowInput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
       RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
       RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
@@ -589,6 +629,12 @@ module Aws
       ScriptBootstrapActionConfig.add_member(:path, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Path"))
       ScriptBootstrapActionConfig.add_member(:args, Shapes::ShapeRef.new(shape: XmlStringList, location_name: "Args"))
       ScriptBootstrapActionConfig.struct_class = Types::ScriptBootstrapActionConfig
+
+      SecurityConfigurationList.member = Shapes::ShapeRef.new(shape: SecurityConfigurationSummary)
+
+      SecurityConfigurationSummary.add_member(:name, Shapes::ShapeRef.new(shape: XmlString, location_name: "Name"))
+      SecurityConfigurationSummary.add_member(:creation_date_time, Shapes::ShapeRef.new(shape: Date, location_name: "CreationDateTime"))
+      SecurityConfigurationSummary.struct_class = Types::SecurityConfigurationSummary
 
       SecurityGroupsList.member = Shapes::ShapeRef.new(shape: XmlStringMaxLen256)
 
@@ -730,6 +776,26 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
+        api.add_operation(:create_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateSecurityConfiguration"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationInput)
+          o.output = Shapes::ShapeRef.new(shape: CreateSecurityConfigurationOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        end)
+
+        api.add_operation(:delete_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteSecurityConfiguration"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteSecurityConfigurationInput)
+          o.output = Shapes::ShapeRef.new(shape: DeleteSecurityConfigurationOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        end)
+
         api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeCluster"
           o.http_method = "POST"
@@ -749,6 +815,16 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeJobFlowsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new("result_key" => "JobFlows")
+        end)
+
+        api.add_operation(:describe_security_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeSecurityConfiguration"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationInput)
+          o.output = Shapes::ShapeRef.new(shape: DescribeSecurityConfigurationOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:describe_step, Seahorse::Model::Operation.new.tap do |o|
@@ -819,6 +895,16 @@ module Aws
             "output_token" => "Marker",
             "result_key" => "Instances"
           )
+        end)
+
+        api.add_operation(:list_security_configurations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListSecurityConfigurations"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListSecurityConfigurationsInput)
+          o.output = Shapes::ShapeRef.new(shape: ListSecurityConfigurationsOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:list_steps, Seahorse::Model::Operation.new.tap do |o|

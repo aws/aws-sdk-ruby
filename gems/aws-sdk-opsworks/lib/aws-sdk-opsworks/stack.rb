@@ -124,7 +124,7 @@ module Aws
       # stack configuration and deployment attributes. You can use custom JSON
       # to override the corresponding default stack configuration attribute
       # values or to pass data to recipes. The string should be in the
-      # following format and must escape characters such as '"':
+      # following format:
       #
       # `"\{"key1": "value1", "key2": "value2",...\}"`
       #

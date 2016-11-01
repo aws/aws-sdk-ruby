@@ -191,7 +191,7 @@ module Aws
       #       input_parallelism: {
       #         count: 1,
       #       },
-      #       input_schema: {
+      #       input_schema: { # required
       #         record_format: { # required
       #           record_format_type: "JSON", # required, accepts JSON, CSV
       #           mapping_parameters: {
@@ -484,7 +484,7 @@ module Aws
       #         input_parallelism: {
       #           count: 1,
       #         },
-      #         input_schema: {
+      #         input_schema: { # required
       #           record_format: { # required
       #             record_format_type: "JSON", # required, accepts JSON, CSV
       #             mapping_parameters: {

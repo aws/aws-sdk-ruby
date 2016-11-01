@@ -22,9 +22,9 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] attachment_set_id
-      #   The ID of the attachment set. If an `AttachmentSetId` is not
+      #   The ID of the attachment set. If an `attachmentSetId` is not
       #   specified, a new attachment set is created, and the ID of the set is
-      #   returned in the response. If an `AttachmentSetId` is specified, the
+      #   returned in the response. If an `attachmentSetId` is specified, the
       #   attachments are added to the specified set, if it exists.
       #   @return [String]
       #
@@ -41,9 +41,9 @@ module Aws
       # The ID and expiry time of the attachment set returned by the
       # AddAttachmentsToSet operation.
       # @!attribute [rw] attachment_set_id
-      #   The ID of the attachment set. If an `AttachmentSetId` was not
+      #   The ID of the attachment set. If an `attachmentSetId` was not
       #   specified, a new attachment set is created, and the ID of the set is
-      #   returned in the response. If an `AttachmentSetId` was specified, the
+      #   returned in the response. If an `attachmentSetId` was specified, the
       #   attachments are added to the specified set, if it exists.
       #   @return [String]
       #
@@ -145,34 +145,43 @@ module Aws
       # It is contained the response from a DescribeCases request.
       # **CaseDetails** contains the following fields:
       #
-      # 1.  **CaseID.** The AWS Support case ID requested or returned in the
-      #     call. The case ID is an alphanumeric string formatted as shown in
-      #     this example: case-*12345678910-2013-c4c1d2bf33c5cf47*.
-      # 2.  **CategoryCode.** The category of problem for the AWS Support
-      #     case. Corresponds to the CategoryCode values returned by a call to
-      #     DescribeServices.
-      # 3.  **DisplayId.** The identifier for the case on pages in the AWS
-      #     Support Center.
-      # 4.  **Language.** The ISO 639-1 code for the language in which AWS
-      #     provides support. AWS Support currently supports English ("en")
-      #     and Japanese ("ja"). Language parameters must be passed
-      #     explicitly for operations that take them.
-      # 5.  **RecentCommunications.** One or more Communication objects.
-      #     Fields of these objects are `Attachments`, `Body`, `CaseId`,
-      #     `SubmittedBy`, and `TimeCreated`.
-      # 6.  **NextToken.** A resumption point for pagination.
-      # 7.  **ServiceCode.** The identifier for the AWS service that
-      #     corresponds to the service code defined in the call to
-      #     DescribeServices.
-      # 8.  <b>SeverityCode. </b>The severity code assigned to the case.
-      #     Contains one of the values returned by the call to
-      #     DescribeSeverityLevels.
-      # 9.  **Status.** The status of the case in the AWS Support Center.
-      # 10. **Subject.** The subject line of the case.
-      # 11. **SubmittedBy.** The email address of the account that submitted
-      #     the case.
-      # 12. **TimeCreated.** The time the case was created, in ISO-8601
-      #     format.
+      # * **caseId.** The AWS Support case ID requested or returned in the
+      #   call. The case ID is an alphanumeric string formatted as shown in
+      #   this example: case-*12345678910-2013-c4c1d2bf33c5cf47*.
+      #
+      # * **categoryCode.** The category of problem for the AWS Support case.
+      #   Corresponds to the CategoryCode values returned by a call to
+      #   DescribeServices.
+      #
+      # * **displayId.** The identifier for the case on pages in the AWS
+      #   Support Center.
+      #
+      # * **language.** The ISO 639-1 code for the language in which AWS
+      #   provides support. AWS Support currently supports English ("en")
+      #   and Japanese ("ja"). Language parameters must be passed explicitly
+      #   for operations that take them.
+      #
+      # * **recentCommunications.** One or more Communication objects. Fields
+      #   of these objects are `attachments`, `body`, `caseId`, `submittedBy`,
+      #   and `timeCreated`.
+      #
+      # * **nextToken.** A resumption point for pagination.
+      #
+      # * **serviceCode.** The identifier for the AWS service that corresponds
+      #   to the service code defined in the call to DescribeServices.
+      #
+      # * <b>severityCode. </b>The severity code assigned to the case.
+      #   Contains one of the values returned by the call to
+      #   DescribeSeverityLevels.
+      #
+      # * **status.** The status of the case in the AWS Support Center.
+      #
+      # * **subject.** The subject line of the case.
+      #
+      # * **submittedBy.** The email address of the account that submitted the
+      #   case.
+      #
+      # * **timeCreated.** The time the case was created, in ISO-8601 format.
       # @!attribute [rw] case_id
       #   The AWS Support case ID requested or returned in the call. The case
       #   ID is an alphanumeric string formatted as shown in this example:
@@ -325,11 +334,11 @@ module Aws
       #   The code for the severity level returned by the call to
       #   DescribeSeverityLevels.
       #
-      #   <note markdown="1">The availability of severity levels depends on each customer's
+      #   <note markdown="1"> The availability of severity levels depends on each customer's
       #   support subscription. In other words, your subscription may not
       #   necessarily require the urgent level of response time.
       #
-      #   </note>
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] category_code
@@ -486,7 +495,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Returns an array of CaseDetails objects and a `NextToken` that defines
+      # Returns an array of CaseDetails objects and a `nextToken` that defines
       # a point for pagination in the result set.
       # @!attribute [rw] cases
       #   The details for the cases that match the request.
@@ -627,7 +636,9 @@ module Aws
       #         check_ids: ["String"], # required
       #       }
       # @!attribute [rw] check_ids
-      #   The IDs of the Trusted Advisor checks.
+      #   The IDs of the Trusted Advisor checks to get the status of.
+      #   **Note:** Specifying the check ID of a check that is automatically
+      #   refreshed causes an `InvalidParameterValue` error.
       #   @return [Array<String>]
       class DescribeTrustedAdvisorCheckRefreshStatusesRequest < Struct.new(
         :check_ids)
@@ -749,7 +760,9 @@ module Aws
       #         check_id: "String", # required
       #       }
       # @!attribute [rw] check_id
-      #   The unique identifier for the Trusted Advisor check.
+      #   The unique identifier for the Trusted Advisor check to refresh.
+      #   **Note:** Specifying the check ID of a check that is automatically
+      #   refreshed causes an `InvalidParameterValue` error.
       #   @return [String]
       class RefreshTrustedAdvisorCheckRequest < Struct.new(
         :check_id)
@@ -800,12 +813,12 @@ module Aws
       # operation.
       # @!attribute [rw] code
       #   The code for an AWS service returned by the DescribeServices
-      #   response. The `Name` element contains the corresponding friendly
+      #   response. The `name` element contains the corresponding friendly
       #   name.
       #   @return [String]
       #
       # @!attribute [rw] name
-      #   The friendly name for an AWS service. The `Code` element contains
+      #   The friendly name for an AWS service. The `code` element contains
       #   the corresponding code.
       #   @return [String]
       #
@@ -827,7 +840,7 @@ module Aws
       # @!attribute [rw] code
       #   One of four values: "low," "medium," "high," and "urgent".
       #   These values correspond to response times returned to the caller in
-      #   `SeverityLevel.name`.
+      #   `severityLevel.name`.
       #   @return [String]
       #
       # @!attribute [rw] name

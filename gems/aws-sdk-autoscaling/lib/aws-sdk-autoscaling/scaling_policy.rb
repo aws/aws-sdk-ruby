@@ -193,7 +193,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option options [Float] :metric_value
       #   The metric value to compare to `BreachThreshold`. This enables you to
       #   execute a policy of type `StepScaling` and determine which step

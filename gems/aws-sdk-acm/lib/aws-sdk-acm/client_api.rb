@@ -15,12 +15,15 @@ module Aws
       AddTagsToCertificateRequest = Shapes::StructureShape.new(name: 'AddTagsToCertificateRequest')
       Arn = Shapes::StringShape.new(name: 'Arn')
       CertificateBody = Shapes::StringShape.new(name: 'CertificateBody')
+      CertificateBodyBlob = Shapes::BlobShape.new(name: 'CertificateBodyBlob')
       CertificateChain = Shapes::StringShape.new(name: 'CertificateChain')
+      CertificateChainBlob = Shapes::BlobShape.new(name: 'CertificateChainBlob')
       CertificateDetail = Shapes::StructureShape.new(name: 'CertificateDetail')
       CertificateStatus = Shapes::StringShape.new(name: 'CertificateStatus')
       CertificateStatuses = Shapes::ListShape.new(name: 'CertificateStatuses')
       CertificateSummary = Shapes::StructureShape.new(name: 'CertificateSummary')
       CertificateSummaryList = Shapes::ListShape.new(name: 'CertificateSummaryList')
+      CertificateType = Shapes::StringShape.new(name: 'CertificateType')
       DeleteCertificateRequest = Shapes::StructureShape.new(name: 'DeleteCertificateRequest')
       DescribeCertificateRequest = Shapes::StructureShape.new(name: 'DescribeCertificateRequest')
       DescribeCertificateResponse = Shapes::StructureShape.new(name: 'DescribeCertificateResponse')
@@ -34,6 +37,8 @@ module Aws
       GetCertificateRequest = Shapes::StructureShape.new(name: 'GetCertificateRequest')
       GetCertificateResponse = Shapes::StructureShape.new(name: 'GetCertificateResponse')
       IdempotencyToken = Shapes::StringShape.new(name: 'IdempotencyToken')
+      ImportCertificateRequest = Shapes::StructureShape.new(name: 'ImportCertificateRequest')
+      ImportCertificateResponse = Shapes::StructureShape.new(name: 'ImportCertificateResponse')
       InUseList = Shapes::ListShape.new(name: 'InUseList')
       InvalidArnException = Shapes::StructureShape.new(name: 'InvalidArnException')
       InvalidDomainValidationOptionsException = Shapes::StructureShape.new(name: 'InvalidDomainValidationOptionsException')
@@ -47,6 +52,7 @@ module Aws
       ListTagsForCertificateResponse = Shapes::StructureShape.new(name: 'ListTagsForCertificateResponse')
       MaxItems = Shapes::IntegerShape.new(name: 'MaxItems')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
+      PrivateKeyBlob = Shapes::BlobShape.new(name: 'PrivateKeyBlob')
       RemoveTagsFromCertificateRequest = Shapes::StructureShape.new(name: 'RemoveTagsFromCertificateRequest')
       RequestCertificateRequest = Shapes::StructureShape.new(name: 'RequestCertificateRequest')
       RequestCertificateResponse = Shapes::StructureShape.new(name: 'RequestCertificateResponse')
@@ -77,6 +83,7 @@ module Aws
       CertificateDetail.add_member(:issuer, Shapes::ShapeRef.new(shape: String, location_name: "Issuer"))
       CertificateDetail.add_member(:created_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "CreatedAt"))
       CertificateDetail.add_member(:issued_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "IssuedAt"))
+      CertificateDetail.add_member(:imported_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "ImportedAt"))
       CertificateDetail.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "Status"))
       CertificateDetail.add_member(:revoked_at, Shapes::ShapeRef.new(shape: TStamp, location_name: "RevokedAt"))
       CertificateDetail.add_member(:revocation_reason, Shapes::ShapeRef.new(shape: RevocationReason, location_name: "RevocationReason"))
@@ -86,6 +93,7 @@ module Aws
       CertificateDetail.add_member(:signature_algorithm, Shapes::ShapeRef.new(shape: String, location_name: "SignatureAlgorithm"))
       CertificateDetail.add_member(:in_use_by, Shapes::ShapeRef.new(shape: InUseList, location_name: "InUseBy"))
       CertificateDetail.add_member(:failure_reason, Shapes::ShapeRef.new(shape: FailureReason, location_name: "FailureReason"))
+      CertificateDetail.add_member(:type, Shapes::ShapeRef.new(shape: CertificateType, location_name: "Type"))
       CertificateDetail.struct_class = Types::CertificateDetail
 
       CertificateStatuses.member = Shapes::ShapeRef.new(shape: CertificateStatus)
@@ -126,6 +134,15 @@ module Aws
       GetCertificateResponse.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBody, location_name: "Certificate"))
       GetCertificateResponse.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChain, location_name: "CertificateChain"))
       GetCertificateResponse.struct_class = Types::GetCertificateResponse
+
+      ImportCertificateRequest.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+      ImportCertificateRequest.add_member(:certificate, Shapes::ShapeRef.new(shape: CertificateBodyBlob, required: true, location_name: "Certificate"))
+      ImportCertificateRequest.add_member(:private_key, Shapes::ShapeRef.new(shape: PrivateKeyBlob, required: true, location_name: "PrivateKey"))
+      ImportCertificateRequest.add_member(:certificate_chain, Shapes::ShapeRef.new(shape: CertificateChainBlob, location_name: "CertificateChain"))
+      ImportCertificateRequest.struct_class = Types::ImportCertificateRequest
+
+      ImportCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: Arn, location_name: "CertificateArn"))
+      ImportCertificateResponse.struct_class = Types::ImportCertificateResponse
 
       InUseList.member = Shapes::ShapeRef.new(shape: String)
 
@@ -227,6 +244,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: RequestInProgressException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArnException)
+        end)
+
+        api.add_operation(:import_certificate, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ImportCertificate"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ImportCertificateRequest)
+          o.output = Shapes::ShapeRef.new(shape: ImportCertificateResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         end)
 
         api.add_operation(:list_certificates, Seahorse::Model::Operation.new.tap do |o|

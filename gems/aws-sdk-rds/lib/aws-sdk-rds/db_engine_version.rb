@@ -67,7 +67,7 @@ module Aws
       end
 
       # A list of the character sets supported by this engine for the
-      # `CharacterSetName` parameter of the CreateDBInstance API.
+      # `CharacterSetName` parameter of the `CreateDBInstance` action.
       # @return [Array<Types::CharacterSet>]
       def supported_character_sets
         data.supported_character_sets
@@ -78,6 +78,13 @@ module Aws
       # @return [Array<Types::UpgradeTarget>]
       def valid_upgrade_target
         data.valid_upgrade_target
+      end
+
+      # A list of the time zones supported by this engine for the `Timezone`
+      # parameter of the `CreateDBInstance` action.
+      # @return [Array<Types::Timezone>]
+      def supported_timezones
+        data.supported_timezones
       end
 
       # @!endgroup

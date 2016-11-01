@@ -1,7 +1,7 @@
 desc 'Builds every service gem'
 task 'build' do
   BuildTools::Services.each do |service|
-    Rake::Task["build:#{service.identifier}"].invoke
+    Rake::Task["build:aws-sdk-#{service.identifier}"].invoke
   end
 end
 
@@ -16,7 +16,7 @@ end
 # Aws::STS is generated directly into the `aws-sdk-core` gem.
 # It is need to provide session credentials and assume role support.
 # Only building source, but not gemspecs, version file, etc.
-task 'build:sts' do
+task 'build:aws-sdk-sts' do
   sts = BuildTools::Services.service('sts')
   sts.dependencies.clear
   builder = BuildTools::Builder::Source.new(sts) {}

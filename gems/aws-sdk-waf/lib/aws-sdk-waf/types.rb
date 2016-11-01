@@ -49,8 +49,10 @@ module Aws
       #   `Action` include the following:
       #
       #   * `ALLOW`\: CloudFront responds with the requested object.
+      #
       #   * `BLOCK`\: CloudFront responds with an HTTP 403 (Forbidden) status
       #     code.
+      #
       #   * `COUNT`\: AWS WAF increments a counter of requests that match the
       #     conditions in the rule and then continues to inspect the web
       #     request based on the remaining rules in the web ACL.
@@ -191,16 +193,20 @@ module Aws
       #   * `HEADER`\: The value that you want AWS WAF to search for in the
       #     request header that you specified in FieldToMatch, for example,
       #     the value of the `User-Agent` or `Referer` header.
+      #
       #   * `METHOD`\: The HTTP method, which indicates the type of operation
       #     specified in the request. CloudFront supports the following
       #     methods: `DELETE`, `GET`, `HEAD`, `OPTIONS`, `PATCH`, `POST`, and
       #     `PUT`.
+      #
       #   * `QUERY_STRING`\: The value that you want AWS WAF to search for in
       #     the query string, which is the part of a URL that appears after a
       #     `?` character.
+      #
       #   * `URI`\: The value that you want AWS WAF to search for in the part
       #     of a URL that identifies a resource, for example,
       #     `/images/daily-ad.jpg`.
+      #
       #   * `BODY`\: The part of a request that contains any additional data
       #     that you want to send to your web server as the HTTP request body,
       #     such as data from a form. The request body immediately follows the
@@ -244,9 +250,13 @@ module Aws
       #   transformations:
       #
       #   * Delete the following characters: \\ " ' ^
+      #
       #   * Delete spaces before the following characters: / (
+      #
       #   * Replace the following characters with a space: , ;
+      #
       #   * Replace multiple spaces with one space
+      #
       #   * Convert uppercase letters (A-Z) to lowercase (a-z)
       #
       #   **COMPRESS\_WHITE\_SPACE**
@@ -255,10 +265,15 @@ module Aws
       #   character (decimal 32):
       #
       #   * \\f, formfeed, decimal 12
+      #
       #   * \\t, tab, decimal 9
+      #
       #   * \\n, newline, decimal 10
+      #
       #   * \\r, carriage return, decimal 13
+      #
       #   * \\v, vertical tab, decimal 11
+      #
       #   * non-breaking space, decimal 160
       #
       #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
@@ -269,11 +284,16 @@ module Aws
       #   characters. `HTML_ENTITY_DECODE` performs the following operations:
       #
       #   * Replaces `(ampersand)quot;` with `"`
+      #
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
+      #
       #   * Replaces `(ampersand)lt;` with a "less than" symbol
+      #
       #   * Replaces `(ampersand)gt;` with `>`
+      #
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
+      #
       #   * Replaces characters that are represented in decimal format,
       #     `(ampersand)#nnnn;`, with the corresponding characters
       #
@@ -311,12 +331,15 @@ module Aws
       #
       #   * `TargetString` exactly matches the value of the specified part of
       #     the web request, such as the value of a header.
+      #
       #   * `TargetString` is at the beginning of the specified part of the
       #     web request and is followed by a character other than an
       #     alphanumeric character or underscore (\_), for example, `BadBot;`.
+      #
       #   * `TargetString` is at the end of the specified part of the web
       #     request and is preceded by a character other than an alphanumeric
       #     character or underscore (\_), for example, `;BadBot`.
+      #
       #   * `TargetString` is in the middle of the specified part of the web
       #     request and is preceded and followed by characters other than
       #     alphanumeric characters or underscore (\_), for example,
@@ -877,14 +900,18 @@ module Aws
       #   * `HEADER`\: A specified request header, for example, the value of
       #     the `User-Agent` or `Referer` header. If you choose `HEADER` for
       #     the type, specify the name of the header in `Data`.
+      #
       #   * `METHOD`\: The HTTP method, which indicated the type of operation
       #     that the request is asking the origin to perform. Amazon
       #     CloudFront supports the following methods: `DELETE`, `GET`,
       #     `HEAD`, `OPTIONS`, `PATCH`, `POST`, and `PUT`.
+      #
       #   * `QUERY_STRING`\: A query string, which is the part of a URL that
       #     appears after a `?` character, if any.
+      #
       #   * `URI`\: The part of a web request that identifies a resource, for
       #     example, `/images/daily-ad.jpg`.
+      #
       #   * `BODY`\: The part of a request that contains any additional data
       #     that you want to send to your web server as the HTTP request body,
       #     such as data from a form. The request body immediately follows the
@@ -931,9 +958,11 @@ module Aws
       #
       #   * ByteMatchSet: Contains `ByteMatchSetId`, `ByteMatchTuples`, and
       #     `Name`
+      #
       #   * `ByteMatchTuples`\: Contains an array of ByteMatchTuple objects.
       #     Each `ByteMatchTuple` object contains FieldToMatch,
       #     `PositionalConstraint`, `TargetString`, and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Types::ByteMatchSet]
       class GetByteMatchSetResponse < Struct.new(
@@ -997,6 +1026,7 @@ module Aws
       #   request. For more information, see the following topics:
       #
       #   * IPSet: Contains `IPSetDescriptors`, `IPSetId`, and `Name`
+      #
       #   * `IPSetDescriptors`\: Contains an array of IPSetDescriptor objects.
       #     Each `IPSetDescriptor` object contains `Type` and `Value`
       #   @return [Types::IPSet]
@@ -1026,6 +1056,7 @@ module Aws
       #
       #   * Rule: Contains `MetricName`, `Name`, an array of `Predicate`
       #     objects, and `RuleId`
+      #
       #   * Predicate: Each `Predicate` object contains `DataId`, `Negated`,
       #     and `Type`
       #   @return [Types::Rule]
@@ -1056,6 +1087,7 @@ module Aws
       #
       #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
       #     to return a sample of requests.
+      #
       #   * `Default_Action`, which causes `GetSampledRequests` to return a
       #     sample of the requests that didn't match any of the rules in the
       #     specified `WebACL`.
@@ -1132,9 +1164,11 @@ module Aws
       #
       #   * SizeConstraintSet: Contains `SizeConstraintSetId`,
       #     `SizeConstraints`, and `Name`
+      #
       #   * `SizeConstraints`\: Contains an array of SizeConstraint objects.
       #     Each `SizeConstraint` object contains FieldToMatch,
       #     `TextTransformation`, `ComparisonOperator`, and `Size`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Types::SizeConstraintSet]
       class GetSizeConstraintSetResponse < Struct.new(
@@ -1167,8 +1201,10 @@ module Aws
       #
       #   * SqlInjectionMatchSet: Contains `Name`, `SqlInjectionMatchSetId`,
       #     and an array of `SqlInjectionMatchTuple` objects
+      #
       #   * SqlInjectionMatchTuple: Each `SqlInjectionMatchTuple` object
       #     contains `FieldToMatch` and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Types::SqlInjectionMatchSet]
       class GetSqlInjectionMatchSetResponse < Struct.new(
@@ -1197,9 +1233,12 @@ module Aws
       #
       #   * WebACL: Contains `DefaultAction`, `MetricName`, `Name`, an array
       #     of `Rule` objects, and `WebACLId`
+      #
       #   * `DefaultAction` (Data type is WafAction): Contains `Type`
+      #
       #   * `Rules`\: Contains an array of `ActivatedRule` objects, which
       #     contain `Action`, `Priority`, and `RuleId`
+      #
       #   * `Action`\: Contains `Type`
       #   @return [Types::WebACL]
       class GetWebACLResponse < Struct.new(
@@ -1232,8 +1271,10 @@ module Aws
       #
       #   * XssMatchSet: Contains `Name`, `XssMatchSetId`, and an array of
       #     `XssMatchTuple` objects
+      #
       #   * XssMatchTuple: Each `XssMatchTuple` object contains `FieldToMatch`
       #     and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Types::XssMatchSet]
       class GetXssMatchSetResponse < Struct.new(
@@ -1270,6 +1311,7 @@ module Aws
       #
       #   * `c-ip`, if the viewer did not use an HTTP proxy or a load balancer
       #     to send the request
+      #
       #   * `x-forwarded-for`, if the viewer did use an HTTP proxy or a load
       #     balancer to send the request
       #   @return [String]
@@ -1345,6 +1387,7 @@ module Aws
       #
       #   * `c-ip`, if the viewer did not use an HTTP proxy or a load balancer
       #     to send the request
+      #
       #   * `x-forwarded-for`, if the viewer did use an HTTP proxy or a load
       #     balancer to send the request
       #   @return [Array<Types::IPSetDescriptor>]
@@ -1361,7 +1404,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         type: "IPV4", # required, accepts IPV4
+      #         type: "IPV4", # required, accepts IPV4, IPV6
       #         value: "IPSetDescriptorValue", # required
       #       }
       # @!attribute [rw] type
@@ -1374,6 +1417,7 @@ module Aws
       #   * To configure AWS WAF to allow, block, or count requests that
       #     originated from the IP address 192.0.2.44, specify
       #     `192.0.2.44/32`.
+      #
       #   * To configure AWS WAF to allow, block, or count requests that
       #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
       #     specify `192.0.2.0/24`.
@@ -1416,7 +1460,7 @@ module Aws
       #       {
       #         action: "INSERT", # required, accepts INSERT, DELETE
       #         ip_set_descriptor: { # required
-      #           type: "IPV4", # required, accepts IPV4
+      #           type: "IPV4", # required, accepts IPV4, IPV6
       #           value: "IPSetDescriptorValue", # required
       #         },
       #       }
@@ -1440,7 +1484,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more `ByteMatchSets`
@@ -1487,7 +1531,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more `IPSets` than
@@ -1532,7 +1576,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more `Rules` than
@@ -1577,7 +1621,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more
@@ -1627,7 +1671,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more
@@ -1676,7 +1720,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more `WebACL`
@@ -1725,7 +1769,7 @@ module Aws
       #
       #       {
       #         next_marker: "NextMarker",
-      #         limit: 1, # required
+      #         limit: 1,
       #       }
       # @!attribute [rw] next_marker
       #   If you specify a value for `Limit` and you have more XssMatchSet
@@ -1819,6 +1863,7 @@ module Aws
       #
       # * An `IPSet` that causes AWS WAF to search for web requests that
       #   originate from the IP address `192.0.2.44`
+      #
       # * A `ByteMatchSet` that causes AWS WAF to search for web requests for
       #   which the value of the `User-Agent` header is `BadBot`.
       #
@@ -1983,9 +2028,13 @@ module Aws
       #   transformations:
       #
       #   * Delete the following characters: \\ " ' ^
+      #
       #   * Delete spaces before the following characters: / (
+      #
       #   * Replace the following characters with a space: , ;
+      #
       #   * Replace multiple spaces with one space
+      #
       #   * Convert uppercase letters (A-Z) to lowercase (a-z)
       #
       #   **COMPRESS\_WHITE\_SPACE**
@@ -1994,10 +2043,15 @@ module Aws
       #   character (decimal 32):
       #
       #   * \\f, formfeed, decimal 12
+      #
       #   * \\t, tab, decimal 9
+      #
       #   * \\n, newline, decimal 10
+      #
       #   * \\r, carriage return, decimal 13
+      #
       #   * \\v, vertical tab, decimal 11
+      #
       #   * non-breaking space, decimal 160
       #
       #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
@@ -2008,11 +2062,16 @@ module Aws
       #   characters. `HTML_ENTITY_DECODE` performs the following operations:
       #
       #   * Replaces `(ampersand)quot;` with `"`
+      #
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
+      #
       #   * Replaces `(ampersand)lt;` with a "less than" symbol
+      #
       #   * Replaces `(ampersand)gt;` with `>`
+      #
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
+      #
       #   * Replaces characters that are represented in decimal format,
       #     `(ampersand)#nnnn;`, with the corresponding characters
       #
@@ -2288,9 +2347,13 @@ module Aws
       #   transformations:
       #
       #   * Delete the following characters: \\ " ' ^
+      #
       #   * Delete spaces before the following characters: / (
+      #
       #   * Replace the following characters with a space: , ;
+      #
       #   * Replace multiple spaces with one space
+      #
       #   * Convert uppercase letters (A-Z) to lowercase (a-z)
       #
       #   **COMPRESS\_WHITE\_SPACE**
@@ -2299,10 +2362,15 @@ module Aws
       #   character (decimal 32):
       #
       #   * \\f, formfeed, decimal 12
+      #
       #   * \\t, tab, decimal 9
+      #
       #   * \\n, newline, decimal 10
+      #
       #   * \\r, carriage return, decimal 13
+      #
       #   * \\v, vertical tab, decimal 11
+      #
       #   * non-breaking space, decimal 160
       #
       #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
@@ -2313,11 +2381,16 @@ module Aws
       #   characters. `HTML_ENTITY_DECODE` performs the following operations:
       #
       #   * Replaces `(ampersand)quot;` with `"`
+      #
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
+      #
       #   * Replaces `(ampersand)lt;` with a "less than" symbol
+      #
       #   * Replaces `(ampersand)gt;` with `>`
+      #
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
+      #
       #   * Replaces characters that are represented in decimal format,
       #     `(ampersand)#nnnn;`, with the corresponding characters
       #
@@ -2415,8 +2488,10 @@ module Aws
       #   applicable data types:
       #
       #   * ByteMatchSetUpdate: Contains `Action` and `ByteMatchTuple`
+      #
       #   * ByteMatchTuple: Contains `FieldToMatch`, `PositionalConstraint`,
       #     `TargetString`, and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Array<Types::ByteMatchSetUpdate>]
       class UpdateByteMatchSetRequest < Struct.new(
@@ -2446,7 +2521,7 @@ module Aws
       #           {
       #             action: "INSERT", # required, accepts INSERT, DELETE
       #             ip_set_descriptor: { # required
-      #               type: "IPV4", # required, accepts IPV4
+      #               type: "IPV4", # required, accepts IPV4, IPV6
       #               value: "IPSetDescriptorValue", # required
       #             },
       #           },
@@ -2467,6 +2542,7 @@ module Aws
       #   types:
       #
       #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
+      #
       #   * IPSetDescriptor: Contains `Type` and `Value`
       #   @return [Array<Types::IPSetUpdate>]
       class UpdateIPSetRequest < Struct.new(
@@ -2518,7 +2594,9 @@ module Aws
       #   types:
       #
       #   * RuleUpdate: Contains `Action` and `Predicate`
+      #
       #   * Predicate: Contains `DataId`, `Negated`, and `Type`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Array<Types::RuleUpdate>]
       class UpdateRuleRequest < Struct.new(
@@ -2575,8 +2653,10 @@ module Aws
       #   information, see the applicable data types:
       #
       #   * SizeConstraintSetUpdate: Contains `Action` and `SizeConstraint`
+      #
       #   * SizeConstraint: Contains `FieldToMatch`, `TextTransformation`,
       #     `ComparisonOperator`, and `Size`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Array<Types::SizeConstraintSetUpdate>]
       class UpdateSizeConstraintSetRequest < Struct.new(
@@ -2634,8 +2714,10 @@ module Aws
       #
       #   * SqlInjectionMatchSetUpdate: Contains `Action` and
       #     `SqlInjectionMatchTuple`
+      #
       #   * SqlInjectionMatchTuple: Contains `FieldToMatch` and
       #     `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Array<Types::SqlInjectionMatchSetUpdate>]
       class UpdateSqlInjectionMatchSetRequest < Struct.new(
@@ -2696,7 +2778,9 @@ module Aws
       #   types:
       #
       #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
+      #
       #   * ActivatedRule: Contains `Action`, `Priority`, and `RuleId`
+      #
       #   * WafAction: Contains `Type`
       #   @return [Array<Types::WebACLUpdate>]
       #
@@ -2762,7 +2846,9 @@ module Aws
       #   applicable data types:
       #
       #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
+      #
       #   * XssMatchTuple: Contains `FieldToMatch` and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       #   @return [Array<Types::XssMatchSetUpdate>]
       class UpdateXssMatchSetRequest < Struct.new(
@@ -2800,7 +2886,9 @@ module Aws
       #   settings in a `Rule`. Valid settings include the following:
       #
       #   * `ALLOW`\: AWS WAF allows requests
+      #
       #   * `BLOCK`\: AWS WAF blocks requests
+      #
       #   * `COUNT`\: AWS WAF increments a counter of the requests that match
       #     all of the conditions in the rule. AWS WAF then continues to
       #     inspect the web request based on the remaining rules in the web
@@ -3029,9 +3117,13 @@ module Aws
       #   transformations:
       #
       #   * Delete the following characters: \\ " ' ^
+      #
       #   * Delete spaces before the following characters: / (
+      #
       #   * Replace the following characters with a space: , ;
+      #
       #   * Replace multiple spaces with one space
+      #
       #   * Convert uppercase letters (A-Z) to lowercase (a-z)
       #
       #   **COMPRESS\_WHITE\_SPACE**
@@ -3040,10 +3132,15 @@ module Aws
       #   character (decimal 32):
       #
       #   * \\f, formfeed, decimal 12
+      #
       #   * \\t, tab, decimal 9
+      #
       #   * \\n, newline, decimal 10
+      #
       #   * \\r, carriage return, decimal 13
+      #
       #   * \\v, vertical tab, decimal 11
+      #
       #   * non-breaking space, decimal 160
       #
       #   `COMPRESS_WHITE_SPACE` also replaces multiple spaces with one space.
@@ -3054,11 +3151,16 @@ module Aws
       #   characters. `HTML_ENTITY_DECODE` performs the following operations:
       #
       #   * Replaces `(ampersand)quot;` with `"`
+      #
       #   * Replaces `(ampersand)nbsp;` with a non-breaking space, decimal 160
+      #
       #   * Replaces `(ampersand)lt;` with a "less than" symbol
+      #
       #   * Replaces `(ampersand)gt;` with `>`
+      #
       #   * Replaces characters that are represented in hexadecimal format,
       #     `(ampersand)#xhhhh;`, with the corresponding characters
+      #
       #   * Replaces characters that are represented in decimal format,
       #     `(ampersand)#nnnn;`, with the corresponding characters
       #

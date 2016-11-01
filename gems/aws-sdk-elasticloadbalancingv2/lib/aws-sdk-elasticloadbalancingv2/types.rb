@@ -147,7 +147,7 @@ module Aws
       #   @return [Array<Types::Certificate>]
       #
       # @!attribute [rw] default_actions
-      #   The default actions for the listener.
+      #   The default action for the listener.
       #   @return [Array<Types::Action>]
       class CreateListenerInput < Struct.new(
         :load_balancer_arn,
@@ -264,7 +264,20 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] conditions
-      #   The conditions.
+      #   A condition. Each condition has the field `path-pattern` and
+      #   specifies one path pattern. A path pattern is case sensitive, can be
+      #   up to 255 characters in length, and can contain any of the following
+      #   characters:
+      #
+      #   * A-Z, a-z, 0-9
+      #
+      #   * \_ - . $ / ~ " ' @ : +
+      #
+      #   * &amp; (using &amp;amp;)
+      #
+      #   * \* (matches 0 or more characters)
+      #
+      #   * ? (matches exactly 1 character)
       #   @return [Array<Types::RuleCondition>]
       #
       # @!attribute [rw] priority
@@ -273,7 +286,8 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] actions
-      #   The actions for the rule.
+      #   An action. Each action has the type `forward` and specifies a target
+      #   group.
       #   @return [Array<Types::Action>]
       class CreateRuleInput < Struct.new(
         :listener_arn,
@@ -484,7 +498,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] targets
-      #   The targets.
+      #   The targets. If you specified a port override when you registered a
+      #   target, you must specify both the target ID and the port when you
+      #   deregister it.
       #   @return [Array<Types::TargetDescription>]
       class DeregisterTargetsInput < Struct.new(
         :target_group_arn,
@@ -951,7 +967,7 @@ module Aws
       #   The name of the attribute.
       #
       #   * `access_logs.s3.enabled` - Indicates whether access logs stored in
-      #     Amazon S3 are enabled.
+      #     Amazon S3 are enabled. The value is `true` or `false`.
       #
       #   * `access_logs.s3.bucket` - The name of the S3 bucket for the access
       #     logs. This attribute is required if access logs in Amazon S3 are
@@ -964,7 +980,7 @@ module Aws
       #     in the root of the bucket.
       #
       #   * `deletion_protection.enabled` - Indicates whether deletion
-      #     protection is enabled.
+      #     protection is enabled. The value is `true` or `false`.
       #
       #   * `idle_timeout.timeout_seconds` - The idle timeout value, in
       #     seconds. The valid range is 1-3600. The default is 60 seconds.
@@ -1291,7 +1307,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] targets
-      #   The targets.
+      #   The targets. The default port for a target is the port for the
+      #   target group. You can specify a port override. If a target is
+      #   already registered, you can register it again using a different
+      #   port.
       #   @return [Array<Types::TargetDescription>]
       class RegisterTargetsInput < Struct.new(
         :target_group_arn,
@@ -1364,11 +1383,11 @@ module Aws
       #         values: ["StringValue"],
       #       }
       # @!attribute [rw] field
-      #   The name of the field. The possible value is `path-pattern`.
+      #   The only possible value is `path-pattern`.
       #   @return [String]
       #
       # @!attribute [rw] values
-      #   The values for the field.
+      #   The path pattern. You can specify a single path pattern.
       #
       #   A path pattern is case sensitive, can be up to 255 characters in
       #   length, and can contain any of the following characters:
@@ -1377,7 +1396,7 @@ module Aws
       #
       #   * \_ - . $ / ~ " ' @ : +
       #
-      #   * &amp;amp; (using &amp;amp;amp;)
+      #   * &amp; (using &amp;amp;)
       #
       #   * \* (matches 0 or more characters)
       #
@@ -1672,7 +1691,7 @@ module Aws
       #     0-3600 seconds. The default value is 300 seconds.
       #
       #   * `stickiness.enabled` - Indicates whether sticky sessions are
-      #     enabled.
+      #     enabled. The value is `true` or `false`.
       #
       #   * `stickiness.type` - The type of sticky sessions. The possible
       #     value is `lb_cookie`.

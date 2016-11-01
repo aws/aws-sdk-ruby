@@ -149,13 +149,13 @@ module Aws
         data.source_db_snapshot_identifier
       end
 
-      # Specifies the storage type associated with DB Snapshot.
+      # Specifies the storage type associated with DB snapshot.
       # @return [String]
       def storage_type
         data.storage_type
       end
 
-      # The ARN from the Key Store with which to associate the instance for
+      # The ARN from the key store with which to associate the instance for
       # TDE encryption.
       # @return [String]
       def tde_credential_arn
@@ -179,6 +179,15 @@ module Aws
       # @return [String]
       def db_snapshot_arn
         data.db_snapshot_arn
+      end
+
+      # The time zone of the DB snapshot. In most cases, the `Timezone`
+      # element is empty. `Timezone` content appears only for snapshots taken
+      # from Microsoft SQL Server DB instances that were created with a time
+      # zone specified.
+      # @return [String]
+      def timezone
+        data.timezone
       end
 
       # @!endgroup

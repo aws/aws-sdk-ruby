@@ -275,7 +275,10 @@ module Aws
       #   The ARN of the project for the upload.
       # @option params [required, String] :name
       #   The upload's file name. The name should not contain the '/'
-      #   character.
+      #   character. If uploading an iOS app, the file name needs to end with
+      #   the `.ipa` extension. If uploading an Android app, the file name needs
+      #   to end with the `.apk` extension. For all others, the file name must
+      #   end with the `.zip` file extension.
       # @option params [required, String] :type
       #   The upload's upload type.
       #
@@ -1026,7 +1029,9 @@ module Aws
       #   Allowed values include:
       #
       #   * FILE: The artifacts are files.
+      #
       #   * LOG: The artifacts are logs.
+      #
       #   * SCREENSHOT: The artifacts are screenshots.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
@@ -1108,7 +1113,7 @@ module Aws
 
       # Gets information about unique device types.
       # @option params [String] :arn
-      #   The device types' ARNs.
+      #   The Amazon Resource Name (ARN) of the project.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1308,7 +1313,9 @@ module Aws
 
       # Gets information about projects.
       # @option params [String] :arn
-      #   The projects' ARNs.
+      #   Optional. If no Amazon Resource Name (ARN) is specified, then AWS
+      #   Device Farm returns a list of all projects for the AWS account. You
+      #   can also specify a project ARN.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1399,9 +1406,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Gets information about runs.
+      # Gets information about runs, given an AWS Device Farm project ARN.
       # @option params [required, String] :arn
-      #   The runs' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list runs.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1450,9 +1458,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Gets information about samples.
+      # Gets information about samples, given an AWS Device Farm project ARN
       # @option params [required, String] :arn
-      #   The samples' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list samples.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the
@@ -1636,9 +1645,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Gets information about uploads.
+      # Gets information about uploads, given an AWS Device Farm project ARN.
       # @option params [required, String] :arn
-      #   The uploads' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list uploads.
       # @option params [String] :next_token
       #   An identifier that was returned from the previous call to this
       #   operation, which can be used to return the next set of items in the

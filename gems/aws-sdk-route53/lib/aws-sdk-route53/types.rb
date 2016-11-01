@@ -91,9 +91,9 @@ module Aws
       #
       #   : Specify the hosted zone ID for the region in which you created the
       #     environment. The environment must have a regionalized subdomain.
-      #     For a list of regions and the corresponding hosted zone IDs, see [
-      #     AWS Elastic Beanstalk][1] in the *Regions and Endpoints* chapter
-      #     of the AWSk General Reference.
+      #     For a list of regions and the corresponding hosted zone IDs, see
+      #     [AWS Elastic Beanstalk][1] in the Regions and Endpoints chapter of
+      #     the *AWS General Reference*.
       #
       #   ELB load balancer
       #
@@ -322,7 +322,7 @@ module Aws
       #       {
       #         hosted_zone_id: "ResourceId", # required
       #         vpc: { # required
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         comment: "AssociateVPCComment",
@@ -370,7 +370,7 @@ module Aws
       #           type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #           set_identifier: "ResourceRecordSetIdentifier",
       #           weight: 1,
-      #           region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+      #           region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #           geo_location: {
       #             continent_code: "GeoLocationContinentCode",
       #             country_code: "GeoLocationCountryCode",
@@ -445,7 +445,7 @@ module Aws
       #               type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #               set_identifier: "ResourceRecordSetIdentifier",
       #               weight: 1,
-      #               region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+      #               region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #               geo_location: {
       #                 continent_code: "GeoLocationContinentCode",
       #                 country_code: "GeoLocationCountryCode",
@@ -582,7 +582,7 @@ module Aws
       #                 type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #                 set_identifier: "ResourceRecordSetIdentifier",
       #                 weight: 1,
-      #                 region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+      #                 region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #                 geo_location: {
       #                   continent_code: "GeoLocationContinentCode",
       #                   country_code: "GeoLocationCountryCode",
@@ -817,7 +817,7 @@ module Aws
       #       {
       #         name: "DNSName", # required
       #         vpc: {
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         caller_reference: "Nonce", # required
@@ -906,6 +906,8 @@ module Aws
       #   @return [Types::DelegationSet]
       #
       # @!attribute [rw] vpc
+      #   A complex type that contains information about an Amazon VPC that
+      #   you associated with this hosted zone.
       #   @return [Types::VPC]
       #
       # @!attribute [rw] location
@@ -951,7 +953,7 @@ module Aws
       #   @return [Types::DelegationSet]
       #
       # @!attribute [rw] location
-      #   The unique URL representing the new reusbale delegation set.
+      #   The unique URL representing the new reusable delegation set.
       #   @return [String]
       class CreateReusableDelegationSetResponse < Struct.new(
         :delegation_set,
@@ -1066,6 +1068,7 @@ module Aws
       #   @return [Types::TrafficPolicy]
       #
       # @!attribute [rw] location
+      #   A unique URL that represents a new traffic policy.
       #   @return [String]
       class CreateTrafficPolicyResponse < Struct.new(
         :traffic_policy,
@@ -1114,6 +1117,7 @@ module Aws
       #   @return [Types::TrafficPolicy]
       #
       # @!attribute [rw] location
+      #   A unique URL that represents a new traffic policy version.
       #   @return [String]
       class CreateTrafficPolicyVersionResponse < Struct.new(
         :traffic_policy,
@@ -1123,9 +1127,16 @@ module Aws
 
       # A complex type that describes the name servers for this hosted zone.
       # @!attribute [rw] id
+      #   The ID that Amazon Route 53 assigns to a reusable delegation set.
       #   @return [String]
       #
       # @!attribute [rw] caller_reference
+      #   A unique string that identifies the request, and that allows you to
+      #   retry failed `CreateReusableDelegationSet` requests without the risk
+      #   of executing the operation twice. You must use a unique
+      #   `CallerReference` string every time you submit a
+      #   `CreateReusableDelegationSet` request. `CallerReference` can be any
+      #   unique string, for example, a date/time stamp.
       #   @return [String]
       #
       # @!attribute [rw] name_servers
@@ -1148,6 +1159,7 @@ module Aws
       #         health_check_id: "HealthCheckId", # required
       #       }
       # @!attribute [rw] health_check_id
+      #   The ID of the health check that you want to delete.
       #   @return [String]
       class DeleteHealthCheckRequest < Struct.new(
         :health_check_id)
@@ -1273,7 +1285,7 @@ module Aws
       #       {
       #         hosted_zone_id: "ResourceId", # required
       #         vpc: { # required
-      #           vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #           vpc_id: "VPCId",
       #         },
       #         comment: "DisassociateVPCComment",
@@ -1457,7 +1469,7 @@ module Aws
       #         subdivision_code: "GeoLocationSubdivisionCode",
       #       }
       # @!attribute [rw] continent_code
-      #   Amazon Route 53 supports the following contintent codes:
+      #   Amazon Route 53 supports the following continent codes:
       #
       #   * **AF**\: Africa
       #
@@ -2914,6 +2926,9 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] delegation_set_id
+      #   If you're using reusable delegation sets and you want to list all
+      #   of the hosted zones that are associated with a reusable delegation
+      #   set, specify the ID of that reusable delegation set.
       #   @return [String]
       class ListHostedZonesRequest < Struct.new(
         :marker,
@@ -3790,7 +3805,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/DeveloperGuide/ResourceRecordTypes.html
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/ResourceRecordTypes.html
       #   @return [String]
       class ResourceRecord < Struct.new(
         :value)
@@ -3806,7 +3821,7 @@ module Aws
       #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
       #         set_identifier: "ResourceRecordSetIdentifier",
       #         weight: 1,
-      #         region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
+      #         region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1, ap-south-1
       #         geo_location: {
       #           continent_code: "GeoLocationContinentCode",
       #           country_code: "GeoLocationCountryCode",
@@ -4236,8 +4251,8 @@ module Aws
       #   record sets and then associate the health check with those resource
       #   record sets, health check results will be unpredictable.
       #
-      #   For more informaiton, see the following topics in the Amazon Route
-      #   53 Developer Guide:
+      #   For more information, see the following topics in the *Amazon Route
+      #   53 Developer Guide*\:
       #
       #   * [Amazon Route 53 Health Checks and DNS Failover][1]
       #
@@ -4250,6 +4265,18 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] traffic_policy_instance_id
+      #   When you create a traffic policy instance, Amazon Route 53
+      #   automatically creates a resource record set.
+      #   `TrafficPolicyInstanceId` is the ID of the traffic policy instance
+      #   that Amazon Route 53 created this resource record set for.
+      #
+      #   To delete the resource record set that is associated with a traffic
+      #   policy instance, use `DeleteTrafficPolicyInstance`. Amazon Route 53
+      #   will delete the resource record set automatically. If you delete the
+      #   resource record set by using `ChangeResourceRecordSets`, Amazon
+      #   Route 53 doesn't automatically delete the traffic policy instance,
+      #   and you'll continue to be charged for it even though it's no
+      #   longer in use.
       #   @return [String]
       class ResourceRecordSet < Struct.new(
         :name,
@@ -4410,21 +4437,38 @@ module Aws
       #         edns0_client_subnet_mask: "SubnetMask",
       #       }
       # @!attribute [rw] hosted_zone_id
+      #   The ID of the hosted zone that you want Amazon Route 53 to simulate
+      #   a query for.
       #   @return [String]
       #
       # @!attribute [rw] record_name
+      #   The name of the resource record set that you want Amazon Route 53 to
+      #   simulate a query for.
       #   @return [String]
       #
       # @!attribute [rw] record_type
+      #   The type of the resource record set.
       #   @return [String]
       #
       # @!attribute [rw] resolver_ip
+      #   If you want to simulate a request from a specific DNS resolver,
+      #   specify the IP address for that resolver. If you omit this value,
+      #   `TestDnsAnswer` uses the IP address of a DNS resolver in the AWS US
+      #   East region.
       #   @return [String]
       #
       # @!attribute [rw] edns0_client_subnet_ip
+      #   If the resolver that you specified for resolverip supports EDNS0,
+      #   specify the IP address of a client in the applicable location.
       #   @return [String]
       #
       # @!attribute [rw] edns0_client_subnet_mask
+      #   If you specify an IP address for `edns0clientsubnetip`, you can
+      #   optionally specify the number of bits of the IP address that you
+      #   want the checking tool to include in the DNS query. For example, if
+      #   you specify `192.0.2.44` for `edns0clientsubnetip` and `24` for
+      #   `edns0clientsubnetmask`, the checking tool will simulate a request
+      #   from 192.0.2.0/24. The default value is 24 bits.
       #   @return [String]
       class TestDNSAnswerRequest < Struct.new(
         :hosted_zone_id,
@@ -4483,22 +4527,41 @@ module Aws
         include Aws::Structure
       end
 
+      # A complex type that contains settings for a traffic policy.
       # @!attribute [rw] id
+      #   The ID that Amazon Route 53 assigned to a traffic policy when you
+      #   created it.
       #   @return [String]
       #
       # @!attribute [rw] version
+      #   The version number that Amazon Route 53 assigns to a traffic policy.
+      #   For a new traffic policy, the value of `Version` is always 1.
       #   @return [Integer]
       #
       # @!attribute [rw] name
+      #   The name that you specified when you created the traffic policy.
       #   @return [String]
       #
       # @!attribute [rw] type
+      #   The DNS type of the resource record sets that Amazon Route 53
+      #   creates when you use a traffic policy to create a traffic policy
+      #   instance.
       #   @return [String]
       #
       # @!attribute [rw] document
+      #   The definition of a traffic policy in JSON format. You specify the
+      #   JSON document to use for a new traffic policy in the
+      #   `CreateTrafficPolicy` request. For more information about the JSON
+      #   format, see [Traffic Policy Document Format][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/api-reference/api-policies-traffic-policy-document-format.html
       #   @return [String]
       #
       # @!attribute [rw] comment
+      #   The comment that you specify in the `CreateTrafficPolicy` request,
+      #   if any.
       #   @return [String]
       class TrafficPolicy < Struct.new(
         :id,
@@ -4510,31 +4573,68 @@ module Aws
         include Aws::Structure
       end
 
+      # A complex type that contains settings for the new traffic policy
+      # instance.
       # @!attribute [rw] id
+      #   The ID that Amazon Route 53 assigned to the new traffic policy
+      #   instance.
       #   @return [String]
       #
       # @!attribute [rw] hosted_zone_id
+      #   The ID of the hosted zone that Amazon Route 53 created resource
+      #   record sets in.
       #   @return [String]
       #
       # @!attribute [rw] name
+      #   The DNS name, such as www.example.com, for which Amazon Route 53
+      #   responds to queries by using the resource record sets that are
+      #   associated with this traffic policy instance.
       #   @return [String]
       #
       # @!attribute [rw] ttl
+      #   The TTL that Amazon Route 53 assigned to all of the resource record
+      #   sets that it created in the specified hosted zone.
       #   @return [Integer]
       #
       # @!attribute [rw] state
+      #   The value of `State` is one of the following values:
+      #
+      #   Applied
+      #
+      #   : Amazon Route 53 has finished creating resource record sets, and
+      #     changes have propagated to all Amazon Route 53 edge locations.
+      #
+      #   Creating
+      #
+      #   : Amazon Route 53 is creating the resource record sets. Use
+      #     `GetTrafficPolicyInstance` to confirm that the
+      #     `CreateTrafficPolicyInstance` request completed successfully.
+      #
+      #   Failed
+      #
+      #   : Amazon Route 53 wasn't able to create or update the resource
+      #     record sets. When the value of `State` is `Failed`, see `Message`
+      #     for an explanation of what caused the request to fail.
       #   @return [String]
       #
       # @!attribute [rw] message
+      #   If `State` is `Failed`, an explanation of the reason for the
+      #   failure. If `State` is another value, `Message` is empty.
       #   @return [String]
       #
       # @!attribute [rw] traffic_policy_id
+      #   The ID of the traffic policy that Amazon Route 53 used to create
+      #   resource record sets in the specified hosted zone.
       #   @return [String]
       #
       # @!attribute [rw] traffic_policy_version
+      #   The version of the traffic policy that Amazon Route 53 used to
+      #   create resource record sets in the specified hosted zone.
       #   @return [Integer]
       #
       # @!attribute [rw] traffic_policy_type
+      #   The DNS type that Amazon Route 53 assigned to all of the resource
+      #   record sets that it created for this traffic policy instance.
       #   @return [String]
       class TrafficPolicyInstance < Struct.new(
         :id,
@@ -4549,19 +4649,31 @@ module Aws
         include Aws::Structure
       end
 
+      # A complex type that contains information about the latest version of
+      # one traffic policy that is associated with the current AWS account.
       # @!attribute [rw] id
+      #   The ID that Amazon Route 53 assigned to the traffic policy when you
+      #   created it.
       #   @return [String]
       #
       # @!attribute [rw] name
+      #   The name that you specified for the traffic policy when you created
+      #   it.
       #   @return [String]
       #
       # @!attribute [rw] type
+      #   The DNS type of the resource record sets that Amazon Route 53
+      #   creates when you use a traffic policy to create a traffic policy
+      #   instance.
       #   @return [String]
       #
       # @!attribute [rw] latest_version
+      #   The version number of the latest version of the traffic policy.
       #   @return [Integer]
       #
       # @!attribute [rw] traffic_policy_count
+      #   The number of traffic policies that are associated with the current
+      #   AWS account.
       #   @return [Integer]
       class TrafficPolicySummary < Struct.new(
         :id,
@@ -4819,6 +4931,20 @@ module Aws
       #   @return [Types::AlarmIdentifier]
       #
       # @!attribute [rw] insufficient_data_health_status
+      #   When CloudWatch has insufficient data about the metric to determine
+      #   the alarm state, the status that you want Amazon Route 53 to assign
+      #   to the health check:
+      #
+      #   * `Healthy`\: Amazon Route 53 considers the health check to be
+      #     healthy.
+      #
+      #   * `Unhealthy`\: Amazon Route 53 considers the health check to be
+      #     unhealthy.
+      #
+      #   * `LastKnownStatus`\: Amazon Route 53 uses the status of the health
+      #     check from the last time CloudWatch had sufficient data to
+      #     determine the alarm state. For new health checks that have no last
+      #     known status, the default status for the health check is healthy.
       #   @return [String]
       class UpdateHealthCheckRequest < Struct.new(
         :health_check_id,
@@ -4974,14 +5100,18 @@ module Aws
         include Aws::Structure
       end
 
+      # A complex type that contains information about the Amazon VPC that
+      # you're associating with the specified hosted zone.
       # @note When making an API call, pass VPC
       #   data as a hash:
       #
       #       {
-      #         vpc_region: "us-east-1", # accepts us-east-1, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #         vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
       #         vpc_id: "VPCId",
       #       }
       # @!attribute [rw] vpc_region
+      #   The region in which you created the VPC that you want to associate
+      #   with the specified Amazon Route 53 hosted zone.
       #   @return [String]
       #
       # @!attribute [rw] vpc_id

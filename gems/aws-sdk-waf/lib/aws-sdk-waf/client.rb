@@ -149,9 +149,12 @@ module Aws
       #
       # 1.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateByteMatchSet` request.
+      #
       # 2.  Submit a `CreateByteMatchSet` request.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an `UpdateByteMatchSet` request.
+      #
       # 4.  Submit an UpdateByteMatchSet request to specify the part of the
       #     request that you want AWS WAF to inspect (for example, the header
       #     or the URI) and the value that you want AWS WAF to watch for.
@@ -207,9 +210,12 @@ module Aws
       #
       # 1.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateIPSet` request.
+      #
       # 2.  Submit a `CreateIPSet` request.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateIPSet request.
+      #
       # 4.  Submit an `UpdateIPSet` request to specify the IP addresses that
       #     you want AWS WAF to watch for.
       #
@@ -239,7 +245,7 @@ module Aws
       #   resp.ip_set.ip_set_id #=> String
       #   resp.ip_set.name #=> String
       #   resp.ip_set.ip_set_descriptors #=> Array
-      #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4"
+      #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
       #   resp.change_token #=> String
       # @overload create_ip_set(params = {})
@@ -256,6 +262,7 @@ module Aws
       # example, suppose you add the following to a `Rule`\:
       #
       # * An `IPSet` that matches the IP address `192.0.2.44/32`
+      #
       # * A `ByteMatchSet` that matches `BadBot` in the `User-Agent` header
       #
       # You then add the `Rule` to a `WebACL` and specify that you want to
@@ -268,13 +275,18 @@ module Aws
       # 1.  Create and update the predicates that you want to include in the
       #     `Rule`. For more information, see CreateByteMatchSet, CreateIPSet,
       #     and CreateSqlInjectionMatchSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateRule` request.
+      #
       # 3.  Submit a `CreateRule` request.
+      #
       # 4.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateRule request.
+      #
       # 5.  Submit an `UpdateRule` request to specify the predicates that you
       #     want to include in the `Rule`.
+      #
       # 6.  Create and update a `WebACL` that contains the `Rule`. For more
       #     information, see CreateWebACL.
       #
@@ -334,10 +346,13 @@ module Aws
       #
       # 1.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateSizeConstraintSet` request.
+      #
       # 2.  Submit a `CreateSizeConstraintSet` request.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an `UpdateSizeConstraintSet`
       #     request.
+      #
       # 4.  Submit an UpdateSizeConstraintSet request to specify the part of
       #     the request that you want AWS WAF to inspect (for example, the
       #     header or the URI) and the value that you want AWS WAF to watch
@@ -392,10 +407,13 @@ module Aws
       #
       # 1.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateSqlInjectionMatchSet` request.
+      #
       # 2.  Submit a `CreateSqlInjectionMatchSet` request.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateSqlInjectionMatchSet
       #     request.
+      #
       # 4.  Submit an UpdateSqlInjectionMatchSet request to specify the parts
       #     of web requests in which you want to allow, block, or count
       #     malicious SQL code.
@@ -453,13 +471,18 @@ module Aws
       #     that you want to include in `Rules`. For more information, see
       #     CreateByteMatchSet, UpdateByteMatchSet, CreateIPSet, UpdateIPSet,
       #     CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.
+      #
       # 2.  Create and update the `Rules` that you want to include in the
       #     `WebACL`. For more information, see CreateRule and UpdateRule.
+      #
       # 3.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateWebACL` request.
+      #
       # 4.  Submit a `CreateWebACL` request.
+      #
       # 5.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateWebACL request.
+      #
       # 6.  Submit an UpdateWebACL request to specify the `Rules` that you
       #     want to include in the `WebACL`, to specify the default action,
       #     and to associate the `WebACL` with a CloudFront distribution.
@@ -525,9 +548,12 @@ module Aws
       #
       # 1.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `CreateXssMatchSet` request.
+      #
       # 2.  Submit a `CreateXssMatchSet` request.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateXssMatchSet request.
+      #
       # 4.  Submit an UpdateXssMatchSet request to specify the parts of web
       #     requests in which you want to allow, block, or count cross-site
       #     scripting attacks.
@@ -580,8 +606,10 @@ module Aws
       #
       # 1.  Update the `ByteMatchSet` to remove filters, if any. For more
       #     information, see UpdateByteMatchSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteByteMatchSet` request.
+      #
       # 3.  Submit a `DeleteByteMatchSet` request.
       # @option params [required, String] :byte_match_set_id
       #   The `ByteMatchSetId` of the ByteMatchSet that you want to delete.
@@ -618,8 +646,10 @@ module Aws
       #
       # 1.  Update the `IPSet` to remove IP address ranges, if any. For more
       #     information, see UpdateIPSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteIPSet` request.
+      #
       # 3.  Submit a `DeleteIPSet` request.
       # @option params [required, String] :ip_set_id
       #   The `IPSetId` of the IPSet that you want to delete. `IPSetId` is
@@ -656,8 +686,10 @@ module Aws
       #
       # 1.  Update the `Rule` to remove predicates, if any. For more
       #     information, see UpdateRule.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteRule` request.
+      #
       # 3.  Submit a `DeleteRule` request.
       # @option params [required, String] :rule_id
       #   The `RuleId` of the Rule that you want to delete. `RuleId` is returned
@@ -695,8 +727,10 @@ module Aws
       #
       # 1.  Update the `SizeConstraintSet` to remove filters, if any. For more
       #     information, see UpdateSizeConstraintSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteSizeConstraintSet` request.
+      #
       # 3.  Submit a `DeleteSizeConstraintSet` request.
       # @option params [required, String] :size_constraint_set_id
       #   The `SizeConstraintSetId` of the SizeConstraintSet that you want to
@@ -735,8 +769,10 @@ module Aws
       #
       # 1.  Update the `SqlInjectionMatchSet` to remove filters, if any. For
       #     more information, see UpdateSqlInjectionMatchSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteSqlInjectionMatchSet` request.
+      #
       # 3.  Submit a `DeleteSqlInjectionMatchSet` request.
       # @option params [required, String] :sql_injection_match_set_id
       #   The `SqlInjectionMatchSetId` of the SqlInjectionMatchSet that you want
@@ -770,8 +806,10 @@ module Aws
       #
       # 1.  Update the `WebACL` to remove `Rules`, if any. For more
       #     information, see UpdateWebACL.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteWebACL` request.
+      #
       # 3.  Submit a `DeleteWebACL` request.
       # @option params [required, String] :web_acl_id
       #   The `WebACLId` of the WebACL that you want to delete. `WebACLId` is
@@ -809,8 +847,10 @@ module Aws
       #
       # 1.  Update the `XssMatchSet` to remove filters, if any. For more
       #     information, see UpdateXssMatchSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of a `DeleteXssMatchSet` request.
+      #
       # 3.  Submit a `DeleteXssMatchSet` request.
       # @option params [required, String] :xss_match_set_id
       #   The `XssMatchSetId` of the XssMatchSet that you want to delete.
@@ -904,8 +944,10 @@ module Aws
       # * `PROVISIONED`\: You requested the change token by calling
       #   `GetChangeToken`, but you haven't used it yet in a call to create,
       #   update, or delete an AWS WAF object.
+      #
       # * `PENDING`\: AWS WAF is propagating the create, update, or delete
       #   request to all AWS WAF servers.
+      #
       # * `IN_SYNC`\: Propagation is complete.
       # @option params [required, String] :change_token
       #   The change token for which you want to get the status. This change
@@ -945,7 +987,7 @@ module Aws
       #   resp.ip_set.ip_set_id #=> String
       #   resp.ip_set.name #=> String
       #   resp.ip_set.ip_set_descriptors #=> Array
-      #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4"
+      #   resp.ip_set.ip_set_descriptors[0].type #=> String, one of "IPV4", "IPV6"
       #   resp.ip_set.ip_set_descriptors[0].value #=> String
       # @overload get_ip_set(params = {})
       # @param [Hash] params ({})
@@ -1003,6 +1045,7 @@ module Aws
       #
       #   * The `RuleId` of the `Rule` for which you want `GetSampledRequests`
       #     to return a sample of requests.
+      #
       #   * `Default_Action`, which causes `GetSampledRequests` to return a
       #     sample of the requests that didn't match any of the rules in the
       #     specified `WebACL`.
@@ -1181,7 +1224,7 @@ module Aws
       #   the second and subsequent `ListByteMatchSets` requests, specify the
       #   value of `NextMarker` from the previous response to get information
       #   about another batch of `ByteMatchSets`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of `ByteMatchSet` objects that you want AWS WAF
       #   to return for this request. If you have more `ByteMatchSets` objects
       #   than the number you specify for `Limit`, the response includes a
@@ -1195,7 +1238,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_byte_match_sets({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1218,7 +1261,7 @@ module Aws
       #   subsequent `ListIPSets` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `ByteMatchSets`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of `IPSet` objects that you want AWS WAF to
       #   return for this request. If you have more `IPSet` objects than the
       #   number you specify for `Limit`, the response includes a `NextMarker`
@@ -1231,7 +1274,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_ip_sets({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1254,7 +1297,7 @@ module Aws
       #   subsequent `ListRules` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `Rules`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of `Rules` that you want AWS WAF to return for
       #   this request. If you have more `Rules` than the number that you
       #   specify for `Limit`, the response includes a `NextMarker` value that
@@ -1267,7 +1310,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_rules({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1291,7 +1334,7 @@ module Aws
       #   `ListSizeConstraintSets` requests, specify the value of `NextMarker`
       #   from the previous response to get information about another batch of
       #   `SizeConstraintSets`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of `SizeConstraintSet` objects that you want AWS
       #   WAF to return for this request. If you have more `SizeConstraintSets`
       #   objects than the number you specify for `Limit`, the response includes
@@ -1305,7 +1348,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_size_constraint_sets({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1329,7 +1372,7 @@ module Aws
       #   subsequent `ListSqlInjectionMatchSets` requests, specify the value of
       #   `NextMarker` from the previous response to get information about
       #   another batch of `SqlInjectionMatchSets`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of SqlInjectionMatchSet objects that you want AWS
       #   WAF to return for this request. If you have more
       #   `SqlInjectionMatchSet` objects than the number you specify for
@@ -1343,7 +1386,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_sql_injection_match_sets({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1366,7 +1409,7 @@ module Aws
       #   group of `WebACL` objects. For the second and subsequent `ListWebACLs`
       #   requests, specify the value of `NextMarker` from the previous response
       #   to get information about another batch of `WebACL` objects.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of `WebACL` objects that you want AWS WAF to
       #   return for this request. If you have more `WebACL` objects than the
       #   number that you specify for `Limit`, the response includes a
@@ -1380,7 +1423,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_web_acls({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1403,7 +1446,7 @@ module Aws
       #   `XssMatchSets`. For the second and subsequent `ListXssMatchSets`
       #   requests, specify the value of `NextMarker` from the previous response
       #   to get information about another batch of `XssMatchSets`.
-      # @option params [required, Integer] :limit
+      # @option params [Integer] :limit
       #   Specifies the number of XssMatchSet objects that you want AWS WAF to
       #   return for this request. If you have more `XssMatchSet` objects than
       #   the number you specify for `Limit`, the response includes a
@@ -1416,7 +1459,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_xss_match_sets({
       #     next_marker: "NextMarker",
-      #     limit: 1, # required
+      #     limit: 1,
       #   })
       #
       # @example Response structure
@@ -1437,14 +1480,18 @@ module Aws
       # * Whether to insert or delete the object from the array. If you want
       #   to change a `ByteMatchSetUpdate` object, you delete the existing
       #   object and add a new one.
+      #
       # * The part of a web request that you want AWS WAF to inspect, such as
       #   a query string or the value of the `User-Agent` header.
+      #
       # * The bytes (typically a string that corresponds with ASCII
       #   characters) that you want AWS WAF to look for. For more information,
       #   including how you specify the values for the AWS WAF API and the AWS
       #   CLI or SDKs, see `TargetString` in the ByteMatchTuple data type.
+      #
       # * Where to look, such as at the beginning or the end of a query
       #   string.
+      #
       # * Whether to perform any conversions on the request, such as
       #   converting it to lowercase, before inspecting it for the specified
       #   string.
@@ -1457,8 +1504,10 @@ module Aws
       #
       # 1.  Create a `ByteMatchSet.` For more information, see
       #     CreateByteMatchSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of an `UpdateByteMatchSet` request.
+      #
       # 3.  Submit an `UpdateByteMatchSet` request to specify the part of the
       #     request that you want AWS WAF to inspect (for example, the header
       #     or the URI) and the value that you want AWS WAF to watch for.
@@ -1481,8 +1530,10 @@ module Aws
       #   applicable data types:
       #
       #   * ByteMatchSetUpdate: Contains `Action` and `ByteMatchTuple`
+      #
       #   * ByteMatchTuple: Contains `FieldToMatch`, `PositionalConstraint`,
       #     `TargetString`, and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       # @return [Types::UpdateByteMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1523,7 +1574,9 @@ module Aws
       # * Whether to insert or delete the object from the array. If you want
       #   to change an `IPSetDescriptor` object, you delete the existing
       #   object and add a new one.
+      #
       # * The IP address version, `IPv4`.
+      #
       # * The IP address in CIDR notation, for example, `192.0.2.0/24` (for
       #   the range of IP addresses from `192.0.2.0` to `192.0.2.255`) or
       #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
@@ -1542,8 +1595,10 @@ module Aws
       # To create and configure an `IPSet`, perform the following steps:
       #
       # 1.  Submit a CreateIPSet request.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of an UpdateIPSet request.
+      #
       # 3.  Submit an `UpdateIPSet` request to specify the IP addresses that
       #     you want AWS WAF to watch for.
       #
@@ -1570,6 +1625,7 @@ module Aws
       #   types:
       #
       #   * IPSetUpdate: Contains `Action` and `IPSetDescriptor`
+      #
       #   * IPSetDescriptor: Contains `Type` and `Value`
       # @return [Types::UpdateIPSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1583,7 +1639,7 @@ module Aws
       #       {
       #         action: "INSERT", # required, accepts INSERT, DELETE
       #         ip_set_descriptor: { # required
-      #           type: "IPV4", # required, accepts IPV4
+      #           type: "IPV4", # required, accepts IPV4, IPV6
       #           value: "IPSetDescriptorValue", # required
       #         },
       #       },
@@ -1608,6 +1664,7 @@ module Aws
       #
       # * A `ByteMatchSet` that matches the value `BadBot` in the `User-Agent`
       #   header
+      #
       # * An `IPSet` that matches the IP address `192.0.2.44`
       #
       # You then add the `Rule` to a `WebACL` and specify that you want to
@@ -1619,10 +1676,14 @@ module Aws
       #
       # 1.  Create and update the predicates that you want to include in the
       #     `Rule`.
+      #
       # 2.  Create the `Rule`. See CreateRule.
+      #
       # 3.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateRule request.
+      #
       # 4.  Submit an `UpdateRule` request to add predicates to the `Rule`.
+      #
       # 5.  Create and update a `WebACL` that contains the `Rule`. See
       #     CreateWebACL.
       #
@@ -1646,7 +1707,9 @@ module Aws
       #   types:
       #
       #   * RuleUpdate: Contains `Action` and `Predicate`
+      #
       #   * Predicate: Contains `DataId`, `Negated`, and `Type`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       # @return [Types::UpdateRuleResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1684,17 +1747,21 @@ module Aws
       # * Whether to insert or delete the object from the array. If you want
       #   to change a `SizeConstraintSetUpdate` object, you delete the
       #   existing object and add a new one.
+      #
       # * The part of a web request that you want AWS WAF to evaluate, such as
       #   the length of a query string or the length of the `User-Agent`
       #   header.
+      #
       # * Whether to perform any transformations on the request, such as
       #   converting it to lowercase, before checking its length. Note that
       #   transformations of the request body are not supported because the
       #   AWS resource forwards only the first `8192` bytes of your request to
       #   AWS WAF.
+      #
       # * A `ComparisonOperator` used for evaluating the selected part of the
       #   request against the specified `Size`, such as equals, greater than,
       #   less than, and so on.
+      #
       # * The length, in bytes, that you want AWS WAF to watch for in selected
       #   part of the request. The length is computed after applying the
       #   transformation.
@@ -1709,8 +1776,10 @@ module Aws
       #
       # 1.  Create a `SizeConstraintSet.` For more information, see
       #     CreateSizeConstraintSet.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of an `UpdateSizeConstraintSet` request.
+      #
       # 3.  Submit an `UpdateSizeConstraintSet` request to specify the part of
       #     the request that you want AWS WAF to inspect (for example, the
       #     header or the URI) and the value that you want AWS WAF to watch
@@ -1734,8 +1803,10 @@ module Aws
       #   applicable data types:
       #
       #   * SizeConstraintSetUpdate: Contains `Action` and `SizeConstraint`
+      #
       #   * SizeConstraint: Contains `FieldToMatch`, `TextTransformation`,
       #     `ComparisonOperator`, and `Size`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       # @return [Types::UpdateSizeConstraintSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1777,9 +1848,11 @@ module Aws
       # * `Action`\: Whether to insert the object into or delete the object
       #   from the array. To change a `SqlInjectionMatchTuple`, you delete the
       #   existing object and add a new one.
+      #
       # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
       #   inspect and, if you want AWS WAF to inspect a header, the name of
       #   the header.
+      #
       # * `TextTransformation`\: Which text transformation, if any, to perform
       #   on the web request before inspecting the request for snippets of
       #   malicious SQL code.
@@ -1795,8 +1868,10 @@ module Aws
       # following steps:
       #
       # 1.  Submit a CreateSqlInjectionMatchSet request.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of an UpdateIPSet request.
+      #
       # 3.  Submit an `UpdateSqlInjectionMatchSet` request to specify the
       #     parts of web requests that you want AWS WAF to inspect for
       #     snippets of SQL code.
@@ -1820,8 +1895,10 @@ module Aws
       #
       #   * SqlInjectionMatchSetUpdate: Contains `Action` and
       #     `SqlInjectionMatchTuple`
+      #
       #   * SqlInjectionMatchTuple: Contains `FieldToMatch` and
       #     `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       # @return [Types::UpdateSqlInjectionMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1861,11 +1938,14 @@ module Aws
       # * A default action for the `WebACL`, either `ALLOW` or `BLOCK`. AWS
       #   WAF performs the default action if a request doesn't match the
       #   criteria in any of the `Rules` in a `WebACL`.
+      #
       # * The `Rules` that you want to add and/or delete. If you want to
       #   replace one `Rule` with another, you delete the existing `Rule` and
       #   add the new one.
+      #
       # * For each `Rule`, whether you want AWS WAF to allow requests, block
       #   requests, or count requests that match the conditions in the `Rule`.
+      #
       # * The order in which you want AWS WAF to evaluate the `Rules` in a
       #   `WebACL`. If you add more than one `Rule` to a `WebACL`, AWS WAF
       #   evaluates each request against the `Rules` in order based on the
@@ -1875,6 +1955,7 @@ module Aws
       #   AWS WAF immediately takes the corresponding action, allow or block,
       #   and doesn't evaluate the request against the remaining `Rules` in
       #   the `WebACL`, if any.
+      #
       # * The CloudFront distribution that you want to associate with the
       #   `WebACL`.
       #
@@ -1884,11 +1965,15 @@ module Aws
       #     `Rules`. For more information, see CreateByteMatchSet,
       #     UpdateByteMatchSet, CreateIPSet, UpdateIPSet,
       #     CreateSqlInjectionMatchSet, and UpdateSqlInjectionMatchSet.
+      #
       # 2.  Create and update the `Rules` that you want to include in the
       #     `WebACL`. For more information, see CreateRule and UpdateRule.
+      #
       # 3.  Create a `WebACL`. See CreateWebACL.
+      #
       # 4.  Use `GetChangeToken` to get the change token that you provide in
       #     the `ChangeToken` parameter of an UpdateWebACL request.
+      #
       # 5.  Submit an `UpdateWebACL` request to specify the `Rules` that you
       #     want to include in the `WebACL`, to specify the default action,
       #     and to associate the `WebACL` with a CloudFront distribution.
@@ -1912,7 +1997,9 @@ module Aws
       #   types:
       #
       #   * WebACLUpdate: Contains `Action` and `ActivatedRule`
+      #
       #   * ActivatedRule: Contains `Action`, `Priority`, and `RuleId`
+      #
       #   * WafAction: Contains `Type`
       # @option params [Types::WafAction] :default_action
       #   For the action that is associated with a rule in a `WebACL`, specifies
@@ -1961,9 +2048,11 @@ module Aws
       # * `Action`\: Whether to insert the object into or delete the object
       #   from the array. To change a `XssMatchTuple`, you delete the existing
       #   object and add a new one.
+      #
       # * `FieldToMatch`\: The part of web requests that you want AWS WAF to
       #   inspect and, if you want AWS WAF to inspect a header, the name of
       #   the header.
+      #
       # * `TextTransformation`\: Which text transformation, if any, to perform
       #   on the web request before inspecting the request for cross-site
       #   scripting attacks.
@@ -1978,8 +2067,10 @@ module Aws
       # To create and configure an `XssMatchSet`, perform the following steps:
       #
       # 1.  Submit a CreateXssMatchSet request.
+      #
       # 2.  Use GetChangeToken to get the change token that you provide in the
       #     `ChangeToken` parameter of an UpdateIPSet request.
+      #
       # 3.  Submit an `UpdateXssMatchSet` request to specify the parts of web
       #     requests that you want AWS WAF to inspect for cross-site scripting
       #     attacks.
@@ -2002,7 +2093,9 @@ module Aws
       #   data types:
       #
       #   * XssMatchSetUpdate: Contains `Action` and `XssMatchTuple`
+      #
       #   * XssMatchTuple: Contains `FieldToMatch` and `TextTransformation`
+      #
       #   * FieldToMatch: Contains `Data` and `Type`
       # @return [Types::UpdateXssMatchSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #

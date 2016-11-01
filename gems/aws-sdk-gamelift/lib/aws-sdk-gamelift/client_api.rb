@@ -15,6 +15,7 @@ module Aws
       Alias = Shapes::StructureShape.new(name: 'Alias')
       AliasId = Shapes::StringShape.new(name: 'AliasId')
       AliasList = Shapes::ListShape.new(name: 'AliasList')
+      ArnStringModel = Shapes::StringShape.new(name: 'ArnStringModel')
       AwsCredentials = Shapes::StructureShape.new(name: 'AwsCredentials')
       Build = Shapes::StructureShape.new(name: 'Build')
       BuildId = Shapes::StringShape.new(name: 'BuildId')
@@ -58,6 +59,8 @@ module Aws
       DescribeGameSessionDetailsOutput = Shapes::StructureShape.new(name: 'DescribeGameSessionDetailsOutput')
       DescribeGameSessionsInput = Shapes::StructureShape.new(name: 'DescribeGameSessionsInput')
       DescribeGameSessionsOutput = Shapes::StructureShape.new(name: 'DescribeGameSessionsOutput')
+      DescribeInstancesInput = Shapes::StructureShape.new(name: 'DescribeInstancesInput')
+      DescribeInstancesOutput = Shapes::StructureShape.new(name: 'DescribeInstancesOutput')
       DescribePlayerSessionsInput = Shapes::StructureShape.new(name: 'DescribePlayerSessionsInput')
       DescribePlayerSessionsOutput = Shapes::StructureShape.new(name: 'DescribePlayerSessionsOutput')
       DescribeRuntimeConfigurationInput = Shapes::StructureShape.new(name: 'DescribeRuntimeConfigurationInput')
@@ -91,11 +94,16 @@ module Aws
       GameSessionDetail = Shapes::StructureShape.new(name: 'GameSessionDetail')
       GameSessionDetailList = Shapes::ListShape.new(name: 'GameSessionDetailList')
       GameSessionFullException = Shapes::StructureShape.new(name: 'GameSessionFullException')
-      GameSessionId = Shapes::StringShape.new(name: 'GameSessionId')
       GameSessionList = Shapes::ListShape.new(name: 'GameSessionList')
       GameSessionStatus = Shapes::StringShape.new(name: 'GameSessionStatus')
       GetGameSessionLogUrlInput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlInput')
       GetGameSessionLogUrlOutput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlOutput')
+      IdStringModel = Shapes::StringShape.new(name: 'IdStringModel')
+      IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
+      Instance = Shapes::StructureShape.new(name: 'Instance')
+      InstanceId = Shapes::StringShape.new(name: 'InstanceId')
+      InstanceList = Shapes::ListShape.new(name: 'InstanceList')
+      InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
       InvalidFleetStatusException = Shapes::StructureShape.new(name: 'InvalidFleetStatusException')
@@ -113,6 +121,7 @@ module Aws
       ListFleetsInput = Shapes::StructureShape.new(name: 'ListFleetsInput')
       ListFleetsOutput = Shapes::StructureShape.new(name: 'ListFleetsOutput')
       MetricName = Shapes::StringShape.new(name: 'MetricName')
+      NonBlankAndLengthConstraintString = Shapes::StringShape.new(name: 'NonBlankAndLengthConstraintString')
       NonBlankString = Shapes::StringShape.new(name: 'NonBlankString')
       NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
       NonZeroAndMaxString = Shapes::StringShape.new(name: 'NonZeroAndMaxString')
@@ -134,6 +143,7 @@ module Aws
       RequestUploadCredentialsOutput = Shapes::StructureShape.new(name: 'RequestUploadCredentialsOutput')
       ResolveAliasInput = Shapes::StructureShape.new(name: 'ResolveAliasInput')
       ResolveAliasOutput = Shapes::StructureShape.new(name: 'ResolveAliasOutput')
+      ResourceCreationLimitPolicy = Shapes::StructureShape.new(name: 'ResourceCreationLimitPolicy')
       RoutingStrategy = Shapes::StructureShape.new(name: 'RoutingStrategy')
       RoutingStrategyType = Shapes::StringShape.new(name: 'RoutingStrategyType')
       RuntimeConfiguration = Shapes::StructureShape.new(name: 'RuntimeConfiguration')
@@ -167,7 +177,7 @@ module Aws
       WholeNumber = Shapes::IntegerShape.new(name: 'WholeNumber')
 
       Alias.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
-      Alias.add_member(:name, Shapes::ShapeRef.new(shape: FreeText, location_name: "Name"))
+      Alias.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
       Alias.add_member(:description, Shapes::ShapeRef.new(shape: FreeText, location_name: "Description"))
       Alias.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, location_name: "RoutingStrategy"))
       Alias.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -192,7 +202,7 @@ module Aws
 
       BuildList.member = Shapes::ShapeRef.new(shape: Build)
 
-      CreateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "Name"))
+      CreateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, required: true, location_name: "Name"))
       CreateAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
       CreateAliasInput.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, required: true, location_name: "RoutingStrategy"))
       CreateAliasInput.struct_class = Types::CreateAliasInput
@@ -221,6 +231,7 @@ module Aws
       CreateFleetInput.add_member(:ec2_inbound_permissions, Shapes::ShapeRef.new(shape: IpPermissionsList, location_name: "EC2InboundPermissions"))
       CreateFleetInput.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
       CreateFleetInput.add_member(:runtime_configuration, Shapes::ShapeRef.new(shape: RuntimeConfiguration, location_name: "RuntimeConfiguration"))
+      CreateFleetInput.add_member(:resource_creation_limit_policy, Shapes::ShapeRef.new(shape: ResourceCreationLimitPolicy, location_name: "ResourceCreationLimitPolicy"))
       CreateFleetInput.struct_class = Types::CreateFleetInput
 
       CreateFleetOutput.add_member(:fleet_attributes, Shapes::ShapeRef.new(shape: FleetAttributes, location_name: "FleetAttributes"))
@@ -231,19 +242,21 @@ module Aws
       CreateGameSessionInput.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, required: true, location_name: "MaximumPlayerSessionCount"))
       CreateGameSessionInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
       CreateGameSessionInput.add_member(:game_properties, Shapes::ShapeRef.new(shape: GamePropertyList, location_name: "GameProperties"))
+      CreateGameSessionInput.add_member(:creator_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "CreatorId"))
+      CreateGameSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: IdStringModel, location_name: "GameSessionId"))
       CreateGameSessionInput.struct_class = Types::CreateGameSessionInput
 
       CreateGameSessionOutput.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
       CreateGameSessionOutput.struct_class = Types::CreateGameSessionOutput
 
-      CreatePlayerSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, required: true, location_name: "GameSessionId"))
+      CreatePlayerSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
       CreatePlayerSessionInput.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, required: true, location_name: "PlayerId"))
       CreatePlayerSessionInput.struct_class = Types::CreatePlayerSessionInput
 
       CreatePlayerSessionOutput.add_member(:player_session, Shapes::ShapeRef.new(shape: PlayerSession, location_name: "PlayerSession"))
       CreatePlayerSessionOutput.struct_class = Types::CreatePlayerSessionOutput
 
-      CreatePlayerSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, required: true, location_name: "GameSessionId"))
+      CreatePlayerSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
       CreatePlayerSessionsInput.add_member(:player_ids, Shapes::ShapeRef.new(shape: PlayerIdList, required: true, location_name: "PlayerIds"))
       CreatePlayerSessionsInput.struct_class = Types::CreatePlayerSessionsInput
 
@@ -326,7 +339,7 @@ module Aws
       DescribeFleetUtilizationOutput.struct_class = Types::DescribeFleetUtilizationOutput
 
       DescribeGameSessionDetailsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-      DescribeGameSessionDetailsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, location_name: "GameSessionId"))
+      DescribeGameSessionDetailsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionId"))
       DescribeGameSessionDetailsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
       DescribeGameSessionDetailsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "StatusFilter"))
       DescribeGameSessionDetailsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
@@ -338,7 +351,7 @@ module Aws
       DescribeGameSessionDetailsOutput.struct_class = Types::DescribeGameSessionDetailsOutput
 
       DescribeGameSessionsInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
-      DescribeGameSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, location_name: "GameSessionId"))
+      DescribeGameSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionId"))
       DescribeGameSessionsInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, location_name: "AliasId"))
       DescribeGameSessionsInput.add_member(:status_filter, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "StatusFilter"))
       DescribeGameSessionsInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
@@ -349,7 +362,17 @@ module Aws
       DescribeGameSessionsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
       DescribeGameSessionsOutput.struct_class = Types::DescribeGameSessionsOutput
 
-      DescribePlayerSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, location_name: "GameSessionId"))
+      DescribeInstancesInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+      DescribeInstancesInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+      DescribeInstancesInput.add_member(:limit, Shapes::ShapeRef.new(shape: PositiveInteger, location_name: "Limit"))
+      DescribeInstancesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+      DescribeInstancesInput.struct_class = Types::DescribeInstancesInput
+
+      DescribeInstancesOutput.add_member(:instances, Shapes::ShapeRef.new(shape: InstanceList, location_name: "Instances"))
+      DescribeInstancesOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "NextToken"))
+      DescribeInstancesOutput.struct_class = Types::DescribeInstancesOutput
+
+      DescribePlayerSessionsInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, location_name: "GameSessionId"))
       DescribePlayerSessionsInput.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
       DescribePlayerSessionsInput.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
       DescribePlayerSessionsInput.add_member(:player_session_status_filter, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerSessionStatusFilter"))
@@ -414,6 +437,7 @@ module Aws
       FleetAttributes.add_member(:log_paths, Shapes::ShapeRef.new(shape: StringList, location_name: "LogPaths"))
       FleetAttributes.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
       FleetAttributes.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+      FleetAttributes.add_member(:resource_creation_limit_policy, Shapes::ShapeRef.new(shape: ResourceCreationLimitPolicy, location_name: "ResourceCreationLimitPolicy"))
       FleetAttributes.struct_class = Types::FleetAttributes
 
       FleetAttributesList.member = Shapes::ShapeRef.new(shape: FleetAttributes)
@@ -442,7 +466,7 @@ module Aws
 
       GamePropertyList.member = Shapes::ShapeRef.new(shape: GameProperty)
 
-      GameSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, location_name: "GameSessionId"))
+      GameSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
       GameSession.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
       GameSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
       GameSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
@@ -454,6 +478,7 @@ module Aws
       GameSession.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
       GameSession.add_member(:port, Shapes::ShapeRef.new(shape: PortNumber, location_name: "Port"))
       GameSession.add_member(:player_session_creation_policy, Shapes::ShapeRef.new(shape: PlayerSessionCreationPolicy, location_name: "PlayerSessionCreationPolicy"))
+      GameSession.add_member(:creator_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "CreatorId"))
       GameSession.struct_class = Types::GameSession
 
       GameSessionDetail.add_member(:game_session, Shapes::ShapeRef.new(shape: GameSession, location_name: "GameSession"))
@@ -464,11 +489,22 @@ module Aws
 
       GameSessionList.member = Shapes::ShapeRef.new(shape: GameSession)
 
-      GetGameSessionLogUrlInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, required: true, location_name: "GameSessionId"))
+      GetGameSessionLogUrlInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
       GetGameSessionLogUrlInput.struct_class = Types::GetGameSessionLogUrlInput
 
       GetGameSessionLogUrlOutput.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PreSignedUrl"))
       GetGameSessionLogUrlOutput.struct_class = Types::GetGameSessionLogUrlOutput
+
+      Instance.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+      Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+      Instance.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+      Instance.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+      Instance.add_member(:type, Shapes::ShapeRef.new(shape: EC2InstanceType, location_name: "Type"))
+      Instance.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
+      Instance.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
+      Instance.struct_class = Types::Instance
+
+      InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
 
       IpPermission.add_member(:from_port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "FromPort"))
       IpPermission.add_member(:to_port, Shapes::ShapeRef.new(shape: PortNumber, required: true, location_name: "ToPort"))
@@ -510,7 +546,7 @@ module Aws
 
       PlayerSession.add_member(:player_session_id, Shapes::ShapeRef.new(shape: PlayerSessionId, location_name: "PlayerSessionId"))
       PlayerSession.add_member(:player_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PlayerId"))
-      PlayerSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, location_name: "GameSessionId"))
+      PlayerSession.add_member(:game_session_id, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "GameSessionId"))
       PlayerSession.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
       PlayerSession.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
       PlayerSession.add_member(:termination_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "TerminationTime"))
@@ -546,6 +582,10 @@ module Aws
 
       ResolveAliasOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
       ResolveAliasOutput.struct_class = Types::ResolveAliasOutput
+
+      ResourceCreationLimitPolicy.add_member(:new_game_sessions_per_creator, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "NewGameSessionsPerCreator"))
+      ResourceCreationLimitPolicy.add_member(:policy_period_in_minutes, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "PolicyPeriodInMinutes"))
+      ResourceCreationLimitPolicy.struct_class = Types::ResourceCreationLimitPolicy
 
       RoutingStrategy.add_member(:type, Shapes::ShapeRef.new(shape: RoutingStrategyType, location_name: "Type"))
       RoutingStrategy.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
@@ -595,7 +635,7 @@ module Aws
       StringList.member = Shapes::ShapeRef.new(shape: NonZeroAndMaxString)
 
       UpdateAliasInput.add_member(:alias_id, Shapes::ShapeRef.new(shape: AliasId, required: true, location_name: "AliasId"))
-      UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
+      UpdateAliasInput.add_member(:name, Shapes::ShapeRef.new(shape: NonBlankAndLengthConstraintString, location_name: "Name"))
       UpdateAliasInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
       UpdateAliasInput.add_member(:routing_strategy, Shapes::ShapeRef.new(shape: RoutingStrategy, location_name: "RoutingStrategy"))
       UpdateAliasInput.struct_class = Types::UpdateAliasInput
@@ -615,6 +655,7 @@ module Aws
       UpdateFleetAttributesInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
       UpdateFleetAttributesInput.add_member(:description, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Description"))
       UpdateFleetAttributesInput.add_member(:new_game_session_protection_policy, Shapes::ShapeRef.new(shape: ProtectionPolicy, location_name: "NewGameSessionProtectionPolicy"))
+      UpdateFleetAttributesInput.add_member(:resource_creation_limit_policy, Shapes::ShapeRef.new(shape: ResourceCreationLimitPolicy, location_name: "ResourceCreationLimitPolicy"))
       UpdateFleetAttributesInput.struct_class = Types::UpdateFleetAttributesInput
 
       UpdateFleetAttributesOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
@@ -637,7 +678,7 @@ module Aws
       UpdateFleetPortSettingsOutput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
       UpdateFleetPortSettingsOutput.struct_class = Types::UpdateFleetPortSettingsOutput
 
-      UpdateGameSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: GameSessionId, required: true, location_name: "GameSessionId"))
+      UpdateGameSessionInput.add_member(:game_session_id, Shapes::ShapeRef.new(shape: ArnStringModel, required: true, location_name: "GameSessionId"))
       UpdateGameSessionInput.add_member(:maximum_player_session_count, Shapes::ShapeRef.new(shape: WholeNumber, location_name: "MaximumPlayerSessionCount"))
       UpdateGameSessionInput.add_member(:name, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "Name"))
       UpdateGameSessionInput.add_member(:player_session_creation_policy, Shapes::ShapeRef.new(shape: PlayerSessionCreationPolicy, location_name: "PlayerSessionCreationPolicy"))
@@ -675,22 +716,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateAliasInput)
           o.output = Shapes::ShapeRef.new(shape: CreateAliasOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         end)
 
         api.add_operation(:create_build, Seahorse::Model::Operation.new.tap do |o|
@@ -699,19 +729,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateBuildInput)
           o.output = Shapes::ShapeRef.new(shape: CreateBuildOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:create_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -720,25 +741,12 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateFleetInput)
           o.output = Shapes::ShapeRef.new(shape: CreateFleetOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:create_game_session, Seahorse::Model::Operation.new.tap do |o|
@@ -747,31 +755,16 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateGameSessionInput)
           o.output = Shapes::ShapeRef.new(shape: CreateGameSessionOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: FleetCapacityExceededException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: FleetCapacityExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: IdempotentParameterMismatchException)
         end)
 
         api.add_operation(:create_player_session, Seahorse::Model::Operation.new.tap do |o|
@@ -780,28 +773,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreatePlayerSessionInput)
           o.output = Shapes::ShapeRef.new(shape: CreatePlayerSessionOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: GameSessionFullException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: GameSessionFullException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:create_player_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -810,28 +788,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreatePlayerSessionsInput)
           o.output = Shapes::ShapeRef.new(shape: CreatePlayerSessionsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: GameSessionFullException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: GameSessionFullException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:delete_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -840,19 +803,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteAliasInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:delete_build, Seahorse::Model::Operation.new.tap do |o|
@@ -861,19 +815,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteBuildInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:delete_fleet, Seahorse::Model::Operation.new.tap do |o|
@@ -882,22 +827,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteFleetInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:delete_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -906,19 +840,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteScalingPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:describe_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -927,19 +852,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAliasInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeAliasOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:describe_build, Seahorse::Model::Operation.new.tap do |o|
@@ -948,19 +864,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeBuildInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeBuildOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:describe_ec2_instance_limits, Seahorse::Model::Operation.new.tap do |o|
@@ -969,16 +876,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeEC2InstanceLimitsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeEC2InstanceLimitsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_fleet_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -987,19 +887,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeFleetAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeFleetAttributesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_fleet_capacity, Seahorse::Model::Operation.new.tap do |o|
@@ -1008,19 +899,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeFleetCapacityInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeFleetCapacityOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_fleet_events, Seahorse::Model::Operation.new.tap do |o|
@@ -1029,19 +911,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeFleetEventsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeFleetEventsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:describe_fleet_port_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1050,19 +923,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeFleetPortSettingsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeFleetPortSettingsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_fleet_utilization, Seahorse::Model::Operation.new.tap do |o|
@@ -1071,19 +935,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeFleetUtilizationInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeFleetUtilizationOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_game_session_details, Seahorse::Model::Operation.new.tap do |o|
@@ -1092,22 +947,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeGameSessionDetailsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeGameSessionDetailsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
         end)
 
         api.add_operation(:describe_game_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -1116,22 +960,23 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeGameSessionsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeGameSessionsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+        end)
+
+        api.add_operation(:describe_instances, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeInstances"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeInstancesInput)
+          o.output = Shapes::ShapeRef.new(shape: DescribeInstancesOutput)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:describe_player_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -1140,19 +985,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribePlayerSessionsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribePlayerSessionsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:describe_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1161,19 +997,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeRuntimeConfigurationInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeRuntimeConfigurationOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:describe_scaling_policies, Seahorse::Model::Operation.new.tap do |o|
@@ -1182,19 +1009,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeScalingPoliciesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeScalingPoliciesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:get_game_session_log_url, Seahorse::Model::Operation.new.tap do |o|
@@ -1203,19 +1021,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetGameSessionLogUrlInput)
           o.output = Shapes::ShapeRef.new(shape: GetGameSessionLogUrlOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|
@@ -1224,16 +1033,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListAliasesInput)
           o.output = Shapes::ShapeRef.new(shape: ListAliasesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:list_builds, Seahorse::Model::Operation.new.tap do |o|
@@ -1242,16 +1044,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListBuildsInput)
           o.output = Shapes::ShapeRef.new(shape: ListBuildsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:list_fleets, Seahorse::Model::Operation.new.tap do |o|
@@ -1260,19 +1055,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListFleetsInput)
           o.output = Shapes::ShapeRef.new(shape: ListFleetsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:put_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1281,19 +1067,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: PutScalingPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: PutScalingPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:request_upload_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -1302,19 +1079,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RequestUploadCredentialsInput)
           o.output = Shapes::ShapeRef.new(shape: RequestUploadCredentialsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:resolve_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1323,22 +1091,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ResolveAliasInput)
           o.output = Shapes::ShapeRef.new(shape: ResolveAliasOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:search_game_sessions, Seahorse::Model::Operation.new.tap do |o|
@@ -1347,22 +1104,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: SearchGameSessionsInput)
           o.output = Shapes::ShapeRef.new(shape: SearchGameSessionsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: TerminalRoutingStrategyException)
         end)
 
         api.add_operation(:update_alias, Seahorse::Model::Operation.new.tap do |o|
@@ -1371,19 +1117,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateAliasInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateAliasOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:update_build, Seahorse::Model::Operation.new.tap do |o|
@@ -1392,19 +1129,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateBuildInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateBuildOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:update_fleet_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -1413,28 +1141,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateFleetAttributesInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateFleetAttributesOutput)
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:update_fleet_capacity, Seahorse::Model::Operation.new.tap do |o|
@@ -1443,28 +1156,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateFleetCapacityInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateFleetCapacityOutput)
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:update_fleet_port_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1473,28 +1171,13 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateFleetPortSettingsInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateFleetPortSettingsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
         end)
 
         api.add_operation(:update_game_session, Seahorse::Model::Operation.new.tap do |o|
@@ -1503,25 +1186,12 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateGameSessionInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateGameSessionOutput)
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ConflictException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidGameSessionStatusException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
         api.add_operation(:update_runtime_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -1530,22 +1200,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: UpdateRuntimeConfigurationInput)
           o.output = Shapes::ShapeRef.new(shape: UpdateRuntimeConfigurationOutput)
-          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: NotFoundException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFleetStatusException)
         end)
       end
 

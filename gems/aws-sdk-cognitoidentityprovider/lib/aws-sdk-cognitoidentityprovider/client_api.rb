@@ -16,6 +16,10 @@ module Aws
       AddCustomAttributesResponse = Shapes::StructureShape.new(name: 'AddCustomAttributesResponse')
       AdminConfirmSignUpRequest = Shapes::StructureShape.new(name: 'AdminConfirmSignUpRequest')
       AdminConfirmSignUpResponse = Shapes::StructureShape.new(name: 'AdminConfirmSignUpResponse')
+      AdminCreateUserConfigType = Shapes::StructureShape.new(name: 'AdminCreateUserConfigType')
+      AdminCreateUserRequest = Shapes::StructureShape.new(name: 'AdminCreateUserRequest')
+      AdminCreateUserResponse = Shapes::StructureShape.new(name: 'AdminCreateUserResponse')
+      AdminCreateUserUnusedAccountValidityDaysType = Shapes::IntegerShape.new(name: 'AdminCreateUserUnusedAccountValidityDaysType')
       AdminDeleteUserAttributesRequest = Shapes::StructureShape.new(name: 'AdminDeleteUserAttributesRequest')
       AdminDeleteUserAttributesResponse = Shapes::StructureShape.new(name: 'AdminDeleteUserAttributesResponse')
       AdminDeleteUserRequest = Shapes::StructureShape.new(name: 'AdminDeleteUserRequest')
@@ -96,6 +100,7 @@ module Aws
       DeleteUserPoolClientRequest = Shapes::StructureShape.new(name: 'DeleteUserPoolClientRequest')
       DeleteUserPoolRequest = Shapes::StructureShape.new(name: 'DeleteUserPoolRequest')
       DeleteUserRequest = Shapes::StructureShape.new(name: 'DeleteUserRequest')
+      DeliveryMediumListType = Shapes::ListShape.new(name: 'DeliveryMediumListType')
       DeliveryMediumType = Shapes::StringShape.new(name: 'DeliveryMediumType')
       DescribeUserImportJobRequest = Shapes::StructureShape.new(name: 'DescribeUserImportJobRequest')
       DescribeUserImportJobResponse = Shapes::StructureShape.new(name: 'DescribeUserImportJobResponse')
@@ -160,6 +165,8 @@ module Aws
       MFAMethodNotFoundException = Shapes::StructureShape.new(name: 'MFAMethodNotFoundException')
       MFAOptionListType = Shapes::ListShape.new(name: 'MFAOptionListType')
       MFAOptionType = Shapes::StructureShape.new(name: 'MFAOptionType')
+      MessageActionType = Shapes::StringShape.new(name: 'MessageActionType')
+      MessageTemplateType = Shapes::StructureShape.new(name: 'MessageTemplateType')
       MessageType = Shapes::StringShape.new(name: 'MessageType')
       NewDeviceMetadataType = Shapes::StructureShape.new(name: 'NewDeviceMetadataType')
       NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
@@ -204,6 +211,7 @@ module Aws
       TooManyFailedAttemptsException = Shapes::StructureShape.new(name: 'TooManyFailedAttemptsException')
       TooManyRequestsException = Shapes::StructureShape.new(name: 'TooManyRequestsException')
       UnexpectedLambdaException = Shapes::StructureShape.new(name: 'UnexpectedLambdaException')
+      UnsupportedUserStateException = Shapes::StructureShape.new(name: 'UnsupportedUserStateException')
       UpdateDeviceStatusRequest = Shapes::StructureShape.new(name: 'UpdateDeviceStatusRequest')
       UpdateDeviceStatusResponse = Shapes::StructureShape.new(name: 'UpdateDeviceStatusResponse')
       UpdateUserAttributesRequest = Shapes::StructureShape.new(name: 'UpdateUserAttributesRequest')
@@ -253,6 +261,24 @@ module Aws
       AdminConfirmSignUpRequest.struct_class = Types::AdminConfirmSignUpRequest
 
       AdminConfirmSignUpResponse.struct_class = Types::AdminConfirmSignUpResponse
+
+      AdminCreateUserConfigType.add_member(:allow_admin_create_user_only, Shapes::ShapeRef.new(shape: BooleanType, location_name: "AllowAdminCreateUserOnly"))
+      AdminCreateUserConfigType.add_member(:unused_account_validity_days, Shapes::ShapeRef.new(shape: AdminCreateUserUnusedAccountValidityDaysType, location_name: "UnusedAccountValidityDays"))
+      AdminCreateUserConfigType.add_member(:invite_message_template, Shapes::ShapeRef.new(shape: MessageTemplateType, location_name: "InviteMessageTemplate"))
+      AdminCreateUserConfigType.struct_class = Types::AdminCreateUserConfigType
+
+      AdminCreateUserRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
+      AdminCreateUserRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
+      AdminCreateUserRequest.add_member(:user_attributes, Shapes::ShapeRef.new(shape: AttributeListType, location_name: "UserAttributes"))
+      AdminCreateUserRequest.add_member(:validation_data, Shapes::ShapeRef.new(shape: AttributeListType, location_name: "ValidationData"))
+      AdminCreateUserRequest.add_member(:temporary_password, Shapes::ShapeRef.new(shape: PasswordType, location_name: "TemporaryPassword"))
+      AdminCreateUserRequest.add_member(:force_alias_creation, Shapes::ShapeRef.new(shape: ForceAliasCreation, location_name: "ForceAliasCreation"))
+      AdminCreateUserRequest.add_member(:message_action, Shapes::ShapeRef.new(shape: MessageActionType, location_name: "MessageAction"))
+      AdminCreateUserRequest.add_member(:desired_delivery_mediums, Shapes::ShapeRef.new(shape: DeliveryMediumListType, location_name: "DesiredDeliveryMediums"))
+      AdminCreateUserRequest.struct_class = Types::AdminCreateUserRequest
+
+      AdminCreateUserResponse.add_member(:user, Shapes::ShapeRef.new(shape: UserType, location_name: "User"))
+      AdminCreateUserResponse.struct_class = Types::AdminCreateUserResponse
 
       AdminDeleteUserAttributesRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
       AdminDeleteUserAttributesRequest.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, required: true, location_name: "Username"))
@@ -479,6 +505,7 @@ module Aws
       CreateUserPoolRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
       CreateUserPoolRequest.add_member(:email_configuration, Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
       CreateUserPoolRequest.add_member(:sms_configuration, Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
+      CreateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
       CreateUserPoolRequest.struct_class = Types::CreateUserPoolRequest
 
       CreateUserPoolResponse.add_member(:user_pool, Shapes::ShapeRef.new(shape: UserPoolType, location_name: "UserPool"))
@@ -501,6 +528,8 @@ module Aws
 
       DeleteUserRequest.add_member(:access_token, Shapes::ShapeRef.new(shape: TokenModelType, location_name: "AccessToken"))
       DeleteUserRequest.struct_class = Types::DeleteUserRequest
+
+      DeliveryMediumListType.member = Shapes::ShapeRef.new(shape: DeliveryMediumType)
 
       DescribeUserImportJobRequest.add_member(:user_pool_id, Shapes::ShapeRef.new(shape: UserPoolIdType, required: true, location_name: "UserPoolId"))
       DescribeUserImportJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: UserImportJobIdType, required: true, location_name: "JobId"))
@@ -667,6 +696,11 @@ module Aws
       MFAOptionType.add_member(:attribute_name, Shapes::ShapeRef.new(shape: AttributeNameType, location_name: "AttributeName"))
       MFAOptionType.struct_class = Types::MFAOptionType
 
+      MessageTemplateType.add_member(:sms_message, Shapes::ShapeRef.new(shape: SmsVerificationMessageType, location_name: "SMSMessage"))
+      MessageTemplateType.add_member(:email_message, Shapes::ShapeRef.new(shape: EmailVerificationMessageType, location_name: "EmailMessage"))
+      MessageTemplateType.add_member(:email_subject, Shapes::ShapeRef.new(shape: EmailVerificationSubjectType, location_name: "EmailSubject"))
+      MessageTemplateType.struct_class = Types::MessageTemplateType
+
       NewDeviceMetadataType.add_member(:device_key, Shapes::ShapeRef.new(shape: DeviceKeyType, location_name: "DeviceKey"))
       NewDeviceMetadataType.add_member(:device_group_key, Shapes::ShapeRef.new(shape: StringType, location_name: "DeviceGroupKey"))
       NewDeviceMetadataType.struct_class = Types::NewDeviceMetadataType
@@ -793,6 +827,7 @@ module Aws
       UpdateUserPoolRequest.add_member(:device_configuration, Shapes::ShapeRef.new(shape: DeviceConfigurationType, location_name: "DeviceConfiguration"))
       UpdateUserPoolRequest.add_member(:email_configuration, Shapes::ShapeRef.new(shape: EmailConfigurationType, location_name: "EmailConfiguration"))
       UpdateUserPoolRequest.add_member(:sms_configuration, Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
+      UpdateUserPoolRequest.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
       UpdateUserPoolRequest.struct_class = Types::UpdateUserPoolRequest
 
       UpdateUserPoolResponse.struct_class = Types::UpdateUserPoolResponse
@@ -867,6 +902,7 @@ module Aws
       UserPoolType.add_member(:sms_configuration, Shapes::ShapeRef.new(shape: SmsConfigurationType, location_name: "SmsConfiguration"))
       UserPoolType.add_member(:sms_configuration_failure, Shapes::ShapeRef.new(shape: StringType, location_name: "SmsConfigurationFailure"))
       UserPoolType.add_member(:email_configuration_failure, Shapes::ShapeRef.new(shape: StringType, location_name: "EmailConfigurationFailure"))
+      UserPoolType.add_member(:admin_create_user_config, Shapes::ShapeRef.new(shape: AdminCreateUserConfigType, location_name: "AdminCreateUserConfig"))
       UserPoolType.struct_class = Types::UserPoolType
 
       UserType.add_member(:username, Shapes::ShapeRef.new(shape: UsernameType, location_name: "Username"))
@@ -875,6 +911,7 @@ module Aws
       UserType.add_member(:user_last_modified_date, Shapes::ShapeRef.new(shape: DateType, location_name: "UserLastModifiedDate"))
       UserType.add_member(:enabled, Shapes::ShapeRef.new(shape: BooleanType, location_name: "Enabled"))
       UserType.add_member(:user_status, Shapes::ShapeRef.new(shape: UserStatusType, location_name: "UserStatus"))
+      UserType.add_member(:mfa_options, Shapes::ShapeRef.new(shape: MFAOptionListType, location_name: "MFAOptions"))
       UserType.struct_class = Types::UserType
 
       UsersListType.member = Shapes::ShapeRef.new(shape: UserType)
@@ -933,6 +970,30 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
+        end)
+
+        api.add_operation(:admin_create_user, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AdminCreateUser"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AdminCreateUserRequest)
+          o.output = Shapes::ShapeRef.new(shape: AdminCreateUserResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: UserNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: UsernameExistsException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
+          o.errors << Shapes::ShapeRef.new(shape: CodeDeliveryFailureException)
+          o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
+          o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
+          o.errors << Shapes::ShapeRef.new(shape: PreconditionNotMetException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleAccessPolicyException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidSmsRoleTrustRelationshipException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: UnsupportedUserStateException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         end)
 
@@ -1102,6 +1163,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: CodeMismatchException)
           o.errors << Shapes::ShapeRef.new(shape: ExpiredCodeException)
           o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
           o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
@@ -1530,6 +1592,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: PasswordResetRequiredException)
+          o.errors << Shapes::ShapeRef.new(shape: UserNotConfirmedException)
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
         end)
 
@@ -1657,6 +1721,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ExpiredCodeException)
           o.errors << Shapes::ShapeRef.new(shape: UnexpectedLambdaException)
           o.errors << Shapes::ShapeRef.new(shape: UserLambdaValidationException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidPasswordException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidLambdaResponseException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidUserPoolConfigurationException)

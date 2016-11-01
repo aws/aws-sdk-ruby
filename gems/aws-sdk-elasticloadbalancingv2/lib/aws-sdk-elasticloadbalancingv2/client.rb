@@ -130,7 +130,7 @@ module Aws
       # @!group API Operations
 
       # Adds the specified tags to the specified resource. You can tag your
-      # Application load balancers and your target groups.
+      # Application Load Balancers and your target groups.
       #
       # Each tag consists of a key and an optional value. If a resource
       # already has a tag with the same key, `AddTags` updates its value.
@@ -160,7 +160,9 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a listener for the specified Application load balancer.
+      # Creates a listener for the specified Application Load Balancer.
+      #
+      # You can create up to 10 listeners per load balancer.
       #
       # To update a listener, use ModifyListener. When you are finished with a
       # listener, you can delete it using DeleteListener. If you are finished
@@ -186,7 +188,7 @@ module Aws
       #   The SSL server certificate. You must provide exactly one certificate
       #   if the protocol is HTTPS.
       # @option params [required, Array<Types::Action>] :default_actions
-      #   The default actions for the listener.
+      #   The default action for the listener.
       # @return [Types::CreateListenerOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateListenerOutput#listeners #Listeners} => Array&lt;Types::Listener&gt;
@@ -229,7 +231,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates an Application load balancer.
+      # Creates an Application Load Balancer.
       #
       # To create listeners for your load balancer, use CreateListener. You
       # can add security groups, subnets, and tags when you create your load
@@ -245,9 +247,13 @@ module Aws
       # For more information, see [Limits for Your Application Load
       # Balancer][1] in the *Application Load Balancers Guide*.
       #
+      # For more information, see [Application Load Balancers][2] in the
+      # *Application Load Balancers Guide*.
+      #
       #
       #
       # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-limits.html
+      # [2]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/application-load-balancers.html
       # @option params [required, String] :name
       #   The name of the load balancer.
       #
@@ -320,24 +326,42 @@ module Aws
 
       # Creates a rule for the specified listener.
       #
-      # A rule consists conditions and actions. Rules are evaluated in
-      # priority order, from the lowest value to the highest value. When the
-      # conditions for a rule are met, the specified actions are taken. If no
-      # rule's conditions are met, the default actions for the listener are
-      # taken.
+      # Each rule can have one action and one condition. Rules are evaluated
+      # in priority order, from the lowest value to the highest value. When
+      # the condition for a rule is met, the specified action is taken. If no
+      # conditions are met, the default action for the default rule is taken.
+      # For more information, see [Listener Rules][1] in the *Application Load
+      # Balancers Guide*.
       #
       # To view your current rules, use DescribeRules. To update a rule, use
       # ModifyRule. To set the priorities of your rules, use
       # SetRulePriorities. To delete a rule, use DeleteRule.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/elasticloadbalancing/latest/application/load-balancer-listeners.html#listener-rules
       # @option params [required, String] :listener_arn
       #   The Amazon Resource Name (ARN) of the listener.
       # @option params [required, Array<Types::RuleCondition>] :conditions
-      #   The conditions.
+      #   A condition. Each condition has the field `path-pattern` and specifies
+      #   one path pattern. A path pattern is case sensitive, can be up to 255
+      #   characters in length, and can contain any of the following characters:
+      #
+      #   * A-Z, a-z, 0-9
+      #
+      #   * \_ - . $ / ~ " ' @ : +
+      #
+      #   * &amp; (using &amp;amp;)
+      #
+      #   * \* (matches 0 or more characters)
+      #
+      #   * ? (matches exactly 1 character)
       # @option params [required, Integer] :priority
       #   The priority for the rule. A listener can't have multiple rules with
       #   the same priority.
       # @option params [required, Array<Types::Action>] :actions
-      #   The actions for the rule.
+      #   An action. Each action has the type `forward` and specifies a target
+      #   group.
       # @return [Types::CreateRuleOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateRuleOutput#rules #Rules} => Array&lt;Types::Rule&gt;
@@ -496,7 +520,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the specified load balancer and its attached listeners.
+      # Deletes the specified Application Load Balancer and its attached
+      # listeners.
       #
       # You can't delete a load balancer if deletion protection is enabled.
       # If the load balancer does not exist or has already been deleted, the
@@ -562,7 +587,9 @@ module Aws
       # @option params [required, String] :target_group_arn
       #   The Amazon Resource Name (ARN) of the target group.
       # @option params [required, Array<Types::TargetDescription>] :targets
-      #   The targets.
+      #   The targets. If you specified a port override when you registered a
+      #   target, you must specify both the target ID and the port when you
+      #   deregister it.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -583,8 +610,8 @@ module Aws
       end
 
       # Describes the specified listeners or the listeners for the specified
-      # load balancer. You must specify either a load balancer or one or more
-      # listeners.
+      # Application Load Balancer. You must specify either a load balancer or
+      # one or more listeners.
       # @option params [String] :load_balancer_arn
       #   The Amazon Resource Name (ARN) of the load balancer.
       # @option params [Array<String>] :listener_arns
@@ -627,7 +654,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes the attributes for the specified load balancer.
+      # Describes the attributes for the specified Application Load Balancer.
       # @option params [required, String] :load_balancer_arn
       #   The Amazon Resource Name (ARN) of the load balancer.
       # @return [Types::DescribeLoadBalancerAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -650,8 +677,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes the specified Application load balancers or all of your
-      # Application load balancers.
+      # Describes the specified Application Load Balancers or all of your
+      # Application Load Balancers.
       #
       # To describe the listeners for a load balancer, use DescribeListeners.
       # To describe the attributes for a load balancer, use
@@ -981,7 +1008,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Modifies the specified attributes of the specified load balancer.
+      # Modifies the specified attributes of the specified Application Load
+      # Balancer.
       #
       # If any of the specified attributes can't be modified as requested,
       # the call fails. Any existing attributes that you do not modify retain
@@ -1171,14 +1199,22 @@ module Aws
 
       # Registers the specified targets with the specified target group.
       #
+      # By default, the load balancer routes requests to registered targets
+      # using the protocol and port number for the target group.
+      # Alternatively, you can override the port for a target when you
+      # register it.
+      #
       # The target must be in the virtual private cloud (VPC) that you
-      # specified for the target group.
+      # specified for the target group. If the target is an EC2 instance, it
+      # can't be in the `stopped` or `running` state when you register it.
       #
       # To remove a target from a target group, use DeregisterTargets.
       # @option params [required, String] :target_group_arn
       #   The Amazon Resource Name (ARN) of the target group.
       # @option params [required, Array<Types::TargetDescription>] :targets
-      #   The targets.
+      #   The targets. The default port for a target is the port for the target
+      #   group. You can specify a port override. If a target is already
+      #   registered, you can register it again using a different port.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values

@@ -163,6 +163,7 @@ module Aws
       #     ],
       #     default_only: false,
       #     list_supported_character_sets: false,
+      #     list_supported_timezones: false,
       #   })
       # @param [Hash] options ({})
       # @option options [String] :engine_version
@@ -186,9 +187,13 @@ module Aws
       #   Indicates that only the default version of the specified engine or
       #   engine and major version combination is returned.
       # @option options [Boolean] :list_supported_character_sets
-      #   If this parameter is specified, and if the requested engine supports
-      #   the CharacterSetName parameter for CreateDBInstance, the response
+      #   If this parameter is specified and the requested engine supports the
+      #   `CharacterSetName` parameter for `CreateDBInstance`, the response
       #   includes a list of supported character sets for each engine version.
+      # @option options [Boolean] :list_supported_timezones
+      #   If this parameter is specified and the requested engine supports the
+      #   `TimeZone` parameter for `CreateDBInstance`, the response includes a
+      #   list of supported time zones for each engine version.
       # @return [DBEngineVersion::Collection]
       def versions(options = {})
         batches = Enumerator.new do |y|

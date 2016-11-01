@@ -236,7 +236,7 @@ module Aws
       Input.add_member(:kinesis_streams_input, Shapes::ShapeRef.new(shape: KinesisStreamsInput, location_name: "KinesisStreamsInput"))
       Input.add_member(:kinesis_firehose_input, Shapes::ShapeRef.new(shape: KinesisFirehoseInput, location_name: "KinesisFirehoseInput"))
       Input.add_member(:input_parallelism, Shapes::ShapeRef.new(shape: InputParallelism, location_name: "InputParallelism"))
-      Input.add_member(:input_schema, Shapes::ShapeRef.new(shape: SourceSchema, location_name: "InputSchema"))
+      Input.add_member(:input_schema, Shapes::ShapeRef.new(shape: SourceSchema, required: true, location_name: "InputSchema"))
       Input.struct_class = Types::Input
 
       InputConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "Id"))

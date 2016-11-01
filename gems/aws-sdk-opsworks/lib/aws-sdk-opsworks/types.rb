@@ -583,8 +583,7 @@ module Aws
       # @!attribute [rw] custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
-      #   The string should be in the following format and must escape
-      #   characters such as '"':
+      #   The string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -1020,8 +1019,7 @@ module Aws
       # @!attribute [rw] custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
-      #   The string should be in the following format and must escape
-      #   characters such as '"':
+      #   The string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -1721,7 +1719,7 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values or to pass data to recipes. The string should be in the
-      #   following escape characters such as '"':
+      #   following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -1887,7 +1885,7 @@ module Aws
       #         allow_self_management: false,
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN; this can also be a federated user's ARN.
       #   @return [String]
       #
       # @!attribute [rw] ssh_username
@@ -2031,7 +2029,7 @@ module Aws
       #         iam_user_arn: "String", # required
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN. This can also be a federated user's ARN.
       #   @return [String]
       class DeleteUserProfileRequest < Struct.new(
         :iam_user_arn)
@@ -2089,7 +2087,7 @@ module Aws
       #   A string that contains user-defined custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values for stack or to pass data to recipes. The string should be in
-      #   the following format and must escape characters such as '"':
+      #   the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -2673,8 +2671,8 @@ module Aws
       #         stack_id: "String",
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user's IAM ARN. For more information about IAM ARNs, see [Using
-      #   Identifiers][1].
+      #   The user's IAM ARN. This can also be a federated user's ARN. For
+      #   more information about IAM ARNs, see [Using Identifiers][1].
       #
       #
       #
@@ -2931,7 +2929,8 @@ module Aws
       #         iam_user_arns: ["String"],
       #       }
       # @!attribute [rw] iam_user_arns
-      #   An array of IAM user ARNs that identify the users to be described.
+      #   An array of IAM or federated user ARNs that identify the users to be
+      #   described.
       #   @return [Array<String>]
       class DescribeUserProfilesRequest < Struct.new(
         :iam_user_arns)
@@ -4481,7 +4480,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN. This can also be a federated user's ARN.
       #   @return [String]
       #
       # @!attribute [rw] allow_ssh
@@ -4771,8 +4770,7 @@ module Aws
       #   the stack configuration and deployment attributes. You can use
       #   custom JSON to override the corresponding default stack
       #   configuration attribute values or to pass data to recipes. The
-      #   string should be in the following format and must escape characters
-      #   such as '"':
+      #   string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -5243,7 +5241,7 @@ module Aws
       #
       # @!attribute [rw] os
       #   The instance's operating system, which must be set to one of the
-      #   following.
+      #   following. You cannot update an instance that is using a custom AMI.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such
       #     as `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon
@@ -5261,8 +5259,6 @@ module Aws
       #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
       #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
       #     Web`.
-      #
-      #   * A custom AMI: `Custom`.
       #
       #   For more information on the supported operating systems, see [AWS
       #   OpsWorks Operating Systems][1].
@@ -5287,17 +5283,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ami_id
-      #   A custom AMI ID to be used to create the instance. The AMI must be
-      #   based on one of the supported operating systems. For more
-      #   information, see [Instances][1]
-      #
-      #   <note markdown="1"> If you specify a custom AMI, you must set `Os` to `Custom`.
-      #
-      #    </note>
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+      #   The ID of the AMI that was used to create the instance. The value of
+      #   this parameter must be the same AMI ID that the instance is already
+      #   using. You cannot apply a new AMI to an instance by running
+      #   UpdateInstance. UpdateInstance does not work on instances that are
+      #   using custom AMIs.
       #   @return [String]
       #
       # @!attribute [rw] ssh_key_name
@@ -5740,7 +5730,7 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration JSON values
       #   or to pass data to recipes. The string should be in the following
-      #   format and escape characters such as '"':
+      #   format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -5895,7 +5885,7 @@ module Aws
       #         allow_self_management: false,
       #       }
       # @!attribute [rw] iam_user_arn
-      #   The user IAM ARN.
+      #   The user IAM ARN. This can also be a federated user's ARN.
       #   @return [String]
       #
       # @!attribute [rw] ssh_username

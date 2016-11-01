@@ -384,7 +384,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       #   @return [String]
       #
       # @!attribute [rw] health_status
@@ -575,7 +575,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       #   @return [String]
       #
       # @!attribute [rw] min_size
@@ -601,7 +601,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       #   @return [Integer]
       #
       # @!attribute [rw] availability_zones
@@ -618,7 +618,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       #   @return [Array<String>]
       #
       # @!attribute [rw] target_group_arns
@@ -635,7 +635,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       #   @return [String]
       #
       # @!attribute [rw] health_check_grace_period
@@ -651,7 +651,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       #   @return [Integer]
       #
       # @!attribute [rw] placement_group
@@ -677,7 +677,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   @return [String]
       #
       # @!attribute [rw] termination_policies
@@ -690,7 +690,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       #   @return [Array<String>]
       #
       # @!attribute [rw] new_instances_protected_from_scale_in
@@ -706,7 +706,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
       #   @return [Array<Types::Tag>]
       class CreateAutoScalingGroupType < Struct.new(
         :auto_scaling_group_name,
@@ -860,7 +860,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
       #   @return [String]
       #
       # @!attribute [rw] instance_type
@@ -905,7 +905,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html
       #   @return [String]
       #
       # @!attribute [rw] iam_instance_profile
@@ -921,7 +921,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html
       #   @return [String]
       #
       # @!attribute [rw] ebs_optimized
@@ -954,7 +954,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
       #   @return [Boolean]
       #
@@ -977,7 +977,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   @return [String]
       class CreateLaunchConfigurationType < Struct.new(
         :launch_configuration_name,
@@ -1943,7 +1943,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       #   @return [Boolean]
       #
       # @!attribute [rw] metric_value
@@ -2278,7 +2278,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @!attribute [rw] lifecycle_hook_name
       #   The name of the lifecycle hook.
       #   @return [String]
@@ -2334,8 +2334,9 @@ module Aws
       #
       # @!attribute [rw] global_timeout
       #   The maximum time, in seconds, that an instance can remain in a
-      #   `Pending:Wait` or `Terminating:Wait` state. The default is 172800
-      #   seconds (48 hours).
+      #   `Pending:Wait` or `Terminating:Wait` state. The maximum is 172800
+      #   seconds (48 hours) or 100 times `HeartbeatTimeout`, whichever is
+      #   smaller.
       #   @return [Integer]
       #
       # @!attribute [rw] default_result
@@ -2533,7 +2534,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SuspendResume.html#process-types
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-suspend-resume-processes.html#process-types
       # @!attribute [rw] process_name
       #   One of the following processes:
       #
@@ -2615,23 +2616,6 @@ module Aws
       #   lifecycle hook. This target can be either an SQS queue or an SNS
       #   topic. If you specify an empty string, this overrides the current
       #   ARN.
-      #
-      #   The notification messages sent to the target include the following
-      #   information:
-      #
-      #   * **AutoScalingGroupName**. The name of the Auto Scaling group.
-      #
-      #   * **AccountId**. The AWS account ID.
-      #
-      #   * **LifecycleTransition**. The lifecycle hook type.
-      #
-      #   * **LifecycleActionToken**. The lifecycle action token.
-      #
-      #   * **EC2InstanceId**. The EC2 instance ID.
-      #
-      #   * **LifecycleHookName**. The name of the lifecycle hook.
-      #
-      #   * **NotificationMetadata**. User-defined information.
       #
       #   This operation uses the JSON format when sending notifications to an
       #   Amazon SQS queue, and an email key/value pair format when sending
@@ -2748,7 +2732,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/as-scale-based-on-demand.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-scale-based-on-demand.html
       #   @return [String]
       #
       # @!attribute [rw] min_adjustment_step
@@ -2785,7 +2769,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       #   @return [Integer]
       #
       # @!attribute [rw] metric_aggregation_type
@@ -2859,25 +2843,22 @@ module Aws
       #   The time for this action to start, in "YYYY-MM-DDThh:mm:ssZ"
       #   format in UTC/GMT only (for example, `2014-06-01T00:00:00Z`).
       #
+      #   If you specify `Recurrence` and `StartTime`, Auto Scaling performs
+      #   the action at this time, and then performs the action based on the
+      #   specified recurrence.
+      #
       #   If you try to schedule your action in the past, Auto Scaling returns
       #   an error message.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action starts and stops.
       #   @return [Time]
       #
       # @!attribute [rw] end_time
-      #   The time for this action to end.
+      #   The time for the recurring schedule to end. Auto Scaling does not
+      #   perform the action after this time.
       #   @return [Time]
       #
       # @!attribute [rw] recurrence
-      #   The time when recurring future actions will start. Start time is
-      #   specified by the user following the Unix cron syntax format. For
-      #   more information, see [Cron][1] in Wikipedia.
-      #
-      #   When `StartTime` and `EndTime` are specified with `Recurrence`, they
-      #   form the boundaries of when the recurring action will start and
-      #   stop.
+      #   The recurring schedule for this action, in Unix cron syntax format.
+      #   For more information, see [Cron][1] in Wikipedia.
       #
       #
       #
@@ -3486,7 +3467,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       #   @return [Integer]
       #
       # @!attribute [rw] availability_zones
@@ -3508,7 +3489,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       #   @return [Integer]
       #
       # @!attribute [rw] placement_group
@@ -3534,7 +3515,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   @return [String]
       #
       # @!attribute [rw] termination_policies
@@ -3547,7 +3528,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       #   @return [Array<String>]
       #
       # @!attribute [rw] new_instances_protected_from_scale_in

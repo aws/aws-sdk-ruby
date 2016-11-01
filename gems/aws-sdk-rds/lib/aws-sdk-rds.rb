@@ -50,7 +50,7 @@ module Aws
   # and return a response object.
   #
   #     rds = Aws::RDS::Client.new
-  #     resp = rds.add_source_identifier_to_subscription(params)
+  #     resp = rds.add_role_to_db_cluster(params)
   #
   #
   # See {Client} for more information.

@@ -208,9 +208,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [String]
       #
       # @!attribute [rw] image
@@ -234,9 +234,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [String]
       #
       # @!attribute [rw] cpu
@@ -285,11 +285,11 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   [4]: http://aws.amazon.com/ec2/instance-types/
-      #   [5]: https://docs.docker.com/reference/run/#cpu-share-constraint
+      #   [5]: https://docs.docker.com/engine/reference/run/#cpu-share-constraint
       #   @return [Integer]
       #
       # @!attribute [rw] memory
@@ -312,9 +312,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Integer]
       #
       # @!attribute [rw] memory_reservation
@@ -345,9 +345,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Integer]
       #
       # @!attribute [rw] links
@@ -357,7 +357,8 @@ module Aws
       #   to `name:alias` in Docker links. Up to 255 letters (uppercase and
       #   lowercase), numbers, hyphens, and underscores are allowed for each
       #   `name` and `alias`. For more information on linking Docker
-      #   containers, see [https://docs.docker.com/userguide/dockerlinks/][1].
+      #   containers, see
+      #   [https://docs.docker.com/engine/userguide/networking/default\_network/dockerlinks/][1].
       #   This parameter maps to `Links` in the [Create a container][2]
       #   section of the [Docker Remote API][3] and the `--link` option to
       #   [docker run][4].
@@ -369,10 +370,10 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/userguide/dockerlinks/
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [3]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [4]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/userguide/networking/default_network/dockerlinks/
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [3]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [4]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<String>]
       #
       # @!attribute [rw] port_mappings
@@ -396,9 +397,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::PortMapping>]
       #
       # @!attribute [rw] essential
@@ -431,14 +432,14 @@ module Aws
       #   to `Entrypoint` in the [Create a container][1] section of the
       #   [Docker Remote API][2] and the `--entrypoint` option to [docker
       #   run][3]. For more information, see
-      #   [https://docs.docker.com/reference/builder/#entrypoint][4].
+      #   [https://docs.docker.com/engine/reference/builder/#entrypoint][4].
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
-      #   [4]: https://docs.docker.com/reference/builder/#entrypoint
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
+      #   [4]: https://docs.docker.com/engine/reference/builder/#entrypoint
       #   @return [Array<String>]
       #
       # @!attribute [rw] command
@@ -446,14 +447,14 @@ module Aws
       #   `Cmd` in the [Create a container][1] section of the [Docker Remote
       #   API][2] and the `COMMAND` parameter to [docker run][3]. For more
       #   information, see
-      #   [https://docs.docker.com/reference/builder/#cmd][4].
+      #   [https://docs.docker.com/engine/reference/builder/#cmd][4].
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
-      #   [4]: https://docs.docker.com/reference/builder/#cmd
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
+      #   [4]: https://docs.docker.com/engine/reference/builder/#cmd
       #   @return [Array<String>]
       #
       # @!attribute [rw] environment
@@ -466,9 +467,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::KeyValuePair>]
       #
       # @!attribute [rw] mount_points
@@ -478,9 +479,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::MountPoint>]
       #
       # @!attribute [rw] volumes_from
@@ -490,9 +491,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::VolumeFrom>]
       #
       # @!attribute [rw] hostname
@@ -502,9 +503,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [String]
       #
       # @!attribute [rw] user
@@ -514,9 +515,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [String]
       #
       # @!attribute [rw] working_directory
@@ -527,9 +528,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [String]
       #
       # @!attribute [rw] disable_networking
@@ -539,8 +540,8 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
       #   @return [Boolean]
       #
       # @!attribute [rw] privileged
@@ -552,9 +553,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Boolean]
       #
       # @!attribute [rw] readonly_root_filesystem
@@ -565,8 +566,8 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
       #   @return [Boolean]
       #
       # @!attribute [rw] dns_servers
@@ -577,9 +578,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<String>]
       #
       # @!attribute [rw] dns_search_domains
@@ -590,9 +591,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<String>]
       #
       # @!attribute [rw] extra_hosts
@@ -603,9 +604,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::HostEntry>]
       #
       # @!attribute [rw] docker_security_options
@@ -625,9 +626,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   [4]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
       #   @return [Array<String>]
       #
@@ -643,9 +644,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] ulimits
@@ -660,9 +661,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   @return [Array<Types::Ulimit>]
       #
       # @!attribute [rw] log_configuration
@@ -704,9 +705,9 @@ module Aws
       #
       #
       #
-      #   [1]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/#create-a-container
-      #   [2]: https://docs.docker.com/reference/api/docker_remote_api_v1.23/
-      #   [3]: https://docs.docker.com/reference/commandline/run/
+      #   [1]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/#create-a-container
+      #   [2]: https://docs.docker.com/engine/reference/api/docker_remote_api_v1.23/
+      #   [3]: https://docs.docker.com/engine/reference/run/
       #   [4]: https://docs.docker.com/engine/admin/logging/overview/
       #   [5]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/ecs-agent-config.html
       #   @return [Types::LogConfiguration]
@@ -762,13 +763,20 @@ module Aws
       #   @return [Types::VersionInfo]
       #
       # @!attribute [rw] remaining_resources
-      #   The remaining resources of the container instance that are available
-      #   for new tasks.
+      #   For most resource types, this parameter describes the remaining
+      #   resources of the container instance that are available for new
+      #   tasks. For port resource types, this parameter describes the ports
+      #   that are reserved by the Amazon ECS container agent and any
+      #   containers that have reserved port mappings; any port that is not
+      #   specified here is available for new tasks.
       #   @return [Array<Types::Resource>]
       #
       # @!attribute [rw] registered_resources
-      #   The registered resources on the container instance that are in use
-      #   by current tasks.
+      #   For most resource types, this parameter describes the registered
+      #   resources on the container instance that are in use by current
+      #   tasks. For port resource types, this parameter describes the ports
+      #   that were reserved by the Amazon ECS container agent when it
+      #   registered the container instance with Amazon ECS.
       #   @return [Array<Types::Resource>]
       #
       # @!attribute [rw] status
@@ -1116,17 +1124,17 @@ module Aws
       #       }
       # @!attribute [rw] maximum_percent
       #   The upper limit (as a percentage of the service's `desiredCount`)
-      #   of the number of running tasks that can be running in a service
-      #   during a deployment. The maximum number of tasks during a deployment
-      #   is the `desiredCount` multiplied by the `maximumPercent`/100,
-      #   rounded down to the nearest integer value.
+      #   of the number of tasks that are allowed in the `RUNNING` or
+      #   `PENDING` state in a service during a deployment. The maximum number
+      #   of tasks during a deployment is the `desiredCount` multiplied by the
+      #   `maximumPercent`/100, rounded down to the nearest integer value.
       #   @return [Integer]
       #
       # @!attribute [rw] minimum_healthy_percent
       #   The lower limit (as a percentage of the service's `desiredCount`)
-      #   of the number of running tasks that must remain running and healthy
-      #   in a service during a deployment. The minimum healthy tasks during a
-      #   deployment is the `desiredCount` multiplied by the
+      #   of the number of running tasks that must remain in the `RUNNING`
+      #   state in a service during a deployment. The minimum healthy tasks
+      #   during a deployment is the `desiredCount` multiplied by the
       #   `minimumHealthyPercent`/100, rounded up to the nearest integer
       #   value.
       #   @return [Integer]
@@ -1163,13 +1171,17 @@ module Aws
       # @!attribute [rw] force
       #   Forces the deregistration of the container instance. If you have
       #   tasks running on the container instance when you deregister it with
-      #   the `force` option, these tasks remain running and they continue to
-      #   pass Elastic Load Balancing load balancer health checks until you
-      #   terminate the instance or the tasks stop through some other means,
-      #   but they are orphaned (no longer monitored or accounted for by
-      #   Amazon ECS). If an orphaned task on your container instance is part
-      #   of an Amazon ECS service, then the service scheduler starts another
-      #   copy of that task, on a different container instance if possible.
+      #   the `force` option, these tasks remain running until you terminate
+      #   the instance or the tasks stop through some other means, but they
+      #   are orphaned (no longer monitored or accounted for by Amazon ECS).
+      #   If an orphaned task on your container instance is part of an Amazon
+      #   ECS service, then the service scheduler starts another copy of that
+      #   task, on a different container instance if possible.
+      #
+      #   Any containers in orphaned service tasks that are registered with a
+      #   Classic load balancer or an Application load balancer target group
+      #   are deregistered, and they will begin connection draining according
+      #   to the settings on the load balancer or target group.
       #   @return [Boolean]
       class DeregisterContainerInstanceRequest < Struct.new(
         :cluster,
@@ -1289,7 +1301,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] services
-      #   A list of services to describe.
+      #   A list of services to describe. You may specify up to 10 services to
+      #   describe in a single operation.
       #   @return [Array<String>]
       class DescribeServicesRequest < Struct.new(
         :cluster,
@@ -1557,7 +1570,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster
       #   that hosts the container instances to list. If you do not specify a
-      #   cluster, the default cluster is assumed..
+      #   cluster, the default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1623,7 +1636,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster
       #   that hosts the services to list. If you do not specify a cluster,
-      #   the default cluster is assumed..
+      #   the default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1859,7 +1872,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster
       #   that hosts the tasks to list. If you do not specify a cluster, the
-      #   default cluster is assumed..
+      #   default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] container_instance
@@ -2155,10 +2168,10 @@ module Aws
       #   general, ports below 32768 are outside of the ephemeral port range.
       #
       #   The default reserved ports are 22 for SSH, the Docker ports 2375 and
-      #   2376, and the Amazon ECS container agent port 51678. Any host port
-      #   that was previously specified in a running task is also reserved
-      #   while the task is running (after a task stops, the host port is
-      #   released).The current reserved ports are displayed in the
+      #   2376, and the Amazon ECS container agent ports 51678 and 51679. Any
+      #   host port that was previously specified in a running task is also
+      #   reserved while the task is running (after a task stops, the host
+      #   port is released).The current reserved ports are displayed in the
       #   `remainingResources` of DescribeContainerInstances output, and a
       #   container instance may have up to 100 reserved ports at a time,
       #   including the default reserved ports (automatically assigned ports
@@ -2209,7 +2222,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster
       #   with which to register your container instance. If you do not
-      #   specify a cluster, the default cluster is assumed..
+      #   specify a cluster, the default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] instance_identity_document
@@ -2359,9 +2372,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] task_role_arn
-      #   The Amazon Resource Name (ARN) of the IAM role that containers in
-      #   this task can assume. All containers in this task are granted the
-      #   permissions that are specified in this role.
+      #   The short name or full Amazon Resource Name (ARN) of the IAM role
+      #   that containers in this task can assume. All containers in this task
+      #   are granted the permissions that are specified in this role. For
+      #   more information, see [IAM Roles for Tasks][1] in the *Amazon EC2
+      #   Container Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
       #   @return [String]
       #
       # @!attribute [rw] network_mode
@@ -2491,7 +2510,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your task. If you do not specify a cluster, the default
-      #   cluster is assumed..
+      #   cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] task_definition
@@ -2701,7 +2720,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to start your task. If you do not specify a cluster, the
-      #   default cluster is assumed..
+      #   default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] task_definition
@@ -2781,7 +2800,7 @@ module Aws
       # @!attribute [rw] cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster
       #   that hosts the task to stop. If you do not specify a cluster, the
-      #   default cluster is assumed..
+      #   default cluster is assumed.
       #   @return [String]
       #
       # @!attribute [rw] task

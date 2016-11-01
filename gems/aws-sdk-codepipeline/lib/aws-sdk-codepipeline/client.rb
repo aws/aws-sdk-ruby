@@ -201,18 +201,18 @@ module Aws
       # Creates a new custom action that can be used in all pipelines
       # associated with the AWS account. Only used for custom actions.
       # @option params [required, String] :category
-      #   The category of the custom action, such as a source action or a build
+      #   The category of the custom action, such as a build action or a test
       #   action.
       #
-      #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
-      #   functional. This value is reserved for future use.
+      #   <note markdown="1"> Although Source and Approval are listed as valid values, they are not
+      #   currently functional. These values are reserved for future use.
       #
       #    </note>
       # @option params [required, String] :provider
       #   The provider of the service used in the custom action, such as AWS
       #   CodeDeploy.
       # @option params [required, String] :version
-      #   The version number of the custom action.
+      #   The version identifier of the custom action.
       # @option params [Types::ActionTypeSettings] :settings
       #   Returns information about the settings for an action type.
       # @option params [Array<Types::ActionConfigurationProperty>] :configuration_properties

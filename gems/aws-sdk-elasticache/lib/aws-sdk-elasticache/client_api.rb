@@ -138,9 +138,12 @@ module Aws
       ModifyReplicationGroupMessage = Shapes::StructureShape.new(name: 'ModifyReplicationGroupMessage')
       ModifyReplicationGroupResult = Shapes::StructureShape.new(name: 'ModifyReplicationGroupResult')
       NodeGroup = Shapes::StructureShape.new(name: 'NodeGroup')
+      NodeGroupConfiguration = Shapes::StructureShape.new(name: 'NodeGroupConfiguration')
+      NodeGroupConfigurationList = Shapes::ListShape.new(name: 'NodeGroupConfigurationList')
       NodeGroupList = Shapes::ListShape.new(name: 'NodeGroupList')
       NodeGroupMember = Shapes::StructureShape.new(name: 'NodeGroupMember')
       NodeGroupMemberList = Shapes::ListShape.new(name: 'NodeGroupMemberList')
+      NodeGroupsPerReplicationGroupQuotaExceededFault = Shapes::StructureShape.new(name: 'NodeGroupsPerReplicationGroupQuotaExceededFault')
       NodeQuotaForClusterExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForClusterExceededFault')
       NodeQuotaForCustomerExceededFault = Shapes::StructureShape.new(name: 'NodeQuotaForCustomerExceededFault')
       NodeSnapshot = Shapes::StructureShape.new(name: 'NodeSnapshot')
@@ -420,6 +423,9 @@ module Aws
       CreateReplicationGroupMessage.add_member(:automatic_failover_enabled, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "AutomaticFailoverEnabled"))
       CreateReplicationGroupMessage.add_member(:num_cache_clusters, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumCacheClusters"))
       CreateReplicationGroupMessage.add_member(:preferred_cache_cluster_a_zs, Shapes::ShapeRef.new(shape: AvailabilityZonesList, location_name: "PreferredCacheClusterAZs"))
+      CreateReplicationGroupMessage.add_member(:num_node_groups, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumNodeGroups"))
+      CreateReplicationGroupMessage.add_member(:replicas_per_node_group, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReplicasPerNodeGroup"))
+      CreateReplicationGroupMessage.add_member(:node_group_configuration, Shapes::ShapeRef.new(shape: NodeGroupConfigurationList, location_name: "NodeGroupConfiguration"))
       CreateReplicationGroupMessage.add_member(:cache_node_type, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeType"))
       CreateReplicationGroupMessage.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
       CreateReplicationGroupMessage.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -441,7 +447,8 @@ module Aws
       CreateReplicationGroupResult.add_member(:replication_group, Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup"))
       CreateReplicationGroupResult.struct_class = Types::CreateReplicationGroupResult
 
-      CreateSnapshotMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CacheClusterId"))
+      CreateSnapshotMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+      CreateSnapshotMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
       CreateSnapshotMessage.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SnapshotName"))
       CreateSnapshotMessage.struct_class = Types::CreateSnapshotMessage
 
@@ -558,11 +565,13 @@ module Aws
       DescribeSnapshotsListMessage.add_member(:snapshots, Shapes::ShapeRef.new(shape: SnapshotList, location_name: "Snapshots"))
       DescribeSnapshotsListMessage.struct_class = Types::DescribeSnapshotsListMessage
 
+      DescribeSnapshotsMessage.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
       DescribeSnapshotsMessage.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
       DescribeSnapshotsMessage.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName"))
       DescribeSnapshotsMessage.add_member(:snapshot_source, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotSource"))
       DescribeSnapshotsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
       DescribeSnapshotsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "MaxRecords"))
+      DescribeSnapshotsMessage.add_member(:show_node_group_config, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ShowNodeGroupConfig"))
       DescribeSnapshotsMessage.struct_class = Types::DescribeSnapshotsMessage
 
       EC2SecurityGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
@@ -662,8 +671,17 @@ module Aws
       NodeGroup.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
       NodeGroup.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
       NodeGroup.add_member(:primary_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "PrimaryEndpoint"))
+      NodeGroup.add_member(:slots, Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
       NodeGroup.add_member(:node_group_members, Shapes::ShapeRef.new(shape: NodeGroupMemberList, location_name: "NodeGroupMembers"))
       NodeGroup.struct_class = Types::NodeGroup
+
+      NodeGroupConfiguration.add_member(:slots, Shapes::ShapeRef.new(shape: String, location_name: "Slots"))
+      NodeGroupConfiguration.add_member(:replica_count, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "ReplicaCount"))
+      NodeGroupConfiguration.add_member(:primary_availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "PrimaryAvailabilityZone"))
+      NodeGroupConfiguration.add_member(:replica_availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZonesList, location_name: "ReplicaAvailabilityZones"))
+      NodeGroupConfiguration.struct_class = Types::NodeGroupConfiguration
+
+      NodeGroupConfigurationList.member = Shapes::ShapeRef.new(shape: NodeGroupConfiguration, location_name: "NodeGroupConfiguration")
 
       NodeGroupList.member = Shapes::ShapeRef.new(shape: NodeGroup, location_name: "NodeGroup")
 
@@ -676,7 +694,10 @@ module Aws
 
       NodeGroupMemberList.member = Shapes::ShapeRef.new(shape: NodeGroupMember, location_name: "NodeGroupMember")
 
+      NodeSnapshot.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
+      NodeSnapshot.add_member(:node_group_id, Shapes::ShapeRef.new(shape: String, location_name: "NodeGroupId"))
       NodeSnapshot.add_member(:cache_node_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheNodeId"))
+      NodeSnapshot.add_member(:node_group_configuration, Shapes::ShapeRef.new(shape: NodeGroupConfiguration, location_name: "NodeGroupConfiguration"))
       NodeSnapshot.add_member(:cache_size, Shapes::ShapeRef.new(shape: String, location_name: "CacheSize"))
       NodeSnapshot.add_member(:cache_node_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "CacheNodeCreateTime"))
       NodeSnapshot.add_member(:snapshot_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "SnapshotCreateTime"))
@@ -750,6 +771,9 @@ module Aws
       ReplicationGroup.add_member(:node_groups, Shapes::ShapeRef.new(shape: NodeGroupList, location_name: "NodeGroups"))
       ReplicationGroup.add_member(:snapshotting_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "SnapshottingClusterId"))
       ReplicationGroup.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
+      ReplicationGroup.add_member(:configuration_endpoint, Shapes::ShapeRef.new(shape: Endpoint, location_name: "ConfigurationEndpoint"))
+      ReplicationGroup.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
+      ReplicationGroup.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
       ReplicationGroup.struct_class = Types::ReplicationGroup
 
       ReplicationGroupList.member = Shapes::ShapeRef.new(shape: ReplicationGroup, location_name: "ReplicationGroup")
@@ -820,6 +844,8 @@ module Aws
       SecurityGroupMembershipList.member = Shapes::ShapeRef.new(shape: SecurityGroupMembership)
 
       Snapshot.add_member(:snapshot_name, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotName"))
+      Snapshot.add_member(:replication_group_id, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupId"))
+      Snapshot.add_member(:replication_group_description, Shapes::ShapeRef.new(shape: String, location_name: "ReplicationGroupDescription"))
       Snapshot.add_member(:cache_cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "CacheClusterId"))
       Snapshot.add_member(:snapshot_status, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotStatus"))
       Snapshot.add_member(:snapshot_source, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotSource"))
@@ -838,6 +864,8 @@ module Aws
       Snapshot.add_member(:auto_minor_version_upgrade, Shapes::ShapeRef.new(shape: Boolean, location_name: "AutoMinorVersionUpgrade"))
       Snapshot.add_member(:snapshot_retention_limit, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "SnapshotRetentionLimit"))
       Snapshot.add_member(:snapshot_window, Shapes::ShapeRef.new(shape: String, location_name: "SnapshotWindow"))
+      Snapshot.add_member(:num_node_groups, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "NumNodeGroups"))
+      Snapshot.add_member(:automatic_failover, Shapes::ShapeRef.new(shape: AutomaticFailoverStatus, location_name: "AutomaticFailover"))
       Snapshot.add_member(:node_snapshots, Shapes::ShapeRef.new(shape: NodeSnapshotList, location_name: "NodeSnapshots"))
       Snapshot.struct_class = Types::Snapshot
 
@@ -992,6 +1020,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: CacheParameterGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidVPCNetworkStateFault)
           o.errors << Shapes::ShapeRef.new(shape: TagQuotaPerResourceExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: NodeGroupsPerReplicationGroupQuotaExceededFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
         end)
@@ -1004,7 +1033,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: CreateSnapshotResult)
           o.errors << Shapes::ShapeRef.new(shape: SnapshotAlreadyExistsFault)
           o.errors << Shapes::ShapeRef.new(shape: CacheClusterNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: ReplicationGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidCacheClusterStateFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidReplicationGroupStateFault)
           o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
           o.errors << Shapes::ShapeRef.new(shape: SnapshotFeatureNotSupportedFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)

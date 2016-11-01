@@ -164,7 +164,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_alias({
-      #     name: "NonZeroAndMaxString", # required
+      #     name: "NonBlankAndLengthConstraintString", # required
       #     description: "NonZeroAndMaxString",
       #     routing_strategy: { # required
       #       type: "SIMPLE", # accepts SIMPLE, TERMINAL
@@ -215,11 +215,11 @@ module Aws
       # [1]: http://docs.aws.amazon.com/gamelift/latest/developerguide/gamelift-build-intro.html
       # @option params [String] :name
       #   Descriptive label associated with a build. Build names do not need to
-      #   be unique. A build name can be changed later using `UpdateBuild`.
+      #   be unique. A build name can be changed later using ` UpdateBuild `.
       # @option params [String] :version
       #   Version associated with this build. Version strings do not need to be
-      #   unique to a build. A build version can be changed later using
-      #   `UpdateBuild`.
+      #   unique to a build. A build version can be changed later using `
+      #   UpdateBuild `.
       # @option params [Types::S3Location] :storage_location
       #   Location in Amazon Simple Storage Service (Amazon S3) where a build's
       #   files are stored. This location is assigned in response to a
@@ -295,13 +295,17 @@ module Aws
       #
       # * Creates a fleet record and sets the status to `NEW` (followed by
       #   other statuses as the fleet is activated).
+      #
       # * Sets the fleet's capacity to 1 "desired", which causes GameLift
       #   to start one new EC2 instance.
+      #
       # * Starts launching server processes on the instance. If the fleet is
       #   configured to run multiple server processes per instance, GameLift
       #   staggers each launch by a few seconds.
+      #
       # * Begins writing events to the fleet event log, which can be accessed
       #   in the GameLift console.
+      #
       # * Sets the fleet's status to `ACTIVE` once one server process in the
       #   fleet is ready to host a game session.
       #
@@ -310,17 +314,20 @@ module Aws
       #
       # * UpdateFleetAttributes -- Update fleet metadata, including name and
       #   description.
+      #
       # * UpdateFleetCapacity -- Increase or decrease the number of instances
       #   you want the fleet to maintain.
+      #
       # * UpdateFleetPortSettings -- Change the IP address and port ranges
       #   that allow access to incoming traffic.
+      #
       # * UpdateRuntimeConfiguration -- Change how server processes are
       #   launched in the fleet, including launch path, launch parameters, and
       #   the number of concurrent processes.
       #
       #
       #
-      # [1]: https://aws.amazon.com/ec2/instance-types/
+      # [1]: http://aws.amazon.com/ec2/instance-types/
       # @option params [required, String] :name
       #   Descriptive label associated with a fleet. Fleet names do not need to
       #   be unique.
@@ -362,7 +369,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       # @option params [Array<Types::IpPermission>] :ec2_inbound_permissions
       #   Range of IP addresses and port settings that permit inbound traffic to
       #   access server processes running on the fleet. If no inbound
@@ -379,6 +386,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       # @option params [Types::RuntimeConfiguration] :runtime_configuration
@@ -394,6 +402,9 @@ module Aws
       #   the parameters `ServerLaunchPath` and `ServerLaunchParameters`;
       #   requests that contain values for these parameters instead of a runtime
       #   configuration will continue to work.)
+      # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
+      #   Policy that limits the number of game sessions an individual player
+      #   can create over a span of time for this fleet.
       # @return [Types::CreateFleetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateFleetOutput#fleet_attributes #FleetAttributes} => Types::FleetAttributes
@@ -425,6 +436,10 @@ module Aws
       #         },
       #       ],
       #     },
+      #     resource_creation_limit_policy: {
+      #       new_game_sessions_per_creator: 1,
+      #       policy_period_in_minutes: 1,
+      #     },
       #   })
       #
       # @example Response structure
@@ -441,6 +456,8 @@ module Aws
       #   resp.fleet_attributes.log_paths[0] #=> String
       #   resp.fleet_attributes.new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.fleet_attributes.operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+      #   resp.fleet_attributes.resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
+      #   resp.fleet_attributes.resource_creation_limit_policy.policy_period_in_minutes #=> Integer
       # @overload create_fleet(params = {})
       # @param [Hash] params ({})
       def create_fleet(params = {}, options = {})
@@ -476,6 +493,22 @@ module Aws
       # @option params [Array<Types::GameProperty>] :game_properties
       #   Set of properties used to administer a game session. These properties
       #   are passed to the server process hosting it.
+      # @option params [String] :creator_id
+      #   Player ID identifying the person or entity creating the game session.
+      #   This ID is used to enforce a resource protection policy (if one
+      #   exists) that limits the number of concurrent active game sessions one
+      #   player can have.
+      # @option params [String] :game_session_id
+      #   Custom string to include in the game session ID, with a maximum length
+      #   of 48 characters. If this parameter is set, GameLift creates a game
+      #   session ID in the following format:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;custom ID string&gt;". For example, this full game session
+      #   ID:
+      #   "arn:aws:gamelift:us-west-2::gamesession/fleet-2ec2aae5-c2c7-43ca-b19d-8249fe5fddf2/my-game-session"
+      #   includes the custom ID string "my-game-session". If this parameter
+      #   is not set, GameLift creates a game session ID in the same format with
+      #   an auto-generated ID string.
       # @return [Types::CreateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateGameSessionOutput#game_session #GameSession} => Types::GameSession
@@ -492,6 +525,8 @@ module Aws
       #         value: "GamePropertyValue", # required
       #       },
       #     ],
+      #     creator_id: "NonZeroAndMaxString",
+      #     game_session_id: "IdStringModel",
       #   })
       #
       # @example Response structure
@@ -502,13 +537,14 @@ module Aws
       #   resp.game_session.termination_time #=> Time
       #   resp.game_session.current_player_session_count #=> Integer
       #   resp.game_session.maximum_player_session_count #=> Integer
-      #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING"
+      #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
       #   resp.game_session.game_properties #=> Array
       #   resp.game_session.game_properties[0].key #=> String
       #   resp.game_session.game_properties[0].value #=> String
       #   resp.game_session.ip_address #=> String
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      #   resp.game_session.creator_id #=> String
       # @overload create_game_session(params = {})
       # @param [Hash] params ({})
       def create_game_session(params = {}, options = {})
@@ -525,8 +561,12 @@ module Aws
       # If successful, the player is added to the game session and a new
       # PlayerSession object is returned.
       # @option params [required, String] :game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to add a player to.
+      #   Unique identifier for the game session to add a player to. Game
+      #   session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [required, String] :player_id
       #   Unique identifier for the player to be added.
       # @return [Types::CreatePlayerSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -535,7 +575,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_player_session({
-      #     game_session_id: "GameSessionId", # required
+      #     game_session_id: "ArnStringModel", # required
       #     player_id: "NonZeroAndMaxString", # required
       #   })
       #
@@ -567,7 +607,12 @@ module Aws
       # player IDs. If successful, the players are added to the game session
       # and a set of new PlayerSession objects is returned.
       # @option params [required, String] :game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for the game session to add players to. Game session
+      #   ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [required, Array<String>] :player_ids
       #   List of unique identifiers for the players to be added.
       # @return [Types::CreatePlayerSessionsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -576,7 +621,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_player_sessions({
-      #     game_session_id: "GameSessionId", # required
+      #     game_session_id: "ArnStringModel", # required
       #     player_ids: ["NonZeroAndMaxString"], # required
       #   })
       #
@@ -747,6 +792,7 @@ module Aws
       # type:
       #
       # * maximum number of instances allowed per AWS account (service limit)
+      #
       # * current usage level for the AWS account
       #
       # Service limits vary depending on region. Available regions for
@@ -762,7 +808,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       # @return [Types::DescribeEC2InstanceLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeEC2InstanceLimitsOutput#ec2_instance_limits #EC2InstanceLimits} => Array&lt;Types::EC2InstanceLimit&gt;
@@ -840,6 +886,8 @@ module Aws
       #   resp.fleet_attributes[0].log_paths[0] #=> String
       #   resp.fleet_attributes[0].new_game_session_protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.fleet_attributes[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+      #   resp.fleet_attributes[0].resource_creation_limit_policy.new_game_sessions_per_creator #=> Integer
+      #   resp.fleet_attributes[0].resource_creation_limit_policy.policy_period_in_minutes #=> Integer
       #   resp.next_token #=> String
       # @overload describe_fleet_attributes(params = {})
       # @param [Hash] params ({})
@@ -1064,8 +1112,12 @@ module Aws
       #   Unique identifier for a fleet. Specify a fleet to retrieve information
       #   on all game sessions active on the fleet.
       # @option params [String] :game_session_id
-      #   Unique identifier for a game session. Specify the game session to
-      #   retrieve information on.
+      #   Unique identifier for the game session to retrieve information on.
+      #   Game session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Specify an alias to retrieve
       #   information on all game sessions active on the fleet.
@@ -1088,7 +1140,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.describe_game_session_details({
       #     fleet_id: "FleetId",
-      #     game_session_id: "GameSessionId",
+      #     game_session_id: "ArnStringModel",
       #     alias_id: "AliasId",
       #     status_filter: "NonZeroAndMaxString",
       #     limit: 1,
@@ -1104,13 +1156,14 @@ module Aws
       #   resp.game_session_details[0].game_session.termination_time #=> Time
       #   resp.game_session_details[0].game_session.current_player_session_count #=> Integer
       #   resp.game_session_details[0].game_session.maximum_player_session_count #=> Integer
-      #   resp.game_session_details[0].game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING"
+      #   resp.game_session_details[0].game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
       #   resp.game_session_details[0].game_session.game_properties #=> Array
       #   resp.game_session_details[0].game_session.game_properties[0].key #=> String
       #   resp.game_session_details[0].game_session.game_properties[0].value #=> String
       #   resp.game_session_details[0].game_session.ip_address #=> String
       #   resp.game_session_details[0].game_session.port #=> Integer
       #   resp.game_session_details[0].game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      #   resp.game_session_details[0].game_session.creator_id #=> String
       #   resp.game_session_details[0].protection_policy #=> String, one of "NoProtection", "FullProtection"
       #   resp.next_token #=> String
       # @overload describe_game_session_details(params = {})
@@ -1120,11 +1173,15 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves properties for one or more game sessions. This action can be
-      # used in several ways: (1) provide a `GameSessionId` to request
-      # properties for a specific game session; (2) provide a `FleetId` or an
-      # `AliasId` to request properties for all game sessions running on a
-      # fleet.
+      # Retrieves a set of one or more game sessions and properties. This
+      # action can be used in several ways: (1) provide a `GameSessionId` to
+      # request properties for a specific game session; (2) provide a
+      # `FleetId` or an `AliasId` to request properties for all game sessions
+      # running on a fleet. You can also use SearchGameSessions, which allows
+      # you to retrieve all game sessions or filter on certain criteria, but
+      # only returns game sessions with a status of ACTIVE. If you need to
+      # retrieve the protection policy for each game session, use
+      # DescribeGameSessionDetails.
       #
       # To get game session record(s), specify just one of the following: game
       # session ID, fleet ID, or alias ID. You can filter this request by game
@@ -1135,8 +1192,12 @@ module Aws
       #   Unique identifier for a fleet. Specify a fleet to retrieve information
       #   on all game sessions active on the fleet.
       # @option params [String] :game_session_id
-      #   Unique identifier for a game session. Specify the game session to
-      #   retrieve information on.
+      #   Unique identifier for the game session to retrieve information on.
+      #   Game session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [String] :alias_id
       #   Unique identifier for a fleet alias. Specify an alias to retrieve
       #   information on all game sessions active on the fleet.
@@ -1159,7 +1220,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.describe_game_sessions({
       #     fleet_id: "FleetId",
-      #     game_session_id: "GameSessionId",
+      #     game_session_id: "ArnStringModel",
       #     alias_id: "AliasId",
       #     status_filter: "NonZeroAndMaxString",
       #     limit: 1,
@@ -1175,18 +1236,70 @@ module Aws
       #   resp.game_sessions[0].termination_time #=> Time
       #   resp.game_sessions[0].current_player_session_count #=> Integer
       #   resp.game_sessions[0].maximum_player_session_count #=> Integer
-      #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING"
+      #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
       #   resp.game_sessions[0].game_properties #=> Array
       #   resp.game_sessions[0].game_properties[0].key #=> String
       #   resp.game_sessions[0].game_properties[0].value #=> String
       #   resp.game_sessions[0].ip_address #=> String
       #   resp.game_sessions[0].port #=> Integer
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      #   resp.game_sessions[0].creator_id #=> String
       #   resp.next_token #=> String
       # @overload describe_game_sessions(params = {})
       # @param [Hash] params ({})
       def describe_game_sessions(params = {}, options = {})
         req = build_request(:describe_game_sessions, params)
+        req.send_request(options)
+      end
+
+      # Retrieves information about instances in a fleet.
+      #
+      # To get information on a specific instance, specify both a fleet ID and
+      # instance ID. To get information for all instances in a fleet, specify
+      # a fleet ID only. Use the pagination parameters to retrieve results as
+      # a set of sequential pages. If successful, an Instance object is
+      # returned for each result.
+      # @option params [required, String] :fleet_id
+      #   Unique identifier for a fleet. Specify the fleet to retrieve instance
+      #   information for.
+      # @option params [String] :instance_id
+      #   Unique identifier for an instance. Specify an instance to retrieve
+      #   information for or leave blank to get information on all instances in
+      #   the fleet.
+      # @option params [Integer] :limit
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
+      # @option params [String] :next_token
+      #   Token indicating the start of the next sequential page of results. Use
+      #   the token that is returned with a previous call to this action. To
+      #   specify the start of the result set, do not specify a value.
+      # @return [Types::DescribeInstancesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeInstancesOutput#instances #Instances} => Array&lt;Types::Instance&gt;
+      #   * {Types::DescribeInstancesOutput#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_instances({
+      #     fleet_id: "FleetId", # required
+      #     instance_id: "InstanceId",
+      #     limit: 1,
+      #     next_token: "NonZeroAndMaxString",
+      #   })
+      #
+      # @example Response structure
+      #   resp.instances #=> Array
+      #   resp.instances[0].fleet_id #=> String
+      #   resp.instances[0].instance_id #=> String
+      #   resp.instances[0].ip_address #=> String
+      #   resp.instances[0].operating_system #=> String, one of "WINDOWS_2012", "AMAZON_LINUX"
+      #   resp.instances[0].type #=> String, one of "t2.micro", "t2.small", "t2.medium", "t2.large", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge"
+      #   resp.instances[0].status #=> String, one of "PENDING", "ACTIVE", "TERMINATING"
+      #   resp.instances[0].creation_time #=> Time
+      #   resp.next_token #=> String
+      # @overload describe_instances(params = {})
+      # @param [Hash] params ({})
+      def describe_instances(params = {}, options = {})
+        req = build_request(:describe_instances, params)
         req.send_request(options)
       end
 
@@ -1205,7 +1318,12 @@ module Aws
       # PlayerSession object is returned for each session matching the
       # request.
       # @option params [String] :game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for the game session to get player sessions for.Game
+      #   session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [String] :player_id
       #   Unique identifier for a player.
       # @option params [String] :player_session_id
@@ -1218,9 +1336,12 @@ module Aws
       #   * **RESERVED** – The player session request has been received, but the
       #     player has not yet connected to the server process and/or been
       #     validated.
+      #
       #   * **ACTIVE** – The player has been validated by the server process and
       #     is currently connected.
+      #
       #   * **COMPLETED** – The player connection has been dropped.
+      #
       #   * **TIMEDOUT** – A player session request was received, but the player
       #     did not connect and/or was not validated within the time-out limit
       #     (60 seconds).
@@ -1240,7 +1361,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_player_sessions({
-      #     game_session_id: "GameSessionId",
+      #     game_session_id: "ArnStringModel",
       #     player_id: "NonZeroAndMaxString",
       #     player_session_id: "PlayerSessionId",
       #     player_session_status_filter: "NonZeroAndMaxString",
@@ -1308,13 +1429,19 @@ module Aws
       #   in force when in an `ACTIVE` status.
       #
       #   * **ACTIVE** – The scaling policy is currently in force.
+      #
       #   * **UPDATEREQUESTED** – A request to update the scaling policy has
       #     been received.
+      #
       #   * **UPDATING** – A change is being made to the scaling policy.
+      #
       #   * **DELETEREQUESTED** – A request to delete the scaling policy has
       #     been received.
+      #
       #   * **DELETING** – The scaling policy is being deleted.
+      #
       #   * **DELETED** – The scaling policy has been deleted.
+      #
       #   * **ERROR** – An error occurred in creating the policy. It should be
       #     removed and recreated.
       # @option params [Integer] :limit
@@ -1370,15 +1497,19 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_gamelift
       # @option params [required, String] :game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to get logs for.
+      #   Unique identifier for the game session to get logs for. Game session
+      #   ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @return [Types::GetGameSessionLogUrlOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetGameSessionLogUrlOutput#pre_signed_url #PreSignedUrl} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_game_session_log_url({
-      #     game_session_id: "GameSessionId", # required
+      #     game_session_id: "ArnStringModel", # required
       #   })
       #
       # @example Response structure
@@ -1406,6 +1537,7 @@ module Aws
       #
       #   * **SIMPLE** – The alias resolves to one specific fleet. Use this type
       #     when routing to active fleets.
+      #
       #   * **TERMINAL** – The alias does not resolve to a fleet but instead can
       #     be used to display a message to the user. A terminal alias throws a
       #     TerminalRoutingStrategyException with the RoutingStrategy message
@@ -1469,8 +1601,10 @@ module Aws
       #     been uploaded. You cannot create fleets for builds that are in this
       #     status. When a build is successfully created, the build status is
       #     set to this value.
+      #
       #   * **READY** – The game build has been successfully uploaded. You can
       #     now create new fleets for this build.
+      #
       #   * **FAILED** – The game build upload failed. You cannot create new
       #     fleets for this build.
       # @option params [Integer] :limit
@@ -1589,8 +1723,10 @@ module Aws
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
       #     value from the current instance count. Positive values scale up
       #     while negative values scale down.
+      #
       #   * **ExactCapacity** – set the instance count to the scaling adjustment
       #     value.
+      #
       #   * **PercentChangeInCapacity** – increase or reduce the current
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down; for
@@ -1609,18 +1745,23 @@ module Aws
       #
       #   * **ActivatingGameSessions** – number of game sessions in the process
       #     of being created (game session status = `ACTIVATING`).
+      #
       #   * **ActiveGameSessions** – number of game sessions currently running
       #     (game session status = `ACTIVE`).
+      #
       #   * **CurrentPlayerSessions** – number of active or reserved player
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
+      #
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
       #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number includes
       #     game sessions that are not currently accepting players (game session
       #     `PlayerSessionCreationPolicy` = `DENY_ALL`).
+      #
       #   * **ActiveInstances** – number of instances currently running a game
       #     session.
+      #
       #   * **IdleInstances** – number of instances not currently running a game
       #     session.
       # @return [Types::PutScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1653,7 +1794,7 @@ module Aws
       # to upload your game build files to Amazon S3.
       #
       # Call this action only if you need credentials for a build created with
-      # `CreateBuild`. This is a rare situation; in most cases, builds are
+      # ` CreateBuild `. This is a rare situation; in most cases, builds are
       # created using the CLI command `upload-build`, which creates a build
       # record and also uploads build files.
       #
@@ -1709,28 +1850,36 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves a list of game sessions in a fleet that match a set of
-      # search criteria and sorts them in a specified order. Currently game
-      # session searches are limited to a single fleet. Search results include
-      # only game sessions that are in ACTIVE status.
+      # Retrieves a set of game sessions that match a set of search criteria
+      # and sorts them in a specified order. Currently a game session search
+      # is limited to a single fleet. Search results include only game
+      # sessions that are in ACTIVE status. If you need to retrieve game
+      # sessions with a status other than active, use DescribeGameSessions. If
+      # you need to retrieve the protection policy for each game session, use
+      # DescribeGameSessionDetails.
       #
       # You can search or sort by the following game session attributes:
       #
       # * **gameSessionId** -- ID value assigned to a game session. This
       #   unique value is returned in a GameSession object when a new game
       #   session is created.
+      #
       # * **gameSessionName** -- Name assigned to a game session. This value
       #   is set when requesting a new game session with CreateGameSession or
       #   updating with UpdateGameSession. Game session names do not need to
       #   be unique to a game session.
+      #
       # * **creationTimeMillis** -- Value indicating when a game session was
       #   created. It is expressed in Unix time as milliseconds.
+      #
       # * **playerSessionCount** -- Number of players currently connected to a
       #   game session. This value changes rapidly as players join the session
       #   or drop out.
+      #
       # * **maximumSessions** -- Maximum number of player sessions allowed for
       #   a game session. This value is set when requesting a new game session
       #   with CreateGameSession or updating with UpdateGameSession.
+      #
       # * **hasAvailablePlayerSessions** -- Boolean value indicating whether
       #   or not a game session has reached its maximum number of players.
       #   When searching with this attribute, the search value must be `true`
@@ -1769,13 +1918,15 @@ module Aws
       #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
       #     `playerSessionCount`, `maximumSessions`,
       #     `hasAvailablePlayerSessions`.
-      #   * **Comparator** -- Valid comparators are: `=`, `&lt;&gt;`, `&lt;`,
-      #     `&gt;`, `&lt;=`, `&gt;=`.
+      #
+      #   * **Comparator** -- Valid comparators are: `=`, `<>`, `<`, `>`, `<=`,
+      #     `>=`.
+      #
       #   * **Value** -- Value to be searched for. Values can be numbers,
       #     boolean values (true/false) or strings. String values are case
       #     sensitive, enclosed in single quotes. Special characters must be
       #     escaped. Boolean and string values can only be used with the
-      #     comparators `=` and `&lt;&gt;`. For example, the following filter
+      #     comparators `=` and `<>`. For example, the following filter
       #     expression searches on `gameSessionName`\: "`FilterExpression":
       #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
       #
@@ -1786,15 +1937,19 @@ module Aws
       #   Session search evaluates conditions from left to right using the
       #   following precedence rules:
       #
-      #   1.  `=`, `&lt;&gt;`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`
+      #   1.  `=`, `<>`, `<`, `>`, `<=`, `>=`
+      #
       #   2.  Parentheses
+      #
       #   3.  NOT
+      #
       #   4.  AND
+      #
       #   5.  OR
       #
       #   For example, this filter expression retrieves game sessions hosting at
-      #   least ten players that have an open player slot:
-      #   `"maximumSessions&gt;=10 AND hasAvailablePlayerSessions=true"`.
+      #   least ten players that have an open player slot: `"maximumSessions>=10
+      #   AND hasAvailablePlayerSessions=true"`.
       # @option params [String] :sort_expression
       #   Instructions on how to sort the search results. If no sort expression
       #   is included, the request returns results in random order. A sort
@@ -1804,6 +1959,7 @@ module Aws
       #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
       #     `playerSessionCount`, `maximumSessions`,
       #     `hasAvailablePlayerSessions`.
+      #
       #   * **Order** -- Valid sort orders are `ASC` (ascending) and `DESC`
       #     (descending).
       #
@@ -1843,13 +1999,14 @@ module Aws
       #   resp.game_sessions[0].termination_time #=> Time
       #   resp.game_sessions[0].current_player_session_count #=> Integer
       #   resp.game_sessions[0].maximum_player_session_count #=> Integer
-      #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING"
+      #   resp.game_sessions[0].status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
       #   resp.game_sessions[0].game_properties #=> Array
       #   resp.game_sessions[0].game_properties[0].key #=> String
       #   resp.game_sessions[0].game_properties[0].value #=> String
       #   resp.game_sessions[0].ip_address #=> String
       #   resp.game_sessions[0].port #=> Integer
       #   resp.game_sessions[0].player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      #   resp.game_sessions[0].creator_id #=> String
       #   resp.next_token #=> String
       # @overload search_game_sessions(params = {})
       # @param [Hash] params ({})
@@ -1879,7 +2036,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.update_alias({
       #     alias_id: "AliasId", # required
-      #     name: "NonZeroAndMaxString",
+      #     name: "NonBlankAndLengthConstraintString",
       #     description: "NonZeroAndMaxString",
       #     routing_strategy: {
       #       type: "SIMPLE", # accepts SIMPLE, TERMINAL
@@ -1961,8 +2118,12 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
+      # @option params [Types::ResourceCreationLimitPolicy] :resource_creation_limit_policy
+      #   Policy that limits the number of game sessions an individual player
+      #   can create over a span of time.
       # @return [Types::UpdateFleetAttributesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateFleetAttributesOutput#fleet_id #FleetId} => String
@@ -1973,6 +2134,10 @@ module Aws
       #     name: "NonZeroAndMaxString",
       #     description: "NonZeroAndMaxString",
       #     new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
+      #     resource_creation_limit_policy: {
+      #       new_game_sessions_per_creator: 1,
+      #       policy_period_in_minutes: 1,
+      #     },
       #   })
       #
       # @example Response structure
@@ -2092,8 +2257,12 @@ module Aws
       # the game session ID and the values you want to change. If successful,
       # an updated GameSession object is returned.
       # @option params [required, String] :game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to update.
+      #   Unique identifier for the game session to update. Game session ID
+      #   format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either a
+      #   custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       # @option params [Integer] :maximum_player_session_count
       #   Maximum number of players that can be simultaneously connected to the
       #   game session.
@@ -2108,6 +2277,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       # @return [Types::UpdateGameSessionOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -2116,7 +2286,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_game_session({
-      #     game_session_id: "GameSessionId", # required
+      #     game_session_id: "ArnStringModel", # required
       #     maximum_player_session_count: 1,
       #     name: "NonZeroAndMaxString",
       #     player_session_creation_policy: "ACCEPT_ALL", # accepts ACCEPT_ALL, DENY_ALL
@@ -2131,13 +2301,14 @@ module Aws
       #   resp.game_session.termination_time #=> Time
       #   resp.game_session.current_player_session_count #=> Integer
       #   resp.game_session.maximum_player_session_count #=> Integer
-      #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING"
+      #   resp.game_session.status #=> String, one of "ACTIVE", "ACTIVATING", "TERMINATED", "TERMINATING", "ERROR"
       #   resp.game_session.game_properties #=> Array
       #   resp.game_session.game_properties[0].key #=> String
       #   resp.game_session.game_properties[0].value #=> String
       #   resp.game_session.ip_address #=> String
       #   resp.game_session.port #=> Integer
       #   resp.game_session.player_session_creation_policy #=> String, one of "ACCEPT_ALL", "DENY_ALL"
+      #   resp.game_session.creator_id #=> String
       # @overload update_game_session(params = {})
       # @param [Hash] params ({})
       def update_game_session(params = {}, options = {})

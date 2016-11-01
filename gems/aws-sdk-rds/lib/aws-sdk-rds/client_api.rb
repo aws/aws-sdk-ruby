@@ -15,6 +15,7 @@ module Aws
       AccountAttributesMessage = Shapes::StructureShape.new(name: 'AccountAttributesMessage')
       AccountQuota = Shapes::StructureShape.new(name: 'AccountQuota')
       AccountQuotaList = Shapes::ListShape.new(name: 'AccountQuotaList')
+      AddRoleToDBClusterMessage = Shapes::StructureShape.new(name: 'AddRoleToDBClusterMessage')
       AddSourceIdentifierToSubscriptionMessage = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionMessage')
       AddSourceIdentifierToSubscriptionResult = Shapes::StructureShape.new(name: 'AddSourceIdentifierToSubscriptionResult')
       AddTagsToResourceMessage = Shapes::StructureShape.new(name: 'AddTagsToResourceMessage')
@@ -85,6 +86,11 @@ module Aws
       DBClusterParameterGroupNotFoundFault = Shapes::StructureShape.new(name: 'DBClusterParameterGroupNotFoundFault')
       DBClusterParameterGroupsMessage = Shapes::StructureShape.new(name: 'DBClusterParameterGroupsMessage')
       DBClusterQuotaExceededFault = Shapes::StructureShape.new(name: 'DBClusterQuotaExceededFault')
+      DBClusterRole = Shapes::StructureShape.new(name: 'DBClusterRole')
+      DBClusterRoleAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterRoleAlreadyExistsFault')
+      DBClusterRoleNotFoundFault = Shapes::StructureShape.new(name: 'DBClusterRoleNotFoundFault')
+      DBClusterRoleQuotaExceededFault = Shapes::StructureShape.new(name: 'DBClusterRoleQuotaExceededFault')
+      DBClusterRoles = Shapes::ListShape.new(name: 'DBClusterRoles')
       DBClusterSnapshot = Shapes::StructureShape.new(name: 'DBClusterSnapshot')
       DBClusterSnapshotAlreadyExistsFault = Shapes::StructureShape.new(name: 'DBClusterSnapshotAlreadyExistsFault')
       DBClusterSnapshotAttribute = Shapes::StructureShape.new(name: 'DBClusterSnapshotAttribute')
@@ -310,6 +316,7 @@ module Aws
       RebootDBInstanceResult = Shapes::StructureShape.new(name: 'RebootDBInstanceResult')
       RecurringCharge = Shapes::StructureShape.new(name: 'RecurringCharge')
       RecurringChargeList = Shapes::ListShape.new(name: 'RecurringChargeList')
+      RemoveRoleFromDBClusterMessage = Shapes::StructureShape.new(name: 'RemoveRoleFromDBClusterMessage')
       RemoveSourceIdentifierFromSubscriptionMessage = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionMessage')
       RemoveSourceIdentifierFromSubscriptionResult = Shapes::StructureShape.new(name: 'RemoveSourceIdentifierFromSubscriptionResult')
       RemoveTagsFromResourceMessage = Shapes::StructureShape.new(name: 'RemoveTagsFromResourceMessage')
@@ -361,10 +368,12 @@ module Aws
       SubscriptionCategoryNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionCategoryNotFoundFault')
       SubscriptionNotFoundFault = Shapes::StructureShape.new(name: 'SubscriptionNotFoundFault')
       SupportedCharacterSetsList = Shapes::ListShape.new(name: 'SupportedCharacterSetsList')
+      SupportedTimezonesList = Shapes::ListShape.new(name: 'SupportedTimezonesList')
       TStamp = Shapes::TimestampShape.new(name: 'TStamp')
       Tag = Shapes::StructureShape.new(name: 'Tag')
       TagList = Shapes::ListShape.new(name: 'TagList')
       TagListMessage = Shapes::StructureShape.new(name: 'TagListMessage')
+      Timezone = Shapes::StructureShape.new(name: 'Timezone')
       UpgradeTarget = Shapes::StructureShape.new(name: 'UpgradeTarget')
       ValidUpgradeTargetList = Shapes::ListShape.new(name: 'ValidUpgradeTargetList')
       VpcSecurityGroupIdList = Shapes::ListShape.new(name: 'VpcSecurityGroupIdList')
@@ -380,6 +389,10 @@ module Aws
       AccountQuota.struct_class = Types::AccountQuota
 
       AccountQuotaList.member = Shapes::ShapeRef.new(shape: AccountQuota, location_name: "AccountQuota")
+
+      AddRoleToDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+      AddRoleToDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+      AddRoleToDBClusterMessage.struct_class = Types::AddRoleToDBClusterMessage
 
       AddSourceIdentifierToSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
       AddSourceIdentifierToSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
@@ -561,6 +574,7 @@ module Aws
       CreateDBInstanceMessage.add_member(:monitoring_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "MonitoringRoleArn"))
       CreateDBInstanceMessage.add_member(:domain_iam_role_name, Shapes::ShapeRef.new(shape: String, location_name: "DomainIAMRoleName"))
       CreateDBInstanceMessage.add_member(:promotion_tier, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PromotionTier"))
+      CreateDBInstanceMessage.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
       CreateDBInstanceMessage.struct_class = Types::CreateDBInstanceMessage
 
       CreateDBInstanceReadReplicaMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBInstanceIdentifier"))
@@ -654,6 +668,7 @@ module Aws
       DBCluster.add_member(:percent_progress, Shapes::ShapeRef.new(shape: String, location_name: "PercentProgress"))
       DBCluster.add_member(:earliest_restorable_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EarliestRestorableTime"))
       DBCluster.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
+      DBCluster.add_member(:reader_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "ReaderEndpoint"))
       DBCluster.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
       DBCluster.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       DBCluster.add_member(:latest_restorable_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LatestRestorableTime"))
@@ -671,6 +686,7 @@ module Aws
       DBCluster.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
       DBCluster.add_member(:db_cluster_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbClusterResourceId"))
       DBCluster.add_member(:db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterArn"))
+      DBCluster.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterRoles, location_name: "AssociatedRoles"))
       DBCluster.struct_class = Types::DBCluster
 
       DBClusterList.member = Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster")
@@ -711,6 +727,12 @@ module Aws
       DBClusterParameterGroupsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
       DBClusterParameterGroupsMessage.add_member(:db_cluster_parameter_groups, Shapes::ShapeRef.new(shape: DBClusterParameterGroupList, location_name: "DBClusterParameterGroups"))
       DBClusterParameterGroupsMessage.struct_class = Types::DBClusterParameterGroupsMessage
+
+      DBClusterRole.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, location_name: "RoleArn"))
+      DBClusterRole.add_member(:status, Shapes::ShapeRef.new(shape: String, location_name: "Status"))
+      DBClusterRole.struct_class = Types::DBClusterRole
+
+      DBClusterRoles.member = Shapes::ShapeRef.new(shape: DBClusterRole, location_name: "DBClusterRole")
 
       DBClusterSnapshot.add_member(:availability_zones, Shapes::ShapeRef.new(shape: AvailabilityZones, location_name: "AvailabilityZones"))
       DBClusterSnapshot.add_member(:db_cluster_snapshot_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterSnapshotIdentifier"))
@@ -756,6 +778,7 @@ module Aws
       DBEngineVersion.add_member(:default_character_set, Shapes::ShapeRef.new(shape: CharacterSet, location_name: "DefaultCharacterSet"))
       DBEngineVersion.add_member(:supported_character_sets, Shapes::ShapeRef.new(shape: SupportedCharacterSetsList, location_name: "SupportedCharacterSets"))
       DBEngineVersion.add_member(:valid_upgrade_target, Shapes::ShapeRef.new(shape: ValidUpgradeTargetList, location_name: "ValidUpgradeTarget"))
+      DBEngineVersion.add_member(:supported_timezones, Shapes::ShapeRef.new(shape: SupportedTimezonesList, location_name: "SupportedTimezones"))
       DBEngineVersion.struct_class = Types::DBEngineVersion
 
       DBEngineVersionList.member = Shapes::ShapeRef.new(shape: DBEngineVersion, location_name: "DBEngineVersion")
@@ -810,6 +833,7 @@ module Aws
       DBInstance.add_member(:monitoring_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "MonitoringRoleArn"))
       DBInstance.add_member(:promotion_tier, Shapes::ShapeRef.new(shape: IntegerOptional, location_name: "PromotionTier"))
       DBInstance.add_member(:db_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceArn"))
+      DBInstance.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
       DBInstance.struct_class = Types::DBInstance
 
       DBInstanceList.member = Shapes::ShapeRef.new(shape: DBInstance, location_name: "DBInstance")
@@ -898,6 +922,7 @@ module Aws
       DBSnapshot.add_member(:encrypted, Shapes::ShapeRef.new(shape: Boolean, location_name: "Encrypted"))
       DBSnapshot.add_member(:kms_key_id, Shapes::ShapeRef.new(shape: String, location_name: "KmsKeyId"))
       DBSnapshot.add_member(:db_snapshot_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBSnapshotArn"))
+      DBSnapshot.add_member(:timezone, Shapes::ShapeRef.new(shape: String, location_name: "Timezone"))
       DBSnapshot.struct_class = Types::DBSnapshot
 
       DBSnapshotAttribute.add_member(:attribute_name, Shapes::ShapeRef.new(shape: String, location_name: "AttributeName"))
@@ -1030,6 +1055,7 @@ module Aws
       DescribeDBEngineVersionsMessage.add_member(:marker, Shapes::ShapeRef.new(shape: String, location_name: "Marker"))
       DescribeDBEngineVersionsMessage.add_member(:default_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "DefaultOnly"))
       DescribeDBEngineVersionsMessage.add_member(:list_supported_character_sets, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ListSupportedCharacterSets"))
+      DescribeDBEngineVersionsMessage.add_member(:list_supported_timezones, Shapes::ShapeRef.new(shape: BooleanOptional, location_name: "ListSupportedTimezones"))
       DescribeDBEngineVersionsMessage.struct_class = Types::DescribeDBEngineVersionsMessage
 
       DescribeDBInstancesMessage.add_member(:db_instance_identifier, Shapes::ShapeRef.new(shape: String, location_name: "DBInstanceIdentifier"))
@@ -1619,6 +1645,10 @@ module Aws
 
       RecurringChargeList.member = Shapes::ShapeRef.new(shape: RecurringCharge, location_name: "RecurringCharge")
 
+      RemoveRoleFromDBClusterMessage.add_member(:db_cluster_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DBClusterIdentifier"))
+      RemoveRoleFromDBClusterMessage.add_member(:role_arn, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RoleArn"))
+      RemoveRoleFromDBClusterMessage.struct_class = Types::RemoveRoleFromDBClusterMessage
+
       RemoveSourceIdentifierFromSubscriptionMessage.add_member(:subscription_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SubscriptionName"))
       RemoveSourceIdentifierFromSubscriptionMessage.add_member(:source_identifier, Shapes::ShapeRef.new(shape: String, required: true, location_name: "SourceIdentifier"))
       RemoveSourceIdentifierFromSubscriptionMessage.struct_class = Types::RemoveSourceIdentifierFromSubscriptionMessage
@@ -1834,6 +1864,8 @@ module Aws
 
       SupportedCharacterSetsList.member = Shapes::ShapeRef.new(shape: CharacterSet, location_name: "CharacterSet")
 
+      SupportedTimezonesList.member = Shapes::ShapeRef.new(shape: Timezone, location_name: "Timezone")
+
       Tag.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
       Tag.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
       Tag.struct_class = Types::Tag
@@ -1842,6 +1874,9 @@ module Aws
 
       TagListMessage.add_member(:tag_list, Shapes::ShapeRef.new(shape: TagList, location_name: "TagList"))
       TagListMessage.struct_class = Types::TagListMessage
+
+      Timezone.add_member(:timezone_name, Shapes::ShapeRef.new(shape: String, location_name: "TimezoneName"))
+      Timezone.struct_class = Types::Timezone
 
       UpgradeTarget.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
       UpgradeTarget.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
@@ -1873,6 +1908,18 @@ module Aws
           "signatureVersion" => "v4",
           "xmlNamespace" => "http://rds.amazonaws.com/doc/2014-10-31/",
         }
+
+        api.add_operation(:add_role_to_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AddRoleToDBCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AddRoleToDBClusterMessage)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleAlreadyExistsFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleQuotaExceededFault)
+        end)
 
         api.add_operation(:add_source_identifier_to_subscription, Seahorse::Model::Operation.new.tap do |o|
           o.name = "AddSourceIdentifierToSubscription"
@@ -1936,6 +1983,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DBClusterSnapshotNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterSnapshotStateFault)
+          o.errors << Shapes::ShapeRef.new(shape: SnapshotQuotaExceededFault)
+          o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
         end)
 
         api.add_operation(:copy_db_parameter_group, Seahorse::Model::Operation.new.tap do |o|
@@ -2785,6 +2834,17 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: RebootDBInstanceResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
+        end)
+
+        api.add_operation(:remove_role_from_db_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RemoveRoleFromDBCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RemoveRoleFromDBClusterMessage)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterRoleNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
         end)
 
         api.add_operation(:remove_source_identifier_from_subscription, Seahorse::Model::Operation.new.tap do |o|

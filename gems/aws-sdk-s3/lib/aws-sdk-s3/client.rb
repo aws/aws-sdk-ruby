@@ -1280,6 +1280,11 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option params [Integer] :part_number
+      #   Part number of the object being read. This is a positive integer
+      #   between 1 and 10,000. Effectively performs a 'ranged' GET request
+      #   for the part specified. Useful for downloading just a part of an
+      #   object.
       # @return [Types::GetObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetObjectOutput#body #Body} => IO
@@ -1309,6 +1314,7 @@ module Aws
       #   * {Types::GetObjectOutput#storage_class #StorageClass} => String
       #   * {Types::GetObjectOutput#request_charged #RequestCharged} => String
       #   * {Types::GetObjectOutput#replication_status #ReplicationStatus} => String
+      #   * {Types::GetObjectOutput#parts_count #PartsCount} => Integer
       #
       # @example Download an object to disk
       #   # stream object directly to disk
@@ -1357,6 +1363,7 @@ module Aws
       #     sse_customer_key: "SSECustomerKey",
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     request_payer: "requester", # accepts requester
+      #     part_number: 1,
       #   })
       #
       # @example Response structure
@@ -1388,6 +1395,7 @@ module Aws
       #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
       #   resp.request_charged #=> String, one of "requester"
       #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+      #   resp.parts_count #=> Integer
       # @overload get_object(params = {})
       # @param [Hash] params ({})
       def get_object(params = {}, options = {})
@@ -1530,6 +1538,11 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option params [Integer] :part_number
+      #   Part number of the object being read. This is a positive integer
+      #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
+      #   for the part specified. Useful querying about the size of the part and
+      #   the number of parts in this object.
       # @return [Types::HeadObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::HeadObjectOutput#delete_marker #DeleteMarker} => Boolean
@@ -1557,6 +1570,7 @@ module Aws
       #   * {Types::HeadObjectOutput#storage_class #StorageClass} => String
       #   * {Types::HeadObjectOutput#request_charged #RequestCharged} => String
       #   * {Types::HeadObjectOutput#replication_status #ReplicationStatus} => String
+      #   * {Types::HeadObjectOutput#parts_count #PartsCount} => Integer
       #
       # @example Request syntax with placeholder values
       #   resp = client.head_object({
@@ -1572,6 +1586,7 @@ module Aws
       #     sse_customer_key: "SSECustomerKey",
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     request_payer: "requester", # accepts requester
+      #     part_number: 1,
       #   })
       #
       # @example Response structure
@@ -1601,6 +1616,7 @@ module Aws
       #   resp.storage_class #=> String, one of "STANDARD", "REDUCED_REDUNDANCY", "STANDARD_IA"
       #   resp.request_charged #=> String, one of "requester"
       #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
+      #   resp.parts_count #=> Integer
       # @overload head_object(params = {})
       # @param [Hash] params ({})
       def head_object(params = {}, options = {})
@@ -1812,6 +1828,10 @@ module Aws
       #   might contain fewer keys but will never contain more.
       # @option params [String] :prefix
       #   Limits the response to keys that begin with the specified prefix.
+      # @option params [String] :request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the list objects request. Bucket owners need not specify this
+      #   parameter in their requests.
       # @return [Types::ListObjectsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListObjectsOutput#is_truncated #IsTruncated} => Boolean
@@ -1833,6 +1853,7 @@ module Aws
       #     marker: "Marker",
       #     max_keys: 1,
       #     prefix: "Prefix",
+      #     request_payer: "requester", # accepts requester
       #   })
       #
       # @example Response structure
@@ -1889,6 +1910,10 @@ module Aws
       #   StartAfter is where you want Amazon S3 to start listing from. Amazon
       #   S3 starts listing after this specified key. StartAfter can be any key
       #   in the bucket
+      # @option params [String] :request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the list objects request in V2 style. Bucket owners need not specify
+      #   this parameter in their requests.
       # @return [Types::ListObjectsV2Output] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListObjectsV2Output#is_truncated #IsTruncated} => Boolean
@@ -1914,6 +1939,7 @@ module Aws
       #     continuation_token: "Token",
       #     fetch_owner: false,
       #     start_after: "StartAfter",
+      #     request_payer: "requester", # accepts requester
       #   })
       #
       # @example Response structure

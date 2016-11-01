@@ -52,7 +52,7 @@ module Aws
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingGroupLifecycle.html
+      # [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/AutoScalingGroupLifecycle.html
       # @return [String]
       def lifecycle_state
         data.lifecycle_state

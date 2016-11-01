@@ -1940,6 +1940,10 @@ module Aws
       #
       # @!attribute [rw] replication_status
       #   @return [String]
+      #
+      # @!attribute [rw] parts_count
+      #   The count of parts this object has.
+      #   @return [Integer]
       class GetObjectOutput < Struct.new(
         :body,
         :delete_marker,
@@ -1967,7 +1971,8 @@ module Aws
         :ssekms_key_id,
         :storage_class,
         :request_charged,
-        :replication_status)
+        :replication_status,
+        :parts_count)
         include Aws::Structure
       end
 
@@ -1993,6 +1998,7 @@ module Aws
       #         sse_customer_key: "SSECustomerKey",
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
+      #         part_number: 1,
       #       }
       # @!attribute [rw] bucket
       #   @return [String]
@@ -2080,6 +2086,13 @@ module Aws
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       #   @return [String]
+      #
+      # @!attribute [rw] part_number
+      #   Part number of the object being read. This is a positive integer
+      #   between 1 and 10,000. Effectively performs a 'ranged' GET request
+      #   for the part specified. Useful for downloading just a part of an
+      #   object.
+      #   @return [Integer]
       class GetObjectRequest < Struct.new(
         :bucket,
         :if_match,
@@ -2098,7 +2111,8 @@ module Aws
         :sse_customer_algorithm,
         :sse_customer_key,
         :sse_customer_key_md5,
-        :request_payer)
+        :request_payer,
+        :part_number)
         include Aws::Structure
       end
 
@@ -2338,6 +2352,10 @@ module Aws
       #
       # @!attribute [rw] replication_status
       #   @return [String]
+      #
+      # @!attribute [rw] parts_count
+      #   The count of parts this object has.
+      #   @return [Integer]
       class HeadObjectOutput < Struct.new(
         :delete_marker,
         :accept_ranges,
@@ -2363,7 +2381,8 @@ module Aws
         :ssekms_key_id,
         :storage_class,
         :request_charged,
-        :replication_status)
+        :replication_status,
+        :parts_count)
         include Aws::Structure
       end
 
@@ -2383,6 +2402,7 @@ module Aws
       #         sse_customer_key: "SSECustomerKey",
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
+      #         part_number: 1,
       #       }
       # @!attribute [rw] bucket
       #   @return [String]
@@ -2446,6 +2466,13 @@ module Aws
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       #   @return [String]
+      #
+      # @!attribute [rw] part_number
+      #   Part number of the object being read. This is a positive integer
+      #   between 1 and 10,000. Effectively performs a 'ranged' HEAD request
+      #   for the part specified. Useful querying about the size of the part
+      #   and the number of parts in this object.
+      #   @return [Integer]
       class HeadObjectRequest < Struct.new(
         :bucket,
         :if_match,
@@ -2458,7 +2485,8 @@ module Aws
         :sse_customer_algorithm,
         :sse_customer_key,
         :sse_customer_key_md5,
-        :request_payer)
+        :request_payer,
+        :part_number)
         include Aws::Structure
       end
 
@@ -3024,6 +3052,7 @@ module Aws
       #         marker: "Marker",
       #         max_keys: 1,
       #         prefix: "Prefix",
+      #         request_payer: "requester", # accepts requester
       #       }
       # @!attribute [rw] bucket
       #   @return [String]
@@ -3053,13 +3082,20 @@ module Aws
       # @!attribute [rw] prefix
       #   Limits the response to keys that begin with the specified prefix.
       #   @return [String]
+      #
+      # @!attribute [rw] request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the list objects request. Bucket owners need not specify this
+      #   parameter in their requests.
+      #   @return [String]
       class ListObjectsRequest < Struct.new(
         :bucket,
         :delimiter,
         :encoding_type,
         :marker,
         :max_keys,
-        :prefix)
+        :prefix,
+        :request_payer)
         include Aws::Structure
       end
 
@@ -3152,6 +3188,7 @@ module Aws
       #         continuation_token: "Token",
       #         fetch_owner: false,
       #         start_after: "StartAfter",
+      #         request_payer: "requester", # accepts requester
       #       }
       # @!attribute [rw] bucket
       #   Name of the bucket to list.
@@ -3192,6 +3229,12 @@ module Aws
       #   S3 starts listing after this specified key. StartAfter can be any
       #   key in the bucket
       #   @return [String]
+      #
+      # @!attribute [rw] request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the list objects request in V2 style. Bucket owners need not specify
+      #   this parameter in their requests.
+      #   @return [String]
       class ListObjectsV2Request < Struct.new(
         :bucket,
         :delimiter,
@@ -3200,7 +3243,8 @@ module Aws
         :prefix,
         :continuation_token,
         :fetch_owner,
-        :start_after)
+        :start_after,
+        :request_payer)
         include Aws::Structure
       end
 

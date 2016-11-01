@@ -173,11 +173,26 @@ module Aws
       # @option params [required, String] :stack_name
       #   The name or the unique ID of the stack that you want to continue
       #   rolling back.
+      # @option params [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes to roll back the
+      #   stack. AWS CloudFormation uses the role's credentials to make calls
+      #   on your behalf. AWS CloudFormation always uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.continue_update_rollback({
       #     stack_name: "StackNameOrId", # required
+      #     role_arn: "RoleARN",
       #   })
       # @overload continue_update_rollback(params = {})
       # @param [Hash] params ({})
@@ -281,6 +296,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      # @option params [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes when executing
+      #   the change set. AWS CloudFormation uses the role's credentials to
+      #   make calls on your behalf. AWS CloudFormation always uses this role
+      #   for all future operations on the stack. As long as users have
+      #   permission to operate on the stack, AWS CloudFormation uses this role
+      #   even if the users don't have permission to pass it. Ensure that the
+      #   role grants least privilege.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @option params [Array<String>] :notification_arns
       #   The Amazon Resource Names (ARNs) of Amazon Simple Notification Service
       #   (Amazon SNS) topics that AWS CloudFormation associates with the stack.
@@ -323,6 +352,7 @@ module Aws
       #     ],
       #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #     resource_types: ["ResourceType"],
+      #     role_arn: "RoleARN",
       #     notification_arns: ["NotificationARN"],
       #     tags: [
       #       {
@@ -459,6 +489,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      # @option params [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes to create the
+      #   stack. AWS CloudFormation uses the role's credentials to make calls
+      #   on your behalf. AWS CloudFormation always uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @option params [String] :on_failure
       #   Determines what action will be taken if stack creation fails. This
       #   must be one of: DO\_NOTHING, ROLLBACK, or DELETE. You can specify
@@ -467,8 +511,8 @@ module Aws
       #   Default: `ROLLBACK`
       # @option params [String] :stack_policy_body
       #   Structure containing the stack policy body. For more information, go
-      #   to [ Prevent Updates to Stack Resources][1] in the AWS CloudFormation
-      #   User Guide. You can specify either the `StackPolicyBody` or the
+      #   to [ Prevent Updates to Stack Resources][1] in the *AWS CloudFormation
+      #   User Guide*. You can specify either the `StackPolicyBody` or the
       #   `StackPolicyURL` parameter, but not both.
       #
       #
@@ -476,9 +520,9 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
       # @option params [String] :stack_policy_url
       #   Location of a file containing the stack policy. The URL must point to
-      #   a policy (max size: 16KB) located in an S3 bucket in the same region
-      #   as the stack. You can specify either the `StackPolicyBody` or the
-      #   `StackPolicyURL` parameter, but not both.
+      #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
+      #   region as the stack. You can specify either the `StackPolicyBody` or
+      #   the `StackPolicyURL` parameter, but not both.
       # @option params [Array<Types::Tag>] :tags
       #   Key-value pairs to associate with this stack. AWS CloudFormation also
       #   propagates these tags to the resources created in the stack. A maximum
@@ -504,6 +548,7 @@ module Aws
       #     notification_arns: ["NotificationARN"],
       #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #     resource_types: ["ResourceType"],
+      #     role_arn: "RoleARN",
       #     on_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
       #     stack_policy_body: "StackPolicyBody",
       #     stack_policy_url: "StackPolicyURL",
@@ -562,12 +607,23 @@ module Aws
       #
       #   Retaining resources is useful when you cannot delete a resource, such
       #   as a non-empty S3 bucket, but you want to delete the stack.
+      # @option params [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes to delete the
+      #   stack. AWS CloudFormation uses the role's credentials to make calls
+      #   on your behalf.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_stack({
       #     stack_name: "StackName", # required
       #     retain_resources: ["LogicalResourceId"],
+      #     role_arn: "RoleARN",
       #   })
       # @overload delete_stack(params = {})
       # @param [Hash] params ({})
@@ -882,6 +938,11 @@ module Aws
 
       # Returns the description for the specified stack; if no stack name was
       # specified, then it returns the description for all the stacks created.
+      #
+      # <note markdown="1"> If the stack does not exist, an `AmazonCloudFormationException` is
+      # returned.
+      #
+      #  </note>
       # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
@@ -929,6 +990,7 @@ module Aws
       #   resp.stacks[0].outputs[0].output_key #=> String
       #   resp.stacks[0].outputs[0].output_value #=> String
       #   resp.stacks[0].outputs[0].description #=> String
+      #   resp.stacks[0].role_arn #=> String
       #   resp.stacks[0].tags #=> Array
       #   resp.stacks[0].tags[0].key #=> String
       #   resp.stacks[0].tags[0].value #=> String
@@ -1485,6 +1547,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      # @option params [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes to update the
+      #   stack. AWS CloudFormation uses the role's credentials to make calls
+      #   on your behalf. AWS CloudFormation always uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @option params [String] :stack_policy_body
       #   Structure containing a new stack policy body. You can specify either
       #   the `StackPolicyBody` or the `StackPolicyURL` parameter, but not both.
@@ -1536,6 +1612,7 @@ module Aws
       #     ],
       #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #     resource_types: ["ResourceType"],
+      #     role_arn: "RoleARN",
       #     stack_policy_body: "StackPolicyBody",
       #     stack_policy_url: "StackPolicyURL",
       #     notification_arns: ["NotificationARN"],
@@ -1556,7 +1633,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Validates a specified template.
+      # Validates a specified template. AWS CloudFormation first checks if the
+      # template is valid JSON. If it isn't, AWS CloudFormation checks if the
+      # template is valid YAML. If both these checks fail, AWS CloudFormation
+      # returns a template validation error.
       # @option params [String] :template_body
       #   Structure containing the template body with a minimum length of 1 byte
       #   and a maximum length of 51,200 bytes. For more information, go to

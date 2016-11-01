@@ -462,6 +462,7 @@ module Aws
       #     delimiter: "Delimiter",
       #     encoding_type: "url", # accepts url
       #     prefix: "Prefix",
+      #     request_payer: "requester", # accepts requester
       #   })
       # @param [Hash] options ({})
       # @option options [String] :delimiter
@@ -475,6 +476,10 @@ module Aws
       #   parameter to request that Amazon S3 encode the keys in the response.
       # @option options [String] :prefix
       #   Limits the response to keys that begin with the specified prefix.
+      # @option options [String] :request_payer
+      #   Confirms that the requester knows that she or he will be charged for
+      #   the list objects request. Bucket owners need not specify this
+      #   parameter in their requests.
       # @return [ObjectSummary::Collection]
       def objects(options = {})
         batches = Enumerator.new do |y|

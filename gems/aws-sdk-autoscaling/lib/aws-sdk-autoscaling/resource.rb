@@ -73,7 +73,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-asg-from-instance.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       # @option options [required, Integer] :min_size
       #   The minimum size of the group.
       # @option options [required, Integer] :max_size
@@ -91,7 +91,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/Cooldown.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/Cooldown.html
       # @option options [Array<String>] :availability_zones
       #   One or more Availability Zones for the group. This parameter is
       #   optional if you specify one or more subnets.
@@ -104,7 +104,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US_SetUpASLBApp.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-asg-from-instance.html
       # @option options [Array<String>] :target_group_arns
       #   The Amazon Resource Names (ARN) of the target groups.
       # @option options [String] :health_check_type
@@ -117,7 +117,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option options [Integer] :health_check_grace_period
       #   The amount of time, in seconds, that Auto Scaling waits before
       #   checking the health status of an EC2 instance that has come into
@@ -131,7 +131,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/healthcheck.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/healthcheck.html
       # @option options [String] :placement_group
       #   The name of the placement group into which you'll launch your
       #   instances, if any. For more information, see [Placement Groups][1] in
@@ -153,7 +153,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @option options [Array<String>] :termination_policies
       #   One or more termination policies used to select the instance to
       #   terminate. These policies are executed in the order that they are
@@ -164,7 +164,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/AutoScalingBehavior.InstanceTermination.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/as-instance-termination.html
       # @option options [Boolean] :new_instances_protected_from_scale_in
       #   Indicates whether newly launched instances are protected from
       #   termination by Auto Scaling when scaling in.
@@ -176,7 +176,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/ASTagging.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/autoscaling-tagging.html
       # @return [AutoScalingGroup]
       def create_group(options = {})
         resp = @client.create_auto_scaling_group(options)
@@ -301,7 +301,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/create-lc-with-instanceID.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/create-lc-with-instanceID.html
       # @option options [String] :instance_type
       #   The instance type of the EC2 instance. For information about available
       #   instance types, see [ Available Instance Types][1] in the *Amazon
@@ -334,7 +334,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/US-SpotInstances.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/US-SpotInstances.html
       # @option options [String] :iam_instance_profile
       #   The name or the Amazon Resource Name (ARN) of the instance profile
       #   associated with the IAM role for the instance.
@@ -348,7 +348,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/us-iam-role.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/us-iam-role.html
       # @option options [Boolean] :ebs_optimized
       #   Indicates whether the instance is optimized for Amazon EBS I/O. By
       #   default, the instance is not optimized for EBS I/O. The optimization
@@ -377,7 +377,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
       # @option options [String] :placement_tenancy
       #   The tenancy of the instance. An instance with a tenancy of `dedicated`
@@ -397,7 +397,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AutoScaling/latest/DeveloperGuide/asg-in-vpc.html
+      #   [1]: http://docs.aws.amazon.com/autoscaling/latest/userguide/asg-in-vpc.html
       # @return [LaunchConfiguration]
       def create_launch_configuration(options = {})
         resp = @client.create_launch_configuration(options)

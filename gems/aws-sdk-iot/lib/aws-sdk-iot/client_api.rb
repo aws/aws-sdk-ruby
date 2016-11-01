@@ -36,6 +36,7 @@ module Aws
       CACertificateStatus = Shapes::StringShape.new(name: 'CACertificateStatus')
       CACertificates = Shapes::ListShape.new(name: 'CACertificates')
       CancelCertificateTransferRequest = Shapes::StructureShape.new(name: 'CancelCertificateTransferRequest')
+      CannedAccessControlList = Shapes::StringShape.new(name: 'CannedAccessControlList')
       Certificate = Shapes::StructureShape.new(name: 'Certificate')
       CertificateArn = Shapes::StringShape.new(name: 'CertificateArn')
       CertificateConflictException = Shapes::StructureShape.new(name: 'CertificateConflictException')
@@ -99,6 +100,7 @@ module Aws
       DetachThingPrincipalResponse = Shapes::StructureShape.new(name: 'DetachThingPrincipalResponse')
       DisableTopicRuleRequest = Shapes::StructureShape.new(name: 'DisableTopicRuleRequest')
       DynamoDBAction = Shapes::StructureShape.new(name: 'DynamoDBAction')
+      DynamoDBv2Action = Shapes::StructureShape.new(name: 'DynamoDBv2Action')
       DynamoKeyType = Shapes::StringShape.new(name: 'DynamoKeyType')
       DynamoOperation = Shapes::StringShape.new(name: 'DynamoOperation')
       ElasticsearchAction = Shapes::StructureShape.new(name: 'ElasticsearchAction')
@@ -192,6 +194,7 @@ module Aws
       Principals = Shapes::ListShape.new(name: 'Principals')
       PrivateKey = Shapes::StringShape.new(name: 'PrivateKey')
       PublicKey = Shapes::StringShape.new(name: 'PublicKey')
+      PutItemInput = Shapes::StructureShape.new(name: 'PutItemInput')
       QueueUrl = Shapes::StringShape.new(name: 'QueueUrl')
       RangeKeyField = Shapes::StringShape.new(name: 'RangeKeyField')
       RangeKeyValue = Shapes::StringShape.new(name: 'RangeKeyValue')
@@ -214,6 +217,7 @@ module Aws
       SearchableAttributes = Shapes::ListShape.new(name: 'SearchableAttributes')
       ServiceUnavailableException = Shapes::StructureShape.new(name: 'ServiceUnavailableException')
       SetAsActive = Shapes::BooleanShape.new(name: 'SetAsActive')
+      SetAsActiveFlag = Shapes::BooleanShape.new(name: 'SetAsActiveFlag')
       SetAsDefault = Shapes::BooleanShape.new(name: 'SetAsDefault')
       SetDefaultPolicyVersionRequest = Shapes::StructureShape.new(name: 'SetDefaultPolicyVersionRequest')
       SetLoggingOptionsRequest = Shapes::StructureShape.new(name: 'SetLoggingOptionsRequest')
@@ -259,12 +263,15 @@ module Aws
       VersionConflictException = Shapes::StructureShape.new(name: 'VersionConflictException')
       VersionsLimitExceededException = Shapes::StructureShape.new(name: 'VersionsLimitExceededException')
       errorMessage = Shapes::StringShape.new(name: 'errorMessage')
+      resourceArn = Shapes::StringShape.new(name: 'resourceArn')
+      resourceId = Shapes::StringShape.new(name: 'resourceId')
 
       AcceptCertificateTransferRequest.add_member(:certificate_id, Shapes::ShapeRef.new(shape: CertificateId, required: true, location: "uri", location_name: "certificateId"))
       AcceptCertificateTransferRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
       AcceptCertificateTransferRequest.struct_class = Types::AcceptCertificateTransferRequest
 
       Action.add_member(:dynamo_db, Shapes::ShapeRef.new(shape: DynamoDBAction, location_name: "dynamoDB"))
+      Action.add_member(:dynamo_d_bv_2, Shapes::ShapeRef.new(shape: DynamoDBv2Action, location_name: "dynamoDBv2"))
       Action.add_member(:lambda, Shapes::ShapeRef.new(shape: LambdaAction, location_name: "lambda"))
       Action.add_member(:sns, Shapes::ShapeRef.new(shape: SnsAction, location_name: "sns"))
       Action.add_member(:sqs, Shapes::ShapeRef.new(shape: SqsAction, location_name: "sqs"))
@@ -511,6 +518,10 @@ module Aws
       DynamoDBAction.add_member(:payload_field, Shapes::ShapeRef.new(shape: PayloadField, location_name: "payloadField"))
       DynamoDBAction.struct_class = Types::DynamoDBAction
 
+      DynamoDBv2Action.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, location_name: "roleArn"))
+      DynamoDBv2Action.add_member(:put_item, Shapes::ShapeRef.new(shape: PutItemInput, location_name: "putItem"))
+      DynamoDBv2Action.struct_class = Types::DynamoDBv2Action
+
       ElasticsearchAction.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
       ElasticsearchAction.add_member(:endpoint, Shapes::ShapeRef.new(shape: ElasticsearchEndpoint, required: true, location_name: "endpoint"))
       ElasticsearchAction.add_member(:index, Shapes::ShapeRef.new(shape: ElasticsearchIndex, required: true, location_name: "index"))
@@ -722,6 +733,9 @@ module Aws
 
       Principals.member = Shapes::ShapeRef.new(shape: PrincipalArn)
 
+      PutItemInput.add_member(:table_name, Shapes::ShapeRef.new(shape: TableName, required: true, location_name: "tableName"))
+      PutItemInput.struct_class = Types::PutItemInput
+
       RegisterCACertificateRequest.add_member(:ca_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "caCertificate"))
       RegisterCACertificateRequest.add_member(:verification_certificate, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "verificationCertificate"))
       RegisterCACertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
@@ -734,7 +748,8 @@ module Aws
 
       RegisterCertificateRequest.add_member(:certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, required: true, location_name: "certificatePem"))
       RegisterCertificateRequest.add_member(:ca_certificate_pem, Shapes::ShapeRef.new(shape: CertificatePem, location_name: "caCertificatePem"))
-      RegisterCertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActive, location: "querystring", location_name: "setAsActive"))
+      RegisterCertificateRequest.add_member(:set_as_active, Shapes::ShapeRef.new(shape: SetAsActiveFlag, deprecated: true, location: "querystring", location_name: "setAsActive"))
+      RegisterCertificateRequest.add_member(:status, Shapes::ShapeRef.new(shape: CertificateStatus, location_name: "status"))
       RegisterCertificateRequest.struct_class = Types::RegisterCertificateRequest
 
       RegisterCertificateResponse.add_member(:certificate_arn, Shapes::ShapeRef.new(shape: CertificateArn, location_name: "certificateArn"))
@@ -758,6 +773,7 @@ module Aws
       S3Action.add_member(:role_arn, Shapes::ShapeRef.new(shape: AwsArn, required: true, location_name: "roleArn"))
       S3Action.add_member(:bucket_name, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "bucketName"))
       S3Action.add_member(:key, Shapes::ShapeRef.new(shape: Key, required: true, location_name: "key"))
+      S3Action.add_member(:canned_acl, Shapes::ShapeRef.new(shape: CannedAccessControlList, location_name: "cannedAcl"))
       S3Action.struct_class = Types::S3Action
 
       SearchableAttributes.member = Shapes::ShapeRef.new(shape: AttributeName)

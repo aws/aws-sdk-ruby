@@ -326,7 +326,10 @@ module Aws
       #
       # @!attribute [rw] name
       #   The upload's file name. The name should not contain the '/'
-      #   character.
+      #   character. If uploading an iOS app, the file name needs to end with
+      #   the `.ipa` extension. If uploading an Android app, the file name
+      #   needs to end with the `.apk` extension. For all others, the file
+      #   name must end with the `.zip` file extension.
       #   @return [String]
       #
       # @!attribute [rw] type
@@ -1239,7 +1242,9 @@ module Aws
       #   Allowed values include:
       #
       #   * FILE: The artifacts are files.
+      #
       #   * LOG: The artifacts are logs.
+      #
       #   * SCREENSHOT: The artifacts are screenshots.
       #   @return [String]
       #
@@ -1335,7 +1340,7 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The device types' ARNs.
+      #   The Amazon Resource Name (ARN) of the project.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1482,7 +1487,9 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The projects' ARNs.
+      #   Optional. If no Amazon Resource Name (ARN) is specified, then AWS
+      #   Device Farm returns a list of all projects for the AWS account. You
+      #   can also specify a project ARN.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1565,7 +1572,8 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The runs' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list runs.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1605,7 +1613,8 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The samples' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list samples.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -1781,7 +1790,8 @@ module Aws
       #         next_token: "PaginationToken",
       #       }
       # @!attribute [rw] arn
-      #   The uploads' ARNs.
+      #   The Amazon Resource Name (ARN) of the project for which you want to
+      #   list uploads.
       #   @return [String]
       #
       # @!attribute [rw] next_token
@@ -2432,7 +2442,7 @@ module Aws
       # @!attribute [rw] billing_method
       #   Specifies the billing method for a test run: `metered` or
       #   `unmetered`. If the parameter is not specified, the default value is
-      #   `unmetered`.
+      #   `metered`.
       #   @return [String]
       #
       # @!attribute [rw] device_minutes
@@ -2571,7 +2581,7 @@ module Aws
       # @!attribute [rw] billing_method
       #   Specifies the billing method for a test run: `metered` or
       #   `unmetered`. If the parameter is not specified, the default value is
-      #   `unmetered`.
+      #   `metered`.
       #   @return [String]
       class ScheduleRunConfiguration < Struct.new(
         :extra_data_package_arn,

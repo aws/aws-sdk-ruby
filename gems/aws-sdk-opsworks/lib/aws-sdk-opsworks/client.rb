@@ -454,8 +454,7 @@ module Aws
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
-      #   The string should be in the following format and must escape
-      #   characters such as '"':
+      #   The string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -767,8 +766,7 @@ module Aws
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It is used to
       #   override the corresponding default stack configuration JSON values.
-      #   The string should be in the following format and must escape
-      #   characters such as '"':
+      #   The string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -1349,7 +1347,7 @@ module Aws
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration attribute
       #   values or to pass data to recipes. The string should be in the
-      #   following escape characters such as '"':
+      #   following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -1516,7 +1514,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN; this can also be a federated user's ARN.
       # @option params [String] :ssh_username
       #   The user's SSH user name. The allowable characters are \[a-z\],
       #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes
@@ -1680,7 +1678,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN. This can also be a federated user's ARN.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -2490,8 +2488,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [String] :iam_user_arn
-      #   The user's IAM ARN. For more information about IAM ARNs, see [Using
-      #   Identifiers][1].
+      #   The user's IAM ARN. This can also be a federated user's ARN. For
+      #   more information about IAM ARNs, see [Using Identifiers][1].
       #
       #
       #
@@ -2880,7 +2878,8 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [Array<String>] :iam_user_arns
-      #   An array of IAM user ARNs that identify the users to be described.
+      #   An array of IAM or federated user ARNs that identify the users to be
+      #   described.
       # @return [Types::DescribeUserProfilesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeUserProfilesResult#user_profiles #UserProfiles} => Array&lt;Types::UserProfile&gt;
@@ -3407,7 +3406,7 @@ module Aws
       # @option params [required, String] :stack_id
       #   The stack ID.
       # @option params [required, String] :iam_user_arn
-      #   The user's IAM ARN.
+      #   The user's IAM ARN. This can also be a federated user's ARN.
       # @option params [Boolean] :allow_ssh
       #   The user is allowed to use SSH to communicate with the instance.
       # @option params [Boolean] :allow_sudo
@@ -3829,7 +3828,7 @@ module Aws
       #   The instance host name.
       # @option params [String] :os
       #   The instance's operating system, which must be set to one of the
-      #   following.
+      #   following. You cannot update an instance that is using a custom AMI.
       #
       #   * A supported Linux operating system: An Amazon Linux version, such as
       #     `Amazon Linux 2016.03`, `Amazon Linux 2015.09`, or `Amazon Linux
@@ -3847,8 +3846,6 @@ module Aws
       #     Server Express`, `Microsoft Windows Server 2012 R2 with SQL Server
       #     Standard`, or `Microsoft Windows Server 2012 R2 with SQL Server
       #     Web`.
-      #
-      #   * A custom AMI: `Custom`.
       #
       #   For more information on the supported operating systems, see [AWS
       #   OpsWorks Operating Systems][1].
@@ -3871,17 +3868,11 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-os.html
       #   [2]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
       # @option params [String] :ami_id
-      #   A custom AMI ID to be used to create the instance. The AMI must be
-      #   based on one of the supported operating systems. For more information,
-      #   see [Instances][1]
-      #
-      #   <note markdown="1"> If you specify a custom AMI, you must set `Os` to `Custom`.
-      #
-      #    </note>
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/workinginstances-custom-ami.html
+      #   The ID of the AMI that was used to create the instance. The value of
+      #   this parameter must be the same AMI ID that the instance is already
+      #   using. You cannot apply a new AMI to an instance by running
+      #   UpdateInstance. UpdateInstance does not work on instances that are
+      #   using custom AMIs.
       # @option params [String] :ssh_key_name
       #   The instance's Amazon EC2 key name.
       # @option params [String] :architecture
@@ -4253,8 +4244,7 @@ module Aws
       # @option params [String] :custom_json
       #   A string that contains user-defined, custom JSON. It can be used to
       #   override the corresponding default stack configuration JSON values or
-      #   to pass data to recipes. The string should be in the following format
-      #   and escape characters such as '"':
+      #   to pass data to recipes. The string should be in the following format:
       #
       #   `"\{"key1": "value1", "key2": "value2",...\}"`
       #
@@ -4414,7 +4404,7 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/opsworks/latest/userguide/opsworks-security-users.html
       # @option params [required, String] :iam_user_arn
-      #   The user IAM ARN.
+      #   The user IAM ARN. This can also be a federated user's ARN.
       # @option params [String] :ssh_username
       #   The user's SSH user name. The allowable characters are \[a-z\],
       #   \[A-Z\], \[0-9\], '-', and '\_'. If the specified name includes

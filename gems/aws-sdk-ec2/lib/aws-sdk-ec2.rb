@@ -50,7 +50,7 @@ module Aws
   # and return a response object.
   #
   #     ec2 = Aws::EC2::Client.new
-  #     resp = ec2.accept_vpc_peering_connection(params)
+  #     resp = ec2.accept_reserved_instances_exchange_quote(params)
   #
   #
   # See {Client} for more information.

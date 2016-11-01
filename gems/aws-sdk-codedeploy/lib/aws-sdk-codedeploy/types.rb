@@ -39,6 +39,62 @@ module Aws
         include Aws::Structure
       end
 
+      # Information about an alarm.
+      # @note When making an API call, pass Alarm
+      #   data as a hash:
+      #
+      #       {
+      #         name: "AlarmName",
+      #       }
+      # @!attribute [rw] name
+      #   The name of the alarm. Maximum length is 255 characters. Each alarm
+      #   name can be used only once in a list of alarms.
+      #   @return [String]
+      class Alarm < Struct.new(
+        :name)
+        include Aws::Structure
+      end
+
+      # Information about alarms associated with the deployment group.
+      # @note When making an API call, pass AlarmConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         enabled: false,
+      #         ignore_poll_alarm_failure: false,
+      #         alarms: [
+      #           {
+      #             name: "AlarmName",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] enabled
+      #   Indicates whether the alarm configuration is enabled.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] ignore_poll_alarm_failure
+      #   Indicates whether a deployment should continue if information about
+      #   the current state of alarms cannot be retrieved from Amazon
+      #   CloudWatch. The default value is false.
+      #
+      #   * true: The deployment will proceed even if alarm status information
+      #     can't be retrieved from Amazon CloudWatch.
+      #
+      #   * false: The deployment will stop if alarm status information can't
+      #     be retrieved from Amazon CloudWatch.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] alarms
+      #   A list of alarms configured for the deployment group. A maximum of
+      #   10 alarms can be added to a deployment group.
+      #   @return [Array<Types::Alarm>]
+      class AlarmConfiguration < Struct.new(
+        :enabled,
+        :ignore_poll_alarm_failure,
+        :alarms)
+        include Aws::Structure
+      end
+
       # Information about an application.
       # @!attribute [rw] application_id
       #   The application ID.
@@ -61,6 +117,30 @@ module Aws
         :application_name,
         :create_time,
         :linked_to_git_hub)
+        include Aws::Structure
+      end
+
+      # Information about a configuration for automatically rolling back to a
+      # previous version of an application revision when a deployment doesn't
+      # complete successfully.
+      # @note When making an API call, pass AutoRollbackConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         enabled: false,
+      #         events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+      #       }
+      # @!attribute [rw] enabled
+      #   Indicates whether a defined automatic rollback configuration is
+      #   currently enabled.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] events
+      #   The event type or types that trigger a rollback.
+      #   @return [Array<String>]
+      class AutoRollbackConfiguration < Struct.new(
+        :enabled,
+        :events)
         include Aws::Structure
       end
 
@@ -329,6 +409,7 @@ module Aws
       #
       #   * HOST\_COUNT: The value parameter represents the minimum number of
       #     healthy instances as an absolute value.
+      #
       #   * FLEET\_PERCENT: The value parameter represents the minimum number
       #     of healthy instances as a percentage of the total number of
       #     instances in the deployment. If you specify FLEET\_PERCENT, at the
@@ -384,9 +465,22 @@ module Aws
       #           {
       #             trigger_name: "TriggerName",
       #             trigger_target_arn: "TriggerTargetArn",
-      #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, InstanceStart, InstanceSuccess, InstanceFailure
+      #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
       #           },
       #         ],
+      #         alarm_configuration: {
+      #           enabled: false,
+      #           ignore_poll_alarm_failure: false,
+      #           alarms: [
+      #             {
+      #               name: "AlarmName",
+      #             },
+      #           ],
+      #         },
+      #         auto_rollback_configuration: {
+      #           enabled: false,
+      #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+      #         },
       #       }
       # @!attribute [rw] application_name
       #   The name of an AWS CodeDeploy application associated with the
@@ -412,23 +506,23 @@ module Aws
       #   The predefined deployment configurations include the following:
       #
       #   * **CodeDeployDefault.AllAtOnce** attempts to deploy an application
-      #     revision to as many instance as possible at once. The status of
+      #     revision to as many instances as possible at once. The status of
       #     the overall deployment will be displayed as **Succeeded** if the
       #     application revision is deployed to one or more of the instances.
       #     The status of the overall deployment will be displayed as
       #     **Failed** if the application revision is not deployed to any of
-      #     the instances. Using an example of nine instance,
+      #     the instances. Using an example of nine instances,
       #     CodeDeployDefault.AllAtOnce will attempt to deploy to all nine
-      #     instance at once. The overall deployment will succeed if
+      #     instances at once. The overall deployment will succeed if
       #     deployment to even a single instance is successful; it will fail
-      #     only if deployments to all nine instance fail.
+      #     only if deployments to all nine instances fail.
       #
       #   * **CodeDeployDefault.HalfAtATime** deploys to up to half of the
       #     instances at a time (with fractions rounded down). The overall
       #     deployment succeeds if the application revision is deployed to at
       #     least half of the instances (with fractions rounded up);
       #     otherwise, the deployment fails. In the example of nine instances,
-      #     it will deploy to up to four instance at a time. The overall
+      #     it will deploy to up to four instances at a time. The overall
       #     deployment succeeds if deployment to five or more instances
       #     succeed; otherwise, the deployment fails. The deployment may be
       #     successfully deployed to some instances even if the overall
@@ -451,11 +545,11 @@ module Aws
       #       deployment may be successfully deployed to some instances even
       #       if the overall deployment fails.
       #
-      #     * In an example using nine instance, it will deploy to one
+      #     * In an example using nine instances, it will deploy to one
       #       instance at a time. The overall deployment succeeds if
-      #       deployment to the first eight instance is successful; the
+      #       deployment to the first eight instances is successful; the
       #       overall deployment fails if deployment to any of the first eight
-      #       instance fails.
+      #       instances fails.
       #
       #     For deployment groups that contain only one instance, the overall
       #     deployment is successful only if deployment to the single instance
@@ -481,8 +575,23 @@ module Aws
       #
       # @!attribute [rw] trigger_configurations
       #   Information about triggers to create when the deployment group is
-      #   created.
+      #   created. For examples, see [Create a Trigger for an AWS CodeDeploy
+      #   Event][1] in the AWS CodeDeploy User Guide.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-sns.html
       #   @return [Array<Types::TriggerConfig>]
+      #
+      # @!attribute [rw] alarm_configuration
+      #   Information to add about Amazon CloudWatch alarms when the
+      #   deployment group is created.
+      #   @return [Types::AlarmConfiguration]
+      #
+      # @!attribute [rw] auto_rollback_configuration
+      #   Configuration information for an automatic rollback that is added
+      #   when a deployment group is created.
+      #   @return [Types::AutoRollbackConfiguration]
       class CreateDeploymentGroupInput < Struct.new(
         :application_name,
         :deployment_group_name,
@@ -491,7 +600,9 @@ module Aws
         :on_premises_instance_tag_filters,
         :auto_scaling_groups,
         :service_role_arn,
-        :trigger_configurations)
+        :trigger_configurations,
+        :alarm_configuration,
+        :auto_rollback_configuration)
         include Aws::Structure
       end
 
@@ -528,6 +639,11 @@ module Aws
       #         deployment_config_name: "DeploymentConfigName",
       #         description: "Description",
       #         ignore_application_stop_failures: false,
+      #         auto_rollback_configuration: {
+      #           enabled: false,
+      #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+      #         },
+      #         update_outdated_instances_only: false,
       #       }
       # @!attribute [rw] application_name
       #   The name of an AWS CodeDeploy application associated with the
@@ -568,13 +684,25 @@ module Aws
       #   the deployment to that instance will stop, and the deployment to
       #   that instance will be considered to have failed.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] auto_rollback_configuration
+      #   Configuration information for an automatic rollback that is added
+      #   when a deployment is created.
+      #   @return [Types::AutoRollbackConfiguration]
+      #
+      # @!attribute [rw] update_outdated_instances_only
+      #   Indicates whether to deploy to all instances or only to instances
+      #   that are not running the latest application revision.
+      #   @return [Boolean]
       class CreateDeploymentInput < Struct.new(
         :application_name,
         :deployment_group_name,
         :revision,
         :deployment_config_name,
         :description,
-        :ignore_application_stop_failures)
+        :ignore_application_stop_failures,
+        :auto_rollback_configuration,
+        :update_outdated_instances_only)
         include Aws::Structure
       end
 
@@ -721,8 +849,17 @@ module Aws
       #   @return [Types::RevisionLocation]
       #
       # @!attribute [rw] trigger_configurations
-      #   A list of associated triggers.
+      #   Information about triggers associated with the deployment group.
       #   @return [Array<Types::TriggerConfig>]
+      #
+      # @!attribute [rw] alarm_configuration
+      #   A list of alarms associated with the deployment group.
+      #   @return [Types::AlarmConfiguration]
+      #
+      # @!attribute [rw] auto_rollback_configuration
+      #   Information about the automatic rollback configuration associated
+      #   with the deployment group.
+      #   @return [Types::AutoRollbackConfiguration]
       class DeploymentGroupInfo < Struct.new(
         :application_name,
         :deployment_group_id,
@@ -733,7 +870,9 @@ module Aws
         :auto_scaling_groups,
         :service_role_arn,
         :target_revision,
-        :trigger_configurations)
+        :trigger_configurations,
+        :alarm_configuration,
+        :auto_rollback_configuration)
         include Aws::Structure
       end
 
@@ -798,7 +937,10 @@ module Aws
       #   The means by which the deployment was created:
       #
       #   * user: A user created the deployment.
+      #
       #   * autoscaling: Auto Scaling created the deployment.
+      #
+      #   * codeDeployRollback: A rollback process created the deployment.
       #   @return [String]
       #
       # @!attribute [rw] ignore_application_stop_failures
@@ -813,6 +955,20 @@ module Aws
       #   the deployment to that instance will stop, and the deployment to
       #   that instance will be considered to have failed.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] auto_rollback_configuration
+      #   Information about the automatic rollback configuration associated
+      #   with the deployment.
+      #   @return [Types::AutoRollbackConfiguration]
+      #
+      # @!attribute [rw] update_outdated_instances_only
+      #   Indicates whether only instances that are not running the latest
+      #   application revision are to be deployed to.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] rollback_info
+      #   Information about a deployment rollback.
+      #   @return [Types::RollbackInfo]
       class DeploymentInfo < Struct.new(
         :application_name,
         :deployment_group_name,
@@ -827,7 +983,10 @@ module Aws
         :deployment_overview,
         :description,
         :creator,
-        :ignore_application_stop_failures)
+        :ignore_application_stop_failures,
+        :auto_rollback_configuration,
+        :update_outdated_instances_only,
+        :rollback_info)
         include Aws::Structure
       end
 
@@ -883,13 +1042,18 @@ module Aws
       #   The associated error code:
       #
       #   * Success: The specified script ran.
+      #
       #   * ScriptMissing: The specified script was not found in the specified
       #     location.
+      #
       #   * ScriptNotExecutable: The specified script is not a recognized
       #     executable file type.
+      #
       #   * ScriptTimedOut: The specified script did not finish running in the
       #     specified time period.
+      #
       #   * ScriptFailed: The specified script failed to run as expected.
+      #
       #   * UnknownError: The specified script did not run for an unknown
       #     reason.
       #   @return [String]
@@ -937,7 +1101,9 @@ module Aws
       #   The tag filter type:
       #
       #   * KEY\_ONLY: Key only.
+      #
       #   * VALUE\_ONLY: Value only.
+      #
       #   * KEY\_AND\_VALUE: Key and value.
       #   @return [String]
       class EC2TagFilter < Struct.new(
@@ -954,26 +1120,38 @@ module Aws
       #   * APPLICATION\_MISSING: The application was missing. This error code
       #     will most likely be raised if the application is deleted after the
       #     deployment is created but before it is started.
+      #
       #   * DEPLOYMENT\_GROUP\_MISSING: The deployment group was missing. This
       #     error code will most likely be raised if the deployment group is
       #     deleted after the deployment is created but before it is started.
+      #
       #   * HEALTH\_CONSTRAINTS: The deployment failed on too many instances
       #     to be successfully deployed within the instance health constraints
       #     specified.
+      #
       #   * HEALTH\_CONSTRAINTS\_INVALID: The revision cannot be successfully
       #     deployed within the instance health constraints specified.
+      #
       #   * IAM\_ROLE\_MISSING: The service role cannot be accessed.
+      #
       #   * IAM\_ROLE\_PERMISSIONS: The service role does not have the correct
       #     permissions.
+      #
       #   * INTERNAL\_ERROR: There was an internal error.
+      #
       #   * NO\_EC2\_SUBSCRIPTION: The calling account is not subscribed to
       #     the Amazon EC2 service.
+      #
       #   * NO\_INSTANCES: No instance were specified, or no instance can be
       #     found.
+      #
       #   * OVER\_MAX\_INSTANCES: The maximum number of instance was exceeded.
+      #
       #   * THROTTLED: The operation was throttled because the calling account
       #     exceeded the throttling limits of one or more AWS services.
+      #
       #   * TIMEOUT: The deployment has timed out.
+      #
       #   * REVISION\_MISSING: The revision ID was missing. This error code
       #     will most likely be raised if the revision is deleted after the
       #     deployment is created but before it is started.
@@ -1308,10 +1486,15 @@ module Aws
       #   The deployment status for this instance:
       #
       #   * Pending: The deployment is pending for this instance.
+      #
       #   * In Progress: The deployment is in progress for this instance.
+      #
       #   * Succeeded: The deployment has succeeded for this instance.
+      #
       #   * Failed: The deployment has failed for this instance.
+      #
       #   * Skipped: The deployment has been skipped for this instance.
+      #
       #   * Unknown: The deployment status is unknown for this instance.
       #   @return [String]
       #
@@ -1354,10 +1537,15 @@ module Aws
       #   The deployment lifecycle event status:
       #
       #   * Pending: The deployment lifecycle event is pending.
+      #
       #   * InProgress: The deployment lifecycle event is in progress.
+      #
       #   * Succeeded: The deployment lifecycle event ran successfully.
+      #
       #   * Failed: The deployment lifecycle event has failed.
+      #
       #   * Skipped: The deployment lifecycle event has been skipped.
+      #
       #   * Unknown: The deployment lifecycle event is unknown.
       #   @return [String]
       class LifecycleEvent < Struct.new(
@@ -1392,8 +1580,10 @@ module Aws
       #
       #   * registerTime: Sort by the time the revisions were registered with
       #     AWS CodeDeploy.
+      #
       #   * firstUsedTime: Sort by the time the revisions were first used in a
       #     deployment.
+      #
       #   * lastUsedTime: Sort by the time the revisions were last used in a
       #     deployment.
       #
@@ -1405,6 +1595,7 @@ module Aws
       #   The order in which to sort the list results:
       #
       #   * ascending: ascending order.
+      #
       #   * descending: descending order.
       #
       #   If not specified, the results will be sorted in ascending order.
@@ -1429,8 +1620,10 @@ module Aws
       #
       #   * include: List revisions that are target revisions of a deployment
       #     group.
+      #
       #   * exclude: Do not list revisions that are target revisions of a
       #     deployment group.
+      #
       #   * ignore: List all revisions.
       #   @return [String]
       #
@@ -1603,11 +1796,16 @@ module Aws
       #   A subset of instances to list by status:
       #
       #   * Pending: Include those instance with pending deployments.
+      #
       #   * InProgress: Include those instance where deployments are still in
       #     progress.
+      #
       #   * Succeeded: Include those instances with successful deployments.
+      #
       #   * Failed: Include those instance with failed deployments.
+      #
       #   * Skipped: Include those instance with skipped deployments.
+      #
       #   * Unknown: Include those instance with deployments in an unknown
       #     state.
       #   @return [Array<String>]
@@ -1662,11 +1860,16 @@ module Aws
       #   A subset of deployments to list by status:
       #
       #   * Created: Include created deployments in the resulting list.
+      #
       #   * Queued: Include queued deployments in the resulting list.
+      #
       #   * In Progress: Include in-progress deployments in the resulting
       #     list.
+      #
       #   * Succeeded: Include successful deployments in the resulting list.
+      #
       #   * Failed: Include failed deployments in the resulting list.
+      #
       #   * Stopped: Include stopped deployments in the resulting list.
       #   @return [Array<String>]
       #
@@ -1705,8 +1908,6 @@ module Aws
       end
 
       # Represents the input of a list on-premises instances operation.
-      #
-      # .
       # @note When making an API call, pass ListOnPremisesInstancesInput
       #   data as a hash:
       #
@@ -1726,6 +1927,7 @@ module Aws
       #
       #   * Deregistered: Include deregistered on-premises instances in the
       #     resulting list.
+      #
       #   * Registered: Include registered on-premises instances in the
       #     resulting list.
       #   @return [String]
@@ -1780,6 +1982,7 @@ module Aws
       #
       #   * HOST\_COUNT: The minimum number of healthy instance as an absolute
       #     value.
+      #
       #   * FLEET\_PERCENT: The minimum number of healthy instance as a
       #     percentage of the total number of instance in the deployment.
       #
@@ -1791,7 +1994,19 @@ module Aws
       #   deployment will be successful if four or more instance are deployed
       #   to successfully; otherwise, the deployment fails.
       #
-      #   <note>In a call to the get deployment configuration operation, CodeDeployDefault.OneAtATime will return a minimum healthy instance type of MOST_CONCURRENCY and a value of 1. This means a deployment to only one instance at a time. (You cannot set the type to MOST_CONCURRENCY, only to HOST_COUNT or FLEET_PERCENT.) In addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try to ensure that all instances but one are kept in a healthy state during the deployment. Although this allows one instance at a time to be taken offline for a new deployment, it also means that if the deployment to the last instance fails, the overall deployment still succeeds.</note>
+      #   <note markdown="1"> In a call to the get deployment configuration operation,
+      #   CodeDeployDefault.OneAtATime will return a minimum healthy instance
+      #   type of MOST\_CONCURRENCY and a value of 1. This means a deployment
+      #   to only one instance at a time. (You cannot set the type to
+      #   MOST\_CONCURRENCY, only to HOST\_COUNT or FLEET\_PERCENT.) In
+      #   addition, with CodeDeployDefault.OneAtATime, AWS CodeDeploy will try
+      #   to ensure that all instances but one are kept in a healthy state
+      #   during the deployment. Although this allows one instance at a time
+      #   to be taken offline for a new deployment, it also means that if the
+      #   deployment to the last instance fails, the overall deployment still
+      #   succeeds.
+      #
+      #    </note>
       #   @return [String]
       class MinimumHealthyHosts < Struct.new(
         :value,
@@ -1925,6 +2140,7 @@ module Aws
       #   The type of application revision:
       #
       #   * S3: An application revision stored in Amazon S3.
+      #
       #   * GitHub: An application revision stored in GitHub.
       #   @return [String]
       #
@@ -1941,6 +2157,28 @@ module Aws
         :revision_type,
         :s3_location,
         :git_hub_location)
+        include Aws::Structure
+      end
+
+      # Information about a deployment rollback.
+      # @!attribute [rw] rollback_deployment_id
+      #   The ID of the deployment rollback.
+      #   @return [String]
+      #
+      # @!attribute [rw] rollback_triggering_deployment_id
+      #   The deployment ID of the deployment that was underway and triggered
+      #   a rollback deployment because it failed or was stopped.
+      #   @return [String]
+      #
+      # @!attribute [rw] rollback_message
+      #   Information describing the status of a deployment rollback; for
+      #   example, whether the deployment can't be rolled back, is in
+      #   progress, failed, or succeeded.
+      #   @return [String]
+      class RollbackInfo < Struct.new(
+        :rollback_deployment_id,
+        :rollback_triggering_deployment_id,
+        :rollback_message)
         include Aws::Structure
       end
 
@@ -1971,7 +2209,9 @@ module Aws
       #   following:
       #
       #   * tar: A tar archive file.
+      #
       #   * tgz: A compressed tar archive file.
+      #
       #   * zip: A zip archive file.
       #   @return [String]
       #
@@ -2005,12 +2245,20 @@ module Aws
       #
       #       {
       #         deployment_id: "DeploymentId", # required
+      #         auto_rollback_enabled: false,
       #       }
       # @!attribute [rw] deployment_id
       #   The unique ID of a deployment.
       #   @return [String]
+      #
+      # @!attribute [rw] auto_rollback_enabled
+      #   Indicates, when a deployment is stopped, whether instances that have
+      #   been updated should be rolled back to the previous version of the
+      #   application revision.
+      #   @return [Boolean]
       class StopDeploymentInput < Struct.new(
-        :deployment_id)
+        :deployment_id,
+        :auto_rollback_enabled)
         include Aws::Structure
       end
 
@@ -2019,6 +2267,7 @@ module Aws
       #   The status of the stop deployment operation:
       #
       #   * Pending: The stop operation is pending.
+      #
       #   * Succeeded: The stop operation was successful.
       #   @return [String]
       #
@@ -2073,7 +2322,9 @@ module Aws
       #   The on-premises instance tag filter type:
       #
       #   * KEY\_ONLY: Key only.
+      #
       #   * VALUE\_ONLY: Value only.
+      #
       #   * KEY\_AND\_VALUE: Key and value.
       #   @return [String]
       class TagFilter < Struct.new(
@@ -2094,13 +2345,17 @@ module Aws
       # @!attribute [rw] start
       #   The start time of the time range.
       #
-      #   <note>Specify null to leave the start time open-ended.</note>
+      #   <note markdown="1"> Specify null to leave the start time open-ended.
+      #
+      #    </note>
       #   @return [Time]
       #
       # @!attribute [rw] end
       #   The end time of the time range.
       #
-      #   <note>Specify null to leave the end time open-ended.</note>
+      #   <note markdown="1"> Specify null to leave the end time open-ended.
+      #
+      #    </note>
       #   @return [Time]
       class TimeRange < Struct.new(
         :start,
@@ -2115,7 +2370,7 @@ module Aws
       #       {
       #         trigger_name: "TriggerName",
       #         trigger_target_arn: "TriggerTargetArn",
-      #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, InstanceStart, InstanceSuccess, InstanceFailure
+      #         trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
       #       }
       # @!attribute [rw] trigger_name
       #   The name of the notification trigger.
@@ -2128,16 +2383,6 @@ module Aws
       #
       # @!attribute [rw] trigger_events
       #   The event type or types for which notifications are triggered.
-      #
-      #   The following event type values are supported:
-      #
-      #   * DEPLOYMENT\_START
-      #   * DEPLOYMENT\_SUCCESS
-      #   * DEPLOYMENT\_FAILURE
-      #   * DEPLOYMENT\_STOP
-      #   * INSTANCE\_START
-      #   * INSTANCE\_SUCCESS
-      #   * INSTANCE\_FAILURE
       #   @return [Array<String>]
       class TriggerConfig < Struct.new(
         :trigger_name,
@@ -2196,9 +2441,22 @@ module Aws
       #           {
       #             trigger_name: "TriggerName",
       #             trigger_target_arn: "TriggerTargetArn",
-      #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, InstanceStart, InstanceSuccess, InstanceFailure
+      #             trigger_events: ["DeploymentStart"], # accepts DeploymentStart, DeploymentSuccess, DeploymentFailure, DeploymentStop, DeploymentRollback, InstanceStart, InstanceSuccess, InstanceFailure
       #           },
       #         ],
+      #         alarm_configuration: {
+      #           enabled: false,
+      #           ignore_poll_alarm_failure: false,
+      #           alarms: [
+      #             {
+      #               name: "AlarmName",
+      #             },
+      #           ],
+      #         },
+      #         auto_rollback_configuration: {
+      #           enabled: false,
+      #           events: ["DEPLOYMENT_FAILURE"], # accepts DEPLOYMENT_FAILURE, DEPLOYMENT_STOP_ON_ALARM, DEPLOYMENT_STOP_ON_REQUEST
+      #         },
       #       }
       # @!attribute [rw] application_name
       #   The application name corresponding to the deployment group to
@@ -2243,8 +2501,23 @@ module Aws
       #
       # @!attribute [rw] trigger_configurations
       #   Information about triggers to change when the deployment group is
-      #   updated.
+      #   updated. For examples, see [Modify Triggers in an AWS CodeDeploy
+      #   Deployment Group][1] in the AWS CodeDeploy User Guide.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/codedeploy/latest/userguide/how-to-notify-edit.html
       #   @return [Array<Types::TriggerConfig>]
+      #
+      # @!attribute [rw] alarm_configuration
+      #   Information to add or change about Amazon CloudWatch alarms when the
+      #   deployment group is updated.
+      #   @return [Types::AlarmConfiguration]
+      #
+      # @!attribute [rw] auto_rollback_configuration
+      #   Information for an automatic rollback configuration that is added or
+      #   changed when a deployment group is updated.
+      #   @return [Types::AutoRollbackConfiguration]
       class UpdateDeploymentGroupInput < Struct.new(
         :application_name,
         :current_deployment_group_name,
@@ -2254,7 +2527,9 @@ module Aws
         :on_premises_instance_tag_filters,
         :auto_scaling_groups,
         :service_role_arn,
-        :trigger_configurations)
+        :trigger_configurations,
+        :alarm_configuration,
+        :auto_rollback_configuration)
         include Aws::Structure
       end
 

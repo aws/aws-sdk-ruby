@@ -28,10 +28,14 @@ module Aws
       CompleteLayerUploadResponse = Shapes::StructureShape.new(name: 'CompleteLayerUploadResponse')
       CreateRepositoryRequest = Shapes::StructureShape.new(name: 'CreateRepositoryRequest')
       CreateRepositoryResponse = Shapes::StructureShape.new(name: 'CreateRepositoryResponse')
+      CreationTimestamp = Shapes::TimestampShape.new(name: 'CreationTimestamp')
       DeleteRepositoryPolicyRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyRequest')
       DeleteRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryPolicyResponse')
       DeleteRepositoryRequest = Shapes::StructureShape.new(name: 'DeleteRepositoryRequest')
       DeleteRepositoryResponse = Shapes::StructureShape.new(name: 'DeleteRepositoryResponse')
+      DescribeImagesFilter = Shapes::StructureShape.new(name: 'DescribeImagesFilter')
+      DescribeImagesRequest = Shapes::StructureShape.new(name: 'DescribeImagesRequest')
+      DescribeImagesResponse = Shapes::StructureShape.new(name: 'DescribeImagesResponse')
       DescribeRepositoriesRequest = Shapes::StructureShape.new(name: 'DescribeRepositoriesRequest')
       DescribeRepositoriesResponse = Shapes::StructureShape.new(name: 'DescribeRepositoriesResponse')
       EmptyUploadException = Shapes::StructureShape.new(name: 'EmptyUploadException')
@@ -47,6 +51,8 @@ module Aws
       GetRepositoryPolicyResponse = Shapes::StructureShape.new(name: 'GetRepositoryPolicyResponse')
       Image = Shapes::StructureShape.new(name: 'Image')
       ImageAlreadyExistsException = Shapes::StructureShape.new(name: 'ImageAlreadyExistsException')
+      ImageDetail = Shapes::StructureShape.new(name: 'ImageDetail')
+      ImageDetailList = Shapes::ListShape.new(name: 'ImageDetailList')
       ImageDigest = Shapes::StringShape.new(name: 'ImageDigest')
       ImageFailure = Shapes::StructureShape.new(name: 'ImageFailure')
       ImageFailureCode = Shapes::StringShape.new(name: 'ImageFailureCode')
@@ -56,7 +62,10 @@ module Aws
       ImageIdentifierList = Shapes::ListShape.new(name: 'ImageIdentifierList')
       ImageList = Shapes::ListShape.new(name: 'ImageList')
       ImageManifest = Shapes::StringShape.new(name: 'ImageManifest')
+      ImageNotFoundException = Shapes::StructureShape.new(name: 'ImageNotFoundException')
+      ImageSizeInBytes = Shapes::IntegerShape.new(name: 'ImageSizeInBytes')
       ImageTag = Shapes::StringShape.new(name: 'ImageTag')
+      ImageTagList = Shapes::ListShape.new(name: 'ImageTagList')
       InitiateLayerUploadRequest = Shapes::StructureShape.new(name: 'InitiateLayerUploadRequest')
       InitiateLayerUploadResponse = Shapes::StructureShape.new(name: 'InitiateLayerUploadResponse')
       InvalidLayerException = Shapes::StructureShape.new(name: 'InvalidLayerException')
@@ -85,6 +94,7 @@ module Aws
       NextToken = Shapes::StringShape.new(name: 'NextToken')
       PartSize = Shapes::IntegerShape.new(name: 'PartSize')
       ProxyEndpoint = Shapes::StringShape.new(name: 'ProxyEndpoint')
+      PushTimestamp = Shapes::TimestampShape.new(name: 'PushTimestamp')
       PutImageRequest = Shapes::StructureShape.new(name: 'PutImageRequest')
       PutImageResponse = Shapes::StructureShape.new(name: 'PutImageResponse')
       RegistryId = Shapes::StringShape.new(name: 'RegistryId')
@@ -178,6 +188,21 @@ module Aws
       DeleteRepositoryResponse.add_member(:repository, Shapes::ShapeRef.new(shape: Repository, location_name: "repository"))
       DeleteRepositoryResponse.struct_class = Types::DeleteRepositoryResponse
 
+      DescribeImagesFilter.add_member(:tag_status, Shapes::ShapeRef.new(shape: TagStatus, location_name: "tagStatus"))
+      DescribeImagesFilter.struct_class = Types::DescribeImagesFilter
+
+      DescribeImagesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+      DescribeImagesRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
+      DescribeImagesRequest.add_member(:image_ids, Shapes::ShapeRef.new(shape: ImageIdentifierList, location_name: "imageIds"))
+      DescribeImagesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+      DescribeImagesRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location_name: "maxResults"))
+      DescribeImagesRequest.add_member(:filter, Shapes::ShapeRef.new(shape: DescribeImagesFilter, location_name: "filter"))
+      DescribeImagesRequest.struct_class = Types::DescribeImagesRequest
+
+      DescribeImagesResponse.add_member(:image_details, Shapes::ShapeRef.new(shape: ImageDetailList, location_name: "imageDetails"))
+      DescribeImagesResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
+      DescribeImagesResponse.struct_class = Types::DescribeImagesResponse
+
       DescribeRepositoriesRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
       DescribeRepositoriesRequest.add_member(:repository_names, Shapes::ShapeRef.new(shape: RepositoryNameList, location_name: "repositoryNames"))
       DescribeRepositoriesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "nextToken"))
@@ -220,6 +245,16 @@ module Aws
       Image.add_member(:image_manifest, Shapes::ShapeRef.new(shape: ImageManifest, location_name: "imageManifest"))
       Image.struct_class = Types::Image
 
+      ImageDetail.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
+      ImageDetail.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
+      ImageDetail.add_member(:image_digest, Shapes::ShapeRef.new(shape: ImageDigest, location_name: "imageDigest"))
+      ImageDetail.add_member(:image_tags, Shapes::ShapeRef.new(shape: ImageTagList, location_name: "imageTags"))
+      ImageDetail.add_member(:image_size_in_bytes, Shapes::ShapeRef.new(shape: ImageSizeInBytes, location_name: "imageSizeInBytes"))
+      ImageDetail.add_member(:image_pushed_at, Shapes::ShapeRef.new(shape: PushTimestamp, location_name: "imagePushedAt"))
+      ImageDetail.struct_class = Types::ImageDetail
+
+      ImageDetailList.member = Shapes::ShapeRef.new(shape: ImageDetail)
+
       ImageFailure.add_member(:image_id, Shapes::ShapeRef.new(shape: ImageIdentifier, location_name: "imageId"))
       ImageFailure.add_member(:failure_code, Shapes::ShapeRef.new(shape: ImageFailureCode, location_name: "failureCode"))
       ImageFailure.add_member(:failure_reason, Shapes::ShapeRef.new(shape: ImageFailureReason, location_name: "failureReason"))
@@ -234,6 +269,8 @@ module Aws
       ImageIdentifierList.member = Shapes::ShapeRef.new(shape: ImageIdentifier)
 
       ImageList.member = Shapes::ShapeRef.new(shape: Image)
+
+      ImageTagList.member = Shapes::ShapeRef.new(shape: ImageTag)
 
       InitiateLayerUploadRequest.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
       InitiateLayerUploadRequest.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, required: true, location_name: "repositoryName"))
@@ -285,6 +322,7 @@ module Aws
       Repository.add_member(:registry_id, Shapes::ShapeRef.new(shape: RegistryId, location_name: "registryId"))
       Repository.add_member(:repository_name, Shapes::ShapeRef.new(shape: RepositoryName, location_name: "repositoryName"))
       Repository.add_member(:repository_uri, Shapes::ShapeRef.new(shape: Url, location_name: "repositoryUri"))
+      Repository.add_member(:created_at, Shapes::ShapeRef.new(shape: CreationTimestamp, location_name: "createdAt"))
       Repository.struct_class = Types::Repository
 
       RepositoryList.member = Shapes::ShapeRef.new(shape: Repository)
@@ -414,6 +452,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryPolicyNotFoundException)
+        end)
+
+        api.add_operation(:describe_images, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeImages"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeImagesRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeImagesResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
         end)
 
         api.add_operation(:describe_repositories, Seahorse::Model::Operation.new.tap do |o|

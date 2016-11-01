@@ -321,7 +321,12 @@ module Aws
 
       # Creates an application version for the specified application.
       #
-      # <note>Once you create an application version with a specified Amazon S3 bucket and key location, you cannot change that Amazon S3 location. If you change the Amazon S3 location, you receive an exception when you attempt to launch an environment from the application version. </note>
+      # <note markdown="1"> Once you create an application version with a specified Amazon S3
+      # bucket and key location, you cannot change that Amazon S3 location. If
+      # you change the Amazon S3 location, you receive an exception when you
+      # attempt to launch an environment from the application version.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application. If no application is found with this
       #   name, and `AutoCreateApplication` is `false`, returns an
@@ -334,6 +339,7 @@ module Aws
       #   Elastic Beanstalk returns an `InvalidParameterValue` error.
       # @option params [String] :description
       #   Describes this version.
+      # @option params [Types::SourceBuildInformation] :source_build_information
       # @option params [Types::S3Location] :source_bundle
       #   The Amazon S3 bucket and key that identify the location of the source
       #   bundle for this version.
@@ -353,6 +359,7 @@ module Aws
       #
       #   * `true`\: Automatically creates the specified application for this
       #     release if it does not already exist.
+      #
       #   * `false`\: Throws an `InvalidParameterValue` if the specified
       #     application for this release does not already exist.
       #
@@ -373,6 +380,11 @@ module Aws
       #     application_name: "ApplicationName", # required
       #     version_label: "VersionLabel", # required
       #     description: "Description",
+      #     source_build_information: {
+      #       source_type: "Git", # required, accepts Git
+      #       source_repository: "CodeCommit", # required, accepts CodeCommit
+      #       source_location: "SourceLocation", # required
+      #     },
       #     source_bundle: {
       #       s3_bucket: "S3Bucket",
       #       s3_key: "S3Key",
@@ -385,6 +397,9 @@ module Aws
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
+      #   resp.application_version.source_build_information.source_type #=> String, one of "Git"
+      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_version.source_build_information.source_location #=> String
       #   resp.application_version.source_bundle.s3_bucket #=> String
       #   resp.application_version.source_bundle.s3_key #=> String
       #   resp.application_version.date_created #=> Time
@@ -404,7 +419,9 @@ module Aws
       # Related Topics
       #
       # * DescribeConfigurationOptions
+      #
       # * DescribeConfigurationSettings
+      #
       # * ListAvailableSolutionStacks
       # @option params [required, String] :application_name
       #   The name of the application to associate with this configuration
@@ -698,7 +715,9 @@ module Aws
       # and configurations. The application versions will not be deleted from
       # your Amazon S3 bucket.
       #
-      # <note>You cannot delete an application that has a running environment. </note>
+      # <note markdown="1"> You cannot delete an application that has a running environment.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application to delete.
       # @option params [Boolean] :terminate_env_by_force
@@ -720,7 +739,10 @@ module Aws
 
       # Deletes the specified version from the specified application.
       #
-      # <note>You cannot delete an application version that is associated with a running environment.</note>
+      # <note markdown="1"> You cannot delete an application version that is associated with a
+      # running environment.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application to delete releases from.
       # @option params [required, String] :version_label
@@ -731,6 +753,7 @@ module Aws
       #
       #   * `true`\: An attempt is made to delete the associated Amazon S3
       #     source bundle specified at time of creation.
+      #
       #   * `false`\: No action is taken on the Amazon S3 source bundle
       #     specified at time of creation.
       #
@@ -752,7 +775,12 @@ module Aws
 
       # Deletes the specified configuration template.
       #
-      # <note>When you launch an environment using a configuration template, the environment gets a copy of the template. You can delete or modify the environment's copy of the template without affecting the running environment.</note>
+      # <note markdown="1"> When you launch an environment using a configuration template, the
+      # environment gets a copy of the template. You can delete or modify the
+      # environment's copy of the template without affecting the running
+      # environment.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application to delete the configuration template from.
       # @option params [required, String] :template_name
@@ -808,14 +836,22 @@ module Aws
       # @option params [Array<String>] :version_labels
       #   If specified, restricts the returned descriptions to only include ones
       #   that have the specified version labels.
+      # @option params [Integer] :max_records
+      #   Specify a maximum number of application versions to paginate in the
+      #   request.
+      # @option params [String] :next_token
+      #   Specify a next token to retrieve the next page in a paginated request.
       # @return [Types::ApplicationVersionDescriptionsMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApplicationVersionDescriptionsMessage#application_versions #ApplicationVersions} => Array&lt;Types::ApplicationVersionDescription&gt;
+      #   * {Types::ApplicationVersionDescriptionsMessage#next_token #NextToken} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_application_versions({
       #     application_name: "ApplicationName",
       #     version_labels: ["VersionLabel"],
+      #     max_records: 1,
+      #     next_token: "Token",
       #   })
       #
       # @example Response structure
@@ -823,11 +859,15 @@ module Aws
       #   resp.application_versions[0].application_name #=> String
       #   resp.application_versions[0].description #=> String
       #   resp.application_versions[0].version_label #=> String
+      #   resp.application_versions[0].source_build_information.source_type #=> String, one of "Git"
+      #   resp.application_versions[0].source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_versions[0].source_build_information.source_location #=> String
       #   resp.application_versions[0].source_bundle.s3_bucket #=> String
       #   resp.application_versions[0].source_bundle.s3_key #=> String
       #   resp.application_versions[0].date_created #=> Time
       #   resp.application_versions[0].date_updated #=> Time
       #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      #   resp.next_token #=> String
       # @overload describe_application_versions(params = {})
       # @param [Hash] params ({})
       def describe_application_versions(params = {}, options = {})
@@ -943,6 +983,8 @@ module Aws
       # Related Topics
       #
       # * DeleteEnvironmentConfiguration
+      #
+      # ^
       # @option params [required, String] :application_name
       #   The application for the environment or configuration template.
       # @option params [String] :template_name
@@ -1261,7 +1303,10 @@ module Aws
       # Returns list of event descriptions matching criteria up to the last 6
       # weeks.
       #
-      # <note>This action returns the most recent 1,000 events from the specified `NextToken`.</note>
+      # <note markdown="1"> This action returns the most recent 1,000 events from the specified
+      # `NextToken`.
+      #
+      #  </note>
       # @option params [String] :application_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
       #   descriptions to include only those associated with this application.
@@ -1474,6 +1519,8 @@ module Aws
       # Related Topics
       #
       # * RetrieveEnvironmentInfo
+      #
+      # ^
       # @option params [String] :environment_id
       #   The ID of the environment of the requested data.
       #
@@ -1543,6 +1590,8 @@ module Aws
       # Related Topics
       #
       # * RequestEnvironmentInfo
+      #
+      # ^
       # @option params [String] :environment_id
       #   The ID of the data's environment.
       #
@@ -1651,6 +1700,7 @@ module Aws
       #   * `true`\: The specified environment as well as the associated AWS
       #     resources, such as Auto Scaling group and LoadBalancer, are
       #     terminated.
+      #
       #   * `false`\: AWS Elastic Beanstalk resource management is removed from
       #     the environment, but the AWS resources continue to operate.
       #
@@ -1731,7 +1781,10 @@ module Aws
 
       # Updates the specified application to have the specified properties.
       #
-      # <note> If a property (for example, `description`) is not provided, the value remains unchanged. To clear these properties, specify an empty string. </note>
+      # <note markdown="1"> If a property (for example, `description`) is not provided, the value
+      # remains unchanged. To clear these properties, specify an empty string.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application to update. If no such application is
       #   found, `UpdateApplication` returns an `InvalidParameterValue` error.
@@ -1769,7 +1822,10 @@ module Aws
       # Updates the specified application version to have the specified
       # properties.
       #
-      # <note> If a property (for example, `description`) is not provided, the value remains unchanged. To clear properties, specify an empty string. </note>
+      # <note markdown="1"> If a property (for example, `description`) is not provided, the value
+      # remains unchanged. To clear properties, specify an empty string.
+      #
+      #  </note>
       # @option params [required, String] :application_name
       #   The name of the application associated with this version.
       #
@@ -1797,6 +1853,9 @@ module Aws
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
+      #   resp.application_version.source_build_information.source_type #=> String, one of "Git"
+      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_version.source_build_information.source_location #=> String
       #   resp.application_version.source_bundle.s3_bucket #=> String
       #   resp.application_version.source_bundle.s3_key #=> String
       #   resp.application_version.date_created #=> Time
@@ -1812,11 +1871,17 @@ module Aws
       # Updates the specified configuration template to have the specified
       # properties or configuration option values.
       #
-      # <note> If a property (for example, `ApplicationName`) is not provided, its value remains unchanged. To clear such properties, specify an empty string. </note>
+      # <note markdown="1"> If a property (for example, `ApplicationName`) is not provided, its
+      # value remains unchanged. To clear such properties, specify an empty
+      # string.
+      #
+      #  </note>
       #
       # Related Topics
       #
       # * DescribeConfigurationOptions
+      #
+      # ^
       # @option params [required, String] :application_name
       #   The name of the application associated with the configuration template
       #   to update.

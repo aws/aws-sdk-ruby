@@ -253,7 +253,7 @@ module Aws
       end
 
       # @!attribute [rw] repository
-      #   An object representing a repository.
+      #   The repository that was created.
       #   @return [Types::Repository]
       class CreateRepositoryResponse < Struct.new(
         :repository)
@@ -330,10 +330,110 @@ module Aws
       end
 
       # @!attribute [rw] repository
-      #   An object representing a repository.
+      #   The repository that was deleted.
       #   @return [Types::Repository]
       class DeleteRepositoryResponse < Struct.new(
         :repository)
+        include Aws::Structure
+      end
+
+      # An object representing a filter on a DescribeImages operation.
+      # @note When making an API call, pass DescribeImagesFilter
+      #   data as a hash:
+      #
+      #       {
+      #         tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #       }
+      # @!attribute [rw] tag_status
+      #   The tag status with which to filter your DescribeImages results. You
+      #   can filter results based on whether they are `TAGGED` or `UNTAGGED`.
+      #   @return [String]
+      class DescribeImagesFilter < Struct.new(
+        :tag_status)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DescribeImagesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         registry_id: "RegistryId",
+      #         repository_name: "RepositoryName", # required
+      #         image_ids: [
+      #           {
+      #             image_digest: "ImageDigest",
+      #             image_tag: "ImageTag",
+      #           },
+      #         ],
+      #         next_token: "NextToken",
+      #         max_results: 1,
+      #         filter: {
+      #           tag_status: "TAGGED", # accepts TAGGED, UNTAGGED
+      #         },
+      #       }
+      # @!attribute [rw] registry_id
+      #   The AWS account ID associated with the registry that contains the
+      #   repository in which to list images. If you do not specify a
+      #   registry, the default registry is assumed.
+      #   @return [String]
+      #
+      # @!attribute [rw] repository_name
+      #   A list of repositories to describe. If this parameter is omitted,
+      #   then all repositories in a registry are described.
+      #   @return [String]
+      #
+      # @!attribute [rw] image_ids
+      #   The list of image IDs for the requested repository.
+      #   @return [Array<Types::ImageIdentifier>]
+      #
+      # @!attribute [rw] next_token
+      #   The `nextToken` value returned from a previous paginated
+      #   `DescribeImages` request where `maxResults` was used and the results
+      #   exceeded the value of that parameter. Pagination continues from the
+      #   end of the previous results that returned the `nextToken` value.
+      #   This value is `null` when there are no more results to return.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of repository results returned by
+      #   `DescribeImages` in paginated output. When this parameter is used,
+      #   `DescribeImages` only returns `maxResults` results in a single page
+      #   along with a `nextToken` response element. The remaining results of
+      #   the initial request can be seen by sending another `DescribeImages`
+      #   request with the returned `nextToken` value. This value can be
+      #   between 1 and 100. If this parameter is not used, then
+      #   `DescribeImages` returns up to 100 results and a `nextToken` value,
+      #   if applicable.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] filter
+      #   The filter key and value with which to filter your `DescribeImages`
+      #   results.
+      #   @return [Types::DescribeImagesFilter]
+      class DescribeImagesRequest < Struct.new(
+        :registry_id,
+        :repository_name,
+        :image_ids,
+        :next_token,
+        :max_results,
+        :filter)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] image_details
+      #   A list of ImageDetail objects that contain data about the image.
+      #   @return [Array<Types::ImageDetail>]
+      #
+      # @!attribute [rw] next_token
+      #   The `nextToken` value to include in a future `DescribeImages`
+      #   request. When the results of a `DescribeImages` request exceed
+      #   `maxResults`, this value can be used to retrieve the next page of
+      #   results. This value is `null` when there are no more results to
+      #   return.
+      #   @return [String]
+      class DescribeImagesResponse < Struct.new(
+        :image_details,
+        :next_token)
         include Aws::Structure
       end
 
@@ -538,6 +638,51 @@ module Aws
         :repository_name,
         :image_id,
         :image_manifest)
+        include Aws::Structure
+      end
+
+      # An object that describes an image returned by a DescribeImages
+      # operation.
+      # @!attribute [rw] registry_id
+      #   The AWS account ID associated with the registry to which this image
+      #   belongs.
+      #   @return [String]
+      #
+      # @!attribute [rw] repository_name
+      #   The name of the repository to which this image belongs.
+      #   @return [String]
+      #
+      # @!attribute [rw] image_digest
+      #   The `sha256` digest of the image manifest.
+      #   @return [String]
+      #
+      # @!attribute [rw] image_tags
+      #   The list of tags associated with this image.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] image_size_in_bytes
+      #   The size, in bytes, of the image in the repository.
+      #
+      #   <note markdown="1"> Beginning with Docker version 1.9, the Docker client compresses
+      #   image layers before pushing them to a V2 Docker registry. The output
+      #   of the `docker images` command shows the uncompressed image size, so
+      #   it may return a larger image size than the image sizes returned by
+      #   DescribeImages.
+      #
+      #    </note>
+      #   @return [Integer]
+      #
+      # @!attribute [rw] image_pushed_at
+      #   The date and time, expressed in standard JavaScript date format, at
+      #   which the current image was pushed to the repository.
+      #   @return [Time]
+      class ImageDetail < Struct.new(
+        :registry_id,
+        :repository_name,
+        :image_digest,
+        :image_tags,
+        :image_size_in_bytes,
+        :image_pushed_at)
         include Aws::Structure
       end
 
@@ -807,11 +952,17 @@ module Aws
       #   The URI for the repository. You can use this URI for Docker `push`
       #   and `pull` operations.
       #   @return [String]
+      #
+      # @!attribute [rw] created_at
+      #   The date and time, in JavaScript date/time format, when the
+      #   repository was created.
+      #   @return [Time]
       class Repository < Struct.new(
         :repository_arn,
         :registry_id,
         :repository_name,
-        :repository_uri)
+        :repository_uri,
+        :created_at)
         include Aws::Structure
       end
 

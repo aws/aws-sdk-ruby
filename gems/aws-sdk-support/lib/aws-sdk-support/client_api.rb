@@ -340,7 +340,7 @@ module Aws
       TrustedAdvisorCostOptimizingSummary.struct_class = Types::TrustedAdvisorCostOptimizingSummary
 
       TrustedAdvisorResourceDetail.add_member(:status, Shapes::ShapeRef.new(shape: String, required: true, location_name: "status"))
-      TrustedAdvisorResourceDetail.add_member(:region, Shapes::ShapeRef.new(shape: String, required: true, location_name: "region"))
+      TrustedAdvisorResourceDetail.add_member(:region, Shapes::ShapeRef.new(shape: String, location_name: "region"))
       TrustedAdvisorResourceDetail.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "resourceId"))
       TrustedAdvisorResourceDetail.add_member(:is_suppressed, Shapes::ShapeRef.new(shape: Boolean, location_name: "isSuppressed"))
       TrustedAdvisorResourceDetail.add_member(:metadata, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "metadata"))
@@ -375,22 +375,11 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AddAttachmentsToSetRequest)
           o.output = Shapes::ShapeRef.new(shape: AddAttachmentsToSetResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetSizeLimitExceeded, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentLimitExceeded, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetSizeLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentLimitExceeded)
         end)
 
         api.add_operation(:add_communication_to_case, Seahorse::Model::Operation.new.tap do |o|
@@ -399,19 +388,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AddCommunicationToCaseRequest)
           o.output = Shapes::ShapeRef.new(shape: AddCommunicationToCaseResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
         end)
 
         api.add_operation(:create_case, Seahorse::Model::Operation.new.tap do |o|
@@ -420,19 +400,10 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateCaseRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateCaseResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CaseCreationLimitExceeded, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: CaseCreationLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetIdNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentSetExpired)
         end)
 
         api.add_operation(:describe_attachment, Seahorse::Model::Operation.new.tap do |o|
@@ -441,16 +412,9 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAttachmentRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeAttachmentResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: DescribeAttachmentLimitExceeded, metadata: {
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: AttachmentIdNotFound, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: DescribeAttachmentLimitExceeded)
+          o.errors << Shapes::ShapeRef.new(shape: AttachmentIdNotFound)
         end)
 
         api.add_operation(:describe_cases, Seahorse::Model::Operation.new.tap do |o|
@@ -459,13 +423,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeCasesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeCasesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
           o[:pager] = Aws::Pager.new(
             "input_token" => "nextToken",
             "output_token" => "nextToken",
@@ -480,13 +439,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeCommunicationsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeCommunicationsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
           o[:pager] = Aws::Pager.new(
             "input_token" => "nextToken",
             "output_token" => "nextToken",
@@ -501,10 +455,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeServicesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeServicesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new("result_key" => "services")
         end)
 
@@ -514,10 +465,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeSeverityLevelsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSeverityLevelsResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:describe_trusted_advisor_check_refresh_statuses, Seahorse::Model::Operation.new.tap do |o|
@@ -526,10 +474,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new("result_key" => "statuses")
         end)
 
@@ -539,10 +484,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckResultRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckResultResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:describe_trusted_advisor_check_summaries, Seahorse::Model::Operation.new.tap do |o|
@@ -551,10 +493,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new("result_key" => "summaries")
         end)
 
@@ -564,10 +503,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorChecksRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorChecksResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:refresh_trusted_advisor_check, Seahorse::Model::Operation.new.tap do |o|
@@ -576,10 +512,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: RefreshTrustedAdvisorCheckRequest)
           o.output = Shapes::ShapeRef.new(shape: RefreshTrustedAdvisorCheckResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
         end)
 
         api.add_operation(:resolve_case, Seahorse::Model::Operation.new.tap do |o|
@@ -588,13 +521,8 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ResolveCaseRequest)
           o.output = Shapes::ShapeRef.new(shape: ResolveCaseResponse)
-          o.errors << Shapes::ShapeRef.new(shape: InternalServerError, metadata: {
-            "exception" => true,
-            "fault" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound, metadata: {
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+          o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
         end)
       end
 

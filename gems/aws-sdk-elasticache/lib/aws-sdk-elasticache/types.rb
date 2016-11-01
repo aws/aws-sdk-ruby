@@ -9,7 +9,7 @@ module Aws
   module ElastiCache
     module Types
 
-      # Represents the input of an *AddTagsToResource* action.
+      # Represents the input of an AddTagsToResource operation.
       # @note When making an API call, pass AddTagsToResourceMessage
       #   data as a hash:
       #
@@ -28,7 +28,7 @@ module Aws
       #   `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
       #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
       #
-      #   For more information on ARNs, go to [Amazon Resource Names (ARNs)
+      #   For more information about ARNs, see [Amazon Resource Names (ARNs)
       #   and AWS Service Namespaces][1].
       #
       #
@@ -46,23 +46,15 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the allowed node types you can use to modify your cache
-      # cluster or replication group.
       # @!attribute [rw] scale_up_modifications
-      #   A string list, each element of which specifies a cache node type
-      #   which you can use to scale your cache cluster or replication group.
-      #
-      #   When scaling up a Redis cluster or replication group using
-      #   `ModifyCacheCluster` or `ModifyReplicationGroup`, use a value from
-      #   this list for the *CacheNodeType* parameter.
       #   @return [Array<String>]
       class AllowedNodeTypeModificationsMessage < Struct.new(
         :scale_up_modifications)
         include Aws::Structure
       end
 
-      # Represents the input of an *AuthorizeCacheSecurityGroupIngress*
-      # action.
+      # Represents the input of an AuthorizeCacheSecurityGroupIngress
+      # operation.
       # @note When making an API call, pass AuthorizeCacheSecurityGroupIngressMessage
       #   data as a hash:
       #
@@ -72,7 +64,7 @@ module Aws
       #         ec2_security_group_owner_id: "String", # required
       #       }
       # @!attribute [rw] cache_security_group_name
-      #   The cache security group which will allow network ingress.
+      #   The cache security group that allows network ingress.
       #   @return [String]
       #
       # @!attribute [rw] ec2_security_group_name
@@ -93,13 +85,13 @@ module Aws
       end
 
       # @!attribute [rw] cache_security_group
-      #   Represents the output of one of the following actions:
+      #   Represents the output of one of the following operations:
       #
-      #   * *AuthorizeCacheSecurityGroupIngress*
+      #   * `AuthorizeCacheSecurityGroupIngress`
       #
-      #   * *CreateCacheSecurityGroup*
+      #   * `CreateCacheSecurityGroup`
       #
-      #   * *RevokeCacheSecurityGroupIngress*
+      #   * `RevokeCacheSecurityGroupIngress`
       #   @return [Types::CacheSecurityGroup]
       class AuthorizeCacheSecurityGroupIngressResult < Struct.new(
         :cache_security_group)
@@ -141,7 +133,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -158,28 +152,30 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] engine
-      #   The name of the cache engine (*memcached* or *redis*) to be used for
+      #   The name of the cache engine (`memcached` or `redis`) to be used for
       #   this cache cluster.
       #   @return [String]
       #
@@ -189,9 +185,9 @@ module Aws
       #
       # @!attribute [rw] cache_cluster_status
       #   The current state of this cache cluster, one of the following
-      #   values: *available*, *creating*, *deleted*, *deleting*,
-      #   *incompatible-network*, *modifying*, *rebooting cache cluster
-      #   nodes*, *restore-failed*, or *snapshotting*.
+      #   values: `available`, `creating`, `deleted`, `deleting`,
+      #   `incompatible-network`, `modifying`, `rebooting cache cluster
+      #   nodes`, `restore-failed`, or `snapshotting`.
       #   @return [String]
       #
       # @!attribute [rw] num_cache_nodes
@@ -213,9 +209,11 @@ module Aws
       #
       # @!attribute [rw] preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
-      #   cache cluster is performed. It is specified as a range in the format
+      #   cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-      #   window is a 60 minute period. Valid values for `ddd` are:
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -231,11 +229,11 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] pending_modified_values
-      #   A group of settings that will be applied to the cache cluster in the
+      #   A group of settings that are applied to the cache cluster in the
       #   future, or that are currently being applied.
       #   @return [Types::PendingModifiedValues]
       #
@@ -251,7 +249,7 @@ module Aws
       #   @return [Array<Types::CacheSecurityGroupMembership>]
       #
       # @!attribute [rw] cache_parameter_group
-      #   The status of the cache parameter group.
+      #   Status of the cache parameter group.
       #   @return [Types::CacheParameterGroupStatus]
       #
       # @!attribute [rw] cache_subnet_group_name
@@ -278,18 +276,18 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] snapshot_retention_limit
-      #   The number of days for which ElastiCache will retain automatic cache
+      #   The number of days for which ElastiCache retains automatic cache
       #   cluster snapshots before deleting them. For example, if you set
-      #   *SnapshotRetentionLimit* to 5, then a snapshot that was taken today
-      #   will be retained for 5 days before being deleted.
+      #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
+      #   retained for 5 days before being deleted.
       #
       #   If the value of SnapshotRetentionLimit is set to zero (0), backups
       #   are turned off.
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
-      #   The daily time range (in UTC) during which ElastiCache will begin
-      #   taking a daily snapshot of your cache cluster.
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of your cache cluster.
       #
       #   Example: `05:00-09:00`
       #   @return [String]
@@ -319,7 +317,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeCacheClusters* action.
+      # Represents the output of a `DescribeCacheClusters` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -346,6 +344,9 @@ module Aws
       # @!attribute [rw] cache_parameter_group_family
       #   The name of the cache parameter group family associated with this
       #   cache engine.
+      #
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
       #   @return [String]
       #
       # @!attribute [rw] cache_engine_description
@@ -364,7 +365,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a DescribeCacheEngineVersions action.
+      # Represents the output of a DescribeCacheEngineVersions operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -389,7 +390,9 @@ module Aws
       #
       #   * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #     `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #     `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #     `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #     `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #     `cache.m4.10xlarge`
       #
       #   * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #     `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -406,24 +409,26 @@ module Aws
       #
       # **Notes:**
       #
-      # * All t2 instances are created in an Amazon Virtual Private Cloud
-      #   (VPC).
+      # * All T2 instances are created in an Amazon Virtual Private Cloud
+      #   (Amazon VPC).
       #
-      # * Redis backup/restore is not supported for t2 instances.
+      # * Redis backup/restore is not supported for Redis (cluster mode
+      #   disabled) T1 and T2 instances. Backup/restore is supported on Redis
+      #   (cluster mode enabled) T2 instances.
       #
-      # * Redis Append-only files (AOF) functionality is not supported for t1
-      #   or t2 instances.
+      # * Redis Append-only files (AOF) functionality is not supported for T1
+      #   or T2 instances.
       #
-      # For a complete listing of cache node types and specifications, see
-      # [Amazon ElastiCache Product Features and Details][1] and either [Cache
-      # Node Type-Specific Parameters for Memcached][2] or [Cache Node
+      # For a complete listing of node types and specifications, see [Amazon
+      # ElastiCache Product Features and Details][1] and either [Cache Node
+      # Type-Specific Parameters for Memcached][2] or [Cache Node
       # Type-Specific Parameters for Redis][3].
       #
       #
       #
       # [1]: http://aws.amazon.com/elasticache/details
-      # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      # [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      # [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       # @!attribute [rw] cache_node_id
       #   The cache node identifier. A node ID is a numeric identifier (0001,
       #   0002, etc.). The combination of cluster ID and node ID uniquely
@@ -448,8 +453,8 @@ module Aws
       #
       # @!attribute [rw] source_cache_node_id
       #   The ID of the primary node to which this read replica node is
-      #   synchronized. If this field is empty, then this node is not
-      #   associated with a primary cache cluster.
+      #   synchronized. If this field is empty, this node is not associated
+      #   with a primary cache cluster.
       #   @return [String]
       #
       # @!attribute [rw] customer_availability_zone
@@ -467,9 +472,9 @@ module Aws
       end
 
       # A parameter that has a different value for each cache node type it is
-      # applied to. For example, in a Redis cache cluster, a *cache.m1.large*
-      # cache node type would have a larger *maxmemory* value than a
-      # *cache.m1.small* type.
+      # applied to. For example, in a Redis cache cluster, a `cache.m1.large`
+      # cache node type would have a larger `maxmemory` value than a
+      # `cache.m1.small` type.
       # @!attribute [rw] parameter_name
       #   The name of the parameter.
       #   @return [String]
@@ -506,11 +511,10 @@ module Aws
       #   @return [Array<Types::CacheNodeTypeSpecificValue>]
       #
       # @!attribute [rw] change_type
-      #   ChangeType indicates whether a change to the parameter will be
-      #   applied immediately or requires a reboot for the change to be
-      #   applied. You can force a reboot or wait until the next maintenance
-      #   window's reboot. For more information, see [Rebooting a
-      #   Cluster][1].
+      #   Indicates whether a change to the parameter is applied immediately
+      #   or requires a reboot for the change to be applied. You can force a
+      #   reboot or wait until the next maintenance window's reboot. For more
+      #   information, see [Rebooting a Cluster][1].
       #
       #
       #
@@ -543,7 +547,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *CreateCacheParameterGroup* action.
+      # Represents the output of a `CreateCacheParameterGroup` operation.
       # @!attribute [rw] cache_parameter_group_name
       #   The name of the cache parameter group.
       #   @return [String]
@@ -551,6 +555,9 @@ module Aws
       # @!attribute [rw] cache_parameter_group_family
       #   The name of the cache parameter group family that this cache
       #   parameter group is compatible with.
+      #
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -563,7 +570,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeCacheParameters* action.
+      # Represents the output of a `DescribeCacheParameters` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -584,11 +591,11 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of one of the following actions:
+      # Represents the output of one of the following operations:
       #
-      # * *ModifyCacheParameterGroup*
+      # * `ModifyCacheParameterGroup`
       #
-      # * *ResetCacheParameterGroup*
+      # * `ResetCacheParameterGroup`
       # @!attribute [rw] cache_parameter_group_name
       #   The name of the cache parameter group.
       #   @return [String]
@@ -597,7 +604,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The status of the cache parameter group.
+      # Status of the cache parameter group.
       # @!attribute [rw] cache_parameter_group_name
       #   The name of the cache parameter group.
       #   @return [String]
@@ -618,7 +625,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeCacheParameterGroups* action.
+      # Represents the output of a `DescribeCacheParameterGroups` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -633,13 +640,13 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of one of the following actions:
+      # Represents the output of one of the following operations:
       #
-      # * *AuthorizeCacheSecurityGroupIngress*
+      # * `AuthorizeCacheSecurityGroupIngress`
       #
-      # * *CreateCacheSecurityGroup*
+      # * `CreateCacheSecurityGroup`
       #
-      # * *RevokeCacheSecurityGroupIngress*
+      # * `RevokeCacheSecurityGroupIngress`
       # @!attribute [rw] owner_id
       #   The AWS account ID of the cache security group owner.
       #   @return [String]
@@ -681,7 +688,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeCacheSecurityGroups* action.
+      # Represents the output of a `DescribeCacheSecurityGroups` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -696,11 +703,11 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of one of the following actions:
+      # Represents the output of one of the following operations:
       #
-      # * *CreateCacheSubnetGroup*
+      # * `CreateCacheSubnetGroup`
       #
-      # * *ModifyCacheSubnetGroup*
+      # * `ModifyCacheSubnetGroup`
       # @!attribute [rw] cache_subnet_group_name
       #   The name of the cache subnet group.
       #   @return [String]
@@ -725,7 +732,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeCacheSubnetGroups* action.
+      # Represents the output of a `DescribeCacheSubnetGroups` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -740,7 +747,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *CopySnapshotMessage* action.
+      # Represents the input of a `CopySnapshotMessage` operation.
       # @note When making an API call, pass CopySnapshotMessage
       #   data as a hash:
       #
@@ -757,20 +764,10 @@ module Aws
       #   A name for the snapshot copy. ElastiCache does not permit
       #   overwriting a snapshot, therefore this name must be unique within
       #   its context - ElastiCache or an Amazon S3 bucket if exporting.
-      #
-      #   **Error Message**
-      #
-      #   * **Error Message:** The S3 bucket %s already contains an object
-      #     with key %s.
-      #
-      #     **Solution:** Give the *TargetSnapshotName* a new and unique
-      #     value. If exporting a snapshot, you could alternatively create a
-      #     new Amazon S3 bucket and use this same value for
-      #     *TargetSnapshotName*.
       #   @return [String]
       #
       # @!attribute [rw] target_bucket
-      #   The Amazon S3 bucket to which the snapshot will be exported. This
+      #   The Amazon S3 bucket to which the snapshot is exported. This
       #   parameter is used only when exporting a snapshot for external
       #   access.
       #
@@ -779,60 +776,13 @@ module Aws
       #   information, see [Step 2: Grant ElastiCache Access to Your Amazon S3
       #   Bucket][1] in the *Amazon ElastiCache User Guide*.
       #
-      #   **Error Messages:**
-      #
-      #   You could receive one of the following error messages.
-      #
-      #   **Erorr Messages**
-      #
-      #   * <b>Error Message: </b> ElastiCache has not been granted READ
-      #     permissions %s on the S3 Bucket.
-      #
-      #     **Solution:** Add List and Read permissions on the bucket.
-      #
-      #   * <b>Error Message: </b> ElastiCache has not been granted WRITE
-      #     permissions %s on the S3 Bucket.
-      #
-      #     **Solution:** Add Upload/Delete permissions on the bucket.
-      #
-      #   * <b>Error Message: </b> ElastiCache has not been granted READ\_ACP
-      #     permissions %s on the S3 Bucket.
-      #
-      #     **Solution:** Add View Permissions permissions on the bucket.
-      #
-      #   * **Error Message:** The S3 bucket %s is outside of the region.
-      #
-      #     **Solution:** Before exporting your snapshot, create a new Amazon
-      #     S3 bucket in the same region as your snapshot. For more
-      #     information, see [Step 1: Create an Amazon S3 Bucket][2].
-      #
-      #   * **Error Message:** The S3 bucket %s does not exist.
-      #
-      #     **Solution:** Create an Amazon S3 bucket in the same region as
-      #     your snapshot. For more information, see [Step 1: Create an Amazon
-      #     S3 Bucket][2].
-      #
-      #   * **Error Message:** The S3 bucket %s is not owned by the
-      #     authenticated user.
-      #
-      #     **Solution:** Create an Amazon S3 bucket in the same region as
-      #     your snapshot. For more information, see [Step 1: Create an Amazon
-      #     S3 Bucket][2].
-      #
-      #   * **Error Message:** The authenticated user does not have sufficient
-      #     permissions to perform the desired activity.
-      #
-      #     **Solution:** Contact your system administrator to get the needed
-      #     permissions.
-      #
-      #   For more information, see [Exporting a Snapshot][3] in the *Amazon
+      #   For more information, see [Exporting a Snapshot][2] in the *Amazon
       #   ElastiCache User Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.CreateBucket
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
+      #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html#Snapshots.Exporting.GrantAccess
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/Snapshots.Exporting.html
       #   @return [String]
       class CopySnapshotMessage < Struct.new(
         :source_snapshot_name,
@@ -842,15 +792,15 @@ module Aws
       end
 
       # @!attribute [rw] snapshot
-      #   Represents a copy of an entire cache cluster as of the time when the
-      #   snapshot was taken.
+      #   Represents a copy of an entire Redis cache cluster as of the time
+      #   when the snapshot was taken.
       #   @return [Types::Snapshot]
       class CopySnapshotResult < Struct.new(
         :snapshot)
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateCacheCluster* action.
+      # Represents the input of a CreateCacheCluster operation.
       # @note When making an API call, pass CreateCacheClusterMessage
       #   data as a hash:
       #
@@ -884,8 +834,8 @@ module Aws
       #         snapshot_window: "String",
       #       }
       # @!attribute [rw] cache_cluster_id
-      #   The node group identifier. This parameter is stored as a lowercase
-      #   string.
+      #   The node group (shard) identifier. This parameter is stored as a
+      #   lowercase string.
       #
       #   **Constraints:**
       #
@@ -899,16 +849,20 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] replication_group_id
+      #   Due to current limitations on Redis (cluster mode disabled), this
+      #   operation or parameter is not supported on Redis (cluster mode
+      #   enabled) replication groups.
+      #
       #   The ID of the replication group to which this cache cluster should
-      #   belong. If this parameter is specified, the cache cluster will be
-      #   added to the specified replication group as a read replica;
-      #   otherwise, the cache cluster will be a standalone primary that is
-      #   not part of any replication group.
+      #   belong. If this parameter is specified, the cache cluster is added
+      #   to the specified replication group as a read replica; otherwise, the
+      #   cache cluster is a standalone primary that is not part of any
+      #   replication group.
       #
       #   If the specified replication group is Multi-AZ enabled and the
-      #   availability zone is not specified, the cache cluster will be
-      #   created in availability zones that provide the best spread of read
-      #   replicas across availability zones.
+      #   Availability Zone is not specified, the cache cluster is created in
+      #   Availability Zones that provide the best spread of read replicas
+      #   across Availability Zones.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -916,9 +870,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] az_mode
-      #   Specifies whether the nodes in this Memcached node group are created
-      #   in a single Availability Zone or created across multiple
-      #   Availability Zones in the cluster's region.
+      #   Specifies whether the nodes in this Memcached cluster are created in
+      #   a single Availability Zone or created across multiple Availability
+      #   Zones in the cluster's region.
       #
       #   This parameter is only supported for Memcached cache clusters.
       #
@@ -927,8 +881,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] preferred_availability_zone
-      #   The EC2 Availability Zone in which the cache cluster will be
-      #   created.
+      #   The EC2 Availability Zone in which the cache cluster is created.
       #
       #   All nodes belonging to this Memcached cache cluster are placed in
       #   the preferred Availability Zone. If you want to create your nodes
@@ -939,8 +892,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] preferred_availability_zones
-      #   A list of the Availability Zones in which cache nodes will be
-      #   created. The order of the zones in the list is not important.
+      #   A list of the Availability Zones in which cache nodes are created.
+      #   The order of the zones in the list is not important.
       #
       #   This option is only supported on Memcached.
       #
@@ -958,17 +911,10 @@ module Aws
       #   multiple times in the list.
       #
       #   Default: System chosen Availability Zones.
-      #
-      #   Example: One Memcached node in each of three different Availability
-      #   Zones:
-      #   `PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2b&amp;PreferredAvailabilityZones.member.3=us-west-2c`
-      #
-      #   Example: All three Memcached nodes in one Availability Zone:
-      #   `PreferredAvailabilityZones.member.1=us-west-2a&amp;PreferredAvailabilityZones.member.2=us-west-2a&amp;PreferredAvailabilityZones.member.3=us-west-2a`
       #   @return [Array<String>]
       #
       # @!attribute [rw] num_cache_nodes
-      #   The initial number of cache nodes that the cache cluster will have.
+      #   The initial number of cache nodes that the cache cluster has.
       #
       #   For clusters running Redis, this value must be 1. For clusters
       #   running Memcached, this value must be between 1 and 20.
@@ -983,7 +929,8 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] cache_node_type
-      #   The compute and memory capacity of the nodes in the node group.
+      #   The compute and memory capacity of the nodes in the node group
+      #   (shard).
       #
       #   Valid node types are as follows:
       #
@@ -991,7 +938,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -1008,38 +957,38 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] engine
       #   The name of the cache engine to be used for this cache cluster.
       #
-      #   Valid values for this parameter are:
-      #
-      #   `memcached` \| `redis`
+      #   Valid values for this parameter are: `memcached` \| `redis`
       #   @return [String]
       #
       # @!attribute [rw] engine_version
       #   The version number of the cache engine to be used for this cache
       #   cluster. To view the supported cache engine versions, use the
-      #   *DescribeCacheEngineVersions* action.
+      #   DescribeCacheEngineVersions operation.
       #
       #   **Important:** You can upgrade to a newer engine version (see
       #   [Selecting a Cache Engine and Version][1]), but you cannot downgrade
@@ -1055,28 +1004,37 @@ module Aws
       # @!attribute [rw] cache_parameter_group_name
       #   The name of the parameter group to associate with this cache
       #   cluster. If this argument is omitted, the default parameter group
-      #   for the specified engine is used.
+      #   for the specified engine is used. You cannot use any parameter group
+      #   which has `cluster-enabled='yes'` when creating a cluster.
       #   @return [String]
       #
       # @!attribute [rw] cache_subnet_group_name
       #   The name of the subnet group to be used for the cache cluster.
       #
       #   Use this parameter only when you are creating a cache cluster in an
-      #   Amazon Virtual Private Cloud (VPC).
+      #   Amazon Virtual Private Cloud (Amazon VPC).
+      #
+      #   If you're going to launch your cluster in an Amazon VPC, you need
+      #   to create a subnet group before you start creating a cluster. For
+      #   more information, see [Subnets and Subnet Groups][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
       #   @return [String]
       #
       # @!attribute [rw] cache_security_group_names
       #   A list of security group names to associate with this cache cluster.
       #
       #   Use this parameter only when you are creating a cache cluster
-      #   outside of an Amazon Virtual Private Cloud (VPC).
+      #   outside of an Amazon Virtual Private Cloud (Amazon VPC).
       #   @return [Array<String>]
       #
       # @!attribute [rw] security_group_ids
       #   One or more VPC security groups associated with the cache cluster.
       #
       #   Use this parameter only when you are creating a cache cluster in an
-      #   Amazon Virtual Private Cloud (VPC).
+      #   Amazon Virtual Private Cloud (Amazon VPC).
       #   @return [Array<String>]
       #
       # @!attribute [rw] tags
@@ -1087,8 +1045,8 @@ module Aws
       # @!attribute [rw] snapshot_arns
       #   A single-element string list containing an Amazon Resource Name
       #   (ARN) that uniquely identifies a Redis RDB snapshot file stored in
-      #   Amazon S3. The snapshot file will be used to populate the node
-      #   group. The Amazon S3 object name in the ARN cannot contain any
+      #   Amazon S3. The snapshot file is used to populate the node group
+      #   (shard). The Amazon S3 object name in the ARN cannot contain any
       #   commas.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
@@ -1099,9 +1057,9 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] snapshot_name
-      #   The name of a snapshot from which to restore data into the new node
-      #   group. The snapshot status changes to `restoring` while the new node
-      #   group is being created.
+      #   The name of a Redis snapshot from which to restore data into the new
+      #   node group (shard). The snapshot status changes to `restoring` while
+      #   the new node group (shard) is being created.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1113,6 +1071,13 @@ module Aws
       #   cache cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
       #   window is a 60 minute period. Valid values for `ddd` are:
+      #
+      #   Specifies the weekly time range during which maintenance on the
+      #   cluster is performed. It is specified as a range in the format
+      #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -1128,17 +1093,17 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] port
-      #   The port number on which each of the cache nodes will accept
+      #   The port number on which each of the cache nodes accepts
       #   connections.
       #   @return [Integer]
       #
       # @!attribute [rw] notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-      #   Service (SNS) topic to which notifications will be sent.
+      #   Service (SNS) topic to which notifications are sent.
       #
       #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cache cluster
       #   owner.
@@ -1151,10 +1116,10 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] snapshot_retention_limit
-      #   The number of days for which ElastiCache will retain automatic
-      #   snapshots before deleting them. For example, if you set
-      #   `SnapshotRetentionLimit` to 5, then a snapshot that was taken today
-      #   will be retained for 5 days before being deleted.
+      #   The number of days for which ElastiCache retains automatic snapshots
+      #   before deleting them. For example, if you set
+      #   `SnapshotRetentionLimit` to 5, a snapshot taken today is retained
+      #   for 5 days before being deleted.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1165,13 +1130,13 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
-      #   The daily time range (in UTC) during which ElastiCache will begin
-      #   taking a daily snapshot of your node group.
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of your node group (shard).
       #
       #   Example: `05:00-09:00`
       #
-      #   If you do not specify this parameter, then ElastiCache will
-      #   automatically choose an appropriate time range.
+      #   If you do not specify this parameter, ElastiCache automatically
+      #   chooses an appropriate time range.
       #
       #   **Note:** This parameter is only valid if the `Engine` parameter is
       #   `redis`.
@@ -1210,7 +1175,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateCacheParameterGroup* action.
+      # Represents the input of a `CreateCacheParameterGroup` operation.
       # @note When making an API call, pass CreateCacheParameterGroupMessage
       #   data as a hash:
       #
@@ -1224,10 +1189,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cache_parameter_group_family
-      #   The name of the cache parameter group family the cache parameter
-      #   group can be used with.
+      #   The name of the cache parameter group family that the cache
+      #   parameter group can be used with.
       #
-      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8`
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -1241,14 +1207,14 @@ module Aws
       end
 
       # @!attribute [rw] cache_parameter_group
-      #   Represents the output of a *CreateCacheParameterGroup* action.
+      #   Represents the output of a `CreateCacheParameterGroup` operation.
       #   @return [Types::CacheParameterGroup]
       class CreateCacheParameterGroupResult < Struct.new(
         :cache_parameter_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateCacheSecurityGroup* action.
+      # Represents the input of a `CreateCacheSecurityGroup` operation.
       # @note When making an API call, pass CreateCacheSecurityGroupMessage
       #   data as a hash:
       #
@@ -1276,20 +1242,20 @@ module Aws
       end
 
       # @!attribute [rw] cache_security_group
-      #   Represents the output of one of the following actions:
+      #   Represents the output of one of the following operations:
       #
-      #   * *AuthorizeCacheSecurityGroupIngress*
+      #   * `AuthorizeCacheSecurityGroupIngress`
       #
-      #   * *CreateCacheSecurityGroup*
+      #   * `CreateCacheSecurityGroup`
       #
-      #   * *RevokeCacheSecurityGroupIngress*
+      #   * `RevokeCacheSecurityGroupIngress`
       #   @return [Types::CacheSecurityGroup]
       class CreateCacheSecurityGroupResult < Struct.new(
         :cache_security_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateCacheSubnetGroup* action.
+      # Represents the input of a `CreateCacheSubnetGroup` operation.
       # @note When making an API call, pass CreateCacheSubnetGroupMessage
       #   data as a hash:
       #
@@ -1323,18 +1289,18 @@ module Aws
       end
 
       # @!attribute [rw] cache_subnet_group
-      #   Represents the output of one of the following actions:
+      #   Represents the output of one of the following operations:
       #
-      #   * *CreateCacheSubnetGroup*
+      #   * `CreateCacheSubnetGroup`
       #
-      #   * *ModifyCacheSubnetGroup*
+      #   * `ModifyCacheSubnetGroup`
       #   @return [Types::CacheSubnetGroup]
       class CreateCacheSubnetGroupResult < Struct.new(
         :cache_subnet_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateReplicationGroup* action.
+      # Represents the input of a `CreateReplicationGroup` operation.
       # @note When making an API call, pass CreateReplicationGroupMessage
       #   data as a hash:
       #
@@ -1345,6 +1311,16 @@ module Aws
       #         automatic_failover_enabled: false,
       #         num_cache_clusters: 1,
       #         preferred_cache_cluster_a_zs: ["String"],
+      #         num_node_groups: 1,
+      #         replicas_per_node_group: 1,
+      #         node_group_configuration: [
+      #           {
+      #             slots: "String",
+      #             replica_count: 1,
+      #             primary_availability_zone: "String",
+      #             replica_availability_zones: ["String"],
+      #           },
+      #         ],
       #         cache_node_type: "String",
       #         engine: "String",
       #         engine_version: "String",
@@ -1387,19 +1363,23 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] primary_cluster_id
-      #   The identifier of the cache cluster that will serve as the primary
-      #   for this replication group. This cache cluster must already exist
-      #   and have a status of *available*.
+      #   The identifier of the cache cluster that serves as the primary for
+      #   this replication group. This cache cluster must already exist and
+      #   have a status of `available`.
       #
-      #   This parameter is not required if *NumCacheClusters* is specified.
+      #   This parameter is not required if `NumCacheClusters`,
+      #   `NumNodeGroups`, or `ReplicasPerNodeGroup` is specified.
       #   @return [String]
       #
       # @!attribute [rw] automatic_failover_enabled
-      #   Specifies whether a read-only replica will be automatically promoted
-      #   to read/write primary if the existing primary fails.
+      #   Specifies whether a read-only replica is automatically promoted to
+      #   read/write primary if the existing primary fails.
       #
       #   If `true`, Multi-AZ is enabled for this replication group. If
       #   `false`, Multi-AZ is disabled for this replication group.
+      #
+      #   `AutomaticFailoverEnabled` must be enabled for Redis (cluster mode
+      #   enabled) replication groups.
       #
       #   Default: false
       #
@@ -1407,54 +1387,80 @@ module Aws
       #
       #    * Redis versions earlier than 2.8.6.
       #
-      #   * T1 and T2 cache node types.
+      #   * Redis (cluster mode disabled): T1 and T2 node types.
+      #
+      #     Redis (cluster mode enabled): T2 node types.
       #
       #    </note>
       #   @return [Boolean]
       #
       # @!attribute [rw] num_cache_clusters
-      #   The number of cache clusters this replication group will initially
-      #   have.
+      #   The number of clusters this replication group initially has.
       #
-      #   If *Multi-AZ* is `enabled`, the value of this parameter must be at
+      #   This parameter is not used if there is more than one node group
+      #   (shard). You should use `ReplicasPerNodeGroup` instead.
+      #
+      #   If `Multi-AZ` is `enabled`, the value of this parameter must be at
       #   least 2.
       #
-      #   The maximum permitted value for *NumCacheClusters* is 6 (primary
-      #   plus 5 replicas). If you need to exceed this limit, please fill out
-      #   the ElastiCache Limit Increase Request form at
-      #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request][1].
+      #   The maximum permitted value for `NumCacheClusters` is 6 (primary
+      #   plus 5 replicas). If you need to exceed this limit, fill out the
+      #   ElastiCache Limit Increase Request form at
+      #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
       #
       #
       #
-      #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request
+      #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request/
       #   @return [Integer]
       #
       # @!attribute [rw] preferred_cache_cluster_a_zs
-      #   A list of EC2 availability zones in which the replication group's
-      #   cache clusters will be created. The order of the availability zones
-      #   in the list is not important.
+      #   A list of EC2 Availability Zones in which the replication group's
+      #   cache clusters are created. The order of the Availability Zones in
+      #   the list is the order in which clusters are allocated. The primary
+      #   cluster is created in the first AZ in the list.
+      #
+      #   This parameter is not used if there is more than one node group
+      #   (shard). You should use `NodeGroupConfiguration` instead.
       #
       #   <note markdown="1"> If you are creating your replication group in an Amazon VPC
-      #   (recommended), you can only locate cache clusters in availability
-      #   zones associated with the subnets in the selected subnet group.
+      #   (recommended), you can only locate cache clusters in Availability
+      #   Zones associated with the subnets in the selected subnet group.
       #
-      #    The number of availability zones listed must equal the value of
-      #   *NumCacheClusters*.
+      #    The number of Availability Zones listed must equal the value of
+      #   `NumCacheClusters`.
       #
       #    </note>
       #
-      #   Default: system chosen availability zones.
-      #
-      #   Example: One Redis cache cluster in each of three availability
-      #   zones.
-      #
-      #   `PreferredAvailabilityZones.member.1=us-west-2a
-      #   PreferredAvailabilityZones.member.2=us-west-2c
-      #   PreferredAvailabilityZones.member.3=us-west-2c`
+      #   Default: system chosen Availability Zones.
       #   @return [Array<String>]
       #
+      # @!attribute [rw] num_node_groups
+      #   An optional parameter that specifies the number of node groups
+      #   (shards) for this Redis (cluster mode enabled) replication group.
+      #   For Redis (cluster mode disabled) either omit this parameter or set
+      #   it to 1.
+      #
+      #   Default: 1
+      #   @return [Integer]
+      #
+      # @!attribute [rw] replicas_per_node_group
+      #   An optional parameter that specifies the number of replica nodes in
+      #   each node group (shard). Valid values are 0 to 5.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] node_group_configuration
+      #   A list of node group (shard) configuration options. Each node group
+      #   (shard) configuration has the following: Slots,
+      #   PrimaryAvailabilityZone, ReplicaAvailabilityZones, ReplicaCount.
+      #
+      #   If you're creating a Redis (cluster mode disabled) or a Redis
+      #   (cluster mode enabled) replication group, you can use this parameter
+      #   to configure one node group (shard) or you can omit this parameter.
+      #   @return [Array<Types::NodeGroupConfiguration>]
+      #
       # @!attribute [rw] cache_node_type
-      #   The compute and memory capacity of the nodes in the node group.
+      #   The compute and memory capacity of the nodes in the node group
+      #   (shard).
       #
       #   Valid node types are as follows:
       #
@@ -1462,7 +1468,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -1479,37 +1487,37 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] engine
       #   The name of the cache engine to be used for the cache clusters in
       #   this replication group.
-      #
-      #   Default: redis
       #   @return [String]
       #
       # @!attribute [rw] engine_version
       #   The version number of the cache engine to be used for the cache
       #   clusters in this replication group. To view the supported cache
-      #   engine versions, use the *DescribeCacheEngineVersions* action.
+      #   engine versions, use the `DescribeCacheEngineVersions` operation.
       #
       #   **Important:** You can upgrade to a newer engine version (see
       #   [Selecting a Cache Engine and Version][1]) in the *ElastiCache User
@@ -1527,11 +1535,29 @@ module Aws
       #   The name of the parameter group to associate with this replication
       #   group. If this argument is omitted, the default cache parameter
       #   group for the specified engine is used.
+      #
+      #   If you are running Redis version 3.2.4 or later, only one node group
+      #   (shard), and want to use a default parameter group, we recommend
+      #   that you specify the parameter group by name.
+      #
+      #   * To create a Redis (cluster mode disabled) replication group, use
+      #     `CacheParameterGroupName=default.redis3.2`.
+      #
+      #   * To create a Redis (cluster mode enabled) replication group, use
+      #     `CacheParameterGroupName=default.redis3.2.cluster.on`.
       #   @return [String]
       #
       # @!attribute [rw] cache_subnet_group_name
       #   The name of the cache subnet group to be used for the replication
       #   group.
+      #
+      #   If you're going to launch your cluster in an Amazon VPC, you need
+      #   to create a subnet group before you start creating a cluster. For
+      #   more information, see [Subnets and Subnet Groups][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/SubnetGroups.html
       #   @return [String]
       #
       # @!attribute [rw] cache_security_group_names
@@ -1544,7 +1570,7 @@ module Aws
       #   replication group.
       #
       #   Use this parameter only when you are creating a replication group in
-      #   an Amazon Virtual Private Cloud (VPC).
+      #   an Amazon Virtual Private Cloud (Amazon VPC).
       #   @return [Array<String>]
       #
       # @!attribute [rw] tags
@@ -1553,11 +1579,12 @@ module Aws
       #   @return [Array<Types::Tag>]
       #
       # @!attribute [rw] snapshot_arns
-      #   A single-element string list containing an Amazon Resource Name
-      #   (ARN) that uniquely identifies a Redis RDB snapshot file stored in
-      #   Amazon S3. The snapshot file will be used to populate the node
-      #   group. The Amazon S3 object name in the ARN cannot contain any
-      #   commas.
+      #   A list of Amazon Resource Names (ARN) that uniquely identify the
+      #   Redis RDB snapshot files stored in Amazon S3. The snapshot files are
+      #   used to populate the replication group. The Amazon S3 object name in
+      #   the ARN cannot contain any commas. The list must match the number of
+      #   node groups (shards) in the replication group, which means you
+      #   cannot repartition.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1567,9 +1594,9 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] snapshot_name
-      #   The name of a snapshot from which to restore data into the new node
-      #   group. The snapshot status changes to `restoring` while the new node
-      #   group is being created.
+      #   The name of a snapshot from which to restore data into the new
+      #   replication group. The snapshot status changes to `restoring` while
+      #   the new replication group is being created.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1581,6 +1608,13 @@ module Aws
       #   cache cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
       #   window is a 60 minute period. Valid values for `ddd` are:
+      #
+      #   Specifies the weekly time range during which maintenance on the
+      #   cluster is performed. It is specified as a range in the format
+      #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -1596,17 +1630,17 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] port
-      #   The port number on which each member of the replication group will
-      #   accept connections.
+      #   The port number on which each member of the replication group
+      #   accepts connections.
       #   @return [Integer]
       #
       # @!attribute [rw] notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon Simple Notification
-      #   Service (SNS) topic to which notifications will be sent.
+      #   Service (SNS) topic to which notifications are sent.
       #
       #   <note markdown="1"> The Amazon SNS topic owner must be the same as the cache cluster
       #   owner.
@@ -1619,10 +1653,10 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] snapshot_retention_limit
-      #   The number of days for which ElastiCache will retain automatic
-      #   snapshots before deleting them. For example, if you set
-      #   `SnapshotRetentionLimit` to 5, then a snapshot that was taken today
-      #   will be retained for 5 days before being deleted.
+      #   The number of days for which ElastiCache retains automatic snapshots
+      #   before deleting them. For example, if you set
+      #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
+      #   retained for 5 days before being deleted.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1633,13 +1667,13 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
-      #   The daily time range (in UTC) during which ElastiCache will begin
-      #   taking a daily snapshot of your node group.
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of your node group (shard).
       #
       #   Example: `05:00-09:00`
       #
-      #   If you do not specify this parameter, then ElastiCache will
-      #   automatically choose an appropriate time range.
+      #   If you do not specify this parameter, ElastiCache automatically
+      #   chooses an appropriate time range.
       #
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
@@ -1652,6 +1686,9 @@ module Aws
         :automatic_failover_enabled,
         :num_cache_clusters,
         :preferred_cache_cluster_a_zs,
+        :num_node_groups,
+        :replicas_per_node_group,
+        :node_group_configuration,
         :cache_node_type,
         :engine,
         :engine_version,
@@ -1672,45 +1709,53 @@ module Aws
       end
 
       # @!attribute [rw] replication_group
-      #   Contains all of the attributes of a specific replication group.
+      #   Contains all of the attributes of a specific Redis replication
+      #   group.
       #   @return [Types::ReplicationGroup]
       class CreateReplicationGroupResult < Struct.new(
         :replication_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *CreateSnapshot* action.
+      # Represents the input of a `CreateSnapshot` operation.
       # @note When making an API call, pass CreateSnapshotMessage
       #   data as a hash:
       #
       #       {
-      #         cache_cluster_id: "String", # required
+      #         replication_group_id: "String",
+      #         cache_cluster_id: "String",
       #         snapshot_name: "String", # required
       #       }
+      # @!attribute [rw] replication_group_id
+      #   The identifier of an existing replication group. The snapshot is
+      #   created from this replication group.
+      #   @return [String]
+      #
       # @!attribute [rw] cache_cluster_id
-      #   The identifier of an existing cache cluster. The snapshot will be
-      #   created from this cache cluster.
+      #   The identifier of an existing cache cluster. The snapshot is created
+      #   from this cache cluster.
       #   @return [String]
       #
       # @!attribute [rw] snapshot_name
       #   A name for the snapshot being created.
       #   @return [String]
       class CreateSnapshotMessage < Struct.new(
+        :replication_group_id,
         :cache_cluster_id,
         :snapshot_name)
         include Aws::Structure
       end
 
       # @!attribute [rw] snapshot
-      #   Represents a copy of an entire cache cluster as of the time when the
-      #   snapshot was taken.
+      #   Represents a copy of an entire Redis cache cluster as of the time
+      #   when the snapshot was taken.
       #   @return [Types::Snapshot]
       class CreateSnapshotResult < Struct.new(
         :snapshot)
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteCacheCluster* action.
+      # Represents the input of a `DeleteCacheCluster` operation.
       # @note When making an API call, pass DeleteCacheClusterMessage
       #   data as a hash:
       #
@@ -1743,7 +1788,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteCacheParameterGroup* action.
+      # Represents the input of a `DeleteCacheParameterGroup` operation.
       # @note When making an API call, pass DeleteCacheParameterGroupMessage
       #   data as a hash:
       #
@@ -1763,7 +1808,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteCacheSecurityGroup* action.
+      # Represents the input of a `DeleteCacheSecurityGroup` operation.
       # @note When making an API call, pass DeleteCacheSecurityGroupMessage
       #   data as a hash:
       #
@@ -1782,7 +1827,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteCacheSubnetGroup* action.
+      # Represents the input of a `DeleteCacheSubnetGroup` operation.
       # @note When making an API call, pass DeleteCacheSubnetGroupMessage
       #   data as a hash:
       #
@@ -1800,7 +1845,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteReplicationGroup* action.
+      # Represents the input of a `DeleteReplicationGroup` operation.
       # @note When making an API call, pass DeleteReplicationGroupMessage
       #   data as a hash:
       #
@@ -1815,16 +1860,16 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] retain_primary_cluster
-      #   If set to *true*, all of the read replicas will be deleted, but the
-      #   primary node will be retained.
+      #   If set to `true`, all of the read replicas are deleted, but the
+      #   primary node is retained.
       #   @return [Boolean]
       #
       # @!attribute [rw] final_snapshot_identifier
-      #   The name of a final node group snapshot. ElastiCache creates the
-      #   snapshot from the primary node in the cluster, rather than one of
-      #   the replicas; this is to ensure that it captures the freshest data.
-      #   After the final snapshot is taken, the cluster is immediately
-      #   deleted.
+      #   The name of a final node group (shard) snapshot. ElastiCache creates
+      #   the snapshot from the primary node in the cluster, rather than one
+      #   of the replicas; this is to ensure that it captures the freshest
+      #   data. After the final snapshot is taken, the replication group is
+      #   immediately deleted.
       #   @return [String]
       class DeleteReplicationGroupMessage < Struct.new(
         :replication_group_id,
@@ -1834,14 +1879,15 @@ module Aws
       end
 
       # @!attribute [rw] replication_group
-      #   Contains all of the attributes of a specific replication group.
+      #   Contains all of the attributes of a specific Redis replication
+      #   group.
       #   @return [Types::ReplicationGroup]
       class DeleteReplicationGroupResult < Struct.new(
         :replication_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *DeleteSnapshot* action.
+      # Represents the input of a `DeleteSnapshot` operation.
       # @note When making an API call, pass DeleteSnapshotMessage
       #   data as a hash:
       #
@@ -1857,15 +1903,15 @@ module Aws
       end
 
       # @!attribute [rw] snapshot
-      #   Represents a copy of an entire cache cluster as of the time when the
-      #   snapshot was taken.
+      #   Represents a copy of an entire Redis cache cluster as of the time
+      #   when the snapshot was taken.
       #   @return [Types::Snapshot]
       class DeleteSnapshotResult < Struct.new(
         :snapshot)
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheClusters* action.
+      # Represents the input of a `DescribeCacheClusters` operation.
       # @note When making an API call, pass DescribeCacheClustersMessage
       #   data as a hash:
       #
@@ -1894,9 +1940,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       #
       # @!attribute [rw] show_cache_node_info
@@ -1911,7 +1957,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheEngineVersions* action.
+      # Represents the input of a `DescribeCacheEngineVersions` operation.
       # @note When making an API call, pass DescribeCacheEngineVersionsMessage
       #   data as a hash:
       #
@@ -1937,6 +1983,9 @@ module Aws
       #   The name of a specific cache parameter group family to return
       #   details for.
       #
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
+      #
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters
@@ -1959,13 +2008,13 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       #
       # @!attribute [rw] default_only
-      #   If *true*, specifies that only the default version of the specified
+      #   If `true`, specifies that only the default version of the specified
       #   engine or engine and major version combination is to be returned.
       #   @return [Boolean]
       class DescribeCacheEngineVersionsMessage < Struct.new(
@@ -1978,7 +2027,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheParameterGroups* action.
+      # Represents the input of a `DescribeCacheParameterGroups` operation.
       # @note When making an API call, pass DescribeCacheParameterGroupsMessage
       #   data as a hash:
       #
@@ -2004,9 +2053,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeCacheParameterGroupsMessage < Struct.new(
         :cache_parameter_group_name,
@@ -2015,7 +2064,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheParameters* action.
+      # Represents the input of a `DescribeCacheParameters` operation.
       # @note When making an API call, pass DescribeCacheParametersMessage
       #   data as a hash:
       #
@@ -2036,7 +2085,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] max_records
-      #   The maximum number of brecords to include in the response. If more
+      #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a marker is
       #   included in the response so that the remaining results can be
       #   retrieved.
@@ -2048,9 +2097,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeCacheParametersMessage < Struct.new(
         :cache_parameter_group_name,
@@ -2060,7 +2109,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheSecurityGroups* action.
+      # Represents the input of a `DescribeCacheSecurityGroups` operation.
       # @note When making an API call, pass DescribeCacheSecurityGroupsMessage
       #   data as a hash:
       #
@@ -2086,9 +2135,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeCacheSecurityGroupsMessage < Struct.new(
         :cache_security_group_name,
@@ -2097,7 +2146,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeCacheSubnetGroups* action.
+      # Represents the input of a `DescribeCacheSubnetGroups` operation.
       # @note When making an API call, pass DescribeCacheSubnetGroupsMessage
       #   data as a hash:
       #
@@ -2123,9 +2172,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeCacheSubnetGroupsMessage < Struct.new(
         :cache_subnet_group_name,
@@ -2134,7 +2183,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeEngineDefaultParameters* action.
+      # Represents the input of a `DescribeEngineDefaultParameters` operation.
       # @note When making an API call, pass DescribeEngineDefaultParametersMessage
       #   data as a hash:
       #
@@ -2144,8 +2193,10 @@ module Aws
       #         marker: "String",
       #       }
       # @!attribute [rw] cache_parameter_group_family
-      #   The name of the cache parameter group family. Valid values are:
-      #   `memcached1.4` \| `redis2.6` \| `redis2.8`
+      #   The name of the cache parameter group family.
+      #
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
       #   @return [String]
       #
       # @!attribute [rw] max_records
@@ -2161,9 +2212,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeEngineDefaultParametersMessage < Struct.new(
         :cache_parameter_group_family,
@@ -2173,20 +2224,21 @@ module Aws
       end
 
       # @!attribute [rw] engine_defaults
-      #   Represents the output of a *DescribeEngineDefaultParameters* action.
+      #   Represents the output of a `DescribeEngineDefaultParameters`
+      #   operation.
       #   @return [Types::EngineDefaults]
       class DescribeEngineDefaultParametersResult < Struct.new(
         :engine_defaults)
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeEvents* action.
+      # Represents the input of a `DescribeEvents` operation.
       # @note When making an API call, pass DescribeEventsMessage
       #   data as a hash:
       #
       #       {
       #         source_identifier: "String",
-      #         source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group
+      #         source_type: "cache-cluster", # accepts cache-cluster, cache-parameter-group, cache-security-group, cache-subnet-group, replication-group
       #         start_time: Time.now,
       #         end_time: Time.now,
       #         duration: 1,
@@ -2194,17 +2246,13 @@ module Aws
       #         marker: "String",
       #       }
       # @!attribute [rw] source_identifier
-      #   The identifier of the event source for which events will be
-      #   returned. If not specified, then all sources are included in the
-      #   response.
+      #   The identifier of the event source for which events are returned. If
+      #   not specified, all sources are included in the response.
       #   @return [String]
       #
       # @!attribute [rw] source_type
       #   The event source to retrieve events for. If no value is specified,
       #   all events are returned.
-      #
-      #   Valid values are: `cache-cluster` \| `cache-parameter-group` \|
-      #   `cache-security-group` \| `cache-subnet-group`
       #   @return [String]
       #
       # @!attribute [rw] start_time
@@ -2234,9 +2282,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeEventsMessage < Struct.new(
         :source_identifier,
@@ -2249,7 +2297,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeReplicationGroups* action.
+      # Represents the input of a `DescribeReplicationGroups` operation.
       # @note When making an API call, pass DescribeReplicationGroupsMessage
       #   data as a hash:
       #
@@ -2279,9 +2327,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeReplicationGroupsMessage < Struct.new(
         :replication_group_id,
@@ -2290,7 +2338,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeReservedCacheNodes* action.
+      # Represents the input of a `DescribeReservedCacheNodes` operation.
       # @note When making an API call, pass DescribeReservedCacheNodesMessage
       #   data as a hash:
       #
@@ -2326,7 +2374,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -2343,24 +2393,26 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] duration
@@ -2396,9 +2448,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeReservedCacheNodesMessage < Struct.new(
         :reserved_cache_node_id,
@@ -2412,8 +2464,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeReservedCacheNodesOfferings*
-      # action.
+      # Represents the input of a `DescribeReservedCacheNodesOfferings`
+      # operation.
       # @note When making an API call, pass DescribeReservedCacheNodesOfferingsMessage
       #   data as a hash:
       #
@@ -2444,7 +2496,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -2461,24 +2515,26 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] duration
@@ -2515,9 +2571,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       class DescribeReservedCacheNodesOfferingsMessage < Struct.new(
         :reserved_cache_nodes_offering_id,
@@ -2530,12 +2586,12 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeSnapshots* action.
+      # Represents the output of a `DescribeSnapshots` operation.
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       #
       # @!attribute [rw] snapshots
@@ -2548,26 +2604,34 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *DescribeSnapshotsMessage* action.
+      # Represents the input of a `DescribeSnapshotsMessage` operation.
       # @note When making an API call, pass DescribeSnapshotsMessage
       #   data as a hash:
       #
       #       {
+      #         replication_group_id: "String",
       #         cache_cluster_id: "String",
       #         snapshot_name: "String",
       #         snapshot_source: "String",
       #         marker: "String",
       #         max_records: 1,
+      #         show_node_group_config: false,
       #       }
+      # @!attribute [rw] replication_group_id
+      #   A user-supplied replication group identifier. If this parameter is
+      #   specified, only snapshots associated with that specific replication
+      #   group are described.
+      #   @return [String]
+      #
       # @!attribute [rw] cache_cluster_id
       #   A user-supplied cluster identifier. If this parameter is specified,
-      #   only snapshots associated with that specific cache cluster will be
+      #   only snapshots associated with that specific cache cluster are
       #   described.
       #   @return [String]
       #
       # @!attribute [rw] snapshot_name
       #   A user-supplied name of the snapshot. If this parameter is
-      #   specified, only this snapshot will be described.
+      #   specified, only this snapshot are described.
       #   @return [String]
       #
       # @!attribute [rw] snapshot_source
@@ -2579,9 +2643,9 @@ module Aws
       #
       # @!attribute [rw] marker
       #   An optional marker returned from a prior request. Use this marker
-      #   for pagination of results from this action. If this parameter is
+      #   for pagination of results from this operation. If this parameter is
       #   specified, the response includes only records beyond the marker, up
-      #   to the value specified by *MaxRecords*.
+      #   to the value specified by `MaxRecords`.
       #   @return [String]
       #
       # @!attribute [rw] max_records
@@ -2594,12 +2658,19 @@ module Aws
       #
       #   Constraints: minimum 20; maximum 50.
       #   @return [Integer]
+      #
+      # @!attribute [rw] show_node_group_config
+      #   A boolean value which if true, the node group (shard) configuration
+      #   is included in the snapshot description.
+      #   @return [Boolean]
       class DescribeSnapshotsMessage < Struct.new(
+        :replication_group_id,
         :cache_cluster_id,
         :snapshot_name,
         :snapshot_source,
         :marker,
-        :max_records)
+        :max_records,
+        :show_node_group_config)
         include Aws::Structure
       end
 
@@ -2638,10 +2709,14 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeEngineDefaultParameters* action.
+      # Represents the output of a `DescribeEngineDefaultParameters`
+      # operation.
       # @!attribute [rw] cache_parameter_group_family
       #   Specifies the name of the cache parameter group family to which the
       #   engine default parameters apply.
+      #
+      #   Valid values are: `memcached1.4` \| `redis2.6` \| `redis2.8` \|
+      #   `redis3.2`
       #   @return [String]
       #
       # @!attribute [rw] marker
@@ -2694,7 +2769,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeEvents* action.
+      # Represents the output of a `DescribeEvents` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -2709,8 +2784,8 @@ module Aws
         include Aws::Structure
       end
 
-      # The input parameters for the *ListAllowedNodeTypeModifications*
-      # action.
+      # The input parameters for the `ListAllowedNodeTypeModifications`
+      # operation.
       # @note When making an API call, pass ListAllowedNodeTypeModificationsMessage
       #   data as a hash:
       #
@@ -2721,11 +2796,11 @@ module Aws
       # @!attribute [rw] cache_cluster_id
       #   The name of the cache cluster you want to scale up to a larger node
       #   instanced type. ElastiCache uses the cluster id to identify the
-      #   current node type of this cluster and from that to to create a list
-      #   of node types you can scale up to.
+      #   current node type of this cluster and from that to create a list of
+      #   node types you can scale up to.
       #
-      #   You must provide a value for either the *CacheClusterId* or the
-      #   *ReplicationGroupId*.
+      #   You must provide a value for either the `CacheClusterId` or the
+      #   `ReplicationGroupId`.
       #   @return [String]
       #
       # @!attribute [rw] replication_group_id
@@ -2734,8 +2809,8 @@ module Aws
       #   current node type being used by this replication group, and from
       #   that to create a list of node types you can scale up to.
       #
-      #   You must provide a value for either the *CacheClusterId* or the
-      #   *ReplicationGroupId*.
+      #   You must provide a value for either the `CacheClusterId` or the
+      #   `ReplicationGroupId`.
       #   @return [String]
       class ListAllowedNodeTypeModificationsMessage < Struct.new(
         :cache_cluster_id,
@@ -2743,7 +2818,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The input parameters for the *ListTagsForResource* action.
+      # The input parameters for the `ListTagsForResource` operation.
       # @note When making an API call, pass ListTagsForResourceMessage
       #   data as a hash:
       #
@@ -2756,7 +2831,7 @@ module Aws
       #   `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
       #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
       #
-      #   For more information on ARNs, go to [Amazon Resource Names (ARNs)
+      #   For more information about ARNs, see [Amazon Resource Names (ARNs)
       #   and AWS Service Namespaces][1].
       #
       #
@@ -2768,7 +2843,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *ModifyCacheCluster* action.
+      # Represents the input of a `ModifyCacheCluster` operation.
       # @note When making an API call, pass ModifyCacheClusterMessage
       #   data as a hash:
       #
@@ -2800,10 +2875,10 @@ module Aws
       #   The number of cache nodes that the cache cluster should have. If the
       #   value for `NumCacheNodes` is greater than the sum of the number of
       #   current cache nodes and the number of cache nodes pending creation
-      #   (which may be zero), then more nodes will be added. If the value is
-      #   less than the number of existing cache nodes, then nodes will be
-      #   removed. If the value is equal to the number of current cache nodes,
-      #   then any pending add or remove requests are canceled.
+      #   (which may be zero), more nodes are added. If the value is less than
+      #   the number of existing cache nodes, nodes are removed. If the value
+      #   is equal to the number of current cache nodes, any pending add or
+      #   remove requests are canceled.
       #
       #   If you are removing cache nodes, you must use the
       #   `CacheNodeIdsToRemove` parameter to provide the IDs of the specific
@@ -2813,25 +2888,26 @@ module Aws
       #   running Memcached, this value must be between 1 and 20.
       #
       #   <note markdown="1"> Adding or removing Memcached cache nodes can be applied immediately
-      #   or as a pending action. See `ApplyImmediately`.
+      #   or as a pending operation (see `ApplyImmediately`).
       #
-      #    A pending action to modify the number of cache nodes in a cluster
+      #    A pending operation to modify the number of cache nodes in a cluster
       #   during its maintenance window, whether by adding or removing nodes
       #   in accordance with the scale out architecture, is not queued. The
       #   customer's latest request to add or remove nodes to the cluster
-      #   overrides any previous pending actions to modify the number of cache
-      #   nodes in the cluster. For example, a request to remove 2 nodes would
-      #   override a previous pending action to remove 3 nodes. Similarly, a
-      #   request to add 2 nodes would override a previous pending action to
-      #   remove 3 nodes and vice versa. As Memcached cache nodes may now be
-      #   provisioned in different Availability Zones with flexible cache node
-      #   placement, a request to add nodes does not automatically override a
-      #   previous pending action to add nodes. The customer can modify the
-      #   previous pending action to add more nodes or explicitly cancel the
-      #   pending request and retry the new request. To cancel pending actions
-      #   to modify the number of cache nodes in a cluster, use the
-      #   `ModifyCacheCluster` request and set *NumCacheNodes* equal to the
-      #   number of cache nodes currently in the cache cluster.
+      #   overrides any previous pending operations to modify the number of
+      #   cache nodes in the cluster. For example, a request to remove 2 nodes
+      #   would override a previous pending operation to remove 3 nodes.
+      #   Similarly, a request to add 2 nodes would override a previous
+      #   pending operation to remove 3 nodes and vice versa. As Memcached
+      #   cache nodes may now be provisioned in different Availability Zones
+      #   with flexible cache node placement, a request to add nodes does not
+      #   automatically override a previous pending operation to add nodes.
+      #   The customer can modify the previous pending operation to add more
+      #   nodes or explicitly cancel the pending request and retry the new
+      #   request. To cancel pending operations to modify the number of cache
+      #   nodes in a cluster, use the `ModifyCacheCluster` request and set
+      #   `NumCacheNodes` equal to the number of cache nodes currently in the
+      #   cache cluster.
       #
       #    </note>
       #   @return [Integer]
@@ -2839,11 +2915,11 @@ module Aws
       # @!attribute [rw] cache_node_ids_to_remove
       #   A list of cache node IDs to be removed. A node ID is a numeric
       #   identifier (0001, 0002, etc.). This parameter is only valid when
-      #   *NumCacheNodes* is less than the existing number of cache nodes. The
+      #   `NumCacheNodes` is less than the existing number of cache nodes. The
       #   number of cache node IDs supplied in this parameter must match the
       #   difference between the existing number of cache nodes in the cluster
       #   or pending cache nodes, whichever is greater, and the value of
-      #   *NumCacheNodes* in the request.
+      #   `NumCacheNodes` in the request.
       #
       #   For example: If you have 3 active cache nodes, 7 pending cache
       #   nodes, and the number of cache nodes in this `ModifyCacheCluser`
@@ -2864,7 +2940,7 @@ module Aws
       #   `cross-az` is specified, existing Memcached nodes remain in their
       #   current Availability Zone.
       #
-      #    Only newly created nodes will be located in different Availability
+      #    Only newly created nodes are located in different Availability
       #   Zones. For instructions on how to move existing Memcached nodes to
       #   different Availability Zones, see the **Availability Zone
       #   Considerations** section of [Cache Node Considerations for
@@ -2879,9 +2955,9 @@ module Aws
       #
       # @!attribute [rw] new_availability_zones
       #   The list of Availability Zones where the new Memcached cache nodes
-      #   will be created.
+      #   are created.
       #
-      #   This parameter is only valid when *NumCacheNodes* in the request is
+      #   This parameter is only valid when `NumCacheNodes` in the request is
       #   greater than the sum of the number of active cache nodes and the
       #   number of cache nodes pending creation (which may be zero). The
       #   number of Availability Zones supplied in this list must match the
@@ -2900,8 +2976,8 @@ module Aws
       #     Specify `NumCacheNodes=6` ((3 + 2) + 1) and optionally specify an
       #     Availability Zone for the new node.
       #
-      #   * **Scenario 3:** You want to cancel all pending actions. Specify
-      #     `NumCacheNodes=3` to cancel all pending actions.
+      #   * **Scenario 3:** You want to cancel all pending operations. Specify
+      #     `NumCacheNodes=3` to cancel all pending operations.
       #
       #   The Availability Zone placement of nodes pending creation cannot be
       #   modified. If you wish to cancel any nodes pending creation, add 0
@@ -2956,10 +3032,6 @@ module Aws
       #       create request is **Apply Immediately - No**, all creates are
       #       pending.
       #
-      #   Example:
-      #
-      #   `NewAvailabilityZones.member.1=us-west-2a&amp;NewAvailabilityZones.member.2=us-west-2b&amp;NewAvailabilityZones.member.3=us-west-2c`
-      #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheNode.Memcached.html
@@ -2969,8 +3041,8 @@ module Aws
       #   A list of cache security group names to authorize on this cache
       #   cluster. This change is asynchronously applied as soon as possible.
       #
-      #   This parameter can be used only with clusters that are created
-      #   outside of an Amazon Virtual Private Cloud (VPC).
+      #   You can use this parameter only with clusters that are created
+      #   outside of an Amazon Virtual Private Cloud (Amazon VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
       #   Must not be "Default".
@@ -2980,14 +3052,16 @@ module Aws
       #   Specifies the VPC Security Groups associated with the cache cluster.
       #
       #   This parameter can be used only with clusters that are created in an
-      #   Amazon Virtual Private Cloud (VPC).
+      #   Amazon Virtual Private Cloud (Amazon VPC).
       #   @return [Array<String>]
       #
       # @!attribute [rw] preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
-      #   cache cluster is performed. It is specified as a range in the format
+      #   cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-      #   window is a 60 minute period. Valid values for `ddd` are:
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -3003,12 +3077,12 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
-      #   notifications will be sent.
+      #   notifications are sent.
       #
       #   <note markdown="1"> The Amazon SNS topic owner must be same as the cache cluster owner.
       #
@@ -3018,13 +3092,13 @@ module Aws
       # @!attribute [rw] cache_parameter_group_name
       #   The name of the cache parameter group to apply to this cache
       #   cluster. This change is asynchronously applied as soon as possible
-      #   for parameters when the *ApplyImmediately* parameter is specified as
-      #   *true* for this request.
+      #   for parameters when the `ApplyImmediately` parameter is specified as
+      #   `true` for this request.
       #   @return [String]
       #
       # @!attribute [rw] notification_topic_status
       #   The status of the Amazon SNS notification topic. Notifications are
-      #   sent only if the status is *active*.
+      #   sent only if the status is `active`.
       #
       #   Valid values: `active` \| `inactive`
       #   @return [String]
@@ -3032,12 +3106,12 @@ module Aws
       # @!attribute [rw] apply_immediately
       #   If `true`, this parameter causes the modifications in this request
       #   and any pending modifications to be applied, asynchronously and as
-      #   soon as possible, regardless of the *PreferredMaintenanceWindow*
+      #   soon as possible, regardless of the `PreferredMaintenanceWindow`
       #   setting for the cache cluster.
       #
-      #   If `false`, then changes to the cache cluster are applied on the
-      #   next maintenance reboot, or the next failure reboot, whichever
-      #   occurs first.
+      #   If `false`, changes to the cache cluster are applied on the next
+      #   maintenance reboot, or the next failure reboot, whichever occurs
+      #   first.
       #
       #   If you perform a `ModifyCacheCluster` before a pending modification
       #   is applied, the pending modification is replaced by the newer
@@ -3068,27 +3142,25 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] snapshot_retention_limit
-      #   The number of days for which ElastiCache will retain automatic cache
+      #   The number of days for which ElastiCache retains automatic cache
       #   cluster snapshots before deleting them. For example, if you set
-      #   *SnapshotRetentionLimit* to 5, then a snapshot that was taken today
-      #   will be retained for 5 days before being deleted.
+      #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
+      #   retained for 5 days before being deleted.
       #
-      #   <note markdown="1"> If the value of SnapshotRetentionLimit is set to zero (0), backups
+      #   <note markdown="1"> If the value of `SnapshotRetentionLimit` is set to zero (0), backups
       #   are turned off.
       #
       #    </note>
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
-      #   The daily time range (in UTC) during which ElastiCache will begin
-      #   taking a daily snapshot of your cache cluster.
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of your cache cluster.
       #   @return [String]
       #
       # @!attribute [rw] cache_node_type
-      #   A valid cache node type that you want to scale this cache cluster
-      #   to. The value of this parameter must be one of the
-      #   *ScaleUpModifications* values returned by the
-      #   `ListAllowedCacheNodeTypeModification` action.
+      #   A valid cache node type that you want to scale this cache cluster up
+      #   to.
       #   @return [String]
       class ModifyCacheClusterMessage < Struct.new(
         :cache_cluster_id,
@@ -3119,7 +3191,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *ModifyCacheParameterGroup* action.
+      # Represents the input of a `ModifyCacheParameterGroup` operation.
       # @note When making an API call, pass ModifyCacheParameterGroupMessage
       #   data as a hash:
       #
@@ -3148,7 +3220,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *ModifyCacheSubnetGroup* action.
+      # Represents the input of a `ModifyCacheSubnetGroup` operation.
       # @note When making an API call, pass ModifyCacheSubnetGroupMessage
       #   data as a hash:
       #
@@ -3168,7 +3240,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cache_subnet_group_description
-      #   A description for the cache subnet group.
+      #   A description of the cache subnet group.
       #   @return [String]
       #
       # @!attribute [rw] subnet_ids
@@ -3182,18 +3254,18 @@ module Aws
       end
 
       # @!attribute [rw] cache_subnet_group
-      #   Represents the output of one of the following actions:
+      #   Represents the output of one of the following operations:
       #
-      #   * *CreateCacheSubnetGroup*
+      #   * `CreateCacheSubnetGroup`
       #
-      #   * *ModifyCacheSubnetGroup*
+      #   * `ModifyCacheSubnetGroup`
       #   @return [Types::CacheSubnetGroup]
       class ModifyCacheSubnetGroupResult < Struct.new(
         :cache_subnet_group)
         include Aws::Structure
       end
 
-      # Represents the input of a *ModifyReplicationGroups* action.
+      # Represents the input of a `ModifyReplicationGroups` operation.
       # @note When making an API call, pass ModifyReplicationGroupMessage
       #   data as a hash:
       #
@@ -3226,20 +3298,21 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] primary_cluster_id
-      #   If this parameter is specified, ElastiCache will promote the
-      #   specified cluster in the specified replication group to the primary
-      #   role. The nodes of all other clusters in the replication group will
-      #   be read replicas.
+      #   For replication groups with a single primary, if this parameter is
+      #   specified, ElastiCache promotes the specified cluster in the
+      #   specified replication group to the primary role. The nodes of all
+      #   other clusters in the replication group are read replicas.
       #   @return [String]
       #
       # @!attribute [rw] snapshotting_cluster_id
-      #   The cache cluster ID that will be used as the daily snapshot source
-      #   for the replication group.
+      #   The cache cluster ID that is used as the daily snapshot source for
+      #   the replication group. This parameter cannot be set for Redis
+      #   (cluster mode enabled) replication groups.
       #   @return [String]
       #
       # @!attribute [rw] automatic_failover_enabled
-      #   Whether a read replica will be automatically promoted to read/write
-      #   primary if the existing primary encounters a failure.
+      #   Determines whether a read replica is automatically promoted to
+      #   read/write primary if the existing primary encounters a failure.
       #
       #   Valid values: `true` \| `false`
       #
@@ -3247,7 +3320,9 @@ module Aws
       #
       #    * Redis versions earlier than 2.8.6.
       #
-      #   * T1 and T2 cache node types.
+      #   * Redis (cluster mode disabled):T1 and T2 cache node types.
+      #
+      #     Redis (cluster mode enabled): T1 node types.
       #
       #    </note>
       #   @return [Boolean]
@@ -3259,10 +3334,10 @@ module Aws
       #
       #   This parameter can be used only with replication group containing
       #   cache clusters running outside of an Amazon Virtual Private Cloud
-      #   (VPC).
+      #   (Amazon VPC).
       #
       #   Constraints: Must contain no more than 255 alphanumeric characters.
-      #   Must not be "Default".
+      #   Must not be `Default`.
       #   @return [Array<String>]
       #
       # @!attribute [rw] security_group_ids
@@ -3270,14 +3345,17 @@ module Aws
       #   in the replication group.
       #
       #   This parameter can be used only with replication group containing
-      #   cache clusters running in an Amazon Virtual Private Cloud (VPC).
+      #   cache clusters running in an Amazon Virtual Private Cloud (Amazon
+      #   VPC).
       #   @return [Array<String>]
       #
       # @!attribute [rw] preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
-      #   cache cluster is performed. It is specified as a range in the format
+      #   cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-      #   window is a 60 minute period. Valid values for `ddd` are:
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -3293,12 +3371,12 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] notification_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic to which
-      #   notifications will be sent.
+      #   notifications are sent.
       #
       #   <note markdown="1"> The Amazon SNS topic owner must be same as the replication group
       #   owner.
@@ -3310,13 +3388,13 @@ module Aws
       #   The name of the cache parameter group to apply to all of the
       #   clusters in this replication group. This change is asynchronously
       #   applied as soon as possible for parameters when the
-      #   *ApplyImmediately* parameter is specified as *true* for this
+      #   `ApplyImmediately` parameter is specified as `true` for this
       #   request.
       #   @return [String]
       #
       # @!attribute [rw] notification_topic_status
       #   The status of the Amazon SNS notification topic for the replication
-      #   group. Notifications are sent only if the status is *active*.
+      #   group. Notifications are sent only if the status is `active`.
       #
       #   Valid values: `active` \| `inactive`
       #   @return [String]
@@ -3324,10 +3402,10 @@ module Aws
       # @!attribute [rw] apply_immediately
       #   If `true`, this parameter causes the modifications in this request
       #   and any pending modifications to be applied, asynchronously and as
-      #   soon as possible, regardless of the *PreferredMaintenanceWindow*
+      #   soon as possible, regardless of the `PreferredMaintenanceWindow`
       #   setting for the replication group.
       #
-      #   If `false`, then changes to the nodes in the replication group are
+      #   If `false`, changes to the nodes in the replication group are
       #   applied on the next maintenance reboot, or the next failure reboot,
       #   whichever occurs first.
       #
@@ -3356,31 +3434,29 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] snapshot_retention_limit
-      #   The number of days for which ElastiCache will retain automatic node
-      #   group snapshots before deleting them. For example, if you set
-      #   *SnapshotRetentionLimit* to 5, then a snapshot that was taken today
-      #   will be retained for 5 days before being deleted.
+      #   The number of days for which ElastiCache retains automatic node
+      #   group (shard) snapshots before deleting them. For example, if you
+      #   set `SnapshotRetentionLimit` to 5, a snapshot that was taken today
+      #   is retained for 5 days before being deleted.
       #
       #   **Important** If the value of SnapshotRetentionLimit is set to zero
       #   (0), backups are turned off.
       #   @return [Integer]
       #
       # @!attribute [rw] snapshot_window
-      #   The daily time range (in UTC) during which ElastiCache will begin
-      #   taking a daily snapshot of the node group specified by
-      #   *SnapshottingClusterId*.
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of the node group (shard) specified by
+      #   `SnapshottingClusterId`.
       #
       #   Example: `05:00-09:00`
       #
-      #   If you do not specify this parameter, then ElastiCache will
-      #   automatically choose an appropriate time range.
+      #   If you do not specify this parameter, ElastiCache automatically
+      #   chooses an appropriate time range.
       #   @return [String]
       #
       # @!attribute [rw] cache_node_type
       #   A valid cache node type that you want to scale this replication
-      #   group to. The value of this parameter must be one of the
-      #   *ScaleUpModifications* values returned by the
-      #   `ListAllowedCacheNodeTypeModification` action.
+      #   group to.
       #   @return [String]
       class ModifyReplicationGroupMessage < Struct.new(
         :replication_group_id,
@@ -3404,42 +3480,94 @@ module Aws
       end
 
       # @!attribute [rw] replication_group
-      #   Contains all of the attributes of a specific replication group.
+      #   Contains all of the attributes of a specific Redis replication
+      #   group.
       #   @return [Types::ReplicationGroup]
       class ModifyReplicationGroupResult < Struct.new(
         :replication_group)
         include Aws::Structure
       end
 
-      # Represents a collection of cache nodes in a replication group.
+      # Represents a collection of cache nodes in a replication group. One
+      # node in the node group is the read/write Primary node. All the other
+      # nodes are read-only Replica nodes.
       # @!attribute [rw] node_group_id
-      #   The identifier for the node group. A replication group contains only
-      #   one node group; therefore, the node group ID is 0001.
+      #   The identifier for the node group (shard). A Redis (cluster mode
+      #   disabled) replication group contains only 1 node group; therefore,
+      #   the node group ID is 0001. A Redis (cluster mode enabled)
+      #   replication group contains 1 to 15 node groups numbered 0001 to
+      #   0015.
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The current state of this replication group - *creating*,
-      #   *available*, etc.
+      #   The current state of this replication group - `creating`,
+      #   `available`, etc.
       #   @return [String]
       #
       # @!attribute [rw] primary_endpoint
-      #   Represents the information required for client programs to connect
-      #   to a cache node.
+      #   The endpoint of the primary node in this node group (shard).
       #   @return [Types::Endpoint]
+      #
+      # @!attribute [rw] slots
+      #   The keyspace for this node group (shard).
+      #   @return [String]
       #
       # @!attribute [rw] node_group_members
       #   A list containing information about individual nodes within the node
-      #   group.
+      #   group (shard).
       #   @return [Array<Types::NodeGroupMember>]
       class NodeGroup < Struct.new(
         :node_group_id,
         :status,
         :primary_endpoint,
+        :slots,
         :node_group_members)
         include Aws::Structure
       end
 
-      # Represents a single node within a node group.
+      # node group (shard) configuration options. Each node group (shard)
+      # configuration has the following: `Slots`, `PrimaryAvailabilityZone`,
+      # `ReplicaAvailabilityZones`, `ReplicaCount`.
+      # @note When making an API call, pass NodeGroupConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         slots: "String",
+      #         replica_count: 1,
+      #         primary_availability_zone: "String",
+      #         replica_availability_zones: ["String"],
+      #       }
+      # @!attribute [rw] slots
+      #   A string that specifies the keyspaces as a series of comma separated
+      #   values. Keyspaces are 0 to 16,383. The string is in the format
+      #   `startkey-endkey`.
+      #
+      #   Example: `"0-3999"`
+      #   @return [String]
+      #
+      # @!attribute [rw] replica_count
+      #   The number of read replica nodes in this node group (shard).
+      #   @return [Integer]
+      #
+      # @!attribute [rw] primary_availability_zone
+      #   The Availability Zone where the primary node of this node group
+      #   (shard) is launched.
+      #   @return [String]
+      #
+      # @!attribute [rw] replica_availability_zones
+      #   A list of Availability Zones to be used for the read replicas. The
+      #   number of Availability Zones in this list must match the value of
+      #   `ReplicaCount` or `ReplicasPerNodeGroup` if not specified.
+      #   @return [Array<String>]
+      class NodeGroupConfiguration < Struct.new(
+        :slots,
+        :replica_count,
+        :primary_availability_zone,
+        :replica_availability_zones)
+        include Aws::Structure
+      end
+
+      # Represents a single node within a node group (shard).
       # @!attribute [rw] cache_cluster_id
       #   The ID of the cache cluster to which the node belongs.
       #   @return [String]
@@ -3459,8 +3587,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] current_role
-      #   The role that is currently assigned to the node - *primary* or
-      #   *replica*.
+      #   The role that is currently assigned to the node - `primary` or
+      #   `replica`.
       #   @return [String]
       class NodeGroupMember < Struct.new(
         :cache_cluster_id,
@@ -3472,9 +3600,21 @@ module Aws
       end
 
       # Represents an individual cache node in a snapshot of a cache cluster.
+      # @!attribute [rw] cache_cluster_id
+      #   A unique identifier for the source cache cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] node_group_id
+      #   A unique identifier for the source node group (shard).
+      #   @return [String]
+      #
       # @!attribute [rw] cache_node_id
       #   The cache node identifier for the node in the source cache cluster.
       #   @return [String]
+      #
+      # @!attribute [rw] node_group_configuration
+      #   The configuration for the source node group (shard).
+      #   @return [Types::NodeGroupConfiguration]
       #
       # @!attribute [rw] cache_size
       #   The size of the cache on the source cache node.
@@ -3490,7 +3630,10 @@ module Aws
       #   set was obtained for the snapshot.
       #   @return [Time]
       class NodeSnapshot < Struct.new(
+        :cache_cluster_id,
+        :node_group_id,
         :cache_node_id,
+        :node_group_configuration,
         :cache_size,
         :cache_node_create_time,
         :snapshot_create_time)
@@ -3550,11 +3693,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] change_type
-      #   ChangeType indicates whether a change to the parameter will be
-      #   applied immediately or requires a reboot for the change to be
-      #   applied. You can force a reboot or wait until the next maintenance
-      #   window's reboot. For more information, see [Rebooting a
-      #   Cluster][1].
+      #   Indicates whether a change to the parameter is applied immediately
+      #   or requires a reboot for the change to be applied. You can force a
+      #   reboot or wait until the next maintenance window's reboot. For more
+      #   information, see [Rebooting a Cluster][1].
       #
       #
       #
@@ -3595,7 +3737,7 @@ module Aws
         include Aws::Structure
       end
 
-      # A group of settings that will be applied to the cache cluster in the
+      # A group of settings that are applied to the cache cluster in the
       # future, or that are currently being applied.
       # @!attribute [rw] num_cache_nodes
       #   The new number of cache nodes for the cache cluster.
@@ -3611,12 +3753,12 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] engine_version
-      #   The new cache engine version that the cache cluster will run.
+      #   The new cache engine version that the cache cluster runs.
       #   @return [String]
       #
       # @!attribute [rw] cache_node_type
-      #   The cache node type that this cache cluster or replication group
-      #   will be scaled to.
+      #   The cache node type that this cache cluster or replication group is
+      #   scaled to.
       #   @return [String]
       class PendingModifiedValues < Struct.new(
         :num_cache_nodes,
@@ -3626,7 +3768,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *PurchaseReservedCacheNodesOffering* action.
+      # Represents the input of a `PurchaseReservedCacheNodesOffering`
+      # operation.
       # @note When making an API call, pass PurchaseReservedCacheNodesOfferingMessage
       #   data as a hash:
       #
@@ -3667,15 +3810,15 @@ module Aws
       end
 
       # @!attribute [rw] reserved_cache_node
-      #   Represents the output of a *PurchaseReservedCacheNodesOffering*
-      #   action.
+      #   Represents the output of a `PurchaseReservedCacheNodesOffering`
+      #   operation.
       #   @return [Types::ReservedCacheNode]
       class PurchaseReservedCacheNodesOfferingResult < Struct.new(
         :reserved_cache_node)
         include Aws::Structure
       end
 
-      # Represents the input of a *RebootCacheCluster* action.
+      # Represents the input of a `RebootCacheCluster` operation.
       # @note When making an API call, pass RebootCacheClusterMessage
       #   data as a hash:
       #
@@ -3722,7 +3865,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *RemoveTagsFromResource* action.
+      # Represents the input of a `RemoveTagsFromResource` operation.
       # @note When making an API call, pass RemoveTagsFromResourceMessage
       #   data as a hash:
       #
@@ -3736,7 +3879,7 @@ module Aws
       #   `arn:aws:elasticache:us-west-2:0123456789:cluster:myCluster` or
       #   `arn:aws:elasticache:us-west-2:0123456789:snapshot:mySnapshot`.
       #
-      #   For more information on ARNs, go to [Amazon Resource Names (ARNs)
+      #   For more information about ARNs, see [Amazon Resource Names (ARNs)
       #   and AWS Service Namespaces][1].
       #
       #
@@ -3746,9 +3889,7 @@ module Aws
       #
       # @!attribute [rw] tag_keys
       #   A list of `TagKeys` identifying the tags you want removed from the
-      #   named resource. For example, `TagKeys.member.1=Region` removes the
-      #   cost allocation tag with the key name `Region` from the resource
-      #   named by the *ResourceName* parameter.
+      #   named resource.
       #   @return [Array<String>]
       class RemoveTagsFromResourceMessage < Struct.new(
         :resource_name,
@@ -3756,7 +3897,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains all of the attributes of a specific replication group.
+      # Contains all of the attributes of a specific Redis replication group.
       # @!attribute [rw] replication_group_id
       #   The identifier for the replication group.
       #   @return [String]
@@ -3766,8 +3907,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   The current state of this replication group - *creating*,
-      #   *available*, etc.
+      #   The current state of this replication group - `creating`,
+      #   `available`, etc.
       #   @return [String]
       #
       # @!attribute [rw] pending_modified_values
@@ -3797,9 +3938,39 @@ module Aws
       #
       #    * Redis versions earlier than 2.8.6.
       #
-      #   * T1 and T2 cache node types.
+      #   * Redis (cluster mode disabled):T1 and T2 cache node types.
+      #
+      #     Redis (cluster mode enabled): T1 node types.
       #
       #    </note>
+      #   @return [String]
+      #
+      # @!attribute [rw] configuration_endpoint
+      #   The configuration endpoint for this replicaiton group. Use the
+      #   configuration endpoint to connect to this replication group.
+      #   @return [Types::Endpoint]
+      #
+      # @!attribute [rw] snapshot_retention_limit
+      #   The number of days for which ElastiCache retains automatic cache
+      #   cluster snapshots before deleting them. For example, if you set
+      #   `SnapshotRetentionLimit` to 5, a snapshot that was taken today is
+      #   retained for 5 days before being deleted.
+      #
+      #   If the value of `SnapshotRetentionLimit` is set to zero (0), backups
+      #   are turned off.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] snapshot_window
+      #   The daily time range (in UTC) during which ElastiCache begins taking
+      #   a daily snapshot of your node group (shard).
+      #
+      #   Example: `05:00-09:00`
+      #
+      #   If you do not specify this parameter, ElastiCache automatically
+      #   chooses an appropriate time range.
+      #
+      #   **Note:** This parameter is only valid if the `Engine` parameter is
+      #   `redis`.
       #   @return [String]
       class ReplicationGroup < Struct.new(
         :replication_group_id,
@@ -3809,11 +3980,14 @@ module Aws
         :member_clusters,
         :node_groups,
         :snapshotting_cluster_id,
-        :automatic_failover)
+        :automatic_failover,
+        :configuration_endpoint,
+        :snapshot_retention_limit,
+        :snapshot_window)
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeReplicationGroups* action.
+      # Represents the output of a `DescribeReplicationGroups` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -3828,22 +4002,24 @@ module Aws
         include Aws::Structure
       end
 
-      # The settings to be applied to the replication group, either
+      # The settings to be applied to the Redis replication group, either
       # immediately or during the next maintenance window.
       # @!attribute [rw] primary_cluster_id
-      #   The primary cluster ID which will be applied immediately (if
+      #   The primary cluster ID that is applied immediately (if
       #   `--apply-immediately` was specified), or during the next maintenance
       #   window.
       #   @return [String]
       #
       # @!attribute [rw] automatic_failover_status
-      #   Indicates the status of Multi-AZ for this replication group.
+      #   Indicates the status of Multi-AZ for this Redis replication group.
       #
       #   <note markdown="1"> ElastiCache Multi-AZ replication groups are not supported on:
       #
       #    * Redis versions earlier than 2.8.6.
       #
-      #   * T1 and T2 cache node types.
+      #   * Redis (cluster mode disabled):T1 and T2 cache node types.
+      #
+      #     Redis (cluster mode enabled): T1 node types.
       #
       #    </note>
       #   @return [String]
@@ -3853,8 +4029,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *PurchaseReservedCacheNodesOffering*
-      # action.
+      # Represents the output of a `PurchaseReservedCacheNodesOffering`
+      # operation.
       # @!attribute [rw] reserved_cache_node_id
       #   The unique identifier for the reservation.
       #   @return [String]
@@ -3872,7 +4048,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -3889,24 +4067,26 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] start_time
@@ -3960,7 +4140,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeReservedCacheNodes* action.
+      # Represents the output of a `DescribeReservedCacheNodes` operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -3989,7 +4169,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -4006,24 +4188,26 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] duration
@@ -4061,8 +4245,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output of a *DescribeReservedCacheNodesOfferings*
-      # action.
+      # Represents the output of a `DescribeReservedCacheNodesOfferings`
+      # operation.
       # @!attribute [rw] marker
       #   Provides an identifier to allow retrieval of paginated results.
       #   @return [String]
@@ -4077,7 +4261,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *ResetCacheParameterGroup* action.
+      # Represents the input of a `ResetCacheParameterGroup` operation.
       # @note When making an API call, pass ResetCacheParameterGroupMessage
       #   data as a hash:
       #
@@ -4096,16 +4280,17 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] reset_all_parameters
-      #   If *true*, all parameters in the cache parameter group will be reset
-      #   to their default values. If *false*, only the parameters listed by
-      #   *ParameterNameValues* are reset to their default values.
+      #   If `true`, all parameters in the cache parameter group are reset to
+      #   their default values. If `false`, only the parameters listed by
+      #   `ParameterNameValues` are reset to their default values.
       #
       #   Valid values: `true` \| `false`
       #   @return [Boolean]
       #
       # @!attribute [rw] parameter_name_values
       #   An array of parameter names to reset to their default values. If
-      #   *ResetAllParameters* is *false*, you must specify the name of at
+      #   `ResetAllParameters` is `true`, do not use `ParameterNameValues`. If
+      #   `ResetAllParameters` is `false`, you must specify the name of at
       #   least one parameter to reset.
       #   @return [Array<Types::ParameterNameValue>]
       class ResetCacheParameterGroupMessage < Struct.new(
@@ -4115,7 +4300,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the input of a *RevokeCacheSecurityGroupIngress* action.
+      # Represents the input of a `RevokeCacheSecurityGroupIngress` operation.
       # @note When making an API call, pass RevokeCacheSecurityGroupIngressMessage
       #   data as a hash:
       #
@@ -4145,13 +4330,13 @@ module Aws
       end
 
       # @!attribute [rw] cache_security_group
-      #   Represents the output of one of the following actions:
+      #   Represents the output of one of the following operations:
       #
-      #   * *AuthorizeCacheSecurityGroupIngress*
+      #   * `AuthorizeCacheSecurityGroupIngress`
       #
-      #   * *CreateCacheSecurityGroup*
+      #   * `CreateCacheSecurityGroup`
       #
-      #   * *RevokeCacheSecurityGroupIngress*
+      #   * `RevokeCacheSecurityGroupIngress`
       #   @return [Types::CacheSecurityGroup]
       class RevokeCacheSecurityGroupIngressResult < Struct.new(
         :cache_security_group)
@@ -4174,12 +4359,20 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents a copy of an entire cache cluster as of the time when the
-      # snapshot was taken.
+      # Represents a copy of an entire Redis cache cluster as of the time when
+      # the snapshot was taken.
       # @!attribute [rw] snapshot_name
       #   The name of a snapshot. For an automatic snapshot, the name is
-      #   system-generated; for a manual snapshot, this is the user-provided
+      #   system-generated. For a manual snapshot, this is the user-provided
       #   name.
+      #   @return [String]
+      #
+      # @!attribute [rw] replication_group_id
+      #   The unique identifier of the source replication group.
+      #   @return [String]
+      #
+      # @!attribute [rw] replication_group_description
+      #   A description of the source replication group.
       #   @return [String]
       #
       # @!attribute [rw] cache_cluster_id
@@ -4206,7 +4399,9 @@ module Aws
       #
       #     * Current generation: `cache.t2.micro`, `cache.t2.small`,
       #       `cache.t2.medium`, `cache.m3.medium`, `cache.m3.large`,
-      #       `cache.m3.xlarge`, `cache.m3.2xlarge`
+      #       `cache.m3.xlarge`, `cache.m3.2xlarge`, `cache.m4.large`,
+      #       `cache.m4.xlarge`, `cache.m4.2xlarge`, `cache.m4.4xlarge`,
+      #       `cache.m4.10xlarge`
       #
       #     * Previous generation: `cache.t1.micro`, `cache.m1.small`,
       #       `cache.m1.medium`, `cache.m1.large`, `cache.m1.xlarge`
@@ -4223,28 +4418,30 @@ module Aws
       #
       #   **Notes:**
       #
-      #   * All t2 instances are created in an Amazon Virtual Private Cloud
-      #     (VPC).
+      #   * All T2 instances are created in an Amazon Virtual Private Cloud
+      #     (Amazon VPC).
       #
-      #   * Redis backup/restore is not supported for t2 instances.
+      #   * Redis backup/restore is not supported for Redis (cluster mode
+      #     disabled) T1 and T2 instances. Backup/restore is supported on
+      #     Redis (cluster mode enabled) T2 instances.
       #
       #   * Redis Append-only files (AOF) functionality is not supported for
-      #     t1 or t2 instances.
+      #     T1 or T2 instances.
       #
-      #   For a complete listing of cache node types and specifications, see
-      #   [Amazon ElastiCache Product Features and Details][1] and [Cache Node
+      #   For a complete listing of node types and specifications, see [Amazon
+      #   ElastiCache Product Features and Details][1] and either [Cache Node
       #   Type-Specific Parameters for Memcached][2] or [Cache Node
       #   Type-Specific Parameters for Redis][3].
       #
       #
       #
       #   [1]: http://aws.amazon.com/elasticache/details
-      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#CacheParameterGroups.Memcached.NodeSpecific
-      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#CacheParameterGroups.Redis.NodeSpecific
+      #   [2]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Memcached.html#ParameterGroups.Memcached.NodeSpecific
+      #   [3]: http://docs.aws.amazon.com/AmazonElastiCache/latest/UserGuide/CacheParameterGroups.Redis.html#ParameterGroups.Redis.NodeSpecific
       #   @return [String]
       #
       # @!attribute [rw] engine
-      #   The name of the cache engine (*memcached* or *redis*) used by the
+      #   The name of the cache engine (`memcached` or `redis`) used by the
       #   source cache cluster.
       #   @return [String]
       #
@@ -4271,9 +4468,11 @@ module Aws
       #
       # @!attribute [rw] preferred_maintenance_window
       #   Specifies the weekly time range during which maintenance on the
-      #   cache cluster is performed. It is specified as a range in the format
+      #   cluster is performed. It is specified as a range in the format
       #   ddd:hh24:mi-ddd:hh24:mi (24H Clock UTC). The minimum maintenance
-      #   window is a 60 minute period. Valid values for `ddd` are:
+      #   window is a 60 minute period.
+      #
+      #   Valid values for `ddd` are:
       #
       #   * `sun`
       #
@@ -4289,7 +4488,7 @@ module Aws
       #
       #   * `sat`
       #
-      #   Example: `sun:05:00-sun:09:00`
+      #   Example: `sun:23:00-mon:01:30`
       #   @return [String]
       #
       # @!attribute [rw] topic_arn
@@ -4323,13 +4522,13 @@ module Aws
       #
       # @!attribute [rw] snapshot_retention_limit
       #   For an automatic snapshot, the number of days for which ElastiCache
-      #   will retain the snapshot before deleting it.
+      #   retains the snapshot before deleting it.
       #
       #   For manual snapshots, this field reflects the
-      #   *SnapshotRetentionLimit* for the source cache cluster when the
+      #   `SnapshotRetentionLimit` for the source cache cluster when the
       #   snapshot was created. This field is otherwise ignored: Manual
       #   snapshots do not expire, and can only be deleted using the
-      #   *DeleteSnapshot* action.
+      #   `DeleteSnapshot` operation.
       #
       #   **Important** If the value of SnapshotRetentionLimit is set to zero
       #   (0), backups are turned off.
@@ -4340,11 +4539,33 @@ module Aws
       #   of the source cache cluster.
       #   @return [String]
       #
+      # @!attribute [rw] num_node_groups
+      #   The number of node groups (shards) in this snapshot. When restoring
+      #   from a snapshot, the number of node groups (shards) in the snapshot
+      #   and in the restored replication group must be the same.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] automatic_failover
+      #   Indicates the status of Multi-AZ for the source replication group.
+      #
+      #   <note markdown="1"> ElastiCache Multi-AZ replication groups are not supported on:
+      #
+      #    * Redis versions earlier than 2.8.6.
+      #
+      #   * Redis (cluster mode disabled):T1 and T2 cache node types.
+      #
+      #     Redis (cluster mode enabled): T1 node types.
+      #
+      #    </note>
+      #   @return [String]
+      #
       # @!attribute [rw] node_snapshots
       #   A list of the cache nodes in the source cache cluster.
       #   @return [Array<Types::NodeSnapshot>]
       class Snapshot < Struct.new(
         :snapshot_name,
+        :replication_group_id,
+        :replication_group_description,
         :cache_cluster_id,
         :snapshot_status,
         :snapshot_source,
@@ -4363,6 +4584,8 @@ module Aws
         :auto_minor_version_upgrade,
         :snapshot_retention_limit,
         :snapshot_window,
+        :num_node_groups,
+        :automatic_failover,
         :node_snapshots)
         include Aws::Structure
       end
@@ -4406,8 +4629,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the output from the *AddTagsToResource*,
-      # *ListTagsOnResource*, and *RemoveTagsFromResource* actions.
+      # Represents the output from the `AddTagsToResource`,
+      # `ListTagsOnResource`, and `RemoveTagsFromResource` operations.
       # @!attribute [rw] tag_list
       #   A list of cost allocation tags as key-value pairs.
       #   @return [Array<Types::Tag>]

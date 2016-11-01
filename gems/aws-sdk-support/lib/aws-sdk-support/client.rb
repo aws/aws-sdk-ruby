@@ -139,20 +139,20 @@ module Aws
       # @!group API Operations
 
       # Adds one or more attachments to an attachment set. If an
-      # `AttachmentSetId` is not specified, a new attachment set is created,
+      # `attachmentSetId` is not specified, a new attachment set is created,
       # and the ID of the set is returned in the response. If an
-      # `AttachmentSetId` is specified, the attachments are added to the
+      # `attachmentSetId` is specified, the attachments are added to the
       # specified set, if it exists.
       #
       # An attachment set is a temporary container for attachments that are to
       # be added to a case or case communication. The set is available for one
-      # hour after it is created; the `ExpiryTime` returned in the response
+      # hour after it is created; the `expiryTime` returned in the response
       # indicates when the set expires. The maximum number of attachments in a
       # set is 3, and the maximum size of any attachment in the set is 5 MB.
       # @option params [String] :attachment_set_id
-      #   The ID of the attachment set. If an `AttachmentSetId` is not
+      #   The ID of the attachment set. If an `attachmentSetId` is not
       #   specified, a new attachment set is created, and the ID of the set is
-      #   returned in the response. If an `AttachmentSetId` is specified, the
+      #   returned in the response. If an `attachmentSetId` is specified, the
       #   attachments are added to the specified set, if it exists.
       # @option params [required, Array<Types::Attachment>] :attachments
       #   One or more attachments to add to the set. The limit is 3 attachments
@@ -184,9 +184,9 @@ module Aws
       end
 
       # Adds additional customer communication to an AWS Support case. You use
-      # the `CaseId` value to identify the case to add communication to. You
+      # the `caseId` value to identify the case to add communication to. You
       # can list a set of email addresses to copy on the communication using
-      # the `CcEmailAddresses` value. The `CommunicationBody` value contains
+      # the `ccEmailAddresses` value. The `communicationBody` value contains
       # the text of the communication.
       #
       # The response indicates the success or failure of the request.
@@ -230,35 +230,43 @@ module Aws
       # modeled on the behavior of the AWS Support Center [Create Case][1]
       # page. Its parameters require you to specify the following information:
       #
-      # 1.  **IssueType.** The type of issue for the case. You can specify
-      #     either "customer-service" or "technical." If you do not
-      #     indicate a value, the default is "technical."
-      # 2.  **ServiceCode.** The code for an AWS service. You obtain the
-      #     `ServiceCode` by calling DescribeServices.
-      # 3.  **CategoryCode.** The category for the service defined for the
-      #     `ServiceCode` value. You also obtain the category code for a
-      #     service by calling DescribeServices. Each AWS service defines its
-      #     own set of category codes.
-      # 4.  **SeverityCode.** A value that indicates the urgency of the case,
-      #     which in turn determines the response time according to your
-      #     service level agreement with AWS Support. You obtain the
-      #     SeverityCode by calling DescribeSeverityLevels.
-      # 5.  **Subject.** The **Subject** field on the AWS Support Center
-      #     [Create Case][1] page.
-      # 6.  **CommunicationBody.** The **Description** field on the AWS
-      #     Support Center [Create Case][1] page.
-      # 7.  **AttachmentSetId.** The ID of a set of attachments that has been
-      #     created by using AddAttachmentsToSet.
-      # 8.  **Language.** The human language in which AWS Support handles the
-      #     case. English and Japanese are currently supported.
-      # 9.  **CcEmailAddresses.** The AWS Support Center **CC** field on the
-      #     [Create Case][1] page. You can list email addresses to be copied
-      #     on any correspondence about the case. The account that opens the
-      #     case is already identified by passing the AWS Credentials in the
-      #     HTTP POST method or in a method or function call from one of the
-      #     programming languages supported by an [AWS SDK][2].
+      # * **issueType.** The type of issue for the case. You can specify
+      #   either "customer-service" or "technical." If you do not indicate
+      #   a value, the default is "technical."
       #
-      # <note markdown="1">To add additional communication or attachments to an existing case,
+      # * **serviceCode.** The code for an AWS service. You obtain the
+      #   `serviceCode` by calling DescribeServices.
+      #
+      # * **categoryCode.** The category for the service defined for the
+      #   `serviceCode` value. You also obtain the category code for a service
+      #   by calling DescribeServices. Each AWS service defines its own set of
+      #   category codes.
+      #
+      # * **severityCode.** A value that indicates the urgency of the case,
+      #   which in turn determines the response time according to your service
+      #   level agreement with AWS Support. You obtain the SeverityCode by
+      #   calling DescribeSeverityLevels.
+      #
+      # * **subject.** The **Subject** field on the AWS Support Center [Create
+      #   Case][1] page.
+      #
+      # * **communicationBody.** The **Description** field on the AWS Support
+      #   Center [Create Case][1] page.
+      #
+      # * **attachmentSetId.** The ID of a set of attachments that has been
+      #   created by using AddAttachmentsToSet.
+      #
+      # * **language.** The human language in which AWS Support handles the
+      #   case. English and Japanese are currently supported.
+      #
+      # * **ccEmailAddresses.** The AWS Support Center **CC** field on the
+      #   [Create Case][1] page. You can list email addresses to be copied on
+      #   any correspondence about the case. The account that opens the case
+      #   is already identified by passing the AWS Credentials in the HTTP
+      #   POST method or in a method or function call from one of the
+      #   programming languages supported by an [AWS SDK][2].
+      #
+      # <note markdown="1"> To add additional communication or attachments to an existing case,
       # use AddCommunicationToCase.
       #
       #  </note>
@@ -279,11 +287,11 @@ module Aws
       #   The code for the severity level returned by the call to
       #   DescribeSeverityLevels.
       #
-      #   <note markdown="1">The availability of severity levels depends on each customer's
+      #   <note markdown="1"> The availability of severity levels depends on each customer's
       #   support subscription. In other words, your subscription may not
       #   necessarily require the urgent level of response time.
       #
-      #   </note>
+      #    </note>
       # @option params [String] :category_code
       #   The category of problem for the AWS Support case.
       # @option params [required, String] :communication_body
@@ -359,8 +367,8 @@ module Aws
 
       # Returns a list of cases that you specify by passing one or more case
       # IDs. In addition, you can filter the cases by date by setting values
-      # for the `AfterTime` and `BeforeTime` request parameters. You can set
-      # values for the `IncludeResolvedCases` and `IncludeCommunications`
+      # for the `afterTime` and `beforeTime` request parameters. You can set
+      # values for the `includeResolvedCases` and `includeCommunications`
       # request parameters to control how much information is returned.
       #
       # Case data is available for 12 months after creation. If a case was
@@ -369,9 +377,10 @@ module Aws
       #
       # The response returns the following in JSON format:
       #
-      # 1.  One or more CaseDetails data types.
-      # 2.  One or more `NextToken` values, which specify where to paginate
-      #     the returned records represented by the `CaseDetails` objects.
+      # * One or more CaseDetails data types.
+      #
+      # * One or more `nextToken` values, which specify where to paginate the
+      #   returned records represented by the `CaseDetails` objects.
       # @option params [Array<String>] :case_id_list
       #   A list of ID numbers of the support cases you want returned. The
       #   maximum number of cases is 100.
@@ -450,17 +459,17 @@ module Aws
       end
 
       # Returns communications (and attachments) for one or more support
-      # cases. You can use the `AfterTime` and `BeforeTime` parameters to
-      # filter by date. You can use the `CaseId` parameter to restrict the
+      # cases. You can use the `afterTime` and `beforeTime` parameters to
+      # filter by date. You can use the `caseId` parameter to restrict the
       # results to a particular case.
       #
       # Case data is available for 12 months after creation. If a case was
       # created more than 12 months ago, a request for data might cause an
       # error.
       #
-      # You can use the `MaxResults` and `NextToken` parameters to control the
-      # pagination of the result set. Set `MaxResults` to the number of cases
-      # you want displayed on each page, and use `NextToken` to specify the
+      # You can use the `maxResults` and `nextToken` parameters to control the
+      # pagination of the result set. Set `maxResults` to the number of cases
+      # you want displayed on each page, and use `nextToken` to specify the
       # resumption of pagination.
       # @option params [required, String] :case_id
       #   The AWS Support case ID requested or returned in the call. The case ID
@@ -588,8 +597,17 @@ module Aws
       # Returns the refresh status of the Trusted Advisor checks that have the
       # specified check IDs. Check IDs can be obtained by calling
       # DescribeTrustedAdvisorChecks.
+      #
+      # <note markdown="1"> Some checks are refreshed automatically, and their refresh statuses
+      # cannot be retrieved by using this operation. Use of the
+      # `DescribeTrustedAdvisorCheckRefreshStatuses` operation for these
+      # checks causes an `InvalidParameterValue` error.
+      #
+      #  </note>
       # @option params [required, Array<String>] :check_ids
-      #   The IDs of the Trusted Advisor checks.
+      #   The IDs of the Trusted Advisor checks to get the status of. **Note:**
+      #   Specifying the check ID of a check that is automatically refreshed
+      #   causes an `InvalidParameterValue` error.
       # @return [Types::DescribeTrustedAdvisorCheckRefreshStatusesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeTrustedAdvisorCheckRefreshStatusesResponse#statuses #statuses} => Array&lt;Types::TrustedAdvisorCheckRefreshStatus&gt;
@@ -619,15 +637,19 @@ module Aws
       # contains these three objects:
       #
       # * TrustedAdvisorCategorySpecificSummary
+      #
       # * TrustedAdvisorResourceDetail
+      #
       # * TrustedAdvisorResourcesSummary
       #
       # In addition, the response contains these fields:
       #
-      # * **Status.** The alert status of the check: "ok" (green),
+      # * **status.** The alert status of the check: "ok" (green),
       #   "warning" (yellow), "error" (red), or "not\_available".
-      # * **Timestamp.** The time of the last refresh of the check.
-      # * **CheckId.** The unique identifier for the check.
+      #
+      # * **timestamp.** The time of the last refresh of the check.
+      #
+      # * **checkId.** The unique identifier for the check.
       # @option params [required, String] :check_id
       #   The unique identifier for the Trusted Advisor check.
       # @option params [String] :language
@@ -742,16 +764,26 @@ module Aws
       # check ID. Check IDs can be obtained by calling
       # DescribeTrustedAdvisorChecks.
       #
+      # <note markdown="1"> Some checks are refreshed automatically, and they cannot be refreshed
+      # by using this operation. Use of the `RefreshTrustedAdvisorCheck`
+      # operation for these checks causes an `InvalidParameterValue` error.
+      #
+      #  </note>
+      #
       # The response contains a TrustedAdvisorCheckRefreshStatus object, which
       # contains these fields:
       #
-      # * **Status.** The refresh status of the check: "none", "enqueued",
+      # * **status.** The refresh status of the check: "none", "enqueued",
       #   "processing", "success", or "abandoned".
-      # * **MillisUntilNextRefreshable.** The amount of time, in milliseconds,
+      #
+      # * **millisUntilNextRefreshable.** The amount of time, in milliseconds,
       #   until the check is eligible for refresh.
-      # * **CheckId.** The unique identifier for the check.
+      #
+      # * **checkId.** The unique identifier for the check.
       # @option params [required, String] :check_id
-      #   The unique identifier for the Trusted Advisor check.
+      #   The unique identifier for the Trusted Advisor check to refresh.
+      #   **Note:** Specifying the check ID of a check that is automatically
+      #   refreshed causes an `InvalidParameterValue` error.
       # @return [Types::RefreshTrustedAdvisorCheckResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RefreshTrustedAdvisorCheckResponse#status #status} => Types::TrustedAdvisorCheckRefreshStatus
@@ -772,7 +804,7 @@ module Aws
         req.send_request(options)
       end
 
-      # Takes a `CaseId` and returns the initial state of the case along with
+      # Takes a `caseId` and returns the initial state of the case along with
       # the state of the case after the call to ResolveCase completed.
       # @option params [String] :case_id
       #   The AWS Support case ID requested or returned in the call. The case ID

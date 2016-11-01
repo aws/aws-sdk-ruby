@@ -2480,8 +2480,12 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
       # @!attribute [rw] type
-      #   Specifies the integration's type. The valid value is `HTTP`, `AWS`,
-      #   or `MOCK`.
+      #   Specifies the integration's type. The valid value is `HTTP` for
+      #   integrating with an HTTP back end, `AWS` for any AWS service
+      #   endpoints, `MOCK` for testing without actually invoking the back
+      #   end, `HTTP_PROXY` for integrating with the HTTP proxy integration,
+      #   or `AWS_PROXY` for integrating with the Lambda proxy integration
+      #   type.
       #   @return [String]
       #
       # @!attribute [rw] http_method
@@ -3157,7 +3161,7 @@ module Aws
       #         rest_api_id: "String", # required
       #         resource_id: "String", # required
       #         http_method: "String", # required
-      #         type: "HTTP", # required, accepts HTTP, AWS, MOCK
+      #         type: "HTTP", # required, accepts HTTP, AWS, MOCK, HTTP_PROXY, AWS_PROXY
       #         integration_http_method: "String",
       #         uri: "String",
       #         credentials: "String",
@@ -3762,9 +3766,7 @@ module Aws
       #   (designated as `/\{method_setting_key` below) are method paths
       #   defined as `\{resource_path\}/\{http_method\}` for an individual
       #   method override, or `/\*/\*` for overriding all methods in the
-      #   stage. Any forward slash ("/") characters in the `resource_path`
-      #   part must be encoded as "~1" as in, for example,
-      #   `~1resource~1sub-resource/GET`.
+      #   stage.
       #   @return [Hash<String,Types::MethodSetting>]
       #
       # @!attribute [rw] variables

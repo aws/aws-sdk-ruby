@@ -13,6 +13,9 @@ module Aws
       include Seahorse::Model
 
       AcceptLanguage = Shapes::StringShape.new(name: 'AcceptLanguage')
+      AccessLevelFilter = Shapes::StructureShape.new(name: 'AccessLevelFilter')
+      AccessLevelFilterKey = Shapes::StringShape.new(name: 'AccessLevelFilterKey')
+      AccessLevelFilterValue = Shapes::StringShape.new(name: 'AccessLevelFilterValue')
       AllowedValue = Shapes::StringShape.new(name: 'AllowedValue')
       AllowedValues = Shapes::ListShape.new(name: 'AllowedValues')
       ApproximateCount = Shapes::IntegerShape.new(name: 'ApproximateCount')
@@ -134,6 +137,10 @@ module Aws
       UsageInstructions = Shapes::ListShape.new(name: 'UsageInstructions')
       UsePreviousValue = Shapes::BooleanShape.new(name: 'UsePreviousValue')
 
+      AccessLevelFilter.add_member(:key, Shapes::ShapeRef.new(shape: AccessLevelFilterKey, location_name: "Key"))
+      AccessLevelFilter.add_member(:value, Shapes::ShapeRef.new(shape: AccessLevelFilterValue, location_name: "Value"))
+      AccessLevelFilter.struct_class = Types::AccessLevelFilter
+
       AllowedValues.member = Shapes::ShapeRef.new(shape: AllowedValue)
 
       ConstraintSummaries.member = Shapes::ShapeRef.new(shape: ConstraintSummary)
@@ -199,6 +206,7 @@ module Aws
       ListLaunchPathsOutput.struct_class = Types::ListLaunchPathsOutput
 
       ListRecordHistoryInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+      ListRecordHistoryInput.add_member(:access_level_filter, Shapes::ShapeRef.new(shape: AccessLevelFilter, location_name: "AccessLevelFilter"))
       ListRecordHistoryInput.add_member(:search_filter, Shapes::ShapeRef.new(shape: ListRecordHistorySearchFilter, location_name: "SearchFilter"))
       ListRecordHistoryInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
       ListRecordHistoryInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
@@ -334,6 +342,7 @@ module Aws
       RecordTags.member = Shapes::ShapeRef.new(shape: RecordTag)
 
       ScanProvisionedProductsInput.add_member(:accept_language, Shapes::ShapeRef.new(shape: AcceptLanguage, location_name: "AcceptLanguage"))
+      ScanProvisionedProductsInput.add_member(:access_level_filter, Shapes::ShapeRef.new(shape: AccessLevelFilter, location_name: "AccessLevelFilter"))
       ScanProvisionedProductsInput.add_member(:page_size, Shapes::ShapeRef.new(shape: PageSize, location_name: "PageSize"))
       ScanProvisionedProductsInput.add_member(:page_token, Shapes::ShapeRef.new(shape: PageToken, location_name: "PageToken"))
       ScanProvisionedProductsInput.struct_class = Types::ScanProvisionedProductsInput

@@ -196,8 +196,12 @@ module Aws
       SolutionStackDescription = Shapes::StructureShape.new(name: 'SolutionStackDescription')
       SolutionStackFileTypeList = Shapes::ListShape.new(name: 'SolutionStackFileTypeList')
       SolutionStackName = Shapes::StringShape.new(name: 'SolutionStackName')
+      SourceBuildInformation = Shapes::StructureShape.new(name: 'SourceBuildInformation')
       SourceBundleDeletionException = Shapes::StructureShape.new(name: 'SourceBundleDeletionException')
       SourceConfiguration = Shapes::StructureShape.new(name: 'SourceConfiguration')
+      SourceLocation = Shapes::StringShape.new(name: 'SourceLocation')
+      SourceRepository = Shapes::StringShape.new(name: 'SourceRepository')
+      SourceType = Shapes::StringShape.new(name: 'SourceType')
       StatusCodes = Shapes::StructureShape.new(name: 'StatusCodes')
       String = Shapes::StringShape.new(name: 'String')
       SwapEnvironmentCNAMEsMessage = Shapes::StructureShape.new(name: 'SwapEnvironmentCNAMEsMessage')
@@ -266,6 +270,7 @@ module Aws
       ApplicationVersionDescription.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
       ApplicationVersionDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
       ApplicationVersionDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
+      ApplicationVersionDescription.add_member(:source_build_information, Shapes::ShapeRef.new(shape: SourceBuildInformation, location_name: "SourceBuildInformation"))
       ApplicationVersionDescription.add_member(:source_bundle, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceBundle"))
       ApplicationVersionDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
       ApplicationVersionDescription.add_member(:date_updated, Shapes::ShapeRef.new(shape: UpdateDate, location_name: "DateUpdated"))
@@ -278,6 +283,7 @@ module Aws
       ApplicationVersionDescriptionMessage.struct_class = Types::ApplicationVersionDescriptionMessage
 
       ApplicationVersionDescriptionsMessage.add_member(:application_versions, Shapes::ShapeRef.new(shape: ApplicationVersionDescriptionList, location_name: "ApplicationVersions"))
+      ApplicationVersionDescriptionsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
       ApplicationVersionDescriptionsMessage.struct_class = Types::ApplicationVersionDescriptionsMessage
 
       ApplyEnvironmentManagedActionRequest.add_member(:environment_name, Shapes::ShapeRef.new(shape: String, location_name: "EnvironmentName"))
@@ -380,6 +386,7 @@ module Aws
       CreateApplicationVersionMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, required: true, location_name: "ApplicationName"))
       CreateApplicationVersionMessage.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, required: true, location_name: "VersionLabel"))
       CreateApplicationVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+      CreateApplicationVersionMessage.add_member(:source_build_information, Shapes::ShapeRef.new(shape: SourceBuildInformation, location_name: "SourceBuildInformation"))
       CreateApplicationVersionMessage.add_member(:source_bundle, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceBundle"))
       CreateApplicationVersionMessage.add_member(:auto_create_application, Shapes::ShapeRef.new(shape: AutoCreateApplication, location_name: "AutoCreateApplication"))
       CreateApplicationVersionMessage.add_member(:process, Shapes::ShapeRef.new(shape: ApplicationVersionProccess, location_name: "Process"))
@@ -436,6 +443,8 @@ module Aws
 
       DescribeApplicationVersionsMessage.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
       DescribeApplicationVersionsMessage.add_member(:version_labels, Shapes::ShapeRef.new(shape: VersionLabelsList, location_name: "VersionLabels"))
+      DescribeApplicationVersionsMessage.add_member(:max_records, Shapes::ShapeRef.new(shape: MaxRecords, location_name: "MaxRecords"))
+      DescribeApplicationVersionsMessage.add_member(:next_token, Shapes::ShapeRef.new(shape: Token, location_name: "NextToken"))
       DescribeApplicationVersionsMessage.struct_class = Types::DescribeApplicationVersionsMessage
 
       DescribeApplicationsMessage.add_member(:application_names, Shapes::ShapeRef.new(shape: ApplicationNamesList, location_name: "ApplicationNames"))
@@ -739,6 +748,11 @@ module Aws
       SolutionStackDescription.struct_class = Types::SolutionStackDescription
 
       SolutionStackFileTypeList.member = Shapes::ShapeRef.new(shape: FileTypeExtension)
+
+      SourceBuildInformation.add_member(:source_type, Shapes::ShapeRef.new(shape: SourceType, required: true, location_name: "SourceType"))
+      SourceBuildInformation.add_member(:source_repository, Shapes::ShapeRef.new(shape: SourceRepository, required: true, location_name: "SourceRepository"))
+      SourceBuildInformation.add_member(:source_location, Shapes::ShapeRef.new(shape: SourceLocation, required: true, location_name: "SourceLocation"))
+      SourceBuildInformation.struct_class = Types::SourceBuildInformation
 
       SourceConfiguration.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "ApplicationName"))
       SourceConfiguration.add_member(:template_name, Shapes::ShapeRef.new(shape: ConfigurationTemplateName, location_name: "TemplateName"))

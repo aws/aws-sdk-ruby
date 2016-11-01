@@ -146,6 +146,7 @@ module Aws
       NotFoundException = Shapes::StructureShape.new(name: 'NotFoundException')
       NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
       NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
+      Op = Shapes::StringShape.new(name: 'Op')
       PatchOperation = Shapes::StructureShape.new(name: 'PatchOperation')
       PathToMapOfMethodSnapshot = Shapes::MapShape.new(name: 'PathToMapOfMethodSnapshot')
       ProviderARN = Shapes::StringShape.new(name: 'ProviderARN')
@@ -200,7 +201,6 @@ module Aws
       UsagePlanKey = Shapes::StructureShape.new(name: 'UsagePlanKey')
       UsagePlanKeys = Shapes::StructureShape.new(name: 'UsagePlanKeys')
       UsagePlans = Shapes::StructureShape.new(name: 'UsagePlans')
-      op = Shapes::StringShape.new(name: 'op')
 
       Account.add_member(:cloudwatch_role_arn, Shapes::ShapeRef.new(shape: String, location_name: "cloudwatchRoleArn"))
       Account.add_member(:throttle_settings, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttleSettings"))
@@ -744,7 +744,7 @@ module Aws
       Models.add_member(:items, Shapes::ShapeRef.new(shape: ListOfModel, location_name: "item"))
       Models.struct_class = Types::Models
 
-      PatchOperation.add_member(:op, Shapes::ShapeRef.new(shape: op, location_name: "op"))
+      PatchOperation.add_member(:op, Shapes::ShapeRef.new(shape: Op, location_name: "op"))
       PatchOperation.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
       PatchOperation.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
       PatchOperation.add_member(:from, Shapes::ShapeRef.new(shape: String, location_name: "from"))

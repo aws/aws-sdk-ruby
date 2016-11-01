@@ -133,6 +133,45 @@ module Aws
 
       # @!group API Operations
 
+      # Purchases Convertible Reserved Instance offerings described in the
+      # GetReservedInstancesExchangeQuote call.
+      # @option params [Boolean] :dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option params [required, Array<String>] :reserved_instance_ids
+      #   The IDs of the Convertible Reserved Instances that you want to
+      #   exchange for other Convertible Reserved Instances of the same or
+      #   higher value.
+      # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
+      #   The configurations of the Convertible Reserved Instance offerings you
+      #   are purchasing in this exchange.
+      # @return [Types::AcceptReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::AcceptReservedInstancesExchangeQuoteResult#exchange_id #ExchangeId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.accept_reserved_instances_exchange_quote({
+      #     dry_run: false,
+      #     reserved_instance_ids: ["String"], # required
+      #     target_configurations: [
+      #       {
+      #         offering_id: "String", # required
+      #         instance_count: 1,
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.exchange_id #=> String
+      # @overload accept_reserved_instances_exchange_quote(params = {})
+      # @param [Hash] params ({})
+      def accept_reserved_instances_exchange_quote(params = {}, options = {})
+        req = build_request(:accept_reserved_instances_exchange_quote, params)
+        req.send_request(options)
+      end
+
       # Accept a VPC peering connection request. To accept a request, the VPC
       # peering connection must be in the `pending-acceptance` state, and you
       # must be the owner of the peer VPC. Use the
@@ -340,11 +379,15 @@ module Aws
       # allow reassociation.
       #
       # This is an idempotent operation. If you perform the operation more
-      # than once, Amazon EC2 doesn't return an error.
+      # than once, Amazon EC2 doesn't return an error, and you may be charged
+      # for each time the Elastic IP address is remapped to the same instance.
+      # For more information, see the *Elastic IP Addresses* section of
+      # [Amazon EC2 Pricing][2].
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+      # [2]: http://aws.amazon.com/ec2/pricing/
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -1745,9 +1788,9 @@ module Aws
       #   resp.flow_log_ids[0] #=> String
       #   resp.client_token #=> String
       #   resp.unsuccessful #=> Array
-      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      #   resp.unsuccessful[0].resource_id #=> String
       # @overload create_flow_logs(params = {})
       # @param [Hash] params ({})
       def create_flow_logs(params = {}, options = {})
@@ -2317,24 +2360,25 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a listing for Amazon EC2 Reserved Instances to be sold in the
-      # Reserved Instance Marketplace. You can submit one Reserved Instance
-      # listing at a time. To get a list of your Reserved Instances, you can
-      # use the DescribeReservedInstances operation.
+      # Creates a listing for Amazon EC2 Standard Reserved Instances to be
+      # sold in the Reserved Instance Marketplace. You can submit one Standard
+      # Reserved Instance listing at a time. To get a list of your Standard
+      # Reserved Instances, you can use the DescribeReservedInstances
+      # operation.
       #
       # The Reserved Instance Marketplace matches sellers who want to resell
-      # Reserved Instance capacity that they no longer need with buyers who
-      # want to purchase additional capacity. Reserved Instances bought and
-      # sold through the Reserved Instance Marketplace work like any other
-      # Reserved Instances.
+      # Standard Reserved Instance capacity that they no longer need with
+      # buyers who want to purchase additional capacity. Reserved Instances
+      # bought and sold through the Reserved Instance Marketplace work like
+      # any other Reserved Instances.
       #
-      # To sell your Reserved Instances, you must first register as a seller
-      # in the Reserved Instance Marketplace. After completing the
+      # To sell your Standard Reserved Instances, you must first register as a
+      # seller in the Reserved Instance Marketplace. After completing the
       # registration process, you can create a Reserved Instance Marketplace
-      # listing of some or all of your Reserved Instances, and specify the
-      # upfront price to receive for them. Your Reserved Instance listings
-      # then become available for purchase. To view the details of your
-      # Reserved Instance listing, you can use the
+      # listing of some or all of your Standard Reserved Instances, and
+      # specify the upfront price to receive for them. Your Standard Reserved
+      # Instance listings then become available for purchase. To view the
+      # details of your Standard Reserved Instance listing, you can use the
       # DescribeReservedInstancesListings operation.
       #
       # For more information, see [Reserved Instance Marketplace][1] in the
@@ -2344,15 +2388,15 @@ module Aws
       #
       # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ri-market-general.html
       # @option params [required, String] :reserved_instances_id
-      #   The ID of the active Reserved Instance.
+      #   The ID of the active Standard Reserved Instance.
       # @option params [required, Integer] :instance_count
       #   The number of instances that are a part of a Reserved Instance account
       #   to be listed in the Reserved Instance Marketplace. This number should
       #   be less than or equal to the instance count associated with the
       #   Reserved Instance ID specified in this call.
       # @option params [required, Array<Types::PriceScheduleSpecification>] :price_schedules
-      #   A list specifying the price of the Reserved Instance for each month
-      #   remaining in the Reserved Instance term.
+      #   A list specifying the price of the Standard Reserved Instance for each
+      #   month remaining in the Reserved Instance term.
       # @option params [required, String] :client_token
       #   Unique, case-sensitive identifier you provide to ensure idempotency of
       #   your listings. This helps avoid duplicate listings. For more
@@ -3434,9 +3478,9 @@ module Aws
       #
       # @example Response structure
       #   resp.unsuccessful #=> Array
-      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      #   resp.unsuccessful[0].resource_id #=> String
       # @overload delete_flow_logs(params = {})
       # @param [Hash] params ({})
       def delete_flow_logs(params = {}, options = {})
@@ -3909,9 +3953,9 @@ module Aws
       #
       # @example Response structure
       #   resp.unsuccessful #=> Array
-      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      #   resp.unsuccessful[0].resource_id #=> String
       # @overload delete_vpc_endpoints(params = {})
       # @param [Hash] params ({})
       def delete_vpc_endpoints(params = {}, options = {})
@@ -4424,8 +4468,6 @@ module Aws
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
-      # @option params [Array<Types::Filter>] :filters
-      #   One or more filters.
       # @option params [Array<String>] :conversion_task_ids
       #   One or more conversion task IDs.
       # @return [Types::DescribeConversionTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -4435,12 +4477,6 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.describe_conversion_tasks({
       #     dry_run: false,
-      #     filters: [
-      #       {
-      #         name: "String",
-      #         values: ["String"],
-      #       },
-      #     ],
       #     conversion_task_ids: ["String"],
       #   })
       #
@@ -5964,7 +6000,7 @@ module Aws
       #   resp.reservations[0].instances[0].product_codes #=> Array
       #   resp.reservations[0].instances[0].product_codes[0].product_code_id #=> String
       #   resp.reservations[0].instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-      #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.reservations[0].instances[0].launch_time #=> Time
       #   resp.reservations[0].instances[0].placement.availability_zone #=> String
       #   resp.reservations[0].instances[0].placement.group_name #=> String
@@ -6840,6 +6876,9 @@ module Aws
       #   * `instance-type` - The instance type that is covered by the
       #     reservation.
       #
+      #   * `scope` - The scope of the Reserved Instance (`Region` or
+      #     `Availability Zone`).
+      #
       #   * `product-description` - The Reserved Instance product platform
       #     description. Instances that include `(Amazon VPC)` in the product
       #     platform description will only be displayed to EC2-Classic account
@@ -6880,6 +6919,8 @@ module Aws
       #   The Reserved Instance offering type. If you are using tools that
       #   predate the 2011-11-01 API version, you only have access to the
       #   `Medium Utilization` Reserved Instance offering type.
+      # @option params [String] :offering_class
+      #   Describes whether the Reserved Instance is Standard or Convertible.
       # @return [Types::DescribeReservedInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeReservedInstancesResult#reserved_instances #ReservedInstances} => Array&lt;Types::ReservedInstances&gt;
@@ -6895,12 +6936,13 @@ module Aws
       #       },
       #     ],
       #     offering_type: "Heavy Utilization", # accepts Heavy Utilization, Medium Utilization, Light Utilization, No Upfront, Partial Upfront, All Upfront
+      #     offering_class: "standard", # accepts standard, convertible
       #   })
       #
       # @example Response structure
       #   resp.reserved_instances #=> Array
       #   resp.reserved_instances[0].reserved_instances_id #=> String
-      #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.reserved_instances[0].availability_zone #=> String
       #   resp.reserved_instances[0].start #=> Time
       #   resp.reserved_instances[0].end #=> Time
@@ -6919,6 +6961,8 @@ module Aws
       #   resp.reserved_instances[0].recurring_charges #=> Array
       #   resp.reserved_instances[0].recurring_charges[0].frequency #=> String, one of "Hourly"
       #   resp.reserved_instances[0].recurring_charges[0].amount #=> Float
+      #   resp.reserved_instances[0].offering_class #=> String, one of "standard", "convertible"
+      #   resp.reserved_instances[0].scope #=> String, one of "Availability Zone", "Region"
       # @overload describe_reserved_instances(params = {})
       # @param [Hash] params ({})
       def describe_reserved_instances(params = {}, options = {})
@@ -7092,7 +7136,8 @@ module Aws
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.availability_zone #=> String
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.platform #=> String
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_count #=> Integer
-      #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.scope #=> String, one of "Availability Zone", "Region"
       #   resp.reserved_instances_modifications[0].create_date #=> Time
       #   resp.reserved_instances_modifications[0].update_date #=> Time
       #   resp.reserved_instances_modifications[0].effective_date #=> Time
@@ -7179,6 +7224,9 @@ module Aws
       #   * `reserved-instances-offering-id` - The Reserved Instances offering
       #     ID.
       #
+      #   * `scope` - The scope of the Reserved Instance (`Availability Zone` or
+      #     `Region`).
+      #
       #   * `usage-price` - The usage price of the Reserved Instance, per hour
       #     (for example, 0.84).
       # @option params [String] :instance_tenancy
@@ -7217,6 +7265,9 @@ module Aws
       #   offerings.
       #
       #   Default: 20
+      # @option params [String] :offering_class
+      #   The offering class of the Reserved Instance. Can be `standard` or
+      #   `convertible`.
       # @return [Types::DescribeReservedInstancesOfferingsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeReservedInstancesOfferingsResult#reserved_instances_offerings #ReservedInstancesOfferings} => Array&lt;Types::ReservedInstancesOffering&gt;
@@ -7226,7 +7277,7 @@ module Aws
       #   resp = client.describe_reserved_instances_offerings({
       #     dry_run: false,
       #     reserved_instances_offering_ids: ["String"],
-      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #     availability_zone: "String",
       #     product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
       #     filters: [
@@ -7243,12 +7294,13 @@ module Aws
       #     min_duration: 1,
       #     max_duration: 1,
       #     max_instance_count: 1,
+      #     offering_class: "standard", # accepts standard, convertible
       #   })
       #
       # @example Response structure
       #   resp.reserved_instances_offerings #=> Array
       #   resp.reserved_instances_offerings[0].reserved_instances_offering_id #=> String
-      #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.reserved_instances_offerings[0].availability_zone #=> String
       #   resp.reserved_instances_offerings[0].duration #=> Integer
       #   resp.reserved_instances_offerings[0].usage_price #=> Float
@@ -7264,6 +7316,8 @@ module Aws
       #   resp.reserved_instances_offerings[0].pricing_details #=> Array
       #   resp.reserved_instances_offerings[0].pricing_details[0].price #=> Float
       #   resp.reserved_instances_offerings[0].pricing_details[0].count #=> Integer
+      #   resp.reserved_instances_offerings[0].offering_class #=> String, one of "standard", "convertible"
+      #   resp.reserved_instances_offerings[0].scope #=> String, one of "Availability Zone", "Region"
       #   resp.next_token #=> String
       # @overload describe_reserved_instances_offerings(params = {})
       # @param [Hash] params ({})
@@ -8117,6 +8171,9 @@ module Aws
       end
 
       # Describes your Spot fleet requests.
+      #
+      # Spot fleet requests are deleted 48 hours after they are canceled and
+      # their instances are terminated.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -8163,7 +8220,7 @@ module Aws
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_id #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].user_data #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].addressing_type #=> String
-      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].kernel_id #=> String
@@ -8227,6 +8284,9 @@ module Aws
       # the identifier of the instance. Alternatively, you can use
       # DescribeInstances with a filter to look for instances where the
       # instance lifecycle is `spot`.
+      #
+      # Spot instance requests are deleted 4 hours after they are canceled and
+      # their instances are terminated.
       #
       #
       #
@@ -8400,7 +8460,7 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
       #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
       #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
-      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
       #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
       #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
@@ -8519,7 +8579,7 @@ module Aws
       #     dry_run: false,
       #     start_time: Time.now,
       #     end_time: Time.now,
-      #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #     product_descriptions: ["String"],
       #     filters: [
       #       {
@@ -8534,7 +8594,7 @@ module Aws
       #
       # @example Response structure
       #   resp.spot_price_history #=> Array
-      #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.spot_price_history[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
       #   resp.spot_price_history[0].spot_price #=> String
       #   resp.spot_price_history[0].timestamp #=> Time
@@ -10342,6 +10402,74 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns details about the values and term of your specified
+      # Convertible Reserved Instances. When an offering ID is specified it
+      # returns information about whether the exchange is valid and can be
+      # performed.
+      # @option params [Boolean] :dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option params [required, Array<String>] :reserved_instance_ids
+      #   The ID/s of the Convertible Reserved Instances you want to exchange.
+      # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
+      #   The configuration requirements of the Convertible Reserved Instances
+      #   you want in exchange for your current Convertible Reserved Instances.
+      # @return [Types::GetReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#reserved_instance_value_set #ReservedInstanceValueSet} => Array&lt;Types::ReservedInstanceReservationValue&gt;
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#reserved_instance_value_rollup #ReservedInstanceValueRollup} => Types::ReservationValue
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#target_configuration_value_set #TargetConfigurationValueSet} => Array&lt;Types::TargetReservationValue&gt;
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#target_configuration_value_rollup #TargetConfigurationValueRollup} => Types::ReservationValue
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#payment_due #PaymentDue} => String
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#currency_code #CurrencyCode} => String
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#output_reserved_instances_will_expire_at #OutputReservedInstancesWillExpireAt} => Time
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#is_valid_exchange #IsValidExchange} => Boolean
+      #   * {Types::GetReservedInstancesExchangeQuoteResult#validation_failure_reason #ValidationFailureReason} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_reserved_instances_exchange_quote({
+      #     dry_run: false,
+      #     reserved_instance_ids: ["String"], # required
+      #     target_configurations: [
+      #       {
+      #         offering_id: "String", # required
+      #         instance_count: 1,
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.reserved_instance_value_set #=> Array
+      #   resp.reserved_instance_value_set[0].reserved_instance_id #=> String
+      #   resp.reserved_instance_value_set[0].reservation_value.remaining_total_value #=> String
+      #   resp.reserved_instance_value_set[0].reservation_value.remaining_upfront_value #=> String
+      #   resp.reserved_instance_value_set[0].reservation_value.hourly_price #=> String
+      #   resp.reserved_instance_value_rollup.remaining_total_value #=> String
+      #   resp.reserved_instance_value_rollup.remaining_upfront_value #=> String
+      #   resp.reserved_instance_value_rollup.hourly_price #=> String
+      #   resp.target_configuration_value_set #=> Array
+      #   resp.target_configuration_value_set[0].target_configuration.offering_id #=> String
+      #   resp.target_configuration_value_set[0].target_configuration.instance_count #=> Integer
+      #   resp.target_configuration_value_set[0].reservation_value.remaining_total_value #=> String
+      #   resp.target_configuration_value_set[0].reservation_value.remaining_upfront_value #=> String
+      #   resp.target_configuration_value_set[0].reservation_value.hourly_price #=> String
+      #   resp.target_configuration_value_rollup.remaining_total_value #=> String
+      #   resp.target_configuration_value_rollup.remaining_upfront_value #=> String
+      #   resp.target_configuration_value_rollup.hourly_price #=> String
+      #   resp.payment_due #=> String
+      #   resp.currency_code #=> String
+      #   resp.output_reserved_instances_will_expire_at #=> Time
+      #   resp.is_valid_exchange #=> Boolean
+      #   resp.validation_failure_reason #=> String
+      # @overload get_reserved_instances_exchange_quote(params = {})
+      # @param [Hash] params ({})
+      def get_reserved_instances_exchange_quote(params = {}, options = {})
+        req = build_request(:get_reserved_instances_exchange_quote, params)
+        req.send_request(options)
+      end
+
       # Import single or multi-volume disk images or EBS snapshots into an
       # Amazon Machine Image (AMI). For more information, see [Importing a VM
       # as an Image Using VM Import/Export][1] in the *VM Import/Export User
@@ -10508,7 +10636,7 @@ module Aws
       #       user_data: {
       #         data: "String",
       #       },
-      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #       placement: {
       #         availability_zone: "String",
       #         group_name: "String",
@@ -10795,9 +10923,9 @@ module Aws
       #   resp.successful #=> Array
       #   resp.successful[0] #=> String
       #   resp.unsuccessful #=> Array
-      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      #   resp.unsuccessful[0].resource_id #=> String
       # @overload modify_hosts(params = {})
       # @param [Hash] params ({})
       def modify_hosts(params = {}, options = {})
@@ -11225,9 +11353,9 @@ module Aws
       end
 
       # Modifies the Availability Zone, instance count, instance type, or
-      # network platform (EC2-Classic or EC2-VPC) of your Reserved Instances.
-      # The Reserved Instances to be modified must be identical, except for
-      # Availability Zone, network platform, and instance type.
+      # network platform (EC2-Classic or EC2-VPC) of your Standard Reserved
+      # Instances. The Reserved Instances to be modified must be identical,
+      # except for Availability Zone, network platform, and instance type.
       #
       # For more information, see [Modifying Reserved Instances][1] in the
       # Amazon Elastic Compute Cloud User Guide.
@@ -11260,7 +11388,8 @@ module Aws
       #         availability_zone: "String",
       #         platform: "String",
       #         instance_count: 1,
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         scope: "Availability Zone", # accepts Availability Zone, Region
       #       },
       #     ],
       #   })
@@ -11747,9 +11876,8 @@ module Aws
       end
 
       # Purchases a Reserved Instance for use with your account. With Reserved
-      # Instances, you obtain a capacity reservation for a certain instance
-      # configuration over a specified period of time and pay a lower hourly
-      # rate compared to On-Demand instance pricing.
+      # Instances, you pay a lower hourly rate compared to On-Demand instance
+      # pricing.
       #
       # Use DescribeReservedInstancesOfferings to get a list of Reserved
       # Instance offerings that match your specifications. After you've
@@ -12143,9 +12271,9 @@ module Aws
       #   resp.successful #=> Array
       #   resp.successful[0] #=> String
       #   resp.unsuccessful #=> Array
-      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
+      #   resp.unsuccessful[0].resource_id #=> String
       # @overload release_hosts(params = {})
       # @param [Hash] params ({})
       def release_hosts(params = {}, options = {})
@@ -12472,7 +12600,7 @@ module Aws
       #           ],
       #           user_data: "String",
       #           addressing_type: "String",
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -12655,7 +12783,7 @@ module Aws
       #       security_groups: ["String"],
       #       user_data: "String",
       #       addressing_type: "String",
-      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #       placement: {
       #         availability_zone: "String",
       #         group_name: "String",
@@ -12731,7 +12859,7 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
       #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
       #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
-      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
       #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
       #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
@@ -13330,6 +13458,9 @@ module Aws
       #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
       #   IP address.
       #
+      #   You cannot specify this option if you're launching more than one
+      #   instance in the request.
+      #
       #   Default: We select an IP address from the IP address range of the
       #   subnet.
       # @option params [String] :client_token
@@ -13374,7 +13505,7 @@ module Aws
       #     security_groups: ["String"],
       #     security_group_ids: ["String"],
       #     user_data: "String",
-      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.4xlarge, x1.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
       #     placement: {
       #       availability_zone: "String",
       #       group_name: "String",
@@ -13454,7 +13585,7 @@ module Aws
       #   resp.instances[0].product_codes #=> Array
       #   resp.instances[0].product_codes[0].product_code_id #=> String
       #   resp.instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-      #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.4xlarge", "x1.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
       #   resp.instances[0].launch_time #=> Time
       #   resp.instances[0].placement.availability_zone #=> String
       #   resp.instances[0].placement.group_name #=> String
@@ -13785,6 +13916,10 @@ module Aws
       # Shuts down one or more instances. This operation is idempotent; if you
       # terminate an instance more than once, each call succeeds.
       #
+      # If you specify multiple instances and the request fails (for example,
+      # because of a single incorrect instance ID), none of the instances are
+      # terminated.
+      #
       # Terminated instances remain visible after termination (for
       # approximately one hour).
       #
@@ -13818,6 +13953,9 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, Array<String>] :instance_ids
       #   One or more instance IDs.
+      #
+      #   Constraints: Up to 1000 instance IDs. We recommend breaking up this
+      #   request into smaller batches.
       # @return [Types::TerminateInstancesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::TerminateInstancesResult#terminating_instances #TerminatingInstances} => Array&lt;Types::InstanceStateChange&gt;

@@ -49,7 +49,7 @@ module Aws
       # @!attribute [rw] certificate_arn
       #   The Amazon Resource Name (ARN) of the certificate. For more
       #   information about ARNs, see [Amazon Resource Names (ARNs) and AWS
-      #   Service Namespaces][1].
+      #   Service Namespaces][1] in the *AWS General Reference*.
       #
       #
       #
@@ -57,22 +57,23 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] domain_name
-      #   The fully qualified domain name (FQDN) for the certificate, such as
+      #   The fully qualified domain name for the certificate, such as
       #   www.example.com or example.com.
       #   @return [String]
       #
       # @!attribute [rw] subject_alternative_names
       #   One or more domain names (subject alternative names) included in the
-      #   certificate request. After the certificate is issued, this list
-      #   includes the domain names bound to the public key contained in the
-      #   certificate. The subject alternative names include the canonical
-      #   domain name (CN) of the certificate and additional domain names that
-      #   can be used to connect to the website.
+      #   certificate. This list contains the domain names that are bound to
+      #   the public key that is contained in the certificate. The subject
+      #   alternative names include the canonical domain name (CN) of the
+      #   certificate and additional domain names that can be used to connect
+      #   to the website.
       #   @return [Array<String>]
       #
       # @!attribute [rw] domain_validation_options
       #   Contains information about the email address or addresses used for
-      #   domain validation.
+      #   domain validation. This field exists only when the certificate type
+      #   is `AMAZON_ISSUED`.
       #   @return [Array<Types::DomainValidation>]
       #
       # @!attribute [rw] serial
@@ -80,21 +81,28 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] subject
-      #   The X.500 distinguished name of the entity associated with the
-      #   public key contained in the certificate.
+      #   The name of the entity that is associated with the public key
+      #   contained in the certificate.
       #   @return [String]
       #
       # @!attribute [rw] issuer
-      #   The X.500 distinguished name of the CA that issued and signed the
+      #   The name of the certificate authority that issued and signed the
       #   certificate.
       #   @return [String]
       #
       # @!attribute [rw] created_at
-      #   The time at which the certificate was requested.
+      #   The time at which the certificate was requested. This value exists
+      #   only when the certificate type is `AMAZON_ISSUED`.
       #   @return [Time]
       #
       # @!attribute [rw] issued_at
-      #   The time at which the certificate was issued.
+      #   The time at which the certificate was issued. This value exists only
+      #   when the certificate type is `AMAZON_ISSUED`.
+      #   @return [Time]
+      #
+      # @!attribute [rw] imported_at
+      #   The date and time at which the certificate was imported. This value
+      #   exists only when the certificate type is `IMPORTED`.
       #   @return [Time]
       #
       # @!attribute [rw] status
@@ -120,29 +128,43 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] key_algorithm
-      #   The algorithm used to generate the key pair (the public and private
-      #   key). Currently the only supported value is `RSA_2048`.
+      #   The algorithm that was used to generate the key pair (the public and
+      #   private key).
       #   @return [String]
       #
       # @!attribute [rw] signature_algorithm
-      #   The algorithm used to generate a signature. Currently the only
-      #   supported value is `SHA256WITHRSA`.
+      #   The algorithm that was used to sign the certificate.
       #   @return [String]
       #
       # @!attribute [rw] in_use_by
-      #   A list of ARNs for the resources that are using the certificate. An
-      #   ACM Certificate can be used by multiple AWS resources.
+      #   A list of ARNs for the AWS resources that are using the certificate.
+      #   A certificate can be used by multiple AWS resources.
       #   @return [Array<String>]
       #
       # @!attribute [rw] failure_reason
       #   The reason the certificate request failed. This value exists only
-      #   when the structure's `Status` is `FAILED`. For more information,
-      #   see [Certificate Request Failed][1] in the *AWS Certificate Manager
-      #   User Guide*.
+      #   when the certificate status is `FAILED`. For more information, see
+      #   [Certificate Request Failed][1] in the *AWS Certificate Manager User
+      #   Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/troubleshooting.html#troubleshooting-failed
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The source of the certificate. For certificates provided by ACM,
+      #   this value is `AMAZON_ISSUED`. For certificates that you imported
+      #   with ImportCertificate, this value is `IMPORTED`. ACM does not
+      #   provide [managed renewal][1] for imported certificates. For more
+      #   information about the differences between certificates that you
+      #   import and those that ACM provides, see [Importing Certificates][2]
+      #   in the *AWS Certificate Manager User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/acm/latest/userguide/acm-renewal.html
+      #   [2]: http://docs.aws.amazon.com/acm/latest/userguide/import-certificate.html
       #   @return [String]
       class CertificateDetail < Struct.new(
         :certificate_arn,
@@ -154,6 +176,7 @@ module Aws
         :issuer,
         :created_at,
         :issued_at,
+        :imported_at,
         :status,
         :revoked_at,
         :revocation_reason,
@@ -162,7 +185,8 @@ module Aws
         :key_algorithm,
         :signature_algorithm,
         :in_use_by,
-        :failure_reason)
+        :failure_reason,
+        :type)
         include Aws::Structure
       end
 
@@ -346,6 +370,70 @@ module Aws
       class GetCertificateResponse < Struct.new(
         :certificate,
         :certificate_chain)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ImportCertificateRequest
+      #   data as a hash:
+      #
+      #       {
+      #         certificate_arn: "Arn",
+      #         certificate: "data", # required
+      #         private_key: "data", # required
+      #         certificate_chain: "data",
+      #       }
+      # @!attribute [rw] certificate_arn
+      #   The [Amazon Resource Name (ARN)][1] of an imported certificate to
+      #   replace. To import a new certificate, omit this field.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate
+      #   The certificate to import. It must meet the following requirements:
+      #
+      #   * Must be PEM-encoded.
+      #
+      #   * Must contain a 1024-bit or 2048-bit RSA public key.
+      #
+      #   * Must be valid at the time of import. You cannot import a
+      #     certificate before its validity period begins (the certificate's
+      #     `NotBefore` date) or after it expires (the certificate's
+      #     `NotAfter` date).
+      #   @return [String]
+      #
+      # @!attribute [rw] private_key
+      #   The private key that matches the public key in the certificate. It
+      #   must meet the following requirements:
+      #
+      #   * Must be PEM-encoded.
+      #
+      #   * Must be unencrypted. You cannot import a private key that is
+      #     protected by a password or passphrase.
+      #   @return [String]
+      #
+      # @!attribute [rw] certificate_chain
+      #   The certificate chain. It must be PEM-encoded.
+      #   @return [String]
+      class ImportCertificateRequest < Struct.new(
+        :certificate_arn,
+        :certificate,
+        :private_key,
+        :certificate_chain)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] certificate_arn
+      #   The [Amazon Resource Name (ARN)][1] of the imported certificate.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws-arns-and-namespaces.html
+      #   @return [String]
+      class ImportCertificateResponse < Struct.new(
+        :certificate_arn)
         include Aws::Structure
       end
 

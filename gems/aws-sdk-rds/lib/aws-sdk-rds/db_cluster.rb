@@ -108,6 +108,23 @@ module Aws
         data.endpoint
       end
 
+      # The reader endpoint for the DB cluster. The reader endpoint for a DB
+      # cluster load-balances connections across the Aurora Replicas that are
+      # available in a DB cluster. As clients request new connections to the
+      # reader endpoint, Aurora distributes the connection requests among the
+      # Aurora Replicas in the DB cluster. This functionality can help balance
+      # your read workload across multiple Aurora Replicas in your DB cluster.
+      #
+      # If a failover occurs, and the Aurora Replica that you are connected to
+      # is promoted to be the primary instance, your connection will be
+      # dropped. To continue sending your read workload to other Aurora
+      # Replicas in the cluster, you can then recoonect to the reader
+      # endpoint.
+      # @return [String]
+      def reader_endpoint
+        data.reader_endpoint
+      end
+
       # Provides the name of the database engine to be used for this DB
       # cluster.
       # @return [String]
@@ -219,6 +236,15 @@ module Aws
       # @return [String]
       def db_cluster_arn
         data.db_cluster_arn
+      end
+
+      # Provides a list of the AWS Identity and Access Management (IAM) roles
+      # that are associated with the DB cluster. IAM roles that are associated
+      # with a DB cluster grant permission for the DB cluster to access other
+      # AWS services on your behalf.
+      # @return [Array<Types::DBClusterRole>]
+      def associated_roles
+        data.associated_roles
       end
 
       # @!endgroup

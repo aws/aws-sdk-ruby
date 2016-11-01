@@ -194,6 +194,143 @@ module Aws
         req.send_request(options)
       end
 
+      # Creates a new user in the specified user pool and sends a welcome
+      # message via email or phone (SMS). This message is based on a template
+      # that you configured in your call to CreateUserPool or UpdateUserPool.
+      # This template includes your custom sign-up instructions and
+      # placeholders for user name and temporary password.
+      #
+      # Requires developer credentials.
+      # @option params [required, String] :user_pool_id
+      #   The user pool ID for the user pool where the user will be created.
+      # @option params [required, String] :username
+      #   The username for the user. Must be unique within the user pool. Must
+      #   be a UTF-8 string between 1 and 128 characters. After the user is
+      #   created, the username cannot be changed.
+      # @option params [Array<Types::AttributeType>] :user_attributes
+      #   An array of name-value pairs that contain user attributes and
+      #   attribute values to be set for the user to be created. You can create
+      #   a user without specifying any attributes other than Username. However,
+      #   any attributes that you specify as required (in CreateUserPool or in
+      #   the **Attributes** tab of the console) must be supplied either by you
+      #   (in your call to AdminCreateUser) or by the user (when he or she signs
+      #   up in response to your welcome message).
+      #
+      #   To send a message inviting the user to sign up, you must specify the
+      #   user's email address or phone number. This can be done in your call
+      #   to AdminCreateUser or in the **Users** tab of the Amazon Cognito
+      #   console for managing your user pools.
+      #
+      #   In your call to AdminCreateUser, you can set the email\_verified
+      #   attribute to True, and you can set the phone\_number\_verified
+      #   attribute to True. (You cannot do this by calling other operations
+      #   such as AdminUpdateUserAttributes.)
+      #
+      #   * **email**\: The email address of the user to whom the message that
+      #     contains the code and username will be sent. Required if the
+      #     email\_verified attribute is set to True, or if "EMAIL" is
+      #     specified in the DesiredDeliveryMediums parameter.
+      #
+      #   * **phone\_number**\: The phone number of the user to whom the message
+      #     that contains the code and username will be sent. Required if the
+      #     phone\_number\_verified attribute is set to True, or if "SMS" is
+      #     specified in the DesiredDeliveryMediums parameter.
+      # @option params [Array<Types::AttributeType>] :validation_data
+      #   The user's validation data. This is an array of name-value pairs that
+      #   contain user attributes and attribute values that you can use for
+      #   custom validation, such as restricting the types of user accounts that
+      #   can be registered. For example, you might choose to allow or disallow
+      #   user sign-up based on the user's domain.
+      #
+      #   To configure custom validation, you must create a Pre Sign-up Lambda
+      #   trigger for the user pool as described in the Amazon Cognito Developer
+      #   Guide. The Lambda trigger receives the validation data and uses it in
+      #   the validation process.
+      #
+      #   The user's validation data is not persisted.
+      # @option params [String] :temporary_password
+      #   The user's temporary password. This password must conform to the
+      #   password policy that you specified when you created the user pool.
+      #
+      #   The temporary password is valid only once. To complete the Admin
+      #   Create User flow, the user must enter the temporary password in the
+      #   sign-in page along with a new password to be used in all future
+      #   sign-ins.
+      #
+      #   This parameter is not required. If you do not specify a value, Amazon
+      #   Cognito generates one for you.
+      #
+      #   The temporary password can only be used until the user account
+      #   expiration limit that you specified when you created the user pool. To
+      #   reset the account after that time limit, you must call AdminCreateUser
+      #   again, specifying "RESEND" for the MessageAction parameter.
+      # @option params [Boolean] :force_alias_creation
+      #   This parameter is only used if the phone\_number\_verified or
+      #   email\_verified attribute is set to True. Otherwise, it is ignored.
+      #
+      #   If this parameter is set to True and the phone number or email address
+      #   specified in the UserAttributes parameter already exists as an alias
+      #   with a different user, the API call will migrate the alias from the
+      #   previous user to the newly created user. The previous user will no
+      #   longer be able to log in using that alias.
+      #
+      #   If this parameter is set to False, the API throws an
+      #   AliasExistsException error if the alias already exists. The default
+      #   value is False.
+      # @option params [String] :message_action
+      #   Set to "RESEND" to resend the invitation message to a user that
+      #   already exists and reset the expiration limit on the user's account.
+      #   Set to "SUPPRESS" to suppress sending the message. Only one value
+      #   can be specified.
+      # @option params [Array<String>] :desired_delivery_mediums
+      #   Specify "EMAIL" if email will be used to send the welcome message.
+      #   Specify "SMS" if the phone number will be used. The default value is
+      #   "SMS". More than one value can be specified.
+      # @return [Types::AdminCreateUserResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::AdminCreateUserResponse#user #User} => Types::UserType
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.admin_create_user({
+      #     user_pool_id: "UserPoolIdType", # required
+      #     username: "UsernameType", # required
+      #     user_attributes: [
+      #       {
+      #         name: "AttributeNameType", # required
+      #         value: "AttributeValueType",
+      #       },
+      #     ],
+      #     validation_data: [
+      #       {
+      #         name: "AttributeNameType", # required
+      #         value: "AttributeValueType",
+      #       },
+      #     ],
+      #     temporary_password: "PasswordType",
+      #     force_alias_creation: false,
+      #     message_action: "RESEND", # accepts RESEND, SUPPRESS
+      #     desired_delivery_mediums: ["SMS"], # accepts SMS, EMAIL
+      #   })
+      #
+      # @example Response structure
+      #   resp.user.username #=> String
+      #   resp.user.attributes #=> Array
+      #   resp.user.attributes[0].name #=> String
+      #   resp.user.attributes[0].value #=> String
+      #   resp.user.user_create_date #=> Time
+      #   resp.user.user_last_modified_date #=> Time
+      #   resp.user.enabled #=> Boolean
+      #   resp.user.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+      #   resp.user.mfa_options #=> Array
+      #   resp.user.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
+      #   resp.user.mfa_options[0].attribute_name #=> String
+      # @overload admin_create_user(params = {})
+      # @param [Hash] params ({})
+      def admin_create_user(params = {}, options = {})
+        req = build_request(:admin_create_user, params)
+        req.send_request(options)
+      end
+
       # Deletes a user as an administrator. Works on any user.
       # @option params [required, String] :user_pool_id
       #   The user pool ID for the user pool where you want to delete the user.
@@ -363,7 +500,7 @@ module Aws
       #   resp.user_create_date #=> Time
       #   resp.user_last_modified_date #=> Time
       #   resp.enabled #=> Boolean
-      #   resp.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED"
+      #   resp.user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
       #   resp.mfa_options #=> Array
       #   resp.mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
       #   resp.mfa_options[0].attribute_name #=> String
@@ -406,7 +543,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH"
+      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
       #   resp.challenge_parameters["StringType"] #=> String
@@ -517,7 +654,7 @@ module Aws
       #   resp = client.admin_respond_to_auth_challenge({
       #     user_pool_id: "UserPoolIdType", # required
       #     client_id: "ClientIdType", # required
-      #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH
+      #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
       #     challenge_responses: {
       #       "StringType" => "StringType",
       #     },
@@ -525,7 +662,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH"
+      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
       #   resp.challenge_parameters["StringType"] #=> String
@@ -574,7 +711,7 @@ module Aws
 
       # Updates the device status as an administrator.
       # @option params [required, String] :user_pool_id
-      #   The user pool ID>
+      #   The user pool ID&gt;
       # @option params [required, String] :username
       #   The user name.
       # @option params [required, String] :device_key
@@ -844,6 +981,8 @@ module Aws
       #   The email configuration.
       # @option params [Types::SmsConfigurationType] :sms_configuration
       #   The SMS configuration.
+      # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
+      #   The configuration for AdminCreateUser requests.
       # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateUserPoolResponse#user_pool #UserPool} => Types::UserPoolType
@@ -888,6 +1027,15 @@ module Aws
       #     sms_configuration: {
       #       sns_caller_arn: "ArnType",
       #       external_id: "StringType",
+      #     },
+      #     admin_create_user_config: {
+      #       allow_admin_create_user_only: false,
+      #       unused_account_validity_days: 1,
+      #       invite_message_template: {
+      #         sms_message: "SmsVerificationMessageType",
+      #         email_message: "EmailVerificationMessageType",
+      #         email_subject: "EmailVerificationSubjectType",
+      #       },
       #     },
       #   })
       #
@@ -938,6 +1086,11 @@ module Aws
       #   resp.user_pool.sms_configuration.external_id #=> String
       #   resp.user_pool.sms_configuration_failure #=> String
       #   resp.user_pool.email_configuration_failure #=> String
+      #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
+      #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
+      #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
+      #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
+      #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
       # @overload create_user_pool(params = {})
       # @param [Hash] params ({})
       def create_user_pool(params = {}, options = {})
@@ -1167,6 +1320,11 @@ module Aws
       #   resp.user_pool.sms_configuration.external_id #=> String
       #   resp.user_pool.sms_configuration_failure #=> String
       #   resp.user_pool.email_configuration_failure #=> String
+      #   resp.user_pool.admin_create_user_config.allow_admin_create_user_only #=> Boolean
+      #   resp.user_pool.admin_create_user_config.unused_account_validity_days #=> Integer
+      #   resp.user_pool.admin_create_user_config.invite_message_template.sms_message #=> String
+      #   resp.user_pool.admin_create_user_config.invite_message_template.email_message #=> String
+      #   resp.user_pool.admin_create_user_config.invite_message_template.email_subject #=> String
       # @overload describe_user_pool(params = {})
       # @param [Hash] params ({})
       def describe_user_pool(params = {}, options = {})
@@ -1422,7 +1580,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH"
+      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
       #   resp.challenge_parameters["StringType"] #=> String
@@ -1483,9 +1641,9 @@ module Aws
       # @option params [required, Integer] :max_results
       #   The maximum number of import jobs you want the request to return.
       # @option params [String] :pagination_token
-      #   An identifier that was returned from the previous call to this
-      #   operation, which can be used to return the next set of import jobs in
-      #   the list.
+      #   An identifier that was returned from the previous call to
+      #   ListUserImportJobs, which can be used to return the next set of import
+      #   jobs in the list.
       # @return [Types::ListUserImportJobsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListUserImportJobsResponse#user_import_jobs #UserImportJobs} => Array&lt;Types::UserImportJobType&gt;
@@ -1635,7 +1793,10 @@ module Aws
       #   resp.users[0].user_create_date #=> Time
       #   resp.users[0].user_last_modified_date #=> Time
       #   resp.users[0].enabled #=> Boolean
-      #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED"
+      #   resp.users[0].user_status #=> String, one of "UNCONFIRMED", "CONFIRMED", "ARCHIVED", "COMPROMISED", "UNKNOWN", "RESET_REQUIRED", "FORCE_CHANGE_PASSWORD"
+      #   resp.users[0].mfa_options #=> Array
+      #   resp.users[0].mfa_options[0].delivery_medium #=> String, one of "SMS", "EMAIL"
+      #   resp.users[0].mfa_options[0].attribute_name #=> String
       #   resp.pagination_token #=> String
       # @overload list_users(params = {})
       # @param [Hash] params ({})
@@ -1696,7 +1857,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.respond_to_auth_challenge({
       #     client_id: "ClientIdType", # required
-      #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH
+      #     challenge_name: "SMS_MFA", # required, accepts SMS_MFA, PASSWORD_VERIFIER, CUSTOM_CHALLENGE, DEVICE_SRP_AUTH, DEVICE_PASSWORD_VERIFIER, ADMIN_NO_SRP_AUTH, NEW_PASSWORD_REQUIRED
       #     session: "SessionType",
       #     challenge_responses: {
       #       "StringType" => "StringType",
@@ -1704,7 +1865,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH"
+      #   resp.challenge_name #=> String, one of "SMS_MFA", "PASSWORD_VERIFIER", "CUSTOM_CHALLENGE", "DEVICE_SRP_AUTH", "DEVICE_PASSWORD_VERIFIER", "ADMIN_NO_SRP_AUTH", "NEW_PASSWORD_REQUIRED"
       #   resp.session #=> String
       #   resp.challenge_parameters #=> Hash
       #   resp.challenge_parameters["StringType"] #=> String
@@ -1946,7 +2107,7 @@ module Aws
       # @option params [String] :email_verification_message
       #   The contents of the email verification message.
       # @option params [String] :email_verification_subject
-      #   The subject of the email verfication message
+      #   The subject of the email verfication message.
       # @option params [String] :sms_authentication_message
       #   The contents of the SMS authentication message.
       # @option params [String] :mfa_configuration
@@ -1954,8 +2115,10 @@ module Aws
       #
       #   * `OFF` - MFA tokens are not required and cannot be specified during
       #     user registration.
+      #
       #   * `ON` - MFA tokens are required for all user registrations. You can
       #     only specify required when you are initially creating a user pool.
+      #
       #   * `OPTIONAL` - Users have the option when registering to create an MFA
       #     token.
       # @option params [Types::DeviceConfigurationType] :device_configuration
@@ -1964,6 +2127,8 @@ module Aws
       #   Email configuration.
       # @option params [Types::SmsConfigurationType] :sms_configuration
       #   SMS configuration.
+      # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
+      #   The configuration for AdminCreateUser requests.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -2005,6 +2170,15 @@ module Aws
       #     sms_configuration: {
       #       sns_caller_arn: "ArnType",
       #       external_id: "StringType",
+      #     },
+      #     admin_create_user_config: {
+      #       allow_admin_create_user_only: false,
+      #       unused_account_validity_days: 1,
+      #       invite_message_template: {
+      #         sms_message: "SmsVerificationMessageType",
+      #         email_message: "EmailVerificationMessageType",
+      #         email_subject: "EmailVerificationSubjectType",
+      #       },
       #     },
       #   })
       # @overload update_user_pool(params = {})

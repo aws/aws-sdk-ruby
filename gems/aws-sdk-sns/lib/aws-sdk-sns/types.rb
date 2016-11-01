@@ -1076,6 +1076,10 @@ module Aws
       #   being crossed. During that interval, if you continue to send SMS
       #   messages, you will incur costs that exceed your limit.
       #
+      #   By default, the spend limit is set to the maximum allowed by Amazon
+      #   SNS. If you want to exceed the maximum, contact [AWS Support][1] or
+      #   your AWS sales representative for a service limit increase.
+      #
       #   `DeliveryStatusIAMRole` – The ARN of the IAM role that allows Amazon
       #   SNS to write logs about SMS deliveries in CloudWatch Logs. For each
       #   SMS message that you send, Amazon SNS writes a log that includes the
@@ -1097,12 +1101,12 @@ module Aws
       #   `DefaultSMSType` – The type of SMS message that you will send by
       #   default. You can assign the following values:
       #
-      #   * `Promotional` – Noncritical messages, such as marketing messages.
-      #     Amazon SNS optimizes the message delivery to incur the lowest
-      #     cost.
+      #   * `Promotional` – (Default) Noncritical messages, such as marketing
+      #     messages. Amazon SNS optimizes the message delivery to incur the
+      #     lowest cost.
       #
-      #   * `Transactional` – (Default) Critical messages that support
-      #     customer transactions, such as one-time passcodes for multi-factor
+      #   * `Transactional` – Critical messages that support customer
+      #     transactions, such as one-time passcodes for multi-factor
       #     authentication. Amazon SNS optimizes the message delivery to
       #     achieve the highest reliability.
       #
@@ -1134,11 +1138,12 @@ module Aws
       #   `s3:GetBucketLocation` actions.
       #
       #   For an example bucket policy and usage report, see [Monitoring SMS
-      #   Activity][1] in the *Amazon SNS Developer Guide*.
+      #   Activity][2] in the *Amazon SNS Developer Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
+      #   [1]: https://aws.amazon.com/premiumsupport/
+      #   [2]: http://docs.aws.amazon.com/sns/latest/dg/sms_stats.html
       #   @return [Hash<String,String>]
       class SetSMSAttributesInput < Struct.new(
         :attributes)

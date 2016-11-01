@@ -173,9 +173,8 @@ module Aws
 
       # Runs and maintains a desired number of tasks from a specified task
       # definition. If the number of tasks running in a service drops below
-      # `desiredCount`, Amazon ECS spawns another instantiation of the task in
-      # the specified cluster. To update an existing service, see
-      # UpdateService.
+      # `desiredCount`, Amazon ECS spawns another copy of the task in the
+      # specified cluster. To update an existing service, see UpdateService.
       #
       # In addition to maintaining the desired count of tasks in your service,
       # you can optionally run your service behind a load balancer. The load
@@ -185,29 +184,35 @@ module Aws
       #
       # You can optionally specify a deployment configuration for your
       # service. During a deployment (which is triggered by changing the task
-      # definition of a service with an UpdateService operation), the service
-      # scheduler uses the `minimumHealthyPercent` and `maximumPercent`
-      # parameters to determine the deployment strategy.
+      # definition or the desired count of a service with an UpdateService
+      # operation), the service scheduler uses the `minimumHealthyPercent` and
+      # `maximumPercent` parameters to determine the deployment strategy.
       #
-      # If the `minimumHealthyPercent` is below 100%, the scheduler can ignore
-      # the `desiredCount` temporarily during a deployment. For example, if
-      # your service has a `desiredCount` of four tasks, a
-      # `minimumHealthyPercent` of 50% allows the scheduler to stop two
-      # existing tasks before starting two new tasks. Tasks for services that
-      # *do not* use a load balancer are considered healthy if they are in the
-      # `RUNNING` state; tasks for services that *do* use a load balancer are
-      # considered healthy if they are in the `RUNNING` state and the
-      # container instance it is hosted on is reported as healthy by the load
-      # balancer. The default value for `minimumHealthyPercent` is 50% in the
-      # console and 100% for the AWS CLI, the AWS SDKs, and the APIs.
+      # The `minimumHealthyPercent` represents a lower limit on the number of
+      # your service's tasks that must remain in the `RUNNING` state during a
+      # deployment, as a percentage of the `desiredCount` (rounded up to the
+      # nearest integer). This parameter enables you to deploy without using
+      # additional cluster capacity. For example, if your service has a
+      # `desiredCount` of four tasks and a `minimumHealthyPercent` of 50%, the
+      # scheduler may stop two existing tasks to free up cluster capacity
+      # before starting two new tasks. Tasks for services that *do not* use a
+      # load balancer are considered healthy if they are in the `RUNNING`
+      # state; tasks for services that *do* use a load balancer are considered
+      # healthy if they are in the `RUNNING` state and the container instance
+      # it is hosted on is reported as healthy by the load balancer. The
+      # default value for `minimumHealthyPercent` is 50% in the console and
+      # 100% for the AWS CLI, the AWS SDKs, and the APIs.
       #
       # The `maximumPercent` parameter represents an upper limit on the number
-      # of running tasks during a deployment, which enables you to define the
-      # deployment batch size. For example, if your service has a
-      # `desiredCount` of four tasks, a `maximumPercent` value of 200% starts
-      # four new tasks before stopping the four older tasks (provided that the
-      # cluster resources required to do this are available). The default
-      # value for `maximumPercent` is 200%.
+      # of your service's tasks that are allowed in the `RUNNING` or
+      # `PENDING` state during a deployment, as a percentage of the
+      # `desiredCount` (rounded down to the nearest integer). This parameter
+      # enables you to define the deployment batch size. For example, if your
+      # service has a `desiredCount` of four tasks and a `maximumPercent`
+      # value of 200%, the scheduler may start four new tasks before stopping
+      # the four older tasks (provided that the cluster resources required to
+      # do this are available). The default value for `maximumPercent` is
+      # 200%.
       #
       # When the service scheduler launches new tasks, it attempts to balance
       # them across the Availability Zones in your cluster with the following
@@ -468,11 +473,10 @@ module Aws
       # finished using the instance, be sure to terminate it in the Amazon EC2
       # console to stop billing.
       #
-      # <note markdown="1"> If you terminate a running container instance with a connected Amazon
-      # ECS container agent, the agent automatically deregisters the instance
-      # from your cluster (stopped container instances or instances with
-      # disconnected agents are not automatically deregistered when
-      # terminated).
+      # <note markdown="1"> If you terminate a running container instance, Amazon ECS
+      # automatically deregisters the instance from your cluster (stopped
+      # container instances or instances with disconnected agents are not
+      # automatically deregistered when terminated).
       #
       #  </note>
       # @option params [String] :cluster
@@ -490,13 +494,17 @@ module Aws
       # @option params [Boolean] :force
       #   Forces the deregistration of the container instance. If you have tasks
       #   running on the container instance when you deregister it with the
-      #   `force` option, these tasks remain running and they continue to pass
-      #   Elastic Load Balancing load balancer health checks until you terminate
-      #   the instance or the tasks stop through some other means, but they are
+      #   `force` option, these tasks remain running until you terminate the
+      #   instance or the tasks stop through some other means, but they are
       #   orphaned (no longer monitored or accounted for by Amazon ECS). If an
       #   orphaned task on your container instance is part of an Amazon ECS
       #   service, then the service scheduler starts another copy of that task,
       #   on a different container instance if possible.
+      #
+      #   Any containers in orphaned service tasks that are registered with a
+      #   Classic load balancer or an Application load balancer target group are
+      #   deregistered, and they will begin connection draining according to the
+      #   settings on the load balancer or target group.
       # @return [Types::DeregisterContainerInstanceResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DeregisterContainerInstanceResponse#container_instance #containerInstance} => Types::ContainerInstance
@@ -742,7 +750,8 @@ module Aws
       #   The name of the cluster that hosts the service to describe. If you do
       #   not specify a cluster, the default cluster is assumed.
       # @option params [required, Array<String>] :services
-      #   A list of services to describe.
+      #   A list of services to describe. You may specify up to 10 services to
+      #   describe in a single operation.
       # @return [Types::DescribeServicesResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeServicesResponse#services #services} => Array&lt;Types::Service&gt;
@@ -1037,7 +1046,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the container instances to list. If you do not specify a
-      #   cluster, the default cluster is assumed..
+      #   cluster, the default cluster is assumed.
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListContainerInstances` request where `maxResults` was used and the
@@ -1087,7 +1096,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the services to list. If you do not specify a cluster, the
-      #   default cluster is assumed..
+      #   default cluster is assumed.
       # @option params [String] :next_token
       #   The `nextToken` value returned from a previous paginated
       #   `ListServices` request where `maxResults` was used and the results
@@ -1282,7 +1291,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the tasks to list. If you do not specify a cluster, the default
-      #   cluster is assumed..
+      #   cluster is assumed.
       # @option params [String] :container_instance
       #   The container instance ID or full Amazon Resource Name (ARN) of the
       #   container instance with which to filter the `ListTasks` results.
@@ -1373,7 +1382,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster with
       #   which to register your container instance. If you do not specify a
-      #   cluster, the default cluster is assumed..
+      #   cluster, the default cluster is assumed.
       # @option params [String] :instance_identity_document
       #   The instance identity document for the EC2 instance to register. This
       #   document can be found by running the following command from the
@@ -1494,9 +1503,15 @@ module Aws
       #   used as a name for your task definition. Up to 255 letters (uppercase
       #   and lowercase), numbers, hyphens, and underscores are allowed.
       # @option params [String] :task_role_arn
-      #   The Amazon Resource Name (ARN) of the IAM role that containers in this
-      #   task can assume. All containers in this task are granted the
-      #   permissions that are specified in this role.
+      #   The short name or full Amazon Resource Name (ARN) of the IAM role that
+      #   containers in this task can assume. All containers in this task are
+      #   granted the permissions that are specified in this role. For more
+      #   information, see [IAM Roles for Tasks][1] in the *Amazon EC2 Container
+      #   Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonECS/latest/developerguide/task-iam-roles.html
       # @option params [String] :network_mode
       #   The Docker networking mode to use for the containers in the task. The
       #   valid values are `none`, `bridge`, and `host`.
@@ -1692,7 +1707,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to run your task. If you do not specify a cluster, the default
-      #   cluster is assumed..
+      #   cluster is assumed.
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to run. If a `revision` is
@@ -1806,7 +1821,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster on
       #   which to start your task. If you do not specify a cluster, the default
-      #   cluster is assumed..
+      #   cluster is assumed.
       # @option params [required, String] :task_definition
       #   The `family` and `revision` (`family:revision`) or full Amazon
       #   Resource Name (ARN) of the task definition to start. If a `revision`
@@ -1924,7 +1939,7 @@ module Aws
       # @option params [String] :cluster
       #   The short name or full Amazon Resource Name (ARN) of the cluster that
       #   hosts the task to stop. If you do not specify a cluster, the default
-      #   cluster is assumed..
+      #   cluster is assumed.
       # @option params [required, String] :task
       #   The task ID or full Amazon Resource Name (ARN) entry of the task to
       #   stop.

@@ -707,11 +707,11 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] category
-      #   The category of the custom action, such as a source action or a
-      #   build action.
+      #   The category of the custom action, such as a build action or a test
+      #   action.
       #
-      #   <note markdown="1"> Although Source is listed as a valid value, it is not currently
-      #   functional. This value is reserved for future use.
+      #   <note markdown="1"> Although Source and Approval are listed as valid values, they are
+      #   not currently functional. These values are reserved for future use.
       #
       #    </note>
       #   @return [String]
@@ -722,7 +722,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] version
-      #   The version number of the custom action.
+      #   The version identifier of the custom action.
       #   @return [String]
       #
       # @!attribute [rw] settings

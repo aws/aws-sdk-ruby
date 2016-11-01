@@ -78,7 +78,7 @@ module Aws
           name: "key",
           values: [@key]
         }])
-        @data = resp.tags[]
+        @data = resp.tags[0]
         self
       end
       alias :reload :load

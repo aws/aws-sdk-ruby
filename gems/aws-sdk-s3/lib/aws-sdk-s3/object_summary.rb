@@ -328,6 +328,7 @@ module Aws
       #     sse_customer_key: "SSECustomerKey",
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     request_payer: "requester", # accepts requester
+      #     part_number: 1,
       #   })
       # @param [Hash] options ({})
       # @option options [String] :if_match
@@ -379,6 +380,11 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [Integer] :part_number
+      #   Part number of the object being read. This is a positive integer
+      #   between 1 and 10,000. Effectively performs a 'ranged' GET request
+      #   for the part specified. Useful for downloading just a part of an
+      #   object.
       # @return [Types::GetObjectOutput]
       def get(options = {})
         options = options.merge(

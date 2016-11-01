@@ -236,8 +236,10 @@ module Aws
       # you have specified.
       #
       # * Notification of starting the delivery.
+      #
       # * Notification of delivery completed, if the delivery was successfully
       #   completed.
+      #
       # * Notification of delivery failure, if the delivery failed to
       #   complete.
       # @option params [required, String] :delivery_channel_name
@@ -276,11 +278,13 @@ module Aws
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
+      #
       # * The rule's AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
       #   permission. If the rule is a custom rule, verify that the AWS Lambda
       #   execution role includes the `config:PutEvaluations` permission.
+      #
       # * The rule's AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
       #   or removed from the rule's scope.
@@ -337,11 +341,13 @@ module Aws
       #   whether it has, use the `DescribeConfigRuleEvaluationStatus` action
       #   to get the `LastSuccessfulInvocationTime` and
       #   `LastFailedInvocationTime`.
+      #
       # * The rule's AWS Lambda function is failing to send evaluation
       #   results to AWS Config. Verify that the role that you assigned to
       #   your configuration recorder includes the `config:PutEvaluations`
       #   permission. If the rule is a custom rule, verify that the AWS Lambda
       #   execution role includes the `config:PutEvaluations` permission.
+      #
       # * The rule's AWS Lambda function has returned `NOT_APPLICABLE` for
       #   all evaluation results. This can occur if the resources were deleted
       #   or removed from the rule's scope.
@@ -483,8 +489,8 @@ module Aws
       # a configuration recorder is not specified, this action returns the
       # status of all configuration recorder associated with the account.
       #
-      # <note markdown="1"> Currently, you can specify only one configuration recorder per
-      # account.
+      # <note markdown="1"> Currently, you can specify only one configuration recorder per region
+      # in your account.
       #
       #  </note>
       # @option params [Array<String>] :configuration_recorder_names
@@ -517,12 +523,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns the name of one or more specified configuration recorders. If
-      # the recorder name is not specified, this action returns the names of
-      # all the configuration recorders associated with the account.
+      # Returns the details for the specified configuration recorders. If the
+      # configuration recorder is not specified, this action returns the
+      # details for all configuration recorders associated with the account.
       #
-      # <note markdown="1"> Currently, you can specify only one configuration recorder per
-      # account.
+      # <note markdown="1"> Currently, you can specify only one configuration recorder per region
+      # in your account.
       #
       #  </note>
       # @option params [Array<String>] :configuration_recorder_names
@@ -543,7 +549,7 @@ module Aws
       #   resp.configuration_recorders[0].recording_group.all_supported #=> Boolean
       #   resp.configuration_recorders[0].recording_group.include_global_resource_types #=> Boolean
       #   resp.configuration_recorders[0].recording_group.resource_types #=> Array
-      #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      #   resp.configuration_recorders[0].recording_group.resource_types[0] #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket"
       # @overload describe_configuration_recorders(params = {})
       # @param [Hash] params ({})
       def describe_configuration_recorders(params = {}, options = {})
@@ -555,7 +561,8 @@ module Aws
       # delivery channel is not specified, this action returns the current
       # status of all delivery channels associated with the account.
       #
-      # <note markdown="1"> Currently, you can specify only one delivery channel per account.
+      # <note markdown="1"> Currently, you can specify only one delivery channel per region in
+      # your account.
       #
       #  </note>
       # @option params [Array<String>] :delivery_channel_names
@@ -599,7 +606,8 @@ module Aws
       # channel is not specified, this action returns the details of all
       # delivery channels associated with the account.
       #
-      # <note markdown="1"> Currently, you can specify only one delivery channel per account.
+      # <note markdown="1"> Currently, you can specify only one delivery channel per region in
+      # your account.
       #
       #  </note>
       # @option params [Array<String>] :delivery_channel_names
@@ -826,7 +834,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_resource_config_history({
-      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
+      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
       #     resource_id: "ResourceId", # required
       #     later_time: Time.now,
       #     earlier_time: Time.now,
@@ -844,7 +852,7 @@ module Aws
       #   resp.configuration_items[0].configuration_state_id #=> String
       #   resp.configuration_items[0].configuration_item_md5_hash #=> String
       #   resp.configuration_items[0].arn #=> String
-      #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      #   resp.configuration_items[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket"
       #   resp.configuration_items[0].resource_id #=> String
       #   resp.configuration_items[0].resource_name #=> String
       #   resp.configuration_items[0].aws_region #=> String
@@ -855,7 +863,7 @@ module Aws
       #   resp.configuration_items[0].related_events #=> Array
       #   resp.configuration_items[0].related_events[0] #=> String
       #   resp.configuration_items[0].relationships #=> Array
-      #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      #   resp.configuration_items[0].relationships[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket"
       #   resp.configuration_items[0].relationships[0].resource_id #=> String
       #   resp.configuration_items[0].relationships[0].resource_name #=> String
       #   resp.configuration_items[0].relationships[0].relationship_name #=> String
@@ -916,7 +924,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.list_discovered_resources({
-      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
+      #     resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
       #     resource_ids: ["ResourceId"],
       #     resource_name: "ResourceName",
       #     limit: 1,
@@ -926,7 +934,7 @@ module Aws
       #
       # @example Response structure
       #   resp.resource_identifiers #=> Array
-      #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer"
+      #   resp.resource_identifiers[0].resource_type #=> String, one of "AWS::EC2::CustomerGateway", "AWS::EC2::EIP", "AWS::EC2::Host", "AWS::EC2::Instance", "AWS::EC2::InternetGateway", "AWS::EC2::NetworkAcl", "AWS::EC2::NetworkInterface", "AWS::EC2::RouteTable", "AWS::EC2::SecurityGroup", "AWS::EC2::Subnet", "AWS::CloudTrail::Trail", "AWS::EC2::Volume", "AWS::EC2::VPC", "AWS::EC2::VPNConnection", "AWS::EC2::VPNGateway", "AWS::IAM::Group", "AWS::IAM::Policy", "AWS::IAM::Role", "AWS::IAM::User", "AWS::ACM::Certificate", "AWS::RDS::DBInstance", "AWS::RDS::DBSubnetGroup", "AWS::RDS::DBSecurityGroup", "AWS::RDS::DBSnapshot", "AWS::RDS::EventSubscription", "AWS::ElasticLoadBalancingV2::LoadBalancer", "AWS::S3::Bucket"
       #   resp.resource_identifiers[0].resource_id #=> String
       #   resp.resource_identifiers[0].resource_name #=> String
       #   resp.resource_identifiers[0].resource_deletion_time #=> Time
@@ -963,17 +971,15 @@ module Aws
       # `ConfigRuleId`. These values are generated by AWS Config for new
       # rules.
       #
-      # If you are updating a rule that you have added previously, specify the
-      # rule's `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in the
-      # `ConfigRule` data type that you use in this request.
+      # If you are updating a rule that you added previously, you can specify
+      # the rule by `ConfigRuleName`, `ConfigRuleId`, or `ConfigRuleArn` in
+      # the `ConfigRule` data type that you use in this request.
       #
       # The maximum number of rules that AWS Config supports is 25.
       #
       # For more information about developing and using AWS Config rules, see
       # [Evaluating AWS Resource Configurations with AWS Config][2] in the
       # *AWS Config Developer Guide*.
-      #
-      #
       #
       #
       #
@@ -1047,8 +1053,8 @@ module Aws
       # `recordingGroup` of an existing recorder. To change the role, call the
       # action on the existing configuration recorder and specify a role.
       #
-      # <note markdown="1"> Currently, you can specify only one configuration recorder per
-      # account.
+      # <note markdown="1"> Currently, you can specify only one configuration recorder per region
+      # in your account.
       #
       #  If `ConfigurationRecorder` does not have the **recordingGroup**
       # parameter specified, the default is to record all supported resource
@@ -1068,7 +1074,7 @@ module Aws
       #       recording_group: {
       #         all_supported: false,
       #         include_global_resource_types: false,
-      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer
+      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
       #       },
       #     },
       #   })
@@ -1092,7 +1098,7 @@ module Aws
       # different value for either the S3 bucket or the SNS topic, this action
       # will keep the existing value for the parameter that is not changed.
       #
-      # <note markdown="1"> You can have only one delivery channel per AWS account.
+      # <note markdown="1"> You can have only one delivery channel per region in your account.
       #
       #  </note>
       # @option params [required, Types::DeliveryChannel] :delivery_channel

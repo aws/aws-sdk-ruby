@@ -502,7 +502,7 @@ module Aws
       #   resp.resource_methods["String"].method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.resource_methods["String"].method_responses["String"].response_models #=> Hash
       #   resp.resource_methods["String"].method_responses["String"].response_models["String"] #=> String
-      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.resource_methods["String"].method_integration.http_method #=> String
       #   resp.resource_methods["String"].method_integration.uri #=> String
       #   resp.resource_methods["String"].method_integration.credentials #=> String
@@ -1676,7 +1676,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.http_method #=> String
       #   resp.uri #=> String
       #   resp.credentials #=> String
@@ -1780,7 +1780,7 @@ module Aws
       #   resp.method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.method_responses["String"].response_models #=> Hash
       #   resp.method_responses["String"].response_models["String"] #=> String
-      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.method_integration.http_method #=> String
       #   resp.method_integration.uri #=> String
       #   resp.method_integration.credentials #=> String
@@ -1980,7 +1980,7 @@ module Aws
       #   resp.resource_methods["String"].method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.resource_methods["String"].method_responses["String"].response_models #=> Hash
       #   resp.resource_methods["String"].method_responses["String"].response_models["String"] #=> String
-      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.resource_methods["String"].method_integration.http_method #=> String
       #   resp.resource_methods["String"].method_integration.uri #=> String
       #   resp.resource_methods["String"].method_integration.credentials #=> String
@@ -2050,7 +2050,7 @@ module Aws
       #   resp.items[0].resource_methods["String"].method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.items[0].resource_methods["String"].method_responses["String"].response_models #=> Hash
       #   resp.items[0].resource_methods["String"].method_responses["String"].response_models["String"] #=> String
-      #   resp.items[0].resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.items[0].resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.items[0].resource_methods["String"].method_integration.http_method #=> String
       #   resp.items[0].resource_methods["String"].method_integration.uri #=> String
       #   resp.items[0].resource_methods["String"].method_integration.credentials #=> String
@@ -2638,7 +2638,7 @@ module Aws
       #     rest_api_id: "String", # required
       #     resource_id: "String", # required
       #     http_method: "String", # required
-      #     type: "HTTP", # required, accepts HTTP, AWS, MOCK
+      #     type: "HTTP", # required, accepts HTTP, AWS, MOCK, HTTP_PROXY, AWS_PROXY
       #     integration_http_method: "String",
       #     uri: "String",
       #     credentials: "String",
@@ -2654,7 +2654,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.http_method #=> String
       #   resp.uri #=> String
       #   resp.credentials #=> String
@@ -2813,7 +2813,7 @@ module Aws
       #   resp.method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.method_responses["String"].response_models #=> Hash
       #   resp.method_responses["String"].response_models["String"] #=> String
-      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.method_integration.http_method #=> String
       #   resp.method_integration.uri #=> String
       #   resp.method_integration.credentials #=> String
@@ -3436,7 +3436,7 @@ module Aws
       #   })
       #
       # @example Response structure
-      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.http_method #=> String
       #   resp.uri #=> String
       #   resp.credentials #=> String
@@ -3563,7 +3563,7 @@ module Aws
       #   resp.method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.method_responses["String"].response_models #=> Hash
       #   resp.method_responses["String"].response_models["String"] #=> String
-      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.method_integration.http_method #=> String
       #   resp.method_integration.uri #=> String
       #   resp.method_integration.credentials #=> String
@@ -3729,7 +3729,7 @@ module Aws
       #   resp.resource_methods["String"].method_responses["String"].response_parameters["String"] #=> Boolean
       #   resp.resource_methods["String"].method_responses["String"].response_models #=> Hash
       #   resp.resource_methods["String"].method_responses["String"].response_models["String"] #=> String
-      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK"
+      #   resp.resource_methods["String"].method_integration.type #=> String, one of "HTTP", "AWS", "MOCK", "HTTP_PROXY", "AWS_PROXY"
       #   resp.resource_methods["String"].method_integration.http_method #=> String
       #   resp.resource_methods["String"].method_integration.uri #=> String
       #   resp.resource_methods["String"].method_integration.credentials #=> String

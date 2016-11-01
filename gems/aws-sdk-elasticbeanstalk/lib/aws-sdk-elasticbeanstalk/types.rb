@@ -128,6 +128,9 @@ module Aws
       #   application.
       #   @return [String]
       #
+      # @!attribute [rw] source_build_information
+      #   @return [Types::SourceBuildInformation]
+      #
       # @!attribute [rw] source_bundle
       #   The location where the source bundle is located for this version.
       #   @return [Types::S3Location]
@@ -147,6 +150,7 @@ module Aws
         :application_name,
         :description,
         :version_label,
+        :source_build_information,
         :source_bundle,
         :date_created,
         :date_updated,
@@ -169,8 +173,14 @@ module Aws
       #   List of `ApplicationVersionDescription` objects sorted by order of
       #   creation.
       #   @return [Array<Types::ApplicationVersionDescription>]
+      #
+      # @!attribute [rw] next_token
+      #   For a paginated request, the token that you can pass in a subsequent
+      #   request to get the next page.
+      #   @return [String]
       class ApplicationVersionDescriptionsMessage < Struct.new(
-        :application_versions)
+        :application_versions,
+        :next_token)
         include Aws::Structure
       end
 
@@ -303,6 +313,7 @@ module Aws
       #   Indicates if the specified CNAME is available:
       #
       #   * `true`\: The CNAME is available.
+      #
       #   * `false`\: The CNAME is not available.
       #   @return [Boolean]
       #
@@ -375,9 +386,11 @@ module Aws
       #
       #   * `NoInterruption`\: There is no interruption to the environment or
       #     application availability.
+      #
       #   * `RestartEnvironment`\: The environment is entirely restarted, all
       #     AWS resources are deleted and recreated, and the environment is
       #     unavailable during the process.
+      #
       #   * `RestartApplicationServer`\: The environment is available the
       #     entire time. However, a short application outage occurs when the
       #     application servers on the running Amazon EC2 instances are
@@ -406,9 +419,12 @@ module Aws
       #   * `Scalar`\: Values for this option are a single selection from the
       #     possible values, or an unformatted string, or numeric value
       #     governed by the `MIN/MAX/Regex` constraints.
+      #
       #   * `List`\: Values for this option are multiple selections from the
       #     possible values.
+      #
       #   * `Boolean`\: Values for this option are either `true` or `false` .
+      #
       #   * `Json`\: Values for this option are a JSON representation of a
       #     `ConfigDocument`.
       #   @return [String]
@@ -538,10 +554,13 @@ module Aws
       #
       #   * `null`\: This configuration is not associated with a running
       #     environment.
+      #
       #   * `pending`\: This is a draft configuration that is not deployed to
       #     the associated environment but is in the process of deploying.
+      #
       #   * `deployed`\: This is the configuration that is currently deployed
       #     to the associated running environment.
+      #
       #   * `failed`\: This is a draft configuration that failed to
       #     successfully deploy.
       #   @return [String]
@@ -623,6 +642,11 @@ module Aws
       #         application_name: "ApplicationName", # required
       #         version_label: "VersionLabel", # required
       #         description: "Description",
+      #         source_build_information: {
+      #           source_type: "Git", # required, accepts Git
+      #           source_repository: "CodeCommit", # required, accepts CodeCommit
+      #           source_location: "SourceLocation", # required
+      #         },
       #         source_bundle: {
       #           s3_bucket: "S3Bucket",
       #           s3_key: "S3Key",
@@ -649,6 +673,9 @@ module Aws
       #   Describes this version.
       #   @return [String]
       #
+      # @!attribute [rw] source_build_information
+      #   @return [Types::SourceBuildInformation]
+      #
       # @!attribute [rw] source_bundle
       #   The Amazon S3 bucket and key that identify the location of the
       #   source bundle for this version.
@@ -670,6 +697,7 @@ module Aws
       #
       #   * `true`\: Automatically creates the specified application for this
       #     release if it does not already exist.
+      #
       #   * `false`\: Throws an `InvalidParameterValue` if the specified
       #     application for this release does not already exist.
       #
@@ -688,6 +716,7 @@ module Aws
         :application_name,
         :version_label,
         :description,
+        :source_build_information,
         :source_bundle,
         :auto_create_application,
         :process)
@@ -1001,6 +1030,7 @@ module Aws
       #
       #   * `true`\: An attempt is made to delete the associated Amazon S3
       #     source bundle specified at time of creation.
+      #
       #   * `false`\: No action is taken on the Amazon S3 source bundle
       #     specified at time of creation.
       #
@@ -1071,7 +1101,9 @@ module Aws
       #   The status of the deployment:
       #
       #   * `In Progress`\: The deployment is in progress.
+      #
       #   * `Deployed`\: The deployment succeeded.
+      #
       #   * `Failed`\: The deployment failed.
       #   @return [String]
       #
@@ -1095,6 +1127,8 @@ module Aws
       #       {
       #         application_name: "ApplicationName",
       #         version_labels: ["VersionLabel"],
+      #         max_records: 1,
+      #         next_token: "Token",
       #       }
       # @!attribute [rw] application_name
       #   If specified, AWS Elastic Beanstalk restricts the returned
@@ -1106,9 +1140,21 @@ module Aws
       #   If specified, restricts the returned descriptions to only include
       #   ones that have the specified version labels.
       #   @return [Array<String>]
+      #
+      # @!attribute [rw] max_records
+      #   Specify a maximum number of application versions to paginate in the
+      #   request.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   Specify a next token to retrieve the next page in a paginated
+      #   request.
+      #   @return [String]
       class DescribeApplicationVersionsMessage < Struct.new(
         :application_name,
-        :version_labels)
+        :version_labels,
+        :max_records,
+        :next_token)
         include Aws::Structure
       end
 
@@ -1685,11 +1731,15 @@ module Aws
       #   The current operational status of the environment:
       #
       #   * `Launching`\: Environment is in the process of initial deployment.
+      #
       #   * `Updating`\: Environment is in the process of updating its
       #     configuration settings or application version.
+      #
       #   * `Ready`\: Environment is available to have an action performed on
       #     it, such as update or terminate.
+      #
       #   * `Terminating`\: Environment is in the shut-down process.
+      #
       #   * `Terminated`\: Environment is not running.
       #   @return [String]
       #
@@ -1708,10 +1758,13 @@ module Aws
       #
       #   * `Red`\: Indicates the environment is not responsive. Occurs when
       #     three or more consecutive failures occur for an environment.
+      #
       #   * `Yellow`\: Indicates that something is wrong. Occurs when two
       #     consecutive failures occur for an environment.
+      #
       #   * `Green`\: Indicates the environment is healthy and fully
       #     functional.
+      #
       #   * `Grey`\: Default health for a new environment. The environment is
       #     not fully launched and health checks have not started or health
       #     checks are suspended during an `UpdateEnvironment` or
@@ -2536,6 +2589,29 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass SourceBuildInformation
+      #   data as a hash:
+      #
+      #       {
+      #         source_type: "Git", # required, accepts Git
+      #         source_repository: "CodeCommit", # required, accepts CodeCommit
+      #         source_location: "SourceLocation", # required
+      #       }
+      # @!attribute [rw] source_type
+      #   @return [String]
+      #
+      # @!attribute [rw] source_repository
+      #   @return [String]
+      #
+      # @!attribute [rw] source_location
+      #   @return [String]
+      class SourceBuildInformation < Struct.new(
+        :source_type,
+        :source_repository,
+        :source_location)
+        include Aws::Structure
+      end
+
       # A specification for an environment configuration
       # @note When making an API call, pass SourceConfiguration
       #   data as a hash:
@@ -2721,6 +2797,7 @@ module Aws
       #   * `true`\: The specified environment as well as the associated AWS
       #     resources, such as Auto Scaling group and LoadBalancer, are
       #     terminated.
+      #
       #   * `false`\: AWS Elastic Beanstalk resource management is removed
       #     from the environment, but the AWS resources continue to operate.
       #
@@ -3064,6 +3141,7 @@ module Aws
       #
       #   * `error`\: This message indicates that this is not a valid setting
       #     for an option.
+      #
       #   * `warning`\: This message is providing information you should take
       #     into account.
       #   @return [String]

@@ -129,9 +129,18 @@ module Aws
 
       # @!group API Operations
 
-      # Create a new origin access identity.
+      # Creates a new origin access identity. If you're using Amazon S3 for
+      # your origin, you can use an origin access identity to require users to
+      # access your content using a CloudFront URL instead of the Amazon S3
+      # URL. For more information about how to use origin access identities,
+      # see [Serving Private Content through CloudFront][1] in the *Amazon
+      # CloudFront Developer Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
       # @option params [required, Types::CloudFrontOriginAccessIdentityConfig] :cloud_front_origin_access_identity_config
-      #   The origin access identity's configuration information.
+      #   The current configuration information for the identity.
       # @return [Types::CreateCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -160,7 +169,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Create a new distribution.
+      # Creates a new web distribution. Send a `GET` request to the
+      # `/CloudFront API version/distribution`/`distribution ID` resource.
       # @option params [required, Types::DistributionConfig] :distribution_config
       #   The distribution's configuration information.
       # @return [Types::CreateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -332,6 +342,8 @@ module Aws
       #         },
       #       },
       #       web_acl_id: "string",
+      #       http_version: "http1.1", # accepts http1.1, http2
+      #       is_ipv6_enabled: false,
       #     },
       #   })
       #
@@ -454,6 +466,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
+      #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
       #   resp.location #=> String
       #   resp.etag #=> String
       # @overload create_distribution(params = {})
@@ -636,6 +650,8 @@ module Aws
       #           },
       #         },
       #         web_acl_id: "string",
+      #         http_version: "http1.1", # accepts http1.1, http2
+      #         is_ipv6_enabled: false,
       #       },
       #       tags: { # required
       #         items: [
@@ -767,6 +783,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
+      #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
       #   resp.location #=> String
       #   resp.etag #=> String
       # @overload create_distribution_with_tags(params = {})
@@ -814,7 +832,40 @@ module Aws
         req.send_request(options)
       end
 
-      # Create a new streaming distribution.
+      # Creates a new RMTP distribution. An RTMP distribution is similar to a
+      # web distribution, but an RTMP distribution streams media files using
+      # the Adobe Real-Time Messaging Protocol (RTMP) instead of serving files
+      # using HTTP.
+      #
+      # To create a new web distribution, submit a `POST` request to the
+      # *CloudFront API version*/distribution resource. The request body must
+      # include a document with a *StreamingDistributionConfig* element. The
+      # response echoes the `StreamingDistributionConfig` element and returns
+      # other information about the RTMP distribution.
+      #
+      # To get the status of your request, use the *GET StreamingDistribution*
+      # API action. When the value of `Enabled` is `true` and the value of
+      # `Status` is `Deployed`, your distribution is ready. A distribution
+      # usually deploys in less than 15 minutes.
+      #
+      # For more information about web distributions, see [Working with RTMP
+      # Distributions][1] in the *Amazon CloudFront Developer Guide*.
+      #
+      # Beginning with the 2012-05-05 version of the CloudFront API, we made
+      # substantial changes to the format of the XML document that you include
+      # in the request body when you create or update a web distribution or an
+      # RTMP distribution, and when you invalidate objects. With previous
+      # versions of the API, we discovered that it was too easy to
+      # accidentally delete one or more values for an element that accepts
+      # multiple values, for example, CNAMEs and trusted signers. Our changes
+      # for the 2012-05-05 release are intended to prevent these accidental
+      # deletions and to notify you when there's a mismatch between the
+      # number of values you say you're specifying in the `Quantity` element
+      # and the number of values specified.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-rtmp.html
       # @option params [required, Types::StreamingDistributionConfig] :streaming_distribution_config
       #   The streaming distribution's configuration information.
       # @return [Types::CreateStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -976,10 +1027,10 @@ module Aws
 
       # Delete an origin access identity.
       # @option params [required, String] :id
-      #   The origin access identity's id.
+      #   The origin access identity's ID.
       # @option params [String] :if_match
-      #   The value of the ETag header you received from a previous GET or PUT
-      #   request. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header you received from a previous `GET` or
+      #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -996,10 +1047,10 @@ module Aws
 
       # Delete a distribution.
       # @option params [required, String] :id
-      #   The distribution id.
+      #   The distribution ID.
       # @option params [String] :if_match
-      #   The value of the ETag header you received when you disabled the
-      #   distribution. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header that you received when you disabled the
+      #   distribution. For example: `E2QWRUHAPOMQZL`.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1014,12 +1065,55 @@ module Aws
         req.send_request(options)
       end
 
-      # Delete a streaming distribution.
+      # Delete a streaming distribution. To delete an RTMP distribution using
+      # the CloudFront API, perform the following steps.
+      #
+      # **To delete an RTMP distribution using the CloudFront API**\:
+      #
+      # 1.  Disable the RTMP distribution.
+      #
+      # 2.  Submit a `GET Streaming Distribution Config` request to get the
+      #     current configuration and the `Etag` header for the distribution.
+      #
+      # 3.  Update the XML document that was returned in the response to your
+      #     `GET Streaming Distribution Config` request to change the value of
+      #     `Enabled` to `false`.
+      #
+      # 4.  Submit a `PUT Streaming Distribution Config` request to update the
+      #     configuration for your distribution. In the request body, include
+      #     the XML document that you updated in Step 3. Then set the value of
+      #     the HTTP `If-Match` header to the value of the `ETag` header that
+      #     CloudFront returned when you submitted the `GET Streaming
+      #     Distribution Config` request in Step 2.
+      #
+      # 5.  Review the response to the `PUT Streaming Distribution Config`
+      #     request to confirm that the distribution was successfully
+      #     disabled.
+      #
+      # 6.  Submit a `GET Streaming Distribution Config` request to confirm
+      #     that your changes have propagated. When propagation is complete,
+      #     the value of `Status` is `Deployed`.
+      #
+      # 7.  Submit a `DELETE Streaming Distribution` request. Set the value of
+      #     the HTTP `If-Match` header to the value of the `ETag` header that
+      #     CloudFront returned when you submitted the `GET Streaming
+      #     Distribution Config` request in Step 2.
+      #
+      # 8.  Review the response to your `DELETE Streaming Distribution`
+      #     request to confirm that the distribution was successfully deleted.
+      #
+      # For information about deleting a distribution using the CloudFront
+      # console, see [Deleting a Distribution][1] in the *Amazon CloudFront
+      # Developer Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
       # @option params [required, String] :id
-      #   The distribution id.
+      #   The distribution ID.
       # @option params [String] :if_match
-      #   The value of the ETag header you received when you disabled the
-      #   streaming distribution. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header that you received when you disabled the
+      #   streaming distribution. For example: `E2QWRUHAPOMQZL`.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1036,7 +1130,7 @@ module Aws
 
       # Get the information about an origin access identity.
       # @option params [required, String] :id
-      #   The identity's id.
+      #   The identity's ID.
       # @return [Types::GetCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -1062,7 +1156,7 @@ module Aws
 
       # Get the configuration information about an origin access identity.
       # @option params [required, String] :id
-      #   The identity's id.
+      #   The identity's ID.
       # @return [Types::GetCloudFrontOriginAccessIdentityConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetCloudFrontOriginAccessIdentityConfigResult#cloud_front_origin_access_identity_config #CloudFrontOriginAccessIdentityConfig} => Types::CloudFrontOriginAccessIdentityConfig
@@ -1086,7 +1180,7 @@ module Aws
 
       # Get the information about a distribution.
       # @option params [required, String] :id
-      #   The distribution's id.
+      #   The distribution's ID.
       # @return [Types::GetDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDistributionResult#distribution #Distribution} => Types::Distribution
@@ -1216,6 +1310,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
+      #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
       #   resp.etag #=> String
       # @overload get_distribution(params = {})
       # @param [Hash] params ({})
@@ -1226,7 +1322,7 @@ module Aws
 
       # Get the configuration information about a distribution.
       # @option params [required, String] :id
-      #   The distribution's id.
+      #   The distribution's ID.
       # @return [Types::GetDistributionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDistributionConfigResult#distribution_config #DistributionConfig} => Types::DistributionConfig
@@ -1343,6 +1439,8 @@ module Aws
       #   resp.distribution_config.restrictions.geo_restriction.items #=> Array
       #   resp.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_config.web_acl_id #=> String
+      #   resp.distribution_config.http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution_config.is_ipv6_enabled #=> Boolean
       #   resp.etag #=> String
       # @overload get_distribution_config(params = {})
       # @param [Hash] params ({})
@@ -1353,9 +1451,10 @@ module Aws
 
       # Get the information about an invalidation.
       # @option params [required, String] :distribution_id
-      #   The distribution's id.
+      #   The distribution's ID.
       # @option params [required, String] :id
-      #   The invalidation's id.
+      #   The identifier for the invalidation request, for example,
+      #   `IDFDVBD632BHDS5`.
       # @return [Types::GetInvalidationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetInvalidationResult#invalidation #Invalidation} => Types::Invalidation
@@ -1381,9 +1480,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Get the information about a streaming distribution.
+      # Gets information about a specified RTMP distribution, including the
+      # distribution configuration.
       # @option params [required, String] :id
-      #   The streaming distribution's id.
+      #   The streaming distribution's ID.
       # @return [Types::GetStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetStreamingDistributionResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution
@@ -1433,7 +1533,7 @@ module Aws
 
       # Get the configuration information about a streaming distribution.
       # @option params [required, String] :id
-      #   The streaming distribution's id.
+      #   The streaming distribution's ID.
       # @return [Types::GetStreamingDistributionConfigResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetStreamingDistributionConfigResult#streaming_distribution_config #StreamingDistributionConfig} => Types::StreamingDistributionConfig
@@ -1469,13 +1569,14 @@ module Aws
         req.send_request(options)
       end
 
-      # List origin access identities.
+      # Lists origin access identities.
       # @option params [String] :marker
       #   Use this when paginating results to indicate where to begin in your
       #   list of origin access identities. The results include identities in
       #   the list that occur after the marker. To get the next page of results,
-      #   set the Marker to the value of the NextMarker from the current page's
-      #   response (which is also the ID of the last identity on that page).
+      #   set the `Marker` to the value of the `NextMarker` from the current
+      #   page's response (which is also the ID of the last identity on that
+      #   page).
       # @option params [Integer] :max_items
       #   The maximum number of origin access identities you want in the
       #   response body.
@@ -1508,15 +1609,13 @@ module Aws
 
       # List distributions.
       # @option params [String] :marker
-      #   Use Marker and MaxItems to control pagination of results. If you have
-      #   more than MaxItems distributions that satisfy the request, the
-      #   response includes a NextMarker element. To get the next page of
-      #   results, submit another request. For the value of Marker, specify the
-      #   value of NextMarker from the last response. (For the first request,
-      #   omit Marker.)
+      #   Use this when paginating results to indicate where to begin in your
+      #   list of distributions. The results include distributions in the list
+      #   that occur after the marker. To get the next page of results, set the
+      #   `Marker` to the value of the `NextMarker` from the current page's
+      #   response (which is also the ID of the last distribution on that page).
       # @option params [Integer] :max_items
-      #   The maximum number of distributions that you want CloudFront to return
-      #   in the response body. The maximum and default values are both 100.
+      #   The maximum number of distributions you want in the response body.
       # @return [Types::ListDistributionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListDistributionsResult#distribution_list #DistributionList} => Types::DistributionList
@@ -1638,6 +1737,8 @@ module Aws
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_list.items[0].web_acl_id #=> String
+      #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
       # @overload list_distributions(params = {})
       # @param [Hash] params ({})
       def list_distributions(params = {}, options = {})
@@ -1648,20 +1749,19 @@ module Aws
       # List the distributions that are associated with a specified AWS WAF
       # web ACL.
       # @option params [String] :marker
-      #   Use Marker and MaxItems to control pagination of results. If you have
-      #   more than MaxItems distributions that satisfy the request, the
-      #   response includes a NextMarker element. To get the next page of
-      #   results, submit another request. For the value of Marker, specify the
-      #   value of NextMarker from the last response. (For the first request,
-      #   omit Marker.)
+      #   Use `Marker` and `MaxItems` to control pagination of results. If you
+      #   have more than `MaxItems` distributions that satisfy the request, the
+      #   response includes a `NextMarker` element. To get the next page of
+      #   results, submit another request. For the value of `Marker`, specify
+      #   the value of `NextMarker` from the last response. (For the first
+      #   request, omit `Marker`.)
       # @option params [Integer] :max_items
       #   The maximum number of distributions that you want CloudFront to return
       #   in the response body. The maximum and default values are both 100.
       # @option params [required, String] :web_acl_id
-      #   The Id of the AWS WAF web ACL for which you want to list the
-      #   associated distributions. If you specify "null" for the Id, the
-      #   request returns a list of the distributions that aren't associated
-      #   with a web ACL.
+      #   The ID of the AWS WAF web ACL that you want to list the associated
+      #   distributions. If you specify "null" for the ID, the request returns
+      #   a list of the distributions that aren't associated with a web ACL.
       # @return [Types::ListDistributionsByWebACLIdResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListDistributionsByWebACLIdResult#distribution_list #DistributionList} => Types::DistributionList
@@ -1784,6 +1884,8 @@ module Aws
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items #=> Array
       #   resp.distribution_list.items[0].restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution_list.items[0].web_acl_id #=> String
+      #   resp.distribution_list.items[0].http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution_list.items[0].is_ipv6_enabled #=> Boolean
       # @overload list_distributions_by_web_acl_id(params = {})
       # @param [Hash] params ({})
       def list_distributions_by_web_acl_id(params = {}, options = {})
@@ -1791,21 +1893,21 @@ module Aws
         req.send_request(options)
       end
 
-      # List invalidation batches.
+      # Lists invalidation batches.
       # @option params [required, String] :distribution_id
-      #   The distribution's id.
+      #   The distribution's ID.
       # @option params [String] :marker
       #   Use this parameter when paginating results to indicate where to begin
       #   in your list of invalidation batches. Because the results are returned
       #   in decreasing order from most recent to oldest, the most recent
       #   results are on the first page, the second page will contain earlier
-      #   results, and so on. To get the next page of results, set the Marker to
-      #   the value of the NextMarker from the current page's response. This
+      #   results, and so on. To get the next page of results, set `Marker` to
+      #   the value of the `NextMarker` from the current page's response. This
       #   value is the same as the ID of the last invalidation batch on that
       #   page.
       # @option params [Integer] :max_items
-      #   The maximum number of invalidation batches you want in the response
-      #   body.
+      #   The maximum number of invalidation batches that you want in the
+      #   response body.
       # @return [Types::ListInvalidationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListInvalidationsResult#invalidation_list #InvalidationList} => Types::InvalidationList
@@ -1836,14 +1938,9 @@ module Aws
 
       # List streaming distributions.
       # @option params [String] :marker
-      #   Use this when paginating results to indicate where to begin in your
-      #   list of streaming distributions. The results include distributions in
-      #   the list that occur after the marker. To get the next page of results,
-      #   set the Marker to the value of the NextMarker from the current page's
-      #   response (which is also the ID of the last distribution on that page).
+      #   The value that you provided for the `Marker` request parameter.
       # @option params [Integer] :max_items
-      #   The maximum number of streaming distributions you want in the response
-      #   body.
+      #   The value that you provided for the `MaxItems` request parameter.
       # @return [Types::ListStreamingDistributionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ListStreamingDistributionsResult#streaming_distribution_list #StreamingDistributionList} => Types::StreamingDistributionList
@@ -1912,7 +2009,7 @@ module Aws
       # @option params [required, String] :resource
       #   An ARN of a CloudFront resource.
       # @option params [required, Types::Tags] :tags
-      #   A complex type that contains zero or more Tag elements.
+      #   A complex type that contains zero or more `Tag` elements.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1938,7 +2035,7 @@ module Aws
       # @option params [required, String] :resource
       #   An ARN of a CloudFront resource.
       # @option params [required, Types::TagKeys] :tag_keys
-      #   A complex type that contains zero or more Tag key elements.
+      #   A complex type that contains zero or more `Tag` key elements.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1961,8 +2058,8 @@ module Aws
       # @option params [required, String] :id
       #   The identity's id.
       # @option params [String] :if_match
-      #   The value of the ETag header you received when retrieving the
-      #   identity's configuration. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header that you received when retrieving the
+      #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
       # @return [Types::UpdateCloudFrontOriginAccessIdentityResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateCloudFrontOriginAccessIdentityResult#cloud_front_origin_access_identity #CloudFrontOriginAccessIdentity} => Types::CloudFrontOriginAccessIdentity
@@ -1997,8 +2094,8 @@ module Aws
       # @option params [required, String] :id
       #   The distribution's id.
       # @option params [String] :if_match
-      #   The value of the ETag header you received when retrieving the
-      #   distribution's configuration. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header that you received when retrieving the
+      #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
       # @return [Types::UpdateDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateDistributionResult#distribution #Distribution} => Types::Distribution
@@ -2167,6 +2264,8 @@ module Aws
       #         },
       #       },
       #       web_acl_id: "string",
+      #       http_version: "http1.1", # accepts http1.1, http2
+      #       is_ipv6_enabled: false,
       #     },
       #     id: "string", # required
       #     if_match: "string",
@@ -2291,6 +2390,8 @@ module Aws
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items #=> Array
       #   resp.distribution.distribution_config.restrictions.geo_restriction.items[0] #=> String
       #   resp.distribution.distribution_config.web_acl_id #=> String
+      #   resp.distribution.distribution_config.http_version #=> String, one of "http1.1", "http2"
+      #   resp.distribution.distribution_config.is_ipv6_enabled #=> Boolean
       #   resp.etag #=> String
       # @overload update_distribution(params = {})
       # @param [Hash] params ({})
@@ -2305,8 +2406,9 @@ module Aws
       # @option params [required, String] :id
       #   The streaming distribution's id.
       # @option params [String] :if_match
-      #   The value of the ETag header you received when retrieving the
-      #   streaming distribution's configuration. For example: E2QWRUHAPOMQZL.
+      #   The value of the `ETag` header that you received when retrieving the
+      #   streaming distribution's configuration. For example:
+      #   `E2QWRUHAPOMQZL`.
       # @return [Types::UpdateStreamingDistributionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateStreamingDistributionResult#streaming_distribution #StreamingDistribution} => Types::StreamingDistribution

@@ -772,6 +772,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListKeysResponse)
           o.errors << Shapes::ShapeRef.new(shape: DependencyTimeoutException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
           o[:pager] = Aws::Pager.new(
             "limit_key" => "Limit",
             "input_token" => "Marker",

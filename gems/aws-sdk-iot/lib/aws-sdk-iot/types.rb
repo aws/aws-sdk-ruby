@@ -47,6 +47,12 @@ module Aws
       #           range_key_type: "STRING", # accepts STRING, NUMBER
       #           payload_field: "PayloadField",
       #         },
+      #         dynamo_d_bv_2: {
+      #           role_arn: "AwsArn",
+      #           put_item: {
+      #             table_name: "TableName", # required
+      #           },
+      #         },
       #         lambda: {
       #           function_arn: "FunctionArn", # required
       #         },
@@ -73,6 +79,7 @@ module Aws
       #           role_arn: "AwsArn", # required
       #           bucket_name: "BucketName", # required
       #           key: "Key", # required
+      #           canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #         },
       #         firehose: {
       #           role_arn: "AwsArn", # required
@@ -104,6 +111,12 @@ module Aws
       # @!attribute [rw] dynamo_db
       #   Write to a DynamoDB table.
       #   @return [Types::DynamoDBAction]
+      #
+      # @!attribute [rw] dynamo_d_bv_2
+      #   Write to a DynamoDB table. This is a new version of the DynamoDB
+      #   action. It allows you to write each attribute in an MQTT message
+      #   payload into a separate DynamoDB column.
+      #   @return [Types::DynamoDBv2Action]
       #
       # @!attribute [rw] lambda
       #   Invoke a Lambda function.
@@ -142,10 +155,11 @@ module Aws
       #   @return [Types::CloudwatchAlarmAction]
       #
       # @!attribute [rw] elasticsearch
-      #   Write data to an Amazon Elasticsearch Service; domain.
+      #   Write data to an Amazon Elasticsearch Service domain.
       #   @return [Types::ElasticsearchAction]
       class Action < Struct.new(
         :dynamo_db,
+        :dynamo_d_bv_2,
         :lambda,
         :sns,
         :sqs,
@@ -787,6 +801,12 @@ module Aws
       #                 range_key_type: "STRING", # accepts STRING, NUMBER
       #                 payload_field: "PayloadField",
       #               },
+      #               dynamo_d_bv_2: {
+      #                 role_arn: "AwsArn",
+      #                 put_item: {
+      #                   table_name: "TableName", # required
+      #                 },
+      #               },
       #               lambda: {
       #                 function_arn: "FunctionArn", # required
       #               },
@@ -813,6 +833,7 @@ module Aws
       #                 role_arn: "AwsArn", # required
       #                 bucket_name: "BucketName", # required
       #                 key: "Key", # required
+      #                 canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #               },
       #               firehose: {
       #                 role_arn: "AwsArn", # required
@@ -1326,8 +1347,41 @@ module Aws
         include Aws::Structure
       end
 
+      # Describes an action to write to a DynamoDB table.
+      #
+      # This DynamoDB action writes each attribute in the message payload into
+      # it's own column in the DynamoDB table.
+      # @note When making an API call, pass DynamoDBv2Action
+      #   data as a hash:
+      #
+      #       {
+      #         role_arn: "AwsArn",
+      #         put_item: {
+      #           table_name: "TableName", # required
+      #         },
+      #       }
+      # @!attribute [rw] role_arn
+      #   The ARN of the IAM role that grants access to the DynamoDB table.
+      #   @return [String]
+      #
+      # @!attribute [rw] put_item
+      #   Specifies the DynamoDB table to which the message data will be
+      #   written. For example:
+      #
+      #   `\{ "dynamoDBv2": \{ "roleArn": "aws:iam:12341251:my-role"
+      #   "putItem": \{ "tableName": "my-table" \} \} \}`
+      #
+      #   Each attribute in the message payload will be written to a separate
+      #   column in the DynamoDB database.
+      #   @return [Types::PutItemInput]
+      class DynamoDBv2Action < Struct.new(
+        :role_arn,
+        :put_item)
+        include Aws::Structure
+      end
+
       # Describes an action that writes data to an Amazon Elasticsearch
-      # Service; domain.
+      # Service domain.
       # @note When making an API call, pass ElasticsearchAction
       #   data as a hash:
       #
@@ -1402,7 +1456,7 @@ module Aws
       #
       # @!attribute [rw] separator
       #   A character separator that will be used to separate records written
-      #   to the firehose stream. Valid values are: '\\n' (newline), '\\t'
+      #   to the Firehose stream. Valid values are: '\\n' (newline), '\\t'
       #   (tab), '\\r\\n' (Windows newline), ',' (comma).
       #   @return [String]
       class FirehoseAction < Struct.new(
@@ -2260,6 +2314,22 @@ module Aws
         include Aws::Structure
       end
 
+      # The input for the DynamoActionVS action that specifies the DynamoDB
+      # table to which the message data will be written.
+      # @note When making an API call, pass PutItemInput
+      #   data as a hash:
+      #
+      #       {
+      #         table_name: "TableName", # required
+      #       }
+      # @!attribute [rw] table_name
+      #   The table where the message data will be written
+      #   @return [String]
+      class PutItemInput < Struct.new(
+        :table_name)
+        include Aws::Structure
+      end
+
       # The input to the RegisterCACertificate operation.
       # @note When making an API call, pass RegisterCACertificateRequest
       #   data as a hash:
@@ -2317,6 +2387,7 @@ module Aws
       #         certificate_pem: "CertificatePem", # required
       #         ca_certificate_pem: "CertificatePem",
       #         set_as_active: false,
+      #         status: "ACTIVE", # accepts ACTIVE, INACTIVE, REVOKED, PENDING_TRANSFER, REGISTER_INACTIVE, PENDING_ACTIVATION
       #       }
       # @!attribute [rw] certificate_pem
       #   The certificate data, in PEM format.
@@ -2331,10 +2402,14 @@ module Aws
       #   A boolean value that specifies if the CA certificate is set to
       #   active.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] status
+      #   @return [String]
       class RegisterCertificateRequest < Struct.new(
         :certificate_pem,
         :ca_certificate_pem,
-        :set_as_active)
+        :set_as_active,
+        :status)
         include Aws::Structure
       end
 
@@ -2396,6 +2471,12 @@ module Aws
       #                 range_key_type: "STRING", # accepts STRING, NUMBER
       #                 payload_field: "PayloadField",
       #               },
+      #               dynamo_d_bv_2: {
+      #                 role_arn: "AwsArn",
+      #                 put_item: {
+      #                   table_name: "TableName", # required
+      #                 },
+      #               },
       #               lambda: {
       #                 function_arn: "FunctionArn", # required
       #               },
@@ -2422,6 +2503,7 @@ module Aws
       #                 role_arn: "AwsArn", # required
       #                 bucket_name: "BucketName", # required
       #                 key: "Key", # required
+      #                 canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #               },
       #               firehose: {
       #                 role_arn: "AwsArn", # required
@@ -2497,6 +2579,7 @@ module Aws
       #         role_arn: "AwsArn", # required
       #         bucket_name: "BucketName", # required
       #         key: "Key", # required
+      #         canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #       }
       # @!attribute [rw] role_arn
       #   The ARN of the IAM role that grants access.
@@ -2509,10 +2592,21 @@ module Aws
       # @!attribute [rw] key
       #   The object key.
       #   @return [String]
+      #
+      # @!attribute [rw] canned_acl
+      #   The Amazon S3 canned ACL that controls access to the object
+      #   identified by the object key. For more information, see [S3 canned
+      #   ACLs][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl
+      #   @return [String]
       class S3Action < Struct.new(
         :role_arn,
         :bucket_name,
-        :key)
+        :key,
+        :canned_acl)
         include Aws::Structure
       end
 
@@ -2803,6 +2897,12 @@ module Aws
       #               range_key_type: "STRING", # accepts STRING, NUMBER
       #               payload_field: "PayloadField",
       #             },
+      #             dynamo_d_bv_2: {
+      #               role_arn: "AwsArn",
+      #               put_item: {
+      #                 table_name: "TableName", # required
+      #               },
+      #             },
       #             lambda: {
       #               function_arn: "FunctionArn", # required
       #             },
@@ -2829,6 +2929,7 @@ module Aws
       #               role_arn: "AwsArn", # required
       #               bucket_name: "BucketName", # required
       #               key: "Key", # required
+      #               canned_acl: "private", # accepts private, public-read, public-read-write, aws-exec-read, authenticated-read, bucket-owner-read, bucket-owner-full-control, log-delivery-write
       #             },
       #             firehose: {
       #               role_arn: "AwsArn", # required

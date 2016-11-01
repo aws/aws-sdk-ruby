@@ -440,7 +440,7 @@ module Aws
       IPSetUpdates.member = Shapes::ShapeRef.new(shape: IPSetUpdate)
 
       ListByteMatchSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListByteMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListByteMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListByteMatchSetsRequest.struct_class = Types::ListByteMatchSetsRequest
 
       ListByteMatchSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -448,7 +448,7 @@ module Aws
       ListByteMatchSetsResponse.struct_class = Types::ListByteMatchSetsResponse
 
       ListIPSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListIPSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListIPSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListIPSetsRequest.struct_class = Types::ListIPSetsRequest
 
       ListIPSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -456,7 +456,7 @@ module Aws
       ListIPSetsResponse.struct_class = Types::ListIPSetsResponse
 
       ListRulesRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListRulesRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListRulesRequest.struct_class = Types::ListRulesRequest
 
       ListRulesResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -464,7 +464,7 @@ module Aws
       ListRulesResponse.struct_class = Types::ListRulesResponse
 
       ListSizeConstraintSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListSizeConstraintSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListSizeConstraintSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListSizeConstraintSetsRequest.struct_class = Types::ListSizeConstraintSetsRequest
 
       ListSizeConstraintSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -472,7 +472,7 @@ module Aws
       ListSizeConstraintSetsResponse.struct_class = Types::ListSizeConstraintSetsResponse
 
       ListSqlInjectionMatchSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListSqlInjectionMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListSqlInjectionMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListSqlInjectionMatchSetsRequest.struct_class = Types::ListSqlInjectionMatchSetsRequest
 
       ListSqlInjectionMatchSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -480,7 +480,7 @@ module Aws
       ListSqlInjectionMatchSetsResponse.struct_class = Types::ListSqlInjectionMatchSetsResponse
 
       ListWebACLsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListWebACLsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListWebACLsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListWebACLsRequest.struct_class = Types::ListWebACLsRequest
 
       ListWebACLsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
@@ -488,7 +488,7 @@ module Aws
       ListWebACLsResponse.struct_class = Types::ListWebACLsResponse
 
       ListXssMatchSetsRequest.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))
-      ListXssMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, required: true, location_name: "Limit"))
+      ListXssMatchSetsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: PaginationLimit, location_name: "Limit"))
       ListXssMatchSetsRequest.struct_class = Types::ListXssMatchSetsRequest
 
       ListXssMatchSetsResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: NextMarker, location_name: "NextMarker"))

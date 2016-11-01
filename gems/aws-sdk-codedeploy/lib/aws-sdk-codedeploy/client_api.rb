@@ -13,6 +13,11 @@ module Aws
       include Seahorse::Model
 
       AddTagsToOnPremisesInstancesInput = Shapes::StructureShape.new(name: 'AddTagsToOnPremisesInstancesInput')
+      Alarm = Shapes::StructureShape.new(name: 'Alarm')
+      AlarmConfiguration = Shapes::StructureShape.new(name: 'AlarmConfiguration')
+      AlarmList = Shapes::ListShape.new(name: 'AlarmList')
+      AlarmName = Shapes::StringShape.new(name: 'AlarmName')
+      AlarmsLimitExceededException = Shapes::StructureShape.new(name: 'AlarmsLimitExceededException')
       ApplicationAlreadyExistsException = Shapes::StructureShape.new(name: 'ApplicationAlreadyExistsException')
       ApplicationDoesNotExistException = Shapes::StructureShape.new(name: 'ApplicationDoesNotExistException')
       ApplicationId = Shapes::StringShape.new(name: 'ApplicationId')
@@ -23,6 +28,9 @@ module Aws
       ApplicationRevisionSortBy = Shapes::StringShape.new(name: 'ApplicationRevisionSortBy')
       ApplicationsInfoList = Shapes::ListShape.new(name: 'ApplicationsInfoList')
       ApplicationsList = Shapes::ListShape.new(name: 'ApplicationsList')
+      AutoRollbackConfiguration = Shapes::StructureShape.new(name: 'AutoRollbackConfiguration')
+      AutoRollbackEvent = Shapes::StringShape.new(name: 'AutoRollbackEvent')
+      AutoRollbackEventsList = Shapes::ListShape.new(name: 'AutoRollbackEventsList')
       AutoScalingGroup = Shapes::StructureShape.new(name: 'AutoScalingGroup')
       AutoScalingGroupHook = Shapes::StringShape.new(name: 'AutoScalingGroupHook')
       AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
@@ -136,7 +144,9 @@ module Aws
       InstanceSummary = Shapes::StructureShape.new(name: 'InstanceSummary')
       InstanceSummaryList = Shapes::ListShape.new(name: 'InstanceSummaryList')
       InstancesList = Shapes::ListShape.new(name: 'InstancesList')
+      InvalidAlarmConfigException = Shapes::StructureShape.new(name: 'InvalidAlarmConfigException')
       InvalidApplicationNameException = Shapes::StructureShape.new(name: 'InvalidApplicationNameException')
+      InvalidAutoRollbackConfigException = Shapes::StructureShape.new(name: 'InvalidAutoRollbackConfigException')
       InvalidAutoScalingGroupException = Shapes::StructureShape.new(name: 'InvalidAutoScalingGroupException')
       InvalidBucketNameFilterException = Shapes::StructureShape.new(name: 'InvalidBucketNameFilterException')
       InvalidDeployedStateFilterException = Shapes::StructureShape.new(name: 'InvalidDeployedStateFilterException')
@@ -190,6 +200,7 @@ module Aws
       MinimumHealthyHostsType = Shapes::StringShape.new(name: 'MinimumHealthyHostsType')
       MinimumHealthyHostsValue = Shapes::IntegerShape.new(name: 'MinimumHealthyHostsValue')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
+      NullableBoolean = Shapes::BooleanShape.new(name: 'NullableBoolean')
       RegisterApplicationRevisionInput = Shapes::StructureShape.new(name: 'RegisterApplicationRevisionInput')
       RegisterOnPremisesInstanceInput = Shapes::StructureShape.new(name: 'RegisterOnPremisesInstanceInput')
       RegistrationStatus = Shapes::StringShape.new(name: 'RegistrationStatus')
@@ -204,6 +215,7 @@ module Aws
       RevisionRequiredException = Shapes::StructureShape.new(name: 'RevisionRequiredException')
       Role = Shapes::StringShape.new(name: 'Role')
       RoleRequiredException = Shapes::StructureShape.new(name: 'RoleRequiredException')
+      RollbackInfo = Shapes::StructureShape.new(name: 'RollbackInfo')
       S3Bucket = Shapes::StringShape.new(name: 'S3Bucket')
       S3Key = Shapes::StringShape.new(name: 'S3Key')
       S3Location = Shapes::StructureShape.new(name: 'S3Location')
@@ -238,6 +250,16 @@ module Aws
       AddTagsToOnPremisesInstancesInput.add_member(:instance_names, Shapes::ShapeRef.new(shape: InstanceNameList, required: true, location_name: "instanceNames"))
       AddTagsToOnPremisesInstancesInput.struct_class = Types::AddTagsToOnPremisesInstancesInput
 
+      Alarm.add_member(:name, Shapes::ShapeRef.new(shape: AlarmName, location_name: "name"))
+      Alarm.struct_class = Types::Alarm
+
+      AlarmConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+      AlarmConfiguration.add_member(:ignore_poll_alarm_failure, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignorePollAlarmFailure"))
+      AlarmConfiguration.add_member(:alarms, Shapes::ShapeRef.new(shape: AlarmList, location_name: "alarms"))
+      AlarmConfiguration.struct_class = Types::AlarmConfiguration
+
+      AlarmList.member = Shapes::ShapeRef.new(shape: Alarm)
+
       ApplicationInfo.add_member(:application_id, Shapes::ShapeRef.new(shape: ApplicationId, location_name: "applicationId"))
       ApplicationInfo.add_member(:application_name, Shapes::ShapeRef.new(shape: ApplicationName, location_name: "applicationName"))
       ApplicationInfo.add_member(:create_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createTime"))
@@ -247,6 +269,12 @@ module Aws
       ApplicationsInfoList.member = Shapes::ShapeRef.new(shape: ApplicationInfo)
 
       ApplicationsList.member = Shapes::ShapeRef.new(shape: ApplicationName)
+
+      AutoRollbackConfiguration.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
+      AutoRollbackConfiguration.add_member(:events, Shapes::ShapeRef.new(shape: AutoRollbackEventsList, location_name: "events"))
+      AutoRollbackConfiguration.struct_class = Types::AutoRollbackConfiguration
+
+      AutoRollbackEventsList.member = Shapes::ShapeRef.new(shape: AutoRollbackEvent)
 
       AutoScalingGroup.add_member(:name, Shapes::ShapeRef.new(shape: AutoScalingGroupName, location_name: "name"))
       AutoScalingGroup.add_member(:hook, Shapes::ShapeRef.new(shape: AutoScalingGroupHook, location_name: "hook"))
@@ -320,6 +348,8 @@ module Aws
       CreateDeploymentGroupInput.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, location_name: "autoScalingGroups"))
       CreateDeploymentGroupInput.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: Role, required: true, location_name: "serviceRoleArn"))
       CreateDeploymentGroupInput.add_member(:trigger_configurations, Shapes::ShapeRef.new(shape: TriggerConfigList, location_name: "triggerConfigurations"))
+      CreateDeploymentGroupInput.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
+      CreateDeploymentGroupInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
       CreateDeploymentGroupInput.struct_class = Types::CreateDeploymentGroupInput
 
       CreateDeploymentGroupOutput.add_member(:deployment_group_id, Shapes::ShapeRef.new(shape: DeploymentGroupId, location_name: "deploymentGroupId"))
@@ -331,6 +361,8 @@ module Aws
       CreateDeploymentInput.add_member(:deployment_config_name, Shapes::ShapeRef.new(shape: DeploymentConfigName, location_name: "deploymentConfigName"))
       CreateDeploymentInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
       CreateDeploymentInput.add_member(:ignore_application_stop_failures, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignoreApplicationStopFailures"))
+      CreateDeploymentInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
+      CreateDeploymentInput.add_member(:update_outdated_instances_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateOutdatedInstancesOnly"))
       CreateDeploymentInput.struct_class = Types::CreateDeploymentInput
 
       CreateDeploymentOutput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "deploymentId"))
@@ -367,6 +399,8 @@ module Aws
       DeploymentGroupInfo.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: Role, location_name: "serviceRoleArn"))
       DeploymentGroupInfo.add_member(:target_revision, Shapes::ShapeRef.new(shape: RevisionLocation, location_name: "targetRevision"))
       DeploymentGroupInfo.add_member(:trigger_configurations, Shapes::ShapeRef.new(shape: TriggerConfigList, location_name: "triggerConfigurations"))
+      DeploymentGroupInfo.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
+      DeploymentGroupInfo.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
       DeploymentGroupInfo.struct_class = Types::DeploymentGroupInfo
 
       DeploymentGroupInfoList.member = Shapes::ShapeRef.new(shape: DeploymentGroupInfo)
@@ -387,6 +421,9 @@ module Aws
       DeploymentInfo.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "description"))
       DeploymentInfo.add_member(:creator, Shapes::ShapeRef.new(shape: DeploymentCreator, location_name: "creator"))
       DeploymentInfo.add_member(:ignore_application_stop_failures, Shapes::ShapeRef.new(shape: Boolean, location_name: "ignoreApplicationStopFailures"))
+      DeploymentInfo.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
+      DeploymentInfo.add_member(:update_outdated_instances_only, Shapes::ShapeRef.new(shape: Boolean, location_name: "updateOutdatedInstancesOnly"))
+      DeploymentInfo.add_member(:rollback_info, Shapes::ShapeRef.new(shape: RollbackInfo, location_name: "rollbackInfo"))
       DeploymentInfo.struct_class = Types::DeploymentInfo
 
       DeploymentOverview.add_member(:pending, Shapes::ShapeRef.new(shape: InstanceCount, location_name: "Pending"))
@@ -609,6 +646,11 @@ module Aws
 
       RevisionLocationList.member = Shapes::ShapeRef.new(shape: RevisionLocation)
 
+      RollbackInfo.add_member(:rollback_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "rollbackDeploymentId"))
+      RollbackInfo.add_member(:rollback_triggering_deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, location_name: "rollbackTriggeringDeploymentId"))
+      RollbackInfo.add_member(:rollback_message, Shapes::ShapeRef.new(shape: Description, location_name: "rollbackMessage"))
+      RollbackInfo.struct_class = Types::RollbackInfo
+
       S3Location.add_member(:bucket, Shapes::ShapeRef.new(shape: S3Bucket, location_name: "bucket"))
       S3Location.add_member(:key, Shapes::ShapeRef.new(shape: S3Key, location_name: "key"))
       S3Location.add_member(:bundle_type, Shapes::ShapeRef.new(shape: BundleType, location_name: "bundleType"))
@@ -617,6 +659,7 @@ module Aws
       S3Location.struct_class = Types::S3Location
 
       StopDeploymentInput.add_member(:deployment_id, Shapes::ShapeRef.new(shape: DeploymentId, required: true, location_name: "deploymentId"))
+      StopDeploymentInput.add_member(:auto_rollback_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "autoRollbackEnabled"))
       StopDeploymentInput.struct_class = Types::StopDeploymentInput
 
       StopDeploymentOutput.add_member(:status, Shapes::ShapeRef.new(shape: StopStatus, location_name: "status"))
@@ -662,6 +705,8 @@ module Aws
       UpdateDeploymentGroupInput.add_member(:auto_scaling_groups, Shapes::ShapeRef.new(shape: AutoScalingGroupNameList, location_name: "autoScalingGroups"))
       UpdateDeploymentGroupInput.add_member(:service_role_arn, Shapes::ShapeRef.new(shape: Role, location_name: "serviceRoleArn"))
       UpdateDeploymentGroupInput.add_member(:trigger_configurations, Shapes::ShapeRef.new(shape: TriggerConfigList, location_name: "triggerConfigurations"))
+      UpdateDeploymentGroupInput.add_member(:alarm_configuration, Shapes::ShapeRef.new(shape: AlarmConfiguration, location_name: "alarmConfiguration"))
+      UpdateDeploymentGroupInput.add_member(:auto_rollback_configuration, Shapes::ShapeRef.new(shape: AutoRollbackConfiguration, location_name: "autoRollbackConfiguration"))
       UpdateDeploymentGroupInput.struct_class = Types::UpdateDeploymentGroupInput
 
       UpdateDeploymentGroupOutput.add_member(:hooks_not_cleaned_up, Shapes::ShapeRef.new(shape: AutoScalingGroupList, location_name: "hooksNotCleanedUp"))
@@ -798,11 +843,13 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentGroupNameException)
           o.errors << Shapes::ShapeRef.new(shape: DeploymentGroupDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: RevisionRequiredException)
+          o.errors << Shapes::ShapeRef.new(shape: RevisionDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRevisionException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentConfigNameException)
           o.errors << Shapes::ShapeRef.new(shape: DeploymentConfigDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: DescriptionTooLongException)
           o.errors << Shapes::ShapeRef.new(shape: DeploymentLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         end)
 
         api.add_operation(:create_deployment_config, Seahorse::Model::Operation.new.tap do |o|
@@ -841,6 +888,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LifecycleHookLimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTriggerConfigException)
           o.errors << Shapes::ShapeRef.new(shape: TriggerTargetsLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidAlarmConfigException)
+          o.errors << Shapes::ShapeRef.new(shape: AlarmsLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         end)
 
         api.add_operation(:delete_application, Seahorse::Model::Operation.new.tap do |o|
@@ -1182,6 +1232,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LifecycleHookLimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTriggerConfigException)
           o.errors << Shapes::ShapeRef.new(shape: TriggerTargetsLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidAlarmConfigException)
+          o.errors << Shapes::ShapeRef.new(shape: AlarmsLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidAutoRollbackConfigException)
         end)
       end
 

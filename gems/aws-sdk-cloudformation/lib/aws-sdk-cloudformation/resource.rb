@@ -40,6 +40,7 @@ module Aws
       #     notification_arns: ["NotificationARN"],
       #     capabilities: ["CAPABILITY_IAM"], # accepts CAPABILITY_IAM, CAPABILITY_NAMED_IAM
       #     resource_types: ["ResourceType"],
+      #     role_arn: "RoleARN",
       #     on_failure: "DO_NOTHING", # accepts DO_NOTHING, ROLLBACK, DELETE
       #     stack_policy_body: "StackPolicyBody",
       #     stack_policy_url: "StackPolicyURL",
@@ -163,6 +164,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-iam-template.html
+      # @option options [String] :role_arn
+      #   The Amazon Resource Name (ARN) of an AWS Identity and Access
+      #   Management (IAM) role that AWS CloudFormation assumes to create the
+      #   stack. AWS CloudFormation uses the role's credentials to make calls
+      #   on your behalf. AWS CloudFormation always uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
+      #
+      #   If you don't specify a value, AWS CloudFormation uses the role that
+      #   was previously associated with the stack. If no role is available, AWS
+      #   CloudFormation uses a temporary session that is generated from your
+      #   user credentials.
       # @option options [String] :on_failure
       #   Determines what action will be taken if stack creation fails. This
       #   must be one of: DO\_NOTHING, ROLLBACK, or DELETE. You can specify
@@ -171,8 +186,8 @@ module Aws
       #   Default: `ROLLBACK`
       # @option options [String] :stack_policy_body
       #   Structure containing the stack policy body. For more information, go
-      #   to [ Prevent Updates to Stack Resources][1] in the AWS CloudFormation
-      #   User Guide. You can specify either the `StackPolicyBody` or the
+      #   to [ Prevent Updates to Stack Resources][1] in the *AWS CloudFormation
+      #   User Guide*. You can specify either the `StackPolicyBody` or the
       #   `StackPolicyURL` parameter, but not both.
       #
       #
@@ -180,9 +195,9 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/protect-stack-resources.html
       # @option options [String] :stack_policy_url
       #   Location of a file containing the stack policy. The URL must point to
-      #   a policy (max size: 16KB) located in an S3 bucket in the same region
-      #   as the stack. You can specify either the `StackPolicyBody` or the
-      #   `StackPolicyURL` parameter, but not both.
+      #   a policy (maximum size: 16 KB) located in an S3 bucket in the same
+      #   region as the stack. You can specify either the `StackPolicyBody` or
+      #   the `StackPolicyURL` parameter, but not both.
       # @option options [Array<Types::Tag>] :tags
       #   Key-value pairs to associate with this stack. AWS CloudFormation also
       #   propagates these tags to the resources created in the stack. A maximum
@@ -241,6 +256,7 @@ module Aws
             page.data.stacks.each do |s|
               batch << Stack.new(
                 name: s.stack_name,
+                data: s,
                 client: @client
               )
             end

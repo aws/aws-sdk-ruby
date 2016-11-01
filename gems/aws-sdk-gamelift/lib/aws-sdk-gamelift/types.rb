@@ -95,8 +95,10 @@ module Aws
       #     been uploaded. You cannot create fleets for builds that are in
       #     this status. When a build is successfully created, the build
       #     status is set to this value.
+      #
       #   * **READY** – The game build has been successfully uploaded. You can
       #     now create new fleets for this build.
+      #
       #   * **FAILED** – The game build upload failed. You cannot create new
       #     fleets for this build.
       #   @return [String]
@@ -133,7 +135,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         name: "NonZeroAndMaxString", # required
+      #         name: "NonBlankAndLengthConstraintString", # required
       #         description: "NonZeroAndMaxString",
       #         routing_strategy: { # required
       #           type: "SIMPLE", # accepts SIMPLE, TERMINAL
@@ -185,13 +187,14 @@ module Aws
       #       }
       # @!attribute [rw] name
       #   Descriptive label associated with a build. Build names do not need
-      #   to be unique. A build name can be changed later using `UpdateBuild`.
+      #   to be unique. A build name can be changed later using ` UpdateBuild
+      #   `.
       #   @return [String]
       #
       # @!attribute [rw] version
       #   Version associated with this build. Version strings do not need to
-      #   be unique to a build. A build version can be changed later using
-      #   `UpdateBuild`.
+      #   be unique to a build. A build version can be changed later using `
+      #   UpdateBuild `.
       #   @return [String]
       #
       # @!attribute [rw] storage_location
@@ -228,7 +231,7 @@ module Aws
       #   AWS credentials required when uploading a game build to the storage
       #   location. These credentials have a limited lifespan and are valid
       #   only for the build they were issued for. If you need to get fresh
-      #   credentials, call `RequestUploadCredentials`.
+      #   credentials, call ` RequestUploadCredentials `.
       #   @return [Types::AwsCredentials]
       #
       # @!attribute [rw] storage_location
@@ -271,6 +274,10 @@ module Aws
       #               concurrent_executions: 1, # required
       #             },
       #           ],
+      #         },
+      #         resource_creation_limit_policy: {
+      #           new_game_sessions_per_creator: 1,
+      #           policy_period_in_minutes: 1,
       #         },
       #       }
       # @!attribute [rw] name
@@ -326,7 +333,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       #   @return [String]
       #
       # @!attribute [rw] ec2_inbound_permissions
@@ -347,6 +354,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       #   @return [String]
@@ -366,6 +374,11 @@ module Aws
       #   parameters instead of a runtime configuration will continue to
       #   work.)
       #   @return [Types::RuntimeConfiguration]
+      #
+      # @!attribute [rw] resource_creation_limit_policy
+      #   Policy that limits the number of game sessions an individual player
+      #   can create over a span of time for this fleet.
+      #   @return [Types::ResourceCreationLimitPolicy]
       class CreateFleetInput < Struct.new(
         :name,
         :description,
@@ -376,7 +389,8 @@ module Aws
         :ec2_instance_type,
         :ec2_inbound_permissions,
         :new_game_session_protection_policy,
-        :runtime_configuration)
+        :runtime_configuration,
+        :resource_creation_limit_policy)
         include Aws::Structure
       end
 
@@ -404,6 +418,8 @@ module Aws
       #             value: "GamePropertyValue", # required
       #           },
       #         ],
+      #         creator_id: "NonZeroAndMaxString",
+      #         game_session_id: "IdStringModel",
       #       }
       # @!attribute [rw] fleet_id
       #   Unique identifier for a fleet. Each request must reference either a
@@ -429,12 +445,34 @@ module Aws
       #   Set of properties used to administer a game session. These
       #   properties are passed to the server process hosting it.
       #   @return [Array<Types::GameProperty>]
+      #
+      # @!attribute [rw] creator_id
+      #   Player ID identifying the person or entity creating the game
+      #   session. This ID is used to enforce a resource protection policy (if
+      #   one exists) that limits the number of concurrent active game
+      #   sessions one player can have.
+      #   @return [String]
+      #
+      # @!attribute [rw] game_session_id
+      #   Custom string to include in the game session ID, with a maximum
+      #   length of 48 characters. If this parameter is set, GameLift creates
+      #   a game session ID in the following format:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;custom ID string&gt;". For example, this full game
+      #   session ID:
+      #   "arn:aws:gamelift:us-west-2::gamesession/fleet-2ec2aae5-c2c7-43ca-b19d-8249fe5fddf2/my-game-session"
+      #   includes the custom ID string "my-game-session". If this parameter
+      #   is not set, GameLift creates a game session ID in the same format
+      #   with an auto-generated ID string.
+      #   @return [String]
       class CreateGameSessionInput < Struct.new(
         :fleet_id,
         :alias_id,
         :maximum_player_session_count,
         :name,
-        :game_properties)
+        :game_properties,
+        :creator_id,
+        :game_session_id)
         include Aws::Structure
       end
 
@@ -452,12 +490,16 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         game_session_id: "GameSessionId", # required
+      #         game_session_id: "ArnStringModel", # required
       #         player_id: "NonZeroAndMaxString", # required
       #       }
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to add a player to.
+      #   Unique identifier for the game session to add a player to. Game
+      #   session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] player_id
@@ -483,11 +525,16 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         game_session_id: "GameSessionId", # required
+      #         game_session_id: "ArnStringModel", # required
       #         player_ids: ["NonZeroAndMaxString"], # required
       #       }
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for the game session to add players to. Game
+      #   session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] player_ids
@@ -643,7 +690,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       #   @return [String]
       class DescribeEC2InstanceLimitsInput < Struct.new(
         :ec2_instance_type)
@@ -706,12 +753,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeFleetAttributesOutput < Struct.new(
         :fleet_attributes,
@@ -766,12 +807,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeFleetCapacityOutput < Struct.new(
         :fleet_capacity,
@@ -837,12 +872,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeFleetEventsOutput < Struct.new(
         :events,
@@ -921,12 +950,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeFleetUtilizationOutput < Struct.new(
         :fleet_utilization,
@@ -940,7 +963,7 @@ module Aws
       #
       #       {
       #         fleet_id: "FleetId",
-      #         game_session_id: "GameSessionId",
+      #         game_session_id: "ArnStringModel",
       #         alias_id: "AliasId",
       #         status_filter: "NonZeroAndMaxString",
       #         limit: 1,
@@ -952,8 +975,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session. Specify the game session to
-      #   retrieve information on.
+      #   Unique identifier for the game session to retrieve information on.
+      #   Game session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] alias_id
@@ -998,12 +1025,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeGameSessionDetailsOutput < Struct.new(
         :game_session_details,
@@ -1017,7 +1038,7 @@ module Aws
       #
       #       {
       #         fleet_id: "FleetId",
-      #         game_session_id: "GameSessionId",
+      #         game_session_id: "ArnStringModel",
       #         alias_id: "AliasId",
       #         status_filter: "NonZeroAndMaxString",
       #         limit: 1,
@@ -1029,8 +1050,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session. Specify the game session to
-      #   retrieve information on.
+      #   Unique identifier for the game session to retrieve information on.
+      #   Game session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] alias_id
@@ -1074,15 +1099,65 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeGameSessionsOutput < Struct.new(
         :game_sessions,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # Represents the input for a request action.
+      # @note When making an API call, pass DescribeInstancesInput
+      #   data as a hash:
+      #
+      #       {
+      #         fleet_id: "FleetId", # required
+      #         instance_id: "InstanceId",
+      #         limit: 1,
+      #         next_token: "NonZeroAndMaxString",
+      #       }
+      # @!attribute [rw] fleet_id
+      #   Unique identifier for a fleet. Specify the fleet to retrieve
+      #   instance information for.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_id
+      #   Unique identifier for an instance. Specify an instance to retrieve
+      #   information for or leave blank to get information on all instances
+      #   in the fleet.
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   Maximum number of results to return. Use this parameter with
+      #   `NextToken` to get results as a set of sequential pages.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   Token indicating the start of the next sequential page of results.
+      #   Use the token that is returned with a previous call to this action.
+      #   To specify the start of the result set, do not specify a value.
+      #   @return [String]
+      class DescribeInstancesInput < Struct.new(
+        :fleet_id,
+        :instance_id,
+        :limit,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # Represents the returned data in response to a request action.
+      # @!attribute [rw] instances
+      #   Collection of objects containing properties for each instance
+      #   returned.
+      #   @return [Array<Types::Instance>]
+      #
+      # @!attribute [rw] next_token
+      #   Token indicating where to resume retrieving results on the next call
+      #   to this action. If no token is returned, these results represent the
+      #   end of the list.
+      #   @return [String]
+      class DescribeInstancesOutput < Struct.new(
+        :instances,
         :next_token)
         include Aws::Structure
       end
@@ -1092,7 +1167,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         game_session_id: "GameSessionId",
+      #         game_session_id: "ArnStringModel",
       #         player_id: "NonZeroAndMaxString",
       #         player_session_id: "PlayerSessionId",
       #         player_session_status_filter: "NonZeroAndMaxString",
@@ -1100,7 +1175,12 @@ module Aws
       #         next_token: "NonZeroAndMaxString",
       #       }
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for the game session to get player sessions
+      #   for.Game session ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] player_id
@@ -1119,9 +1199,12 @@ module Aws
       #   * **RESERVED** – The player session request has been received, but
       #     the player has not yet connected to the server process and/or been
       #     validated.
+      #
       #   * **ACTIVE** – The player has been validated by the server process
       #     and is currently connected.
+      #
       #   * **COMPLETED** – The player connection has been dropped.
+      #
       #   * **TIMEDOUT** – A player session request was received, but the
       #     player did not connect and/or was not validated within the
       #     time-out limit (60 seconds).
@@ -1159,12 +1242,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribePlayerSessionsOutput < Struct.new(
         :player_sessions,
@@ -1217,13 +1294,19 @@ module Aws
       #   in force when in an `ACTIVE` status.
       #
       #   * **ACTIVE** – The scaling policy is currently in force.
+      #
       #   * **UPDATEREQUESTED** – A request to update the scaling policy has
       #     been received.
+      #
       #   * **UPDATING** – A change is being made to the scaling policy.
+      #
       #   * **DELETEREQUESTED** – A request to delete the scaling policy has
       #     been received.
+      #
       #   * **DELETING** – The scaling policy is being deleted.
+      #
       #   * **DELETED** – The scaling policy has been deleted.
+      #
       #   * **ERROR** – An error occurred in creating the policy. It should be
       #     removed and recreated.
       #   @return [String]
@@ -1256,12 +1339,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class DescribeScalingPoliciesOutput < Struct.new(
         :scaling_policies,
@@ -1327,7 +1404,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       #   @return [String]
       #
       # @!attribute [rw] current_instances
@@ -1409,13 +1486,18 @@ module Aws
       #
       #   * **NEW** – A new fleet has been defined and desired instances is
       #     set to 1.
+      #
       #   * **DOWNLOADING/VALIDATING/BUILDING/ACTIVATING** – GameLift is
       #     setting up the new fleet, creating new instances with the game
       #     build and starting server processes.
+      #
       #   * **ACTIVE** – Hosts can now accept game sessions.
+      #
       #   * **ERROR** – An error occurred when downloading, validating,
       #     building, or activating the fleet.
+      #
       #   * **DELETING** – Hosts are responding to a delete fleet request.
+      #
       #   * **TERMINATED** – The fleet no longer exists.
       #   @return [String]
       #
@@ -1427,14 +1509,14 @@ module Aws
       #   Path to a game server executable in the fleet's build, specified
       #   for fleets created prior to 2016-08-04 (or AWS SDK v. 0.12.16).
       #   Server launch paths for fleets created after this date are specified
-      #   in the fleet's `RuntimeConfiguration`.
+      #   in the fleet's ` RuntimeConfiguration `.
       #   @return [String]
       #
       # @!attribute [rw] server_launch_parameters
       #   Game server launch parameters specified for fleets created prior to
       #   2016-08-04 (or AWS SDK v. 0.12.16). Server launch parameters for
-      #   fleets created after this date are specified in the fleet's
-      #   `RuntimeConfiguration`.
+      #   fleets created after this date are specified in the fleet's `
+      #   RuntimeConfiguration `.
       #   @return [String]
       #
       # @!attribute [rw] log_paths
@@ -1457,6 +1539,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       #   @return [String]
@@ -1466,6 +1549,11 @@ module Aws
       #   operating system depends on the OS specified for the build that is
       #   deployed on this fleet.
       #   @return [String]
+      #
+      # @!attribute [rw] resource_creation_limit_policy
+      #   Fleet policy to limit the number of game sessions an individual
+      #   player can create over a span of time.
+      #   @return [Types::ResourceCreationLimitPolicy]
       class FleetAttributes < Struct.new(
         :fleet_id,
         :description,
@@ -1478,7 +1566,8 @@ module Aws
         :server_launch_parameters,
         :log_paths,
         :new_game_session_protection_policy,
-        :operating_system)
+        :operating_system,
+        :resource_creation_limit_policy)
         include Aws::Structure
       end
 
@@ -1499,7 +1588,7 @@ module Aws
       #
       #
       #
-      #   [1]: https://aws.amazon.com/ec2/instance-types/
+      #   [1]: http://aws.amazon.com/ec2/instance-types/
       #   @return [String]
       #
       # @!attribute [rw] instance_counts
@@ -1562,9 +1651,11 @@ module Aws
       #         value: "GamePropertyValue", # required
       #       }
       # @!attribute [rw] key
+      #   TBD
       #   @return [String]
       #
       # @!attribute [rw] value
+      #   TBD
       #   @return [String]
       class GameProperty < Struct.new(
         :key,
@@ -1574,7 +1665,12 @@ module Aws
 
       # Properties describing a game session.
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for a game session. Game session ID format is as
+      #   follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] name
@@ -1628,6 +1724,13 @@ module Aws
       # @!attribute [rw] player_session_creation_policy
       #   Indicates whether or not the game session is accepting new players.
       #   @return [String]
+      #
+      # @!attribute [rw] creator_id
+      #   Player ID of the person or entity that created the game session.
+      #   This ID is used to enforce a resource protection policy (if one
+      #   exists) that limits the number of concurrent active game sessions
+      #   one player can have.
+      #   @return [String]
       class GameSession < Struct.new(
         :game_session_id,
         :name,
@@ -1640,7 +1743,8 @@ module Aws
         :game_properties,
         :ip_address,
         :port,
-        :player_session_creation_policy)
+        :player_session_creation_policy,
+        :creator_id)
         include Aws::Structure
       end
 
@@ -1655,6 +1759,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       #   @return [String]
@@ -1669,11 +1774,15 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         game_session_id: "GameSessionId", # required
+      #         game_session_id: "ArnStringModel", # required
       #       }
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to get logs for.
+      #   Unique identifier for the game session to get logs for. Game session
+      #   ID format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       class GetGameSessionLogUrlInput < Struct.new(
         :game_session_id)
@@ -1686,6 +1795,63 @@ module Aws
       #   @return [String]
       class GetGameSessionLogUrlOutput < Struct.new(
         :pre_signed_url)
+        include Aws::Structure
+      end
+
+      # Properties describing an instance of a virtual computing resource that
+      # is hosting game servers. Fleets contain zero or more instances.
+      # @!attribute [rw] fleet_id
+      #   Unique identifier for the fleet that the instance belongs to.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_id
+      #   Unique identifier for the instance.
+      #   @return [String]
+      #
+      # @!attribute [rw] ip_address
+      #   IP address assigned to the instance.
+      #   @return [String]
+      #
+      # @!attribute [rw] operating_system
+      #   Operating system being used on this instance.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   EC2 instance type that defines the computing resources of this
+      #   instance.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   Current status of the instance. Possible statuses include the
+      #   following:
+      #
+      #   * **PENDING** – The instance is in the process of being created and
+      #     launching server processes as defined in the fleet's runtime
+      #     configuration.
+      #
+      #   * **ACTIVE** – The instance has been successfully created and at
+      #     least one server process has successfully launched and reported
+      #     back to GameLift that it is ready to host a game session. The
+      #     instance is now considered ready to host game sessions.
+      #
+      #   * **TERMINATING** – The instance is in the process of shutting down.
+      #     This may happen to reduce capacity during a scaling down event or
+      #     to recycle resources in the event of a problem.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_time
+      #   Time stamp indicating when this data object was created. Format is a
+      #   number expressed in Unix time as milliseconds (ex:
+      #   "1469498468.057").
+      #   @return [Time]
+      class Instance < Struct.new(
+        :fleet_id,
+        :instance_id,
+        :ip_address,
+        :operating_system,
+        :type,
+        :status,
+        :creation_time)
         include Aws::Structure
       end
 
@@ -1752,6 +1918,7 @@ module Aws
       #
       #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
       #     type when routing to active fleets.
+      #
       #   * **TERMINAL** – The alias does not resolve to a fleet but instead
       #     can be used to display a message to the user. A terminal alias
       #     throws a TerminalRoutingStrategyException with the RoutingStrategy
@@ -1790,12 +1957,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class ListAliasesOutput < Struct.new(
         :aliases,
@@ -1822,8 +1983,10 @@ module Aws
       #     been uploaded. You cannot create fleets for builds that are in
       #     this status. When a build is successfully created, the build
       #     status is set to this value.
+      #
       #   * **READY** – The game build has been successfully uploaded. You can
       #     now create new fleets for this build.
+      #
       #   * **FAILED** – The game build upload failed. You cannot create new
       #     fleets for this build.
       #   @return [String]
@@ -1854,12 +2017,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class ListBuildsOutput < Struct.new(
         :builds,
@@ -1911,12 +2068,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class ListFleetsOutput < Struct.new(
         :fleet_ids,
@@ -1934,7 +2085,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session.
+      #   Unique identifier for the game session that the player session is
+      #   connected to.
       #   @return [String]
       #
       # @!attribute [rw] fleet_id
@@ -1961,9 +2113,12 @@ module Aws
       #   * **RESERVED** – The player session request has been received, but
       #     the player has not yet connected to the server process and/or been
       #     validated.
+      #
       #   * **ACTIVE** – The player has been validated by the server process
       #     and is currently connected.
+      #
       #   * **COMPLETED** – The player connection has been dropped.
+      #
       #   * **TIMEDOUT** – A player session request was received, but the
       #     player did not connect and/or was not validated within the
       #     time-out limit (60 seconds).
@@ -2026,8 +2181,10 @@ module Aws
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
       #     value from the current instance count. Positive values scale up
       #     while negative values scale down.
+      #
       #   * **ExactCapacity** – set the instance count to the scaling
       #     adjustment value.
+      #
       #   * **PercentChangeInCapacity** – increase or reduce the current
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down; for
@@ -2054,18 +2211,23 @@ module Aws
       #
       #   * **ActivatingGameSessions** – number of game sessions in the
       #     process of being created (game session status = `ACTIVATING`).
+      #
       #   * **ActiveGameSessions** – number of game sessions currently running
       #     (game session status = `ACTIVE`).
+      #
       #   * **CurrentPlayerSessions** – number of active or reserved player
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
+      #
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
       #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number includes
       #     game sessions that are not currently accepting players (game
       #     session `PlayerSessionCreationPolicy` = `DENY_ALL`).
+      #
       #   * **ActiveInstances** – number of instances currently running a game
       #     session.
+      #
       #   * **IdleInstances** – number of instances not currently running a
       #     game session.
       #   @return [String]
@@ -2147,6 +2309,39 @@ module Aws
         include Aws::Structure
       end
 
+      # Policy that limits the number of game sessions a player can create on
+      # the same fleet. This optional policy gives game owners control over
+      # how players can consume available game server resources. A resource
+      # creation policy makes the following statement: "An individual player
+      # can create a maximum number of new game sessions within a specified
+      # time period".
+      #
+      # The policy is evaluated when a player tries to create a new game
+      # session. For example, with a policy of 10 new game sessions and a time
+      # period of 60 minutes, on receiving a `CreateGameSession` request,
+      # GameLift checks that the player (identified by `CreatorId`) has
+      # created fewer than 10 game sessions in the past 60 minutes.
+      # @note When making an API call, pass ResourceCreationLimitPolicy
+      #   data as a hash:
+      #
+      #       {
+      #         new_game_sessions_per_creator: 1,
+      #         policy_period_in_minutes: 1,
+      #       }
+      # @!attribute [rw] new_game_sessions_per_creator
+      #   Maximum number of game sessions an individual can create during the
+      #   policy period.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] policy_period_in_minutes
+      #   Time span used to evaluate the resource creation limit policy.
+      #   @return [Integer]
+      class ResourceCreationLimitPolicy < Struct.new(
+        :new_game_sessions_per_creator,
+        :policy_period_in_minutes)
+        include Aws::Structure
+      end
+
       # Routing configuration for a fleet alias.
       # @note When making an API call, pass RoutingStrategy
       #   data as a hash:
@@ -2163,6 +2358,7 @@ module Aws
       #
       #   * **SIMPLE** – The alias resolves to one specific fleet. Use this
       #     type when routing to active fleets.
+      #
       #   * **TERMINAL** – The alias does not resolve to a fleet but instead
       #     can be used to display a message to the user. A terminal alias
       #     throws a TerminalRoutingStrategyException with the RoutingStrategy
@@ -2202,7 +2398,7 @@ module Aws
       # A GameLift instance is limited to 50 processes running simultaneously.
       # To calculate the total number of processes specified in a runtime
       # configuration, add the values of the `ConcurrentExecutions` parameter
-      # for each `ServerProcess` object in the runtime configuration.
+      # for each ` ServerProcess ` object in the runtime configuration.
       # @note When making an API call, pass RuntimeConfiguration
       #   data as a hash:
       #
@@ -2276,13 +2472,19 @@ module Aws
       #   force when in an `ACTIVE` status.
       #
       #   * **ACTIVE** – The scaling policy is currently in force.
+      #
       #   * **UPDATE\_REQUESTED** – A request to update the scaling policy has
       #     been received.
+      #
       #   * **UPDATING** – A change is being made to the scaling policy.
+      #
       #   * **DELETE\_REQUESTED** – A request to delete the scaling policy has
       #     been received.
+      #
       #   * **DELETING** – The scaling policy is being deleted.
+      #
       #   * **DELETED** – The scaling policy has been deleted.
+      #
       #   * **ERROR** – An error occurred in creating the policy. It should be
       #     removed and recreated.
       #   @return [String]
@@ -2298,8 +2500,10 @@ module Aws
       #   * **ChangeInCapacity** – add (or subtract) the scaling adjustment
       #     value from the current instance count. Positive values scale up
       #     while negative values scale down.
+      #
       #   * **ExactCapacity** – set the instance count to the scaling
       #     adjustment value.
+      #
       #   * **PercentChangeInCapacity** – increase or reduce the current
       #     instance count by the scaling adjustment, read as a percentage.
       #     Positive values scale up while negative values scale down.
@@ -2325,18 +2529,23 @@ module Aws
       #
       #   * **ActivatingGameSessions** – number of game sessions in the
       #     process of being created (game session status = `ACTIVATING`).
+      #
       #   * **ActiveGameSessions** – number of game sessions currently running
       #     (game session status = `ACTIVE`).
+      #
       #   * **CurrentPlayerSessions** – number of active or reserved player
       #     sessions (player session status = `ACTIVE` or `RESERVED`).
+      #
       #   * **AvailablePlayerSessions** – number of player session slots
       #     currently available in active game sessions across the fleet,
       #     calculated by subtracting a game session's current player session
       #     count from its maximum player session count. This number does
       #     include game sessions that are not currently accepting players
       #     (game session `PlayerSessionCreationPolicy` = `DENY_ALL`).
+      #
       #   * **ActiveInstances** – number of instances currently running a game
       #     session.
+      #
       #   * **IdleInstances** – number of instances not currently running a
       #     game session.
       #   @return [String]
@@ -2387,13 +2596,15 @@ module Aws
       #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
       #     `playerSessionCount`, `maximumSessions`,
       #     `hasAvailablePlayerSessions`.
-      #   * **Comparator** -- Valid comparators are: `=`, `&lt;&gt;`, `&lt;`,
-      #     `&gt;`, `&lt;=`, `&gt;=`.
+      #
+      #   * **Comparator** -- Valid comparators are: `=`, `<>`, `<`, `>`,
+      #     `<=`, `>=`.
+      #
       #   * **Value** -- Value to be searched for. Values can be numbers,
       #     boolean values (true/false) or strings. String values are case
       #     sensitive, enclosed in single quotes. Special characters must be
       #     escaped. Boolean and string values can only be used with the
-      #     comparators `=` and `&lt;&gt;`. For example, the following filter
+      #     comparators `=` and `<>`. For example, the following filter
       #     expression searches on `gameSessionName`\: "`FilterExpression":
       #     "gameSessionName = 'Matt\'s Awesome Game 1'"`.
       #
@@ -2404,15 +2615,19 @@ module Aws
       #   Session search evaluates conditions from left to right using the
       #   following precedence rules:
       #
-      #   1.  `=`, `&lt;&gt;`, `&lt;`, `&gt;`, `&lt;=`, `&gt;=`
+      #   1.  `=`, `<>`, `<`, `>`, `<=`, `>=`
+      #
       #   2.  Parentheses
+      #
       #   3.  NOT
+      #
       #   4.  AND
+      #
       #   5.  OR
       #
       #   For example, this filter expression retrieves game sessions hosting
       #   at least ten players that have an open player slot:
-      #   `"maximumSessions&gt;=10 AND hasAvailablePlayerSessions=true"`.
+      #   `"maximumSessions>=10 AND hasAvailablePlayerSessions=true"`.
       #   @return [String]
       #
       # @!attribute [rw] sort_expression
@@ -2424,6 +2639,7 @@ module Aws
       #     `gameSessionName`, `gameSessionId`, `creationTimeMillis`,
       #     `playerSessionCount`, `maximumSessions`,
       #     `hasAvailablePlayerSessions`.
+      #
       #   * **Order** -- Valid sort orders are `ASC` (ascending) and `DESC`
       #     (descending).
       #
@@ -2464,12 +2680,6 @@ module Aws
       #   Token indicating where to resume retrieving results on the next call
       #   to this action. If no token is returned, these results represent the
       #   end of the list.
-      #
-      #   <note markdown="1"> If a request has a limit that exactly matches the number of
-      #   remaining results, a token is returned even though there are no more
-      #   results to retrieve.
-      #
-      #    </note>
       #   @return [String]
       class SearchGameSessionsOutput < Struct.new(
         :game_sessions,
@@ -2481,8 +2691,8 @@ module Aws
       # in a fleet. Each instruction set identifies the location of the server
       # executable, optional launch parameters, and the number of server
       # processes with this configuration to maintain concurrently on the
-      # instance. Server process configurations make up a fleet's
-      # `RuntimeConfiguration`.
+      # instance. Server process configurations make up a fleet's `
+      # RuntimeConfiguration `.
       # @note When making an API call, pass ServerProcess
       #   data as a hash:
       #
@@ -2520,7 +2730,7 @@ module Aws
       #
       #       {
       #         alias_id: "AliasId", # required
-      #         name: "NonZeroAndMaxString",
+      #         name: "NonBlankAndLengthConstraintString",
       #         description: "NonZeroAndMaxString",
       #         routing_strategy: {
       #           type: "SIMPLE", # accepts SIMPLE, TERMINAL
@@ -2609,6 +2819,10 @@ module Aws
       #         name: "NonZeroAndMaxString",
       #         description: "NonZeroAndMaxString",
       #         new_game_session_protection_policy: "NoProtection", # accepts NoProtection, FullProtection
+      #         resource_creation_limit_policy: {
+      #           new_game_sessions_per_creator: 1,
+      #           policy_period_in_minutes: 1,
+      #         },
       #       }
       # @!attribute [rw] fleet_id
       #   Unique identifier for the fleet you want to update attribute
@@ -2631,14 +2845,21 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       #   @return [String]
+      #
+      # @!attribute [rw] resource_creation_limit_policy
+      #   Policy that limits the number of game sessions an individual player
+      #   can create over a span of time.
+      #   @return [Types::ResourceCreationLimitPolicy]
       class UpdateFleetAttributesInput < Struct.new(
         :fleet_id,
         :name,
         :description,
-        :new_game_session_protection_policy)
+        :new_game_session_protection_policy,
+        :resource_creation_limit_policy)
         include Aws::Structure
       end
 
@@ -2751,15 +2972,19 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         game_session_id: "GameSessionId", # required
+      #         game_session_id: "ArnStringModel", # required
       #         maximum_player_session_count: 1,
       #         name: "NonZeroAndMaxString",
       #         player_session_creation_policy: "ACCEPT_ALL", # accepts ACCEPT_ALL, DENY_ALL
       #         protection_policy: "NoProtection", # accepts NoProtection, FullProtection
       #       }
       # @!attribute [rw] game_session_id
-      #   Unique identifier for a game session. Specify the game session you
-      #   want to update.
+      #   Unique identifier for the game session to update. Game session ID
+      #   format is as follows:
+      #   "arn:aws:gamelift:&lt;region&gt;\::gamesession/fleet-&lt;fleet
+      #   ID&gt;/&lt;ID string&gt;". The value of &lt;ID string&gt; is either
+      #   a custom ID string (if one was specified when the game session was
+      #   created) an auto-generated string.
       #   @return [String]
       #
       # @!attribute [rw] maximum_player_session_count
@@ -2782,6 +3007,7 @@ module Aws
       #
       #   * **NoProtection** – The game session can be terminated during a
       #     scale-down event.
+      #
       #   * **FullProtection** – If the game session is in an `ACTIVE` status,
       #     it cannot be terminated during a scale-down event.
       #   @return [String]

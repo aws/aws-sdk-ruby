@@ -269,6 +269,7 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      #   resp.snapshot.enhanced_vpc_routing #=> Boolean
       # @overload authorize_snapshot_access(params = {})
       # @param [Hash] params ({})
       def authorize_snapshot_access(params = {}, options = {})
@@ -301,6 +302,8 @@ module Aws
       #
       #   * Must be the identifier for a valid automated snapshot whose state is
       #     `available`.
+      #
+      #   ^
       # @option params [String] :source_snapshot_cluster_identifier
       #   The identifier of the cluster the source snapshot was created from.
       #   This parameter is required if your IAM user has a policy containing a
@@ -310,15 +313,21 @@ module Aws
       #   Constraints:
       #
       #   * Must be the identifier for a valid cluster.
+      #
+      #   ^
       # @option params [required, String] :target_snapshot_identifier
       #   The identifier given to the new manual snapshot.
       #
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank.
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for the AWS account that is making the request.
       # @return [Types::CopyClusterSnapshotResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -364,6 +373,7 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      #   resp.snapshot.enhanced_vpc_routing #=> Boolean
       # @overload copy_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def copy_cluster_snapshot(params = {}, options = {})
@@ -371,13 +381,14 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new cluster. To create the cluster in virtual private cloud
-      # (VPC), you must provide cluster subnet group name. If you don't
-      # provide a cluster subnet group name or the cluster security group
-      # parameter, Amazon Redshift creates a non-VPC cluster, it associates
-      # the default cluster security group with the cluster. For more
-      # information about managing clusters, go to [Amazon Redshift
-      # Clusters][1] in the *Amazon Redshift Cluster Management Guide* .
+      # Creates a new cluster.
+      #
+      # To create the cluster in Virtual Private Cloud (VPC), you must provide
+      # a cluster subnet group name. The cluster subnet group identifies the
+      # subnets of your VPC that Amazon Redshift uses when creating the
+      # cluster. For more information about managing clusters, go to [Amazon
+      # Redshift Clusters][1] in the *Amazon Redshift Cluster Management
+      # Guide*.
       #
       #
       #
@@ -396,7 +407,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain 1 to 64 alphanumeric characters.
+      #
       #   * Must contain only lowercase letters.
+      #
       #   * Cannot be a word that is reserved by the service. A list of reserved
       #     words can be found in [Reserved Words][2] in the Amazon Redshift
       #     Database Developer Guide.
@@ -414,15 +427,21 @@ module Aws
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #
       #   Example: `myexamplecluster`
       # @option params [String] :cluster_type
-      #   The type of the cluster. When cluster type is specified as *
-      #   `single-node`, the **NumberOfNodes** parameter is not required.
+      #   The type of the cluster. When cluster type is specified as
+      #
+      #   * `single-node`, the **NumberOfNodes** parameter is not required.
+      #
       #   * `multi-node`, the **NumberOfNodes** parameter is required.
       #
       #   Valid Values: `multi-node` \| `single-node`
@@ -446,7 +465,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 - 128 alphanumeric characters.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot be a reserved word. A list of reserved words can be found in
       #     [Reserved Words][1] in the Amazon Redshift Database Developer Guide.
       #
@@ -460,9 +481,13 @@ module Aws
       #   Constraints:
       #
       #   * Must be between 8 and 64 characters in length.
+      #
       #   * Must contain at least one uppercase letter.
+      #
       #   * Must contain at least one lowercase letter.
+      #
       #   * Must contain one number.
+      #
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
       #     ' (single quote), " (double quote), \\, /, @, or space.
       # @option params [Array<String>] :cluster_security_groups
@@ -522,7 +547,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #
@@ -616,6 +643,20 @@ module Aws
       # @option params [String] :kms_key_id
       #   The AWS Key Management Service (KMS) key ID of the encryption key that
       #   you want to use to encrypt data in the cluster.
+      # @option params [Boolean] :enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
       # @option params [String] :additional_info
       #   Reserved.
       # @option params [Array<String>] :iam_roles
@@ -624,7 +665,7 @@ module Aws
       #   IAM roles in their Amazon Resource Name (ARN) format. You can supply
       #   up to 10 IAM roles in a single request.
       #
-      #   A cluster can have up to 10 IAM roles associated at any time.
+      #   A cluster can have up to 10 IAM roles associated with it at any time.
       # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateClusterResult#cluster #Cluster} => Types::Cluster
@@ -660,6 +701,7 @@ module Aws
       #       },
       #     ],
       #     kms_key_id: "String",
+      #     enhanced_vpc_routing: false,
       #     additional_info: "String",
       #     iam_roles: ["String"],
       #   })
@@ -700,6 +742,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -729,6 +772,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -761,11 +805,16 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique withing your AWS account.
       #
-      #   <note>This value is stored as a lower-case string.</note>
+      #   <note markdown="1"> This value is stored as a lower-case string.
+      #
+      #    </note>
       # @option params [required, String] :parameter_group_family
       #   The Amazon Redshift engine version to which the cluster parameter
       #   group applies. The cluster engine version determines the set of
@@ -830,7 +879,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
+      #
       #   * Must not be "Default".
+      #
       #   * Must be unique for all security groups that are created by your AWS
       #     account.
       #
@@ -898,8 +949,11 @@ module Aws
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       #
       #   Example: `my-snapshot-id`
@@ -956,6 +1010,7 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      #   resp.snapshot.enhanced_vpc_routing #=> Boolean
       # @overload create_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def create_cluster_snapshot(params = {}, options = {})
@@ -980,7 +1035,9 @@ module Aws
       #   Constraints:
       #
       #   * Must contain no more than 255 alphanumeric characters or hyphens.
+      #
       #   * Must not be "Default".
+      #
       #   * Must be unique for all subnet groups that are created by your AWS
       #     account.
       #
@@ -1059,8 +1116,11 @@ module Aws
       #   Constraints:
       #
       #   * Cannot be null, empty, or blank.
+      #
       #   * Must contain from 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       # @option params [required, String] :sns_topic_arn
       #   The Amazon Resource Name (ARN) of the Amazon SNS topic used to
@@ -1275,10 +1335,14 @@ module Aws
       #
       #   Constraints:
       #
-      #    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       # @option params [String] :kms_key_id
       #   The unique identifier of the customer master key (CMK) to which to
@@ -1357,7 +1421,7 @@ module Aws
       # DescribeClusters to monitor the status of the deletion. The delete
       # operation cannot be canceled or reverted once submitted. For more
       # information about managing clusters, go to [Amazon Redshift
-      # Clusters][1] in the *Amazon Redshift Cluster Management Guide* .
+      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
       #
       # If you want to shut down the cluster and retain it for future use, set
       # *SkipFinalClusterSnapshot* to `false` and specify a name for
@@ -1368,7 +1432,7 @@ module Aws
       # begins deleting the cluster.
       #
       # For more information about managing clusters, go to [Amazon Redshift
-      # Clusters][1] in the *Amazon Redshift Cluster Management Guide* .
+      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
       #
       #
       #
@@ -1379,8 +1443,11 @@ module Aws
       #   Constraints:
       #
       #   * Must contain lowercase characters.
+      #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       # @option params [Boolean] :skip_final_cluster_snapshot
       #   Determines whether a final snapshot of the cluster is created before
@@ -1388,7 +1455,10 @@ module Aws
       #   snapshot is not created. If `false`, a final cluster snapshot is
       #   created before the cluster is deleted.
       #
-      #   <note>The *FinalClusterSnapshotIdentifier* parameter must be specified if *SkipFinalClusterSnapshot* is `false`.</note>
+      #   <note markdown="1"> The *FinalClusterSnapshotIdentifier* parameter must be specified if
+      #   *SkipFinalClusterSnapshot* is `false`.
+      #
+      #    </note>
       #
       #   Default: `false`
       # @option params [String] :final_cluster_snapshot_identifier
@@ -1399,7 +1469,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       # @return [Types::DeleteClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1448,6 +1520,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -1477,6 +1550,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -1487,14 +1561,19 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes a specified Amazon Redshift parameter group. <note>You cannot
-      # delete a parameter group if it is associated with a cluster.</note>
+      # Deletes a specified Amazon Redshift parameter group.
+      #
+      # <note markdown="1"> You cannot delete a parameter group if it is associated with a
+      # cluster.
+      #
+      #  </note>
       # @option params [required, String] :parameter_group_name
       #   The name of the parameter group to be deleted.
       #
       #   Constraints:
       #
       #   * Must be the name of an existing cluster parameter group.
+      #
       #   * Cannot delete a default cluster parameter group.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -1511,7 +1590,10 @@ module Aws
 
       # Deletes an Amazon Redshift security group.
       #
-      # <note>You cannot delete a security group that is associated with any clusters. You cannot delete the default security group.</note>
+      # <note markdown="1"> You cannot delete a security group that is associated with any
+      # clusters. You cannot delete the default security group.
+      #
+      #  </note>
       #
       # For information about managing security groups, go to [Amazon Redshift
       # Cluster Security Groups][1] in the *Amazon Redshift Cluster Management
@@ -1600,6 +1682,7 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      #   resp.snapshot.enhanced_vpc_routing #=> Boolean
       # @overload delete_cluster_snapshot(params = {})
       # @param [Hash] params ({})
       def delete_cluster_snapshot(params = {}, options = {})
@@ -2129,6 +2212,7 @@ module Aws
       #   resp.snapshots[0].tags[0].value #=> String
       #   resp.snapshots[0].restorable_node_types #=> Array
       #   resp.snapshots[0].restorable_node_types[0] #=> String
+      #   resp.snapshots[0].enhanced_vpc_routing #=> Boolean
       # @overload describe_cluster_snapshots(params = {})
       # @param [Hash] params ({})
       def describe_cluster_snapshots(params = {}, options = {})
@@ -2226,7 +2310,7 @@ module Aws
       # versions. You can call this operation even before creating any
       # clusters to learn more about the Amazon Redshift versions. For more
       # information about managing clusters, go to [Amazon Redshift
-      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*
+      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
       #
       #
       #
@@ -2242,7 +2326,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       # @option params [Integer] :max_records
       #   The maximum number of response records to return in each call. If the
@@ -2292,7 +2378,7 @@ module Aws
       # properties, and security and access properties. This operation
       # supports pagination. For more information about managing clusters, go
       # to [Amazon Redshift Clusters][1] in the *Amazon Redshift Cluster
-      # Management Guide* .
+      # Management Guide*.
       #
       # If you specify both tag keys and tag values in the same request,
       # Amazon Redshift returns all clusters that match any combination of the
@@ -2399,6 +2485,7 @@ module Aws
       #   resp.clusters[0].pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.clusters[0].pending_modified_values.cluster_identifier #=> String
       #   resp.clusters[0].pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.clusters[0].pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.clusters[0].cluster_version #=> String
       #   resp.clusters[0].allow_version_upgrade #=> Boolean
       #   resp.clusters[0].number_of_nodes #=> Integer
@@ -2428,6 +2515,7 @@ module Aws
       #   resp.clusters[0].tags[0].key #=> String
       #   resp.clusters[0].tags[0].value #=> String
       #   resp.clusters[0].kms_key_id #=> String
+      #   resp.clusters[0].enhanced_vpc_routing #=> Boolean
       #   resp.clusters[0].iam_roles #=> Array
       #   resp.clusters[0].iam_roles[0].iam_role_arn #=> String
       #   resp.clusters[0].iam_roles[0].apply_status #=> String
@@ -2613,10 +2701,13 @@ module Aws
       #   If *SourceIdentifier* is supplied, *SourceType* must also be provided.
       #
       #   * Specify a cluster identifier when *SourceType* is `cluster`.
+      #
       #   * Specify a cluster security group name when *SourceType* is
       #     `cluster-security-group`.
+      #
       #   * Specify a cluster parameter group name when *SourceType* is
       #     `cluster-parameter-group`.
+      #
       #   * Specify a cluster snapshot identifier when *SourceType* is
       #     `cluster-snapshot`.
       # @option params [String] :source_type
@@ -2628,10 +2719,13 @@ module Aws
       #   If *SourceType* is supplied, *SourceIdentifier* must also be provided.
       #
       #   * Specify `cluster` when *SourceIdentifier* is a cluster identifier.
+      #
       #   * Specify `cluster-security-group` when *SourceIdentifier* is a
       #     cluster security group name.
+      #
       #   * Specify `cluster-parameter-group` when *SourceIdentifier* is a
       #     cluster parameter group name.
+      #
       #   * Specify `cluster-snapshot` when *SourceIdentifier* is a cluster
       #     snapshot identifier.
       # @option params [Time,DateTime,Date,Integer,String] :start_time
@@ -2919,7 +3013,7 @@ module Aws
       # cost involved you might want to obtain a list of cluster options in
       # the specific region and specify values when creating a cluster. For
       # more information about managing clusters, go to [Amazon Redshift
-      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*
+      # Clusters][1] in the *Amazon Redshift Cluster Management Guide*.
       #
       #
       #
@@ -3301,11 +3395,14 @@ module Aws
       # by specifying an ARN, or you can return all tags for a given type of
       # resource, such as clusters, snapshots, and so on.
       #
-      # The following are limitations for `DescribeTags`\: * You cannot
-      # specify an ARN and a resource-type value together in the
+      # The following are limitations for `DescribeTags`\:
+      #
+      # * You cannot specify an ARN and a resource-type value together in the
       #   same request.
+      #
       # * You cannot use the `MaxRecords` and `Marker` parameters together
       #   with the ARN parameter.
+      #
       # * The `MaxRecords` parameter can be a range from 10 to 50 results to
       #   return in a request.
       #
@@ -3324,15 +3421,26 @@ module Aws
       #   `arn:aws:redshift:us-east-1:123456789:cluster:t1`.
       # @option params [String] :resource_type
       #   The type of resource with which you want to view tags. Valid resource
-      #   types are: * Cluster
+      #   types are:
+      #
+      #   * Cluster
+      #
       #   * CIDR/IP
+      #
       #   * EC2 security group
+      #
       #   * Snapshot
+      #
       #   * Cluster security group
+      #
       #   * Subnet group
+      #
       #   * HSM connection
+      #
       #   * HSM certificate
+      #
       #   * Parameter group
+      #
       #   * Snapshot copy grant
       #
       #   For more information about Amazon Redshift resource types and
@@ -3491,6 +3599,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -3520,6 +3629,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -3543,6 +3653,7 @@ module Aws
       #   Constraints:
       #
       #   * Must be in the same region as the cluster
+      #
       #   * The cluster must have read bucket and put object permissions
       # @option params [String] :s3_key_prefix
       #   The prefix applied to the log file names.
@@ -3550,13 +3661,19 @@ module Aws
       #   Constraints:
       #
       #   * Cannot exceed 512 characters
+      #
       #   * Cannot contain spaces( ), double quotes ("), single quotes ('), a
       #     backslash (\\), or control characters. The hexadecimal codes for
       #     invalid characters are:
+      #
       #     * x00 to x20
+      #
       #     * x22
+      #
       #     * x27
+      #
       #     * x5c
+      #
       #     * x7f or larger
       # @return [Types::LoggingStatus] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -3663,6 +3780,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -3692,6 +3810,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -3709,7 +3828,7 @@ module Aws
       # reboot. However, modifying a parameter group requires a reboot for
       # parameters to take effect. For more information about managing
       # clusters, go to [Amazon Redshift Clusters][1] in the *Amazon Redshift
-      # Cluster Management Guide* .
+      # Cluster Management Guide*.
       #
       # You can also change node type and the number of nodes to scale up or
       # down the cluster. When resizing a cluster, you must specify both the
@@ -3773,7 +3892,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens
+      #
       #   * First character must be a letter
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       # @option params [Array<String>] :vpc_security_group_ids
       #   A list of virtual private cloud (VPC) security groups to be associated
@@ -3783,18 +3904,26 @@ module Aws
       #   asynchronously applied as soon as possible. Between the time of the
       #   request and the completion of the request, the `MasterUserPassword`
       #   element exists in the `PendingModifiedValues` element of the operation
-      #   response. <note> Operations never return the password, so this
-      #   operation provides a way to regain access to the master user account
-      #   for a cluster if the password is lost. </note>
+      #   response.
+      #
+      #   <note markdown="1"> Operations never return the password, so this operation provides a way
+      #   to regain access to the master user account for a cluster if the
+      #   password is lost.
+      #
+      #    </note>
       #
       #   Default: Uses existing setting.
       #
       #   Constraints:
       #
       #   * Must be between 8 and 64 characters in length.
+      #
       #   * Must contain at least one uppercase letter.
+      #
       #   * Must contain at least one lowercase letter.
+      #
       #   * Must contain one number.
+      #
       #   * Can be any printable ASCII character (ASCII code 33 to 126) except
       #     ' (single quote), " (double quote), \\, /, @, or space.
       # @option params [String] :cluster_parameter_group_name
@@ -3870,9 +3999,13 @@ module Aws
       #   Constraints:
       #
       #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       #
       #   Example: `examplecluster`
@@ -3891,6 +4024,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#cluster-platforms
+      # @option params [Boolean] :enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
       # @return [Types::ModifyClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ModifyClusterResult#cluster #Cluster} => Types::Cluster
@@ -3914,6 +4061,7 @@ module Aws
       #     new_cluster_identifier: "String",
       #     publicly_accessible: false,
       #     elastic_ip: "String",
+      #     enhanced_vpc_routing: false,
       #   })
       #
       # @example Response structure
@@ -3952,6 +4100,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -3981,6 +4130,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -3999,13 +4149,13 @@ module Aws
       #   The unique identifier of the cluster for which you want to associate
       #   or disassociate IAM roles.
       # @option params [Array<String>] :add_iam_roles
-      #   Zero or more IAM roles (in their ARN format) to associate with the
-      #   cluster. You can associate up to 10 IAM roles with a single cluster in
-      #   a single request.
+      #   Zero or more IAM roles to associate with the cluster. The roles must
+      #   be in their Amazon Resource Name (ARN) format. You can associate up to
+      #   10 IAM roles with a single cluster in a single request.
       # @option params [Array<String>] :remove_iam_roles
-      #   Zero or more IAM roles (in their ARN format) to disassociate from the
-      #   cluster. You can disassociate up to 10 IAM roles from a single cluster
-      #   in a single request.
+      #   Zero or more IAM roles in ARN format to disassociate from the cluster.
+      #   You can disassociate up to 10 IAM roles from a single cluster in a
+      #   single request.
       # @return [Types::ModifyClusterIamRolesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ModifyClusterIamRolesResult#cluster #Cluster} => Types::Cluster
@@ -4053,6 +4203,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -4082,6 +4233,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -4328,6 +4480,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -4357,6 +4510,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -4425,7 +4579,7 @@ module Aws
       # reboot is completed. Any pending cluster modifications (see
       # ModifyCluster) are applied at this reboot. For more information about
       # managing clusters, go to [Amazon Redshift Clusters][1] in the *Amazon
-      # Redshift Cluster Management Guide*
+      # Redshift Cluster Management Guide*.
       #
       #
       #
@@ -4477,6 +4631,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -4506,6 +4661,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -4594,10 +4750,14 @@ module Aws
       #
       #   Constraints:
       #
-      #    * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #   * Must contain from 1 to 63 alphanumeric characters or hyphens.
+      #
       #   * Alphabetic characters must be lowercase.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
+      #
       #   * Must be unique for all clusters within an AWS account.
       # @option params [required, String] :snapshot_identifier
       #   The name of the snapshot from which to create the new cluster. This
@@ -4658,7 +4818,9 @@ module Aws
       #   Constraints:
       #
       #   * Must be 1 to 255 alphanumeric characters or hyphens.
+      #
       #   * First character must be a letter.
+      #
       #   * Cannot end with a hyphen or contain two consecutive hyphens.
       #
       #
@@ -4726,6 +4888,20 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/working-with-clusters.html#rs-about-clusters-and-nodes
+      # @option params [Boolean] :enhanced_vpc_routing
+      #   An option that specifies whether to create the cluster with enhanced
+      #   VPC routing enabled. To create a cluster that uses enhanced VPC
+      #   routing, the cluster must be in a VPC. For more information, see
+      #   [Enhanced VPC Routing][1] in the Amazon Redshift Cluster Management
+      #   Guide.
+      #
+      #   If this option is `true`, enhanced VPC routing is enabled.
+      #
+      #   Default: false
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/redshift/latest/mgmt/enhanced-vpc-routing.html
       # @option params [String] :additional_info
       #   Reserved.
       # @option params [Array<String>] :iam_roles
@@ -4760,6 +4936,7 @@ module Aws
       #     automated_snapshot_retention_period: 1,
       #     kms_key_id: "String",
       #     node_type: "String",
+      #     enhanced_vpc_routing: false,
       #     additional_info: "String",
       #     iam_roles: ["String"],
       #   })
@@ -4800,6 +4977,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -4829,6 +5007,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
@@ -5044,6 +5223,7 @@ module Aws
       #   resp.snapshot.tags[0].value #=> String
       #   resp.snapshot.restorable_node_types #=> Array
       #   resp.snapshot.restorable_node_types[0] #=> String
+      #   resp.snapshot.enhanced_vpc_routing #=> Boolean
       # @overload revoke_snapshot_access(params = {})
       # @param [Hash] params ({})
       def revoke_snapshot_access(params = {}, options = {})
@@ -5103,6 +5283,7 @@ module Aws
       #   resp.cluster.pending_modified_values.automated_snapshot_retention_period #=> Integer
       #   resp.cluster.pending_modified_values.cluster_identifier #=> String
       #   resp.cluster.pending_modified_values.publicly_accessible #=> Boolean
+      #   resp.cluster.pending_modified_values.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.cluster_version #=> String
       #   resp.cluster.allow_version_upgrade #=> Boolean
       #   resp.cluster.number_of_nodes #=> Integer
@@ -5132,6 +5313,7 @@ module Aws
       #   resp.cluster.tags[0].key #=> String
       #   resp.cluster.tags[0].value #=> String
       #   resp.cluster.kms_key_id #=> String
+      #   resp.cluster.enhanced_vpc_routing #=> Boolean
       #   resp.cluster.iam_roles #=> Array
       #   resp.cluster.iam_roles[0].iam_role_arn #=> String
       #   resp.cluster.iam_roles[0].apply_status #=> String
