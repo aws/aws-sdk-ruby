@@ -22,12 +22,16 @@
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
   },
+  "Budgets": {
+    "models": "budgets/2016-10-20",
+    "endpoint": "budgets"
+  },
   "CloudFormation": {
     "models": "cloudformation/2010-05-15",
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-08-20",
+    "models": "cloudfront/2016-09-29",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
@@ -125,7 +129,7 @@
     "endpoint": "streams.dynamodb"
   },
   "EC2": {
-    "models": "ec2/2016-04-01",
+    "models": "ec2/2016-09-15",
     "endpoint": "ec2",
     "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
@@ -307,6 +311,10 @@
   "SimpleDB": {
     "models": "sdb/2009-04-15",
     "endpoint": "sdb"
+  },
+  "SMS": {
+    "models": "sms/2016-10-24",
+    "endpoint": "sms"
   },
   "SNS": {
     "models": "sns/2010-03-31",

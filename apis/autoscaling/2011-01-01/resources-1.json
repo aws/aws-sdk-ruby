@@ -1514,7 +1514,7 @@
                         }
                     ]
                 },
-                "path": "Tags[]"
+                "path": "Tags[0]"
             },
             "actions": {
                 "Create": {

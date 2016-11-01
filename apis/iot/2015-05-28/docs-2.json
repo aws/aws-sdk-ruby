@@ -171,6 +171,7 @@
         "CloudwatchAlarmAction$roleArn": "<p>The IAM role that allows access to the CloudWatch alarm.</p>",
         "CloudwatchMetricAction$roleArn": "<p>The IAM role that allows access to the CloudWatch metric.</p>",
         "DynamoDBAction$roleArn": "<p>The ARN of the IAM role that grants access to the DynamoDB table.</p>",
+        "DynamoDBv2Action$roleArn": "<p>The ARN of the IAM role that grants access to the DynamoDB table.</p>",
         "ElasticsearchAction$roleArn": "<p>The IAM role ARN that has access to Elasticsearch.</p>",
         "FirehoseAction$roleArn": "<p>The IAM role that grants access to the Amazon Kinesis Firehost stream.</p>",
         "GetLoggingOptionsResponse$roleArn": "<p>The ARN of the IAM role that grants access.</p>",
@@ -231,6 +232,12 @@
     "CancelCertificateTransferRequest": {
       "base": "<p>The input for the CancelCertificateTransfer operation.</p>",
       "refs": {
+      }
+    },
+    "CannedAccessControlList": {
+      "base": null,
+      "refs": {
+        "S3Action$cannedAcl": "<p>The Amazon S3 canned ACL that controls access to the object identified by the object key. For more information, see <a href=\"http://docs.aws.amazon.com/AmazonS3/latest/dev/acl-overview.html#canned-acl\">S3 canned ACLs</a>.</p>"
       }
     },
     "Certificate": {
@@ -320,6 +327,7 @@
       "refs": {
         "Certificate$status": "<p>The status of the certificate.</p> <p>The status value REGISTER_INACTIVE is deprecated and should not be used.</p>",
         "CertificateDescription$status": "<p>The status of the certificate.</p>",
+        "RegisterCertificateRequest$status": null,
         "UpdateCertificateRequest$newStatus": "<p>The new status.</p> <p><b>Note:</b> Setting the status to PENDING_TRANSFER will result in an exception being thrown. PENDING_TRANSFER is a status used internally by AWS IoT. It is not intended for developer use.</p> <p><b>Note:</b> The status value REGISTER_INACTIVE is deprecated and should not be used.</p>"
       }
     },
@@ -617,6 +625,12 @@
         "Action$dynamoDB": "<p>Write to a DynamoDB table.</p>"
       }
     },
+    "DynamoDBv2Action": {
+      "base": "<p>Describes an action to write to a DynamoDB table.</p> <p>This DynamoDB action writes each attribute in the message payload into it's own column in the DynamoDB table.</p>",
+      "refs": {
+        "Action$dynamoDBv2": "<p>Write to a DynamoDB table. This is a new version of the DynamoDB action. It allows you to write each attribute in an MQTT message payload into a separate DynamoDB column.</p>"
+      }
+    },
     "DynamoKeyType": {
       "base": null,
       "refs": {
@@ -631,9 +645,9 @@
       }
     },
     "ElasticsearchAction": {
-      "base": "<p>Describes an action that writes data to an Amazon Elasticsearch Service; domain.</p>",
+      "base": "<p>Describes an action that writes data to an Amazon Elasticsearch Service domain.</p>",
       "refs": {
-        "Action$elasticsearch": "<p>Write data to an Amazon Elasticsearch Service; domain.</p>"
+        "Action$elasticsearch": "<p>Write data to an Amazon Elasticsearch Service domain.</p>"
       }
     },
     "ElasticsearchEndpoint": {
@@ -680,7 +694,7 @@
     "FirehoseSeparator": {
       "base": null,
       "refs": {
-        "FirehoseAction$separator": "<p>A character separator that will be used to separate records written to the firehose stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
+        "FirehoseAction$separator": "<p>A character separator that will be used to separate records written to the Firehose stream. Valid values are: '\\n' (newline), '\\t' (tab), '\\r\\n' (Windows newline), ',' (comma).</p>"
       }
     },
     "Flag": {
@@ -1211,6 +1225,12 @@
         "KeyPair$PublicKey": "<p>The public key.</p>"
       }
     },
+    "PutItemInput": {
+      "base": "<p>The input for the DynamoActionVS action that specifies the DynamoDB table to which the message data will be written.</p>",
+      "refs": {
+        "DynamoDBv2Action$putItem": "<p>Specifies the DynamoDB table to which the message data will be written. For example:</p> <p><code>{ \"dynamoDBv2\": { \"roleArn\": \"aws:iam:12341251:my-role\" \"putItem\": { \"tableName\": \"my-table\" } } }</code></p> <p>Each attribute in the message payload will be written to a separate column in the DynamoDB database.</p>"
+      }
+    },
     "QueueUrl": {
       "base": null,
       "refs": {
@@ -1342,7 +1362,12 @@
         "AcceptCertificateTransferRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
         "CreateCertificateFromCsrRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
         "CreateKeysAndCertificateRequest$setAsActive": "<p>Specifies whether the certificate is active.</p>",
-        "RegisterCACertificateRequest$setAsActive": "<p>A boolean value that specifies if the CA certificate is set to active.</p>",
+        "RegisterCACertificateRequest$setAsActive": "<p>A boolean value that specifies if the CA certificate is set to active.</p>"
+      }
+    },
+    "SetAsActiveFlag": {
+      "base": null,
+      "refs": {
         "RegisterCertificateRequest$setAsActive": "<p>A boolean value that specifies if the CA certificate is set to active.</p>"
       }
     },
@@ -1400,7 +1425,8 @@
     "TableName": {
       "base": null,
       "refs": {
-        "DynamoDBAction$tableName": "<p>The name of the DynamoDB table.</p>"
+        "DynamoDBAction$tableName": "<p>The name of the DynamoDB table.</p>",
+        "PutItemInput$tableName": "<p>The table where the message data will be written</p>"
       }
     },
     "ThingArn": {
@@ -1646,6 +1672,18 @@
         "UnauthorizedException$message": "<p>The message for the exception.</p>",
         "VersionConflictException$message": "<p>The message for the exception.</p>",
         "VersionsLimitExceededException$message": "<p>The message for the exception.</p>"
+      }
+    },
+    "resourceArn": {
+      "base": null,
+      "refs": {
+        "ResourceAlreadyExistsException$resourceArn": "<p>The ARN of the resource that caused the exception.</p>"
+      }
+    },
+    "resourceId": {
+      "base": null,
+      "refs": {
+        "ResourceAlreadyExistsException$resourceId": "<p>The ID of the resource that caused the exception.</p>"
       }
     }
   }

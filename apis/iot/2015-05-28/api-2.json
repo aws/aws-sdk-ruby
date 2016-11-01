@@ -2419,6 +2419,7 @@
       "type":"structure",
       "members":{
         "dynamoDB":{"shape":"DynamoDBAction"},
+        "dynamoDBv2":{"shape":"DynamoDBv2Action"},
         "lambda":{"shape":"LambdaAction"},
         "sns":{"shape":"SnsAction"},
         "sqs":{"shape":"SqsAction"},
@@ -2562,6 +2563,19 @@
           "locationName":"certificateId"
         }
       }
+    },
+    "CannedAccessControlList":{
+      "type":"string",
+      "enum":[
+        "private",
+        "public-read",
+        "public-read-write",
+        "aws-exec-read",
+        "authenticated-read",
+        "bucket-owner-read",
+        "bucket-owner-full-control",
+        "log-delivery-write"
+      ]
     },
     "Certificate":{
       "type":"structure",
@@ -3127,6 +3141,13 @@
         "rangeKeyValue":{"shape":"RangeKeyValue"},
         "rangeKeyType":{"shape":"DynamoKeyType"},
         "payloadField":{"shape":"PayloadField"}
+      }
+    },
+    "DynamoDBv2Action":{
+      "type":"structure",
+      "members":{
+        "roleArn":{"shape":"AwsArn"},
+        "putItem":{"shape":"PutItemInput"}
       }
     },
     "DynamoKeyType":{
@@ -3833,6 +3854,13 @@
       "type":"string",
       "min":1
     },
+    "PutItemInput":{
+      "type":"structure",
+      "required":["tableName"],
+      "members":{
+        "tableName":{"shape":"TableName"}
+      }
+    },
     "QueueUrl":{"type":"string"},
     "RangeKeyField":{"type":"string"},
     "RangeKeyValue":{"type":"string"},
@@ -3871,10 +3899,12 @@
         "certificatePem":{"shape":"CertificatePem"},
         "caCertificatePem":{"shape":"CertificatePem"},
         "setAsActive":{
-          "shape":"SetAsActive",
+          "shape":"SetAsActiveFlag",
+          "deprecated":true,
           "location":"querystring",
           "locationName":"setAsActive"
-        }
+        },
+        "status":{"shape":"CertificateStatus"}
       }
     },
     "RegisterCertificateResponse":{
@@ -3941,7 +3971,9 @@
     "ResourceAlreadyExistsException":{
       "type":"structure",
       "members":{
-        "message":{"shape":"errorMessage"}
+        "message":{"shape":"errorMessage"},
+        "resourceId":{"shape":"resourceId"},
+        "resourceArn":{"shape":"resourceArn"}
       },
       "error":{"httpStatusCode":409},
       "exception":true
@@ -3971,7 +4003,8 @@
       "members":{
         "roleArn":{"shape":"AwsArn"},
         "bucketName":{"shape":"BucketName"},
-        "key":{"shape":"Key"}
+        "key":{"shape":"Key"},
+        "cannedAcl":{"shape":"CannedAccessControlList"}
       }
     },
     "SQL":{"type":"string"},
@@ -3989,6 +4022,7 @@
       "fault":true
     },
     "SetAsActive":{"type":"boolean"},
+    "SetAsActiveFlag":{"type":"boolean"},
     "SetAsDefault":{"type":"boolean"},
     "SetDefaultPolicyVersionRequest":{
       "type":"structure",
@@ -4305,6 +4339,8 @@
       "error":{"httpStatusCode":409},
       "exception":true
     },
-    "errorMessage":{"type":"string"}
+    "errorMessage":{"type":"string"},
+    "resourceArn":{"type":"string"},
+    "resourceId":{"type":"string"}
   }
 }

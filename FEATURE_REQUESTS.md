@@ -10,6 +10,27 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Handle S3 #exists? Edge Cases
+
+See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267).
+
+### Retry S3 Transfers on BadDigest Error
+
+See [related GitHub issue #1264](https://github.com/aws/aws-sdk-ruby/issues/1264).
+
+### Add Waiters for Aws::ElasticBeanstalk
+
+See [related GitHub issue #1259](https://github.com/aws/aws-sdk-ruby/issues/1259).
+
+### Provide an Interface to Interact With Shared Configuration Values
+
+The SDK uses the Shared Credential and Configuration files at various points
+within the default credential provider chain, and other places. However, there
+is not currently a way to interact with these raw configuration values. This
+request is to expose these values in a consistent and usable way.
+
+See [related GitHub issue #1256](https://github.com/aws/aws-sdk-ruby/issues/1256).
+
 ### Expose Raw Exception Response Bodies
 
 The SDK uses first the exception response `__type` field, then the `ErrorCode`

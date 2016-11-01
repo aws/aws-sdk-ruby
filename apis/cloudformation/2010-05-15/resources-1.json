@@ -36,7 +36,8 @@
           "type": "Stack",
           "identifiers": [
             { "target": "Name", "source": "response", "path": "Stacks[].StackName" }
-          ]
+          ],
+          "path": "Stacks[]"
         }
       }
     }
@@ -72,6 +73,14 @@
         "CancelUpdate": {
           "request": {
             "operation": "CancelUpdateStack",
+            "params": [
+              { "target": "StackName", "source": "identifier", "name": "Name" }
+            ]
+          }
+        },
+        "Create": {
+          "request": {
+            "operation": "CreateStack",
             "params": [
               { "target": "StackName", "source": "identifier", "name": "Name" }
             ]

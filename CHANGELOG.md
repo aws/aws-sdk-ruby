@@ -1,6 +1,67 @@
 Unreleased Changes
 ------------------
 
+2.6.5 (2016-09-29)
+------------------
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::EC2 - Added support for the new 2016-09-15 API version of Amazon Elastic Compute Cloud.
+
+2.6.4 (2016-09-27)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::CodePipeline - Updated the documentation for AWS CodePipeline.
+
+* Feature - Aws::EFS - Updated the documentation for Amazon Elastic File System.
+
+* Feature - Aws::KMS - Updated the documentation for AWS Key Management Service.
+
+* Feature - Aws::Snowball - Updated the documentation for Amazon Import/Export Snowball.
+
+2.6.3 (2016-09-22)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+2.6.2 (2016-09-20)
+------------------
+
+* Feature - Aws::CodeDeploy - Updated the API, and documentation for AWS CodeDeploy.
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::Redshift - Updated the API, and documentation for Amazon Redshift.
+
+2.6.1 (2016-09-15)
+------------------
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+2.6.0 (2016-09-13)
+------------------
+
+* Feature - Aws::AutoScaling - Updated the resource interfaces for Auto Scaling.
+
+* Feature - Aws::EC2 - Updated the documentation for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.5.11 (2016-09-08)
+------------------
+
+* Feature - Aws::SNS - Updated the documentation for Amazon Simple Notification Service.
+
+* Feature - Aws::Support - Updated the API, and documentation for AWS Support.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-09-07 API version of Amazon CloudFront.
+
 2.5.10 (2016-09-07)
 ------------------
 
