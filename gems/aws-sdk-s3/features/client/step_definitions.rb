@@ -201,7 +201,8 @@ When(/^I create a (non-secure )?presigned url for "(.*?)" with:$/) do |non_secur
 end
 
 When(/^I send an HTTP get request for the presigned url$/) do
-  @resp = Net::HTTP.get_response(URI(@url))
+  uri = URI(@url)
+  @resp = Net::HTTP.get_response(uri.host, uri.request_uri)
 end
 
 Then(/^the response should be "(.*?)"$/) do |expected|
@@ -211,16 +212,20 @@ end
 When(/^I send an HTTP put request for the presigned url with body "(.*?)"$/) do |body|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri)
+  req = Net::HTTP::Put.new(uri.request_uri, {
+    'content-length' => body.bytesize.to_s
+  })
   req.body = body
   @resp = http.request(req)
-  puts @resp.body
   expect(@resp.code).to eq('200')
 end
 
 Then(/^I make an unauthenticated HTTPS GET request for key "(.*?)"$/) do |key|
   uri = URI.parse("https://#{@bucket_name}.s3.amazonaws.com/#{key}")
-  @resp = Net::HTTP.get_response(uri)
+  http = Net::HTTP.new(uri.host, 443)
+  http.use_ssl = true
+  req = Net::HTTP::Get.new(uri.request_uri)
+  @resp = http.request(req)
 end
 
 Then(/^I make an unauthenticated HTTP GET request for key "(.*?)"$/) do |key|
@@ -251,7 +256,7 @@ end
 When(/^I send an HTTP put request with the content type as "(.*?)"$/) do |content_type|
   uri = URI(@url)
   http = Net::HTTP.new(uri.host)
-  req = Net::HTTP::Put.new(uri, 'content-type' => content_type)
+  req = Net::HTTP::Put.new(uri.request_uri, 'content-type' => content_type)
   req.body = 'data'
   @resp = http.request(req)
 end
