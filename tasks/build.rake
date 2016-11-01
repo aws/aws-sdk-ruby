@@ -23,11 +23,3 @@ task 'build:sts' do
   builder = BuildTools::Builder::Source.new(sts) {}
   builder.build
 end
-
-task 'build:clean' do
-  Dir.glob("#{$REPO_ROOT}/gems/**/*").each do |path|
-    next if File.directory?(path)
-    next if BuildTools::GENERATED_SRC_FIRST_LINE != File.open(path, 'r', &:gets)
-    sh("rm #{path}")
-  end
-end
