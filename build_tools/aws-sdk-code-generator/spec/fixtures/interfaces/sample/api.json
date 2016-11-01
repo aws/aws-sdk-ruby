@@ -89,6 +89,14 @@
       },
       "input": { "shape": "UpdateBandRequest" },
       "output": { "shape": "UpdateBandResponse" }
+    },
+    "DeleteBands":{
+      "name":"DeleteBands",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input": { "shape": "DeleteBandsRequest" }
     }
   },
   "shapes": {
@@ -335,6 +343,44 @@
         "Band": { "shape": "Band" }
       }
     },
-    "Year": { "type": "integer" }
+    "Year": { "type": "integer" },
+    "Delete":{
+      "type": "structure",
+      "required": [ "Bands "],
+      "members": {
+        "Bands": {
+          "shape": "BandIdentifierList",
+          "locationName": "Band"
+        }
+      }
+    },
+    "BandIdentifierList":{
+      "type": "list",
+      "member": { "shape": "BandIdentifier"},
+      "flattened": true
+    },
+    "BandIdentifier":{
+      "type": "structure",
+      "required": [ "BandName" ],
+      "members": {
+        "BandName": { "shape": "BandName" }
+      }
+    },
+    "DeleteBandsRequest":{
+      "type":"structure",
+      "required":[
+        "Delete"
+      ],
+      "members":{
+        "Delete":{
+          "shape": "Delete",
+          "locationName": "Delete"
+        },
+        "Bands":{
+          "shape": "BandList",
+          "locationName": "Band"
+        }
+      }
+    }
   }
 }

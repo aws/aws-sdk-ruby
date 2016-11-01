@@ -173,6 +173,19 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_put(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].name
+            params[:topic_arn] = batch[0].topic_arn
+            params[:notification_types] ||= []
+            batch.each do |item|
+              params[:notification_types] << {
+                notification_type: item.notification_type
+              }
+            end
+            batch[0].client.put_notification_configuration(params)
+          end
+          nil
         end
 
         # @!endgroup

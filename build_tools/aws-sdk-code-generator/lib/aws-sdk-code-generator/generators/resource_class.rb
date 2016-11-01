@@ -43,10 +43,7 @@ module AwsSdkCodeGenerator
         apply_associations
         add(identifiers_method)
         add(*private_methods)
-        add(Generators::Resource::CollectionClass.new(
-          resource_name: @name,
-          resource: @resource,
-        ))
+        add(batch_action)
       end
 
       def initialize_method
@@ -160,6 +157,13 @@ module AwsSdkCodeGenerator
             var_name: @var_name,
           )
         end
+      end
+
+      def batch_action
+        Generators::Resource::CollectionClass.new(
+          resource_name: @name,
+          resource: @resource,
+        )
       end
 
       def identifiers_method

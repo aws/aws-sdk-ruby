@@ -872,12 +872,10 @@ module Aws
         # @return [void]
         def batch_delete!(options = {})
           batch_enum.each do |batch|
-            params = Aws::Util.deep_merge(options, {
-              bucket: batch[0].bucket_name,
-              delete: {
-                objects: []
-              }
-            })
+            params = Aws::Util.copy_hash(options)
+            params[:bucket] = batch[0].bucket_name
+            params[:delete] ||= {}
+            params[:delete][:objects] ||= []
             batch.each do |item|
               params[:delete][:objects] << {
                 key: item.key

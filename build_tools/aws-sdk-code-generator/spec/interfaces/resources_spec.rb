@@ -697,24 +697,56 @@ describe 'Interfaces' do
 
     describe 'batchActions' do
 
-      it 'invokes one client request per collection batch'
+      it 'raises for actions that model a resource' do
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        expect(bands).to respond_to(:batch_delete!) 
+      end
 
-      it 'supports batch actions with fixed params'
+      it 'invokes one client request per collection batch and returns nil as response' do
+        client.stub_responses(:list_bands, [
+          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
+          { bands: [{ band_name: 'band-2' }] },
+        ])
+        expect(client).to receive(:delete_bands).twice.and_return(nil)
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        bands.batch_delete!
+      end
 
-      it 'raises for actions that model a resource'
+      it 'has a #batches method that returns a collection enumerator that responds to batch actions' do
+        client.stub_responses(:list_bands, [
+          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
+          { bands: [{ band_name: 'band-2' }] },
+        ])
+        expect(client).to receive(:delete_bands).with({
+          bands: [
+            { band_name: 'band-1' }
+          ]
+        }).once.and_return(nil)
+        expect(client).to receive(:delete_bands).with({
+          bands: [
+            { band_name: 'band-2' }
+          ]
+        }).once.and_return(nil)
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        bands.batches.each do |batch|
+          batch.batch_delete!
+        end
+      end
 
-      it 'prefixes batch operation names with batch_'
-
-      it 'suffixes batch delete operations with a bang(!)'
-
-      it 'suffixes batch terminate operations with a bang(!)'
-
-      it 'validates batch args, accepts 0 or 1 arguments'
-
-      it 'validates batch args, options must be a hash'
-
-      it 'has a #batches method that returns a collection enumerator that responds to batch actions'
-
+      it 'validates batch args, options must be a hash' do
+        client.stub_responses(:list_bands, [
+          { bands: [{ band_name: 'band-1' }], next_token: 'token' },
+          { bands: [{ band_name: 'band-2' }] },
+        ])
+        svc = Sample::Resource.new(client: client)
+        bands = svc.bands
+        expect{
+          bands.batch_delete!('not_hash')
+        }.to raise_error(ArgumentError, "expected hash, got `String`")
+      end
     end
   end
 end

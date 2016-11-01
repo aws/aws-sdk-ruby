@@ -366,16 +366,49 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:alarm_names] ||= []
+            batch.each do |item|
+              params[:alarm_names] << {
+                name: item.name
+              }
+            end
+            batch[0].client.delete_alarms(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_disable_actions(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:alarm_names] ||= []
+            batch.each do |item|
+              params[:alarm_names] << {
+                name: item.name
+              }
+            end
+            batch[0].client.disable_alarm_actions(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_enable_actions(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:alarm_names] ||= []
+            batch.each do |item|
+              params[:alarm_names] << {
+                name: item.name
+              }
+            end
+            batch[0].client.enable_alarm_actions(params)
+          end
+          nil
         end
 
         # @!endgroup

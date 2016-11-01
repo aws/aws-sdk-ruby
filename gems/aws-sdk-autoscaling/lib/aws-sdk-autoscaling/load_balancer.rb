@@ -174,11 +174,35 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:load_balancer_names] ||= []
+            batch.each do |item|
+              params[:load_balancer_names] << {
+                name: item.name
+              }
+            end
+            batch[0].client.attach_load_balancers(params)
+          end
+          nil
         end
 
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:auto_scaling_group_name] = batch[0].group_name
+            params[:load_balancer_names] ||= []
+            batch.each do |item|
+              params[:load_balancer_names] << {
+                name: item.name
+              }
+            end
+            batch[0].client.detach_load_balancers(params)
+          end
+          nil
         end
 
         # @!endgroup

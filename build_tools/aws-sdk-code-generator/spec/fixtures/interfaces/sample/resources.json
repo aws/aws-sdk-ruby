@@ -124,6 +124,14 @@
               { "target": "BandName", "source": "identifier", "name": "Name" }
             ]
           }
+        },
+        "Delete": {
+          "request": {
+            "operation": "DeleteBands",
+            "params": [
+              { "target": "Bands[].BandName", "source": "identifier", "name": "Name" }
+            ]
+          }
         }
       },
       "batchActions": {

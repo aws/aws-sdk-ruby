@@ -32,7 +32,6 @@ module Aws
           end
         end
       end
-      deprecated :batches
 
       # @deprecated
       # @api private

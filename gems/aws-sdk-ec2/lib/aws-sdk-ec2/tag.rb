@@ -187,6 +187,22 @@ module Aws
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
+          batch_enum.each do |batch|
+            params = Aws::Util.copy_hash(options)
+            params[:resources] ||= []
+            params[:tags] ||= []
+            batch.each do |item|
+              params[:resources] << {
+                resource_id: item.resource_id
+              }
+              params[:tags] << {
+                key: item.key,
+                value: item.value
+              }
+            end
+            batch[0].client.delete_tags(params)
+          end
+          nil
         end
 
         # @!endgroup
