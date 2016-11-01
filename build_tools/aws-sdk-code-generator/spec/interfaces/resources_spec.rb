@@ -700,7 +700,7 @@ describe 'Interfaces' do
       it 'raises for actions that model a resource' do
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
-        expect(bands).to respond_to(:batch_delete!) 
+        expect(bands).to respond_to(:batch_delete!)
       end
 
       it 'invokes one client request per collection batch and returns nil as response' do
@@ -708,7 +708,12 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
           { bands: [{ band_name: 'band-2' }] },
         ])
-        expect(client).to receive(:delete_bands).twice.and_return(nil)
+        expect(client).to receive(:delete_bands).
+          with(bands: [{ band_name: 'band-1' }]).
+          ordered
+        expect(client).to receive(:delete_bands).
+          with(bands: [{ band_name: 'band-2' }]).
+          ordered
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         bands.batch_delete!
@@ -719,16 +724,12 @@ describe 'Interfaces' do
           { bands: [{ band_name: 'band-1' }], next_token: 'token' },
           { bands: [{ band_name: 'band-2' }] },
         ])
-        expect(client).to receive(:delete_bands).with({
-          bands: [
-            { band_name: 'band-1' }
-          ]
-        }).once.and_return(nil)
-        expect(client).to receive(:delete_bands).with({
-          bands: [
-            { band_name: 'band-2' }
-          ]
-        }).once.and_return(nil)
+        expect(client).to receive(:delete_bands).
+          with(bands: [{ band_name: 'band-1' }]).
+          ordered
+        expect(client).to receive(:delete_bands).
+          with(bands: [{ band_name: 'band-2' }]).
+          ordered
         svc = Sample::Resource.new(client: client)
         bands = svc.bands
         bands.batches.each do |batch|
@@ -747,6 +748,7 @@ describe 'Interfaces' do
           bands.batch_delete!('not_hash')
         }.to raise_error(ArgumentError, "expected hash, got `String`")
       end
+
     end
   end
 end
