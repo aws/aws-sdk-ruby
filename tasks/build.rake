@@ -5,12 +5,11 @@ task 'build' do
   end
 end
 
-desc 'Build one service gem, eg `build:dynamodb`'
-task 'build:*'
+desc 'Build one service, e.g. `rake build  build:aws-sdk-dynamodb`'
+task 'build:aws-sdk-*'
 
-# Build a single service gem; invoke like `rake build:s3`
-rule /^build:\w+$/ do |task|
-  identifier = task.name.split(':').last
+rule /^build:aws-sdk-\w+$/ do |task|
+  identifier = task.name.split('-').last
   BuildTools::Services[identifier].build
 end
 
