@@ -12,7 +12,7 @@ module Aws
         GetOpenIdToken
         UnlinkIdentity
       ).each do |operation_name|
-        Seahorse::Util.underscore(operation_name).tap do |method_name|
+        AwsSdkCodeGenerator::Underscore.underscore(operation_name).tap do |method_name|
 
           it "does not sign calls to #{method_name}" do
             resp = client.send(method_name, {})

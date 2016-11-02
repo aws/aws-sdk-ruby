@@ -76,7 +76,7 @@ def client_for(suite, test_case, n)
 end
 
 def underscore(str)
-  Seahorse::Util.underscore(str)
+  AwsSdkCodeGenerator::Underscore.underscore(str)
 end
 
 def format_data(ref, src)

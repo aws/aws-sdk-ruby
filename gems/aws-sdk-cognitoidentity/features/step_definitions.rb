@@ -15,7 +15,7 @@ end
 
 When(/^I make a (\w+) request$/) do |operation|
   begin
-    @client.send(Seahorse::Util.underscore(operation))
+    @client.send(AwsSdkCodeGenerator::Underscore.underscore(operation))
   rescue => error
     @error = error
   end
