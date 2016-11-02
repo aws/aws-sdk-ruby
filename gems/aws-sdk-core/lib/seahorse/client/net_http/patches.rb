@@ -2,6 +2,7 @@ require 'net/http'
 
 module Seahorse
   module Client
+    # @api private
     module NetHttp
 
       # @api private

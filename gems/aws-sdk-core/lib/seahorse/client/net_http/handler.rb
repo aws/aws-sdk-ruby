@@ -3,6 +3,7 @@ require 'openssl'
 
 module Seahorse
   module Client
+    # @api private
     module NetHttp
 
       # The default HTTP handler for Seahorse::Client.  This is based on

@@ -2,6 +2,8 @@ require 'pathname'
 
 module Seahorse
   module Client
+    # @deprecated Use Aws::Logging instead.
+    # @api private
     module Logging
 
       # A log formatter receives a {Response} object and return

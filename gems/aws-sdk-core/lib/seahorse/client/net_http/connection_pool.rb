@@ -10,6 +10,7 @@ Seahorse::Client::NetHttp::Patches.apply!
 
 module Seahorse
   module Client
+    # @api private
     module NetHttp
 
       class ConnectionPool
