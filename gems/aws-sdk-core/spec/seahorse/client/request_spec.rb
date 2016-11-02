@@ -1,5 +1,6 @@
 require_relative '../../spec_helper'
 require 'tempfile'
+require 'pathname'
 
 module Seahorse
   module Client

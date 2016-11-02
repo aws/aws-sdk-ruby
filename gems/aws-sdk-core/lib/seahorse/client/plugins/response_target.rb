@@ -1,3 +1,5 @@
+require 'pathname'
+
 module Seahorse
   module Client
     module Plugins

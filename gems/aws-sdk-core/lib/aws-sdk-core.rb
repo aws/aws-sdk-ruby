@@ -120,7 +120,6 @@ require_relative 'aws-sdk-core/json/error_handler'
 require_relative 'aws-sdk-core/json/handler'
 require_relative 'aws-sdk-core/json/parser'
 
-
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',
   'CNAMEs' => 'cnames',
