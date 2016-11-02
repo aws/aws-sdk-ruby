@@ -25,12 +25,6 @@ a default `:region` is search for in the following locations:
         resolve_region(cfg)
       end
 
-    # @seahorse.client.option [required, String] :region
-    #
-    # @seahorse.client.option [String] :endpoint A default endpoint is
-    #   constructed from the `:region`.
-    #
-
       option(:endpoint, doc_type: String, docstring: <<-DOCS) do |cfg|
 The client endpoint is normally constructed from the `:region`
 option. You should only configure an `:endpoint` when connecting
