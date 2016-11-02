@@ -2,11 +2,19 @@
 
 ## `aws-sdk-core` - v3.0.0
 
-* Removed `Aws.add_service`
+* Service modules have been removed from `aws-sdk-core`. They are now available
+  in service gems. The `aws-sdk-core` gem now only contains shared utilities,
+  such as credential providers, logging, etc. If you had a dependency on
+  `aws-sdk-core` previously to use Amazon S3, replace it instead with `aws-sdk-s3`.
+  If you want to load every AWS service gem, use the `aws-sdk` gem.
 
-* `Aws.eager_autoload!` no longer loads every service unless `aws-sdk` is present.
-  TODO : consider removing this functionality if/when aws-sdk-core eliminates
-  autoload.
+* `Aws.eager_autoload!` is deprecated as all autoload statements have been replaced
+  with require statements. Calling this method will now generate a warning and
+  have no other effect.
+
+* Removed the `Aws.add_service` method. Services are no longer defined
+  at runtime. Each service is now defined in a seperate gem, e.g.
+  `aws-sdk-s3`, `aws-sdk-ec2`, etc.
 
 ## `aws-sdk-core` - v2.5.0
 
