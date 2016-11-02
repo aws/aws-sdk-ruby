@@ -21,12 +21,12 @@ module Aws
             max_attempts: 40,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "matcher" => "path",
                   "expected" => true,
-                  "argument" => "length(Reservations[]) > `0`",
+                  "argument" => "length(reservations[]) > `0`",
                   "state" => "success"
                 },
                 {
@@ -63,19 +63,19 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeBundleTasks",
-              "acceptors" => [
+              operation_name: :describe_bundle_tasks,
+              acceptors: [
                 {
                   "expected" => "complete",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "BundleTasks[].State"
+                  "argument" => "bundle_tasks[].state"
                 },
                 {
                   "expected" => "failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "BundleTasks[].State"
+                  "argument" => "bundle_tasks[].state"
                 }
               ]
             )
@@ -106,12 +106,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeConversionTasks",
-              "acceptors" => [{
+              operation_name: :describe_conversion_tasks,
+              acceptors: [{
                 "expected" => "cancelled",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "ConversionTasks[].State"
+                "argument" => "conversion_tasks[].state"
               }]
             )
           }.merge(options))
@@ -141,25 +141,25 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeConversionTasks",
-              "acceptors" => [
+              operation_name: :describe_conversion_tasks,
+              acceptors: [
                 {
                   "expected" => "completed",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "ConversionTasks[].State"
+                  "argument" => "conversion_tasks[].state"
                 },
                 {
                   "expected" => "cancelled",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "ConversionTasks[].State"
+                  "argument" => "conversion_tasks[].state"
                 },
                 {
                   "expected" => "cancelling",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "ConversionTasks[].State"
+                  "argument" => "conversion_tasks[].state"
                 }
               ]
             )
@@ -190,12 +190,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeConversionTasks",
-              "acceptors" => [{
+              operation_name: :describe_conversion_tasks,
+              acceptors: [{
                 "expected" => "deleted",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "ConversionTasks[].State"
+                "argument" => "conversion_tasks[].state"
               }]
             )
           }.merge(options))
@@ -225,25 +225,25 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeCustomerGateways",
-              "acceptors" => [
+              operation_name: :describe_customer_gateways,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "CustomerGateways[].State"
+                  "argument" => "customer_gateways[].state"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "CustomerGateways[].State"
+                  "argument" => "customer_gateways[].state"
                 },
                 {
                   "expected" => "deleting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "CustomerGateways[].State"
+                  "argument" => "customer_gateways[].state"
                 }
               ]
             )
@@ -274,12 +274,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeExportTasks",
-              "acceptors" => [{
+              operation_name: :describe_export_tasks,
+              acceptors: [{
                 "expected" => "cancelled",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "ExportTasks[].State"
+                "argument" => "export_tasks[].state"
               }]
             )
           }.merge(options))
@@ -309,12 +309,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeExportTasks",
-              "acceptors" => [{
+              operation_name: :describe_export_tasks,
+              acceptors: [{
                 "expected" => "completed",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "ExportTasks[].State"
+                "argument" => "export_tasks[].state"
               }]
             )
           }.merge(options))
@@ -344,12 +344,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeImages",
-              "acceptors" => [
+              operation_name: :describe_images,
+              acceptors: [
                 {
                   "matcher" => "path",
                   "expected" => true,
-                  "argument" => "length(Images[]) > `0`",
+                  "argument" => "length(images[]) > `0`",
                   "state" => "success"
                 },
                 {
@@ -386,18 +386,18 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeImages",
-              "acceptors" => [
+              operation_name: :describe_images,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "pathAll",
-                  "argument" => "Images[].State",
+                  "argument" => "images[].state",
                   "expected" => "available"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "Images[].State",
+                  "argument" => "images[].state",
                   "expected" => "failed"
                 }
               ]
@@ -429,31 +429,31 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "running",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "shutting-down",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "stopping",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "matcher" => "error",
@@ -489,12 +489,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstanceStatus",
-              "acceptors" => [
+              operation_name: :describe_instance_status,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "pathAll",
-                  "argument" => "InstanceStatuses[].InstanceStatus.Status",
+                  "argument" => "instance_statuses[].instance_status.status",
                   "expected" => "ok"
                 },
                 {
@@ -531,25 +531,25 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "stopped",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "pending",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 }
               ]
             )
@@ -580,25 +580,25 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "pending",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 },
                 {
                   "expected" => "stopping",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Reservations[].Instances[].State.Name"
+                  "argument" => "reservations[].instances[].state.name"
                 }
               ]
             )
@@ -629,13 +629,13 @@ module Aws
             max_attempts: 6,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeKeyPairs",
-              "acceptors" => [
+              operation_name: :describe_key_pairs,
+              acceptors: [
                 {
                   "expected" => true,
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "length(KeyPairs[].KeyName) > `0`"
+                  "argument" => "length(key_pairs[].key_name) > `0`"
                 },
                 {
                   "expected" => "InvalidKeyPair.NotFound",
@@ -671,30 +671,30 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeNatGateways",
-              "acceptors" => [
+              operation_name: :describe_nat_gateways,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "pathAll",
-                  "argument" => "NatGateways[].State",
+                  "argument" => "nat_gateways[].state",
                   "expected" => "available"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "NatGateways[].State",
+                  "argument" => "nat_gateways[].state",
                   "expected" => "failed"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "NatGateways[].State",
+                  "argument" => "nat_gateways[].state",
                   "expected" => "deleting"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "NatGateways[].State",
+                  "argument" => "nat_gateways[].state",
                   "expected" => "deleted"
                 },
                 {
@@ -731,13 +731,13 @@ module Aws
             max_attempts: 10,
             delay: 20,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeNetworkInterfaces",
-              "acceptors" => [
+              operation_name: :describe_network_interfaces,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "NetworkInterfaces[].Status"
+                  "argument" => "network_interfaces[].status"
                 },
                 {
                   "expected" => "InvalidNetworkInterfaceID.NotFound",
@@ -773,11 +773,11 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetPasswordData",
-              "acceptors" => [{
+              operation_name: :get_password_data,
+              acceptors: [{
                 "state" => "success",
                 "matcher" => "path",
-                "argument" => "length(PasswordData) > `0`",
+                "argument" => "length(password_data) > `0`",
                 "expected" => true
               }]
             )
@@ -808,12 +808,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeSnapshots",
-              "acceptors" => [{
+              operation_name: :describe_snapshots,
+              acceptors: [{
                 "expected" => "completed",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "Snapshots[].State"
+                "argument" => "snapshots[].state"
               }]
             )
           }.merge(options))
@@ -843,36 +843,36 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeSpotInstanceRequests",
-              "acceptors" => [
+              operation_name: :describe_spot_instance_requests,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "pathAll",
-                  "argument" => "SpotInstanceRequests[].Status.Code",
+                  "argument" => "spot_instance_requests[].status.code",
                   "expected" => "fulfilled"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "SpotInstanceRequests[].Status.Code",
+                  "argument" => "spot_instance_requests[].status.code",
                   "expected" => "schedule-expired"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "SpotInstanceRequests[].Status.Code",
+                  "argument" => "spot_instance_requests[].status.code",
                   "expected" => "canceled-before-fulfillment"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "SpotInstanceRequests[].Status.Code",
+                  "argument" => "spot_instance_requests[].status.code",
                   "expected" => "bad-parameters"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "SpotInstanceRequests[].Status.Code",
+                  "argument" => "spot_instance_requests[].status.code",
                   "expected" => "system-error"
                 }
               ]
@@ -904,12 +904,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeSubnets",
-              "acceptors" => [{
+              operation_name: :describe_subnets,
+              acceptors: [{
                 "expected" => "available",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "Subnets[].State"
+                "argument" => "subnets[].state"
               }]
             )
           }.merge(options))
@@ -939,11 +939,11 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstanceStatus",
-              "acceptors" => [{
+              operation_name: :describe_instance_status,
+              acceptors: [{
                 "state" => "success",
                 "matcher" => "pathAll",
-                "argument" => "InstanceStatuses[].SystemStatus.Status",
+                "argument" => "instance_statuses[].system_status.status",
                 "expected" => "ok"
               }]
             )
@@ -974,19 +974,19 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVolumes",
-              "acceptors" => [
+              operation_name: :describe_volumes,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Volumes[].State"
+                  "argument" => "volumes[].state"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Volumes[].State"
+                  "argument" => "volumes[].state"
                 }
               ]
             )
@@ -1017,13 +1017,13 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVolumes",
-              "acceptors" => [
+              operation_name: :describe_volumes,
+              acceptors: [
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Volumes[].State"
+                  "argument" => "volumes[].state"
                 },
                 {
                   "matcher" => "error",
@@ -1059,19 +1059,19 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVolumes",
-              "acceptors" => [
+              operation_name: :describe_volumes,
+              acceptors: [
                 {
                   "expected" => "in-use",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Volumes[].State"
+                  "argument" => "volumes[].state"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Volumes[].State"
+                  "argument" => "volumes[].state"
                 }
               ]
             )
@@ -1102,12 +1102,12 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVpcs",
-              "acceptors" => [{
+              operation_name: :describe_vpcs,
+              acceptors: [{
                 "expected" => "available",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "Vpcs[].State"
+                "argument" => "vpcs[].state"
               }]
             )
           }.merge(options))
@@ -1137,8 +1137,8 @@ module Aws
             max_attempts: 5,
             delay: 1,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVpcs",
-              "acceptors" => [
+              operation_name: :describe_vpcs,
+              acceptors: [
                 {
                   "matcher" => "status",
                   "expected" => 200,
@@ -1178,25 +1178,25 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVpnConnections",
-              "acceptors" => [
+              operation_name: :describe_vpn_connections,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "VpnConnections[].State"
+                  "argument" => "vpn_connections[].state"
                 },
                 {
                   "expected" => "deleting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "VpnConnections[].State"
+                  "argument" => "vpn_connections[].state"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "VpnConnections[].State"
+                  "argument" => "vpn_connections[].state"
                 }
               ]
             )
@@ -1227,19 +1227,19 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVpnConnections",
-              "acceptors" => [
+              operation_name: :describe_vpn_connections,
+              acceptors: [
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "VpnConnections[].State"
+                  "argument" => "vpn_connections[].state"
                 },
                 {
                   "expected" => "pending",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "VpnConnections[].State"
+                  "argument" => "vpn_connections[].state"
                 }
               ]
             )
@@ -1270,8 +1270,8 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVpcPeeringConnections",
-              "acceptors" => [
+              operation_name: :describe_vpc_peering_connections,
+              acceptors: [
                 {
                   "matcher" => "status",
                   "expected" => 200,

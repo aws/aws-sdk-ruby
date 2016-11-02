@@ -21,19 +21,19 @@ module Aws
             max_attempts: 30,
             delay: 60,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeClusters",
-              "acceptors" => [
+              operation_name: :describe_clusters,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Clusters[].ClusterStatus"
+                  "argument" => "clusters[].cluster_status"
                 },
                 {
                   "expected" => "deleting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Clusters[].ClusterStatus"
+                  "argument" => "clusters[].cluster_status"
                 },
                 {
                   "expected" => "ClusterNotFound",
@@ -69,8 +69,8 @@ module Aws
             max_attempts: 30,
             delay: 60,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeClusters",
-              "acceptors" => [
+              operation_name: :describe_clusters,
+              acceptors: [
                 {
                   "expected" => "ClusterNotFound",
                   "matcher" => "error",
@@ -80,13 +80,13 @@ module Aws
                   "expected" => "creating",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Clusters[].ClusterStatus"
+                  "argument" => "clusters[].cluster_status"
                 },
                 {
                   "expected" => "modifying",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Clusters[].ClusterStatus"
+                  "argument" => "clusters[].cluster_status"
                 }
               ]
             )
@@ -117,18 +117,18 @@ module Aws
             max_attempts: 30,
             delay: 60,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeClusters",
-              "acceptors" => [
+              operation_name: :describe_clusters,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "pathAll",
-                  "argument" => "Clusters[].RestoreStatus.Status",
+                  "argument" => "clusters[].restore_status.status",
                   "expected" => "completed"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "pathAny",
-                  "argument" => "Clusters[].ClusterStatus",
+                  "argument" => "clusters[].cluster_status",
                   "expected" => "deleting"
                 }
               ]
@@ -160,25 +160,25 @@ module Aws
             max_attempts: 20,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeClusterSnapshots",
-              "acceptors" => [
+              operation_name: :describe_cluster_snapshots,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Snapshots[].Status"
+                  "argument" => "snapshots[].status"
                 },
                 {
                   "expected" => "failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Snapshots[].Status"
+                  "argument" => "snapshots[].status"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Snapshots[].Status"
+                  "argument" => "snapshots[].status"
                 }
               ]
             )

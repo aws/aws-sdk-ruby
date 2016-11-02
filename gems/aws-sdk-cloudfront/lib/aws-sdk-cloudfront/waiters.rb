@@ -21,13 +21,13 @@ module Aws
             max_attempts: 25,
             delay: 60,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetDistribution",
               "description" => "Wait until a distribution is deployed.",
-              "acceptors" => [{
+              operation_name: :get_distribution,
+              acceptors: [{
                 "expected" => "Deployed",
                 "matcher" => "path",
                 "state" => "success",
-                "argument" => "Distribution.Status"
+                "argument" => "distribution.status"
               }]
             )
           }.merge(options))
@@ -57,13 +57,13 @@ module Aws
             max_attempts: 30,
             delay: 20,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetInvalidation",
               "description" => "Wait until an invalidation has completed.",
-              "acceptors" => [{
+              operation_name: :get_invalidation,
+              acceptors: [{
                 "expected" => "Completed",
                 "matcher" => "path",
                 "state" => "success",
-                "argument" => "Invalidation.Status"
+                "argument" => "invalidation.status"
               }]
             )
           }.merge(options))
@@ -93,13 +93,13 @@ module Aws
             max_attempts: 25,
             delay: 60,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetStreamingDistribution",
               "description" => "Wait until a streaming distribution is deployed.",
-              "acceptors" => [{
+              operation_name: :get_streaming_distribution,
+              acceptors: [{
                 "expected" => "Deployed",
                 "matcher" => "path",
                 "state" => "success",
-                "argument" => "StreamingDistribution.Status"
+                "argument" => "streaming_distribution.status"
               }]
             )
           }.merge(options))

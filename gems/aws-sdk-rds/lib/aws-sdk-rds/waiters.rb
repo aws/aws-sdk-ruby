@@ -21,43 +21,43 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeDBInstances",
-              "acceptors" => [
+              operation_name: :describe_db_instances,
+              acceptors: [
                 {
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "deleting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "incompatible-restore",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "incompatible-parameters",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 }
               ]
             )
@@ -88,13 +88,13 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeDBInstances",
-              "acceptors" => [
+              operation_name: :describe_db_instances,
+              acceptors: [
                 {
                   "expected" => "deleted",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "DBInstanceNotFound",
@@ -105,25 +105,25 @@ module Aws
                   "expected" => "creating",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "modifying",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "rebooting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 },
                 {
                   "expected" => "resetting-master-credentials",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "DBInstances[].DBInstanceStatus"
+                  "argument" => "db_instances[].db_instance_status"
                 }
               ]
             )

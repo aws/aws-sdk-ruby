@@ -21,8 +21,8 @@ module Aws
             max_attempts: 15,
             delay: 3,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVault",
-              "acceptors" => [
+              operation_name: :describe_vault,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "status",
@@ -62,8 +62,8 @@ module Aws
             max_attempts: 15,
             delay: 3,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeVault",
-              "acceptors" => [
+              operation_name: :describe_vault,
+              acceptors: [
                 {
                   "state" => "retry",
                   "matcher" => "status",

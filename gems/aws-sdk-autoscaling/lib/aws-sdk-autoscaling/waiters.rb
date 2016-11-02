@@ -21,21 +21,21 @@ module Aws
             max_attempts: 10,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              operation_name: :describe_auto_scaling_groups,
+              acceptors: [
                 {
-                  "argument" => "length(AutoScalingGroups) > `0`",
+                  "argument" => "length(auto_scaling_groups) > `0`",
                   "expected" => true,
                   "matcher" => "path",
                   "state" => "success"
                 },
                 {
-                  "argument" => "length(AutoScalingGroups) > `0`",
+                  "argument" => "length(auto_scaling_groups) > `0`",
                   "expected" => false,
                   "matcher" => "path",
                   "state" => "retry"
                 }
-              ],
-              "operation" => "DescribeAutoScalingGroups"
+              ]
             )
           }.merge(options))
         end
@@ -64,21 +64,21 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              operation_name: :describe_auto_scaling_groups,
+              acceptors: [
                 {
-                  "argument" => "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
+                  "argument" => "contains(auto_scaling_groups[].[length(instances[?lifecycle_state=='InService']) >= min_size][], `false`)",
                   "expected" => false,
                   "matcher" => "path",
                   "state" => "success"
                 },
                 {
-                  "argument" => "contains(AutoScalingGroups[].[length(Instances[?LifecycleState=='InService']) >= MinSize][], `false`)",
+                  "argument" => "contains(auto_scaling_groups[].[length(instances[?lifecycle_state=='InService']) >= min_size][], `false`)",
                   "expected" => true,
                   "matcher" => "path",
                   "state" => "retry"
                 }
-              ],
-              "operation" => "DescribeAutoScalingGroups"
+              ]
             )
           }.merge(options))
         end
@@ -107,21 +107,21 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              operation_name: :describe_auto_scaling_groups,
+              acceptors: [
                 {
-                  "argument" => "length(AutoScalingGroups) > `0`",
+                  "argument" => "length(auto_scaling_groups) > `0`",
                   "expected" => false,
                   "matcher" => "path",
                   "state" => "success"
                 },
                 {
-                  "argument" => "length(AutoScalingGroups) > `0`",
+                  "argument" => "length(auto_scaling_groups) > `0`",
                   "expected" => true,
                   "matcher" => "path",
                   "state" => "retry"
                 }
-              ],
-              "operation" => "DescribeAutoScalingGroups"
+              ]
             )
           }.merge(options))
         end

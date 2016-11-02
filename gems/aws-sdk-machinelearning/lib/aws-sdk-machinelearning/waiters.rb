@@ -21,19 +21,19 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeDataSources",
-              "acceptors" => [
+              operation_name: :describe_data_sources,
+              acceptors: [
                 {
                   "expected" => "COMPLETED",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 },
                 {
                   "expected" => "FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 }
               ]
             )
@@ -64,19 +64,19 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeMLModels",
-              "acceptors" => [
+              operation_name: :describe_ml_models,
+              acceptors: [
                 {
                   "expected" => "COMPLETED",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 },
                 {
                   "expected" => "FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 }
               ]
             )
@@ -107,19 +107,19 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeEvaluations",
-              "acceptors" => [
+              operation_name: :describe_evaluations,
+              acceptors: [
                 {
                   "expected" => "COMPLETED",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 },
                 {
                   "expected" => "FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 }
               ]
             )
@@ -150,19 +150,19 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeBatchPredictions",
-              "acceptors" => [
+              operation_name: :describe_batch_predictions,
+              acceptors: [
                 {
                   "expected" => "COMPLETED",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 },
                 {
                   "expected" => "FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Results[].Status"
+                  "argument" => "results[].status"
                 }
               ]
             )

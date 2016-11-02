@@ -40,6 +40,15 @@ attr_reader :waiter
         hash = hash.dup
         hash.delete('delay')
         hash.delete('maxAttempts')
+        hash[:operation_name] = Underscore.underscore(hash.delete('operation')).to_sym
+        hash[:acceptors] = hash.delete('acceptors').map do |acceptor|
+          if acceptor['argument']
+            acceptor['argument'] = acceptor['argument'].gsub(/(?<![`'])\b\w+\b(?![`'])/) do |str|
+              Underscore.underscore(str)
+            end
+          end
+          acceptor
+        end
         formatter = HashFormatter.new(
           wrap: false,
           inline: false,

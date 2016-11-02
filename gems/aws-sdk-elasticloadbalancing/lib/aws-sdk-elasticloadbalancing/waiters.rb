@@ -21,13 +21,13 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstanceHealth",
-              "acceptors" => [
+              operation_name: :describe_instance_health,
+              acceptors: [
                 {
                   "expected" => "OutOfService",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "InstanceStates[].State"
+                  "argument" => "instance_states[].state"
                 },
                 {
                   "matcher" => "error",
@@ -63,13 +63,13 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [{
-                "argument" => "InstanceStates[].State",
+              operation_name: :describe_instance_health,
+              acceptors: [{
+                "argument" => "instance_states[].state",
                 "expected" => "InService",
                 "matcher" => "pathAny",
                 "state" => "success"
-              }],
-              "operation" => "DescribeInstanceHealth"
+              }]
             )
           }.merge(options))
         end
@@ -98,13 +98,13 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [{
-                "argument" => "InstanceStates[].State",
+              operation_name: :describe_instance_health,
+              acceptors: [{
+                "argument" => "instance_states[].state",
                 "expected" => "InService",
                 "matcher" => "pathAll",
                 "state" => "success"
-              }],
-              "operation" => "DescribeInstanceHealth"
+              }]
             )
           }.merge(options))
         end

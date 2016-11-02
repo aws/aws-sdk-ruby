@@ -21,8 +21,8 @@ module Aws
             max_attempts: 40,
             delay: 1,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeApps",
-              "acceptors" => [
+              operation_name: :describe_apps,
+              acceptors: [
                 {
                   "expected" => 200,
                   "matcher" => "status",
@@ -62,20 +62,20 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeDeployments",
               "description" => "Wait until a deployment has completed successfully",
-              "acceptors" => [
+              operation_name: :describe_deployments,
+              acceptors: [
                 {
                   "expected" => "successful",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Deployments[].Status"
+                  "argument" => "deployments[].status"
                 },
                 {
                   "expected" => "failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Deployments[].Status"
+                  "argument" => "deployments[].status"
                 }
               ]
             )
@@ -106,62 +106,62 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
               "description" => "Wait until OpsWorks instance is online.",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "online",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "setup_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "shutting_down",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "start_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stopped",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stopping",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "terminating",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stop_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 }
               ]
             )
@@ -192,56 +192,56 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
               "description" => "Wait until OpsWorks instance is registered.",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "registered",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "setup_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "shutting_down",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stopped",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stopping",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "terminating",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stop_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 }
               ]
             )
@@ -272,68 +272,68 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
               "description" => "Wait until OpsWorks instance is stopped.",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "stopped",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "booting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "online",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "pending",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "rebooting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "requested",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "running_setup",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "setup_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "start_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "stop_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 }
               ]
             )
@@ -364,14 +364,14 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeInstances",
               "description" => "Wait until OpsWorks instance is terminated.",
-              "acceptors" => [
+              operation_name: :describe_instances,
+              acceptors: [
                 {
                   "expected" => "terminated",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "ResourceNotFoundException",
@@ -382,49 +382,49 @@ module Aws
                   "expected" => "booting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "online",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "pending",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "rebooting",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "requested",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "running_setup",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "setup_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 },
                 {
                   "expected" => "start_failed",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Instances[].Status"
+                  "argument" => "instances[].status"
                 }
               ]
             )

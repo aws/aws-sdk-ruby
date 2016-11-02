@@ -9,10 +9,12 @@ module Aws
       # @api private
       RAISE_HANDLER = Seahorse::Client::Plugins::RaiseResponseErrors::Handler
 
+      # @option options [required, String] :operation_name
+      # @option options [required, Array<Hash>] :acceptors
       # @api private
       def initialize(options = {})
-        @operation_name = underscore(options['operation']).to_sym
-        @acceptors = options['acceptors'] || []
+        @operation_name = options.fetch(:operation_name)
+        @acceptors = options.fetch(:acceptors)
       end
 
       # @return [Symbol]

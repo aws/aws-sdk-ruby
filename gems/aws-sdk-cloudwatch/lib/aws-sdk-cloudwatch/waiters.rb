@@ -21,11 +21,11 @@ module Aws
             max_attempts: 40,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeAlarms",
-              "acceptors" => [{
+              operation_name: :describe_alarms,
+              acceptors: [{
                 "matcher" => "path",
                 "expected" => true,
-                "argument" => "length(MetricAlarms[]) > `0`",
+                "argument" => "length(metric_alarms[]) > `0`",
                 "state" => "success"
               }]
             )

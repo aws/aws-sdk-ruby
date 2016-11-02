@@ -21,12 +21,12 @@ module Aws
             max_attempts: 18,
             delay: 10,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStream",
-              "acceptors" => [{
+              operation_name: :describe_stream,
+              acceptors: [{
                 "expected" => "ACTIVE",
                 "matcher" => "path",
                 "state" => "success",
-                "argument" => "StreamDescription.StreamStatus"
+                "argument" => "stream_description.stream_status"
               }]
             )
           }.merge(options))

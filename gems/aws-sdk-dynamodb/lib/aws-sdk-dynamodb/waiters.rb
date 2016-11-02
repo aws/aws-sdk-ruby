@@ -21,13 +21,13 @@ module Aws
             max_attempts: 25,
             delay: 20,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeTable",
-              "acceptors" => [
+              operation_name: :describe_table,
+              acceptors: [
                 {
                   "expected" => "ACTIVE",
                   "matcher" => "path",
                   "state" => "success",
-                  "argument" => "Table.TableStatus"
+                  "argument" => "table.table_status"
                 },
                 {
                   "expected" => "ResourceNotFoundException",
@@ -63,8 +63,8 @@ module Aws
             max_attempts: 25,
             delay: 20,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeTable",
-              "acceptors" => [{
+              operation_name: :describe_table,
+              acceptors: [{
                 "expected" => "ResourceNotFoundException",
                 "matcher" => "error",
                 "state" => "success"

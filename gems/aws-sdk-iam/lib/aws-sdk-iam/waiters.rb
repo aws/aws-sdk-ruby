@@ -21,8 +21,8 @@ module Aws
             max_attempts: 40,
             delay: 1,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetInstanceProfile",
-              "acceptors" => [
+              operation_name: :get_instance_profile,
+              acceptors: [
                 {
                   "expected" => 200,
                   "matcher" => "status",
@@ -62,8 +62,8 @@ module Aws
             max_attempts: 20,
             delay: 1,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetUser",
-              "acceptors" => [
+              operation_name: :get_user,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "status",

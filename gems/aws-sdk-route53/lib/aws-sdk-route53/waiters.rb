@@ -21,11 +21,11 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetChange",
-              "acceptors" => [{
+              operation_name: :get_change,
+              acceptors: [{
                 "matcher" => "path",
                 "expected" => "INSYNC",
-                "argument" => "ChangeInfo.Status",
+                "argument" => "change_info.status",
                 "state" => "success"
               }]
             )

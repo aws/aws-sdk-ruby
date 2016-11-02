@@ -21,25 +21,25 @@ module Aws
             max_attempts: 120,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "ReadJob",
-              "acceptors" => [
+              operation_name: :read_job,
+              acceptors: [
                 {
                   "expected" => "Complete",
                   "matcher" => "path",
                   "state" => "success",
-                  "argument" => "Job.Status"
+                  "argument" => "job.status"
                 },
                 {
                   "expected" => "Canceled",
                   "matcher" => "path",
                   "state" => "failure",
-                  "argument" => "Job.Status"
+                  "argument" => "job.status"
                 },
                 {
                   "expected" => "Error",
                   "matcher" => "path",
                   "state" => "failure",
-                  "argument" => "Job.Status"
+                  "argument" => "job.status"
                 }
               ]
             )

@@ -21,8 +21,8 @@ module Aws
             max_attempts: 20,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "HeadBucket",
-              "acceptors" => [
+              operation_name: :head_bucket,
+              acceptors: [
                 {
                   "expected" => 200,
                   "matcher" => "status",
@@ -72,8 +72,8 @@ module Aws
             max_attempts: 20,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "HeadBucket",
-              "acceptors" => [{
+              operation_name: :head_bucket,
+              acceptors: [{
                 "expected" => 404,
                 "matcher" => "status",
                 "state" => "success"
@@ -106,8 +106,8 @@ module Aws
             max_attempts: 20,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "HeadObject",
-              "acceptors" => [
+              operation_name: :head_object,
+              acceptors: [
                 {
                   "expected" => 200,
                   "matcher" => "status",
@@ -147,8 +147,8 @@ module Aws
             max_attempts: 20,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "HeadObject",
-              "acceptors" => [{
+              operation_name: :head_object,
+              acceptors: [{
                 "expected" => 404,
                 "matcher" => "status",
                 "state" => "success"

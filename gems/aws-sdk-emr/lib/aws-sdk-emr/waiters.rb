@@ -21,36 +21,36 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeCluster",
-              "acceptors" => [
+              operation_name: :describe_cluster,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "path",
-                  "argument" => "Cluster.Status.State",
+                  "argument" => "cluster.status.state",
                   "expected" => "RUNNING"
                 },
                 {
                   "state" => "success",
                   "matcher" => "path",
-                  "argument" => "Cluster.Status.State",
+                  "argument" => "cluster.status.state",
                   "expected" => "WAITING"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "path",
-                  "argument" => "Cluster.Status.State",
+                  "argument" => "cluster.status.state",
                   "expected" => "TERMINATING"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "path",
-                  "argument" => "Cluster.Status.State",
+                  "argument" => "cluster.status.state",
                   "expected" => "TERMINATED"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "path",
-                  "argument" => "Cluster.Status.State",
+                  "argument" => "cluster.status.state",
                   "expected" => "TERMINATED_WITH_ERRORS"
                 }
               ]
@@ -82,24 +82,24 @@ module Aws
             max_attempts: 60,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStep",
-              "acceptors" => [
+              operation_name: :describe_step,
+              acceptors: [
                 {
                   "state" => "success",
                   "matcher" => "path",
-                  "argument" => "Step.Status.State",
+                  "argument" => "step.status.state",
                   "expected" => "COMPLETED"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "path",
-                  "argument" => "Step.Status.State",
+                  "argument" => "step.status.state",
                   "expected" => "FAILED"
                 },
                 {
                   "state" => "failure",
                   "matcher" => "path",
-                  "argument" => "Step.Status.State",
+                  "argument" => "step.status.state",
                   "expected" => "CANCELLED"
                 }
               ]

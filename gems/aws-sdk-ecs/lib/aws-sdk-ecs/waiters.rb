@@ -21,13 +21,13 @@ module Aws
             max_attempts: 100,
             delay: 6,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeTasks",
-              "acceptors" => [
+              operation_name: :describe_tasks,
+              acceptors: [
                 {
                   "expected" => "STOPPED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "tasks[].lastStatus"
+                  "argument" => "tasks[].last_status"
                 },
                 {
                   "expected" => "MISSING",
@@ -39,7 +39,7 @@ module Aws
                   "expected" => "RUNNING",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "tasks[].lastStatus"
+                  "argument" => "tasks[].last_status"
                 }
               ]
             )
@@ -70,12 +70,12 @@ module Aws
             max_attempts: 100,
             delay: 6,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeTasks",
-              "acceptors" => [{
+              operation_name: :describe_tasks,
+              acceptors: [{
                 "expected" => "STOPPED",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "tasks[].lastStatus"
+                "argument" => "tasks[].last_status"
               }]
             )
           }.merge(options))
@@ -105,8 +105,8 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeServices",
-              "acceptors" => [
+              operation_name: :describe_services,
+              acceptors: [
                 {
                   "expected" => "MISSING",
                   "matcher" => "pathAny",
@@ -129,7 +129,7 @@ module Aws
                   "expected" => true,
                   "matcher" => "path",
                   "state" => "success",
-                  "argument" => "length(services[?!(length(deployments) == `1` && runningCount == desiredCount)]) == `0`"
+                  "argument" => "length(services[?!(length(deployments) == `1` && running_count == desired_count)]) == `0`"
                 }
               ]
             )
@@ -160,8 +160,8 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeServices",
-              "acceptors" => [
+              operation_name: :describe_services,
+              acceptors: [
                 {
                   "expected" => "MISSING",
                   "matcher" => "pathAny",

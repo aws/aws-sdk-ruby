@@ -21,12 +21,12 @@ module Aws
             max_attempts: 20,
             delay: 3,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetIdentityVerificationAttributes",
-              "acceptors" => [{
+              operation_name: :get_identity_verification_attributes,
+              acceptors: [{
                 "expected" => "Success",
                 "matcher" => "pathAll",
                 "state" => "success",
-                "argument" => "VerificationAttributes.*.VerificationStatus"
+                "argument" => "verification_attributes.*.verification_status"
               }]
             )
           }.merge(options))

@@ -21,40 +21,40 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              "description" => "Wait until ElastiCache cluster is available.",
+              operation_name: :describe_cache_clusters,
+              acceptors: [
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "deleting",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "incompatible-network",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "restore-failed",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 }
-              ],
-              "description" => "Wait until ElastiCache cluster is available.",
-              "operation" => "DescribeCacheClusters"
+              ]
             )
           }.merge(options))
         end
@@ -83,9 +83,11 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              "description" => "Wait until ElastiCache cluster is deleted.",
+              operation_name: :describe_cache_clusters,
+              acceptors: [
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "deleted",
                   "matcher" => "pathAll",
                   "state" => "success"
@@ -96,44 +98,42 @@ module Aws
                   "state" => "success"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "available",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "creating",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "incompatible-network",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "modifying",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "restore-failed",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "CacheClusters[].CacheClusterStatus",
+                  "argument" => "cache_clusters[].cache_cluster_status",
                   "expected" => "snapshotting",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 }
-              ],
-              "description" => "Wait until ElastiCache cluster is deleted.",
-              "operation" => "DescribeCacheClusters"
+              ]
             )
           }.merge(options))
         end
@@ -162,22 +162,22 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              "description" => "Wait until ElastiCache replication group is available.",
+              operation_name: :describe_replication_groups,
+              acceptors: [
                 {
-                  "argument" => "ReplicationGroups[].Status",
+                  "argument" => "replication_groups[].status",
                   "expected" => "available",
                   "matcher" => "pathAll",
                   "state" => "success"
                 },
                 {
-                  "argument" => "ReplicationGroups[].Status",
+                  "argument" => "replication_groups[].status",
                   "expected" => "deleted",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 }
-              ],
-              "description" => "Wait until ElastiCache replication group is available.",
-              "operation" => "DescribeReplicationGroups"
+              ]
             )
           }.merge(options))
         end
@@ -206,15 +206,17 @@ module Aws
             max_attempts: 40,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "acceptors" => [
+              "description" => "Wait until ElastiCache replication group is deleted.",
+              operation_name: :describe_replication_groups,
+              acceptors: [
                 {
-                  "argument" => "ReplicationGroups[].Status",
+                  "argument" => "replication_groups[].status",
                   "expected" => "deleted",
                   "matcher" => "pathAll",
                   "state" => "success"
                 },
                 {
-                  "argument" => "ReplicationGroups[].Status",
+                  "argument" => "replication_groups[].status",
                   "expected" => "available",
                   "matcher" => "pathAny",
                   "state" => "failure"
@@ -224,9 +226,7 @@ module Aws
                   "matcher" => "error",
                   "state" => "success"
                 }
-              ],
-              "description" => "Wait until ElastiCache replication group is deleted.",
-              "operation" => "DescribeReplicationGroups"
+              ]
             )
           }.merge(options))
         end

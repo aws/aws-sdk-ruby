@@ -21,25 +21,25 @@ module Aws
             max_attempts: 120,
             delay: 15,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "GetDeployment",
-              "acceptors" => [
+              operation_name: :get_deployment,
+              acceptors: [
                 {
                   "expected" => "Succeeded",
                   "matcher" => "path",
                   "state" => "success",
-                  "argument" => "deploymentInfo.status"
+                  "argument" => "deployment_info.status"
                 },
                 {
                   "expected" => "Failed",
                   "matcher" => "path",
                   "state" => "failure",
-                  "argument" => "deploymentInfo.status"
+                  "argument" => "deployment_info.status"
                 },
                 {
                   "expected" => "Stopped",
                   "matcher" => "path",
                   "state" => "failure",
-                  "argument" => "deploymentInfo.status"
+                  "argument" => "deployment_info.status"
                 }
               ]
             )

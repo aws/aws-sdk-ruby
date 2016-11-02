@@ -21,8 +21,8 @@ module Aws
             max_attempts: 20,
             delay: 5,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStacks",
-              "acceptors" => [
+              operation_name: :describe_stacks,
+              acceptors: [
                 {
                   "matcher" => "status",
                   "expected" => 200,
@@ -62,55 +62,55 @@ module Aws
             max_attempts: 120,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStacks",
               "description" => "Wait until stack status is CREATE_COMPLETE.",
-              "acceptors" => [
+              operation_name: :describe_stacks,
+              acceptors: [
                 {
                   "expected" => "CREATE_COMPLETE",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "CREATE_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "DELETE_COMPLETE",
                   "matcher" => "pathAny",
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
                   "expected" => "DELETE_IN_PROGRESS",
                   "matcher" => "pathAny",
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
                   "expected" => "DELETE_FAILED",
                   "matcher" => "pathAny",
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
                   "expected" => "ROLLBACK_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "ROLLBACK_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "ROLLBACK_IN_PROGRESS",
                   "matcher" => "pathAny",
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
@@ -147,14 +147,14 @@ module Aws
             max_attempts: 120,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStacks",
               "description" => "Wait until stack status is DELETE_COMPLETE.",
-              "acceptors" => [
+              operation_name: :describe_stacks,
+              acceptors: [
                 {
                   "expected" => "DELETE_COMPLETE",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "ValidationError",
@@ -165,82 +165,82 @@ module Aws
                   "expected" => "DELETE_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "CREATE_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "CREATE_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "CREATE_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "ROLLBACK_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "ROLLBACK_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "ROLLBACK_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
@@ -274,41 +274,41 @@ module Aws
             max_attempts: 120,
             delay: 30,
             poller: Aws::Waiters::Poller.new(
-              "operation" => "DescribeStacks",
               "description" => "Wait until stack status is UPDATE_COMPLETE.",
-              "acceptors" => [
+              operation_name: :describe_stacks,
+              acceptors: [
                 {
                   "expected" => "UPDATE_COMPLETE",
                   "matcher" => "pathAll",
                   "state" => "success",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "UPDATE_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "UPDATE_ROLLBACK_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
                   "expected" => "UPDATE_ROLLBACK_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure",
-                  "argument" => "Stacks[].StackStatus"
+                  "argument" => "stacks[].stack_status"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
-                  "argument" => "Stacks[].StackStatus",
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
