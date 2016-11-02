@@ -1,5 +1,8 @@
 module Aws
   module Sigv4
+    # Users that wish to configure static credentials can use the
+    # `:access_key_id` and `:secret_access_key` constructor options.
+    # @api private
     class Credentials
 
       # @option options [required, String] :access_key_id
@@ -32,13 +35,9 @@ module Aws
 
     end
 
-    # The default credential provider class.
-    #
-    #     StaticCredentialsProvider.new({
-    #       access_key_id: 'akid',
-    #       secret_access_key: 'secret',
-    #     })
-    #
+    # Users that wish to configure static credentials can use the
+    # `:access_key_id` and `:secret_access_key` constructor options.
+    # @api private
     class StaticCredentialsProvider
 
       # @option options [Credentials] :credentials

@@ -81,18 +81,25 @@ module Aws
       # @overload initialize(service:, region:, credentials:, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
       #   @param [String] :region The region name, e.g. 'us-east-1'.
-      #   @param [Credentials] :credentials
+      #   @param [Credentials] :credentials Any object that responds to the following
+      #     methods:
+      #
+      #     * `#access_key_id` => String
+      #     * `#secret_access_key` => String
+      #     * `#session_token` => String, nil
+      #     * `#set?` => Boolean
       #
       # @overload initialize(service:, region:, credentials_provider:, **options)
       #   @param [String] :service The service signing name, e.g. 's3'.
       #   @param [String] :region The region name, e.g. 'us-east-1'.
       #   @param [#credentials] :credentials_provider An object that responds
-      #     to `#credentials`, returning an instance of {Credentials} or
-      #     an object that responds to:
+      #     to `#credentials`, returning an object that responds to the following
+      #     methods:
       #
-      #     * `#access_key_id`
-      #     * `#secret_access_key`
-      #     * `#session_token`
+      #     * `#access_key_id` => String
+      #     * `#secret_access_key` => String
+      #     * `#session_token` => String, nil
+      #     * `#set?` => Boolean
       #
       # @option options [Array<String>] :unsigned_headers ([]) A list of
       #   headers that should not be signed. This is useful when a proxy
@@ -125,8 +132,15 @@ module Aws
       # @return [String]
       attr_reader :region
 
-      # @return [#credentials] Returns an object that responds
-      #   to `#credentials` returning a {Credentials} object.
+      # @return [#credentials] Returns an object that responds to
+      #   `#credentials`, returning an object that responds to the following
+      #   methods:
+      #
+      #   * `#access_key_id` => String
+      #   * `#secret_access_key` => String
+      #   * `#session_token` => String, nil
+      #   * `#set?` => Boolean
+      #
       attr_reader :credentials_provider
 
       # @return [Set<String>] Returns a set of header names that should not be signed.
