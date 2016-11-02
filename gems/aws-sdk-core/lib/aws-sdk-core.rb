@@ -133,6 +133,8 @@ Seahorse::Util.irregular_inflections({
 
 module Aws
 
+  CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip
+
   @config = {}
 
   class << self
