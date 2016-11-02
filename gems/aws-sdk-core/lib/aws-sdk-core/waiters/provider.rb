@@ -1,5 +1,6 @@
 module Aws
   module Waiters
+
     # @api private
     class Provider
 
@@ -28,6 +29,15 @@ module Aws
         else
           raise Errors::NoSuchWaiterError.new(waiter_name, waiter_names)
         end
+      end
+
+    end
+
+    # @api private
+    class NullProvider < Provider
+
+      def initialize
+        super('waiters' => {})
       end
 
     end

@@ -48,6 +48,61 @@ require_relative 'aws-sdk-core/log/formatter'
 require_relative 'aws-sdk-core/log/param_filter'
 require_relative 'aws-sdk-core/log/param_formatter'
 
+# stubbing
+
+require_relative 'aws-sdk-core/stubbing/empty_stub'
+require_relative 'aws-sdk-core/stubbing/data_applicator'
+require_relative 'aws-sdk-core/stubbing/stub_data'
+require_relative 'aws-sdk-core/stubbing/xml_error'
+
+# stubbing protocols
+
+require_relative 'aws-sdk-core/stubbing/protocols/ec2'
+require_relative 'aws-sdk-core/stubbing/protocols/json'
+require_relative 'aws-sdk-core/stubbing/protocols/query'
+require_relative 'aws-sdk-core/stubbing/protocols/rest'
+require_relative 'aws-sdk-core/stubbing/protocols/rest_json'
+require_relative 'aws-sdk-core/stubbing/protocols/rest_xml'
+
+# waiters
+
+require_relative 'aws-sdk-core/waiters/errors'
+require_relative 'aws-sdk-core/waiters/poller'
+require_relative 'aws-sdk-core/waiters/provider'
+require_relative 'aws-sdk-core/waiters/waiter'
+
+# query protocol
+
+require_relative 'aws-sdk-core/query/ec2_param_builder'
+require_relative 'aws-sdk-core/query/handler'
+require_relative 'aws-sdk-core/query/param'
+require_relative 'aws-sdk-core/query/param_builder'
+require_relative 'aws-sdk-core/query/param_list'
+
+# rest protocol : request
+
+require_relative 'aws-sdk-core/rest/handler'
+require_relative 'aws-sdk-core/rest/request/body'
+require_relative 'aws-sdk-core/rest/request/builder'
+require_relative 'aws-sdk-core/rest/request/endpoint'
+require_relative 'aws-sdk-core/rest/request/headers'
+
+# rest protocol : response
+
+require_relative 'aws-sdk-core/rest/response/body'
+require_relative 'aws-sdk-core/rest/response/headers'
+require_relative 'aws-sdk-core/rest/response/parser'
+require_relative 'aws-sdk-core/rest/response/status_code'
+
+# xml
+
+require_relative 'aws-sdk-core/xml/builder'
+require_relative 'aws-sdk-core/xml/default_list'
+require_relative 'aws-sdk-core/xml/default_map'
+require_relative 'aws-sdk-core/xml/doc_builder'
+require_relative 'aws-sdk-core/xml/error_handler'
+require_relative 'aws-sdk-core/xml/parser'
+
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',
   'CNAMEs' => 'cnames',
@@ -59,66 +114,6 @@ Seahorse::Util.irregular_inflections({
 })
 
 module Aws
-
-  # @api private
-  module Query
-    autoload :EC2ParamBuilder, 'aws-sdk-core/query/ec2_param_builder'
-    autoload :Handler, 'aws-sdk-core/query/handler'
-    autoload :Param, 'aws-sdk-core/query/param'
-    autoload :ParamBuilder, 'aws-sdk-core/query/param_builder'
-    autoload :ParamList, 'aws-sdk-core/query/param_list'
-  end
-
-  # @api private
-  module Rest
-    autoload :Handler, 'aws-sdk-core/rest/handler'
-    module Request
-      autoload :Body, 'aws-sdk-core/rest/request/body'
-      autoload :Builder, 'aws-sdk-core/rest/request/builder'
-      autoload :Endpoint, 'aws-sdk-core/rest/request/endpoint'
-      autoload :Headers, 'aws-sdk-core/rest/request/headers'
-    end
-    module Response
-      autoload :Body, 'aws-sdk-core/rest/response/body'
-      autoload :Headers, 'aws-sdk-core/rest/response/headers'
-      autoload :Parser, 'aws-sdk-core/rest/response/parser'
-      autoload :StatusCode, 'aws-sdk-core/rest/response/status_code'
-    end
-  end
-
-  # @api private
-  module Stubbing
-    autoload :EmptyStub, 'aws-sdk-core/stubbing/empty_stub'
-    autoload :DataApplicator, 'aws-sdk-core/stubbing/data_applicator'
-    autoload :StubData, 'aws-sdk-core/stubbing/stub_data'
-    autoload :XmlError, 'aws-sdk-core/stubbing/xml_error'
-    module Protocols
-      autoload :EC2, 'aws-sdk-core/stubbing/protocols/ec2'
-      autoload :Json, 'aws-sdk-core/stubbing/protocols/json'
-      autoload :Query, 'aws-sdk-core/stubbing/protocols/query'
-      autoload :Rest, 'aws-sdk-core/stubbing/protocols/rest'
-      autoload :RestJson, 'aws-sdk-core/stubbing/protocols/rest_json'
-      autoload :RestXml, 'aws-sdk-core/stubbing/protocols/rest_xml'
-    end
-  end
-
-  module Waiters
-    autoload :Poller, 'aws-sdk-core/waiters/poller'
-    autoload :Errors, 'aws-sdk-core/waiters/errors'
-    autoload :NullProvider, 'aws-sdk-core/waiters/null_provider'
-    autoload :Provider, 'aws-sdk-core/waiters/provider'
-    autoload :Waiter, 'aws-sdk-core/waiters/waiter'
-  end
-
-  # @api private
-  module Xml
-    autoload :Builder, 'aws-sdk-core/xml/builder'
-    autoload :DefaultList,  'aws-sdk-core/xml/default_list'
-    autoload :DefaultMap,  'aws-sdk-core/xml/default_map'
-    autoload :DocBuilder, 'aws-sdk-core/xml/doc_builder'
-    autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
-    autoload :Parser, 'aws-sdk-core/xml/parser'
-  end
 
   @config = {}
 
