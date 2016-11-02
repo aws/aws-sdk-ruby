@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.17 (2016-11-02)
+------------------
+
 * Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
 
 2.6.16 (2016-11-02)
