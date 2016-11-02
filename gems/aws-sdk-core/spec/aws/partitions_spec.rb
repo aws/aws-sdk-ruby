@@ -96,13 +96,10 @@ module Aws
 
         describe '#service' do
 
-          Aws::SERVICE_MODULE_NAMES.each do |svc|
-            next if svc == 'CloudSearchDomain'
-            it "can return a service by name: #{svc}" do
-              service = Aws.partition('aws').service(svc)
-              expect(service).to be_kind_of(Partitions::Service)
-              expect(service.name).to eq(svc)
-            end
+          it 'can return a service by name' do
+            service = Aws.partition('aws').service('EC2')
+            expect(service).to be_kind_of(Partitions::Service)
+            expect(service.name).to eq('EC2')
           end
 
           it 'raises ArgumentError for unknown regions' do
