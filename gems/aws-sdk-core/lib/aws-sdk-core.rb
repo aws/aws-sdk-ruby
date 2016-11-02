@@ -1,5 +1,4 @@
 require 'jmespath'
-require 'pathname'
 
 require_relative 'aws-sdk-core/deprecations'
 
@@ -23,7 +22,6 @@ require_relative 'aws-sdk-core/client_waiters'
 require_relative 'aws-sdk-core/eager_loader'
 require_relative 'aws-sdk-core/endpoint_provider'
 require_relative 'aws-sdk-core/errors'
-require_relative 'aws-sdk-core/ini_parser'
 require_relative 'aws-sdk-core/pageable_response'
 require_relative 'aws-sdk-core/pager'
 require_relative 'aws-sdk-core/param_converter'

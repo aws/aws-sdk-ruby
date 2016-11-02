@@ -1,3 +1,5 @@
+require_relative 'ini_parser'
+
 module Aws
   class SharedCredentials
 
