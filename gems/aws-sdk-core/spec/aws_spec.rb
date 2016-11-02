@@ -43,31 +43,4 @@ module Aws
     end
 
   end
-
-  describe '.eager_autoload!' do
-
-    it 'loads all services by default' do
-      pending('only works when run with every service present')
-      raise 'failure'
-      eager_loader = Aws.eager_autoload!
-      BuildTools::Services.each do |svc|
-        expect(eager_loader.loaded).to include(Aws.const_get(svc.name))
-      end
-    end
-
-    it 'can load fewer than all services' do
-      pending('only works when run in isolation')
-      raise 'failure'
-      eager_loader = Aws.eager_autoload!(services:['S3', 'IAM'])
-      expect(eager_loader.loaded).to include(Aws::S3)
-      expect(eager_loader.loaded).to include(Aws::IAM)
-      expect(eager_loader.loaded).not_to include(Aws::EC2)
-    end
-
-    it  'loads non-service modules' do
-      eager_loader = Aws.eager_autoload!
-      expect(eager_loader.loaded).to include(Aws::Xml)
-    end
-
-  end
 end

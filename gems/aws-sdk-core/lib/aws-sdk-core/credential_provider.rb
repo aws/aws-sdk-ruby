@@ -1,3 +1,5 @@
+require_relative 'deprecations'
+
 module Aws
   module CredentialProvider
 

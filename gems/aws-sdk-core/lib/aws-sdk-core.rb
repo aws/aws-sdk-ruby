@@ -1,6 +1,52 @@
-require 'seahorse'
 require 'jmespath'
 require 'pathname'
+
+require_relative 'aws-sdk-core/deprecations'
+
+# credential providers
+
+require_relative 'aws-sdk-core/credential_provider'
+require_relative 'aws-sdk-core/refreshing_credentials'
+require_relative 'aws-sdk-core/assume_role_credentials'
+require_relative 'aws-sdk-core/credentials'
+require_relative 'aws-sdk-core/credential_provider_chain'
+require_relative 'aws-sdk-core/ecs_credentials'
+require_relative 'aws-sdk-core/instance_profile_credentials'
+require_relative 'aws-sdk-core/shared_credentials'
+
+# client modules
+
+require_relative 'seahorse'
+require_relative 'aws-sdk-core/checksums'
+require_relative 'aws-sdk-core/client_stubs'
+require_relative 'aws-sdk-core/client_waiters'
+require_relative 'aws-sdk-core/eager_loader'
+require_relative 'aws-sdk-core/endpoint_provider'
+require_relative 'aws-sdk-core/errors'
+require_relative 'aws-sdk-core/ini_parser'
+require_relative 'aws-sdk-core/json'
+require_relative 'aws-sdk-core/pageable_response'
+require_relative 'aws-sdk-core/pager'
+require_relative 'aws-sdk-core/param_converter'
+require_relative 'aws-sdk-core/param_validator'
+require_relative 'aws-sdk-core/partitions'
+require_relative 'aws-sdk-core/service'
+require_relative 'aws-sdk-core/shared_config'
+require_relative 'aws-sdk-core/structure'
+require_relative 'aws-sdk-core/tree_hash'
+require_relative 'aws-sdk-core/type_builder'
+require_relative 'aws-sdk-core/util'
+require_relative 'aws-sdk-core/version'
+
+# resource classes
+
+require_relative 'aws-sdk-core/resources/collection'
+
+# logging
+
+require_relative 'aws-sdk-core/log/formatter'
+require_relative 'aws-sdk-core/log/param_filter'
+require_relative 'aws-sdk-core/log/param_formatter'
 
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',
@@ -89,97 +135,6 @@ module Aws
     WorkSpaces
   )
 
-  @config = {}
-
-  autoload :Checksums, 'aws-sdk-core/checksums'
-
-
-
-
-
-  autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
-  autoload :ClientStubs, 'aws-sdk-core/client_stubs'
-  autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
-  autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
-  autoload :CredentialProviderChain, 'aws-sdk-core/credential_provider_chain'
-  autoload :Credentials, 'aws-sdk-core/credentials'
-  autoload :Deprecations, 'aws-sdk-core/deprecations'
-  autoload :EagerLoader, 'aws-sdk-core/eager_loader'
-  autoload :ECSCredentials, 'aws-sdk-core/ecs_credentials'
-  autoload :EmptyStructure, 'aws-sdk-core/empty_structure'
-  autoload :EndpointProvider, 'aws-sdk-core/endpoint_provider'
-  autoload :Errors, 'aws-sdk-core/errors'
-  autoload :IniParser, 'aws-sdk-core/ini_parser'
-  autoload :InstanceProfileCredentials, 'aws-sdk-core/instance_profile_credentials'
-  autoload :Json, 'aws-sdk-core/json'
-  autoload :PageableResponse, 'aws-sdk-core/pageable_response'
-  autoload :Pager, 'aws-sdk-core/pager'
-  autoload :ParamConverter, 'aws-sdk-core/param_converter'
-  autoload :ParamValidator, 'aws-sdk-core/param_validator'
-  autoload :Partitions, 'aws-sdk-core/partitions'
-  autoload :RefreshingCredentials, 'aws-sdk-core/refreshing_credentials'
-  autoload :Service, 'aws-sdk-core/service'
-  autoload :SharedConfig, 'aws-sdk-core/shared_config'
-  autoload :SharedCredentials, 'aws-sdk-core/shared_credentials'
-  autoload :Structure, 'aws-sdk-core/structure'
-  autoload :TreeHash, 'aws-sdk-core/tree_hash'
-  autoload :TypeBuilder, 'aws-sdk-core/type_builder'
-  autoload :Util, 'aws-sdk-core/util'
-  autoload :VERSION, 'aws-sdk-core/version'
-
-  module Resources
-    autoload :Batch, 'aws-sdk-core/resources/batch'
-    autoload :Collection, 'aws-sdk-core/resources/collection'
-  end
-
-  # @api private
-  module Api
-    autoload :Builder, 'aws-sdk-core/api/builder'
-    autoload :ShapeMap, 'aws-sdk-core/api/shape_map'
-    module Docs
-      autoload :Builder, 'aws-sdk-core/api/docs/builder'
-      autoload :ClientTypeDocumenter, 'aws-sdk-core/api/docs/client_type_documenter'
-      autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
-      autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
-      autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'
-      autoload :ParamFormatter, 'aws-sdk-core/api/docs/param_formatter'
-      autoload :RequestSyntaxExample, 'aws-sdk-core/api/docs/request_syntax_example'
-      autoload :ResponseStructureExample, 'aws-sdk-core/api/docs/response_structure_example'
-      autoload :SharedExample, 'aws-sdk-core/api/docs/shared_example'
-      autoload :Utils, 'aws-sdk-core/api/docs/utils'
-    end
-  end
-
-  module Log
-    autoload :Formatter, 'aws-sdk-core/log/formatter'
-    autoload :ParamFilter, 'aws-sdk-core/log/param_filter'
-    autoload :ParamFormatter, 'aws-sdk-core/log/param_formatter'
-  end
-
-  module Plugins
-    autoload :CredentialsConfiguration, 'aws-sdk-core/plugins/credentials_configuration'
-    autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
-    autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
-    autoload :Logging, 'aws-sdk-core/plugins/logging'
-    autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
-    autoload :ParamValidator, 'aws-sdk-core/plugins/param_validator'
-    autoload :RegionalEndpoint, 'aws-sdk-core/plugins/regional_endpoint'
-    autoload :ResponsePaging, 'aws-sdk-core/plugins/response_paging'
-    autoload :RetryErrors, 'aws-sdk-core/plugins/retry_errors'
-    autoload :SignatureV4, 'aws-sdk-core/plugins/signature_v4'
-    autoload :StubResponses, 'aws-sdk-core/plugins/stub_responses'
-    autoload :UserAgent, 'aws-sdk-core/plugins/user_agent'
-
-    module Protocols
-      autoload :EC2, 'aws-sdk-core/plugins/protocols/ec2'
-      autoload :JsonRpc, 'aws-sdk-core/plugins/protocols/json_rpc'
-      autoload :Query, 'aws-sdk-core/plugins/protocols/query'
-      autoload :RestJson, 'aws-sdk-core/plugins/protocols/rest_json'
-      autoload :RestXml, 'aws-sdk-core/plugins/protocols/rest_xml'
-    end
-
-  end
-
   # @api private
   module Query
     autoload :EC2ParamBuilder, 'aws-sdk-core/query/ec2_param_builder'
@@ -239,6 +194,8 @@ module Aws
     autoload :ErrorHandler,  'aws-sdk-core/xml/error_handler'
     autoload :Parser, 'aws-sdk-core/xml/parser'
   end
+
+  @config = {}
 
   class << self
 
@@ -335,41 +292,11 @@ module Aws
       ))
     end
 
-    # Loads modules that are normally loaded with Ruby's `autoload`.
-    # This can avoid thread-safety issues that some Ruby versions have
-    # with `autoload`.
-    #
-    #     # loads ALL services
-    #     Aws.eager_autoload!
-    #
-    # Loading all services can be slow. You can specify what services you
-    # want to load with the `:services` option. All services not named
-    # will continue to autoload as normal.
-    #
-    #     Aws.eager_autoload!(services: %w(S3 EC2))
-    #
-    # @return [void]
-    def eager_autoload!(options = {})
-      eager_loader = EagerLoader.new
-      eager_loader.load(JMESPath)
-      eager_loader.load(Seahorse)
-      sub_modules(options).each do |module_or_class|
-        eager_loader.load(module_or_class)
-      end
-      eager_loader
-    end
-
-    def sub_modules(options = {})
-      constants = Aws.constants.map(&:to_s)
-      if options[:services]
-        constants -= SERVICE_MODULE_NAMES
-        constants += options[:services] || SERVICE_MODULE_NAMES
-      end
-      constants.inject([]) do |modules, const_name|
-        constant = Aws.const_get(const_name)
-        modules << constant if Module === constant
-        modules
-      end
+    # @api private
+    def eager_autoload!(*args)
+      msg = 'Aws.eager_autoload is no longer needed, usage of '
+      msg << 'autoload has been replaced with require statements'
+      warn(msg)
     end
 
   end
