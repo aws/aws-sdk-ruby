@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ECR - Updated the API for Amazon EC2 Container Registry.
+
 * Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#create`
 
 2.6.14 (2016-10-25)
