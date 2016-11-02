@@ -91,14 +91,13 @@ module Aws
 
   @config = {}
 
-  autoload :DefaultList, 'aws-sdk-core/default_list'
-  autoload :DefaultMap, 'aws-sdk-core/default_map'
-  autoload :Hash2Struct, 'aws-sdk-core/hash_2_struct'
-  autoload :Struct2Hash, 'aws-sdk-core/struct_2_hash'
-  autoload :StructureType, 'aws-sdk-core/structure_type'
+  autoload :Checksums, 'aws-sdk-core/checksums'
+
+
+
+
 
   autoload :AssumeRoleCredentials, 'aws-sdk-core/assume_role_credentials'
-  autoload :Checksums, 'aws-sdk-core/checksums'
   autoload :ClientStubs, 'aws-sdk-core/client_stubs'
   autoload :ClientWaiters, 'aws-sdk-core/client_waiters'
   autoload :CredentialProvider, 'aws-sdk-core/credential_provider'
