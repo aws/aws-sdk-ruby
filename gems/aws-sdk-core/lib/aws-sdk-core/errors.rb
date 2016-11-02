@@ -38,15 +38,15 @@ module Aws
     # This error indicates a checksum failed.
     class ChecksumError < RuntimeError; end
 
-    # Raised when a {Service} is constructed and the specified shared
+    # Raised when a client is constructed and the specified shared
     # credentials profile does not exist.
     class NoSuchProfileError < RuntimeError; end
 
-    # Raised when a {Service} is constructed, where Assume Role credentials are
+    # Raised when a client is constructed, where Assume Role credentials are
     # expected, and there is no source profile specified.
     class NoSourceProfileError < RuntimeError; end
 
-    # Raised when a {Service} is constructed and credentials are not
+    # Raised when a client is constructed and credentials are not
     # set, or the set credentials are empty.
     class MissingCredentialsError < RuntimeError
       def initialize(*args)
