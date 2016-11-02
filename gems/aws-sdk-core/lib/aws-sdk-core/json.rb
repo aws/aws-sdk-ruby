@@ -4,11 +4,6 @@ module Aws
   # @api private
   module Json
 
-    autoload :Builder, 'aws-sdk-core/json/builder'
-    autoload :ErrorHandler, 'aws-sdk-core/json/error_handler'
-    autoload :Handler, 'aws-sdk-core/json/handler'
-    autoload :Parser, 'aws-sdk-core/json/parser'
-
     class ParseError < StandardError
 
       def initialize(error)

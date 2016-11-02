@@ -1,18 +1,8 @@
 module Aws
+  # @api private
   module Xml
-
     # A SAX-style XML parser that uses a shape context to handle types.
     class Parser
-
-      autoload :Stack, 'aws-sdk-core/xml/parser/stack'
-      autoload :Frame, 'aws-sdk-core/xml/parser/frame'
-      autoload :ParsingError, 'aws-sdk-core/xml/parser/parsing_error'
-
-      autoload :LibxmlEngine, 'aws-sdk-core/xml/parser/engines/libxml'
-      autoload :NokogiriEngine, 'aws-sdk-core/xml/parser/engines/nokogiri'
-      autoload :OgaEngine, 'aws-sdk-core/xml/parser/engines/oga'
-      autoload :OxEngine, 'aws-sdk-core/xml/parser/engines/ox'
-      autoload :RexmlEngine, 'aws-sdk-core/xml/parser/engines/rexml'
 
       # @param [Seahorse::Model::ShapeRef] rules
       def initialize(rules, options = {})

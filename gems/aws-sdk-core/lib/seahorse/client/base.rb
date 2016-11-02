@@ -37,12 +37,6 @@ module Seahorse
           context_for(operation_name, params))
       end
 
-      # @param [String] name
-      # @return [Model::Operation]
-      def operation(name)
-        config.api.operation(name)
-      end
-
       # @api private
       def inspect
         "#<#{self.class.name}>"
@@ -89,7 +83,7 @@ module Seahorse
       def context_for(operation_name, params)
         RequestContext.new(
           operation_name: operation_name,
-          operation: operation(operation_name),
+          operation: config.api.operation(operation_name),
           client: self,
           params: params,
           config: config)

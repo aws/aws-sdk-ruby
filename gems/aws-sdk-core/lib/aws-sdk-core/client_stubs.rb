@@ -159,7 +159,7 @@ module Aws
     # @return [Structure] Returns a stubbed response data structure. The
     #   actual class returned will depend on the given `operation_name`.
     def stub_data(operation_name, data = {})
-      Stubbing::StubData.new(operation(operation_name)).stub(data)
+      Stubbing::StubData.new(config.api.operation(operation_name)).stub(data)
     end
 
     # @api private

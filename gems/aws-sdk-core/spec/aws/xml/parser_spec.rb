@@ -1,33 +1,14 @@
 require_relative '../../spec_helper'
 require 'time'
 
-# This engine behaves the same as the rexml parser, except it fires
-# multiple text events for the xml text. This ensures the parser
-# supports the text value of a single element can be given in
-# multiple events.
-#
-# This is known to happen with Nokogiri on larger xml documents.
-#
-class Aws::Xml::Parser::DummyEngine < Aws::Xml::Parser::RexmlEngine
-  def text(value)
-    if value.empty?
-      super(value)
-    else
-      value.chars.each do |char|
-        super(char)
-      end
-    end
-  end
-end
-
 module Aws
   module Xml
     describe Parser do
-      [:OxEngine, :OgaEngine, :NokogiriEngine, :LibxmlEngine, :RexmlEngine, :DummyEngine].each do |engine|
+      [:ox, :oga, :nokogiri, :libxml, :rexml].each do |engine|
         describe("ENGINE: #{engine}") do
 
           begin
-            Parser.const_get(engine)
+            Parser.engine = engine
           rescue LoadError
             next
           end
@@ -35,10 +16,9 @@ module Aws
           let(:shapes) { ApiHelper.sample_shapes }
 
           let(:parser) {
-            engine_class = Parser.const_get(engine)
             api = ApiHelper.sample_api(shapes:shapes)
             rules = api.operation(:example_operation).output
-            Parser.new(rules, engine: engine_class)
+            Parser.new(rules)
           }
 
           def parse(xml, to_h = true)

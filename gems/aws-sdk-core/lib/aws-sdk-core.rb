@@ -24,7 +24,6 @@ require_relative 'aws-sdk-core/eager_loader'
 require_relative 'aws-sdk-core/endpoint_provider'
 require_relative 'aws-sdk-core/errors'
 require_relative 'aws-sdk-core/ini_parser'
-require_relative 'aws-sdk-core/json'
 require_relative 'aws-sdk-core/pageable_response'
 require_relative 'aws-sdk-core/pager'
 require_relative 'aws-sdk-core/param_converter'
@@ -37,6 +36,13 @@ require_relative 'aws-sdk-core/tree_hash'
 require_relative 'aws-sdk-core/type_builder'
 require_relative 'aws-sdk-core/util'
 require_relative 'aws-sdk-core/version'
+
+# partitions/regions/services interfaces
+
+require_relative 'aws-sdk-core/partitions/partition'
+require_relative 'aws-sdk-core/partitions/partition_list'
+require_relative 'aws-sdk-core/partitions/region'
+require_relative 'aws-sdk-core/partitions/service'
 
 # resource classes
 
@@ -102,6 +108,18 @@ require_relative 'aws-sdk-core/xml/default_map'
 require_relative 'aws-sdk-core/xml/doc_builder'
 require_relative 'aws-sdk-core/xml/error_handler'
 require_relative 'aws-sdk-core/xml/parser'
+require_relative 'aws-sdk-core/xml/parser/stack'
+require_relative 'aws-sdk-core/xml/parser/frame'
+require_relative 'aws-sdk-core/xml/parser/parsing_error'
+
+# json protoocl
+
+require_relative 'aws-sdk-core/json'
+require_relative 'aws-sdk-core/json/builder'
+require_relative 'aws-sdk-core/json/error_handler'
+require_relative 'aws-sdk-core/json/handler'
+require_relative 'aws-sdk-core/json/parser'
+
 
 Seahorse::Util.irregular_inflections({
   'ARNs' => 'arns',

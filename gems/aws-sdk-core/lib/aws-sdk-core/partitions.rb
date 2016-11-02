@@ -117,12 +117,6 @@ module Aws
   # correspond to the service's module.
   #
   module Partitions
-
-    autoload :Partition, 'aws-sdk-core/partitions/partition'
-    autoload :PartitionList, 'aws-sdk-core/partitions/partition_list'
-    autoload :Region, 'aws-sdk-core/partitions/region'
-    autoload :Service, 'aws-sdk-core/partitions/service'
-
     class << self
 
       # @param [Hash] new_partitions
