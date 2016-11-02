@@ -7,8 +7,10 @@ task 'aws-sdk:update' do
     start: /# service gems/,
     stop: /# end service gems/,
     new_lines: BuildTools::Services.group_by(&:gem_name).map { |gem_name, _|
-      "  spec.add_dependency('#{gem_name}', '~> 1.0')\n"
-    }
+      if gem_name != 'aws-sdk-core'
+        "  spec.add_dependency('#{gem_name}', '~> 1.0')\n"
+      end
+    }.compact
   )
 
   # update the module autoloads

@@ -72,7 +72,7 @@ module Aws
   autoload :SQS, 'aws-sdk-sqs'
   autoload :SSM, 'aws-sdk-ssm'
   autoload :StorageGateway, 'aws-sdk-storagegateway'
-  autoload :STS, 'aws-sdk-sts'
+  autoload :STS, 'aws-sdk-core'
   autoload :Support, 'aws-sdk-support'
   autoload :SWF, 'aws-sdk-swf'
   autoload :WAF, 'aws-sdk-waf'

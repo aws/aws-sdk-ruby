@@ -343,7 +343,7 @@
   "STS": {
     "models": "sts/2011-06-15",
     "endpoint": "sts",
-    "gem_dir": "gems/aws-sdk-core"
+    "gem": "aws-sdk-core"
   },
   "Support": {
     "models": "support/2013-04-15",

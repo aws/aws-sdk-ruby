@@ -130,7 +130,7 @@ module BuildTools
           svc.name = name
           svc.models = models(definition['models'])
           svc.gem_name = definition['gem'] || "aws-sdk-#{svc.identifier}"
-          svc.gem_dir = definition['gem_dir'] || File.join('gems', svc.gem_name)
+          svc.gem_dir = File.join('gems', svc.gem_name)
           svc.endpoints_key = definition['endpoint']
           svc.dependencies = dependencies(svc, definition)
           svc.add_plugins = add_plugins(svc, definition)
