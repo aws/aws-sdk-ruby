@@ -1,8 +1,5 @@
 #!/usr/bin/env ruby
 
-root = File.dirname(File.dirname(__FILE__))
-$:.unshift(File.join(root, 'lib'))
-
 require 'rubygems'
 require 'optparse'
 require 'logger'
@@ -92,48 +89,46 @@ options[:load_paths].each do |path|
   $LOAD_PATH.unshift(path)
 end
 
-# when running locally, ensure the local signature gems are loaded
-%w(v2 v4).each do |version|
-  File.expand_path("../../../aws-sig#{version}/lib", __FILE__).tap do |dir|
-    if File.directory?(dir)
-      $:.unshift(dir)
+# load the aws-sdk gem
+$:.unshift(File.expand_path('../../lib', __FILE__))
+require 'aws-sdk'
+
+# when running the REPL locally, we want to load all of the gems from source
+if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
+  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2)
+  Aws.constants.each do |const_name|
+    if Aws.autoload?(const_name)
+      gems << "aws-sdk-#{const_name.downcase}"
     end
   end
-  require "aws-sig#{version}"
+  gems.each do |gem_name|
+    $:.unshift(File.expand_path("../../../#{gem_name}/lib", __FILE__))
+  end
 end
 
-require 'aws-sdk-core'
-
+# add helper methods
 module Aws
   class << self
-    Aws::SERVICE_MODULE_NAMES.each do |svc_name|
-
-      # Load a local copy from disk if present, this makes it possible
-      # to run the REPL against a clone of the repository.
-      gem_name = "aws-sdk-#{svc_name.downcase}"
-      gem_lib = File.expand_path("../../../#{gem_name}/lib", __FILE__)
-      if File.directory?(gem_lib)
-        $LOAD_PATH.unshift(gem_lib)
-        Aws.autoload(svc_name, "#{gem_lib}/#{gem_name}")
-      else
-        Aws.autoload(svc_name, gem_name)
+    Aws.constants.each do |const_name|
+      if Aws.autoload?(const_name)
+        define_method(const_name.downcase) do |options = {}|
+          Aws.const_get(const_name).const_get(:Client).new(options)
+        end
       end
-
-      define_method(svc_name.downcase) do |options={}|
-        client = const_get(svc_name).const_get(:Client).new(options)
-        resource = const_get(svc_name).const_get(:Resource).new(client: client)
-        client.instance_variable_set("@resource", resource)
-        client.extend(Module.new do
-          def resource; @resource; end
-        end)
-        client
-      end
-
     end
   end
 end
 
-# configure the aws-sdk gem
+# add the `#resource` helper method to client classes
+require 'aws-sdk-core'
+class Seahorse::Client::Base
+  def resource
+    name = self.class.name.split('::')[1]
+    Aws.const_get(name).const_get(:Resource).new(client: self)
+  end
+end
+
+# configure the sdk
 
 cfg = {}
 

@@ -10,8 +10,6 @@ Gem::Specification.new do |spec|
   spec.require_paths = ['lib']
   spec.files         = ['endpoints.json', 'ca-bundle.crt']
   spec.files         += Dir['lib/**/*.rb']
-  spec.bindir        = 'bin'
-  spec.executables   << 'aws.rb'
 
   spec.add_dependency('jmespath', '~> 1.0')
   spec.add_dependency('aws-sigv4', '~> 1.0') # necessary for making Aws::STS API calls
