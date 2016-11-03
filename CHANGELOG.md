@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.18 (2016-11-03)
+------------------
+
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
 
 2.6.17 (2016-11-02)
