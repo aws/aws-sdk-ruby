@@ -1,4 +1,5 @@
 module Aws
+  # @api private
   module Stubbing
     class StubData
 

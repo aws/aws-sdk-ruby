@@ -1,5 +1,6 @@
 module Aws
   module Waiters
+    # @api private
     class Waiter
 
       # @api private

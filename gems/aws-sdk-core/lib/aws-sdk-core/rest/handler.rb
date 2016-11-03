@@ -1,4 +1,5 @@
 module Aws
+  # @api private
   module Rest
     class Handler < Seahorse::Client::Handler
 
