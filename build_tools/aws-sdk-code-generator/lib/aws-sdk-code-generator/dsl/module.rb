@@ -27,9 +27,10 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def require(path)
+      def require_statement(path)
         root.require(path)
       end
+      alias require require_statement
 
       def docstring(docstring = nil)
         @docstring ||= Dsl::Docstring.new

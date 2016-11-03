@@ -62,7 +62,7 @@ module AwsSdkCodeGenerator
       yield(client_api_module)
       yield(client_class, true)
       yield(errors_module)
-      yield(waiters_module) if @waiters
+      yield(waiters_module, true) if @waiters
       yield(root_resource_class)
       if @resources
         @resources['resources'].keys.sort.each do |name|
@@ -123,8 +123,13 @@ module AwsSdkCodeGenerator
       Generators::ErrorsModule.new(api: @api)
     end
 
-    def waiters_module
-      Generators::WaitersModule.new(waiters: @waiters)
+    def waiters_module(svc_mod = new_svc_module)
+      klass = Generators::WaitersModule.new(
+        parent: svc_mod,
+        waiters: @waiters
+      )
+      svc_mod.add(klass)
+      klass
     end
 
     def root_resource_class

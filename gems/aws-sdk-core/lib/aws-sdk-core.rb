@@ -64,12 +64,6 @@ require_relative 'aws-sdk-core/stubbing/protocols/rest'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_json'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_xml'
 
-# waiters
-
-require_relative 'aws-sdk-core/waiters/errors'
-require_relative 'aws-sdk-core/waiters/poller'
-require_relative 'aws-sdk-core/waiters/waiter'
-
 # query protocol
 
 require_relative 'aws-sdk-core/query/ec2_param_builder'

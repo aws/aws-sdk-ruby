@@ -5,6 +5,8 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sdk-core/waiters'
+
 module Aws
   module S3
     module Waiters

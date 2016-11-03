@@ -5,6 +5,8 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+require 'aws-sdk-core/waiters'
+
 module Aws
   module Route53
     module Waiters
