@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cognitosync/types'
 require_relative 'aws-sdk-cognitosync/client_api'
 require_relative 'aws-sdk-cognitosync/client'
 require_relative 'aws-sdk-cognitosync/errors'
-require_relative 'aws-sdk-cognitosync/waiters'
 require_relative 'aws-sdk-cognitosync/resource'
 
 module Aws

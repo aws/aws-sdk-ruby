@@ -9,13 +9,14 @@ module AwsSdkCodeGenerator
         client_method = underscore(waiter['operation'])
         super(options.fetch(:waiter_name))
         code <<-CODE
+# @param [Hash] options
 # @option options [required, Client] :client
 # @option options [Integer] :max_attempts (#{waiter['maxAttempts']})
 # @option options [Integer] :delay (#{waiter['delay']})
 # @option options [Proc] :before_attempt
 # @option options [Proc] :before_wait
-def initialize(options = {})
-  @client = options[:client]
+def initialize(options)
+  @client = options.fetch(:client)
   @waiter = Aws::Waiters::Waiter.new({
     max_attempts: #{waiter['maxAttempts']},
     delay: #{waiter['delay']},

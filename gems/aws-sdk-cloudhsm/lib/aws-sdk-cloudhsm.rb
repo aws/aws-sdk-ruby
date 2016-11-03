@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cloudhsm/types'
 require_relative 'aws-sdk-cloudhsm/client_api'
 require_relative 'aws-sdk-cloudhsm/client'
 require_relative 'aws-sdk-cloudhsm/errors'
-require_relative 'aws-sdk-cloudhsm/waiters'
 require_relative 'aws-sdk-cloudhsm/resource'
 
 module Aws

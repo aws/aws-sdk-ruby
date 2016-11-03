@@ -11,7 +11,6 @@ require_relative 'aws-sdk-budgets/types'
 require_relative 'aws-sdk-budgets/client_api'
 require_relative 'aws-sdk-budgets/client'
 require_relative 'aws-sdk-budgets/errors'
-require_relative 'aws-sdk-budgets/waiters'
 require_relative 'aws-sdk-budgets/resource'
 
 module Aws

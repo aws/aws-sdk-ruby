@@ -11,7 +11,6 @@ require_relative 'aws-sdk-codepipeline/types'
 require_relative 'aws-sdk-codepipeline/client_api'
 require_relative 'aws-sdk-codepipeline/client'
 require_relative 'aws-sdk-codepipeline/errors'
-require_relative 'aws-sdk-codepipeline/waiters'
 require_relative 'aws-sdk-codepipeline/resource'
 
 module Aws

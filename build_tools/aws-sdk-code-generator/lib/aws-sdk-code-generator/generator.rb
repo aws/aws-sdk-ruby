@@ -62,7 +62,7 @@ module AwsSdkCodeGenerator
       yield(client_api_module)
       yield(client_class, true)
       yield(errors_module)
-      yield(waiters_module)
+      yield(waiters_module) if @waiters
       yield(root_resource_class)
       if @resources
         @resources['resources'].keys.sort.each do |name|
@@ -86,7 +86,8 @@ module AwsSdkCodeGenerator
     def service_module(autoload_prefix)
       autoloads = Generators::ServiceAutoloads.new(
         prefix: autoload_prefix,
-        resources: @resources
+        resources: @resources,
+        waiters: !!@waiters,
       )
       svc_mod = new_svc_module
       @gem_requires.each { |gem_name| svc_mod.require(gem_name) }

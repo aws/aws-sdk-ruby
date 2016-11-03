@@ -11,7 +11,6 @@ require_relative 'aws-sdk-gamelift/types'
 require_relative 'aws-sdk-gamelift/client_api'
 require_relative 'aws-sdk-gamelift/client'
 require_relative 'aws-sdk-gamelift/errors'
-require_relative 'aws-sdk-gamelift/waiters'
 require_relative 'aws-sdk-gamelift/resource'
 
 module Aws

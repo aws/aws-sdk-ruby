@@ -11,7 +11,6 @@ require_relative 'aws-sdk-kinesisanalytics/types'
 require_relative 'aws-sdk-kinesisanalytics/client_api'
 require_relative 'aws-sdk-kinesisanalytics/client'
 require_relative 'aws-sdk-kinesisanalytics/errors'
-require_relative 'aws-sdk-kinesisanalytics/waiters'
 require_relative 'aws-sdk-kinesisanalytics/resource'
 
 module Aws

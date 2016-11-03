@@ -11,7 +11,6 @@ require_relative 'aws-sdk-swf/types'
 require_relative 'aws-sdk-swf/client_api'
 require_relative 'aws-sdk-swf/client'
 require_relative 'aws-sdk-swf/errors'
-require_relative 'aws-sdk-swf/waiters'
 require_relative 'aws-sdk-swf/resource'
 
 module Aws

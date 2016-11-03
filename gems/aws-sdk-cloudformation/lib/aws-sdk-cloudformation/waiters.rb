@@ -10,13 +10,14 @@ module Aws
     module Waiters
       class StackExists
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (20)
         # @option options [Integer] :delay (5)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 20,
             delay: 5,
@@ -51,13 +52,14 @@ module Aws
 
       class StackCreateComplete
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (120)
         # @option options [Integer] :delay (30)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 120,
             delay: 30,
@@ -136,13 +138,14 @@ module Aws
 
       class StackDeleteComplete
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (120)
         # @option options [Integer] :delay (30)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 120,
             delay: 30,
@@ -263,13 +266,14 @@ module Aws
 
       class StackUpdateComplete
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (120)
         # @option options [Integer] :delay (30)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 120,
             delay: 30,

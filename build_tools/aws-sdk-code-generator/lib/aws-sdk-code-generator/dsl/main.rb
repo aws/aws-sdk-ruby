@@ -47,9 +47,10 @@ module AwsSdkCodeGenerator
       end
       alias :extend :extend_module
 
-      def require(path)
+      def require_statement(path)
         @top_content << "require '#{path}'"
       end
+      alias require require_statement
 
       # Allows inserting top-of document content.
       def top(string)

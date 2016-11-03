@@ -11,7 +11,6 @@ require_relative 'aws-sdk-firehose/types'
 require_relative 'aws-sdk-firehose/client_api'
 require_relative 'aws-sdk-firehose/client'
 require_relative 'aws-sdk-firehose/errors'
-require_relative 'aws-sdk-firehose/waiters'
 require_relative 'aws-sdk-firehose/resource'
 
 module Aws

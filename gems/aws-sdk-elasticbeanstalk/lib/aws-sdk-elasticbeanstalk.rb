@@ -11,7 +11,6 @@ require_relative 'aws-sdk-elasticbeanstalk/types'
 require_relative 'aws-sdk-elasticbeanstalk/client_api'
 require_relative 'aws-sdk-elasticbeanstalk/client'
 require_relative 'aws-sdk-elasticbeanstalk/errors'
-require_relative 'aws-sdk-elasticbeanstalk/waiters'
 require_relative 'aws-sdk-elasticbeanstalk/resource'
 
 module Aws

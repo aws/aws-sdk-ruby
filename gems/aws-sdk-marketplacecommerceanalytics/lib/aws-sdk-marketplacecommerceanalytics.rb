@@ -11,7 +11,6 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/types'
 require_relative 'aws-sdk-marketplacecommerceanalytics/client_api'
 require_relative 'aws-sdk-marketplacecommerceanalytics/client'
 require_relative 'aws-sdk-marketplacecommerceanalytics/errors'
-require_relative 'aws-sdk-marketplacecommerceanalytics/waiters'
 require_relative 'aws-sdk-marketplacecommerceanalytics/resource'
 
 module Aws

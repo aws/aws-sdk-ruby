@@ -11,7 +11,6 @@ require_relative 'aws-sdk-servicecatalog/types'
 require_relative 'aws-sdk-servicecatalog/client_api'
 require_relative 'aws-sdk-servicecatalog/client'
 require_relative 'aws-sdk-servicecatalog/errors'
-require_relative 'aws-sdk-servicecatalog/waiters'
 require_relative 'aws-sdk-servicecatalog/resource'
 
 module Aws

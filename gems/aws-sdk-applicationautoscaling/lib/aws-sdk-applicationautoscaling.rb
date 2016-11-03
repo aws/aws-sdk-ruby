@@ -11,7 +11,6 @@ require_relative 'aws-sdk-applicationautoscaling/types'
 require_relative 'aws-sdk-applicationautoscaling/client_api'
 require_relative 'aws-sdk-applicationautoscaling/client'
 require_relative 'aws-sdk-applicationautoscaling/errors'
-require_relative 'aws-sdk-applicationautoscaling/waiters'
 require_relative 'aws-sdk-applicationautoscaling/resource'
 
 module Aws

@@ -11,7 +11,6 @@ require_relative 'aws-sdk-importexport/types'
 require_relative 'aws-sdk-importexport/client_api'
 require_relative 'aws-sdk-importexport/client'
 require_relative 'aws-sdk-importexport/errors'
-require_relative 'aws-sdk-importexport/waiters'
 require_relative 'aws-sdk-importexport/resource'
 
 module Aws

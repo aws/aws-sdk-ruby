@@ -11,7 +11,6 @@ require_relative 'aws-sdk-elasticsearchservice/types'
 require_relative 'aws-sdk-elasticsearchservice/client_api'
 require_relative 'aws-sdk-elasticsearchservice/client'
 require_relative 'aws-sdk-elasticsearchservice/errors'
-require_relative 'aws-sdk-elasticsearchservice/waiters'
 require_relative 'aws-sdk-elasticsearchservice/resource'
 
 module Aws

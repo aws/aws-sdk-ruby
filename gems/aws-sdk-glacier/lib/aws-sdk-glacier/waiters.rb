@@ -10,13 +10,14 @@ module Aws
     module Waiters
       class VaultExists
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (15)
         # @option options [Integer] :delay (3)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 15,
             delay: 3,
@@ -51,13 +52,14 @@ module Aws
 
       class VaultNotExists
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (15)
         # @option options [Integer] :delay (3)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 15,
             delay: 3,

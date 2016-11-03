@@ -11,7 +11,6 @@ require_relative 'aws-sdk-applicationdiscoveryservice/types'
 require_relative 'aws-sdk-applicationdiscoveryservice/client_api'
 require_relative 'aws-sdk-applicationdiscoveryservice/client'
 require_relative 'aws-sdk-applicationdiscoveryservice/errors'
-require_relative 'aws-sdk-applicationdiscoveryservice/waiters'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
 
 module Aws

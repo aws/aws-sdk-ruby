@@ -11,7 +11,6 @@ require_relative 'aws-sdk-efs/types'
 require_relative 'aws-sdk-efs/client_api'
 require_relative 'aws-sdk-efs/client'
 require_relative 'aws-sdk-efs/errors'
-require_relative 'aws-sdk-efs/waiters'
 require_relative 'aws-sdk-efs/resource'
 
 module Aws

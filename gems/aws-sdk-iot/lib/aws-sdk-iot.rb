@@ -11,7 +11,6 @@ require_relative 'aws-sdk-iot/types'
 require_relative 'aws-sdk-iot/client_api'
 require_relative 'aws-sdk-iot/client'
 require_relative 'aws-sdk-iot/errors'
-require_relative 'aws-sdk-iot/waiters'
 require_relative 'aws-sdk-iot/resource'
 
 module Aws

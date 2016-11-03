@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cloudwatchevents/types'
 require_relative 'aws-sdk-cloudwatchevents/client_api'
 require_relative 'aws-sdk-cloudwatchevents/client'
 require_relative 'aws-sdk-cloudwatchevents/errors'
-require_relative 'aws-sdk-cloudwatchevents/waiters'
 require_relative 'aws-sdk-cloudwatchevents/resource'
 
 module Aws

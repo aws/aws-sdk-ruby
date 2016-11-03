@@ -11,7 +11,6 @@ require_relative 'aws-sdk-sqs/types'
 require_relative 'aws-sdk-sqs/client_api'
 require_relative 'aws-sdk-sqs/client'
 require_relative 'aws-sdk-sqs/errors'
-require_relative 'aws-sdk-sqs/waiters'
 require_relative 'aws-sdk-sqs/resource'
 
 # customizations for generated code

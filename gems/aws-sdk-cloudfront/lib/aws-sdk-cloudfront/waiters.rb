@@ -10,13 +10,14 @@ module Aws
     module Waiters
       class DistributionDeployed
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (25)
         # @option options [Integer] :delay (60)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 25,
             delay: 60,
@@ -46,13 +47,14 @@ module Aws
 
       class InvalidationCompleted
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (30)
         # @option options [Integer] :delay (20)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 30,
             delay: 20,
@@ -82,13 +84,14 @@ module Aws
 
       class StreamingDistributionDeployed
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (25)
         # @option options [Integer] :delay (60)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 25,
             delay: 60,

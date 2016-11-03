@@ -11,7 +11,6 @@ require_relative 'aws-sdk-codecommit/types'
 require_relative 'aws-sdk-codecommit/client_api'
 require_relative 'aws-sdk-codecommit/client'
 require_relative 'aws-sdk-codecommit/errors'
-require_relative 'aws-sdk-codecommit/waiters'
 require_relative 'aws-sdk-codecommit/resource'
 
 module Aws

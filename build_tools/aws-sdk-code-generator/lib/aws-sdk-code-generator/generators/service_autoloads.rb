@@ -8,9 +8,11 @@ module AwsSdkCodeGenerator
 
       # @option options [required, String] :prefix
       # @option options [required, Hash] :resources
+      # @option options [required, Boolean] :waiters
       def initialize(options)
         @prefix = options.fetch(:prefix)
         @resources = options.fetch(:resources)
+        @waiters = options.fetch(:waiters)
       end
 
       # @param [Dsl::Module] mod
@@ -28,7 +30,7 @@ module AwsSdkCodeGenerator
         autoloads['ClientApi'] = "#{@prefix}/client_api"
         autoloads['Client'] = "#{@prefix}/client"
         autoloads['Errors'] = "#{@prefix}/errors"
-        autoloads['Waiters'] = "#{@prefix}/waiters"
+        autoloads['Waiters'] = "#{@prefix}/waiters" if @waiters
         autoloads['Resource'] = "#{@prefix}/resource"
         if @resources && @resources['resources']
           @resources['resources'].keys.each do |resource_name|

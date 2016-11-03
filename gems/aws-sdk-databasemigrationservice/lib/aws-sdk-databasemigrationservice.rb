@@ -11,7 +11,6 @@ require_relative 'aws-sdk-databasemigrationservice/types'
 require_relative 'aws-sdk-databasemigrationservice/client_api'
 require_relative 'aws-sdk-databasemigrationservice/client'
 require_relative 'aws-sdk-databasemigrationservice/errors'
-require_relative 'aws-sdk-databasemigrationservice/waiters'
 require_relative 'aws-sdk-databasemigrationservice/resource'
 
 module Aws

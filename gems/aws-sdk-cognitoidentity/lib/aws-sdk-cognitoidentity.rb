@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cognitoidentity/types'
 require_relative 'aws-sdk-cognitoidentity/client_api'
 require_relative 'aws-sdk-cognitoidentity/client'
 require_relative 'aws-sdk-cognitoidentity/errors'
-require_relative 'aws-sdk-cognitoidentity/waiters'
 require_relative 'aws-sdk-cognitoidentity/resource'
 
 module Aws

@@ -11,7 +11,6 @@ require_relative 'aws-sdk-support/types'
 require_relative 'aws-sdk-support/client_api'
 require_relative 'aws-sdk-support/client'
 require_relative 'aws-sdk-support/errors'
-require_relative 'aws-sdk-support/waiters'
 require_relative 'aws-sdk-support/resource'
 
 module Aws

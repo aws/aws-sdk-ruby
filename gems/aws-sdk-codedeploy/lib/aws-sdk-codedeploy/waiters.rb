@@ -10,13 +10,14 @@ module Aws
     module Waiters
       class DeploymentSuccessful
 
+        # @param [Hash] options
         # @option options [required, Client] :client
         # @option options [Integer] :max_attempts (120)
         # @option options [Integer] :delay (15)
         # @option options [Proc] :before_attempt
         # @option options [Proc] :before_wait
-        def initialize(options = {})
-          @client = options[:client]
+        def initialize(options)
+          @client = options.fetch(:client)
           @waiter = Aws::Waiters::Waiter.new({
             max_attempts: 120,
             delay: 15,

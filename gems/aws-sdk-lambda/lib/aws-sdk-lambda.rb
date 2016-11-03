@@ -11,7 +11,6 @@ require_relative 'aws-sdk-lambda/types'
 require_relative 'aws-sdk-lambda/client_api'
 require_relative 'aws-sdk-lambda/client'
 require_relative 'aws-sdk-lambda/errors'
-require_relative 'aws-sdk-lambda/waiters'
 require_relative 'aws-sdk-lambda/resource'
 
 module Aws

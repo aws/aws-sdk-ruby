@@ -11,7 +11,6 @@ require_relative 'aws-sdk-workspaces/types'
 require_relative 'aws-sdk-workspaces/client_api'
 require_relative 'aws-sdk-workspaces/client'
 require_relative 'aws-sdk-workspaces/errors'
-require_relative 'aws-sdk-workspaces/waiters'
 require_relative 'aws-sdk-workspaces/resource'
 
 module Aws

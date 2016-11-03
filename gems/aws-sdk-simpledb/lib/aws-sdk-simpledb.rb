@@ -11,7 +11,6 @@ require_relative 'aws-sdk-simpledb/types'
 require_relative 'aws-sdk-simpledb/client_api'
 require_relative 'aws-sdk-simpledb/client'
 require_relative 'aws-sdk-simpledb/errors'
-require_relative 'aws-sdk-simpledb/waiters'
 require_relative 'aws-sdk-simpledb/resource'
 
 module Aws

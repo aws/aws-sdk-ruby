@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cloudtrail/types'
 require_relative 'aws-sdk-cloudtrail/client_api'
 require_relative 'aws-sdk-cloudtrail/client'
 require_relative 'aws-sdk-cloudtrail/errors'
-require_relative 'aws-sdk-cloudtrail/waiters'
 require_relative 'aws-sdk-cloudtrail/resource'
 
 module Aws

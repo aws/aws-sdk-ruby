@@ -11,7 +11,6 @@ require_relative 'aws-sdk-cloudsearch/types'
 require_relative 'aws-sdk-cloudsearch/client_api'
 require_relative 'aws-sdk-cloudsearch/client'
 require_relative 'aws-sdk-cloudsearch/errors'
-require_relative 'aws-sdk-cloudsearch/waiters'
 require_relative 'aws-sdk-cloudsearch/resource'
 
 module Aws

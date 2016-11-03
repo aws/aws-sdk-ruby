@@ -11,7 +11,6 @@ require_relative 'aws-sdk-directconnect/types'
 require_relative 'aws-sdk-directconnect/client_api'
 require_relative 'aws-sdk-directconnect/client'
 require_relative 'aws-sdk-directconnect/errors'
-require_relative 'aws-sdk-directconnect/waiters'
 require_relative 'aws-sdk-directconnect/resource'
 
 module Aws

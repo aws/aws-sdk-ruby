@@ -11,7 +11,6 @@ require_relative 'aws-sdk-iotdataplane/types'
 require_relative 'aws-sdk-iotdataplane/client_api'
 require_relative 'aws-sdk-iotdataplane/client'
 require_relative 'aws-sdk-iotdataplane/errors'
-require_relative 'aws-sdk-iotdataplane/waiters'
 require_relative 'aws-sdk-iotdataplane/resource'
 
 module Aws

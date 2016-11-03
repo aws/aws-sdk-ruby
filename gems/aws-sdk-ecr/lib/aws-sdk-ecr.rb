@@ -11,7 +11,6 @@ require_relative 'aws-sdk-ecr/types'
 require_relative 'aws-sdk-ecr/client_api'
 require_relative 'aws-sdk-ecr/client'
 require_relative 'aws-sdk-ecr/errors'
-require_relative 'aws-sdk-ecr/waiters'
 require_relative 'aws-sdk-ecr/resource'
 
 module Aws

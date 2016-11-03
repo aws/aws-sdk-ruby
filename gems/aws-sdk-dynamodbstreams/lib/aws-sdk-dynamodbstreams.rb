@@ -11,7 +11,6 @@ require_relative 'aws-sdk-dynamodbstreams/types'
 require_relative 'aws-sdk-dynamodbstreams/client_api'
 require_relative 'aws-sdk-dynamodbstreams/client'
 require_relative 'aws-sdk-dynamodbstreams/errors'
-require_relative 'aws-sdk-dynamodbstreams/waiters'
 require_relative 'aws-sdk-dynamodbstreams/resource'
 
 module Aws

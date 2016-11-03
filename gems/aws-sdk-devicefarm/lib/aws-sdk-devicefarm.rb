@@ -11,7 +11,6 @@ require_relative 'aws-sdk-devicefarm/types'
 require_relative 'aws-sdk-devicefarm/client_api'
 require_relative 'aws-sdk-devicefarm/client'
 require_relative 'aws-sdk-devicefarm/errors'
-require_relative 'aws-sdk-devicefarm/waiters'
 require_relative 'aws-sdk-devicefarm/resource'
 
 module Aws

@@ -11,7 +11,6 @@ require_relative 'aws-sdk-kms/types'
 require_relative 'aws-sdk-kms/client_api'
 require_relative 'aws-sdk-kms/client'
 require_relative 'aws-sdk-kms/errors'
-require_relative 'aws-sdk-kms/waiters'
 require_relative 'aws-sdk-kms/resource'
 
 module Aws
