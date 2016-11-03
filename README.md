@@ -252,7 +252,6 @@ to be backwards compatible.
 | aws-sdk-cognitoidentityprovider      | Amazon Cognito Identity Provider         | Aws::CognitoIdentityProvider      | 2016-04-18  |
 | aws-sdk-cognitosync                  | Amazon Cognito Sync                      | Aws::CognitoSync                  | 2014-06-30  |
 | aws-sdk-configservice                | AWS Config                               | Aws::ConfigService                | 2014-11-12  |
-| aws-sdk-core                         | AWS Security Token Service               | Aws::STS                          | 2011-06-15  |
 | aws-sdk-databasemigrationservice     | AWS Database Migration Service           | Aws::DatabaseMigrationService     | 2016-01-01  |
 | aws-sdk-datapipeline                 | AWS Data Pipeline                        | Aws::DataPipeline                 | 2012-10-29  |
 | aws-sdk-devicefarm                   | AWS Device Farm                          | Aws::DeviceFarm                   | 2015-06-23  |
@@ -302,6 +301,7 @@ to be backwards compatible.
 | aws-sdk-sqs                          | Amazon Simple Queue Service              | Aws::SQS                          | 2012-11-05  |
 | aws-sdk-ssm                          | Amazon Simple Systems Management Service | Aws::SSM                          | 2014-11-06  |
 | aws-sdk-storagegateway               | AWS Storage Gateway                      | Aws::StorageGateway               | 2013-06-30  |
+| aws-sdk-sts                          | AWS Security Token Service               | Aws::STS                          | 2011-06-15  |
 | aws-sdk-support                      | AWS Support                              | Aws::Support                      | 2013-04-15  |
 | aws-sdk-swf                          | Amazon Simple Workflow Service           | Aws::SWF                          | 2012-01-25  |
 | aws-sdk-waf                          | AWS WAF                                  | Aws::WAF                          | 2015-08-24  |

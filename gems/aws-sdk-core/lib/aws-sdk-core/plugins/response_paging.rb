@@ -1,8 +1,8 @@
 module Aws
   module Plugins
+    # @api private
     class ResponsePaging < Seahorse::Client::Plugin
 
-      # @api private
       class Handler < Seahorse::Client::Handler
 
         def call(context)
