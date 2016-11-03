@@ -26,7 +26,6 @@ module Aws
         end
 
         handler(Handler)
-
         handler(Xml::ErrorHandler, step: :sign)
 
       end

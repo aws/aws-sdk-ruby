@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class RegionalEndpoint < Seahorse::Client::Plugin
 
       # raised when region is not configured

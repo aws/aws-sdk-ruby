@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class ParamConverter < Seahorse::Client::Plugin
 
       option(:convert_params,

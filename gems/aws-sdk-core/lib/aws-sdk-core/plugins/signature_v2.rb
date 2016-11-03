@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class SignatureV2 < Seahorse::Client::Plugin
 
       option(:v2_signer) do |cfg|

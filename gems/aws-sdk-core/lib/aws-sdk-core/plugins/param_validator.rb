@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class ParamValidator < Seahorse::Client::Plugin
 
       option(:validate_params,

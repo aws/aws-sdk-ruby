@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class StubResponses < Seahorse::Client::Plugin
 
       option(:stub_responses,

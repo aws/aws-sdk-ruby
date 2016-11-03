@@ -66,6 +66,7 @@ module Aws
     end
   end
 
+  # @api private
   class EmptyStructure < Struct.new('AwsEmptyStructure')
     include(Aws::Structure)
   end

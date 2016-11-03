@@ -2,6 +2,7 @@ require 'set'
 
 module Aws
   module Plugins
+    # @api private
     class RetryErrors < Seahorse::Client::Plugin
 
       option(:retry_limit,

@@ -1,5 +1,7 @@
 module Aws
+  # @api private
   module Plugins
+    # @api private
     class CredentialsConfiguration < Seahorse::Client::Plugin
 
       option(:access_key_id, doc_type: String, docstring: '')

@@ -1,10 +1,7 @@
 module Aws
   module Plugins
-
-    # Enables logging for all requests.  This plugin allows you to configure
-    # your logging device, the log format and the level to log messages at.
-    #
     # @see Log::Formatter
+    # @api private
     class Logging < Seahorse::Client::Plugin
 
       option(:logger,

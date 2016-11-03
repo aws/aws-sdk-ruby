@@ -120,6 +120,7 @@ module Aws
     # to call on a pageable response, as this would trigger n api calls
     # simply to count the number of response pages, when likely what is
     # wanted is to access count on the data. Same for #to_h.
+    # @api private
     module UnsafeEnumerableMethods
 
       def count

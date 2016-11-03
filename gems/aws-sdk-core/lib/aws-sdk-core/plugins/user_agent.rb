@@ -1,5 +1,6 @@
 module Aws
   module Plugins
+    # @api private
     class UserAgent < Seahorse::Client::Plugin
 
       option(:user_agent_suffix)

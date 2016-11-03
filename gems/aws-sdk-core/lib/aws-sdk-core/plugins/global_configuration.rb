@@ -38,6 +38,7 @@ module Aws
     #     Aws::EC2.new # no error this time
     #     Aws::S3.new.config.force_path_style #=> true
     #
+    # @api private
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private

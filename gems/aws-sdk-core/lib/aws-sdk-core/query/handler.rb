@@ -1,4 +1,5 @@
 module Aws
+  # @api private
   module Query
     class Handler < Seahorse::Client::Handler
 

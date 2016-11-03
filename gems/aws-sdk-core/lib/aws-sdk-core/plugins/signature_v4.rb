@@ -2,6 +2,7 @@ require 'aws-sigv4'
 
 module Aws
   module Plugins
+    # @api private
     class SignatureV4 < Seahorse::Client::Plugin
 
       option(:sigv4_signer) do |cfg|
