@@ -841,10 +841,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListIdentitiesRequest)
           o.output = Shapes::ShapeRef.new(shape: ListIdentitiesResponse)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxItems",
-            "result_key" => "Identities"
+            limit_key: "max_items",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -878,7 +878,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.output = Shapes::ShapeRef.new(shape: ListVerifiedEmailAddressesResponse)
-          o[:pager] = Aws::Pager.new("result_key" => "VerifiedEmailAddresses")
         end)
 
         api.add_operation(:put_identity_policy, Seahorse::Model::Operation.new.tap do |o|

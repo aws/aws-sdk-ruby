@@ -2364,10 +2364,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeDBEngineVersionsMessage)
           o.output = Shapes::ShapeRef.new(shape: DBEngineVersionMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBEngineVersions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2379,10 +2379,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBInstanceMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBInstances"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2394,10 +2394,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeDBLogFilesResponse)
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DescribeDBLogFiles"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2409,10 +2409,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBParameterGroupsMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBParameterGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2424,10 +2424,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBParameterGroupDetails)
           o.errors << Shapes::ShapeRef.new(shape: DBParameterGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2439,10 +2439,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBSecurityGroupMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBSecurityGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBSecurityGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2463,10 +2463,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBSnapshotMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBSnapshots"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2478,10 +2478,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DBSubnetGroupMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBSubnetGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DBSubnetGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2500,10 +2500,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeEngineDefaultParametersMessage)
           o.output = Shapes::ShapeRef.new(shape: DescribeEngineDefaultParametersResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "EngineDefaults.Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "EngineDefaults.Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "engine_defaults.marker" => "marker"
+            }
           )
         end)
 
@@ -2523,10 +2523,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: EventSubscriptionsMessage)
           o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "EventSubscriptionsList"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2537,10 +2537,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeEventsMessage)
           o.output = Shapes::ShapeRef.new(shape: EventsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Events"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2551,10 +2551,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeOptionGroupOptionsMessage)
           o.output = Shapes::ShapeRef.new(shape: OptionGroupOptionsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "OptionGroupOptions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2566,10 +2566,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: OptionGroups)
           o.errors << Shapes::ShapeRef.new(shape: OptionGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "OptionGroupsList"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2580,10 +2580,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeOrderableDBInstanceOptionsMessage)
           o.output = Shapes::ShapeRef.new(shape: OrderableDBInstanceOptionsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "OrderableDBInstanceOptions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2604,10 +2604,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ReservedDBInstanceMessage)
           o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstanceNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedDBInstances"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2619,10 +2619,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingMessage)
           o.errors << Shapes::ShapeRef.new(shape: ReservedDBInstancesOfferingNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedDBInstancesOfferings"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2643,11 +2643,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: DBLogFileNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "NumberOfLines",
-            "more_results" => "AdditionalDataPending",
-            "result_key" => "LogFileData"
+            more_results: "additional_data_pending",
+            limit_key: "number_of_lines",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -2670,7 +2670,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: TagListMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
-          o[:pager] = Aws::Pager.new("result_key" => "TagList")
         end)
 
         api.add_operation(:modify_db_cluster, Seahorse::Model::Operation.new.tap do |o|

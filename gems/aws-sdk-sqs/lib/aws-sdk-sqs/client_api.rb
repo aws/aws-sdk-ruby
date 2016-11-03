@@ -400,7 +400,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListQueuesRequest)
           o.output = Shapes::ShapeRef.new(shape: ListQueuesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "QueueUrls")
         end)
 
         api.add_operation(:purge_queue, Seahorse::Model::Operation.new.tap do |o|

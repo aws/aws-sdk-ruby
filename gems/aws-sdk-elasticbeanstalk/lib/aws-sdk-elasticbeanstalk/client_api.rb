@@ -986,7 +986,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeApplicationVersionsMessage)
           o.output = Shapes::ShapeRef.new(shape: ApplicationVersionDescriptionsMessage)
-          o[:pager] = Aws::Pager.new("result_key" => "ApplicationVersions")
         end)
 
         api.add_operation(:describe_applications, Seahorse::Model::Operation.new.tap do |o|
@@ -995,7 +994,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeApplicationsMessage)
           o.output = Shapes::ShapeRef.new(shape: ApplicationDescriptionsMessage)
-          o[:pager] = Aws::Pager.new("result_key" => "Applications")
         end)
 
         api.add_operation(:describe_configuration_options, Seahorse::Model::Operation.new.tap do |o|
@@ -1005,7 +1003,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationOptionsMessage)
           o.output = Shapes::ShapeRef.new(shape: ConfigurationOptionsDescription)
           o.errors << Shapes::ShapeRef.new(shape: TooManyBucketsException)
-          o[:pager] = Aws::Pager.new("result_key" => "Options")
         end)
 
         api.add_operation(:describe_configuration_settings, Seahorse::Model::Operation.new.tap do |o|
@@ -1060,7 +1057,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeEnvironmentsMessage)
           o.output = Shapes::ShapeRef.new(shape: EnvironmentDescriptionsMessage)
-          o[:pager] = Aws::Pager.new("result_key" => "Environments")
         end)
 
         api.add_operation(:describe_events, Seahorse::Model::Operation.new.tap do |o|
@@ -1070,10 +1066,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeEventsMessage)
           o.output = Shapes::ShapeRef.new(shape: EventDescriptionsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Events"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1093,7 +1089,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.output = Shapes::ShapeRef.new(shape: ListAvailableSolutionStacksResultMessage)
-          o[:pager] = Aws::Pager.new("result_key" => "SolutionStacks")
         end)
 
         api.add_operation(:rebuild_environment, Seahorse::Model::Operation.new.tap do |o|

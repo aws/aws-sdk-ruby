@@ -1743,7 +1743,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.output = Shapes::ShapeRef.new(shape: ListBucketsOutput)
-          o[:pager] = Aws::Pager.new("result_key" => "Buckets")
         end)
 
         api.add_operation(:list_multipart_uploads, Seahorse::Model::Operation.new.tap do |o|
@@ -1753,20 +1752,12 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListMultipartUploadsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListMultipartUploadsOutput)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxUploads",
-            "more_results" => "IsTruncated",
-            "output_token" => [
-              "NextKeyMarker",
-              "NextUploadIdMarker"
-            ],
-            "input_token" => [
-              "KeyMarker",
-              "UploadIdMarker"
-            ],
-            "result_key" => [
-              "Uploads",
-              "CommonPrefixes"
-            ]
+            more_results: "is_truncated",
+            limit_key: "max_uploads",
+            tokens: {
+              "next_key_marker" => "key_marker",
+              "next_upload_id_marker" => "upload_id_marker"
+            }
           )
         end)
 
@@ -1777,21 +1768,12 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListObjectVersionsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListObjectVersionsOutput)
           o[:pager] = Aws::Pager.new(
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxKeys",
-            "output_token" => [
-              "NextKeyMarker",
-              "NextVersionIdMarker"
-            ],
-            "input_token" => [
-              "KeyMarker",
-              "VersionIdMarker"
-            ],
-            "result_key" => [
-              "Versions",
-              "DeleteMarkers",
-              "CommonPrefixes"
-            ]
+            more_results: "is_truncated",
+            limit_key: "max_keys",
+            tokens: {
+              "next_key_marker" => "key_marker",
+              "next_version_id_marker" => "version_id_marker"
+            }
           )
         end)
 
@@ -1803,14 +1785,11 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListObjectsOutput)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchBucket)
           o[:pager] = Aws::Pager.new(
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxKeys",
-            "output_token" => "NextMarker || Contents[-1].Key",
-            "input_token" => "Marker",
-            "result_key" => [
-              "Contents",
-              "CommonPrefixes"
-            ]
+            more_results: "is_truncated",
+            limit_key: "max_keys",
+            tokens: {
+              "next_marker || contents[-1].key" => "marker"
+            }
           )
         end)
 
@@ -1822,13 +1801,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListObjectsV2Output)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchBucket)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxKeys",
-            "output_token" => "NextContinuationToken",
-            "input_token" => "ContinuationToken",
-            "result_key" => [
-              "Contents",
-              "CommonPrefixes"
-            ]
+            limit_key: "max_keys",
+            tokens: {
+              "next_continuation_token" => "continuation_token"
+            }
           )
         end)
 
@@ -1839,11 +1815,11 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListPartsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListPartsOutput)
           o[:pager] = Aws::Pager.new(
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxParts",
-            "output_token" => "NextPartNumberMarker",
-            "input_token" => "PartNumberMarker",
-            "result_key" => "Parts"
+            more_results: "is_truncated",
+            limit_key: "max_parts",
+            tokens: {
+              "next_part_number_marker" => "part_number_marker"
+            }
           )
         end)
 

@@ -43,9 +43,7 @@ attr_reader :waiter
         hash[:operation_name] = Underscore.underscore(hash.delete('operation')).to_sym
         hash[:acceptors] = hash.delete('acceptors').map do |acceptor|
           if acceptor['argument']
-            acceptor['argument'] = acceptor['argument'].gsub(/(?<![`'])\b\w+\b(?![`'])/) do |str|
-              Underscore.underscore(str)
-            end
+            acceptor['argument'] = Underscore.underscore_jmespath(acceptor['argument'])
           end
           acceptor
         end

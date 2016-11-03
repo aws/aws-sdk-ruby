@@ -807,10 +807,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "clusterArns"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -825,10 +825,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "containerInstanceArns"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -843,10 +843,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "serviceArns"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -860,10 +860,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "families"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -877,10 +877,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "taskDefinitionArns"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -896,10 +896,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "taskArns"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

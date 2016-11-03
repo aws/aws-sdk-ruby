@@ -246,10 +246,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "ScalableTargets"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -264,10 +264,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "ScalingActivities"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -283,10 +283,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ConcurrentUpdateException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "ScalingPolicies"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

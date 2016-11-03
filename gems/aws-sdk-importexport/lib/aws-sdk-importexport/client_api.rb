@@ -352,11 +352,11 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Jobs[-1].JobId",
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxJobs",
-            "result_key" => "Jobs"
+            more_results: "is_truncated",
+            limit_key: "max_jobs",
+            tokens: {
+              "jobs[-1].job_id" => "marker"
+            }
           )
         end)
 

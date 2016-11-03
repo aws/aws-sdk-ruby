@@ -172,14 +172,28 @@ module AwsSdkCodeGenerator
 
       def apply_operation_pager(code, operation_name)
         if @paginators && @paginators['pagination'][operation_name]
-          rules = @paginators['pagination'][operation_name]
-          rules = HashFormatter.new(
+          p = @paginators['pagination'][operation_name]
+          input = Array(p['input_token'])
+          output = Array(p['output_token'])
+          tokens = {}
+          input.each.with_index do |key, n|
+            tokens[underscore_jmespath(output[n])] = underscore_jmespath(key)
+          end
+          options = {}
+          options[:more_results] = underscore_jmespath(p['more_results']) if p['more_results']
+          options[:limit_key] = underscore_jmespath(p['limit_key']) if p['limit_key']
+          options[:tokens] = tokens
+          options = HashFormatter.new(
             quote_strings: true,
             inline: true,
             wrap: false,
-          ).format(rules)
-          code << "o[:pager] = Aws::Pager.new(#{rules})"
+          ).format(options)
+          code << "o[:pager] = Aws::Pager.new(#{options})" unless tokens.empty?
         end
+      end
+
+      def underscore_jmespath(str)
+        Underscore.underscore_jmespath(str)
       end
 
       def apply_shape_classes(m)

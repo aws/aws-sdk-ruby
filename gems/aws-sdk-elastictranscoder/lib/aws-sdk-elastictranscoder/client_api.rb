@@ -725,9 +725,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "PageToken",
-            "output_token" => "NextPageToken",
-            "result_key" => "Jobs"
+            tokens: {
+              "next_page_token" => "page_token"
+            }
           )
         end)
 
@@ -743,9 +743,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "PageToken",
-            "output_token" => "NextPageToken",
-            "result_key" => "Jobs"
+            tokens: {
+              "next_page_token" => "page_token"
+            }
           )
         end)
 
@@ -760,9 +760,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "PageToken",
-            "output_token" => "NextPageToken",
-            "result_key" => "Pipelines"
+            tokens: {
+              "next_page_token" => "page_token"
+            }
           )
         end)
 
@@ -777,9 +777,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AccessDeniedException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "PageToken",
-            "output_token" => "NextPageToken",
-            "result_key" => "Presets"
+            tokens: {
+              "next_page_token" => "page_token"
+            }
           )
         end)
 

@@ -814,7 +814,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeJobFlowsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeJobFlowsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "JobFlows")
         end)
 
         api.add_operation(:describe_security_configuration, Seahorse::Model::Operation.new.tap do |o|
@@ -846,9 +845,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "result_key" => "BootstrapActions"
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -861,9 +860,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "result_key" => "Clusters"
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -876,9 +875,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "result_key" => "InstanceGroups"
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -891,9 +890,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "result_key" => "Instances"
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -916,9 +915,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "result_key" => "Steps"
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

@@ -732,7 +732,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeEndPointStateOutput)
           o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidEndPointException)
-          o[:pager] = Aws::Pager.new("result_key" => "InstanceStates")
         end)
 
         api.add_operation(:describe_load_balancer_attributes, Seahorse::Model::Operation.new.tap do |o|
@@ -753,7 +752,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPoliciesOutput)
           o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: PolicyNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "PolicyDescriptions")
         end)
 
         api.add_operation(:describe_load_balancer_policy_types, Seahorse::Model::Operation.new.tap do |o|
@@ -763,7 +761,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPolicyTypesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancerPolicyTypesOutput)
           o.errors << Shapes::ShapeRef.new(shape: PolicyTypeNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "PolicyTypeDescriptions")
         end)
 
         api.add_operation(:describe_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -775,9 +772,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AccessPointNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: DependencyThrottleException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "result_key" => "LoadBalancerDescriptions"
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 

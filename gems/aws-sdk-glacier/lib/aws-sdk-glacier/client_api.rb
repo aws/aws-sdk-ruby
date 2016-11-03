@@ -959,10 +959,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "Marker",
-            "limit_key" => "limit",
-            "result_key" => "JobList"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -989,10 +989,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "Marker",
-            "limit_key" => "limit",
-            "result_key" => "UploadsList"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1019,10 +1019,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "Marker",
-            "limit_key" => "limit",
-            "result_key" => "Parts"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1073,10 +1073,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "Marker",
-            "limit_key" => "limit",
-            "result_key" => "VaultList"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

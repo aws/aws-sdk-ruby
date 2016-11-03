@@ -263,10 +263,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListCertificatesRequest)
           o.output = Shapes::ShapeRef.new(shape: ListCertificatesResponse)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxItems",
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "CertificateSummaryList"
+            limit_key: "max_items",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

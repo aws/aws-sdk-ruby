@@ -988,12 +988,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => [
-              "current",
-              "nextPeriod"
-            ]
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1092,9 +1089,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "artifacts"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1109,9 +1106,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "devicePools"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1126,9 +1123,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "devices"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1143,9 +1140,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "jobs"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1161,9 +1158,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "offeringTransactions"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1179,9 +1176,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "offerings"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1196,9 +1193,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "projects"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1225,9 +1222,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "runs"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1242,9 +1239,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "samples"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1259,9 +1256,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "suites"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1276,9 +1273,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "tests"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1293,9 +1290,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "uniqueProblems"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1310,9 +1307,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceAccountException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "uploads"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

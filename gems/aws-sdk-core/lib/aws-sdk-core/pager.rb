@@ -4,13 +4,13 @@ module Aws
   # @api private
   class Pager
 
-    def initialize(rules)
-      @more_results = rules['more_results']
-      @more_results = underscore(@more_results) if @more_results
-      if rules['limit_key']
-        @limit_key = underscore(rules['limit_key']).to_sym
-      end
-      map_tokens(rules)
+    # @option options [required, Hash<JMESPath,JMESPath>] :tokens
+    # @option options [String<JMESPath>] :limit_key
+    # @option options [String<JMESPath>] :more_results
+    def initialize(options)
+      @tokens = options.fetch(:tokens)
+      @limit_key = options.fetch(:limit_key, nil)
+      @more_results = options.fetch(:more_results, nil)
     end
 
     # @return [Symbol, nil]
@@ -39,28 +39,13 @@ module Aws
       if @more_results
         JMESPath.search(@more_results, response.data)
       else
-        next_tokens = self.next_tokens(response)
-        prev_tokens = self.prev_tokens(response)
-        !(next_tokens.empty? || next_tokens == prev_tokens)
+        next_t = next_tokens(response)
+        prev_t = prev_tokens(response)
+        !(next_t.empty? || next_t == prev_t)
       end
     end
 
     private
-
-    def map_tokens(rules)
-      input = Array(rules['input_token'])
-      output = Array(rules['output_token'])
-      @tokens = {}
-      input.each.with_index do |key, n|
-        @tokens[underscore(output[n])] = underscore(key)
-      end
-    end
-
-    def underscore(str)
-      str.
-        gsub(' or ', '||').
-        gsub(/\w+/) { |part| Seahorse::Util.underscore(part) }
-    end
 
     def empty_value?(value)
       value.nil? || value == '' || value == [] || value == {}

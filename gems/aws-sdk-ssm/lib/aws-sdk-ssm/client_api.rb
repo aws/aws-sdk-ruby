@@ -764,10 +764,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "ActivationList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -816,10 +816,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceInformationFilterValue)
           o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "InstanceInformationList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -842,10 +842,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Associations"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -861,10 +861,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "CommandInvocations"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -880,10 +880,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Commands"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -897,10 +897,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: InvalidFilterKey)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "DocumentIdentifiers"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

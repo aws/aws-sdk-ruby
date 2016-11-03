@@ -1579,10 +1579,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterParameterGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ParameterGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1594,10 +1594,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ClusterParameterGroupDetails)
           o.errors << Shapes::ShapeRef.new(shape: ClusterParameterGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1610,10 +1610,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterSecurityGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ClusterSecurityGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1626,10 +1626,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterSnapshotNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Snapshots"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1642,10 +1642,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterSubnetGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ClusterSubnetGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1656,10 +1656,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeClusterVersionsMessage)
           o.output = Shapes::ShapeRef.new(shape: ClusterVersionsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ClusterVersions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1672,10 +1672,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ClusterNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Clusters"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1686,10 +1686,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeDefaultClusterParametersMessage)
           o.output = Shapes::ShapeRef.new(shape: DescribeDefaultClusterParametersResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "DefaultClusterParameters.Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "DefaultClusterParameters.Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "default_cluster_parameters.marker" => "marker"
+            }
           )
         end)
 
@@ -1709,10 +1709,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: EventSubscriptionsMessage)
           o.errors << Shapes::ShapeRef.new(shape: SubscriptionNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "EventSubscriptionsList"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1723,10 +1723,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeEventsMessage)
           o.output = Shapes::ShapeRef.new(shape: EventsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Events"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1739,10 +1739,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: HsmClientCertificateNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "HsmClientCertificates"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1755,10 +1755,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: HsmConfigurationNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidTagFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "HsmConfigurations"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1778,10 +1778,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeOrderableClusterOptionsMessage)
           o.output = Shapes::ShapeRef.new(shape: OrderableClusterOptionsMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "OrderableClusterOptions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1794,10 +1794,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ReservedNodeOfferingNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedNodeOfferings"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1809,10 +1809,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ReservedNodesMessage)
           o.errors << Shapes::ShapeRef.new(shape: ReservedNodeNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedNodes"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

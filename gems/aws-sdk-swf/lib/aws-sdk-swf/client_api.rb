@@ -1273,10 +1273,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "events"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1293,10 +1293,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "typeInfos"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1313,10 +1313,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "executionInfos"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1330,10 +1330,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "domainInfos"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1350,10 +1350,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "executionInfos"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1370,10 +1370,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "typeInfos"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 
@@ -1410,10 +1410,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "maximumPageSize",
-            "input_token" => "nextPageToken",
-            "output_token" => "nextPageToken",
-            "result_key" => "events"
+            limit_key: "maximum_page_size",
+            tokens: {
+              "next_page_token" => "next_page_token"
+            }
           )
         end)
 

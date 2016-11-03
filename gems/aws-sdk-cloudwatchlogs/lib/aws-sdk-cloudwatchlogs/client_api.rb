@@ -579,10 +579,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "destinations"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -605,10 +605,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "logGroups"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -622,10 +622,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "logStreams"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -639,10 +639,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "metricFilters"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -656,10 +656,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "subscriptionFilters"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -673,13 +673,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => [
-              "events",
-              "searchedLogStreams"
-            ]
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -693,10 +690,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextForwardToken",
-            "limit_key" => "limit",
-            "result_key" => "events"
+            limit_key: "limit",
+            tokens: {
+              "next_forward_token" => "next_token"
+            }
           )
         end)
 

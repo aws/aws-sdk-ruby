@@ -1004,10 +1004,10 @@ module Aws
             "fault" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "Results"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1027,10 +1027,10 @@ module Aws
             "fault" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "Results"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1050,10 +1050,10 @@ module Aws
             "fault" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "Results"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1073,10 +1073,10 @@ module Aws
             "fault" => true
           })
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "Results"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

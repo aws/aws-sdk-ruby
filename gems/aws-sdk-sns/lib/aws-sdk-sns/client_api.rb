@@ -536,9 +536,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Endpoints"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -564,9 +564,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "PlatformApplications"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -580,9 +580,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Subscriptions"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -597,9 +597,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Subscriptions"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -613,9 +613,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalErrorException)
           o.errors << Shapes::ShapeRef.new(shape: AuthorizationErrorException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Topics"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

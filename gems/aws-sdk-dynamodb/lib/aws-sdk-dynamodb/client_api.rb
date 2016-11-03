@@ -606,8 +606,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "RequestItems",
-            "output_token" => "UnprocessedKeys"
+            tokens: {
+              "unprocessed_keys" => "request_items"
+            }
           )
         end)
 
@@ -697,10 +698,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListTablesOutput)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "ExclusiveStartTableName",
-            "output_token" => "LastEvaluatedTableName",
-            "limit_key" => "Limit",
-            "result_key" => "TableNames"
+            limit_key: "limit",
+            tokens: {
+              "last_evaluated_table_name" => "exclusive_start_table_name"
+            }
           )
         end)
 
@@ -727,10 +728,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "ExclusiveStartKey",
-            "output_token" => "LastEvaluatedKey",
-            "limit_key" => "Limit",
-            "result_key" => "Items"
+            limit_key: "limit",
+            tokens: {
+              "last_evaluated_key" => "exclusive_start_key"
+            }
           )
         end)
 
@@ -744,10 +745,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "ExclusiveStartKey",
-            "output_token" => "LastEvaluatedKey",
-            "limit_key" => "Limit",
-            "result_key" => "Items"
+            limit_key: "limit",
+            tokens: {
+              "last_evaluated_key" => "exclusive_start_key"
+            }
           )
         end)
 

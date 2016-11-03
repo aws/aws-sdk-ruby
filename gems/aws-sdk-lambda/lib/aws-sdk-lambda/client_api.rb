@@ -575,10 +575,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "limit_key" => "MaxItems",
-            "result_key" => "EventSourceMappings"
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -591,10 +591,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "limit_key" => "MaxItems",
-            "result_key" => "Functions"
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 

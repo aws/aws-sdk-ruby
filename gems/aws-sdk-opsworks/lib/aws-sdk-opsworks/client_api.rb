@@ -1399,7 +1399,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeAppsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Apps")
         end)
 
         api.add_operation(:describe_commands, Seahorse::Model::Operation.new.tap do |o|
@@ -1410,7 +1409,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeCommandsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Commands")
         end)
 
         api.add_operation(:describe_deployments, Seahorse::Model::Operation.new.tap do |o|
@@ -1421,7 +1419,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeDeploymentsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Deployments")
         end)
 
         api.add_operation(:describe_ecs_clusters, Seahorse::Model::Operation.new.tap do |o|
@@ -1433,10 +1430,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "EcsClusters"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1448,7 +1445,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeElasticIpsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "ElasticIps")
         end)
 
         api.add_operation(:describe_elastic_load_balancers, Seahorse::Model::Operation.new.tap do |o|
@@ -1459,7 +1455,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeElasticLoadBalancersResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "ElasticLoadBalancers")
         end)
 
         api.add_operation(:describe_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -1470,7 +1465,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeInstancesResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Instances")
         end)
 
         api.add_operation(:describe_layers, Seahorse::Model::Operation.new.tap do |o|
@@ -1481,7 +1475,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeLayersResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Layers")
         end)
 
         api.add_operation(:describe_load_based_auto_scaling, Seahorse::Model::Operation.new.tap do |o|
@@ -1492,7 +1485,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBasedAutoScalingResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "LoadBasedAutoScalingConfigurations")
         end)
 
         api.add_operation(:describe_my_user_profile, Seahorse::Model::Operation.new.tap do |o|
@@ -1511,7 +1503,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribePermissionsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Permissions")
         end)
 
         api.add_operation(:describe_raid_arrays, Seahorse::Model::Operation.new.tap do |o|
@@ -1522,7 +1513,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeRaidArraysResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "RaidArrays")
         end)
 
         api.add_operation(:describe_rds_db_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -1543,7 +1533,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeServiceErrorsResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "ServiceErrors")
         end)
 
         api.add_operation(:describe_stack_provisioning_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -1574,7 +1563,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeStacksResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Stacks")
         end)
 
         api.add_operation(:describe_time_based_auto_scaling, Seahorse::Model::Operation.new.tap do |o|
@@ -1585,7 +1573,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeTimeBasedAutoScalingResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "TimeBasedAutoScalingConfigurations")
         end)
 
         api.add_operation(:describe_user_profiles, Seahorse::Model::Operation.new.tap do |o|
@@ -1596,7 +1583,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeUserProfilesResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "UserProfiles")
         end)
 
         api.add_operation(:describe_volumes, Seahorse::Model::Operation.new.tap do |o|
@@ -1607,7 +1593,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeVolumesResult)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o[:pager] = Aws::Pager.new("result_key" => "Volumes")
         end)
 
         api.add_operation(:detach_elastic_load_balancer, Seahorse::Model::Operation.new.tap do |o|

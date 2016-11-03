@@ -663,9 +663,9 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeStackEventsInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeStackEventsOutput)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "StackEvents"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -683,7 +683,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeStackResourcesInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeStackResourcesOutput)
-          o[:pager] = Aws::Pager.new("result_key" => "StackResources")
         end)
 
         api.add_operation(:describe_stacks, Seahorse::Model::Operation.new.tap do |o|
@@ -693,9 +692,9 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeStacksInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeStacksOutput)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Stacks"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -756,9 +755,9 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListStackResourcesInput)
           o.output = Shapes::ShapeRef.new(shape: ListStackResourcesOutput)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "StackResourceSummaries"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -769,9 +768,9 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListStacksInput)
           o.output = Shapes::ShapeRef.new(shape: ListStacksOutput)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "StackSummaries"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

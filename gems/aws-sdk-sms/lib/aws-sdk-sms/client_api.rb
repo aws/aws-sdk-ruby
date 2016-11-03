@@ -313,10 +313,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetConnectorsResponse)
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "connectorList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -330,10 +330,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "replicationJobList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -347,10 +347,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: MissingRequiredParameterException)
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "replicationRunList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -362,10 +362,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetServersResponse)
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedOperationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "serverList"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

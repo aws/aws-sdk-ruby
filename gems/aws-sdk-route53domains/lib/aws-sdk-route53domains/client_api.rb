@@ -532,10 +532,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListDomainsResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxItems",
-            "input_token" => "Marker",
-            "output_token" => "NextPageMarker",
-            "result_key" => "Domains"
+            limit_key: "max_items",
+            tokens: {
+              "next_page_marker" => "marker"
+            }
           )
         end)
 
@@ -547,10 +547,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListOperationsResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxItems",
-            "input_token" => "Marker",
-            "output_token" => "NextPageMarker",
-            "result_key" => "Operations"
+            limit_key: "max_items",
+            tokens: {
+              "next_page_marker" => "marker"
+            }
           )
         end)
 

@@ -5051,7 +5051,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAccountAttributesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeAccountAttributesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "AccountAttributes")
         end)
 
         api.add_operation(:describe_addresses, Seahorse::Model::Operation.new.tap do |o|
@@ -5060,7 +5059,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAddressesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeAddressesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "Addresses")
         end)
 
         api.add_operation(:describe_availability_zones, Seahorse::Model::Operation.new.tap do |o|
@@ -5069,7 +5067,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAvailabilityZonesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeAvailabilityZonesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "AvailabilityZones")
         end)
 
         api.add_operation(:describe_bundle_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5078,7 +5075,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeBundleTasksRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeBundleTasksResult)
-          o[:pager] = Aws::Pager.new("result_key" => "BundleTasks")
         end)
 
         api.add_operation(:describe_classic_link_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -5095,7 +5091,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeConversionTasksRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeConversionTasksResult)
-          o[:pager] = Aws::Pager.new("result_key" => "ConversionTasks")
         end)
 
         api.add_operation(:describe_customer_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -5104,7 +5099,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeCustomerGatewaysRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeCustomerGatewaysResult)
-          o[:pager] = Aws::Pager.new("result_key" => "CustomerGateways")
         end)
 
         api.add_operation(:describe_dhcp_options, Seahorse::Model::Operation.new.tap do |o|
@@ -5113,7 +5107,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeDhcpOptionsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeDhcpOptionsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "DhcpOptions")
         end)
 
         api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5122,7 +5115,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeExportTasksRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeExportTasksResult)
-          o[:pager] = Aws::Pager.new("result_key" => "ExportTasks")
         end)
 
         api.add_operation(:describe_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -5187,7 +5179,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeImagesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeImagesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "Images")
         end)
 
         api.add_operation(:describe_import_image_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5221,10 +5212,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeInstanceStatusRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeInstanceStatusResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "InstanceStatuses"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5235,10 +5226,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeInstancesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeInstancesResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Reservations"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5248,7 +5239,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeInternetGatewaysRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeInternetGatewaysResult)
-          o[:pager] = Aws::Pager.new("result_key" => "InternetGateways")
         end)
 
         api.add_operation(:describe_key_pairs, Seahorse::Model::Operation.new.tap do |o|
@@ -5257,7 +5247,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeKeyPairsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeKeyPairsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "KeyPairs")
         end)
 
         api.add_operation(:describe_moving_addresses, Seahorse::Model::Operation.new.tap do |o|
@@ -5282,7 +5271,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeNetworkAclsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeNetworkAclsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "NetworkAcls")
         end)
 
         api.add_operation(:describe_network_interface_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -5299,7 +5287,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeNetworkInterfacesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "NetworkInterfaces")
         end)
 
         api.add_operation(:describe_placement_groups, Seahorse::Model::Operation.new.tap do |o|
@@ -5308,7 +5295,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribePlacementGroupsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribePlacementGroupsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "PlacementGroups")
         end)
 
         api.add_operation(:describe_prefix_lists, Seahorse::Model::Operation.new.tap do |o|
@@ -5325,7 +5311,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeRegionsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeRegionsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "Regions")
         end)
 
         api.add_operation(:describe_reserved_instances, Seahorse::Model::Operation.new.tap do |o|
@@ -5334,7 +5319,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeReservedInstancesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeReservedInstancesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "ReservedInstances")
         end)
 
         api.add_operation(:describe_reserved_instances_listings, Seahorse::Model::Operation.new.tap do |o|
@@ -5343,7 +5327,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeReservedInstancesListingsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeReservedInstancesListingsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "ReservedInstancesListings")
         end)
 
         api.add_operation(:describe_reserved_instances_modifications, Seahorse::Model::Operation.new.tap do |o|
@@ -5353,9 +5336,9 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeReservedInstancesModificationsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeReservedInstancesModificationsResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "ReservedInstancesModifications"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5366,10 +5349,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeReservedInstancesOfferingsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeReservedInstancesOfferingsResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "ReservedInstancesOfferings"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5379,7 +5362,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeRouteTablesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeRouteTablesResult)
-          o[:pager] = Aws::Pager.new("result_key" => "RouteTables")
         end)
 
         api.add_operation(:describe_scheduled_instance_availability, Seahorse::Model::Operation.new.tap do |o|
@@ -5412,7 +5394,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeSecurityGroupsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSecurityGroupsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "SecurityGroups")
         end)
 
         api.add_operation(:describe_snapshot_attribute, Seahorse::Model::Operation.new.tap do |o|
@@ -5430,10 +5411,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeSnapshotsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSnapshotsResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Snapshots"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5468,10 +5449,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeSpotFleetRequestsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSpotFleetRequestsResponse)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "SpotFleetRequestConfigs"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5481,7 +5462,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeSpotInstanceRequestsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSpotInstanceRequestsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "SpotInstanceRequests")
         end)
 
         api.add_operation(:describe_spot_price_history, Seahorse::Model::Operation.new.tap do |o|
@@ -5491,10 +5471,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeSpotPriceHistoryRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSpotPriceHistoryResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "SpotPriceHistory"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5512,7 +5492,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeSubnetsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeSubnetsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "Subnets")
         end)
 
         api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
@@ -5522,10 +5501,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeTagsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTagsResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Tags"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5544,10 +5523,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeVolumeStatusRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVolumeStatusResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "VolumeStatuses"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5558,10 +5537,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeVolumesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVolumesResult)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxResults",
-            "result_key" => "Volumes"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -5611,7 +5590,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeVpcPeeringConnectionsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVpcPeeringConnectionsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "VpcPeeringConnections")
         end)
 
         api.add_operation(:describe_vpcs, Seahorse::Model::Operation.new.tap do |o|
@@ -5620,7 +5598,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeVpcsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVpcsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "Vpcs")
         end)
 
         api.add_operation(:describe_vpn_connections, Seahorse::Model::Operation.new.tap do |o|
@@ -5629,7 +5606,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeVpnConnectionsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVpnConnectionsResult)
-          o[:pager] = Aws::Pager.new("result_key" => "VpnConnections")
         end)
 
         api.add_operation(:describe_vpn_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -5638,7 +5614,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeVpnGatewaysRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeVpnGatewaysResult)
-          o[:pager] = Aws::Pager.new("result_key" => "VpnGateways")
         end)
 
         api.add_operation(:detach_classic_link_vpc, Seahorse::Model::Operation.new.tap do |o|

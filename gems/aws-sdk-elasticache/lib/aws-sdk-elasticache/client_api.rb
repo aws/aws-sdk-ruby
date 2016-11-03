@@ -1128,10 +1128,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "CacheClusters"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1142,10 +1142,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeCacheEngineVersionsMessage)
           o.output = Shapes::ShapeRef.new(shape: CacheEngineVersionMessage)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "CacheEngineVersions"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1159,10 +1159,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "CacheParameterGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1176,10 +1176,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1193,10 +1193,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "CacheSecurityGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1208,10 +1208,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: CacheSubnetGroupMessage)
           o.errors << Shapes::ShapeRef.new(shape: CacheSubnetGroupNotFoundFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "CacheSubnetGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1224,10 +1224,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "EngineDefaults.Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "EngineDefaults.Parameters"
+            limit_key: "max_records",
+            tokens: {
+              "engine_defaults.marker" => "marker"
+            }
           )
         end)
 
@@ -1240,10 +1240,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Events"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1257,10 +1257,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReplicationGroups"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1274,10 +1274,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedCacheNodes"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1291,10 +1291,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ReservedCacheNodesOfferings"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1309,10 +1309,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterCombinationException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "Marker",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Snapshots"
+            limit_key: "max_records",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

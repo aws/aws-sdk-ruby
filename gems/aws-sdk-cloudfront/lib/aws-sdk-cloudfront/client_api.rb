@@ -1110,11 +1110,11 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListCloudFrontOriginAccessIdentitiesResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "CloudFrontOriginAccessIdentityList.NextMarker",
-            "limit_key" => "MaxItems",
-            "more_results" => "CloudFrontOriginAccessIdentityList.IsTruncated",
-            "result_key" => "CloudFrontOriginAccessIdentityList.Items"
+            more_results: "cloud_front_origin_access_identity_list.is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "cloud_front_origin_access_identity_list.next_marker" => "marker"
+            }
           )
         end)
 
@@ -1126,11 +1126,11 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListDistributionsResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "DistributionList.NextMarker",
-            "limit_key" => "MaxItems",
-            "more_results" => "DistributionList.IsTruncated",
-            "result_key" => "DistributionList.Items"
+            more_results: "distribution_list.is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "distribution_list.next_marker" => "marker"
+            }
           )
         end)
 
@@ -1154,11 +1154,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoSuchDistribution)
           o.errors << Shapes::ShapeRef.new(shape: AccessDenied)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "InvalidationList.NextMarker",
-            "limit_key" => "MaxItems",
-            "more_results" => "InvalidationList.IsTruncated",
-            "result_key" => "InvalidationList.Items"
+            more_results: "invalidation_list.is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "invalidation_list.next_marker" => "marker"
+            }
           )
         end)
 
@@ -1170,11 +1170,11 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListStreamingDistributionsResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgument)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "StreamingDistributionList.NextMarker",
-            "limit_key" => "MaxItems",
-            "more_results" => "StreamingDistributionList.IsTruncated",
-            "result_key" => "StreamingDistributionList.Items"
+            more_results: "streaming_distribution_list.is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "streaming_distribution_list.next_marker" => "marker"
+            }
           )
         end)
 

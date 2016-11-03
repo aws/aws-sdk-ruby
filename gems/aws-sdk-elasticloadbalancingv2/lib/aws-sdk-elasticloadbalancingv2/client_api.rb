@@ -747,9 +747,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ListenerNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "result_key" => "Listeners"
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -770,9 +770,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeLoadBalancersOutput)
           o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "result_key" => "LoadBalancers"
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -825,9 +825,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LoadBalancerNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TargetGroupNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "result_key" => "TargetGroups"
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 

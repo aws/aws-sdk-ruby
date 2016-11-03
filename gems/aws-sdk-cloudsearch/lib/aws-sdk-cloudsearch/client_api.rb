@@ -790,7 +790,6 @@ module Aws
             "error" => {"code"=>"ResourceNotFound", "httpStatusCode"=>409, "senderFault"=>true},
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "AnalysisSchemes")
         end)
 
         api.add_operation(:describe_availability_options, Seahorse::Model::Operation.new.tap do |o|
@@ -837,7 +836,6 @@ module Aws
             "error" => {"code"=>"InternalException", "httpStatusCode"=>500},
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "DomainStatusList")
         end)
 
         api.add_operation(:describe_expressions, Seahorse::Model::Operation.new.tap do |o|
@@ -857,7 +855,6 @@ module Aws
             "error" => {"code"=>"ResourceNotFound", "httpStatusCode"=>409, "senderFault"=>true},
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "Expressions")
         end)
 
         api.add_operation(:describe_index_fields, Seahorse::Model::Operation.new.tap do |o|
@@ -877,7 +874,6 @@ module Aws
             "error" => {"code"=>"ResourceNotFound", "httpStatusCode"=>409, "senderFault"=>true},
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "IndexFields")
         end)
 
         api.add_operation(:describe_scaling_parameters, Seahorse::Model::Operation.new.tap do |o|
@@ -935,7 +931,6 @@ module Aws
             "error" => {"code"=>"ResourceNotFound", "httpStatusCode"=>409, "senderFault"=>true},
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "Suggesters")
         end)
 
         api.add_operation(:index_documents, Seahorse::Model::Operation.new.tap do |o|

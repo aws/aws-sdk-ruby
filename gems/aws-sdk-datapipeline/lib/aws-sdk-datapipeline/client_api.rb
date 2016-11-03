@@ -480,10 +480,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "marker",
-            "more_results" => "hasMoreResults",
-            "result_key" => "pipelineObjects"
+            more_results: "has_more_results",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -506,7 +506,6 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException, metadata: {
             "exception" => true
           })
-          o[:pager] = Aws::Pager.new("result_key" => "pipelineDescriptionList")
         end)
 
         api.add_operation(:evaluate_expression, Seahorse::Model::Operation.new.tap do |o|
@@ -568,10 +567,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "marker",
-            "more_results" => "hasMoreResults",
-            "result_key" => "pipelineIdList"
+            more_results: "has_more_results",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -634,11 +633,11 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "marker",
-            "output_token" => "marker",
-            "more_results" => "hasMoreResults",
-            "limit_key" => "limit",
-            "result_key" => "ids"
+            more_results: "has_more_results",
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

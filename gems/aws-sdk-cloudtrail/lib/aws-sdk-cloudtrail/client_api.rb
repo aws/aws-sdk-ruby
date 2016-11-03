@@ -371,7 +371,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeTrailsResponse)
           o.errors << Shapes::ShapeRef.new(shape: UnsupportedOperationException)
           o.errors << Shapes::ShapeRef.new(shape: OperationNotPermittedException)
-          o[:pager] = Aws::Pager.new("result_key" => "trailList")
         end)
 
         api.add_operation(:get_trail_status, Seahorse::Model::Operation.new.tap do |o|

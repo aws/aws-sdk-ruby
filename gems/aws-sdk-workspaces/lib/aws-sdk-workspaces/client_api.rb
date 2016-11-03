@@ -429,9 +429,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceBundlesResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Bundles"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -443,9 +443,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeWorkspaceDirectoriesResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Directories"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -458,10 +458,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValuesException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Workspaces"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

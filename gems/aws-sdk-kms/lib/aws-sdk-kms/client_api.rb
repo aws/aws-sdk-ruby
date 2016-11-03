@@ -715,11 +715,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "Truncated",
-            "result_key" => "Aliases"
+            more_results: "truncated",
+            limit_key: "limit",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -736,11 +736,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "Truncated",
-            "result_key" => "Grants"
+            more_results: "truncated",
+            limit_key: "limit",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -756,11 +756,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "Truncated",
-            "result_key" => "PolicyNames"
+            more_results: "truncated",
+            limit_key: "limit",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -774,11 +774,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: KMSInternalException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidMarkerException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "Limit",
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "Truncated",
-            "result_key" => "Keys"
+            more_results: "truncated",
+            limit_key: "limit",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 

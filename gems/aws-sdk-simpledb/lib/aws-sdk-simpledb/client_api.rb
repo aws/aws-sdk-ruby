@@ -342,10 +342,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxNumberOfDomains",
-            "result_key" => "DomainNames"
+            limit_key: "max_number_of_domains",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -428,9 +428,9 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Items"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
       end

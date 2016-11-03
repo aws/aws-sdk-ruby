@@ -1091,7 +1091,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeCachediSCSIVolumesOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "CachediSCSIVolumes")
         end)
 
         api.add_operation(:describe_chap_credentials, Seahorse::Model::Operation.new.tap do |o|
@@ -1142,7 +1141,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeStorediSCSIVolumesOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "StorediSCSIVolumes")
         end)
 
         api.add_operation(:describe_tape_archives, Seahorse::Model::Operation.new.tap do |o|
@@ -1154,10 +1152,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "TapeArchives"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1170,10 +1168,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "TapeRecoveryPointInfos"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1186,10 +1184,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "Tapes"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1212,10 +1210,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "VTLDevices"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1248,10 +1246,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "Gateways"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 
@@ -1263,7 +1261,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListLocalDisksOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "Disks")
         end)
 
         api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
@@ -1304,7 +1301,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListVolumeRecoveryPointsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "VolumeRecoveryPointInfos")
         end)
 
         api.add_operation(:list_volumes, Seahorse::Model::Operation.new.tap do |o|
@@ -1316,10 +1312,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidGatewayRequestException)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "limit_key" => "Limit",
-            "output_token" => "Marker",
-            "result_key" => "VolumeInfos"
+            limit_key: "limit",
+            tokens: {
+              "marker" => "marker"
+            }
           )
         end)
 

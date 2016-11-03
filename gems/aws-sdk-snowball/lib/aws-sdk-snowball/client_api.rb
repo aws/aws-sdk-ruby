@@ -301,10 +301,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeAddressesResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxResults",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "Addresses"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -352,10 +352,10 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ListJobsRequest)
           o.output = Shapes::ShapeRef.new(shape: ListJobsResult)
           o[:pager] = Aws::Pager.new(
-            "limit_key" => "MaxResults",
-            "output_token" => "NextToken",
-            "input_token" => "NextToken",
-            "result_key" => "JobListEntries"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

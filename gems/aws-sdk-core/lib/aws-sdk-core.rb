@@ -119,16 +119,6 @@ require_relative 'aws-sdk-core/json/parser'
 
 require 'aws-sdk-sts'
 
-Seahorse::Util.irregular_inflections({
-  'ARNs' => 'arns',
-  'CNAMEs' => 'cnames',
-  'Ec2' => 'ec2',
-  'ElastiCache' => 'elasticache',
-  'iSCSI' => 'iscsi',
-  'ACLs' => 'acls',
-  #'SSEKMS' => 'sse_kms',
-})
-
 module Aws
 
   CORE_GEM_VERSION = File.read(File.expand_path('../../VERSION', __FILE__)).strip

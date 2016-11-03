@@ -301,10 +301,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "limit_key" => "MaxItems",
-            "result_key" => "EventSources"
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -319,10 +319,10 @@ module Aws
             "exception" => true
           })
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "limit_key" => "MaxItems",
-            "result_key" => "Functions"
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 

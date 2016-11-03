@@ -760,10 +760,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoAvailableConfigurationRecorderException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotDiscoveredException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "limit",
-            "result_key" => "configurationItems"
+            limit_key: "limit",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

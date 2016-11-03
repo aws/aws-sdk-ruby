@@ -10,15 +10,16 @@ module Aws
       resp
     end
 
-    let(:pager) { Pager.new(rules) }
+    let(:pager) { Pager.new(options) }
 
     let(:resp) { pageable(Seahorse::Client::Response.new, pager) }
 
     describe 'pagable operations' do
 
-      let(:rules) {{
-        'input_token' => 'Offset',
-        'output_token' => 'NextToken',
+      let(:options) {{
+        tokens: {
+          'next_token' => 'offset'
+        }
       }}
 
       it 'is Enumerable' do
@@ -77,9 +78,11 @@ module Aws
 
     describe 'paging with multiple tokens' do
 
-      let(:rules) {{
-        'input_token' => ['OffsetA', 'OffsetB'],
-        'output_token' => ['Group', 'Value'],
+      let(:options) {{
+        tokens: {
+          'group' => 'offset_a',
+          'value' => 'offset_b'
+        }
       }}
 
       it 'returns false from last page if all paging tokens are present' do
@@ -121,10 +124,11 @@ module Aws
 
     describe 'paging with truncation indicator' do
 
-      let(:rules) {{
-        'input_token' => 'Marker',
-        'output_token' => 'NextMarker',
-        'more_results' => 'IsTruncated',
+      let(:options) {{
+        tokens: {
+          'next_marker' => 'marker'
+        },
+        more_results: 'is_truncated'
       }}
 
       it 'returns false from last page if the truncation marker is true' do
@@ -143,9 +147,10 @@ module Aws
 
     describe '#each_page' do
 
-      let(:rules) {{
-        'input_token' => 'Offset',
-        'output_token' => 'NextToken',
+      let(:options) {{
+        tokens: {
+          'next_token' => 'offset'
+        }
       }}
 
       it 'yields once per paging result' do
@@ -174,7 +179,9 @@ module Aws
 
     describe '#count' do
 
-      let(:rules) {{}}
+      let(:options) {{
+        tokens: {}
+      }}
 
       it 'raises not implemented error by default' do
         data = double('data')

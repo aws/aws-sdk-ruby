@@ -469,7 +469,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Connections)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "connections")
         end)
 
         api.add_operation(:describe_connections_on_interconnect, Seahorse::Model::Operation.new.tap do |o|
@@ -480,7 +479,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Connections)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "connections")
         end)
 
         api.add_operation(:describe_interconnect_loa, Seahorse::Model::Operation.new.tap do |o|
@@ -501,7 +499,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Interconnects)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "interconnects")
         end)
 
         api.add_operation(:describe_locations, Seahorse::Model::Operation.new.tap do |o|
@@ -512,7 +509,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Locations)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "locations")
         end)
 
         api.add_operation(:describe_virtual_gateways, Seahorse::Model::Operation.new.tap do |o|
@@ -523,7 +519,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: VirtualGateways)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "virtualGateways")
         end)
 
         api.add_operation(:describe_virtual_interfaces, Seahorse::Model::Operation.new.tap do |o|
@@ -534,7 +529,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: VirtualInterfaces)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
-          o[:pager] = Aws::Pager.new("result_key" => "virtualInterfaces")
         end)
       end
 

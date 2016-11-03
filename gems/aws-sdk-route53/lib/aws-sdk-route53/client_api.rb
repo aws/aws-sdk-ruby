@@ -1376,11 +1376,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o.errors << Shapes::ShapeRef.new(shape: IncompatibleVersion)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxItems",
-            "result_key" => "HealthChecks"
+            more_results: "is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -1394,11 +1394,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoSuchDelegationSet)
           o.errors << Shapes::ShapeRef.new(shape: DelegationSetNotReusable)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "Marker",
-            "output_token" => "NextMarker",
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxItems",
-            "result_key" => "HostedZones"
+            more_results: "is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "next_marker" => "marker"
+            }
           )
         end)
 
@@ -1421,19 +1421,13 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o[:pager] = Aws::Pager.new(
-            "more_results" => "IsTruncated",
-            "limit_key" => "MaxItems",
-            "result_key" => "ResourceRecordSets",
-            "input_token" => [
-              "StartRecordName",
-              "StartRecordType",
-              "StartRecordIdentifier"
-            ],
-            "output_token" => [
-              "NextRecordName",
-              "NextRecordType",
-              "NextRecordIdentifier"
-            ]
+            more_results: "is_truncated",
+            limit_key: "max_items",
+            tokens: {
+              "next_record_name" => "start_record_name",
+              "next_record_type" => "start_record_type",
+              "next_record_identifier" => "start_record_identifier"
+            }
           )
         end)
 

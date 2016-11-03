@@ -476,10 +476,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "result_key" => "repositories",
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -539,10 +539,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
           o[:pager] = Aws::Pager.new(
-            "result_key" => "imageIds",
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

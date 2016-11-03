@@ -1,5 +1,5 @@
 module AwsSdkCodeGenerator
-  class Underscore
+  module Underscore
     class << self
 
       def irregular_inflections(hash)
@@ -15,6 +15,14 @@ module AwsSdkCodeGenerator
           gsub(/([A-Z0-9]+)([A-Z][a-z])/, '\1_\2').
           scan(/[a-z0-9]+|\d+|[A-Z0-9]+[a-z]*/).
           join('_').downcase
+      end
+
+      # @param [String<JMESPath>]
+      # @return [String]
+      def underscore_jmespath(expression)
+        expression.
+          gsub(' or ', '||').
+          gsub(/(?<![`'])\b\w+\b(?![`'])/) { |str| Underscore.underscore(str) }
       end
 
     end

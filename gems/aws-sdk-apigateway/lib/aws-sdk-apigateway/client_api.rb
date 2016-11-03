@@ -1434,10 +1434,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1485,10 +1485,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1513,10 +1513,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1543,10 +1543,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1572,10 +1572,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1669,10 +1669,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1698,10 +1698,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1726,10 +1726,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1778,10 +1778,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1820,10 +1820,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 
@@ -1838,10 +1838,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: ConflictException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "position",
-            "output_token" => "position",
-            "limit_key" => "limit",
-            "result_key" => "items"
+            limit_key: "limit",
+            tokens: {
+              "position" => "position"
+            }
           )
         end)
 

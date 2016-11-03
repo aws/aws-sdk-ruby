@@ -450,9 +450,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: EncryptionKeyUnavailableException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "branches"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -466,9 +466,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidOrderException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidContinuationTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "repositories"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

@@ -1041,9 +1041,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDeployedStateFilterException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "revisions"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1055,9 +1055,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListApplicationsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "applications"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1069,9 +1069,9 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListDeploymentConfigsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "deploymentConfigsList"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1086,9 +1086,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ApplicationDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "deploymentGroups"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1105,9 +1105,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentIdException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInstanceStatusException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "instancesList"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1127,9 +1127,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDeploymentStatusException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "result_key" => "deployments"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

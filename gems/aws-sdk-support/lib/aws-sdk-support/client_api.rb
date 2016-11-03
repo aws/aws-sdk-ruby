@@ -426,10 +426,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "cases"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -442,10 +442,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o.errors << Shapes::ShapeRef.new(shape: CaseIdNotFound)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "nextToken",
-            "output_token" => "nextToken",
-            "limit_key" => "maxResults",
-            "result_key" => "communications"
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -456,7 +456,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeServicesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeServicesResponse)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "services")
         end)
 
         api.add_operation(:describe_severity_levels, Seahorse::Model::Operation.new.tap do |o|
@@ -475,7 +474,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckRefreshStatusesResponse)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "statuses")
         end)
 
         api.add_operation(:describe_trusted_advisor_check_result, Seahorse::Model::Operation.new.tap do |o|
@@ -494,7 +492,6 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeTrustedAdvisorCheckSummariesResponse)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
-          o[:pager] = Aws::Pager.new("result_key" => "summaries")
         end)
 
         api.add_operation(:describe_trusted_advisor_checks, Seahorse::Model::Operation.new.tap do |o|

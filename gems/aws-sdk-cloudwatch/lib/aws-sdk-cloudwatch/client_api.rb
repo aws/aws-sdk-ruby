@@ -298,10 +298,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeAlarmHistoryOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "AlarmHistoryItems"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -313,10 +313,10 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DescribeAlarmsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "MetricAlarms"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -326,7 +326,6 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeAlarmsForMetricInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeAlarmsForMetricOutput)
-          o[:pager] = Aws::Pager.new("result_key" => "MetricAlarms")
         end)
 
         api.add_operation(:disable_alarm_actions, Seahorse::Model::Operation.new.tap do |o|
@@ -366,9 +365,9 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InternalServiceFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "result_key" => "Metrics"
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 

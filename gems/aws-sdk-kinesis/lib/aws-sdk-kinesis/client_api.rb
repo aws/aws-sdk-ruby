@@ -335,11 +335,11 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "ExclusiveStartShardId",
-            "limit_key" => "Limit",
-            "more_results" => "StreamDescription.HasMoreShards",
-            "output_token" => "StreamDescription.Shards[-1].ShardId",
-            "result_key" => "StreamDescription.Shards"
+            more_results: "stream_description.has_more_shards",
+            limit_key: "limit",
+            tokens: {
+              "stream_description.shards[-1].shard_id" => "exclusive_start_shard_id"
+            }
           )
         end)
 
@@ -410,11 +410,11 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListStreamsOutput)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "ExclusiveStartStreamName",
-            "limit_key" => "Limit",
-            "more_results" => "HasMoreStreams",
-            "output_token" => "StreamNames[-1]",
-            "result_key" => "StreamNames"
+            more_results: "has_more_streams",
+            limit_key: "limit",
+            tokens: {
+              "stream_names[-1]" => "exclusive_start_stream_name"
+            }
           )
         end)
 

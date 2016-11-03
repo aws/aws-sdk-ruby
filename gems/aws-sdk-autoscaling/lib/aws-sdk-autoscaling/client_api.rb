@@ -1033,10 +1033,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "AutoScalingGroups"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1049,10 +1049,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "AutoScalingInstances"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1074,10 +1074,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "LaunchConfigurations"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1135,10 +1135,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "NotificationConfigurations"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1151,10 +1151,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ScalingPolicies"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1167,10 +1167,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Activities"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1192,10 +1192,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "ScheduledUpdateGroupActions"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
@@ -1208,10 +1208,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidNextToken)
           o.errors << Shapes::ShapeRef.new(shape: ResourceContentionFault)
           o[:pager] = Aws::Pager.new(
-            "input_token" => "NextToken",
-            "output_token" => "NextToken",
-            "limit_key" => "MaxRecords",
-            "result_key" => "Tags"
+            limit_key: "max_records",
+            tokens: {
+              "next_token" => "next_token"
+            }
           )
         end)
 
