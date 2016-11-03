@@ -3022,8 +3022,8 @@ module Aws
       #
       # In between attempts, the waiter will sleep.
       #
-      #    # polls in a loop, sleeping between attempts
-      #    client.waiter_until(waiter_name, params)
+      #     # polls in a loop, sleeping between attempts
+      #     client.waiter_until(waiter_name, params)
       #
       # ## Configuration
       #
@@ -3059,7 +3059,7 @@ module Aws
       #
       # When a waiter is unsuccessful, it will raise an error.
       # All of the failure errors extend from
-      # {Aws::Waiters::Errors::WaiterFailed}**.
+      # {Aws::Waiters::Errors::WaiterFailed}.
       #
       #     begin
       #       client.wait_until(...)
@@ -3067,25 +3067,17 @@ module Aws
       #       # resource did not enter the desired state in time
       #     end
       #
-      # @param [Symbol] waiter_name The name of the waiter.
-      #   Must be one of the following:
+      # ## Valid Waiters
       #
-      #   * `:bucket_exists`
-      #   * `:bucket_not_exists`
-      #   * `:object_exists`
-      #   * `:object_not_exists`
+      # The following table lists the valid waiter names, the operations they call,
+      # and the default `:delay` and `:max_attempts` values.
       #
-      # @param [Hash] params A hash of request parameters to send to the
-      #   operation. The following list links to the operation called by
-      #   the named waiter.
-      #
-      #   * `:bucket_exists` => {#head_bucket}
-      #   * `:bucket_not_exists` => {#head_bucket}
-      #   * `:object_exists` => {#head_object}
-      #   * `:object_not_exists` => {#head_object}
-      #
-      # @yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter}
-      #   object that can be configured prior to waiting.
+      # | waiter_name       | params      | :delay   | :max_attempts |
+      # | ----------------- | ----------- | -------- | ------------- |
+      # | bucket_exists     | head_bucket | 5        | 20            |
+      # | bucket_not_exists | head_bucket | 5        | 20            |
+      # | object_exists     | head_object | 5        | 20            |
+      # | object_not_exists | head_object | 5        | 20            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

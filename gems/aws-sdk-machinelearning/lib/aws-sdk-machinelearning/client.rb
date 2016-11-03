@@ -1891,8 +1891,8 @@ module Aws
       #
       # In between attempts, the waiter will sleep.
       #
-      #    # polls in a loop, sleeping between attempts
-      #    client.waiter_until(waiter_name, params)
+      #     # polls in a loop, sleeping between attempts
+      #     client.waiter_until(waiter_name, params)
       #
       # ## Configuration
       #
@@ -1928,7 +1928,7 @@ module Aws
       #
       # When a waiter is unsuccessful, it will raise an error.
       # All of the failure errors extend from
-      # {Aws::Waiters::Errors::WaiterFailed}**.
+      # {Aws::Waiters::Errors::WaiterFailed}.
       #
       #     begin
       #       client.wait_until(...)
@@ -1936,25 +1936,17 @@ module Aws
       #       # resource did not enter the desired state in time
       #     end
       #
-      # @param [Symbol] waiter_name The name of the waiter.
-      #   Must be one of the following:
+      # ## Valid Waiters
       #
-      #   * `:data_source_available`
-      #   * `:ml_model_available`
-      #   * `:evaluation_available`
-      #   * `:batch_prediction_available`
+      # The following table lists the valid waiter names, the operations they call,
+      # and the default `:delay` and `:max_attempts` values.
       #
-      # @param [Hash] params A hash of request parameters to send to the
-      #   operation. The following list links to the operation called by
-      #   the named waiter.
-      #
-      #   * `:data_source_available` => {#describe_data_sources}
-      #   * `:ml_model_available` => {#describe_ml_models}
-      #   * `:evaluation_available` => {#describe_evaluations}
-      #   * `:batch_prediction_available` => {#describe_batch_predictions}
-      #
-      # @yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter}
-      #   object that can be configured prior to waiting.
+      # | waiter_name                | params                     | :delay   | :max_attempts |
+      # | -------------------------- | -------------------------- | -------- | ------------- |
+      # | batch_prediction_available | describe_batch_predictions | 30       | 60            |
+      # | data_source_available      | describe_data_sources      | 30       | 60            |
+      # | evaluation_available       | describe_evaluations       | 30       | 60            |
+      # | ml_model_available         | describe_ml_models         | 30       | 60            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

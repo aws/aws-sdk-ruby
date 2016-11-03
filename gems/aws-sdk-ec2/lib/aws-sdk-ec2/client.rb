@@ -14050,8 +14050,8 @@ module Aws
       #
       # In between attempts, the waiter will sleep.
       #
-      #    # polls in a loop, sleeping between attempts
-      #    client.waiter_until(waiter_name, params)
+      #     # polls in a loop, sleeping between attempts
+      #     client.waiter_until(waiter_name, params)
       #
       # ## Configuration
       #
@@ -14087,7 +14087,7 @@ module Aws
       #
       # When a waiter is unsuccessful, it will raise an error.
       # All of the failure errors extend from
-      # {Aws::Waiters::Errors::WaiterFailed}**.
+      # {Aws::Waiters::Errors::WaiterFailed}.
       #
       #     begin
       #       client.wait_until(...)
@@ -14095,77 +14095,43 @@ module Aws
       #       # resource did not enter the desired state in time
       #     end
       #
-      # @param [Symbol] waiter_name The name of the waiter.
-      #   Must be one of the following:
+      # ## Valid Waiters
       #
-      #   * `:instance_exists`
-      #   * `:bundle_task_complete`
-      #   * `:conversion_task_cancelled`
-      #   * `:conversion_task_completed`
-      #   * `:conversion_task_deleted`
-      #   * `:customer_gateway_available`
-      #   * `:export_task_cancelled`
-      #   * `:export_task_completed`
-      #   * `:image_exists`
-      #   * `:image_available`
-      #   * `:instance_running`
-      #   * `:instance_status_ok`
-      #   * `:instance_stopped`
-      #   * `:instance_terminated`
-      #   * `:key_pair_exists`
-      #   * `:nat_gateway_available`
-      #   * `:network_interface_available`
-      #   * `:password_data_available`
-      #   * `:snapshot_completed`
-      #   * `:spot_instance_request_fulfilled`
-      #   * `:subnet_available`
-      #   * `:system_status_ok`
-      #   * `:volume_available`
-      #   * `:volume_deleted`
-      #   * `:volume_in_use`
-      #   * `:vpc_available`
-      #   * `:vpc_exists`
-      #   * `:vpn_connection_available`
-      #   * `:vpn_connection_deleted`
-      #   * `:vpc_peering_connection_exists`
+      # The following table lists the valid waiter names, the operations they call,
+      # and the default `:delay` and `:max_attempts` values.
       #
-      # @param [Hash] params A hash of request parameters to send to the
-      #   operation. The following list links to the operation called by
-      #   the named waiter.
-      #
-      #   * `:instance_exists` => {#describe_instances}
-      #   * `:bundle_task_complete` => {#describe_bundle_tasks}
-      #   * `:conversion_task_cancelled` => {#describe_conversion_tasks}
-      #   * `:conversion_task_completed` => {#describe_conversion_tasks}
-      #   * `:conversion_task_deleted` => {#describe_conversion_tasks}
-      #   * `:customer_gateway_available` => {#describe_customer_gateways}
-      #   * `:export_task_cancelled` => {#describe_export_tasks}
-      #   * `:export_task_completed` => {#describe_export_tasks}
-      #   * `:image_exists` => {#describe_images}
-      #   * `:image_available` => {#describe_images}
-      #   * `:instance_running` => {#describe_instances}
-      #   * `:instance_status_ok` => {#describe_instance_status}
-      #   * `:instance_stopped` => {#describe_instances}
-      #   * `:instance_terminated` => {#describe_instances}
-      #   * `:key_pair_exists` => {#describe_key_pairs}
-      #   * `:nat_gateway_available` => {#describe_nat_gateways}
-      #   * `:network_interface_available` => {#describe_network_interfaces}
-      #   * `:password_data_available` => {#get_password_data}
-      #   * `:snapshot_completed` => {#describe_snapshots}
-      #   * `:spot_instance_request_fulfilled` => {#describe_spot_instance_requests}
-      #   * `:subnet_available` => {#describe_subnets}
-      #   * `:system_status_ok` => {#describe_instance_status}
-      #   * `:volume_available` => {#describe_volumes}
-      #   * `:volume_deleted` => {#describe_volumes}
-      #   * `:volume_in_use` => {#describe_volumes}
-      #   * `:vpc_available` => {#describe_vpcs}
-      #   * `:vpc_exists` => {#describe_vpcs}
-      #   * `:vpn_connection_available` => {#describe_vpn_connections}
-      #   * `:vpn_connection_deleted` => {#describe_vpn_connections}
-      #   * `:vpc_peering_connection_exists` => {#describe_vpc_peering_connections}
-      #
-      # @yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter}
-      #   object that can be configured prior to waiting.
+      # | waiter_name                     | params                           | :delay   | :max_attempts |
+      # | ------------------------------- | -------------------------------- | -------- | ------------- |
+      # | bundle_task_complete            | describe_bundle_tasks            | 15       | 40            |
+      # | conversion_task_cancelled       | describe_conversion_tasks        | 15       | 40            |
+      # | conversion_task_completed       | describe_conversion_tasks        | 15       | 40            |
+      # | conversion_task_deleted         | describe_conversion_tasks        | 15       | 40            |
+      # | customer_gateway_available      | describe_customer_gateways       | 15       | 40            |
+      # | export_task_cancelled           | describe_export_tasks            | 15       | 40            |
+      # | export_task_completed           | describe_export_tasks            | 15       | 40            |
+      # | image_available                 | describe_images                  | 15       | 40            |
+      # | image_exists                    | describe_images                  | 15       | 40            |
+      # | instance_exists                 | describe_instances               | 5        | 40            |
+      # | instance_running                | describe_instances               | 15       | 40            |
+      # | instance_status_ok              | describe_instance_status         | 15       | 40            |
+      # | instance_stopped                | describe_instances               | 15       | 40            |
+      # | instance_terminated             | describe_instances               | 15       | 40            |
+      # | key_pair_exists                 | describe_key_pairs               | 5        | 6             |
+      # | nat_gateway_available           | describe_nat_gateways            | 15       | 40            |
+      # | network_interface_available     | describe_network_interfaces      | 20       | 10            |
+      # | password_data_available         | get_password_data                | 15       | 40            |
+      # | snapshot_completed              | describe_snapshots               | 15       | 40            |
+      # | spot_instance_request_fulfilled | describe_spot_instance_requests  | 15       | 40            |
+      # | subnet_available                | describe_subnets                 | 15       | 40            |
+      # | system_status_ok                | describe_instance_status         | 15       | 40            |
+      # | volume_available                | describe_volumes                 | 15       | 40            |
+      # | volume_deleted                  | describe_volumes                 | 15       | 40            |
+      # | volume_in_use                   | describe_volumes                 | 15       | 40            |
+      # | vpc_available                   | describe_vpcs                    | 15       | 40            |
+      # | vpc_exists                      | describe_vpcs                    | 1        | 5             |
+      # | vpc_peering_connection_exists   | describe_vpc_peering_connections | 15       | 40            |
+      # | vpn_connection_available        | describe_vpn_connections         | 15       | 40            |
+      # | vpn_connection_deleted          | describe_vpn_connections         | 15       | 40            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

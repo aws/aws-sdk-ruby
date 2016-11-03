@@ -4483,8 +4483,8 @@ module Aws
       #
       # In between attempts, the waiter will sleep.
       #
-      #    # polls in a loop, sleeping between attempts
-      #    client.waiter_until(waiter_name, params)
+      #     # polls in a loop, sleeping between attempts
+      #     client.waiter_until(waiter_name, params)
       #
       # ## Configuration
       #
@@ -4520,7 +4520,7 @@ module Aws
       #
       # When a waiter is unsuccessful, it will raise an error.
       # All of the failure errors extend from
-      # {Aws::Waiters::Errors::WaiterFailed}**.
+      # {Aws::Waiters::Errors::WaiterFailed}.
       #
       #     begin
       #       client.wait_until(...)
@@ -4528,29 +4528,19 @@ module Aws
       #       # resource did not enter the desired state in time
       #     end
       #
-      # @param [Symbol] waiter_name The name of the waiter.
-      #   Must be one of the following:
+      # ## Valid Waiters
       #
-      #   * `:app_exists`
-      #   * `:deployment_successful`
-      #   * `:instance_online`
-      #   * `:instance_registered`
-      #   * `:instance_stopped`
-      #   * `:instance_terminated`
+      # The following table lists the valid waiter names, the operations they call,
+      # and the default `:delay` and `:max_attempts` values.
       #
-      # @param [Hash] params A hash of request parameters to send to the
-      #   operation. The following list links to the operation called by
-      #   the named waiter.
-      #
-      #   * `:app_exists` => {#describe_apps}
-      #   * `:deployment_successful` => {#describe_deployments}
-      #   * `:instance_online` => {#describe_instances}
-      #   * `:instance_registered` => {#describe_instances}
-      #   * `:instance_stopped` => {#describe_instances}
-      #   * `:instance_terminated` => {#describe_instances}
-      #
-      # @yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter}
-      #   object that can be configured prior to waiting.
+      # | waiter_name           | params               | :delay   | :max_attempts |
+      # | --------------------- | -------------------- | -------- | ------------- |
+      # | app_exists            | describe_apps        | 1        | 40            |
+      # | deployment_successful | describe_deployments | 15       | 40            |
+      # | instance_online       | describe_instances   | 15       | 40            |
+      # | instance_registered   | describe_instances   | 15       | 40            |
+      # | instance_stopped      | describe_instances   | 15       | 40            |
+      # | instance_terminated   | describe_instances   | 15       | 40            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

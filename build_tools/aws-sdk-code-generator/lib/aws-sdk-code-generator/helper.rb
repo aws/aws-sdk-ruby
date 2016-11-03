@@ -21,6 +21,31 @@ module AwsSdkCodeGenerator
       end
     end
 
+    # @param [Array<Array<String>>]
+    def markdown_table(table)
+      # compute the width of each column by scanning for longest values
+      column_width = lambda do |col|
+        table.map { |row| row[col].size }.max
+      end
+      widths = [
+        column_width.call(0),
+        column_width.call(1),
+        column_width.call(2),
+        column_width.call(3),
+      ]
+
+      # insert a dashed line after the header row
+      table = [
+        table[0],
+        ['-' * widths[0], '-' * widths[1], '-' * widths[2], '-' * widths[3]]
+      ] + table[1..-1]
+
+      # build the final table
+      line = "| #{widths.map{|n| "%-#{n}s" }.join(' | ')} |"
+      table.map { |row| line % row }.join("\n")
+    end
+    module_function :markdown_table
+
     def underscore(str)
       str.split('.').map do |part|
         Underscore.underscore(part)

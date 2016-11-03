@@ -152,15 +152,16 @@ module AwsSdkCodeGenerator
         waiters = HashFormatter.new.format(waiters)
 
         # wait_until(waiter_name, params = {}, options = {}, &block)
-        klass.add(Dsl::Method.new('wait_until') do |m|
-          m.param('waiter_name', type: Symbol)
-          m.param('params', type: Hash, default: {})
-          m.param('options', type: Hash, default: {})
-          m.option(name: 'max_attempts', type: Integer)
-          m.option(name: 'delay', type: Integer)
-          m.option(name: 'before_attempt', type: Proc)
-          m.option(name: 'before_wait', type: Proc)
-          m.docstring(<<-DOCS)
+        if @waiters
+          klass.add(Dsl::Method.new('wait_until') do |m|
+            m.param('waiter_name', type: Symbol)
+            m.param('params', type: Hash, default: {})
+            m.param('options', type: Hash, default: {})
+            m.option(name: 'max_attempts', type: Integer)
+            m.option(name: 'delay', type: Integer)
+            m.option(name: 'before_attempt', type: Proc)
+            m.option(name: 'before_wait', type: Proc)
+            m.docstring(<<-DOCS)
 Polls an API operation until a resource enters a desired state.
 
 ## Basic Usage
@@ -173,8 +174,8 @@ A waiter will call an API operation until:
 
 In between attempts, the waiter will sleep.
 
-   # polls in a loop, sleeping between attempts
-   client.waiter_until(waiter_name, params)
+    # polls in a loop, sleeping between attempts
+    client.waiter_until(waiter_name, params)
 
 ## Configuration
 
@@ -210,7 +211,7 @@ it will terminate the waiter.
 
 When a waiter is unsuccessful, it will raise an error.
 All of the failure errors extend from
-{Aws::Waiters::Errors::WaiterFailed}**.
+{Aws::Waiters::Errors::WaiterFailed}.
 
     begin
       client.wait_until(...)
@@ -218,19 +219,12 @@ All of the failure errors extend from
       # resource did not enter the desired state in time
     end
 
-@param [Symbol] waiter_name The name of the waiter.
-  Must be one of the following:
+## Valid Waiters
 
-#{waiter_methods.keys.map { |name| "  * `:#{name}`" }.join("\n")}
+The following table lists the valid waiter names, the operations they call,
+and the default `:delay` and `:max_attempts` values.
 
-@param [Hash] params A hash of request parameters to send to the
-  operation. The following list links to the operation called by
-  the named waiter.
-
-#{waiter_methods.map { |name,method| "  * `:#{name}` => {##{method}}" }.join("\n")}
-
-@yieldparam [Waiters::Waiter] waiter Yields a {Waiters::Waiter Waiter}
-  object that can be configured prior to waiting.
+#{waiter_table}
 
 @raise [Errors::FailureStateError] Raised when the waiter terminates
   because the waiter has entered a state that it will not transition
@@ -247,20 +241,24 @@ All of the failure errors extend from
   for an unknown state.
 
 @return [Boolean] Returns `true` if the waiter was successful.
-          DOCS
-
-          m.code(<<-CODE)
+            DOCS
+            m.code(<<-CODE)
 w = waiter(waiter_name, options)
 yield(w.waiter) if block_given? # deprecated
 w.wait(params)
-          CODE
-        end)
+            CODE
+          end)
+        end
 
         # waiter_names
         klass.add(Dsl::Method.new('waiter_names') do |m|
           m.docstring("@api private")
           m.docstring("@deprecated")
-          m.code("waiters.keys")
+          if @waiters
+            m.code("waiters.keys")
+          else
+            m.code('[]')
+          end
         end)
 
         # private: waiter(waiter_name)
@@ -275,12 +273,12 @@ else
   raise Aws::Waiters::Errors::NoSuchWaiterError.new(waiter_name, waiters.keys)
 end
           CODE
-        end)
+        end) if @waiters
 
         # private: waiters
         klass.add(Dsl::Method.new('waiters', access: :private) do |m|
           m.code(waiters)
-        end)
+        end) if @waiters
 
       end
 
@@ -321,6 +319,19 @@ end
         else
           {}
         end
+      end
+
+      def waiter_table
+        # insert one row for each supported service
+        table = []
+        @waiters['waiters'].each_pair do |name, waiter|
+          table << [underscore(name), underscore(waiter['operation']), waiter['delay'], waiter['maxAttempts']]
+        end
+        table = table.sort_by(&:first)
+
+        # header row
+        table.unshift(['waiter_name', 'params', ':delay', ':max_attempts'])
+        markdown_table(table)
       end
 
       # @api private
