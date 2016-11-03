@@ -4375,10 +4375,10 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name      | params         | :delay   | :max_attempts |
-      # | ---------------- | -------------- | -------- | ------------- |
-      # | table_exists     | describe_table | 20       | 25            |
-      # | table_not_exists | describe_table | 20       | 25            |
+      # | waiter_name      | params            | :delay   | :max_attempts |
+      # | ---------------- | ----------------- | -------- | ------------- |
+      # | table_exists     | {#describe_table} | 20       | 25            |
+      # | table_not_exists | {#describe_table} | 20       | 25            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

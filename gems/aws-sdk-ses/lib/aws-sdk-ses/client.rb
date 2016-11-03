@@ -2146,9 +2146,9 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name     | params                               | :delay   | :max_attempts |
-      # | --------------- | ------------------------------------ | -------- | ------------- |
-      # | identity_exists | get_identity_verification_attributes | 3        | 20            |
+      # | waiter_name     | params                                  | :delay   | :max_attempts |
+      # | --------------- | --------------------------------------- | -------- | ------------- |
+      # | identity_exists | {#get_identity_verification_attributes} | 3        | 20            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

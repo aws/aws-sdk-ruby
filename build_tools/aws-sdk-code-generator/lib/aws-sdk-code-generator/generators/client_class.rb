@@ -141,16 +141,6 @@ module AwsSdkCodeGenerator
 
       def apply_waiter_methods(klass)
 
-        waiters = {}
-        waiter_methods = {}
-        ((@waiters || {})['waiters'] || {}).each_pair do |name, definition|
-          class_name = "Waiters::#{name}"
-          name = underscore(name).to_sym
-          waiter_methods[name] = Underscore.underscore(definition['operation'])
-          waiters[name] = class_name
-        end
-        waiters = HashFormatter.new.format(waiters)
-
         # wait_until(waiter_name, params = {}, options = {}, &block)
         if @waiters
           klass.add(Dsl::Method.new('wait_until') do |m|
@@ -277,7 +267,12 @@ end
 
         # private: waiters
         klass.add(Dsl::Method.new('waiters', access: :private) do |m|
-          m.code(waiters)
+          waiters = {}
+          ((@waiters || {})['waiters'] || {}).each_pair do |name, definition|
+            class_name = "Waiters::#{name}"
+            waiters[underscore(name).to_sym] = class_name
+          end
+          m.code(HashFormatter.new.format(waiters))
         end) if @waiters
 
       end
@@ -325,7 +320,7 @@ end
         # insert one row for each supported service
         table = []
         @waiters['waiters'].each_pair do |name, waiter|
-          table << [underscore(name), underscore(waiter['operation']), waiter['delay'], waiter['maxAttempts']]
+          table << [underscore(name), "{##{underscore(waiter['operation'])}}", waiter['delay'], waiter['maxAttempts']]
         end
         table = table.sort_by(&:first)
 

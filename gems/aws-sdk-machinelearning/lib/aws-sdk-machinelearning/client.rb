@@ -1941,12 +1941,12 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name                | params                     | :delay   | :max_attempts |
-      # | -------------------------- | -------------------------- | -------- | ------------- |
-      # | batch_prediction_available | describe_batch_predictions | 30       | 60            |
-      # | data_source_available      | describe_data_sources      | 30       | 60            |
-      # | evaluation_available       | describe_evaluations       | 30       | 60            |
-      # | ml_model_available         | describe_ml_models         | 30       | 60            |
+      # | waiter_name                | params                        | :delay   | :max_attempts |
+      # | -------------------------- | ----------------------------- | -------- | ------------- |
+      # | batch_prediction_available | {#describe_batch_predictions} | 30       | 60            |
+      # | data_source_available      | {#describe_data_sources}      | 30       | 60            |
+      # | evaluation_available       | {#describe_evaluations}       | 30       | 60            |
+      # | ml_model_available         | {#describe_ml_models}         | 30       | 60            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

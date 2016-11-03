@@ -1400,10 +1400,10 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name     | params           | :delay   | :max_attempts |
-      # | --------------- | ---------------- | -------- | ------------- |
-      # | cluster_running | describe_cluster | 30       | 60            |
-      # | step_complete   | describe_step    | 30       | 60            |
+      # | waiter_name     | params              | :delay   | :max_attempts |
+      # | --------------- | ------------------- | -------- | ------------- |
+      # | cluster_running | {#describe_cluster} | 30       | 60            |
+      # | step_complete   | {#describe_step}    | 30       | 60            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

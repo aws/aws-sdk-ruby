@@ -892,9 +892,9 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name  | params          | :delay   | :max_attempts |
-      # | ------------ | --------------- | -------- | ------------- |
-      # | alarm_exists | describe_alarms | 5        | 40            |
+      # | waiter_name  | params             | :delay   | :max_attempts |
+      # | ------------ | ------------------ | -------- | ------------- |
+      # | alarm_exists | {#describe_alarms} | 5        | 40            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

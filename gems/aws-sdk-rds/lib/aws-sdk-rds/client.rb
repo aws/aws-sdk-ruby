@@ -9122,10 +9122,10 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name           | params                | :delay   | :max_attempts |
-      # | --------------------- | --------------------- | -------- | ------------- |
-      # | db_instance_available | describe_db_instances | 30       | 60            |
-      # | db_instance_deleted   | describe_db_instances | 30       | 60            |
+      # | waiter_name           | params                   | :delay   | :max_attempts |
+      # | --------------------- | ------------------------ | -------- | ------------- |
+      # | db_instance_available | {#describe_db_instances} | 30       | 60            |
+      # | db_instance_deleted   | {#describe_db_instances} | 30       | 60            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

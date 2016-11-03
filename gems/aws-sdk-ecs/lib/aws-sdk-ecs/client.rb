@@ -2355,12 +2355,12 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name       | params            | :delay   | :max_attempts |
-      # | ----------------- | ----------------- | -------- | ------------- |
-      # | services_inactive | describe_services | 15       | 40            |
-      # | services_stable   | describe_services | 15       | 40            |
-      # | tasks_running     | describe_tasks    | 6        | 100           |
-      # | tasks_stopped     | describe_tasks    | 6        | 100           |
+      # | waiter_name       | params               | :delay   | :max_attempts |
+      # | ----------------- | -------------------- | -------- | ------------- |
+      # | services_inactive | {#describe_services} | 15       | 40            |
+      # | services_stable   | {#describe_services} | 15       | 40            |
+      # | tasks_running     | {#describe_tasks}    | 6        | 100           |
+      # | tasks_stopped     | {#describe_tasks}    | 6        | 100           |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

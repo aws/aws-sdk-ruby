@@ -1753,12 +1753,12 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name           | params          | :delay   | :max_attempts |
-      # | --------------------- | --------------- | -------- | ------------- |
-      # | stack_create_complete | describe_stacks | 30       | 120           |
-      # | stack_delete_complete | describe_stacks | 30       | 120           |
-      # | stack_exists          | describe_stacks | 5        | 20            |
-      # | stack_update_complete | describe_stacks | 30       | 120           |
+      # | waiter_name           | params             | :delay   | :max_attempts |
+      # | --------------------- | ------------------ | -------- | ------------- |
+      # | stack_create_complete | {#describe_stacks} | 30       | 120           |
+      # | stack_delete_complete | {#describe_stacks} | 30       | 120           |
+      # | stack_exists          | {#describe_stacks} | 5        | 20            |
+      # | stack_update_complete | {#describe_stacks} | 30       | 120           |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition

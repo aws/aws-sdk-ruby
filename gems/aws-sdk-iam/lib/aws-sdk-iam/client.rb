@@ -6802,10 +6802,10 @@ module Aws
       # The following table lists the valid waiter names, the operations they call,
       # and the default `:delay` and `:max_attempts` values.
       #
-      # | waiter_name             | params               | :delay   | :max_attempts |
-      # | ----------------------- | -------------------- | -------- | ------------- |
-      # | instance_profile_exists | get_instance_profile | 1        | 40            |
-      # | user_exists             | get_user             | 1        | 20            |
+      # | waiter_name             | params                  | :delay   | :max_attempts |
+      # | ----------------------- | ----------------------- | -------- | ------------- |
+      # | instance_profile_exists | {#get_instance_profile} | 1        | 40            |
+      # | user_exists             | {#get_user}             | 1        | 20            |
       #
       # @raise [Errors::FailureStateError] Raised when the waiter terminates
       #   because the waiter has entered a state that it will not transition
