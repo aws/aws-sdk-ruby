@@ -26,7 +26,7 @@ module Aws
 
         it 'returns a list of Partition objects' do
           partitions = Aws.partitions
-          expect(partitions.map(&:name)).to eq(%w(aws aws-cn aws-us-gov))
+          expect(partitions.map(&:name).sort).to eq(%w(aws aws-cn aws-us-gov).sort)
           partitions.each do |p|
             expect(p).to be_kind_of(Partition)
           end
