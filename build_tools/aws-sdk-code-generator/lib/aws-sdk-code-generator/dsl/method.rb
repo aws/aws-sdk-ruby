@@ -15,6 +15,7 @@ module AwsSdkCodeGenerator
         @return_tags = []
         @aliases = []
         @docstring = Dsl::Docstring.new(options.fetch(:docstring, nil))
+        @api_private = options.fetch(:api_private, false)
         yield(self) if block
       end
 
@@ -81,6 +82,7 @@ module AwsSdkCodeGenerator
         tags.concat(ParamList.new(@params).tags)
         tags.concat(@option_tags)
         tags.concat(@return_tags)
+        tags << "# @api private" if @api_private
         tags.each.with_index do |tag, n|
           docs.concat(tag.lines.to_a)
         end

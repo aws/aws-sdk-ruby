@@ -32,9 +32,8 @@ module AwsSdkCodeGenerator
         apply_operations(self)
         apply_waiter_methods(self)
         eigenclass do |eigenclass|
-          eigenclass.docstring('@api private')
           eigenclass.attr_reader('identifier', api_private: true)
-          eigenclass.method('errors_module') do |m|
+          eigenclass.method('errors_module', api_private: true) do |m|
             m.code('Errors')
           end
         end

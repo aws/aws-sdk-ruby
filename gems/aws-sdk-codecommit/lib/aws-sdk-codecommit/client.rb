@@ -647,12 +647,12 @@ module Aws
         []
       end
 
-      # @api private
       class << self
 
         # @api private
         attr_reader :identifier
 
+        # @api private
         def errors_module
           Errors
         end
