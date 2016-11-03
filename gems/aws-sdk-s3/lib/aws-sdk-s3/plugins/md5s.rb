@@ -18,12 +18,37 @@ module Aws
         # @api private
         class Handler < Seahorse::Client::Handler
 
+          CHUNK_SIZE = 1 * 1024 * 1024 # one MB
+
           def call(context)
             body = context.http_request.body
             if body.size > 0
-              context.http_request.headers['Content-Md5'] ||= Checksums.md5(body)
+              context.http_request.headers['Content-Md5'] ||= md5(body)
             end
             @handler.call(context)
+          end
+
+          private
+
+          # @param [File, Tempfile, IO#read, String] value
+          # @return [String<MD5>]
+          def md5(value)
+            if (File === value || Tempfile === value) && !value.path.nil? && File.exist?(value.path)
+              Base64.encode64(OpenSSL::Digest::MD5.file(value).digest).strip
+            elsif value.respond_to?(:read)
+              md5 = OpenSSL::Digest::MD5.new
+              update_in_chunks(md5, value)
+              Base64.encode64(md5.digest).strip
+            else
+              Base64.encode64(OpenSSL::Digest::MD5.digest(value)).strip
+            end
+          end
+
+          def update_in_chunks(digest, io)
+            while chunk = io.read(CHUNK_SIZE)
+              digest.update(chunk)
+            end
+            io.rewind
           end
 
         end

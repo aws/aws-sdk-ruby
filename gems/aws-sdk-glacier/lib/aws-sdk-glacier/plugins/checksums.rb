@@ -1,3 +1,4 @@
+require_relative '../tree_hash'
 require 'openssl'
 
 module Aws
