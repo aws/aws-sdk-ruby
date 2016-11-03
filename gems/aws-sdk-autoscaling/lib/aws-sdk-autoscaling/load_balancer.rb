@@ -171,6 +171,9 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   load_balancer.batch_attach()
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
@@ -188,6 +191,9 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   load_balancer.batch_detach()
         # @param options ({})
         # @return [void]
         def batch_detach(options = {})

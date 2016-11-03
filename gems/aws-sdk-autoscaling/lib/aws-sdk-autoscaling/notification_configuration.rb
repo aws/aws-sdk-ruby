@@ -170,6 +170,9 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   notification_configuration.batch_put()
         # @param options ({})
         # @return [void]
         def batch_put(options = {})

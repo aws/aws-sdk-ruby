@@ -364,7 +364,22 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   object_version.batch_delete!({
+        #     mfa: "MFA",
+        #     request_payer: "requester", # accepts requester
+        #   })
         # @param options ({})
+        # @option options [String] :mfa
+        #   The concatenation of the authentication device's serial number, a
+        #   space, and the value that is displayed on your authentication device.
+        # @option options [String] :request_payer
+        #   Confirms that the requester knows that she or he will be charged for
+        #   the request. Bucket owners need not specify this parameter in their
+        #   requests. Documentation on downloading objects from requester pays
+        #   buckets can be found at
+        #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
         # @return [void]
         def batch_delete!(options = {})
           batch_enum.each do |batch|

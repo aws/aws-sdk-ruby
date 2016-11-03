@@ -1339,7 +1339,27 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_create_tags({
+        #     dry_run: false,
+        #     tags: [ # required
+        #       {
+        #         key: "String",
+        #         value: "String",
+        #       },
+        #     ],
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+        # @option options [required, Array<Types::Tag>] :tags
+        #   One or more tags. The `value` parameter is required, but if you don't
+        #   want the tag to have a value, specify the parameter with no value, and
+        #   we set the value to an empty string.
         # @return [void]
         def batch_create_tags(options = {})
           batch_enum.each do |batch|
@@ -1355,7 +1375,17 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_monitor({
+        #     dry_run: false,
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
         # @return [void]
         def batch_monitor(options = {})
           batch_enum.each do |batch|
@@ -1371,7 +1401,17 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_reboot({
+        #     dry_run: false,
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
         # @return [void]
         def batch_reboot(options = {})
           batch_enum.each do |batch|
@@ -1387,7 +1427,20 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_start({
+        #     additional_info: "String",
+        #     dry_run: false,
+        #   })
         # @param options ({})
+        # @option options [String] :additional_info
+        #   Reserved.
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
         # @return [void]
         def batch_start(options = {})
           batch_enum.each do |batch|
@@ -1403,7 +1456,25 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_stop({
+        #     dry_run: false,
+        #     force: false,
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+        # @option options [Boolean] :force
+        #   Forces the instances to stop. The instances do not have an opportunity
+        #   to flush file system caches or file system metadata. If you use this
+        #   option, you must perform file system check and repair procedures. This
+        #   option is not recommended for Windows instances.
+        #
+        #   Default: `false`
         # @return [void]
         def batch_stop(options = {})
           batch_enum.each do |batch|
@@ -1419,7 +1490,17 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_terminate!({
+        #     dry_run: false,
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
         # @return [void]
         def batch_terminate!(options = {})
           batch_enum.each do |batch|
@@ -1435,7 +1516,17 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_unmonitor({
+        #     dry_run: false,
+        #   })
         # @param options ({})
+        # @option options [Boolean] :dry_run
+        #   Checks whether you have the required permissions for the action,
+        #   without actually making the request, and provides an error response.
+        #   If you have the required permissions, the error response is
+        #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
         # @return [void]
         def batch_unmonitor(options = {})
           batch_enum.each do |batch|

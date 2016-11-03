@@ -163,6 +163,7 @@ module AwsSdkCodeGenerator
         Generators::Resource::CollectionClass.new(
           resource_name: @name,
           resource: @resource,
+          api: @api,
         )
       end
 
