@@ -316,6 +316,9 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_attach()
         # @param options ({})
         # @return [void]
         def batch_attach(options = {})
@@ -333,7 +336,15 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_detach({
+        #     should_decrement_desired_capacity: false, # required
+        #   })
         # @param options ({})
+        # @option options [required, Boolean] :should_decrement_desired_capacity
+        #   If `True`, the Auto Scaling group decrements the desired capacity
+        #   value by the number of instances detached.
         # @return [void]
         def batch_detach(options = {})
           batch_enum.each do |batch|
@@ -350,7 +361,17 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_enter_standby({
+        #     should_decrement_desired_capacity: false, # required
+        #   })
         # @param options ({})
+        # @option options [required, Boolean] :should_decrement_desired_capacity
+        #   Specifies whether the instances moved to `Standby` mode count as part
+        #   of the Auto Scaling group's desired capacity. If set, the desired
+        #   capacity for the Auto Scaling group decrements by the number of
+        #   instances moved to `Standby` mode.
         # @return [void]
         def batch_enter_standby(options = {})
           batch_enum.each do |batch|
@@ -367,6 +388,9 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   instance.batch_exit_standby()
         # @param options ({})
         # @return [void]
         def batch_exit_standby(options = {})

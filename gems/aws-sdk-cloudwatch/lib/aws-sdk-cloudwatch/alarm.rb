@@ -363,6 +363,9 @@ module Aws
 
         # @!group Batch Actions
 
+        # @example Request syntax with placeholder values
+        #
+        #   alarm.batch_delete!()
         # @param options ({})
         # @return [void]
         def batch_delete!(options = {})
@@ -379,6 +382,9 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   alarm.batch_disable_actions()
         # @param options ({})
         # @return [void]
         def batch_disable_actions(options = {})
@@ -395,6 +401,9 @@ module Aws
           nil
         end
 
+        # @example Request syntax with placeholder values
+        #
+        #   alarm.batch_enable_actions()
         # @param options ({})
         # @return [void]
         def batch_enable_actions(options = {})
