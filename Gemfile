@@ -7,6 +7,10 @@ group :test do
 
   gem 'rspec'
   gem 'cucumber'
+  # webmock depends on addressable, but the latest version of addressable
+  # has a dependency on ~> 2.0 of public_suffix which is not compatible
+  # with Ruby 1.9.3
+  gem 'addressable', '2.4.0'
   gem 'webmock'
   gem 'json-schema'
   gem 'multipart-post'
