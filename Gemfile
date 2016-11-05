@@ -22,6 +22,10 @@ group :test do
   gem 'rspec'
   gem 'cucumber'
   gem 'webmock'
+  # webmock depends on addressable, but the latest version of addressable
+  # has a dependency on ~> 2.0 of public_suffix which is not compatible
+  # with Ruby 1.9.3
+  gem 'addressable', '2.4.0'
   gem 'simplecov', require: false
   gem 'coveralls', require: false if RUBY_VERSION > '1.9.3'
   gem 'json-schema'
