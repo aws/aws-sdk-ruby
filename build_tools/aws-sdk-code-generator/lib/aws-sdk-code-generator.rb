@@ -1,10 +1,22 @@
+require_relative 'aws-sdk-code-generator/apply_docs'
+require_relative 'aws-sdk-code-generator/service'
+require_relative 'aws-sdk-code-generator/gem_builder'
+require_relative 'aws-sdk-code-generator/underscore'
+require_relative 'aws-sdk-code-generator/view'
+
+# views
+require_relative 'aws-sdk-code-generator/views/features/env'
+require_relative 'aws-sdk-code-generator/views/features/step_definitions'
+require_relative 'aws-sdk-code-generator/views/gemspec'
+require_relative 'aws-sdk-code-generator/views/spec/spec_helper'
+require_relative 'aws-sdk-code-generator/views/version'
+
 module AwsSdkCodeGenerator
 
   autoload :Errors, 'aws-sdk-code-generator/errors'
   autoload :Generator, 'aws-sdk-code-generator/generator'
   autoload :HashFormatter, 'aws-sdk-code-generator/hash_formatter'
   autoload :Helper, 'aws-sdk-code-generator/helper'
-  autoload :Underscore, 'aws-sdk-code-generator/underscore'
 
   module Dsl
     autoload :AccessControlStatement, 'aws-sdk-code-generator/dsl/access_control_statement'
