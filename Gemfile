@@ -3,6 +3,7 @@ source 'https://rubygems.org'
 gemspec path: 'aws-sdk-core'
 
 gem 'rake', require: false
+gem 'aws-sigv4'
 
 if !ENV['PURE_RUBY']
   if ENV['OLD_OJ']
