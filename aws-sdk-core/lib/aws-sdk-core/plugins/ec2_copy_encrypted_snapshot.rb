@@ -30,6 +30,9 @@ module Aws
           param_list.set('DestinationRegion', context.config.region)
           param_list.set('Version', context.config.api.metadata['apiVersion'])
           Aws::Query::EC2ParamBuilder.new(param_list).apply(context.operation.input, params)
+          url = Aws::EndpointProvider.resolve('ec2', signer.region)
+          url += "?#{param_list.to_s}"
+
           signer = Aws::Sigv4::Signer.new(
             service: 'ec2',
             region: params[:source_region],
@@ -37,7 +40,7 @@ module Aws
           )
           signer.presign_url(
             http_method: 'GET',
-            url: "https://ec2.#{signer.region}.amazonaws.com?#{param_list.to_s}",
+            url: url,
             body: '',
             expires_in: 3600,
           ).to_s
