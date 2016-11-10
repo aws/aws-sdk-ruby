@@ -127,8 +127,8 @@ module Aws
       end
 
       # @api private
-      def exists?
-        wait_until_exists { |w| w.max_attempts = 1 }
+      def exists?(options = {})
+        wait_until_exists(options) { |w| w.max_attempts = 1 }
         true
       rescue Waiters::Errors::UnexpectedError => e
         raise e.error

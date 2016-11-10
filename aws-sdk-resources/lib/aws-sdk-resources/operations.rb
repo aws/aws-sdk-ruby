@@ -221,7 +221,7 @@ module Aws
 
           resource = options[:resource]
 
-          params_hash = {}
+          params_hash = options[:args].first || {}
           @waiter_params.each do |param|
             param.apply(params_hash, options)
           end
