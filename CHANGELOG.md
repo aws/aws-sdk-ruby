@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.19 (2016-11-10)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
 
 * Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
