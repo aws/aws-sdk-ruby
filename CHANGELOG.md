@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.21 (2016-11-15)
+------------------
+
 * Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
 
 * Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
