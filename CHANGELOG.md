@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.22 (2016-11-15)
+------------------
+
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
 
 2.6.21 (2016-11-15)
