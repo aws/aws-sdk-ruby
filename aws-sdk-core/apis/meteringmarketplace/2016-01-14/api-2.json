@@ -30,6 +30,21 @@
       ]
     }
   },
+  "operations":{
+    "ResolveCustomer":{
+      "name":"ResolveCustomer",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"ResolveCustomerRequest"},
+      "output":{"shape":"ResolveCustomerResult"},
+      "errors":[
+        {"shape":"InternalServiceErrorException"},
+        {"shape":"ThrottlingException"}
+      ]
+    }
+  },
   "shapes":{
     "Boolean":{"type":"boolean"},
     "DuplicateRequestException":{
@@ -89,6 +104,22 @@
       "type":"structure",
       "members":{
         "MeteringRecordId":{"shape":"String"}
+      }
+    },
+    "ResolveCustomerRequest":{
+      "type":"structure",
+      "required":[
+        "RegistrationToken"
+      ],
+      "members":{
+        "RegistrationToken":{"shape":"String"}
+      }
+    },
+    "ResolveCustomerResult":{
+      "type":"structure",
+      "members":{
+        "CustomerIdentifier":{"shape":"String"},
+        "ProductCode":{"shape":"ProductCode"}
       }
     },
     "ProductCode":{
