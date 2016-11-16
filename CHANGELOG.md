@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Resources - The `#exists?` method on resources now passes additional
+  arguments to the client waiter.
+
+* Issue - Resources - Resource identifiers passed in as `nil` now correctly
+  raise an `ArgumentError`.
+
 2.6.23 (2016-11-16)
 ------------------
 
