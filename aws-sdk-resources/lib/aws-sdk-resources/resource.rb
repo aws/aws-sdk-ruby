@@ -177,7 +177,7 @@ module Aws
         self.class.identifiers.each.with_index do |name, n|
           if args[n]
             identifiers[name] = args[n]
-          elsif options.key?(name)
+          elsif options[name]
             identifiers[name] = options.delete(name)
           else
             raise ArgumentError, "missing required option #{name.inspect}"

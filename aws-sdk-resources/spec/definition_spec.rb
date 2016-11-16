@@ -64,6 +64,10 @@ module Aws
             group = namespace::Group.new(id:'group-id')
             expect(group).to be_kind_of(Resource)
             expect(group.identifiers).to eq(id:'group-id')
+
+            expect do
+              namespace::User.new(name: nil)
+            end.to raise_error(ArgumentError, 'missing required option :name')
           end
 
           describe 'actions' do
