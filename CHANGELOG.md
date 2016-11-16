@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.23 (2016-11-16)
+------------------
+
 * Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
 
 * Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
