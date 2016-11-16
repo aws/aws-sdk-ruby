@@ -175,6 +175,7 @@ module Aws
     autoload :GlacierChecksums, 'aws-sdk-core/plugins/glacier_checksums'
     autoload :GlobalConfiguration, 'aws-sdk-core/plugins/global_configuration'
     autoload :HelpfulSocketErrors, 'aws-sdk-core/plugins/helpful_socket_errors'
+    autoload :IdempotencyToken, 'aws-sdk-core/plugins/idempotency_token'
     autoload :Logging, 'aws-sdk-core/plugins/logging'
     autoload :MachineLearningPredictEndpoint, 'aws-sdk-core/plugins/machine_learning_predict_endpoint'
     autoload :ParamConverter, 'aws-sdk-core/plugins/param_converter'
