@@ -1164,6 +1164,31 @@ module Aws
               }.to raise_error(NotImplementedError)
             end
 
+            it 'passes additional params to the client' do
+              definition['resources'] = {
+                'Thing' => {
+                  'identifiers' => [{ 'name' => 'Name' }],
+                  'waiters' => {
+                    'Exists' => {
+                      'waiterName' => 'ThingExists',
+                      'params' => [
+                        { 'target' => 'ThingName', 'source' => 'identifier', 'name' => 'Name' }
+                      ]
+                    }
+                  }
+                }
+              }
+
+              expect(client).to receive(:wait_until).
+                with(:thing_exists, { thing_name: 'name', extra: 'param'}).
+                and_return(double('successful-response'))
+
+              apply_definition
+
+              thing = namespace::Thing.new('name')
+              expect(thing.exists?(extra: 'param')).to be(true)
+            end
+
           end
         end
       end
