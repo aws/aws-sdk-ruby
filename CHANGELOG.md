@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::SQS - Updated the API, documentation, and resource interfaces for Amazon Simple Queue Service.
+
 * Issue - Aws::AutoScaling - Resolved an issue with loading tags.
 
   See related [GitHub issue #1313](https://github.com/aws/aws-sdk-ruby/issues/1313).
