@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.24 (2016-11-17)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
