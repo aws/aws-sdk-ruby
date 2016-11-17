@@ -11,6 +11,8 @@ module Aws
         secret_access_key: nil,
         session_token: nil,
         profile: nil,
+        instance_profile_credentials_timeout: 1,
+        instance_profile_credentials_retries: 0,
       )
     }
 
