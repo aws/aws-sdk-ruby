@@ -1,6 +1,19 @@
 Unreleased Changes
 ------------------
 
+* Feature - Credentials - Added the ability to configure extended retries
+  when loading credentials from the instance metadata service without needing
+  to construct your own `Aws::InstanceProfileCredentials` object:
+
+  ```ruby
+  s3 = Aws::S3::Client.new(
+    instance_profile_credentials_timeout: 5, # defaults to 1 second
+    instance_profile_credentials_retries: 5, # defaults to 0 retries
+  )
+  ```
+
+  These options are used by the default credential chain.
+
 * Feature - Resources - The `#exists?` method on resources now passes additional
   arguments to the client waiter.
 
