@@ -230,6 +230,7 @@ module Aws
       autoload :Builder, 'aws-sdk-core/rest/request/builder'
       autoload :Endpoint, 'aws-sdk-core/rest/request/endpoint'
       autoload :Headers, 'aws-sdk-core/rest/request/headers'
+      autoload :QuerystringBuilder, 'aws-sdk-core/rest/request/querystring_builder'
     end
     module Response
       autoload :Body, 'aws-sdk-core/rest/response/body'
