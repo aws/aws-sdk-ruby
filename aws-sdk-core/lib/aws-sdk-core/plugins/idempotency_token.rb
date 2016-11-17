@@ -8,17 +8,13 @@ module Aws
     # when no value is provided
     class IdempotencyToken < Seahorse::Client::Plugin
 
-      option(:idempotency_auto_fill, false)
-
       # @api private
       class Handler < Seahorse::Client::Handler
 
         # @param [RequestContext] context
         # @param [Response]
         def call(context)
-          enable_auto_fill = context.params.delete(:idempotency_auto_fill)
-          enable_auto_fill = context.config.idempotency_auto_fill if enable_auto_fill.nil?
-          if enable_auto_fill
+          unless context.params.delete(:disable_idempotency_auto_fill)
             auto_fill(context.params, context.operation.input)
           end
           @handler.call(context)
@@ -29,7 +25,7 @@ module Aws
         def auto_fill(params, ref)
           ref.shape.members.each do |name, member_ref|
             if member_ref['idempotencyToken']
-              params[name] = params[name] || SecureRandom.uuid
+              params[name] ||= SecureRandom.uuid
             end
           end
         end
