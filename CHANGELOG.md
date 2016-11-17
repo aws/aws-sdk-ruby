@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Issue - Aws::AutoScaling - Resolved an issue with loading tags.
+
+  See related [GitHub issue #1313](https://github.com/aws/aws-sdk-ruby/issues/1313).
+
 * Feature - Credentials - Added the ability to configure extended retries
   when loading credentials from the instance metadata service without needing
   to construct your own `Aws::InstanceProfileCredentials` object:
