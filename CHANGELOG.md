@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
 2.6.24 (2016-11-17)
 ------------------
 
