@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.25 (2016-11-18)
+------------------
+
 * Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
 
 * Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
