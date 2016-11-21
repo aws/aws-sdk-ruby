@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :elasticloadbalancingv2
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticloadbalancingv2)
 
 module Aws
   module ElasticLoadBalancingV2

@@ -21,7 +21,7 @@ require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-route53/plugins/id_fix.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :route53
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53)
 
 module Aws
   module Route53

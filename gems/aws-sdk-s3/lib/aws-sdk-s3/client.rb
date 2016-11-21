@@ -32,7 +32,7 @@ require 'aws-sdk-s3/plugins/url_encoded_keys.rb'
 require 'aws-sdk-s3/plugins/s3_signer.rb'
 require 'aws-sdk-s3/plugins/bucket_name_restrictions.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :s3
+Aws::Plugins::GlobalConfiguration.add_identifier(:s3)
 
 module Aws
   module S3

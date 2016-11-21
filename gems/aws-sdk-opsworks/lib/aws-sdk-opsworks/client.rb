@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :opsworks
+Aws::Plugins::GlobalConfiguration.add_identifier(:opsworks)
 
 module Aws
   module OpsWorks

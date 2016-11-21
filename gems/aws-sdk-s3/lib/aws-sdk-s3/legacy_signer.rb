@@ -2,6 +2,7 @@ require 'set'
 require 'time'
 require 'openssl'
 require 'webrick/httputils'
+require 'aws-sdk-core/query'
 
 module Aws
   module S3

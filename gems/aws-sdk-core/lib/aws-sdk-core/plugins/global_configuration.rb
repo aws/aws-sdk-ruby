@@ -42,7 +42,7 @@ module Aws
     class GlobalConfiguration < Seahorse::Client::Plugin
 
       # @api private
-      IDENTIFIERS = Set.new()
+      @identifiers = Set.new()
 
       # @api private
       def before_initialize(client_class, options)
@@ -69,7 +69,15 @@ module Aws
         end
       end
 
+      class << self
+
+        # Registers an additional service identifier.
+        # @api private
+        def add_identifier(identifier)
+          @identifiers << identifier
+        end
+
+      end
     end
   end
-
 end

@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-cloudsearchdomain/plugins/conditional_signing.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :cloudsearchdomain
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudsearchdomain)
 
 module Aws
   module CloudSearchDomain

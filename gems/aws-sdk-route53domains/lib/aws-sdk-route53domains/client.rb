@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :route53domains
+Aws::Plugins::GlobalConfiguration.add_identifier(:route53domains)
 
 module Aws
   module Route53Domains

@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v2.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :importexport
+Aws::Plugins::GlobalConfiguration.add_identifier(:importexport)
 
 module Aws
   module ImportExport

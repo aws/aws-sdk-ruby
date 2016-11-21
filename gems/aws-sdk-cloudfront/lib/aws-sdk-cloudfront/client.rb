@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :cloudfront
+Aws::Plugins::GlobalConfiguration.add_identifier(:cloudfront)
 
 module Aws
   module CloudFront

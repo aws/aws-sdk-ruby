@@ -21,7 +21,7 @@ require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :apigateway
+Aws::Plugins::GlobalConfiguration.add_identifier(:apigateway)
 
 module Aws
   module APIGateway

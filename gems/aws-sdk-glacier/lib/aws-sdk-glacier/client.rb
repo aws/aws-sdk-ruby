@@ -23,7 +23,7 @@ require 'aws-sdk-glacier/plugins/account_id.rb'
 require 'aws-sdk-glacier/plugins/api_version.rb'
 require 'aws-sdk-glacier/plugins/checksums.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :glacier
+Aws::Plugins::GlobalConfiguration.add_identifier(:glacier)
 
 module Aws
   module Glacier

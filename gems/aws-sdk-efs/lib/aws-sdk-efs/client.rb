@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :efs
+Aws::Plugins::GlobalConfiguration.add_identifier(:efs)
 
 module Aws
   module EFS

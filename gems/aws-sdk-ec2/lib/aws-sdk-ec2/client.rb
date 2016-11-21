@@ -22,7 +22,7 @@ require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
 require 'aws-sdk-ec2/plugins/region_validation.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :ec2
+Aws::Plugins::GlobalConfiguration.add_identifier(:ec2)
 
 module Aws
   module EC2

@@ -21,7 +21,7 @@ require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 require 'aws-sdk-swf/plugins/read_timeouts.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :swf
+Aws::Plugins::GlobalConfiguration.add_identifier(:swf)
 
 module Aws
   module SWF

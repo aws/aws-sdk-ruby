@@ -20,7 +20,7 @@ require 'aws-sdk-core/plugins/stub_responses.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
-Aws::Plugins::GlobalConfiguration::IDENTIFIERS << :elasticache
+Aws::Plugins::GlobalConfiguration.add_identifier(:elasticache)
 
 module Aws
   module ElastiCache
