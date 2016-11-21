@@ -1,4 +1,8 @@
 require 'json'
+require_relative 'json/builder'
+require_relative 'json/error_handler'
+require_relative 'json/handler'
+require_relative 'json/parser'
 
 module Aws
   # @api private

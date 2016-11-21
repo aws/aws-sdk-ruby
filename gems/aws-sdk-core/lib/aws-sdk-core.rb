@@ -1,3 +1,4 @@
+require 'seahorse'
 require 'jmespath'
 
 require_relative 'aws-sdk-core/deprecations'
@@ -15,7 +16,6 @@ require_relative 'aws-sdk-core/shared_credentials'
 
 # client modules
 
-require_relative 'seahorse'
 require_relative 'aws-sdk-core/client_stubs'
 require_relative 'aws-sdk-core/eager_loader'
 require_relative 'aws-sdk-core/endpoint_provider'
@@ -64,50 +64,13 @@ require_relative 'aws-sdk-core/stubbing/protocols/rest'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_json'
 require_relative 'aws-sdk-core/stubbing/protocols/rest_xml'
 
-# query protocol
+# protocols
 
-require_relative 'aws-sdk-core/query/ec2_param_builder'
-require_relative 'aws-sdk-core/query/handler'
-require_relative 'aws-sdk-core/query/param'
-require_relative 'aws-sdk-core/query/param_builder'
-require_relative 'aws-sdk-core/query/param_list'
-
-# rest protocol : request
-
-require_relative 'aws-sdk-core/rest/handler'
-require_relative 'aws-sdk-core/rest/request/body'
-require_relative 'aws-sdk-core/rest/request/builder'
-require_relative 'aws-sdk-core/rest/request/endpoint'
-require_relative 'aws-sdk-core/rest/request/headers'
-
-# rest protocol : response
-
-require_relative 'aws-sdk-core/rest/response/body'
-require_relative 'aws-sdk-core/rest/response/headers'
-require_relative 'aws-sdk-core/rest/response/parser'
-require_relative 'aws-sdk-core/rest/response/status_code'
-
-# xml
-
-require_relative 'aws-sdk-core/xml/builder'
-require_relative 'aws-sdk-core/xml/default_list'
-require_relative 'aws-sdk-core/xml/default_map'
-require_relative 'aws-sdk-core/xml/doc_builder'
-require_relative 'aws-sdk-core/xml/error_handler'
-require_relative 'aws-sdk-core/xml/parser'
-require_relative 'aws-sdk-core/xml/parser/stack'
-require_relative 'aws-sdk-core/xml/parser/frame'
-require_relative 'aws-sdk-core/xml/parser/parsing_error'
-
-# json protoocl
-
+require_relative 'aws-sdk-core/rest'
+require_relative 'aws-sdk-core/xml'
 require_relative 'aws-sdk-core/json'
-require_relative 'aws-sdk-core/json/builder'
-require_relative 'aws-sdk-core/json/error_handler'
-require_relative 'aws-sdk-core/json/handler'
-require_relative 'aws-sdk-core/json/parser'
 
-# STS
+# aws-sdk-sts is vendored to support Aws::AssumeRoleCredentials
 
 require 'aws-sdk-sts'
 
