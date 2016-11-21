@@ -18,12 +18,12 @@ module Aws
       end
 
       before(:all) do
-        GlobalConfiguration::IDENTIFIERS << :svc
+        GlobalConfiguration.add_identifier(:svc)
       end
 
       after(:all) do
         Aws.config.clear
-        GlobalConfiguration::IDENTIFIERS.delete(:svc)
+        GlobalConfiguration.identifiers.delete(:svc)
       end
 
       it 'gives priority to Aws.config over plugin defaults' do

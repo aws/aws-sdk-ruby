@@ -41,7 +41,6 @@ module Aws
     # @api private
     class GlobalConfiguration < Seahorse::Client::Plugin
 
-      # @api private
       @identifiers = Set.new()
 
       # @api private
@@ -63,7 +62,7 @@ module Aws
 
       def apply_aws_defaults(client_class, options)
         Aws.config.each do |option_name, default|
-          next if IDENTIFIERS.include?(option_name)
+          next if self.class.identifiers.include?(option_name)
           next if options.key?(option_name)
           options[option_name] = default
         end
@@ -75,6 +74,12 @@ module Aws
         # @api private
         def add_identifier(identifier)
           @identifiers << identifier
+        end
+
+        # @return [Set<String>]
+        # @api private
+        def identifiers
+          @identifiers
         end
 
       end
