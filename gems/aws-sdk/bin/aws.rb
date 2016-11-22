@@ -90,19 +90,19 @@ options[:load_paths].each do |path|
 end
 
 # load the aws-sdk gem
-$:.unshift(File.expand_path('../../lib', __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../lib', __FILE__))
 require 'aws-sdk'
 
 # when running the REPL locally, we want to load all of the gems from source
 if File.directory?(File.expand_path('../../../../build_tools', __FILE__))
-  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2)
+  gems = %w(aws-sdk-core aws-sigv4 aws-sigv2 aws-partitions)
   Aws.constants.each do |const_name|
     if Aws.autoload?(const_name)
       gems << "aws-sdk-#{const_name.downcase}"
     end
   end
   gems.each do |gem_name|
-    $:.unshift(File.expand_path("../../../#{gem_name}/lib", __FILE__))
+    $LOAD_PATH.unshift(File.expand_path("../../../#{gem_name}/lib", __FILE__))
   end
 end
 

@@ -1,5 +1,6 @@
 module Aws
   module Partitions
+    # @api private
     class EndpointProvider
 
       # Intentionally marked private. The format of the endpoint rules
@@ -9,6 +10,9 @@ module Aws
         @rules = rules
       end
 
+      # @param [String] region
+      # @param [String] service The endpoint prefix for the service, e.g. "monitoring" for
+      #   cloudwatch.
       # @api private Use the static class methods instead.
       def resolve(region, service)
         "https://" + endpoint_for(region, service)
