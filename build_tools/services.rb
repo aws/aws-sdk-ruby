@@ -142,7 +142,7 @@ module BuildTools
 
         def dependencies(svc, definition)
           dependencies = {}
-          dependencies['aws-sdk-core'] = '~> 3.0'
+          dependencies['aws-sdk-core'] = '3.0.0.rc1'
           case svc.signature_version
           when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
           when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
