@@ -1,3 +1,4 @@
+require_relative 'aws-partitions/endpoint_provider'
 require_relative 'aws-partitions/partition'
 require_relative 'aws-partitions/partition_list'
 require_relative 'aws-partitions/region'

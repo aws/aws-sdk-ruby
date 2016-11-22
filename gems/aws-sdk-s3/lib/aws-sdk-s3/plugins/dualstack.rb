@@ -39,7 +39,7 @@ for all operations.
             bucket_name = context.params[:bucket]
             region = context.config.region
             force_path_style = context.config.force_path_style
-            dns_suffix = EndpointProvider.dns_suffix_for(region)
+            dns_suffix = Aws::Partitions::EndpointProvider.dns_suffix_for(region)
 
             if use_bucket_dns?(bucket_name, context)
               host = "#{bucket_name}.s3.dualstack.#{region}.#{dns_suffix}"

@@ -28,14 +28,14 @@ module Aws
         #
         # * When the region is configured, but it is configured
         #   to a non region, such as "aws-global". This is similar
-        #   to the previous case. We use the EndpointProvider
+        #   to the previous case. We use the Aws::Partitions::EndpointProvider
         #   to resolve to the actual signing region.
         #
         prefix = cfg.api.metadata['endpointPrefix']
         if prefix && cfg.endpoint.to_s.match(/#{prefix}\.amazonaws\.com/)
           'us-east-1'
         elsif cfg.region
-          EndpointProvider.signing_region(cfg.region, cfg.sigv4_name)
+          Aws::Partitions::EndpointProvider.signing_region(cfg.region, cfg.sigv4_name)
         end
       end
 

@@ -33,7 +33,7 @@ to test endpoints. This should be avalid HTTP(S) URI.
         DOCS
         endpoint_prefix = cfg.api.metadata['endpointPrefix']
         if cfg.region && endpoint_prefix
-          EndpointProvider.resolve(cfg.region, endpoint_prefix)
+          Aws::Partitions::EndpointProvider.resolve(cfg.region, endpoint_prefix)
         end
       end
 

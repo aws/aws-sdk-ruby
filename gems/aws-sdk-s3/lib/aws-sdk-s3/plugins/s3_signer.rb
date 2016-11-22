@@ -17,7 +17,7 @@ module Aws
         end
 
         option(:sigv4_region) do |cfg|
-          EndpointProvider.signing_region(cfg.region, 's3')
+          Aws::Partitions::EndpointProvider.signing_region(cfg.region, 's3')
         end
 
         def add_handlers(handlers, cfg)
@@ -196,7 +196,8 @@ module Aws
             if region == 'us-east-1'
               "#{bucket}.s3.amazonaws.com"
             else
-              bucket + '.' + URI.parse(EndpointProvider.resolve(region, 's3')).host
+              endpoint = Aws::Partitions::EndpointProvider.resolve(region, 's3')
+              bucket + '.' + URI.parse(endpoint).host
             end
           end
 

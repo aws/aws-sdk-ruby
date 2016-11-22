@@ -578,7 +578,7 @@ module Aws
       end
 
       def bucket_url
-        url = EndpointProvider.resolve(@bucket_region, 's3')
+        url = Aws::Partitions::EndpointProvider.resolve(@bucket_region, 's3')
         url = URI.parse(url)
         if Plugins::BucketDns.dns_compatible?(@bucket_name, true)
           url.host = @bucket_name + '.' + url.host

@@ -19,7 +19,6 @@ require_relative 'aws-sdk-core/shared_credentials'
 
 require_relative 'aws-sdk-core/client_stubs'
 require_relative 'aws-sdk-core/eager_loader'
-require_relative 'aws-sdk-core/endpoint_provider'
 require_relative 'aws-sdk-core/errors'
 require_relative 'aws-sdk-core/pageable_response'
 require_relative 'aws-sdk-core/pager'
