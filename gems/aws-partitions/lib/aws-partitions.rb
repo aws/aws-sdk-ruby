@@ -1,3 +1,10 @@
+require_relative 'aws-partitions/partition'
+require_relative 'aws-partitions/partition_list'
+require_relative 'aws-partitions/region'
+require_relative 'aws-partitions/service'
+
+require 'json'
+
 module Aws
 
   # A {Partition} is a group of AWS {Region} and {Service} objects. You
@@ -15,11 +22,11 @@ module Aws
   #
   # To get a partition by name:
   #
-  #     aws = Aws.partition('aws')
+  #     aws = Aws::Partitions.partition('aws')
   #
   # You can also enumerate all partitions:
   #
-  #     Aws.partitions.each do |partition|
+  #     Aws::Partitions.each do |partition|
   #       puts partition.name
   #     end
   #
@@ -30,20 +37,20 @@ module Aws
   # a region by name. Calling {Partition#region} will return an instance
   # of {Region}.
   #
-  #     region = Aws.partition('aws').region('us-east-1')
+  #     region = Aws::Partitions.partition('aws').region('us-west-2')
   #     region.name
-  #     #=> "us-east-1"
+  #     #=> "us-west-2"
   #
   # You can also enumerate all regions within a partition:
   #
-  #     Aws.partition('aws').regions.each do |region|
+  #     Aws::Partitions.partition('aws').regions.each do |region|
   #       puts region.name
   #     end
   #
   # Each {Region} object has a name, description and a list of services
   # available to that region:
   #
-  #     us_west_2 = Aws.partition('aws').region('us-west-2')
+  #     us_west_2 = Aws::Partitions.partition('aws').region('us-west-2')
   #
   #     us_west_2.name #=> "us-west-2"
   #     us_west_2.description #=> "US West (Oregon)"
@@ -62,7 +69,7 @@ module Aws
   # Its also possible to enumerate every service for every region in
   # every partition.
   #
-  #     Aws.partitions.each do |partition|
+  #     Aws::Partitions.partitions.each do |partition|
   #       partition.regions.each do |region|
   #         region.services.each do |service_name|
   #           puts "#{partition.name} -> #{region.name} -> #{service_name}"
@@ -75,11 +82,11 @@ module Aws
   # A {Partition} has a list of services available. You can get a
   # single {Service} by name:
   #
-  #     Aws.partition('aws').service('DynamoDB')
+  #     Aws::Partitions.partition('aws').service('DynamoDB')
   #
   # You can also enumerate all services in a partition:
   #
-  #     Aws.partition('aws').services.each do |service|
+  #     Aws::Partitions.partition('aws').services.each do |service|
   #       puts service.name
   #     end
   #
@@ -95,15 +102,15 @@ module Aws
   # partition. The {Service#regionalized?} method indicates when this is
   # the case.
   #
-  #     iam = Aws.partition('aws').service('IAM')
+  #     iam = Aws::Partitions.partition('aws').service('IAM')
   #
   #     iam.regionalized? #=> false
-  #     service.partition_region #=> "us-east-1"
+  #     service.partition_region #=> "aws-global"
   #
   # Its also possible to enumerate every region for every service in
   # every partition.
   #
-  #     Aws.partitions.each do |partition|
+  #     Aws::Partitions.partitions.each do |partition|
   #       partition.services.each do |service|
   #         service.regions.each do |region_name|
   #           puts "#{partition.name} -> #{region_name} -> #{service.name}"
@@ -117,41 +124,98 @@ module Aws
   # correspond to the service's module.
   #
   module Partitions
+
     class << self
 
+      include Enumerable
+
+      # @return [Enumerable<Partition>]
+      def each(&block)
+        default_partition_list.each(&block)
+      end
+
+      # Return the partition with the given name. A partition describes
+      # the services and regions available in that partition.
+      #
+      #     aws = Aws::Partitions.partition('aws')
+      #
+      #     puts "Regions available in the aws partition:\n"
+      #     aws.regions.each do |region|
+      #       puts region.name
+      #     end
+      #
+      #     puts "Services available in the aws partition:\n"
+      #     aws.services.each do |services|
+      #       puts services.name
+      #     end
+      #
+      # @param [String] partition_name The name of the partition to return.
+      #   Valid names include "aws", "aws-cn", and "aws-us-gov".
+      #
+      # @return [Partition]
+      #
+      # @raise [ArgumentError] Raises an `ArgumentError` if a partition is
+      #   not found with the given name. The error message contains a list
+      #   of valid partition names.
+      def partition(name)
+        default_partition_list.partition(name)
+      end
+
+      # Returns an array with every partitions. A partition describes
+      # the services and regions available in that partition.
+      #
+      #     Aws::Partitions.partitions.each do |partition|
+      #
+      #       puts "Regions available in #{partition.name}:\n"
+      #       partition.regions.each do |region|
+      #         puts region.name
+      #       end
+      #
+      #       puts "Services available in #{partition.name}:\n"
+      #       partition.services.each do |service|
+      #         puts service.name
+      #       end
+      #     end
+      #
+      # @return [Enumerable<Partition>] Returns an enumerable of all
+      #   known partitions.
+      def partitions
+        default_partition_list
+      end
+
       # @param [Hash] new_partitions
-      # @api private
+      # @api private For internal use only.
       def add(new_partitions)
         new_partitions['partitions'].each do |partition|
-          default_list.add_partition(Partition.build(partition))
+          default_partition_list.add_partition(Partition.build(partition))
           defaults['partitions'] << partition
         end
       end
 
-      # @api private
+      # @api private For internal use only.
       def clear
-        default_list.clear
+        default_partition_list.clear
         defaults['partitions'].clear
+      end
+
+      # @return [PartitionList]
+      # @api private
+      def default_partition_list
+        @default_partition_list ||= PartitionList.build(defaults)
       end
 
       # @return [Hash]
       # @api private
       def defaults
         @defaults ||= begin
-          path = File.join(File.dirname(__FILE__), '..', '..', 'endpoints.json')
-          Aws::Json.load_file(path)
+          path = File.expand_path('../../partitions.json', __FILE__)
+          JSON.load(File.read(path))
         end
-      end
-
-      # @return [PartitionList]
-      # @api priviate
-      def default_list
-        @default_list ||= PartitionList.build(defaults)
       end
 
       # @return [Hash<String,String>] Returns a map of service module names
       #   to their id as used in the endpoints.json document.
-      # @api private
+      # @api private For internal use only.
       def service_ids
         @service_ids ||= begin
           # service ids

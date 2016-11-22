@@ -1,3 +1,4 @@
+require 'aws-partitions'
 require 'seahorse'
 require 'jmespath'
 
@@ -24,19 +25,11 @@ require_relative 'aws-sdk-core/pageable_response'
 require_relative 'aws-sdk-core/pager'
 require_relative 'aws-sdk-core/param_converter'
 require_relative 'aws-sdk-core/param_validator'
-require_relative 'aws-sdk-core/partitions'
 require_relative 'aws-sdk-core/shared_config'
 require_relative 'aws-sdk-core/structure'
 require_relative 'aws-sdk-core/type_builder'
 require_relative 'aws-sdk-core/util'
 require_relative 'aws-sdk-core/version'
-
-# partitions/regions/services interfaces
-
-require_relative 'aws-sdk-core/partitions/partition'
-require_relative 'aws-sdk-core/partitions/partition_list'
-require_relative 'aws-sdk-core/partitions/region'
-require_relative 'aws-sdk-core/partitions/service'
 
 # resource classes
 
@@ -101,57 +94,14 @@ module Aws
       end
     end
 
-    # Return the partition with the given name. A partition describes
-    # the services and regions available in that partition.
-    #
-    #     aws = Aws.partition('aws')
-    #
-    #     puts "Regions available in the aws partition:\n"
-    #     aws.regions.each do |region|
-    #       puts region.name
-    #     end
-    #
-    #     puts "Services available in the aws partition:\n"
-    #     aws.services.each do |services|
-    #       puts services.name
-    #     end
-    #
-    # See {Partitions} for more information and examples.
-    #
-    # @param [String] partition_name The name of the partition to return.
-    #   Valid names include "aws", "aws-cn", and "aws-us-gov".
-    #
-    # @return [Partitions::Partition]
-    #
-    # @raise [ArgumentError] Raises an `ArgumentError` if a partition is
-    #   not found with the given name. The error message contains a list
-    #   of valid partition names.
+    # @see (Aws::Partitions.partition)
     def partition(partition_name)
-      Partitions.default_list.partition(partition_name)
+      Aws::Partitions.partition(partition_name)
     end
 
-    # Return an array of partitions. A partition describes
-    # the services and regions available in that partition.
-    #
-    #     Aws.partitions.each do |partition|
-    #
-    #       puts "Regions available in #{partition.name}:\n"
-    #       partition.regions.each do |region|
-    #         puts region.name
-    #       end
-    #
-    #       puts "Services available in #{partition.name}:\n"
-    #       partition.services.each do |service|
-    #         puts service.name
-    #       end
-    #     end
-    #
-    # See {Partitions} for more information and examples.
-    #
-    # @return [Array<Partitions::Partition>] Returns an array of all
-    #   known partitions.
+    # @see (Aws::Partitions.partitions)
     def partitions
-      Partitions.default_list.partitions
+      Aws::Partitions.partitions
     end
 
     # The SDK ships with a ca certificate bundle to use when verifying SSL

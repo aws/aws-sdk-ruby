@@ -1,11 +1,10 @@
+require_relative '../../../gems/aws-sdk-core/spec/shared_spec_helper'
+
 $:.unshift(File.expand_path('../../lib', __FILE__))
-$:.unshift(File.expand_path('../../../../gems/aws-sdk-core/lib', __FILE__))
-$:.unshift(File.expand_path('../../../../gems/aws-sigv4/lib', __FILE__))
 
 require 'tmpdir'
 require 'json'
 require 'rspec'
-
 require 'aws-sdk-core'
 require 'aws-sdk-code-generator'
 

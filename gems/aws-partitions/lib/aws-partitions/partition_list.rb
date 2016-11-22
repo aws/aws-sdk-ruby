@@ -1,15 +1,10 @@
 module Aws
   module Partitions
-    # @api private
     class PartitionList
 
       include Enumerable
 
       def initialize
-        @partitions = {}
-      end
-
-      def clear
         @partitions = {}
       end
 
@@ -36,12 +31,19 @@ module Aws
       end
 
       # @param [Partition] partition
+      # @api private
       def add_partition(partition)
         if Partition === partition
           @partitions[partition.name] = partition
         else
           raise ArgumentError, "expected Partition, got #{partition.class}"
         end
+      end
+
+      # Removed all partitions.
+      # @api private
+      def clear
+        @partitions = {}
       end
 
       class << self

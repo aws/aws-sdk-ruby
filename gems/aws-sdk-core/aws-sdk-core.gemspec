@@ -8,10 +8,11 @@ Gem::Specification.new do |spec|
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'
   spec.require_paths = ['lib']
-  spec.files         = ['endpoints.json', 'ca-bundle.crt', 'VERSION']
+  spec.files         = ['ca-bundle.crt', 'VERSION']
   spec.files         += Dir['lib/**/*.rb']
 
   spec.add_dependency('jmespath', '~> 1.0')
+  spec.add_dependency('aws-partitions', '~> 1.0')
   spec.add_dependency('aws-sigv4', '~> 1.0') # necessary for making Aws::STS API calls
 
 end

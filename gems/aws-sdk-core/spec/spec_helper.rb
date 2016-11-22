@@ -1,6 +1,7 @@
 require_relative 'shared_spec_helper'
 
 $LOAD_PATH.unshift(File.dirname(__FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../aws-partitions/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../../build_tools/aws-sdk-code-generator/lib',  __FILE__))
 
 require 'rspec'
