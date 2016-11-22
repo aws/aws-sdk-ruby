@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.28 (2016-11-22)
+------------------
+
 * Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
 
 * Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
