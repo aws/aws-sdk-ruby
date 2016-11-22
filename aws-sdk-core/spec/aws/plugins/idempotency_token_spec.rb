@@ -12,18 +12,6 @@ module Aws
         )
       }
 
-      it 'can disable auto_fill per operation' do
-        resp = ec2.run_scheduled_instances(
-          instance_count: 1,
-          launch_specification: {
-            image_id: "ami-12345678",
-          },
-          scheduled_instance_id: "sci-1234-1234-1234-1234-123456789012",
-          disable_idempotency_auto_fill: true
-        )
-        expect(resp.context.params[:client_token]).to be_nil
-      end
-
       it 'auto fills param with `idempotencyToken` trait by default' do
         resp = ec2.run_scheduled_instances(
           instance_count: 1,

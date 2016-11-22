@@ -14,9 +14,7 @@ module Aws
         # @param [RequestContext] context
         # @param [Response]
         def call(context)
-          unless context.params.delete(:disable_idempotency_auto_fill)
-            auto_fill(context.params, context.operation.input)
-          end
+          auto_fill(context.params, context.operation.input)
           @handler.call(context)
         end
 
