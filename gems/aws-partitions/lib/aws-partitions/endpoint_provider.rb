@@ -1,16 +1,20 @@
 module Aws
   module Partitions
-    # @api private
     class EndpointProvider
 
+      # Intentionally marked private. The format of the endpoint rules
+      # is an implementation detail.
+      # @api private
       def initialize(rules)
         @rules = rules
       end
 
+      # @api private Use the static class methods instead.
       def resolve(region, service)
         "https://" + endpoint_for(region, service)
       end
 
+      # @api private Use the static class methods instead.
       def signing_region(region, service)
         get_partition(region).
           fetch("services", {}).
@@ -21,6 +25,7 @@ module Aws
           fetch("region", region)
       end
 
+      # @api private Use the static class methods instead.
       def dns_suffix_for(region)
         partition = get_partition(region)
         partition['dnsSuffix']
