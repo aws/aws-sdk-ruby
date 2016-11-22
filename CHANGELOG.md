@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.27 (2016-11-22)
+------------------
+
 * Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
 
 * Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
