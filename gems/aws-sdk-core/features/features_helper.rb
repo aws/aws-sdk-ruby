@@ -1,5 +1,6 @@
 $LOAD_PATH.unshift(File.expand_path('../../lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
+$LOAD_PATH.unshift(File.expand_path('../../../aws-partitions/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../../build_tools/aws-sdk-code-generator/lib',  __FILE__))
 
 require 'aws-sdk-code-generator'
