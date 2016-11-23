@@ -46,6 +46,10 @@ module Aws
             type = input_type(ref)
             docstring = "@option #{@optname} [#{req}#{type}] :#{name}\n"
             docstring += ref.documentation.to_s.lines.map { |line| "  #{line}" }.join
+            if ref['idempotencyToken']
+              docstring << "\n\n  This parameter will be auto-filled on your behalf"\
+                " with a random UUIDv4 when no value is provided.\n"
+            end
             tag(docstring)
           end
         end
