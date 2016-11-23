@@ -85,7 +85,6 @@ module Aws
       plugins('ec2', add: %w(
         Aws::Plugins::EC2CopyEncryptedSnapshot
         Aws::Plugins::EC2RegionValidation
-        Aws::Plugins::IdempotencyToken
       ))
 
       api('glacier') do |api|
