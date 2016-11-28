@@ -26,7 +26,7 @@ module Aws
     describe '.partitions' do
 
       it 'returns a list of Partition objects' do
-        expect(partitions.map(&:name)).to eq(%w(aws aws-cn aws-us-gov))
+        expect(partitions.map(&:name).sort).to eq(%w(aws aws-cn aws-us-gov).sort)
         partitions.each do |p|
           expect(p).to be_kind_of(Partitions::Partition)
         end
@@ -168,9 +168,9 @@ module Aws
 
       it '#partition_region returns the partition global endpoint region' do
         svc = partitions.partition('aws').service('IAM')
-        expect(svc.partition_region).to eq('us-east-1')
+        expect(svc.partition_region).to eq('aws-global')
         svc = partitions.partition('aws-cn').service('IAM')
-        expect(svc.partition_region).to eq('cn-north-1')
+        expect(svc.partition_region).to eq('aws-cn-global')
         svc = partitions.partition('aws').service('EC2')
         expect(svc.partition_region).to be(nil)
       end
@@ -184,7 +184,7 @@ module Aws
 
       it '#regions returns the list of regions the service is available in' do
         svc = partitions.partition('aws').service('IAM')
-        expect(svc.regions.sort).to eq(%w(us-east-1))
+        expect(svc.regions.sort).to eq([])
         svc = partitions.partition('aws').service('EC2')
         expect(svc.regions).to include('us-east-1')
         expect(svc.regions).to include('us-west-1')

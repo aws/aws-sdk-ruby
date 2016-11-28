@@ -40,7 +40,13 @@ each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3
         class AccelerateHandler < Seahorse::Client::Handler
 
           def call(context)
-            use_accelerate_endpoint(context) if context[:use_accelerate_endpoint]
+            if context[:use_accelerate_endpoint]
+              if context[:use_dualstack_endpoint]
+                use_combined_accelerate_dualstack_endpoint(context)
+              else
+                use_accelerate_endpoint(context)
+              end
+            end
             @handler.call(context)
           end
 
@@ -53,6 +59,16 @@ each bucket.  [Go here for more information](http://docs.aws.amazon.com/AmazonS3
             endpoint.scheme = 'https'
             endpoint.port = 443
             endpoint.host = "#{bucket_name}.s3-accelerate.amazonaws.com"
+            context.http_request.endpoint = endpoint.to_s
+          end
+
+          def use_combined_accelerate_dualstack_endpoint(context)
+            bucket_name = context.params[:bucket]
+            validate_bucket_name!(bucket_name)
+            endpoint = URI.parse(context.http_request.endpoint.to_s)
+            endpoint.scheme = 'https'
+            endpoint.port = 443
+            endpoint.host = "#{bucket_name}.s3-accelerate.dualstack.amazonaws.com"
             context.http_request.endpoint = endpoint.to_s
           end
 

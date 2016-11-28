@@ -1,6 +1,103 @@
 Unreleased Changes
 ------------------
 
+2.6.18 (2016-11-03)
+------------------
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+2.6.17 (2016-11-02)
+------------------
+
+* Feature - Aws::SES - Updated the API, and documentation for Amazon Simple Email Service.
+
+2.6.16 (2016-11-02)
+------------------
+
+2.6.15 (2016-11-02)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, documentation, and waiters for AWS CloudFormation.
+
+* Feature - Aws::ECR - Updated the API for Amazon EC2 Container Registry.
+
+* Feature - Aws::CloudFormation - Added `Aws::CloudFormation::Stack#create`
+
+2.6.14 (2016-10-25)
+------------------
+
+* Feature - Aws::AutoScaling - Updated the documentation for Auto Scaling.
+
+* Feature - Aws::ElasticLoadBalancingV2 - Updated the documentation for Elastic Load Balancing.
+
+2.6.13 (2016-10-24)
+------------------
+
+2.6.12 (2016-10-20)
+------------------
+
+* Feature - Aws::WAF - Updated the documentation for AWS WAF.
+
+* Feature - Aws::Budgets - Added support for a new service, AWS Budgets.
+
+2.6.11 (2016-10-18)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the resource interfaces for AWS CloudFormation.
+
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::IoT - Updated the API, and documentation for AWS IoT.
+
+* Feature - Aws::KinesisAnalytics - Updated the API, and documentation for Amazon Kinesis Analytics.
+
+* Feature - Aws::RDS - Updated the API, documentation, and resource interfaces for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-09-29 API version of Amazon CloudFront.
+
+2.6.10 (2016-10-17)
+------------------
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+2.6.9 (2016-10-13)
+------------------
+
+* Feature - Aws::ACM - Updated the API, and documentation for AWS Certificate Manager.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::S3 - Adds support for Amazon S3 Accelerate with dualstack endpoints.
+
+2.6.8 (2016-10-12)
+------------------
+
+2.6.7 (2016-10-12)
+------------------
+
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+2.6.6 (2016-10-06)
+------------------
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+* Feature - Aws::DeviceFarm - Updated the documentation for AWS Device Farm.
+
+* Feature - Aws::KMS - Updated the API for AWS Key Management Service.
+
+* Feature - Aws::OpsWorks - Updated the documentation for AWS OpsWorks.
+
+* Feature - Aws::S3 - Updated the documentation for Amazon Simple Storage Service.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
+* Feature - Aws::WAF - Updated the API, and documentation for AWS WAF.
+
 2.6.5 (2016-09-29)
 ------------------
 

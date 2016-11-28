@@ -16,7 +16,6 @@ module Aws
         @regions = options[:regions]
         @regionalized = options[:regionalized]
         @partition_region = options[:partition_region]
-        @regions << @partition_region if !@regionalized
       end
 
       # @return [String] The name of this service. The name is the module
@@ -66,16 +65,7 @@ module Aws
         end
 
         def partition_region(service)
-          if service['partitionEndpoint']
-            endpoint = service['endpoints'][service['partitionEndpoint']]
-            if endpoint['credentialScope']
-              endpoint['credentialScope']['region']
-            elsif service['defaults'] && service['defaults']['credentialScope']
-              service['defaults']['credentialScope']['region']
-            else
-              service['partitionEndpoint']
-            end
-          end
+          service['partitionEndpoint']
         end
 
       end

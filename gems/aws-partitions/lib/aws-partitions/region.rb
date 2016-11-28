@@ -57,19 +57,7 @@ module Aws
         end
 
         def service_in_region?(svc, region_name)
-          svc_endpoints_contains_region?(svc, region_name) ||
-          svc_partition_endpoint_matches_region?(svc, region_name)
-        end
-
-        def svc_endpoints_contains_region?(svc, region_name)
           svc['endpoints'].key?(region_name)
-        end
-
-        def svc_partition_endpoint_matches_region?(svc, region_name)
-          if pe = svc['partitionEndpoint']
-            region = svc['endpoints'][pe].fetch('credentialScope', {})['region']
-            region == region_name
-          end
         end
 
       end
