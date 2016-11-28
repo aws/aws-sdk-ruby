@@ -243,6 +243,118 @@ module Aws
       # An empty element returned on a successful request.
       class CloneReceiptRuleSetResponse < Aws::EmptyStructure; end
 
+      # Contains information associated with an Amazon CloudWatch event
+      # destination to which email sending events are published.
+      #
+      # Event destinations, such as Amazon CloudWatch, are associated with
+      # configuration sets, which enable you to publish email sending events.
+      # For information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass CloudWatchDestination
+      #   data as a hash:
+      #
+      #       {
+      #         dimension_configurations: [ # required
+      #           {
+      #             dimension_name: "DimensionName", # required
+      #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #             default_dimension_value: "DefaultDimensionValue", # required
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] dimension_configurations
+      #   A list of dimensions upon which to categorize your emails when you
+      #   publish email sending events to Amazon CloudWatch.
+      #   @return [Array<Types::CloudWatchDimensionConfiguration>]
+      class CloudWatchDestination < Struct.new(
+        :dimension_configurations)
+        include Aws::Structure
+      end
+
+      # Contains the dimension configuration to use when you publish email
+      # sending events to Amazon CloudWatch.
+      #
+      # For information about publishing email sending events to Amazon
+      # CloudWatch, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass CloudWatchDimensionConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         dimension_name: "DimensionName", # required
+      #         dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #         default_dimension_value: "DefaultDimensionValue", # required
+      #       }
+      # @!attribute [rw] dimension_name
+      #   The name of an Amazon CloudWatch dimension associated with an email
+      #   sending metric. The name must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 256 characters.
+      #   @return [String]
+      #
+      # @!attribute [rw] dimension_value_source
+      #   The place where Amazon SES finds the value of a dimension to publish
+      #   to Amazon CloudWatch. If you want Amazon SES to use the message tags
+      #   that you specify using an `X-SES-MESSAGE-TAGS` header or a parameter
+      #   to the `SendEmail`/`SendRawEmail` API, choose `messageTag`. If you
+      #   want Amazon SES to use your own email headers, choose `emailHeader`.
+      #   @return [String]
+      #
+      # @!attribute [rw] default_dimension_value
+      #   The default value of the dimension that is published to Amazon
+      #   CloudWatch if you do not provide the value of the dimension when you
+      #   send an email. The default value must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 256 characters.
+      #   @return [String]
+      class CloudWatchDimensionConfiguration < Struct.new(
+        :dimension_name,
+        :dimension_value_source,
+        :default_dimension_value)
+        include Aws::Structure
+      end
+
+      # The name of the configuration set.
+      #
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass ConfigurationSet
+      #   data as a hash:
+      #
+      #       {
+      #         name: "ConfigurationSetName", # required
+      #       }
+      # @!attribute [rw] name
+      #   The name of the configuration set. The name must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 64 characters.
+      #   @return [String]
+      class ConfigurationSet < Struct.new(
+        :name)
+        include Aws::Structure
+      end
+
       # Represents textual data, plus an optional character set specification.
       #
       # By default, the text must be 7-bit ASCII, due to the constraints of
@@ -268,6 +380,85 @@ module Aws
         :charset)
         include Aws::Structure
       end
+
+      # Represents a request to create a configuration set event destination.
+      # A configuration set event destination, which can be either Amazon
+      # CloudWatch or Amazon Kinesis Firehose, describes an AWS service in
+      # which Amazon SES publishes the email sending events associated with a
+      # configuration set. For information about using configuration sets, see
+      # the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass CreateConfigurationSetEventDestinationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set_name: "ConfigurationSetName", # required
+      #         event_destination: { # required
+      #           name: "EventDestinationName", # required
+      #           enabled: false,
+      #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+      #           kinesis_firehose_destination: {
+      #             iam_role_arn: "AmazonResourceName", # required
+      #             delivery_stream_arn: "AmazonResourceName", # required
+      #           },
+      #           cloud_watch_destination: {
+      #             dimension_configurations: [ # required
+      #               {
+      #                 dimension_name: "DimensionName", # required
+      #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #                 default_dimension_value: "DefaultDimensionValue", # required
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set to which to apply the event
+      #   destination.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_destination
+      #   An object that describes the AWS service to which Amazon SES will
+      #   publish the email sending events associated with the specified
+      #   configuration set.
+      #   @return [Types::EventDestination]
+      class CreateConfigurationSetEventDestinationRequest < Struct.new(
+        :configuration_set_name,
+        :event_destination)
+        include Aws::Structure
+      end
+
+      # An empty element returned on a successful request.
+      class CreateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+      # Represents a request to create a configuration set. Configuration sets
+      # enable you to publish email sending events. For information about
+      # using configuration sets, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass CreateConfigurationSetRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set: { # required
+      #           name: "ConfigurationSetName", # required
+      #         },
+      #       }
+      # @!attribute [rw] configuration_set
+      #   A data structure that contains the name of the configuration set.
+      #   @return [Types::ConfigurationSet]
+      class CreateConfigurationSetRequest < Struct.new(
+        :configuration_set)
+        include Aws::Structure
+      end
+
+      # An empty element returned on a successful request.
+      class CreateConfigurationSetResponse < Aws::EmptyStructure; end
 
       # Represents a request to create a new IP address filter. You use IP
       # address filters when you receive email with Amazon SES. For more
@@ -414,6 +605,63 @@ module Aws
 
       # An empty element returned on a successful request.
       class CreateReceiptRuleSetResponse < Aws::EmptyStructure; end
+
+      # Represents a request to delete a configuration set event destination.
+      # Configuration set event destinations are associated with configuration
+      # sets, which enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass DeleteConfigurationSetEventDestinationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set_name: "ConfigurationSetName", # required
+      #         event_destination_name: "EventDestinationName", # required
+      #       }
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set from which to delete the event
+      #   destination.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_destination_name
+      #   The name of the event destination to delete.
+      #   @return [String]
+      class DeleteConfigurationSetEventDestinationRequest < Struct.new(
+        :configuration_set_name,
+        :event_destination_name)
+        include Aws::Structure
+      end
+
+      # An empty element returned on a successful request.
+      class DeleteConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
+
+      # Represents a request to delete a configuration set. Configuration sets
+      # enable you to publish email sending events. For information about
+      # using configuration sets, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass DeleteConfigurationSetRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set_name: "ConfigurationSetName", # required
+      #       }
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set to delete.
+      #   @return [String]
+      class DeleteConfigurationSetRequest < Struct.new(
+        :configuration_set_name)
+        include Aws::Structure
+      end
+
+      # An empty element returned on a successful request.
+      class DeleteConfigurationSetResponse < Aws::EmptyStructure; end
 
       # Represents a request to delete a sending authorization policy for an
       # identity. Sending authorization is an Amazon SES feature that enables
@@ -596,6 +844,55 @@ module Aws
         include Aws::Structure
       end
 
+      # Represents a request to return the details of a configuration set.
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass DescribeConfigurationSetRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set_name: "ConfigurationSetName", # required
+      #         configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations
+      #       }
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set to describe.
+      #   @return [String]
+      #
+      # @!attribute [rw] configuration_set_attribute_names
+      #   A list of configuration set attributes to return.
+      #   @return [Array<String>]
+      class DescribeConfigurationSetRequest < Struct.new(
+        :configuration_set_name,
+        :configuration_set_attribute_names)
+        include Aws::Structure
+      end
+
+      # Represents the details of a configuration set. Configuration sets
+      # enable you to publish email sending events. For information about
+      # using configuration sets, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @!attribute [rw] configuration_set
+      #   The configuration set object associated with the specified
+      #   configuration set.
+      #   @return [Types::ConfigurationSet]
+      #
+      # @!attribute [rw] event_destinations
+      #   A list of event destinations associated with the configuration set.
+      #   @return [Array<Types::EventDestination>]
+      class DescribeConfigurationSetResponse < Struct.new(
+        :configuration_set,
+        :event_destinations)
+        include Aws::Structure
+      end
+
       # Represents a request to return the details of a receipt rule. You use
       # receipt rules to receive email with Amazon SES. For more information,
       # see the [Amazon SES Developer Guide][1].
@@ -706,6 +1003,85 @@ module Aws
         :to_addresses,
         :cc_addresses,
         :bcc_addresses)
+        include Aws::Structure
+      end
+
+      # Contains information about the event destination to which the
+      # specified email sending events are published.
+      #
+      # <note markdown="1"> When you create or update an event destination, you must provide one,
+      # and only one, destination. The destination can be either Amazon
+      # CloudWatch or Amazon Kinesis Firehose.
+      #
+      #  </note>
+      #
+      # Event destinations are associated with configuration sets, which
+      # enable you to publish email sending events to Amazon CloudWatch or
+      # Amazon Kinesis Firehose. For information about using configuration
+      # sets, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass EventDestination
+      #   data as a hash:
+      #
+      #       {
+      #         name: "EventDestinationName", # required
+      #         enabled: false,
+      #         matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+      #         kinesis_firehose_destination: {
+      #           iam_role_arn: "AmazonResourceName", # required
+      #           delivery_stream_arn: "AmazonResourceName", # required
+      #         },
+      #         cloud_watch_destination: {
+      #           dimension_configurations: [ # required
+      #             {
+      #               dimension_name: "DimensionName", # required
+      #               dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #               default_dimension_value: "DefaultDimensionValue", # required
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] name
+      #   The name of the event destination. The name must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 64 characters.
+      #   @return [String]
+      #
+      # @!attribute [rw] enabled
+      #   Sets whether Amazon SES publishes events to this destination when
+      #   you send an email with the associated configuration set. Set to
+      #   `true` to enable publishing to this destination; set to `false` to
+      #   prevent publishing to this destination. The default value is
+      #   `false`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] matching_event_types
+      #   The type of email sending events to publish to the event
+      #   destination.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] kinesis_firehose_destination
+      #   An object that contains the delivery stream ARN and the IAM role ARN
+      #   associated with an Amazon Kinesis Firehose event destination.
+      #   @return [Types::KinesisFirehoseDestination]
+      #
+      # @!attribute [rw] cloud_watch_destination
+      #   An object that contains the names, default values, and sources of
+      #   the dimensions associated with an Amazon CloudWatch event
+      #   destination.
+      #   @return [Types::CloudWatchDestination]
+      class EventDestination < Struct.new(
+        :name,
+        :enabled,
+        :matching_event_types,
+        :kinesis_firehose_destination,
+        :cloud_watch_destination)
         include Aws::Structure
       end
 
@@ -960,7 +1336,7 @@ module Aws
       # domain.
       # @!attribute [rw] dkim_enabled
       #   True if DKIM signing is enabled for email sent from the identity;
-      #   false otherwise.
+      #   false otherwise. The default value is true.
       #   @return [Boolean]
       #
       # @!attribute [rw] dkim_verification_status
@@ -1105,6 +1481,39 @@ module Aws
         include Aws::Structure
       end
 
+      # Contains the delivery stream ARN and the IAM role ARN associated with
+      # an Amazon Kinesis Firehose event destination.
+      #
+      # Event destinations, such as Amazon Kinesis Firehose, are associated
+      # with configuration sets, which enable you to publish email sending
+      # events. For information about using configuration sets, see the
+      # [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass KinesisFirehoseDestination
+      #   data as a hash:
+      #
+      #       {
+      #         iam_role_arn: "AmazonResourceName", # required
+      #         delivery_stream_arn: "AmazonResourceName", # required
+      #       }
+      # @!attribute [rw] iam_role_arn
+      #   The ARN of the IAM role under which Amazon SES publishes email
+      #   sending events to the Amazon Kinesis Firehose stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] delivery_stream_arn
+      #   The ARN of the Amazon Kinesis Firehose stream to which to publish
+      #   email sending events.
+      #   @return [String]
+      class KinesisFirehoseDestination < Struct.new(
+        :iam_role_arn,
+        :delivery_stream_arn)
+        include Aws::Structure
+      end
+
       # When included in a receipt rule, this action calls an AWS Lambda
       # function and, optionally, publishes a notification to Amazon Simple
       # Notification Service (Amazon SNS).
@@ -1174,6 +1583,59 @@ module Aws
         :topic_arn,
         :function_arn,
         :invocation_type)
+        include Aws::Structure
+      end
+
+      # Represents a request to list the configuration sets associated with
+      # your AWS account. Configuration sets enable you to publish email
+      # sending events. For information about using configuration sets, see
+      # the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass ListConfigurationSetsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         next_token: "NextToken",
+      #         max_items: 1,
+      #       }
+      # @!attribute [rw] next_token
+      #   A token returned from a previous call to `ListConfigurationSets` to
+      #   indicate the position of the configuration set in the configuration
+      #   set list.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_items
+      #   The number of configuration sets to return.
+      #   @return [Integer]
+      class ListConfigurationSetsRequest < Struct.new(
+        :next_token,
+        :max_items)
+        include Aws::Structure
+      end
+
+      # A list of configuration sets associated with your AWS account.
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @!attribute [rw] configuration_sets
+      #   A list of configuration sets.
+      #   @return [Array<Types::ConfigurationSet>]
+      #
+      # @!attribute [rw] next_token
+      #   A token indicating that there are additional configuration sets
+      #   available to be listed. Pass this token to successive calls of
+      #   `ListConfigurationSets`.
+      #   @return [String]
+      class ListConfigurationSetsResponse < Struct.new(
+        :configuration_sets,
+        :next_token)
         include Aws::Structure
       end
 
@@ -1263,10 +1725,10 @@ module Aws
         include Aws::Structure
       end
 
-      # \: Represents a request to list the IP address filters that exist
-      # under your AWS account. You use IP address filters when you receive
-      # email with Amazon SES. For more information, see the [Amazon SES
-      # Developer Guide][1].
+      # Represents a request to list the IP address filters that exist under
+      # your AWS account. You use IP address filters when you receive email
+      # with Amazon SES. For more information, see the [Amazon SES Developer
+      # Guide][1].
       #
       #
       #
@@ -1420,6 +1882,46 @@ module Aws
         :reporting_mta,
         :arrival_date,
         :extension_fields)
+        include Aws::Structure
+      end
+
+      # Contains the name and value of a tag that you can provide to
+      # `SendEmail` or `SendRawEmail` to apply to an email.
+      #
+      # Message tags, which you use with configuration sets, enable you to
+      # publish email sending events. For information about using
+      # configuration sets, see the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass MessageTag
+      #   data as a hash:
+      #
+      #       {
+      #         name: "MessageTagName", # required
+      #         value: "MessageTagValue", # required
+      #       }
+      # @!attribute [rw] name
+      #   The name of the tag. The name must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 256 characters.
+      #   @return [String]
+      #
+      # @!attribute [rw] value
+      #   The value of the tag. The value must:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), underscores
+      #     (\_), or dashes (-).
+      #
+      #   * Contain less than 256 characters.
+      #   @return [String]
+      class MessageTag < Struct.new(
+        :name,
+        :value)
         include Aws::Structure
       end
 
@@ -2233,7 +2735,7 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] delivery_attempts
-      #   Number of emails that have been enqueued for sending.
+      #   Number of emails that have been sent.
       #   @return [Integer]
       #
       # @!attribute [rw] bounces
@@ -2292,6 +2794,13 @@ module Aws
       #         return_path: "Address",
       #         source_arn: "AmazonResourceName",
       #         return_path_arn: "AmazonResourceName",
+      #         tags: [
+      #           {
+      #             name: "MessageTagName", # required
+      #             value: "MessageTagValue", # required
+      #           },
+      #         ],
+      #         configuration_set_name: "ConfigurationSetName",
       #       }
       # @!attribute [rw] source
       #   The email address that is sending the email. This email address must
@@ -2385,6 +2894,18 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
       #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   A list of tags, in the form of name/value pairs, to apply to an
+      #   email that you send using `SendEmail`. Tags correspond to
+      #   characteristics of the email that you define, so that you can
+      #   publish email sending events.
+      #   @return [Array<Types::MessageTag>]
+      #
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set to use when you send an email
+      #   using `SendEmail`.
+      #   @return [String]
       class SendEmailRequest < Struct.new(
         :source,
         :destination,
@@ -2392,7 +2913,9 @@ module Aws
         :reply_to_addresses,
         :return_path,
         :source_arn,
-        :return_path_arn)
+        :return_path_arn,
+        :tags,
+        :configuration_set_name)
         include Aws::Structure
       end
 
@@ -2423,6 +2946,13 @@ module Aws
       #         from_arn: "AmazonResourceName",
       #         source_arn: "AmazonResourceName",
       #         return_path_arn: "AmazonResourceName",
+      #         tags: [
+      #           {
+      #             name: "MessageTagName", # required
+      #             value: "MessageTagValue", # required
+      #           },
+      #         ],
+      #         configuration_set_name: "ConfigurationSetName",
       #       }
       # @!attribute [rw] source
       #   The identity's email address. If you do not provide a value for
@@ -2552,13 +3082,27 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
       #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   A list of tags, in the form of name/value pairs, to apply to an
+      #   email that you send using `SendRawEmail`. Tags correspond to
+      #   characteristics of the email that you define, so that you can
+      #   publish email sending events.
+      #   @return [Array<Types::MessageTag>]
+      #
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set to use when you send an email
+      #   using `SendRawEmail`.
+      #   @return [String]
       class SendRawEmailRequest < Struct.new(
         :source,
         :destinations,
         :raw_message,
         :from_arn,
         :source_arn,
-        :return_path_arn)
+        :return_path_arn,
+        :tags,
+        :configuration_set_name)
         include Aws::Structure
       end
 
@@ -2889,6 +3433,55 @@ module Aws
         :topic_arn)
         include Aws::Structure
       end
+
+      # Represents a request to update the event destination of a
+      # configuration set. Configuration sets enable you to publish email
+      # sending events. For information about using configuration sets, see
+      # the [Amazon SES Developer Guide][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @note When making an API call, pass UpdateConfigurationSetEventDestinationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         configuration_set_name: "ConfigurationSetName", # required
+      #         event_destination: { # required
+      #           name: "EventDestinationName", # required
+      #           enabled: false,
+      #           matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+      #           kinesis_firehose_destination: {
+      #             iam_role_arn: "AmazonResourceName", # required
+      #             delivery_stream_arn: "AmazonResourceName", # required
+      #           },
+      #           cloud_watch_destination: {
+      #             dimension_configurations: [ # required
+      #               {
+      #                 dimension_name: "DimensionName", # required
+      #                 dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #                 default_dimension_value: "DefaultDimensionValue", # required
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] configuration_set_name
+      #   The name of the configuration set that you want to update.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_destination
+      #   The event destination object that you want to apply to the specified
+      #   configuration set.
+      #   @return [Types::EventDestination]
+      class UpdateConfigurationSetEventDestinationRequest < Struct.new(
+        :configuration_set_name,
+        :event_destination)
+        include Aws::Structure
+      end
+
+      # An empty element returned on a successful request.
+      class UpdateConfigurationSetEventDestinationResponse < Aws::EmptyStructure; end
 
       # Represents a request to update a receipt rule. You use receipt rules
       # to receive email with Amazon SES. For more information, see the

@@ -504,7 +504,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       # @option options [required, String] :description
       #   A description for the security group. This is informational only.
       #
@@ -513,7 +513,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       # @option options [String] :vpc_id
       #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
       # @return [SecurityGroup]

@@ -893,6 +893,30 @@ module Aws
         include Aws::Structure
       end
 
+      # Container for the parameters to the DescribeTags operation.
+      # @note When making an API call, pass DescribeTagsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_arns: ["ResourceArn"], # required
+      #       }
+      # @!attribute [rw] resource_arns
+      #   The Amazon Resource Names (ARNs) of the Direct Connect resources.
+      #   @return [Array<String>]
+      class DescribeTagsRequest < Struct.new(
+        :resource_arns)
+        include Aws::Structure
+      end
+
+      # The response received when DescribeTags is called.
+      # @!attribute [rw] resource_tags
+      #   Information about the tags.
+      #   @return [Array<Types::ResourceTag>]
+      class DescribeTagsResponse < Struct.new(
+        :resource_tags)
+        include Aws::Structure
+      end
+
       # Container for the parameters to the DescribeVirtualInterfaces
       # operation.
       # @note When making an API call, pass DescribeVirtualInterfacesRequest
@@ -1333,6 +1357,20 @@ module Aws
         include Aws::Structure
       end
 
+      # The tags associated with a Direct Connect resource.
+      # @!attribute [rw] resource_arn
+      #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   The tags.
+      #   @return [Array<Types::Tag>]
+      class ResourceTag < Struct.new(
+        :resource_arn,
+        :tags)
+        include Aws::Structure
+      end
+
       # A route filter prefix that the customer can advertise through Border
       # Gateway Protocol (BGP) over a public virtual interface.
       # @note When making an API call, pass RouteFilterPrefix
@@ -1351,6 +1389,83 @@ module Aws
         :cidr)
         include Aws::Structure
       end
+
+      # Information about a tag.
+      # @note When making an API call, pass Tag
+      #   data as a hash:
+      #
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #       }
+      # @!attribute [rw] key
+      #   The key of the tag.
+      #   @return [String]
+      #
+      # @!attribute [rw] value
+      #   The value of the tag.
+      #   @return [String]
+      class Tag < Struct.new(
+        :key,
+        :value)
+        include Aws::Structure
+      end
+
+      # Container for the parameters to the TagResource operation.
+      # @note When making an API call, pass TagResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_arn: "ResourceArn", # required
+      #         tags: [ # required
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] resource_arn
+      #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      #
+      #   Example:
+      #   arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   The list of tags to add.
+      #   @return [Array<Types::Tag>]
+      class TagResourceRequest < Struct.new(
+        :resource_arn,
+        :tags)
+        include Aws::Structure
+      end
+
+      # The response received when TagResource is called.
+      class TagResourceResponse < Aws::EmptyStructure; end
+
+      # Container for the parameters to the UntagResource operation.
+      # @note When making an API call, pass UntagResourceRequest
+      #   data as a hash:
+      #
+      #       {
+      #         resource_arn: "ResourceArn", # required
+      #         tag_keys: ["TagKey"], # required
+      #       }
+      # @!attribute [rw] resource_arn
+      #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      #   @return [String]
+      #
+      # @!attribute [rw] tag_keys
+      #   The list of tag keys to remove.
+      #   @return [Array<String>]
+      class UntagResourceRequest < Struct.new(
+        :resource_arn,
+        :tag_keys)
+        include Aws::Structure
+      end
+
+      # The response received when UntagResource is called.
+      class UntagResourceResponse < Aws::EmptyStructure; end
 
       # You can create one or more AWS Direct Connect private virtual
       # interfaces linking to your virtual private gateway.

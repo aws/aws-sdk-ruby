@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/ec2.rb'
 require 'aws-sdk-ec2/plugins/copy_encrypted_snapshot.rb'
@@ -46,6 +47,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::EC2)
       add_plugin(Aws::EC2::Plugins::CopyEncryptedSnapshot)
@@ -2625,7 +2627,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       # @option params [required, String] :description
       #   A description for the security group. This is informational only.
       #
@@ -2634,7 +2636,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       # @option params [String] :vpc_id
       #   \[EC2-VPC\] The ID of the VPC. Required for EC2-VPC.
       # @return [Types::CreateSecurityGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -8557,7 +8559,7 @@ module Aws
       #
       #   * `timestamp` - The timestamp of the Spot price history, in UTC format
       #     (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can use
-      #     wildcards (\* and ?). Greater than or less than comparison is not
+      #     wildcards (* and ?). Greater than or less than comparison is not
       #     supported.
       # @option params [String] :availability_zone
       #   Filters the results by the specified Availability Zone.
@@ -11948,6 +11950,9 @@ module Aws
       #   Unique, case-sensitive identifier that ensures the idempotency of the
       #   request. For more information, see [Ensuring Idempotency][1].
       #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
@@ -13686,6 +13691,9 @@ module Aws
       # @option params [String] :client_token
       #   Unique, case-sensitive identifier that ensures the idempotency of the
       #   request. For more information, see [Ensuring Idempotency][1].
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       #
       #
       #

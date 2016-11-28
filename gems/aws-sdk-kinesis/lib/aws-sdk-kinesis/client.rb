@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -194,6 +196,7 @@ module Aws
       #
       # * Have more than five streams in the `CREATING` state at any point in
       #   time.
+      #
       # * Create more shards than are authorized for your account.
       #
       # For the default shard limit for an AWS account, see [Streams
@@ -296,37 +299,60 @@ module Aws
         req.send_request(options)
       end
 
+      # Describes the shard limits and usage for the account.
+      #
+      # If you update your account limits, the old limits might be returned
+      # for a few minutes.
+      #
+      # This operation has a limit of 1 transaction per second per account.
+      # @return [Types::DescribeLimitsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeLimitsOutput#shard_limit #ShardLimit} => Integer
+      #   * {Types::DescribeLimitsOutput#open_shard_count #OpenShardCount} => Integer
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_limits()
+      #
+      # @example Response structure
+      #   resp.shard_limit #=> Integer
+      #   resp.open_shard_count #=> Integer
+      # @overload describe_limits(params = {})
+      # @param [Hash] params ({})
+      def describe_limits(params = {}, options = {})
+        req = build_request(:describe_limits, params)
+        req.send_request(options)
+      end
+
       # Describes the specified Amazon Kinesis stream.
       #
-      # The information about the stream includes its current status, its
-      # Amazon Resource Name (ARN), and an array of shard objects. For each
-      # shard object, there is information about the hash key and sequence
-      # number ranges that the shard spans, and the IDs of any earlier shards
-      # that played in a role in creating the shard. A sequence number is the
-      # identifier associated with every record ingested in the stream. The
-      # sequence number is assigned when a record is put into the stream.
+      # The information returned includes the stream name, Amazon Resource
+      # Name (ARN), creation time, enhanced metric configuration, and shard
+      # map. The shard map is an array of shard objects. For each shard
+      # object, there is the hash key and sequence number ranges that the
+      # shard spans, and the IDs of any earlier shards that played in a role
+      # in creating the shard. Every record ingested in the stream is
+      # identified by a sequence number, which is assigned when the record is
+      # put into the stream.
       #
-      # You can limit the number of returned shards using the `Limit`
-      # parameter. The number of shards in a stream may be too large to return
-      # from a single call to `DescribeStream`. You can detect this by using
-      # the `HasMoreShards` flag in the returned output. `HasMoreShards` is
-      # set to `true` when there is more data available.
+      # You can limit the number of shards returned by each call. For more
+      # information, see [Retrieving Shards from a Stream][1] in the *Amazon
+      # Kinesis Streams Developer Guide*.
       #
-      # `DescribeStream` is a paginated operation. If there are more shards
-      # available, you can request them using the shard ID of the last shard
-      # returned. Specify this ID in the `ExclusiveStartShardId` parameter in
-      # a subsequent request to `DescribeStream`.
+      # There are no guarantees about the chronological order shards returned.
+      # To process shards in chronological order, use the ID of the parent
+      # shard to track the lineage to the oldest shard.
       #
-      # There are no guarantees about the chronological order shards returned
-      # in `DescribeStream` results. If you want to process shards in
-      # chronological order, use `ParentShardId` to track lineage to the
-      # oldest shard.
+      # This operation has a limit of 10 transactions per second per account.
       #
-      # DescribeStream has a limit of 10 transactions per second per account.
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/kinesis-using-sdk-java-retrieve-shards.html
       # @option params [required, String] :stream_name
       #   The name of the stream to describe.
       # @option params [Integer] :limit
-      #   The maximum number of shards to return.
+      #   The maximum number of shards to return in a single call. The default
+      #   value is 100. If you specify a value greater than 100, at most 100
+      #   shards are returned.
       # @option params [String] :exclusive_start_shard_id
       #   The shard ID of the shard to start with.
       # @return [Types::DescribeStreamOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -354,6 +380,7 @@ module Aws
       #   resp.stream_description.shards[0].sequence_number_range.ending_sequence_number #=> String
       #   resp.stream_description.has_more_shards #=> Boolean
       #   resp.stream_description.retention_period_hours #=> Integer
+      #   resp.stream_description.stream_creation_timestamp #=> Time
       #   resp.stream_description.enhanced_monitoring #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics #=> Array
       #   resp.stream_description.enhanced_monitoring[0].shard_level_metrics[0] #=> String, one of "IncomingBytes", "IncomingRecords", "OutgoingBytes", "OutgoingRecords", "WriteProvisionedThroughputExceeded", "ReadProvisionedThroughputExceeded", "IteratorAgeMilliseconds", "ALL"
@@ -375,12 +402,19 @@ module Aws
       #   disables every metric.
       #
       #   * `IncomingBytes`
+      #
       #   * `IncomingRecords`
+      #
       #   * `OutgoingBytes`
+      #
       #   * `OutgoingRecords`
+      #
       #   * `WriteProvisionedThroughputExceeded`
+      #
       #   * `ReadProvisionedThroughputExceeded`
+      #
       #   * `IteratorAgeMilliseconds`
+      #
       #   * `ALL`
       #
       #   For more information, see [Monitoring the Amazon Kinesis Streams
@@ -426,12 +460,19 @@ module Aws
       #   enables every metric.
       #
       #   * `IncomingBytes`
+      #
       #   * `IncomingRecords`
+      #
       #   * `OutgoingBytes`
+      #
       #   * `OutgoingRecords`
+      #
       #   * `WriteProvisionedThroughputExceeded`
+      #
       #   * `ReadProvisionedThroughputExceeded`
+      #
       #   * `IteratorAgeMilliseconds`
+      #
       #   * `ALL`
       #
       #   For more information, see [Monitoring the Amazon Kinesis Streams
@@ -621,13 +662,17 @@ module Aws
       #   * AT\_SEQUENCE\_NUMBER - Start reading from the position denoted by a
       #     specific sequence number, provided in the value
       #     `StartingSequenceNumber`.
+      #
       #   * AFTER\_SEQUENCE\_NUMBER - Start reading right after the position
       #     denoted by a specific sequence number, provided in the value
       #     `StartingSequenceNumber`.
+      #
       #   * AT\_TIMESTAMP - Start reading from the position denoted by a
       #     specific timestamp, provided in the value `Timestamp`.
+      #
       #   * TRIM\_HORIZON - Start reading at the last untrimmed record in the
       #     shard in the system, which is the oldest data record in the shard.
+      #
       #   * LATEST - Start reading just after the most recent record in the
       #     shard, so that you always read the most recent data in the shard.
       # @option params [String] :starting_sequence_number
@@ -1157,6 +1202,66 @@ module Aws
       # @param [Hash] params ({})
       def split_shard(params = {}, options = {})
         req = build_request(:split_shard, params)
+        req.send_request(options)
+      end
+
+      # Updates the shard count of the specified stream to the specified
+      # number of shards.
+      #
+      # Updating the shard count is an asynchronous operation. Upon receiving
+      # the request, Amazon Kinesis returns immediately and sets the status of
+      # the stream to `UPDATING`. After the update is complete, Amazon Kinesis
+      # sets the status of the stream back to `ACTIVE`. Depending on the size
+      # of the stream, the scaling action could take a few minutes to
+      # complete. You can continue to read and write data to your stream while
+      # its status is `UPDATING`.
+      #
+      # To update the shard count, Amazon Kinesis performs splits and merges
+      # and individual shards. This can cause short-lived shards to be
+      # created, in addition to the final shards. We recommend that you double
+      # or halve the shard count, as this results in the fewest number of
+      # splits or merges.
+      #
+      # This operation has a rate limit of twice per rolling 24 hour period.
+      # You cannot scale above double your current shard count, scale below
+      # half your current shard count, or exceed the shard limits for your
+      # account.
+      #
+      # For the default limits for an AWS account, see [Streams Limits][1] in
+      # the *Amazon Kinesis Streams Developer Guide*. If you need to increase
+      # a limit, [contact AWS Support][2].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/kinesis/latest/dev/service-sizes-and-limits.html
+      # [2]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html
+      # @option params [required, String] :stream_name
+      #   The name of the stream.
+      # @option params [required, Integer] :target_shard_count
+      #   The new number of shards.
+      # @option params [required, String] :scaling_type
+      #   The scaling type. Uniform scaling creates shards of equal size.
+      # @return [Types::UpdateShardCountOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateShardCountOutput#stream_name #StreamName} => String
+      #   * {Types::UpdateShardCountOutput#current_shard_count #CurrentShardCount} => Integer
+      #   * {Types::UpdateShardCountOutput#target_shard_count #TargetShardCount} => Integer
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_shard_count({
+      #     stream_name: "StreamName", # required
+      #     target_shard_count: 1, # required
+      #     scaling_type: "UNIFORM_SCALING", # required, accepts UNIFORM_SCALING
+      #   })
+      #
+      # @example Response structure
+      #   resp.stream_name #=> String
+      #   resp.current_shard_count #=> Integer
+      #   resp.target_shard_count #=> Integer
+      # @overload update_shard_count(params = {})
+      # @param [Hash] params ({})
+      def update_shard_count(params = {}, options = {})
+        req = build_request(:update_shard_count, params)
         req.send_request(options)
       end
 

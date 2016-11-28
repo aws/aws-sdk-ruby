@@ -74,10 +74,16 @@ module Aws
       #
       # @return [self]
       def load
-        resp = @client.describe_tags(filters: [{
-          name: "key",
-          values: [@key]
-        }])
+        resp = @client.describe_tags(filters: [
+          {
+            name: "key",
+            values: [@key]
+          },
+          {
+            name: @resource_type,
+            values: [@resource_id]
+          }
+        ])
         @data = resp.tags[0]
         self
       end

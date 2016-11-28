@@ -12,7 +12,6 @@ module Aws
 
       include Seahorse::Model
 
-      AWSAccountID = Shapes::StringShape.new(name: 'AWSAccountID')
       AlarmIdentifier = Shapes::StructureShape.new(name: 'AlarmIdentifier')
       AlarmName = Shapes::StringShape.new(name: 'AlarmName')
       AliasHealthEnabled = Shapes::BooleanShape.new(name: 'AliasHealthEnabled')
@@ -23,8 +22,6 @@ module Aws
       Change = Shapes::StructureShape.new(name: 'Change')
       ChangeAction = Shapes::StringShape.new(name: 'ChangeAction')
       ChangeBatch = Shapes::StructureShape.new(name: 'ChangeBatch')
-      ChangeBatchRecord = Shapes::StructureShape.new(name: 'ChangeBatchRecord')
-      ChangeBatchRecords = Shapes::ListShape.new(name: 'ChangeBatchRecords')
       ChangeInfo = Shapes::StructureShape.new(name: 'ChangeInfo')
       ChangeResourceRecordSetsRequest = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsRequest')
       ChangeResourceRecordSetsResponse = Shapes::StructureShape.new(name: 'ChangeResourceRecordSetsResponse')
@@ -52,9 +49,10 @@ module Aws
       CreateTrafficPolicyResponse = Shapes::StructureShape.new(name: 'CreateTrafficPolicyResponse')
       CreateTrafficPolicyVersionRequest = Shapes::StructureShape.new(name: 'CreateTrafficPolicyVersionRequest')
       CreateTrafficPolicyVersionResponse = Shapes::StructureShape.new(name: 'CreateTrafficPolicyVersionResponse')
+      CreateVPCAssociationAuthorizationRequest = Shapes::StructureShape.new(name: 'CreateVPCAssociationAuthorizationRequest')
+      CreateVPCAssociationAuthorizationResponse = Shapes::StructureShape.new(name: 'CreateVPCAssociationAuthorizationResponse')
       DNSName = Shapes::StringShape.new(name: 'DNSName')
       DNSRCode = Shapes::StringShape.new(name: 'DNSRCode')
-      Date = Shapes::StringShape.new(name: 'Date')
       DelegationSet = Shapes::StructureShape.new(name: 'DelegationSet')
       DelegationSetAlreadyCreated = Shapes::StructureShape.new(name: 'DelegationSetAlreadyCreated')
       DelegationSetAlreadyReusable = Shapes::StructureShape.new(name: 'DelegationSetAlreadyReusable')
@@ -73,6 +71,8 @@ module Aws
       DeleteTrafficPolicyInstanceResponse = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyInstanceResponse')
       DeleteTrafficPolicyRequest = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyRequest')
       DeleteTrafficPolicyResponse = Shapes::StructureShape.new(name: 'DeleteTrafficPolicyResponse')
+      DeleteVPCAssociationAuthorizationRequest = Shapes::StructureShape.new(name: 'DeleteVPCAssociationAuthorizationRequest')
+      DeleteVPCAssociationAuthorizationResponse = Shapes::StructureShape.new(name: 'DeleteVPCAssociationAuthorizationResponse')
       Dimension = Shapes::StructureShape.new(name: 'Dimension')
       DimensionField = Shapes::StringShape.new(name: 'DimensionField')
       DimensionList = Shapes::ListShape.new(name: 'DimensionList')
@@ -94,8 +94,6 @@ module Aws
       GeoLocationDetailsList = Shapes::ListShape.new(name: 'GeoLocationDetailsList')
       GeoLocationSubdivisionCode = Shapes::StringShape.new(name: 'GeoLocationSubdivisionCode')
       GeoLocationSubdivisionName = Shapes::StringShape.new(name: 'GeoLocationSubdivisionName')
-      GetChangeDetailsRequest = Shapes::StructureShape.new(name: 'GetChangeDetailsRequest')
-      GetChangeDetailsResponse = Shapes::StructureShape.new(name: 'GetChangeDetailsResponse')
       GetChangeRequest = Shapes::StructureShape.new(name: 'GetChangeRequest')
       GetChangeResponse = Shapes::StructureShape.new(name: 'GetChangeResponse')
       GetCheckerIpRangesRequest = Shapes::StructureShape.new(name: 'GetCheckerIpRangesRequest')
@@ -154,16 +152,13 @@ module Aws
       InvalidChangeBatch = Shapes::StructureShape.new(name: 'InvalidChangeBatch')
       InvalidDomainName = Shapes::StructureShape.new(name: 'InvalidDomainName')
       InvalidInput = Shapes::StructureShape.new(name: 'InvalidInput')
+      InvalidPaginationToken = Shapes::StructureShape.new(name: 'InvalidPaginationToken')
       InvalidTrafficPolicyDocument = Shapes::StructureShape.new(name: 'InvalidTrafficPolicyDocument')
       InvalidVPCId = Shapes::StructureShape.new(name: 'InvalidVPCId')
       Inverted = Shapes::BooleanShape.new(name: 'Inverted')
       IsPrivateZone = Shapes::BooleanShape.new(name: 'IsPrivateZone')
       LastVPCAssociation = Shapes::StructureShape.new(name: 'LastVPCAssociation')
       LimitsExceeded = Shapes::StructureShape.new(name: 'LimitsExceeded')
-      ListChangeBatchesByHostedZoneRequest = Shapes::StructureShape.new(name: 'ListChangeBatchesByHostedZoneRequest')
-      ListChangeBatchesByHostedZoneResponse = Shapes::StructureShape.new(name: 'ListChangeBatchesByHostedZoneResponse')
-      ListChangeBatchesByRRSetRequest = Shapes::StructureShape.new(name: 'ListChangeBatchesByRRSetRequest')
-      ListChangeBatchesByRRSetResponse = Shapes::StructureShape.new(name: 'ListChangeBatchesByRRSetResponse')
       ListGeoLocationsRequest = Shapes::StructureShape.new(name: 'ListGeoLocationsRequest')
       ListGeoLocationsResponse = Shapes::StructureShape.new(name: 'ListGeoLocationsResponse')
       ListHealthChecksRequest = Shapes::StructureShape.new(name: 'ListHealthChecksRequest')
@@ -190,6 +185,9 @@ module Aws
       ListTrafficPolicyInstancesResponse = Shapes::StructureShape.new(name: 'ListTrafficPolicyInstancesResponse')
       ListTrafficPolicyVersionsRequest = Shapes::StructureShape.new(name: 'ListTrafficPolicyVersionsRequest')
       ListTrafficPolicyVersionsResponse = Shapes::StructureShape.new(name: 'ListTrafficPolicyVersionsResponse')
+      ListVPCAssociationAuthorizationsRequest = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsRequest')
+      ListVPCAssociationAuthorizationsResponse = Shapes::StructureShape.new(name: 'ListVPCAssociationAuthorizationsResponse')
+      MaxResults = Shapes::StringShape.new(name: 'MaxResults')
       MeasureLatency = Shapes::BooleanShape.new(name: 'MeasureLatency')
       Message = Shapes::StringShape.new(name: 'Message')
       MetricName = Shapes::StringShape.new(name: 'MetricName')
@@ -203,9 +201,11 @@ module Aws
       NoSuchTrafficPolicy = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicy')
       NoSuchTrafficPolicyInstance = Shapes::StructureShape.new(name: 'NoSuchTrafficPolicyInstance')
       Nonce = Shapes::StringShape.new(name: 'Nonce')
+      NotAuthorizedException = Shapes::StructureShape.new(name: 'NotAuthorizedException')
       PageMarker = Shapes::StringShape.new(name: 'PageMarker')
       PageMaxItems = Shapes::IntegerShape.new(name: 'PageMaxItems')
       PageTruncated = Shapes::BooleanShape.new(name: 'PageTruncated')
+      PaginationToken = Shapes::StringShape.new(name: 'PaginationToken')
       Period = Shapes::IntegerShape.new(name: 'Period')
       Port = Shapes::IntegerShape.new(name: 'Port')
       PriorRequestNotComplete = Shapes::StructureShape.new(name: 'PriorRequestNotComplete')
@@ -252,6 +252,7 @@ module Aws
       TooManyHostedZones = Shapes::StructureShape.new(name: 'TooManyHostedZones')
       TooManyTrafficPolicies = Shapes::StructureShape.new(name: 'TooManyTrafficPolicies')
       TooManyTrafficPolicyInstances = Shapes::StructureShape.new(name: 'TooManyTrafficPolicyInstances')
+      TooManyVPCAssociationAuthorizations = Shapes::StructureShape.new(name: 'TooManyVPCAssociationAuthorizations')
       TrafficPolicies = Shapes::ListShape.new(name: 'TrafficPolicies')
       TrafficPolicy = Shapes::StructureShape.new(name: 'TrafficPolicy')
       TrafficPolicyAlreadyExists = Shapes::StructureShape.new(name: 'TrafficPolicyAlreadyExists')
@@ -280,6 +281,7 @@ module Aws
       UpdateTrafficPolicyInstanceRequest = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceRequest')
       UpdateTrafficPolicyInstanceResponse = Shapes::StructureShape.new(name: 'UpdateTrafficPolicyInstanceResponse')
       VPC = Shapes::StructureShape.new(name: 'VPC')
+      VPCAssociationAuthorizationNotFound = Shapes::StructureShape.new(name: 'VPCAssociationAuthorizationNotFound')
       VPCAssociationNotFound = Shapes::StructureShape.new(name: 'VPCAssociationNotFound')
       VPCId = Shapes::StringShape.new(name: 'VPCId')
       VPCRegion = Shapes::StringShape.new(name: 'VPCRegion')
@@ -309,16 +311,6 @@ module Aws
       ChangeBatch.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
       ChangeBatch.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, required: true, location_name: "Changes"))
       ChangeBatch.struct_class = Types::ChangeBatch
-
-      ChangeBatchRecord.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
-      ChangeBatchRecord.add_member(:submitted_at, Shapes::ShapeRef.new(shape: TimeStamp, location_name: "SubmittedAt"))
-      ChangeBatchRecord.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, required: true, location_name: "Status"))
-      ChangeBatchRecord.add_member(:comment, Shapes::ShapeRef.new(shape: ResourceDescription, location_name: "Comment"))
-      ChangeBatchRecord.add_member(:submitter, Shapes::ShapeRef.new(shape: AWSAccountID, location_name: "Submitter"))
-      ChangeBatchRecord.add_member(:changes, Shapes::ShapeRef.new(shape: Changes, location_name: "Changes"))
-      ChangeBatchRecord.struct_class = Types::ChangeBatchRecord
-
-      ChangeBatchRecords.member = Shapes::ShapeRef.new(shape: ChangeBatchRecord, deprecated: true, location_name: "ChangeBatchRecord")
 
       ChangeInfo.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "Id"))
       ChangeInfo.add_member(:status, Shapes::ShapeRef.new(shape: ChangeStatus, required: true, location_name: "Status"))
@@ -416,6 +408,14 @@ module Aws
       CreateTrafficPolicyVersionResponse.add_member(:location, Shapes::ShapeRef.new(shape: ResourceURI, required: true, location: "header", location_name: "Location"))
       CreateTrafficPolicyVersionResponse.struct_class = Types::CreateTrafficPolicyVersionResponse
 
+      CreateVPCAssociationAuthorizationRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+      CreateVPCAssociationAuthorizationRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, required: true, location_name: "VPC"))
+      CreateVPCAssociationAuthorizationRequest.struct_class = Types::CreateVPCAssociationAuthorizationRequest
+
+      CreateVPCAssociationAuthorizationResponse.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+      CreateVPCAssociationAuthorizationResponse.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, required: true, location_name: "VPC"))
+      CreateVPCAssociationAuthorizationResponse.struct_class = Types::CreateVPCAssociationAuthorizationResponse
+
       DelegationSet.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, location_name: "Id"))
       DelegationSet.add_member(:caller_reference, Shapes::ShapeRef.new(shape: Nonce, location_name: "CallerReference"))
       DelegationSet.add_member(:name_servers, Shapes::ShapeRef.new(shape: DelegationSetNameServers, required: true, location_name: "NameServers"))
@@ -452,6 +452,12 @@ module Aws
 
       DeleteTrafficPolicyResponse.struct_class = Types::DeleteTrafficPolicyResponse
 
+      DeleteVPCAssociationAuthorizationRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+      DeleteVPCAssociationAuthorizationRequest.add_member(:vpc, Shapes::ShapeRef.new(shape: VPC, required: true, location_name: "VPC"))
+      DeleteVPCAssociationAuthorizationRequest.struct_class = Types::DeleteVPCAssociationAuthorizationRequest
+
+      DeleteVPCAssociationAuthorizationResponse.struct_class = Types::DeleteVPCAssociationAuthorizationResponse
+
       Dimension.add_member(:name, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Name"))
       Dimension.add_member(:value, Shapes::ShapeRef.new(shape: DimensionField, required: true, location_name: "Value"))
       Dimension.struct_class = Types::Dimension
@@ -482,12 +488,6 @@ module Aws
       GeoLocationDetails.struct_class = Types::GeoLocationDetails
 
       GeoLocationDetailsList.member = Shapes::ShapeRef.new(shape: GeoLocationDetails, location_name: "GeoLocationDetails")
-
-      GetChangeDetailsRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
-      GetChangeDetailsRequest.struct_class = Types::GetChangeDetailsRequest
-
-      GetChangeDetailsResponse.add_member(:change_batch_record, Shapes::ShapeRef.new(shape: ChangeBatchRecord, required: true, deprecated: true, location_name: "ChangeBatchRecord"))
-      GetChangeDetailsResponse.struct_class = Types::GetChangeDetailsResponse
 
       GetChangeRequest.add_member(:id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
       GetChangeRequest.struct_class = Types::GetChangeRequest
@@ -616,37 +616,6 @@ module Aws
       HostedZoneConfig.struct_class = Types::HostedZoneConfig
 
       HostedZones.member = Shapes::ShapeRef.new(shape: HostedZone, location_name: "HostedZone")
-
-      ListChangeBatchesByHostedZoneRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
-      ListChangeBatchesByHostedZoneRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Date, required: true, deprecated: true, location: "querystring", location_name: "startDate"))
-      ListChangeBatchesByHostedZoneRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Date, required: true, deprecated: true, location: "querystring", location_name: "endDate"))
-      ListChangeBatchesByHostedZoneRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxItems"))
-      ListChangeBatchesByHostedZoneRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
-      ListChangeBatchesByHostedZoneRequest.struct_class = Types::ListChangeBatchesByHostedZoneRequest
-
-      ListChangeBatchesByHostedZoneResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
-      ListChangeBatchesByHostedZoneResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, required: true, location_name: "Marker"))
-      ListChangeBatchesByHostedZoneResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: PageTruncated, location_name: "IsTruncated"))
-      ListChangeBatchesByHostedZoneResponse.add_member(:change_batch_records, Shapes::ShapeRef.new(shape: ChangeBatchRecords, required: true, deprecated: true, location_name: "ChangeBatchRecords"))
-      ListChangeBatchesByHostedZoneResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextMarker"))
-      ListChangeBatchesByHostedZoneResponse.struct_class = Types::ListChangeBatchesByHostedZoneResponse
-
-      ListChangeBatchesByRRSetRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
-      ListChangeBatchesByRRSetRequest.add_member(:name, Shapes::ShapeRef.new(shape: DNSName, required: true, location: "querystring", location_name: "rrSet_name"))
-      ListChangeBatchesByRRSetRequest.add_member(:type, Shapes::ShapeRef.new(shape: RRType, required: true, location: "querystring", location_name: "type"))
-      ListChangeBatchesByRRSetRequest.add_member(:set_identifier, Shapes::ShapeRef.new(shape: ResourceRecordSetIdentifier, location: "querystring", location_name: "identifier"))
-      ListChangeBatchesByRRSetRequest.add_member(:start_date, Shapes::ShapeRef.new(shape: Date, required: true, deprecated: true, location: "querystring", location_name: "startDate"))
-      ListChangeBatchesByRRSetRequest.add_member(:end_date, Shapes::ShapeRef.new(shape: Date, required: true, deprecated: true, location: "querystring", location_name: "endDate"))
-      ListChangeBatchesByRRSetRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, location: "querystring", location_name: "maxItems"))
-      ListChangeBatchesByRRSetRequest.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, location: "querystring", location_name: "marker"))
-      ListChangeBatchesByRRSetRequest.struct_class = Types::ListChangeBatchesByRRSetRequest
-
-      ListChangeBatchesByRRSetResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
-      ListChangeBatchesByRRSetResponse.add_member(:marker, Shapes::ShapeRef.new(shape: PageMarker, required: true, location_name: "Marker"))
-      ListChangeBatchesByRRSetResponse.add_member(:is_truncated, Shapes::ShapeRef.new(shape: PageTruncated, location_name: "IsTruncated"))
-      ListChangeBatchesByRRSetResponse.add_member(:change_batch_records, Shapes::ShapeRef.new(shape: ChangeBatchRecords, required: true, deprecated: true, location_name: "ChangeBatchRecords"))
-      ListChangeBatchesByRRSetResponse.add_member(:next_marker, Shapes::ShapeRef.new(shape: PageMarker, location_name: "NextMarker"))
-      ListChangeBatchesByRRSetResponse.struct_class = Types::ListChangeBatchesByRRSetResponse
 
       ListGeoLocationsRequest.add_member(:start_continent_code, Shapes::ShapeRef.new(shape: GeoLocationContinentCode, location: "querystring", location_name: "startcontinentcode"))
       ListGeoLocationsRequest.add_member(:start_country_code, Shapes::ShapeRef.new(shape: GeoLocationCountryCode, location: "querystring", location_name: "startcountrycode"))
@@ -802,6 +771,16 @@ module Aws
       ListTrafficPolicyVersionsResponse.add_member(:traffic_policy_version_marker, Shapes::ShapeRef.new(shape: TrafficPolicyVersionMarker, required: true, location_name: "TrafficPolicyVersionMarker"))
       ListTrafficPolicyVersionsResponse.add_member(:max_items, Shapes::ShapeRef.new(shape: PageMaxItems, required: true, location_name: "MaxItems"))
       ListTrafficPolicyVersionsResponse.struct_class = Types::ListTrafficPolicyVersionsResponse
+
+      ListVPCAssociationAuthorizationsRequest.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location: "uri", location_name: "Id"))
+      ListVPCAssociationAuthorizationsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location: "querystring", location_name: "nexttoken"))
+      ListVPCAssociationAuthorizationsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: MaxResults, location: "querystring", location_name: "maxresults"))
+      ListVPCAssociationAuthorizationsRequest.struct_class = Types::ListVPCAssociationAuthorizationsRequest
+
+      ListVPCAssociationAuthorizationsResponse.add_member(:hosted_zone_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "HostedZoneId"))
+      ListVPCAssociationAuthorizationsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: PaginationToken, location_name: "NextToken"))
+      ListVPCAssociationAuthorizationsResponse.add_member(:vp_cs, Shapes::ShapeRef.new(shape: VPCs, required: true, location_name: "VPCs"))
+      ListVPCAssociationAuthorizationsResponse.struct_class = Types::ListVPCAssociationAuthorizationsResponse
 
       RecordData.member = Shapes::ShapeRef.new(shape: RecordDataEntry, location_name: "RecordDataEntry")
 
@@ -970,6 +949,7 @@ module Aws
           )
           o.output = Shapes::ShapeRef.new(shape: AssociateVPCWithHostedZoneResponse)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+          o.errors << Shapes::ShapeRef.new(shape: NotAuthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o.errors << Shapes::ShapeRef.new(shape: PublicZoneVPCAssociation)
@@ -1123,6 +1103,23 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidTrafficPolicyDocument)
         end)
 
+        api.add_operation(:create_vpc_association_authorization, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateVPCAssociationAuthorization"
+          o.http_method = "POST"
+          o.http_request_uri = "/2013-04-01/hostedzone/{Id}/authorizevpcassociation"
+          o.input = Shapes::ShapeRef.new(shape: CreateVPCAssociationAuthorizationRequest,
+            location_name: "CreateVPCAssociationAuthorizationRequest",
+            metadata: {
+              "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            }
+          )
+          o.output = Shapes::ShapeRef.new(shape: CreateVPCAssociationAuthorizationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyVPCAssociationAuthorizations)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        end)
+
         api.add_operation(:delete_health_check, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteHealthCheck"
           o.http_method = "DELETE"
@@ -1182,6 +1179,23 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: PriorRequestNotComplete)
         end)
 
+        api.add_operation(:delete_vpc_association_authorization, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteVPCAssociationAuthorization"
+          o.http_method = "POST"
+          o.http_request_uri = "/2013-04-01/hostedzone/{Id}/deauthorizevpcassociation"
+          o.input = Shapes::ShapeRef.new(shape: DeleteVPCAssociationAuthorizationRequest,
+            location_name: "DeleteVPCAssociationAuthorizationRequest",
+            metadata: {
+              "xmlNamespace" => {"uri"=>"https://route53.amazonaws.com/doc/2013-04-01/"}
+            }
+          )
+          o.output = Shapes::ShapeRef.new(shape: DeleteVPCAssociationAuthorizationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: VPCAssociationAuthorizationNotFound)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidVPCId)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+        end)
+
         api.add_operation(:disassociate_vpc_from_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DisassociateVPCFromHostedZone"
           o.http_method = "POST"
@@ -1206,17 +1220,6 @@ module Aws
           o.http_request_uri = "/2013-04-01/change/{Id}"
           o.input = Shapes::ShapeRef.new(shape: GetChangeRequest)
           o.output = Shapes::ShapeRef.new(shape: GetChangeResponse)
-          o.errors << Shapes::ShapeRef.new(shape: NoSuchChange)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        end)
-
-        api.add_operation(:get_change_details, Seahorse::Model::Operation.new.tap do |o|
-          o.name = "GetChangeDetails"
-          o.http_method = "GET"
-          o.http_request_uri = "/2013-04-01/changedetails/{Id}"
-          o.deprecated = true
-          o.input = Shapes::ShapeRef.new(shape: GetChangeDetailsRequest)
-          o.output = Shapes::ShapeRef.new(shape: GetChangeDetailsResponse)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchChange)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         end)
@@ -1334,28 +1337,6 @@ module Aws
           o.http_request_uri = "/2013-04-01/trafficpolicyinstancecount"
           o.input = Shapes::ShapeRef.new(shape: GetTrafficPolicyInstanceCountRequest)
           o.output = Shapes::ShapeRef.new(shape: GetTrafficPolicyInstanceCountResponse)
-        end)
-
-        api.add_operation(:list_change_batches_by_hosted_zone, Seahorse::Model::Operation.new.tap do |o|
-          o.name = "ListChangeBatchesByHostedZone"
-          o.http_method = "GET"
-          o.http_request_uri = "/2013-04-01/hostedzone/{Id}/changes"
-          o.deprecated = true
-          o.input = Shapes::ShapeRef.new(shape: ListChangeBatchesByHostedZoneRequest)
-          o.output = Shapes::ShapeRef.new(shape: ListChangeBatchesByHostedZoneResponse)
-          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
-        end)
-
-        api.add_operation(:list_change_batches_by_rr_set, Seahorse::Model::Operation.new.tap do |o|
-          o.name = "ListChangeBatchesByRRSet"
-          o.http_method = "GET"
-          o.http_request_uri = "/2013-04-01/hostedzone/{Id}/rrsChanges"
-          o.deprecated = true
-          o.input = Shapes::ShapeRef.new(shape: ListChangeBatchesByRRSetRequest)
-          o.output = Shapes::ShapeRef.new(shape: ListChangeBatchesByRRSetResponse)
-          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
         end)
 
         api.add_operation(:list_geo_locations, Seahorse::Model::Operation.new.tap do |o|
@@ -1520,6 +1501,17 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ListTrafficPolicyVersionsResponse)
           o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchTrafficPolicy)
+        end)
+
+        api.add_operation(:list_vpc_association_authorizations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListVPCAssociationAuthorizations"
+          o.http_method = "GET"
+          o.http_request_uri = "/2013-04-01/hostedzone/{Id}/authorizevpcassociation"
+          o.input = Shapes::ShapeRef.new(shape: ListVPCAssociationAuthorizationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListVPCAssociationAuthorizationsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: NoSuchHostedZone)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidPaginationToken)
         end)
 
         api.add_operation(:test_dns_answer, Seahorse::Model::Operation.new.tap do |o|

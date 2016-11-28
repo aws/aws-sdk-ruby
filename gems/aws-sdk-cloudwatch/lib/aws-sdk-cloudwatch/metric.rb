@@ -40,7 +40,7 @@ module Aws
       end
       alias :metric_name :name
 
-      # A list of dimensions associated with the metric.
+      # The dimensions for the metric.
       # @return [Array<Types::Dimension>]
       def dimensions
         data.dimensions
@@ -98,51 +98,73 @@ module Aws
       #     start_time: Time.now, # required
       #     end_time: Time.now, # required
       #     period: 1, # required
-      #     statistics: ["SampleCount"], # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     statistics: ["SampleCount"], # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistics: ["ExtendedStatistic"],
       #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #   })
       # @param [Hash] options ({})
       # @option options [Array<Types::Dimension>] :dimensions
-      #   A list of dimensions describing qualities of the metric.
+      #   The dimensions. CloudWatch treats each unique combination of
+      #   dimensions as a separate metric. You can't retrieve statistics using
+      #   combinations of dimensions that were not specially published. You must
+      #   specify the same dimensions that were used when the metrics were
+      #   created. For an example, see [Dimension Combinations][1] in the
+      #   *Amazon CloudWatch User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
       # @option options [required, Time,DateTime,Date,Integer,String] :start_time
-      #   The time stamp to use for determining the first datapoint to return.
-      #   The value specified is inclusive; results include datapoints with the
-      #   time stamp specified. The time stamp must be in ISO 8601 UTC format
-      #   (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the first data point to return. Note
+      #   that start times are evaluated relative to the time that CloudWatch
+      #   receives the request.
       #
-      #   <note markdown="1"> The specified start time is rounded down to the nearest value.
-      #   Datapoints are returned for start times up to two weeks in the past.
-      #   Specified start times that are more than two weeks in the past will
-      #   not return datapoints for metrics that are older than two weeks.
+      #   The value specified is inclusive; results include data points with the
+      #   specified time stamp. The time stamp must be in ISO 8601 UTC format
+      #   (for example, 2016-10-03T23:00:00Z).
       #
-      #    Data that is timestamped 24 hours or more in the past may take in
-      #   excess of 48 hours to become available from submission time using
-      #   `GetMetricStatistics`.
+      #   CloudWatch rounds the specified time stamp as follows:
       #
-      #    </note>
+      #   * Start time less than 15 days ago - Round down to the nearest whole
+      #     minute. For example, 12:32:34 is rounded down to 12:32:00.
+      #
+      #   * Start time between 15 and 63 days ago - Round down to the nearest
+      #     5-minute clock interval. For example, 12:32:34 is rounded down to
+      #     12:30:00.
+      #
+      #   * Start time greater than 63 days ago - Round down to the nearest
+      #     1-hour clock interval. For example, 12:32:34 is rounded down to
+      #     12:00:00.
       # @option options [required, Time,DateTime,Date,Integer,String] :end_time
-      #   The time stamp to use for determining the last datapoint to return.
-      #   The value specified is exclusive; results will include datapoints up
-      #   to the time stamp specified. The time stamp must be in ISO 8601 UTC
-      #   format (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the last data point to return.
+      #
+      #   The value specified is exclusive; results will include data points up
+      #   to the specified time stamp. The time stamp must be in ISO 8601 UTC
+      #   format (for example, 2016-10-10T23:00:00Z).
       # @option options [required, Integer] :period
-      #   The granularity, in seconds, of the returned datapoints. A `Period`
-      #   can be as short as one minute (60 seconds) or as long as one day
-      #   (86,400 seconds), and must be a multiple of 60. The default value is
-      #   60.
-      # @option options [required, Array<String>] :statistics
-      #   The metric statistics to return. For information about specific
-      #   statistics returned by GetMetricStatistics, see [Statistics][1] in the
-      #   *Amazon CloudWatch Developer Guide*.
+      #   The granularity, in seconds, of the returned data points. A period can
+      #   be as short as one minute (60 seconds) and must be a multiple of 60.
+      #   The default value is 60.
       #
+      #   If the `StartTime` parameter specifies a time stamp that is greater
+      #   than 15 days ago, you must specify the period as follows or no data
+      #   points in that time range is returned:
       #
+      #   * Start time between 15 and 63 days ago - Use a multiple of 300
+      #     seconds (5 minutes).
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic
+      #   * Start time greater than 63 days ago - Use a multiple of 3600 seconds
+      #     (1 hour).
+      # @option options [Array<String>] :statistics
+      #   The metric statistics, other than percentile. For percentile
+      #   statistics, use `ExtendedStatistic`.
+      # @option options [Array<String>] :extended_statistics
+      #   The percentile statistics. Specify values between p0.0 and p100.
       # @option options [String] :unit
-      #   The specific unit for a given metric. Metrics may be reported in
-      #   multiple units. Not supplying a unit results in all units being
-      #   returned. If the metric only ever reports one unit, specifying a unit
-      #   will have no effect.
+      #   The unit for a given metric. Metrics may be reported in multiple
+      #   units. Not supplying a unit results in all units being returned. If
+      #   the metric only ever reports one unit, specifying a unit has no
+      #   effect.
       # @return [Types::GetMetricStatisticsOutput]
       def get_statistics(options = {})
         options = options.merge(
@@ -162,7 +184,8 @@ module Aws
       #     ok_actions: ["ResourceName"],
       #     alarm_actions: ["ResourceName"],
       #     insufficient_data_actions: ["ResourceName"],
-      #     statistic: "SampleCount", # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistic: "ExtendedStatistic",
       #     dimensions: [
       #       {
       #         name: "DimensionName", # required
@@ -177,21 +200,36 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [required, String] :alarm_name
-      #   The descriptive name for the alarm. This name must be unique within
-      #   the user's AWS account
+      #   The name for the alarm. This name must be unique within the AWS
+      #   account.
       # @option options [String] :alarm_description
       #   The description for the alarm.
       # @option options [Boolean] :actions_enabled
-      #   Indicates whether or not actions should be executed during any changes
-      #   to the alarm's state.
+      #   Indicates whether actions should be executed during any changes to the
+      #   alarm state.
       # @option options [Array<String>] :ok_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `OK` state from any other state. Each action is specified as an Amazon
+      #   The actions to execute when this alarm transitions to an `OK` state
+      #   from any other state. Each action is specified as an Amazon Resource
+      #   Name (ARN).
+      #
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
+      #
+      #   Valid Values (for use with IAM roles):
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+      #   \|
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+      #   \|
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+      # @option options [Array<String>] :alarm_actions
+      #   The actions to execute when this alarm transitions to the `ALARM`
+      #   state from any other state. Each action is specified as an Amazon
       #   Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -199,41 +237,14 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
-      # @option options [Array<String>] :alarm_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `ALARM` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
-      #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
-      #
-      #   Valid Values (for use with IAM roles):
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
-      #   \|
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
-      #   \|
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
       # @option options [Array<String>] :insufficient_data_actions
-      #   The list of actions to execute when this alarm transitions into an
+      #   The actions to execute when this alarm transitions to the
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
       #   specified as an Amazon Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -241,38 +252,36 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
-      # @option options [required, String] :statistic
-      #   The statistic to apply to the alarm's associated metric.
+      # @option options [String] :statistic
+      #   The statistic for the metric associated with the alarm, other than
+      #   percentile. For percentile statistics, use `ExtendedStatistic`.
+      # @option options [String] :extended_statistic
+      #   The percentile statistic for the metric associated with the alarm.
+      #   Specify a value between p0.0 and p100.
       # @option options [Array<Types::Dimension>] :dimensions
-      #   The dimensions for the alarm's associated metric.
+      #   The dimensions for the metric associated with the alarm.
       # @option options [required, Integer] :period
-      #   The period in seconds over which the specified statistic is applied.
+      #   The period, in seconds, over which the specified statistic is applied.
       # @option options [String] :unit
-      #   The statistic's unit of measure. For example, the units for the
+      #   The unit of measure for the statistic. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
       #   number of bytes that an instance receives on all network interfaces.
       #   You can also specify a unit when you create a custom metric. Units
       #   help provide conceptual meaning to your data. Metric data points that
       #   specify a unit of measure, such as Percent, are aggregated separately.
       #
-      #   **Note:** If you specify a unit, you must use a unit that is
-      #   appropriate for the metric. Otherwise, this can cause an Amazon
-      #   CloudWatch alarm to get stuck in the INSUFFICIENT DATA state.
+      #   If you specify a unit, you must use a unit that is appropriate for the
+      #   metric. Otherwise, the Amazon CloudWatch alarm can get stuck in the
+      #   `INSUFFICIENT DATA` state.
       # @option options [required, Integer] :evaluation_periods
       #   The number of periods over which data is compared to the specified
       #   threshold.
       # @option options [required, Float] :threshold
       #   The value against which the specified statistic is compared.
       # @option options [required, String] :comparison_operator
-      #   The arithmetic operation to use when comparing the specified
-      #   `Statistic` and `Threshold`. The specified `Statistic` value is used
-      #   as the first operand.
+      #   The arithmetic operation to use when comparing the specified statistic
+      #   and threshold. The specified statistic value is used as the first
+      #   operand.
       # @return [Alarm]
       def put_alarm(options = {})
         options = options.merge(
@@ -312,7 +321,7 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [required, Array<Types::MetricDatum>] :metric_data
-      #   A list of data describing the metric.
+      #   The data for the metric.
       # @return [EmptyStructure]
       def put_data(options = {})
         options = Aws::Util.deep_merge(options,
@@ -329,6 +338,7 @@ module Aws
       #
       #   alarms = metric.alarms({
       #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistic: "ExtendedStatistic",
       #     dimensions: [
       #       {
       #         name: "DimensionName", # required
@@ -340,13 +350,17 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :statistic
-      #   The statistic for the metric.
+      #   The statistic for the metric, other than percentiles. For percentile
+      #   statistics, use `ExtendedStatistics`.
+      # @option options [String] :extended_statistic
+      #   The percentile statistic for the metric. Specify a value between p0.0
+      #   and p100.
       # @option options [Array<Types::Dimension>] :dimensions
-      #   The list of dimensions associated with the metric. If the metric has
-      #   any associated dimensions, you must specify them in order for the
-      #   DescribeAlarmsForMetric to succeed.
+      #   The dimensions associated with the metric. If the metric has any
+      #   associated dimensions, you must specify them in order for the call to
+      #   succeed.
       # @option options [Integer] :period
-      #   The period in seconds over which the statistic is applied.
+      #   The period, in seconds, over which the statistic is applied.
       # @option options [String] :unit
       #   The unit for the metric.
       # @return [Alarm::Collection]

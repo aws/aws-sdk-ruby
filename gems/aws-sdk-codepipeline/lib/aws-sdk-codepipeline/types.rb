@@ -144,7 +144,7 @@ module Aws
       #   from all calls except for GetJobDetails, GetThirdPartyJobDetails,
       #   PollForJobs, and PollForThirdPartyJobs.
       #
-      #   When updating a pipeline, passing \* \* \* \* \* without changing
+      #   When updating a pipeline, passing * * * * * without changing
       #   any other values of the action will preserve the prior value of the
       #   secret.
       #   @return [Boolean]

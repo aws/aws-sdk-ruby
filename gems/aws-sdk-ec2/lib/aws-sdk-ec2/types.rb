@@ -2642,7 +2642,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       #   @return [String]
       #
       # @!attribute [rw] description
@@ -2653,7 +2653,7 @@ module Aws
       #   Constraints for EC2-Classic: ASCII characters
       #
       #   Constraints for EC2-VPC: a-z, A-Z, 0-9, spaces, and
-      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$\*
+      #   .\_-:/()#,@\[\]+=&amp;;\\\{\\}!$*
       #   @return [String]
       #
       # @!attribute [rw] vpc_id
@@ -7907,7 +7907,7 @@ module Aws
       #
       #   * `timestamp` - The timestamp of the Spot price history, in UTC
       #     format (for example, *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z). You can
-      #     use wildcards (\* and ?). Greater than or less than comparison is
+      #     use wildcards (* and ?). Greater than or less than comparison is
       #     not supported.
       #   @return [Array<Types::Filter>]
       #
@@ -14695,6 +14695,9 @@ module Aws
       #   Unique, case-sensitive identifier that ensures the idempotency of
       #   the request. For more information, see [Ensuring Idempotency][1].
       #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/APIReference/Run_Instance_Idempotency.html
@@ -15794,7 +15797,7 @@ module Aws
       # The cost associated with the Reserved Instance.
       # @!attribute [rw] remaining_total_value
       #   The balance of the total value (the sum of remainingUpfrontValue +
-      #   hourlyPrice \* number of hours remaining).
+      #   hourlyPrice * number of hours remaining).
       #   @return [String]
       #
       # @!attribute [rw] remaining_upfront_value
@@ -15821,7 +15824,7 @@ module Aws
       #       }
       # @!attribute [rw] amount
       #   Used for Reserved Instance Marketplace offerings. Specifies the
-      #   limit price on the total order (instanceCount \* price).
+      #   limit price on the total order (instanceCount * price).
       #   @return [Float]
       #
       # @!attribute [rw] currency_code
@@ -17129,6 +17132,9 @@ module Aws
       # @!attribute [rw] client_token
       #   Unique, case-sensitive identifier that ensures the idempotency of
       #   the request. For more information, see [Ensuring Idempotency][1].
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       #
       #
       #

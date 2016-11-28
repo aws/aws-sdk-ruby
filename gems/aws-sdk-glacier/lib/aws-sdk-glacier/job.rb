@@ -140,18 +140,21 @@ module Aws
       # For the specific case when the whole archive is retrieved, this value
       # is the same as the ArchiveSHA256TreeHash value.
       #
-      # This field is null in the following situations: * Archive retrieval
-      # jobs that specify a range that is not tree-hash
+      # This field is null in the following situations:
+      #
+      # * Archive retrieval jobs that specify a range that is not tree-hash
       #   aligned.
       #
       # ^
+      # ^
       #
-      #  * Archival jobs that specify a range that is equal to the whole
+      # * Archival jobs that specify a range that is equal to the whole
       #   archive and the job status is InProgress.
       #
       # ^
+      # ^
       #
-      #  * Inventory jobs.
+      # * Inventory jobs.
       #
       # ^
       # @return [String]
@@ -174,6 +177,13 @@ module Aws
       # @return [String]
       def retrieval_byte_range
         data.retrieval_byte_range
+      end
+
+      # The retrieval option to use for the archive retrieval. Valid values
+      # are `Expedited`, `Standard`, or `Bulk`. `Standard` is the default.
+      # @return [String]
+      def tier
+        data.tier
       end
 
       # Parameters used for range inventory retrieval.
@@ -231,9 +241,36 @@ module Aws
       # @param [Hash] options ({})
       # @option options [String] :range
       #   The range of bytes to retrieve from the output. For example, if you
-      #   want to download the first 1,048,576 bytes, specify "Range:
-      #   bytes=0-1048575". By default, this operation downloads the entire
+      #   want to download the first 1,048,576 bytes, specify the range as
+      #   `bytes=0-1048575`. By default, this operation downloads the entire
       #   output.
+      #
+      #   If the job output is large, then you can use a range to retrieve a
+      #   portion of the output. This allows you to download the entire output
+      #   in smaller chunks of bytes. For example, suppose you have 1 GB of job
+      #   output you want to download and you decide to download 128 MB chunks
+      #   of data at a time, which is a total of eight Get Job Output requests.
+      #   You use the following process to download the job output:
+      #
+      #   1.  Download a 128 MB chunk of output by specifying the appropriate
+      #       byte range. Verify that all 128 MB of data was received.
+      #
+      #   2.  Along with the data, the response includes a SHA256 tree hash of
+      #       the payload. You compute the checksum of the payload on the client
+      #       and compare it with the checksum you received in the response to
+      #       ensure you received all the expected data.
+      #
+      #   3.  Repeat steps 1 and 2 for all the eight 128 MB chunks of output
+      #       data, each time specifying the appropriate byte range.
+      #
+      #   4.  After downloading all the parts of the job output, you have a list
+      #       of eight checksum values. Compute the tree hash of these values to
+      #       find the checksum of the entire output. Using the DescribeJob API,
+      #       obtain job information of the job that provided you the output.
+      #       The response includes the checksum of the entire archive stored in
+      #       Amazon Glacier. You compare this value with the checksum you
+      #       computed to ensure you have downloaded the entire archive content
+      #       with no errors.
       # @return [Types::GetJobOutputOutput]
       def get_output(options = {})
         options = options.merge(

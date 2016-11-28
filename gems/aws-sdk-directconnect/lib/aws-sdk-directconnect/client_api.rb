@@ -49,9 +49,12 @@ module Aws
       DescribeInterconnectLoaRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaRequest')
       DescribeInterconnectLoaResponse = Shapes::StructureShape.new(name: 'DescribeInterconnectLoaResponse')
       DescribeInterconnectsRequest = Shapes::StructureShape.new(name: 'DescribeInterconnectsRequest')
+      DescribeTagsRequest = Shapes::StructureShape.new(name: 'DescribeTagsRequest')
+      DescribeTagsResponse = Shapes::StructureShape.new(name: 'DescribeTagsResponse')
       DescribeVirtualInterfacesRequest = Shapes::StructureShape.new(name: 'DescribeVirtualInterfacesRequest')
       DirectConnectClientException = Shapes::StructureShape.new(name: 'DirectConnectClientException')
       DirectConnectServerException = Shapes::StructureShape.new(name: 'DirectConnectServerException')
+      DuplicateTagKeysException = Shapes::StructureShape.new(name: 'DuplicateTagKeysException')
       ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
       Interconnect = Shapes::StructureShape.new(name: 'Interconnect')
       InterconnectId = Shapes::StringShape.new(name: 'InterconnectId')
@@ -76,9 +79,23 @@ module Aws
       PartnerName = Shapes::StringShape.new(name: 'PartnerName')
       ProviderName = Shapes::StringShape.new(name: 'ProviderName')
       Region = Shapes::StringShape.new(name: 'Region')
+      ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
+      ResourceArnList = Shapes::ListShape.new(name: 'ResourceArnList')
+      ResourceTag = Shapes::StructureShape.new(name: 'ResourceTag')
+      ResourceTagList = Shapes::ListShape.new(name: 'ResourceTagList')
       RouteFilterPrefix = Shapes::StructureShape.new(name: 'RouteFilterPrefix')
       RouteFilterPrefixList = Shapes::ListShape.new(name: 'RouteFilterPrefixList')
       RouterConfig = Shapes::StringShape.new(name: 'RouterConfig')
+      Tag = Shapes::StructureShape.new(name: 'Tag')
+      TagKey = Shapes::StringShape.new(name: 'TagKey')
+      TagKeyList = Shapes::ListShape.new(name: 'TagKeyList')
+      TagList = Shapes::ListShape.new(name: 'TagList')
+      TagResourceRequest = Shapes::StructureShape.new(name: 'TagResourceRequest')
+      TagResourceResponse = Shapes::StructureShape.new(name: 'TagResourceResponse')
+      TagValue = Shapes::StringShape.new(name: 'TagValue')
+      TooManyTagsException = Shapes::StructureShape.new(name: 'TooManyTagsException')
+      UntagResourceRequest = Shapes::StructureShape.new(name: 'UntagResourceRequest')
+      UntagResourceResponse = Shapes::StructureShape.new(name: 'UntagResourceResponse')
       VLAN = Shapes::IntegerShape.new(name: 'VLAN')
       VirtualGateway = Shapes::StructureShape.new(name: 'VirtualGateway')
       VirtualGatewayId = Shapes::StringShape.new(name: 'VirtualGatewayId')
@@ -204,6 +221,12 @@ module Aws
       DescribeInterconnectsRequest.add_member(:interconnect_id, Shapes::ShapeRef.new(shape: InterconnectId, location_name: "interconnectId"))
       DescribeInterconnectsRequest.struct_class = Types::DescribeInterconnectsRequest
 
+      DescribeTagsRequest.add_member(:resource_arns, Shapes::ShapeRef.new(shape: ResourceArnList, required: true, location_name: "resourceArns"))
+      DescribeTagsRequest.struct_class = Types::DescribeTagsRequest
+
+      DescribeTagsResponse.add_member(:resource_tags, Shapes::ShapeRef.new(shape: ResourceTagList, location_name: "resourceTags"))
+      DescribeTagsResponse.struct_class = Types::DescribeTagsResponse
+
       DescribeVirtualInterfacesRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, location_name: "connectionId"))
       DescribeVirtualInterfacesRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
       DescribeVirtualInterfacesRequest.struct_class = Types::DescribeVirtualInterfacesRequest
@@ -270,10 +293,38 @@ module Aws
       NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, required: true, location_name: "routeFilterPrefixes"))
       NewPublicVirtualInterfaceAllocation.struct_class = Types::NewPublicVirtualInterfaceAllocation
 
+      ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
+
+      ResourceTag.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "resourceArn"))
+      ResourceTag.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tags"))
+      ResourceTag.struct_class = Types::ResourceTag
+
+      ResourceTagList.member = Shapes::ShapeRef.new(shape: ResourceTag)
+
       RouteFilterPrefix.add_member(:cidr, Shapes::ShapeRef.new(shape: CIDR, location_name: "cidr"))
       RouteFilterPrefix.struct_class = Types::RouteFilterPrefix
 
       RouteFilterPrefixList.member = Shapes::ShapeRef.new(shape: RouteFilterPrefix)
+
+      Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, required: true, location_name: "key"))
+      Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "value"))
+      Tag.struct_class = Types::Tag
+
+      TagKeyList.member = Shapes::ShapeRef.new(shape: TagKey)
+
+      TagList.member = Shapes::ShapeRef.new(shape: Tag)
+
+      TagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+      TagResourceRequest.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, required: true, location_name: "tags"))
+      TagResourceRequest.struct_class = Types::TagResourceRequest
+
+      TagResourceResponse.struct_class = Types::TagResourceResponse
+
+      UntagResourceRequest.add_member(:resource_arn, Shapes::ShapeRef.new(shape: ResourceArn, required: true, location_name: "resourceArn"))
+      UntagResourceRequest.add_member(:tag_keys, Shapes::ShapeRef.new(shape: TagKeyList, required: true, location_name: "tagKeys"))
+      UntagResourceRequest.struct_class = Types::UntagResourceRequest
+
+      UntagResourceResponse.struct_class = Types::UntagResourceResponse
 
       VirtualGateway.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
       VirtualGateway.add_member(:virtual_gateway_state, Shapes::ShapeRef.new(shape: VirtualGatewayState, location_name: "virtualGatewayState"))
@@ -511,6 +562,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)
 
+        api.add_operation(:describe_tags, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeTags"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeTagsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeTagsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
         api.add_operation(:describe_virtual_gateways, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DescribeVirtualGateways"
           o.http_method = "POST"
@@ -527,6 +588,28 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeVirtualInterfacesRequest)
           o.output = Shapes::ShapeRef.new(shape: VirtualInterfaces)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
+        api.add_operation(:tag_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "TagResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: TagResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: TagResourceResponse)
+          o.errors << Shapes::ShapeRef.new(shape: DuplicateTagKeysException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyTagsException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
+        api.add_operation(:untag_resource, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UntagResource"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UntagResourceRequest)
+          o.output = Shapes::ShapeRef.new(shape: UntagResourceResponse)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)

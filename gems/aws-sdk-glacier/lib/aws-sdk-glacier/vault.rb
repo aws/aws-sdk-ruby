@@ -46,16 +46,17 @@ module Aws
         data.vault_arn
       end
 
-      # The UTC date when the vault was created. A string representation of
-      # ISO 8601 date format, for example, "2012-03-20T17:03:43.221Z".
+      # The Universal Coordinated Time (UTC) date when the vault was created.
+      # This value should be a string in the ISO 8601 date format, for example
+      # `2012-03-20T17:03:43.221Z`.
       # @return [Time]
       def creation_date
         data.creation_date
       end
 
-      # The UTC date when Amazon Glacier completed the last vault inventory. A
-      # string representation of ISO 8601 date format, for example,
-      # "2012-03-20T17:03:43.221Z".
+      # The Universal Coordinated Time (UTC) date when Amazon Glacier
+      # completed the last vault inventory. This value should be a string in
+      # the ISO 8601 date format, for example `2012-03-20T17:03:43.221Z`.
       # @return [Time]
       def last_inventory_date
         data.last_inventory_date
@@ -63,7 +64,7 @@ module Aws
 
       # The number of archives in the vault as of the last inventory date.
       # This field will return `null` if an inventory has not yet run on the
-      # vault, for example, if you just created the vault.
+      # vault, for example if you just created the vault.
       # @return [Integer]
       def number_of_archives
         data.number_of_archives
@@ -71,7 +72,7 @@ module Aws
 
       # Total size, in bytes, of the archives in the vault as of the last
       # inventory date. This field will return null if an inventory has not
-      # yet run on the vault, for example, if you just created the vault.
+      # yet run on the vault, for example if you just created the vault.
       # @return [Integer]
       def size_in_bytes
         data.size_in_bytes
@@ -256,8 +257,8 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :statuscode
-      #   Specifies the type of job status to return. You can specify the
-      #   following values: "InProgress", "Succeeded", or "Failed".
+      #   The type of job status to return. You can specify the following
+      #   values: `InProgress`, `Succeeded`, or `Failed`.
       # @return [Job::Collection]
       def completed_jobs(options = {})
         batches = Enumerator.new do |y|
@@ -291,8 +292,7 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
-      #   Specifies the state of the jobs to return. You can specify `true` or
-      #   `false`.
+      #   The state of the jobs to return. You can specify `true` or `false`.
       # @return [Job::Collection]
       def failed_jobs(options = {})
         batches = Enumerator.new do |y|
@@ -338,11 +338,10 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :statuscode
-      #   Specifies the type of job status to return. You can specify the
-      #   following values: "InProgress", "Succeeded", or "Failed".
+      #   The type of job status to return. You can specify the following
+      #   values: `InProgress`, `Succeeded`, or `Failed`.
       # @option options [String] :completed
-      #   Specifies the state of the jobs to return. You can specify `true` or
-      #   `false`.
+      #   The state of the jobs to return. You can specify `true` or `false`.
       # @return [Job::Collection]
       def jobs(options = {})
         batches = Enumerator.new do |y|
@@ -375,8 +374,7 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
-      #   Specifies the state of the jobs to return. You can specify `true` or
-      #   `false`.
+      #   The state of the jobs to return. You can specify `true` or `false`.
       # @return [Job::Collection]
       def jobs_in_progress(options = {})
         batches = Enumerator.new do |y|
@@ -459,8 +457,7 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [String] :completed
-      #   Specifies the state of the jobs to return. You can specify `true` or
-      #   `false`.
+      #   The state of the jobs to return. You can specify `true` or `false`.
       # @return [Job::Collection]
       def succeeded_jobs(options = {})
         batches = Enumerator.new do |y|

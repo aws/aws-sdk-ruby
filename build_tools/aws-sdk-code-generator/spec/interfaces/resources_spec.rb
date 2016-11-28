@@ -4,7 +4,6 @@ describe 'Interfaces' do
 
   before(:all) do
     # TODO : support Aws.config[:sample] = { ... }
-    # TODO : ec2 and s3 batch operations require aliases for backwards compatability
     @tmpdir = SpecHelper.generate_service(['Sample'], multiple_files: true)
   end
 
@@ -669,6 +668,17 @@ describe 'Interfaces' do
         expect(waiter).to receive(:wait).with(band_name: 'band-name')
         band = Sample::Band.new(name: 'band-name', client: client)
         band.wait_until_exists(max_attempts: 2, delay: 2)
+      end
+
+      it 'passes through params to the client waiter method' do
+        waiter = double('waiter')
+        expect(Sample::Waiters::BandExists).to receive(:new).with(
+          client: client,
+          max_attempts: 1,
+        ).and_return(waiter)
+        expect(waiter).to receive(:wait).with(band_name: 'band-name', extra_param: true)
+        band = Sample::Band.new(name: 'band-name', client: client)
+        band.exists?(extra_param: true)
       end
 
       it 'returns a new hydrated resource if path is given' do

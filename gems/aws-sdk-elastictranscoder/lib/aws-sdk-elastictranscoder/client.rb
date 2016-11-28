@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -130,7 +132,12 @@ module Aws
 
       # The CancelJob operation cancels an unfinished job.
       #
-      # <note>You can only cancel a job that has a status of `Submitted`. To prevent a pipeline from starting to process a job while you're getting the job identifier, use UpdatePipelineStatus to temporarily pause the pipeline.</note>
+      # <note markdown="1"> You can only cancel a job that has a status of `Submitted`. To prevent
+      # a pipeline from starting to process a job while you're getting the
+      # job identifier, use UpdatePipelineStatus to temporarily pause the
+      # pipeline.
+      #
+      #  </note>
       # @option params [required, String] :id
       #   The identifier of the job that you want to cancel.
       #
@@ -163,11 +170,16 @@ module Aws
       #   Amazon S3 bucket from which Elastic Transcoder gets the files to
       #   transcode and the bucket into which Elastic Transcoder puts the
       #   transcoded files.
-      # @option params [required, Types::JobInput] :input
+      # @option params [Types::JobInput] :input
       #   A section of the request body that provides information about the file
       #   that is being transcoded.
+      # @option params [Array<Types::JobInput>] :inputs
+      #   A section of the request body that provides information about the
+      #   files that are being transcoded.
       # @option params [Types::CreateJobOutput] :output
-      #   The `CreateJobOutput` structure.
+      #   A section of the request body that provides information about the
+      #   transcoded (target) file. We strongly recommend that you use the
+      #   `Outputs` syntax instead of the `Output` syntax.
       # @option params [Array<Types::CreateJobOutput>] :outputs
       #   A section of the request body that provides information about the
       #   transcoded (target) files. We recommend that you use the `Outputs`
@@ -187,7 +199,7 @@ module Aws
       #   User-defined metadata that you want to associate with an Elastic
       #   Transcoder job. You specify metadata in `key/value` pairs, and you can
       #   add up to 10 `key/value` pairs per job. Elastic Transcoder does not
-      #   guarantee that `key/value` pairs will be returned in the same order in
+      #   guarantee that `key/value` pairs are returned in the same order in
       #   which you specify them.
       # @return [Types::CreateJobResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -196,7 +208,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.create_job({
       #     pipeline_id: "Id", # required
-      #     input: { # required
+      #     input: {
       #       key: "LongKey",
       #       frame_rate: "FrameRate",
       #       resolution: "Resolution",
@@ -209,6 +221,27 @@ module Aws
       #         key_md_5: "Base64EncodedString",
       #         initialization_vector: "ZeroTo255String",
       #       },
+      #       time_span: {
+      #         start_time: "Time",
+      #         duration: "Time",
+      #       },
+      #       input_captions: {
+      #         merge_policy: "CaptionMergePolicy",
+      #         caption_sources: [
+      #           {
+      #             key: "LongKey",
+      #             language: "Key",
+      #             time_offset: "TimeOffset",
+      #             label: "Name",
+      #             encryption: {
+      #               mode: "EncryptionMode",
+      #               key: "Base64EncodedString",
+      #               key_md_5: "Base64EncodedString",
+      #               initialization_vector: "ZeroTo255String",
+      #             },
+      #           },
+      #         ],
+      #       },
       #       detected_properties: {
       #         width: 1,
       #         height: 1,
@@ -217,6 +250,50 @@ module Aws
       #         duration_millis: 1,
       #       },
       #     },
+      #     inputs: [
+      #       {
+      #         key: "LongKey",
+      #         frame_rate: "FrameRate",
+      #         resolution: "Resolution",
+      #         aspect_ratio: "AspectRatio",
+      #         interlaced: "Interlaced",
+      #         container: "JobContainer",
+      #         encryption: {
+      #           mode: "EncryptionMode",
+      #           key: "Base64EncodedString",
+      #           key_md_5: "Base64EncodedString",
+      #           initialization_vector: "ZeroTo255String",
+      #         },
+      #         time_span: {
+      #           start_time: "Time",
+      #           duration: "Time",
+      #         },
+      #         input_captions: {
+      #           merge_policy: "CaptionMergePolicy",
+      #           caption_sources: [
+      #             {
+      #               key: "LongKey",
+      #               language: "Key",
+      #               time_offset: "TimeOffset",
+      #               label: "Name",
+      #               encryption: {
+      #                 mode: "EncryptionMode",
+      #                 key: "Base64EncodedString",
+      #                 key_md_5: "Base64EncodedString",
+      #                 initialization_vector: "ZeroTo255String",
+      #               },
+      #             },
+      #           ],
+      #         },
+      #         detected_properties: {
+      #           width: 1,
+      #           height: 1,
+      #           frame_rate: "FloatString",
+      #           file_size: 1,
+      #           duration_millis: 1,
+      #         },
+      #       },
+      #     ],
       #     output: {
       #       key: "Key",
       #       thumbnail_pattern: "ThumbnailPattern",
@@ -436,11 +513,51 @@ module Aws
       #   resp.job.input.encryption.key #=> String
       #   resp.job.input.encryption.key_md_5 #=> String
       #   resp.job.input.encryption.initialization_vector #=> String
+      #   resp.job.input.time_span.start_time #=> String
+      #   resp.job.input.time_span.duration #=> String
+      #   resp.job.input.input_captions.merge_policy #=> String
+      #   resp.job.input.input_captions.caption_sources #=> Array
+      #   resp.job.input.input_captions.caption_sources[0].key #=> String
+      #   resp.job.input.input_captions.caption_sources[0].language #=> String
+      #   resp.job.input.input_captions.caption_sources[0].time_offset #=> String
+      #   resp.job.input.input_captions.caption_sources[0].label #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.initialization_vector #=> String
       #   resp.job.input.detected_properties.width #=> Integer
       #   resp.job.input.detected_properties.height #=> Integer
       #   resp.job.input.detected_properties.frame_rate #=> String
       #   resp.job.input.detected_properties.file_size #=> Integer
       #   resp.job.input.detected_properties.duration_millis #=> Integer
+      #   resp.job.inputs #=> Array
+      #   resp.job.inputs[0].key #=> String
+      #   resp.job.inputs[0].frame_rate #=> String
+      #   resp.job.inputs[0].resolution #=> String
+      #   resp.job.inputs[0].aspect_ratio #=> String
+      #   resp.job.inputs[0].interlaced #=> String
+      #   resp.job.inputs[0].container #=> String
+      #   resp.job.inputs[0].encryption.mode #=> String
+      #   resp.job.inputs[0].encryption.key #=> String
+      #   resp.job.inputs[0].encryption.key_md_5 #=> String
+      #   resp.job.inputs[0].encryption.initialization_vector #=> String
+      #   resp.job.inputs[0].time_span.start_time #=> String
+      #   resp.job.inputs[0].time_span.duration #=> String
+      #   resp.job.inputs[0].input_captions.merge_policy #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources #=> Array
+      #   resp.job.inputs[0].input_captions.caption_sources[0].key #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].language #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].time_offset #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].label #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.initialization_vector #=> String
+      #   resp.job.inputs[0].detected_properties.width #=> Integer
+      #   resp.job.inputs[0].detected_properties.height #=> Integer
+      #   resp.job.inputs[0].detected_properties.frame_rate #=> String
+      #   resp.job.inputs[0].detected_properties.file_size #=> Integer
+      #   resp.job.inputs[0].detected_properties.duration_millis #=> Integer
       #   resp.job.output.id #=> String
       #   resp.job.output.key #=> String
       #   resp.job.output.thumbnail_pattern #=> String
@@ -614,13 +731,17 @@ module Aws
       #   transcoded files. (Use this, or use ContentConfig:Bucket plus
       #   ThumbnailConfig:Bucket.)
       #
-      #   Specify this value when all of the following are true: * You want to
-      #   save transcoded files, thumbnails (if any), and
+      #   Specify this value when all of the following are true:
+      #
+      #   * You want to save transcoded files, thumbnails (if any), and
       #     playlists (if any) together in one bucket.
+      #
       #   * You do not want to specify the users or groups who have access to
       #     the transcoded files, thumbnails, and playlists.
+      #
       #   * You do not want to specify the permissions that Elastic Transcoder
       #     grants to the files.
+      #
       #     When Elastic Transcoder saves files in `OutputBucket`, it grants
       #     full control over the files only to the AWS account that owns the
       #     role that is specified by `Role`.
@@ -659,14 +780,17 @@ module Aws
       #     the ARN that Amazon SNS returned when you created the topic. For
       #     more information, see Create a Topic in the Amazon Simple
       #     Notification Service Developer Guide.
+      #
       #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder has finished processing a job in
       #     this pipeline. This is the ARN that Amazon SNS returned when you
       #     created the topic.
+      #
       #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters a warning condition
       #     while processing a job in this pipeline. This is the ARN that Amazon
       #     SNS returned when you created the topic.
+      #
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want to
       #     notify when Elastic Transcoder encounters an error condition while
       #     processing a job in this pipeline. This is the ARN that Amazon SNS
@@ -686,12 +810,15 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save transcoded files and playlists.
+      #
       #   * **Permissions** (Optional): The Permissions object specifies which
       #     users you want to have access to transcoded files and the type of
       #     access you want them to have. You can grant permissions to a maximum
       #     of 30 users and/or predefined Amazon S3 groups.
+      #
       #   * **Grantee Type**\: Specify the type of value that appears in the
       #     `Grantee` object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution. For more information about
@@ -701,10 +828,12 @@ module Aws
       #       require that users use CloudFront URLs instead of Amazon S3 URLs,
       #       see Using an Origin Access Identity to Restrict Access to Your
       #       Amazon S3 Content.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -714,16 +843,21 @@ module Aws
       #     can specify the canonical user ID for an AWS account, an origin
       #     access identity for a CloudFront distribution, the registered email
       #     address of an AWS account, or a predefined Amazon S3 group
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     files that Elastic Transcoder adds to the bucket, including
       #     playlists and video files. Valid values include:
+      #
       #     * `READ`\: The grantee can read the objects and metadata for objects
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -748,20 +882,25 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save thumbnail files.
+      #
       #   * **Permissions** (Optional): The `Permissions` object specifies which
       #     users and/or predefined Amazon S3 groups you want to have access to
       #     thumbnail files, and the type of access you want them to have. You
       #     can grant permissions to a maximum of 30 users and/or predefined
       #     Amazon S3 groups.
+      #
       #   * **GranteeType**\: Specify the type of value that appears in the
       #     Grantee object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -771,16 +910,21 @@ module Aws
       #     canonical user ID for an AWS account, an origin access identity for
       #     a CloudFront distribution, the registered email address of an AWS
       #     account, or a predefined Amazon S3 group.
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     thumbnail files that Elastic Transcoder adds to the bucket. Valid
       #     values include:
+      #
       #     * `READ`\: The grantee can read the thumbnails and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the thumbnails that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -1113,11 +1257,51 @@ module Aws
       #   resp.jobs[0].input.encryption.key #=> String
       #   resp.jobs[0].input.encryption.key_md_5 #=> String
       #   resp.jobs[0].input.encryption.initialization_vector #=> String
+      #   resp.jobs[0].input.time_span.start_time #=> String
+      #   resp.jobs[0].input.time_span.duration #=> String
+      #   resp.jobs[0].input.input_captions.merge_policy #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources #=> Array
+      #   resp.jobs[0].input.input_captions.caption_sources[0].key #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].language #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].time_offset #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].label #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.initialization_vector #=> String
       #   resp.jobs[0].input.detected_properties.width #=> Integer
       #   resp.jobs[0].input.detected_properties.height #=> Integer
       #   resp.jobs[0].input.detected_properties.frame_rate #=> String
       #   resp.jobs[0].input.detected_properties.file_size #=> Integer
       #   resp.jobs[0].input.detected_properties.duration_millis #=> Integer
+      #   resp.jobs[0].inputs #=> Array
+      #   resp.jobs[0].inputs[0].key #=> String
+      #   resp.jobs[0].inputs[0].frame_rate #=> String
+      #   resp.jobs[0].inputs[0].resolution #=> String
+      #   resp.jobs[0].inputs[0].aspect_ratio #=> String
+      #   resp.jobs[0].inputs[0].interlaced #=> String
+      #   resp.jobs[0].inputs[0].container #=> String
+      #   resp.jobs[0].inputs[0].encryption.mode #=> String
+      #   resp.jobs[0].inputs[0].encryption.key #=> String
+      #   resp.jobs[0].inputs[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].inputs[0].encryption.initialization_vector #=> String
+      #   resp.jobs[0].inputs[0].time_span.start_time #=> String
+      #   resp.jobs[0].inputs[0].time_span.duration #=> String
+      #   resp.jobs[0].inputs[0].input_captions.merge_policy #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources #=> Array
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].key #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].language #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].time_offset #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].label #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.initialization_vector #=> String
+      #   resp.jobs[0].inputs[0].detected_properties.width #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.height #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.frame_rate #=> String
+      #   resp.jobs[0].inputs[0].detected_properties.file_size #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.duration_millis #=> Integer
       #   resp.jobs[0].output.id #=> String
       #   resp.jobs[0].output.key #=> String
       #   resp.jobs[0].output.thumbnail_pattern #=> String
@@ -1319,11 +1503,51 @@ module Aws
       #   resp.jobs[0].input.encryption.key #=> String
       #   resp.jobs[0].input.encryption.key_md_5 #=> String
       #   resp.jobs[0].input.encryption.initialization_vector #=> String
+      #   resp.jobs[0].input.time_span.start_time #=> String
+      #   resp.jobs[0].input.time_span.duration #=> String
+      #   resp.jobs[0].input.input_captions.merge_policy #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources #=> Array
+      #   resp.jobs[0].input.input_captions.caption_sources[0].key #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].language #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].time_offset #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].label #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].input.input_captions.caption_sources[0].encryption.initialization_vector #=> String
       #   resp.jobs[0].input.detected_properties.width #=> Integer
       #   resp.jobs[0].input.detected_properties.height #=> Integer
       #   resp.jobs[0].input.detected_properties.frame_rate #=> String
       #   resp.jobs[0].input.detected_properties.file_size #=> Integer
       #   resp.jobs[0].input.detected_properties.duration_millis #=> Integer
+      #   resp.jobs[0].inputs #=> Array
+      #   resp.jobs[0].inputs[0].key #=> String
+      #   resp.jobs[0].inputs[0].frame_rate #=> String
+      #   resp.jobs[0].inputs[0].resolution #=> String
+      #   resp.jobs[0].inputs[0].aspect_ratio #=> String
+      #   resp.jobs[0].inputs[0].interlaced #=> String
+      #   resp.jobs[0].inputs[0].container #=> String
+      #   resp.jobs[0].inputs[0].encryption.mode #=> String
+      #   resp.jobs[0].inputs[0].encryption.key #=> String
+      #   resp.jobs[0].inputs[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].inputs[0].encryption.initialization_vector #=> String
+      #   resp.jobs[0].inputs[0].time_span.start_time #=> String
+      #   resp.jobs[0].inputs[0].time_span.duration #=> String
+      #   resp.jobs[0].inputs[0].input_captions.merge_policy #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources #=> Array
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].key #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].language #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].time_offset #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].label #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.jobs[0].inputs[0].input_captions.caption_sources[0].encryption.initialization_vector #=> String
+      #   resp.jobs[0].inputs[0].detected_properties.width #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.height #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.frame_rate #=> String
+      #   resp.jobs[0].inputs[0].detected_properties.file_size #=> Integer
+      #   resp.jobs[0].inputs[0].detected_properties.duration_millis #=> Integer
       #   resp.jobs[0].output.id #=> String
       #   resp.jobs[0].output.key #=> String
       #   resp.jobs[0].output.thumbnail_pattern #=> String
@@ -1648,11 +1872,51 @@ module Aws
       #   resp.job.input.encryption.key #=> String
       #   resp.job.input.encryption.key_md_5 #=> String
       #   resp.job.input.encryption.initialization_vector #=> String
+      #   resp.job.input.time_span.start_time #=> String
+      #   resp.job.input.time_span.duration #=> String
+      #   resp.job.input.input_captions.merge_policy #=> String
+      #   resp.job.input.input_captions.caption_sources #=> Array
+      #   resp.job.input.input_captions.caption_sources[0].key #=> String
+      #   resp.job.input.input_captions.caption_sources[0].language #=> String
+      #   resp.job.input.input_captions.caption_sources[0].time_offset #=> String
+      #   resp.job.input.input_captions.caption_sources[0].label #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.job.input.input_captions.caption_sources[0].encryption.initialization_vector #=> String
       #   resp.job.input.detected_properties.width #=> Integer
       #   resp.job.input.detected_properties.height #=> Integer
       #   resp.job.input.detected_properties.frame_rate #=> String
       #   resp.job.input.detected_properties.file_size #=> Integer
       #   resp.job.input.detected_properties.duration_millis #=> Integer
+      #   resp.job.inputs #=> Array
+      #   resp.job.inputs[0].key #=> String
+      #   resp.job.inputs[0].frame_rate #=> String
+      #   resp.job.inputs[0].resolution #=> String
+      #   resp.job.inputs[0].aspect_ratio #=> String
+      #   resp.job.inputs[0].interlaced #=> String
+      #   resp.job.inputs[0].container #=> String
+      #   resp.job.inputs[0].encryption.mode #=> String
+      #   resp.job.inputs[0].encryption.key #=> String
+      #   resp.job.inputs[0].encryption.key_md_5 #=> String
+      #   resp.job.inputs[0].encryption.initialization_vector #=> String
+      #   resp.job.inputs[0].time_span.start_time #=> String
+      #   resp.job.inputs[0].time_span.duration #=> String
+      #   resp.job.inputs[0].input_captions.merge_policy #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources #=> Array
+      #   resp.job.inputs[0].input_captions.caption_sources[0].key #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].language #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].time_offset #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].label #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.mode #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.key #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.key_md_5 #=> String
+      #   resp.job.inputs[0].input_captions.caption_sources[0].encryption.initialization_vector #=> String
+      #   resp.job.inputs[0].detected_properties.width #=> Integer
+      #   resp.job.inputs[0].detected_properties.height #=> Integer
+      #   resp.job.inputs[0].detected_properties.frame_rate #=> String
+      #   resp.job.inputs[0].detected_properties.file_size #=> Integer
+      #   resp.job.inputs[0].detected_properties.duration_millis #=> Integer
       #   resp.job.output.id #=> String
       #   resp.job.output.key #=> String
       #   resp.job.output.thumbnail_pattern #=> String
@@ -1946,8 +2210,8 @@ module Aws
       #   The Amazon S3 bucket that contains media files to be transcoded. The
       #   action attempts to read from this bucket.
       # @option params [required, String] :output_bucket
-      #   The Amazon S3 bucket that Elastic Transcoder will write transcoded
-      #   media files to. The action attempts to read from this bucket.
+      #   The Amazon S3 bucket that Elastic Transcoder writes transcoded media
+      #   files to. The action attempts to read from this bucket.
       # @option params [required, Array<String>] :topics
       #   The ARNs of one or more Amazon Simple Notification Service (Amazon
       #   SNS) topics that you want the action to send a test notification to.
@@ -1976,6 +2240,7 @@ module Aws
       end
 
       # Use the `UpdatePipeline` operation to update settings for a pipeline.
+      #
       # When you change pipeline settings, your changes take effect
       # immediately. Jobs that you have already submitted and that Elastic
       # Transcoder has not started to process are affected in addition to jobs
@@ -2004,11 +2269,29 @@ module Aws
       #   key, or if you are using an `Encryption:Mode` of `AES-PKCS7`,
       #   `AES-CTR`, or `AES-GCM`.
       # @option params [Types::Notifications] :notifications
-      #   The Amazon Simple Notification Service (Amazon SNS) topic or topics to
-      #   notify in order to report job status.
+      #   The topic ARN for the Amazon Simple Notification Service (Amazon SNS)
+      #   topic that you want to notify to report job status.
       #
       #   To receive notifications, you must also subscribe to the new topic in
       #   the Amazon SNS console.
+      #
+      #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
+      #     Service (Amazon SNS) topic that you want to notify when Elastic
+      #     Transcoder has started to process jobs that are added to this
+      #     pipeline. This is the ARN that Amazon SNS returned when you created
+      #     the topic.
+      #
+      #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
+      #     to notify when Elastic Transcoder has finished processing a job.
+      #     This is the ARN that Amazon SNS returned when you created the topic.
+      #
+      #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
+      #     to notify when Elastic Transcoder encounters a warning condition.
+      #     This is the ARN that Amazon SNS returned when you created the topic.
+      #
+      #   * **Error**\: The topic ARN for the Amazon SNS topic that you want to
+      #     notify when Elastic Transcoder encounters an error condition. This
+      #     is the ARN that Amazon SNS returned when you created the topic.
       # @option params [Types::PipelineOutputConfig] :content_config
       #   The optional `ContentConfig` object specifies information about the
       #   Amazon S3 bucket in which you want Elastic Transcoder to save
@@ -2024,12 +2307,15 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save transcoded files and playlists.
+      #
       #   * **Permissions** (Optional): The Permissions object specifies which
       #     users you want to have access to transcoded files and the type of
       #     access you want them to have. You can grant permissions to a maximum
       #     of 30 users and/or predefined Amazon S3 groups.
+      #
       #   * **Grantee Type**\: Specify the type of value that appears in the
       #     `Grantee` object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution. For more information about
@@ -2039,10 +2325,12 @@ module Aws
       #       require that users use CloudFront URLs instead of Amazon S3 URLs,
       #       see Using an Origin Access Identity to Restrict Access to Your
       #       Amazon S3 Content.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -2052,16 +2340,21 @@ module Aws
       #     can specify the canonical user ID for an AWS account, an origin
       #     access identity for a CloudFront distribution, the registered email
       #     address of an AWS account, or a predefined Amazon S3 group
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     files that Elastic Transcoder adds to the bucket, including
       #     playlists and video files. Valid values include:
+      #
       #     * `READ`\: The grantee can read the objects and metadata for objects
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -2086,20 +2379,25 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save thumbnail files.
+      #
       #   * **Permissions** (Optional): The `Permissions` object specifies which
       #     users and/or predefined Amazon S3 groups you want to have access to
       #     thumbnail files, and the type of access you want them to have. You
       #     can grant permissions to a maximum of 30 users and/or predefined
       #     Amazon S3 groups.
+      #
       #   * **GranteeType**\: Specify the type of value that appears in the
       #     Grantee object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access identity
       #       for an Amazon CloudFront distribution.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -2109,16 +2407,21 @@ module Aws
       #     canonical user ID for an AWS account, an origin access identity for
       #     a CloudFront distribution, the registered email address of an AWS
       #     account, or a predefined Amazon S3 group.
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     thumbnail files that Elastic Transcoder adds to the bucket. Valid
       #     values include:
+      #
       #     * `READ`\: The grantee can read the thumbnails and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the thumbnails that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -2225,12 +2528,15 @@ module Aws
       #     Transcoder has started to process jobs that are added to this
       #     pipeline. This is the ARN that Amazon SNS returned when you created
       #     the topic.
+      #
       #   * **Completed**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder has finished processing a job.
       #     This is the ARN that Amazon SNS returned when you created the topic.
+      #
       #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters a warning condition.
       #     This is the ARN that Amazon SNS returned when you created the topic.
+      #
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want to
       #     notify when Elastic Transcoder encounters an error condition. This
       #     is the ARN that Amazon SNS returned when you created the topic.
@@ -2297,6 +2603,7 @@ module Aws
       #   The desired status of the pipeline:
       #
       #   * `Active`\: The pipeline is processing jobs.
+      #
       #   * `Paused`\: The pipeline is not currently processing jobs.
       # @return [Types::UpdatePipelineStatusResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #

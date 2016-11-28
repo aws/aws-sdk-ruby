@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -647,6 +649,24 @@ module Aws
       #
       #   **Note:** This parameter is only valid if the `Engine` parameter is
       #   `redis`.
+      # @option params [String] :auth_token
+      #   The password used to access a password protected server.
+      #
+      #   Password constraints:
+      #
+      #   * Must be only printable ASCII characters.
+      #
+      #   * Must be at least 16 characters and no more than 128 characters in
+      #     length.
+      #
+      #   * Cannot contain any of the following characters: '/', '"', or
+      #     "@".
+      #
+      #   For more information, see [AUTH password][1] at Redis.
+      #
+      #
+      #
+      #   [1]: http://redis.io/commands/AUTH
       # @return [Types::CreateCacheClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateCacheClusterResult#cache_cluster #CacheCluster} => Types::CacheCluster
@@ -680,6 +700,7 @@ module Aws
       #     auto_minor_version_upgrade: false,
       #     snapshot_retention_limit: 1,
       #     snapshot_window: "String",
+      #     auth_token: "String",
       #   })
       #
       # @example Response structure
@@ -873,7 +894,7 @@ module Aws
       # When a Redis (cluster mode disabled) replication group has been
       # successfully created, you can add one or more read replicas to it, up
       # to a total of 5 read replicas. You cannot alter a Redis (cluster mode
-      # enabled) replication group once it has been created.
+      # enabled) replication group after it has been created.
       #
       # <note markdown="1"> This operation is valid for Redis only.
       #
@@ -929,13 +950,7 @@ module Aws
       #   least 2.
       #
       #   The maximum permitted value for `NumCacheClusters` is 6 (primary plus
-      #   5 replicas). If you need to exceed this limit, fill out the
-      #   ElastiCache Limit Increase Request form at
-      #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
-      #
-      #
-      #
-      #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request/
+      #   5 replicas).
       # @option params [Array<String>] :preferred_cache_cluster_a_zs
       #   A list of EC2 Availability Zones in which the replication group's
       #   cache clusters are created. The order of the Availability Zones in the
@@ -1163,6 +1178,24 @@ module Aws
       #   <note markdown="1"> This parameter is only valid if the `Engine` parameter is `redis`.
       #
       #    </note>
+      # @option params [String] :auth_token
+      #   The password used to access a password protected server.
+      #
+      #   Password constraints:
+      #
+      #   * Must be only printable ASCII characters.
+      #
+      #   * Must be at least 16 characters and no more than 128 characters in
+      #     length.
+      #
+      #   * Cannot contain any of the following characters: '/', '"', or
+      #     "@".
+      #
+      #   For more information, see [AUTH password][1] at Redis.
+      #
+      #
+      #
+      #   [1]: http://redis.io/commands/AUTH
       # @return [Types::CreateReplicationGroupResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateReplicationGroupResult#replication_group #ReplicationGroup} => Types::ReplicationGroup
@@ -1206,6 +1239,7 @@ module Aws
       #     auto_minor_version_upgrade: false,
       #     snapshot_retention_limit: 1,
       #     snapshot_window: "String",
+      #     auth_token: "String",
       #   })
       #
       # @example Response structure
@@ -2469,7 +2503,7 @@ module Aws
       #
       #   Constraints: minimum 20; maximum 50.
       # @option params [Boolean] :show_node_group_config
-      #   A boolean value which if true, the node group (shard) configuration is
+      #   A Boolean value which if true, the node group (shard) configuration is
       #   included in the snapshot description.
       # @return [Types::DescribeSnapshotsListMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #

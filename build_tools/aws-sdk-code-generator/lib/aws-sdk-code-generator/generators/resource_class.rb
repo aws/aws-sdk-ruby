@@ -177,6 +177,7 @@ module AwsSdkCodeGenerator
         methods = []
         methods.concat(extract_identifier_methods)
         methods << yield_waiter_and_warn_method
+        methods << separate_params_and_options
         methods.compact
       end
 
@@ -292,6 +293,28 @@ if !@waiter_block_warned
   @waiter_block_warned = true
 end
 yield(waiter.waiter)
+            CODE
+          end
+        end
+      end
+
+      def separate_params_and_options
+        if @resource['waiters'] && @resource['waiters'].size > 0
+          Dsl::Method.new(:separate_params_and_options, access: :private) do |m|
+            m.param(:options)
+            m.code(<<-CODE)
+opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+waiter_opts = {}
+waiter_params = {}
+options.each_pair do |key, value|
+  if opts.include?(key)
+    waiter_opts[key] = value
+  else
+    waiter_params[key] = value
+  end
+end
+waiter_opts[:client] ||= @client
+[waiter_opts, waiter_params]
             CODE
           end
         end

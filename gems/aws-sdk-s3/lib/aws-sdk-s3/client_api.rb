@@ -159,6 +159,7 @@ module Aws
       GetObjectRequest = Shapes::StructureShape.new(name: 'GetObjectRequest')
       GetObjectTorrentOutput = Shapes::StructureShape.new(name: 'GetObjectTorrentOutput')
       GetObjectTorrentRequest = Shapes::StructureShape.new(name: 'GetObjectTorrentRequest')
+      GlacierJobParameters = Shapes::StructureShape.new(name: 'GlacierJobParameters')
       Grant = Shapes::StructureShape.new(name: 'Grant')
       GrantFullControl = Shapes::StringShape.new(name: 'GrantFullControl')
       GrantRead = Shapes::StringShape.new(name: 'GrantRead')
@@ -332,6 +333,7 @@ module Aws
       TargetGrant = Shapes::StructureShape.new(name: 'TargetGrant')
       TargetGrants = Shapes::ListShape.new(name: 'TargetGrants')
       TargetPrefix = Shapes::StringShape.new(name: 'TargetPrefix')
+      Tier = Shapes::StringShape.new(name: 'Tier')
       Token = Shapes::StringShape.new(name: 'Token')
       TopicArn = Shapes::StringShape.new(name: 'TopicArn')
       TopicConfiguration = Shapes::StructureShape.new(name: 'TopicConfiguration')
@@ -811,6 +813,9 @@ module Aws
       GetObjectTorrentRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
       GetObjectTorrentRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
       GetObjectTorrentRequest.struct_class = Types::GetObjectTorrentRequest
+
+      GlacierJobParameters.add_member(:tier, Shapes::ShapeRef.new(shape: Tier, required: true, location_name: "Tier"))
+      GlacierJobParameters.struct_class = Types::GlacierJobParameters
 
       Grant.add_member(:grantee, Shapes::ShapeRef.new(shape: Grantee, location_name: "Grantee"))
       Grant.add_member(:permission, Shapes::ShapeRef.new(shape: Permission, location_name: "Permission"))
@@ -1320,6 +1325,7 @@ module Aws
       RestoreObjectRequest[:payload_member] = RestoreObjectRequest.member(:restore_request)
 
       RestoreRequest.add_member(:days, Shapes::ShapeRef.new(shape: Days, required: true, location_name: "Days"))
+      RestoreRequest.add_member(:glacier_job_parameters, Shapes::ShapeRef.new(shape: GlacierJobParameters, location_name: "GlacierJobParameters"))
       RestoreRequest.struct_class = Types::RestoreRequest
 
       RoutingRule.add_member(:condition, Shapes::ShapeRef.new(shape: Condition, location_name: "Condition"))

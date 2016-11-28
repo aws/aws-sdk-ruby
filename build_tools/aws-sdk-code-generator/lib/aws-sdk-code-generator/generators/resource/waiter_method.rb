@@ -15,7 +15,7 @@ module AwsSdkCodeGenerator
           @waiter_name = @resource_waiter['waiterName']
           waiter = options.fetch(:waiter)
           super("wait_until_#{underscore(options.fetch(:resource_waiter_name))}")
-          param('options', default:{})
+          param('options', type: 'Hash', default:{})
           option(name: 'max_attempts', type:Integer, default: waiter['maxAttempts'])
           option(name: 'delay', type:Float, default: waiter['delay'])
           option(name: 'before_attempt', type:Proc)
@@ -25,9 +25,10 @@ module AwsSdkCodeGenerator
 
           resp = @resource_waiter['path'] ? 'resp = ' : ''
           code(<<-CODE)
-waiter = Waiters::#{@waiter_name}.new(options.merge(client: @client))
+options, params = separate_params_and_options(options)
+waiter = Waiters::#{@waiter_name}.new(options)
 yield_waiter_and_warn(waiter, &Proc.new) if block_given?
-#{resp}waiter.wait(#{args})
+#{resp}waiter.wait(params.merge(#{args}))
 #{resource_name}.new(#{constructor_args})
           CODE
         end

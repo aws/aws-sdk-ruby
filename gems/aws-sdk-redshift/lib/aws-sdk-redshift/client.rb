@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -219,7 +221,7 @@ module Aws
       # @option params [String] :snapshot_cluster_identifier
       #   The identifier of the cluster the snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       # @option params [required, String] :account_with_restore_access
       #   The identifier of the AWS customer account authorized to restore the
@@ -306,7 +308,7 @@ module Aws
       # @option params [String] :source_snapshot_cluster_identifier
       #   The identifier of the cluster the source snapshot was created from.
       #   This parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       #
       #   Constraints:
@@ -1634,7 +1636,7 @@ module Aws
       # @option params [String] :snapshot_cluster_identifier
       #   The unique identifier of the cluster the snapshot was created from.
       #   This parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       #
       #   Constraints: Must be the name of valid cluster.
@@ -4766,7 +4768,7 @@ module Aws
       # @option params [String] :snapshot_cluster_identifier
       #   The name of the cluster the source snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       # @option params [Integer] :port
       #   The port number on which the cluster accepts connections.
@@ -5173,7 +5175,7 @@ module Aws
       # @option params [String] :snapshot_cluster_identifier
       #   The identifier of the cluster the snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       # @option params [required, String] :account_with_restore_access
       #   The identifier of the AWS customer account that can no longer restore

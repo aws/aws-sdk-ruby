@@ -65,7 +65,6 @@ module Aws
         end
 
         it 'manages :destination_region and :presigned_url' do
-
           now = Time.now
           allow(Time).to receive(:now).and_return(now)
           dest_region = 'us-west-1'

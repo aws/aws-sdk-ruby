@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -137,9 +139,9 @@ module Aws
 
       # @!group API Operations
 
-      # AddInstanceGroups adds an instance group to a running cluster.
+      # Adds one or more instance groups to a running cluster.
       # @option params [required, Array<Types::InstanceGroupConfig>] :instance_groups
-      #   Instance Groups to add.
+      #   Instance groups to add.
       # @option params [required, String] :job_flow_id
       #   Job flow in which to add the instance groups.
       # @return [Types::AddInstanceGroupsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -181,6 +183,44 @@ module Aws
       #           ],
       #           ebs_optimized: false,
       #         },
+      #         auto_scaling_policy: {
+      #           constraints: { # required
+      #             min_capacity: 1, # required
+      #             max_capacity: 1, # required
+      #           },
+      #           rules: [ # required
+      #             {
+      #               name: "String", # required
+      #               description: "String",
+      #               action: { # required
+      #                 market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                 simple_scaling_policy_configuration: { # required
+      #                   adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                   scaling_adjustment: 1, # required
+      #                   cool_down: 1,
+      #                 },
+      #               },
+      #               trigger: { # required
+      #                 cloud_watch_alarm_definition: { # required
+      #                   comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                   evaluation_periods: 1,
+      #                   metric_name: "String", # required
+      #                   namespace: "String",
+      #                   period: 1, # required
+      #                   statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                   threshold: 1.0, # required
+      #                   unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                   dimensions: [
+      #                     {
+      #                       key: "String",
+      #                       value: "String",
+      #                     },
+      #                   ],
+      #                 },
+      #               },
+      #             },
+      #           ],
+      #         },
       #       },
       #     ],
       #     job_flow_id: "XmlStringMaxLen256", # required
@@ -205,9 +245,8 @@ module Aws
       # can bypass the 256-step limitation in various ways, including using
       # the SSH shell to connect to the master node and submitting queries
       # directly to the software running on the master node, such as Hive and
-      # Hadoop. For more information on how to do this, go to [Add More than
-      # 256 Steps to a Job Flow][1] in the *Amazon Elastic MapReduce
-      # Developer's Guide*.
+      # Hadoop. For more information on how to do this, see [Add More than 256
+      # Steps to a Job Flow][1] in the *Amazon EMR Developer's Guide*.
       #
       # A step specifies the location of a JAR file stored either on the
       # master node of the job flow or in Amazon S3. Each step is performed by
@@ -215,10 +254,10 @@ module Aws
       # can be specified either in the manifest of the JAR or by using the
       # MainFunction parameter of the step.
       #
-      # Elastic MapReduce executes each step in the order listed. For a step
-      # to be considered complete, the main function must exit with a zero
-      # exit code and all Hadoop jobs started while the step was running must
-      # have completed and run successfully.
+      # Amazon EMR executes each step in the order listed. For a step to be
+      # considered complete, the main function must exit with a zero exit code
+      # and all Hadoop jobs started while the step was running must have
+      # completed and run successfully.
       #
       # You can only add steps to a job flow that is in one of the following
       # states: STARTING, BOOTSTRAPPING, RUNNING, or WAITING.
@@ -279,7 +318,7 @@ module Aws
       #   The Amazon EMR resource identifier to which tags will be added. This
       #   value must be a cluster identifier.
       # @option params [required, Array<Types::Tag>] :tags
-      #   A list of tags to associate with a cluster and propagate to Amazon EC2
+      #   A list of tags to associate with a cluster and propagate to EC2
       #   instances. Tags are user-defined key/value pairs that consist of a
       #   required key string with a maximum of 128 characters, and an optional
       #   value string with a maximum of 256 characters.
@@ -302,10 +341,42 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a security configuration using EMR Security Configurations,
-      # which are stored in the service. Security Configurations enable you to
-      # more easily create a configuration, reuse it, and apply it whenever a
-      # cluster is created.
+      # Cancels a pending step or steps in a running cluster. Available only
+      # in Amazon EMR versions 4.8.0 and later, excluding version 5.0.0. A
+      # maximum of 256 steps are allowed in each CancelSteps request.
+      # CancelSteps is idempotent but asynchronous; it does not guarantee a
+      # step will be canceled, even if the request is successfully submitted.
+      # You can only cancel steps that are in a `PENDING` state.
+      # @option params [String] :cluster_id
+      #   The `ClusterID` for which specified steps will be canceled. Use
+      #   RunJobFlow and ListClusters to get ClusterIDs.
+      # @option params [Array<String>] :step_ids
+      #   The list of `StepIDs` to cancel. Use ListSteps to get steps and their
+      #   states for the specified cluster.
+      # @return [Types::CancelStepsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CancelStepsOutput#cancel_steps_info_list #CancelStepsInfoList} => Array&lt;Types::CancelStepsInfo&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.cancel_steps({
+      #     cluster_id: "XmlStringMaxLen256",
+      #     step_ids: ["XmlStringMaxLen256"],
+      #   })
+      #
+      # @example Response structure
+      #   resp.cancel_steps_info_list #=> Array
+      #   resp.cancel_steps_info_list[0].step_id #=> String
+      #   resp.cancel_steps_info_list[0].status #=> String, one of "SUBMITTED", "FAILED"
+      #   resp.cancel_steps_info_list[0].reason #=> String
+      # @overload cancel_steps(params = {})
+      # @param [Hash] params ({})
+      def cancel_steps(params = {}, options = {})
+        req = build_request(:cancel_steps, params)
+        req.send_request(options)
+      end
+
+      # Creates a security configuration, which is stored in the service and
+      # can be specified when a cluster is created.
       # @option params [required, String] :name
       #   The name of the security configuration.
       # @option params [required, String] :security_configuration
@@ -407,6 +478,8 @@ module Aws
       #   resp.cluster.configurations[0].properties #=> Hash
       #   resp.cluster.configurations[0].properties["String"] #=> String
       #   resp.cluster.security_configuration #=> String
+      #   resp.cluster.auto_scaling_role #=> String
+      #   resp.cluster.scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
       # @overload describe_cluster(params = {})
       # @param [Hash] params ({})
       def describe_cluster(params = {}, options = {})
@@ -434,8 +507,7 @@ module Aws
       # * Job flows created within the last two months that are in one of the
       #   following states: `RUNNING`, `WAITING`, `SHUTTING_DOWN`, `STARTING`
       #
-      # Amazon Elastic MapReduce can return a maximum of 512 job flow
-      # descriptions.
+      # Amazon EMR can return a maximum of 512 job flow descriptions.
       # @option params [Time,DateTime,Date,Integer,String] :created_after
       #   Return only job flows created after this date and time.
       # @option params [Time,DateTime,Date,Integer,String] :created_before
@@ -520,6 +592,8 @@ module Aws
       #   resp.job_flows[0].visible_to_all_users #=> Boolean
       #   resp.job_flows[0].job_flow_role #=> String
       #   resp.job_flows[0].service_role #=> String
+      #   resp.job_flows[0].auto_scaling_role #=> String
+      #   resp.job_flows[0].scale_down_behavior #=> String, one of "TERMINATE_AT_INSTANCE_HOUR", "TERMINATE_AT_TASK_COMPLETION"
       # @overload describe_job_flows(params = {})
       # @param [Hash] params ({})
       def describe_job_flows(params = {}, options = {})
@@ -578,7 +652,7 @@ module Aws
       #   resp.step.config.args #=> Array
       #   resp.step.config.args[0] #=> String
       #   resp.step.action_on_failure #=> String, one of "TERMINATE_JOB_FLOW", "TERMINATE_CLUSTER", "CANCEL_AND_WAIT", "CONTINUE"
-      #   resp.step.status.state #=> String, one of "PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
+      #   resp.step.status.state #=> String, one of "PENDING", "CANCEL_PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
       #   resp.step.status.state_change_reason.code #=> String, one of "NONE"
       #   resp.step.status.state_change_reason.message #=> String
       #   resp.step.status.failure_details.reason #=> String
@@ -597,7 +671,7 @@ module Aws
       # Provides information about the bootstrap actions associated with a
       # cluster.
       # @option params [required, String] :cluster_id
-      #   The cluster identifier for the bootstrap actions to list .
+      #   The cluster identifier for the bootstrap actions to list.
       # @option params [String] :marker
       #   The pagination token that indicates the next set of results to
       #   retrieve.
@@ -633,10 +707,10 @@ module Aws
       # marker to track the paging of the cluster list across multiple
       # ListClusters calls.
       # @option params [Time,DateTime,Date,Integer,String] :created_after
-      #   The creation date and time beginning value filter for listing clusters
-      #   .
+      #   The creation date and time beginning value filter for listing
+      #   clusters.
       # @option params [Time,DateTime,Date,Integer,String] :created_before
-      #   The creation date and time end value filter for listing clusters .
+      #   The creation date and time end value filter for listing clusters.
       # @option params [Array<String>] :cluster_states
       #   The cluster state filters to apply when listing clusters.
       # @option params [String] :marker
@@ -724,6 +798,29 @@ module Aws
       #   resp.instance_groups[0].shrink_policy.instance_resize_policy.instances_to_protect #=> Array
       #   resp.instance_groups[0].shrink_policy.instance_resize_policy.instances_to_protect[0] #=> String
       #   resp.instance_groups[0].shrink_policy.instance_resize_policy.instance_termination_timeout #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.status.state #=> String, one of "PENDING", "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "FAILED"
+      #   resp.instance_groups[0].auto_scaling_policy.status.state_change_reason.code #=> String, one of "USER_REQUEST", "PROVISION_FAILURE", "CLEANUP_FAILURE"
+      #   resp.instance_groups[0].auto_scaling_policy.status.state_change_reason.message #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.constraints.min_capacity #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.constraints.max_capacity #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.rules #=> Array
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].name #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].description #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].action.market #=> String, one of "ON_DEMAND", "SPOT"
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.adjustment_type #=> String, one of "CHANGE_IN_CAPACITY", "PERCENT_CHANGE_IN_CAPACITY", "EXACT_CAPACITY"
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.scaling_adjustment #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.cool_down #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.comparison_operator #=> String, one of "GREATER_THAN_OR_EQUAL", "GREATER_THAN", "LESS_THAN", "LESS_THAN_OR_EQUAL"
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.evaluation_periods #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.metric_name #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.namespace #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.period #=> Integer
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.statistic #=> String, one of "SAMPLE_COUNT", "AVERAGE", "SUM", "MINIMUM", "MAXIMUM"
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.threshold #=> Float
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.unit #=> String, one of "NONE", "SECONDS", "MICRO_SECONDS", "MILLI_SECONDS", "BYTES", "KILO_BYTES", "MEGA_BYTES", "GIGA_BYTES", "TERA_BYTES", "BITS", "KILO_BITS", "MEGA_BITS", "GIGA_BITS", "TERA_BITS", "PERCENT", "COUNT", "BYTES_PER_SECOND", "KILO_BYTES_PER_SECOND", "MEGA_BYTES_PER_SECOND", "GIGA_BYTES_PER_SECOND", "TERA_BYTES_PER_SECOND", "BITS_PER_SECOND", "KILO_BITS_PER_SECOND", "MEGA_BITS_PER_SECOND", "GIGA_BITS_PER_SECOND", "TERA_BITS_PER_SECOND", "COUNT_PER_SECOND"
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
+      #   resp.instance_groups[0].auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
       #   resp.marker #=> String
       # @overload list_instance_groups(params = {})
       # @param [Hash] params ({})
@@ -818,7 +915,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Provides a list of steps for the cluster.
+      # Provides a list of steps for the cluster in reverse order unless you
+      # specify stepIds with the request.
       # @option params [required, String] :cluster_id
       #   The identifier of the cluster for which to list the steps.
       # @option params [Array<String>] :step_states
@@ -837,7 +935,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_steps({
       #     cluster_id: "ClusterId", # required
-      #     step_states: ["PENDING"], # accepts PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
+      #     step_states: ["PENDING"], # accepts PENDING, CANCEL_PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
       #     step_ids: ["XmlString"],
       #     marker: "Marker",
       #   })
@@ -853,7 +951,7 @@ module Aws
       #   resp.steps[0].config.args #=> Array
       #   resp.steps[0].config.args[0] #=> String
       #   resp.steps[0].action_on_failure #=> String, one of "TERMINATE_JOB_FLOW", "TERMINATE_CLUSTER", "CANCEL_AND_WAIT", "CONTINUE"
-      #   resp.steps[0].status.state #=> String, one of "PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
+      #   resp.steps[0].status.state #=> String, one of "PENDING", "CANCEL_PENDING", "RUNNING", "COMPLETED", "CANCELLED", "FAILED", "INTERRUPTED"
       #   resp.steps[0].status.state_change_reason.code #=> String, one of "NONE"
       #   resp.steps[0].status.state_change_reason.message #=> String
       #   resp.steps[0].status.failure_details.reason #=> String
@@ -874,12 +972,15 @@ module Aws
       # settings of an instance group. The input parameters include the new
       # target instance count for the group and the instance group ID. The
       # call will either succeed or fail atomically.
+      # @option params [String] :cluster_id
+      #   The ID of the cluster to which the instance group belongs.
       # @option params [Array<Types::InstanceGroupModifyConfig>] :instance_groups
       #   Instance groups to change.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.modify_instance_groups({
+      #     cluster_id: "ClusterId",
       #     instance_groups: [
       #       {
       #         instance_group_id: "XmlStringMaxLen256", # required
@@ -900,6 +1001,124 @@ module Aws
       # @param [Hash] params ({})
       def modify_instance_groups(params = {}, options = {})
         req = build_request(:modify_instance_groups, params)
+        req.send_request(options)
+      end
+
+      # Creates or updates an automatic scaling policy for a core instance
+      # group or task instance group in an Amazon EMR cluster. The automatic
+      # scaling policy defines how an instance group dynamically adds and
+      # terminates EC2 instances in response to the value of a CloudWatch
+      # metric.
+      # @option params [required, String] :cluster_id
+      #   Specifies the ID of a cluster. The instance group to which the
+      #   automatic scaling policy is applied is within this cluster.
+      # @option params [required, String] :instance_group_id
+      #   Specifies the ID of the instance group to which the automatic scaling
+      #   policy is applied.
+      # @option params [required, Types::AutoScalingPolicy] :auto_scaling_policy
+      #   Specifies the definition of the automatic scaling policy.
+      # @return [Types::PutAutoScalingPolicyOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::PutAutoScalingPolicyOutput#cluster_id #ClusterId} => String
+      #   * {Types::PutAutoScalingPolicyOutput#instance_group_id #InstanceGroupId} => String
+      #   * {Types::PutAutoScalingPolicyOutput#auto_scaling_policy #AutoScalingPolicy} => Types::AutoScalingPolicyDescription
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_auto_scaling_policy({
+      #     cluster_id: "ClusterId", # required
+      #     instance_group_id: "InstanceGroupId", # required
+      #     auto_scaling_policy: { # required
+      #       constraints: { # required
+      #         min_capacity: 1, # required
+      #         max_capacity: 1, # required
+      #       },
+      #       rules: [ # required
+      #         {
+      #           name: "String", # required
+      #           description: "String",
+      #           action: { # required
+      #             market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #             simple_scaling_policy_configuration: { # required
+      #               adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #               scaling_adjustment: 1, # required
+      #               cool_down: 1,
+      #             },
+      #           },
+      #           trigger: { # required
+      #             cloud_watch_alarm_definition: { # required
+      #               comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #               evaluation_periods: 1,
+      #               metric_name: "String", # required
+      #               namespace: "String",
+      #               period: 1, # required
+      #               statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #               threshold: 1.0, # required
+      #               unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #               dimensions: [
+      #                 {
+      #                   key: "String",
+      #                   value: "String",
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #         },
+      #       ],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.cluster_id #=> String
+      #   resp.instance_group_id #=> String
+      #   resp.auto_scaling_policy.status.state #=> String, one of "PENDING", "ATTACHING", "ATTACHED", "DETACHING", "DETACHED", "FAILED"
+      #   resp.auto_scaling_policy.status.state_change_reason.code #=> String, one of "USER_REQUEST", "PROVISION_FAILURE", "CLEANUP_FAILURE"
+      #   resp.auto_scaling_policy.status.state_change_reason.message #=> String
+      #   resp.auto_scaling_policy.constraints.min_capacity #=> Integer
+      #   resp.auto_scaling_policy.constraints.max_capacity #=> Integer
+      #   resp.auto_scaling_policy.rules #=> Array
+      #   resp.auto_scaling_policy.rules[0].name #=> String
+      #   resp.auto_scaling_policy.rules[0].description #=> String
+      #   resp.auto_scaling_policy.rules[0].action.market #=> String, one of "ON_DEMAND", "SPOT"
+      #   resp.auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.adjustment_type #=> String, one of "CHANGE_IN_CAPACITY", "PERCENT_CHANGE_IN_CAPACITY", "EXACT_CAPACITY"
+      #   resp.auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.scaling_adjustment #=> Integer
+      #   resp.auto_scaling_policy.rules[0].action.simple_scaling_policy_configuration.cool_down #=> Integer
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.comparison_operator #=> String, one of "GREATER_THAN_OR_EQUAL", "GREATER_THAN", "LESS_THAN", "LESS_THAN_OR_EQUAL"
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.evaluation_periods #=> Integer
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.metric_name #=> String
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.namespace #=> String
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.period #=> Integer
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.statistic #=> String, one of "SAMPLE_COUNT", "AVERAGE", "SUM", "MINIMUM", "MAXIMUM"
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.threshold #=> Float
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.unit #=> String, one of "NONE", "SECONDS", "MICRO_SECONDS", "MILLI_SECONDS", "BYTES", "KILO_BYTES", "MEGA_BYTES", "GIGA_BYTES", "TERA_BYTES", "BITS", "KILO_BITS", "MEGA_BITS", "GIGA_BITS", "TERA_BITS", "PERCENT", "COUNT", "BYTES_PER_SECOND", "KILO_BYTES_PER_SECOND", "MEGA_BYTES_PER_SECOND", "GIGA_BYTES_PER_SECOND", "TERA_BYTES_PER_SECOND", "BITS_PER_SECOND", "KILO_BITS_PER_SECOND", "MEGA_BITS_PER_SECOND", "GIGA_BITS_PER_SECOND", "TERA_BITS_PER_SECOND", "COUNT_PER_SECOND"
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions #=> Array
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].key #=> String
+      #   resp.auto_scaling_policy.rules[0].trigger.cloud_watch_alarm_definition.dimensions[0].value #=> String
+      # @overload put_auto_scaling_policy(params = {})
+      # @param [Hash] params ({})
+      def put_auto_scaling_policy(params = {}, options = {})
+        req = build_request(:put_auto_scaling_policy, params)
+        req.send_request(options)
+      end
+
+      # Removes an automatic scaling policy from a specified instance group
+      # within an EMR cluster.
+      # @option params [required, String] :cluster_id
+      #   Specifies the ID of a cluster. The instance group to which the
+      #   automatic scaling policy is applied is within this cluster.
+      # @option params [required, String] :instance_group_id
+      #   Specifies the ID of the instance group to which the scaling policy is
+      #   applied.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.remove_auto_scaling_policy({
+      #     cluster_id: "ClusterId", # required
+      #     instance_group_id: "InstanceGroupId", # required
+      #   })
+      # @overload remove_auto_scaling_policy(params = {})
+      # @param [Hash] params ({})
+      def remove_auto_scaling_policy(params = {}, options = {})
+        req = build_request(:remove_auto_scaling_policy, params)
         req.send_request(options)
       end
 
@@ -934,12 +1153,13 @@ module Aws
       end
 
       # RunJobFlow creates and starts running a new job flow. The job flow
-      # will run the steps specified. Once the job flow completes, the cluster
-      # is stopped and the HDFS partition is lost. To prevent loss of data,
-      # configure the last step of the job flow to store results in Amazon S3.
-      # If the JobFlowInstancesConfig `KeepJobFlowAliveWhenNoSteps` parameter
-      # is set to `TRUE`, the job flow will transition to the WAITING state
-      # rather than shutting down once the steps have completed.
+      # will run the steps specified. After the job flow completes, the
+      # cluster is stopped and the HDFS partition is lost. To prevent loss of
+      # data, configure the last step of the job flow to store results in
+      # Amazon S3. If the JobFlowInstancesConfig `KeepJobFlowAliveWhenNoSteps`
+      # parameter is set to `TRUE`, the job flow will transition to the
+      # WAITING state rather than shutting down after the steps have
+      # completed.
       #
       # For additional protection, you can set the JobFlowInstancesConfig
       # `TerminationProtected` parameter to `TRUE` to lock the job flow and
@@ -953,16 +1173,15 @@ module Aws
       # can bypass the 256-step limitation in various ways, including using
       # the SSH shell to connect to the master node and submitting queries
       # directly to the software running on the master node, such as Hive and
-      # Hadoop. For more information on how to do this, go to [Add More than
-      # 256 Steps to a Job Flow][1] in the *Amazon Elastic MapReduce
-      # Developer's Guide*.
+      # Hadoop. For more information on how to do this, see [Add More than 256
+      # Steps to a Job Flow][1] in the *Amazon EMR Management Guide*.
       #
       # For long running job flows, we recommend that you periodically store
       # your results.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/DeveloperGuide/AddMoreThan256Steps.html
+      # [1]: http://docs.aws.amazon.com/ElasticMapReduce/latest/Management/Guide/AddMoreThan256Steps.html
       # @option params [required, String] :name
       #   The name of the job flow.
       # @option params [String] :log_uri
@@ -989,8 +1208,16 @@ module Aws
       #   of Hadoop from the defaults shown above.
       #
       #   For details about the AMI versions currently supported by Amazon
-      #   Elastic MapReduce, go to [AMI Versions Supported in Elastic
-      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer's Guide.*
+      #   Elastic MapReduce, see [AMI Versions Supported in Elastic
+      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer Guide.*
+      #
+      #   <note markdown="1"> Previously, the EMR AMI version API parameter options allowed you to
+      #   use latest for the latest AMI version rather than specify a numerical
+      #   value. Some regions no longer support this deprecated option as they
+      #   only have a newer release label version of EMR, which requires you to
+      #   specify an EMR release label release (EMR 4.x or later).
+      #
+      #    </note>
       #
       #
       #
@@ -1017,8 +1244,8 @@ module Aws
       #    </note>
       #
       #   A list of strings that indicates third-party software to use with the
-      #   job flow. For more information, go to [Use Third Party Applications
-      #   with Amazon EMR][1]. Currently supported values are:
+      #   job flow. For more information, see [Use Third Party Applications with
+      #   Amazon EMR][1]. Currently supported values are:
       #
       #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
       #
@@ -1097,6 +1324,26 @@ module Aws
       #   instances.
       # @option params [String] :security_configuration
       #   The name of a security configuration to apply to the cluster.
+      # @option params [String] :auto_scaling_role
+      #   An IAM role for automatic scaling policies. The default role is
+      #   `EMR_AutoScaling_DefaultRole`. The IAM role provides permissions that
+      #   the automatic scaling feature requires to launch and terminate EC2
+      #   instances in an instance group.
+      # @option params [String] :scale_down_behavior
+      #   Specifies the way that individual Amazon EC2 instances terminate when
+      #   an automatic scale-in activity occurs or an instance group is resized.
+      #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
+      #   nodes at the instance-hour boundary, regardless of when the request to
+      #   terminate the instance was submitted. This option is only available
+      #   with Amazon EMR 5.1.0 and later and is the default for clusters
+      #   created using that version. `TERMINATE_AT_TASK_COMPLETION` indicates
+      #   that Amazon EMR blacklists and drains tasks from nodes before
+      #   terminating the Amazon EC2 instances, regardless of the instance-hour
+      #   boundary. With either behavior, Amazon EMR removes the least active
+      #   nodes first and blocks instance termination if it could lead to HDFS
+      #   corruption. `TERMINATE_AT_TASK_COMPLETION` available only in Amazon
+      #   EMR version 4.1.0 and later, and is the default for versions of Amazon
+      #   EMR earlier than 5.1.0.
       # @return [Types::RunJobFlowOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RunJobFlowOutput#job_flow_id #JobFlowId} => String
@@ -1143,6 +1390,44 @@ module Aws
       #               },
       #             ],
       #             ebs_optimized: false,
+      #           },
+      #           auto_scaling_policy: {
+      #             constraints: { # required
+      #               min_capacity: 1, # required
+      #               max_capacity: 1, # required
+      #             },
+      #             rules: [ # required
+      #               {
+      #                 name: "String", # required
+      #                 description: "String",
+      #                 action: { # required
+      #                   market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                   simple_scaling_policy_configuration: { # required
+      #                     adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                     scaling_adjustment: 1, # required
+      #                     cool_down: 1,
+      #                   },
+      #                 },
+      #                 trigger: { # required
+      #                   cloud_watch_alarm_definition: { # required
+      #                     comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                     evaluation_periods: 1,
+      #                     metric_name: "String", # required
+      #                     namespace: "String",
+      #                     period: 1, # required
+      #                     statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                     threshold: 1.0, # required
+      #                     unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                     dimensions: [
+      #                       {
+      #                         key: "String",
+      #                         value: "String",
+      #                       },
+      #                     ],
+      #                   },
+      #                 },
+      #               },
+      #             ],
       #           },
       #         },
       #       ],
@@ -1224,6 +1509,8 @@ module Aws
       #       },
       #     ],
       #     security_configuration: "XmlString",
+      #     auto_scaling_role: "XmlString",
+      #     scale_down_behavior: "TERMINATE_AT_INSTANCE_HOUR", # accepts TERMINATE_AT_INSTANCE_HOUR, TERMINATE_AT_TASK_COMPLETION
       #   })
       #
       # @example Response structure
@@ -1235,9 +1522,9 @@ module Aws
         req.send_request(options)
       end
 
-      # SetTerminationProtection locks a job flow so the Amazon EC2 instances
-      # in the cluster cannot be terminated by user intervention, an API call,
-      # or in the event of a job-flow error. The cluster still terminates upon
+      # SetTerminationProtection locks a job flow so the EC2 instances in the
+      # cluster cannot be terminated by user intervention, an API call, or in
+      # the event of a job-flow error. The cluster still terminates upon
       # successful completion of the job flow. Calling
       # SetTerminationProtection on a job flow is analogous to calling the
       # Amazon EC2 DisableAPITermination API on all of the EC2 instances in a
@@ -1253,8 +1540,8 @@ module Aws
       # by a subsequent call to SetTerminationProtection in which you set the
       # value to `false`.
       #
-      # For more information, go to [Protecting a Job Flow from
-      # Termination][1] in the *Amazon Elastic MapReduce Developer's Guide.*
+      # For more information, see[Protecting a Job Flow from Termination][1]
+      # in the *Amazon EMR Guide.*
       #
       #
       #
@@ -1318,7 +1605,7 @@ module Aws
       #
       # The maximum number of JobFlows allowed is 10. The call to
       # TerminateJobFlows is asynchronous. Depending on the configuration of
-      # the job flow, it may take up to 5-20 minutes for the job flow to
+      # the job flow, it may take up to 1-5 minutes for the job flow to
       # completely terminate and release allocated resources, such as Amazon
       # EC2 instances.
       # @option params [required, Array<String>] :job_flow_ids

@@ -24,7 +24,7 @@ module Aws
   # and return a response object.
   #
   #     servicecatalog = Aws::ServiceCatalog::Client.new
-  #     resp = servicecatalog.describe_product(params)
+  #     resp = servicecatalog.accept_portfolio_share(params)
   #
   #
   # See {Client} for more information.

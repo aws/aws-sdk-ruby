@@ -222,12 +222,17 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] type
-      #   \[Required\] The type of the authorizer. Currently, the only valid
-      #   type is TOKEN.
+      #   \[Required\] The type of the authorizer. Currently, the valid type
+      #   is `TOKEN` for a Lambda function or `COGNITO_USER_POOLS` for an
+      #   Amazon Cognito user pool.
       #   @return [String]
       #
       # @!attribute [rw] provider_arns
-      #   A list of the provider ARNs of the authorizer.
+      #   A list of the provider ARNs of the authorizer. For an `TOKEN`
+      #   authorizer, this is not defined. For authorizers of the
+      #   `COGNITO_USER_POOLS` type, each element corresponds to a user pool
+      #   ARN of this format:
+      #   `arn:aws:cognito-idp:\{region\}:\{account_id\}:userpool/\{user_pool_id\}`.
       #   @return [Array<String>]
       #
       # @!attribute [rw] auth_type
@@ -237,14 +242,16 @@ module Aws
       #
       # @!attribute [rw] authorizer_uri
       #   \[Required\] Specifies the authorizer's Uniform Resource Identifier
-      #   (URI). For TOKEN authorizers, this must be a well-formed Lambda
-      #   function URI. The URI should be of the form
-      #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`.
-      #   `Region` is used to determine the right endpoint. In this case,
-      #   `path` is used to indicate that the remaining substring in the URI
-      #   should be treated as the path to the resource, including the initial
-      #   `/`. For Lambda functions, this is usually of the form
-      #   /2015-03-31/functions/\[FunctionARN\]/invocations
+      #   (URI). For `TOKEN` authorizers, this must be a well-formed Lambda
+      #   function URI, for example,
+      #   `arn:aws:apigateway:us-west-2:lambda:path/2015-03-31/functions/arn:aws:lambda:us-west-2:\{account_id\}:function:\{lambda_function_name\}/invocations`.
+      #   In general, the URI has this form
+      #   `arn:aws:apigateway:\{region\}:lambda:path/\{service_api\}`, where
+      #   `\{region\}` is the same as the region hosting the Lambda function,
+      #   `path` indicates that the remaining substring in the URI should be
+      #   treated as the path to the resource, including the initial `/`. For
+      #   Lambda functions, this is usually of the form
+      #   /2015-03-31/functions/\[FunctionARN\]/invocations.
       #   @return [String]
       #
       # @!attribute [rw] authorizer_credentials
@@ -256,15 +263,16 @@ module Aws
       #
       # @!attribute [rw] identity_source
       #   \[Required\] The source of the identity in an incoming request. For
-      #   TOKEN authorizers, this value is a mapping expression with the same
-      #   syntax as integration parameter mappings. The only valid source for
-      #   tokens is 'header', so the expression should match
+      #   a `TOKEN` authorizer, this value is a mapping expression with the
+      #   same syntax as integration parameter mappings. The only valid source
+      #   for tokens is 'header', so the expression should match
       #   'method.request.header.\[headerName\]'. The value of the header
-      #   '\[headerName\]' will be interpreted as the incoming token.
+      #   '\[headerName\]' will be interpreted as the incoming token. For
+      #   `COGNITO_USER_POOLS` authorizers, this property is used.
       #   @return [String]
       #
       # @!attribute [rw] identity_validation_expression
-      #   A validation expression for the incoming identity. For TOKEN
+      #   A validation expression for the incoming identity. For `TOKEN`
       #   authorizers, this value should be a regular expression. The incoming
       #   token from the client is matched against this expression, and will
       #   proceed if the token matches. If the token doesn't match, the
@@ -612,7 +620,7 @@ module Aws
       #
       #       {
       #         rest_api_id: "String", # required
-      #         stage_name: "String", # required
+      #         stage_name: "String",
       #         stage_description: "String",
       #         description: "String",
       #         cache_cluster_enabled: false,
@@ -792,6 +800,7 @@ module Aws
       #         name: "String", # required
       #         description: "String",
       #         clone_from: "String",
+      #         binary_media_types: ["String"],
       #       }
       # @!attribute [rw] name
       #   The name of the RestApi.
@@ -804,10 +813,16 @@ module Aws
       # @!attribute [rw] clone_from
       #   The ID of the RestApi that you want to clone from.
       #   @return [String]
+      #
+      # @!attribute [rw] binary_media_types
+      #   The list of binary media types supported by the RestApi. By default,
+      #   the RestApi supports only UTF-8-encoded text payloads.
+      #   @return [Array<String>]
       class CreateRestApiRequest < Struct.new(
         :name,
         :description,
-        :clone_from)
+        :clone_from,
+        :binary_media_types)
         include Aws::Structure
       end
 
@@ -1552,6 +1567,7 @@ module Aws
       #         position: "String",
       #         limit: 1,
       #         name_query: "String",
+      #         customer_id: "String",
       #         include_values: false,
       #       }
       # @!attribute [rw] position
@@ -1567,6 +1583,9 @@ module Aws
       #   The name of queried API keys.
       #   @return [String]
       #
+      # @!attribute [rw] customer_id
+      #   @return [String]
+      #
       # @!attribute [rw] include_values
       #   A boolean flag to specify whether (`true`) or not (`false`) the
       #   result contains key values.
@@ -1575,6 +1594,7 @@ module Aws
         :position,
         :limit,
         :name_query,
+        :customer_id,
         :include_values)
         include Aws::Structure
       end
@@ -2465,7 +2485,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents an HTTP, AWS, or Mock integration.
+      # Represents an HTTP, HTTP\_PROXY, AWS, AWS\_PROXY, or Mock integration.
       #
       # <div class="remarks">
       # In the API Gateway console, the built-in Lambda integration is an AWS
@@ -2473,12 +2493,13 @@ module Aws
       # </div>
       #
       # <div class="seeAlso">
-      # [Creating an API][1]
+      # [Creating an API][1], [][2]
       # </div>
       #
       #
       #
       # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/how-to-create-api.html
+      # [2]: http://docs.aws.amazon.com/apigateway/latest/developerguide/.html
       # @!attribute [rw] type
       #   Specifies the integration's type. The valid value is `HTTP` for
       #   integrating with an HTTP back end, `AWS` for any AWS service
@@ -2516,7 +2537,7 @@ module Aws
       #   Role for Amazon API Gateway to assume, use the role's Amazon
       #   Resource Name (ARN). To require that the caller's identity be
       #   passed through from the request, specify the string
-      #   `arn:aws:iam::\*:user/\*`. To use resource-based permissions on
+      #   `arn:aws:iam::*:user/*`. To use resource-based permissions on
       #   supported AWS services, specify null.
       #   @return [String]
       #
@@ -2569,6 +2590,23 @@ module Aws
       #   </div>
       #   @return [String]
       #
+      # @!attribute [rw] content_handling
+      #   Specifies how to handle request payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a request payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a request payload from a binary blob
+      #     to a Base64-encoded string.
+      #
+      #   If this property is not defined, the request payload will be passed
+      #   through from the method request to integration request without
+      #   modification, provided that the `passthroughBehaviors` is configured
+      #   to support payload pass-through.
+      #   @return [String]
+      #
       # @!attribute [rw] cache_namespace
       #   Specifies the integration's cache namespace.
       #   @return [String]
@@ -2618,6 +2656,7 @@ module Aws
         :request_parameters,
         :request_templates,
         :passthrough_behavior,
+        :content_handling,
         :cache_namespace,
         :cache_key_parameters,
         :integration_responses)
@@ -2672,11 +2711,28 @@ module Aws
       #   body. Response templates are represented as a key/value map, with a
       #   content-type as the key and a template as the value.
       #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] content_handling
+      #   Specifies how to handle response payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a response payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a response payload from a binary blob
+      #     to a Base64-encoded string.
+      #
+      #   If this property is not defined, the response payload will be passed
+      #   through from the integration response to the method response without
+      #   modification.
+      #   @return [String]
       class IntegrationResponse < Struct.new(
         :status_code,
         :selection_pattern,
         :response_parameters,
-        :response_templates)
+        :response_templates,
+        :content_handling)
         include Aws::Structure
       end
 
@@ -3056,9 +3112,9 @@ module Aws
       #
       # @!attribute [rw] schema
       #   The schema for the model. For `application/json` models, this should
-      #   be [JSON-schema draft v4][1] model. Do not include "\\\*/"
+      #   be [JSON-schema draft v4][1] model. Do not include "\\*/"
       #   characters in the description of any properties because such
-      #   "\\\*/" characters may be interpreted as the closing marker for
+      #   "\\*/" characters may be interpreted as the closing marker for
       #   comments in some languages, such as Java or JavaScript, causing the
       #   installation of your API's SDK generated by API Gateway to fail.
       #
@@ -3174,6 +3230,7 @@ module Aws
       #         passthrough_behavior: "String",
       #         cache_namespace: "String",
       #         cache_key_parameters: ["String"],
+      #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
       #       }
       # @!attribute [rw] rest_api_id
       #   Specifies a put integration request's API identifier.
@@ -3254,6 +3311,23 @@ module Aws
       # @!attribute [rw] cache_key_parameters
       #   Specifies a put integration input's cache key parameters.
       #   @return [Array<String>]
+      #
+      # @!attribute [rw] content_handling
+      #   Specifies how to handle request payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a request payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a request payload from a binary blob
+      #     to a Base64-encoded string.
+      #
+      #   If this property is not defined, the request payload will be passed
+      #   through from the method request to integration request without
+      #   modification, provided that the `passthroughBehaviors` is configured
+      #   to support payload pass-through.
+      #   @return [String]
       class PutIntegrationRequest < Struct.new(
         :rest_api_id,
         :resource_id,
@@ -3266,7 +3340,8 @@ module Aws
         :request_templates,
         :passthrough_behavior,
         :cache_namespace,
-        :cache_key_parameters)
+        :cache_key_parameters,
+        :content_handling)
         include Aws::Structure
       end
 
@@ -3286,6 +3361,7 @@ module Aws
       #         response_templates: {
       #           "String" => "String",
       #         },
+      #         content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
       #       }
       # @!attribute [rw] rest_api_id
       #   Specifies a put integration response request's API identifier.
@@ -3326,6 +3402,22 @@ module Aws
       # @!attribute [rw] response_templates
       #   Specifies a put integration response's templates.
       #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] content_handling
+      #   Specifies how to handle response payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a response payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a response payload from a binary blob
+      #     to a Base64-encoded string.
+      #
+      #   If this property is not defined, the response payload will be passed
+      #   through from the integration response to the method response without
+      #   modification.
+      #   @return [String]
       class PutIntegrationResponseRequest < Struct.new(
         :rest_api_id,
         :resource_id,
@@ -3333,7 +3425,8 @@ module Aws
         :status_code,
         :selection_pattern,
         :response_parameters,
-        :response_templates)
+        :response_templates,
+        :content_handling)
         include Aws::Structure
       end
 
@@ -3670,12 +3763,18 @@ module Aws
       #   The warning messages reported when `failonwarnings` is turned on
       #   during API import.
       #   @return [Array<String>]
+      #
+      # @!attribute [rw] binary_media_types
+      #   The list of binary media types supported by the RestApi. By default,
+      #   the RestApi supports only UTF-8-encoded text payloads.
+      #   @return [Array<String>]
       class RestApi < Struct.new(
         :id,
         :name,
         :description,
         :created_date,
-        :warnings)
+        :warnings,
+        :binary_media_types)
         include Aws::Structure
       end
 
@@ -3765,7 +3864,7 @@ module Aws
       #   A map that defines the method settings for a Stage resource. Keys
       #   (designated as `/\{method_setting_key` below) are method paths
       #   defined as `\{resource_path\}/\{http_method\}` for an individual
-      #   method override, or `/\*/\*` for overriding all methods in the
+      #   method override, or `/*/*` for overriding all methods in the
       #   stage.
       #   @return [Hash<String,Types::MethodSetting>]
       #

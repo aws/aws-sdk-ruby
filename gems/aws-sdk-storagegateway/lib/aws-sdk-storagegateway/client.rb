@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -694,7 +696,7 @@ module Aws
       # @option params [required, Integer] :tape_size_in_bytes
       #   The size, in bytes, of the virtual tape that you want to create.
       #
-      #   <note markdown="1">The size must be aligned by gigabyte (1024\*1024\*1024 byte).
+      #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
       #
       #    </note>
       # @option params [required, String] :tape_barcode
@@ -734,7 +736,7 @@ module Aws
       # @option params [required, Integer] :tape_size_in_bytes
       #   The size, in bytes, of the virtual tapes that you want to create.
       #
-      #   <note markdown="1">The size must be aligned by gigabyte (1024\*1024\*1024 byte).
+      #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
       #
       #    </note>
       # @option params [required, String] :client_token

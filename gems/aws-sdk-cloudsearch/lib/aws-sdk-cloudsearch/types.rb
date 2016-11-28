@@ -310,7 +310,7 @@ module Aws
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
-      #   Dynamic field names must begin or end with a wildcard (\*). The
+      #   Dynamic field names must begin or end with a wildcard (*). The
       #   wildcard can also be the only character in a dynamic field name.
       #   Multiple wildcards, and wildcards embedded within a string are not
       #   supported.
@@ -1471,7 +1471,7 @@ module Aws
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
-      #   Dynamic field names must begin or end with a wildcard (\*). The
+      #   Dynamic field names must begin or end with a wildcard (*). The
       #   wildcard can also be the only character in a dynamic field name.
       #   Multiple wildcards, and wildcards embedded within a string are not
       #   supported.
@@ -1715,7 +1715,7 @@ module Aws
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
-      #   Dynamic field names must begin or end with a wildcard (\*). The
+      #   Dynamic field names must begin or end with a wildcard (*). The
       #   wildcard can also be the only character in a dynamic field name.
       #   Multiple wildcards, and wildcards embedded within a string are not
       #   supported.
@@ -1842,7 +1842,7 @@ module Aws
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
-      #   Dynamic field names must begin or end with a wildcard (\*). The
+      #   Dynamic field names must begin or end with a wildcard (*). The
       #   wildcard can also be the only character in a dynamic field name.
       #   Multiple wildcards, and wildcards embedded within a string are not
       #   supported.
@@ -2097,7 +2097,7 @@ module Aws
       #
       #   Regular field names begin with a letter and can contain the
       #   following characters: a-z (lowercase), 0-9, and \_ (underscore).
-      #   Dynamic field names must begin or end with a wildcard (\*). The
+      #   Dynamic field names must begin or end with a wildcard (*). The
       #   wildcard can also be the only character in a dynamic field name.
       #   Multiple wildcards, and wildcards embedded within a string are not
       #   supported.

@@ -97,7 +97,7 @@ module Aws
       #   Specifies whether IAM user passwords must contain at least one of the
       #   following non-alphanumeric characters:
       #
-      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| '
+      #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
       #
       #   Default value: false
       # @option options [Boolean] :require_numbers

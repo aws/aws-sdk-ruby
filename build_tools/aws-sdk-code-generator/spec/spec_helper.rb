@@ -58,19 +58,29 @@ module SpecHelper
     #
     def generate_service(module_names, options = {})
 
-      multiple_files = options.fetch(:multiple_files, true)
+      svc_path = module_names.map do |name|
+        AwsSdkCodeGenerator::Underscore.underscore(name)
+      end.join('/')
 
-      path = module_names.map(&:downcase).join('/')
-      dir = File.join(File.dirname(__FILE__), 'fixtures', 'interfaces', path)
-      generator = AwsSdkCodeGenerator::Generator.new({
-        module_names: module_names,
-        api: JSON.load(File.read("#{dir}/api.json")),
-        paginators: JSON.load(File.read("#{dir}/paginators.json")),
-        resources: JSON.load(File.read("#{dir}/resources.json")),
-        waiters: JSON.load(File.read("#{dir}/waiters.json")),
-      })
+      api_dir = File.join([
+        File.dirname(__FILE__),
+        'fixtures',
+        'interfaces',
+        svc_path,
+      ])
 
-      if multiple_files
+      generator_opts = {}
+      generator_opts[:module_names] = module_names
+      [:api, :paginators, :resources, :waiters, :examples].each do |option|
+        path = "#{api_dir}/#{option}.json"
+        if File.exists?(path)
+          generator_opts[option] = JSON.load(File.read(path))
+        end
+      end
+
+      generator = AwsSdkCodeGenerator::Generator.new(generator_opts)
+
+      if options.fetch(:multiple_files, true)
 
         tmpdir = Dir.mktmpdir
         generator.generate_src_files.each do |path, code|
@@ -81,7 +91,7 @@ module SpecHelper
           end
         end
         $LOAD_PATH << tmpdir
-        require "#{tmpdir}/#{path}"
+        require "#{tmpdir}/#{svc_path}"
         tmpdir
 
       else

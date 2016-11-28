@@ -16,7 +16,7 @@ module Aws
       #         task_id: "ExportTaskId", # required
       #       }
       # @!attribute [rw] task_id
-      #   Id of the export task to cancel.
+      #   The ID of the export task.
       #   @return [String]
       class CancelExportTaskRequest < Struct.new(
         :task_id)
@@ -40,39 +40,34 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] log_group_name
-      #   The name of the log group to export.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name_prefix
-      #   Will only export log streams that match the provided
-      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
-      #   is applied.
+      #   Export only log streams that match the provided prefix. If you
+      #   don't specify a value, no prefix filter is applied.
       #   @return [String]
       #
       # @!attribute [rw] from
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. It indicates the start time of the range for the
-      #   request. Events with a timestamp prior to this time will not be
-      #   exported.
+      #   The start time of the range for the request, expressed as the number
+      #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
+      #   timestamp earlier than this time are not exported.
       #   @return [Integer]
       #
       # @!attribute [rw] to
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. It indicates the end time of the range for the
-      #   request. Events with a timestamp later than this time will not be
-      #   exported.
+      #   The end time of the range for the request, expressed as the number
+      #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
+      #   timestamp later than this time are not exported.
       #   @return [Integer]
       #
       # @!attribute [rw] destination
-      #   Name of Amazon S3 bucket to which the log data will be exported.
-      #
-      #   **Note:** Only buckets in the same AWS region are supported.
+      #   The name of S3 bucket for the exported log data. The bucket must be
+      #   in the same AWS region.
       #   @return [String]
       #
       # @!attribute [rw] destination_prefix
-      #   Prefix that will be used as the start of Amazon S3 key for every
-      #   object exported. If not specified, this defaults to
-      #   'exportedlogs'.
+      #   The prefix used as the start of the key for every object exported.
+      #   If you don't specify a value, the default is `exportedlogs`.
       #   @return [String]
       class CreateExportTaskRequest < Struct.new(
         :task_name,
@@ -86,7 +81,7 @@ module Aws
       end
 
       # @!attribute [rw] task_id
-      #   Id of the export task that got created.
+      #   The ID of the export task.
       #   @return [String]
       class CreateExportTaskResponse < Struct.new(
         :task_id)
@@ -100,7 +95,7 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to create.
+      #   The name of the log group.
       #   @return [String]
       class CreateLogGroupRequest < Struct.new(
         :log_group_name)
@@ -115,12 +110,11 @@ module Aws
       #         log_stream_name: "LogStreamName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group under which the log stream is to be
-      #   created.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name
-      #   The name of the log stream to create.
+      #   The name of the log stream.
       #   @return [String]
       class CreateLogStreamRequest < Struct.new(
         :log_group_name,
@@ -135,7 +129,7 @@ module Aws
       #         destination_name: "DestinationName", # required
       #       }
       # @!attribute [rw] destination_name
-      #   The name of destination to delete.
+      #   The name of the destination.
       #   @return [String]
       class DeleteDestinationRequest < Struct.new(
         :destination_name)
@@ -149,7 +143,7 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to delete.
+      #   The name of the log group.
       #   @return [String]
       class DeleteLogGroupRequest < Struct.new(
         :log_group_name)
@@ -164,12 +158,11 @@ module Aws
       #         log_stream_name: "LogStreamName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group under which the log stream to delete
-      #   belongs.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name
-      #   The name of the log stream to delete.
+      #   The name of the log stream.
       #   @return [String]
       class DeleteLogStreamRequest < Struct.new(
         :log_group_name,
@@ -185,12 +178,11 @@ module Aws
       #         filter_name: "FilterName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group that is associated with the metric filter
-      #   to delete.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name
-      #   The name of the metric filter to delete.
+      #   The name of the metric filter.
       #   @return [String]
       class DeleteMetricFilterRequest < Struct.new(
         :log_group_name,
@@ -205,8 +197,7 @@ module Aws
       #         log_group_name: "LogGroupName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group that is associated with the retention
-      #   policy to delete.
+      #   The name of the log group.
       #   @return [String]
       class DeleteRetentionPolicyRequest < Struct.new(
         :log_group_name)
@@ -221,12 +212,11 @@ module Aws
       #         filter_name: "FilterName", # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group that is associated with the subscription
-      #   filter to delete.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name
-      #   The name of the subscription filter to delete.
+      #   The name of the subscription filter.
       #   @return [String]
       class DeleteSubscriptionFilterRequest < Struct.new(
         :log_group_name,
@@ -243,19 +233,18 @@ module Aws
       #         limit: 1,
       #       }
       # @!attribute [rw] destination_name_prefix
-      #   Will only return destinations that match the provided
-      #   destinationNamePrefix. If you don't specify a value, no prefix is
-      #   applied.
+      #   The prefix to match. If you don't specify a value, no prefix filter
+      #   is applied.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of results to return.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
       class DescribeDestinationsRequest < Struct.new(
         :destination_name_prefix,
@@ -265,12 +254,12 @@ module Aws
       end
 
       # @!attribute [rw] destinations
+      #   The destinations.
       #   @return [Array<Types::Destination>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeDestinationsResponse < Struct.new(
         :destinations,
@@ -288,24 +277,23 @@ module Aws
       #         limit: 1,
       #       }
       # @!attribute [rw] task_id
-      #   Export task that matches the specified task Id will be returned.
-      #   This can result in zero or one export task.
+      #   The ID of the export task. Specifying a task ID filters the results
+      #   to zero or one export tasks.
       #   @return [String]
       #
       # @!attribute [rw] status_code
-      #   All export tasks that matches the specified status code will be
-      #   returned. This can return zero or more export tasks.
+      #   The status code of the export task. Specifying a status code filters
+      #   the results to zero or more export tasks.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous `DescribeExportTasks` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
       class DescribeExportTasksRequest < Struct.new(
         :task_id,
@@ -316,13 +304,12 @@ module Aws
       end
 
       # @!attribute [rw] export_tasks
-      #   A list of export tasks.
+      #   The export tasks.
       #   @return [Array<Types::ExportTask>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeExportTasksResponse < Struct.new(
         :export_tasks,
@@ -339,20 +326,17 @@ module Aws
       #         limit: 1,
       #       }
       # @!attribute [rw] log_group_name_prefix
-      #   Will only return log groups that match the provided
-      #   logGroupNamePrefix. If you don't specify a value, no prefix filter
-      #   is applied.
+      #   The prefix to match.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous `DescribeLogGroups` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
       class DescribeLogGroupsRequest < Struct.new(
         :log_group_name_prefix,
@@ -362,13 +346,12 @@ module Aws
       end
 
       # @!attribute [rw] log_groups
-      #   A list of log groups.
+      #   The log groups.
       #   @return [Array<Types::LogGroup>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeLogGroupsResponse < Struct.new(
         :log_groups,
@@ -388,37 +371,38 @@ module Aws
       #         limit: 1,
       #       }
       # @!attribute [rw] log_group_name
-      #   The log group name for which log streams are to be listed.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name_prefix
-      #   Will only return log streams that match the provided
-      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
-      #   is applied.
+      #   The prefix to match.
+      #
+      #   You cannot specify this parameter if `orderBy` is `LastEventTime`.
       #   @return [String]
       #
       # @!attribute [rw] order_by
-      #   Specifies what to order the returned log streams by. Valid arguments
-      #   are 'LogStreamName' or 'LastEventTime'. If you don't specify a
-      #   value, results are ordered by LogStreamName. If 'LastEventTime' is
-      #   chosen, the request cannot also contain a logStreamNamePrefix.
+      #   If the value is `LogStreamName`, the results are ordered by log
+      #   stream name. If the value is `LastEventTime`, the results are
+      #   ordered by the event time. The default value is `LogStreamName`.
+      #
+      #   If you order the results by event time, you cannot specify the
+      #   `logStreamNamePrefix` parameter.
       #   @return [String]
       #
       # @!attribute [rw] descending
-      #   If set to true, results are returned in descending order. If you
-      #   don't specify a value or set it to false, results are returned in
-      #   ascending order.
+      #   If the value is true, results are returned in descending order. If
+      #   the value is to false, results are returned in ascending order. The
+      #   default value is false.
       #   @return [Boolean]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous `DescribeLogStreams` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
       class DescribeLogStreamsRequest < Struct.new(
         :log_group_name,
@@ -431,13 +415,12 @@ module Aws
       end
 
       # @!attribute [rw] log_streams
-      #   A list of log streams.
+      #   The log streams.
       #   @return [Array<Types::LogStream>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeLogStreamsResponse < Struct.new(
         :log_streams,
@@ -449,46 +432,55 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         log_group_name: "LogGroupName", # required
+      #         log_group_name: "LogGroupName",
       #         filter_name_prefix: "FilterName",
       #         next_token: "NextToken",
       #         limit: 1,
+      #         metric_name: "MetricName",
+      #         metric_namespace: "MetricNamespace",
       #       }
       # @!attribute [rw] log_group_name
-      #   The log group name for which metric filters are to be listed.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name_prefix
-      #   Will only return metric filters that match the provided
-      #   filterNamePrefix. If you don't specify a value, no prefix filter is
-      #   applied.
+      #   The prefix to match.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous `DescribeMetricFilters` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
+      #
+      # @!attribute [rw] metric_name
+      #   The name of the CloudWatch metric.
+      #   @return [String]
+      #
+      # @!attribute [rw] metric_namespace
+      #   The namespace of the CloudWatch metric.
+      #   @return [String]
       class DescribeMetricFiltersRequest < Struct.new(
         :log_group_name,
         :filter_name_prefix,
         :next_token,
-        :limit)
+        :limit,
+        :metric_name,
+        :metric_namespace)
         include Aws::Structure
       end
 
       # @!attribute [rw] metric_filters
+      #   The metric filters.
       #   @return [Array<Types::MetricFilter>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeMetricFiltersResponse < Struct.new(
         :metric_filters,
@@ -506,23 +498,22 @@ module Aws
       #         limit: 1,
       #       }
       # @!attribute [rw] log_group_name
-      #   The log group name for which subscription filters are to be listed.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name_prefix
-      #   Will only return subscription filters that match the provided
-      #   filterNamePrefix. If you don't specify a value, no prefix filter is
-      #   applied.
+      #   The prefix to match. If you don't specify a value, no prefix filter
+      #   is applied.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of results to return.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       #   @return [Integer]
       class DescribeSubscriptionFiltersRequest < Struct.new(
         :log_group_name,
@@ -533,12 +524,12 @@ module Aws
       end
 
       # @!attribute [rw] subscription_filters
+      #   The subscription filters.
       #   @return [Array<Types::SubscriptionFilter>]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items to return. The token expires
+      #   after 24 hours.
       #   @return [String]
       class DescribeSubscriptionFiltersResponse < Struct.new(
         :subscription_filters,
@@ -546,19 +537,20 @@ module Aws
         include Aws::Structure
       end
 
-      # A cross account destination that is the recipient of subscription log
+      # Represents a cross-account destination that receives subscription log
       # events.
       # @!attribute [rw] destination_name
-      #   Name of the destination.
+      #   The name of the destination.
       #   @return [String]
       #
       # @!attribute [rw] target_arn
-      #   ARN of the physical target where the log events will be delivered
-      #   (eg. ARN of a Kinesis stream).
+      #   The Amazon Resource Name (ARN) of the physical target where the log
+      #   events will be delivered (for example, a Kinesis stream).
       #   @return [String]
       #
       # @!attribute [rw] role_arn
-      #   A role for impersonation for delivering log events to the target.
+      #   A role for impersonation, used when delivering log events to the
+      #   target.
       #   @return [String]
       #
       # @!attribute [rw] access_policy
@@ -567,12 +559,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] arn
-      #   ARN of this destination.
+      #   The ARN of this destination.
       #   @return [String]
       #
       # @!attribute [rw] creation_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC specifying when this destination was created.
+      #   The creation time of the destination.
       #   @return [Integer]
       class Destination < Struct.new(
         :destination_name,
@@ -586,7 +577,7 @@ module Aws
 
       # Represents an export task.
       # @!attribute [rw] task_id
-      #   Id of the export task.
+      #   The ID of the export task.
       #   @return [String]
       #
       # @!attribute [rw] task_name
@@ -598,28 +589,26 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] from
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. Events with a timestamp prior to this time are
-      #   not exported.
+      #   The start time. Events with a timestamp prior to this time are not
+      #   exported.
       #   @return [Integer]
       #
       # @!attribute [rw] to
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. Events with a timestamp later than this time are
-      #   not exported.
+      #   The end time. Events with a timestamp later than this time are not
+      #   exported.
       #   @return [Integer]
       #
       # @!attribute [rw] destination
-      #   Name of Amazon S3 bucket to which the log data was exported.
+      #   The name of Amazon S3 bucket to which the log data was exported.
       #   @return [String]
       #
       # @!attribute [rw] destination_prefix
-      #   Prefix that was used as the start of Amazon S3 key for every object
-      #   exported.
+      #   The prefix that was used as the start of Amazon S3 key for every
+      #   object exported.
       #   @return [String]
       #
       # @!attribute [rw] status
-      #   Status of the export task.
+      #   The status of the export task.
       #   @return [Types::ExportTaskStatus]
       #
       # @!attribute [rw] execution_info
@@ -640,11 +629,11 @@ module Aws
 
       # Represents the status of an export task.
       # @!attribute [rw] creation_time
-      #   A point in time when the export task got created.
+      #   The creation time of the export task.
       #   @return [Integer]
       #
       # @!attribute [rw] completion_time
-      #   A point in time when the export task got completed.
+      #   The completion time of the export task.
       #   @return [Integer]
       class ExportTaskExecutionInfo < Struct.new(
         :creation_time,
@@ -654,11 +643,11 @@ module Aws
 
       # Represents the status of an export task.
       # @!attribute [rw] code
-      #   Status code of the export task.
+      #   The status code of the export task.
       #   @return [String]
       #
       # @!attribute [rw] message
-      #   Status message related to the `code`.
+      #   The status message related to the status code.
       #   @return [String]
       class ExportTaskStatus < Struct.new(
         :code,
@@ -680,48 +669,45 @@ module Aws
       #         interleaved: false,
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to query.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_names
-      #   Optional list of log stream names within the specified log group to
-      #   search. Defaults to all the log streams in the log group.
+      #   Optional list of log stream names.
       #   @return [Array<String>]
       #
       # @!attribute [rw] start_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. If provided, events with a timestamp prior to
-      #   this time are not returned.
+      #   The start of the time range. Events with a timestamp prior to this
+      #   time are not returned.
       #   @return [Integer]
       #
       # @!attribute [rw] end_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. If provided, events with a timestamp later than
-      #   this time are not returned.
+      #   The end of the time range. Events with a timestamp later than this
+      #   time are not returned.
       #   @return [Integer]
       #
       # @!attribute [rw] filter_pattern
-      #   A valid CloudWatch Logs filter pattern to use for filtering the
-      #   response. If not provided, all the events are matched.
+      #   The filter pattern to use. If not provided, all the events are
+      #   matched.
       #   @return [String]
       #
       # @!attribute [rw] next_token
-      #   A pagination token obtained from a `FilterLogEvents` response to
-      #   continue paginating the FilterLogEvents results. This token is
-      #   omitted from the response when there are no other events to display.
+      #   The token for the next set of events to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of events to return in a page of results. Default
-      #   is 10,000 events.
+      #   The maximum number of events to return. The default is 10,000
+      #   events.
       #   @return [Integer]
       #
       # @!attribute [rw] interleaved
-      #   If provided, the API will make a best effort to provide responses
-      #   that contain events from multiple log streams within the log group
-      #   interleaved in a single response. If not provided, all the matched
-      #   log events in the first log stream will be searched first, then
-      #   those in the next log stream, etc.
+      #   If the value is true, the operation makes a best effort to provide
+      #   responses that contain events from multiple log streams within the
+      #   log group interleaved in a single response. If the value is false
+      #   all the matched log events in the first log stream are searched
+      #   first, then those in the next log stream, and so on. The default is
+      #   false.
       #   @return [Boolean]
       class FilterLogEventsRequest < Struct.new(
         :log_group_name,
@@ -736,20 +722,17 @@ module Aws
       end
 
       # @!attribute [rw] events
-      #   A list of `FilteredLogEvent` objects representing the matched events
-      #   from the request.
+      #   The matched events.
       #   @return [Array<Types::FilteredLogEvent>]
       #
       # @!attribute [rw] searched_log_streams
-      #   A list of `SearchedLogStream` objects indicating which log streams
-      #   have been searched in this request and whether each has been
-      #   searched completely or still has more to be paginated.
+      #   Indicates which log streams have been searched and whether each has
+      #   been searched completely.
       #   @return [Array<Types::SearchedLogStream>]
       #
       # @!attribute [rw] next_token
-      #   A pagination token obtained from a `FilterLogEvents` response to
-      #   continue paginating the FilterLogEvents results. This token is
-      #   omitted from the response when there are no other events to display.
+      #   The token to use when requesting the next set of items. The token
+      #   expires after 24 hours.
       #   @return [String]
       class FilterLogEventsResponse < Struct.new(
         :events,
@@ -758,14 +741,13 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents a matched event from a `FilterLogEvents` request.
+      # Represents a matched event.
       # @!attribute [rw] log_stream_name
       #   The name of the log stream this event belongs to.
       #   @return [String]
       #
       # @!attribute [rw] timestamp
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time the event occurred.
       #   @return [Integer]
       #
       # @!attribute [rw] message
@@ -773,12 +755,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ingestion_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time the event was ingested.
       #   @return [Integer]
       #
       # @!attribute [rw] event_id
-      #   A unique identifier for this event.
+      #   The ID of the event.
       #   @return [String]
       class FilteredLogEvent < Struct.new(
         :log_stream_name,
@@ -802,39 +783,38 @@ module Aws
       #         start_from_head: false,
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to query.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name
-      #   The name of the log stream to query.
+      #   The name of the log stream.
       #   @return [String]
       #
       # @!attribute [rw] start_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The start of the time range. Events with a timestamp earlier than
+      #   this time are not included.
       #   @return [Integer]
       #
       # @!attribute [rw] end_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The end of the time range. Events with a timestamp later than this
+      #   time are not included.
       #   @return [Integer]
       #
       # @!attribute [rw] next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the `nextForwardToken` or
-      #   `nextBackwardToken` fields in the response of the previous
-      #   `GetLogEvents` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of log events returned in the response. If you
-      #   don't specify a value, the request would return as many log events
-      #   as can fit in a response size of 1MB, up to 10,000 log events.
+      #   The maximum number of log events returned. If you don't specify a
+      #   value, the maximum is as many log events as can fit in a response
+      #   size of 1MB, up to 10,000 log events.
       #   @return [Integer]
       #
       # @!attribute [rw] start_from_head
-      #   If set to true, the earliest log events would be returned first. The
-      #   default is false (the latest log events are returned first).
+      #   If the value is true, the earliest log events are returned first. If
+      #   the value is false, the latest log events are returned first. The
+      #   default value is false.
       #   @return [Boolean]
       class GetLogEventsRequest < Struct.new(
         :log_group_name,
@@ -848,18 +828,17 @@ module Aws
       end
 
       # @!attribute [rw] events
+      #   The events.
       #   @return [Array<Types::OutputLogEvent>]
       #
       # @!attribute [rw] next_forward_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items in the forward direction. The
+      #   token expires after 24 hours.
       #   @return [String]
       #
       # @!attribute [rw] next_backward_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the
-      #   previous request. The token expires after 24 hours.
+      #   The token for the next set of items in the backward direction. The
+      #   token expires after 24 hours.
       #   @return [String]
       class GetLogEventsResponse < Struct.new(
         :events,
@@ -868,10 +847,8 @@ module Aws
         include Aws::Structure
       end
 
-      # A log event is a record of some activity that was recorded by the
-      # application or resource being monitored. The log event record that
-      # CloudWatch Logs understands contains two properties: the timestamp of
-      # when the event occurred, and the raw event message.
+      # Represents a log event, which is a record of activity that was
+      # recorded by the application or resource being monitored.
       # @note When making an API call, pass InputLogEvent
       #   data as a hash:
       #
@@ -880,11 +857,11 @@ module Aws
       #         message: "EventMessage", # required
       #       }
       # @!attribute [rw] timestamp
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time the event occurred.
       #   @return [Integer]
       #
       # @!attribute [rw] message
+      #   The raw event message.
       #   @return [String]
       class InputLogEvent < Struct.new(
         :timestamp,
@@ -892,28 +869,31 @@ module Aws
         include Aws::Structure
       end
 
+      # Represents a log group.
       # @!attribute [rw] log_group_name
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] creation_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The creation time of the log group.
       #   @return [Integer]
       #
       # @!attribute [rw] retention_in_days
-      #   Specifies the number of days you want to retain log events in the
-      #   specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60,
-      #   90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653.
+      #   The number of days to retain the log events in the specified log
+      #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
+      #   180, 365, 400, 545, 731, 1827, and 3653.
       #   @return [Integer]
       #
       # @!attribute [rw] metric_filter_count
-      #   The number of metric filters associated with the log group.
+      #   The number of metric filters.
       #   @return [Integer]
       #
       # @!attribute [rw] arn
+      #   The Amazon Resource Name (ARN) of the log group.
       #   @return [String]
       #
       # @!attribute [rw] stored_bytes
+      #   The number of bytes stored.
       #   @return [Integer]
       class LogGroup < Struct.new(
         :log_group_name,
@@ -925,41 +905,38 @@ module Aws
         include Aws::Structure
       end
 
-      # A log stream is sequence of log events from a single emitter of logs.
+      # Represents a log stream, which is a sequence of log events from a
+      # single emitter of logs.
       # @!attribute [rw] log_stream_name
+      #   The name of the log stream.
       #   @return [String]
       #
       # @!attribute [rw] creation_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The creation time of the stream.
       #   @return [Integer]
       #
       # @!attribute [rw] first_event_timestamp
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time of the first event.
       #   @return [Integer]
       #
       # @!attribute [rw] last_event_timestamp
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time of the last event.
       #   @return [Integer]
       #
       # @!attribute [rw] last_ingestion_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The ingestion time.
       #   @return [Integer]
       #
       # @!attribute [rw] upload_sequence_token
-      #   A string token used for making PutLogEvents requests. A
-      #   `sequenceToken` can only be used once, and PutLogEvents requests
-      #   must include the `sequenceToken` obtained from the response of the
-      #   previous request.
+      #   The sequence token.
       #   @return [String]
       #
       # @!attribute [rw] arn
+      #   The Amazon Resource Name (ARN) of the log stream.
       #   @return [String]
       #
       # @!attribute [rw] stored_bytes
+      #   The number of bytes stored.
       #   @return [Integer]
       class LogStream < Struct.new(
         :log_stream_name,
@@ -973,11 +950,11 @@ module Aws
         include Aws::Structure
       end
 
-      # Metric filters can be used to express how CloudWatch Logs would
-      # extract metric observations from ingested log events and transform
-      # them to metric data in a CloudWatch metric.
+      # Metric filters express how CloudWatch Logs would extract metric
+      # observations from ingested log events and transform them into metric
+      # data in a CloudWatch metric.
       # @!attribute [rw] filter_name
-      #   A name for a metric or subscription filter.
+      #   The name of the metric filter.
       #   @return [String]
       #
       # @!attribute [rw] filter_pattern
@@ -988,27 +965,36 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] metric_transformations
+      #   The metric transformations.
       #   @return [Array<Types::MetricTransformation>]
       #
       # @!attribute [rw] creation_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The creation time of the metric filter.
       #   @return [Integer]
+      #
+      # @!attribute [rw] log_group_name
+      #   The name of the log group.
+      #   @return [String]
       class MetricFilter < Struct.new(
         :filter_name,
         :filter_pattern,
         :metric_transformations,
-        :creation_time)
+        :creation_time,
+        :log_group_name)
         include Aws::Structure
       end
 
+      # Represents a matched event.
       # @!attribute [rw] event_number
+      #   The event number.
       #   @return [Integer]
       #
       # @!attribute [rw] event_message
+      #   The raw event data.
       #   @return [String]
       #
       # @!attribute [rw] extracted_values
+      #   The values extracted from the event data by the filter.
       #   @return [Hash<String,String>]
       class MetricFilterMatchRecord < Struct.new(
         :event_number,
@@ -1017,6 +1003,8 @@ module Aws
         include Aws::Structure
       end
 
+      # Indicates how to transform ingested log events into metric data in a
+      # CloudWatch metric.
       # @note When making an API call, pass MetricTransformation
       #   data as a hash:
       #
@@ -1027,21 +1015,21 @@ module Aws
       #         default_value: 1.0,
       #       }
       # @!attribute [rw] metric_name
-      #   Name of the metric.
+      #   The name of the CloudWatch metric.
       #   @return [String]
       #
       # @!attribute [rw] metric_namespace
-      #   Namespace to which the metric belongs.
+      #   The namespace of the CloudWatch metric.
       #   @return [String]
       #
       # @!attribute [rw] metric_value
-      #   A string representing a value to publish to this metric when a
-      #   filter pattern matches a log event.
+      #   The value to publish to the CloudWatch metric when a filter pattern
+      #   matches a log event.
       #   @return [String]
       #
       # @!attribute [rw] default_value
-      #   (Optional) A default value to emit when a filter pattern does not
-      #   match a log event. Can be null.
+      #   (Optional) The value to emit when a filter pattern does not match a
+      #   log event. This value can be null.
       #   @return [Float]
       class MetricTransformation < Struct.new(
         :metric_name,
@@ -1051,17 +1039,17 @@ module Aws
         include Aws::Structure
       end
 
+      # Represents a log event.
       # @!attribute [rw] timestamp
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time the event occurred.
       #   @return [Integer]
       #
       # @!attribute [rw] message
+      #   The data contained in the log event.
       #   @return [String]
       #
       # @!attribute [rw] ingestion_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The time the event was ingested.
       #   @return [Integer]
       class OutputLogEvent < Struct.new(
         :timestamp,
@@ -1083,7 +1071,7 @@ module Aws
       #
       # @!attribute [rw] access_policy
       #   An IAM policy document that authorizes cross-account users to
-      #   deliver their log events to associated destination.
+      #   deliver their log events to the associated destination.
       #   @return [String]
       class PutDestinationPolicyRequest < Struct.new(
         :destination_name,
@@ -1109,8 +1097,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] role_arn
-      #   The ARN of an IAM role that grants CloudWatch Logs permissions to do
-      #   Amazon Kinesis PutRecord requests on the destination stream.
+      #   The ARN of an IAM role that grants CloudWatch Logs permissions to
+      #   call Amazon Kinesis PutRecord on the destination stream.
       #   @return [String]
       class PutDestinationRequest < Struct.new(
         :destination_name,
@@ -1120,8 +1108,7 @@ module Aws
       end
 
       # @!attribute [rw] destination
-      #   A cross account destination that is the recipient of subscription
-      #   log events.
+      #   The destination.
       #   @return [Types::Destination]
       class PutDestinationResponse < Struct.new(
         :destination)
@@ -1143,20 +1130,19 @@ module Aws
       #         sequence_token: "SequenceToken",
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to put log events to.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] log_stream_name
-      #   The name of the log stream to put log events to.
+      #   The name of the log stream.
       #   @return [String]
       #
       # @!attribute [rw] log_events
-      #   A list of log events belonging to a log stream.
+      #   The log events.
       #   @return [Array<Types::InputLogEvent>]
       #
       # @!attribute [rw] sequence_token
-      #   A string token that must be obtained from the response of the
-      #   previous `PutLogEvents` request.
+      #   The sequence token.
       #   @return [String]
       class PutLogEventsRequest < Struct.new(
         :log_group_name,
@@ -1167,13 +1153,11 @@ module Aws
       end
 
       # @!attribute [rw] next_sequence_token
-      #   A string token used for making PutLogEvents requests. A
-      #   `sequenceToken` can only be used once, and PutLogEvents requests
-      #   must include the `sequenceToken` obtained from the response of the
-      #   previous request.
+      #   The next sequence token.
       #   @return [String]
       #
       # @!attribute [rw] rejected_log_events_info
+      #   The rejected events.
       #   @return [Types::RejectedLogEventsInfo]
       class PutLogEventsResponse < Struct.new(
         :next_sequence_token,
@@ -1198,7 +1182,7 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to associate the metric filter with.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name
@@ -1206,8 +1190,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] filter_pattern
-      #   A valid CloudWatch Logs filter pattern for extracting metric data
-      #   out of ingested log events.
+      #   A filter pattern for extracting metric data out of ingested log
+      #   events.
       #   @return [String]
       #
       # @!attribute [rw] metric_transformations
@@ -1230,13 +1214,13 @@ module Aws
       #         retention_in_days: 1, # required
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to associate the retention policy with.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] retention_in_days
-      #   Specifies the number of days you want to retain log events in the
-      #   specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60,
-      #   90, 120, 150, 180, 365, 400, 545, 731, 1827, 3653.
+      #   The number of days to retain the log events in the specified log
+      #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150,
+      #   180, 365, 400, 545, 731, 1827, and 3653.
       #   @return [Integer]
       class PutRetentionPolicyRequest < Struct.new(
         :log_group_name,
@@ -1255,7 +1239,7 @@ module Aws
       #         role_arn: "RoleArn",
       #       }
       # @!attribute [rw] log_group_name
-      #   The name of the log group to associate the subscription filter with.
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_name
@@ -1263,8 +1247,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] filter_pattern
-      #   A valid CloudWatch Logs filter pattern for subscribing to a filtered
-      #   stream of log events.
+      #   A filter pattern for subscribing to a filtered stream of log events.
       #   @return [String]
       #
       # @!attribute [rw] destination_arn
@@ -1274,8 +1257,8 @@ module Aws
       #   * An Amazon Kinesis stream belonging to the same account as the
       #     subscription filter, for same-account delivery.
       #
-      #   * A logical destination (used via an ARN of `Destination`) belonging
-      #     to a different account, for cross-account delivery.
+      #   * A logical destination (specified using an ARN) belonging to a
+      #     different account, for cross-account delivery.
       #
       #   * An Amazon Kinesis Firehose stream belonging to the same account as
       #     the subscription filter, for same-account delivery.
@@ -1288,8 +1271,7 @@ module Aws
       #   The ARN of an IAM role that grants CloudWatch Logs permissions to
       #   deliver ingested log events to the destination stream. You don't
       #   need to provide the ARN when you are working with a logical
-      #   destination (used via an ARN of `Destination`) for cross-account
-      #   delivery.
+      #   destination for cross-account delivery.
       #   @return [String]
       class PutSubscriptionFilterRequest < Struct.new(
         :log_group_name,
@@ -1300,13 +1282,17 @@ module Aws
         include Aws::Structure
       end
 
+      # Represents the rejected events.
       # @!attribute [rw] too_new_log_event_start_index
+      #   The log events that are too new.
       #   @return [Integer]
       #
       # @!attribute [rw] too_old_log_event_end_index
+      #   The log events that are too old.
       #   @return [Integer]
       #
       # @!attribute [rw] expired_log_event_end_index
+      #   The expired log events.
       #   @return [Integer]
       class RejectedLogEventsInfo < Struct.new(
         :too_new_log_event_start_index,
@@ -1315,15 +1301,13 @@ module Aws
         include Aws::Structure
       end
 
-      # An object indicating the search status of a log stream in a
-      # `FilterLogEvents` request.
+      # Represents the search status of a log stream.
       # @!attribute [rw] log_stream_name
       #   The name of the log stream.
       #   @return [String]
       #
       # @!attribute [rw] searched_completely
-      #   Indicates whether all the events in this log stream were searched or
-      #   more data exists to search by paginating further.
+      #   Indicates whether all the events in this log stream were searched.
       #   @return [Boolean]
       class SearchedLogStream < Struct.new(
         :log_stream_name,
@@ -1331,11 +1315,13 @@ module Aws
         include Aws::Structure
       end
 
+      # Represents a subscription filter.
       # @!attribute [rw] filter_name
-      #   A name for a metric or subscription filter.
+      #   The name of the subscription filter.
       #   @return [String]
       #
       # @!attribute [rw] log_group_name
+      #   The name of the log group.
       #   @return [String]
       #
       # @!attribute [rw] filter_pattern
@@ -1346,14 +1332,14 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] destination_arn
+      #   The Amazon Resource Name (ARN) of the destination.
       #   @return [String]
       #
       # @!attribute [rw] role_arn
       #   @return [String]
       #
       # @!attribute [rw] creation_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The creation time of the subscription filter.
       #   @return [Integer]
       class SubscriptionFilter < Struct.new(
         :filter_name,
@@ -1380,7 +1366,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] log_event_messages
-      #   A list of log event messages to test.
+      #   The log event messages to test.
       #   @return [Array<String>]
       class TestMetricFilterRequest < Struct.new(
         :filter_pattern,
@@ -1389,6 +1375,7 @@ module Aws
       end
 
       # @!attribute [rw] matches
+      #   The matched events.
       #   @return [Array<Types::MetricFilterMatchRecord>]
       class TestMetricFilterResponse < Struct.new(
         :matches)

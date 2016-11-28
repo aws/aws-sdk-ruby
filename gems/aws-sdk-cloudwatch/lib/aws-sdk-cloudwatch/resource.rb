@@ -41,9 +41,9 @@ module Aws
       #   })
       # @param [Hash] options ({})
       # @option options [Array<String>] :alarm_names
-      #   A list of alarm names to retrieve information for.
+      #   The names of the alarms.
       # @option options [String] :alarm_name_prefix
-      #   The alarm name prefix. `AlarmNames` cannot be specified if this
+      #   The alarm name prefix. You cannot specify `AlarmNames` if this
       #   parameter is specified.
       # @option options [String] :state_value
       #   The state value to be used in matching alarms.
@@ -97,7 +97,7 @@ module Aws
       # @option options [String] :metric_name
       #   The name of the metric to filter against.
       # @option options [Array<Types::DimensionFilter>] :dimensions
-      #   A list of dimensions to filter against.
+      #   The dimensions to filter against.
       # @return [Metric::Collection]
       def metrics(options = {})
         batches = Enumerator.new do |y|

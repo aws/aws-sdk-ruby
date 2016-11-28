@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-s3/plugins/accelerate.rb'
 require 'aws-sdk-s3/plugins/dualstack.rb'
@@ -56,6 +57,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::Protocols::RestXml)
       add_plugin(Aws::S3::Plugins::Accelerate)
       add_plugin(Aws::S3::Plugins::Dualstack)
@@ -2806,6 +2808,9 @@ module Aws
       #     version_id: "ObjectVersionId",
       #     restore_request: {
       #       days: 1, # required
+      #       glacier_job_parameters: {
+      #         tier: "Standard", # required, accepts Standard, Bulk, Expedited
+      #       },
       #     },
       #     request_payer: "requester", # accepts requester
       #   })

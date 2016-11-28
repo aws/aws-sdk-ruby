@@ -78,12 +78,14 @@ module Aws
       HorizontalAlign = Shapes::StringShape.new(name: 'HorizontalAlign')
       Id = Shapes::StringShape.new(name: 'Id')
       IncompatibleVersionException = Shapes::StructureShape.new(name: 'IncompatibleVersionException')
+      InputCaptions = Shapes::StructureShape.new(name: 'InputCaptions')
       Interlaced = Shapes::StringShape.new(name: 'Interlaced')
       InternalServiceException = Shapes::StructureShape.new(name: 'InternalServiceException')
       Job = Shapes::StructureShape.new(name: 'Job')
       JobAlbumArt = Shapes::StructureShape.new(name: 'JobAlbumArt')
       JobContainer = Shapes::StringShape.new(name: 'JobContainer')
       JobInput = Shapes::StructureShape.new(name: 'JobInput')
+      JobInputs = Shapes::ListShape.new(name: 'JobInputs')
       JobOutput = Shapes::StructureShape.new(name: 'JobOutput')
       JobOutputs = Shapes::ListShape.new(name: 'JobOutputs')
       JobStatus = Shapes::StringShape.new(name: 'JobStatus')
@@ -230,8 +232,8 @@ module Aws
 
       CaptionSources.member = Shapes::ShapeRef.new(shape: CaptionSource)
 
-      Captions.add_member(:merge_policy, Shapes::ShapeRef.new(shape: CaptionMergePolicy, location_name: "MergePolicy"))
-      Captions.add_member(:caption_sources, Shapes::ShapeRef.new(shape: CaptionSources, location_name: "CaptionSources"))
+      Captions.add_member(:merge_policy, Shapes::ShapeRef.new(shape: CaptionMergePolicy, deprecated: true, location_name: "MergePolicy"))
+      Captions.add_member(:caption_sources, Shapes::ShapeRef.new(shape: CaptionSources, deprecated: true, location_name: "CaptionSources"))
       Captions.add_member(:caption_formats, Shapes::ShapeRef.new(shape: CaptionFormats, location_name: "CaptionFormats"))
       Captions.struct_class = Types::Captions
 
@@ -241,7 +243,7 @@ module Aws
       CodecOptions.key = Shapes::ShapeRef.new(shape: CodecOption)
       CodecOptions.value = Shapes::ShapeRef.new(shape: CodecOption)
 
-      Composition.member = Shapes::ShapeRef.new(shape: Clip)
+      Composition.member = Shapes::ShapeRef.new(shape: Clip, deprecated: true)
 
       CreateJobOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
       CreateJobOutput.add_member(:thumbnail_pattern, Shapes::ShapeRef.new(shape: ThumbnailPattern, location_name: "ThumbnailPattern"))
@@ -251,7 +253,7 @@ module Aws
       CreateJobOutput.add_member(:segment_duration, Shapes::ShapeRef.new(shape: FloatString, location_name: "SegmentDuration"))
       CreateJobOutput.add_member(:watermarks, Shapes::ShapeRef.new(shape: JobWatermarks, location_name: "Watermarks"))
       CreateJobOutput.add_member(:album_art, Shapes::ShapeRef.new(shape: JobAlbumArt, location_name: "AlbumArt"))
-      CreateJobOutput.add_member(:composition, Shapes::ShapeRef.new(shape: Composition, location_name: "Composition"))
+      CreateJobOutput.add_member(:composition, Shapes::ShapeRef.new(shape: Composition, deprecated: true, location_name: "Composition"))
       CreateJobOutput.add_member(:captions, Shapes::ShapeRef.new(shape: Captions, location_name: "Captions"))
       CreateJobOutput.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
       CreateJobOutput.struct_class = Types::CreateJobOutput
@@ -268,7 +270,8 @@ module Aws
       CreateJobPlaylists.member = Shapes::ShapeRef.new(shape: CreateJobPlaylist)
 
       CreateJobRequest.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: Id, required: true, location_name: "PipelineId"))
-      CreateJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: JobInput, required: true, location_name: "Input"))
+      CreateJobRequest.add_member(:input, Shapes::ShapeRef.new(shape: JobInput, location_name: "Input"))
+      CreateJobRequest.add_member(:inputs, Shapes::ShapeRef.new(shape: JobInputs, location_name: "Inputs"))
       CreateJobRequest.add_member(:output, Shapes::ShapeRef.new(shape: CreateJobOutput, location_name: "Output"))
       CreateJobRequest.add_member(:outputs, Shapes::ShapeRef.new(shape: CreateJobOutputs, location_name: "Outputs"))
       CreateJobRequest.add_member(:output_key_prefix, Shapes::ShapeRef.new(shape: Key, location_name: "OutputKeyPrefix"))
@@ -338,10 +341,15 @@ module Aws
       HlsContentProtection.add_member(:key_storage_policy, Shapes::ShapeRef.new(shape: KeyStoragePolicy, location_name: "KeyStoragePolicy"))
       HlsContentProtection.struct_class = Types::HlsContentProtection
 
+      InputCaptions.add_member(:merge_policy, Shapes::ShapeRef.new(shape: CaptionMergePolicy, location_name: "MergePolicy"))
+      InputCaptions.add_member(:caption_sources, Shapes::ShapeRef.new(shape: CaptionSources, location_name: "CaptionSources"))
+      InputCaptions.struct_class = Types::InputCaptions
+
       Job.add_member(:id, Shapes::ShapeRef.new(shape: Id, location_name: "Id"))
       Job.add_member(:arn, Shapes::ShapeRef.new(shape: String, location_name: "Arn"))
       Job.add_member(:pipeline_id, Shapes::ShapeRef.new(shape: Id, location_name: "PipelineId"))
       Job.add_member(:input, Shapes::ShapeRef.new(shape: JobInput, location_name: "Input"))
+      Job.add_member(:inputs, Shapes::ShapeRef.new(shape: JobInputs, location_name: "Inputs"))
       Job.add_member(:output, Shapes::ShapeRef.new(shape: JobOutput, location_name: "Output"))
       Job.add_member(:outputs, Shapes::ShapeRef.new(shape: JobOutputs, location_name: "Outputs"))
       Job.add_member(:output_key_prefix, Shapes::ShapeRef.new(shape: Key, location_name: "OutputKeyPrefix"))
@@ -362,8 +370,12 @@ module Aws
       JobInput.add_member(:interlaced, Shapes::ShapeRef.new(shape: Interlaced, location_name: "Interlaced"))
       JobInput.add_member(:container, Shapes::ShapeRef.new(shape: JobContainer, location_name: "Container"))
       JobInput.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
+      JobInput.add_member(:time_span, Shapes::ShapeRef.new(shape: TimeSpan, location_name: "TimeSpan"))
+      JobInput.add_member(:input_captions, Shapes::ShapeRef.new(shape: InputCaptions, location_name: "InputCaptions"))
       JobInput.add_member(:detected_properties, Shapes::ShapeRef.new(shape: DetectedProperties, location_name: "DetectedProperties"))
       JobInput.struct_class = Types::JobInput
+
+      JobInputs.member = Shapes::ShapeRef.new(shape: JobInput)
 
       JobOutput.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "Id"))
       JobOutput.add_member(:key, Shapes::ShapeRef.new(shape: Key, location_name: "Key"))
@@ -382,7 +394,7 @@ module Aws
       JobOutput.add_member(:duration_millis, Shapes::ShapeRef.new(shape: NullableLong, location_name: "DurationMillis"))
       JobOutput.add_member(:watermarks, Shapes::ShapeRef.new(shape: JobWatermarks, location_name: "Watermarks"))
       JobOutput.add_member(:album_art, Shapes::ShapeRef.new(shape: JobAlbumArt, location_name: "AlbumArt"))
-      JobOutput.add_member(:composition, Shapes::ShapeRef.new(shape: Composition, location_name: "Composition"))
+      JobOutput.add_member(:composition, Shapes::ShapeRef.new(shape: Composition, deprecated: true, location_name: "Composition"))
       JobOutput.add_member(:captions, Shapes::ShapeRef.new(shape: Captions, location_name: "Captions"))
       JobOutput.add_member(:encryption, Shapes::ShapeRef.new(shape: Encryption, location_name: "Encryption"))
       JobOutput.add_member(:applied_color_space_conversion, Shapes::ShapeRef.new(shape: String, location_name: "AppliedColorSpaceConversion"))
@@ -826,6 +838,7 @@ module Aws
           o.name = "TestRole"
           o.http_method = "POST"
           o.http_request_uri = "/2012-09-25/roleTests"
+          o.deprecated = true
           o.input = Shapes::ShapeRef.new(shape: TestRoleRequest)
           o.output = Shapes::ShapeRef.new(shape: TestRoleResponse)
           o.errors << Shapes::ShapeRef.new(shape: ValidationException)

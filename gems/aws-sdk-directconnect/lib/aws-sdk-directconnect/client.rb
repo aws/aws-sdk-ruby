@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -1096,6 +1098,32 @@ module Aws
         req.send_request(options)
       end
 
+      # Describes the tags associated with the specified Direct Connect
+      # resources.
+      # @option params [required, Array<String>] :resource_arns
+      #   The Amazon Resource Names (ARNs) of the Direct Connect resources.
+      # @return [Types::DescribeTagsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeTagsResponse#resource_tags #resourceTags} => Array&lt;Types::ResourceTag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_tags({
+      #     resource_arns: ["ResourceArn"], # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.resource_tags #=> Array
+      #   resp.resource_tags[0].resource_arn #=> String
+      #   resp.resource_tags[0].tags #=> Array
+      #   resp.resource_tags[0].tags[0].key #=> String
+      #   resp.resource_tags[0].tags[0].value #=> String
+      # @overload describe_tags(params = {})
+      # @param [Hash] params ({})
+      def describe_tags(params = {}, options = {})
+        req = build_request(:describe_tags, params)
+        req.send_request(options)
+      end
+
       # Returns a list of virtual private gateways owned by the AWS account.
       #
       # You can create one or more AWS Direct Connect private virtual
@@ -1178,6 +1206,57 @@ module Aws
       # @param [Hash] params ({})
       def describe_virtual_interfaces(params = {}, options = {})
         req = build_request(:describe_virtual_interfaces, params)
+        req.send_request(options)
+      end
+
+      # Adds the specified tags to the specified Direct Connect resource. Each
+      # Direct Connect resource can have a maximum of 50 tags.
+      #
+      # Each tag consists of a key and an optional value. If a tag with the
+      # same key is already associated with the Direct Connect resource, this
+      # action updates its value.
+      # @option params [required, String] :resource_arn
+      #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      #
+      #   Example:
+      #   arn:aws:directconnect:us-east-1:123456789012:dxcon/dxcon-fg5678gh
+      # @option params [required, Array<Types::Tag>] :tags
+      #   The list of tags to add.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.tag_resource({
+      #     resource_arn: "ResourceArn", # required
+      #     tags: [ # required
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue",
+      #       },
+      #     ],
+      #   })
+      # @overload tag_resource(params = {})
+      # @param [Hash] params ({})
+      def tag_resource(params = {}, options = {})
+        req = build_request(:tag_resource, params)
+        req.send_request(options)
+      end
+
+      # Removes one or more tags from the specified Direct Connect resource.
+      # @option params [required, String] :resource_arn
+      #   The Amazon Resource Name (ARN) of the Direct Connect resource.
+      # @option params [required, Array<String>] :tag_keys
+      #   The list of tag keys to remove.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.untag_resource({
+      #     resource_arn: "ResourceArn", # required
+      #     tag_keys: ["TagKey"], # required
+      #   })
+      # @overload untag_resource(params = {})
+      # @param [Hash] params ({})
+      def untag_resource(params = {}, options = {})
+        req = build_request(:untag_resource, params)
         req.send_request(options)
       end
 

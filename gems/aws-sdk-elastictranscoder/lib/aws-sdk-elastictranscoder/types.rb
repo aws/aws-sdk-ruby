@@ -68,24 +68,29 @@ module Aws
       #   * `Fit:` Elastic Transcoder scales the output art so it matches the
       #     value that you specified in either `MaxWidth` or `MaxHeight`
       #     without exceeding the other value.
+      #
       #   * `Fill:` Elastic Transcoder scales the output art so it matches the
       #     value that you specified in either `MaxWidth` or `MaxHeight` and
       #     matches or exceeds the other value. Elastic Transcoder centers the
       #     output art and then crops it in the dimension (if any) that
       #     exceeds the maximum value.
+      #
       #   * `Stretch:` Elastic Transcoder stretches the output art to match
       #     the values that you specified for `MaxWidth` and `MaxHeight`. If
       #     the relative proportions of the input art and the output art are
       #     different, the output art will be distorted.
+      #
       #   * `Keep:` Elastic Transcoder does not scale the output art. If
       #     either dimension of the input art exceeds the values that you
       #     specified for `MaxWidth` and `MaxHeight`, Elastic Transcoder crops
       #     the output art.
+      #
       #   * `ShrinkToFit:` Elastic Transcoder scales the output art down so
       #     that its dimensions match the values that you specified for at
       #     least one of `MaxWidth` and `MaxHeight` without exceeding either
       #     value. If you specify this option, Elastic Transcoder does not
       #     scale the art up.
+      #
       #   * `ShrinkToFill` Elastic Transcoder scales the output art down so
       #     that its dimensions match the values that you specified for at
       #     least one of `MaxWidth` and `MaxHeight` without dropping below
@@ -137,23 +142,26 @@ module Aws
       #   Specify the AAC profile for the output file. Elastic Transcoder
       #   supports the following profiles:
       #
-      #   * `auto`\: If you specify `auto`, Elastic Transcoder will select the
+      #   * `auto`\: If you specify `auto`, Elastic Transcoder selects the
       #     profile based on the bit rate selected for the output file.
+      #
       #   * `AAC-LC`\: The most common AAC profile. Use for bit rates larger
       #     than 64 kbps.
+      #
       #   * `HE-AAC`\: Not supported on some older players and devices. Use
       #     for bit rates between 40 and 80 kbps.
+      #
       #   * `HE-AACv2`\: Not supported on some players and devices. Use for
       #     bit rates less than 48 kbps.
       #
       #   All outputs in a `Smooth` playlist must have the same value for
       #   `Profile`.
       #
-      #   <note markdown="1">If you created any presets before AAC profiles were added, Elastic
+      #   <note markdown="1"> If you created any presets before AAC profiles were added, Elastic
       #   Transcoder automatically updated your presets to use AAC-LC. You can
       #   change the value as required.
       #
-      #   </note>
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] bit_depth
@@ -247,13 +255,16 @@ module Aws
       #
       #   The output of a specific channel value and inputs are as follows:
       #
-      #   * `auto`<b> channel specified, with any input:</b> Pass through up
+      #   * `auto` <b> channel specified, with any input:</b> Pass through up
       #     to eight input channels.
-      #   * `0`<b> channels specified, with any input:</b> Audio omitted from
+      #
+      #   * `0` <b> channels specified, with any input:</b> Audio omitted from
       #     the output.
-      #   * `1`<b> channel specified, with at least one input channel:</b>
+      #
+      #   * `1` <b> channel specified, with at least one input channel:</b>
       #     Mono sound.
-      #   * `2`<b> channels specified, with any input:</b> Two identical mono
+      #
+      #   * `2` <b> channels specified, with any input:</b> Two identical mono
       #     channels or stereo. For more information about tracks, see
       #     `Audio:AudioPackingMode.`
       #
@@ -281,20 +292,28 @@ module Aws
       #   are as follows:
       #
       #   * `0` <b> channels with any input:</b> Audio omitted from the output
+      #
       #   * `1, 2, or auto ` **channels with no audio input:** Audio omitted
       #     from the output
+      #
       #   * `1 ` **channel with any input with audio:** One track with one
       #     channel, downmixed if necessary
+      #
       #   * `2 ` **channels with one track with one channel:** One track with
       #     two identical channels
+      #
       #   * `2 or auto ` **channels with two tracks with one channel each:**
       #     One track with two channels
+      #
       #   * `2 or auto ` **channels with one track with two channels:** One
       #     track with two channels
+      #
       #   * `2 ` **channels with one track with multiple channels:** One track
       #     with two channels
+      #
       #   * `auto ` **channels with one track with one channel:** One track
       #     with one channel
+      #
       #   * `auto ` **channels with one track with multiple channels:** One
       #     track with multiple channels
       #
@@ -306,20 +325,28 @@ module Aws
       #   inputs are as follows:
       #
       #   * `0 ` **channels with any input:** Audio omitted from the output
+      #
       #   * `1, 2, or auto ` **channels with no audio input:** Audio omitted
       #     from the output
+      #
       #   * `1 ` **channel with any input with audio:** One track with one
       #     channel, downmixed if necessary
+      #
       #   * `2 ` **channels with one track with one channel:** Two tracks with
       #     one identical channel each
+      #
       #   * `2 or auto ` **channels with two tracks with one channel each:**
       #     Two tracks with one channel each
+      #
       #   * `2 or auto ` **channels with one track with two channels:** Two
       #     tracks with one channel each
+      #
       #   * `2 ` **channels with one track with multiple channels:** Two
       #     tracks with one channel each
+      #
       #   * `auto ` **channels with one track with one channel:** One track
       #     with one channel
+      #
       #   * `auto ` **channels with one track with multiple channels:** Up to
       #     eight tracks with one channel each
       #
@@ -332,20 +359,28 @@ module Aws
       #   channel value and inputs are as follows:
       #
       #   * `0 ` **channels with any input:** Audio omitted from the output
+      #
       #   * `1, 2, or auto ` **channels with no audio input:** Audio omitted
       #     from the output
+      #
       #   * `1 ` **channel with any input with audio:** One track with one
       #     channel, downmixed if necessary, plus six MOS tracks
+      #
       #   * `2 ` **channels with one track with one channel:** Two tracks with
       #     one identical channel each, plus six MOS tracks
+      #
       #   * `2 or auto ` **channels with two tracks with one channel each:**
       #     Two tracks with one channel each, plus six MOS tracks
+      #
       #   * `2 or auto ` **channels with one track with two channels:** Two
       #     tracks with one channel each, plus six MOS tracks
+      #
       #   * `2 ` **channels with one track with multiple channels:** Two
       #     tracks with one channel each, plus six MOS tracks
+      #
       #   * `auto ` **channels with one track with one channel:** One track
       #     with one channel, plus seven MOS tracks
+      #
       #   * `auto ` **channels with one track with multiple channels:** Up to
       #     eight tracks with one channel each, plus MOS tracks until there
       #     are eight tracks in all
@@ -442,6 +477,7 @@ module Aws
       #   *description*-`\{language\}`, where:
       #
       #   * *description* is a description of the video.
+      #
       #   * `\{language\}` is a literal value that Elastic Transcoder replaces
       #     with the two- or three-letter code for the language of the caption
       #     in the output file names.
@@ -454,7 +490,7 @@ module Aws
       #
       #   For example, suppose you're transcoding into srt format. When you
       #   enter "Sydney-\\\{language\\}-sunrise", and the language of the
-      #   captions is English (en), the name of the first caption file will be
+      #   captions is English (en), the name of the first caption file is be
       #   Sydney-en-sunrise00000.srt.
       #   @return [String]
       #
@@ -492,8 +528,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] language
-      #   A string that specifies the language of the caption. Specify this as
-      #   one of:
+      #   A string that specifies the language of the caption. If you
+      #   specified multiple inputs with captions, the caption language must
+      #   match in order to be included in the output. Specify this as one of:
       #
       #   * 2-character ISO 639-1 code
       #
@@ -520,7 +557,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] encryption
-      #   The encryption settings, if any, that you want Elastic Transcoder to
+      #   The encryption settings, if any, that Elastic Transcoder needs to
+      #   decyrpt your caption sources, or that you want Elastic Transcoder to
       #   apply to your caption sources.
       #   @return [Types::Encryption]
       class CaptionSource < Struct.new(
@@ -736,12 +774,12 @@ module Aws
       #   information that you want to include in the file name for each
       #   thumbnail. You can specify the following values in any sequence:
       #
-      #   * **`\{count\}` (Required)**\: If you want to create thumbnails, you
-      #     must include `\{count\}` in the `ThumbnailPattern` object.
-      #     Wherever you specify `\{count\}`, Elastic Transcoder adds a
-      #     five-digit sequence number (beginning with **00001**) to thumbnail
-      #     file names. The number indicates where a given thumbnail appears
-      #     in the sequence of thumbnails for a transcoded file.
+      #   * <b> <code>\{count\}</code> (Required)</b>\: If you want to create
+      #     thumbnails, you must include `\{count\}` in the `ThumbnailPattern`
+      #     object. Wherever you specify `\{count\}`, Elastic Transcoder adds
+      #     a five-digit sequence number (beginning with **00001**) to
+      #     thumbnail file names. The number indicates where a given thumbnail
+      #     appears in the sequence of thumbnails for a transcoded file.
       #
       #     If you specify a literal value and/or `\{resolution\}` but you
       #     omit `\{count\}`, Elastic Transcoder returns a validation error
@@ -752,9 +790,9 @@ module Aws
       #     include them as a file name prefix or as a delimiter between
       #     `\{resolution\}` and `\{count\}`.
       #
-      #   * **`\{resolution\}` (Optional)**\: If you want Elastic Transcoder
-      #     to include the resolution in the file name, include
-      #     `\{resolution\}` in the `ThumbnailPattern` object.
+      #   * <b> <code>\{resolution\}</code> (Optional)</b>\: If you want
+      #     Elastic Transcoder to include the resolution in the file name,
+      #     include `\{resolution\}` in the `ThumbnailPattern` object.
       #
       #   When creating thumbnails, Elastic Transcoder automatically saves the
       #   files in the format (.jpg or .png) that appears in the preset that
@@ -934,11 +972,12 @@ module Aws
       #   identical for all `Name` objects. If you create more than one master
       #   playlist, the values of all `Name` objects must be unique.
       #
-      #   **Note:** Elastic Transcoder automatically appends the relevant file
-      #   extension to the file name (`.m3u8` for `HLSv3` and `HLSv4`
-      #   playlists, and `.ism` and `.ismc` for `Smooth` playlists). If you
-      #   include a file extension in `Name`, the file name will have two
-      #   extensions.
+      #   <note markdown="1"> Elastic Transcoder automatically appends the relevant file extension
+      #   to the file name (`.m3u8` for `HLSv3` and `HLSv4` playlists, and
+      #   `.ism` and `.ismc` for `Smooth` playlists). If you include a file
+      #   extension in `Name`, the file name will have two extensions.
+      #
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] format
@@ -1014,7 +1053,7 @@ module Aws
       #
       #       {
       #         pipeline_id: "Id", # required
-      #         input: { # required
+      #         input: {
       #           key: "LongKey",
       #           frame_rate: "FrameRate",
       #           resolution: "Resolution",
@@ -1027,6 +1066,27 @@ module Aws
       #             key_md_5: "Base64EncodedString",
       #             initialization_vector: "ZeroTo255String",
       #           },
+      #           time_span: {
+      #             start_time: "Time",
+      #             duration: "Time",
+      #           },
+      #           input_captions: {
+      #             merge_policy: "CaptionMergePolicy",
+      #             caption_sources: [
+      #               {
+      #                 key: "LongKey",
+      #                 language: "Key",
+      #                 time_offset: "TimeOffset",
+      #                 label: "Name",
+      #                 encryption: {
+      #                   mode: "EncryptionMode",
+      #                   key: "Base64EncodedString",
+      #                   key_md_5: "Base64EncodedString",
+      #                   initialization_vector: "ZeroTo255String",
+      #                 },
+      #               },
+      #             ],
+      #           },
       #           detected_properties: {
       #             width: 1,
       #             height: 1,
@@ -1035,6 +1095,50 @@ module Aws
       #             duration_millis: 1,
       #           },
       #         },
+      #         inputs: [
+      #           {
+      #             key: "LongKey",
+      #             frame_rate: "FrameRate",
+      #             resolution: "Resolution",
+      #             aspect_ratio: "AspectRatio",
+      #             interlaced: "Interlaced",
+      #             container: "JobContainer",
+      #             encryption: {
+      #               mode: "EncryptionMode",
+      #               key: "Base64EncodedString",
+      #               key_md_5: "Base64EncodedString",
+      #               initialization_vector: "ZeroTo255String",
+      #             },
+      #             time_span: {
+      #               start_time: "Time",
+      #               duration: "Time",
+      #             },
+      #             input_captions: {
+      #               merge_policy: "CaptionMergePolicy",
+      #               caption_sources: [
+      #                 {
+      #                   key: "LongKey",
+      #                   language: "Key",
+      #                   time_offset: "TimeOffset",
+      #                   label: "Name",
+      #                   encryption: {
+      #                     mode: "EncryptionMode",
+      #                     key: "Base64EncodedString",
+      #                     key_md_5: "Base64EncodedString",
+      #                     initialization_vector: "ZeroTo255String",
+      #                   },
+      #                 },
+      #               ],
+      #             },
+      #             detected_properties: {
+      #               width: 1,
+      #               height: 1,
+      #               frame_rate: "FloatString",
+      #               file_size: 1,
+      #               duration_millis: 1,
+      #             },
+      #           },
+      #         ],
       #         output: {
       #           key: "Key",
       #           thumbnail_pattern: "ThumbnailPattern",
@@ -1252,8 +1356,15 @@ module Aws
       #   file that is being transcoded.
       #   @return [Types::JobInput]
       #
+      # @!attribute [rw] inputs
+      #   A section of the request body that provides information about the
+      #   files that are being transcoded.
+      #   @return [Array<Types::JobInput>]
+      #
       # @!attribute [rw] output
-      #   The `CreateJobOutput` structure.
+      #   A section of the request body that provides information about the
+      #   transcoded (target) file. We strongly recommend that you use the
+      #   `Outputs` syntax instead of the `Output` syntax.
       #   @return [Types::CreateJobOutput]
       #
       # @!attribute [rw] outputs
@@ -1281,12 +1392,13 @@ module Aws
       #   User-defined metadata that you want to associate with an Elastic
       #   Transcoder job. You specify metadata in `key/value` pairs, and you
       #   can add up to 10 `key/value` pairs per job. Elastic Transcoder does
-      #   not guarantee that `key/value` pairs will be returned in the same
-      #   order in which you specify them.
+      #   not guarantee that `key/value` pairs are returned in the same order
+      #   in which you specify them.
       #   @return [Hash<String,String>]
       class CreateJobRequest < Struct.new(
         :pipeline_id,
         :input,
+        :inputs,
         :output,
         :outputs,
         :output_key_prefix,
@@ -1361,13 +1473,17 @@ module Aws
       #   the transcoded files. (Use this, or use ContentConfig:Bucket plus
       #   ThumbnailConfig:Bucket.)
       #
-      #   Specify this value when all of the following are true: * You want to
-      #   save transcoded files, thumbnails (if any), and
+      #   Specify this value when all of the following are true:
+      #
+      #   * You want to save transcoded files, thumbnails (if any), and
       #     playlists (if any) together in one bucket.
+      #
       #   * You do not want to specify the users or groups who have access to
       #     the transcoded files, thumbnails, and playlists.
+      #
       #   * You do not want to specify the permissions that Elastic Transcoder
       #     grants to the files.
+      #
       #     When Elastic Transcoder saves files in `OutputBucket`, it grants
       #     full control over the files only to the AWS account that owns the
       #     role that is specified by `Role`.
@@ -1412,14 +1528,17 @@ module Aws
       #     the ARN that Amazon SNS returned when you created the topic. For
       #     more information, see Create a Topic in the Amazon Simple
       #     Notification Service Developer Guide.
+      #
       #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
       #     want to notify when Elastic Transcoder has finished processing a
       #     job in this pipeline. This is the ARN that Amazon SNS returned
       #     when you created the topic.
+      #
       #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters a warning condition
       #     while processing a job in this pipeline. This is the ARN that
       #     Amazon SNS returned when you created the topic.
+      #
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters an error condition
       #     while processing a job in this pipeline. This is the ARN that
@@ -1441,12 +1560,15 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save transcoded files and playlists.
+      #
       #   * **Permissions** (Optional): The Permissions object specifies which
       #     users you want to have access to transcoded files and the type of
       #     access you want them to have. You can grant permissions to a
       #     maximum of 30 users and/or predefined Amazon S3 groups.
+      #
       #   * **Grantee Type**\: Specify the type of value that appears in the
       #     `Grantee` object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution. For more
@@ -1456,10 +1578,12 @@ module Aws
       #       identities to require that users use CloudFront URLs instead of
       #       Amazon S3 URLs, see Using an Origin Access Identity to Restrict
       #       Access to Your Amazon S3 Content.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -1470,16 +1594,21 @@ module Aws
       #     origin access identity for a CloudFront distribution, the
       #     registered email address of an AWS account, or a predefined Amazon
       #     S3 group
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     files that Elastic Transcoder adds to the bucket, including
       #     playlists and video files. Valid values include:
+      #
       #     * `READ`\: The grantee can read the objects and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for objects
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -1506,20 +1635,25 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save thumbnail files.
+      #
       #   * **Permissions** (Optional): The `Permissions` object specifies
       #     which users and/or predefined Amazon S3 groups you want to have
       #     access to thumbnail files, and the type of access you want them to
       #     have. You can grant permissions to a maximum of 30 users and/or
       #     predefined Amazon S3 groups.
+      #
       #   * **GranteeType**\: Specify the type of value that appears in the
       #     Grantee object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -1529,16 +1663,21 @@ module Aws
       #     the canonical user ID for an AWS account, an origin access
       #     identity for a CloudFront distribution, the registered email
       #     address of an AWS account, or a predefined Amazon S3 group.
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     thumbnail files that Elastic Transcoder adds to the bucket. Valid
       #     values include:
+      #
       #     * `READ`\: The grantee can read the thumbnails and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the thumbnails that Elastic
       #       Transcoder adds to the Amazon S3 bucket.
@@ -1779,8 +1918,8 @@ module Aws
 
       # The encryption settings, if any, that are used for decrypting your
       # input files or encrypting your output files. If your input file is
-      # encrypted, you must specify the mode that Elastic Transcoder will use
-      # to decrypt your file, otherwise you must specify the mode you want
+      # encrypted, you must specify the mode that Elastic Transcoder uses to
+      # decrypt your file, otherwise you must specify the mode you want
       # Elastic Transcoder to use to encrypt your output files.
       # @note When making an API call, pass Encryption
       #   data as a hash:
@@ -1813,7 +1952,7 @@ module Aws
       #
       #   * **AES-GCM:** AES Galois Counter Mode, a mode of operation that is
       #     an authenticated encryption format, meaning that a file, key, or
-      #     initialization vector that has been tampered with will fail the
+      #     initialization vector that has been tampered with fails the
       #     decryption process.
       #
       #   For all three AES options, you must provide the following settings,
@@ -1884,8 +2023,8 @@ module Aws
       #   The content protection method for your output. The only valid value
       #   is: `aes-128`.
       #
-      #   This value will be written into the method attribute of the
-      #   `EXT-X-KEY` metadata tag in the output playlist.
+      #   This value is written into the method attribute of the `EXT-X-KEY`
+      #   metadata tag in the output playlist.
       #   @return [String]
       #
       # @!attribute [rw] key
@@ -1944,6 +2083,62 @@ module Aws
         include Aws::Structure
       end
 
+      # The captions to be created, if any.
+      # @note When making an API call, pass InputCaptions
+      #   data as a hash:
+      #
+      #       {
+      #         merge_policy: "CaptionMergePolicy",
+      #         caption_sources: [
+      #           {
+      #             key: "LongKey",
+      #             language: "Key",
+      #             time_offset: "TimeOffset",
+      #             label: "Name",
+      #             encryption: {
+      #               mode: "EncryptionMode",
+      #               key: "Base64EncodedString",
+      #               key_md_5: "Base64EncodedString",
+      #               initialization_vector: "ZeroTo255String",
+      #             },
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] merge_policy
+      #   A policy that determines how Elastic Transcoder handles the
+      #   existence of multiple captions.
+      #
+      #   * **MergeOverride:** Elastic Transcoder transcodes both embedded and
+      #     sidecar captions into outputs. If captions for a language are
+      #     embedded in the input file and also appear in a sidecar file,
+      #     Elastic Transcoder uses the sidecar captions and ignores the
+      #     embedded captions for that language.
+      #
+      #   * **MergeRetain:** Elastic Transcoder transcodes both embedded and
+      #     sidecar captions into outputs. If captions for a language are
+      #     embedded in the input file and also appear in a sidecar file,
+      #     Elastic Transcoder uses the embedded captions and ignores the
+      #     sidecar captions for that language. If `CaptionSources` is empty,
+      #     Elastic Transcoder omits all sidecar captions from the output
+      #     files.
+      #
+      #   * **Override:** Elastic Transcoder transcodes only the sidecar
+      #     captions that you specify in `CaptionSources`.
+      #
+      #   `MergePolicy` cannot be null.
+      #   @return [String]
+      #
+      # @!attribute [rw] caption_sources
+      #   Source files for the input sidecar captions used during the
+      #   transcoding process. To omit all sidecar captions, leave
+      #   `CaptionSources` blank.
+      #   @return [Array<Types::CaptionSource>]
+      class InputCaptions < Struct.new(
+        :merge_policy,
+        :caption_sources)
+        include Aws::Structure
+      end
+
       # A section of the response body that provides information about the job
       # that is created.
       # @!attribute [rw] id
@@ -1968,6 +2163,12 @@ module Aws
       #   about the file that is being transcoded.
       #   @return [Types::JobInput]
       #
+      # @!attribute [rw] inputs
+      #   Information about the files that you're transcoding. If you
+      #   specified multiple files for this job, Elastic Transcoder stitches
+      #   the files together to make one output.
+      #   @return [Array<Types::JobInput>]
+      #
       # @!attribute [rw] output
       #   If you specified one output for a job, information about that
       #   output. If you specified multiple outputs for a job, the Output
@@ -1977,7 +2178,7 @@ module Aws
       #
       #   Outputs recommended instead.
       #
-      #    A section of the request or response body that provides information
+      #   A section of the request or response body that provides information
       #   about the transcoded (target) file.
       #   @return [Types::JobOutput]
       #
@@ -2020,8 +2221,8 @@ module Aws
       #   User-defined metadata that you want to associate with an Elastic
       #   Transcoder job. You specify metadata in `key/value` pairs, and you
       #   can add up to 10 `key/value` pairs per job. Elastic Transcoder does
-      #   not guarantee that `key/value` pairs will be returned in the same
-      #   order in which you specify them.
+      #   not guarantee that `key/value` pairs are returned in the same order
+      #   in which you specify them.
       #
       #   Metadata `keys` and `values` must use characters from the following
       #   list:
@@ -2043,6 +2244,7 @@ module Aws
         :arn,
         :pipeline_id,
         :input,
+        :inputs,
         :output,
         :outputs,
         :output_key_prefix,
@@ -2077,19 +2279,22 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] merge_policy
-      #   A policy that determines how Elastic Transcoder will handle the
+      #   A policy that determines how Elastic Transcoder handles the
       #   existence of multiple album artwork files.
       #
-      #   * `Replace:` The specified album art will replace any existing album
+      #   * `Replace:` The specified album art replaces any existing album
       #     art.
-      #   * `Prepend:` The specified album art will be placed in front of any
+      #
+      #   * `Prepend:` The specified album art is placed in front of any
       #     existing album art.
-      #   * `Append:` The specified album art will be placed after any
-      #     existing album art.
+      #
+      #   * `Append:` The specified album art is placed after any existing
+      #     album art.
+      #
       #   * `Fallback:` If the original input file contains artwork, Elastic
-      #     Transcoder will use that artwork for the output. If the original
-      #     input does not contain artwork, Elastic Transcoder will use the
-      #     specified album art file.
+      #     Transcoder uses that artwork for the output. If the original input
+      #     does not contain artwork, Elastic Transcoder uses the specified
+      #     album art file.
       #   @return [String]
       #
       # @!attribute [rw] artwork
@@ -2119,6 +2324,27 @@ module Aws
       #           key: "Base64EncodedString",
       #           key_md_5: "Base64EncodedString",
       #           initialization_vector: "ZeroTo255String",
+      #         },
+      #         time_span: {
+      #           start_time: "Time",
+      #           duration: "Time",
+      #         },
+      #         input_captions: {
+      #           merge_policy: "CaptionMergePolicy",
+      #           caption_sources: [
+      #             {
+      #               key: "LongKey",
+      #               language: "Key",
+      #               time_offset: "TimeOffset",
+      #               label: "Name",
+      #               encryption: {
+      #                 mode: "EncryptionMode",
+      #                 key: "Base64EncodedString",
+      #                 key_md_5: "Base64EncodedString",
+      #                 initialization_vector: "ZeroTo255String",
+      #               },
+      #             },
+      #           ],
       #         },
       #         detected_properties: {
       #           width: 1,
@@ -2194,8 +2420,67 @@ module Aws
       # @!attribute [rw] encryption
       #   The encryption settings, if any, that are used for decrypting your
       #   input files. If your input file is encrypted, you must specify the
-      #   mode that Elastic Transcoder will use to decrypt your file.
+      #   mode that Elastic Transcoder uses to decrypt your file.
       #   @return [Types::Encryption]
+      #
+      # @!attribute [rw] time_span
+      #   Settings for clipping an input. Each input can have different clip
+      #   settings.
+      #   @return [Types::TimeSpan]
+      #
+      # @!attribute [rw] input_captions
+      #   You can configure Elastic Transcoder to transcode captions, or
+      #   subtitles, from one format to another. All captions must be in
+      #   UTF-8. Elastic Transcoder supports two types of captions:
+      #
+      #   * **Embedded:** Embedded captions are included in the same file as
+      #     the audio and video. Elastic Transcoder supports only one embedded
+      #     caption per language, to a maximum of 300 embedded captions per
+      #     file.
+      #
+      #     Valid input values include: `CEA-608 (EIA-608`, first non-empty
+      #     channel only), `CEA-708 (EIA-708`, first non-empty channel only),
+      #     and `mov-text`
+      #
+      #     Valid outputs include: `mov-text`
+      #
+      #     Elastic Transcoder supports a maximum of one embedded format per
+      #     output.
+      #
+      #   * **Sidecar:** Sidecar captions are kept in a separate metadata file
+      #     from the audio and video data. Sidecar captions require a player
+      #     that is capable of understanding the relationship between the
+      #     video file and the sidecar file. Elastic Transcoder supports only
+      #     one sidecar caption per language, to a maximum of 20 sidecar
+      #     captions per file.
+      #
+      #     Valid input values include: `dfxp` (first div element only),
+      #     `ebu-tt`, `scc`, `smpt`, `srt`, `ttml` (first div element only),
+      #     and `webvtt`
+      #
+      #     Valid outputs include: `dfxp` (first div element only), `scc`,
+      #     `srt`, and `webvtt`.
+      #
+      #   If you want ttml or smpte-tt compatible captions, specify dfxp as
+      #   your output format.
+      #
+      #   Elastic Transcoder does not support OCR (Optical Character
+      #   Recognition), does not accept pictures as a valid input for
+      #   captions, and is not available for audio-only transcoding. Elastic
+      #   Transcoder does not preserve text formatting (for example, italics)
+      #   during the transcoding process.
+      #
+      #   To remove captions or leave the captions empty, set `Captions` to
+      #   null. To pass through existing captions unchanged, set the
+      #   `MergePolicy` to `MergeRetain`, and pass in a null `CaptionSources`
+      #   array.
+      #
+      #   For more information on embedded files, see the Subtitles Wikipedia
+      #   page.
+      #
+      #   For more information on sidecar files, see the Extensible Metadata
+      #   Platform and Sidecar file Wikipedia pages.
+      #   @return [Types::InputCaptions]
       #
       # @!attribute [rw] detected_properties
       #   The detected properties of the input file.
@@ -2208,6 +2493,8 @@ module Aws
         :interlaced,
         :container,
         :encryption,
+        :time_span,
+        :input_captions,
         :detected_properties)
         include Aws::Structure
       end
@@ -2242,12 +2529,12 @@ module Aws
       #   information that you want to include in the file name for each
       #   thumbnail. You can specify the following values in any sequence:
       #
-      #   * **`\{count\}` (Required)**\: If you want to create thumbnails, you
-      #     must include `\{count\}` in the `ThumbnailPattern` object.
-      #     Wherever you specify `\{count\}`, Elastic Transcoder adds a
-      #     five-digit sequence number (beginning with **00001**) to thumbnail
-      #     file names. The number indicates where a given thumbnail appears
-      #     in the sequence of thumbnails for a transcoded file.
+      #   * <b> <code>\{count\}</code> (Required)</b>\: If you want to create
+      #     thumbnails, you must include `\{count\}` in the `ThumbnailPattern`
+      #     object. Wherever you specify `\{count\}`, Elastic Transcoder adds
+      #     a five-digit sequence number (beginning with **00001**) to
+      #     thumbnail file names. The number indicates where a given thumbnail
+      #     appears in the sequence of thumbnails for a transcoded file.
       #
       #     If you specify a literal value and/or `\{resolution\}` but you
       #     omit `\{count\}`, Elastic Transcoder returns a validation error
@@ -2258,9 +2545,9 @@ module Aws
       #     include them as a file name prefix or as a delimiter between
       #     `\{resolution\}` and `\{count\}`.
       #
-      #   * **`\{resolution\}` (Optional)**\: If you want Elastic Transcoder
-      #     to include the resolution in the file name, include
-      #     `\{resolution\}` in the `ThumbnailPattern` object.
+      #   * <b> <code>\{resolution\}</code> (Optional)</b>\: If you want
+      #     Elastic Transcoder to include the resolution in the file name,
+      #     include `\{resolution\}` in the `ThumbnailPattern` object.
       #
       #   When creating thumbnails, Elastic Transcoder automatically saves the
       #   files in the format (.jpg or .png) that appears in the preset that
@@ -2301,10 +2588,11 @@ module Aws
       #   `Container` is `fmp4` (Fragmented MP4) or `ts` (MPEG-TS),
       #   `SegmentDuration` is the target maximum duration of each segment in
       #   seconds. For `HLSv3` format playlists, each media segment is stored
-      #   in a separate `.ts` file. For `HLSv4` and `Smooth` playlists, all
-      #   media segments for an output are stored in a single file. Each
-      #   segment is approximately the length of the `SegmentDuration`, though
-      #   individual segments might be shorter or longer.
+      #   in a separate `.ts` file. For `HLSv4`, `MPEG-DASH`, and `Smooth`
+      #   playlists, all media segments for an output are stored in a single
+      #   file. Each segment is approximately the length of the
+      #   `SegmentDuration`, though individual segments might be shorter or
+      #   longer.
       #
       #   The range of valid values is 1 to 60 seconds. If the duration of the
       #   video is not evenly divisible by `SegmentDuration`, the duration of
@@ -2319,23 +2607,27 @@ module Aws
       # @!attribute [rw] status
       #   The status of one output in a job. If you specified only one output
       #   for the job, `Outputs:Status` is always the same as `Job:Status`. If
-      #   you specified more than one output: * `Job:Status` and
-      #   `Outputs:Status` for all of the outputs is
+      #   you specified more than one output:
+      #
+      #   * `Job:Status` and `Outputs:Status` for all of the outputs is
       #     Submitted until Elastic Transcoder starts to process the first
       #     output.
+      #
       #   * When Elastic Transcoder starts to process the first output,
       #     `Outputs:Status` for that output and `Job:Status` both change to
       #     Progressing. For each output, the value of `Outputs:Status`
       #     remains Submitted until Elastic Transcoder starts to process the
       #     output.
+      #
       #   * Job:Status remains Progressing until all of the outputs reach a
       #     terminal status, either Complete or Error.
+      #
       #   * When all of the outputs reach a terminal status, `Job:Status`
       #     changes to Complete only if `Outputs:Status` for all of the
       #     outputs is `Complete`. If `Outputs:Status` for one or more outputs
       #     is `Error`, the terminal status for `Job:Status` is also `Error`.
       #
-      #    The value of `Status` is one of the following: `Submitted`,
+      #   The value of `Status` is one of the following: `Submitted`,
       #   `Progressing`, `Complete`, `Canceled`, or `Error`.
       #   @return [String]
       #
@@ -2379,9 +2671,9 @@ module Aws
       #   added to the output video first, the second watermark in the list is
       #   added next, and so on. As a result, if the settings in a preset
       #   cause Elastic Transcoder to place all watermarks in the same
-      #   location, the second watermark that you add will cover the first
-      #   one, the third one will cover the second, and the fourth one will
-      #   cover the third.
+      #   location, the second watermark that you add covers the first one,
+      #   the third one covers the second, and the fourth one covers the
+      #   third.
       #   @return [Array<Types::JobWatermark>]
       #
       # @!attribute [rw] album_art
@@ -2455,7 +2747,7 @@ module Aws
       #   The encryption settings, if any, that you want Elastic Transcoder to
       #   apply to your output files. If you choose to use encryption, you
       #   must specify a mode to use. If you choose not to use encryption,
-      #   Elastic Transcoder will write an unencrypted file to your Amazon S3
+      #   Elastic Transcoder writes an unencrypted file to your Amazon S3
       #   bucket.
       #   @return [Types::Encryption]
       #
@@ -2464,7 +2756,7 @@ module Aws
       #   `ColorSpaceConversionMode` to transcode the output file, the
       #   `AppliedColorSpaceConversion` parameter shows the conversion used.
       #   If no `ColorSpaceConversionMode` was defined in the preset, this
-      #   parameter will not be included in the job response.
+      #   parameter is not be included in the job response.
       #   @return [String]
       class JobOutput < Struct.new(
         :id,
@@ -2772,12 +3064,15 @@ module Aws
       #         access: ["AccessControl"],
       #       }
       # @!attribute [rw] grantee_type
-      #   The type of value that appears in the Grantee object: *
-      #   `Canonical`\: Either the canonical user ID for an AWS account or
+      #   The type of value that appears in the Grantee object:
+      #
+      #   * `Canonical`\: Either the canonical user ID for an AWS account or
       #     an origin access identity for an Amazon CloudFront distribution.
+      #
       #     A canonical user ID is not the same as an AWS account number.
       #
       #   * `Email`\: The registered email address of an AWS account.
+      #
       #   * `Group`\: One of the following predefined Amazon S3 groups:
       #     `AllUsers`, `AuthenticatedUsers`, or `LogDelivery`.
       #   @return [String]
@@ -2792,13 +3087,17 @@ module Aws
       #
       # @!attribute [rw] access
       #   The permission that you want to give to the AWS user that is listed
-      #   in Grantee. Valid values include: * `READ`\: The grantee can read
-      #   the thumbnails and metadata for
+      #   in Grantee. Valid values include:
+      #
+      #   * `READ`\: The grantee can read the thumbnails and metadata for
       #     thumbnails that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #   * `READ_ACP`\: The grantee can read the object ACL for thumbnails
       #     that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #   * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #     that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #   * `FULL_CONTROL`\: The grantee has READ, READ\_ACP, and WRITE\_ACP
       #     permissions for the thumbnails that Elastic Transcoder adds to the
       #     Amazon S3 bucket.
@@ -2832,6 +3131,7 @@ module Aws
       #   The current status of the pipeline:
       #
       #   * `Active`\: The pipeline is processing jobs.
+      #
       #   * `Paused`\: The pipeline is not currently processing jobs.
       #   @return [String]
       #
@@ -2874,10 +3174,13 @@ module Aws
       #   * **Progressing** (optional): The Amazon Simple Notification Service
       #     (Amazon SNS) topic that you want to notify when Elastic Transcoder
       #     has started to process the job.
+      #
       #   * **Completed** (optional): The Amazon SNS topic that you want to
       #     notify when Elastic Transcoder has finished processing the job.
+      #
       #   * **Warning** (optional): The Amazon SNS topic that you want to
       #     notify when Elastic Transcoder encounters a warning condition.
+      #
       #   * **Error** (optional): The Amazon SNS topic that you want to notify
       #     when Elastic Transcoder encounters an error condition.
       #   @return [Types::Notifications]
@@ -2890,28 +3193,38 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save transcoded files and playlists.
+      #
       #   * **Permissions**\: A list of the users and/or predefined Amazon S3
       #     groups you want to have access to transcoded files and playlists,
       #     and the type of access that you want them to have.
+      #
       #     * GranteeType: The type of value that appears in the `Grantee`
       #       object:
+      #
       #       * `Canonical`\: Either the canonical user ID for an AWS account
       #         or an origin access identity for an Amazon CloudFront
       #         distribution.
+      #
       #       * `Email`\: The registered email address of an AWS account.
+      #
       #       * `Group`\: One of the following predefined Amazon S3 groups:
       #         `AllUsers`, `AuthenticatedUsers`, or `LogDelivery`.
       #
       #     * `Grantee`\: The AWS user or group that you want to have access
       #       to transcoded files and playlists.
+      #
       #     * `Access`\: The permission that you want to give to the AWS user
       #       that is listed in `Grantee`. Valid values include:
+      #
       #       * `READ`\: The grantee can read the objects and metadata for
       #         objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #       * `READ_ACP`\: The grantee can read the object ACL for objects
       #         that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #       * `WRITE_ACP`\: The grantee can write the ACL for the objects
       #         that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #       * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #         `WRITE_ACP` permissions for the objects that Elastic
       #         Transcoder adds to the Amazon S3 bucket.
@@ -2930,32 +3243,42 @@ module Aws
       #
       #   * `Bucket`\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save thumbnail files.
+      #
       #   * `Permissions`\: A list of the users and/or predefined Amazon S3
       #     groups you want to have access to thumbnail files, and the type of
       #     access that you want them to have.
+      #
       #     * GranteeType: The type of value that appears in the Grantee
       #       object:
+      #
       #       * `Canonical`\: Either the canonical user ID for an AWS account
       #         or an origin access identity for an Amazon CloudFront
       #         distribution.
+      #
       #         A canonical user ID is not the same as an AWS account number.
       #
       #       * `Email`\: The registered email address of an AWS account.
+      #
       #       * `Group`\: One of the following predefined Amazon S3 groups:
       #         `AllUsers`, `AuthenticatedUsers`, or `LogDelivery`.
       #
       #     * `Grantee`\: The AWS user or group that you want to have access
       #       to thumbnail files.
+      #
       #     * Access: The permission that you want to give to the AWS user
       #       that is listed in Grantee. Valid values include:
+      #
       #       * `READ`\: The grantee can read the thumbnails and metadata for
       #         thumbnails that Elastic Transcoder adds to the Amazon S3
       #         bucket.
+      #
       #       * `READ_ACP`\: The grantee can read the object ACL for
       #         thumbnails that Elastic Transcoder adds to the Amazon S3
       #         bucket.
+      #
       #       * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #         that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #       * `FULL_CONTROL`\: The grantee has READ, READ\_ACP, and
       #         WRITE\_ACP permissions for the thumbnails that Elastic
       #         Transcoder adds to the Amazon S3 bucket.
@@ -2997,18 +3320,22 @@ module Aws
       # @!attribute [rw] bucket
       #   The Amazon S3 bucket in which you want Elastic Transcoder to save
       #   the transcoded files. Specify this value when all of the following
-      #   are true: * You want to save transcoded files, thumbnails (if any),
-      #   and
+      #   are true:
+      #
+      #   * You want to save transcoded files, thumbnails (if any), and
       #     playlists (if any) together in one bucket.
+      #
       #   * You do not want to specify the users or groups who have access to
       #     the transcoded files, thumbnails, and playlists.
+      #
       #   * You do not want to specify the permissions that Elastic Transcoder
       #     grants to the files.
+      #
       #   * You want to associate the transcoded files and thumbnails with the
       #     Amazon S3 Standard storage class.
       #
-      #    If you want to save transcoded files and playlists in one bucket
-      #   and thumbnails in another bucket, specify which users can access the
+      #   If you want to save transcoded files and playlists in one bucket and
+      #   thumbnails in another bucket, specify which users can access the
       #   transcoded files or the permissions the users have, or change the
       #   Amazon S3 storage class, omit OutputBucket and specify values for
       #   `ContentConfig` and `ThumbnailConfig` instead.
@@ -3090,10 +3417,9 @@ module Aws
       #   which key to provide.
       #
       #   The key ID must be provided in big endian, and Elastic Transcoder
-      #   will convert it to little endian before inserting it into the
-      #   PlayReady DRM headers. If you are unsure whether your license server
-      #   provides your key ID in big or little endian, check with your DRM
-      #   provider.
+      #   converts it to little endian before inserting it into the PlayReady
+      #   DRM headers. If you are unsure whether your license server provides
+      #   your key ID in big or little endian, check with your DRM provider.
       #   @return [String]
       #
       # @!attribute [rw] initialization_vector
@@ -3137,11 +3463,12 @@ module Aws
       #   identical for all `Name` objects. If you create more than one master
       #   playlist, the values of all `Name` objects must be unique.
       #
-      #   **Note**\: Elastic Transcoder automatically appends the relevant
-      #   file extension to the file name (`.m3u8` for `HLSv3` and `HLSv4`
-      #   playlists, and `.ism` and `.ismc` for `Smooth` playlists). If you
-      #   include a file extension in `Name`, the file name will have two
-      #   extensions.
+      #   <note markdown="1"> Elastic Transcoder automatically appends the relevant file extension
+      #   to the file name (`.m3u8` for `HLSv3` and `HLSv4` playlists, and
+      #   `.ism` and `.ismc` for `Smooth` playlists). If you include a file
+      #   extension in `Name`, the file name will have two extensions.
+      #
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] format
@@ -3313,43 +3640,53 @@ module Aws
       #         target: "Target",
       #       }
       # @!attribute [rw] id
-      #   A unique identifier for the settings for one watermark. The value of `Id` can be up to 40 characters long.
+      #   A unique identifier for the settings for one watermark. The value of
+      #   `Id` can be up to 40 characters long.
       #   @return [String]
       #
       # @!attribute [rw] max_width
       #   The maximum width of the watermark in one of the following formats:
+      #
       #   * number of pixels (px): The minimum value is 16 pixels, and the
       #     maximum value is the value of `MaxWidth`.
+      #
       #   * integer percentage (%): The range of valid values is 0 to 100. Use
       #     the value of `Target` to specify whether you want Elastic
       #     Transcoder to include the black bars that are added by Elastic
       #     Transcoder, if any, in the calculation.
-      #   `MaxWidth`
+      #
+      #     If you specify the value in pixels, it must be less than or equal
+      #     to the value of `MaxWidth`.
       #   @return [String]
       #
       # @!attribute [rw] max_height
       #   The maximum height of the watermark in one of the following formats:
+      #
       #   * number of pixels (px): The minimum value is 16 pixels, and the
       #     maximum value is the value of `MaxHeight`.
+      #
       #   * integer percentage (%): The range of valid values is 0 to 100. Use
       #     the value of `Target` to specify whether you want Elastic
       #     Transcoder to include the black bars that are added by Elastic
       #     Transcoder, if any, in the calculation.
       #
-      #    If you specify the value in pixels, it must be less than or equal
-      #   to the value of `MaxHeight`.
+      #   If you specify the value in pixels, it must be less than or equal to
+      #   the value of `MaxHeight`.
       #   @return [String]
       #
       # @!attribute [rw] sizing_policy
-      #   A value that controls scaling of the watermark: * **Fit**\: Elastic
-      #   Transcoder scales the watermark so it matches
+      #   A value that controls scaling of the watermark:
+      #
+      #   * **Fit**\: Elastic Transcoder scales the watermark so it matches
       #     the value that you specified in either `MaxWidth` or `MaxHeight`
       #     without exceeding the other value.
+      #
       #   * **Stretch**\: Elastic Transcoder stretches the watermark to match
       #     the values that you specified for `MaxWidth` and `MaxHeight`. If
       #     the relative proportions of the watermark and the values of
       #     `MaxWidth` and `MaxHeight` are different, the watermark will be
       #     distorted.
+      #
       #   * **ShrinkToFit**\: Elastic Transcoder scales the watermark down so
       #     that its dimensions match the values that you specified for at
       #     least one of `MaxWidth` and `MaxHeight` without exceeding either
@@ -3359,11 +3696,14 @@ module Aws
       #
       # @!attribute [rw] horizontal_align
       #   The horizontal position of the watermark unless you specify a
-      #   non-zero value for `HorizontalOffset`\: * **Left**\: The left edge
-      #   of the watermark is aligned with the left
+      #   non-zero value for `HorizontalOffset`\:
+      #
+      #   * **Left**\: The left edge of the watermark is aligned with the left
       #     border of the video.
+      #
       #   * **Right**\: The right edge of the watermark is aligned with the
       #     right border of the video.
+      #
       #   * **Center**\: The watermark is centered between the left and right
       #     borders.
       #   @return [String]
@@ -3371,9 +3711,11 @@ module Aws
       # @!attribute [rw] horizontal_offset
       #   The amount by which you want the horizontal position of the
       #   watermark to be offset from the position specified by
-      #   HorizontalAlign: * number of pixels (px): The minimum value is 0
-      #   pixels, and the
+      #   HorizontalAlign:
+      #
+      #   * number of pixels (px): The minimum value is 0 pixels, and the
       #     maximum value is the value of MaxWidth.
+      #
       #   * integer percentage (%): The range of valid values is 0 to 100.
       #
       #   For example, if you specify Left for `HorizontalAlign` and 5px for
@@ -3395,23 +3737,30 @@ module Aws
       #
       # @!attribute [rw] vertical_align
       #   The vertical position of the watermark unless you specify a non-zero
-      #   value for `VerticalOffset`\: * **Top**\: The top edge of the
-      #   watermark is aligned with the top
+      #   value for `VerticalOffset`\:
+      #
+      #   * **Top**\: The top edge of the watermark is aligned with the top
       #     border of the video.
+      #
       #   * **Bottom**\: The bottom edge of the watermark is aligned with the
       #     bottom border of the video.
+      #
       #   * **Center**\: The watermark is centered between the top and bottom
       #     borders.
       #   @return [String]
       #
       # @!attribute [rw] vertical_offset
-      #   `VerticalOffset` The amount by which you want the vertical position of the watermark
-      #   to be offset from the position specified by VerticalAlign:* number
-      #   of pixels (px): The minimum value is 0 pixels, and the
+      #   `VerticalOffset`
+      #
+      #   The amount by which you want the vertical position of the watermark
+      #   to be offset from the position specified by VerticalAlign:
+      #
+      #   * number of pixels (px): The minimum value is 0 pixels, and the
       #     maximum value is the value of `MaxHeight`.
+      #
       #   * integer percentage (%): The range of valid values is 0 to 100.
       #
-      #    For example, if you specify `Top` for `VerticalAlign` and `5px` for
+      #   For example, if you specify `Top` for `VerticalAlign` and `5px` for
       #   `VerticalOffset`, the top of the watermark appears 5 pixels from the
       #   top border of the output video.
       #
@@ -3445,17 +3794,21 @@ module Aws
       # @!attribute [rw] target
       #   A value that determines how Elastic Transcoder interprets values
       #   that you specified for `HorizontalOffset`, `VerticalOffset`,
-      #   `MaxWidth`, and `MaxHeight`\: * **Content**\: `HorizontalOffset` and
-      #   `VerticalOffset` values are
+      #   `MaxWidth`, and `MaxHeight`\:
+      #
+      #   * **Content**\: `HorizontalOffset` and `VerticalOffset` values are
       #     calculated based on the borders of the video excluding black bars
       #     added by Elastic Transcoder, if any. In addition, `MaxWidth` and
       #     `MaxHeight`, if specified as a percentage, are calculated based on
       #     the borders of the video excluding black bars added by Elastic
       #     Transcoder, if any.
+      #
       #   * **Frame**\: `HorizontalOffset` and `VerticalOffset` values are
       #     calculated based on the borders of the video including black bars
-      #     added by Elastic Transcoder, if any.
-      #   `MaxWidth``MaxHeight`
+      #     added by Elastic Transcoder, if any. In addition, `MaxWidth` and
+      #     `MaxHeight`, if specified as a percentage, are calculated based on
+      #     the borders of the video including black bars added by Elastic
+      #     Transcoder, if any.
       #   @return [String]
       class PresetWatermark < Struct.new(
         :id,
@@ -3579,8 +3932,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] output_bucket
-      #   The Amazon S3 bucket that Elastic Transcoder will write transcoded
-      #   media files to. The action attempts to read from this bucket.
+      #   The Amazon S3 bucket that Elastic Transcoder writes transcoded media
+      #   files to. The action attempts to read from this bucket.
       #   @return [String]
       #
       # @!attribute [rw] topics
@@ -3646,7 +3999,7 @@ module Aws
       #   not use them together.
       #
       #   The width and height of thumbnail files in pixels. Specify a value
-      #   in the format `width` x `height` where both values are even
+      #   in the format ` width ` x ` height ` where both values are even
       #   integers. The values cannot exceed the width and height that you
       #   specified in the `Video:Resolution` object.
       #   @return [String]
@@ -3685,24 +4038,29 @@ module Aws
       #   * `Fit`\: Elastic Transcoder scales thumbnails so they match the
       #     value that you specified in thumbnail MaxWidth or MaxHeight
       #     settings without exceeding the other value.
+      #
       #   * `Fill`\: Elastic Transcoder scales thumbnails so they match the
       #     value that you specified in thumbnail `MaxWidth` or `MaxHeight`
       #     settings and matches or exceeds the other value. Elastic
       #     Transcoder centers the image in thumbnails and then crops in the
       #     dimension (if any) that exceeds the maximum value.
+      #
       #   * `Stretch`\: Elastic Transcoder stretches thumbnails to match the
       #     values that you specified for thumbnail `MaxWidth` and `MaxHeight`
       #     settings. If the relative proportions of the input video and
       #     thumbnails are different, the thumbnails will be distorted.
+      #
       #   * `Keep`\: Elastic Transcoder does not scale thumbnails. If either
       #     dimension of the input video exceeds the values that you specified
       #     for thumbnail `MaxWidth` and `MaxHeight` settings, Elastic
       #     Transcoder crops the thumbnails.
+      #
       #   * `ShrinkToFit`\: Elastic Transcoder scales thumbnails down so that
       #     their dimensions match the values that you specified for at least
       #     one of thumbnail `MaxWidth` and `MaxHeight` without exceeding
       #     either value. If you specify this option, Elastic Transcoder does
       #     not scale thumbnails up.
+      #
       #   * `ShrinkToFill`\: Elastic Transcoder scales thumbnails down so that
       #     their dimensions match the values that you specified for at least
       #     one of `MaxWidth` and `MaxHeight` without dropping below either
@@ -3812,14 +4170,17 @@ module Aws
       #     Transcoder has started to process jobs that are added to this
       #     pipeline. This is the ARN that Amazon SNS returned when you
       #     created the topic.
+      #
       #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
       #     want to notify when Elastic Transcoder has finished processing a
       #     job. This is the ARN that Amazon SNS returned when you created the
       #     topic.
+      #
       #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters a warning condition.
       #     This is the ARN that Amazon SNS returned when you created the
       #     topic.
+      #
       #   * **Error**\: The topic ARN for the Amazon SNS topic that you want
       #     to notify when Elastic Transcoder encounters an error condition.
       #     This is the ARN that Amazon SNS returned when you created the
@@ -3834,7 +4195,7 @@ module Aws
       # The `UpdatePipelineNotificationsResponse` structure.
       # @!attribute [rw] pipeline
       #   A section of the response body that provides information about the
-      #   pipeline.
+      #   pipeline associated with this notification.
       #   @return [Types::Pipeline]
       class UpdatePipelineNotificationsResponse < Struct.new(
         :pipeline)
@@ -3915,11 +4276,32 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] notifications
-      #   The Amazon Simple Notification Service (Amazon SNS) topic or topics
-      #   to notify in order to report job status.
+      #   The topic ARN for the Amazon Simple Notification Service (Amazon
+      #   SNS) topic that you want to notify to report job status.
       #
       #   To receive notifications, you must also subscribe to the new topic
       #   in the Amazon SNS console.
+      #
+      #   * **Progressing**\: The topic ARN for the Amazon Simple Notification
+      #     Service (Amazon SNS) topic that you want to notify when Elastic
+      #     Transcoder has started to process jobs that are added to this
+      #     pipeline. This is the ARN that Amazon SNS returned when you
+      #     created the topic.
+      #
+      #   * **Completed**\: The topic ARN for the Amazon SNS topic that you
+      #     want to notify when Elastic Transcoder has finished processing a
+      #     job. This is the ARN that Amazon SNS returned when you created the
+      #     topic.
+      #
+      #   * **Warning**\: The topic ARN for the Amazon SNS topic that you want
+      #     to notify when Elastic Transcoder encounters a warning condition.
+      #     This is the ARN that Amazon SNS returned when you created the
+      #     topic.
+      #
+      #   * **Error**\: The topic ARN for the Amazon SNS topic that you want
+      #     to notify when Elastic Transcoder encounters an error condition.
+      #     This is the ARN that Amazon SNS returned when you created the
+      #     topic.
       #   @return [Types::Notifications]
       #
       # @!attribute [rw] content_config
@@ -3937,12 +4319,15 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save transcoded files and playlists.
+      #
       #   * **Permissions** (Optional): The Permissions object specifies which
       #     users you want to have access to transcoded files and the type of
       #     access you want them to have. You can grant permissions to a
       #     maximum of 30 users and/or predefined Amazon S3 groups.
+      #
       #   * **Grantee Type**\: Specify the type of value that appears in the
       #     `Grantee` object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution. For more
@@ -3952,10 +4337,12 @@ module Aws
       #       identities to require that users use CloudFront URLs instead of
       #       Amazon S3 URLs, see Using an Origin Access Identity to Restrict
       #       Access to Your Amazon S3 Content.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -3966,16 +4353,21 @@ module Aws
       #     origin access identity for a CloudFront distribution, the
       #     registered email address of an AWS account, or a predefined Amazon
       #     S3 group
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     files that Elastic Transcoder adds to the bucket, including
       #     playlists and video files. Valid values include:
+      #
       #     * `READ`\: The grantee can read the objects and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for objects
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the objects that
       #       Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the objects that Elastic Transcoder
       #       adds to the Amazon S3 bucket.
@@ -4002,20 +4394,25 @@ module Aws
       #
       #   * **Bucket**\: The Amazon S3 bucket in which you want Elastic
       #     Transcoder to save thumbnail files.
+      #
       #   * **Permissions** (Optional): The `Permissions` object specifies
       #     which users and/or predefined Amazon S3 groups you want to have
       #     access to thumbnail files, and the type of access you want them to
       #     have. You can grant permissions to a maximum of 30 users and/or
       #     predefined Amazon S3 groups.
+      #
       #   * **GranteeType**\: Specify the type of value that appears in the
       #     Grantee object:
+      #
       #     * **Canonical**\: The value in the `Grantee` object is either the
       #       canonical user ID for an AWS account or an origin access
       #       identity for an Amazon CloudFront distribution.
+      #
       #       A canonical user ID is not the same as an AWS account number.
       #
       #     * **Email**\: The value in the `Grantee` object is the registered
       #       email address of an AWS account.
+      #
       #     * **Group**\: The value in the `Grantee` object is one of the
       #       following predefined Amazon S3 groups: `AllUsers`,
       #       `AuthenticatedUsers`, or `LogDelivery`.
@@ -4025,16 +4422,21 @@ module Aws
       #     the canonical user ID for an AWS account, an origin access
       #     identity for a CloudFront distribution, the registered email
       #     address of an AWS account, or a predefined Amazon S3 group.
+      #
       #   * **Access**\: The permission that you want to give to the AWS user
       #     that you specified in `Grantee`. Permissions are granted on the
       #     thumbnail files that Elastic Transcoder adds to the bucket. Valid
       #     values include:
+      #
       #     * `READ`\: The grantee can read the thumbnails and metadata for
       #       objects that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `READ_ACP`\: The grantee can read the object ACL for thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `WRITE_ACP`\: The grantee can write the ACL for the thumbnails
       #       that Elastic Transcoder adds to the Amazon S3 bucket.
+      #
       #     * `FULL_CONTROL`\: The grantee has `READ`, `READ_ACP`, and
       #       `WRITE_ACP` permissions for the thumbnails that Elastic
       #       Transcoder adds to the Amazon S3 bucket.
@@ -4058,7 +4460,7 @@ module Aws
       # When you update a pipeline, Elastic Transcoder returns the values that
       # you specified in the request.
       # @!attribute [rw] pipeline
-      #   The pipeline (queue) that is used to manage jobs.
+      #   The pipeline updated by this `UpdatePipelineResponse` call.
       #   @return [Types::Pipeline]
       #
       # @!attribute [rw] warnings
@@ -4091,6 +4493,7 @@ module Aws
       #   The desired status of the pipeline:
       #
       #   * `Active`\: The pipeline is processing jobs.
+      #
       #   * `Paused`\: The pipeline is not currently processing jobs.
       #   @return [String]
       class UpdatePipelineStatusRequest < Struct.new(
@@ -4148,21 +4551,23 @@ module Aws
       #       }
       # @!attribute [rw] codec
       #   The video codec for the output file. Valid values include `gif`,
-      #   `H.264`, `mpeg2`, and `vp8`. You can only specify `vp8` when the
-      #   container type is `webm`, `gif` when the container type is `gif`,
-      #   and `mpeg2` when the container type is `mpg`.
+      #   `H.264`, `mpeg2`, `vp8`, and `vp9`. You can only specify `vp8` and
+      #   `vp9` when the container type is `webm`, `gif` when the container
+      #   type is `gif`, and `mpeg2` when the container type is `mpg`.
       #   @return [String]
       #
       # @!attribute [rw] codec_options
-      #   **Profile (H.264/VP8 Only)**
+      #   **Profile (H.264/VP8/VP9 Only)**
       #
       #   The H.264 profile that you want to use for the output file. Elastic
       #   Transcoder supports the following profiles:
       #
       #   * `baseline`\: The profile most commonly used for videoconferencing
       #     and for mobile applications.
+      #
       #   * `main`\: The profile used for standard-definition digital TV
       #     broadcasts.
+      #
       #   * `high`\: The profile used for high-definition digital TV
       #     broadcasts and for Blu-ray discs.
       #
@@ -4191,20 +4596,32 @@ module Aws
       #   16x16.)
       #
       #   * 1 - 396
+      #
       #   * 1b - 396
+      #
       #   * 1\.1 - 900
+      #
       #   * 1\.2 - 2376
+      #
       #   * 1\.3 - 2376
+      #
       #   * 2 - 2376
+      #
       #   * 2\.1 - 4752
+      #
       #   * 2\.2 - 8100
+      #
       #   * 3 - 8100
+      #
       #   * 3\.1 - 18000
+      #
       #   * 3\.2 - 20480
+      #
       #   * 4 - 32768
+      #
       #   * 4\.1 - 32768
       #
-      #   **MaxBitRate (Optional, H.264/MPEG2/VP8 only)**
+      #   **MaxBitRate (Optional, H.264/MPEG2/VP8/VP9 only)**
       #
       #   The maximum number of bits per second in a video buffer; the size of
       #   the buffer is specified by `BufferSize`. Specify a value between 16
@@ -4212,7 +4629,7 @@ module Aws
       #   by reducing the maximum bit rate, but this also reduces the quality
       #   of the video.
       #
-      #   **BufferSize (Optional, H.264/MPEG2/VP8 only)**
+      #   **BufferSize (Optional, H.264/MPEG2/VP8/VP9 only)**
       #
       #   The maximum number of bits in any x seconds of the output video.
       #   This window is commonly 10 seconds, the standard segment duration
@@ -4259,14 +4676,21 @@ module Aws
       #
       #   * *Standard to HD, 720x480 to 1920x1080* - Elastic Transcoder
       #     applies `Bt601ToBt709`
+      #
       #   * *Standard to HD, 720x576 to 1920x1080* - Elastic Transcoder
       #     applies `Bt601ToBt709`
+      #
       #   * *HD to Standard, 1920x1080 to 720x480* - Elastic Transcoder
       #     applies `Bt709ToBt601`
+      #
       #   * *HD to Standard, 1920x1080 to 720x576* - Elastic Transcoder
       #     applies `Bt709ToBt601`
       #
-      #   <note>Elastic Transcoder may change the behavior of the `ColorspaceConversionMode` `Auto` mode in the future. All outputs in a playlist must use the same `ColorSpaceConversionMode`.</note>
+      #   <note markdown="1"> Elastic Transcoder may change the behavior of the
+      #   `ColorspaceConversionMode` `Auto` mode in the future. All outputs in
+      #   a playlist must use the same `ColorSpaceConversionMode`.
+      #
+      #    </note>
       #
       #   If you do not specify a `ColorSpaceConversionMode`, Elastic
       #   Transcoder does not change the color space of a file. If you are
@@ -4326,6 +4750,7 @@ module Aws
       #   * `true`\: Elastic Transcoder uses the value of `KeyframesMaxDist`
       #     for the distance between key frames (the number of frames in a
       #     group of pictures, or GOP).
+      #
       #   * `false`\: The distance between key frames can vary.
       #
       #   `FixedGOP` must be set to `true` for `fmp4` containers.
@@ -4345,15 +4770,25 @@ module Aws
       #   Profile)*
       #
       #   * 1 - 64 : 80
+      #
       #   * 1b - 128 : 160
+      #
       #   * 1\.1 - 192 : 240
+      #
       #   * 1\.2 - 384 : 480
+      #
       #   * 1\.3 - 768 : 960
+      #
       #   * 2 - 2000 : 2500
+      #
       #   * 3 - 10000 : 12500
+      #
       #   * 3\.1 - 14000 : 17500
+      #
       #   * 3\.2 - 20000 : 25000
+      #
       #   * 4 - 20000 : 25000
+      #
       #   * 4\.1 - 50000 : 62500
       #   @return [String]
       #
@@ -4374,6 +4809,7 @@ module Aws
       #
       #   * *width in pixels* and *height in pixels* represent the Resolution
       #     of the output video.
+      #
       #   * *maximum recommended decoding speed in Luma samples/second* is
       #     less than or equal to the maximum value listed in the following
       #     table, based on the value that you specified for Level.
@@ -4383,17 +4819,29 @@ module Aws
       #   speed*):
       #
       #   * 1 - 380160
+      #
       #   * 1b - 380160
+      #
       #   * 1\.1 - 76800
+      #
       #   * 1\.2 - 1536000
+      #
       #   * 1\.3 - 3041280
+      #
       #   * 2 - 3041280
+      #
       #   * 2\.1 - 5068800
+      #
       #   * 2\.2 - 5184000
+      #
       #   * 3 - 10368000
+      #
       #   * 3\.1 - 27648000
+      #
       #   * 3\.2 - 55296000
+      #
       #   * 4 - 62914560
+      #
       #   * 4\.1 - 62914560
       #   @return [String]
       #
@@ -4419,35 +4867,53 @@ module Aws
       #
       #   * `auto`\: Elastic Transcoder attempts to preserve the width and
       #     height of the input file, subject to the following rules.
-      #   * `width x height`\: The width and height of the output video in
+      #
+      #   * ` width x height `\: The width and height of the output video in
       #     pixels.
       #
       #   Note the following about specifying the width and height:
       #
       #   * The width must be an even integer between 128 and 4096, inclusive.
+      #
       #   * The height must be an even integer between 96 and 3072, inclusive.
+      #
       #   * If you specify a resolution that is less than the resolution of
       #     the input file, Elastic Transcoder rescales the output file to the
       #     lower resolution.
+      #
       #   * If you specify a resolution that is greater than the resolution of
       #     the input file, Elastic Transcoder rescales the output to the
       #     higher resolution.
+      #
       #   * We recommend that you specify a resolution for which the product
       #     of width and height is less than or equal to the applicable value
       #     in the following list (*List - Max width x height value*):
-      #   * 1 - 25344
-      #   * 1b - 25344
-      #   * 1\.1 - 101376
-      #   * 1\.2 - 101376
-      #   * 1\.3 - 101376
-      #   * 2 - 101376
-      #   * 2\.1 - 202752
-      #   * 2\.2 - 404720
-      #   * 3 - 404720
-      #   * 3\.1 - 921600
-      #   * 3\.2 - 1310720
-      #   * 4 - 2097152
-      #   * 4\.1 - 2097152
+      #
+      #     * 1 - 25344
+      #
+      #     * 1b - 25344
+      #
+      #     * 1\.1 - 101376
+      #
+      #     * 1\.2 - 101376
+      #
+      #     * 1\.3 - 101376
+      #
+      #     * 2 - 101376
+      #
+      #     * 2\.1 - 202752
+      #
+      #     * 2\.2 - 404720
+      #
+      #     * 3 - 404720
+      #
+      #     * 3\.1 - 921600
+      #
+      #     * 3\.2 - 1310720
+      #
+      #     * 4 - 2097152
+      #
+      #     * 4\.1 - 2097152
       #   @return [String]
       #
       # @!attribute [rw] aspect_ratio
@@ -4498,24 +4964,29 @@ module Aws
       #   * `Fit`\: Elastic Transcoder scales the output video so it matches
       #     the value that you specified in either `MaxWidth` or `MaxHeight`
       #     without exceeding the other value.
+      #
       #   * `Fill`\: Elastic Transcoder scales the output video so it matches
       #     the value that you specified in either `MaxWidth` or `MaxHeight`
       #     and matches or exceeds the other value. Elastic Transcoder centers
       #     the output video and then crops it in the dimension (if any) that
       #     exceeds the maximum value.
+      #
       #   * `Stretch`\: Elastic Transcoder stretches the output video to match
       #     the values that you specified for `MaxWidth` and `MaxHeight`. If
       #     the relative proportions of the input video and the output video
       #     are different, the output video will be distorted.
+      #
       #   * `Keep`\: Elastic Transcoder does not scale the output video. If
       #     either dimension of the input video exceeds the values that you
       #     specified for `MaxWidth` and `MaxHeight`, Elastic Transcoder crops
       #     the output video.
+      #
       #   * `ShrinkToFit`\: Elastic Transcoder scales the output video down so
       #     that its dimensions match the values that you specified for at
       #     least one of `MaxWidth` and `MaxHeight` without exceeding either
       #     value. If you specify this option, Elastic Transcoder does not
       #     scale the video up.
+      #
       #   * `ShrinkToFill`\: Elastic Transcoder scales the output video down
       #     so that its dimensions match the values that you specified for at
       #     least one of `MaxWidth` and `MaxHeight` without dropping below
@@ -4582,7 +5053,9 @@ module Aws
       #   The message explaining what resources are in a different region from
       #   the pipeline.
       #
-      #   **Note:** AWS KMS keys must be in the same region as the pipeline.
+      #   <note markdown="1"> AWS KMS keys must be in the same region as the pipeline.
+      #
+      #    </note>
       #   @return [String]
       class Warning < Struct.new(
         :code,

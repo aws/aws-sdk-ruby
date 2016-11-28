@@ -3,6 +3,8 @@ $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv2/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-sigv4/lib',  __FILE__))
 $LOAD_PATH.unshift(File.expand_path('../../../aws-partitions/lib',  __FILE__))
 
+require 'webmock/rspec'
+
 # Prevent the SDK unit tests from loading actual credentials while under test.
 # By default the SDK attempts to load credentials from:
 #

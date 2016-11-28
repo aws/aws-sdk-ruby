@@ -8,7 +8,7 @@ module AwsSdkCodeGenerator
       end
 
       def version
-        @service.version
+        @service.gem_version
       end
 
     end

@@ -108,11 +108,12 @@ module Aws
         !!@data
       end
 
+      # @param [Hash] options ({})
       # @return [Boolean]
       #   Returns `true` if the InstanceProfile exists.
-      def exists?
+      def exists?(options = {})
         begin
-          wait_until_exists(max_attempts: 1)
+          wait_until_exists(options.merge(max_attempts: 1))
           true
         rescue Aws::Waiters::Errors::UnexpectedError => e
           raise e.error
@@ -121,16 +122,17 @@ module Aws
         end
       end
 
-      # @param options ({})
+      # @param [Hash] options ({})
       # @option options [Integer] :max_attempts (40)
       # @option options [Float] :delay (1)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       # @return [InstanceProfile]
       def wait_until_exists(options = {})
-        waiter = Waiters::InstanceProfileExists.new(options.merge(client: @client))
+        options, params = separate_params_and_options(options)
+        waiter = Waiters::InstanceProfileExists.new(options)
         yield_waiter_and_warn(waiter, &Proc.new) if block_given?
-        waiter.wait(instance_profile_name: @name)
+        waiter.wait(params.merge(instance_profile_name: @name))
         InstanceProfile.new({
           name: @name,
           client: @client
@@ -239,6 +241,21 @@ module Aws
           @waiter_block_warned = true
         end
         yield(waiter.waiter)
+      end
+
+      def separate_params_and_options(options)
+        opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+        waiter_opts = {}
+        waiter_params = {}
+        options.each_pair do |key, value|
+          if opts.include?(key)
+            waiter_opts[key] = value
+          else
+            waiter_params[key] = value
+          end
+        end
+        waiter_opts[:client] ||= @client
+        [waiter_opts, waiter_params]
       end
 
       class Collection < Aws::Resources::Collection; end

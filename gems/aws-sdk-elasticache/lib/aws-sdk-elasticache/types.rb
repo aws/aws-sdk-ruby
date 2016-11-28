@@ -832,6 +832,7 @@ module Aws
       #         auto_minor_version_upgrade: false,
       #         snapshot_retention_limit: 1,
       #         snapshot_window: "String",
+      #         auth_token: "String",
       #       }
       # @!attribute [rw] cache_cluster_id
       #   The node group (shard) identifier. This parameter is stored as a
@@ -1141,6 +1142,26 @@ module Aws
       #   **Note:** This parameter is only valid if the `Engine` parameter is
       #   `redis`.
       #   @return [String]
+      #
+      # @!attribute [rw] auth_token
+      #   The password used to access a password protected server.
+      #
+      #   Password constraints:
+      #
+      #   * Must be only printable ASCII characters.
+      #
+      #   * Must be at least 16 characters and no more than 128 characters in
+      #     length.
+      #
+      #   * Cannot contain any of the following characters: '/', '"', or
+      #     "@".
+      #
+      #   For more information, see [AUTH password][1] at Redis.
+      #
+      #
+      #
+      #   [1]: http://redis.io/commands/AUTH
+      #   @return [String]
       class CreateCacheClusterMessage < Struct.new(
         :cache_cluster_id,
         :replication_group_id,
@@ -1163,7 +1184,8 @@ module Aws
         :notification_topic_arn,
         :auto_minor_version_upgrade,
         :snapshot_retention_limit,
-        :snapshot_window)
+        :snapshot_window,
+        :auth_token)
         include Aws::Structure
       end
 
@@ -1342,6 +1364,7 @@ module Aws
       #         auto_minor_version_upgrade: false,
       #         snapshot_retention_limit: 1,
       #         snapshot_window: "String",
+      #         auth_token: "String",
       #       }
       # @!attribute [rw] replication_group_id
       #   The replication group identifier. This parameter is stored as a
@@ -1404,13 +1427,7 @@ module Aws
       #   least 2.
       #
       #   The maximum permitted value for `NumCacheClusters` is 6 (primary
-      #   plus 5 replicas). If you need to exceed this limit, fill out the
-      #   ElastiCache Limit Increase Request form at
-      #   [http://aws.amazon.com/contact-us/elasticache-node-limit-request/][1].
-      #
-      #
-      #
-      #   [1]: http://aws.amazon.com/contact-us/elasticache-node-limit-request/
+      #   plus 5 replicas).
       #   @return [Integer]
       #
       # @!attribute [rw] preferred_cache_cluster_a_zs
@@ -1679,6 +1696,26 @@ module Aws
       #
       #    </note>
       #   @return [String]
+      #
+      # @!attribute [rw] auth_token
+      #   The password used to access a password protected server.
+      #
+      #   Password constraints:
+      #
+      #   * Must be only printable ASCII characters.
+      #
+      #   * Must be at least 16 characters and no more than 128 characters in
+      #     length.
+      #
+      #   * Cannot contain any of the following characters: '/', '"', or
+      #     "@".
+      #
+      #   For more information, see [AUTH password][1] at Redis.
+      #
+      #
+      #
+      #   [1]: http://redis.io/commands/AUTH
+      #   @return [String]
       class CreateReplicationGroupMessage < Struct.new(
         :replication_group_id,
         :replication_group_description,
@@ -1704,7 +1741,8 @@ module Aws
         :notification_topic_arn,
         :auto_minor_version_upgrade,
         :snapshot_retention_limit,
-        :snapshot_window)
+        :snapshot_window,
+        :auth_token)
         include Aws::Structure
       end
 
@@ -2660,7 +2698,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] show_node_group_config
-      #   A boolean value which if true, the node group (shard) configuration
+      #   A Boolean value which if true, the node group (shard) configuration
       #   is included in the snapshot description.
       #   @return [Boolean]
       class DescribeSnapshotsMessage < Struct.new(
@@ -3489,7 +3527,7 @@ module Aws
       end
 
       # Represents a collection of cache nodes in a replication group. One
-      # node in the node group is the read/write Primary node. All the other
+      # node in the node group is the read/write primary node. All the other
       # nodes are read-only Replica nodes.
       # @!attribute [rw] node_group_id
       #   The identifier for the node group (shard). A Redis (cluster mode
@@ -3908,7 +3946,8 @@ module Aws
       #
       # @!attribute [rw] status
       #   The current state of this replication group - `creating`,
-      #   `available`, etc.
+      #   `available`, `modifying`, `deleting`, `create-failed`,
+      #   `snapshotting`.
       #   @return [String]
       #
       # @!attribute [rw] pending_modified_values

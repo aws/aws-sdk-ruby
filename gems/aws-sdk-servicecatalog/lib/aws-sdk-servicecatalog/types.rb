@@ -9,6 +9,37 @@ module Aws
   module ServiceCatalog
     module Types
 
+      # @note When making an API call, pass AcceptPortfolioShareInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      class AcceptPortfolioShareInput < Struct.new(
+        :accept_language,
+        :portfolio_id)
+        include Aws::Structure
+      end
+
+      class AcceptPortfolioShareOutput < Aws::EmptyStructure; end
+
       # The access level to limit results.
       # @note When making an API call, pass AccessLevelFilter
       #   data as a hash:
@@ -38,6 +69,116 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass AssociatePrincipalWithPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         principal_arn: "PrincipalARN", # required
+      #         principal_type: "IAM", # required, accepts IAM
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal_arn
+      #   The ARN representing the principal (IAM user, role, or group).
+      #   @return [String]
+      #
+      # @!attribute [rw] principal_type
+      #   The principal type. Must be `IAM`
+      #   @return [String]
+      class AssociatePrincipalWithPortfolioInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :principal_arn,
+        :principal_type)
+        include Aws::Structure
+      end
+
+      class AssociatePrincipalWithPortfolioOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass AssociateProductWithPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         portfolio_id: "Id", # required
+      #         source_portfolio_id: "Id",
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] source_portfolio_id
+      #   The identifier of the source portfolio to use with this association.
+      #   @return [String]
+      class AssociateProductWithPortfolioInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :portfolio_id,
+        :source_portfolio_id)
+        include Aws::Structure
+      end
+
+      class AssociateProductWithPortfolioOutput < Aws::EmptyStructure; end
+
+      # Detailed constraint information.
+      # @!attribute [rw] constraint_id
+      #   The identifier of the constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of the constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] owner
+      #   The owner of the constraint.
+      #   @return [String]
+      class ConstraintDetail < Struct.new(
+        :constraint_id,
+        :type,
+        :description,
+        :owner)
+        include Aws::Structure
+      end
+
       # An administrator-specified constraint to apply when provisioning a
       # product.
       # @!attribute [rw] type
@@ -50,6 +191,695 @@ module Aws
       class ConstraintSummary < Struct.new(
         :type,
         :description)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass CreateConstraintInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         product_id: "Id", # required
+      #         parameters: "ConstraintParameters", # required
+      #         type: "ConstraintType", # required
+      #         description: "ConstraintDescription",
+      #         idempotency_token: "IdempotencyToken", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] parameters
+      #   The constraint parameters.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of the constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that
+      #   you also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #   @return [String]
+      class CreateConstraintInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :product_id,
+        :parameters,
+        :type,
+        :description,
+        :idempotency_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] constraint_detail
+      #   The resulting detailed constraint information.
+      #   @return [Types::ConstraintDetail]
+      #
+      # @!attribute [rw] constraint_parameters
+      #   The resulting constraint parameters.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class CreateConstraintOutput < Struct.new(
+        :constraint_detail,
+        :constraint_parameters,
+        :status)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass CreatePortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         display_name: "PortfolioDisplayName", # required
+      #         description: "PortfolioDescription",
+      #         provider_name: "ProviderName", # required
+      #         tags: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #         idempotency_token: "IdempotencyToken", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] display_name
+      #   The name to use for display purposes.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the portfolio.
+      #   @return [String]
+      #
+      # @!attribute [rw] provider_name
+      #   The name of the portfolio provider.
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   Tags to associate with the new portfolio.
+      #   @return [Array<Types::Tag>]
+      #
+      # @!attribute [rw] idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that
+      #   you also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #   @return [String]
+      class CreatePortfolioInput < Struct.new(
+        :accept_language,
+        :display_name,
+        :description,
+        :provider_name,
+        :tags,
+        :idempotency_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_detail
+      #   The resulting detailed portfolio information.
+      #   @return [Types::PortfolioDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags successfully associated with the new portfolio.
+      #   @return [Array<Types::Tag>]
+      class CreatePortfolioOutput < Struct.new(
+        :portfolio_detail,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass CreatePortfolioShareInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         account_id: "AccountId", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] account_id
+      #   The account ID with which to share the portfolio.
+      #   @return [String]
+      class CreatePortfolioShareInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :account_id)
+        include Aws::Structure
+      end
+
+      class CreatePortfolioShareOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass CreateProductInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         name: "ProductViewName", # required
+      #         owner: "ProductViewOwner", # required
+      #         description: "ProductViewShortDescription",
+      #         distributor: "ProductViewOwner",
+      #         support_description: "SupportDescription",
+      #         support_email: "SupportEmail",
+      #         support_url: "SupportUrl",
+      #         product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE
+      #         tags: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #         provisioning_artifact_parameters: { # required
+      #           name: "ProvisioningArtifactName",
+      #           description: "ProvisioningArtifactDescription",
+      #           info: { # required
+      #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
+      #           },
+      #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+      #         },
+      #         idempotency_token: "IdempotencyToken", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The name of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] owner
+      #   The owner of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] distributor
+      #   The distributor of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_description
+      #   Support information about the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_email
+      #   Contact email for product support.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_url
+      #   Contact URL for product support.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_type
+      #   The type of the product to create.
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   Tags to associate with the new product.
+      #   @return [Array<Types::Tag>]
+      #
+      # @!attribute [rw] provisioning_artifact_parameters
+      #   Parameters for the provisioning artifact.
+      #   @return [Types::ProvisioningArtifactProperties]
+      #
+      # @!attribute [rw] idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that
+      #   you also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #   @return [String]
+      class CreateProductInput < Struct.new(
+        :accept_language,
+        :name,
+        :owner,
+        :description,
+        :distributor,
+        :support_description,
+        :support_email,
+        :support_url,
+        :product_type,
+        :tags,
+        :provisioning_artifact_parameters,
+        :idempotency_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] product_view_detail
+      #   The resulting detailed product view information.
+      #   @return [Types::ProductViewDetail]
+      #
+      # @!attribute [rw] provisioning_artifact_detail
+      #   The resulting detailed provisioning artifact information.
+      #   @return [Types::ProvisioningArtifactDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags successfully associated with the new product.
+      #   @return [Array<Types::Tag>]
+      class CreateProductOutput < Struct.new(
+        :product_view_detail,
+        :provisioning_artifact_detail,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass CreateProvisioningArtifactInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         parameters: { # required
+      #           name: "ProvisioningArtifactName",
+      #           description: "ProvisioningArtifactDescription",
+      #           info: { # required
+      #             "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
+      #           },
+      #           type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+      #         },
+      #         idempotency_token: "IdempotencyToken", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] parameters
+      #   The parameters to use when creating the new provisioning artifact.
+      #   @return [Types::ProvisioningArtifactProperties]
+      #
+      # @!attribute [rw] idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that
+      #   you also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      #   @return [String]
+      class CreateProvisioningArtifactInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :parameters,
+        :idempotency_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] provisioning_artifact_detail
+      #   The resulting detailed provisioning artifact information.
+      #   @return [Types::ProvisioningArtifactDetail]
+      #
+      # @!attribute [rw] info
+      #   Additional information about the provisioning artifact create
+      #   request.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class CreateProvisioningArtifactOutput < Struct.new(
+        :provisioning_artifact_detail,
+        :info,
+        :status)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DeleteConstraintInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the constraint to delete.
+      #   @return [String]
+      class DeleteConstraintInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      class DeleteConstraintOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DeletePortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the portfolio for the delete request.
+      #   @return [String]
+      class DeletePortfolioInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      class DeletePortfolioOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DeletePortfolioShareInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         account_id: "AccountId", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] account_id
+      #   The account ID associated with the share to delete.
+      #   @return [String]
+      class DeletePortfolioShareInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :account_id)
+        include Aws::Structure
+      end
+
+      class DeletePortfolioShareOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DeleteProductInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the product for the delete request.
+      #   @return [String]
+      class DeleteProductInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      class DeleteProductOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DeleteProvisioningArtifactInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         provisioning_artifact_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] provisioning_artifact_id
+      #   The identifier of the provisioning artifact for the delete request.
+      #   @return [String]
+      class DeleteProvisioningArtifactInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :provisioning_artifact_id)
+        include Aws::Structure
+      end
+
+      class DeleteProvisioningArtifactOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DescribeConstraintInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the constraint.
+      #   @return [String]
+      class DescribeConstraintInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] constraint_detail
+      #   Detailed constraint information.
+      #   @return [Types::ConstraintDetail]
+      #
+      # @!attribute [rw] constraint_parameters
+      #   The current parameters associated with the specified constraint.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class DescribeConstraintOutput < Struct.new(
+        :constraint_detail,
+        :constraint_parameters,
+        :status)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DescribePortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the portfolio for which to retrieve information.
+      #   @return [String]
+      class DescribePortfolioInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_detail
+      #   Detailed portfolio information.
+      #   @return [Types::PortfolioDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags associated with the portfolio.
+      #   @return [Array<Types::Tag>]
+      class DescribePortfolioOutput < Struct.new(
+        :portfolio_detail,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DescribeProductAsAdminInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the product for which to retrieve information.
+      #   @return [String]
+      class DescribeProductAsAdminInput < Struct.new(
+        :accept_language,
+        :id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] product_view_detail
+      #   Detailed product view information.
+      #   @return [Types::ProductViewDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags associated with the product.
+      #   @return [Array<Types::Tag>]
+      class DescribeProductAsAdminOutput < Struct.new(
+        :product_view_detail,
+        :tags)
         include Aws::Structure
       end
 
@@ -141,6 +971,59 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DescribeProvisioningArtifactInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         provisioning_artifact_id: "Id", # required
+      #         product_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] provisioning_artifact_id
+      #   The identifier of the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      class DescribeProvisioningArtifactInput < Struct.new(
+        :accept_language,
+        :provisioning_artifact_id,
+        :product_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] provisioning_artifact_detail
+      #   Detailed provisioning artifact information.
+      #   @return [Types::ProvisioningArtifactDetail]
+      #
+      # @!attribute [rw] info
+      #   Additional information about the provisioning artifact.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class DescribeProvisioningArtifactOutput < Struct.new(
+        :provisioning_artifact_detail,
+        :info,
+        :status)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass DescribeProvisioningParametersInput
       #   data as a hash:
       #
@@ -164,7 +1047,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] product_id
-      #   The identifier of the product.
+      #   The product identifier.
       #   @return [String]
       #
       # @!attribute [rw] provisioning_artifact_id
@@ -275,6 +1158,80 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DisassociatePrincipalFromPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         principal_arn: "PrincipalARN", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] principal_arn
+      #   The ARN representing the principal (IAM user, role, or group).
+      #   @return [String]
+      class DisassociatePrincipalFromPortfolioInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :principal_arn)
+        include Aws::Structure
+      end
+
+      class DisassociatePrincipalFromPortfolioOutput < Aws::EmptyStructure; end
+
+      # @note When making an API call, pass DisassociateProductFromPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         portfolio_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      class DisassociateProductFromPortfolioInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :portfolio_id)
+        include Aws::Structure
+      end
+
+      class DisassociateProductFromPortfolioOutput < Aws::EmptyStructure; end
+
       # Summary information about a path for a user to have access to a
       # specified product.
       # @!attribute [rw] id
@@ -301,6 +1258,122 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass ListAcceptedPortfolioSharesInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         page_token: "PageToken",
+      #         page_size: 1,
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      class ListAcceptedPortfolioSharesInput < Struct.new(
+        :accept_language,
+        :page_token,
+        :page_size)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_details
+      #   List of detailed portfolio information objects.
+      #   @return [Array<Types::PortfolioDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListAcceptedPortfolioSharesOutput < Struct.new(
+        :portfolio_details,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListConstraintsForPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         product_id: "Id",
+      #         page_size: 1,
+      #         page_token: "PageToken",
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      class ListConstraintsForPortfolioInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :product_id,
+        :page_size,
+        :page_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] constraint_details
+      #   List of detailed constraint information objects.
+      #   @return [Array<Types::ConstraintDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListConstraintsForPortfolioOutput < Struct.new(
+        :constraint_details,
+        :next_page_token)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass ListLaunchPathsInput
       #   data as a hash:
       #
@@ -324,8 +1397,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] product_id
-      #   Identifies the product for which to retrieve `LaunchPathSummaries`
-      #   information.
+      #   The product identifier.. Identifies the product for which to
+      #   retrieve `LaunchPathSummaries` information.
       #   @return [String]
       #
       # @!attribute [rw] page_size
@@ -357,6 +1430,260 @@ module Aws
       #   @return [String]
       class ListLaunchPathsOutput < Struct.new(
         :launch_path_summaries,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListPortfolioAccessInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      class ListPortfolioAccessInput < Struct.new(
+        :accept_language,
+        :portfolio_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] account_ids
+      #   List of account IDs associated with access to the portfolio.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListPortfolioAccessOutput < Struct.new(
+        :account_ids,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListPortfoliosForProductInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         page_token: "PageToken",
+      #         page_size: 1,
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      class ListPortfoliosForProductInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :page_token,
+        :page_size)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_details
+      #   List of detailed portfolio information objects.
+      #   @return [Array<Types::PortfolioDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListPortfoliosForProductOutput < Struct.new(
+        :portfolio_details,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListPortfoliosInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         page_token: "PageToken",
+      #         page_size: 1,
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      class ListPortfoliosInput < Struct.new(
+        :accept_language,
+        :page_token,
+        :page_size)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_details
+      #   List of detailed portfolio information objects.
+      #   @return [Array<Types::PortfolioDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListPortfoliosOutput < Struct.new(
+        :portfolio_details,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListPrincipalsForPortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #         page_size: 1,
+      #         page_token: "PageToken",
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      class ListPrincipalsForPortfolioInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :page_size,
+        :page_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] principals
+      #   The IAM principals (users or roles) associated with the portfolio.
+      #   @return [Array<Types::Principal>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListPrincipalsForPortfolioOutput < Struct.new(
+        :principals,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListProvisioningArtifactsInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      class ListProvisioningArtifactsInput < Struct.new(
+        :accept_language,
+        :product_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] provisioning_artifact_details
+      #   List of detailed provisioning artifact information objects.
+      #   @return [Array<Types::ProvisioningArtifactDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class ListProvisioningArtifactsOutput < Struct.new(
+        :provisioning_artifact_details,
         :next_page_token)
         include Aws::Structure
       end
@@ -464,6 +1791,54 @@ module Aws
         include Aws::Structure
       end
 
+      # Detailed portfolio information.
+      # @!attribute [rw] id
+      #   The identifier for the portfolio.
+      #   @return [String]
+      #
+      # @!attribute [rw] arn
+      #   The ARN assigned to the portfolio.
+      #   @return [String]
+      #
+      # @!attribute [rw] display_name
+      #   The name to use for display purposes.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the portfolio.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_time
+      #   The UTC timestamp of the creation time.
+      #   @return [Time]
+      #
+      # @!attribute [rw] provider_name
+      #   The name of the portfolio provider.
+      #   @return [String]
+      class PortfolioDetail < Struct.new(
+        :id,
+        :arn,
+        :display_name,
+        :description,
+        :created_time,
+        :provider_name)
+        include Aws::Structure
+      end
+
+      # A principal's ARN and type.
+      # @!attribute [rw] principal_arn
+      #   The ARN representing the principal (IAM user, role, or group).
+      #   @return [String]
+      #
+      # @!attribute [rw] principal_type
+      #   The principal type. Must be `IAM`
+      #   @return [String]
+      class Principal < Struct.new(
+        :principal_arn,
+        :principal_type)
+        include Aws::Structure
+      end
+
       # A single product view aggregation value/count pair, containing
       # metadata about each product to which the calling user has access.
       # @!attribute [rw] value
@@ -476,6 +1851,30 @@ module Aws
       class ProductViewAggregationValue < Struct.new(
         :value,
         :approximate_count)
+        include Aws::Structure
+      end
+
+      # Detailed product view information.
+      # @!attribute [rw] product_view_summary
+      #   The summary metadata about the specified product view.
+      #   @return [Types::ProductViewSummary]
+      #
+      # @!attribute [rw] status
+      #   Current status of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_arn
+      #   The ARN associated with the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_time
+      #   The UTC timestamp of the creation time.
+      #   @return [Time]
+      class ProductViewDetail < Struct.new(
+        :product_view_summary,
+        :status,
+        :product_arn,
+        :created_time)
         include Aws::Structure
       end
 
@@ -563,8 +1962,8 @@ module Aws
       #         ],
       #         tags: [
       #           {
-      #             key: "TagKey",
-      #             value: "TagValue",
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
       #           },
       #         ],
       #         notification_arns: ["NotificationArn"],
@@ -584,7 +1983,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] product_id
-      #   The identifier of the product.
+      #   The product identifier.
       #   @return [String]
       #
       # @!attribute [rw] provisioning_artifact_id
@@ -620,6 +2019,9 @@ module Aws
       # @!attribute [rw] provision_token
       #   An idempotency token that uniquely identifies the provisioning
       #   request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       #   @return [String]
       class ProvisionProductInput < Struct.new(
         :accept_language,
@@ -671,12 +2073,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] created_time
-      #   The time the ProvisionedProduct was created.
+      #   The UTC timestamp of the creation time.
       #   @return [Time]
       #
       # @!attribute [rw] idempotency_token
-      #   An idempotency token that uniquely identifies this
-      #   ProvisionedProduct.
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that
+      #   you also specify a different idempotency token for each request.
       #   @return [String]
       #
       # @!attribute [rw] last_record_id
@@ -711,12 +2114,41 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] created_time
-      #   The time that the artifact was created by the Administrator.
+      #   The UTC timestamp of the creation time.
       #   @return [Time]
       class ProvisioningArtifact < Struct.new(
         :id,
         :name,
         :description,
+        :created_time)
+        include Aws::Structure
+      end
+
+      # Detailed provisioning artifact information.
+      # @!attribute [rw] id
+      #   The identifier of the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The name assigned to the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_time
+      #   The UTC timestamp of the creation time.
+      #   @return [Time]
+      class ProvisioningArtifactDetail < Struct.new(
+        :id,
+        :name,
+        :description,
+        :type,
         :created_time)
         include Aws::Structure
       end
@@ -759,6 +2191,41 @@ module Aws
         include Aws::Structure
       end
 
+      # Provisioning artifact properties.
+      # @note When making an API call, pass ProvisioningArtifactProperties
+      #   data as a hash:
+      #
+      #       {
+      #         name: "ProvisioningArtifactName",
+      #         description: "ProvisioningArtifactDescription",
+      #         info: { # required
+      #           "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
+      #         },
+      #         type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+      #       }
+      # @!attribute [rw] name
+      #   The name assigned to the provisioning artifact properties.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The text description of the provisioning artifact properties.
+      #   @return [String]
+      #
+      # @!attribute [rw] info
+      #   Additional information about the provisioning artifact properties.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] type
+      #   The type of the provisioning artifact properties.
+      #   @return [String]
+      class ProvisioningArtifactProperties < Struct.new(
+        :name,
+        :description,
+        :info,
+        :type)
+        include Aws::Structure
+      end
+
       # The arameter key/value pairs used to provision a product.
       # @note When making an API call, pass ProvisioningParameter
       #   data as a hash:
@@ -796,8 +2263,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] created_time
-      #   The time when the record for the ProvisionedProduct object was
-      #   created.
+      #   The UTC timestamp of the creation time.
       #   @return [Time]
       #
       # @!attribute [rw] updated_time
@@ -818,7 +2284,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] product_id
-      #   The identifier of the product.
+      #   The product identifier.
       #   @return [String]
       #
       # @!attribute [rw] provisioning_artifact_id
@@ -902,6 +2368,37 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass RejectPortfolioShareInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id", # required
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      class RejectPortfolioShareInput < Struct.new(
+        :accept_language,
+        :portfolio_id)
+        include Aws::Structure
+      end
+
+      class RejectPortfolioShareOutput < Aws::EmptyStructure; end
+
       # @note When making an API call, pass ScanProvisionedProductsInput
       #   data as a hash:
       #
@@ -960,6 +2457,94 @@ module Aws
       #   @return [String]
       class ScanProvisionedProductsOutput < Struct.new(
         :provisioned_products,
+        :next_page_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass SearchProductsAsAdminInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         portfolio_id: "Id",
+      #         filters: {
+      #           "FullTextSearch" => ["ProductViewFilterValue"],
+      #         },
+      #         sort_by: "Title", # accepts Title, VersionCount, CreationDate
+      #         sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+      #         page_token: "PageToken",
+      #         page_size: 1,
+      #         product_source: "ACCOUNT", # accepts ACCOUNT
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] portfolio_id
+      #   The portfolio identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] filters
+      #   The list of filters with which to limit search results. If no search
+      #   filters are specified, the output is all the products to which the
+      #   administrator has access.
+      #   @return [Hash<String,Array<String>>]
+      #
+      # @!attribute [rw] sort_by
+      #   The sort field specifier. If no value is specified, results are not
+      #   sorted.
+      #   @return [String]
+      #
+      # @!attribute [rw] sort_order
+      #   The sort order specifier. If no value is specified, results are not
+      #   sorted.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      #   @return [String]
+      #
+      # @!attribute [rw] page_size
+      #   The maximum number of items to return in the results. If more
+      #   results exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] product_source
+      #   Access level of the source of the product.
+      #   @return [String]
+      class SearchProductsAsAdminInput < Struct.new(
+        :accept_language,
+        :portfolio_id,
+        :filters,
+        :sort_by,
+        :sort_order,
+        :page_token,
+        :page_size,
+        :product_source)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] product_view_details
+      #   List of detailed product view information objects.
+      #   @return [Array<Types::ProductViewDetail>]
+      #
+      # @!attribute [rw] next_page_token
+      #   The page token to use to retrieve the next page of results for this
+      #   operation. If there are no more pages, this value is null.
+      #   @return [String]
+      class SearchProductsAsAdminOutput < Struct.new(
+        :product_view_details,
         :next_page_token)
         include Aws::Structure
       end
@@ -1052,8 +2637,8 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         key: "TagKey",
-      #         value: "TagValue",
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
       #       }
       # @!attribute [rw] key
       #   The `ProvisioningArtifactParameter.TagKey` parameter from
@@ -1097,6 +2682,9 @@ module Aws
       #   After the ProvisionedProduct object is terminated, further requests
       #   to terminate the same ProvisionedProduct object always return
       #   **ResourceNotFound** regardless of the value of `TerminateToken`.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       #   @return [String]
       #
       # @!attribute [rw] ignore_errors
@@ -1134,6 +2722,241 @@ module Aws
       #   @return [Types::RecordDetail]
       class TerminateProvisionedProductOutput < Struct.new(
         :record_detail)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass UpdateConstraintInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #         description: "ConstraintDescription",
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the constraint to update.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The updated text description of the constraint.
+      #   @return [String]
+      class UpdateConstraintInput < Struct.new(
+        :accept_language,
+        :id,
+        :description)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] constraint_detail
+      #   The resulting detailed constraint information.
+      #   @return [Types::ConstraintDetail]
+      #
+      # @!attribute [rw] constraint_parameters
+      #   The resulting updated constraint parameters.
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class UpdateConstraintOutput < Struct.new(
+        :constraint_detail,
+        :constraint_parameters,
+        :status)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass UpdatePortfolioInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #         display_name: "PortfolioDisplayName",
+      #         description: "PortfolioDescription",
+      #         provider_name: "ProviderName",
+      #         add_tags: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #         remove_tags: ["TagKey"],
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the portfolio for the update request.
+      #   @return [String]
+      #
+      # @!attribute [rw] display_name
+      #   The name to use for display purposes.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The updated text description of the portfolio.
+      #   @return [String]
+      #
+      # @!attribute [rw] provider_name
+      #   The updated name of the portfolio provider.
+      #   @return [String]
+      #
+      # @!attribute [rw] add_tags
+      #   Tags to add to the existing list of tags associated with the
+      #   portfolio.
+      #   @return [Array<Types::Tag>]
+      #
+      # @!attribute [rw] remove_tags
+      #   Tags to remove from the existing list of tags associated with the
+      #   portfolio.
+      #   @return [Array<String>]
+      class UpdatePortfolioInput < Struct.new(
+        :accept_language,
+        :id,
+        :display_name,
+        :description,
+        :provider_name,
+        :add_tags,
+        :remove_tags)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] portfolio_detail
+      #   The resulting detailed portfolio information.
+      #   @return [Types::PortfolioDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags associated with the portfolio.
+      #   @return [Array<Types::Tag>]
+      class UpdatePortfolioOutput < Struct.new(
+        :portfolio_detail,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass UpdateProductInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         id: "Id", # required
+      #         name: "ProductViewName",
+      #         owner: "ProductViewOwner",
+      #         description: "ProductViewShortDescription",
+      #         distributor: "ProductViewOwner",
+      #         support_description: "SupportDescription",
+      #         support_email: "SupportEmail",
+      #         support_url: "SupportUrl",
+      #         add_tags: [
+      #           {
+      #             key: "TagKey", # required
+      #             value: "TagValue", # required
+      #           },
+      #         ],
+      #         remove_tags: ["TagKey"],
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier of the product for the update request.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The updated product name.
+      #   @return [String]
+      #
+      # @!attribute [rw] owner
+      #   The updated owner of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The updated text description of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] distributor
+      #   The updated distributor of the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_description
+      #   The updated support description for the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_email
+      #   The updated support email for the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] support_url
+      #   The updated support URL for the product.
+      #   @return [String]
+      #
+      # @!attribute [rw] add_tags
+      #   Tags to add to the existing list of tags associated with the
+      #   product.
+      #   @return [Array<Types::Tag>]
+      #
+      # @!attribute [rw] remove_tags
+      #   Tags to remove from the existing list of tags associated with the
+      #   product.
+      #   @return [Array<String>]
+      class UpdateProductInput < Struct.new(
+        :accept_language,
+        :id,
+        :name,
+        :owner,
+        :description,
+        :distributor,
+        :support_description,
+        :support_email,
+        :support_url,
+        :add_tags,
+        :remove_tags)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] product_view_detail
+      #   The resulting detailed product view information.
+      #   @return [Types::ProductViewDetail]
+      #
+      # @!attribute [rw] tags
+      #   Tags associated with the product.
+      #   @return [Array<Types::Tag>]
+      class UpdateProductOutput < Struct.new(
+        :product_view_detail,
+        :tags)
         include Aws::Structure
       end
 
@@ -1204,6 +3027,9 @@ module Aws
       # @!attribute [rw] update_token
       #   The idempotency token that uniquely identifies the provisioning
       #   update request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       #   @return [String]
       class UpdateProvisionedProductInput < Struct.new(
         :accept_language,
@@ -1225,6 +3051,72 @@ module Aws
       #   @return [Types::RecordDetail]
       class UpdateProvisionedProductOutput < Struct.new(
         :record_detail)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass UpdateProvisioningArtifactInput
+      #   data as a hash:
+      #
+      #       {
+      #         accept_language: "AcceptLanguage",
+      #         product_id: "Id", # required
+      #         provisioning_artifact_id: "Id", # required
+      #         name: "ProvisioningArtifactName",
+      #         description: "ProvisioningArtifactDescription",
+      #       }
+      # @!attribute [rw] accept_language
+      #   The language code to use for this operation. Supported language
+      #   codes are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      #   @return [String]
+      #
+      # @!attribute [rw] product_id
+      #   The product identifier.
+      #   @return [String]
+      #
+      # @!attribute [rw] provisioning_artifact_id
+      #   The identifier of the provisioning artifact for the update request.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The updated name of the provisioning artifact.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The updated text description of the provisioning artifact.
+      #   @return [String]
+      class UpdateProvisioningArtifactInput < Struct.new(
+        :accept_language,
+        :product_id,
+        :provisioning_artifact_id,
+        :name,
+        :description)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] provisioning_artifact_detail
+      #   The resulting detailed provisioning artifact information.
+      #   @return [Types::ProvisioningArtifactDetail]
+      #
+      # @!attribute [rw] info
+      #   Additional information about the provisioning artifact update
+      #   request.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] status
+      #   The status of the current request.
+      #   @return [String]
+      class UpdateProvisioningArtifactOutput < Struct.new(
+        :provisioning_artifact_detail,
+        :info,
+        :status)
         include Aws::Structure
       end
 

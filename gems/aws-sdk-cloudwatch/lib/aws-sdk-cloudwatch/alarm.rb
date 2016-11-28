@@ -38,7 +38,7 @@ module Aws
         data.alarm_arn
       end
 
-      # The description for the alarm.
+      # The description of the alarm.
       # @return [String]
       def alarm_description
         data.alarm_description
@@ -51,33 +51,31 @@ module Aws
       end
 
       # Indicates whether actions should be executed during any changes to the
-      # alarm's state.
+      # alarm state.
       # @return [Boolean]
       def actions_enabled
         data.actions_enabled
       end
 
-      # The list of actions to execute when this alarm transitions into an
-      # `OK` state from any other state. Each action is specified as an Amazon
-      # Resource Name (ARN).
+      # The actions to execute when this alarm transitions to the `OK` state
+      # from any other state. Each action is specified as an Amazon Resource
+      # Name (ARN).
       # @return [Array<String>]
       def ok_actions
         data.ok_actions
       end
 
-      # The list of actions to execute when this alarm transitions into an
-      # `ALARM` state from any other state. Each action is specified as an
-      # Amazon Resource Name (ARN).
+      # The actions to execute when this alarm transitions to the `ALARM`
+      # state from any other state. Each action is specified as an Amazon
+      # Resource Name (ARN).
       # @return [Array<String>]
       def alarm_actions
         data.alarm_actions
       end
 
-      # The list of actions to execute when this alarm transitions into an
+      # The actions to execute when this alarm transitions to the
       # `INSUFFICIENT_DATA` state from any other state. Each action is
       # specified as an Amazon Resource Name (ARN).
-      #
-      # The current WSDL lists this attribute as `UnknownActions`.
       # @return [Array<String>]
       def insufficient_data_actions
         data.insufficient_data_actions
@@ -89,55 +87,63 @@ module Aws
         data.state_value
       end
 
-      # A human-readable explanation for the alarm's state.
+      # An explanation for the alarm state, in text format.
       # @return [String]
       def state_reason
         data.state_reason
       end
 
-      # An explanation for the alarm's state in machine-readable JSON format
+      # An explanation for the alarm state, in JSON format.
       # @return [String]
       def state_reason_data
         data.state_reason_data
       end
 
-      # The time stamp of the last update to the alarm's state.
+      # The time stamp of the last update to the alarm state.
       # @return [Time]
       def state_updated_timestamp
         data.state_updated_timestamp
       end
 
-      # The name of the alarm's metric.
+      # The name of the metric associated with the alarm.
       # @return [String]
       def metric_name
         data.metric_name
       end
 
-      # The namespace of alarm's associated metric.
+      # The namespace of the metric associated with the alarm.
       # @return [String]
       def namespace
         data.namespace
       end
 
-      # The statistic to apply to the alarm's associated metric.
+      # The statistic for the metric associated with the alarm, other than
+      # percentile. For percentile statistics, use `ExtendedStatistic`.
       # @return [String]
       def statistic
         data.statistic
       end
 
-      # The list of dimensions associated with the alarm's associated metric.
+      # The percentile statistic for the metric associated with the alarm.
+      # Specify a value between p0.0 and p100.
+      # @return [String]
+      def extended_statistic
+        data.extended_statistic
+      end
+
+      # The dimensions for the metric associated with the alarm.
       # @return [Array<Types::Dimension>]
       def dimensions
         data.dimensions
       end
 
-      # The period in seconds over which the statistic is applied.
+      # The period, in seconds, over which the statistic is applied.
       # @return [Integer]
       def period
         data.period
       end
 
-      # The unit of the alarm's associated metric.
+      # The unit of the metric associated with the alarm.
       # @return [String]
       def unit
         data.unit
@@ -150,15 +156,15 @@ module Aws
         data.evaluation_periods
       end
 
-      # The value against which the specified statistic is compared.
+      # The value to compare with the specified statistic.
       # @return [Float]
       def threshold
         data.threshold
       end
 
-      # The arithmetic operation to use when comparing the specified
-      # `Statistic` and `Threshold`. The specified `Statistic` value is used
-      # as the first operand.
+      # The arithmetic operation to use when comparing the specified statistic
+      # and threshold. The specified statistic value is used as the first
+      # operand.
       # @return [String]
       def comparison_operator
         data.comparison_operator
@@ -199,11 +205,12 @@ module Aws
         !!@data
       end
 
+      # @param [Hash] options ({})
       # @return [Boolean]
       #   Returns `true` if the Alarm exists.
-      def exists?
+      def exists?(options = {})
         begin
-          wait_until_exists(max_attempts: 1)
+          wait_until_exists(options.merge(max_attempts: 1))
           true
         rescue Aws::Waiters::Errors::UnexpectedError => e
           raise e.error
@@ -212,16 +219,17 @@ module Aws
         end
       end
 
-      # @param options ({})
+      # @param [Hash] options ({})
       # @option options [Integer] :max_attempts (40)
       # @option options [Float] :delay (5)
       # @option options [Proc] :before_attempt
       # @option options [Proc] :before_wait
       # @return [Alarm]
       def wait_until_exists(options = {})
-        waiter = Waiters::AlarmExists.new(options.merge(client: @client))
+        options, params = separate_params_and_options(options)
+        waiter = Waiters::AlarmExists.new(options)
         yield_waiter_and_warn(waiter, &Proc.new) if block_given?
-        waiter.wait(alarm_names: [@name])
+        waiter.wait(params.merge(alarm_names: [@name]))
         Alarm.new({
           name: @name,
           client: @client
@@ -302,11 +310,11 @@ module Aws
       # @option options [required, String] :state_value
       #   The value of the state.
       # @option options [required, String] :state_reason
-      #   The reason that this alarm is set to this specific state (in
-      #   human-readable text format)
+      #   The reason that this alarm is set to this specific state, in text
+      #   format.
       # @option options [String] :state_reason_data
-      #   The reason that this alarm is set to this specific state (in
-      #   machine-readable JSON format)
+      #   The reason that this alarm is set to this specific state, in JSON
+      #   format.
       # @return [EmptyStructure]
       def set_state(options = {})
         options = options.merge(alarm_name: @name)
@@ -357,6 +365,21 @@ module Aws
           @waiter_block_warned = true
         end
         yield(waiter.waiter)
+      end
+
+      def separate_params_and_options(options)
+        opts = Set.new([:client, :max_attempts, :delay, :before_attempt, :before_wait])
+        waiter_opts = {}
+        waiter_params = {}
+        options.each_pair do |key, value|
+          if opts.include?(key)
+            waiter_opts[key] = value
+          else
+            waiter_params[key] = value
+          end
+        end
+        waiter_opts[:client] ||= @client
+        [waiter_opts, waiter_params]
       end
 
       class Collection < Aws::Resources::Collection

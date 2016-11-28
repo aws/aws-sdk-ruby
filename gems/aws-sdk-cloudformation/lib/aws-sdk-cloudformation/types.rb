@@ -120,10 +120,18 @@ module Aws
       #       {
       #         stack_name: "StackNameOrId", # required
       #         role_arn: "RoleARN",
+      #         resources_to_skip: ["ResourceToSkip"],
       #       }
       # @!attribute [rw] stack_name
       #   The name or the unique ID of the stack that you want to continue
       #   rolling back.
+      #
+      #   <note markdown="1"> Don't specify the name of a nested stack (a stack that was created
+      #   by using the `AWS::CloudFormation::Stack` resource). Instead, use
+      #   this operation on the parent stack (the stack that contains the
+      #   `AWS::CloudFormation::Stack` resource).
+      #
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] role_arn
@@ -141,9 +149,47 @@ module Aws
       #   AWS CloudFormation uses a temporary session that is generated from
       #   your user credentials.
       #   @return [String]
+      #
+      # @!attribute [rw] resources_to_skip
+      #   A list of the logical IDs of the resources that AWS CloudFormation
+      #   skips during the continue update rollback operation. You can specify
+      #   only resources that are in the `UPDATE_FAILED` state because a
+      #   rollback failed. You can't specify resources that are in the
+      #   `UPDATE_FAILED` state for other reasons, for example, because an
+      #   update was canceled. To check why a resource update failed, use the
+      #   DescribeStackResources action, and view the resource status reason.
+      #
+      #   Specify this property to skip rolling back resources that AWS
+      #   CloudFormation can't successfully roll back. We recommend that you
+      #   [ troubleshoot][1] resources before skipping them. AWS
+      #   CloudFormation sets the status of the specified resources to
+      #   `UPDATE_COMPLETE` and continues to roll back the stack. After the
+      #   rollback is complete, the state of the skipped resources will be
+      #   inconsistent with the state of the resources in the stack template.
+      #   Before performing another stack update, you must update the stack or
+      #   resources to be consistent with each other. If you don't,
+      #   subsequent stack updates might fail, and the stack will become
+      #   unrecoverable.
+      #
+      #   Specify the minimum number of resources required to successfully
+      #   roll back your stack. For example, a failed resource update might
+      #   cause dependent resources to fail. In this case, it might not be
+      #   necessary to skip the dependent resources.
+      #
+      #   To specify resources in a nested stack, use the following format:
+      #   `NestedStackName.ResourceLogicalID`. You can specify a nested stack
+      #   resource (the logical ID of an `AWS::CloudFormation::Stack`
+      #   resource) only if it's in one of the following states:
+      #   `DELETE_IN_PROGRESS`, `DELETE_COMPLETE`, or `DELETE_FAILED`.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
+      #   @return [Array<String>]
       class ContinueUpdateRollbackInput < Struct.new(
         :stack_name,
-        :role_arn)
+        :role_arn,
+        :resources_to_skip)
         include Aws::Structure
       end
 
@@ -179,6 +225,7 @@ module Aws
       #         change_set_name: "ChangeSetName", # required
       #         client_token: "ClientToken",
       #         description: "Description",
+      #         change_set_type: "CREATE", # accepts CREATE, UPDATE
       #       }
       # @!attribute [rw] stack_name
       #   The name or the unique ID of the stack for which you are creating a
@@ -280,11 +327,11 @@ module Aws
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes when executing
       #   the change set. AWS CloudFormation uses the role's credentials to
-      #   make calls on your behalf. AWS CloudFormation always uses this role
-      #   for all future operations on the stack. As long as users have
-      #   permission to operate on the stack, AWS CloudFormation uses this
-      #   role even if the users don't have permission to pass it. Ensure
-      #   that the role grants least privilege.
+      #   make calls on your behalf. AWS CloudFormation uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
       #
       #   If you don't specify a value, AWS CloudFormation uses the role that
       #   was previously associated with the stack. If no role is available,
@@ -325,6 +372,25 @@ module Aws
       # @!attribute [rw] description
       #   A description to help you identify this change set.
       #   @return [String]
+      #
+      # @!attribute [rw] change_set_type
+      #   The type of change set operation. To create a change set for a new
+      #   stack, specify `CREATE`. To create a change set for an existing
+      #   stack, specify `UPDATE`.
+      #
+      #   If you create a change set for a new stack, AWS Cloudformation
+      #   creates a stack with a unique stack ID, but no template or
+      #   resources. The stack will be in the [ `REVIEW_IN_PROGRESS` ][1]
+      #   state until you execute the change set.
+      #
+      #   By default, AWS CloudFormation specifies `UPDATE`. You can't use
+      #   the `UPDATE` type to create a change set for a new stack or the
+      #   `CREATE` type to create a change set for an existing stack.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
+      #   @return [String]
       class CreateChangeSetInput < Struct.new(
         :stack_name,
         :template_body,
@@ -338,7 +404,8 @@ module Aws
         :tags,
         :change_set_name,
         :client_token,
-        :description)
+        :description,
+        :change_set_type)
         include Aws::Structure
       end
 
@@ -346,8 +413,13 @@ module Aws
       # @!attribute [rw] id
       #   The Amazon Resource Name (ARN) of the change set.
       #   @return [String]
+      #
+      # @!attribute [rw] stack_id
+      #   The unique ID of the stack.
+      #   @return [String]
       class CreateChangeSetOutput < Struct.new(
-        :id)
+        :id,
+        :stack_id)
         include Aws::Structure
       end
 
@@ -1099,6 +1171,31 @@ module Aws
       # The output for the ExecuteChangeSet action.
       class ExecuteChangeSetOutput < Aws::EmptyStructure; end
 
+      # The `Export` structure describes the exported output values for a
+      # stack.
+      # @!attribute [rw] exporting_stack_id
+      #   The stack that contains the exported output name and value.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The name of exported output value. Use this name and the
+      #   `Fn::ImportValue` function to import the associated value into other
+      #   stacks. The name is defined in the `Export` field in the associated
+      #   stack's `Outputs` section.
+      #   @return [String]
+      #
+      # @!attribute [rw] value
+      #   The value of the exported output, such as a resource physical ID.
+      #   This value is defined in the `Export` field in the associated
+      #   stack's `Outputs` section.
+      #   @return [String]
+      class Export < Struct.new(
+        :exporting_stack_id,
+        :name,
+        :value)
+        include Aws::Structure
+      end
+
       # The input for the GetStackPolicy action.
       # @note When making an API call, pass GetStackPolicyInput
       #   data as a hash:
@@ -1135,7 +1232,9 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         stack_name: "StackName", # required
+      #         stack_name: "StackName",
+      #         change_set_name: "ChangeSetNameOrId",
+      #         template_stage: "Original", # accepts Original, Processed
       #       }
       # @!attribute [rw] stack_name
       #   The name or the unique stack ID that is associated with the stack,
@@ -1148,8 +1247,27 @@ module Aws
       #
       #   Default: There is no default value.
       #   @return [String]
+      #
+      # @!attribute [rw] change_set_name
+      #   The name or Amazon Resource Name (ARN) of a change set for which AWS
+      #   CloudFormation returns the associated template. If you specify a
+      #   name, you must also specify the `StackName`.
+      #   @return [String]
+      #
+      # @!attribute [rw] template_stage
+      #   For templates that include transforms, the stage of the template
+      #   that AWS CloudFormation returns. To get the user-submitted template,
+      #   specify `Original`. To get the template after AWS CloudFormation has
+      #   processed all transforms, specify `Processed`.
+      #
+      #   If the template doesn't include transforms, `Original` and
+      #   `Processed` return the same template. By default, AWS CloudFormation
+      #   specifies `Original`.
+      #   @return [String]
       class GetTemplateInput < Struct.new(
-        :stack_name)
+        :stack_name,
+        :change_set_name,
+        :template_stage)
         include Aws::Structure
       end
 
@@ -1165,8 +1283,17 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/template-anatomy.html
       #   @return [String]
+      #
+      # @!attribute [rw] stages_available
+      #   The stage of the template that you can retrieve. For stacks, the
+      #   `Original` and `Processed` templates are always available. For
+      #   change sets, the `Original` template is always available. After AWS
+      #   CloudFormation finishes creating the change set, the `Processed`
+      #   template becomes available.
+      #   @return [Array<String>]
       class GetTemplateOutput < Struct.new(
-        :template_body)
+        :template_body,
+        :stages_available)
         include Aws::Structure
       end
 
@@ -1269,6 +1396,10 @@ module Aws
       #   The value that is defined for the `Metadata` property of the
       #   template.
       #   @return [String]
+      #
+      # @!attribute [rw] declared_transforms
+      #   A list of the transforms that are declared in the template.
+      #   @return [Array<String>]
       class GetTemplateSummaryOutput < Struct.new(
         :parameters,
         :description,
@@ -1276,7 +1407,8 @@ module Aws
         :capabilities_reason,
         :resource_types,
         :version,
-        :metadata)
+        :metadata,
+        :declared_transforms)
         include Aws::Structure
       end
 
@@ -1315,6 +1447,75 @@ module Aws
       #   @return [String]
       class ListChangeSetsOutput < Struct.new(
         :summaries,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListExportsInput
+      #   data as a hash:
+      #
+      #       {
+      #         next_token: "NextToken",
+      #       }
+      # @!attribute [rw] next_token
+      #   A string (provided by the ListExports response output) that
+      #   identifies the next page of exported output values that you asked to
+      #   retrieve.
+      #   @return [String]
+      class ListExportsInput < Struct.new(
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] exports
+      #   The output for the ListExports action.
+      #   @return [Array<Types::Export>]
+      #
+      # @!attribute [rw] next_token
+      #   If the output exceeds 100 exported output values, a string that
+      #   identifies the next page of exports. If there is no additional page,
+      #   this value is null.
+      #   @return [String]
+      class ListExportsOutput < Struct.new(
+        :exports,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListImportsInput
+      #   data as a hash:
+      #
+      #       {
+      #         export_name: "ExportName", # required
+      #         next_token: "NextToken",
+      #       }
+      # @!attribute [rw] export_name
+      #   The name of the exported output value. AWS CloudFormation returns
+      #   the stack names that are importing this value.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_token
+      #   A string (provided by the ListImports response output) that
+      #   identifies the next page of stacks that are importing the specified
+      #   exported output value.
+      #   @return [String]
+      class ListImportsInput < Struct.new(
+        :export_name,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] imports
+      #   A list of stack names that are importing the specified exported
+      #   output value.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_token
+      #   A string that identifies the next page of exports. If there is no
+      #   additional page, this value is null.
+      #   @return [String]
+      class ListImportsOutput < Struct.new(
+        :imports,
         :next_token)
         include Aws::Structure
       end
@@ -1371,7 +1572,7 @@ module Aws
       #
       #       {
       #         next_token: "NextToken",
-      #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE
+      #         stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
       #       }
       # @!attribute [rw] next_token
       #   A string that identifies the next page of stacks that you want to
@@ -1761,6 +1962,10 @@ module Aws
       #   The name associated with the stack.
       #   @return [String]
       #
+      # @!attribute [rw] change_set_id
+      #   The unique ID of the change set.
+      #   @return [String]
+      #
       # @!attribute [rw] description
       #   A user-defined description associated with the stack.
       #   @return [String]
@@ -1823,6 +2028,7 @@ module Aws
       class Stack < Struct.new(
         :stack_id,
         :stack_name,
+        :change_set_id,
         :description,
         :parameters,
         :creation_time,
@@ -2460,11 +2666,16 @@ module Aws
       #   The list of resources that generated the values in the
       #   `Capabilities` response element.
       #   @return [String]
+      #
+      # @!attribute [rw] declared_transforms
+      #   A list of the transforms that are declared in the template.
+      #   @return [Array<String>]
       class ValidateTemplateOutput < Struct.new(
         :parameters,
         :description,
         :capabilities,
-        :capabilities_reason)
+        :capabilities_reason,
+        :declared_transforms)
         include Aws::Structure
       end
 

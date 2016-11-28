@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -137,6 +139,658 @@ module Aws
 
       # @!group API Operations
 
+      # Accepts an offer to share a portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.accept_portfolio_share({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #   })
+      # @overload accept_portfolio_share(params = {})
+      # @param [Hash] params ({})
+      def accept_portfolio_share(params = {}, options = {})
+        req = build_request(:accept_portfolio_share, params)
+        req.send_request(options)
+      end
+
+      # Associates the specified principal ARN with the specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [required, String] :principal_arn
+      #   The ARN representing the principal (IAM user, role, or group).
+      # @option params [required, String] :principal_type
+      #   The principal type. Must be `IAM`
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.associate_principal_with_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     principal_arn: "PrincipalARN", # required
+      #     principal_type: "IAM", # required, accepts IAM
+      #   })
+      # @overload associate_principal_with_portfolio(params = {})
+      # @param [Hash] params ({})
+      def associate_principal_with_portfolio(params = {}, options = {})
+        req = build_request(:associate_principal_with_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Associates a product with a portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [String] :source_portfolio_id
+      #   The identifier of the source portfolio to use with this association.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.associate_product_with_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     portfolio_id: "Id", # required
+      #     source_portfolio_id: "Id",
+      #   })
+      # @overload associate_product_with_portfolio(params = {})
+      # @param [Hash] params ({})
+      def associate_product_with_portfolio(params = {}, options = {})
+        req = build_request(:associate_product_with_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Creates a new constraint.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, String] :parameters
+      #   The constraint parameters.
+      # @option params [required, String] :type
+      #   The type of the constraint.
+      # @option params [String] :description
+      #   The text description of the constraint.
+      # @option params [required, String] :idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that you
+      #   also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::CreateConstraintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateConstraintOutput#constraint_detail #ConstraintDetail} => Types::ConstraintDetail
+      #   * {Types::CreateConstraintOutput#constraint_parameters #ConstraintParameters} => String
+      #   * {Types::CreateConstraintOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_constraint({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     product_id: "Id", # required
+      #     parameters: "ConstraintParameters", # required
+      #     type: "ConstraintType", # required
+      #     description: "ConstraintDescription",
+      #     idempotency_token: "IdempotencyToken", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.constraint_detail.constraint_id #=> String
+      #   resp.constraint_detail.type #=> String
+      #   resp.constraint_detail.description #=> String
+      #   resp.constraint_detail.owner #=> String
+      #   resp.constraint_parameters #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload create_constraint(params = {})
+      # @param [Hash] params ({})
+      def create_constraint(params = {}, options = {})
+        req = build_request(:create_constraint, params)
+        req.send_request(options)
+      end
+
+      # Creates a new portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :display_name
+      #   The name to use for display purposes.
+      # @option params [String] :description
+      #   The text description of the portfolio.
+      # @option params [required, String] :provider_name
+      #   The name of the portfolio provider.
+      # @option params [Array<Types::Tag>] :tags
+      #   Tags to associate with the new portfolio.
+      # @option params [required, String] :idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that you
+      #   also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::CreatePortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreatePortfolioOutput#portfolio_detail #PortfolioDetail} => Types::PortfolioDetail
+      #   * {Types::CreatePortfolioOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     display_name: "PortfolioDisplayName", # required
+      #     description: "PortfolioDescription",
+      #     provider_name: "ProviderName", # required
+      #     tags: [
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #     idempotency_token: "IdempotencyToken", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_detail.id #=> String
+      #   resp.portfolio_detail.arn #=> String
+      #   resp.portfolio_detail.display_name #=> String
+      #   resp.portfolio_detail.description #=> String
+      #   resp.portfolio_detail.created_time #=> Time
+      #   resp.portfolio_detail.provider_name #=> String
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload create_portfolio(params = {})
+      # @param [Hash] params ({})
+      def create_portfolio(params = {}, options = {})
+        req = build_request(:create_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Creates a new portfolio share.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [required, String] :account_id
+      #   The account ID with which to share the portfolio.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_portfolio_share({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     account_id: "AccountId", # required
+      #   })
+      # @overload create_portfolio_share(params = {})
+      # @param [Hash] params ({})
+      def create_portfolio_share(params = {}, options = {})
+        req = build_request(:create_portfolio_share, params)
+        req.send_request(options)
+      end
+
+      # Creates a new product.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :name
+      #   The name of the product.
+      # @option params [required, String] :owner
+      #   The owner of the product.
+      # @option params [String] :description
+      #   The text description of the product.
+      # @option params [String] :distributor
+      #   The distributor of the product.
+      # @option params [String] :support_description
+      #   Support information about the product.
+      # @option params [String] :support_email
+      #   Contact email for product support.
+      # @option params [String] :support_url
+      #   Contact URL for product support.
+      # @option params [required, String] :product_type
+      #   The type of the product to create.
+      # @option params [Array<Types::Tag>] :tags
+      #   Tags to associate with the new product.
+      # @option params [required, Types::ProvisioningArtifactProperties] :provisioning_artifact_parameters
+      #   Parameters for the provisioning artifact.
+      # @option params [required, String] :idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that you
+      #   also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::CreateProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateProductOutput#product_view_detail #ProductViewDetail} => Types::ProductViewDetail
+      #   * {Types::CreateProductOutput#provisioning_artifact_detail #ProvisioningArtifactDetail} => Types::ProvisioningArtifactDetail
+      #   * {Types::CreateProductOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_product({
+      #     accept_language: "AcceptLanguage",
+      #     name: "ProductViewName", # required
+      #     owner: "ProductViewOwner", # required
+      #     description: "ProductViewShortDescription",
+      #     distributor: "ProductViewOwner",
+      #     support_description: "SupportDescription",
+      #     support_email: "SupportEmail",
+      #     support_url: "SupportUrl",
+      #     product_type: "CLOUD_FORMATION_TEMPLATE", # required, accepts CLOUD_FORMATION_TEMPLATE
+      #     tags: [
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #     provisioning_artifact_parameters: { # required
+      #       name: "ProvisioningArtifactName",
+      #       description: "ProvisioningArtifactDescription",
+      #       info: { # required
+      #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
+      #       },
+      #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+      #     },
+      #     idempotency_token: "IdempotencyToken", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.product_view_detail.product_view_summary.id #=> String
+      #   resp.product_view_detail.product_view_summary.product_id #=> String
+      #   resp.product_view_detail.product_view_summary.name #=> String
+      #   resp.product_view_detail.product_view_summary.owner #=> String
+      #   resp.product_view_detail.product_view_summary.short_description #=> String
+      #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.product_view_detail.product_view_summary.distributor #=> String
+      #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
+      #   resp.product_view_detail.product_view_summary.support_email #=> String
+      #   resp.product_view_detail.product_view_summary.support_description #=> String
+      #   resp.product_view_detail.product_view_summary.support_url #=> String
+      #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      #   resp.product_view_detail.product_arn #=> String
+      #   resp.product_view_detail.created_time #=> Time
+      #   resp.provisioning_artifact_detail.id #=> String
+      #   resp.provisioning_artifact_detail.name #=> String
+      #   resp.provisioning_artifact_detail.description #=> String
+      #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.provisioning_artifact_detail.created_time #=> Time
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload create_product(params = {})
+      # @param [Hash] params ({})
+      def create_product(params = {}, options = {})
+        req = build_request(:create_product, params)
+        req.send_request(options)
+      end
+
+      # Create a new provisioning artifact for the specified product. This
+      # operation will not work with a product that has been shared with you.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, Types::ProvisioningArtifactProperties] :parameters
+      #   The parameters to use when creating the new provisioning artifact.
+      # @option params [required, String] :idempotency_token
+      #   A token to disambiguate duplicate requests. You can create multiple
+      #   resources using the same input in multiple requests, provided that you
+      #   also specify a different idempotency token for each request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::CreateProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateProvisioningArtifactOutput#provisioning_artifact_detail #ProvisioningArtifactDetail} => Types::ProvisioningArtifactDetail
+      #   * {Types::CreateProvisioningArtifactOutput#info #Info} => Hash&lt;String,String&gt;
+      #   * {Types::CreateProvisioningArtifactOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_provisioning_artifact({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     parameters: { # required
+      #       name: "ProvisioningArtifactName",
+      #       description: "ProvisioningArtifactDescription",
+      #       info: { # required
+      #         "ProvisioningArtifactInfoKey" => "ProvisioningArtifactInfoValue",
+      #       },
+      #       type: "CLOUD_FORMATION_TEMPLATE", # accepts CLOUD_FORMATION_TEMPLATE
+      #     },
+      #     idempotency_token: "IdempotencyToken", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.provisioning_artifact_detail.id #=> String
+      #   resp.provisioning_artifact_detail.name #=> String
+      #   resp.provisioning_artifact_detail.description #=> String
+      #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.provisioning_artifact_detail.created_time #=> Time
+      #   resp.info #=> Hash
+      #   resp.info["ProvisioningArtifactInfoKey"] #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload create_provisioning_artifact(params = {})
+      # @param [Hash] params ({})
+      def create_provisioning_artifact(params = {}, options = {})
+        req = build_request(:create_provisioning_artifact, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified constraint.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the constraint to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_constraint({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      # @overload delete_constraint(params = {})
+      # @param [Hash] params ({})
+      def delete_constraint(params = {}, options = {})
+        req = build_request(:delete_constraint, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified portfolio. This operation will not work with a
+      # portfolio that has been shared with you or if it has products, users,
+      # constraints, or shared accounts associated with it.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the portfolio for the delete request.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      # @overload delete_portfolio(params = {})
+      # @param [Hash] params ({})
+      def delete_portfolio(params = {}, options = {})
+        req = build_request(:delete_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified portfolio share.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [required, String] :account_id
+      #   The account ID associated with the share to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_portfolio_share({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     account_id: "AccountId", # required
+      #   })
+      # @overload delete_portfolio_share(params = {})
+      # @param [Hash] params ({})
+      def delete_portfolio_share(params = {}, options = {})
+        req = build_request(:delete_portfolio_share, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified product. This operation will not work with a
+      # product that has been shared with you or is associated with a
+      # portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the product for the delete request.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_product({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      # @overload delete_product(params = {})
+      # @param [Hash] params ({})
+      def delete_product(params = {}, options = {})
+        req = build_request(:delete_product, params)
+        req.send_request(options)
+      end
+
+      # Deletes the specified provisioning artifact. This operation will not
+      # work on a provisioning artifact associated with a product that has
+      # been shared with you, or on the last provisioning artifact associated
+      # with a product (a product must have at least one provisioning
+      # artifact).
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, String] :provisioning_artifact_id
+      #   The identifier of the provisioning artifact for the delete request.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_provisioning_artifact({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     provisioning_artifact_id: "Id", # required
+      #   })
+      # @overload delete_provisioning_artifact(params = {})
+      # @param [Hash] params ({})
+      def delete_provisioning_artifact(params = {}, options = {})
+        req = build_request(:delete_provisioning_artifact, params)
+        req.send_request(options)
+      end
+
+      # Retrieves detailed information for a specified constraint.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the constraint.
+      # @return [Types::DescribeConstraintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeConstraintOutput#constraint_detail #ConstraintDetail} => Types::ConstraintDetail
+      #   * {Types::DescribeConstraintOutput#constraint_parameters #ConstraintParameters} => String
+      #   * {Types::DescribeConstraintOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_constraint({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.constraint_detail.constraint_id #=> String
+      #   resp.constraint_detail.type #=> String
+      #   resp.constraint_detail.description #=> String
+      #   resp.constraint_detail.owner #=> String
+      #   resp.constraint_parameters #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload describe_constraint(params = {})
+      # @param [Hash] params ({})
+      def describe_constraint(params = {}, options = {})
+        req = build_request(:describe_constraint, params)
+        req.send_request(options)
+      end
+
+      # Retrieves detailed information and any tags associated with the
+      # specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the portfolio for which to retrieve information.
+      # @return [Types::DescribePortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribePortfolioOutput#portfolio_detail #PortfolioDetail} => Types::PortfolioDetail
+      #   * {Types::DescribePortfolioOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_detail.id #=> String
+      #   resp.portfolio_detail.arn #=> String
+      #   resp.portfolio_detail.display_name #=> String
+      #   resp.portfolio_detail.description #=> String
+      #   resp.portfolio_detail.created_time #=> Time
+      #   resp.portfolio_detail.provider_name #=> String
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload describe_portfolio(params = {})
+      # @param [Hash] params ({})
+      def describe_portfolio(params = {}, options = {})
+        req = build_request(:describe_portfolio, params)
+        req.send_request(options)
+      end
+
       # Retrieves information about a specified product.
       #
       # This operation is functionally identical to DescribeProductView except
@@ -171,7 +825,7 @@ module Aws
       #   resp.product_view_summary.name #=> String
       #   resp.product_view_summary.owner #=> String
       #   resp.product_view_summary.short_description #=> String
-      #   resp.product_view_summary.type #=> String
+      #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
       #   resp.product_view_summary.distributor #=> String
       #   resp.product_view_summary.has_default_path #=> Boolean
       #   resp.product_view_summary.support_email #=> String
@@ -186,6 +840,57 @@ module Aws
       # @param [Hash] params ({})
       def describe_product(params = {}, options = {})
         req = build_request(:describe_product, params)
+        req.send_request(options)
+      end
+
+      # Retrieves information about a specified product, run with
+      # administrator access.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the product for which to retrieve information.
+      # @return [Types::DescribeProductAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeProductAsAdminOutput#product_view_detail #ProductViewDetail} => Types::ProductViewDetail
+      #   * {Types::DescribeProductAsAdminOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_product_as_admin({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.product_view_detail.product_view_summary.id #=> String
+      #   resp.product_view_detail.product_view_summary.product_id #=> String
+      #   resp.product_view_detail.product_view_summary.name #=> String
+      #   resp.product_view_detail.product_view_summary.owner #=> String
+      #   resp.product_view_detail.product_view_summary.short_description #=> String
+      #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.product_view_detail.product_view_summary.distributor #=> String
+      #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
+      #   resp.product_view_detail.product_view_summary.support_email #=> String
+      #   resp.product_view_detail.product_view_summary.support_description #=> String
+      #   resp.product_view_detail.product_view_summary.support_url #=> String
+      #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      #   resp.product_view_detail.product_arn #=> String
+      #   resp.product_view_detail.created_time #=> Time
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload describe_product_as_admin(params = {})
+      # @param [Hash] params ({})
+      def describe_product_as_admin(params = {}, options = {})
+        req = build_request(:describe_product_as_admin, params)
         req.send_request(options)
       end
 
@@ -223,7 +928,7 @@ module Aws
       #   resp.product_view_summary.name #=> String
       #   resp.product_view_summary.owner #=> String
       #   resp.product_view_summary.short_description #=> String
-      #   resp.product_view_summary.type #=> String
+      #   resp.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
       #   resp.product_view_summary.distributor #=> String
       #   resp.product_view_summary.has_default_path #=> Boolean
       #   resp.product_view_summary.support_email #=> String
@@ -238,6 +943,52 @@ module Aws
       # @param [Hash] params ({})
       def describe_product_view(params = {}, options = {})
         req = build_request(:describe_product_view, params)
+        req.send_request(options)
+      end
+
+      # Retrieves detailed information about the specified provisioning
+      # artifact.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :provisioning_artifact_id
+      #   The identifier of the provisioning artifact.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @return [Types::DescribeProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeProvisioningArtifactOutput#provisioning_artifact_detail #ProvisioningArtifactDetail} => Types::ProvisioningArtifactDetail
+      #   * {Types::DescribeProvisioningArtifactOutput#info #Info} => Hash&lt;String,String&gt;
+      #   * {Types::DescribeProvisioningArtifactOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_provisioning_artifact({
+      #     accept_language: "AcceptLanguage",
+      #     provisioning_artifact_id: "Id", # required
+      #     product_id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.provisioning_artifact_detail.id #=> String
+      #   resp.provisioning_artifact_detail.name #=> String
+      #   resp.provisioning_artifact_detail.description #=> String
+      #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.provisioning_artifact_detail.created_time #=> Time
+      #   resp.info #=> Hash
+      #   resp.info["ProvisioningArtifactInfoKey"] #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload describe_provisioning_artifact(params = {})
+      # @param [Hash] params ({})
+      def describe_provisioning_artifact(params = {}, options = {})
+        req = build_request(:describe_provisioning_artifact, params)
         req.send_request(options)
       end
 
@@ -257,7 +1008,7 @@ module Aws
       #
       #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
-      #   The identifier of the product.
+      #   The product identifier.
       # @option params [required, String] :provisioning_artifact_id
       #   The provisioning artifact identifier for this product.
       # @option params [String] :path_id
@@ -370,6 +1121,169 @@ module Aws
         req.send_request(options)
       end
 
+      # Disassociates a previously associated principal ARN from a specified
+      # portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [required, String] :principal_arn
+      #   The ARN representing the principal (IAM user, role, or group).
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.disassociate_principal_from_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     principal_arn: "PrincipalARN", # required
+      #   })
+      # @overload disassociate_principal_from_portfolio(params = {})
+      # @param [Hash] params ({})
+      def disassociate_principal_from_portfolio(params = {}, options = {})
+        req = build_request(:disassociate_principal_from_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Disassociates the specified product from the specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.disassociate_product_from_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     portfolio_id: "Id", # required
+      #   })
+      # @overload disassociate_product_from_portfolio(params = {})
+      # @param [Hash] params ({})
+      def disassociate_product_from_portfolio(params = {}, options = {})
+        req = build_request(:disassociate_product_from_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Lists details of all portfolios for which sharing was accepted by this
+      # account.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @return [Types::ListAcceptedPortfolioSharesOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListAcceptedPortfolioSharesOutput#portfolio_details #PortfolioDetails} => Array&lt;Types::PortfolioDetail&gt;
+      #   * {Types::ListAcceptedPortfolioSharesOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_accepted_portfolio_shares({
+      #     accept_language: "AcceptLanguage",
+      #     page_token: "PageToken",
+      #     page_size: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_details #=> Array
+      #   resp.portfolio_details[0].id #=> String
+      #   resp.portfolio_details[0].arn #=> String
+      #   resp.portfolio_details[0].display_name #=> String
+      #   resp.portfolio_details[0].description #=> String
+      #   resp.portfolio_details[0].created_time #=> Time
+      #   resp.portfolio_details[0].provider_name #=> String
+      #   resp.next_page_token #=> String
+      # @overload list_accepted_portfolio_shares(params = {})
+      # @param [Hash] params ({})
+      def list_accepted_portfolio_shares(params = {}, options = {})
+        req = build_request(:list_accepted_portfolio_shares, params)
+        req.send_request(options)
+      end
+
+      # Retrieves detailed constraint information for the specified portfolio
+      # and product.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [String] :product_id
+      #   The product identifier.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @return [Types::ListConstraintsForPortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListConstraintsForPortfolioOutput#constraint_details #ConstraintDetails} => Array&lt;Types::ConstraintDetail&gt;
+      #   * {Types::ListConstraintsForPortfolioOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_constraints_for_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     product_id: "Id",
+      #     page_size: 1,
+      #     page_token: "PageToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.constraint_details #=> Array
+      #   resp.constraint_details[0].constraint_id #=> String
+      #   resp.constraint_details[0].type #=> String
+      #   resp.constraint_details[0].description #=> String
+      #   resp.constraint_details[0].owner #=> String
+      #   resp.next_page_token #=> String
+      # @overload list_constraints_for_portfolio(params = {})
+      # @param [Hash] params ({})
+      def list_constraints_for_portfolio(params = {}, options = {})
+        req = build_request(:list_constraints_for_portfolio, params)
+        req.send_request(options)
+      end
+
       # Returns a paginated list of all paths to a specified product. A path
       # is how the user has access to a specified product, and is necessary
       # when provisioning a product. A path also determines the constraints
@@ -386,8 +1300,8 @@ module Aws
       #
       #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
-      #   Identifies the product for which to retrieve `LaunchPathSummaries`
-      #   information.
+      #   The product identifier.. Identifies the product for which to retrieve
+      #   `LaunchPathSummaries` information.
       # @option params [Integer] :page_size
       #   The maximum number of items to return in the results. If more results
       #   exist than fit in the specified `PageSize`, the value of
@@ -423,6 +1337,227 @@ module Aws
       # @param [Hash] params ({})
       def list_launch_paths(params = {}, options = {})
         req = build_request(:list_launch_paths, params)
+        req.send_request(options)
+      end
+
+      # Lists the account IDs that have been authorized sharing of the
+      # specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @return [Types::ListPortfolioAccessOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListPortfolioAccessOutput#account_ids #AccountIds} => Array&lt;String&gt;
+      #   * {Types::ListPortfolioAccessOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_portfolio_access({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.account_ids #=> Array
+      #   resp.account_ids[0] #=> String
+      #   resp.next_page_token #=> String
+      # @overload list_portfolio_access(params = {})
+      # @param [Hash] params ({})
+      def list_portfolio_access(params = {}, options = {})
+        req = build_request(:list_portfolio_access, params)
+        req.send_request(options)
+      end
+
+      # Lists all portfolios in the catalog.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @return [Types::ListPortfoliosOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListPortfoliosOutput#portfolio_details #PortfolioDetails} => Array&lt;Types::PortfolioDetail&gt;
+      #   * {Types::ListPortfoliosOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_portfolios({
+      #     accept_language: "AcceptLanguage",
+      #     page_token: "PageToken",
+      #     page_size: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_details #=> Array
+      #   resp.portfolio_details[0].id #=> String
+      #   resp.portfolio_details[0].arn #=> String
+      #   resp.portfolio_details[0].display_name #=> String
+      #   resp.portfolio_details[0].description #=> String
+      #   resp.portfolio_details[0].created_time #=> Time
+      #   resp.portfolio_details[0].provider_name #=> String
+      #   resp.next_page_token #=> String
+      # @overload list_portfolios(params = {})
+      # @param [Hash] params ({})
+      def list_portfolios(params = {}, options = {})
+        req = build_request(:list_portfolios, params)
+        req.send_request(options)
+      end
+
+      # Lists all portfolios that the specified product is associated with.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @return [Types::ListPortfoliosForProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListPortfoliosForProductOutput#portfolio_details #PortfolioDetails} => Array&lt;Types::PortfolioDetail&gt;
+      #   * {Types::ListPortfoliosForProductOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_portfolios_for_product({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     page_token: "PageToken",
+      #     page_size: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_details #=> Array
+      #   resp.portfolio_details[0].id #=> String
+      #   resp.portfolio_details[0].arn #=> String
+      #   resp.portfolio_details[0].display_name #=> String
+      #   resp.portfolio_details[0].description #=> String
+      #   resp.portfolio_details[0].created_time #=> Time
+      #   resp.portfolio_details[0].provider_name #=> String
+      #   resp.next_page_token #=> String
+      # @overload list_portfolios_for_product(params = {})
+      # @param [Hash] params ({})
+      def list_portfolios_for_product(params = {}, options = {})
+        req = build_request(:list_portfolios_for_product, params)
+        req.send_request(options)
+      end
+
+      # Lists all principal ARNs associated with the specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @return [Types::ListPrincipalsForPortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListPrincipalsForPortfolioOutput#principals #Principals} => Array&lt;Types::Principal&gt;
+      #   * {Types::ListPrincipalsForPortfolioOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_principals_for_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #     page_size: 1,
+      #     page_token: "PageToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.principals #=> Array
+      #   resp.principals[0].principal_arn #=> String
+      #   resp.principals[0].principal_type #=> String, one of "IAM"
+      #   resp.next_page_token #=> String
+      # @overload list_principals_for_portfolio(params = {})
+      # @param [Hash] params ({})
+      def list_principals_for_portfolio(params = {}, options = {})
+        req = build_request(:list_principals_for_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Lists all provisioning artifacts associated with the specified
+      # product.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @return [Types::ListProvisioningArtifactsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListProvisioningArtifactsOutput#provisioning_artifact_details #ProvisioningArtifactDetails} => Array&lt;Types::ProvisioningArtifactDetail&gt;
+      #   * {Types::ListProvisioningArtifactsOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_provisioning_artifacts({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.provisioning_artifact_details #=> Array
+      #   resp.provisioning_artifact_details[0].id #=> String
+      #   resp.provisioning_artifact_details[0].name #=> String
+      #   resp.provisioning_artifact_details[0].description #=> String
+      #   resp.provisioning_artifact_details[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.provisioning_artifact_details[0].created_time #=> Time
+      #   resp.next_page_token #=> String
+      # @overload list_provisioning_artifacts(params = {})
+      # @param [Hash] params ({})
+      def list_provisioning_artifacts(params = {}, options = {})
+        req = build_request(:list_provisioning_artifacts, params)
         req.send_request(options)
       end
 
@@ -518,7 +1653,7 @@ module Aws
       #
       #   If no code is specified, "en" is used as the default.
       # @option params [required, String] :product_id
-      #   The identifier of the product.
+      #   The product identifier.
       # @option params [required, String] :provisioning_artifact_id
       #   The provisioning artifact identifier for this product.
       # @option params [String] :path_id
@@ -540,6 +1675,9 @@ module Aws
       # @option params [required, String] :provision_token
       #   An idempotency token that uniquely identifies the provisioning
       #   request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       # @return [Types::ProvisionProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ProvisionProductOutput#record_detail #RecordDetail} => Types::RecordDetail
@@ -559,8 +1697,8 @@ module Aws
       #     ],
       #     tags: [
       #       {
-      #         key: "TagKey",
-      #         value: "TagValue",
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
       #       },
       #     ],
       #     notification_arns: ["NotificationArn"],
@@ -589,6 +1727,34 @@ module Aws
       # @param [Hash] params ({})
       def provision_product(params = {}, options = {})
         req = build_request(:provision_product, params)
+        req.send_request(options)
+      end
+
+      # Rejects an offer to share a portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :portfolio_id
+      #   The portfolio identifier.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.reject_portfolio_share({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id", # required
+      #   })
+      # @overload reject_portfolio_share(params = {})
+      # @param [Hash] params ({})
+      def reject_portfolio_share(params = {}, options = {})
+        req = build_request(:reject_portfolio_share, params)
         req.send_request(options)
       end
 
@@ -708,7 +1874,7 @@ module Aws
       #   resp.product_view_summaries[0].name #=> String
       #   resp.product_view_summaries[0].owner #=> String
       #   resp.product_view_summaries[0].short_description #=> String
-      #   resp.product_view_summaries[0].type #=> String
+      #   resp.product_view_summaries[0].type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
       #   resp.product_view_summaries[0].distributor #=> String
       #   resp.product_view_summaries[0].has_default_path #=> Boolean
       #   resp.product_view_summaries[0].support_email #=> String
@@ -723,6 +1889,85 @@ module Aws
       # @param [Hash] params ({})
       def search_products(params = {}, options = {})
         req = build_request(:search_products, params)
+        req.send_request(options)
+      end
+
+      # Retrieves summary and status information about all products created
+      # within the caller's account. If a portfolio ID is provided, this
+      # operation retrieves information for only those products that are
+      # associated with the specified portfolio.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [String] :portfolio_id
+      #   The portfolio identifier.
+      # @option params [Hash<String,Array>] :filters
+      #   The list of filters with which to limit search results. If no search
+      #   filters are specified, the output is all the products to which the
+      #   administrator has access.
+      # @option params [String] :sort_by
+      #   The sort field specifier. If no value is specified, results are not
+      #   sorted.
+      # @option params [String] :sort_order
+      #   The sort order specifier. If no value is specified, results are not
+      #   sorted.
+      # @option params [String] :page_token
+      #   The page token of the first page retrieved. If null, this retrieves
+      #   the first page of size `PageSize`.
+      # @option params [Integer] :page_size
+      #   The maximum number of items to return in the results. If more results
+      #   exist than fit in the specified `PageSize`, the value of
+      #   `NextPageToken` in the response is non-null.
+      # @option params [String] :product_source
+      #   Access level of the source of the product.
+      # @return [Types::SearchProductsAsAdminOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::SearchProductsAsAdminOutput#product_view_details #ProductViewDetails} => Array&lt;Types::ProductViewDetail&gt;
+      #   * {Types::SearchProductsAsAdminOutput#next_page_token #NextPageToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.search_products_as_admin({
+      #     accept_language: "AcceptLanguage",
+      #     portfolio_id: "Id",
+      #     filters: {
+      #       "FullTextSearch" => ["ProductViewFilterValue"],
+      #     },
+      #     sort_by: "Title", # accepts Title, VersionCount, CreationDate
+      #     sort_order: "ASCENDING", # accepts ASCENDING, DESCENDING
+      #     page_token: "PageToken",
+      #     page_size: 1,
+      #     product_source: "ACCOUNT", # accepts ACCOUNT
+      #   })
+      #
+      # @example Response structure
+      #   resp.product_view_details #=> Array
+      #   resp.product_view_details[0].product_view_summary.id #=> String
+      #   resp.product_view_details[0].product_view_summary.product_id #=> String
+      #   resp.product_view_details[0].product_view_summary.name #=> String
+      #   resp.product_view_details[0].product_view_summary.owner #=> String
+      #   resp.product_view_details[0].product_view_summary.short_description #=> String
+      #   resp.product_view_details[0].product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.product_view_details[0].product_view_summary.distributor #=> String
+      #   resp.product_view_details[0].product_view_summary.has_default_path #=> Boolean
+      #   resp.product_view_details[0].product_view_summary.support_email #=> String
+      #   resp.product_view_details[0].product_view_summary.support_description #=> String
+      #   resp.product_view_details[0].product_view_summary.support_url #=> String
+      #   resp.product_view_details[0].status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      #   resp.product_view_details[0].product_arn #=> String
+      #   resp.product_view_details[0].created_time #=> Time
+      #   resp.next_page_token #=> String
+      # @overload search_products_as_admin(params = {})
+      # @param [Hash] params ({})
+      def search_products_as_admin(params = {}, options = {})
+        req = build_request(:search_products_as_admin, params)
         req.send_request(options)
       end
 
@@ -749,6 +1994,9 @@ module Aws
       #   ProvisionedProduct object is terminated, further requests to terminate
       #   the same ProvisionedProduct object always return **ResourceNotFound**
       #   regardless of the value of `TerminateToken`.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       # @option params [Boolean] :ignore_errors
       #   If set to true, AWS Service Catalog stops managing the specified
       #   ProvisionedProduct object even if it cannot delete the underlying
@@ -802,6 +2050,197 @@ module Aws
         req.send_request(options)
       end
 
+      # Updates an existing constraint.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the constraint to update.
+      # @option params [String] :description
+      #   The updated text description of the constraint.
+      # @return [Types::UpdateConstraintOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateConstraintOutput#constraint_detail #ConstraintDetail} => Types::ConstraintDetail
+      #   * {Types::UpdateConstraintOutput#constraint_parameters #ConstraintParameters} => String
+      #   * {Types::UpdateConstraintOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_constraint({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #     description: "ConstraintDescription",
+      #   })
+      #
+      # @example Response structure
+      #   resp.constraint_detail.constraint_id #=> String
+      #   resp.constraint_detail.type #=> String
+      #   resp.constraint_detail.description #=> String
+      #   resp.constraint_detail.owner #=> String
+      #   resp.constraint_parameters #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload update_constraint(params = {})
+      # @param [Hash] params ({})
+      def update_constraint(params = {}, options = {})
+        req = build_request(:update_constraint, params)
+        req.send_request(options)
+      end
+
+      # Updates the specified portfolio's details. This operation will not
+      # work with a product that has been shared with you.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the portfolio for the update request.
+      # @option params [String] :display_name
+      #   The name to use for display purposes.
+      # @option params [String] :description
+      #   The updated text description of the portfolio.
+      # @option params [String] :provider_name
+      #   The updated name of the portfolio provider.
+      # @option params [Array<Types::Tag>] :add_tags
+      #   Tags to add to the existing list of tags associated with the
+      #   portfolio.
+      # @option params [Array<String>] :remove_tags
+      #   Tags to remove from the existing list of tags associated with the
+      #   portfolio.
+      # @return [Types::UpdatePortfolioOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdatePortfolioOutput#portfolio_detail #PortfolioDetail} => Types::PortfolioDetail
+      #   * {Types::UpdatePortfolioOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_portfolio({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #     display_name: "PortfolioDisplayName",
+      #     description: "PortfolioDescription",
+      #     provider_name: "ProviderName",
+      #     add_tags: [
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #     remove_tags: ["TagKey"],
+      #   })
+      #
+      # @example Response structure
+      #   resp.portfolio_detail.id #=> String
+      #   resp.portfolio_detail.arn #=> String
+      #   resp.portfolio_detail.display_name #=> String
+      #   resp.portfolio_detail.description #=> String
+      #   resp.portfolio_detail.created_time #=> Time
+      #   resp.portfolio_detail.provider_name #=> String
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload update_portfolio(params = {})
+      # @param [Hash] params ({})
+      def update_portfolio(params = {}, options = {})
+        req = build_request(:update_portfolio, params)
+        req.send_request(options)
+      end
+
+      # Updates an existing product.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :id
+      #   The identifier of the product for the update request.
+      # @option params [String] :name
+      #   The updated product name.
+      # @option params [String] :owner
+      #   The updated owner of the product.
+      # @option params [String] :description
+      #   The updated text description of the product.
+      # @option params [String] :distributor
+      #   The updated distributor of the product.
+      # @option params [String] :support_description
+      #   The updated support description for the product.
+      # @option params [String] :support_email
+      #   The updated support email for the product.
+      # @option params [String] :support_url
+      #   The updated support URL for the product.
+      # @option params [Array<Types::Tag>] :add_tags
+      #   Tags to add to the existing list of tags associated with the product.
+      # @option params [Array<String>] :remove_tags
+      #   Tags to remove from the existing list of tags associated with the
+      #   product.
+      # @return [Types::UpdateProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateProductOutput#product_view_detail #ProductViewDetail} => Types::ProductViewDetail
+      #   * {Types::UpdateProductOutput#tags #Tags} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_product({
+      #     accept_language: "AcceptLanguage",
+      #     id: "Id", # required
+      #     name: "ProductViewName",
+      #     owner: "ProductViewOwner",
+      #     description: "ProductViewShortDescription",
+      #     distributor: "ProductViewOwner",
+      #     support_description: "SupportDescription",
+      #     support_email: "SupportEmail",
+      #     support_url: "SupportUrl",
+      #     add_tags: [
+      #       {
+      #         key: "TagKey", # required
+      #         value: "TagValue", # required
+      #       },
+      #     ],
+      #     remove_tags: ["TagKey"],
+      #   })
+      #
+      # @example Response structure
+      #   resp.product_view_detail.product_view_summary.id #=> String
+      #   resp.product_view_detail.product_view_summary.product_id #=> String
+      #   resp.product_view_detail.product_view_summary.name #=> String
+      #   resp.product_view_detail.product_view_summary.owner #=> String
+      #   resp.product_view_detail.product_view_summary.short_description #=> String
+      #   resp.product_view_detail.product_view_summary.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.product_view_detail.product_view_summary.distributor #=> String
+      #   resp.product_view_detail.product_view_summary.has_default_path #=> Boolean
+      #   resp.product_view_detail.product_view_summary.support_email #=> String
+      #   resp.product_view_detail.product_view_summary.support_description #=> String
+      #   resp.product_view_detail.product_view_summary.support_url #=> String
+      #   resp.product_view_detail.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      #   resp.product_view_detail.product_arn #=> String
+      #   resp.product_view_detail.created_time #=> Time
+      #   resp.tags #=> Array
+      #   resp.tags[0].key #=> String
+      #   resp.tags[0].value #=> String
+      # @overload update_product(params = {})
+      # @param [Hash] params ({})
+      def update_product(params = {}, options = {})
+        req = build_request(:update_product, params)
+        req.send_request(options)
+      end
+
       # Requests updates to the configuration of an existing
       # ProvisionedProduct object. If there are tags associated with the
       # object, they cannot be updated or added with this operation. Depending
@@ -844,6 +2283,9 @@ module Aws
       # @option params [required, String] :update_token
       #   The idempotency token that uniquely identifies the provisioning update
       #   request.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
       # @return [Types::UpdateProvisionedProductOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateProvisionedProductOutput#record_detail #RecordDetail} => Types::RecordDetail
@@ -888,6 +2330,59 @@ module Aws
       # @param [Hash] params ({})
       def update_provisioned_product(params = {}, options = {})
         req = build_request(:update_provisioned_product, params)
+        req.send_request(options)
+      end
+
+      # Updates an existing provisioning artifact's information. This
+      # operation will not work on a provisioning artifact associated with a
+      # product that has been shared with you.
+      # @option params [String] :accept_language
+      #   The language code to use for this operation. Supported language codes
+      #   are as follows:
+      #
+      #   "en" (English)
+      #
+      #   "jp" (Japanese)
+      #
+      #   "zh" (Chinese)
+      #
+      #   If no code is specified, "en" is used as the default.
+      # @option params [required, String] :product_id
+      #   The product identifier.
+      # @option params [required, String] :provisioning_artifact_id
+      #   The identifier of the provisioning artifact for the update request.
+      # @option params [String] :name
+      #   The updated name of the provisioning artifact.
+      # @option params [String] :description
+      #   The updated text description of the provisioning artifact.
+      # @return [Types::UpdateProvisioningArtifactOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateProvisioningArtifactOutput#provisioning_artifact_detail #ProvisioningArtifactDetail} => Types::ProvisioningArtifactDetail
+      #   * {Types::UpdateProvisioningArtifactOutput#info #Info} => Hash&lt;String,String&gt;
+      #   * {Types::UpdateProvisioningArtifactOutput#status #Status} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_provisioning_artifact({
+      #     accept_language: "AcceptLanguage",
+      #     product_id: "Id", # required
+      #     provisioning_artifact_id: "Id", # required
+      #     name: "ProvisioningArtifactName",
+      #     description: "ProvisioningArtifactDescription",
+      #   })
+      #
+      # @example Response structure
+      #   resp.provisioning_artifact_detail.id #=> String
+      #   resp.provisioning_artifact_detail.name #=> String
+      #   resp.provisioning_artifact_detail.description #=> String
+      #   resp.provisioning_artifact_detail.type #=> String, one of "CLOUD_FORMATION_TEMPLATE"
+      #   resp.provisioning_artifact_detail.created_time #=> Time
+      #   resp.info #=> Hash
+      #   resp.info["ProvisioningArtifactInfoKey"] #=> String
+      #   resp.status #=> String, one of "AVAILABLE", "CREATING", "FAILED"
+      # @overload update_provisioning_artifact(params = {})
+      # @param [Hash] params ({})
+      def update_provisioning_artifact(params = {}, options = {})
+        req = build_request(:update_provisioning_artifact, params)
         req.send_request(options)
       end
 

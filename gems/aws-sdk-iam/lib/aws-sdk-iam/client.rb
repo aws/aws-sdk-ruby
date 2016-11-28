@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -5910,7 +5912,7 @@ module Aws
       #   Specifies whether IAM user passwords must contain at least one of the
       #   following non-alphanumeric characters:
       #
-      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| '
+      #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
       #
       #   Default value: false
       # @option params [Boolean] :require_numbers
@@ -6029,7 +6031,7 @@ module Aws
       # permissions on both the source object and the target object. For
       # example, to change "Managers" to "MGRs", the entity making the
       # request must have permission on both "Managers" and "MGRs", or
-      # must have permission on all (\*). For more information about
+      # must have permission on all (*). For more information about
       # permissions, see [Permissions and Policies][2].
       #
       #  </note>
@@ -6304,7 +6306,7 @@ module Aws
       # object. For example, to change the name from "ProductionCert" to
       # "ProdCert", the entity making the request must have permission on
       # "ProductionCert" and "ProdCert", or must have permission on all
-      # (\*). For more information about permissions, see [Access
+      # (*). For more information about permissions, see [Access
       # Management][3] in the *IAM User Guide*.
       #
       #  </note>
@@ -6422,7 +6424,7 @@ module Aws
       # <note markdown="1"> To change a user name the requester must have appropriate permissions
       # on both the source object and the target object. For example, to
       # change Bob to Robert, the entity making the request must have
-      # permission on Bob and Robert, or must have permission on all (\*). For
+      # permission on Bob and Robert, or must have permission on all (*). For
       # more information about permissions, see [Permissions and Policies][3].
       #
       #  </note>

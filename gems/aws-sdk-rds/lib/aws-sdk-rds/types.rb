@@ -10875,7 +10875,7 @@ module Aws
       #   "aws:" or "rds:". The string can only contain only the set of
       #   Unicode letters, digits, white-space, '\_', '.', '/', '=',
       #   '+', '-' (Java regex:
-      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
       #   @return [String]
       #
       # @!attribute [rw] value
@@ -10884,7 +10884,7 @@ module Aws
       #   with "aws:" or "rds:". The string can only contain only the set
       #   of Unicode letters, digits, white-space, '\_', '.', '/',
       #   '=', '+', '-' (Java regex:
-      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
       #   @return [String]
       class Tag < Struct.new(
         :key,

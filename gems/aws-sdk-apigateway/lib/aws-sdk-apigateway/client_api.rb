@@ -31,6 +31,7 @@ module Aws
       ClientCertificate = Shapes::StructureShape.new(name: 'ClientCertificate')
       ClientCertificates = Shapes::StructureShape.new(name: 'ClientCertificates')
       ConflictException = Shapes::StructureShape.new(name: 'ConflictException')
+      ContentHandlingStrategy = Shapes::StringShape.new(name: 'ContentHandlingStrategy')
       CreateApiKeyRequest = Shapes::StructureShape.new(name: 'CreateApiKeyRequest')
       CreateAuthorizerRequest = Shapes::StructureShape.new(name: 'CreateAuthorizerRequest')
       CreateBasePathMappingRequest = Shapes::StructureShape.new(name: 'CreateBasePathMappingRequest')
@@ -294,7 +295,7 @@ module Aws
       CreateBasePathMappingRequest.struct_class = Types::CreateBasePathMappingRequest
 
       CreateDeploymentRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
-      CreateDeploymentRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "stageName"))
+      CreateDeploymentRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, location_name: "stageName"))
       CreateDeploymentRequest.add_member(:stage_description, Shapes::ShapeRef.new(shape: String, location_name: "stageDescription"))
       CreateDeploymentRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       CreateDeploymentRequest.add_member(:cache_cluster_enabled, Shapes::ShapeRef.new(shape: NullableBoolean, location_name: "cacheClusterEnabled"))
@@ -324,6 +325,7 @@ module Aws
       CreateRestApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
       CreateRestApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       CreateRestApiRequest.add_member(:clone_from, Shapes::ShapeRef.new(shape: String, location_name: "cloneFrom"))
+      CreateRestApiRequest.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
       CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
 
       CreateStageRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -453,13 +455,14 @@ module Aws
       GetAccountRequest.struct_class = Types::GetAccountRequest
 
       GetApiKeyRequest.add_member(:api_key, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "api_Key"))
-      GetApiKeyRequest.add_member(:include_value, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeValue"))
+      GetApiKeyRequest.add_member(:include_value, Shapes::ShapeRef.new(shape: NullableBoolean, location: "querystring", location_name: "includeValue"))
       GetApiKeyRequest.struct_class = Types::GetApiKeyRequest
 
       GetApiKeysRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
       GetApiKeysRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
       GetApiKeysRequest.add_member(:name_query, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "name"))
-      GetApiKeysRequest.add_member(:include_values, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "includeValues"))
+      GetApiKeysRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "customerId"))
+      GetApiKeysRequest.add_member(:include_values, Shapes::ShapeRef.new(shape: NullableBoolean, location: "querystring", location_name: "includeValues"))
       GetApiKeysRequest.struct_class = Types::GetApiKeysRequest
 
       GetAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -623,6 +626,7 @@ module Aws
       Integration.add_member(:request_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestParameters"))
       Integration.add_member(:request_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "requestTemplates"))
       Integration.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: String, location_name: "passthroughBehavior"))
+      Integration.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
       Integration.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
       Integration.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
       Integration.add_member(:integration_responses, Shapes::ShapeRef.new(shape: MapOfIntegrationResponse, location_name: "integrationResponses"))
@@ -632,6 +636,7 @@ module Aws
       IntegrationResponse.add_member(:selection_pattern, Shapes::ShapeRef.new(shape: String, location_name: "selectionPattern"))
       IntegrationResponse.add_member(:response_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseParameters"))
       IntegrationResponse.add_member(:response_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseTemplates"))
+      IntegrationResponse.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
       IntegrationResponse.struct_class = Types::IntegrationResponse
 
       ListOfARNs.member = Shapes::ShapeRef.new(shape: ProviderARN)
@@ -765,6 +770,7 @@ module Aws
       PutIntegrationRequest.add_member(:passthrough_behavior, Shapes::ShapeRef.new(shape: String, location_name: "passthroughBehavior"))
       PutIntegrationRequest.add_member(:cache_namespace, Shapes::ShapeRef.new(shape: String, location_name: "cacheNamespace"))
       PutIntegrationRequest.add_member(:cache_key_parameters, Shapes::ShapeRef.new(shape: ListOfString, location_name: "cacheKeyParameters"))
+      PutIntegrationRequest.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
       PutIntegrationRequest.struct_class = Types::PutIntegrationRequest
 
       PutIntegrationResponseRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -774,6 +780,7 @@ module Aws
       PutIntegrationResponseRequest.add_member(:selection_pattern, Shapes::ShapeRef.new(shape: String, location_name: "selectionPattern"))
       PutIntegrationResponseRequest.add_member(:response_parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseParameters"))
       PutIntegrationResponseRequest.add_member(:response_templates, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "responseTemplates"))
+      PutIntegrationResponseRequest.add_member(:content_handling, Shapes::ShapeRef.new(shape: ContentHandlingStrategy, location_name: "contentHandling"))
       PutIntegrationResponseRequest.struct_class = Types::PutIntegrationResponseRequest
 
       PutMethodRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -824,6 +831,7 @@ module Aws
       RestApi.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       RestApi.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
       RestApi.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
+      RestApi.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
       RestApi.struct_class = Types::RestApi
 
       RestApis.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
@@ -1157,6 +1165,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
         end)
 
         api.add_operation(:create_usage_plan_key, Seahorse::Model::Operation.new.tap do |o|
@@ -1837,6 +1846,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o[:pager] = Aws::Pager.new(
             limit_key: "limit",
             tokens: {

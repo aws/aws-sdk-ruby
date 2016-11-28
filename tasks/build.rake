@@ -14,9 +14,12 @@ rule /^build:aws-sdk-\w+$/ do |task|
   service = BuildTools::Services[identifier]
   BuildTools::Builder::Source.new(service).build
 
+  version = "gems/aws-sdk-#{identifier}/VERSION"
+  version = File.exists?(version) ? File.read(version).strip : "1.0.0.rc1"
+
   # template-based generator
   svc = AwsSdkCodeGenerator::Service.new(
-    version: '1.0.0',
+    gem_version: version,
     name: service.name,
     api: service.api,
     docs: service.models[:docs],

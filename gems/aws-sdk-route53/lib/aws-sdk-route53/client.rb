@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_xml.rb'
 require 'aws-sdk-route53/plugins/id_fix.rb'
@@ -45,6 +46,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::RestXml)
       add_plugin(Aws::Route53::Plugins::IdFix)
@@ -132,34 +134,33 @@ module Aws
 
       # Associates an Amazon VPC with a private hosted zone.
       #
-      # The VPC and the hosted zone must already exist, and you must have
-      # created a private hosted zone. You cannot convert a public hosted zone
-      # into a private hosted zone.
+      # To perform the association, the VPC and the private hosted zone must
+      # already exist. You can't convert a public hosted zone into a private
+      # hosted zone.
       #
       # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
-      # ID/associatevpc` resource. The request body must include an XML
-      # document with a `AssociateVPCWithHostedZoneRequest` element. The
-      # response returns the `AssociateVPCWithHostedZoneResponse` element.
+      # ID/associatevpc` resource. The request body must include a document
+      # with an `AssociateVPCWithHostedZoneRequest` element. The response
+      # contains a `ChangeInfo` data type that you can use to track the
+      # progress of the request.
       #
-      # <note markdown="1"> If you used different accounts to create the hosted zone and to create
-      # the Amazon VPCs that you want to associate with the hosted zone, we
-      # need to update account permissions for you. For more information, see
-      # [Associating Amazon VPCs and Private Hosted Zones That You Create with
-      # Different AWS Accounts][1] in the Amazon Route 53 Developer Guide.
+      # <note markdown="1"> If you want to associate a VPC that was created by using one AWS
+      # account with a private hosted zone that was created by using a
+      # different account, the AWS account that created the private hosted
+      # zone must first submit a `CreateVPCAssociationAuthorization` request.
+      # Then the account that created the VPC must submit an
+      # `AssociateVPCWithHostedZone` request.
       #
       #  </note>
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/hosted-zone-private-associate-vpcs-different-accounts.html
       # @option params [required, String] :hosted_zone_id
-      #   The ID of the hosted zone you want to associate your VPC with.
+      #   The ID of the private hosted zone that you want to associate an Amazon
+      #   VPC with.
       #
-      #   Note that you cannot associate a VPC with a hosted zone that doesn't
+      #   Note that you can't associate a VPC with a hosted zone that doesn't
       #   have an existing VPC association.
       # @option params [required, Types::VPC] :vpc
-      #   A complex type containing information about the Amazon VPC that
-      #   you're associating with the specified hosted zone.
+      #   A complex type that contains information about the VPC that you want
+      #   to associate with a private hosted zone.
       # @option params [String] :comment
       #   *Optional:* A comment about the association request.
       # @return [Types::AssociateVPCWithHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -211,7 +212,7 @@ module Aws
       # (plus any other changes in the batch) fail, and the original `CNAME`
       # record continues to exist.
       #
-      # Due to the nature of transactional changes, you cannot delete the same
+      # Due to the nature of transactional changes, you can't delete the same
       # resource record set more than once in a single change batch. If you
       # attempt to delete the same change batch more than once, Amazon Route
       # 53 returns an `InvalidChangeBatch` error.
@@ -236,29 +237,55 @@ module Aws
       #   values.
       #
       # * `DELETE`\: Deletes an existing resource record set that has the
-      #   specified values for `Name`, `Type`, `Set Identifier` (for code
-      #   latency, weighted, geolocation, and failover resource record sets),
-      #   and `TTL` (except alias resource record sets, for which the TTL is
-      #   determined by the AWS resource you're routing queries to).
+      #   specified values.
       #
       # * `UPSERT`\: If a resource record set does not already exist, AWS
       #   creates it. If a resource set does exist, Amazon Route 53 updates it
-      #   with the values in the request. Amazon Route 53 can update an
-      #   existing resource record set only when all of the following values
-      #   match: `Name`, `Type`, and `Set Identifier` (for weighted, latency,
-      #   geolocation, and failover resource record sets).
+      #   with the values in the request.
       #
-      # In response to a `ChangeResourceRecordSets` request, the DNS data is
-      # changed on all Amazon Route 53 DNS servers. Initially, the status of a
-      # change is `PENDING`, meaning the change has not yet propagated to all
-      # the authoritative Amazon Route 53 DNS servers. When the change is
-      # propagated to all hosts, the change returns a status of `INSYNC`.
+      # The values that you need to include in the request depend on the type
+      # of resource record set that you're creating, deleting, or updating:
       #
-      # After sending a change request, confirm your change has propagated to
-      # all Amazon Route 53 DNS servers. Changes generally propagate to all
-      # Amazon Route 53 name servers in a few minutes. In rare circumstances,
-      # propagation can take up to 30 minutes. For more information, see
-      # GetChange.
+      # **Basic resource record sets (excluding alias, failover, geolocation,
+      # latency, and weighted resource record sets)**
+      #
+      # * `Name`
+      #
+      # * `Type`
+      #
+      # * `TTL`
+      #
+      # **Failover, geolocation, latency, or weighted resource record sets
+      # (excluding alias resource record sets)**
+      #
+      # * `Name`
+      #
+      # * `Type`
+      #
+      # * `TTL`
+      #
+      # * `SetIdentifier`
+      #
+      # **Alias resource record sets (including failover alias, geolocation
+      # alias, latency alias, and weighted alias resource record sets)**
+      #
+      # * `Name`
+      #
+      # * `Type`
+      #
+      # * `AliasTarget` (includes `DNSName`, `EvaluateTargetHealth`, and
+      #   `HostedZoneId`)
+      #
+      # * `SetIdentifier` (for failover, geolocation, latency, and weighted
+      #   resource record sets)
+      #
+      # When you submit a `ChangeResourceRecordSets` request, Amazon Route 53
+      # propagates your changes to all of the Amazon Route 53 authoritative
+      # DNS servers. While your changes are propagating, `GetChange` returns a
+      # status of `PENDING`. When propagation is complete, `GetChange` returns
+      # a status of `INSYNC`. Changes generally propagate to all Amazon Route
+      # 53 name servers in a few minutes. In rare circumstances, propagation
+      # can take up to 30 minutes. For more information, see GetChange
       #
       # For information about the limits on a `ChangeResourceRecordSets`
       # request, see [Limits][2] in the *Amazon Route 53 Developer Guide*.
@@ -380,19 +407,18 @@ module Aws
       # Creates a new health check.
       #
       # To create a new health check, send a `POST` request to the
-      # `/2013-04-01/healthcheck` resource. The request body must include an
-      # XML document with a `CreateHealthCheckRequest` element. The response
+      # `/2013-04-01/healthcheck` resource. The request body must include a
+      # document with a `CreateHealthCheckRequest` element. The response
       # returns the `CreateHealthCheckResponse` element, containing the health
       # check ID specified when adding health check to a resource record set.
       # For information about adding health checks to resource record sets,
       # see ResourceRecordSet$HealthCheckId in ChangeResourceRecordSets.
       #
-      # If you are registering Amazon EC2 instances with an Elastic Load
-      # Balancing (ELB) load balancer, do not create Amazon Route 53 health
-      # checks for the Amazon EC2 instances. When you register an Amazon EC2
-      # instance with a load balancer, you configure settings for an ELB
-      # health check, which performs a similar function to an Amazon Route 53
-      # health check.
+      # If you are registering EC2 instances with an Elastic Load Balancing
+      # (ELB) load balancer, do not create Amazon Route 53 health checks for
+      # the EC2 instances. When you register an EC2 instance with a load
+      # balancer, you configure settings for an ELB health check, which
+      # performs a similar function to an Amazon Route 53 health check.
       #
       # You can associate health checks with failover resource record sets in
       # a private hosted zone. Note the following:
@@ -412,7 +438,7 @@ module Aws
       #   an alarm to the metric, and then create a health check that is based
       #   on the state of the alarm. For information about creating CloudWatch
       #   metrics and alarms by using the CloudWatch console, see the [Amazon
-      #   CloudWatch Developer Guide][1].
+      #   CloudWatch User Guide][1].
       #
       #
       #
@@ -449,7 +475,7 @@ module Aws
       #       enable_sni: false,
       #       regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
       #       alarm_identifier: {
-      #         region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #         name: "AlarmName", # required
       #       },
       #       insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -475,7 +501,7 @@ module Aws
       #   resp.health_check.health_check_config.enable_sni #=> Boolean
       #   resp.health_check.health_check_config.regions #=> Array
       #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
+      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
       #   resp.health_check.health_check_config.alarm_identifier.name #=> String
       #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
       #   resp.health_check.health_check_version #=> Integer
@@ -501,22 +527,21 @@ module Aws
       # System (DNS) routes traffic on the Internet for a domain, such as
       # example.com, and its subdomains.
       #
-      # Public hosted zones cannot be converted to a private hosted zone or
+      # Public hosted zones can't be converted to a private hosted zone or
       # vice versa. Instead, create a new hosted zone with the same name and
       # create new resource record sets.
       #
       # Send a `POST` request to the `/2013-04-01/hostedzone` resource. The
-      # request body must include an XML document with a
-      # `CreateHostedZoneRequest` element. The response returns the
-      # `CreateHostedZoneResponse` element containing metadata about the
-      # hosted zone.
+      # request body must include a document with a `CreateHostedZoneRequest`
+      # element. The response returns the `CreateHostedZoneResponse` element
+      # containing metadata about the hosted zone.
       #
       # Fore more information about charges for hosted zones, see [Amazon
       # Route 53 Pricing][1].
       #
       # Note the following:
       #
-      # * You cannot create a hosted zone for a top-level domain (TLD).
+      # * You can't create a hosted zone for a top-level domain (TLD).
       #
       # * Amazon Route 53 automatically creates a default SOA record and four
       #   NS records for the zone. For more information about SOA and NS
@@ -558,7 +583,7 @@ module Aws
       #   returns in the DelegationSet element.
       # @option params [Types::VPC] :vpc
       #   The VPC that you want your hosted zone to be associated with. By
-      #   providing this parameter, your newly created hosted cannot be resolved
+      #   providing this parameter, your newly created hosted can't be resolved
       #   anywhere other than the given VPC.
       # @option params [required, String] :caller_reference
       #   A unique string that identifies the request and that allows failed
@@ -641,10 +666,10 @@ module Aws
       # that zone as reusable
       #
       # Send a `POST` request to the `/2013-04-01/delegationset` resource. The
-      # request body must include an XML document with a
+      # request body must include a document with a
       # `CreateReusableDelegationSetRequest` element.
       #
-      # <note markdown="1"> A reusable delegation set cannot be associated with a private hosted
+      # <note markdown="1"> A reusable delegation set can't be associated with a private hosted
       # zone/
       #
       #  </note>
@@ -703,12 +728,11 @@ module Aws
       #   The name of the traffic policy.
       # @option params [required, String] :document
       #   The definition of this traffic policy in JSON format. For more
-      #   information, see [Traffic Policy Document Format][1] in the *Amazon
-      #   Route 53 API Reference*.
+      #   information, see [Traffic Policy Document Format][1].
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/api-policies-traffic-policy-document-format.html
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
       # @option params [String] :comment
       #   (Optional) Any comments that you want to include about the traffic
       #   policy.
@@ -852,6 +876,55 @@ module Aws
         req.send_request(options)
       end
 
+      # Authorizes the AWS account that created a specified VPC to submit an
+      # `AssociateVPCWithHostedZone` request to associate the VPC with a
+      # specified hosted zone that was created by a different account. To
+      # submit a `CreateVPCAssociationAuthorization` request, you must use the
+      # account that created the hosted zone. After you authorize the
+      # association, use the account that created the VPC to submit an
+      # `AssociateVPCWithHostedZone` request.
+      #
+      # <note markdown="1"> If you want to associate multiple VPCs that you created by using one
+      # account with a hosted zone that you created by using a different
+      # account, you must submit one authorization request for each VPC.
+      #
+      #  </note>
+      #
+      # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/authorizevpcassociation` resource. The request body must include a
+      # document with a `CreateVPCAssociationAuthorizationRequest` element.
+      # The response contains information about the authorization.
+      # @option params [required, String] :hosted_zone_id
+      #   The ID of the private hosted zone that you want to authorize
+      #   associating a VPC with.
+      # @option params [required, Types::VPC] :vpc
+      #   A complex type that contains the VPC ID and region for the VPC that
+      #   you want to authorize associating with your hosted zone.
+      # @return [Types::CreateVPCAssociationAuthorizationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateVPCAssociationAuthorizationResponse#hosted_zone_id #HostedZoneId} => String
+      #   * {Types::CreateVPCAssociationAuthorizationResponse#vpc #VPC} => Types::VPC
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_vpc_association_authorization({
+      #     hosted_zone_id: "ResourceId", # required
+      #     vpc: { # required
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_id: "VPCId",
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.hosted_zone_id #=> String
+      #   resp.vpc.vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vpc.vpc_id #=> String
+      # @overload create_vpc_association_authorization(params = {})
+      # @param [Hash] params ({})
+      def create_vpc_association_authorization(params = {}, options = {})
+        req = build_request(:create_vpc_association_authorization, params)
+        req.send_request(options)
+      end
+
       # Deletes a health check. Send a `DELETE` request to the
       # `/2013-04-01/healthcheck/health check ID ` resource.
       #
@@ -859,7 +932,7 @@ module Aws
       # if the health check is associated with one or more resource record
       # sets. If you delete a health check and you don't update the
       # associated resource record sets, the future status of the health check
-      # cannot be predicted and may change. This will affect the routing of
+      # can't be predicted and may change. This will affect the routing of
       # DNS queries for your DNS failover configuration. For more information,
       # see [Replacing and Deleting Health Checks][1] in the Amazon Route 53
       # Developer Guide.
@@ -990,22 +1063,67 @@ module Aws
         req.send_request(options)
       end
 
+      # Removes authorization to submit an `AssociateVPCWithHostedZone`
+      # request to associate a specified VPC with a hosted zone that was
+      # created by a different account. You must use the account that created
+      # the hosted zone to submit a `DeleteVPCAssociationAuthorization`
+      # request.
+      #
+      # Sending this request only prevents the AWS account that created the
+      # VPC from associating the VPC with the Amazon Route 53 hosted zone in
+      # the future. If the VPC is already associated with the hosted zone,
+      # `DeleteVPCAssociationAuthorization` won't disassociate the VPC from
+      # the hosted zone. If you want to delete an existing association, use
+      # `DisassociateVPCFromHostedZone`.
+      #
+      # Send a `DELETE` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/deauthorizevpcassociation` resource. The request body must include
+      # a document with a `DeleteVPCAssociationAuthorizationRequest` element.
+      # @option params [required, String] :hosted_zone_id
+      #   When removing authorization to associate a VPC that was created by one
+      #   AWS account with a hosted zone that was created with a different AWS
+      #   account, the ID of the hosted zone.
+      # @option params [required, Types::VPC] :vpc
+      #   When removing authorization to associate a VPC that was created by one
+      #   AWS account with a hosted zone that was created with a different AWS
+      #   account, a complex type that includes the ID and region of the VPC.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_vpc_association_authorization({
+      #     hosted_zone_id: "ResourceId", # required
+      #     vpc: { # required
+      #       vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #       vpc_id: "VPCId",
+      #     },
+      #   })
+      # @overload delete_vpc_association_authorization(params = {})
+      # @param [Hash] params ({})
+      def delete_vpc_association_authorization(params = {}, options = {})
+        req = build_request(:delete_vpc_association_authorization, params)
+        req.send_request(options)
+      end
+
       # Disassociates a VPC from a Amazon Route 53 private hosted zone.
       #
-      # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
-      # ID/disassociatevpc` resource. The request body must include an XML
-      # document with a `DisassociateVPCFromHostedZoneRequest` element. The
-      # response returns the `DisassociateVPCFromHostedZoneResponse` element.
+      # <note markdown="1"> You can't disassociate the last VPC from a private hosted zone.
       #
-      # You can only disassociate a VPC from a private hosted zone when two or
-      # more VPCs are associated with that hosted zone. You cannot convert a
+      #  </note>
+      #
+      # Send a `POST` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/disassociatevpc` resource. The request body must include a document
+      # with a `DisassociateVPCFromHostedZoneRequest` element. The response
+      # includes a `DisassociateVPCFromHostedZoneResponse` element.
+      #
+      # You can't disassociate a VPC from a private hosted zone when only one
+      # VPC is associated with the hosted zone. You also can't convert a
       # private hosted zone into a public hosted zone.
       # @option params [required, String] :hosted_zone_id
-      #   The ID of the VPC that you want to disassociate from an Amazon Route
-      #   53 hosted zone.
+      #   The ID of the private hosted zone that you want to disassociate a VPC
+      #   from.
       # @option params [required, Types::VPC] :vpc
-      #   A complex type containing information about the Amazon VPC that
-      #   you're disassociating from the specified hosted zone.
+      #   A complex type that contains information about the VPC that you're
+      #   disassociating from the specified hosted zone.
       # @option params [String] :comment
       #   *Optional:* A comment about the disassociation request.
       # @return [Types::DisassociateVPCFromHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1065,51 +1183,6 @@ module Aws
       # @param [Hash] params ({})
       def get_change(params = {}, options = {})
         req = build_request(:get_change, params)
-        req.send_request(options)
-      end
-
-      # Returns the status and changes of a change batch request.
-      # @option params [required, String] :id
-      #   The ID of the change batch. This is the value that you specified in
-      #   the `change ID` parameter when you submitted the request.
-      # @return [Types::GetChangeDetailsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-      #
-      #   * {Types::GetChangeDetailsResponse#change_batch_record #ChangeBatchRecord} => Types::ChangeBatchRecord
-      #
-      # @example Request syntax with placeholder values
-      #   resp = client.get_change_details({
-      #     id: "ResourceId", # required
-      #   })
-      #
-      # @example Response structure
-      #   resp.change_batch_record.id #=> String
-      #   resp.change_batch_record.submitted_at #=> Time
-      #   resp.change_batch_record.status #=> String, one of "PENDING", "INSYNC"
-      #   resp.change_batch_record.comment #=> String
-      #   resp.change_batch_record.submitter #=> String
-      #   resp.change_batch_record.changes #=> Array
-      #   resp.change_batch_record.changes[0].action #=> String, one of "CREATE", "DELETE", "UPSERT"
-      #   resp.change_batch_record.changes[0].resource_record_set.name #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
-      #   resp.change_batch_record.changes[0].resource_record_set.set_identifier #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_record.changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
-      #   resp.change_batch_record.changes[0].resource_record_set.geo_location.continent_code #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.geo_location.country_code #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.geo_location.subdivision_code #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.failover #=> String, one of "PRIMARY", "SECONDARY"
-      #   resp.change_batch_record.changes[0].resource_record_set.ttl #=> Integer
-      #   resp.change_batch_record.changes[0].resource_record_set.resource_records #=> Array
-      #   resp.change_batch_record.changes[0].resource_record_set.resource_records[0].value #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.alias_target.hosted_zone_id #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.alias_target.dns_name #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
-      #   resp.change_batch_record.changes[0].resource_record_set.health_check_id #=> String
-      #   resp.change_batch_record.changes[0].resource_record_set.traffic_policy_instance_id #=> String
-      # @overload get_change_details(params = {})
-      # @param [Hash] params ({})
-      def get_change_details(params = {}, options = {})
-        req = build_request(:get_change_details, params)
         req.send_request(options)
       end
 
@@ -1237,7 +1310,7 @@ module Aws
       #   resp.health_check.health_check_config.enable_sni #=> Boolean
       #   resp.health_check.health_check_config.regions #=> Array
       #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
+      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
       #   resp.health_check.health_check_config.alarm_identifier.name #=> String
       #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
       #   resp.health_check.health_check_version #=> Integer
@@ -1577,147 +1650,6 @@ module Aws
         req.send_request(options)
       end
 
-      # Gets the list of ChangeBatches in a given time period for a given
-      # hosted zone.
-      # @option params [required, String] :hosted_zone_id
-      #   The ID of the hosted zone that you want to see changes for.
-      # @option params [required, String] :start_date
-      #   The start of the time period you want to see changes for.
-      # @option params [required, String] :end_date
-      #   The end of the time period you want to see changes for.
-      # @option params [Integer] :max_items
-      #   The maximum number of items on a page.
-      # @option params [String] :marker
-      #   The page marker.
-      # @return [Types::ListChangeBatchesByHostedZoneResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-      #
-      #   * {Types::ListChangeBatchesByHostedZoneResponse#max_items #MaxItems} => Integer
-      #   * {Types::ListChangeBatchesByHostedZoneResponse#marker #Marker} => String
-      #   * {Types::ListChangeBatchesByHostedZoneResponse#is_truncated #IsTruncated} => Boolean
-      #   * {Types::ListChangeBatchesByHostedZoneResponse#change_batch_records #ChangeBatchRecords} => Array&lt;Types::ChangeBatchRecord&gt;
-      #   * {Types::ListChangeBatchesByHostedZoneResponse#next_marker #NextMarker} => String
-      #
-      # @example Request syntax with placeholder values
-      #   resp = client.list_change_batches_by_hosted_zone({
-      #     hosted_zone_id: "ResourceId", # required
-      #     start_date: "Date", # required
-      #     end_date: "Date", # required
-      #     max_items: 1,
-      #     marker: "PageMarker",
-      #   })
-      #
-      # @example Response structure
-      #   resp.max_items #=> Integer
-      #   resp.marker #=> String
-      #   resp.is_truncated #=> Boolean
-      #   resp.change_batch_records #=> Array
-      #   resp.change_batch_records[0].id #=> String
-      #   resp.change_batch_records[0].submitted_at #=> Time
-      #   resp.change_batch_records[0].status #=> String, one of "PENDING", "INSYNC"
-      #   resp.change_batch_records[0].comment #=> String
-      #   resp.change_batch_records[0].submitter #=> String
-      #   resp.change_batch_records[0].changes #=> Array
-      #   resp.change_batch_records[0].changes[0].action #=> String, one of "CREATE", "DELETE", "UPSERT"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.name #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.failover #=> String, one of "PRIMARY", "SECONDARY"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.ttl #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.resource_records #=> Array
-      #   resp.change_batch_records[0].changes[0].resource_record_set.resource_records[0].value #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.hosted_zone_id #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.dns_name #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
-      #   resp.change_batch_records[0].changes[0].resource_record_set.health_check_id #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.traffic_policy_instance_id #=> String
-      #   resp.next_marker #=> String
-      # @overload list_change_batches_by_hosted_zone(params = {})
-      # @param [Hash] params ({})
-      def list_change_batches_by_hosted_zone(params = {}, options = {})
-        req = build_request(:list_change_batches_by_hosted_zone, params)
-        req.send_request(options)
-      end
-
-      # Gets the list of ChangeBatches in a given time period for a given
-      # hosted zone and RRSet.
-      # @option params [required, String] :hosted_zone_id
-      #   The ID of the hosted zone that you want to see changes for.
-      # @option params [required, String] :name
-      #   The name of the RRSet that you want to see changes for.
-      # @option params [required, String] :type
-      #   The type of the RRSet that you want to see changes for.
-      # @option params [String] :set_identifier
-      #   The identifier of the RRSet that you want to see changes for.
-      # @option params [required, String] :start_date
-      #   The start of the time period you want to see changes for.
-      # @option params [required, String] :end_date
-      #   The end of the time period you want to see changes for.
-      # @option params [Integer] :max_items
-      #   The maximum number of items on a page.
-      # @option params [String] :marker
-      #   The page marker.
-      # @return [Types::ListChangeBatchesByRRSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
-      #
-      #   * {Types::ListChangeBatchesByRRSetResponse#max_items #MaxItems} => Integer
-      #   * {Types::ListChangeBatchesByRRSetResponse#marker #Marker} => String
-      #   * {Types::ListChangeBatchesByRRSetResponse#is_truncated #IsTruncated} => Boolean
-      #   * {Types::ListChangeBatchesByRRSetResponse#change_batch_records #ChangeBatchRecords} => Array&lt;Types::ChangeBatchRecord&gt;
-      #   * {Types::ListChangeBatchesByRRSetResponse#next_marker #NextMarker} => String
-      #
-      # @example Request syntax with placeholder values
-      #   resp = client.list_change_batches_by_rr_set({
-      #     hosted_zone_id: "ResourceId", # required
-      #     name: "DNSName", # required
-      #     type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
-      #     set_identifier: "ResourceRecordSetIdentifier",
-      #     start_date: "Date", # required
-      #     end_date: "Date", # required
-      #     max_items: 1,
-      #     marker: "PageMarker",
-      #   })
-      #
-      # @example Response structure
-      #   resp.max_items #=> Integer
-      #   resp.marker #=> String
-      #   resp.is_truncated #=> Boolean
-      #   resp.change_batch_records #=> Array
-      #   resp.change_batch_records[0].id #=> String
-      #   resp.change_batch_records[0].submitted_at #=> Time
-      #   resp.change_batch_records[0].status #=> String, one of "PENDING", "INSYNC"
-      #   resp.change_batch_records[0].comment #=> String
-      #   resp.change_batch_records[0].submitter #=> String
-      #   resp.change_batch_records[0].changes #=> Array
-      #   resp.change_batch_records[0].changes[0].action #=> String, one of "CREATE", "DELETE", "UPSERT"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.name #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.type #=> String, one of "SOA", "A", "TXT", "NS", "CNAME", "MX", "NAPTR", "PTR", "SRV", "SPF", "AAAA"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.set_identifier #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.weight #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1", "ap-south-1"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.continent_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.country_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.geo_location.subdivision_code #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.failover #=> String, one of "PRIMARY", "SECONDARY"
-      #   resp.change_batch_records[0].changes[0].resource_record_set.ttl #=> Integer
-      #   resp.change_batch_records[0].changes[0].resource_record_set.resource_records #=> Array
-      #   resp.change_batch_records[0].changes[0].resource_record_set.resource_records[0].value #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.hosted_zone_id #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.dns_name #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.alias_target.evaluate_target_health #=> Boolean
-      #   resp.change_batch_records[0].changes[0].resource_record_set.health_check_id #=> String
-      #   resp.change_batch_records[0].changes[0].resource_record_set.traffic_policy_instance_id #=> String
-      #   resp.next_marker #=> String
-      # @overload list_change_batches_by_rr_set(params = {})
-      # @param [Hash] params ({})
-      def list_change_batches_by_rr_set(params = {}, options = {})
-        req = build_request(:list_change_batches_by_rr_set, params)
-        req.send_request(options)
-      end
-
       # Retrieves a list of supported geo locations. Send a `GET` request to
       # the `/2013-04-01/geolocations` resource. The response to this request
       # includes a `GeoLocationDetailsList` element for each location that
@@ -1878,7 +1810,7 @@ module Aws
       #   resp.health_checks[0].health_check_config.enable_sni #=> Boolean
       #   resp.health_checks[0].health_check_config.regions #=> Array
       #   resp.health_checks[0].health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-      #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
+      #   resp.health_checks[0].health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
       #   resp.health_checks[0].health_check_config.alarm_identifier.name #=> String
       #   resp.health_checks[0].health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
       #   resp.health_checks[0].health_check_version #=> Integer
@@ -2178,7 +2110,7 @@ module Aws
       #
       #   Values for alias resource record sets:
       #
-      #   * **CloudFront distribution**\: A
+      #   * **CloudFront distribution**\: A or AAAA
       #
       #   * **Elastic Beanstalk environment that has a regionalized
       #     subdomain**\: A
@@ -2953,6 +2885,68 @@ module Aws
         req.send_request(options)
       end
 
+      # Gets a list of the VPCs that were created by other accounts and that
+      # can be associated with a specified hosted zone because you've
+      # submitted one or more `CreateVPCAssociationAuthorization` requests.
+      #
+      # Send a `GET` request to the `/2013-04-01/hostedzone/hosted zone
+      # ID/authorizevpcassociation` resource. The response to this request
+      # includes a `VPCs` element with a `VPC` child element for each VPC that
+      # can be associated with the hosted zone.
+      #
+      # Amazon Route 53 returns up to 50 VPCs per page. To return fewer VPCs
+      # per page, include the `MaxResults` parameter:
+      #
+      # `/2013-04-01/hostedzone/hosted zone
+      # ID/authorizevpcassociation?MaxItems=VPCs per page `
+      #
+      # If the response includes a `NextToken` element, there are more VPCs to
+      # list. To get the next page of VPCs, submit another
+      # `ListVPCAssociationAuthorizations` request, and include the value of
+      # the `NextToken` element from the response in the `NextToken` request
+      # parameter:
+      #
+      # `/2013-04-01/hostedzone/hosted zone
+      # ID/authorizevpcassociation?MaxItems=VPCs per page&NextToken= `
+      # @option params [required, String] :hosted_zone_id
+      #   The ID of the hosted zone for which you want a list of VPCs that can
+      #   be associated with the hosted zone.
+      # @option params [String] :next_token
+      #   *Optional*\: If a response includes a `NextToken` element, there are
+      #   more VPCs that can be associated with the specified hosted zone. To
+      #   get the next page of results, submit another request, and include the
+      #   value of the `NextToken` element in from the response in the
+      #   `NextToken` parameter in another `ListVPCAssociationAuthorizations`
+      #   request.
+      # @option params [String] :max_results
+      #   *Optional*\: An integer that specifies the maximum number of VPCs that
+      #   you want Amazon Route 53 to return.
+      # @return [Types::ListVPCAssociationAuthorizationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListVPCAssociationAuthorizationsResponse#hosted_zone_id #HostedZoneId} => String
+      #   * {Types::ListVPCAssociationAuthorizationsResponse#next_token #NextToken} => String
+      #   * {Types::ListVPCAssociationAuthorizationsResponse#vp_cs #VPCs} => Array&lt;Types::VPC&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_vpc_association_authorizations({
+      #     hosted_zone_id: "ResourceId", # required
+      #     next_token: "PaginationToken",
+      #     max_results: "MaxResults",
+      #   })
+      #
+      # @example Response structure
+      #   resp.hosted_zone_id #=> String
+      #   resp.next_token #=> String
+      #   resp.vp_cs #=> Array
+      #   resp.vp_cs[0].vpc_region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-west-1", "eu-central-1", "ap-southeast-1", "ap-southeast-2", "ap-south-1", "ap-northeast-1", "ap-northeast-2", "sa-east-1", "cn-north-1"
+      #   resp.vp_cs[0].vpc_id #=> String
+      # @overload list_vpc_association_authorizations(params = {})
+      # @param [Hash] params ({})
+      def list_vpc_association_authorizations(params = {}, options = {})
+        req = build_request(:list_vpc_association_authorizations, params)
+        req.send_request(options)
+      end
+
       # Gets the value that Amazon Route 53 returns in response to a DNS
       # request for a specified record name and type. You can optionally
       # specify the IP address of a DNS resolver, an EDNS0 client subnet IP
@@ -3017,7 +3011,7 @@ module Aws
       # Updates an existing health check.
       #
       # Send a `POST` request to the `/2013-04-01/healthcheck/health check ID
-      # ` resource. The request body must include an XML document with an
+      # ` resource. The request body must include a document with an
       # `UpdateHealthCheckRequest` element. For more information about
       # updating health checks, see [Creating, Updating, and Deleting Health
       # Checks][1] in the Amazon Route 53 Developer Guide.
@@ -3049,17 +3043,18 @@ module Aws
       #     Amazon Route 53 does not update the health check, and it returns a
       #     `HealthCheckVersionMismatch` error.
       # @option params [String] :ip_address
-      #   The IPv4 IP address of the endpoint on which you want Amazon Route 53
-      #   to perform health checks. If you don't specify a value for
-      #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the domain
-      #   name that you specify in `FullyQualifiedDomainName` at the interval
-      #   you specify in `RequestInterval`. Using an IP address that DNS
-      #   returns, Amazon Route 53 then checks the health of the endpoint.
+      #   The IPv4 or IPv6 IP address for the endpoint that you want Amazon
+      #   Route 53 to perform health checks on. If you don't specify a value
+      #   for `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
+      #   domain name that you specify in `FullyQualifiedDomainName` at the
+      #   interval that you specify in `RequestInterval`. Using an IP address
+      #   that is returned by DNS, Amazon Route 53 then checks the health of the
+      #   endpoint.
       #
-      #   f the endpoint is an Amazon EC2 instance, we recommend that you create
-      #   an Elastic IP address, associate it with your Amazon EC2 instance, and
-      #   specify the Elastic IP address for `IPAddress`. This ensures that the
-      #   IP address of your instance never changes. For more information, see
+      #   If the endpoint is an EC2 instance, we recommend that you create an
+      #   Elastic IP address, associate it with your EC2 instance, and specify
+      #   the Elastic IP address for `IPAddress`. This ensures that the IP
+      #   address of your instance never changes. For more information, see
       #   [Elastic IP Addresses (EIP)][1] in the *Amazon EC2 User Guide for
       #   Linux Instances*.
       #
@@ -3072,9 +3067,23 @@ module Aws
       #   For more information, see
       #   UpdateHealthCheckRequest$FullyQualifiedDomainName.
       #
+      #   Constraints: Amazon Route 53 can't check the health of endpoints for
+      #   which the IP address is in local, private, non-routable, or multicast
+      #   ranges. For more information about IP addresses for which you can't
+      #   create health checks, see the following documents:
+      #
+      #   * [RFC 5735, Special Use IPv4 Addresses][2]
+      #
+      #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][3]
+      #
+      #   * [RFC 5156, Special-Use IPv6 Addresses][4]
+      #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+      #   [2]: https://tools.ietf.org/html/rfc5735
+      #   [3]: https://tools.ietf.org/html/rfc6598
+      #   [4]: https://tools.ietf.org/html/rfc5156
       # @option params [Integer] :port
       #   The port on the endpoint on which you want Amazon Route 53 to perform
       #   health checks.
@@ -3095,13 +3104,16 @@ module Aws
       #
       #    </note>
       #
-      #   **If you specify** `IPAddress`\:
+      #   **If you specify a value for** `IPAddress`\:
       #
-      #   The value that you want Amazon Route 53 to pass in the `Host` header
-      #   in all health checks except TCP health checks. This is typically the
-      #   fully qualified DNS name of the endpoint on which you want Amazon
-      #   Route 53 to perform health checks. When Amazon Route 53 checks the
-      #   health of an endpoint, here is how it constructs the `Host` header:
+      #   Amazon Route 53 sends health check requests to the specified IPv4 or
+      #   IPv6 address and passes the value of `FullyQualifiedDomainName` in the
+      #   `Host` header for all health checks except TCP health checks. This is
+      #   typically the fully qualified DNS name of the endpoint on which you
+      #   want Amazon Route 53 to perform health checks.
+      #
+      #   When Amazon Route 53 checks the health of an endpoint, here is how it
+      #   constructs the `Host` header:
       #
       #   * If you specify a value of `80` for `Port` and `HTTP` or
       #     `HTTP_STR_MATCH` for `Type`, Amazon Route 53 passes the value of
@@ -3120,13 +3132,21 @@ module Aws
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header in
       #   each of the above cases.
       #
-      #   **If you don't specify** `IPAddress`\:
+      #   **If you don't specify a value for** `IPAddress`\:
       #
       #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends a
       #   DNS request to the domain that you specify in
       #   `FullyQualifiedDomainName` at the interval you specify in
-      #   `RequestInterval`. Using an IP address that DNS returns, Amazon Route
-      #   53 then checks the health of the endpoint.
+      #   `RequestInterval`. Using an IPv4 address that is returned by DNS,
+      #   Amazon Route 53 then checks the health of the endpoint.
+      #
+      #   <note markdown="1"> If you don't specify a value for `IPAddress`, Amazon Route 53 uses
+      #   only IPv4 to send health checks to the endpoint. If there's no
+      #   resource record set with a type of A for the name that you specify for
+      #   `FullyQualifiedDomainName`, the health check fails with a "DNS
+      #   resolution failed" error.
+      #
+      #    </note>
       #
       #   If you want to check the health of weighted, latency, or failover
       #   resource record sets and you choose to specify the endpoint only by
@@ -3254,7 +3274,7 @@ module Aws
       #     enable_sni: false,
       #     regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
       #     alarm_identifier: {
-      #       region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #       region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #       name: "AlarmName", # required
       #     },
       #     insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -3279,7 +3299,7 @@ module Aws
       #   resp.health_check.health_check_config.enable_sni #=> Boolean
       #   resp.health_check.health_check_config.regions #=> Array
       #   resp.health_check.health_check_config.regions[0] #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-west-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "sa-east-1"
-      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
+      #   resp.health_check.health_check_config.alarm_identifier.region #=> String, one of "us-east-1", "us-east-2", "us-west-1", "us-west-2", "eu-central-1", "eu-west-1", "ap-south-1", "ap-southeast-1", "ap-southeast-2", "ap-northeast-1", "ap-northeast-2", "sa-east-1"
       #   resp.health_check.health_check_config.alarm_identifier.name #=> String
       #   resp.health_check.health_check_config.insufficient_data_health_status #=> String, one of "Healthy", "Unhealthy", "LastKnownStatus"
       #   resp.health_check.health_check_version #=> Integer

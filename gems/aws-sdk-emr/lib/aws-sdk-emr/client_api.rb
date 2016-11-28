@@ -19,14 +19,27 @@ module Aws
       AddJobFlowStepsOutput = Shapes::StructureShape.new(name: 'AddJobFlowStepsOutput')
       AddTagsInput = Shapes::StructureShape.new(name: 'AddTagsInput')
       AddTagsOutput = Shapes::StructureShape.new(name: 'AddTagsOutput')
+      AdjustmentType = Shapes::StringShape.new(name: 'AdjustmentType')
       Application = Shapes::StructureShape.new(name: 'Application')
       ApplicationList = Shapes::ListShape.new(name: 'ApplicationList')
+      AutoScalingPolicy = Shapes::StructureShape.new(name: 'AutoScalingPolicy')
+      AutoScalingPolicyDescription = Shapes::StructureShape.new(name: 'AutoScalingPolicyDescription')
+      AutoScalingPolicyState = Shapes::StringShape.new(name: 'AutoScalingPolicyState')
+      AutoScalingPolicyStateChangeReason = Shapes::StructureShape.new(name: 'AutoScalingPolicyStateChangeReason')
+      AutoScalingPolicyStateChangeReasonCode = Shapes::StringShape.new(name: 'AutoScalingPolicyStateChangeReasonCode')
+      AutoScalingPolicyStatus = Shapes::StructureShape.new(name: 'AutoScalingPolicyStatus')
       Boolean = Shapes::BooleanShape.new(name: 'Boolean')
       BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
       BootstrapActionConfig = Shapes::StructureShape.new(name: 'BootstrapActionConfig')
       BootstrapActionConfigList = Shapes::ListShape.new(name: 'BootstrapActionConfigList')
       BootstrapActionDetail = Shapes::StructureShape.new(name: 'BootstrapActionDetail')
       BootstrapActionDetailList = Shapes::ListShape.new(name: 'BootstrapActionDetailList')
+      CancelStepsInfo = Shapes::StructureShape.new(name: 'CancelStepsInfo')
+      CancelStepsInfoList = Shapes::ListShape.new(name: 'CancelStepsInfoList')
+      CancelStepsInput = Shapes::StructureShape.new(name: 'CancelStepsInput')
+      CancelStepsOutput = Shapes::StructureShape.new(name: 'CancelStepsOutput')
+      CancelStepsRequestStatus = Shapes::StringShape.new(name: 'CancelStepsRequestStatus')
+      CloudWatchAlarmDefinition = Shapes::StructureShape.new(name: 'CloudWatchAlarmDefinition')
       Cluster = Shapes::StructureShape.new(name: 'Cluster')
       ClusterId = Shapes::StringShape.new(name: 'ClusterId')
       ClusterState = Shapes::StringShape.new(name: 'ClusterState')
@@ -39,6 +52,7 @@ module Aws
       ClusterTimeline = Shapes::StructureShape.new(name: 'ClusterTimeline')
       Command = Shapes::StructureShape.new(name: 'Command')
       CommandList = Shapes::ListShape.new(name: 'CommandList')
+      ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
       Configuration = Shapes::StructureShape.new(name: 'Configuration')
       ConfigurationList = Shapes::ListShape.new(name: 'ConfigurationList')
       CreateSecurityConfigurationInput = Shapes::StructureShape.new(name: 'CreateSecurityConfigurationInput')
@@ -125,14 +139,27 @@ module Aws
       ListStepsOutput = Shapes::StructureShape.new(name: 'ListStepsOutput')
       Marker = Shapes::StringShape.new(name: 'Marker')
       MarketType = Shapes::StringShape.new(name: 'MarketType')
+      MetricDimension = Shapes::StructureShape.new(name: 'MetricDimension')
+      MetricDimensionList = Shapes::ListShape.new(name: 'MetricDimensionList')
       ModifyInstanceGroupsInput = Shapes::StructureShape.new(name: 'ModifyInstanceGroupsInput')
       NewSupportedProductsList = Shapes::ListShape.new(name: 'NewSupportedProductsList')
+      NonNegativeDouble = Shapes::FloatShape.new(name: 'NonNegativeDouble')
       PlacementType = Shapes::StructureShape.new(name: 'PlacementType')
+      PutAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyInput')
+      PutAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'PutAutoScalingPolicyOutput')
+      RemoveAutoScalingPolicyInput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyInput')
+      RemoveAutoScalingPolicyOutput = Shapes::StructureShape.new(name: 'RemoveAutoScalingPolicyOutput')
       RemoveTagsInput = Shapes::StructureShape.new(name: 'RemoveTagsInput')
       RemoveTagsOutput = Shapes::StructureShape.new(name: 'RemoveTagsOutput')
       ResourceId = Shapes::StringShape.new(name: 'ResourceId')
       RunJobFlowInput = Shapes::StructureShape.new(name: 'RunJobFlowInput')
       RunJobFlowOutput = Shapes::StructureShape.new(name: 'RunJobFlowOutput')
+      ScaleDownBehavior = Shapes::StringShape.new(name: 'ScaleDownBehavior')
+      ScalingAction = Shapes::StructureShape.new(name: 'ScalingAction')
+      ScalingConstraints = Shapes::StructureShape.new(name: 'ScalingConstraints')
+      ScalingRule = Shapes::StructureShape.new(name: 'ScalingRule')
+      ScalingRuleList = Shapes::ListShape.new(name: 'ScalingRuleList')
+      ScalingTrigger = Shapes::StructureShape.new(name: 'ScalingTrigger')
       ScriptBootstrapActionConfig = Shapes::StructureShape.new(name: 'ScriptBootstrapActionConfig')
       SecurityConfigurationList = Shapes::ListShape.new(name: 'SecurityConfigurationList')
       SecurityConfigurationSummary = Shapes::StructureShape.new(name: 'SecurityConfigurationSummary')
@@ -140,6 +167,8 @@ module Aws
       SetTerminationProtectionInput = Shapes::StructureShape.new(name: 'SetTerminationProtectionInput')
       SetVisibleToAllUsersInput = Shapes::StructureShape.new(name: 'SetVisibleToAllUsersInput')
       ShrinkPolicy = Shapes::StructureShape.new(name: 'ShrinkPolicy')
+      SimpleScalingPolicyConfiguration = Shapes::StructureShape.new(name: 'SimpleScalingPolicyConfiguration')
+      Statistic = Shapes::StringShape.new(name: 'Statistic')
       Step = Shapes::StructureShape.new(name: 'Step')
       StepConfig = Shapes::StructureShape.new(name: 'StepConfig')
       StepConfigList = Shapes::ListShape.new(name: 'StepConfigList')
@@ -165,6 +194,7 @@ module Aws
       Tag = Shapes::StructureShape.new(name: 'Tag')
       TagList = Shapes::ListShape.new(name: 'TagList')
       TerminateJobFlowsInput = Shapes::StructureShape.new(name: 'TerminateJobFlowsInput')
+      Unit = Shapes::StringShape.new(name: 'Unit')
       VolumeSpecification = Shapes::StructureShape.new(name: 'VolumeSpecification')
       XmlString = Shapes::StringShape.new(name: 'XmlString')
       XmlStringList = Shapes::ListShape.new(name: 'XmlStringList')
@@ -199,6 +229,23 @@ module Aws
 
       ApplicationList.member = Shapes::ShapeRef.new(shape: Application)
 
+      AutoScalingPolicy.add_member(:constraints, Shapes::ShapeRef.new(shape: ScalingConstraints, required: true, location_name: "Constraints"))
+      AutoScalingPolicy.add_member(:rules, Shapes::ShapeRef.new(shape: ScalingRuleList, required: true, location_name: "Rules"))
+      AutoScalingPolicy.struct_class = Types::AutoScalingPolicy
+
+      AutoScalingPolicyDescription.add_member(:status, Shapes::ShapeRef.new(shape: AutoScalingPolicyStatus, location_name: "Status"))
+      AutoScalingPolicyDescription.add_member(:constraints, Shapes::ShapeRef.new(shape: ScalingConstraints, location_name: "Constraints"))
+      AutoScalingPolicyDescription.add_member(:rules, Shapes::ShapeRef.new(shape: ScalingRuleList, location_name: "Rules"))
+      AutoScalingPolicyDescription.struct_class = Types::AutoScalingPolicyDescription
+
+      AutoScalingPolicyStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: AutoScalingPolicyStateChangeReasonCode, location_name: "Code"))
+      AutoScalingPolicyStateChangeReason.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+      AutoScalingPolicyStateChangeReason.struct_class = Types::AutoScalingPolicyStateChangeReason
+
+      AutoScalingPolicyStatus.add_member(:state, Shapes::ShapeRef.new(shape: AutoScalingPolicyState, location_name: "State"))
+      AutoScalingPolicyStatus.add_member(:state_change_reason, Shapes::ShapeRef.new(shape: AutoScalingPolicyStateChangeReason, location_name: "StateChangeReason"))
+      AutoScalingPolicyStatus.struct_class = Types::AutoScalingPolicyStatus
+
       BootstrapActionConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, required: true, location_name: "Name"))
       BootstrapActionConfig.add_member(:script_bootstrap_action, Shapes::ShapeRef.new(shape: ScriptBootstrapActionConfig, required: true, location_name: "ScriptBootstrapAction"))
       BootstrapActionConfig.struct_class = Types::BootstrapActionConfig
@@ -209,6 +256,31 @@ module Aws
       BootstrapActionDetail.struct_class = Types::BootstrapActionDetail
 
       BootstrapActionDetailList.member = Shapes::ShapeRef.new(shape: BootstrapActionDetail)
+
+      CancelStepsInfo.add_member(:step_id, Shapes::ShapeRef.new(shape: StepId, location_name: "StepId"))
+      CancelStepsInfo.add_member(:status, Shapes::ShapeRef.new(shape: CancelStepsRequestStatus, location_name: "Status"))
+      CancelStepsInfo.add_member(:reason, Shapes::ShapeRef.new(shape: String, location_name: "Reason"))
+      CancelStepsInfo.struct_class = Types::CancelStepsInfo
+
+      CancelStepsInfoList.member = Shapes::ShapeRef.new(shape: CancelStepsInfo)
+
+      CancelStepsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "ClusterId"))
+      CancelStepsInput.add_member(:step_ids, Shapes::ShapeRef.new(shape: StepIdsList, location_name: "StepIds"))
+      CancelStepsInput.struct_class = Types::CancelStepsInput
+
+      CancelStepsOutput.add_member(:cancel_steps_info_list, Shapes::ShapeRef.new(shape: CancelStepsInfoList, location_name: "CancelStepsInfoList"))
+      CancelStepsOutput.struct_class = Types::CancelStepsOutput
+
+      CloudWatchAlarmDefinition.add_member(:comparison_operator, Shapes::ShapeRef.new(shape: ComparisonOperator, required: true, location_name: "ComparisonOperator"))
+      CloudWatchAlarmDefinition.add_member(:evaluation_periods, Shapes::ShapeRef.new(shape: Integer, location_name: "EvaluationPeriods"))
+      CloudWatchAlarmDefinition.add_member(:metric_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "MetricName"))
+      CloudWatchAlarmDefinition.add_member(:namespace, Shapes::ShapeRef.new(shape: String, location_name: "Namespace"))
+      CloudWatchAlarmDefinition.add_member(:period, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "Period"))
+      CloudWatchAlarmDefinition.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+      CloudWatchAlarmDefinition.add_member(:threshold, Shapes::ShapeRef.new(shape: NonNegativeDouble, required: true, location_name: "Threshold"))
+      CloudWatchAlarmDefinition.add_member(:unit, Shapes::ShapeRef.new(shape: Unit, location_name: "Unit"))
+      CloudWatchAlarmDefinition.add_member(:dimensions, Shapes::ShapeRef.new(shape: MetricDimensionList, location_name: "Dimensions"))
+      CloudWatchAlarmDefinition.struct_class = Types::CloudWatchAlarmDefinition
 
       Cluster.add_member(:id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "Id"))
       Cluster.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -228,6 +300,8 @@ module Aws
       Cluster.add_member(:master_public_dns_name, Shapes::ShapeRef.new(shape: String, location_name: "MasterPublicDnsName"))
       Cluster.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
       Cluster.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
+      Cluster.add_member(:auto_scaling_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "AutoScalingRole"))
+      Cluster.add_member(:scale_down_behavior, Shapes::ShapeRef.new(shape: ScaleDownBehavior, location_name: "ScaleDownBehavior"))
       Cluster.struct_class = Types::Cluster
 
       ClusterStateChangeReason.add_member(:code, Shapes::ShapeRef.new(shape: ClusterStateChangeReasonCode, location_name: "Code"))
@@ -389,6 +463,7 @@ module Aws
       InstanceGroup.add_member(:ebs_block_devices, Shapes::ShapeRef.new(shape: EbsBlockDeviceList, location_name: "EbsBlockDevices"))
       InstanceGroup.add_member(:ebs_optimized, Shapes::ShapeRef.new(shape: BooleanObject, location_name: "EbsOptimized"))
       InstanceGroup.add_member(:shrink_policy, Shapes::ShapeRef.new(shape: ShrinkPolicy, location_name: "ShrinkPolicy"))
+      InstanceGroup.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription, location_name: "AutoScalingPolicy"))
       InstanceGroup.struct_class = Types::InstanceGroup
 
       InstanceGroupConfig.add_member(:name, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "Name"))
@@ -399,6 +474,7 @@ module Aws
       InstanceGroupConfig.add_member(:instance_count, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "InstanceCount"))
       InstanceGroupConfig.add_member(:configurations, Shapes::ShapeRef.new(shape: ConfigurationList, location_name: "Configurations"))
       InstanceGroupConfig.add_member(:ebs_configuration, Shapes::ShapeRef.new(shape: EbsConfiguration, location_name: "EbsConfiguration"))
+      InstanceGroupConfig.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicy, location_name: "AutoScalingPolicy"))
       InstanceGroupConfig.struct_class = Types::InstanceGroupConfig
 
       InstanceGroupConfigList.member = Shapes::ShapeRef.new(shape: InstanceGroupConfig)
@@ -484,6 +560,8 @@ module Aws
       JobFlowDetail.add_member(:visible_to_all_users, Shapes::ShapeRef.new(shape: Boolean, location_name: "VisibleToAllUsers"))
       JobFlowDetail.add_member(:job_flow_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "JobFlowRole"))
       JobFlowDetail.add_member(:service_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "ServiceRole"))
+      JobFlowDetail.add_member(:auto_scaling_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "AutoScalingRole"))
+      JobFlowDetail.add_member(:scale_down_behavior, Shapes::ShapeRef.new(shape: ScaleDownBehavior, location_name: "ScaleDownBehavior"))
       JobFlowDetail.struct_class = Types::JobFlowDetail
 
       JobFlowDetailList.member = Shapes::ShapeRef.new(shape: JobFlowDetail)
@@ -590,6 +668,13 @@ module Aws
       ListStepsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: Marker, location_name: "Marker"))
       ListStepsOutput.struct_class = Types::ListStepsOutput
 
+      MetricDimension.add_member(:key, Shapes::ShapeRef.new(shape: String, location_name: "Key"))
+      MetricDimension.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "Value"))
+      MetricDimension.struct_class = Types::MetricDimension
+
+      MetricDimensionList.member = Shapes::ShapeRef.new(shape: MetricDimension)
+
+      ModifyInstanceGroupsInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
       ModifyInstanceGroupsInput.add_member(:instance_groups, Shapes::ShapeRef.new(shape: InstanceGroupModifyConfigList, location_name: "InstanceGroups"))
       ModifyInstanceGroupsInput.struct_class = Types::ModifyInstanceGroupsInput
 
@@ -597,6 +682,22 @@ module Aws
 
       PlacementType.add_member(:availability_zone, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "AvailabilityZone"))
       PlacementType.struct_class = Types::PlacementType
+
+      PutAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      PutAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
+      PutAutoScalingPolicyInput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicy, required: true, location_name: "AutoScalingPolicy"))
+      PutAutoScalingPolicyInput.struct_class = Types::PutAutoScalingPolicyInput
+
+      PutAutoScalingPolicyOutput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+      PutAutoScalingPolicyOutput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, location_name: "InstanceGroupId"))
+      PutAutoScalingPolicyOutput.add_member(:auto_scaling_policy, Shapes::ShapeRef.new(shape: AutoScalingPolicyDescription, location_name: "AutoScalingPolicy"))
+      PutAutoScalingPolicyOutput.struct_class = Types::PutAutoScalingPolicyOutput
+
+      RemoveAutoScalingPolicyInput.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      RemoveAutoScalingPolicyInput.add_member(:instance_group_id, Shapes::ShapeRef.new(shape: InstanceGroupId, required: true, location_name: "InstanceGroupId"))
+      RemoveAutoScalingPolicyInput.struct_class = Types::RemoveAutoScalingPolicyInput
+
+      RemoveAutoScalingPolicyOutput.struct_class = Types::RemoveAutoScalingPolicyOutput
 
       RemoveTagsInput.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
       RemoveTagsInput.add_member(:tag_keys, Shapes::ShapeRef.new(shape: StringList, required: true, location_name: "TagKeys"))
@@ -621,10 +722,31 @@ module Aws
       RunJobFlowInput.add_member(:service_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "ServiceRole"))
       RunJobFlowInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "Tags"))
       RunJobFlowInput.add_member(:security_configuration, Shapes::ShapeRef.new(shape: XmlString, location_name: "SecurityConfiguration"))
+      RunJobFlowInput.add_member(:auto_scaling_role, Shapes::ShapeRef.new(shape: XmlString, location_name: "AutoScalingRole"))
+      RunJobFlowInput.add_member(:scale_down_behavior, Shapes::ShapeRef.new(shape: ScaleDownBehavior, location_name: "ScaleDownBehavior"))
       RunJobFlowInput.struct_class = Types::RunJobFlowInput
 
       RunJobFlowOutput.add_member(:job_flow_id, Shapes::ShapeRef.new(shape: XmlStringMaxLen256, location_name: "JobFlowId"))
       RunJobFlowOutput.struct_class = Types::RunJobFlowOutput
+
+      ScalingAction.add_member(:market, Shapes::ShapeRef.new(shape: MarketType, location_name: "Market"))
+      ScalingAction.add_member(:simple_scaling_policy_configuration, Shapes::ShapeRef.new(shape: SimpleScalingPolicyConfiguration, required: true, location_name: "SimpleScalingPolicyConfiguration"))
+      ScalingAction.struct_class = Types::ScalingAction
+
+      ScalingConstraints.add_member(:min_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MinCapacity"))
+      ScalingConstraints.add_member(:max_capacity, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "MaxCapacity"))
+      ScalingConstraints.struct_class = Types::ScalingConstraints
+
+      ScalingRule.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "Name"))
+      ScalingRule.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+      ScalingRule.add_member(:action, Shapes::ShapeRef.new(shape: ScalingAction, required: true, location_name: "Action"))
+      ScalingRule.add_member(:trigger, Shapes::ShapeRef.new(shape: ScalingTrigger, required: true, location_name: "Trigger"))
+      ScalingRule.struct_class = Types::ScalingRule
+
+      ScalingRuleList.member = Shapes::ShapeRef.new(shape: ScalingRule)
+
+      ScalingTrigger.add_member(:cloud_watch_alarm_definition, Shapes::ShapeRef.new(shape: CloudWatchAlarmDefinition, required: true, location_name: "CloudWatchAlarmDefinition"))
+      ScalingTrigger.struct_class = Types::ScalingTrigger
 
       ScriptBootstrapActionConfig.add_member(:path, Shapes::ShapeRef.new(shape: XmlString, required: true, location_name: "Path"))
       ScriptBootstrapActionConfig.add_member(:args, Shapes::ShapeRef.new(shape: XmlStringList, location_name: "Args"))
@@ -649,6 +771,11 @@ module Aws
       ShrinkPolicy.add_member(:decommission_timeout, Shapes::ShapeRef.new(shape: Integer, location_name: "DecommissionTimeout"))
       ShrinkPolicy.add_member(:instance_resize_policy, Shapes::ShapeRef.new(shape: InstanceResizePolicy, location_name: "InstanceResizePolicy"))
       ShrinkPolicy.struct_class = Types::ShrinkPolicy
+
+      SimpleScalingPolicyConfiguration.add_member(:adjustment_type, Shapes::ShapeRef.new(shape: AdjustmentType, location_name: "AdjustmentType"))
+      SimpleScalingPolicyConfiguration.add_member(:scaling_adjustment, Shapes::ShapeRef.new(shape: Integer, required: true, location_name: "ScalingAdjustment"))
+      SimpleScalingPolicyConfiguration.add_member(:cool_down, Shapes::ShapeRef.new(shape: Integer, location_name: "CoolDown"))
+      SimpleScalingPolicyConfiguration.struct_class = Types::SimpleScalingPolicyConfiguration
 
       Step.add_member(:id, Shapes::ShapeRef.new(shape: StepId, location_name: "Id"))
       Step.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
@@ -773,6 +900,16 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: AddTagsInput)
           o.output = Shapes::ShapeRef.new(shape: AddTagsOutput)
           o.errors << Shapes::ShapeRef.new(shape: InternalServerException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        end)
+
+        api.add_operation(:cancel_steps, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CancelSteps"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CancelStepsInput)
+          o.output = Shapes::ShapeRef.new(shape: CancelStepsOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
         end)
 
@@ -928,6 +1065,22 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: ModifyInstanceGroupsInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: InternalServerError)
+        end)
+
+        api.add_operation(:put_auto_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutAutoScalingPolicy"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: PutAutoScalingPolicyInput)
+          o.output = Shapes::ShapeRef.new(shape: PutAutoScalingPolicyOutput)
+        end)
+
+        api.add_operation(:remove_auto_scaling_policy, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "RemoveAutoScalingPolicy"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyInput)
+          o.output = Shapes::ShapeRef.new(shape: RemoveAutoScalingPolicyOutput)
         end)
 
         api.add_operation(:remove_tags, Seahorse::Model::Operation.new.tap do |o|

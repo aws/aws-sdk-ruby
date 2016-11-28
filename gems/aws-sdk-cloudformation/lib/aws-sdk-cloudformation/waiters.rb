@@ -70,51 +70,39 @@ module Aws
               operation_name: :describe_stacks,
               acceptors: [
                 {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "CREATE_COMPLETE",
                   "matcher" => "pathAll",
-                  "state" => "success",
-                  "argument" => "stacks[].stack_status"
+                  "state" => "success"
                 },
                 {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "CREATE_FAILED",
                   "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "stacks[].stack_status"
+                  "state" => "failure"
                 },
                 {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "DELETE_COMPLETE",
                   "matcher" => "pathAny",
-                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
-                  "expected" => "DELETE_IN_PROGRESS",
-                  "matcher" => "pathAny",
                   "argument" => "stacks[].stack_status",
-                  "state" => "failure"
-                },
-                {
                   "expected" => "DELETE_FAILED",
                   "matcher" => "pathAny",
-                  "argument" => "stacks[].stack_status",
                   "state" => "failure"
                 },
                 {
-                  "expected" => "ROLLBACK_COMPLETE",
-                  "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "stacks[].stack_status"
-                },
-                {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "ROLLBACK_FAILED",
                   "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "stacks[].stack_status"
+                  "state" => "failure"
                 },
                 {
-                  "expected" => "ROLLBACK_IN_PROGRESS",
-                  "matcher" => "pathAny",
                   "argument" => "stacks[].stack_status",
+                  "expected" => "ROLLBACK_COMPLETE",
+                  "matcher" => "pathAny",
                   "state" => "failure"
                 },
                 {
@@ -156,10 +144,10 @@ module Aws
               operation_name: :describe_stacks,
               acceptors: [
                 {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "DELETE_COMPLETE",
                   "matcher" => "pathAll",
-                  "state" => "success",
-                  "argument" => "stacks[].stack_status"
+                  "state" => "success"
                 },
                 {
                   "expected" => "ValidationError",
@@ -167,14 +155,8 @@ module Aws
                   "state" => "success"
                 },
                 {
-                  "expected" => "DELETE_FAILED",
-                  "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "stacks[].stack_status"
-                },
-                {
                   "argument" => "stacks[].stack_status",
-                  "expected" => "CREATE_COMPLETE",
+                  "expected" => "DELETE_FAILED",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
@@ -186,55 +168,7 @@ module Aws
                 },
                 {
                   "argument" => "stacks[].stack_status",
-                  "expected" => "CREATE_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "ROLLBACK_COMPLETE",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
                   "expected" => "ROLLBACK_FAILED",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "ROLLBACK_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_COMPLETE",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_ROLLBACK_COMPLETE",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
                   "matcher" => "pathAny",
                   "state" => "failure"
                 },
@@ -284,10 +218,10 @@ module Aws
               operation_name: :describe_stacks,
               acceptors: [
                 {
+                  "argument" => "stacks[].stack_status",
                   "expected" => "UPDATE_COMPLETE",
                   "matcher" => "pathAll",
-                  "state" => "success",
-                  "argument" => "stacks[].stack_status"
+                  "state" => "success"
                 },
                 {
                   "expected" => "UPDATE_FAILED",
@@ -296,28 +230,16 @@ module Aws
                   "argument" => "stacks[].stack_status"
                 },
                 {
+                  "argument" => "stacks[].stack_status",
+                  "expected" => "UPDATE_ROLLBACK_FAILED",
+                  "matcher" => "pathAny",
+                  "state" => "failure"
+                },
+                {
                   "expected" => "UPDATE_ROLLBACK_COMPLETE",
                   "matcher" => "pathAny",
                   "state" => "failure",
                   "argument" => "stacks[].stack_status"
-                },
-                {
-                  "expected" => "UPDATE_ROLLBACK_FAILED",
-                  "matcher" => "pathAny",
-                  "state" => "failure",
-                  "argument" => "stacks[].stack_status"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
-                },
-                {
-                  "argument" => "stacks[].stack_status",
-                  "expected" => "UPDATE_ROLLBACK_IN_PROGRESS",
-                  "matcher" => "pathAny",
-                  "state" => "failure"
                 },
                 {
                   "expected" => "ValidationError",

@@ -1,6 +1,109 @@
 Unreleased Changes
 ------------------
 
+2.6.28 (2016-11-22)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the API, and documentation for AWS CloudFormation.
+
+* Feature - Aws::Glacier - Updated the API, and documentation for Amazon Glacier.
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::S3 - Updated the API, and documentation for Amazon Simple Storage Service.
+
+2.6.27 (2016-11-22)
+------------------
+
+* Feature - Aws::CloudTrail - Updated the API, and documentation for AWS CloudTrail.
+
+* Feature - Aws::ECS - Updated the API, and documentation for Amazon EC2 Container Service.
+
+2.6.26 (2016-11-18)
+------------------
+
+* Feature - Aws::ApplicationAutoScaling - Updated the API, and documentation for Application Auto Scaling.
+
+2.6.25 (2016-11-18)
+------------------
+
+* Feature - Aws::EMR - Updated the API, and documentation for Amazon Elastic MapReduce.
+
+* Feature - Aws::ElasticTranscoder - Updated the API, and documentation for Amazon Elastic Transcoder.
+
+* Feature - Aws::GameLift - Updated the API, and documentation for Amazon GameLift.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+2.6.24 (2016-11-17)
+------------------
+
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::MarketplaceMetering - Updated the API, and documentation for AWSMarketplace Metering.
+
+* Feature - Aws::CloudWatch - Updated the API, and documentation for Amazon CloudWatch.
+
+* Feature - Aws::SQS - Updated the API, documentation, and resource interfaces for Amazon Simple Queue Service.
+
+* Issue - Aws::AutoScaling - Resolved an issue with loading tags.
+
+  See related [GitHub issue #1313](https://github.com/aws/aws-sdk-ruby/issues/1313).
+
+* Feature - Credentials - Added the ability to configure extended retries
+  when loading credentials from the instance metadata service without needing
+  to construct your own `Aws::InstanceProfileCredentials` object:
+
+  ```ruby
+  s3 = Aws::S3::Client.new(
+    instance_profile_credentials_timeout: 5, # defaults to 1 second
+    instance_profile_credentials_retries: 5, # defaults to 0 retries
+  )
+  ```
+
+  These options are used by the default credential chain.
+
+* Feature - Resources - The `#exists?` method on resources now passes additional
+  arguments to the client waiter.
+
+* Issue - Resources - Resource identifiers passed in as `nil` now correctly
+  raise an `ArgumentError`.
+
+2.6.23 (2016-11-16)
+------------------
+
+* Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.22 (2016-11-15)
+------------------
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.21 (2016-11-15)
+------------------
+
+* Feature - Aws::DirectoryService - Updated the API, and documentation for AWS Directory Service.
+
+* Feature - Aws::ElastiCache - Updated the API, and documentation for Amazon ElastiCache.
+
+* Feature - Aws::Kinesis - Updated the API, and documentation for Amazon Kinesis.
+
+* Feature - Aws::ServiceCatalog - Updated the API, and documentation for AWS Service Catalog.
+
+2.6.20 (2016-11-15)
+------------------
+
+* Feature - Aws::CognitoIdentityProvider - Updated the API, and documentation for Amazon Cognito Identity Provider.
+
+2.6.19 (2016-11-10)
+------------------
+
+* Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
 2.6.18 (2016-11-03)
 ------------------
 

@@ -49,6 +49,7 @@ module Aws
       InitiateMultipartUploadOutput = Shapes::StructureShape.new(name: 'InitiateMultipartUploadOutput')
       InitiateVaultLockInput = Shapes::StructureShape.new(name: 'InitiateVaultLockInput')
       InitiateVaultLockOutput = Shapes::StructureShape.new(name: 'InitiateVaultLockOutput')
+      InsufficientCapacityException = Shapes::StructureShape.new(name: 'InsufficientCapacityException')
       InvalidParameterValueException = Shapes::StructureShape.new(name: 'InvalidParameterValueException')
       InventoryRetrievalJobDescription = Shapes::StructureShape.new(name: 'InventoryRetrievalJobDescription')
       InventoryRetrievalJobInput = Shapes::StructureShape.new(name: 'InventoryRetrievalJobInput')
@@ -61,6 +62,8 @@ module Aws
       ListMultipartUploadsOutput = Shapes::StructureShape.new(name: 'ListMultipartUploadsOutput')
       ListPartsInput = Shapes::StructureShape.new(name: 'ListPartsInput')
       ListPartsOutput = Shapes::StructureShape.new(name: 'ListPartsOutput')
+      ListProvisionedCapacityInput = Shapes::StructureShape.new(name: 'ListProvisionedCapacityInput')
+      ListProvisionedCapacityOutput = Shapes::StructureShape.new(name: 'ListProvisionedCapacityOutput')
       ListTagsForVaultInput = Shapes::StructureShape.new(name: 'ListTagsForVaultInput')
       ListTagsForVaultOutput = Shapes::StructureShape.new(name: 'ListTagsForVaultOutput')
       ListVaultsInput = Shapes::StructureShape.new(name: 'ListVaultsInput')
@@ -71,6 +74,10 @@ module Aws
       PartList = Shapes::ListShape.new(name: 'PartList')
       PartListElement = Shapes::StructureShape.new(name: 'PartListElement')
       PolicyEnforcedException = Shapes::StructureShape.new(name: 'PolicyEnforcedException')
+      ProvisionedCapacityDescription = Shapes::StructureShape.new(name: 'ProvisionedCapacityDescription')
+      ProvisionedCapacityList = Shapes::ListShape.new(name: 'ProvisionedCapacityList')
+      PurchaseProvisionedCapacityInput = Shapes::StructureShape.new(name: 'PurchaseProvisionedCapacityInput')
+      PurchaseProvisionedCapacityOutput = Shapes::StructureShape.new(name: 'PurchaseProvisionedCapacityOutput')
       RemoveTagsFromVaultInput = Shapes::StructureShape.new(name: 'RemoveTagsFromVaultInput')
       RequestTimeoutException = Shapes::StructureShape.new(name: 'RequestTimeoutException')
       ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
@@ -248,6 +255,7 @@ module Aws
       GlacierJobDescription.add_member(:sha256_tree_hash, Shapes::ShapeRef.new(shape: string, location_name: "SHA256TreeHash"))
       GlacierJobDescription.add_member(:archive_sha256_tree_hash, Shapes::ShapeRef.new(shape: string, location_name: "ArchiveSHA256TreeHash"))
       GlacierJobDescription.add_member(:retrieval_byte_range, Shapes::ShapeRef.new(shape: string, location_name: "RetrievalByteRange"))
+      GlacierJobDescription.add_member(:tier, Shapes::ShapeRef.new(shape: string, location_name: "Tier"))
       GlacierJobDescription.add_member(:inventory_retrieval_parameters, Shapes::ShapeRef.new(shape: InventoryRetrievalJobDescription, location_name: "InventoryRetrievalParameters"))
       GlacierJobDescription.struct_class = Types::GlacierJobDescription
 
@@ -303,6 +311,7 @@ module Aws
       JobParameters.add_member(:description, Shapes::ShapeRef.new(shape: string, location_name: "Description"))
       JobParameters.add_member(:sns_topic, Shapes::ShapeRef.new(shape: string, location_name: "SNSTopic"))
       JobParameters.add_member(:retrieval_byte_range, Shapes::ShapeRef.new(shape: string, location_name: "RetrievalByteRange"))
+      JobParameters.add_member(:tier, Shapes::ShapeRef.new(shape: string, location_name: "Tier"))
       JobParameters.add_member(:inventory_retrieval_parameters, Shapes::ShapeRef.new(shape: InventoryRetrievalJobInput, location_name: "InventoryRetrievalParameters"))
       JobParameters.struct_class = Types::JobParameters
 
@@ -344,6 +353,12 @@ module Aws
       ListPartsOutput.add_member(:marker, Shapes::ShapeRef.new(shape: string, location_name: "Marker"))
       ListPartsOutput.struct_class = Types::ListPartsOutput
 
+      ListProvisionedCapacityInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
+      ListProvisionedCapacityInput.struct_class = Types::ListProvisionedCapacityInput
+
+      ListProvisionedCapacityOutput.add_member(:provisioned_capacity_list, Shapes::ShapeRef.new(shape: ProvisionedCapacityList, location_name: "ProvisionedCapacityList"))
+      ListProvisionedCapacityOutput.struct_class = Types::ListProvisionedCapacityOutput
+
       ListTagsForVaultInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
       ListTagsForVaultInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
       ListTagsForVaultInput.struct_class = Types::ListTagsForVaultInput
@@ -367,6 +382,19 @@ module Aws
       PartListElement.add_member(:range_in_bytes, Shapes::ShapeRef.new(shape: string, location_name: "RangeInBytes"))
       PartListElement.add_member(:sha256_tree_hash, Shapes::ShapeRef.new(shape: string, location_name: "SHA256TreeHash"))
       PartListElement.struct_class = Types::PartListElement
+
+      ProvisionedCapacityDescription.add_member(:capacity_id, Shapes::ShapeRef.new(shape: string, location_name: "CapacityId"))
+      ProvisionedCapacityDescription.add_member(:start_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "StartDate"))
+      ProvisionedCapacityDescription.add_member(:expiration_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ExpirationDate"))
+      ProvisionedCapacityDescription.struct_class = Types::ProvisionedCapacityDescription
+
+      ProvisionedCapacityList.member = Shapes::ShapeRef.new(shape: ProvisionedCapacityDescription)
+
+      PurchaseProvisionedCapacityInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
+      PurchaseProvisionedCapacityInput.struct_class = Types::PurchaseProvisionedCapacityInput
+
+      PurchaseProvisionedCapacityOutput.add_member(:capacity_id, Shapes::ShapeRef.new(shape: string, location: "header", location_name: "x-amz-capacity-id"))
+      PurchaseProvisionedCapacityOutput.struct_class = Types::PurchaseProvisionedCapacityOutput
 
       RemoveTagsFromVaultInput.add_member(:account_id, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "accountId"))
       RemoveTagsFromVaultInput.add_member(:vault_name, Shapes::ShapeRef.new(shape: string, required: true, location: "uri", location_name: "vaultName"))
@@ -458,22 +486,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}"
           o.input = Shapes::ShapeRef.new(shape: AbortMultipartUploadInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:abort_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -482,22 +498,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/lock-policy"
           o.input = Shapes::ShapeRef.new(shape: AbortVaultLockInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:add_tags_to_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -506,26 +510,11 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/tags?operation=add"
           o.input = Shapes::ShapeRef.new(shape: AddTagsToVaultInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:complete_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -534,22 +523,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}"
           o.input = Shapes::ShapeRef.new(shape: CompleteMultipartUploadInput)
           o.output = Shapes::ShapeRef.new(shape: ArchiveCreationOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:complete_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -558,22 +535,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/lock-policy/{lockId}"
           o.input = Shapes::ShapeRef.new(shape: CompleteVaultLockInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:create_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -582,22 +547,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}"
           o.input = Shapes::ShapeRef.new(shape: CreateVaultInput)
           o.output = Shapes::ShapeRef.new(shape: CreateVaultOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         end)
 
         api.add_operation(:delete_archive, Seahorse::Model::Operation.new.tap do |o|
@@ -606,22 +559,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/archives/{archiveId}"
           o.input = Shapes::ShapeRef.new(shape: DeleteArchiveInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:delete_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -630,22 +571,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}"
           o.input = Shapes::ShapeRef.new(shape: DeleteVaultInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:delete_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -654,22 +583,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/access-policy"
           o.input = Shapes::ShapeRef.new(shape: DeleteVaultAccessPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:delete_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -678,22 +595,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/notification-configuration"
           o.input = Shapes::ShapeRef.new(shape: DeleteVaultNotificationsInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:describe_job, Seahorse::Model::Operation.new.tap do |o|
@@ -702,22 +607,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/jobs/{jobId}"
           o.input = Shapes::ShapeRef.new(shape: DescribeJobInput)
           o.output = Shapes::ShapeRef.new(shape: GlacierJobDescription)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:describe_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -726,22 +619,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}"
           o.input = Shapes::ShapeRef.new(shape: DescribeVaultInput)
           o.output = Shapes::ShapeRef.new(shape: DescribeVaultOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:get_data_retrieval_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -750,18 +631,9 @@ module Aws
           o.http_request_uri = "/{accountId}/policies/data-retrieval"
           o.input = Shapes::ShapeRef.new(shape: GetDataRetrievalPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: GetDataRetrievalPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:get_job_output, Seahorse::Model::Operation.new.tap do |o|
@@ -770,22 +642,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/jobs/{jobId}/output"
           o.input = Shapes::ShapeRef.new(shape: GetJobOutputInput)
           o.output = Shapes::ShapeRef.new(shape: GetJobOutputOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:get_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -794,22 +654,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/access-policy"
           o.input = Shapes::ShapeRef.new(shape: GetVaultAccessPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: GetVaultAccessPolicyOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:get_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -818,22 +666,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/lock-policy"
           o.input = Shapes::ShapeRef.new(shape: GetVaultLockInput)
           o.output = Shapes::ShapeRef.new(shape: GetVaultLockOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:get_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -842,22 +678,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/notification-configuration"
           o.input = Shapes::ShapeRef.new(shape: GetVaultNotificationsInput)
           o.output = Shapes::ShapeRef.new(shape: GetVaultNotificationsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:initiate_job, Seahorse::Model::Operation.new.tap do |o|
@@ -866,26 +690,12 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/jobs"
           o.input = Shapes::ShapeRef.new(shape: InitiateJobInput)
           o.output = Shapes::ShapeRef.new(shape: InitiateJobOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: PolicyEnforcedException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: PolicyEnforcedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: InsufficientCapacityException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:initiate_multipart_upload, Seahorse::Model::Operation.new.tap do |o|
@@ -894,22 +704,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads"
           o.input = Shapes::ShapeRef.new(shape: InitiateMultipartUploadInput)
           o.output = Shapes::ShapeRef.new(shape: InitiateMultipartUploadOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:initiate_vault_lock, Seahorse::Model::Operation.new.tap do |o|
@@ -918,22 +716,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/lock-policy"
           o.input = Shapes::ShapeRef.new(shape: InitiateVaultLockInput)
           o.output = Shapes::ShapeRef.new(shape: InitiateVaultLockOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
@@ -942,22 +728,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/jobs"
           o.input = Shapes::ShapeRef.new(shape: ListJobsInput)
           o.output = Shapes::ShapeRef.new(shape: ListJobsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
             limit_key: "limit",
             tokens: {
@@ -972,22 +746,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads"
           o.input = Shapes::ShapeRef.new(shape: ListMultipartUploadsInput)
           o.output = Shapes::ShapeRef.new(shape: ListMultipartUploadsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
             limit_key: "limit",
             tokens: {
@@ -1002,28 +764,27 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}"
           o.input = Shapes::ShapeRef.new(shape: ListPartsInput)
           o.output = Shapes::ShapeRef.new(shape: ListPartsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
             limit_key: "limit",
             tokens: {
               "marker" => "marker"
             }
           )
+        end)
+
+        api.add_operation(:list_provisioned_capacity, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListProvisionedCapacity"
+          o.http_method = "GET"
+          o.http_request_uri = "/{accountId}/provisioned-capacity"
+          o.input = Shapes::ShapeRef.new(shape: ListProvisionedCapacityInput)
+          o.output = Shapes::ShapeRef.new(shape: ListProvisionedCapacityOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:list_tags_for_vault, Seahorse::Model::Operation.new.tap do |o|
@@ -1032,22 +793,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/tags"
           o.input = Shapes::ShapeRef.new(shape: ListTagsForVaultInput)
           o.output = Shapes::ShapeRef.new(shape: ListTagsForVaultOutput)
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:list_vaults, Seahorse::Model::Operation.new.tap do |o|
@@ -1056,22 +805,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults"
           o.input = Shapes::ShapeRef.new(shape: ListVaultsInput)
           o.output = Shapes::ShapeRef.new(shape: ListVaultsOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
           o[:pager] = Aws::Pager.new(
             limit_key: "limit",
             tokens: {
@@ -1080,28 +817,28 @@ module Aws
           )
         end)
 
+        api.add_operation(:purchase_provisioned_capacity, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PurchaseProvisionedCapacity"
+          o.http_method = "POST"
+          o.http_request_uri = "/{accountId}/provisioned-capacity"
+          o.input = Shapes::ShapeRef.new(shape: PurchaseProvisionedCapacityInput)
+          o.output = Shapes::ShapeRef.new(shape: PurchaseProvisionedCapacityOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        end)
+
         api.add_operation(:remove_tags_from_vault, Seahorse::Model::Operation.new.tap do |o|
           o.name = "RemoveTagsFromVault"
           o.http_method = "POST"
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/tags?operation=remove"
           o.input = Shapes::ShapeRef.new(shape: RemoveTagsFromVaultInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:set_data_retrieval_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1110,18 +847,9 @@ module Aws
           o.http_request_uri = "/{accountId}/policies/data-retrieval"
           o.input = Shapes::ShapeRef.new(shape: SetDataRetrievalPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:set_vault_access_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -1130,22 +858,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/access-policy"
           o.input = Shapes::ShapeRef.new(shape: SetVaultAccessPolicyInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:set_vault_notifications, Seahorse::Model::Operation.new.tap do |o|
@@ -1154,22 +870,10 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/notification-configuration"
           o.input = Shapes::ShapeRef.new(shape: SetVaultNotificationsInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:upload_archive, Seahorse::Model::Operation.new.tap do |o|
@@ -1178,26 +882,11 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/archives"
           o.input = Shapes::ShapeRef.new(shape: UploadArchiveInput)
           o.output = Shapes::ShapeRef.new(shape: ArchiveCreationOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException, metadata: {
-            "error" => {"httpStatusCode"=>408},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
 
         api.add_operation(:upload_multipart_part, Seahorse::Model::Operation.new.tap do |o|
@@ -1206,26 +895,11 @@ module Aws
           o.http_request_uri = "/{accountId}/vaults/{vaultName}/multipart-uploads/{uploadId}"
           o.input = Shapes::ShapeRef.new(shape: UploadMultipartPartInput)
           o.output = Shapes::ShapeRef.new(shape: UploadMultipartPartOutput)
-          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException, metadata: {
-            "error" => {"httpStatusCode"=>404},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException, metadata: {
-            "error" => {"httpStatusCode"=>400},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException, metadata: {
-            "error" => {"httpStatusCode"=>408},
-            "exception" => true
-          })
-          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException, metadata: {
-            "error" => {"httpStatusCode"=>500},
-            "exception" => true
-          })
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: MissingParameterValueException)
+          o.errors << Shapes::ShapeRef.new(shape: RequestTimeoutException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
         end)
       end
 

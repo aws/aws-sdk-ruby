@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -982,6 +984,9 @@ module Aws
       #   The SMS configuration.
       # @option params [Types::AdminCreateUserConfigType] :admin_create_user_config
       #   The configuration for AdminCreateUser requests.
+      # @option params [Array<Types::SchemaAttributeType>] :schema
+      #   An array of schema attributes for the new user pool. These attributes
+      #   can be standard or custom attributes.
       # @return [Types::CreateUserPoolResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateUserPoolResponse#user_pool #UserPool} => Types::UserPoolType
@@ -1024,7 +1029,7 @@ module Aws
       #       reply_to_email_address: "EmailAddressType",
       #     },
       #     sms_configuration: {
-      #       sns_caller_arn: "ArnType",
+      #       sns_caller_arn: "ArnType", # required
       #       external_id: "StringType",
       #     },
       #     admin_create_user_config: {
@@ -1036,6 +1041,23 @@ module Aws
       #         email_subject: "EmailVerificationSubjectType",
       #       },
       #     },
+      #     schema: [
+      #       {
+      #         name: "CustomAttributeNameType",
+      #         attribute_data_type: "String", # accepts String, Number, DateTime, Boolean
+      #         developer_only_attribute: false,
+      #         mutable: false,
+      #         required: false,
+      #         number_attribute_constraints: {
+      #           min_value: "StringType",
+      #           max_value: "StringType",
+      #         },
+      #         string_attribute_constraints: {
+      #           min_length: "StringType",
+      #           max_length: "StringType",
+      #         },
+      #       },
+      #     ],
       #   })
       #
       # @example Response structure
@@ -1395,8 +1417,8 @@ module Aws
       #   secret key of a user pool client and username plus the client ID in
       #   the message.
       # @option params [required, String] :username
-      #   The user name of the user for whom you want to enter a code to
-      #   retrieve a forgotten password.
+      #   The user name of the user for whom you want to enter a code to reset a
+      #   forgotten password.
       # @return [Types::ForgotPasswordResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ForgotPasswordResponse#code_delivery_details #CodeDeliveryDetails} => Types::CodeDeliveryDetailsType
@@ -2167,7 +2189,7 @@ module Aws
       #       reply_to_email_address: "EmailAddressType",
       #     },
       #     sms_configuration: {
-      #       sns_caller_arn: "ArnType",
+      #       sns_caller_arn: "ArnType", # required
       #       external_id: "StringType",
       #     },
       #     admin_create_user_config: {

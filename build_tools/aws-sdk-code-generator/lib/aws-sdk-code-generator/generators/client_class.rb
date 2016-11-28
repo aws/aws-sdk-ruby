@@ -290,6 +290,7 @@ end
           'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
           'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
           'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
+          'Aws::Plugins::IdempotencyToken' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/idempotency_token.rb',
         }
       end
 

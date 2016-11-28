@@ -52,6 +52,11 @@ locations will be searched for credentials:
       ) do |config|
         CredentialProviderChain.new(config).resolve
       end
+
+      option(:instance_profile_credentials_retries, 0)
+
+      option(:instance_profile_credentials_timeout, 1)
+
     end
   end
 end

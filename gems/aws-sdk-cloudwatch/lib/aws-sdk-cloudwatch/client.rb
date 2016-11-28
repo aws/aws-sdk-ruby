@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -128,10 +130,10 @@ module Aws
 
       # @!group API Operations
 
-      # Deletes all specified alarms. In the event of an error, no alarms are
+      # Deletes the specified alarms. In the event of an error, no alarms are
       # deleted.
       # @option params [required, Array<String>] :alarm_names
-      #   A list of alarms to be deleted.
+      #   The alarms to be deleted.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -145,14 +147,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves history for the specified alarm. Filter alarms by date range
-      # or item type. If an alarm name is not specified, Amazon CloudWatch
-      # returns histories for all of the owner's alarms.
+      # Retrieves the history for the specified alarm. You can filter the
+      # results by date range or item type. If an alarm name is not specified,
+      # the histories for all alarms are returned.
       #
-      # <note markdown="1"> Amazon CloudWatch retains the history of an alarm for two weeks,
-      # whether or not you delete the alarm.
-      #
-      #  </note>
+      # Note that Amazon CloudWatch retains the history of an alarm even if
+      # you delete the alarm.
       # @option params [String] :alarm_name
       #   The name of the alarm.
       # @option params [String] :history_item_type
@@ -196,14 +196,13 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves alarms with the specified names. If no name is specified,
-      # all alarms for the user are returned. Alarms can be retrieved by using
-      # only a prefix for the alarm name, the alarm state, or a prefix for any
-      # action.
+      # Retrieves the specified alarms. If no alarms are specified, all alarms
+      # are returned. Alarms can be retrieved by using only a prefix for the
+      # alarm name, the alarm state, or a prefix for any action.
       # @option params [Array<String>] :alarm_names
-      #   A list of alarm names to retrieve information for.
+      #   The names of the alarms.
       # @option params [String] :alarm_name_prefix
-      #   The alarm name prefix. `AlarmNames` cannot be specified if this
+      #   The alarm name prefix. You cannot specify `AlarmNames` if this
       #   parameter is specified.
       # @option params [String] :state_value
       #   The state value to be used in matching alarms.
@@ -249,6 +248,7 @@ module Aws
       #   resp.metric_alarms[0].metric_name #=> String
       #   resp.metric_alarms[0].namespace #=> String
       #   resp.metric_alarms[0].statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+      #   resp.metric_alarms[0].extended_statistic #=> String
       #   resp.metric_alarms[0].dimensions #=> Array
       #   resp.metric_alarms[0].dimensions[0].name #=> String
       #   resp.metric_alarms[0].dimensions[0].value #=> String
@@ -265,20 +265,24 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves all alarms for a single metric. Specify a statistic, period,
-      # or unit to filter the set of alarms further.
+      # Retrieves the alarms for the specified metric. Specify a statistic,
+      # period, or unit to filter the results.
       # @option params [required, String] :metric_name
       #   The name of the metric.
       # @option params [required, String] :namespace
       #   The namespace of the metric.
       # @option params [String] :statistic
-      #   The statistic for the metric.
+      #   The statistic for the metric, other than percentiles. For percentile
+      #   statistics, use `ExtendedStatistics`.
+      # @option params [String] :extended_statistic
+      #   The percentile statistic for the metric. Specify a value between p0.0
+      #   and p100.
       # @option params [Array<Types::Dimension>] :dimensions
-      #   The list of dimensions associated with the metric. If the metric has
-      #   any associated dimensions, you must specify them in order for the
-      #   DescribeAlarmsForMetric to succeed.
+      #   The dimensions associated with the metric. If the metric has any
+      #   associated dimensions, you must specify them in order for the call to
+      #   succeed.
       # @option params [Integer] :period
-      #   The period in seconds over which the statistic is applied.
+      #   The period, in seconds, over which the statistic is applied.
       # @option params [String] :unit
       #   The unit for the metric.
       # @return [Types::DescribeAlarmsForMetricOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -290,6 +294,7 @@ module Aws
       #     metric_name: "MetricName", # required
       #     namespace: "Namespace", # required
       #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistic: "ExtendedStatistic",
       #     dimensions: [
       #       {
       #         name: "DimensionName", # required
@@ -320,6 +325,7 @@ module Aws
       #   resp.metric_alarms[0].metric_name #=> String
       #   resp.metric_alarms[0].namespace #=> String
       #   resp.metric_alarms[0].statistic #=> String, one of "SampleCount", "Average", "Sum", "Minimum", "Maximum"
+      #   resp.metric_alarms[0].extended_statistic #=> String
       #   resp.metric_alarms[0].dimensions #=> Array
       #   resp.metric_alarms[0].dimensions[0].name #=> String
       #   resp.metric_alarms[0].dimensions[0].value #=> String
@@ -335,11 +341,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Disables actions for the specified alarms. When an alarm's actions
-      # are disabled the alarm's state may change, but none of the alarm's
-      # actions will execute.
+      # Disables the actions for the specified alarms. When an alarm's
+      # actions are disabled, the alarm actions do not execute when the alarm
+      # state changes.
       # @option params [required, Array<String>] :alarm_names
-      #   The names of the alarms to disable actions for.
+      #   The names of the alarms.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -353,9 +359,9 @@ module Aws
         req.send_request(options)
       end
 
-      # Enables actions for the specified alarms.
+      # Enables the actions for the specified alarms.
       # @option params [required, Array<String>] :alarm_names
-      #   The names of the alarms to enable actions for.
+      #   The names of the alarms.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -371,87 +377,108 @@ module Aws
 
       # Gets statistics for the specified metric.
       #
-      # The maximum number of data points that can be queried is 50,850,
-      # whereas the maximum number of data points returned from a single
-      # `GetMetricStatistics` request is 1,440. If you make a request that
-      # generates more than 1,440 data points, Amazon CloudWatch returns an
-      # error. In such a case, you can alter the request by narrowing the
-      # specified time range or increasing the specified period. A period can
-      # be as short as one minute (60 seconds) or as long as one day (86,400
-      # seconds). Alternatively, you can make multiple requests across
-      # adjacent time ranges. `GetMetricStatistics` does not return the data
-      # in chronological order.
+      # Amazon CloudWatch retains metric data as follows:
+      #
+      # * Data points with a period of 60 seconds (1 minute) are available for
+      #   15 days
+      #
+      # * Data points with a period of 300 seconds (5 minute) are available
+      #   for 63 days
+      #
+      # * Data points with a period of 3600 seconds (1 hour) are available for
+      #   455 days (15 months)
+      #
+      # Note that CloudWatch started retaining 5-minute and 1-hour metric data
+      # as of 9 July 2016.
+      #
+      # The maximum number of data points returned from a single call is
+      # 1,440. If you request more than 1,440 data points, Amazon CloudWatch
+      # returns an error. To reduce the number of data points, you can narrow
+      # the specified time range and make multiple requests across adjacent
+      # time ranges, or you can increase the specified period. A period can be
+      # as short as one minute (60 seconds). Note that data points are not
+      # returned in chronological order.
       #
       # Amazon CloudWatch aggregates data points based on the length of the
-      # `period` that you specify. For example, if you request statistics with
-      # a one-minute granularity, Amazon CloudWatch aggregates data points
-      # with time stamps that fall within the same one-minute period. In such
-      # a case, the data points queried can greatly outnumber the data points
-      # returned.
+      # period that you specify. For example, if you request statistics with a
+      # one-hour period, Amazon CloudWatch aggregates all data points with
+      # time stamps that fall within each one-hour period. Therefore, the
+      # number of values aggregated by CloudWatch is larger than the number of
+      # data points returned.
       #
-      # The following examples show various statistics allowed by the data
-      # point query maximum of 50,850 when you call `GetMetricStatistics` on
-      # Amazon EC2 instances with detailed (one-minute) monitoring enabled:
-      #
-      # * Statistics for up to 400 instances for a span of one hour
-      #
-      # * Statistics for up to 35 instances over a span of 24 hours
-      #
-      # * Statistics for up to 2 instances over a span of 2 weeks
-      #
-      # For information about the namespace, metric names, and dimensions that
-      # other Amazon Web Services products use to send metrics to CloudWatch,
-      # go to [Amazon CloudWatch Metrics, Namespaces, and Dimensions
-      # Reference][1] in the *Amazon CloudWatch Developer Guide*.
+      # For a list of metrics and dimensions supported by AWS services, see
+      # the [Amazon CloudWatch Metrics and Dimensions Reference][1] in the
+      # *Amazon CloudWatch User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html
+      # [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/CW_Support_For_AWS.html
       # @option params [required, String] :namespace
       #   The namespace of the metric, with or without spaces.
       # @option params [required, String] :metric_name
       #   The name of the metric, with or without spaces.
       # @option params [Array<Types::Dimension>] :dimensions
-      #   A list of dimensions describing qualities of the metric.
+      #   The dimensions. CloudWatch treats each unique combination of
+      #   dimensions as a separate metric. You can't retrieve statistics using
+      #   combinations of dimensions that were not specially published. You must
+      #   specify the same dimensions that were used when the metrics were
+      #   created. For an example, see [Dimension Combinations][1] in the
+      #   *Amazon CloudWatch User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
       # @option params [required, Time,DateTime,Date,Integer,String] :start_time
-      #   The time stamp to use for determining the first datapoint to return.
-      #   The value specified is inclusive; results include datapoints with the
-      #   time stamp specified. The time stamp must be in ISO 8601 UTC format
-      #   (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the first data point to return. Note
+      #   that start times are evaluated relative to the time that CloudWatch
+      #   receives the request.
       #
-      #   <note markdown="1"> The specified start time is rounded down to the nearest value.
-      #   Datapoints are returned for start times up to two weeks in the past.
-      #   Specified start times that are more than two weeks in the past will
-      #   not return datapoints for metrics that are older than two weeks.
+      #   The value specified is inclusive; results include data points with the
+      #   specified time stamp. The time stamp must be in ISO 8601 UTC format
+      #   (for example, 2016-10-03T23:00:00Z).
       #
-      #    Data that is timestamped 24 hours or more in the past may take in
-      #   excess of 48 hours to become available from submission time using
-      #   `GetMetricStatistics`.
+      #   CloudWatch rounds the specified time stamp as follows:
       #
-      #    </note>
+      #   * Start time less than 15 days ago - Round down to the nearest whole
+      #     minute. For example, 12:32:34 is rounded down to 12:32:00.
+      #
+      #   * Start time between 15 and 63 days ago - Round down to the nearest
+      #     5-minute clock interval. For example, 12:32:34 is rounded down to
+      #     12:30:00.
+      #
+      #   * Start time greater than 63 days ago - Round down to the nearest
+      #     1-hour clock interval. For example, 12:32:34 is rounded down to
+      #     12:00:00.
       # @option params [required, Time,DateTime,Date,Integer,String] :end_time
-      #   The time stamp to use for determining the last datapoint to return.
-      #   The value specified is exclusive; results will include datapoints up
-      #   to the time stamp specified. The time stamp must be in ISO 8601 UTC
-      #   format (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the last data point to return.
+      #
+      #   The value specified is exclusive; results will include data points up
+      #   to the specified time stamp. The time stamp must be in ISO 8601 UTC
+      #   format (for example, 2016-10-10T23:00:00Z).
       # @option params [required, Integer] :period
-      #   The granularity, in seconds, of the returned datapoints. A `Period`
-      #   can be as short as one minute (60 seconds) or as long as one day
-      #   (86,400 seconds), and must be a multiple of 60. The default value is
-      #   60.
-      # @option params [required, Array<String>] :statistics
-      #   The metric statistics to return. For information about specific
-      #   statistics returned by GetMetricStatistics, see [Statistics][1] in the
-      #   *Amazon CloudWatch Developer Guide*.
+      #   The granularity, in seconds, of the returned data points. A period can
+      #   be as short as one minute (60 seconds) and must be a multiple of 60.
+      #   The default value is 60.
       #
+      #   If the `StartTime` parameter specifies a time stamp that is greater
+      #   than 15 days ago, you must specify the period as follows or no data
+      #   points in that time range is returned:
       #
+      #   * Start time between 15 and 63 days ago - Use a multiple of 300
+      #     seconds (5 minutes).
       #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic
+      #   * Start time greater than 63 days ago - Use a multiple of 3600 seconds
+      #     (1 hour).
+      # @option params [Array<String>] :statistics
+      #   The metric statistics, other than percentile. For percentile
+      #   statistics, use `ExtendedStatistic`.
+      # @option params [Array<String>] :extended_statistics
+      #   The percentile statistics. Specify values between p0.0 and p100.
       # @option params [String] :unit
-      #   The specific unit for a given metric. Metrics may be reported in
-      #   multiple units. Not supplying a unit results in all units being
-      #   returned. If the metric only ever reports one unit, specifying a unit
-      #   will have no effect.
+      #   The unit for a given metric. Metrics may be reported in multiple
+      #   units. Not supplying a unit results in all units being returned. If
+      #   the metric only ever reports one unit, specifying a unit has no
+      #   effect.
       # @return [Types::GetMetricStatisticsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetMetricStatisticsOutput#label #Label} => String
@@ -470,7 +497,8 @@ module Aws
       #     start_time: Time.now, # required
       #     end_time: Time.now, # required
       #     period: 1, # required
-      #     statistics: ["SampleCount"], # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     statistics: ["SampleCount"], # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistics: ["ExtendedStatistic"],
       #     unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #   })
       #
@@ -484,6 +512,8 @@ module Aws
       #   resp.datapoints[0].minimum #=> Float
       #   resp.datapoints[0].maximum #=> Float
       #   resp.datapoints[0].unit #=> String, one of "Seconds", "Microseconds", "Milliseconds", "Bytes", "Kilobytes", "Megabytes", "Gigabytes", "Terabytes", "Bits", "Kilobits", "Megabits", "Gigabits", "Terabits", "Percent", "Count", "Bytes/Second", "Kilobytes/Second", "Megabytes/Second", "Gigabytes/Second", "Terabytes/Second", "Bits/Second", "Kilobits/Second", "Megabits/Second", "Gigabits/Second", "Terabits/Second", "Count/Second", "None"
+      #   resp.datapoints[0].extended_statistics #=> Hash
+      #   resp.datapoints[0].extended_statistics["ExtendedStatistic"] #=> Float
       # @overload get_metric_statistics(params = {})
       # @param [Hash] params ({})
       def get_metric_statistics(params = {}, options = {})
@@ -491,27 +521,21 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns a list of valid metrics stored for the AWS account owner.
-      # Returned metrics can be used with GetMetricStatistics to obtain
-      # statistical data for a given metric.
+      # List the specified metrics. You can use the returned metrics with
+      # GetMetricStatistics to obtain statistical data.
       #
-      # <note markdown="1"> Up to 500 results are returned for any one call. To retrieve further
-      # results, use returned `NextToken` values with subsequent `ListMetrics`
-      # operations.
+      # Up to 500 results are returned for any one call. To retrieve
+      # additional results, use the returned token with subsequent calls.
       #
-      #  </note>
-      #
-      # <note markdown="1"> If you create a metric with PutMetricData, allow up to fifteen minutes
-      # for the metric to appear in calls to `ListMetrics`. Statistics about
-      # the metric, however, are available sooner using GetMetricStatistics.
-      #
-      #  </note>
+      # After you create a metric, allow up to fifteen minutes before the
+      # metric appears. Statistics about the metric, however, are available
+      # sooner using GetMetricStatistics.
       # @option params [String] :namespace
       #   The namespace to filter against.
       # @option params [String] :metric_name
       #   The name of the metric to filter against.
       # @option params [Array<Types::DimensionFilter>] :dimensions
-      #   A list of dimensions to filter against.
+      #   The dimensions to filter against.
       # @option params [String] :next_token
       #   The token returned by a previous call to indicate that there is more
       #   data available.
@@ -549,71 +573,83 @@ module Aws
       end
 
       # Creates or updates an alarm and associates it with the specified
-      # Amazon CloudWatch metric. Optionally, this operation can associate one
-      # or more Amazon SNS resources with the alarm.
+      # metric. Optionally, this operation can associate one or more Amazon
+      # SNS resources with the alarm.
       #
       # When this operation creates an alarm, the alarm state is immediately
-      # set to `INSUFFICIENT_DATA`. The alarm is evaluated and its
-      # `StateValue` is set appropriately. Any actions associated with the
-      # `StateValue` are then executed.
+      # set to `INSUFFICIENT_DATA`. The alarm is evaluated and its state is
+      # set appropriately. Any actions associated with the state are then
+      # executed.
       #
-      # <note markdown="1"> When updating an existing alarm, its `StateValue` is left unchanged,
-      # but it completely overwrites the alarm's previous configuration.
+      # When you update an existing alarm, its state is left unchanged, but
+      # the update completely overwrites the previous configuration of the
+      # alarm.
       #
-      #  </note>
+      # If you are an AWS Identity and Access Management (IAM) user, you must
+      # have Amazon EC2 permissions for some operations:
       #
-      # <note markdown="1"> If you are using an AWS Identity and Access Management (IAM) account
-      # to create or modify an alarm, you must have the following Amazon EC2
-      # permissions:
+      # * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
+      #   alarms on EC2 instance status metrics
       #
-      #  * `ec2:DescribeInstanceStatus` and `ec2:DescribeInstances` for all
-      #   alarms on Amazon EC2 instance status metrics.
+      # * `ec2:StopInstances` for alarms with stop actions
       #
-      # * `ec2:StopInstances` for alarms with stop actions.
+      # * `ec2:TerminateInstances` for alarms with terminate actions
       #
-      # * `ec2:TerminateInstances` for alarms with terminate actions.
+      # * `ec2:DescribeInstanceRecoveryAttribute` and `ec2:RecoverInstances`
+      #   for alarms with recover actions
       #
-      # * `ec2:DescribeInstanceRecoveryAttribute`, and `ec2:RecoverInstances`
-      #   for alarms with recover actions.
+      # If you have read/write permissions for Amazon CloudWatch but not for
+      # Amazon EC2, you can still create an alarm, but the stop or terminate
+      # actions won't be performed. However, if you are later granted the
+      # required permissions, the alarm actions that you created earlier will
+      # be performed.
       #
-      #  If you have read/write permissions for Amazon CloudWatch but not for
-      # Amazon EC2, you can still create an alarm but the stop or terminate
-      # actions won't be performed on the Amazon EC2 instance. However, if
-      # you are later granted permission to use the associated Amazon EC2
-      # APIs, the alarm actions you created earlier will be performed. For
-      # more information about IAM permissions, see [Permissions and
-      # Policies][1] in *Using IAM*.
+      # If you are using an IAM role (for example, an Amazon EC2 instance
+      # profile), you cannot stop or terminate the instance using alarm
+      # actions. However, you can still see the alarm state and perform any
+      # other actions such as Amazon SNS notifications or Auto Scaling
+      # policies.
       #
-      #  If you are using an IAM role (e.g., an Amazon EC2 instance profile),
-      # you cannot stop or terminate the instance using alarm actions.
-      # However, you can still see the alarm state and perform any other
-      # actions such as Amazon SNS notifications or Auto Scaling policies.
-      #
-      #  If you are using temporary security credentials granted using the AWS
+      # If you are using temporary security credentials granted using the AWS
       # Security Token Service (AWS STS), you cannot stop or terminate an
       # Amazon EC2 instance using alarm actions.
       #
-      #  </note>
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PermissionsAndPolicies.html
+      # Note that you must create at least one stop, terminate, or reboot
+      # alarm using the Amazon EC2 or CloudWatch console to create the
+      # **EC2ActionsAccess** IAM role. After this IAM role is created, you can
+      # create stop, terminate, or reboot alarms using a command-line
+      # interface or an API.
       # @option params [required, String] :alarm_name
-      #   The descriptive name for the alarm. This name must be unique within
-      #   the user's AWS account
+      #   The name for the alarm. This name must be unique within the AWS
+      #   account.
       # @option params [String] :alarm_description
       #   The description for the alarm.
       # @option params [Boolean] :actions_enabled
-      #   Indicates whether or not actions should be executed during any changes
-      #   to the alarm's state.
+      #   Indicates whether actions should be executed during any changes to the
+      #   alarm state.
       # @option params [Array<String>] :ok_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `OK` state from any other state. Each action is specified as an Amazon
+      #   The actions to execute when this alarm transitions to an `OK` state
+      #   from any other state. Each action is specified as an Amazon Resource
+      #   Name (ARN).
+      #
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
+      #
+      #   Valid Values (for use with IAM roles):
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
+      #   \|
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
+      #   \|
+      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
+      # @option params [Array<String>] :alarm_actions
+      #   The actions to execute when this alarm transitions to the `ALARM`
+      #   state from any other state. Each action is specified as an Amazon
       #   Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -621,41 +657,14 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
-      # @option params [Array<String>] :alarm_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `ALARM` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
-      #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
-      #
-      #   Valid Values (for use with IAM roles):
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
-      #   \|
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
-      #   \|
-      #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
       # @option params [Array<String>] :insufficient_data_actions
-      #   The list of actions to execute when this alarm transitions into an
+      #   The actions to execute when this alarm transitions to the
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
       #   specified as an Amazon Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -663,42 +672,40 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM role
-      #   is created, you can create stop, terminate, or reboot alarms using the
-      #   CLI.
       # @option params [required, String] :metric_name
-      #   The name for the alarm's associated metric.
+      #   The name for the metric associated with the alarm.
       # @option params [required, String] :namespace
-      #   The namespace for the alarm's associated metric.
-      # @option params [required, String] :statistic
-      #   The statistic to apply to the alarm's associated metric.
+      #   The namespace for the metric associated with the alarm.
+      # @option params [String] :statistic
+      #   The statistic for the metric associated with the alarm, other than
+      #   percentile. For percentile statistics, use `ExtendedStatistic`.
+      # @option params [String] :extended_statistic
+      #   The percentile statistic for the metric associated with the alarm.
+      #   Specify a value between p0.0 and p100.
       # @option params [Array<Types::Dimension>] :dimensions
-      #   The dimensions for the alarm's associated metric.
+      #   The dimensions for the metric associated with the alarm.
       # @option params [required, Integer] :period
-      #   The period in seconds over which the specified statistic is applied.
+      #   The period, in seconds, over which the specified statistic is applied.
       # @option params [String] :unit
-      #   The statistic's unit of measure. For example, the units for the
+      #   The unit of measure for the statistic. For example, the units for the
       #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
       #   number of bytes that an instance receives on all network interfaces.
       #   You can also specify a unit when you create a custom metric. Units
       #   help provide conceptual meaning to your data. Metric data points that
       #   specify a unit of measure, such as Percent, are aggregated separately.
       #
-      #   **Note:** If you specify a unit, you must use a unit that is
-      #   appropriate for the metric. Otherwise, this can cause an Amazon
-      #   CloudWatch alarm to get stuck in the INSUFFICIENT DATA state.
+      #   If you specify a unit, you must use a unit that is appropriate for the
+      #   metric. Otherwise, the Amazon CloudWatch alarm can get stuck in the
+      #   `INSUFFICIENT DATA` state.
       # @option params [required, Integer] :evaluation_periods
       #   The number of periods over which data is compared to the specified
       #   threshold.
       # @option params [required, Float] :threshold
       #   The value against which the specified statistic is compared.
       # @option params [required, String] :comparison_operator
-      #   The arithmetic operation to use when comparing the specified
-      #   `Statistic` and `Threshold`. The specified `Statistic` value is used
-      #   as the first operand.
+      #   The arithmetic operation to use when comparing the specified statistic
+      #   and threshold. The specified statistic value is used as the first
+      #   operand.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -711,7 +718,8 @@ module Aws
       #     insufficient_data_actions: ["ResourceName"],
       #     metric_name: "MetricName", # required
       #     namespace: "Namespace", # required
-      #     statistic: "SampleCount", # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #     extended_statistic: "ExtendedStatistic",
       #     dimensions: [
       #       {
       #         name: "DimensionName", # required
@@ -746,19 +754,17 @@ module Aws
       # (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
       # (e.g., NaN, +Infinity, -Infinity) are not supported.
       #
-      # Data that is timestamped 24 hours or more in the past may take in
-      # excess of 48 hours to become available from submission time using
-      # `GetMetricStatistics`.
+      # Data points with time stamps from 24 hours ago or longer can take at
+      # least 48 hours to become available for GetMetricStatistics from the
+      # time they are submitted.
       # @option params [required, String] :namespace
       #   The namespace for the metric data.
       #
-      #   <note markdown="1"> You cannot specify a namespace that begins with "AWS/". Namespaces
-      #   that begin with "AWS/" are reserved for other Amazon Web Services
-      #   products that send metrics to Amazon CloudWatch.
-      #
-      #    </note>
+      #   You cannot specify a namespace that begins with "AWS/". Namespaces
+      #   that begin with "AWS/" are reserved for use by Amazon Web Services
+      #   products.
       # @option params [required, Array<Types::MetricDatum>] :metric_data
-      #   A list of data describing the metric.
+      #   The data for the metric.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -793,25 +799,25 @@ module Aws
       end
 
       # Temporarily sets the state of an alarm for testing purposes. When the
-      # updated `StateValue` differs from the previous value, the action
-      # configured for the appropriate state is invoked. For example, if your
-      # alarm is configured to send an Amazon SNS message when an alarm is
-      # triggered, temporarily changing the alarm's state to **ALARM** sends
-      # an Amazon SNS message. The alarm returns to its actual state (often
-      # within seconds). Because the alarm state change happens very quickly,
-      # it is typically only visible in the alarm's **History** tab in the
-      # Amazon CloudWatch console or through `DescribeAlarmHistory`.
+      # updated state differs from the previous value, the action configured
+      # for the appropriate state is invoked. For example, if your alarm is
+      # configured to send an Amazon SNS message when an alarm is triggered,
+      # temporarily changing the alarm state to `ALARM` sends an Amazon SNS
+      # message. The alarm returns to its actual state (often within seconds).
+      # Because the alarm state change happens very quickly, it is typically
+      # only visible in the alarm's **History** tab in the Amazon CloudWatch
+      # console or through DescribeAlarmHistory.
       # @option params [required, String] :alarm_name
-      #   The descriptive name for the alarm. This name must be unique within
-      #   the user's AWS account. The maximum length is 255 characters.
+      #   The name for the alarm. This name must be unique within the AWS
+      #   account. The maximum length is 255 characters.
       # @option params [required, String] :state_value
       #   The value of the state.
       # @option params [required, String] :state_reason
-      #   The reason that this alarm is set to this specific state (in
-      #   human-readable text format)
+      #   The reason that this alarm is set to this specific state, in text
+      #   format.
       # @option params [String] :state_reason_data
-      #   The reason that this alarm is set to this specific state (in
-      #   machine-readable JSON format)
+      #   The reason that this alarm is set to this specific state, in JSON
+      #   format.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values

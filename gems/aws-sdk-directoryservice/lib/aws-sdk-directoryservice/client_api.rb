@@ -26,6 +26,8 @@ module Aws
       AuthenticationFailedException = Shapes::StructureShape.new(name: 'AuthenticationFailedException')
       AvailabilityZone = Shapes::StringShape.new(name: 'AvailabilityZone')
       AvailabilityZones = Shapes::ListShape.new(name: 'AvailabilityZones')
+      CancelSchemaExtensionRequest = Shapes::StructureShape.new(name: 'CancelSchemaExtensionRequest')
+      CancelSchemaExtensionResult = Shapes::StructureShape.new(name: 'CancelSchemaExtensionResult')
       CidrIp = Shapes::StringShape.new(name: 'CidrIp')
       CidrIps = Shapes::ListShape.new(name: 'CidrIps')
       ClientException = Shapes::StructureShape.new(name: 'ClientException')
@@ -49,6 +51,7 @@ module Aws
       CreateDirectoryResult = Shapes::StructureShape.new(name: 'CreateDirectoryResult')
       CreateMicrosoftADRequest = Shapes::StructureShape.new(name: 'CreateMicrosoftADRequest')
       CreateMicrosoftADResult = Shapes::StructureShape.new(name: 'CreateMicrosoftADResult')
+      CreateSnapshotBeforeSchemaExtension = Shapes::BooleanShape.new(name: 'CreateSnapshotBeforeSchemaExtension')
       CreateSnapshotRequest = Shapes::StructureShape.new(name: 'CreateSnapshotRequest')
       CreateSnapshotResult = Shapes::StructureShape.new(name: 'CreateSnapshotResult')
       CreateTrustRequest = Shapes::StructureShape.new(name: 'CreateTrustRequest')
@@ -101,6 +104,7 @@ module Aws
       EnableRadiusResult = Shapes::StructureShape.new(name: 'EnableRadiusResult')
       EnableSsoRequest = Shapes::StructureShape.new(name: 'EnableSsoRequest')
       EnableSsoResult = Shapes::StructureShape.new(name: 'EnableSsoResult')
+      EndDateTime = Shapes::TimestampShape.new(name: 'EndDateTime')
       EntityAlreadyExistsException = Shapes::StructureShape.new(name: 'EntityAlreadyExistsException')
       EntityDoesNotExistException = Shapes::StructureShape.new(name: 'EntityDoesNotExistException')
       EventTopic = Shapes::StructureShape.new(name: 'EventTopic')
@@ -124,9 +128,12 @@ module Aws
       IpRoutesInfo = Shapes::ListShape.new(name: 'IpRoutesInfo')
       LastUpdatedDateTime = Shapes::TimestampShape.new(name: 'LastUpdatedDateTime')
       LaunchTime = Shapes::TimestampShape.new(name: 'LaunchTime')
+      LdifContent = Shapes::StringShape.new(name: 'LdifContent')
       Limit = Shapes::IntegerShape.new(name: 'Limit')
       ListIpRoutesRequest = Shapes::StructureShape.new(name: 'ListIpRoutesRequest')
       ListIpRoutesResult = Shapes::StructureShape.new(name: 'ListIpRoutesResult')
+      ListSchemaExtensionsRequest = Shapes::StructureShape.new(name: 'ListSchemaExtensionsRequest')
+      ListSchemaExtensionsResult = Shapes::StructureShape.new(name: 'ListSchemaExtensionsResult')
       ListTagsForResourceRequest = Shapes::StructureShape.new(name: 'ListTagsForResourceRequest')
       ListTagsForResourceResult = Shapes::StructureShape.new(name: 'ListTagsForResourceResult')
       ManualSnapshotsLimitReached = Shapes::BooleanShape.new(name: 'ManualSnapshotsLimitReached')
@@ -155,6 +162,11 @@ module Aws
       RestoreFromSnapshotRequest = Shapes::StructureShape.new(name: 'RestoreFromSnapshotRequest')
       RestoreFromSnapshotResult = Shapes::StructureShape.new(name: 'RestoreFromSnapshotResult')
       SID = Shapes::StringShape.new(name: 'SID')
+      SchemaExtensionId = Shapes::StringShape.new(name: 'SchemaExtensionId')
+      SchemaExtensionInfo = Shapes::StructureShape.new(name: 'SchemaExtensionInfo')
+      SchemaExtensionStatus = Shapes::StringShape.new(name: 'SchemaExtensionStatus')
+      SchemaExtensionStatusReason = Shapes::StringShape.new(name: 'SchemaExtensionStatusReason')
+      SchemaExtensionsInfo = Shapes::ListShape.new(name: 'SchemaExtensionsInfo')
       SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
       Server = Shapes::StringShape.new(name: 'Server')
       Servers = Shapes::ListShape.new(name: 'Servers')
@@ -170,6 +182,9 @@ module Aws
       Snapshots = Shapes::ListShape.new(name: 'Snapshots')
       SsoEnabled = Shapes::BooleanShape.new(name: 'SsoEnabled')
       StageReason = Shapes::StringShape.new(name: 'StageReason')
+      StartDateTime = Shapes::TimestampShape.new(name: 'StartDateTime')
+      StartSchemaExtensionRequest = Shapes::StructureShape.new(name: 'StartSchemaExtensionRequest')
+      StartSchemaExtensionResult = Shapes::StructureShape.new(name: 'StartSchemaExtensionResult')
       StartTime = Shapes::TimestampShape.new(name: 'StartTime')
       StateLastUpdatedDateTime = Shapes::TimestampShape.new(name: 'StateLastUpdatedDateTime')
       SubnetId = Shapes::StringShape.new(name: 'SubnetId')
@@ -225,6 +240,12 @@ module Aws
       Attributes.member = Shapes::ShapeRef.new(shape: Attribute)
 
       AvailabilityZones.member = Shapes::ShapeRef.new(shape: AvailabilityZone)
+
+      CancelSchemaExtensionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      CancelSchemaExtensionRequest.add_member(:schema_extension_id, Shapes::ShapeRef.new(shape: SchemaExtensionId, required: true, location_name: "SchemaExtensionId"))
+      CancelSchemaExtensionRequest.struct_class = Types::CancelSchemaExtensionRequest
+
+      CancelSchemaExtensionResult.struct_class = Types::CancelSchemaExtensionResult
 
       CidrIps.member = Shapes::ShapeRef.new(shape: CidrIp)
 
@@ -522,6 +543,15 @@ module Aws
       ListIpRoutesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListIpRoutesResult.struct_class = Types::ListIpRoutesResult
 
+      ListSchemaExtensionsRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      ListSchemaExtensionsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListSchemaExtensionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
+      ListSchemaExtensionsRequest.struct_class = Types::ListSchemaExtensionsRequest
+
+      ListSchemaExtensionsResult.add_member(:schema_extensions_info, Shapes::ShapeRef.new(shape: SchemaExtensionsInfo, location_name: "SchemaExtensionsInfo"))
+      ListSchemaExtensionsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListSchemaExtensionsResult.struct_class = Types::ListSchemaExtensionsResult
+
       ListTagsForResourceRequest.add_member(:resource_id, Shapes::ShapeRef.new(shape: ResourceId, required: true, location_name: "ResourceId"))
       ListTagsForResourceRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListTagsForResourceRequest.add_member(:limit, Shapes::ShapeRef.new(shape: Limit, location_name: "Limit"))
@@ -566,6 +596,17 @@ module Aws
 
       RestoreFromSnapshotResult.struct_class = Types::RestoreFromSnapshotResult
 
+      SchemaExtensionInfo.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
+      SchemaExtensionInfo.add_member(:schema_extension_id, Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: "SchemaExtensionId"))
+      SchemaExtensionInfo.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+      SchemaExtensionInfo.add_member(:schema_extension_status, Shapes::ShapeRef.new(shape: SchemaExtensionStatus, location_name: "SchemaExtensionStatus"))
+      SchemaExtensionInfo.add_member(:schema_extension_status_reason, Shapes::ShapeRef.new(shape: SchemaExtensionStatusReason, location_name: "SchemaExtensionStatusReason"))
+      SchemaExtensionInfo.add_member(:start_date_time, Shapes::ShapeRef.new(shape: StartDateTime, location_name: "StartDateTime"))
+      SchemaExtensionInfo.add_member(:end_date_time, Shapes::ShapeRef.new(shape: EndDateTime, location_name: "EndDateTime"))
+      SchemaExtensionInfo.struct_class = Types::SchemaExtensionInfo
+
+      SchemaExtensionsInfo.member = Shapes::ShapeRef.new(shape: SchemaExtensionInfo)
+
       Servers.member = Shapes::ShapeRef.new(shape: Server)
 
       Snapshot.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, location_name: "DirectoryId"))
@@ -584,6 +625,15 @@ module Aws
       SnapshotLimits.struct_class = Types::SnapshotLimits
 
       Snapshots.member = Shapes::ShapeRef.new(shape: Snapshot)
+
+      StartSchemaExtensionRequest.add_member(:directory_id, Shapes::ShapeRef.new(shape: DirectoryId, required: true, location_name: "DirectoryId"))
+      StartSchemaExtensionRequest.add_member(:create_snapshot_before_schema_extension, Shapes::ShapeRef.new(shape: CreateSnapshotBeforeSchemaExtension, required: true, location_name: "CreateSnapshotBeforeSchemaExtension"))
+      StartSchemaExtensionRequest.add_member(:ldif_content, Shapes::ShapeRef.new(shape: LdifContent, required: true, location_name: "LdifContent"))
+      StartSchemaExtensionRequest.add_member(:description, Shapes::ShapeRef.new(shape: Description, required: true, location_name: "Description"))
+      StartSchemaExtensionRequest.struct_class = Types::StartSchemaExtensionRequest
+
+      StartSchemaExtensionResult.add_member(:schema_extension_id, Shapes::ShapeRef.new(shape: SchemaExtensionId, location_name: "SchemaExtensionId"))
+      StartSchemaExtensionResult.struct_class = Types::StartSchemaExtensionResult
 
       SubnetIds.member = Shapes::ShapeRef.new(shape: SubnetId)
 
@@ -671,6 +721,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: TagLimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
+        api.add_operation(:cancel_schema_extension, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CancelSchemaExtension"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CancelSchemaExtensionRequest)
+          o.output = Shapes::ShapeRef.new(shape: CancelSchemaExtensionResult)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)
@@ -996,6 +1057,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)
 
+        api.add_operation(:list_schema_extensions, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListSchemaExtensions"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListSchemaExtensionsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListSchemaExtensionsResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidNextTokenException)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
         api.add_operation(:list_tags_for_resource, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListTagsForResource"
           o.http_method = "POST"
@@ -1054,6 +1127,20 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: RestoreFromSnapshotResult)
           o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: ClientException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
+        end)
+
+        api.add_operation(:start_schema_extension, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "StartSchemaExtension"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: StartSchemaExtensionRequest)
+          o.output = Shapes::ShapeRef.new(shape: StartSchemaExtensionResult)
+          o.errors << Shapes::ShapeRef.new(shape: DirectoryUnavailableException)
+          o.errors << Shapes::ShapeRef.new(shape: EntityDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
+          o.errors << Shapes::ShapeRef.new(shape: SnapshotLimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: ClientException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)

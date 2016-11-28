@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -143,6 +145,16 @@ module Aws
       # *AddIpRoutes* adds this address block. You can also use *AddIpRoutes*
       # to facilitate routing traffic that uses public IP ranges from your
       # Microsoft AD on AWS to a peer VPC.
+      #
+      # Before you call *AddIpRoutes*, ensure that all of the required
+      # permissions have been explicitly granted through a policy. For details
+      # about what permissions are required to run the *AddIpRoutes*
+      # operation, see [AWS Directory Service API Permissions: Actions,
+      # Resources, and Conditions Reference][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
       # @option params [required, String] :directory_id
       #   Identifier (ID) of the directory to which to add the address block.
       # @option params [required, Array<Types::IpRoute>] :ip_routes
@@ -223,7 +235,7 @@ module Aws
       end
 
       # Adds or overwrites one or more tags for the specified Amazon Directory
-      # Services directory. Each directory can have a maximum of 10 tags. Each
+      # Services directory. Each directory can have a maximum of 50 tags. Each
       # tag consists of a key and optional value. Tag keys must be unique to
       # each resource.
       # @option params [required, String] :resource_id
@@ -249,7 +261,41 @@ module Aws
         req.send_request(options)
       end
 
+      # Cancels an in-progress schema extension to a Microsoft AD directory.
+      # Once a schema extension has started replicating to all domain
+      # controllers, the task can no longer be canceled. A schema extension
+      # can be canceled during any of the following states; `Initializing`,
+      # `CreatingSnapshot`, and `UpdatingSchema`.
+      # @option params [required, String] :directory_id
+      #   The identifier of the directory whose schema extension will be
+      #   canceled.
+      # @option params [required, String] :schema_extension_id
+      #   The identifier of the schema extension that will be canceled.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.cancel_schema_extension({
+      #     directory_id: "DirectoryId", # required
+      #     schema_extension_id: "SchemaExtensionId", # required
+      #   })
+      # @overload cancel_schema_extension(params = {})
+      # @param [Hash] params ({})
+      def cancel_schema_extension(params = {}, options = {})
+        req = build_request(:cancel_schema_extension, params)
+        req.send_request(options)
+      end
+
       # Creates an AD Connector to connect to an on-premises directory.
+      #
+      # Before you call *ConnectDirectory*, ensure that all of the required
+      # permissions have been explicitly granted through a policy. For details
+      # about what permissions are required to run the *ConnectDirectory*
+      # operation, see [AWS Directory Service API Permissions: Actions,
+      # Resources, and Conditions Reference][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
       # @option params [required, String] :name
       #   The fully-qualified name of the on-premises directory, such as
       #   `corp.example.com`.
@@ -404,6 +450,16 @@ module Aws
       end
 
       # Creates a Simple AD directory.
+      #
+      # Before you call *CreateDirectory*, ensure that all of the required
+      # permissions have been explicitly granted through a policy. For details
+      # about what permissions are required to run the *CreateDirectory*
+      # operation, see [AWS Directory Service API Permissions: Actions,
+      # Resources, and Conditions Reference][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
       # @option params [required, String] :name
       #   The fully qualified name for the directory, such as
       #   `corp.example.com`.
@@ -447,6 +503,16 @@ module Aws
       end
 
       # Creates a Microsoft AD in the AWS cloud.
+      #
+      # Before you call *CreateMicrosoftAD*, ensure that all of the required
+      # permissions have been explicitly granted through a policy. For details
+      # about what permissions are required to run the *CreateMicrosoftAD*
+      # operation, see [AWS Directory Service API Permissions: Actions,
+      # Resources, and Conditions Reference][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
       # @option params [required, String] :name
       #   The fully qualified domain name for the directory, such as
       #   `corp.example.com`. This name will resolve inside your VPC only. It
@@ -589,6 +655,16 @@ module Aws
       end
 
       # Deletes an AWS Directory Service directory.
+      #
+      # Before you call *DeleteDirectory*, ensure that all of the required
+      # permissions have been explicitly granted through a policy. For details
+      # about what permissions are required to run the *DeleteDirectory*
+      # operation, see [AWS Directory Service API Permissions: Actions,
+      # Resources, and Conditions Reference][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/directoryservice/latest/admin-guide/UsingWithDS_IAM_ResourcePermissions.html
       # @option params [required, String] :directory_id
       #   The identifier of the directory to delete.
       # @return [Types::DeleteDirectoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1142,6 +1218,44 @@ module Aws
         req.send_request(options)
       end
 
+      # Lists all schema extensions applied to a Microsoft AD Directory.
+      # @option params [required, String] :directory_id
+      #   The identifier of the directory from which to retrieve the schema
+      #   extension information.
+      # @option params [String] :next_token
+      #   The `ListSchemaExtensions.NextToken` value from a previous call to
+      #   `ListSchemaExtensions`. Pass null if this is the first call.
+      # @option params [Integer] :limit
+      #   The maximum number of items to return.
+      # @return [Types::ListSchemaExtensionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListSchemaExtensionsResult#schema_extensions_info #SchemaExtensionsInfo} => Array&lt;Types::SchemaExtensionInfo&gt;
+      #   * {Types::ListSchemaExtensionsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_schema_extensions({
+      #     directory_id: "DirectoryId", # required
+      #     next_token: "NextToken",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.schema_extensions_info #=> Array
+      #   resp.schema_extensions_info[0].directory_id #=> String
+      #   resp.schema_extensions_info[0].schema_extension_id #=> String
+      #   resp.schema_extensions_info[0].description #=> String
+      #   resp.schema_extensions_info[0].schema_extension_status #=> String, one of "Initializing", "CreatingSnapshot", "UpdatingSchema", "Replicating", "CancelInProgress", "RollbackInProgress", "Cancelled", "Failed", "Completed"
+      #   resp.schema_extensions_info[0].schema_extension_status_reason #=> String
+      #   resp.schema_extensions_info[0].start_date_time #=> Time
+      #   resp.schema_extensions_info[0].end_date_time #=> Time
+      #   resp.next_token #=> String
+      # @overload list_schema_extensions(params = {})
+      # @param [Hash] params ({})
+      def list_schema_extensions(params = {}, options = {})
+        req = build_request(:list_schema_extensions, params)
+        req.send_request(options)
+      end
+
       # Lists all tags on an Amazon Directory Services directory.
       # @option params [required, String] :resource_id
       #   Identifier (ID) of the directory for which you want to retrieve tags.
@@ -1260,6 +1374,39 @@ module Aws
       # @param [Hash] params ({})
       def restore_from_snapshot(params = {}, options = {})
         req = build_request(:restore_from_snapshot, params)
+        req.send_request(options)
+      end
+
+      # Applies a schema extension to a Microsoft AD directory.
+      # @option params [required, String] :directory_id
+      #   The identifier of the directory for which the schema extension will be
+      #   applied to.
+      # @option params [required, Boolean] :create_snapshot_before_schema_extension
+      #   If true, creates a snapshot of the directory before applying the
+      #   schema extension.
+      # @option params [required, String] :ldif_content
+      #   The LDIF file represented as a string. The file size can be no larger
+      #   than 1MB.
+      # @option params [required, String] :description
+      #   A description of the schema extension.
+      # @return [Types::StartSchemaExtensionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StartSchemaExtensionResult#schema_extension_id #SchemaExtensionId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.start_schema_extension({
+      #     directory_id: "DirectoryId", # required
+      #     create_snapshot_before_schema_extension: false, # required
+      #     ldif_content: "LdifContent", # required
+      #     description: "Description", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.schema_extension_id #=> String
+      # @overload start_schema_extension(params = {})
+      # @param [Hash] params ({})
+      def start_schema_extension(params = {}, options = {})
+        req = build_request(:start_schema_extension, params)
         req.send_request(options)
       end
 

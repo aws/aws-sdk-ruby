@@ -13,12 +13,13 @@ module Aws
       include Seahorse::Model
 
       AddTagsToStreamInput = Shapes::StructureShape.new(name: 'AddTagsToStreamInput')
-      ApproximateArrivalTimestamp = Shapes::TimestampShape.new(name: 'ApproximateArrivalTimestamp')
       BooleanObject = Shapes::BooleanShape.new(name: 'BooleanObject')
       CreateStreamInput = Shapes::StructureShape.new(name: 'CreateStreamInput')
       Data = Shapes::BlobShape.new(name: 'Data')
       DecreaseStreamRetentionPeriodInput = Shapes::StructureShape.new(name: 'DecreaseStreamRetentionPeriodInput')
       DeleteStreamInput = Shapes::StructureShape.new(name: 'DeleteStreamInput')
+      DescribeLimitsInput = Shapes::StructureShape.new(name: 'DescribeLimitsInput')
+      DescribeLimitsOutput = Shapes::StructureShape.new(name: 'DescribeLimitsOutput')
       DescribeStreamInput = Shapes::StructureShape.new(name: 'DescribeStreamInput')
       DescribeStreamInputLimit = Shapes::IntegerShape.new(name: 'DescribeStreamInputLimit')
       DescribeStreamOutput = Shapes::StructureShape.new(name: 'DescribeStreamOutput')
@@ -66,10 +67,11 @@ module Aws
       RemoveTagsFromStreamInput = Shapes::StructureShape.new(name: 'RemoveTagsFromStreamInput')
       ResourceInUseException = Shapes::StructureShape.new(name: 'ResourceInUseException')
       ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
-      RetentionPeriodHours = Shapes::IntegerShape.new(name: 'RetentionPeriodHours')
+      ScalingType = Shapes::StringShape.new(name: 'ScalingType')
       SequenceNumber = Shapes::StringShape.new(name: 'SequenceNumber')
       SequenceNumberRange = Shapes::StructureShape.new(name: 'SequenceNumberRange')
       Shard = Shapes::StructureShape.new(name: 'Shard')
+      ShardCountObject = Shapes::IntegerShape.new(name: 'ShardCountObject')
       ShardId = Shapes::StringShape.new(name: 'ShardId')
       ShardIterator = Shapes::StringShape.new(name: 'ShardIterator')
       ShardIteratorType = Shapes::StringShape.new(name: 'ShardIteratorType')
@@ -87,6 +89,8 @@ module Aws
       TagMap = Shapes::MapShape.new(name: 'TagMap')
       TagValue = Shapes::StringShape.new(name: 'TagValue')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+      UpdateShardCountInput = Shapes::StructureShape.new(name: 'UpdateShardCountInput')
+      UpdateShardCountOutput = Shapes::StructureShape.new(name: 'UpdateShardCountOutput')
 
       AddTagsToStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
       AddTagsToStreamInput.add_member(:tags, Shapes::ShapeRef.new(shape: TagMap, required: true, location_name: "Tags"))
@@ -97,11 +101,17 @@ module Aws
       CreateStreamInput.struct_class = Types::CreateStreamInput
 
       DecreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
-      DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
+      DecreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
       DecreaseStreamRetentionPeriodInput.struct_class = Types::DecreaseStreamRetentionPeriodInput
 
       DeleteStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
       DeleteStreamInput.struct_class = Types::DeleteStreamInput
+
+      DescribeLimitsInput.struct_class = Types::DescribeLimitsInput
+
+      DescribeLimitsOutput.add_member(:shard_limit, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "ShardLimit"))
+      DescribeLimitsOutput.add_member(:open_shard_count, Shapes::ShapeRef.new(shape: ShardCountObject, required: true, location_name: "OpenShardCount"))
+      DescribeLimitsOutput.struct_class = Types::DescribeLimitsOutput
 
       DescribeStreamInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
       DescribeStreamInput.add_member(:limit, Shapes::ShapeRef.new(shape: DescribeStreamInputLimit, location_name: "Limit"))
@@ -153,7 +163,7 @@ module Aws
       HashKeyRange.struct_class = Types::HashKeyRange
 
       IncreaseStreamRetentionPeriodInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
-      IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
+      IncreaseStreamRetentionPeriodInput.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
       IncreaseStreamRetentionPeriodInput.struct_class = Types::IncreaseStreamRetentionPeriodInput
 
       ListStreamsInput.add_member(:limit, Shapes::ShapeRef.new(shape: ListStreamsInputLimit, location_name: "Limit"))
@@ -215,7 +225,7 @@ module Aws
       PutRecordsResultEntryList.member = Shapes::ShapeRef.new(shape: PutRecordsResultEntry)
 
       Record.add_member(:sequence_number, Shapes::ShapeRef.new(shape: SequenceNumber, required: true, location_name: "SequenceNumber"))
-      Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: ApproximateArrivalTimestamp, location_name: "ApproximateArrivalTimestamp"))
+      Record.add_member(:approximate_arrival_timestamp, Shapes::ShapeRef.new(shape: Timestamp, location_name: "ApproximateArrivalTimestamp"))
       Record.add_member(:data, Shapes::ShapeRef.new(shape: Data, required: true, location_name: "Data"))
       Record.add_member(:partition_key, Shapes::ShapeRef.new(shape: PartitionKey, required: true, location_name: "PartitionKey"))
       Record.struct_class = Types::Record
@@ -249,7 +259,8 @@ module Aws
       StreamDescription.add_member(:stream_status, Shapes::ShapeRef.new(shape: StreamStatus, required: true, location_name: "StreamStatus"))
       StreamDescription.add_member(:shards, Shapes::ShapeRef.new(shape: ShardList, required: true, location_name: "Shards"))
       StreamDescription.add_member(:has_more_shards, Shapes::ShapeRef.new(shape: BooleanObject, required: true, location_name: "HasMoreShards"))
-      StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: RetentionPeriodHours, required: true, location_name: "RetentionPeriodHours"))
+      StreamDescription.add_member(:retention_period_hours, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "RetentionPeriodHours"))
+      StreamDescription.add_member(:stream_creation_timestamp, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StreamCreationTimestamp"))
       StreamDescription.add_member(:enhanced_monitoring, Shapes::ShapeRef.new(shape: EnhancedMonitoringList, required: true, location_name: "EnhancedMonitoring"))
       StreamDescription.struct_class = Types::StreamDescription
 
@@ -265,6 +276,16 @@ module Aws
 
       TagMap.key = Shapes::ShapeRef.new(shape: TagKey)
       TagMap.value = Shapes::ShapeRef.new(shape: TagValue)
+
+      UpdateShardCountInput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, required: true, location_name: "StreamName"))
+      UpdateShardCountInput.add_member(:target_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, required: true, location_name: "TargetShardCount"))
+      UpdateShardCountInput.add_member(:scaling_type, Shapes::ShapeRef.new(shape: ScalingType, required: true, location_name: "ScalingType"))
+      UpdateShardCountInput.struct_class = Types::UpdateShardCountInput
+
+      UpdateShardCountOutput.add_member(:stream_name, Shapes::ShapeRef.new(shape: StreamName, location_name: "StreamName"))
+      UpdateShardCountOutput.add_member(:current_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "CurrentShardCount"))
+      UpdateShardCountOutput.add_member(:target_shard_count, Shapes::ShapeRef.new(shape: PositiveIntegerObject, location_name: "TargetShardCount"))
+      UpdateShardCountOutput.struct_class = Types::UpdateShardCountOutput
 
 
       # @api private
@@ -312,7 +333,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         end)
 
@@ -323,6 +343,15 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DeleteStreamInput)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        end)
+
+        api.add_operation(:describe_limits, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeLimits"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeLimitsInput)
+          o.output = Shapes::ShapeRef.new(shape: DescribeLimitsOutput)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         end)
 
@@ -398,7 +427,6 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
-          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
         end)
 
@@ -485,6 +513,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        end)
+
+        api.add_operation(:update_shard_count, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateShardCount"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UpdateShardCountInput)
+          o.output = Shapes::ShapeRef.new(shape: UpdateShardCountOutput)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidArgumentException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceInUseException)
+          o.errors << Shapes::ShapeRef.new(shape: ResourceNotFoundException)
         end)
       end
 

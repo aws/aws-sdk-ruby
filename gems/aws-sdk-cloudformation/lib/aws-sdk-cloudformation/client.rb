@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -172,6 +174,13 @@ module Aws
       # @option params [required, String] :stack_name
       #   The name or the unique ID of the stack that you want to continue
       #   rolling back.
+      #
+      #   <note markdown="1"> Don't specify the name of a nested stack (a stack that was created by
+      #   using the `AWS::CloudFormation::Stack` resource). Instead, use this
+      #   operation on the parent stack (the stack that contains the
+      #   `AWS::CloudFormation::Stack` resource).
+      #
+      #    </note>
       # @option params [String] :role_arn
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes to roll back the
@@ -186,12 +195,47 @@ module Aws
       #   was previously associated with the stack. If no role is available, AWS
       #   CloudFormation uses a temporary session that is generated from your
       #   user credentials.
+      # @option params [Array<String>] :resources_to_skip
+      #   A list of the logical IDs of the resources that AWS CloudFormation
+      #   skips during the continue update rollback operation. You can specify
+      #   only resources that are in the `UPDATE_FAILED` state because a
+      #   rollback failed. You can't specify resources that are in the
+      #   `UPDATE_FAILED` state for other reasons, for example, because an
+      #   update was canceled. To check why a resource update failed, use the
+      #   DescribeStackResources action, and view the resource status reason.
+      #
+      #   Specify this property to skip rolling back resources that AWS
+      #   CloudFormation can't successfully roll back. We recommend that you [
+      #   troubleshoot][1] resources before skipping them. AWS CloudFormation
+      #   sets the status of the specified resources to `UPDATE_COMPLETE` and
+      #   continues to roll back the stack. After the rollback is complete, the
+      #   state of the skipped resources will be inconsistent with the state of
+      #   the resources in the stack template. Before performing another stack
+      #   update, you must update the stack or resources to be consistent with
+      #   each other. If you don't, subsequent stack updates might fail, and
+      #   the stack will become unrecoverable.
+      #
+      #   Specify the minimum number of resources required to successfully roll
+      #   back your stack. For example, a failed resource update might cause
+      #   dependent resources to fail. In this case, it might not be necessary
+      #   to skip the dependent resources.
+      #
+      #   To specify resources in a nested stack, use the following format:
+      #   `NestedStackName.ResourceLogicalID`. You can specify a nested stack
+      #   resource (the logical ID of an `AWS::CloudFormation::Stack` resource)
+      #   only if it's in one of the following states: `DELETE_IN_PROGRESS`,
+      #   `DELETE_COMPLETE`, or `DELETE_FAILED`.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/troubleshooting.html#troubleshooting-errors-update-rollback-failed
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.continue_update_rollback({
       #     stack_name: "StackNameOrId", # required
       #     role_arn: "RoleARN",
+      #     resources_to_skip: ["ResourceToSkip"],
       #   })
       # @overload continue_update_rollback(params = {})
       # @param [Hash] params ({})
@@ -201,11 +245,11 @@ module Aws
       end
 
       # Creates a list of changes for a stack. AWS CloudFormation generates
-      # the change set by comparing the stack's information with the
+      # the change set by comparing the template's information with the
       # information that you submit. A change set can help you understand
-      # which resources AWS CloudFormation will change and how it will change
-      # them before you update your stack. Change sets allow you to check
-      # before you make a change so that you don't delete or replace critical
+      # which resources AWS CloudFormation will change, and how it will change
+      # them, before you update your stack. Change sets allow you to check
+      # before making a change to avoid deleting or replacing critical
       # resources.
       #
       # AWS CloudFormation doesn't make any changes to the stack when you
@@ -299,11 +343,11 @@ module Aws
       #   The Amazon Resource Name (ARN) of an AWS Identity and Access
       #   Management (IAM) role that AWS CloudFormation assumes when executing
       #   the change set. AWS CloudFormation uses the role's credentials to
-      #   make calls on your behalf. AWS CloudFormation always uses this role
-      #   for all future operations on the stack. As long as users have
-      #   permission to operate on the stack, AWS CloudFormation uses this role
-      #   even if the users don't have permission to pass it. Ensure that the
-      #   role grants least privilege.
+      #   make calls on your behalf. AWS CloudFormation uses this role for all
+      #   future operations on the stack. As long as users have permission to
+      #   operate on the stack, AWS CloudFormation uses this role even if the
+      #   users don't have permission to pass it. Ensure that the role grants
+      #   least privilege.
       #
       #   If you don't specify a value, AWS CloudFormation uses the role that
       #   was previously associated with the stack. If no role is available, AWS
@@ -332,9 +376,27 @@ module Aws
       #   CloudFormation successfully received them.
       # @option params [String] :description
       #   A description to help you identify this change set.
+      # @option params [String] :change_set_type
+      #   The type of change set operation. To create a change set for a new
+      #   stack, specify `CREATE`. To create a change set for an existing stack,
+      #   specify `UPDATE`.
+      #
+      #   If you create a change set for a new stack, AWS Cloudformation creates
+      #   a stack with a unique stack ID, but no template or resources. The
+      #   stack will be in the [ `REVIEW_IN_PROGRESS` ][1] state until you
+      #   execute the change set.
+      #
+      #   By default, AWS CloudFormation specifies `UPDATE`. You can't use the
+      #   `UPDATE` type to create a change set for a new stack or the `CREATE`
+      #   type to create a change set for an existing stack.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-describing-stacks.html#d0e11995
       # @return [Types::CreateChangeSetOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateChangeSetOutput#id #Id} => String
+      #   * {Types::CreateChangeSetOutput#stack_id #StackId} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_change_set({
@@ -362,10 +424,12 @@ module Aws
       #     change_set_name: "ChangeSetName", # required
       #     client_token: "ClientToken",
       #     description: "Description",
+      #     change_set_type: "CREATE", # accepts CREATE, UPDATE
       #   })
       #
       # @example Response structure
       #   resp.id #=> String
+      #   resp.stack_id #=> String
       # @overload create_change_set(params = {})
       # @param [Hash] params ({})
       def create_change_set(params = {}, options = {})
@@ -970,6 +1034,7 @@ module Aws
       #   resp.stacks #=> Array
       #   resp.stacks[0].stack_id #=> String
       #   resp.stacks[0].stack_name #=> String
+      #   resp.stacks[0].change_set_id #=> String
       #   resp.stacks[0].description #=> String
       #   resp.stacks[0].parameters #=> Array
       #   resp.stacks[0].parameters[0].parameter_key #=> String
@@ -977,7 +1042,7 @@ module Aws
       #   resp.stacks[0].parameters[0].use_previous_value #=> Boolean
       #   resp.stacks[0].creation_time #=> Time
       #   resp.stacks[0].last_updated_time #=> Time
-      #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE"
+      #   resp.stacks[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
       #   resp.stacks[0].stack_status_reason #=> String
       #   resp.stacks[0].disable_rollback #=> Boolean
       #   resp.stacks[0].notification_arns #=> Array
@@ -1118,7 +1183,7 @@ module Aws
       # <note markdown="1"> If the template does not exist, a `ValidationError` is returned.
       #
       #  </note>
-      # @option params [required, String] :stack_name
+      # @option params [String] :stack_name
       #   The name or the unique stack ID that is associated with the stack,
       #   which are not always interchangeable:
       #
@@ -1128,17 +1193,35 @@ module Aws
       #   * Deleted stacks: You must specify the unique stack ID.
       #
       #   Default: There is no default value.
+      # @option params [String] :change_set_name
+      #   The name or Amazon Resource Name (ARN) of a change set for which AWS
+      #   CloudFormation returns the associated template. If you specify a name,
+      #   you must also specify the `StackName`.
+      # @option params [String] :template_stage
+      #   For templates that include transforms, the stage of the template that
+      #   AWS CloudFormation returns. To get the user-submitted template,
+      #   specify `Original`. To get the template after AWS CloudFormation has
+      #   processed all transforms, specify `Processed`.
+      #
+      #   If the template doesn't include transforms, `Original` and
+      #   `Processed` return the same template. By default, AWS CloudFormation
+      #   specifies `Original`.
       # @return [Types::GetTemplateOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetTemplateOutput#template_body #TemplateBody} => String
+      #   * {Types::GetTemplateOutput#stages_available #StagesAvailable} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_template({
-      #     stack_name: "StackName", # required
+      #     stack_name: "StackName",
+      #     change_set_name: "ChangeSetNameOrId",
+      #     template_stage: "Original", # accepts Original, Processed
       #   })
       #
       # @example Response structure
       #   resp.template_body #=> String
+      #   resp.stages_available #=> Array
+      #   resp.stages_available[0] #=> String, one of "Original", "Processed"
       # @overload get_template(params = {})
       # @param [Hash] params ({})
       def get_template(params = {}, options = {})
@@ -1199,6 +1282,7 @@ module Aws
       #   * {Types::GetTemplateSummaryOutput#resource_types #ResourceTypes} => Array&lt;String&gt;
       #   * {Types::GetTemplateSummaryOutput#version #Version} => String
       #   * {Types::GetTemplateSummaryOutput#metadata #Metadata} => String
+      #   * {Types::GetTemplateSummaryOutput#declared_transforms #DeclaredTransforms} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_template_summary({
@@ -1224,6 +1308,8 @@ module Aws
       #   resp.resource_types[0] #=> String
       #   resp.version #=> String
       #   resp.metadata #=> String
+      #   resp.declared_transforms #=> Array
+      #   resp.declared_transforms[0] #=> String
       # @overload get_template_summary(params = {})
       # @param [Hash] params ({})
       def get_template_summary(params = {}, options = {})
@@ -1267,6 +1353,84 @@ module Aws
       # @param [Hash] params ({})
       def list_change_sets(params = {}, options = {})
         req = build_request(:list_change_sets, params)
+        req.send_request(options)
+      end
+
+      # Lists all exported output values in the account and region in which
+      # you call this action. Use this action to see the exported output
+      # values that you can import into other stacks. To import values, use
+      # the [ `Fn::ImportValue` ][1] function.
+      #
+      # For more information, see [ AWS CloudFormation Export Stack Output
+      # Values][2].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
+      # [2]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/using-cfn-stack-exports.html
+      # @option params [String] :next_token
+      #   A string (provided by the ListExports response output) that identifies
+      #   the next page of exported output values that you asked to retrieve.
+      # @return [Types::ListExportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListExportsOutput#exports #Exports} => Array&lt;Types::Export&gt;
+      #   * {Types::ListExportsOutput#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_exports({
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.exports #=> Array
+      #   resp.exports[0].exporting_stack_id #=> String
+      #   resp.exports[0].name #=> String
+      #   resp.exports[0].value #=> String
+      #   resp.next_token #=> String
+      # @overload list_exports(params = {})
+      # @param [Hash] params ({})
+      def list_exports(params = {}, options = {})
+        req = build_request(:list_exports, params)
+        req.send_request(options)
+      end
+
+      # Lists all stacks that are importing an exported output value. To
+      # modify or remove an exported output value, first use this action to
+      # see which stacks are using it. To see the exported output values in
+      # your account, see ListExports.
+      #
+      # For more information about importing an exported output value, see the
+      # [ `Fn::ImportValue` ][1] function.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/intrinsic-function-reference-importvalue.html
+      # @option params [required, String] :export_name
+      #   The name of the exported output value. AWS CloudFormation returns the
+      #   stack names that are importing this value.
+      # @option params [String] :next_token
+      #   A string (provided by the ListImports response output) that identifies
+      #   the next page of stacks that are importing the specified exported
+      #   output value.
+      # @return [Types::ListImportsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListImportsOutput#imports #Imports} => Array&lt;String&gt;
+      #   * {Types::ListImportsOutput#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_imports({
+      #     export_name: "ExportName", # required
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.imports #=> Array
+      #   resp.imports[0] #=> String
+      #   resp.next_token #=> String
+      # @overload list_imports(params = {})
+      # @param [Hash] params ({})
+      def list_imports(params = {}, options = {})
+        req = build_request(:list_imports, params)
         req.send_request(options)
       end
 
@@ -1336,7 +1500,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.list_stacks({
       #     next_token: "NextToken",
-      #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE
+      #     stack_status_filter: ["CREATE_IN_PROGRESS"], # accepts CREATE_IN_PROGRESS, CREATE_FAILED, CREATE_COMPLETE, ROLLBACK_IN_PROGRESS, ROLLBACK_FAILED, ROLLBACK_COMPLETE, DELETE_IN_PROGRESS, DELETE_FAILED, DELETE_COMPLETE, UPDATE_IN_PROGRESS, UPDATE_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_COMPLETE, UPDATE_ROLLBACK_IN_PROGRESS, UPDATE_ROLLBACK_FAILED, UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS, UPDATE_ROLLBACK_COMPLETE, REVIEW_IN_PROGRESS
       #   })
       #
       # @example Response structure
@@ -1347,7 +1511,7 @@ module Aws
       #   resp.stack_summaries[0].creation_time #=> Time
       #   resp.stack_summaries[0].last_updated_time #=> Time
       #   resp.stack_summaries[0].deletion_time #=> Time
-      #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE"
+      #   resp.stack_summaries[0].stack_status #=> String, one of "CREATE_IN_PROGRESS", "CREATE_FAILED", "CREATE_COMPLETE", "ROLLBACK_IN_PROGRESS", "ROLLBACK_FAILED", "ROLLBACK_COMPLETE", "DELETE_IN_PROGRESS", "DELETE_FAILED", "DELETE_COMPLETE", "UPDATE_IN_PROGRESS", "UPDATE_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_COMPLETE", "UPDATE_ROLLBACK_IN_PROGRESS", "UPDATE_ROLLBACK_FAILED", "UPDATE_ROLLBACK_COMPLETE_CLEANUP_IN_PROGRESS", "UPDATE_ROLLBACK_COMPLETE", "REVIEW_IN_PROGRESS"
       #   resp.stack_summaries[0].stack_status_reason #=> String
       #   resp.next_token #=> String
       # @overload list_stacks(params = {})
@@ -1665,6 +1829,7 @@ module Aws
       #   * {Types::ValidateTemplateOutput#description #Description} => String
       #   * {Types::ValidateTemplateOutput#capabilities #Capabilities} => Array&lt;String&gt;
       #   * {Types::ValidateTemplateOutput#capabilities_reason #CapabilitiesReason} => String
+      #   * {Types::ValidateTemplateOutput#declared_transforms #DeclaredTransforms} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.validate_template({
@@ -1682,6 +1847,8 @@ module Aws
       #   resp.capabilities #=> Array
       #   resp.capabilities[0] #=> String, one of "CAPABILITY_IAM", "CAPABILITY_NAMED_IAM"
       #   resp.capabilities_reason #=> String
+      #   resp.declared_transforms #=> Array
+      #   resp.declared_transforms[0] #=> String
       # @overload validate_template(params = {})
       # @param [Hash] params ({})
       def validate_template(params = {}, options = {})

@@ -9,10 +9,11 @@ module AwsSdkCodeGenerator
         def initialize(options)
           resource_name = options.fetch(:resource_name)
           super('exists?')
+          param(:options, type: 'Hash', default: {})
           returns('Boolean', docstring: "Returns `true` if the #{resource_name} exists.")
           code <<-CODE
 begin
-  wait_until_exists(max_attempts: 1)
+  wait_until_exists(options.merge(max_attempts: 1))
   true
 rescue Aws::Waiters::Errors::UnexpectedError => e
   raise e.error

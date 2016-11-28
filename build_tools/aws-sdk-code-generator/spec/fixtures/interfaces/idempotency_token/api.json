@@ -1,0 +1,32 @@
+{
+  "version":"2.0",
+  "metadata":{
+    "endpointPrefix":"svc",
+    "protocol":"json",
+    "signatureVersion":"v4"
+  },
+  "operations":{
+    "OperationWithIdempotencyToken": {
+      "name":"OperationWithIdempotencyToken",
+      "http":{
+        "method":"POST",
+        "requestUri":"/"
+      },
+      "input":{"shape":"Input"}
+    }
+  },
+  "shapes": {
+    "Input":{
+      "type":"structure",
+      "members":{
+        "ClientToken":{
+          "shape":"String",
+          "idempotencyToken":true
+        }
+      }
+    },
+    "String": {
+      "type": "string"
+    }
+  }
+}

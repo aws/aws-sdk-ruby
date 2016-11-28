@@ -98,6 +98,22 @@ module Aws
         include Aws::Structure
       end
 
+      # @api private
+      class DescribeLimitsInput < Aws::EmptyStructure; end
+
+      # @!attribute [rw] shard_limit
+      #   The maximum number of shards.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] open_shard_count
+      #   The number of open shards.
+      #   @return [Integer]
+      class DescribeLimitsOutput < Struct.new(
+        :shard_limit,
+        :open_shard_count)
+        include Aws::Structure
+      end
+
       # Represents the input for `DescribeStream`.
       # @note When making an API call, pass DescribeStreamInput
       #   data as a hash:
@@ -112,7 +128,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] limit
-      #   The maximum number of shards to return.
+      #   The maximum number of shards to return in a single call. The default
+      #   value is 100. If you specify a value greater than 100, at most 100
+      #   shards are returned.
       #   @return [Integer]
       #
       # @!attribute [rw] exclusive_start_shard_id
@@ -128,8 +146,8 @@ module Aws
       # Represents the output for `DescribeStream`.
       # @!attribute [rw] stream_description
       #   The current status of the stream, the stream ARN, an array of shard
-      #   objects that comprise the stream, and states whether there are more
-      #   shards available.
+      #   objects that comprise the stream, and whether there are more shards
+      #   available.
       #   @return [Types::StreamDescription]
       class DescribeStreamOutput < Struct.new(
         :stream_description)
@@ -156,12 +174,19 @@ module Aws
       #   disables every metric.
       #
       #   * `IncomingBytes`
+      #
       #   * `IncomingRecords`
+      #
       #   * `OutgoingBytes`
+      #
       #   * `OutgoingRecords`
+      #
       #   * `WriteProvisionedThroughputExceeded`
+      #
       #   * `ReadProvisionedThroughputExceeded`
+      #
       #   * `IteratorAgeMilliseconds`
+      #
       #   * `ALL`
       #
       #   For more information, see [Monitoring the Amazon Kinesis Streams
@@ -197,12 +222,19 @@ module Aws
       #   enables every metric.
       #
       #   * `IncomingBytes`
+      #
       #   * `IncomingRecords`
+      #
       #   * `OutgoingBytes`
+      #
       #   * `OutgoingRecords`
+      #
       #   * `WriteProvisionedThroughputExceeded`
+      #
       #   * `ReadProvisionedThroughputExceeded`
+      #
       #   * `IteratorAgeMilliseconds`
+      #
       #   * `ALL`
       #
       #   For more information, see [Monitoring the Amazon Kinesis Streams
@@ -227,12 +259,19 @@ module Aws
       #   enhances every metric.
       #
       #   * `IncomingBytes`
+      #
       #   * `IncomingRecords`
+      #
       #   * `OutgoingBytes`
+      #
       #   * `OutgoingRecords`
+      #
       #   * `WriteProvisionedThroughputExceeded`
+      #
       #   * `ReadProvisionedThroughputExceeded`
+      #
       #   * `IteratorAgeMilliseconds`
+      #
       #   * `ALL`
       #
       #   For more information, see [Monitoring the Amazon Kinesis Streams
@@ -347,13 +386,17 @@ module Aws
       #   * AT\_SEQUENCE\_NUMBER - Start reading from the position denoted by
       #     a specific sequence number, provided in the value
       #     `StartingSequenceNumber`.
+      #
       #   * AFTER\_SEQUENCE\_NUMBER - Start reading right after the position
       #     denoted by a specific sequence number, provided in the value
       #     `StartingSequenceNumber`.
+      #
       #   * AT\_TIMESTAMP - Start reading from the position denoted by a
       #     specific timestamp, provided in the value `Timestamp`.
+      #
       #   * TRIM\_HORIZON - Start reading at the last untrimmed record in the
       #     shard in the system, which is the oldest data record in the shard.
+      #
       #   * LATEST - Start reading just after the most recent record in the
       #     shard, so that you always read the most recent data in the shard.
       #   @return [String]
@@ -882,12 +925,15 @@ module Aws
       #
       #   * `CREATING` - The stream is being created. Amazon Kinesis
       #     immediately returns and sets `StreamStatus` to `CREATING`.
+      #
       #   * `DELETING` - The stream is being deleted. The specified stream is
       #     in the `DELETING` state until Amazon Kinesis completes the
       #     deletion.
+      #
       #   * `ACTIVE` - The stream exists and is ready for read and write
       #     operations or deletion. You should perform read and write
       #     operations only on an `ACTIVE` stream.
+      #
       #   * `UPDATING` - Shards in the stream are being merged or split. Read
       #     and write operations continue to work while the stream is in the
       #     `UPDATING` state.
@@ -906,6 +952,10 @@ module Aws
       #   The current retention period, in hours.
       #   @return [Integer]
       #
+      # @!attribute [rw] stream_creation_timestamp
+      #   The approximate time that the stream was created.
+      #   @return [Time]
+      #
       # @!attribute [rw] enhanced_monitoring
       #   Represents the current enhanced monitoring settings of the stream.
       #   @return [Array<Types::EnhancedMetrics>]
@@ -916,6 +966,7 @@ module Aws
         :shards,
         :has_more_shards,
         :retention_period_hours,
+        :stream_creation_timestamp,
         :enhanced_monitoring)
         include Aws::Structure
       end
@@ -935,6 +986,50 @@ module Aws
       class Tag < Struct.new(
         :key,
         :value)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass UpdateShardCountInput
+      #   data as a hash:
+      #
+      #       {
+      #         stream_name: "StreamName", # required
+      #         target_shard_count: 1, # required
+      #         scaling_type: "UNIFORM_SCALING", # required, accepts UNIFORM_SCALING
+      #       }
+      # @!attribute [rw] stream_name
+      #   The name of the stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] target_shard_count
+      #   The new number of shards.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] scaling_type
+      #   The scaling type. Uniform scaling creates shards of equal size.
+      #   @return [String]
+      class UpdateShardCountInput < Struct.new(
+        :stream_name,
+        :target_shard_count,
+        :scaling_type)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] stream_name
+      #   The name of the stream.
+      #   @return [String]
+      #
+      # @!attribute [rw] current_shard_count
+      #   The current number of shards.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] target_shard_count
+      #   The updated number of shards.
+      #   @return [Integer]
+      class UpdateShardCountOutput < Struct.new(
+        :stream_name,
+        :current_shard_count,
+        :target_shard_count)
         include Aws::Structure
       end
 

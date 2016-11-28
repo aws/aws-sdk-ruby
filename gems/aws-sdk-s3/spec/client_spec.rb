@@ -668,7 +668,7 @@ module Aws
         it 'returns true when the :bucket_exists waiter receives a 301' do
           stub_request(:head, "https://bucket.s3.amazonaws.com").
             to_return(:status => 301)
-          expect(client.wait_until(:bucket_exists, bucket:'bucket')).to be_truthy
+          expect(client.wait_until(:bucket_exists, bucket:'bucket')).not_to be(nil)
         end
 
       end

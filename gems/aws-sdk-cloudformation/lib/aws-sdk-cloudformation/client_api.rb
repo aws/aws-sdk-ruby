@@ -32,6 +32,7 @@ module Aws
       ChangeSetStatusReason = Shapes::StringShape.new(name: 'ChangeSetStatusReason')
       ChangeSetSummaries = Shapes::ListShape.new(name: 'ChangeSetSummaries')
       ChangeSetSummary = Shapes::StructureShape.new(name: 'ChangeSetSummary')
+      ChangeSetType = Shapes::StringShape.new(name: 'ChangeSetType')
       ChangeSource = Shapes::StringShape.new(name: 'ChangeSource')
       ChangeType = Shapes::StringShape.new(name: 'ChangeType')
       Changes = Shapes::ListShape.new(name: 'Changes')
@@ -68,12 +69,17 @@ module Aws
       ExecuteChangeSetInput = Shapes::StructureShape.new(name: 'ExecuteChangeSetInput')
       ExecuteChangeSetOutput = Shapes::StructureShape.new(name: 'ExecuteChangeSetOutput')
       ExecutionStatus = Shapes::StringShape.new(name: 'ExecutionStatus')
+      Export = Shapes::StructureShape.new(name: 'Export')
+      ExportName = Shapes::StringShape.new(name: 'ExportName')
+      ExportValue = Shapes::StringShape.new(name: 'ExportValue')
+      Exports = Shapes::ListShape.new(name: 'Exports')
       GetStackPolicyInput = Shapes::StructureShape.new(name: 'GetStackPolicyInput')
       GetStackPolicyOutput = Shapes::StructureShape.new(name: 'GetStackPolicyOutput')
       GetTemplateInput = Shapes::StructureShape.new(name: 'GetTemplateInput')
       GetTemplateOutput = Shapes::StructureShape.new(name: 'GetTemplateOutput')
       GetTemplateSummaryInput = Shapes::StructureShape.new(name: 'GetTemplateSummaryInput')
       GetTemplateSummaryOutput = Shapes::StructureShape.new(name: 'GetTemplateSummaryOutput')
+      Imports = Shapes::ListShape.new(name: 'Imports')
       InsufficientCapabilitiesException = Shapes::StructureShape.new(name: 'InsufficientCapabilitiesException')
       InvalidChangeSetStatusException = Shapes::StructureShape.new(name: 'InvalidChangeSetStatusException')
       LastUpdatedTime = Shapes::TimestampShape.new(name: 'LastUpdatedTime')
@@ -82,6 +88,10 @@ module Aws
       LimitValue = Shapes::IntegerShape.new(name: 'LimitValue')
       ListChangeSetsInput = Shapes::StructureShape.new(name: 'ListChangeSetsInput')
       ListChangeSetsOutput = Shapes::StructureShape.new(name: 'ListChangeSetsOutput')
+      ListExportsInput = Shapes::StructureShape.new(name: 'ListExportsInput')
+      ListExportsOutput = Shapes::StructureShape.new(name: 'ListExportsOutput')
+      ListImportsInput = Shapes::StructureShape.new(name: 'ListImportsInput')
+      ListImportsOutput = Shapes::StructureShape.new(name: 'ListImportsOutput')
       ListStackResourcesInput = Shapes::StructureShape.new(name: 'ListStackResourcesInput')
       ListStackResourcesOutput = Shapes::StructureShape.new(name: 'ListStackResourcesOutput')
       ListStacksInput = Shapes::StructureShape.new(name: 'ListStacksInput')
@@ -119,8 +129,10 @@ module Aws
       ResourceStatus = Shapes::StringShape.new(name: 'ResourceStatus')
       ResourceStatusReason = Shapes::StringShape.new(name: 'ResourceStatusReason')
       ResourceTargetDefinition = Shapes::StructureShape.new(name: 'ResourceTargetDefinition')
+      ResourceToSkip = Shapes::StringShape.new(name: 'ResourceToSkip')
       ResourceType = Shapes::StringShape.new(name: 'ResourceType')
       ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+      ResourcesToSkip = Shapes::ListShape.new(name: 'ResourcesToSkip')
       RetainResources = Shapes::ListShape.new(name: 'RetainResources')
       RoleARN = Shapes::StringShape.new(name: 'RoleARN')
       Scope = Shapes::ListShape.new(name: 'Scope')
@@ -147,6 +159,7 @@ module Aws
       StackSummaries = Shapes::ListShape.new(name: 'StackSummaries')
       StackSummary = Shapes::StructureShape.new(name: 'StackSummary')
       Stacks = Shapes::ListShape.new(name: 'Stacks')
+      StageList = Shapes::ListShape.new(name: 'StageList')
       Tag = Shapes::StructureShape.new(name: 'Tag')
       TagKey = Shapes::StringShape.new(name: 'TagKey')
       TagValue = Shapes::StringShape.new(name: 'TagValue')
@@ -155,9 +168,12 @@ module Aws
       TemplateDescription = Shapes::StringShape.new(name: 'TemplateDescription')
       TemplateParameter = Shapes::StructureShape.new(name: 'TemplateParameter')
       TemplateParameters = Shapes::ListShape.new(name: 'TemplateParameters')
+      TemplateStage = Shapes::StringShape.new(name: 'TemplateStage')
       TemplateURL = Shapes::StringShape.new(name: 'TemplateURL')
       TimeoutMinutes = Shapes::IntegerShape.new(name: 'TimeoutMinutes')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
+      TransformName = Shapes::StringShape.new(name: 'TransformName')
+      TransformsList = Shapes::ListShape.new(name: 'TransformsList')
       UpdateStackInput = Shapes::StructureShape.new(name: 'UpdateStackInput')
       UpdateStackOutput = Shapes::StructureShape.new(name: 'UpdateStackOutput')
       Url = Shapes::StringShape.new(name: 'Url')
@@ -201,6 +217,7 @@ module Aws
 
       ContinueUpdateRollbackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
       ContinueUpdateRollbackInput.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+      ContinueUpdateRollbackInput.add_member(:resources_to_skip, Shapes::ShapeRef.new(shape: ResourcesToSkip, location_name: "ResourcesToSkip"))
       ContinueUpdateRollbackInput.struct_class = Types::ContinueUpdateRollbackInput
 
       ContinueUpdateRollbackOutput.struct_class = Types::ContinueUpdateRollbackOutput
@@ -218,9 +235,11 @@ module Aws
       CreateChangeSetInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetName, required: true, location_name: "ChangeSetName"))
       CreateChangeSetInput.add_member(:client_token, Shapes::ShapeRef.new(shape: ClientToken, location_name: "ClientToken"))
       CreateChangeSetInput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
+      CreateChangeSetInput.add_member(:change_set_type, Shapes::ShapeRef.new(shape: ChangeSetType, location_name: "ChangeSetType"))
       CreateChangeSetInput.struct_class = Types::CreateChangeSetInput
 
       CreateChangeSetOutput.add_member(:id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "Id"))
+      CreateChangeSetOutput.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
       CreateChangeSetOutput.struct_class = Types::CreateChangeSetOutput
 
       CreateStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
@@ -327,16 +346,26 @@ module Aws
 
       ExecuteChangeSetOutput.struct_class = Types::ExecuteChangeSetOutput
 
+      Export.add_member(:exporting_stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "ExportingStackId"))
+      Export.add_member(:name, Shapes::ShapeRef.new(shape: ExportName, location_name: "Name"))
+      Export.add_member(:value, Shapes::ShapeRef.new(shape: ExportValue, location_name: "Value"))
+      Export.struct_class = Types::Export
+
+      Exports.member = Shapes::ShapeRef.new(shape: Export)
+
       GetStackPolicyInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
       GetStackPolicyInput.struct_class = Types::GetStackPolicyInput
 
       GetStackPolicyOutput.add_member(:stack_policy_body, Shapes::ShapeRef.new(shape: StackPolicyBody, location_name: "StackPolicyBody"))
       GetStackPolicyOutput.struct_class = Types::GetStackPolicyOutput
 
-      GetTemplateInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+      GetTemplateInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, location_name: "StackName"))
+      GetTemplateInput.add_member(:change_set_name, Shapes::ShapeRef.new(shape: ChangeSetNameOrId, location_name: "ChangeSetName"))
+      GetTemplateInput.add_member(:template_stage, Shapes::ShapeRef.new(shape: TemplateStage, location_name: "TemplateStage"))
       GetTemplateInput.struct_class = Types::GetTemplateInput
 
       GetTemplateOutput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
+      GetTemplateOutput.add_member(:stages_available, Shapes::ShapeRef.new(shape: StageList, location_name: "StagesAvailable"))
       GetTemplateOutput.struct_class = Types::GetTemplateOutput
 
       GetTemplateSummaryInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
@@ -351,7 +380,10 @@ module Aws
       GetTemplateSummaryOutput.add_member(:resource_types, Shapes::ShapeRef.new(shape: ResourceTypes, location_name: "ResourceTypes"))
       GetTemplateSummaryOutput.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "Version"))
       GetTemplateSummaryOutput.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location_name: "Metadata"))
+      GetTemplateSummaryOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
       GetTemplateSummaryOutput.struct_class = Types::GetTemplateSummaryOutput
+
+      Imports.member = Shapes::ShapeRef.new(shape: StackName)
 
       ListChangeSetsInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackNameOrId, required: true, location_name: "StackName"))
       ListChangeSetsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -360,6 +392,21 @@ module Aws
       ListChangeSetsOutput.add_member(:summaries, Shapes::ShapeRef.new(shape: ChangeSetSummaries, location_name: "Summaries"))
       ListChangeSetsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
       ListChangeSetsOutput.struct_class = Types::ListChangeSetsOutput
+
+      ListExportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListExportsInput.struct_class = Types::ListExportsInput
+
+      ListExportsOutput.add_member(:exports, Shapes::ShapeRef.new(shape: Exports, location_name: "Exports"))
+      ListExportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListExportsOutput.struct_class = Types::ListExportsOutput
+
+      ListImportsInput.add_member(:export_name, Shapes::ShapeRef.new(shape: ExportName, required: true, location_name: "ExportName"))
+      ListImportsInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListImportsInput.struct_class = Types::ListImportsInput
+
+      ListImportsOutput.add_member(:imports, Shapes::ShapeRef.new(shape: Imports, location_name: "Imports"))
+      ListImportsOutput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListImportsOutput.struct_class = Types::ListImportsOutput
 
       ListStackResourcesInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
       ListStackResourcesInput.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -430,6 +477,8 @@ module Aws
 
       ResourceTypes.member = Shapes::ShapeRef.new(shape: ResourceType)
 
+      ResourcesToSkip.member = Shapes::ShapeRef.new(shape: ResourceToSkip)
+
       RetainResources.member = Shapes::ShapeRef.new(shape: LogicalResourceId)
 
       Scope.member = Shapes::ShapeRef.new(shape: ResourceAttribute)
@@ -447,6 +496,7 @@ module Aws
 
       Stack.add_member(:stack_id, Shapes::ShapeRef.new(shape: StackId, location_name: "StackId"))
       Stack.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
+      Stack.add_member(:change_set_id, Shapes::ShapeRef.new(shape: ChangeSetId, location_name: "ChangeSetId"))
       Stack.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
       Stack.add_member(:parameters, Shapes::ShapeRef.new(shape: Parameters, location_name: "Parameters"))
       Stack.add_member(:creation_time, Shapes::ShapeRef.new(shape: CreationTime, required: true, location_name: "CreationTime"))
@@ -527,6 +577,8 @@ module Aws
 
       Stacks.member = Shapes::ShapeRef.new(shape: Stack)
 
+      StageList.member = Shapes::ShapeRef.new(shape: TemplateStage)
+
       Tag.add_member(:key, Shapes::ShapeRef.new(shape: TagKey, location_name: "Key"))
       Tag.add_member(:value, Shapes::ShapeRef.new(shape: TagValue, location_name: "Value"))
       Tag.struct_class = Types::Tag
@@ -540,6 +592,8 @@ module Aws
       TemplateParameter.struct_class = Types::TemplateParameter
 
       TemplateParameters.member = Shapes::ShapeRef.new(shape: TemplateParameter)
+
+      TransformsList.member = Shapes::ShapeRef.new(shape: TransformName)
 
       UpdateStackInput.add_member(:stack_name, Shapes::ShapeRef.new(shape: StackName, required: true, location_name: "StackName"))
       UpdateStackInput.add_member(:template_body, Shapes::ShapeRef.new(shape: TemplateBody, location_name: "TemplateBody"))
@@ -568,6 +622,7 @@ module Aws
       ValidateTemplateOutput.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
       ValidateTemplateOutput.add_member(:capabilities, Shapes::ShapeRef.new(shape: Capabilities, location_name: "Capabilities"))
       ValidateTemplateOutput.add_member(:capabilities_reason, Shapes::ShapeRef.new(shape: CapabilitiesReason, location_name: "CapabilitiesReason"))
+      ValidateTemplateOutput.add_member(:declared_transforms, Shapes::ShapeRef.new(shape: TransformsList, location_name: "DeclaredTransforms"))
       ValidateTemplateOutput.struct_class = Types::ValidateTemplateOutput
 
 
@@ -714,6 +769,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: ExecuteChangeSetOutput)
           o.errors << Shapes::ShapeRef.new(shape: InvalidChangeSetStatusException)
           o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InsufficientCapabilitiesException)
         end)
 
         api.add_operation(:get_stack_policy, Seahorse::Model::Operation.new.tap do |o|
@@ -730,6 +786,7 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: GetTemplateInput)
           o.output = Shapes::ShapeRef.new(shape: GetTemplateOutput)
+          o.errors << Shapes::ShapeRef.new(shape: ChangeSetNotFoundException)
         end)
 
         api.add_operation(:get_template_summary, Seahorse::Model::Operation.new.tap do |o|
@@ -746,6 +803,22 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: ListChangeSetsInput)
           o.output = Shapes::ShapeRef.new(shape: ListChangeSetsOutput)
+        end)
+
+        api.add_operation(:list_exports, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListExports"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListExportsInput)
+          o.output = Shapes::ShapeRef.new(shape: ListExportsOutput)
+        end)
+
+        api.add_operation(:list_imports, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListImports"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListImportsInput)
+          o.output = Shapes::ShapeRef.new(shape: ListImportsOutput)
         end)
 
         api.add_operation(:list_stack_resources, Seahorse::Model::Operation.new.tap do |o|

@@ -39,10 +39,7 @@ module Seahorse
             instance_variable_set("@#{opt_name}", value)
           end
           @pool_mutex = Mutex.new
-          @pool = Hash.new do |pool, endpoint|
-            pool[endpoint] = []
-            pool[endpoint]
-          end
+          @pool = {}
         end
 
         OPTIONS.keys.each do |attr_name|
@@ -89,7 +86,9 @@ module Seahorse
           # attempt to recycle an already open session
           @pool_mutex.synchronize do
             _clean
-            session = @pool[endpoint].shift
+            if @pool.key?(endpoint)
+              session = @pool[endpoint].shift
+            end
           end
 
           begin
@@ -103,7 +102,10 @@ module Seahorse
             raise
           else
             # No error raised? Good, check the session into the pool.
-            @pool_mutex.synchronize { @pool[endpoint] << session }
+            @pool_mutex.synchronize do
+              @pool[endpoint] = [] unless @pool.key?(endpoint)
+              @pool[endpoint] << session
+            end
           end
           nil
         end
@@ -217,7 +219,9 @@ module Seahorse
           # @return [Array<ConnectionPool>] Returns a list of of the
           #   constructed connection pools.
           def pools
-            @pools.values
+            @pools_mutex.synchronize do
+              @pools.values
+            end
           end
 
           private

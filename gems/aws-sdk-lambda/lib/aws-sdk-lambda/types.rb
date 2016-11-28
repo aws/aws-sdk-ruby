@@ -70,15 +70,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] source_account
-      #   This parameter is used for S3 and SES only. The AWS account ID
-      #   (without a hyphen) of the source owner. For example, if the
-      #   `SourceArn` identifies a bucket, then this is the bucket owner's
-      #   account ID. You can use this additional condition to ensure the
-      #   bucket you specify is owned by a specific account (it is possible
-      #   the bucket owner deleted the bucket and some other AWS account
-      #   created the bucket). You can also use this condition to specify all
-      #   sources (that is, you don't specify the `SourceArn`) owned by a
-      #   specific account.
+      #   This parameter is used for S3, SES, CloudWatch Logs and CloudWatch
+      #   Rules only. The AWS account ID (without a hyphen) of the source
+      #   owner. For example, if the `SourceArn` identifies a bucket, then
+      #   this is the bucket owner's account ID. You can use this additional
+      #   condition to ensure the bucket you specify is owned by a specific
+      #   account (it is possible the bucket owner deleted the bucket and some
+      #   other AWS account created the bucket). You can also use this
+      #   condition to specify all sources (that is, you don't specify the
+      #   `SourceArn`) owned by a specific account.
       #   @return [String]
       #
       # @!attribute [rw] event_source_token
@@ -283,6 +283,12 @@ module Aws
       #           subnet_ids: ["SubnetId"],
       #           security_group_ids: ["SecurityGroupId"],
       #         },
+      #         environment: {
+      #           variables: {
+      #             "EnvironmentVariableName" => "EnvironmentVariableValue",
+      #           },
+      #         },
+      #         kms_key_arn: "KMSKeyArn",
       #       }
       # @!attribute [rw] function_name
       #   The name you want to assign to the function you are uploading. The
@@ -357,6 +363,17 @@ module Aws
       #   IDs. These must belong to the same VPC. You must provide at least
       #   one security group and one subnet ID.
       #   @return [Types::VpcConfig]
+      #
+      # @!attribute [rw] environment
+      #   The parent object that contains your environment's configuration
+      #   settings.
+      #   @return [Types::Environment]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If not provided, AWS Lambda will
+      #   use a default service key.
+      #   @return [String]
       class CreateFunctionRequest < Struct.new(
         :function_name,
         :runtime,
@@ -367,7 +384,9 @@ module Aws
         :timeout,
         :memory_size,
         :publish,
-        :vpc_config)
+        :vpc_config,
+        :environment,
+        :kms_key_arn)
         include Aws::Structure
       end
 
@@ -448,6 +467,58 @@ module Aws
       class DeleteFunctionRequest < Struct.new(
         :function_name,
         :qualifier)
+        include Aws::Structure
+      end
+
+      # The parent object that contains your environment's configuration
+      # settings.
+      # @note When making an API call, pass Environment
+      #   data as a hash:
+      #
+      #       {
+      #         variables: {
+      #           "EnvironmentVariableName" => "EnvironmentVariableValue",
+      #         },
+      #       }
+      # @!attribute [rw] variables
+      #   The key-value pairs that represent your environment's configuration
+      #   settings. The value you specify cannot contain a ",".
+      #   @return [Hash<String,String>]
+      class Environment < Struct.new(
+        :variables)
+        include Aws::Structure
+      end
+
+      # The parent object that contains error information associated with your
+      # configuration settings.
+      # @!attribute [rw] error_code
+      #   The error code returned by the environment error object.
+      #   @return [String]
+      #
+      # @!attribute [rw] message
+      #   The message returned by the environment error object.
+      #   @return [String]
+      class EnvironmentError < Struct.new(
+        :error_code,
+        :message)
+        include Aws::Structure
+      end
+
+      # The parent object returned that contains your environment's
+      # configuration settings or any error information associated with your
+      # configuration settings.
+      # @!attribute [rw] variables
+      #   The key-value pairs returned that represent your environment's
+      #   configuration settings or error information.
+      #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] error
+      #   The parent object that contains error information associated with
+      #   your configuration settings.
+      #   @return [Types::EnvironmentError]
+      class EnvironmentResponse < Struct.new(
+        :variables,
+        :error)
         include Aws::Structure
       end
 
@@ -627,6 +698,17 @@ module Aws
       # @!attribute [rw] vpc_config
       #   VPC configuration associated with your Lambda function.
       #   @return [Types::VpcConfigResponse]
+      #
+      # @!attribute [rw] environment
+      #   The parent object that contains your environment's configuration
+      #   settings.
+      #   @return [Types::EnvironmentResponse]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If empty, it means you are using
+      #   the AWS Lambda default service key.
+      #   @return [String]
       class FunctionConfiguration < Struct.new(
         :function_name,
         :function_arn,
@@ -640,7 +722,9 @@ module Aws
         :last_modified,
         :code_sha_256,
         :version,
-        :vpc_config)
+        :vpc_config,
+        :environment,
+        :kms_key_arn)
         include Aws::Structure
       end
 
@@ -754,7 +838,7 @@ module Aws
       end
 
       # This response contains the object for the Lambda function location
-      # (see .
+      # (see FunctionCodeLocation.
       # @!attribute [rw] configuration
       #   A complex type that describes function metadata.
       #   @return [Types::FunctionConfiguration]
@@ -927,7 +1011,7 @@ module Aws
       #
       # @!attribute [rw] payload
       #   It is the JSON representation of the object returned by the Lambda
-      #   function. In This is present only if the invocation type is
+      #   function. This is present only if the invocation type is
       #   `RequestResponse`.
       #
       #   In the event of a function error this field contains a message
@@ -1071,7 +1155,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Contains a list of event sources (see )
+      # Contains a list of event sources (see EventSourceMappingConfiguration)
       # @!attribute [rw] next_marker
       #   A string, present if there are more event source mappings.
       #   @return [String]
@@ -1415,6 +1499,12 @@ module Aws
       #           subnet_ids: ["SubnetId"],
       #           security_group_ids: ["SecurityGroupId"],
       #         },
+      #         environment: {
+      #           variables: {
+      #             "EnvironmentVariableName" => "EnvironmentVariableValue",
+      #           },
+      #         },
+      #         kms_key_arn: "KMSKeyArn",
       #         runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7
       #       }
       # @!attribute [rw] function_name
@@ -1467,6 +1557,18 @@ module Aws
       #   one security group and one subnet ID.
       #   @return [Types::VpcConfig]
       #
+      # @!attribute [rw] environment
+      #   The parent object that contains your environment's configuration
+      #   settings.
+      #   @return [Types::Environment]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If you elect to use the AWS
+      #   Lambda default service key, pass in an empty string ("") for this
+      #   parameter.
+      #   @return [String]
+      #
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function.
       #
@@ -1481,6 +1583,8 @@ module Aws
         :timeout,
         :memory_size,
         :vpc_config,
+        :environment,
+        :kms_key_arn,
         :runtime)
         include Aws::Structure
       end

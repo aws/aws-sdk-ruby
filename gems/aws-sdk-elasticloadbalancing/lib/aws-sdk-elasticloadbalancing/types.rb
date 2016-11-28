@@ -1450,9 +1450,9 @@ module Aws
       #
       #   * ZERO\_OR\_ONE(0..1) : Up to one value is allowed
       #
-      #   * ZERO\_OR\_MORE(0..\*) : Optional. Multiple values are allowed
+      #   * ZERO\_OR\_MORE(0..*) : Optional. Multiple values are allowed
       #
-      #   * ONE\_OR\_MORE(1..\*0) : Required. Multiple values are allowed
+      #   * ONE\_OR\_MORE(1..*0) : Required. Multiple values are allowed
       #   @return [String]
       class PolicyAttributeTypeDescription < Struct.new(
         :attribute_name,

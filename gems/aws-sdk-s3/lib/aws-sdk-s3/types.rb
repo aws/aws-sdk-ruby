@@ -2157,6 +2157,20 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass GlacierJobParameters
+      #   data as a hash:
+      #
+      #       {
+      #         tier: "Standard", # required, accepts Standard, Bulk, Expedited
+      #       }
+      # @!attribute [rw] tier
+      #   Glacier retrieval tier at which the restore will be processed.
+      #   @return [String]
+      class GlacierJobParameters < Struct.new(
+        :tier)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass Grant
       #   data as a hash:
       #
@@ -4973,6 +4987,9 @@ module Aws
       #         version_id: "ObjectVersionId",
       #         restore_request: {
       #           days: 1, # required
+      #           glacier_job_parameters: {
+      #             tier: "Standard", # required, accepts Standard, Bulk, Expedited
+      #           },
       #         },
       #         request_payer: "requester", # accepts requester
       #       }
@@ -5009,12 +5026,20 @@ module Aws
       #
       #       {
       #         days: 1, # required
+      #         glacier_job_parameters: {
+      #           tier: "Standard", # required, accepts Standard, Bulk, Expedited
+      #         },
       #       }
       # @!attribute [rw] days
       #   Lifetime of the active copy in days
       #   @return [Integer]
+      #
+      # @!attribute [rw] glacier_job_parameters
+      #   Glacier related prameters pertaining to this job.
+      #   @return [Types::GlacierJobParameters]
       class RestoreRequest < Struct.new(
-        :days)
+        :days,
+        :glacier_job_parameters)
         include Aws::Structure
       end
 

@@ -52,11 +52,14 @@ module BuildTools
       #
       attr_accessor :models
 
-      # @return [string] Something like "aws-sdk-dynamodb"
+      # @return [String] Something like "aws-sdk-dynamodb"
       attr_accessor :gem_name
 
-      # @return [string] Path to the gem directory, e.g. "gems/aws-sdk-dynamodb"
+      # @return [String] Path to the gem directory, e.g. "gems/aws-sdk-dynamodb"
       attr_accessor :gem_dir
+
+      # @return [String]
+      attr_accessor :gem_version
 
       # @return [Hash<String,String> A hash of runtime gem dependencies. Keys
       #   are gem names and values are versions

@@ -757,6 +757,17 @@ module Aws
       #   The EC2 instance ID of the container instance.
       #   @return [String]
       #
+      # @!attribute [rw] version
+      #   The version counter for the container instance. Every time a
+      #   container instance experiences a change that triggers a CloudWatch
+      #   event, the version counter is incremented. If you are replicating
+      #   your Amazon ECS container instance state with CloudWatch events, you
+      #   can compare the version of a container instance reported by the
+      #   Amazon ECS APIs with the version reported in CloudWatch events for
+      #   the container instance (inside the `detail` object) to verify that
+      #   the version in your event stream is current.
+      #   @return [Integer]
+      #
       # @!attribute [rw] version_info
       #   The version information for the Amazon ECS container agent and
       #   Docker daemon running on the container instance.
@@ -814,6 +825,7 @@ module Aws
       class ContainerInstance < Struct.new(
         :container_instance_arn,
         :ec2_instance_id,
+        :version,
         :version_info,
         :remaining_resources,
         :registered_resources,
@@ -1191,8 +1203,7 @@ module Aws
       end
 
       # @!attribute [rw] container_instance
-      #   An EC2 instance that is running the Amazon ECS agent and has been
-      #   registered with a cluster.
+      #   The container instance that was deregistered.
       #   @return [Types::ContainerInstance]
       class DeregisterContainerInstanceResponse < Struct.new(
         :container_instance)
@@ -2269,8 +2280,7 @@ module Aws
       end
 
       # @!attribute [rw] container_instance
-      #   An EC2 instance that is running the Amazon ECS agent and has been
-      #   registered with a cluster.
+      #   The container instance that was registered.
       #   @return [Types::ContainerInstance]
       class RegisterContainerInstanceResponse < Struct.new(
         :container_instance)
@@ -2823,7 +2833,7 @@ module Aws
       end
 
       # @!attribute [rw] task
-      #   Details on a task in a cluster.
+      #   The task that was stopped.
       #   @return [Types::Task]
       class StopTaskResponse < Struct.new(
         :task)
@@ -2980,6 +2990,16 @@ module Aws
       #   deployment ID of the service that starts it.
       #   @return [String]
       #
+      # @!attribute [rw] version
+      #   The version counter for the task. Every time a task experiences a
+      #   change that triggers a CloudWatch event, the version counter is
+      #   incremented. If you are replicating your Amazon ECS task state with
+      #   CloudWatch events, you can compare the version of a task reported by
+      #   the Amazon ECS APIs with the version reported in CloudWatch events
+      #   for the task (inside the `detail` object) to verify that the version
+      #   in your event stream is current.
+      #   @return [Integer]
+      #
       # @!attribute [rw] stopped_reason
       #   The reason the task was stopped.
       #   @return [String]
@@ -3008,6 +3028,7 @@ module Aws
         :desired_status,
         :containers,
         :started_by,
+        :version,
         :stopped_reason,
         :created_at,
         :started_at,
@@ -3186,8 +3207,7 @@ module Aws
       end
 
       # @!attribute [rw] container_instance
-      #   An EC2 instance that is running the Amazon ECS agent and has been
-      #   registered with a cluster.
+      #   The container instance for which the container agent was updated.
       #   @return [Types::ContainerInstance]
       class UpdateContainerAgentResponse < Struct.new(
         :container_instance)

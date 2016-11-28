@@ -53,7 +53,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   The scheduling expression. For example, "cron(0 20 * * ? *)",
       #   "rate(5 minutes)".
       #   @return [String]
       #
@@ -366,7 +366,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   The scheduling expression. For example, "cron(0 20 * * ? *)",
       #   "rate(5 minutes)".
       #   @return [String]
       #
@@ -549,7 +549,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] schedule_expression
-      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   The scheduling expression. For example, "cron(0 20 * * ? *)",
       #   "rate(5 minutes)".
       #   @return [String]
       #

@@ -422,3 +422,7 @@ changes before 2.0.0 final.
 
 * The short name for Aws::SimpleDB has been renamed from `sdb` to
   `simpledb`.
+
+# Upgrading from v1?
+
+Please see [MIGRATING.md](https://github.com/aws/aws-sdk-ruby/blob/master/MIGRATING.md)

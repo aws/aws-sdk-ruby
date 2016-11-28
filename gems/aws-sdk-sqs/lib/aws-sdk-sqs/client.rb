@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 require 'aws-sdk-sqs/plugins/queue_urls.rb'
@@ -46,6 +47,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
       add_plugin(Aws::SQS::Plugins::QueueUrls)
@@ -152,15 +154,15 @@ module Aws
       #
       #  </note>
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
+      # <note markdown="1"> Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
       # 1. For example, a parameter list with two elements looks like this:
       #
       #  </note>
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
       #
       #
       #
@@ -235,7 +237,7 @@ module Aws
       # of 12 hours. If you try to extend beyond 12 hours, the request will be
       # rejected.
       #
-      # <note markdown="1">There is a 120,000 limit for the number of inflight messages per
+      # <note markdown="1"> There is a 120,000 limit for the number of inflight messages per
       # queue. Messages are inflight after they have been received from the
       # queue by a consuming component, but have not yet been deleted from the
       # queue. If you reach the 120,000 limit, you will receive an OverLimit
@@ -244,7 +246,7 @@ module Aws
       # processed. You can also increase the number of queues you use to
       # process the messages.
       #
-      # </note>
+      #  </note>
       #
       # If you attempt to set the `VisibilityTimeout` to an amount more than
       # the maximum time left, Amazon SQS returns an error. It will not
@@ -297,15 +299,15 @@ module Aws
       # and unsuccessful actions, you should check for batch errors even when
       # the call returns an HTTP status code of 200.
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
+      # <note markdown="1"> Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
       # 1. For example, a parameter list with two elements looks like this:
       #
       #  </note>
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
@@ -345,81 +347,152 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new queue, or returns the URL of an existing one. When you
-      # request `CreateQueue`, you provide a name for the queue. To
-      # successfully create a new queue, you must provide a name that is
-      # unique within the scope of your own queues.
+      # Creates a new standard or FIFO queue or returns the URL of an existing
+      # queue. You can pass one or more attributes in the request.
       #
-      # <note markdown="1"> If you delete a queue, you must wait at least 60 seconds before
-      # creating a queue with the same name.
+      # * If you don't specify the `FifoQueue` attribute, Amazon SQS creates
+      #   a standard queue.
+      # 
+      #   <note markdown="1"> You can't change the queue type after you create it and you can't
+      #   convert an existing standard queue into a FIFO queue. You must
+      #   either create a new FIFO queue for your application or delete your
+      #   existing standard queue and recreate it as a FIFO queue. For more
+      #   information, see [ Moving From a Standard Queue to a FIFO Queue][1]
+      #   in the *Amazon SQS Developer Guide*.
+      # 
+      #    </note>
       #
-      #  </note>
+      # * If you don't provide a value for an attribute, the queue is created
+      #   with the default value for the attribute.
       #
-      # You may pass one or more attributes in the request. If you do not
-      # provide a value for any attribute, the queue will have the default
-      # value for that attribute.
+      # * If you delete a queue, you must wait at least 60 seconds before
+      #   creating a queue with the same name.
       #
-      # <note markdown="1">Use GetQueueUrl to get a queue's URL. GetQueueUrl requires only the
-      # `QueueName` parameter.
+      # To successfully create a new queue, you must provide a queue name that
+      # adheres to the [limits related to queues][2] and is unique within the
+      # scope of your queues.
       #
-      # </note>
+      # To get the queue URL, use the GetQueueUrl action. GetQueueUrl requires
+      # only the `QueueName` parameter.
       #
-      # If you provide the name of an existing queue, along with the exact
-      # names and values of all the queue's attributes, `CreateQueue` returns
-      # the queue URL for the existing queue. If the queue name, attribute
-      # names, or attribute values do not match an existing queue,
-      # `CreateQueue` returns an error.
+      # * If you provide the name of an existing queue along with the exact
+      #   names and values of all the queue's attributes, `CreateQueue`
+      #   returns the queue URL for the existing queue.
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
-      # using the `param.n` notation. Values of `n` are integers starting from
-      # 1. For example, a parameter list with two elements looks like this:
+      # * If the queue name, attribute names, or attribute values don't match
+      #   an existing queue, `CreateQueue` returns an error.
       #
-      #  </note>
+      # Some API actions take lists of parameters. Specify these lists using
+      # the `param.n` notation. Values of `n` are integers starting from 1.
+      # The following is an example of a parameter list with two elements:
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues-moving.html
+      # [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/limits-queues.html
       # @option params [required, String] :queue_name
-      #   The name for the queue to be created.
+      #   The name of the new queue. The following limits apply to this name:
+      #
+      #   * A queue name can have up to 80 characters.
+      #
+      #   * The following are accepted: alphanumeric chatacters, hyphens (`-`),
+      #     and underscores (`_`).
+      #
+      #   * A FIFO queue name must end with the `.fifo` suffix.
       #
       #   Queue names are case-sensitive.
       # @option params [Hash<String,String>] :attributes
       #   A map of attributes with their corresponding values.
       #
       #   The following lists the names, descriptions, and values of the special
-      #   request parameters the `CreateQueue` action uses:
+      #   request parameters that the `CreateQueue` action uses:
       #
-      #   * `DelaySeconds` - The time in seconds that the delivery of all
-      #     messages in the queue will be delayed. An integer from 0 to 900 (15
-      #     minutes). The default for this attribute is 0 (zero).
+      #   * `DelaySeconds` - The number of seconds for which the delivery of all
+      #     messages in the queue is delayed. An integer from 0 to 900 (15
+      #     minutes). The default is 0 (zero).
       #
       #   * `MaximumMessageSize` - The limit of how many bytes a message can
-      #     contain before Amazon SQS rejects it. An integer from 1024 bytes (1
-      #     KiB) up to 262144 bytes (256 KiB). The default for this attribute is
-      #     262144 (256 KiB).
+      #     contain before Amazon SQS rejects it. An integer from 1,024 bytes (1
+      #     KiB) up to 262,144 bytes (256 KiB). The default is 262,144 (256
+      #     KiB).
       #
-      #   * `MessageRetentionPeriod` - The number of seconds Amazon SQS retains
-      #     a message. Integer representing seconds, from 60 (1 minute) to
-      #     1209600 (14 days). The default for this attribute is 345600 (4
-      #     days).
+      #   * `MessageRetentionPeriod` - The number of seconds for which Amazon
+      #     SQS retains a message. An integer representing seconds, from 60 (1
+      #     minute) to 120,9600 (14 days). The default is 345,600 (4 days).
       #
       #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #
-      #   * `ReceiveMessageWaitTimeSeconds` - The time for which a
-      #     ReceiveMessage call will wait for a message to arrive. An integer
-      #     from 0 to 20 (seconds). The default for this attribute is 0.
+      #   * `ReceiveMessageWaitTimeSeconds` - The number of seconds for which a
+      #     ReceiveMessage action will wait for a message to arrive. An integer
+      #     from 0 to 20 (seconds). The default is 0.
       #
-      #   * `RedrivePolicy` - The parameters for dead letter queue functionality
-      #     of the source queue. For more information about RedrivePolicy and
-      #     dead letter queues, see [Using Amazon SQS Dead Letter Queues][2] in
-      #     the *Amazon SQS Developer Guide*.
+      #   * `RedrivePolicy` - The parameters for the dead letter queue
+      #     functionality of the source queue. For more information about the
+      #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
+      #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+      #
+      #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
+      #     Similarly, the dead letter queue of a standard queue must also be a
+      #     standard queue.
+      #
+      #      </note>
       #
       #   * `VisibilityTimeout` - The visibility timeout for the queue. An
-      #     integer from 0 to 43200 (12 hours). The default for this attribute
-      #     is 30. For more information about visibility timeout, see
-      #     [Visibility Timeout][3] in the *Amazon SQS Developer Guide*.
+      #     integer from 0 to 43200 (12 hours). The default is 30. For more
+      #     information about the visibility timeout, see [Visibility
+      #     Timeout][3] in the *Amazon SQS Developer Guide*.
+      #
+      #   The following attributes apply only to [FIFO (first-in-first-out)
+      #   queues][4]\:
+      #
+      #   * `FifoQueue` - Designates a queue as FIFO. You can provide this
+      #     attribute only during queue creation; you can't change it for an
+      #     existing queue. When you set this attribute, you must provide a
+      #     `MessageGroupId` explicitly.
+      #
+      #     For more information, see [FIFO Queue Logic][5] in the *Amazon SQS
+      #     Developer Guide*.
+      #
+      #   * `ContentBasedDeduplication` - Enables content-based deduplication.
+      #     For more information, see [Exactly-Once Processing][6] in the
+      #     *Amazon SQS Developer Guide*.
+      #
+      #     * Every message must have a unique `MessageDeduplicationId`,
+      #
+      #       * You may provide a `MessageDeduplicationId` explicitly.
+      #
+      #       * If you aren't able to provide a `MessageDeduplicationId` and
+      #         you enable `ContentBasedDeduplication` for your queue, Amazon
+      #         SQS uses a SHA-256 hash to generate the `MessageDeduplicationId`
+      #         using the body of the message (but not the attributes of the
+      #         message).
+      #
+      #       * If you don't provide a `MessageDeduplicationId` and the queue
+      #         doesn't have `ContentBasedDeduplication` set, the action fails
+      #         with an error.
+      #
+      #       * If the queue has `ContentBasedDeduplication` set, your
+      #         `MessageDeduplicationId` overrides the generated one.
+      #
+      #     * When `ContentBasedDeduplication` is in effect, messages with
+      #       identical content sent within the deduplication interval are
+      #       treated as duplicates and only one copy of the message is
+      #       delivered.
+      #
+      #     * You can also use `ContentBasedDeduplication` for messages with
+      #       identical content to be treated as duplicates.
+      #
+      #     * If you send one message with `ContentBasedDeduplication` enabled
+      #       and then another message with a `MessageDeduplicationId` that is
+      #       the same as the one generated for the first
+      #       `MessageDeduplicationId`, the two messages are treated as
+      #       duplicates and only one copy of the message is delivered.
       #
       #   Any other valid special request parameters that are specified (such as
       #   `ApproximateNumberOfMessages`, `ApproximateNumberOfMessagesDelayed`,
@@ -431,6 +504,9 @@ module Aws
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
       #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
       #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+      #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+      #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
       # @return [Types::CreateQueueResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateQueueResult#queue_url #QueueUrl} => String
@@ -439,7 +515,7 @@ module Aws
       #   resp = client.create_queue({
       #     queue_name: "String", # required
       #     attributes: {
-      #       "Policy" => "String",
+      #       "All" => "String",
       #     },
       #   })
       #
@@ -504,15 +580,15 @@ module Aws
       # and unsuccessful actions, you should check for batch errors even when
       # the call returns an HTTP status code of 200.
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
+      # <note markdown="1"> Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
       # 1. For example, a parameter list with two elements looks like this:
       #
       #  </note>
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
@@ -551,7 +627,7 @@ module Aws
       end
 
       # Deletes the queue specified by the **queue URL**, regardless of
-      # whether the queue is empty. If the specified queue does not exist,
+      # whether the queue is empty. If the specified queue doesn't exist,
       # Amazon SQS returns a successful response.
       #
       # Use `DeleteQueue` with care; once you delete your queue, any messages
@@ -590,79 +666,94 @@ module Aws
 
       # Gets attributes for the specified queue.
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
+      # <note markdown="1"> Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
       # 1. For example, a parameter list with two elements looks like this:
       #
       #  </note>
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
       # @option params [Array<String>] :attribute_names
-      #   A list of attributes to retrieve information for. The following
-      #   attributes are supported:
+      #   A list of attributes for which to retrieve information.
       #
-      #   * `All` - returns all values.
+      #   <note markdown="1"> Going forward, new attributes might be added. If you are writing code
+      #   that calls this action, we recommend that you structure your code so
+      #   that it can handle new attributes gracefully.
       #
-      #   * `ApproximateNumberOfMessages` - returns the approximate number of
+      #    </note>
+      #
+      #   The following attributes are supported:
+      #
+      #   * `All` - Returns all values.
+      #
+      #   * `ApproximateNumberOfMessages` - Returns the approximate number of
       #     visible messages in a queue. For more information, see [Resources
       #     Required to Process Messages][1] in the *Amazon SQS Developer
       #     Guide*.
       #
-      #   * `ApproximateNumberOfMessagesNotVisible` - returns the approximate
-      #     number of messages that are not timed-out and not deleted. For more
-      #     information, see [Resources Required to Process Messages][1] in the
-      #     *Amazon SQS Developer Guide*.
+      #   * `ApproximateNumberOfMessagesDelayed` - Returns the approximate
+      #     number of messages that are waiting to be added to the queue.
       #
-      #   * `VisibilityTimeout` - returns the visibility timeout for the queue.
-      #     For more information about visibility timeout, see [Visibility
-      #     Timeout][2] in the *Amazon SQS Developer Guide*.
+      #   * `ApproximateNumberOfMessagesNotVisible` - Returns the approximate
+      #     number of messages that have not timed-out and are not deleted. For
+      #     more information, see [Resources Required to Process Messages][1] in
+      #     the *Amazon SQS Developer Guide*.
       #
-      #   * `CreatedTimestamp` - returns the time when the queue was created
-      #     (epoch time in seconds).
+      #   * `CreatedTimestamp` - Returns the time when the queue was created in
+      #     seconds (epoch time).
       #
-      #   * `LastModifiedTimestamp` - returns the time when the queue was last
-      #     changed (epoch time in seconds).
+      #   * `DelaySeconds` - Returns the default delay on the queue in seconds.
       #
-      #   * `Policy` - returns the queue's policy.
+      #   * `LastModifiedTimestamp` - Returns the time when the queue was last
+      #     changed in seconds (epoch time).
       #
-      #   * `MaximumMessageSize` - returns the limit of how many bytes a message
+      #   * `MaximumMessageSize` - Returns the limit of how many bytes a message
       #     can contain before Amazon SQS rejects it.
       #
-      #   * `MessageRetentionPeriod` - returns the number of seconds Amazon SQS
-      #     retains a message.
+      #   * `MessageRetentionPeriod` - Returns the number of seconds for which
+      #     Amazon SQS retains a message.
       #
-      #   * `QueueArn` - returns the queue's Amazon resource name (ARN).
+      #   * `Policy` - Returns the policy of the queue.
       #
-      #   * `ApproximateNumberOfMessagesDelayed` - returns the approximate
-      #     number of messages that are pending to be added to the queue.
+      #   * `QueueArn` - Returns the Amazon resource name (ARN) of the queue.
       #
-      #   * `DelaySeconds` - returns the default delay on the queue in seconds.
+      #   * `ReceiveMessageWaitTimeSeconds` - Returns the number of seconds for
+      #     which ReceiveMessage call will wait for a message to arrive.
       #
-      #   * `ReceiveMessageWaitTimeSeconds` - returns the time for which a
-      #     ReceiveMessage call will wait for a message to arrive.
+      #   * `RedrivePolicy` - Returns the parameters for dead letter queue
+      #     functionality of the source queue. For more information about the
+      #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
+      #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
       #
-      #   * `RedrivePolicy` - returns the parameters for dead letter queue
-      #     functionality of the source queue. For more information about
-      #     RedrivePolicy and dead letter queues, see [Using Amazon SQS Dead
-      #     Letter Queues][3] in the *Amazon SQS Developer Guide*.
+      #   * `VisibilityTimeout` - Returns the visibility timeout for the queue.
+      #     For more information about the visibility timeout, see [Visibility
+      #     Timeout][3] in the *Amazon SQS Developer Guide*.
       #
-      #   <note markdown="1">Going forward, new attributes might be added. If you are writing code
-      #   that calls this action, we recommend that you structure your code so
-      #   that it can handle new attributes gracefully.
+      #   The following attributes apply only to [FIFO (first-in-first-out)
+      #   queues][4]\:
       #
-      #   </note>
+      #   * `FifoQueue` - Returns whether the queue is FIFO. For more
+      #     information, see [FIFO Queue Logic][5] in the *Amazon SQS Developer
+      #     Guide*.
+      #
+      #   * `ContentBasedDeduplication` - Returns whether content-based
+      #     deduplication is enabled for the queue. For more information, see
+      #     [Exactly-Once Processing][6] in the *Amazon SQS Developer Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/ApproximateNumber.html
-      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
-      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
+      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+      #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
+      #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
       # @return [Types::GetQueueAttributesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetQueueAttributesResult#attributes #Attributes} => Hash&lt;String,String&gt;
@@ -670,7 +761,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.get_queue_attributes({
       #     queue_url: "String", # required
-      #     attribute_names: ["Policy"], # accepts Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy
+      #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication
       #   })
       #
       # @example Response structure
@@ -690,7 +781,7 @@ module Aws
       # `QueueOwnerAWSAccountId` parameter to specify the account ID of the
       # queue's owner. The queue's owner must grant you permission to access
       # the queue. For more information about shared queue access, see
-      # AddPermission or go to [Shared Queues][1] in the *Amazon SQS Developer
+      # AddPermission or see [Shared Queues][1] in the *Amazon SQS Developer
       # Guide*.
       #
       #
@@ -727,7 +818,7 @@ module Aws
       # attribute configured with a dead letter queue.
       #
       # For more information about using dead letter queues, see [Using Amazon
-      # SQS Dead Letter Queues][1].
+      # SQS Dead Letter Queues][1] in the *Amazon SQS Developer Guide*.
       #
       #
       #
@@ -786,14 +877,14 @@ module Aws
       # Deletes the messages in a queue specified by the **queue URL**.
       #
       # When you use the `PurgeQueue` API, the deleted messages in the queue
-      # cannot be retrieved.
+      # can't be retrieved.
       #
       # When you purge a queue, the message deletion process takes up to 60
       # seconds. All messages sent to the queue before calling `PurgeQueue`
       # will be deleted; messages sent to the queue while it is being purged
-      # may be deleted. While the queue is being purged, messages sent to the
-      # queue before `PurgeQueue` was called may be received, but will be
-      # deleted within the next minute.
+      # might be deleted. While the queue is being purged, messages sent to
+      # the queue before `PurgeQueue` was called might be received, but will
+      # be deleted within the next minute.
       # @option params [required, String] :queue_url
       #   The queue URL of the queue to delete the messages from when using the
       #   `PurgeQueue` API.
@@ -830,8 +921,8 @@ module Aws
       #
       # * Message body
       #
-      # * MD5 digest of the message body. For information about MD5, go to
-      #   [http://www.faqs.org/rfcs/rfc1321.html][2].
+      # * MD5 digest of the message body. For information about MD5, see
+      #   [RFC1321][2].
       #
       # * Message ID you received when you sent the message to the queue.
       #
@@ -847,10 +938,15 @@ module Aws
       #
       # You can provide the `VisibilityTimeout` parameter in your request,
       # which will be applied to the messages that Amazon SQS returns in the
-      # response. If you do not include the parameter, the overall visibility
+      # response. If you don't include the parameter, the overall visibility
       # timeout for the queue is used for the returned messages. For more
       # information, see [Visibility Timeout][4] in the *Amazon SQS Developer
       # Guide*.
+      #
+      # A message that is not deleted or a message whose visibility is not
+      # extended before the visibility timeout expires counts as a failed
+      # receive. Depending on the configuration of the queue, the message
+      # might be sent to the dead letter queue.
       #
       # <note markdown="1"> Going forward, new attributes might be added. If you are writing code
       # that calls this action, we recommend that you structure your code so
@@ -861,7 +957,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-long-polling.html
-      # [2]: http://www.faqs.org/rfcs/rfc1321.html
+      # [2]: https://www.ietf.org/rfc/rfc1321.txt
       # [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/ImportantIdentifiers.html
       # [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
       # @option params [required, String] :queue_url
@@ -872,28 +968,66 @@ module Aws
       #   A list of attributes that need to be returned along with each message.
       #   These attributes include:
       #
-      #   * `All` - returns all values.
+      #   * `All` - Returns all values.
       #
-      #   * `ApproximateFirstReceiveTimestamp` - returns the time when the
-      #     message was first received from the queue (epoch time in
-      #     milliseconds).
+      #   * `ApproximateFirstReceiveTimestamp` - Returns the time the message
+      #     was first received from the queue (epoch time in milliseconds).
       #
-      #   * `ApproximateReceiveCount` - returns the number of times a message
+      #   * `ApproximateReceiveCount` - Returns the number of times a message
       #     has been received from the queue but not deleted.
       #
-      #   * `SenderId` - returns the AWS account number (or the IP address, if
-      #     anonymous access is allowed) of the sender.
+      #   * `SenderId`
       #
-      #   * `SentTimestamp` - returns the time when the message was sent to the
-      #     queue (epoch time in milliseconds).
+      #     * For an IAM user, returns the IAM user ID, for example
+      #       `ABCDEFGHI1JKLMNOPQ23R`.
       #
-      #   Any other valid special request parameters that are specified (such as
-      #   `ApproximateNumberOfMessages`, `ApproximateNumberOfMessagesDelayed`,
-      #   `ApproximateNumberOfMessagesNotVisible`, `CreatedTimestamp`,
-      #   `DelaySeconds`, `LastModifiedTimestamp`, `MaximumMessageSize`,
-      #   `MessageRetentionPeriod`, `Policy`, `QueueArn`,
-      #   `ReceiveMessageWaitTimeSeconds`, `RedrivePolicy`, and
-      #   `VisibilityTimeout`) will be ignored.
+      #     * For an IAM role, returns the IAM role ID, for example
+      #       `ABCDE1F2GH3I4JK5LMNOP:i-a123b456`.
+      #
+      #   * `SentTimestamp` - Returns the time the message was sent to the queue
+      #     (epoch time in milliseconds).
+      #
+      #   * `MessageDeduplicationId` - Returns the value provided by the sender
+      #     that calls the ` SendMessage ` action.
+      #
+      #   * `MessageGroupId` - Returns the value provided by the sender that
+      #     calls the ` SendMessage ` action. Messages with the same
+      #     `MessageGroupId` are returned in sequence.
+      #
+      #   * `SequenceNumber` - Returns the value provided by Amazon SQS.
+      #
+      #   Any other valid special request parameters (such as the following)
+      #   that are specified are ignored:
+      #
+      #   * `ApproximateNumberOfMessages`
+      #
+      #   * `ApproximateNumberOfMessagesDelayed`
+      #
+      #   * `ApproximateNumberOfMessagesNotVisible`
+      #
+      #   * `CreatedTimestamp`
+      #
+      #   * `ContentBasedDeduplication`
+      #
+      #   * `DelaySeconds`
+      #
+      #   * `LastModifiedTimestamp`
+      #
+      #   * `MaximumMessageSize`
+      #
+      #   * `MessageRetentionPeriod`
+      #
+      #   * `Policy`
+      #
+      #   * `QueueArn`,
+      #
+      #   * `ReceiveMessageWaitTimeSeconds`
+      #
+      #   * `RedrivePolicy`
+      #
+      #   * `FifoQueue`
+      #
+      #   * `VisibilityTimeout`
       # @option params [Array<String>] :message_attribute_names
       #   The name of the message attribute, where *N* is the index. The message
       #   attribute name can contain the following characters: A-Z, a-z, 0-9,
@@ -901,18 +1035,18 @@ module Aws
       #   or end with a period, and it should not have successive periods. The
       #   name is case sensitive and must be unique among all attribute names
       #   for the message. The name can be up to 256 characters long. The name
-      #   cannot start with "AWS." or "Amazon." (or any variations in
+      #   can't start with "AWS." or "Amazon." (or any variations in
       #   casing), because these prefixes are reserved for use by Amazon Web
       #   Services.
       #
       #   When using `ReceiveMessage`, you can send a list of attribute names to
       #   receive, or you can return all of the attributes by specifying "All"
-      #   or ".\*" in your request. You can also use "bar.\*" to return all
+      #   or ".*" in your request. You can also use "bar.*" to return all
       #   message attributes starting with the "bar" prefix.
       # @option params [Integer] :max_number_of_messages
       #   The maximum number of messages to return. Amazon SQS never returns
-      #   more messages than this value but may return fewer. Values can be from
-      #   1 to 10. Default is 1.
+      #   more messages than this value but might return fewer. Values can be
+      #   from 1 to 10. Default is 1.
       #
       #   All of the messages are not necessarily returned.
       # @option params [Integer] :visibility_timeout
@@ -923,6 +1057,71 @@ module Aws
       #   The duration (in seconds) for which the call will wait for a message
       #   to arrive in the queue before returning. If a message is available,
       #   the call will return sooner than WaitTimeSeconds.
+      # @option params [String] :receive_request_attempt_id
+      #   This parameter applies only to FIFO (first-in-first-out) queues.
+      #
+      #   The token used for deduplication of `ReceiveMessage` calls. If a
+      #   networking issue occurs after a `ReceiveMessage` action, and instead
+      #   of a response you receive a generic error, you can retry the same
+      #   action with an identical `ReceiveRequestAttemptId` to retrieve the
+      #   same set of messages, even if their visibility timeout has not yet
+      #   expired.
+      #
+      #   * You can use `ReceiveRequestAttemptId` only for 5 minutes after a
+      #     `ReceiveMessage` action.
+      #
+      #   * When you set `FifoQueue`, a caller of the `ReceiveMessage` action
+      #     can provide a `ReceiveRequestAttemptId` explicitly.
+      #
+      #   * If a caller of the `ReceiveMessage` action doesn't provide a
+      #     `ReceiveRequestAttemptId`, Amazon SQS generates a
+      #     `ReceiveRequestAttemptId`.
+      #
+      #   * You can retry the `ReceiveMessage` action with the same
+      #     `ReceiveRequestAttemptId` if none of the messages have been modified
+      #     (deleted or had their visibility changes).
+      #
+      #   * During a visibility timeout, subsequent calls with the same
+      #     `ReceiveRequestAttemptId` return the same messages and receipt
+      #     handles. If a retry occurs within the deduplication interval, it
+      #     resets the visibility timeout. For more information, see [Visibility
+      #     Timeout][1] in the *Amazon Simple Queue Service Developer Guide*.
+      #
+      #     If a caller of the `ReceiveMessage` action is still processing
+      #     messages when the visibility timeout expires and messages become
+      #     visible, another worker reading from the same queue can receive the
+      #     same messages and therefore process duplicates. Also, if a reader
+      #     whose message processing time is longer than the visibility timeout
+      #     tries to delete the processed messages, the action fails with an
+      #     error.
+      #
+      #      To mitigate this effect, ensure that your application observes a
+      #     safe threshold before the visibility timeout expires and extend the
+      #     visibility timeout as necessary.
+      #
+      #   * While messages with a particular `MessageGroupId` are invisible, no
+      #     more messages belonging to the same `MessageGroupId` are returned
+      #     until the visibility timeout expires. You can still receive messages
+      #     with another `MessageGroupId` as long as it is also visible.
+      #
+      #   * If a caller of `ReceiveMessage` can't track the
+      #     `ReceiveRequestAttemptId`, no retries will work until the original
+      #     visibility timeout expires. As a result, delays might occur but the
+      #     messages in the queue will remain in a strict order.
+      #
+      #   The length of `ReceiveRequestAttemptId` is 128 characters.
+      #   `ReceiveRequestAttemptId` can contain alphanumeric characters (`a-z`,
+      #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~
+      #   ``).
+      #
+      #   For best practices of using `ReceiveRequestAttemptId`, see [Using the
+      #   ReceiveRequestAttemptId Request Parameter][2] in the *Amazon Simple
+      #   Queue Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-receiverequestattemptid-request-parameter
       # @return [Types::ReceiveMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ReceiveMessageResult#messages #Messages} => Array&lt;Types::Message&gt;
@@ -930,11 +1129,12 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.receive_message({
       #     queue_url: "String", # required
-      #     attribute_names: ["Policy"], # accepts Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy
+      #     attribute_names: ["All"], # accepts All, Policy, VisibilityTimeout, MaximumMessageSize, MessageRetentionPeriod, ApproximateNumberOfMessages, ApproximateNumberOfMessagesNotVisible, CreatedTimestamp, LastModifiedTimestamp, QueueArn, ApproximateNumberOfMessagesDelayed, DelaySeconds, ReceiveMessageWaitTimeSeconds, RedrivePolicy, FifoQueue, ContentBasedDeduplication
       #     message_attribute_names: ["MessageAttributeName"],
       #     max_number_of_messages: 1,
       #     visibility_timeout: 1,
       #     wait_time_seconds: 1,
+      #     receive_request_attempt_id: "String",
       #   })
       #
       # @example Response structure
@@ -944,7 +1144,7 @@ module Aws
       #   resp.messages[0].md5_of_body #=> String
       #   resp.messages[0].body #=> String
       #   resp.messages[0].attributes #=> Hash
-      #   resp.messages[0].attributes["QueueAttributeName"] #=> String
+      #   resp.messages[0].attributes["MessageSystemAttributeName"] #=> String
       #   resp.messages[0].md5_of_message_attributes #=> String
       #   resp.messages[0].message_attributes #=> Hash
       #   resp.messages[0].message_attributes["String"].string_value #=> String
@@ -984,47 +1184,142 @@ module Aws
         req.send_request(options)
       end
 
-      # Delivers a message to the specified queue. With Amazon SQS, you now
-      # have the ability to send large payload messages that are up to 256KB
-      # (262,144 bytes) in size. To send large payloads, you must use an AWS
-      # SDK that supports SigV4 signing. To verify whether SigV4 is supported
-      # for an AWS SDK, check the SDK release notes.
+      # Delivers a message to the specified queue.
       #
-      # The following list shows the characters (in Unicode) allowed in your
-      # message, according to the W3C XML specification. For more information,
-      # go to [http://www.w3.org/TR/REC-xml/#charsets][1] If you send any
-      # characters not included in the list, your request will be rejected.
+      # The following list shows the characters (in Unicode) that are allowed
+      # in your message, according to the W3C XML specification:
       #
-      #  \#x9 \| #xA \| #xD \| \[#x20 to #xD7FF\] \| \[#xE000 to #xFFFD\] \|
-      # \[#x10000 to #x10FFFF\]
+      #  `#x9` \| `#xA` \| `#xD` \| \[`#x20` to `#xD7FF`\] \| \[`#xE000` to
+      # `#xFFFD`\] \| \[`#x10000` to `#x10FFFF`\]
+      #
+      #  For more information, see [RFC1321][1]. If you send any characters
+      # that aren't included in this list, your request will be rejected.
       #
       #
       #
-      # [1]: http://www.w3.org/TR/REC-xml/#charsets
+      # [1]: https://www.ietf.org/rfc/rfc1321.txt
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
       #   Queue URLs are case-sensitive.
       # @option params [required, String] :message_body
       #   The message to send. String maximum 256 KB in size. For a list of
-      #   allowed characters, see the preceding important note.
+      #   allowed characters, see the preceding note.
       # @option params [Integer] :delay_seconds
       #   The number of seconds (0 to 900 - 15 minutes) to delay a specific
       #   message. Messages with a positive `DelaySeconds` value become
       #   available for processing after the delay time is finished. If you
       #   don't specify a value, the default value for the queue applies.
+      #
+      #   <note markdown="1"> When you set `FifoQueue`, you can't set `DelaySeconds` per message.
+      #   You can set this parameter only on a queue level.
+      #
+      #    </note>
       # @option params [Hash<String,Types::MessageAttributeValue>] :message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
-      #   information, see [Message Attribute Items][1].
+      #   information, see [Message Attribute Items][1] in the *Amazon SQS
+      #   Developer Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html#SQSMessageAttributesNTV
+      # @option params [String] :message_deduplication_id
+      #   This parameter applies only to FIFO (first-in-first-out) queues.
+      #
+      #   The token used for deduplication of sent messages. If a message with a
+      #   particular `MessageDeduplicationId` is sent successfully, any messages
+      #   sent with the same `MessageDeduplicationId` are accepted successfully
+      #   but aren't delivered during the 5-minute deduplication interval. For
+      #   more information, see [ Exactly-Once Processing][1] in the *Amazon SQS
+      #   Developer Guide*.
+      #
+      #   * Every message must have a unique `MessageDeduplicationId`,
+      #
+      #     * You may provide a `MessageDeduplicationId` explicitly.
+      #
+      #     * If you aren't able to provide a `MessageDeduplicationId` and you
+      #       enable `ContentBasedDeduplication` for your queue, Amazon SQS uses
+      #       a SHA-256 hash to generate the `MessageDeduplicationId` using the
+      #       body of the message (but not the attributes of the message).
+      #
+      #     * If you don't provide a `MessageDeduplicationId` and the queue
+      #       doesn't have `ContentBasedDeduplication` set, the action fails
+      #       with an error.
+      #
+      #     * If the queue has `ContentBasedDeduplication` set, your
+      #       `MessageDeduplicationId` overrides the generated one.
+      #
+      #   * When `ContentBasedDeduplication` is in effect, messages with
+      #     identical content sent within the deduplication interval are treated
+      #     as duplicates and only one copy of the message is delivered.
+      #
+      #   * You can also use `ContentBasedDeduplication` for messages with
+      #     identical content to be treated as duplicates.
+      #
+      #   * If you send one message with `ContentBasedDeduplication` enabled and
+      #     then another message with a `MessageDeduplicationId` that is the
+      #     same as the one generated for the first `MessageDeduplicationId`,
+      #     the two messages are treated as duplicates and only one copy of the
+      #     message is delivered.
+      #
+      #   <note markdown="1"> The `MessageDeduplicationId` is available to the recipient of the
+      #   message (this can be useful for troubleshooting delivery issues).
+      #
+      #    If a message is sent successfully but the acknowledgdment is lost and
+      #   the message is resent with the same `MessageDeduplicationId` after the
+      #   deduplication interval, Amazon SQS can't detect duplicate messages.
+      #
+      #    </note>
+      #
+      #   The length of `MessageDeduplicationId` is 128 characters.
+      #   `MessageDeduplicationId` can contain alphanumeric characters (`a-z`,
+      #   `A-Z`, `0-9`) and punctuation (`` !"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~
+      #   ``).
+      #
+      #   For best practices of using `MessageDeduplicationId`, see [Using the
+      #   MessageDeduplicationId Property][2] in the *Amazon Simple Queue
+      #   Service Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagededuplicationid-property
+      # @option params [String] :message_group_id
+      #   This parameter applies only to FIFO (first-in-first-out) queues.
+      #
+      #   The tag that specifies that a message belongs to a specific message
+      #   group. Messages that belong to the same message group are processed in
+      #   a FIFO manner (however, messages in different message groups might be
+      #   processed out of order). To interleave multiple ordered streams within
+      #   a single queue, use `MessageGroupId` values (for example, session data
+      #   for multiple users). In this scenario, multiple readers can process
+      #   the queue, but the session data of each user is processed in a FIFO
+      #   fashion.
+      #
+      #   * You must associate a non-empty `MessageGroupId` with a message. If
+      #     you don't provide a `MessageGroupId`, the action fails.
+      #
+      #   * `ReceiveMessage` might return messages with multiple
+      #     `MessageGroupId` values. For each `MessageGroupId`, the messages are
+      #     sorted by time sent. The caller can't specify a `MessageGroupId`.
+      #
+      #   The length of `MessageGroupId` is 128 characters. Valid values are
+      #   alphanumeric characters and punctuation ``
+      #   (!"#$%&'()*+,-./:;<=>?@[\]^_`\{|\}~) ``.
+      #
+      #   For best practices of using `MessageGroupId`, see [Using the
+      #   MessageGroupId Property][1] in the *Amazon Simple Queue Service
+      #   Developer Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-messagegroupid-property
       # @return [Types::SendMessageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SendMessageResult#md5_of_message_body #MD5OfMessageBody} => String
       #   * {Types::SendMessageResult#md5_of_message_attributes #MD5OfMessageAttributes} => String
       #   * {Types::SendMessageResult#message_id #MessageId} => String
+      #   * {Types::SendMessageResult#sequence_number #SequenceNumber} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.send_message({
@@ -1040,12 +1335,15 @@ module Aws
       #         data_type: "String", # required
       #       },
       #     },
+      #     message_deduplication_id: "String",
+      #     message_group_id: "String",
       #   })
       #
       # @example Response structure
       #   resp.md5_of_message_body #=> String
       #   resp.md5_of_message_attributes #=> String
       #   resp.message_id #=> String
+      #   resp.sequence_number #=> String
       # @overload send_message(params = {})
       # @param [Hash] params ({})
       def send_message(params = {}, options = {})
@@ -1054,42 +1352,43 @@ module Aws
       end
 
       # Delivers up to ten messages to the specified queue. This is a batch
-      # version of SendMessage. The result of the send action on each message
-      # is reported individually in the response. The maximum allowed
-      # individual message size is 256 KB (262,144 bytes).
+      # version of ` SendMessage `. For a FIFO queue, multiple messages within
+      # a single batch are enqueued in the order they are sent.
       #
-      # The maximum total payload size (i.e., the sum of all a batch's
-      # individual message lengths) is also 256 KB (262,144 bytes).
+      # The result of sending each message is reported individually in the
+      # response. Because the batch request can result in a combination of
+      # successful and unsuccessful actions, you should check for batch errors
+      # even when the call returns an HTTP status code of 200.
       #
-      # If the `DelaySeconds` parameter is not specified for an entry, the
-      # default for the queue is used.
+      # The maximum allowed individual message size and the maximum total
+      # payload size (the sum of the individual lengths of all of the batched
+      # messages) are both 256 KB (262,144 bytes).
       #
       # The following list shows the characters (in Unicode) that are allowed
-      # in your message, according to the W3C XML specification. For more
-      # information, go to [http://www.faqs.org/rfcs/rfc1321.html][1]. If you
-      # send any characters that are not included in the list, your request
-      # will be rejected.
+      # in your message, according to the W3C XML specification:
       #
-      #  \#x9 \| #xA \| #xD \| \[#x20 to #xD7FF\] \| \[#xE000 to #xFFFD\] \|
-      # \[#x10000 to #x10FFFF\]
+      #  `#x9` \| `#xA` \| `#xD` \| \[`#x20` to `#xD7FF`\] \| \[`#xE000` to
+      # `#xFFFD`\] \| \[`#x10000` to `#x10FFFF`\]
       #
-      # Because the batch request can result in a combination of successful
-      # and unsuccessful actions, you should check for batch errors even when
-      # the call returns an HTTP status code of 200.
+      #  For more information, see [RFC1321][1]. If you send any characters
+      # that aren't included in this list, your request will be rejected.
       #
-      # <note markdown="1">Some API actions take lists of parameters. These lists are specified
+      # If you don't specify the `DelaySeconds` parameter for an entry,
+      # Amazon SQS uses the default for the queue.
+      #
+      # <note markdown="1"> Some API actions take lists of parameters. These lists are specified
       # using the `param.n` notation. Values of `n` are integers starting from
       # 1. For example, a parameter list with two elements looks like this:
       #
       #  </note>
       #
-      # `<![CDATA[&Attribute.1=this]]>`
+      # `&amp;Attribute.1=this`
       #
-      # `<![CDATA[&Attribute.2=that]]>`
+      # `&amp;Attribute.2=that`
       #
       #
       #
-      # [1]: http://www.faqs.org/rfcs/rfc1321.html
+      # [1]: https://www.ietf.org/rfc/rfc1321.txt
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
@@ -1118,6 +1417,8 @@ module Aws
       #             data_type: "String", # required
       #           },
       #         },
+      #         message_deduplication_id: "String",
+      #         message_group_id: "String",
       #       },
       #     ],
       #   })
@@ -1128,6 +1429,7 @@ module Aws
       #   resp.successful[0].message_id #=> String
       #   resp.successful[0].md5_of_message_body #=> String
       #   resp.successful[0].md5_of_message_attributes #=> String
+      #   resp.successful[0].sequence_number #=> String
       #   resp.failed #=> Array
       #   resp.failed[0].id #=> String
       #   resp.failed[0].sender_fault #=> Boolean
@@ -1145,11 +1447,11 @@ module Aws
       # the attributes to propagate throughout the SQS system. Changes made to
       # the `MessageRetentionPeriod` attribute can take up to 15 minutes.
       #
-      # <note markdown="1">Going forward, new attributes might be added. If you are writing code
-      # that calls this action, we recommend that you structure your code so
-      # that it can handle new attributes gracefully.
+      # <note markdown="1"> In the future, new attributes might be added. When you write code that
+      # calls this action, we recommend structuring your code so that it can
+      # handle new attributes gracefully.
       #
-      # </note>
+      #  </note>
       # @option params [required, String] :queue_url
       #   The URL of the Amazon SQS queue to take action on.
       #
@@ -1158,39 +1460,82 @@ module Aws
       #   A map of attributes to set.
       #
       #   The following lists the names, descriptions, and values of the special
-      #   request parameters the `SetQueueAttributes` action uses:
+      #   request parameters that the `SetQueueAttributes` action uses:
       #
-      #   * `DelaySeconds` - The time in seconds that the delivery of all
-      #     messages in the queue will be delayed. An integer from 0 to 900 (15
-      #     minutes). The default for this attribute is 0 (zero).
+      #   * `DelaySeconds` - The number of seconds for which the delivery of all
+      #     messages in the queue is delayed. An integer from 0 to 900 (15
+      #     minutes). The default is 0 (zero).
       #
       #   * `MaximumMessageSize` - The limit of how many bytes a message can
-      #     contain before Amazon SQS rejects it. An integer from 1024 bytes (1
-      #     KiB) up to 262144 bytes (256 KiB). The default for this attribute is
-      #     262144 (256 KiB).
+      #     contain before Amazon SQS rejects it. An integer from 1,024 bytes (1
+      #     KiB) up to 262,144 bytes (256 KiB). The default is 262,144 (256
+      #     KiB).
       #
-      #   * `MessageRetentionPeriod` - The number of seconds Amazon SQS retains
-      #     a message. Integer representing seconds, from 60 (1 minute) to
-      #     1209600 (14 days). The default for this attribute is 345600 (4
-      #     days).
+      #   * `MessageRetentionPeriod` - The number of seconds for which Amazon
+      #     SQS retains a message. An integer representing seconds, from 60 (1
+      #     minute) to 120,9600 (14 days). The default is 345,600 (4 days).
       #
       #   * `Policy` - The queue's policy. A valid AWS policy. For more
       #     information about policy structure, see [Overview of AWS IAM
       #     Policies][1] in the *Amazon IAM User Guide*.
       #
-      #   * `ReceiveMessageWaitTimeSeconds` - The time for which a
-      #     ReceiveMessage call will wait for a message to arrive. An integer
-      #     from 0 to 20 (seconds). The default for this attribute is 0.
+      #   * `ReceiveMessageWaitTimeSeconds` - The number of seconds for which a
+      #     ReceiveMessage action will wait for a message to arrive. An integer
+      #     from 0 to 20 (seconds). The default is 0.
+      #
+      #   * `RedrivePolicy` - The parameters for the dead letter queue
+      #     functionality of the source queue. For more information about the
+      #     redrive policy and dead letter queues, see [Using Amazon SQS Dead
+      #     Letter Queues][2] in the *Amazon SQS Developer Guide*.
+      #
+      #     <note markdown="1"> The dead letter queue of a FIFO queue must also be a FIFO queue.
+      #     Similarly, the dead letter queue of a standard queue must also be a
+      #     standard queue.
+      #
+      #      </note>
       #
       #   * `VisibilityTimeout` - The visibility timeout for the queue. An
-      #     integer from 0 to 43200 (12 hours). The default for this attribute
-      #     is 30. For more information about visibility timeout, see Visibility
-      #     Timeout in the *Amazon SQS Developer Guide*.
+      #     integer from 0 to 43200 (12 hours). The default is 30. For more
+      #     information about the visibility timeout, see [Visibility
+      #     Timeout][3] in the *Amazon SQS Developer Guide*.
       #
-      #   * `RedrivePolicy` - The parameters for dead letter queue functionality
-      #     of the source queue. For more information about RedrivePolicy and
-      #     dead letter queues, see Using Amazon SQS Dead Letter Queues in the
+      #   The following attribute applies only to [FIFO (first-in-first-out)
+      #   queues][4]\:
+      #
+      #   * `ContentBasedDeduplication` - Enables content-based deduplication.
+      #     For more information, see [Exactly-Once Processing][5] in the
       #     *Amazon SQS Developer Guide*.
+      #
+      #     * Every message must have a unique `MessageDeduplicationId`,
+      #
+      #       * You may provide a `MessageDeduplicationId` explicitly.
+      #
+      #       * If you aren't able to provide a `MessageDeduplicationId` and
+      #         you enable `ContentBasedDeduplication` for your queue, Amazon
+      #         SQS uses a SHA-256 hash to generate the `MessageDeduplicationId`
+      #         using the body of the message (but not the attributes of the
+      #         message).
+      #
+      #       * If you don't provide a `MessageDeduplicationId` and the queue
+      #         doesn't have `ContentBasedDeduplication` set, the action fails
+      #         with an error.
+      #
+      #       * If the queue has `ContentBasedDeduplication` set, your
+      #         `MessageDeduplicationId` overrides the generated one.
+      #
+      #     * When `ContentBasedDeduplication` is in effect, messages with
+      #       identical content sent within the deduplication interval are
+      #       treated as duplicates and only one copy of the message is
+      #       delivered.
+      #
+      #     * You can also use `ContentBasedDeduplication` for messages with
+      #       identical content to be treated as duplicates.
+      #
+      #     * If you send one message with `ContentBasedDeduplication` enabled
+      #       and then another message with a `MessageDeduplicationId` that is
+      #       the same as the one generated for the first
+      #       `MessageDeduplicationId`, the two messages are treated as
+      #       duplicates and only one copy of the message is delivered.
       #
       #   Any other valid special request parameters that are specified (such as
       #   `ApproximateNumberOfMessages`, `ApproximateNumberOfMessagesDelayed`,
@@ -1200,13 +1545,17 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
+      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
+      #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.set_queue_attributes({
       #     queue_url: "String", # required
       #     attributes: { # required
-      #       "Policy" => "String",
+      #       "All" => "String",
       #     },
       #   })
       # @overload set_queue_attributes(params = {})

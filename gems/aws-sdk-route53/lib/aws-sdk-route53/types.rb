@@ -16,7 +16,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #         region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #         name: "AlarmName", # required
       #       }
       # @!attribute [rw] region
@@ -46,14 +46,14 @@ module Aws
 
       # *Alias resource record sets only:* Information about the CloudFront
       # distribution, Elastic Beanstalk environment, ELB load balancer, Amazon
-      # S3 bucket, or Amazon Route 53 resource record set to which you are
-      # redirecting queries. The Elastic Beanstalk environment must have a
+      # S3 bucket, or Amazon Route 53 resource record set that you're
+      # redirecting queries to. The Elastic Beanstalk environment must have a
       # regionalized subdomain.
       #
       # When creating resource record sets for a private hosted zone, note the
       # following:
       #
-      # * Resource record sets cannot be created for CloudFront distributions
+      # * Resource record sets can't be created for CloudFront distributions
       #   in a private hosted zone.
       #
       # * Creating geolocation alias resource record sets or latency alias
@@ -82,7 +82,7 @@ module Aws
       #
       #   : Specify `Z2FDTNDATAQYW2`.
       #
-      #     <note markdown="1"> Alias resource record sets for CloudFront cannot be created in a
+      #     <note markdown="1"> Alias resource record sets for CloudFront can't be created in a
       #     private zone.
       #
       #      </note>
@@ -93,18 +93,18 @@ module Aws
       #     environment. The environment must have a regionalized subdomain.
       #     For a list of regions and the corresponding hosted zone IDs, see
       #     [AWS Elastic Beanstalk][1] in the Regions and Endpoints chapter of
-      #     the *AWS General Reference*.
+      #     the *Amazon Web Services General Reference*.
       #
       #   ELB load balancer
       #
       #   : Specify the value of the hosted zone ID for the load balancer. Use
       #     the following methods to get the hosted zone ID:
       #
-      #     * AWS Management Console: Go to the Amazon EC2; page, click Load
-      #       Balancers in the navigation pane, select the load balancer, and
-      #       get the value of the Hosted Zone ID field on the Description
-      #       tab. Use the same process to get the DNS Name. See
-      #       HostedZone$Name.
+      #     * AWS Management Console: Go to the Amazon EC2 page, click **Load
+      #       Balancers** in the navigation pane, select the load balancer,
+      #       and get the value of the **Hosted Zone ID** field on the
+      #       **Description** tab. Use the same process to get the value of
+      #       **DNS Name**. See HostedZone$Name.
       #
       #     * Elastic Load Balancing API: Use `DescribeLoadBalancers` to get
       #       the value of `CanonicalHostedZoneNameID`. Use the same process
@@ -124,7 +124,7 @@ module Aws
       #   Another Amazon Route 53 resource record set in your hosted zone
       #
       #   : Specify the hosted zone ID of your hosted zone. (An alias resource
-      #     record set cannot reference a resource record set in a different
+      #     record set can't reference a resource record set in a different
       #     hosted zone.)
       #
       #
@@ -154,7 +154,7 @@ module Aws
       #     of the CNAME attribute:
       #
       #     * *AWS Managment Console*\: For information about how to get the
-      #       value by using the console, see [Using Custom Domains with
+      #       value by using the console, see [Using Custom Domains with AWS
       #       Elastic Beanstalk][2] in the *AWS Elastic Beanstalk Developer
       #       Guide*.
       #
@@ -175,11 +175,11 @@ module Aws
       #     the console and the other value from the API or the CLI, creating
       #     the resource record set will fail.
       #
-      #     * *AWS Management Console*\: Go to the Amazon EC2 page, click Load
-      #       Balancers in the navigation pane, choose the load balancer,
-      #       choose the Description tab, and get the value of the DNS Name
-      #       field that begins with dualstack. Use the same process to get
-      #       the Hosted Zone ID. See HostedZone$Id.
+      #     * *AWS Management Console*\: Go to the EC2 page, click **Load
+      #       Balancers** in the navigation pane, choose the load balancer,
+      #       choose the **Description** tab, and get the value of the **DNS
+      #       Name** field that begins with dualstack. Use the same process to
+      #       get the **Hosted Zone ID**. See HostedZone$Id.
       #
       #     * *Elastic Load Balancing API*\: Use ` DescribeLoadBalancers ` to
       #       get the value of `CanonicalHostedZoneName`. Use the same process
@@ -195,9 +195,9 @@ module Aws
       #     `s3-website-us-east-1.amazonaws.com`. For more information about
       #     valid values, see the table [Amazon Simple Storage Service (S3)
       #     Website Endpoints][5] in the *Amazon Web Services General
-      #     Reference*. For more information about using Amazon S3 buckets for
+      #     Reference*. For more information about using S3 buckets for
       #     websites, see [Hosting a Static Website on Amazon S3][6] in the
-      #     *Amazon Simple Storage Service Developer Guide.*
+      #     *Amazon S3 Developer Guide.*
       #
       #   * **Another Amazon Route 53 resource record set**\: Specify the
       #     value of the `Name` element for a resource record set in the
@@ -251,7 +251,7 @@ module Aws
       #
       #   Note the following:
       #
-      #   * You cannot set `EvaluateTargetHealth` to `true` when the alias
+      #   * You can't set `EvaluateTargetHealth` to `true` when the alias
       #     target is a CloudFront distribution.
       #
       #   * If the AWS resource that you specify in `AliasTarget` is a
@@ -267,27 +267,26 @@ module Aws
       #     balancer, Elastic Load Balancing routes queries only to the
       #     healthy Amazon EC2 instances that are registered with the load
       #     balancer. (An environment automatically contains an ELB load
-      #     balancer if it includes more than one Amazon EC2 instance.) If you
-      #     set `EvaluateTargetHealth` to `true` and either no Amazon EC2
-      #     instances are healthy or the load balancer itself is unhealthy,
-      #     Amazon Route 53 routes queries to other available resources that
-      #     are healthy, if any.
+      #     balancer if it includes more than one EC2 instance.) If you set
+      #     `EvaluateTargetHealth` to `true` and either no EC2 instances are
+      #     healthy or the load balancer itself is unhealthy, Amazon Route 53
+      #     routes queries to other available resources that are healthy, if
+      #     any.
       #
-      #     If the environment contains a single Amazon EC2 instance, there
-      #     are no special requirements.
+      #     If the environment contains a single EC2 instance, there are no
+      #     special requirements.
       #
       #   * If you specify an ELB load balancer in ` AliasTarget `, Elastic
-      #     Load Balancing routes queries only to the healthy Amazon EC2
-      #     instances that are registered with the load balancer. If no Amazon
-      #     EC2 instances are healthy or if the load balancer itself is
-      #     unhealthy, and if `EvaluateTargetHealth` is true for the
-      #     corresponding alias resource record set, Amazon Route 53 routes
-      #     queries to other resources. When you create a load balancer, you
-      #     configure settings for Elastic Load Balancing health checks;
-      #     they're not Amazon Route 53 health checks, but they perform a
-      #     similar function. Do not create Amazon Route 53 health checks for
-      #     the Amazon EC2 instances that you register with an ELB load
-      #     balancer.
+      #     Load Balancing routes queries only to the healthy EC2 instances
+      #     that are registered with the load balancer. If no EC2 instances
+      #     are healthy or if the load balancer itself is unhealthy, and if
+      #     `EvaluateTargetHealth` is true for the corresponding alias
+      #     resource record set, Amazon Route 53 routes queries to other
+      #     resources. When you create a load balancer, you configure settings
+      #     for Elastic Load Balancing health checks; they're not Amazon
+      #     Route 53 health checks, but they perform a similar function. Do
+      #     not create Amazon Route 53 health checks for the EC2 instances
+      #     that you register with an ELB load balancer.
       #
       #     For more information, see [How Health Checks Work in More Complex
       #     Amazon Route 53 Configurations][2] in the *Amazon Route 53
@@ -314,8 +313,8 @@ module Aws
         include Aws::Structure
       end
 
-      # A complex type that contains information about the VPC and the hosted
-      # zone that you want to associate.
+      # A complex type that contains information about the request to
+      # associate a VPC with a private hosted zone.
       # @note When making an API call, pass AssociateVPCWithHostedZoneRequest
       #   data as a hash:
       #
@@ -328,15 +327,16 @@ module Aws
       #         comment: "AssociateVPCComment",
       #       }
       # @!attribute [rw] hosted_zone_id
-      #   The ID of the hosted zone you want to associate your VPC with.
+      #   The ID of the private hosted zone that you want to associate an
+      #   Amazon VPC with.
       #
-      #   Note that you cannot associate a VPC with a hosted zone that
+      #   Note that you can't associate a VPC with a hosted zone that
       #   doesn't have an existing VPC association.
       #   @return [String]
       #
       # @!attribute [rw] vpc
-      #   A complex type containing information about the Amazon VPC that
-      #   you're associating with the specified hosted zone.
+      #   A complex type that contains information about the VPC that you want
+      #   to associate with a private hosted zone.
       #   @return [Types::VPC]
       #
       # @!attribute [rw] comment
@@ -349,8 +349,8 @@ module Aws
         include Aws::Structure
       end
 
-      # A complex type that contains the response information for the hosted
-      # zone.
+      # A complex type that contains the response information for the
+      # `AssociateVPCWithHostedZone` request.
       # @!attribute [rw] change_info
       #   A complex type that describes the changes made to your hosted zone.
       #   @return [Types::ChangeInfo]
@@ -398,32 +398,61 @@ module Aws
       #   * `CREATE`\: Creates a resource record set that has the specified
       #     values.
       #
-      #   * `DELETE`\: Deletes a existing resource record set that has the
-      #     specified values for `Name`, `Type`, `SetIdentifier` (for latency,
-      #     weighted, geolocation, and failover resource record sets), and
-      #     `TTL` (except alias resource record sets, for which the TTL is
-      #     determined by the AWS resource that you're routing DNS queries
-      #     to).
+      #   * `DELETE`\: Deletes a existing resource record set.
       #
       #     To delete the resource record set that is associated with a
       #     traffic policy instance, use ` DeleteTrafficPolicyInstance `.
-      #     Amazon Route 53will delete the resource record set automatically.
+      #     Amazon Route 53 will delete the resource record set automatically.
       #     If you delete the resource record set by using
       #     `ChangeResourceRecordSets`, Amazon Route 53 doesn't automatically
       #     delete the traffic policy instance, and you'll continue to be
       #     charged for it even though it's no longer in use.
       #
-      #   * `UPSERT`\: If a resource record set does not already exist, Amazon
+      #   * `UPSERT`\: If a resource record set doesn't already exist, Amazon
       #     Route 53 creates it. If a resource record set does exist, Amazon
-      #     Route 53 updates it with the values in the request. Amazon Route
-      #     53 can update an existing resource record set only when all of the
-      #     following values match: `Name`, `Type`, and `SetIdentifier` (for
-      #     weighted, latency, geolocation, and failover resource record
-      #     sets).
+      #     Route 53 updates it with the values in the request.
+      #
+      #   The values that you need to include in the request depend on the
+      #   type of resource record set that you're creating, deleting, or
+      #   updating:
+      #
+      #   **Basic resource record sets (excluding alias, failover,
+      #   geolocation, latency, and weighted resource record sets)**
+      #
+      #   * `Name`
+      #
+      #   * `Type`
+      #
+      #   * `TTL`
+      #
+      #   **Failover, geolocation, latency, or weighted resource record sets
+      #   (excluding alias resource record sets)**
+      #
+      #   * `Name`
+      #
+      #   * `Type`
+      #
+      #   * `TTL`
+      #
+      #   * `SetIdentifier`
+      #
+      #   **Alias resource record sets (including failover alias, geolocation
+      #   alias, latency alias, and weighted alias resource record sets)**
+      #
+      #   * `Name`
+      #
+      #   * `Type`
+      #
+      #   * `AliasTarget` (includes `DNSName`, `EvaluateTargetHealth`, and
+      #     `HostedZoneId`)
+      #
+      #   * `SetIdentifier` (for failover, geolocation, latency, and weighted
+      #     resource record sets)
       #   @return [String]
       #
       # @!attribute [rw] resource_record_set
-      #   Information about the resource record set to create or delete.
+      #   Information about the resource record set to create, delete, or
+      #   update.
       #   @return [Types::ResourceRecordSet]
       class Change < Struct.new(
         :action,
@@ -479,52 +508,6 @@ module Aws
       #   @return [Array<Types::Change>]
       class ChangeBatch < Struct.new(
         :comment,
-        :changes)
-        include Aws::Structure
-      end
-
-      # A complex type that lists the changes and information for a
-      # ChangeBatch.
-      # @!attribute [rw] id
-      #   The ID of the request. Use this ID to track when the change has
-      #   completed across all Amazon Route 53 DNS servers.
-      #   @return [String]
-      #
-      # @!attribute [rw] submitted_at
-      #   The date and time the change was submitted, in the format
-      #   `YYYY-MM-DDThh:mm:ssZ`, as specified in the ISO 8601 standard (for
-      #   example, 2009-11-19T19:37:58Z). The `Z` after the time indicates
-      #   that the time is listed in Coordinated Universal Time (UTC).
-      #   @return [Time]
-      #
-      # @!attribute [rw] status
-      #   The current state of the request. `PENDING` indicates that this
-      #   request has not yet been applied to all Amazon Route 53 DNS servers.
-      #
-      #   Valid Values: `PENDING` \| `INSYNC`
-      #   @return [String]
-      #
-      # @!attribute [rw] comment
-      #   A complex type that describes change information about changes made
-      #   to your hosted zone.
-      #
-      #   This element contains an ID that you use when performing a GetChange
-      #   action to get detailed information about the change.
-      #   @return [String]
-      #
-      # @!attribute [rw] submitter
-      #   The AWS account ID attached to the changes.
-      #   @return [String]
-      #
-      # @!attribute [rw] changes
-      #   A list of changes made in the ChangeBatch.
-      #   @return [Array<Types::Change>]
-      class ChangeBatchRecord < Struct.new(
-        :id,
-        :submitted_at,
-        :status,
-        :comment,
-        :submitter,
         :changes)
         include Aws::Structure
       end
@@ -717,7 +700,7 @@ module Aws
       # @!attribute [rw] namespace
       #   The namespace of the metric that the alarm is associated with. For
       #   more information, see [Amazon CloudWatch Namespaces, Dimensions, and
-      #   Metrics Reference][1] in the *Amazon CloudWatch Developer Guide*.
+      #   Metrics Reference][1] in the *Amazon CloudWatch User Guide*.
       #
       #
       #
@@ -735,7 +718,7 @@ module Aws
       #   metric.For information, see [Amazon CloudWatch Namespaces,
       #   Dimensions, and Metrics Reference](
       #   http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/CW_Support_For_AWS.html)
-      #   in the *Amazon CloudWatch Developer Guide*.
+      #   in the *Amazon CloudWatch User Guide*.
       #   @return [Array<Types::Dimension>]
       class CloudWatchAlarmConfiguration < Struct.new(
         :evaluation_periods,
@@ -771,7 +754,7 @@ module Aws
       #           enable_sni: false,
       #           regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
       #           alarm_identifier: {
-      #             region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #             region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #             name: "AlarmName", # required
       #           },
       #           insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -844,7 +827,7 @@ module Aws
       #
       # @!attribute [rw] vpc
       #   The VPC that you want your hosted zone to be associated with. By
-      #   providing this parameter, your newly created hosted cannot be
+      #   providing this parameter, your newly created hosted can't be
       #   resolved anywhere other than the given VPC.
       #   @return [Types::VPC]
       #
@@ -1042,12 +1025,11 @@ module Aws
       #
       # @!attribute [rw] document
       #   The definition of this traffic policy in JSON format. For more
-      #   information, see [Traffic Policy Document Format][1] in the *Amazon
-      #   Route 53 API Reference*.
+      #   information, see [Traffic Policy Document Format][1].
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/api-policies-traffic-policy-document-format.html
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
       #   @return [String]
       #
       # @!attribute [rw] comment
@@ -1122,6 +1104,51 @@ module Aws
       class CreateTrafficPolicyVersionResponse < Struct.new(
         :traffic_policy,
         :location)
+        include Aws::Structure
+      end
+
+      # A complex type that contains information about the request to
+      # authorize associating a VPC with your private hosted zone.
+      # Authorization is only required when a private hosted zone and a VPC
+      # were created by using different accounts.
+      # @note When making an API call, pass CreateVPCAssociationAuthorizationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         hosted_zone_id: "ResourceId", # required
+      #         vpc: { # required
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_id: "VPCId",
+      #         },
+      #       }
+      # @!attribute [rw] hosted_zone_id
+      #   The ID of the private hosted zone that you want to authorize
+      #   associating a VPC with.
+      #   @return [String]
+      #
+      # @!attribute [rw] vpc
+      #   A complex type that contains the VPC ID and region for the VPC that
+      #   you want to authorize associating with your hosted zone.
+      #   @return [Types::VPC]
+      class CreateVPCAssociationAuthorizationRequest < Struct.new(
+        :hosted_zone_id,
+        :vpc)
+        include Aws::Structure
+      end
+
+      # A complex type that contains the response information from a
+      # CreateVPCAssociationAuthorization request.
+      # @!attribute [rw] hosted_zone_id
+      #   The ID of the hosted zone that you authorized associating a VPC
+      #   with.
+      #   @return [String]
+      #
+      # @!attribute [rw] vpc
+      #   The VPC that you authorized associating with a hosted zone.
+      #   @return [Types::VPC]
+      class CreateVPCAssociationAuthorizationResponse < Struct.new(
+        :hosted_zone_id,
+        :vpc)
         include Aws::Structure
       end
 
@@ -1260,6 +1287,40 @@ module Aws
       # An empty element.
       class DeleteTrafficPolicyResponse < Aws::EmptyStructure; end
 
+      # A complex type that contains information about the request to remove
+      # authorization to associate a VPC that was created by one AWS account
+      # with a hosted zone that was created with a different AWS account.
+      # @note When making an API call, pass DeleteVPCAssociationAuthorizationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         hosted_zone_id: "ResourceId", # required
+      #         vpc: { # required
+      #           vpc_region: "us-east-1", # accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-west-1, eu-central-1, ap-southeast-1, ap-southeast-2, ap-south-1, ap-northeast-1, ap-northeast-2, sa-east-1, cn-north-1
+      #           vpc_id: "VPCId",
+      #         },
+      #       }
+      # @!attribute [rw] hosted_zone_id
+      #   When removing authorization to associate a VPC that was created by
+      #   one AWS account with a hosted zone that was created with a different
+      #   AWS account, the ID of the hosted zone.
+      #   @return [String]
+      #
+      # @!attribute [rw] vpc
+      #   When removing authorization to associate a VPC that was created by
+      #   one AWS account with a hosted zone that was created with a different
+      #   AWS account, a complex type that includes the ID and region of the
+      #   VPC.
+      #   @return [Types::VPC]
+      class DeleteVPCAssociationAuthorizationRequest < Struct.new(
+        :hosted_zone_id,
+        :vpc)
+        include Aws::Structure
+      end
+
+      # Empty response for the request.
+      class DeleteVPCAssociationAuthorizationResponse < Aws::EmptyStructure; end
+
       # For the metric that the CloudWatch alarm is associated with, a complex
       # type that contains information about one dimension.
       # @!attribute [rw] name
@@ -1277,8 +1338,8 @@ module Aws
         include Aws::Structure
       end
 
-      # A complex type that contains information about the VPC and the hosted
-      # zone that you want to disassociate.
+      # A complex type that contains information about the VPC that you want
+      # to disassociate from a specified private hosted zone.
       # @note When making an API call, pass DisassociateVPCFromHostedZoneRequest
       #   data as a hash:
       #
@@ -1291,13 +1352,13 @@ module Aws
       #         comment: "DisassociateVPCComment",
       #       }
       # @!attribute [rw] hosted_zone_id
-      #   The ID of the VPC that you want to disassociate from an Amazon Route
-      #   53 hosted zone.
+      #   The ID of the private hosted zone that you want to disassociate a
+      #   VPC from.
       #   @return [String]
       #
       # @!attribute [rw] vpc
-      #   A complex type containing information about the Amazon VPC that
-      #   you're disassociating from the specified hosted zone.
+      #   A complex type that contains information about the VPC that you're
+      #   disassociating from the specified hosted zone.
       #   @return [Types::VPC]
       #
       # @!attribute [rw] comment
@@ -1313,7 +1374,8 @@ module Aws
       # A complex type that contains the response information for the
       # disassociate request.
       # @!attribute [rw] change_info
-      #   A complex type that describes the changes made to your hosted zone.
+      #   A complex type that describes the changes made to the specified
+      #   private hosted zone.
       #   @return [Types::ChangeInfo]
       class DisassociateVPCFromHostedZoneResponse < Struct.new(
         :change_info)
@@ -1387,33 +1449,6 @@ module Aws
         :country_name,
         :subdivision_code,
         :subdivision_name)
-        include Aws::Structure
-      end
-
-      # The input for a `GetChangeDetails` request.
-      # @note When making an API call, pass GetChangeDetailsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "ResourceId", # required
-      #       }
-      # @!attribute [rw] id
-      #   The ID of the change batch. This is the value that you specified in
-      #   the `change ID` parameter when you submitted the request.
-      #   @return [String]
-      class GetChangeDetailsRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # A complex type that contains the `ChangeBatchRecord` element.
-      # @!attribute [rw] change_batch_record
-      #   A complex type that contains information about the specified change
-      #   batch, including the change batch ID, the status of the change, and
-      #   the contained changes.
-      #   @return [Types::ChangeBatchRecord]
-      class GetChangeDetailsResponse < Struct.new(
-        :change_batch_record)
         include Aws::Structure
       end
 
@@ -1930,42 +1965,47 @@ module Aws
       #         enable_sni: false,
       #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
       #         alarm_identifier: {
-      #           region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #           name: "AlarmName", # required
       #         },
       #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
       #       }
       # @!attribute [rw] ip_address
-      #   The IPv4 IP address of the endpoint on which you want Amazon Route
-      #   53 to perform health checks. If you don't specify a value for
-      #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
+      #   The IPv4 or IPv6 IP address of the endpoint that you want Amazon
+      #   Route 53 to perform health checks on. If you don't specify a value
+      #   for `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
       #   domain name that you specify in `FullyQualifiedDomainName` at the
-      #   interval that you specify in RequestInterval. Using an IP address
-      #   that DNS returns, Amazon Route 53 then checks the health of the
+      #   interval that you specify in `RequestInterval`. Using an IP address
+      #   returned by DNS, Amazon Route 53 then checks the health of the
       #   endpoint.
       #
-      #   If the endpoint is an Amazon EC2 instance, we recommend that you
-      #   create an Elastic IP address, associate it with your Amazon EC2
-      #   instance, and specify the Elastic IP address for `IPAddress`. This
-      #   ensures that the IP address of your instance will never change.
+      #   If the endpoint is an EC2 instance, we recommend that you create an
+      #   Elastic IP address, associate it with your EC2 instance, and specify
+      #   the Elastic IP address for `IPAddress`. This ensures that the IP
+      #   address of your instance will never change.
       #
       #   For more information, see
       #   HealthCheckConfig$FullyQualifiedDomainName.
       #
-      #   Contraints: Amazon Route 53 cannot check the health of endpoints for
-      #   which the IP address is in local, private, non-routable, or
+      #   Constraints: Amazon Route 53 can't check the health of endpoints
+      #   for which the IP address is in local, private, non-routable, or
       #   multicast ranges. For more information about IP addresses for which
-      #   you cannot create health checks, see [RFC 5735, Special Use IPv4
-      #   Addresses][1] and [RFC 6598, IANA-Reserved IPv4 Prefix for Shared
-      #   Address Space][2].
+      #   you can't create health checks, see the following documents:
       #
-      #   When the value of Type is `CALCULATED` or `CLOUDWATCH_METRIC`, omit
-      #   IPAddress.
+      #   * [RFC 5735, Special Use IPv4 Addresses][1]
+      #
+      #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][2]
+      #
+      #   * [RFC 5156, Special-Use IPv6 Addresses][3]
+      #
+      #   When the value of `Type` is `CALCULATED` or `CLOUDWATCH_METRIC`,
+      #   omit `IPAddress`.
       #
       #
       #
       #   [1]: https://tools.ietf.org/html/rfc5735
       #   [2]: https://tools.ietf.org/html/rfc6598
+      #   [3]: https://tools.ietf.org/html/rfc5156
       #   @return [String]
       #
       # @!attribute [rw] port
@@ -2036,13 +2076,16 @@ module Aws
       #   Amazon Route 53 behavior depends on whether you specify a value for
       #   `IPAddress`.
       #
-      #   **If you specify** `IPAddress`\:
+      #   **If you specify a value for** `IPAddress`\:
       #
-      #   The value that you want Amazon Route 53 to pass in the `Host` header
-      #   in all health checks except TCP health checks. This is typically the
-      #   fully qualified DNS name of the website that you are attempting to
-      #   health check. When Amazon Route 53 checks the health of an endpoint,
-      #   here is how it constructs the `Host` header:
+      #   Amazon Route 53 sends health check requests to the specified IPv4 or
+      #   IPv6 address and passes the value of `FullyQualifiedDomainName` in
+      #   the `Host` header for all health checks except TCP health checks.
+      #   This is typically the fully qualified DNS name of the endpoint on
+      #   which you want Amazon Route 53 to perform health checks.
+      #
+      #   When Amazon Route 53 checks the health of an endpoint, here is how
+      #   it constructs the `Host` header:
       #
       #   * If you specify a value of `80` for `Port` and `HTTP` or
       #     `HTTP_STR_MATCH` for `Type`, Amazon Route 53 passes the value of
@@ -2060,13 +2103,20 @@ module Aws
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header
       #   in each of the preceding cases.
       #
-      #   **If you don't specify** `IPAddress`\:
+      #   <b>If you don't specify a value for <code>IPAddress</code> </b>\:
       #
-      #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends
-      #   a DNS request to the domain that you specify in
-      #   `FullyQualifiedDomainName` at the interval you specify in
-      #   `RequestInterval`. Using an IP address that DNS returns, Amazon
+      #   Amazon Route 53 sends a DNS request to the domain that you specify
+      #   for `FullyQualifiedDomainName` at the interval that you specify for
+      #   `RequestInterval`. Using an IPv4 address that DNS returns, Amazon
       #   Route 53 then checks the health of the endpoint.
+      #
+      #   <note markdown="1"> If you don't specify a value for `IPAddress`, Amazon Route 53 uses
+      #   only IPv4 to send health checks to the endpoint. If there's no
+      #   resource record set with a type of A for the name that you specify
+      #   for `FullyQualifiedDomainName`, the health check fails with a "DNS
+      #   resolution failed" error.
+      #
+      #    </note>
       #
       #   If you want to check the health of weighted, latency, or failover
       #   resource record sets and you choose to specify the endpoint only by
@@ -2320,163 +2370,6 @@ module Aws
       class HostedZoneConfig < Struct.new(
         :comment,
         :private_zone)
-        include Aws::Structure
-      end
-
-      # The input for a ListChangeBatchesByHostedZone request.
-      # @note When making an API call, pass ListChangeBatchesByHostedZoneRequest
-      #   data as a hash:
-      #
-      #       {
-      #         hosted_zone_id: "ResourceId", # required
-      #         start_date: "Date", # required
-      #         end_date: "Date", # required
-      #         max_items: 1,
-      #         marker: "PageMarker",
-      #       }
-      # @!attribute [rw] hosted_zone_id
-      #   The ID of the hosted zone that you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] start_date
-      #   The start of the time period you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] end_date
-      #   The end of the time period you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of items on a page.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] marker
-      #   The page marker.
-      #   @return [String]
-      class ListChangeBatchesByHostedZoneRequest < Struct.new(
-        :hosted_zone_id,
-        :start_date,
-        :end_date,
-        :max_items,
-        :marker)
-        include Aws::Structure
-      end
-
-      # A complex type containing the response information for the request.
-      # @!attribute [rw] max_items
-      #   The value that you specified for the `maxitems` parameter in the
-      #   call to `ListHostedZones` that produced the current response.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] marker
-      #   For the second and subsequent calls to ListHostedZones, Marker is
-      #   the value that you specified for the marker parameter in the request
-      #   that produced the current response.
-      #   @return [String]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates if there are more change batches to list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] change_batch_records
-      #   The change batches within the given hosted zone and time period.
-      #   @return [Array<Types::ChangeBatchRecord>]
-      #
-      # @!attribute [rw] next_marker
-      #   The next page marker.
-      #   @return [String]
-      class ListChangeBatchesByHostedZoneResponse < Struct.new(
-        :max_items,
-        :marker,
-        :is_truncated,
-        :change_batch_records,
-        :next_marker)
-        include Aws::Structure
-      end
-
-      # The input for a ListChangeBatchesByRRSet request.
-      # @note When making an API call, pass ListChangeBatchesByRRSetRequest
-      #   data as a hash:
-      #
-      #       {
-      #         hosted_zone_id: "ResourceId", # required
-      #         name: "DNSName", # required
-      #         type: "SOA", # required, accepts SOA, A, TXT, NS, CNAME, MX, NAPTR, PTR, SRV, SPF, AAAA
-      #         set_identifier: "ResourceRecordSetIdentifier",
-      #         start_date: "Date", # required
-      #         end_date: "Date", # required
-      #         max_items: 1,
-      #         marker: "PageMarker",
-      #       }
-      # @!attribute [rw] hosted_zone_id
-      #   The ID of the hosted zone that you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] name
-      #   The name of the RRSet that you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] type
-      #   The type of the RRSet that you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] set_identifier
-      #   The identifier of the RRSet that you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] start_date
-      #   The start of the time period you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] end_date
-      #   The end of the time period you want to see changes for.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of items on a page.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] marker
-      #   The page marker.
-      #   @return [String]
-      class ListChangeBatchesByRRSetRequest < Struct.new(
-        :hosted_zone_id,
-        :name,
-        :type,
-        :set_identifier,
-        :start_date,
-        :end_date,
-        :max_items,
-        :marker)
-        include Aws::Structure
-      end
-
-      # The input for a ListChangeBatchesByRRSet request.
-      # @!attribute [rw] max_items
-      #   The maximum number of items on a page.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] marker
-      #   The page marker.
-      #   @return [String]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates if there are more change batches to list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] change_batch_records
-      #   The change batches within the given hosted zone and time period.
-      #   @return [Array<Types::ChangeBatchRecord>]
-      #
-      # @!attribute [rw] next_marker
-      #   The next page marker.
-      #   @return [String]
-      class ListChangeBatchesByRRSetResponse < Struct.new(
-        :max_items,
-        :marker,
-        :is_truncated,
-        :change_batch_records,
-        :next_marker)
         include Aws::Structure
       end
 
@@ -3012,7 +2905,7 @@ module Aws
       #
       #   Values for alias resource record sets:
       #
-      #   * **CloudFront distribution**\: A
+      #   * **CloudFront distribution**\: A or AAAA
       #
       #   * **Elastic Beanstalk environment that has a regionalized
       #     subdomain**\: A
@@ -3777,6 +3670,70 @@ module Aws
         include Aws::Structure
       end
 
+      # A complex type that contains information about that can be associated
+      # with your hosted zone.
+      # @note When making an API call, pass ListVPCAssociationAuthorizationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         hosted_zone_id: "ResourceId", # required
+      #         next_token: "PaginationToken",
+      #         max_results: "MaxResults",
+      #       }
+      # @!attribute [rw] hosted_zone_id
+      #   The ID of the hosted zone for which you want a list of VPCs that can
+      #   be associated with the hosted zone.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_token
+      #   *Optional*\: If a response includes a `NextToken` element, there are
+      #   more VPCs that can be associated with the specified hosted zone. To
+      #   get the next page of results, submit another request, and include
+      #   the value of the `NextToken` element in from the response in the
+      #   `NextToken` parameter in another `ListVPCAssociationAuthorizations`
+      #   request.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   *Optional*\: An integer that specifies the maximum number of VPCs
+      #   that you want Amazon Route 53 to return.
+      #   @return [String]
+      class ListVPCAssociationAuthorizationsRequest < Struct.new(
+        :hosted_zone_id,
+        :next_token,
+        :max_results)
+        include Aws::Structure
+      end
+
+      # A complex type that contains the response information for the request.
+      # @!attribute [rw] hosted_zone_id
+      #   The ID of the hosted zone that you can associate the listed VPCs
+      #   with.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_token
+      #   When the response includes a `NextToken` element, there are more
+      #   VPCs that can be associated with the specified hosted zone. To get
+      #   the next page of VPCs, submit another
+      #   `ListVPCAssociationAuthorizations` request, and include the value of
+      #   the `NextToken` element from the response in the `NextToken` request
+      #   parameter:
+      #
+      #   `/2013-04-01/hostedzone/hosted zone
+      #   ID/authorizevpcassociation?MaxItems=VPCs per page&NextToken= `
+      #   @return [String]
+      #
+      # @!attribute [rw] vp_cs
+      #   The list of VPCs that are authorized to be associated with the
+      #   specified hosted zone.
+      #   @return [Array<Types::VPC>]
+      class ListVPCAssociationAuthorizationsResponse < Struct.new(
+        :hosted_zone_id,
+        :next_token,
+        :vp_cs)
+        include Aws::Structure
+      end
+
       # Information specific to the resource record.
       #
       # <note markdown="1"> If you are creating an alias resource record set, omit
@@ -3857,26 +3814,26 @@ module Aws
       #   names, see [DNS Domain Name Format][1] in the *Amazon Route 53
       #   Developer Guide*.
       #
-      #   You can use the asterisk (\*) wildcard to replace the leftmost label
+      #   You can use the asterisk (*) wildcard to replace the leftmost label
       #   in a domain name. For example, `*.example.com`. Note the following:
       #
-      #   * The \* must replace the entire label. For example, you can't
+      #   * The * must replace the entire label. For example, you can't
       #     specify `*prod.example.com` or `prod*.example.com`.
       #
-      #   * The \* can't replace any of the middle labels, for example,
-      #     marketing.\*.example.com.
+      #   * The * can't replace any of the middle labels, for example,
+      #     marketing.*.example.com.
       #
-      #   * If you include \* in any position other than the leftmost label in
-      #     a domain name, DNS treats it as an \* character (ASCII 42), not as
+      #   * If you include * in any position other than the leftmost label in
+      #     a domain name, DNS treats it as an * character (ASCII 42), not as
       #     a wildcard.
       #
-      #     You can't use the \* wildcard for resource records sets that have
+      #     You can't use the * wildcard for resource records sets that have
       #     a type of NS.
       #
-      #   You can use the \* wildcard as the leftmost label in a domain name,
-      #   for example, `*.example.com`. You cannot use an \* for one of the
+      #   You can use the * wildcard as the leftmost label in a domain name,
+      #   for example, `*.example.com`. You can't use an * for one of the
       #   middle labels, for example, `marketing.*.example.com`. In addition,
-      #   the \* must replace the entire label; for example, you can't
+      #   the * must replace the entire label; for example, you can't
       #   specify `prod*.example.com`.
       #
       #
@@ -3915,7 +3872,11 @@ module Aws
       #
       #   * **CloudFront distributions:** `A`
       #
-      #   * **Elastic Beanstalk environment that has a regionalized
+      #     If IPv6 is enabled for the distribution, create two resource
+      #     record sets to route traffic to your distribution, one with a
+      #     value of `A` and one with a value of `AAAA`.
+      #
+      #   * **AWS Elastic Beanstalk environment that has a regionalized
       #     subdomain**\: `A`
       #
       #   * **ELB load balancers:** `A` \| `AAAA`
@@ -3957,7 +3918,7 @@ module Aws
       #   * You can only specify one `ResourceRecord` per weighted resource
       #     record set.
       #
-      #   * You cannot create latency, failover, or geolocation resource
+      #   * You can't create latency, failover, or geolocation resource
       #     record sets that have the same values for the `Name` and `Type`
       #     elements as weighted resource record sets.
       #
@@ -3984,11 +3945,11 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] region
-      #   *Latency-based resource record sets only:* The Amazon EC2 region
+      #   *Latency-based resource record sets only:* The Amazon EC2 Region
       #   where the resource that is specified in this resource record set
-      #   resides. The resource typically is an AWS resource, such as an
-      #   Amazon EC2 instance or an ELB load balancer, and is referred to by
-      #   an IP address or a DNS domain name, depending on the record type.
+      #   resides. The resource typically is an AWS resource, such as an EC2
+      #   instance or an ELB load balancer, and is referred to by an IP
+      #   address or a DNS domain name, depending on the record type.
       #
       #   <note markdown="1"> Creating latency and latency alias resource record sets in private
       #   hosted zones is not supported.
@@ -3998,7 +3959,7 @@ module Aws
       #   When Amazon Route 53 receives a DNS query for a domain name and type
       #   for which you have created latency resource record sets, Amazon
       #   Route 53 selects the latency resource record set that has the lowest
-      #   latency between the end user and the associated Amazon EC2 region.
+      #   latency between the end user and the associated Amazon EC2 Region.
       #   Amazon Route 53 then returns the value that is associated with the
       #   selected resource record set.
       #
@@ -4008,14 +3969,14 @@ module Aws
       #     record set.
       #
       #   * You can only create one latency resource record set for each
-      #     Amazon EC2 region.
+      #     Amazon EC2 Region.
       #
       #   * You are not required to create latency resource record sets for
-      #     all Amazon EC2 regions. Amazon Route 53 will choose the region
+      #     all Amazon EC2 Regions. Amazon Route 53 will choose the region
       #     with the best latency from among the regions for which you create
       #     latency resource record sets.
       #
-      #   * You cannot create non-latency resource record sets that have the
+      #   * You can't create non-latency resource record sets that have the
       #     same values for the `Name` and `Type` elements as latency resource
       #     record sets.
       #   @return [String]
@@ -4040,7 +4001,7 @@ module Aws
       #   most queries for a continent to one resource and to route queries
       #   for a country on that continent to a different resource.
       #
-      #   You cannot create two geolocation resource record sets that specify
+      #   You can't create two geolocation resource record sets that specify
       #   the same geographic location.
       #
       #   The value `*` in the `CountryCode` element matches all geographic
@@ -4060,7 +4021,7 @@ module Aws
       #   a `*` resource record set, Amazon Route 53 returns a "no answer"
       #   response for queries from those locations.
       #
-      #   You cannot create non-geolocation resource record sets that have the
+      #   You can't create non-geolocation resource record sets that have the
       #   same values for the `Name` and `Type` elements as geolocation
       #   resource record sets.
       #   @return [Types::GeoLocation]
@@ -4099,7 +4060,7 @@ module Aws
       #     value from the secondary resource record set. This is true
       #     regardless of the health of the associated endpoint.
       #
-      #   You cannot create non-failover resource record sets that have the
+      #   You can't create non-failover resource record sets that have the
       #   same values for the `Name` and `Type` elements as failover resource
       #   record sets.
       #
@@ -4157,10 +4118,10 @@ module Aws
       #
       # @!attribute [rw] alias_target
       #   *Alias resource record sets only:* Information about the CloudFront
-      #   distribution, Elastic Beanstalk environment, ELB load balancer,
+      #   distribution, AWS Elastic Beanstalk environment, ELB load balancer,
       #   Amazon S3 bucket, or Amazon Route 53 resource record set to which
-      #   you are redirecting queries. The Elastic Beanstalk environment must
-      #   have a regionalized subdomain.
+      #   you are redirecting queries. The AWS Elastic Beanstalk environment
+      #   must have a regionalized subdomain.
       #
       #   If you're creating resource records sets for a private hosted zone,
       #   note the following:
@@ -4556,7 +4517,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/Route53/latest/api-reference/api-policies-traffic-policy-document-format.html
+      #   [1]: http://docs.aws.amazon.com/Route53/latest/APIReference/api-policies-traffic-policy-document-format.html
       #   @return [String]
       #
       # @!attribute [rw] comment
@@ -4703,7 +4664,7 @@ module Aws
       #         enable_sni: false,
       #         regions: ["us-east-1"], # accepts us-east-1, us-west-1, us-west-2, eu-west-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, sa-east-1
       #         alarm_identifier: {
-      #           region: "us-east-1", # required, accepts us-east-1, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
+      #           region: "us-east-1", # required, accepts us-east-1, us-east-2, us-west-1, us-west-2, eu-central-1, eu-west-1, ap-south-1, ap-southeast-1, ap-southeast-2, ap-northeast-1, ap-northeast-2, sa-east-1
       #           name: "AlarmName", # required
       #         },
       #         insufficient_data_health_status: "Healthy", # accepts Healthy, Unhealthy, LastKnownStatus
@@ -4736,19 +4697,20 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] ip_address
-      #   The IPv4 IP address of the endpoint on which you want Amazon Route
-      #   53 to perform health checks. If you don't specify a value for
-      #   `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
+      #   The IPv4 or IPv6 IP address for the endpoint that you want Amazon
+      #   Route 53 to perform health checks on. If you don't specify a value
+      #   for `IPAddress`, Amazon Route 53 sends a DNS request to resolve the
       #   domain name that you specify in `FullyQualifiedDomainName` at the
-      #   interval you specify in `RequestInterval`. Using an IP address that
-      #   DNS returns, Amazon Route 53 then checks the health of the endpoint.
+      #   interval that you specify in `RequestInterval`. Using an IP address
+      #   that is returned by DNS, Amazon Route 53 then checks the health of
+      #   the endpoint.
       #
-      #   f the endpoint is an Amazon EC2 instance, we recommend that you
-      #   create an Elastic IP address, associate it with your Amazon EC2
-      #   instance, and specify the Elastic IP address for `IPAddress`. This
-      #   ensures that the IP address of your instance never changes. For more
-      #   information, see [Elastic IP Addresses (EIP)][1] in the *Amazon EC2
-      #   User Guide for Linux Instances*.
+      #   If the endpoint is an EC2 instance, we recommend that you create an
+      #   Elastic IP address, associate it with your EC2 instance, and specify
+      #   the Elastic IP address for `IPAddress`. This ensures that the IP
+      #   address of your instance never changes. For more information, see
+      #   [Elastic IP Addresses (EIP)][1] in the *Amazon EC2 User Guide for
+      #   Linux Instances*.
       #
       #   <note markdown="1"> If a health check already has a value for `IPAddress`, you can
       #   change the value. However, you can't update an existing health
@@ -4759,9 +4721,23 @@ module Aws
       #   For more information, see
       #   UpdateHealthCheckRequest$FullyQualifiedDomainName.
       #
+      #   Constraints: Amazon Route 53 can't check the health of endpoints
+      #   for which the IP address is in local, private, non-routable, or
+      #   multicast ranges. For more information about IP addresses for which
+      #   you can't create health checks, see the following documents:
+      #
+      #   * [RFC 5735, Special Use IPv4 Addresses][2]
+      #
+      #   * [RFC 6598, IANA-Reserved IPv4 Prefix for Shared Address Space][3]
+      #
+      #   * [RFC 5156, Special-Use IPv6 Addresses][4]
+      #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/elastic-ip-addresses-eip.html
+      #   [2]: https://tools.ietf.org/html/rfc5735
+      #   [3]: https://tools.ietf.org/html/rfc6598
+      #   [4]: https://tools.ietf.org/html/rfc5156
       #   @return [String]
       #
       # @!attribute [rw] port
@@ -4788,13 +4764,16 @@ module Aws
       #
       #    </note>
       #
-      #   **If you specify** `IPAddress`\:
+      #   **If you specify a value for** `IPAddress`\:
       #
-      #   The value that you want Amazon Route 53 to pass in the `Host` header
-      #   in all health checks except TCP health checks. This is typically the
-      #   fully qualified DNS name of the endpoint on which you want Amazon
-      #   Route 53 to perform health checks. When Amazon Route 53 checks the
-      #   health of an endpoint, here is how it constructs the `Host` header:
+      #   Amazon Route 53 sends health check requests to the specified IPv4 or
+      #   IPv6 address and passes the value of `FullyQualifiedDomainName` in
+      #   the `Host` header for all health checks except TCP health checks.
+      #   This is typically the fully qualified DNS name of the endpoint on
+      #   which you want Amazon Route 53 to perform health checks.
+      #
+      #   When Amazon Route 53 checks the health of an endpoint, here is how
+      #   it constructs the `Host` header:
       #
       #   * If you specify a value of `80` for `Port` and `HTTP` or
       #     `HTTP_STR_MATCH` for `Type`, Amazon Route 53 passes the value of
@@ -4813,13 +4792,21 @@ module Aws
       #   Route 53 substitutes the value of `IPAddress` in the `Host` header
       #   in each of the above cases.
       #
-      #   **If you don't specify** `IPAddress`\:
+      #   **If you don't specify a value for** `IPAddress`\:
       #
       #   If you don't specify a value for `IPAddress`, Amazon Route 53 sends
       #   a DNS request to the domain that you specify in
       #   `FullyQualifiedDomainName` at the interval you specify in
-      #   `RequestInterval`. Using an IP address that DNS returns, Amazon
-      #   Route 53 then checks the health of the endpoint.
+      #   `RequestInterval`. Using an IPv4 address that is returned by DNS,
+      #   Amazon Route 53 then checks the health of the endpoint.
+      #
+      #   <note markdown="1"> If you don't specify a value for `IPAddress`, Amazon Route 53 uses
+      #   only IPv4 to send health checks to the endpoint. If there's no
+      #   resource record set with a type of A for the name that you specify
+      #   for `FullyQualifiedDomainName`, the health check fails with a "DNS
+      #   resolution failed" error.
+      #
+      #    </note>
       #
       #   If you want to check the health of weighted, latency, or failover
       #   resource record sets and you choose to specify the endpoint only by
@@ -5100,8 +5087,8 @@ module Aws
         include Aws::Structure
       end
 
-      # A complex type that contains information about the Amazon VPC that
-      # you're associating with the specified hosted zone.
+      # A complex type that contains information about an Amazon VPC that is
+      # associated with a private hosted zone.
       # @note When making an API call, pass VPC
       #   data as a hash:
       #
@@ -5115,7 +5102,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] vpc_id
-      #   A VPC ID
+      #   The ID of an Amazon VPC.
       #   @return [String]
       class VPC < Struct.new(
         :vpc_region,

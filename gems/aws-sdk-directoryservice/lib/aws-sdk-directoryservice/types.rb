@@ -154,6 +154,29 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass CancelSchemaExtensionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         schema_extension_id: "SchemaExtensionId", # required
+      #       }
+      # @!attribute [rw] directory_id
+      #   The identifier of the directory whose schema extension will be
+      #   canceled.
+      #   @return [String]
+      #
+      # @!attribute [rw] schema_extension_id
+      #   The identifier of the schema extension that will be canceled.
+      #   @return [String]
+      class CancelSchemaExtensionRequest < Struct.new(
+        :directory_id,
+        :schema_extension_id)
+        include Aws::Structure
+      end
+
+      class CancelSchemaExtensionResult < Aws::EmptyStructure; end
+
       # Contains information about a computer account in a directory.
       # @!attribute [rw] computer_id
       #   The identifier of the computer.
@@ -1590,6 +1613,49 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass ListSchemaExtensionsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         next_token: "NextToken",
+      #         limit: 1,
+      #       }
+      # @!attribute [rw] directory_id
+      #   The identifier of the directory from which to retrieve the schema
+      #   extension information.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_token
+      #   The `ListSchemaExtensions.NextToken` value from a previous call to
+      #   `ListSchemaExtensions`. Pass null if this is the first call.
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   The maximum number of items to return.
+      #   @return [Integer]
+      class ListSchemaExtensionsRequest < Struct.new(
+        :directory_id,
+        :next_token,
+        :limit)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] schema_extensions_info
+      #   Information about the schema extensions applied to the directory.
+      #   @return [Array<Types::SchemaExtensionInfo>]
+      #
+      # @!attribute [rw] next_token
+      #   If not null, more results are available. Pass this value for the
+      #   `NextToken` parameter in a subsequent call to `ListSchemaExtensions`
+      #   to retrieve the next set of items.
+      #   @return [String]
+      class ListSchemaExtensionsResult < Struct.new(
+        :schema_extensions_info,
+        :next_token)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass ListTagsForResourceRequest
       #   data as a hash:
       #
@@ -1784,6 +1850,47 @@ module Aws
       # Contains the results of the RestoreFromSnapshot operation.
       class RestoreFromSnapshotResult < Aws::EmptyStructure; end
 
+      # Information about a schema extension.
+      # @!attribute [rw] directory_id
+      #   The identifier of the directory to which the schema extension is
+      #   applied.
+      #   @return [String]
+      #
+      # @!attribute [rw] schema_extension_id
+      #   The identifier of the schema extension.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   A description of the schema extension.
+      #   @return [String]
+      #
+      # @!attribute [rw] schema_extension_status
+      #   The current status of the schema extension.
+      #   @return [String]
+      #
+      # @!attribute [rw] schema_extension_status_reason
+      #   The reason for the `SchemaExtensionStatus`.
+      #   @return [String]
+      #
+      # @!attribute [rw] start_date_time
+      #   The date and time that the schema extension started being applied to
+      #   the directory.
+      #   @return [Time]
+      #
+      # @!attribute [rw] end_date_time
+      #   The date and time that the schema extension was completed.
+      #   @return [Time]
+      class SchemaExtensionInfo < Struct.new(
+        :directory_id,
+        :schema_extension_id,
+        :description,
+        :schema_extension_status,
+        :schema_extension_status_reason,
+        :start_date_time,
+        :end_date_time)
+        include Aws::Structure
+      end
+
       # Describes a directory snapshot.
       # @!attribute [rw] directory_id
       #   The directory identifier.
@@ -1837,6 +1944,49 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass StartSchemaExtensionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         directory_id: "DirectoryId", # required
+      #         create_snapshot_before_schema_extension: false, # required
+      #         ldif_content: "LdifContent", # required
+      #         description: "Description", # required
+      #       }
+      # @!attribute [rw] directory_id
+      #   The identifier of the directory for which the schema extension will
+      #   be applied to.
+      #   @return [String]
+      #
+      # @!attribute [rw] create_snapshot_before_schema_extension
+      #   If true, creates a snapshot of the directory before applying the
+      #   schema extension.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] ldif_content
+      #   The LDIF file represented as a string. The file size can be no
+      #   larger than 1MB.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   A description of the schema extension.
+      #   @return [String]
+      class StartSchemaExtensionRequest < Struct.new(
+        :directory_id,
+        :create_snapshot_before_schema_extension,
+        :ldif_content,
+        :description)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] schema_extension_id
+      #   The identifier of the schema extension that will be applied.
+      #   @return [String]
+      class StartSchemaExtensionResult < Struct.new(
+        :schema_extension_id)
+        include Aws::Structure
+      end
+
       # Metadata assigned to an Amazon Directory Services directory consisting
       # of a key-value pair.
       # @note When making an API call, pass Tag
@@ -1851,7 +2001,7 @@ module Aws
       #   and cannot be prefixed with "aws:". The string can contain only
       #   the set of Unicode letters, digits, white-space, '\_', '.',
       #   '/', '=', '+', '-' (Java regex:
-      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
       #   @return [String]
       #
       # @!attribute [rw] value
@@ -1859,7 +2009,7 @@ module Aws
       #   characters. The string can contain only the set of Unicode letters,
       #   digits, white-space, '\_', '.', '/', '=', '+', '-' (Java
       #   regex:
-      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]\*)$").
+      #   "^(\[\\\\p\\\{L\\}\\\\p\\\{Z\\}\\\\p\\\{N\\}\_.:/=+\\\\-\]*)$").
       #   @return [String]
       class Tag < Struct.new(
         :key,

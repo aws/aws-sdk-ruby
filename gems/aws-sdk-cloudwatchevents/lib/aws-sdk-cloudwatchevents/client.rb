@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -406,7 +408,7 @@ module Aws
       # @option params [required, String] :name
       #   The name of the rule that you are creating or updating.
       # @option params [String] :schedule_expression
-      #   The scheduling expression. For example, "cron(0 20 \* \* ? \*)",
+      #   The scheduling expression. For example, "cron(0 20 * * ? *)",
       #   "rate(5 minutes)".
       # @option params [String] :event_pattern
       #   The event pattern.

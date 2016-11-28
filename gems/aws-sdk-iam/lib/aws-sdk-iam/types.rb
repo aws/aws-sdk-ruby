@@ -1848,7 +1848,7 @@ module Aws
       # @!attribute [rw] missing_context_values
       #   A list of context keys that are required by the included input
       #   policies but that were not provided by one of the input parameters.
-      #   This list is used when the resource in a simulation is "\*",
+      #   This list is used when the resource in a simulation is "*",
       #   either explicitly, or when the `ResourceArns` parameter blank. If
       #   you include a list of resources, then any missing context values are
       #   instead included under the `ResourceSpecificResults` section. To
@@ -5571,8 +5571,8 @@ module Aws
       #   A list of context keys that are required by the included input
       #   policies but that were not provided by one of the input parameters.
       #   This list is used when a list of ARNs is included in the
-      #   `ResourceArns` parameter instead of "\*". If you do not specify
-      #   individual resources, by setting `ResourceArns` to "\*" or by not
+      #   `ResourceArns` parameter instead of "*". If you do not specify
+      #   individual resources, by setting `ResourceArns` to "*" or by not
       #   including the `ResourceArns` parameter, then any missing context
       #   values are instead included under the `EvaluationResults` section.
       #   To discover the context keys used by a set of policies, you can call
@@ -6584,7 +6584,7 @@ module Aws
       #   Specifies whether IAM user passwords must contain at least one of
       #   the following non-alphanumeric characters:
       #
-      #   ! @ # $ % ^ &amp;amp; \* ( ) \_ + - = \[ \] \\\{ \\} \| '
+      #   ! @ # $ % ^ &amp;amp; * ( ) \_ + - = \[ \] \\\{ \\} \| '
       #
       #   Default value: false
       #   @return [Boolean]

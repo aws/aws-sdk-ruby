@@ -37,6 +37,12 @@ module Aws
       EC2UnexpectedException = Shapes::StructureShape.new(name: 'EC2UnexpectedException')
       ENILimitReachedException = Shapes::StructureShape.new(name: 'ENILimitReachedException')
       Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+      Environment = Shapes::StructureShape.new(name: 'Environment')
+      EnvironmentError = Shapes::StructureShape.new(name: 'EnvironmentError')
+      EnvironmentResponse = Shapes::StructureShape.new(name: 'EnvironmentResponse')
+      EnvironmentVariableName = Shapes::StringShape.new(name: 'EnvironmentVariableName')
+      EnvironmentVariableValue = Shapes::StringShape.new(name: 'EnvironmentVariableValue')
+      EnvironmentVariables = Shapes::MapShape.new(name: 'EnvironmentVariables')
       EventSourceMappingConfiguration = Shapes::StructureShape.new(name: 'EventSourceMappingConfiguration')
       EventSourceMappingsList = Shapes::ListShape.new(name: 'EventSourceMappingsList')
       EventSourcePosition = Shapes::StringShape.new(name: 'EventSourcePosition')
@@ -67,6 +73,11 @@ module Aws
       InvocationType = Shapes::StringShape.new(name: 'InvocationType')
       InvokeAsyncRequest = Shapes::StructureShape.new(name: 'InvokeAsyncRequest')
       InvokeAsyncResponse = Shapes::StructureShape.new(name: 'InvokeAsyncResponse')
+      KMSAccessDeniedException = Shapes::StructureShape.new(name: 'KMSAccessDeniedException')
+      KMSDisabledException = Shapes::StructureShape.new(name: 'KMSDisabledException')
+      KMSInvalidStateException = Shapes::StructureShape.new(name: 'KMSInvalidStateException')
+      KMSKeyArn = Shapes::StringShape.new(name: 'KMSKeyArn')
+      KMSNotFoundException = Shapes::StructureShape.new(name: 'KMSNotFoundException')
       ListAliasesRequest = Shapes::StructureShape.new(name: 'ListAliasesRequest')
       ListAliasesResponse = Shapes::StructureShape.new(name: 'ListAliasesResponse')
       ListEventSourceMappingsRequest = Shapes::StructureShape.new(name: 'ListEventSourceMappingsRequest')
@@ -159,6 +170,8 @@ module Aws
       CreateFunctionRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
       CreateFunctionRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
       CreateFunctionRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+      CreateFunctionRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
+      CreateFunctionRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
 
       DeleteAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
@@ -171,6 +184,20 @@ module Aws
       DeleteFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
       DeleteFunctionRequest.add_member(:qualifier, Shapes::ShapeRef.new(shape: Qualifier, location: "querystring", location_name: "Qualifier"))
       DeleteFunctionRequest.struct_class = Types::DeleteFunctionRequest
+
+      Environment.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "Variables"))
+      Environment.struct_class = Types::Environment
+
+      EnvironmentError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
+      EnvironmentError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+      EnvironmentError.struct_class = Types::EnvironmentError
+
+      EnvironmentResponse.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "Variables"))
+      EnvironmentResponse.add_member(:error, Shapes::ShapeRef.new(shape: EnvironmentError, location_name: "Error"))
+      EnvironmentResponse.struct_class = Types::EnvironmentResponse
+
+      EnvironmentVariables.key = Shapes::ShapeRef.new(shape: EnvironmentVariableName)
+      EnvironmentVariables.value = Shapes::ShapeRef.new(shape: EnvironmentVariableValue)
 
       EventSourceMappingConfiguration.add_member(:uuid, Shapes::ShapeRef.new(shape: String, location_name: "UUID"))
       EventSourceMappingConfiguration.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
@@ -207,6 +234,8 @@ module Aws
       FunctionConfiguration.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "CodeSha256"))
       FunctionConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "Version"))
       FunctionConfiguration.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "VpcConfig"))
+      FunctionConfiguration.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentResponse, location_name: "Environment"))
+      FunctionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
       FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
@@ -342,6 +371,8 @@ module Aws
       UpdateFunctionConfigurationRequest.add_member(:timeout, Shapes::ShapeRef.new(shape: Timeout, location_name: "Timeout"))
       UpdateFunctionConfigurationRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
       UpdateFunctionConfigurationRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+      UpdateFunctionConfigurationRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
+      UpdateFunctionConfigurationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       UpdateFunctionConfigurationRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
       UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
@@ -538,6 +569,10 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidSubnetIDException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidSecurityGroupIDException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidZipFileException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSDisabledException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSInvalidStateException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSAccessDeniedException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSNotFoundException)
         end)
 
         api.add_operation(:invoke_async, Seahorse::Model::Operation.new.tap do |o|

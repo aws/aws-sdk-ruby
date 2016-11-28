@@ -46,12 +46,50 @@ module Aws
       #               ],
       #               ebs_optimized: false,
       #             },
+      #             auto_scaling_policy: {
+      #               constraints: { # required
+      #                 min_capacity: 1, # required
+      #                 max_capacity: 1, # required
+      #               },
+      #               rules: [ # required
+      #                 {
+      #                   name: "String", # required
+      #                   description: "String",
+      #                   action: { # required
+      #                     market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                     simple_scaling_policy_configuration: { # required
+      #                       adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                       scaling_adjustment: 1, # required
+      #                       cool_down: 1,
+      #                     },
+      #                   },
+      #                   trigger: { # required
+      #                     cloud_watch_alarm_definition: { # required
+      #                       comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                       evaluation_periods: 1,
+      #                       metric_name: "String", # required
+      #                       namespace: "String",
+      #                       period: 1, # required
+      #                       statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                       threshold: 1.0, # required
+      #                       unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                       dimensions: [
+      #                         {
+      #                           key: "String",
+      #                           value: "String",
+      #                         },
+      #                       ],
+      #                     },
+      #                   },
+      #                 },
+      #               ],
+      #             },
       #           },
       #         ],
       #         job_flow_id: "XmlStringMaxLen256", # required
       #       }
       # @!attribute [rw] instance_groups
-      #   Instance Groups to add.
+      #   Instance groups to add.
       #   @return [Array<Types::InstanceGroupConfig>]
       #
       # @!attribute [rw] job_flow_id
@@ -143,9 +181,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] tags
-      #   A list of tags to associate with a cluster and propagate to Amazon
-      #   EC2 instances. Tags are user-defined key/value pairs that consist of
-      #   a required key string with a maximum of 128 characters, and an
+      #   A list of tags to associate with a cluster and propagate to EC2
+      #   instances. Tags are user-defined key/value pairs that consist of a
+      #   required key string with a maximum of 128 characters, and an
       #   optional value string with a maximum of 256 characters.
       #   @return [Array<Types::Tag>]
       class AddTagsInput < Struct.new(
@@ -218,6 +256,127 @@ module Aws
         include Aws::Structure
       end
 
+      # An automatic scaling policy for a core instance group or task instance
+      # group in an Amazon EMR cluster. An automatic scaling policy defines
+      # how an instance group dynamically adds and terminates EC2 instances in
+      # response to the value of a CloudWatch metric. See
+      # PutAutoScalingPolicy.
+      # @note When making an API call, pass AutoScalingPolicy
+      #   data as a hash:
+      #
+      #       {
+      #         constraints: { # required
+      #           min_capacity: 1, # required
+      #           max_capacity: 1, # required
+      #         },
+      #         rules: [ # required
+      #           {
+      #             name: "String", # required
+      #             description: "String",
+      #             action: { # required
+      #               market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #               simple_scaling_policy_configuration: { # required
+      #                 adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                 scaling_adjustment: 1, # required
+      #                 cool_down: 1,
+      #               },
+      #             },
+      #             trigger: { # required
+      #               cloud_watch_alarm_definition: { # required
+      #                 comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                 evaluation_periods: 1,
+      #                 metric_name: "String", # required
+      #                 namespace: "String",
+      #                 period: 1, # required
+      #                 statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                 threshold: 1.0, # required
+      #                 unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                 dimensions: [
+      #                   {
+      #                     key: "String",
+      #                     value: "String",
+      #                   },
+      #                 ],
+      #               },
+      #             },
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] constraints
+      #   The upper and lower EC2 instance limits for an automatic scaling
+      #   policy. Automatic scaling activity will not cause an instance group
+      #   to grow above or below these limits.
+      #   @return [Types::ScalingConstraints]
+      #
+      # @!attribute [rw] rules
+      #   The scale-in and scale-out rules that comprise the automatic scaling
+      #   policy.
+      #   @return [Array<Types::ScalingRule>]
+      class AutoScalingPolicy < Struct.new(
+        :constraints,
+        :rules)
+        include Aws::Structure
+      end
+
+      # An automatic scaling policy for a core instance group or task instance
+      # group in an Amazon EMR cluster. The automatic scaling policy defines
+      # how an instance group dynamically adds and terminates EC2 instances in
+      # response to the value of a CloudWatch metric. See
+      # PutAutoScalingPolicy.
+      # @!attribute [rw] status
+      #   The status of an automatic scaling policy.
+      #   @return [Types::AutoScalingPolicyStatus]
+      #
+      # @!attribute [rw] constraints
+      #   The upper and lower EC2 instance limits for an automatic scaling
+      #   policy. Automatic scaling activity will not cause an instance group
+      #   to grow above or below these limits.
+      #   @return [Types::ScalingConstraints]
+      #
+      # @!attribute [rw] rules
+      #   The scale-in and scale-out rules that comprise the automatic scaling
+      #   policy.
+      #   @return [Array<Types::ScalingRule>]
+      class AutoScalingPolicyDescription < Struct.new(
+        :status,
+        :constraints,
+        :rules)
+        include Aws::Structure
+      end
+
+      # The reason for an AutoScalingPolicyStatus change.
+      # @!attribute [rw] code
+      #   The code indicating the reason for the change in
+      #   status.`USER_REQUEST` indicates that the scaling policy status was
+      #   changed by a user. `PROVISION_FAILURE` indicates that the status
+      #   change was because the policy failed to provision. `CLEANUP_FAILURE`
+      #   indicates something unclean happened.--&gt;
+      #   @return [String]
+      #
+      # @!attribute [rw] message
+      #   A friendly, more verbose message that accompanies an automatic
+      #   scaling policy state change.
+      #   @return [String]
+      class AutoScalingPolicyStateChangeReason < Struct.new(
+        :code,
+        :message)
+        include Aws::Structure
+      end
+
+      # The status of an automatic scaling policy.
+      # @!attribute [rw] state
+      #   @return [String]
+      #
+      # @!attribute [rw] state_change_reason
+      #   The reason for a change in status.
+      #   @return [Types::AutoScalingPolicyStateChangeReason]
+      class AutoScalingPolicyStatus < Struct.new(
+        :state,
+        :state_change_reason)
+        include Aws::Structure
+      end
+
+      # Configuration of a bootstrap action.
       # @note When making an API call, pass BootstrapActionConfig
       #   data as a hash:
       #
@@ -229,9 +388,11 @@ module Aws
       #         },
       #       }
       # @!attribute [rw] name
+      #   The name of the bootstrap action.
       #   @return [String]
       #
       # @!attribute [rw] script_bootstrap_action
+      #   The script run by the bootstrap action.
       #   @return [Types::ScriptBootstrapActionConfig]
       class BootstrapActionConfig < Struct.new(
         :name,
@@ -245,6 +406,134 @@ module Aws
       #   @return [Types::BootstrapActionConfig]
       class BootstrapActionDetail < Struct.new(
         :bootstrap_action_config)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] step_id
+      #   @return [String]
+      #
+      # @!attribute [rw] status
+      #   @return [String]
+      #
+      # @!attribute [rw] reason
+      #   @return [String]
+      class CancelStepsInfo < Struct.new(
+        :step_id,
+        :status,
+        :reason)
+        include Aws::Structure
+      end
+
+      # The input argument to the CancelSteps operation.
+      # @note When making an API call, pass CancelStepsInput
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "XmlStringMaxLen256",
+      #         step_ids: ["XmlStringMaxLen256"],
+      #       }
+      # @!attribute [rw] cluster_id
+      #   The `ClusterID` for which specified steps will be canceled. Use
+      #   RunJobFlow and ListClusters to get ClusterIDs.
+      #   @return [String]
+      #
+      # @!attribute [rw] step_ids
+      #   The list of `StepIDs` to cancel. Use ListSteps to get steps and
+      #   their states for the specified cluster.
+      #   @return [Array<String>]
+      class CancelStepsInput < Struct.new(
+        :cluster_id,
+        :step_ids)
+        include Aws::Structure
+      end
+
+      # The output for the CancelSteps operation.
+      # @!attribute [rw] cancel_steps_info_list
+      #   A list of CancelStepsInfo, which shows the status of specified
+      #   cancel requests for each `StepID` specified.
+      #   @return [Array<Types::CancelStepsInfo>]
+      class CancelStepsOutput < Struct.new(
+        :cancel_steps_info_list)
+        include Aws::Structure
+      end
+
+      # The definition of a CloudWatch metric alarm, which determines when an
+      # automatic scaling activity is triggered. When the defined alarm
+      # conditions are satisfied, scaling activity begins.
+      # @note When making an API call, pass CloudWatchAlarmDefinition
+      #   data as a hash:
+      #
+      #       {
+      #         comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #         evaluation_periods: 1,
+      #         metric_name: "String", # required
+      #         namespace: "String",
+      #         period: 1, # required
+      #         statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #         threshold: 1.0, # required
+      #         unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #         dimensions: [
+      #           {
+      #             key: "String",
+      #             value: "String",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] comparison_operator
+      #   Determines how the metric specified by `MetricName` is compared to
+      #   the value specified by `Threshold`.
+      #   @return [String]
+      #
+      # @!attribute [rw] evaluation_periods
+      #   The number of periods, expressed in seconds using `Period`, during
+      #   which the alarm condition must exist before the alarm triggers
+      #   automatic scaling activity. The default value is `1`.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] metric_name
+      #   The name of the CloudWatch metric that is watched to determine an
+      #   alarm condition.
+      #   @return [String]
+      #
+      # @!attribute [rw] namespace
+      #   The namespace for the CloudWatch metric. The default is
+      #   `AWS/ElasticMapReduce`.
+      #   @return [String]
+      #
+      # @!attribute [rw] period
+      #   The period, in seconds, over which the statistic is applied. EMR
+      #   CloudWatch metrics are emitted every five minutes (300 seconds), so
+      #   if an EMR CloudWatch metric is specified, specify `300`.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] statistic
+      #   The statistic to apply to the metric associated with the alarm. The
+      #   default is `AVERAGE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] threshold
+      #   The value against which the specified statistic is compared.
+      #   @return [Float]
+      #
+      # @!attribute [rw] unit
+      #   The unit of measure associated with the CloudWatch metric being
+      #   watched. The value specified for `Unit` must correspond to the units
+      #   specified in the CloudWatch metric.
+      #   @return [String]
+      #
+      # @!attribute [rw] dimensions
+      #   A CloudWatch metric dimension.
+      #   @return [Array<Types::MetricDimension>]
+      class CloudWatchAlarmDefinition < Struct.new(
+        :comparison_operator,
+        :evaluation_periods,
+        :metric_name,
+        :namespace,
+        :period,
+        :statistic,
+        :threshold,
+        :unit,
+        :dimensions)
         include Aws::Structure
       end
 
@@ -344,6 +633,30 @@ module Aws
       # @!attribute [rw] security_configuration
       #   The name of the security configuration applied to the cluster.
       #   @return [String]
+      #
+      # @!attribute [rw] auto_scaling_role
+      #   An IAM role for automatic scaling policies. The default role is
+      #   `EMR_AutoScaling_DefaultRole`. The IAM role provides permissions
+      #   that the automatic scaling feature requires to launch and terminate
+      #   EC2 instances in an instance group.
+      #   @return [String]
+      #
+      # @!attribute [rw] scale_down_behavior
+      #   The way that individual Amazon EC2 instances terminate when an
+      #   automatic scale-in activity occurs or an instance group is resized.
+      #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
+      #   nodes at the instance-hour boundary, regardless of when the request
+      #   to terminate the instance was submitted. This option is only
+      #   available with Amazon EMR 5.1.0 and later and is the default for
+      #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
+      #   indicates that Amazon EMR blacklists and drains tasks from nodes
+      #   before terminating the Amazon EC2 instances, regardless of the
+      #   instance-hour boundary. With either behavior, Amazon EMR removes the
+      #   least active nodes first and blocks instance termination if it could
+      #   lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` is available
+      #   only in Amazon EMR version 4.1.0 and later, and is the default for
+      #   versions of Amazon EMR earlier than 5.1.0.
+      #   @return [String]
       class Cluster < Struct.new(
         :id,
         :name,
@@ -362,7 +675,9 @@ module Aws
         :normalized_instance_hours,
         :master_public_dns_name,
         :configurations,
-        :security_configuration)
+        :security_configuration,
+        :auto_scaling_role,
+        :scale_down_behavior)
         include Aws::Structure
       end
 
@@ -701,7 +1016,7 @@ module Aws
       # Configuration of requested EBS block device associated with the
       # instance group.
       # @!attribute [rw] volume_specification
-      #   EBS volume specifications such as volume type, IOPS, and size(GiB)
+      #   EBS volume specifications such as volume type, IOPS, and size (GiB)
       #   that will be requested for the EBS volume attached to an EC2
       #   instance in the cluster.
       #   @return [Types::VolumeSpecification]
@@ -730,13 +1045,13 @@ module Aws
       #         volumes_per_instance: 1,
       #       }
       # @!attribute [rw] volume_specification
-      #   EBS volume specifications such as volume type, IOPS, and size(GiB)
+      #   EBS volume specifications such as volume type, IOPS, and size (GiB)
       #   that will be requested for the EBS volume attached to an EC2
       #   instance in the cluster.
       #   @return [Types::VolumeSpecification]
       #
       # @!attribute [rw] volumes_per_instance
-      #   Number of EBS volumes with specific volume configuration, that will
+      #   Number of EBS volumes with a specific volume configuration that will
       #   be associated with every instance in the instance group
       #   @return [Integer]
       class EbsBlockDeviceConfig < Struct.new(
@@ -745,6 +1060,7 @@ module Aws
         include Aws::Structure
       end
 
+      # The Amazon EBS configuration of a cluster instance.
       # @note When making an API call, pass EbsConfiguration
       #   data as a hash:
       #
@@ -762,9 +1078,12 @@ module Aws
       #         ebs_optimized: false,
       #       }
       # @!attribute [rw] ebs_block_device_configs
+      #   An array of Amazon EBS volume specifications attached to a cluster
+      #   instance.
       #   @return [Array<Types::EbsBlockDeviceConfig>]
       #
       # @!attribute [rw] ebs_optimized
+      #   Indicates whether an Amazon EBS volume is EBS-optimized.
       #   @return [Boolean]
       class EbsConfiguration < Struct.new(
         :ebs_block_device_configs,
@@ -1062,6 +1381,14 @@ module Aws
       # @!attribute [rw] shrink_policy
       #   Policy for customizing shrink operations.
       #   @return [Types::ShrinkPolicy]
+      #
+      # @!attribute [rw] auto_scaling_policy
+      #   An automatic scaling policy for a core instance group or task
+      #   instance group in an Amazon EMR cluster. The automatic scaling
+      #   policy defines how an instance group dynamically adds and terminates
+      #   EC2 instances in response to the value of a CloudWatch metric. See
+      #   PutAutoScalingPolicy.
+      #   @return [Types::AutoScalingPolicyDescription]
       class InstanceGroup < Struct.new(
         :id,
         :name,
@@ -1075,7 +1402,8 @@ module Aws
         :configurations,
         :ebs_block_devices,
         :ebs_optimized,
-        :shrink_policy)
+        :shrink_policy,
+        :auto_scaling_policy)
         include Aws::Structure
       end
 
@@ -1114,14 +1442,51 @@ module Aws
       #           ],
       #           ebs_optimized: false,
       #         },
+      #         auto_scaling_policy: {
+      #           constraints: { # required
+      #             min_capacity: 1, # required
+      #             max_capacity: 1, # required
+      #           },
+      #           rules: [ # required
+      #             {
+      #               name: "String", # required
+      #               description: "String",
+      #               action: { # required
+      #                 market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                 simple_scaling_policy_configuration: { # required
+      #                   adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                   scaling_adjustment: 1, # required
+      #                   cool_down: 1,
+      #                 },
+      #               },
+      #               trigger: { # required
+      #                 cloud_watch_alarm_definition: { # required
+      #                   comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                   evaluation_periods: 1,
+      #                   metric_name: "String", # required
+      #                   namespace: "String",
+      #                   period: 1, # required
+      #                   statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                   threshold: 1.0, # required
+      #                   unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                   dimensions: [
+      #                     {
+      #                       key: "String",
+      #                       value: "String",
+      #                     },
+      #                   ],
+      #                 },
+      #               },
+      #             },
+      #           ],
+      #         },
       #       }
       # @!attribute [rw] name
       #   Friendly name given to the instance group.
       #   @return [String]
       #
       # @!attribute [rw] market
-      #   Market type of the Amazon EC2 instances used to create a cluster
-      #   node.
+      #   Market type of the EC2 instances used to create a cluster node.
       #   @return [String]
       #
       # @!attribute [rw] instance_role
@@ -1129,13 +1494,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] bid_price
-      #   Bid price for each Amazon EC2 instance in the instance group when
-      #   launching nodes as Spot Instances, expressed in USD.
+      #   Bid price for each EC2 instance in the instance group when launching
+      #   nodes as Spot Instances, expressed in USD.
       #   @return [String]
       #
       # @!attribute [rw] instance_type
-      #   The Amazon EC2 instance type for all instances in the instance
-      #   group.
+      #   The EC2 instance type for all instances in the instance group.
       #   @return [String]
       #
       # @!attribute [rw] instance_count
@@ -1153,9 +1517,17 @@ module Aws
       #   @return [Array<Types::Configuration>]
       #
       # @!attribute [rw] ebs_configuration
-      #   EBS configurations that will be attached to each Amazon EC2 instance
-      #   in the instance group.
+      #   EBS configurations that will be attached to each EC2 instance in the
+      #   instance group.
       #   @return [Types::EbsConfiguration]
+      #
+      # @!attribute [rw] auto_scaling_policy
+      #   An automatic scaling policy for a core instance group or task
+      #   instance group in an Amazon EMR cluster. The automatic scaling
+      #   policy defines how an instance group dynamically adds and terminates
+      #   EC2 instances in response to the value of a CloudWatch metric. See
+      #   PutAutoScalingPolicy.
+      #   @return [Types::AutoScalingPolicy]
       class InstanceGroupConfig < Struct.new(
         :name,
         :market,
@@ -1164,7 +1536,8 @@ module Aws
         :instance_type,
         :instance_count,
         :configurations,
-        :ebs_configuration)
+        :ebs_configuration,
+        :auto_scaling_policy)
         include Aws::Structure
       end
 
@@ -1178,8 +1551,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] market
-      #   Market type of the Amazon EC2 instances used to create a cluster
-      #   node.
+      #   Market type of the EC2 instances used to create a cluster node.
       #   @return [String]
       #
       # @!attribute [rw] instance_role
@@ -1192,7 +1564,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_type
-      #   Amazon EC2 Instance type.
+      #   EC2 instance type.
       #   @return [String]
       #
       # @!attribute [rw] instance_request_count
@@ -1271,7 +1643,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] ec2_instance_ids_to_terminate
-      #   The EC2 InstanceIds to terminate. Once you terminate the instances,
+      #   The EC2 InstanceIds to terminate. After you terminate the instances,
       #   the instance group will not return to its original requested size.
       #   @return [Array<String>]
       #
@@ -1438,8 +1810,8 @@ module Aws
       # @!attribute [rw] ami_version
       #   The version of the AMI used to initialize Amazon EC2 instances in
       #   the job flow. For a list of AMI versions currently supported by
-      #   Amazon ElasticMapReduce, go to [AMI Versions Supported in Elastic
-      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer Guide.*
+      #   Amazon EMR, see [AMI Versions Supported in EMR][1] in the *Amazon
+      #   EMR Developer Guide.*
       #
       #
       #
@@ -1487,6 +1859,30 @@ module Aws
       #   The IAM role that will be assumed by the Amazon EMR service to
       #   access AWS resources on your behalf.
       #   @return [String]
+      #
+      # @!attribute [rw] auto_scaling_role
+      #   An IAM role for automatic scaling policies. The default role is
+      #   `EMR_AutoScaling_DefaultRole`. The IAM role provides a way for the
+      #   automatic scaling feature to get the required permissions it needs
+      #   to launch and terminate EC2 instances in an instance group.
+      #   @return [String]
+      #
+      # @!attribute [rw] scale_down_behavior
+      #   The way that individual Amazon EC2 instances terminate when an
+      #   automatic scale-in activity occurs or an instance group is resized.
+      #   `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR terminates
+      #   nodes at the instance-hour boundary, regardless of when the request
+      #   to terminate the instance was submitted. This option is only
+      #   available with Amazon EMR 5.1.0 and later and is the default for
+      #   clusters created using that version. `TERMINATE_AT_TASK_COMPLETION`
+      #   indicates that Amazon EMR blacklists and drains tasks from nodes
+      #   before terminating the Amazon EC2 instances, regardless of the
+      #   instance-hour boundary. With either behavior, Amazon EMR removes the
+      #   least active nodes first and blocks instance termination if it could
+      #   lead to HDFS corruption. `TERMINATE_AT_TASK_COMPLETION` available
+      #   only in Amazon EMR version 4.1.0 and later, and is the default for
+      #   versions of Amazon EMR earlier than 5.1.0.
+      #   @return [String]
       class JobFlowDetail < Struct.new(
         :job_flow_id,
         :name,
@@ -1499,7 +1895,9 @@ module Aws
         :supported_products,
         :visible_to_all_users,
         :job_flow_role,
-        :service_role)
+        :service_role,
+        :auto_scaling_role,
+        :scale_down_behavior)
         include Aws::Structure
       end
 
@@ -1582,6 +1980,44 @@ module Aws
       #               ],
       #               ebs_optimized: false,
       #             },
+      #             auto_scaling_policy: {
+      #               constraints: { # required
+      #                 min_capacity: 1, # required
+      #                 max_capacity: 1, # required
+      #               },
+      #               rules: [ # required
+      #                 {
+      #                   name: "String", # required
+      #                   description: "String",
+      #                   action: { # required
+      #                     market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                     simple_scaling_policy_configuration: { # required
+      #                       adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                       scaling_adjustment: 1, # required
+      #                       cool_down: 1,
+      #                     },
+      #                   },
+      #                   trigger: { # required
+      #                     cloud_watch_alarm_definition: { # required
+      #                       comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                       evaluation_periods: 1,
+      #                       metric_name: "String", # required
+      #                       namespace: "String",
+      #                       period: 1, # required
+      #                       statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                       threshold: 1.0, # required
+      #                       unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                       dimensions: [
+      #                         {
+      #                           key: "String",
+      #                           value: "String",
+      #                         },
+      #                       ],
+      #                     },
+      #                   },
+      #                 },
+      #               ],
+      #             },
       #           },
       #         ],
       #         ec2_key_name: "XmlStringMaxLen256",
@@ -1607,7 +2043,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_count
-      #   The number of Amazon EC2 instances used to execute the job flow.
+      #   The number of EC2 instances used to execute the job flow.
       #   @return [Integer]
       #
       # @!attribute [rw] instance_groups
@@ -1615,8 +2051,8 @@ module Aws
       #   @return [Array<Types::InstanceGroupConfig>]
       #
       # @!attribute [rw] ec2_key_name
-      #   The name of the Amazon EC2 key pair that can be used to ssh to the
-      #   master node as the user called "hadoop."
+      #   The name of the EC2 key pair that can be used to ssh to the master
+      #   node as the user called "hadoop."
       #   @return [String]
       #
       # @!attribute [rw] placement
@@ -1727,12 +2163,12 @@ module Aws
       #
       # @!attribute [rw] normalized_instance_hours
       #   An approximation of the cost of the job flow, represented in
-      #   m1.small/hours. This value is incremented once for every hour an
-      #   m1.small runs. Larger instances are weighted more, so an Amazon EC2
-      #   instance that is roughly four times more expensive would result in
-      #   the normalized instance hours being incremented by four. This result
-      #   is only an approximation and does not reflect the actual billing
-      #   rate.
+      #   m1.small/hours. This value is incremented one time for every hour
+      #   that an m1.small runs. Larger instances are weighted more, so an
+      #   Amazon EC2 instance that is roughly four times more expensive would
+      #   result in the normalized instance hours being incremented by four.
+      #   This result is only an approximation and does not reflect the actual
+      #   billing rate.
       #   @return [Integer]
       #
       # @!attribute [rw] ec2_key_name
@@ -1811,7 +2247,7 @@ module Aws
       #         marker: "Marker",
       #       }
       # @!attribute [rw] cluster_id
-      #   The cluster identifier for the bootstrap actions to list .
+      #   The cluster identifier for the bootstrap actions to list.
       #   @return [String]
       #
       # @!attribute [rw] marker
@@ -1824,9 +2260,9 @@ module Aws
         include Aws::Structure
       end
 
-      # This output contains the boostrap actions detail .
+      # This output contains the bootstrap actions detail.
       # @!attribute [rw] bootstrap_actions
-      #   The bootstrap actions associated with the cluster .
+      #   The bootstrap actions associated with the cluster.
       #   @return [Array<Types::Command>]
       #
       # @!attribute [rw] marker
@@ -1852,11 +2288,11 @@ module Aws
       #       }
       # @!attribute [rw] created_after
       #   The creation date and time beginning value filter for listing
-      #   clusters .
+      #   clusters.
       #   @return [Time]
       #
       # @!attribute [rw] created_before
-      #   The creation date and time end value filter for listing clusters .
+      #   The creation date and time end value filter for listing clusters.
       #   @return [Time]
       #
       # @!attribute [rw] cluster_states
@@ -2021,7 +2457,7 @@ module Aws
       #
       #       {
       #         cluster_id: "ClusterId", # required
-      #         step_states: ["PENDING"], # accepts PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
+      #         step_states: ["PENDING"], # accepts PENDING, CANCEL_PENDING, RUNNING, COMPLETED, CANCELLED, FAILED, INTERRUPTED
       #         step_ids: ["XmlString"],
       #         marker: "Marker",
       #       }
@@ -2066,11 +2502,39 @@ module Aws
         include Aws::Structure
       end
 
+      # A CloudWatch dimension, which is specified using a `Key` (known as a
+      # `Name` in CloudWatch), Value pair. By default, Amazon EMR uses one
+      # dimension whose `Key` is `JobFlowID` and `Value` is a variable
+      # representing the cluster ID, which is `$\{emr:cluster_id\}`. This
+      # enables the rule to bootstrap when the cluster ID becomes available,
+      # and also enables a single automatic scaling policy to be reused for
+      # multiple clusters and instance groups.
+      # @note When making an API call, pass MetricDimension
+      #   data as a hash:
+      #
+      #       {
+      #         key: "String",
+      #         value: "String",
+      #       }
+      # @!attribute [rw] key
+      #   The dimension name.
+      #   @return [String]
+      #
+      # @!attribute [rw] value
+      #   The dimension value.
+      #   @return [String]
+      class MetricDimension < Struct.new(
+        :key,
+        :value)
+        include Aws::Structure
+      end
+
       # Change the size of some instance groups.
       # @note When making an API call, pass ModifyInstanceGroupsInput
       #   data as a hash:
       #
       #       {
+      #         cluster_id: "ClusterId",
       #         instance_groups: [
       #           {
       #             instance_group_id: "XmlStringMaxLen256", # required
@@ -2087,10 +2551,15 @@ module Aws
       #           },
       #         ],
       #       }
+      # @!attribute [rw] cluster_id
+      #   The ID of the cluster to which the instance group belongs.
+      #   @return [String]
+      #
       # @!attribute [rw] instance_groups
       #   Instance groups to change.
       #   @return [Array<Types::InstanceGroupModifyConfig>]
       class ModifyInstanceGroupsInput < Struct.new(
+        :cluster_id,
         :instance_groups)
         include Aws::Structure
       end
@@ -2109,6 +2578,115 @@ module Aws
         :availability_zone)
         include Aws::Structure
       end
+
+      # @note When making an API call, pass PutAutoScalingPolicyInput
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #         instance_group_id: "InstanceGroupId", # required
+      #         auto_scaling_policy: { # required
+      #           constraints: { # required
+      #             min_capacity: 1, # required
+      #             max_capacity: 1, # required
+      #           },
+      #           rules: [ # required
+      #             {
+      #               name: "String", # required
+      #               description: "String",
+      #               action: { # required
+      #                 market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                 simple_scaling_policy_configuration: { # required
+      #                   adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                   scaling_adjustment: 1, # required
+      #                   cool_down: 1,
+      #                 },
+      #               },
+      #               trigger: { # required
+      #                 cloud_watch_alarm_definition: { # required
+      #                   comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                   evaluation_periods: 1,
+      #                   metric_name: "String", # required
+      #                   namespace: "String",
+      #                   period: 1, # required
+      #                   statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                   threshold: 1.0, # required
+      #                   unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                   dimensions: [
+      #                     {
+      #                       key: "String",
+      #                       value: "String",
+      #                     },
+      #                   ],
+      #                 },
+      #               },
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] cluster_id
+      #   Specifies the ID of a cluster. The instance group to which the
+      #   automatic scaling policy is applied is within this cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_group_id
+      #   Specifies the ID of the instance group to which the automatic
+      #   scaling policy is applied.
+      #   @return [String]
+      #
+      # @!attribute [rw] auto_scaling_policy
+      #   Specifies the definition of the automatic scaling policy.
+      #   @return [Types::AutoScalingPolicy]
+      class PutAutoScalingPolicyInput < Struct.new(
+        :cluster_id,
+        :instance_group_id,
+        :auto_scaling_policy)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] cluster_id
+      #   Specifies the ID of a cluster. The instance group to which the
+      #   automatic scaling policy is applied is within this cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_group_id
+      #   Specifies the ID of the instance group to which the scaling policy
+      #   is applied.
+      #   @return [String]
+      #
+      # @!attribute [rw] auto_scaling_policy
+      #   The automatic scaling policy definition.
+      #   @return [Types::AutoScalingPolicyDescription]
+      class PutAutoScalingPolicyOutput < Struct.new(
+        :cluster_id,
+        :instance_group_id,
+        :auto_scaling_policy)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass RemoveAutoScalingPolicyInput
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #         instance_group_id: "InstanceGroupId", # required
+      #       }
+      # @!attribute [rw] cluster_id
+      #   Specifies the ID of a cluster. The instance group to which the
+      #   automatic scaling policy is applied is within this cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] instance_group_id
+      #   Specifies the ID of the instance group to which the scaling policy
+      #   is applied.
+      #   @return [String]
+      class RemoveAutoScalingPolicyInput < Struct.new(
+        :cluster_id,
+        :instance_group_id)
+        include Aws::Structure
+      end
+
+      class RemoveAutoScalingPolicyOutput < Aws::EmptyStructure; end
 
       # This input identifies a cluster and a list of tags to remove.
       # @note When making an API call, pass RemoveTagsInput
@@ -2180,6 +2758,44 @@ module Aws
       #                   },
       #                 ],
       #                 ebs_optimized: false,
+      #               },
+      #               auto_scaling_policy: {
+      #                 constraints: { # required
+      #                   min_capacity: 1, # required
+      #                   max_capacity: 1, # required
+      #                 },
+      #                 rules: [ # required
+      #                   {
+      #                     name: "String", # required
+      #                     description: "String",
+      #                     action: { # required
+      #                       market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #                       simple_scaling_policy_configuration: { # required
+      #                         adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #                         scaling_adjustment: 1, # required
+      #                         cool_down: 1,
+      #                       },
+      #                     },
+      #                     trigger: { # required
+      #                       cloud_watch_alarm_definition: { # required
+      #                         comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #                         evaluation_periods: 1,
+      #                         metric_name: "String", # required
+      #                         namespace: "String",
+      #                         period: 1, # required
+      #                         statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #                         threshold: 1.0, # required
+      #                         unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #                         dimensions: [
+      #                           {
+      #                             key: "String",
+      #                             value: "String",
+      #                           },
+      #                         ],
+      #                       },
+      #                     },
+      #                   },
+      #                 ],
       #               },
       #             },
       #           ],
@@ -2261,6 +2877,8 @@ module Aws
       #           },
       #         ],
       #         security_configuration: "XmlString",
+      #         auto_scaling_role: "XmlString",
+      #         scale_down_behavior: "TERMINATE_AT_INSTANCE_HOUR", # accepts TERMINATE_AT_INSTANCE_HOUR, TERMINATE_AT_TASK_COMPLETION
       #       }
       # @!attribute [rw] name
       #   The name of the job flow.
@@ -2295,8 +2913,17 @@ module Aws
       #   version of Hadoop from the defaults shown above.
       #
       #   For details about the AMI versions currently supported by Amazon
-      #   Elastic MapReduce, go to [AMI Versions Supported in Elastic
-      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer's Guide.*
+      #   Elastic MapReduce, see [AMI Versions Supported in Elastic
+      #   MapReduce][1] in the *Amazon Elastic MapReduce Developer Guide.*
+      #
+      #   <note markdown="1"> Previously, the EMR AMI version API parameter options allowed you to
+      #   use latest for the latest AMI version rather than specify a
+      #   numerical value. Some regions no longer support this deprecated
+      #   option as they only have a newer release label version of EMR, which
+      #   requires you to specify an EMR release label release (EMR 4.x or
+      #   later).
+      #
+      #    </note>
       #
       #
       #
@@ -2333,7 +2960,7 @@ module Aws
       #    </note>
       #
       #   A list of strings that indicates third-party software to use with
-      #   the job flow. For more information, go to [Use Third Party
+      #   the job flow. For more information, see [Use Third Party
       #   Applications with Amazon EMR][1]. Currently supported values are:
       #
       #   * "mapr-m3" - launch the job flow using MapR M3 Edition.
@@ -2431,6 +3058,31 @@ module Aws
       # @!attribute [rw] security_configuration
       #   The name of a security configuration to apply to the cluster.
       #   @return [String]
+      #
+      # @!attribute [rw] auto_scaling_role
+      #   An IAM role for automatic scaling policies. The default role is
+      #   `EMR_AutoScaling_DefaultRole`. The IAM role provides permissions
+      #   that the automatic scaling feature requires to launch and terminate
+      #   EC2 instances in an instance group.
+      #   @return [String]
+      #
+      # @!attribute [rw] scale_down_behavior
+      #   Specifies the way that individual Amazon EC2 instances terminate
+      #   when an automatic scale-in activity occurs or an instance group is
+      #   resized. `TERMINATE_AT_INSTANCE_HOUR` indicates that Amazon EMR
+      #   terminates nodes at the instance-hour boundary, regardless of when
+      #   the request to terminate the instance was submitted. This option is
+      #   only available with Amazon EMR 5.1.0 and later and is the default
+      #   for clusters created using that version.
+      #   `TERMINATE_AT_TASK_COMPLETION` indicates that Amazon EMR blacklists
+      #   and drains tasks from nodes before terminating the Amazon EC2
+      #   instances, regardless of the instance-hour boundary. With either
+      #   behavior, Amazon EMR removes the least active nodes first and blocks
+      #   instance termination if it could lead to HDFS corruption.
+      #   `TERMINATE_AT_TASK_COMPLETION` available only in Amazon EMR version
+      #   4.1.0 and later, and is the default for versions of Amazon EMR
+      #   earlier than 5.1.0.
+      #   @return [String]
       class RunJobFlowInput < Struct.new(
         :name,
         :log_uri,
@@ -2448,7 +3100,9 @@ module Aws
         :job_flow_role,
         :service_role,
         :tags,
-        :security_configuration)
+        :security_configuration,
+        :auto_scaling_role,
+        :scale_down_behavior)
         include Aws::Structure
       end
 
@@ -2461,6 +3115,158 @@ module Aws
         include Aws::Structure
       end
 
+      # The type of adjustment the automatic scaling activity makes when
+      # triggered, and the periodicity of the adjustment.
+      # @note When making an API call, pass ScalingAction
+      #   data as a hash:
+      #
+      #       {
+      #         market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #         simple_scaling_policy_configuration: { # required
+      #           adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #           scaling_adjustment: 1, # required
+      #           cool_down: 1,
+      #         },
+      #       }
+      # @!attribute [rw] market
+      #   Not available for instance groups. Instance groups use the market
+      #   type specified for the group.
+      #   @return [String]
+      #
+      # @!attribute [rw] simple_scaling_policy_configuration
+      #   The type of adjustment the automatic scaling activity makes when
+      #   triggered, and the periodicity of the adjustment.
+      #   @return [Types::SimpleScalingPolicyConfiguration]
+      class ScalingAction < Struct.new(
+        :market,
+        :simple_scaling_policy_configuration)
+        include Aws::Structure
+      end
+
+      # The upper and lower EC2 instance limits for an automatic scaling
+      # policy. Automatic scaling activities triggered by automatic scaling
+      # rules will not cause an instance group to grow above or below these
+      # limits.
+      # @note When making an API call, pass ScalingConstraints
+      #   data as a hash:
+      #
+      #       {
+      #         min_capacity: 1, # required
+      #         max_capacity: 1, # required
+      #       }
+      # @!attribute [rw] min_capacity
+      #   The lower boundary of EC2 instances in an instance group below which
+      #   scaling activities are not allowed to shrink. Scale-in activities
+      #   will not terminate instances below this boundary.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] max_capacity
+      #   The upper boundary of EC2 instances in an instance group beyond
+      #   which scaling activities are not allowed to grow. Scale-out
+      #   activities will not add instances beyond this boundary.
+      #   @return [Integer]
+      class ScalingConstraints < Struct.new(
+        :min_capacity,
+        :max_capacity)
+        include Aws::Structure
+      end
+
+      # A scale-in or scale-out rule that defines scaling activity, including
+      # the CloudWatch metric alarm that triggers activity, how EC2 instances
+      # are added or removed, and the periodicity of adjustments. The
+      # automatic scaling policy for an instance group can comprise one or
+      # more automatic scaling rules.
+      # @note When making an API call, pass ScalingRule
+      #   data as a hash:
+      #
+      #       {
+      #         name: "String", # required
+      #         description: "String",
+      #         action: { # required
+      #           market: "ON_DEMAND", # accepts ON_DEMAND, SPOT
+      #           simple_scaling_policy_configuration: { # required
+      #             adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #             scaling_adjustment: 1, # required
+      #             cool_down: 1,
+      #           },
+      #         },
+      #         trigger: { # required
+      #           cloud_watch_alarm_definition: { # required
+      #             comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #             evaluation_periods: 1,
+      #             metric_name: "String", # required
+      #             namespace: "String",
+      #             period: 1, # required
+      #             statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #             threshold: 1.0, # required
+      #             unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #             dimensions: [
+      #               {
+      #                 key: "String",
+      #                 value: "String",
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] name
+      #   The name used to identify an automatic scaling rule. Rule names must
+      #   be unique within a scaling policy.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   A friendly, more verbose description of the automatic scaling rule.
+      #   @return [String]
+      #
+      # @!attribute [rw] action
+      #   The conditions that trigger an automatic scaling activity.
+      #   @return [Types::ScalingAction]
+      #
+      # @!attribute [rw] trigger
+      #   The CloudWatch alarm definition that determines when automatic
+      #   scaling activity is triggered.
+      #   @return [Types::ScalingTrigger]
+      class ScalingRule < Struct.new(
+        :name,
+        :description,
+        :action,
+        :trigger)
+        include Aws::Structure
+      end
+
+      # The conditions that trigger an automatic scaling activity.
+      # @note When making an API call, pass ScalingTrigger
+      #   data as a hash:
+      #
+      #       {
+      #         cloud_watch_alarm_definition: { # required
+      #           comparison_operator: "GREATER_THAN_OR_EQUAL", # required, accepts GREATER_THAN_OR_EQUAL, GREATER_THAN, LESS_THAN, LESS_THAN_OR_EQUAL
+      #           evaluation_periods: 1,
+      #           metric_name: "String", # required
+      #           namespace: "String",
+      #           period: 1, # required
+      #           statistic: "SAMPLE_COUNT", # accepts SAMPLE_COUNT, AVERAGE, SUM, MINIMUM, MAXIMUM
+      #           threshold: 1.0, # required
+      #           unit: "NONE", # accepts NONE, SECONDS, MICRO_SECONDS, MILLI_SECONDS, BYTES, KILO_BYTES, MEGA_BYTES, GIGA_BYTES, TERA_BYTES, BITS, KILO_BITS, MEGA_BITS, GIGA_BITS, TERA_BITS, PERCENT, COUNT, BYTES_PER_SECOND, KILO_BYTES_PER_SECOND, MEGA_BYTES_PER_SECOND, GIGA_BYTES_PER_SECOND, TERA_BYTES_PER_SECOND, BITS_PER_SECOND, KILO_BITS_PER_SECOND, MEGA_BITS_PER_SECOND, GIGA_BITS_PER_SECOND, TERA_BITS_PER_SECOND, COUNT_PER_SECOND
+      #           dimensions: [
+      #             {
+      #               key: "String",
+      #               value: "String",
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] cloud_watch_alarm_definition
+      #   The definition of a CloudWatch metric alarm. When the defined alarm
+      #   conditions are met along with other trigger parameters, scaling
+      #   activity begins.
+      #   @return [Types::CloudWatchAlarmDefinition]
+      class ScalingTrigger < Struct.new(
+        :cloud_watch_alarm_definition)
+        include Aws::Structure
+      end
+
+      # Configuration of the script to run during a bootstrap action.
       # @note When making an API call, pass ScriptBootstrapActionConfig
       #   data as a hash:
       #
@@ -2469,9 +3275,13 @@ module Aws
       #         args: ["XmlString"],
       #       }
       # @!attribute [rw] path
+      #   Location of the script to run during a bootstrap action. Can be
+      #   either a location in Amazon S3 or on a local file system.
       #   @return [String]
       #
       # @!attribute [rw] args
+      #   A list of command line arguments to pass to the bootstrap action
+      #   script.
       #   @return [Array<String>]
       class ScriptBootstrapActionConfig < Struct.new(
         :path,
@@ -2569,6 +3379,57 @@ module Aws
       class ShrinkPolicy < Struct.new(
         :decommission_timeout,
         :instance_resize_policy)
+        include Aws::Structure
+      end
+
+      # An automatic scaling configuration, which describes how the policy
+      # adds or removes instances, the cooldown period, and the number of EC2
+      # instances that will be added each time the CloudWatch metric alarm
+      # condition is satisfied.
+      # @note When making an API call, pass SimpleScalingPolicyConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         adjustment_type: "CHANGE_IN_CAPACITY", # accepts CHANGE_IN_CAPACITY, PERCENT_CHANGE_IN_CAPACITY, EXACT_CAPACITY
+      #         scaling_adjustment: 1, # required
+      #         cool_down: 1,
+      #       }
+      # @!attribute [rw] adjustment_type
+      #   The way in which EC2 instances are added (if `ScalingAdjustment` is
+      #   a positive number) or terminated (if `ScalingAdjustment` is a
+      #   negative number) each time the scaling activity is triggered.
+      #   `CHANGE_IN_CAPACITY` is the default. `CHANGE_IN_CAPACITY` indicates
+      #   that the EC2 instance count increments or decrements by
+      #   `ScalingAdjustment`, which should be expressed as an integer.
+      #   `PERCENT_CHANGE_IN_CAPACITY` indicates the instance count increments
+      #   or decrements by the percentage specified by `ScalingAdjustment`,
+      #   which should be expressed as a decimal, for example, 0.20 indicates
+      #   an increase in 20% increments of cluster capacity. `EXACT_CAPACITY`
+      #   indicates the scaling activity results in an instance group with the
+      #   number of EC2 instances specified by `ScalingAdjustment`, which
+      #   should be expressed as a positive integer.
+      #   @return [String]
+      #
+      # @!attribute [rw] scaling_adjustment
+      #   The amount by which to scale in or scale out, based on the specified
+      #   `AdjustmentType`. A positive value adds to the instance group's EC2
+      #   instance count while a negative number removes instances. If
+      #   `AdjustmentType` is set to `EXACT_CAPACITY`, the number should only
+      #   be a positive integer. If `AdjustmentType` is set to
+      #   `PERCENT_CHANGE_IN_CAPACITY`, the value should express the
+      #   percentage as a decimal. For example, -0.20 indicates a decrease in
+      #   20% increments of cluster capacity.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] cool_down
+      #   The amount of time, in seconds, after a scaling activity completes
+      #   before any further trigger-related scaling activities can start. The
+      #   default value is 0.
+      #   @return [Integer]
+      class SimpleScalingPolicyConfiguration < Struct.new(
+        :adjustment_type,
+        :scaling_adjustment,
+        :cool_down)
         include Aws::Structure
       end
 
@@ -2799,9 +3660,9 @@ module Aws
 
       # A key/value pair containing user-defined metadata that you can
       # associate with an Amazon EMR resource. Tags make it easier to
-      # associate clusters in various ways, such as grouping clu\\ sters to
-      # track your Amazon EMR resource allocation costs. For more information,
-      # see [Tagging Amazon EMR Resources][1].
+      # associate clusters in various ways, such as grouping clusters to track
+      # your Amazon EMR resource allocation costs. For more information, see
+      # [Tagging Amazon EMR Resources][1].
       #
       #
       #
@@ -2852,7 +3713,7 @@ module Aws
         include Aws::Structure
       end
 
-      # EBS volume specifications such as volume type, IOPS, and size(GiB)
+      # EBS volume specifications such as volume type, IOPS, and size (GiB)
       # that will be requested for the EBS volume attached to an EC2 instance
       # in the cluster.
       # @note When making an API call, pass VolumeSpecification

@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -518,6 +520,7 @@ module Aws
       # @example Response structure
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
+      #   resp.container_instance.version #=> Integer
       #   resp.container_instance.version_info.agent_version #=> String
       #   resp.container_instance.version_info.agent_hash #=> String
       #   resp.container_instance.version_info.docker_version #=> String
@@ -707,6 +710,7 @@ module Aws
       #   resp.container_instances #=> Array
       #   resp.container_instances[0].container_instance_arn #=> String
       #   resp.container_instances[0].ec2_instance_id #=> String
+      #   resp.container_instances[0].version #=> Integer
       #   resp.container_instances[0].version_info.agent_version #=> String
       #   resp.container_instances[0].version_info.agent_hash #=> String
       #   resp.container_instances[0].version_info.docker_version #=> String
@@ -945,6 +949,7 @@ module Aws
       #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
       #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
       #   resp.tasks[0].started_by #=> String
+      #   resp.tasks[0].version #=> Integer
       #   resp.tasks[0].stopped_reason #=> String
       #   resp.tasks[0].created_at #=> Time
       #   resp.tasks[0].started_at #=> Time
@@ -1439,6 +1444,7 @@ module Aws
       # @example Response structure
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
+      #   resp.container_instance.version #=> Integer
       #   resp.container_instance.version_info.agent_version #=> String
       #   resp.container_instance.version_info.agent_hash #=> String
       #   resp.container_instance.version_info.docker_version #=> String
@@ -1798,6 +1804,7 @@ module Aws
       #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
       #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
       #   resp.tasks[0].started_by #=> String
+      #   resp.tasks[0].version #=> Integer
       #   resp.tasks[0].stopped_reason #=> String
       #   resp.tasks[0].created_at #=> Time
       #   resp.tasks[0].started_at #=> Time
@@ -1913,6 +1920,7 @@ module Aws
       #   resp.tasks[0].containers[0].network_bindings[0].host_port #=> Integer
       #   resp.tasks[0].containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
       #   resp.tasks[0].started_by #=> String
+      #   resp.tasks[0].version #=> Integer
       #   resp.tasks[0].stopped_reason #=> String
       #   resp.tasks[0].created_at #=> Time
       #   resp.tasks[0].started_at #=> Time
@@ -1987,6 +1995,7 @@ module Aws
       #   resp.task.containers[0].network_bindings[0].host_port #=> Integer
       #   resp.task.containers[0].network_bindings[0].protocol #=> String, one of "tcp", "udp"
       #   resp.task.started_by #=> String
+      #   resp.task.version #=> Integer
       #   resp.task.stopped_reason #=> String
       #   resp.task.created_at #=> Time
       #   resp.task.started_at #=> Time
@@ -2125,6 +2134,7 @@ module Aws
       # @example Response structure
       #   resp.container_instance.container_instance_arn #=> String
       #   resp.container_instance.ec2_instance_id #=> String
+      #   resp.container_instance.version #=> Integer
       #   resp.container_instance.version_info.agent_version #=> String
       #   resp.container_instance.version_info.agent_hash #=> String
       #   resp.container_instance.version_info.docker_version #=> String

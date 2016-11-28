@@ -652,7 +652,7 @@ module Aws
       # @!attribute [rw] tape_size_in_bytes
       #   The size, in bytes, of the virtual tape that you want to create.
       #
-      #   <note markdown="1">The size must be aligned by gigabyte (1024\*1024\*1024 byte).
+      #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
       #
       #    </note>
       #   @return [Integer]
@@ -697,7 +697,7 @@ module Aws
       # @!attribute [rw] tape_size_in_bytes
       #   The size, in bytes, of the virtual tapes that you want to create.
       #
-      #   <note markdown="1">The size must be aligned by gigabyte (1024\*1024\*1024 byte).
+      #   <note markdown="1">The size must be aligned by gigabyte (1024*1024*1024 byte).
       #
       #    </note>
       #   @return [Integer]

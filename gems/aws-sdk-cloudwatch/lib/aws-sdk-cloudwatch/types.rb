@@ -9,10 +9,7 @@ module Aws
   module CloudWatch
     module Types
 
-      # The `AlarmHistoryItem` data type contains descriptive information
-      # about the history of a specific alarm. If you call
-      # DescribeAlarmHistory, Amazon CloudWatch returns this data type as part
-      # of the DescribeAlarmHistoryResult data type.
+      # Represents the history of a specific alarm.
       # @!attribute [rw] alarm_name
       #   The descriptive name for the alarm.
       #   @return [String]
@@ -26,11 +23,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] history_summary
-      #   A human-readable summary of the alarm history.
+      #   A summary of the alarm history, in text format.
       #   @return [String]
       #
       # @!attribute [rw] history_data
-      #   Machine-readable data about the alarm in JSON format.
+      #   Data about the alarm, in JSON format.
       #   @return [String]
       class AlarmHistoryItem < Struct.new(
         :alarm_name,
@@ -41,36 +38,40 @@ module Aws
         include Aws::Structure
       end
 
-      # The `Datapoint` data type encapsulates the statistical data that
-      # Amazon CloudWatch computes from metric data.
+      # Encapsulates the statistical data that Amazon CloudWatch computes from
+      # metric data.
       # @!attribute [rw] timestamp
-      #   The time stamp used for the datapoint.
+      #   The time stamp used for the data point.
       #   @return [Time]
       #
       # @!attribute [rw] sample_count
       #   The number of metric values that contributed to the aggregate value
-      #   of this datapoint.
+      #   of this data point.
       #   @return [Float]
       #
       # @!attribute [rw] average
-      #   The average of metric values that correspond to the datapoint.
+      #   The average of the metric values that correspond to the data point.
       #   @return [Float]
       #
       # @!attribute [rw] sum
-      #   The sum of metric values used for the datapoint.
+      #   The sum of the metric values for the data point.
       #   @return [Float]
       #
       # @!attribute [rw] minimum
-      #   The minimum metric value used for the datapoint.
+      #   The minimum metric value for the data point.
       #   @return [Float]
       #
       # @!attribute [rw] maximum
-      #   The maximum of the metric value used for the datapoint.
+      #   The maximum metric value for the data point.
       #   @return [Float]
       #
       # @!attribute [rw] unit
-      #   The standard unit used for the datapoint.
+      #   The standard unit for the data point.
       #   @return [String]
+      #
+      # @!attribute [rw] extended_statistics
+      #   The percentile statistic for the data point.
+      #   @return [Hash<String,Float>]
       class Datapoint < Struct.new(
         :timestamp,
         :sample_count,
@@ -78,11 +79,11 @@ module Aws
         :sum,
         :minimum,
         :maximum,
-        :unit)
+        :unit,
+        :extended_statistics)
         include Aws::Structure
       end
 
-      # Describes the inputs for DeleteAlarms.
       # @note When making an API call, pass DeleteAlarmsInput
       #   data as a hash:
       #
@@ -90,14 +91,13 @@ module Aws
       #         alarm_names: ["AlarmName"], # required
       #       }
       # @!attribute [rw] alarm_names
-      #   A list of alarms to be deleted.
+      #   The alarms to be deleted.
       #   @return [Array<String>]
       class DeleteAlarmsInput < Struct.new(
         :alarm_names)
         include Aws::Structure
       end
 
-      # Describes the inputs for DescribeAlarmHistory.
       # @note When making an API call, pass DescribeAlarmHistoryInput
       #   data as a hash:
       #
@@ -143,13 +143,13 @@ module Aws
         include Aws::Structure
       end
 
-      # The output for DescribeAlarmHistory.
       # @!attribute [rw] alarm_history_items
-      #   A list of alarm histories in JSON format.
+      #   The alarm histories, in JSON format.
       #   @return [Array<Types::AlarmHistoryItem>]
       #
       # @!attribute [rw] next_token
-      #   A string that marks the start of the next batch of returned results.
+      #   The token that marks the start of the next batch of returned
+      #   results.
       #   @return [String]
       class DescribeAlarmHistoryOutput < Struct.new(
         :alarm_history_items,
@@ -157,7 +157,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the inputs for DescribeAlarmsForMetric.
       # @note When making an API call, pass DescribeAlarmsForMetricInput
       #   data as a hash:
       #
@@ -165,6 +164,7 @@ module Aws
       #         metric_name: "MetricName", # required
       #         namespace: "Namespace", # required
       #         statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #         extended_statistic: "ExtendedStatistic",
       #         dimensions: [
       #           {
       #             name: "DimensionName", # required
@@ -183,17 +183,23 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] statistic
-      #   The statistic for the metric.
+      #   The statistic for the metric, other than percentiles. For percentile
+      #   statistics, use `ExtendedStatistics`.
+      #   @return [String]
+      #
+      # @!attribute [rw] extended_statistic
+      #   The percentile statistic for the metric. Specify a value between
+      #   p0.0 and p100.
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   The list of dimensions associated with the metric. If the metric has
-      #   any associated dimensions, you must specify them in order for the
-      #   DescribeAlarmsForMetric to succeed.
+      #   The dimensions associated with the metric. If the metric has any
+      #   associated dimensions, you must specify them in order for the call
+      #   to succeed.
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] period
-      #   The period in seconds over which the statistic is applied.
+      #   The period, in seconds, over which the statistic is applied.
       #   @return [Integer]
       #
       # @!attribute [rw] unit
@@ -203,22 +209,21 @@ module Aws
         :metric_name,
         :namespace,
         :statistic,
+        :extended_statistic,
         :dimensions,
         :period,
         :unit)
         include Aws::Structure
       end
 
-      # The output for DescribeAlarmsForMetric.
       # @!attribute [rw] metric_alarms
-      #   A list of information for each alarm with the specified metric.
+      #   The information for each alarm with the specified metric.
       #   @return [Array<Types::MetricAlarm>]
       class DescribeAlarmsForMetricOutput < Struct.new(
         :metric_alarms)
         include Aws::Structure
       end
 
-      # Describes the inputs for DescribeAlarms.
       # @note When making an API call, pass DescribeAlarmsInput
       #   data as a hash:
       #
@@ -231,11 +236,11 @@ module Aws
       #         next_token: "NextToken",
       #       }
       # @!attribute [rw] alarm_names
-      #   A list of alarm names to retrieve information for.
+      #   The names of the alarms.
       #   @return [Array<String>]
       #
       # @!attribute [rw] alarm_name_prefix
-      #   The alarm name prefix. `AlarmNames` cannot be specified if this
+      #   The alarm name prefix. You cannot specify `AlarmNames` if this
       #   parameter is specified.
       #   @return [String]
       #
@@ -265,13 +270,13 @@ module Aws
         include Aws::Structure
       end
 
-      # The output for DescribeAlarms.
       # @!attribute [rw] metric_alarms
-      #   A list of information for the specified alarms.
+      #   The information for the specified alarms.
       #   @return [Array<Types::MetricAlarm>]
       #
       # @!attribute [rw] next_token
-      #   A string that marks the start of the next batch of returned results.
+      #   The token that marks the start of the next batch of returned
+      #   results.
       #   @return [String]
       class DescribeAlarmsOutput < Struct.new(
         :metric_alarms,
@@ -279,10 +284,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The `Dimension` data type further expands on the identity of a metric
-      # using a Name, Value pair.
-      #
-      # For examples that use one or more dimensions, see PutMetricData.
+      # Expands the identity of a metric.
       # @note When making an API call, pass Dimension
       #   data as a hash:
       #
@@ -295,7 +297,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] value
-      #   The value representing the dimension measurement
+      #   The value representing the dimension measurement.
       #   @return [String]
       class Dimension < Struct.new(
         :name,
@@ -303,7 +305,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The `DimensionFilter` data type is used to filter ListMetrics results.
+      # Represents filters for a dimension.
       # @note When making an API call, pass DimensionFilter
       #   data as a hash:
       #
@@ -317,11 +319,6 @@ module Aws
       #
       # @!attribute [rw] value
       #   The value of the dimension to be matched.
-      #
-      #   <note markdown="1"> Specifying a `Name` without specifying a `Value` returns all values
-      #   associated with that `Name`.
-      #
-      #    </note>
       #   @return [String]
       class DimensionFilter < Struct.new(
         :name,
@@ -336,14 +333,13 @@ module Aws
       #         alarm_names: ["AlarmName"], # required
       #       }
       # @!attribute [rw] alarm_names
-      #   The names of the alarms to disable actions for.
+      #   The names of the alarms.
       #   @return [Array<String>]
       class DisableAlarmActionsInput < Struct.new(
         :alarm_names)
         include Aws::Structure
       end
 
-      # Describes the inputs for EnableAlarmActions.
       # @note When making an API call, pass EnableAlarmActionsInput
       #   data as a hash:
       #
@@ -351,14 +347,13 @@ module Aws
       #         alarm_names: ["AlarmName"], # required
       #       }
       # @!attribute [rw] alarm_names
-      #   The names of the alarms to enable actions for.
+      #   The names of the alarms.
       #   @return [Array<String>]
       class EnableAlarmActionsInput < Struct.new(
         :alarm_names)
         include Aws::Structure
       end
 
-      # Describes the inputs for GetMetricStatistics.
       # @note When making an API call, pass GetMetricStatisticsInput
       #   data as a hash:
       #
@@ -374,7 +369,8 @@ module Aws
       #         start_time: Time.now, # required
       #         end_time: Time.now, # required
       #         period: 1, # required
-      #         statistics: ["SampleCount"], # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #         statistics: ["SampleCount"], # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #         extended_statistics: ["ExtendedStatistic"],
       #         unit: "Seconds", # accepts Seconds, Microseconds, Milliseconds, Bytes, Kilobytes, Megabytes, Gigabytes, Terabytes, Bits, Kilobits, Megabits, Gigabits, Terabits, Percent, Count, Bytes/Second, Kilobytes/Second, Megabytes/Second, Gigabytes/Second, Terabytes/Second, Bits/Second, Kilobits/Second, Megabits/Second, Gigabits/Second, Terabits/Second, Count/Second, None
       #       }
       # @!attribute [rw] namespace
@@ -386,56 +382,79 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   A list of dimensions describing qualities of the metric.
+      #   The dimensions. CloudWatch treats each unique combination of
+      #   dimensions as a separate metric. You can't retrieve statistics
+      #   using combinations of dimensions that were not specially published.
+      #   You must specify the same dimensions that were used when the metrics
+      #   were created. For an example, see [Dimension Combinations][1] in the
+      #   *Amazon CloudWatch User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/monitoring/cloudwatch_concepts.html#dimension-combinations
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] start_time
-      #   The time stamp to use for determining the first datapoint to return.
-      #   The value specified is inclusive; results include datapoints with
-      #   the time stamp specified. The time stamp must be in ISO 8601 UTC
-      #   format (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the first data point to return. Note
+      #   that start times are evaluated relative to the time that CloudWatch
+      #   receives the request.
       #
-      #   <note markdown="1"> The specified start time is rounded down to the nearest value.
-      #   Datapoints are returned for start times up to two weeks in the past.
-      #   Specified start times that are more than two weeks in the past will
-      #   not return datapoints for metrics that are older than two weeks.
+      #   The value specified is inclusive; results include data points with
+      #   the specified time stamp. The time stamp must be in ISO 8601 UTC
+      #   format (for example, 2016-10-03T23:00:00Z).
       #
-      #    Data that is timestamped 24 hours or more in the past may take in
-      #   excess of 48 hours to become available from submission time using
-      #   `GetMetricStatistics`.
+      #   CloudWatch rounds the specified time stamp as follows:
       #
-      #    </note>
+      #   * Start time less than 15 days ago - Round down to the nearest whole
+      #     minute. For example, 12:32:34 is rounded down to 12:32:00.
+      #
+      #   * Start time between 15 and 63 days ago - Round down to the nearest
+      #     5-minute clock interval. For example, 12:32:34 is rounded down to
+      #     12:30:00.
+      #
+      #   * Start time greater than 63 days ago - Round down to the nearest
+      #     1-hour clock interval. For example, 12:32:34 is rounded down to
+      #     12:00:00.
       #   @return [Time]
       #
       # @!attribute [rw] end_time
-      #   The time stamp to use for determining the last datapoint to return.
-      #   The value specified is exclusive; results will include datapoints up
-      #   to the time stamp specified. The time stamp must be in ISO 8601 UTC
-      #   format (e.g., 2014-09-03T23:00:00Z).
+      #   The time stamp that determines the last data point to return.
+      #
+      #   The value specified is exclusive; results will include data points
+      #   up to the specified time stamp. The time stamp must be in ISO 8601
+      #   UTC format (for example, 2016-10-10T23:00:00Z).
       #   @return [Time]
       #
       # @!attribute [rw] period
-      #   The granularity, in seconds, of the returned datapoints. A `Period`
-      #   can be as short as one minute (60 seconds) or as long as one day
-      #   (86,400 seconds), and must be a multiple of 60. The default value is
-      #   60.
+      #   The granularity, in seconds, of the returned data points. A period
+      #   can be as short as one minute (60 seconds) and must be a multiple of
+      #   60. The default value is 60.
+      #
+      #   If the `StartTime` parameter specifies a time stamp that is greater
+      #   than 15 days ago, you must specify the period as follows or no data
+      #   points in that time range is returned:
+      #
+      #   * Start time between 15 and 63 days ago - Use a multiple of 300
+      #     seconds (5 minutes).
+      #
+      #   * Start time greater than 63 days ago - Use a multiple of 3600
+      #     seconds (1 hour).
       #   @return [Integer]
       #
       # @!attribute [rw] statistics
-      #   The metric statistics to return. For information about specific
-      #   statistics returned by GetMetricStatistics, see [Statistics][1] in
-      #   the *Amazon CloudWatch Developer Guide*.
+      #   The metric statistics, other than percentile. For percentile
+      #   statistics, use `ExtendedStatistic`.
+      #   @return [Array<String>]
       #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudWatch/latest/DeveloperGuide/cloudwatch_concepts.html#Statistic
+      # @!attribute [rw] extended_statistics
+      #   The percentile statistics. Specify values between p0.0 and p100.
       #   @return [Array<String>]
       #
       # @!attribute [rw] unit
-      #   The specific unit for a given metric. Metrics may be reported in
-      #   multiple units. Not supplying a unit results in all units being
-      #   returned. If the metric only ever reports one unit, specifying a
-      #   unit will have no effect.
+      #   The unit for a given metric. Metrics may be reported in multiple
+      #   units. Not supplying a unit results in all units being returned. If
+      #   the metric only ever reports one unit, specifying a unit has no
+      #   effect.
       #   @return [String]
       class GetMetricStatisticsInput < Struct.new(
         :namespace,
@@ -445,17 +464,17 @@ module Aws
         :end_time,
         :period,
         :statistics,
+        :extended_statistics,
         :unit)
         include Aws::Structure
       end
 
-      # The output for GetMetricStatistics.
       # @!attribute [rw] label
-      #   A label describing the specified metric.
+      #   A label for the specified metric.
       #   @return [String]
       #
       # @!attribute [rw] datapoints
-      #   The datapoints for the specified metric.
+      #   The data points for the specified metric.
       #   @return [Array<Types::Datapoint>]
       class GetMetricStatisticsOutput < Struct.new(
         :label,
@@ -463,7 +482,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the inputs for ListMetrics.
       # @note When making an API call, pass ListMetricsInput
       #   data as a hash:
       #
@@ -487,7 +505,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   A list of dimensions to filter against.
+      #   The dimensions to filter against.
       #   @return [Array<Types::DimensionFilter>]
       #
       # @!attribute [rw] next_token
@@ -502,13 +520,13 @@ module Aws
         include Aws::Structure
       end
 
-      # The output for ListMetrics.
       # @!attribute [rw] metrics
-      #   A list of metrics used to generate statistics for an AWS account.
+      #   The metrics.
       #   @return [Array<Types::Metric>]
       #
       # @!attribute [rw] next_token
-      #   A string that marks the start of the next batch of returned results.
+      #   The token that marks the start of the next batch of returned
+      #   results.
       #   @return [String]
       class ListMetricsOutput < Struct.new(
         :metrics,
@@ -516,13 +534,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The `Metric` data type contains information about a specific metric.
-      # If you call ListMetrics, Amazon CloudWatch returns information
-      # contained by this data type.
-      #
-      # The example in the Examples section publishes two metrics named
-      # buffers and latency. Both metrics are in the examples namespace. Both
-      # metrics have two dimensions, InstanceID and InstanceType.
+      # Represents a specific metric.
       # @!attribute [rw] namespace
       #   The namespace of the metric.
       #   @return [String]
@@ -532,7 +544,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   A list of dimensions associated with the metric.
+      #   The dimensions for the metric.
       #   @return [Array<Types::Dimension>]
       class Metric < Struct.new(
         :namespace,
@@ -541,8 +553,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The MetricAlarm data type represents an alarm. You can use
-      # PutMetricAlarm to create or update an alarm.
+      # Represents an alarm.
       # @!attribute [rw] alarm_name
       #   The name of the alarm.
       #   @return [String]
@@ -552,7 +563,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] alarm_description
-      #   The description for the alarm.
+      #   The description of the alarm.
       #   @return [String]
       #
       # @!attribute [rw] alarm_configuration_updated_timestamp
@@ -561,27 +572,25 @@ module Aws
       #
       # @!attribute [rw] actions_enabled
       #   Indicates whether actions should be executed during any changes to
-      #   the alarm's state.
+      #   the alarm state.
       #   @return [Boolean]
       #
       # @!attribute [rw] ok_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `OK` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
+      #   The actions to execute when this alarm transitions to the `OK` state
+      #   from any other state. Each action is specified as an Amazon Resource
+      #   Name (ARN).
       #   @return [Array<String>]
       #
       # @!attribute [rw] alarm_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `ALARM` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
+      #   The actions to execute when this alarm transitions to the `ALARM`
+      #   state from any other state. Each action is specified as an Amazon
+      #   Resource Name (ARN).
       #   @return [Array<String>]
       #
       # @!attribute [rw] insufficient_data_actions
-      #   The list of actions to execute when this alarm transitions into an
+      #   The actions to execute when this alarm transitions to the
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
       #   specified as an Amazon Resource Name (ARN).
-      #
-      #   The current WSDL lists this attribute as `UnknownActions`.
       #   @return [Array<String>]
       #
       # @!attribute [rw] state_value
@@ -589,41 +598,45 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] state_reason
-      #   A human-readable explanation for the alarm's state.
+      #   An explanation for the alarm state, in text format.
       #   @return [String]
       #
       # @!attribute [rw] state_reason_data
-      #   An explanation for the alarm's state in machine-readable JSON
-      #   format
+      #   An explanation for the alarm state, in JSON format.
       #   @return [String]
       #
       # @!attribute [rw] state_updated_timestamp
-      #   The time stamp of the last update to the alarm's state.
+      #   The time stamp of the last update to the alarm state.
       #   @return [Time]
       #
       # @!attribute [rw] metric_name
-      #   The name of the alarm's metric.
+      #   The name of the metric associated with the alarm.
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   The namespace of alarm's associated metric.
+      #   The namespace of the metric associated with the alarm.
       #   @return [String]
       #
       # @!attribute [rw] statistic
-      #   The statistic to apply to the alarm's associated metric.
+      #   The statistic for the metric associated with the alarm, other than
+      #   percentile. For percentile statistics, use `ExtendedStatistic`.
+      #   @return [String]
+      #
+      # @!attribute [rw] extended_statistic
+      #   The percentile statistic for the metric associated with the alarm.
+      #   Specify a value between p0.0 and p100.
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   The list of dimensions associated with the alarm's associated
-      #   metric.
+      #   The dimensions for the metric associated with the alarm.
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] period
-      #   The period in seconds over which the statistic is applied.
+      #   The period, in seconds, over which the statistic is applied.
       #   @return [Integer]
       #
       # @!attribute [rw] unit
-      #   The unit of the alarm's associated metric.
+      #   The unit of the metric associated with the alarm.
       #   @return [String]
       #
       # @!attribute [rw] evaluation_periods
@@ -632,13 +645,13 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] threshold
-      #   The value against which the specified statistic is compared.
+      #   The value to compare with the specified statistic.
       #   @return [Float]
       #
       # @!attribute [rw] comparison_operator
       #   The arithmetic operation to use when comparing the specified
-      #   `Statistic` and `Threshold`. The specified `Statistic` value is used
-      #   as the first operand.
+      #   statistic and threshold. The specified statistic value is used as
+      #   the first operand.
       #   @return [String]
       class MetricAlarm < Struct.new(
         :alarm_name,
@@ -656,6 +669,7 @@ module Aws
         :metric_name,
         :namespace,
         :statistic,
+        :extended_statistic,
         :dimensions,
         :period,
         :unit,
@@ -665,9 +679,8 @@ module Aws
         include Aws::Structure
       end
 
-      # The `MetricDatum` data type encapsulates the information sent with
-      # PutMetricData to either create a new metric or add new values to be
-      # aggregated into an existing metric.
+      # Encapsulates the information sent to either create a metric or add new
+      # values to be aggregated into an existing metric.
       # @note When making an API call, pass MetricDatum
       #   data as a hash:
       #
@@ -694,29 +707,26 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   A list of dimensions associated with the metric. Note, when using
-      #   the Dimensions value in a query, you need to append .member.N to it
-      #   (e.g., Dimensions.member.N).
+      #   The dimensions associated with the metric.
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] timestamp
-      #   The time stamp used for the metric in ISO 8601 Universal Coordinated
-      #   Time (UTC) format. If not specified, the default value is set to the
-      #   time the metric data was received.
+      #   The time the metric data was received, expressed as the number of
+      #   milliseconds since Jan 1, 1970 00:00:00 UTC.
       #   @return [Time]
       #
       # @!attribute [rw] value
       #   The value for the metric.
       #
-      #   Although the `Value` parameter accepts numbers of type `Double`,
-      #   Amazon CloudWatch rejects values that are either too small or too
-      #   large. Values must be in the range of 8.515920e-109 to 1.174271e+108
-      #   (Base 10) or 2e-360 to 2e360 (Base 2). In addition, special values
-      #   (e.g., NaN, +Infinity, -Infinity) are not supported.
+      #   Although the parameter accepts numbers of type Double, Amazon
+      #   CloudWatch rejects values that are either too small or too large.
+      #   Values must be in the range of 8.515920e-109 to 1.174271e+108 (Base
+      #   10) or 2e-360 to 2e360 (Base 2). In addition, special values (for
+      #   example, NaN, +Infinity, -Infinity) are not supported.
       #   @return [Float]
       #
       # @!attribute [rw] statistic_values
-      #   A set of statistical values describing the metric.
+      #   The statistical values for the metric.
       #   @return [Types::StatisticSet]
       #
       # @!attribute [rw] unit
@@ -732,7 +742,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the inputs for PutMetricAlarm.
       # @note When making an API call, pass PutMetricAlarmInput
       #   data as a hash:
       #
@@ -745,7 +754,8 @@ module Aws
       #         insufficient_data_actions: ["ResourceName"],
       #         metric_name: "MetricName", # required
       #         namespace: "Namespace", # required
-      #         statistic: "SampleCount", # required, accepts SampleCount, Average, Sum, Minimum, Maximum
+      #         statistic: "SampleCount", # accepts SampleCount, Average, Sum, Minimum, Maximum
+      #         extended_statistic: "ExtendedStatistic",
       #         dimensions: [
       #           {
       #             name: "DimensionName", # required
@@ -759,8 +769,8 @@ module Aws
       #         comparison_operator: "GreaterThanOrEqualToThreshold", # required, accepts GreaterThanOrEqualToThreshold, GreaterThanThreshold, LessThanThreshold, LessThanOrEqualToThreshold
       #       }
       # @!attribute [rw] alarm_name
-      #   The descriptive name for the alarm. This name must be unique within
-      #   the user's AWS account
+      #   The name for the alarm. This name must be unique within the AWS
+      #   account.
       #   @return [String]
       #
       # @!attribute [rw] alarm_description
@@ -768,18 +778,18 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] actions_enabled
-      #   Indicates whether or not actions should be executed during any
-      #   changes to the alarm's state.
+      #   Indicates whether actions should be executed during any changes to
+      #   the alarm state.
       #   @return [Boolean]
       #
       # @!attribute [rw] ok_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `OK` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
+      #   The actions to execute when this alarm transitions to an `OK` state
+      #   from any other state. Each action is specified as an Amazon Resource
+      #   Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop
-      #   \| arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -787,22 +797,16 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM
-      #   role is created, you can create stop, terminate, or reboot alarms
-      #   using the CLI.
       #   @return [Array<String>]
       #
       # @!attribute [rw] alarm_actions
-      #   The list of actions to execute when this alarm transitions into an
-      #   `ALARM` state from any other state. Each action is specified as an
-      #   Amazon Resource Name (ARN).
+      #   The actions to execute when this alarm transitions to the `ALARM`
+      #   state from any other state. Each action is specified as an Amazon
+      #   Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop
-      #   \| arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -810,22 +814,16 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM
-      #   role is created, you can create stop, terminate, or reboot alarms
-      #   using the CLI.
       #   @return [Array<String>]
       #
       # @!attribute [rw] insufficient_data_actions
-      #   The list of actions to execute when this alarm transitions into an
+      #   The actions to execute when this alarm transitions to the
       #   `INSUFFICIENT_DATA` state from any other state. Each action is
       #   specified as an Amazon Resource Name (ARN).
       #
-      #   Valid Values: arn:aws:automate:*region (e.g., us-east-1)*\:ec2:stop
-      #   \| arn:aws:automate:*region (e.g., us-east-1)*\:ec2:terminate \|
-      #   arn:aws:automate:*region (e.g., us-east-1)*\:ec2:recover
+      #   Valid Values: arn:aws:automate:*region*\:ec2:stop \|
+      #   arn:aws:automate:*region*\:ec2:terminate \|
+      #   arn:aws:automate:*region*\:ec2:recover
       #
       #   Valid Values (for use with IAM roles):
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Stop/1.0
@@ -833,46 +831,47 @@ module Aws
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Terminate/1.0
       #   \|
       #   arn:aws:swf:us-east-1:\\\{*customer-account*\\}:action/actions/AWS\_EC2.InstanceId.Reboot/1.0
-      #
-      #   **Note:** You must create at least one stop, terminate, or reboot
-      #   alarm using the Amazon EC2 or CloudWatch console to create the
-      #   **EC2ActionsAccess** IAM role for the first time. After this IAM
-      #   role is created, you can create stop, terminate, or reboot alarms
-      #   using the CLI.
       #   @return [Array<String>]
       #
       # @!attribute [rw] metric_name
-      #   The name for the alarm's associated metric.
+      #   The name for the metric associated with the alarm.
       #   @return [String]
       #
       # @!attribute [rw] namespace
-      #   The namespace for the alarm's associated metric.
+      #   The namespace for the metric associated with the alarm.
       #   @return [String]
       #
       # @!attribute [rw] statistic
-      #   The statistic to apply to the alarm's associated metric.
+      #   The statistic for the metric associated with the alarm, other than
+      #   percentile. For percentile statistics, use `ExtendedStatistic`.
+      #   @return [String]
+      #
+      # @!attribute [rw] extended_statistic
+      #   The percentile statistic for the metric associated with the alarm.
+      #   Specify a value between p0.0 and p100.
       #   @return [String]
       #
       # @!attribute [rw] dimensions
-      #   The dimensions for the alarm's associated metric.
+      #   The dimensions for the metric associated with the alarm.
       #   @return [Array<Types::Dimension>]
       #
       # @!attribute [rw] period
-      #   The period in seconds over which the specified statistic is applied.
+      #   The period, in seconds, over which the specified statistic is
+      #   applied.
       #   @return [Integer]
       #
       # @!attribute [rw] unit
-      #   The statistic's unit of measure. For example, the units for the
-      #   Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks the
-      #   number of bytes that an instance receives on all network interfaces.
-      #   You can also specify a unit when you create a custom metric. Units
-      #   help provide conceptual meaning to your data. Metric data points
-      #   that specify a unit of measure, such as Percent, are aggregated
-      #   separately.
+      #   The unit of measure for the statistic. For example, the units for
+      #   the Amazon EC2 NetworkIn metric are Bytes because NetworkIn tracks
+      #   the number of bytes that an instance receives on all network
+      #   interfaces. You can also specify a unit when you create a custom
+      #   metric. Units help provide conceptual meaning to your data. Metric
+      #   data points that specify a unit of measure, such as Percent, are
+      #   aggregated separately.
       #
-      #   **Note:** If you specify a unit, you must use a unit that is
-      #   appropriate for the metric. Otherwise, this can cause an Amazon
-      #   CloudWatch alarm to get stuck in the INSUFFICIENT DATA state.
+      #   If you specify a unit, you must use a unit that is appropriate for
+      #   the metric. Otherwise, the Amazon CloudWatch alarm can get stuck in
+      #   the `INSUFFICIENT DATA` state.
       #   @return [String]
       #
       # @!attribute [rw] evaluation_periods
@@ -886,8 +885,8 @@ module Aws
       #
       # @!attribute [rw] comparison_operator
       #   The arithmetic operation to use when comparing the specified
-      #   `Statistic` and `Threshold`. The specified `Statistic` value is used
-      #   as the first operand.
+      #   statistic and threshold. The specified statistic value is used as
+      #   the first operand.
       #   @return [String]
       class PutMetricAlarmInput < Struct.new(
         :alarm_name,
@@ -899,6 +898,7 @@ module Aws
         :metric_name,
         :namespace,
         :statistic,
+        :extended_statistic,
         :dimensions,
         :period,
         :unit,
@@ -908,7 +908,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the inputs for PutMetricData.
       # @note When making an API call, pass PutMetricDataInput
       #   data as a hash:
       #
@@ -938,15 +937,13 @@ module Aws
       # @!attribute [rw] namespace
       #   The namespace for the metric data.
       #
-      #   <note markdown="1"> You cannot specify a namespace that begins with "AWS/". Namespaces
-      #   that begin with "AWS/" are reserved for other Amazon Web Services
-      #   products that send metrics to Amazon CloudWatch.
-      #
-      #    </note>
+      #   You cannot specify a namespace that begins with "AWS/". Namespaces
+      #   that begin with "AWS/" are reserved for use by Amazon Web Services
+      #   products.
       #   @return [String]
       #
       # @!attribute [rw] metric_data
-      #   A list of data describing the metric.
+      #   The data for the metric.
       #   @return [Array<Types::MetricDatum>]
       class PutMetricDataInput < Struct.new(
         :namespace,
@@ -954,7 +951,6 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the inputs for SetAlarmState.
       # @note When making an API call, pass SetAlarmStateInput
       #   data as a hash:
       #
@@ -965,8 +961,8 @@ module Aws
       #         state_reason_data: "StateReasonData",
       #       }
       # @!attribute [rw] alarm_name
-      #   The descriptive name for the alarm. This name must be unique within
-      #   the user's AWS account. The maximum length is 255 characters.
+      #   The name for the alarm. This name must be unique within the AWS
+      #   account. The maximum length is 255 characters.
       #   @return [String]
       #
       # @!attribute [rw] state_value
@@ -974,13 +970,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] state_reason
-      #   The reason that this alarm is set to this specific state (in
-      #   human-readable text format)
+      #   The reason that this alarm is set to this specific state, in text
+      #   format.
       #   @return [String]
       #
       # @!attribute [rw] state_reason_data
-      #   The reason that this alarm is set to this specific state (in
-      #   machine-readable JSON format)
+      #   The reason that this alarm is set to this specific state, in JSON
+      #   format.
       #   @return [String]
       class SetAlarmStateInput < Struct.new(
         :alarm_name,
@@ -990,9 +986,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The `StatisticSet` data type describes the `StatisticValues` component
-      # of MetricDatum, and represents a set of statistics that describes a
-      # specific metric.
+      # Represents a set of statistics that describes a specific metric.
       # @note When making an API call, pass StatisticSet
       #   data as a hash:
       #

@@ -275,7 +275,7 @@ module Aws
       #
       #   * &amp; (using &amp;amp;)
       #
-      #   * \* (matches 0 or more characters)
+      #   * * (matches 0 or more characters)
       #
       #   * ? (matches exactly 1 character)
       #   @return [Array<Types::RuleCondition>]
@@ -1398,7 +1398,7 @@ module Aws
       #
       #   * &amp; (using &amp;amp;)
       #
-      #   * \* (matches 0 or more characters)
+      #   * * (matches 0 or more characters)
       #
       #   * ? (matches exactly 1 character)
       #   @return [Array<String>]

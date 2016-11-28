@@ -24,7 +24,7 @@ module Aws
   # and return a response object.
   #
   #     marketplacemetering = Aws::MarketplaceMetering::Client.new
-  #     resp = marketplacemetering.meter_usage(params)
+  #     resp = marketplacemetering.batch_meter_usage(params)
   #
   #
   # See {Client} for more information.

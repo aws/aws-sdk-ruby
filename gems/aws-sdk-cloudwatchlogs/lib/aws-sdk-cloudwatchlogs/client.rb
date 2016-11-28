@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -137,9 +139,11 @@ module Aws
 
       # @!group API Operations
 
-      # Cancels an export task if it is in `PENDING` or `RUNNING` state.
+      # Cancels the specified export task.
+      #
+      # The task must be in the `PENDING` or `RUNNING` state.
       # @option params [required, String] :task_id
-      #   Id of the export task to cancel.
+      #   The ID of the export task.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -153,44 +157,41 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates an `ExportTask` which allows you to efficiently export data
-      # from a Log Group to your Amazon S3 bucket.
+      # Creates an export task, which allows you to efficiently export data
+      # from a log group to an Amazon S3 bucket.
       #
       # This is an asynchronous call. If all the required information is
-      # provided, this API will initiate an export task and respond with the
-      # task Id. Once started, `DescribeExportTasks` can be used to get the
-      # status of an export task. You can only have one active (`RUNNING` or
-      # `PENDING`) export task at a time, per account.
+      # provided, this operation initiates an export task and responds with
+      # the ID of the task. After the task has started, you can use
+      # DescribeExportTasks to get the status of the export task. Each account
+      # can only have one active (`RUNNING` or `PENDING`) export task at a
+      # time. To cancel an export task, use CancelExportTask.
       #
       # You can export logs from multiple log groups or multiple time ranges
-      # to the same Amazon S3 bucket. To separate out log data for each export
-      # task, you can specify a prefix that will be used as the Amazon S3 key
-      # prefix for all exported objects.
+      # to the same S3 bucket. To separate out log data for each export task,
+      # you can specify a prefix that will be used as the Amazon S3 key prefix
+      # for all exported objects.
       # @option params [String] :task_name
       #   The name of the export task.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to export.
+      #   The name of the log group.
       # @option params [String] :log_stream_name_prefix
-      #   Will only export log streams that match the provided
-      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
-      #   is applied.
+      #   Export only log streams that match the provided prefix. If you don't
+      #   specify a value, no prefix filter is applied.
       # @option params [required, Integer] :from
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. It indicates the start time of the range for the
-      #   request. Events with a timestamp prior to this time will not be
-      #   exported.
+      #   The start time of the range for the request, expressed as the number
+      #   of milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a
+      #   timestamp earlier than this time are not exported.
       # @option params [required, Integer] :to
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. It indicates the end time of the range for the
-      #   request. Events with a timestamp later than this time will not be
-      #   exported.
+      #   The end time of the range for the request, expressed as the number of
+      #   milliseconds since Jan 1, 1970 00:00:00 UTC. Events with a timestamp
+      #   later than this time are not exported.
       # @option params [required, String] :destination
-      #   Name of Amazon S3 bucket to which the log data will be exported.
-      #
-      #   **Note:** Only buckets in the same AWS region are supported.
+      #   The name of S3 bucket for the exported log data. The bucket must be in
+      #   the same AWS region.
       # @option params [String] :destination_prefix
-      #   Prefix that will be used as the start of Amazon S3 key for every
-      #   object exported. If not specified, this defaults to 'exportedlogs'.
+      #   The prefix used as the start of the key for every object exported. If
+      #   you don't specify a value, the default is `exportedlogs`.
       # @return [Types::CreateExportTaskResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateExportTaskResponse#task_id #taskId} => String
@@ -215,18 +216,21 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new log group with the specified name. The name of the log
-      # group must be unique within a region for an AWS account. You can
-      # create up to 500 log groups per account.
+      # Creates a log group with the specified name.
+      #
+      # You can create up to 5000 log groups per account.
       #
       # You must use the following guidelines when naming a log group:
       #
+      # * Log group names must be unique within a region for an AWS account.
+      #
       # * Log group names can be between 1 and 512 characters long.
       #
-      # * Allowed characters are a-z, A-Z, 0-9, '\_' (underscore), '-'
-      #   (hyphen), '/' (forward slash), and '.' (period).
+      # * Log group names consist of the following characters: a-z, A-Z, 0-9,
+      #   '\_' (underscore), '-' (hyphen), '/' (forward slash), and
+      #   '.' (period).
       # @option params [required, String] :log_group_name
-      #   The name of the log group to create.
+      #   The name of the log group.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -240,19 +244,22 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a new log stream in the specified log group. The name of the
-      # log stream must be unique within the log group. There is no limit on
-      # the number of log streams that can exist in a log group.
+      # Creates a log stream for the specified log group.
+      #
+      # There is no limit on the number of log streams that you can create for
+      # a log group.
       #
       # You must use the following guidelines when naming a log stream:
       #
+      # * Log stream names must be unique within the log group.
+      #
       # * Log stream names can be between 1 and 512 characters long.
       #
-      # * The ':' colon character is not allowed.
+      # * The ':' (colon) and '*' (asterisk) characters are not allowed.
       # @option params [required, String] :log_group_name
-      #   The name of the log group under which the log stream is to be created.
+      #   The name of the log group.
       # @option params [required, String] :log_stream_name
-      #   The name of the log stream to create.
+      #   The name of the log stream.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -267,11 +274,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the destination with the specified name and eventually
-      # disables all the subscription filters that publish to it. This will
-      # not delete the physical resource encapsulated by the destination.
+      # Deletes the specified destination, and eventually disables all the
+      # subscription filters that publish to it. This operation does not
+      # delete the physical resource encapsulated by the destination.
       # @option params [required, String] :destination_name
-      #   The name of destination to delete.
+      #   The name of the destination.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -285,10 +292,10 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the log group with the specified name and permanently deletes
-      # all the archived log events associated with it.
+      # Deletes the specified log group and permanently deletes all the
+      # archived log events associated with the log group.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to delete.
+      #   The name of the log group.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -302,13 +309,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes a log stream and permanently deletes all the archived log
-      # events associated with it.
+      # Deletes the specified log stream and permanently deletes all the
+      # archived log events associated with the log stream.
       # @option params [required, String] :log_group_name
-      #   The name of the log group under which the log stream to delete
-      #   belongs.
+      #   The name of the log group.
       # @option params [required, String] :log_stream_name
-      #   The name of the log stream to delete.
+      #   The name of the log stream.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -323,12 +329,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes a metric filter associated with the specified log group.
+      # Deletes the specified metric filter.
       # @option params [required, String] :log_group_name
-      #   The name of the log group that is associated with the metric filter to
-      #   delete.
+      #   The name of the log group.
       # @option params [required, String] :filter_name
-      #   The name of the metric filter to delete.
+      #   The name of the metric filter.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -343,12 +348,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes the retention policy of the specified log group. Log events
-      # would not expire if they belong to log groups without a retention
-      # policy.
+      # Deletes the specified retention policy.
+      #
+      # Log events do not expire if they belong to log groups without a
+      # retention policy.
       # @option params [required, String] :log_group_name
-      #   The name of the log group that is associated with the retention policy
-      #   to delete.
+      #   The name of the log group.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -362,12 +367,11 @@ module Aws
         req.send_request(options)
       end
 
-      # Deletes a subscription filter associated with the specified log group.
+      # Deletes the specified subscription filter.
       # @option params [required, String] :log_group_name
-      #   The name of the log group that is associated with the subscription
-      #   filter to delete.
+      #   The name of the log group.
       # @option params [required, String] :filter_name
-      #   The name of the subscription filter to delete.
+      #   The name of the subscription filter.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -382,25 +386,17 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the destinations that are associated with the AWS account
-      # making the request. The list returned in the response is ASCII-sorted
-      # by destination name.
-      #
-      # By default, this operation returns up to 50 destinations. If there are
-      # more destinations to list, the response would contain a `nextToken`
-      # value in the response body. You can also limit the number of
-      # destinations returned in the response by specifying the `limit`
-      # parameter in the request.
+      # Lists all your destinations. The results are ASCII-sorted by
+      # destination name.
       # @option params [String] :destination_name_prefix
-      #   Will only return destinations that match the provided
-      #   destinationNamePrefix. If you don't specify a value, no prefix is
-      #   applied.
+      #   The prefix to match. If you don't specify a value, no prefix filter
+      #   is applied.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   request. The token expires after 24 hours.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of results to return.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       # @return [Types::DescribeDestinationsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeDestinationsResponse#destinations #destinations} => Array&lt;Types::Destination&gt;
@@ -429,28 +425,20 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the export tasks that are associated with the AWS account
-      # making the request. The export tasks can be filtered based on `TaskId`
-      # or `TaskStatus`.
-      #
-      # By default, this operation returns up to 50 export tasks that satisfy
-      # the specified filters. If there are more export tasks to list, the
-      # response would contain a `nextToken` value in the response body. You
-      # can also limit the number of export tasks returned in the response by
-      # specifying the `limit` parameter in the request.
+      # Lists the specified export tasks. You can list all your export tasks
+      # or filter the results based on task ID or task status.
       # @option params [String] :task_id
-      #   Export task that matches the specified task Id will be returned. This
-      #   can result in zero or one export task.
+      #   The ID of the export task. Specifying a task ID filters the results to
+      #   zero or one export tasks.
       # @option params [String] :status_code
-      #   All export tasks that matches the specified status code will be
-      #   returned. This can return zero or more export tasks.
+      #   The status code of the export task. Specifying a status code filters
+      #   the results to zero or more export tasks.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   `DescribeExportTasks` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       # @return [Types::DescribeExportTasksResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeExportTasksResponse#export_tasks #exportTasks} => Array&lt;Types::ExportTask&gt;
@@ -485,26 +473,17 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the log groups that are associated with the AWS account
-      # making the request. The list returned in the response is ASCII-sorted
-      # by log group name.
-      #
-      # By default, this operation returns up to 50 log groups. If there are
-      # more log groups to list, the response would contain a `nextToken`
-      # value in the response body. You can also limit the number of log
-      # groups returned in the response by specifying the `limit` parameter in
-      # the request.
+      # Lists the specified log groups. You can list all your log groups or
+      # filter the results by prefix. The results are ASCII-sorted by log
+      # group name.
       # @option params [String] :log_group_name_prefix
-      #   Will only return log groups that match the provided
-      #   logGroupNamePrefix. If you don't specify a value, no prefix filter is
-      #   applied.
+      #   The prefix to match.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   `DescribeLogGroups` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       # @return [Types::DescribeLogGroupsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeLogGroupsResponse#log_groups #logGroups} => Array&lt;Types::LogGroup&gt;
@@ -533,38 +512,35 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the log streams that are associated with the specified log
-      # group. The list returned in the response is ASCII-sorted by log stream
-      # name.
+      # Lists the log streams for the specified log group. You can list all
+      # the log streams or filter the results by prefix. You can also control
+      # how the results are ordered.
       #
-      # By default, this operation returns up to 50 log streams. If there are
-      # more log streams to list, the response would contain a `nextToken`
-      # value in the response body. You can also limit the number of log
-      # streams returned in the response by specifying the `limit` parameter
-      # in the request. This operation has a limit of five transactions per
-      # second, after which transactions are throttled.
+      # This operation has a limit of five transactions per second, after
+      # which transactions are throttled.
       # @option params [required, String] :log_group_name
-      #   The log group name for which log streams are to be listed.
+      #   The name of the log group.
       # @option params [String] :log_stream_name_prefix
-      #   Will only return log streams that match the provided
-      #   logStreamNamePrefix. If you don't specify a value, no prefix filter
-      #   is applied.
+      #   The prefix to match.
+      #
+      #   You cannot specify this parameter if `orderBy` is `LastEventTime`.
       # @option params [String] :order_by
-      #   Specifies what to order the returned log streams by. Valid arguments
-      #   are 'LogStreamName' or 'LastEventTime'. If you don't specify a
-      #   value, results are ordered by LogStreamName. If 'LastEventTime' is
-      #   chosen, the request cannot also contain a logStreamNamePrefix.
+      #   If the value is `LogStreamName`, the results are ordered by log stream
+      #   name. If the value is `LastEventTime`, the results are ordered by the
+      #   event time. The default value is `LogStreamName`.
+      #
+      #   If you order the results by event time, you cannot specify the
+      #   `logStreamNamePrefix` parameter.
       # @option params [Boolean] :descending
-      #   If set to true, results are returned in descending order. If you
-      #   don't specify a value or set it to false, results are returned in
-      #   ascending order.
+      #   If the value is true, results are returned in descending order. If the
+      #   value is to false, results are returned in ascending order. The
+      #   default value is false.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   `DescribeLogStreams` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       # @return [Types::DescribeLogStreamsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeLogStreamsResponse#log_streams #logStreams} => Array&lt;Types::LogStream&gt;
@@ -598,28 +574,23 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the metrics filters associated with the specified log
-      # group. The list returned in the response is ASCII-sorted by filter
-      # name.
-      #
-      # By default, this operation returns up to 50 metric filters. If there
-      # are more metric filters to list, the response would contain a
-      # `nextToken` value in the response body. You can also limit the number
-      # of metric filters returned in the response by specifying the `limit`
-      # parameter in the request.
-      # @option params [required, String] :log_group_name
-      #   The log group name for which metric filters are to be listed.
+      # Lists the specified metric filters. You can list all the metric
+      # filters or filter the results by log name, prefix, metric name, or
+      # metric namespace. The results are ASCII-sorted by filter name.
+      # @option params [String] :log_group_name
+      #   The name of the log group.
       # @option params [String] :filter_name_prefix
-      #   Will only return metric filters that match the provided
-      #   filterNamePrefix. If you don't specify a value, no prefix filter is
-      #   applied.
+      #   The prefix to match.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   `DescribeMetricFilters` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of items returned in the response. If you don't
-      #   specify a value, the request would return up to 50 items.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
+      # @option params [String] :metric_name
+      #   The name of the CloudWatch metric.
+      # @option params [String] :metric_namespace
+      #   The namespace of the CloudWatch metric.
       # @return [Types::DescribeMetricFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeMetricFiltersResponse#metric_filters #metricFilters} => Array&lt;Types::MetricFilter&gt;
@@ -627,10 +598,12 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_metric_filters({
-      #     log_group_name: "LogGroupName", # required
+      #     log_group_name: "LogGroupName",
       #     filter_name_prefix: "FilterName",
       #     next_token: "NextToken",
       #     limit: 1,
+      #     metric_name: "MetricName",
+      #     metric_namespace: "MetricNamespace",
       #   })
       #
       # @example Response structure
@@ -643,6 +616,7 @@ module Aws
       #   resp.metric_filters[0].metric_transformations[0].metric_value #=> String
       #   resp.metric_filters[0].metric_transformations[0].default_value #=> Float
       #   resp.metric_filters[0].creation_time #=> Integer
+      #   resp.metric_filters[0].log_group_name #=> String
       #   resp.next_token #=> String
       # @overload describe_metric_filters(params = {})
       # @param [Hash] params ({})
@@ -651,27 +625,20 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns all the subscription filters associated with the specified log
-      # group. The list returned in the response is ASCII-sorted by filter
-      # name.
-      #
-      # By default, this operation returns up to 50 subscription filters. If
-      # there are more subscription filters to list, the response would
-      # contain a `nextToken` value in the response body. You can also limit
-      # the number of subscription filters returned in the response by
-      # specifying the `limit` parameter in the request.
+      # Lists the subscription filters for the specified log group. You can
+      # list all the subscription filters or filter the results by prefix. The
+      # results are ASCII-sorted by filter name.
       # @option params [required, String] :log_group_name
-      #   The log group name for which subscription filters are to be listed.
+      #   The name of the log group.
       # @option params [String] :filter_name_prefix
-      #   Will only return subscription filters that match the provided
-      #   filterNamePrefix. If you don't specify a value, no prefix filter is
-      #   applied.
+      #   The prefix to match. If you don't specify a value, no prefix filter
+      #   is applied.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the response of the previous
-      #   request. The token expires after 24 hours.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of results to return.
+      #   The maximum number of items returned. If you don't specify a value,
+      #   the default is up to 50 items.
       # @return [Types::DescribeSubscriptionFiltersResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeSubscriptionFiltersResponse#subscription_filters #subscriptionFilters} => Array&lt;Types::SubscriptionFilter&gt;
@@ -701,50 +668,39 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves log events, optionally filtered by a filter pattern from the
-      # specified log group. You can provide an optional time range to filter
-      # the results on the event `timestamp`. You can limit the streams
-      # searched to an explicit list of `logStreamNames`.
+      # Lists log events from the specified log group. You can list all the
+      # log events or filter the results using a filter pattern, a time range,
+      # and the name of the log stream.
       #
-      # By default, this operation returns as much matching log events as can
-      # fit in a response size of 1MB, up to 10,000 log events, or all the
-      # events found within a time-bounded scan window. If the response
-      # includes a `nextToken`, then there is more data to search, and the
-      # search can be resumed with a new request providing the nextToken. The
-      # response will contain a list of `searchedLogStreams` that contains
-      # information about which streams were searched in the request and
-      # whether they have been searched completely or require further
-      # pagination. The `limit` parameter in the request can be used to
-      # specify the maximum number of events to return in a page.
+      # By default, this operation returns as many log events as can fit in
+      # 1MB (up to 10,000 log events), or all the events found within the time
+      # range that you specify. If the results include a token, then there are
+      # more log events available, and you can get additional results by
+      # specifying the token in a subsequent call.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to query.
+      #   The name of the log group.
       # @option params [Array<String>] :log_stream_names
-      #   Optional list of log stream names within the specified log group to
-      #   search. Defaults to all the log streams in the log group.
+      #   Optional list of log stream names.
       # @option params [Integer] :start_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. If provided, events with a timestamp prior to this
+      #   The start of the time range. Events with a timestamp prior to this
       #   time are not returned.
       # @option params [Integer] :end_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC. If provided, events with a timestamp later than
-      #   this time are not returned.
+      #   The end of the time range. Events with a timestamp later than this
+      #   time are not returned.
       # @option params [String] :filter_pattern
-      #   A valid CloudWatch Logs filter pattern to use for filtering the
-      #   response. If not provided, all the events are matched.
+      #   The filter pattern to use. If not provided, all the events are
+      #   matched.
       # @option params [String] :next_token
-      #   A pagination token obtained from a `FilterLogEvents` response to
-      #   continue paginating the FilterLogEvents results. This token is omitted
-      #   from the response when there are no other events to display.
+      #   The token for the next set of events to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of events to return in a page of results. Default
-      #   is 10,000 events.
+      #   The maximum number of events to return. The default is 10,000 events.
       # @option params [Boolean] :interleaved
-      #   If provided, the API will make a best effort to provide responses that
-      #   contain events from multiple log streams within the log group
-      #   interleaved in a single response. If not provided, all the matched log
-      #   events in the first log stream will be searched first, then those in
-      #   the next log stream, etc.
+      #   If the value is true, the operation makes a best effort to provide
+      #   responses that contain events from multiple log streams within the log
+      #   group interleaved in a single response. If the value is false all the
+      #   matched log events in the first log stream are searched first, then
+      #   those in the next log stream, and so on. The default is false.
       # @return [Types::FilterLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::FilterLogEventsResponse#events #events} => Array&lt;Types::FilteredLogEvent&gt;
@@ -781,39 +737,34 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieves log events from the specified log stream. You can provide an
-      # optional time range to filter the results on the event `timestamp`.
+      # Lists log events from the specified log stream. You can list all the
+      # log events or filter using a time range.
       #
-      # By default, this operation returns as much log events as can fit in a
-      # response size of 1MB, up to 10,000 log events. The response will
-      # always include a `nextForwardToken` and a `nextBackwardToken` in the
-      # response body. You can use any of these tokens in subsequent
-      # `GetLogEvents` requests to paginate through events in either forward
-      # or backward direction. You can also limit the number of log events
-      # returned in the response by specifying the `limit` parameter in the
-      # request.
+      # By default, this operation returns as many log events as can fit in a
+      # response size of 1MB (up to 10,000 log events). If the results include
+      # tokens, there are more log events available. You can get additional
+      # log events by specifying one of the tokens in a subsequent call.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to query.
+      #   The name of the log group.
       # @option params [required, String] :log_stream_name
-      #   The name of the log stream to query.
+      #   The name of the log stream.
       # @option params [Integer] :start_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The start of the time range. Events with a timestamp earlier than this
+      #   time are not included.
       # @option params [Integer] :end_time
-      #   A point in time expressed as the number of milliseconds since Jan 1,
-      #   1970 00:00:00 UTC.
+      #   The end of the time range. Events with a timestamp later than this
+      #   time are not included.
       # @option params [String] :next_token
-      #   A string token used for pagination that points to the next page of
-      #   results. It must be a value obtained from the `nextForwardToken` or
-      #   `nextBackwardToken` fields in the response of the previous
-      #   `GetLogEvents` request.
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
       # @option params [Integer] :limit
-      #   The maximum number of log events returned in the response. If you
-      #   don't specify a value, the request would return as many log events as
-      #   can fit in a response size of 1MB, up to 10,000 log events.
+      #   The maximum number of log events returned. If you don't specify a
+      #   value, the maximum is as many log events as can fit in a response size
+      #   of 1MB, up to 10,000 log events.
       # @option params [Boolean] :start_from_head
-      #   If set to true, the earliest log events would be returned first. The
-      #   default is false (the latest log events are returned first).
+      #   If the value is true, the earliest log events are returned first. If
+      #   the value is false, the latest log events are returned first. The
+      #   default value is false.
       # @return [Types::GetLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetLogEventsResponse#events #events} => Array&lt;Types::OutputLogEvent&gt;
@@ -845,26 +796,26 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates or updates a `Destination`. A destination encapsulates a
-      # physical resource (such as a Kinesis stream) and allows you to
+      # Creates or updates a destination. A destination encapsulates a
+      # physical resource (such as a Kinesis stream) and enables you to
       # subscribe to a real-time stream of log events of a different account,
-      # ingested through `PutLogEvents` requests. Currently, the only
-      # supported physical resource is a Amazon Kinesis stream belonging to
-      # the same account as the destination.
+      # ingested using PutLogEvents. Currently, the only supported physical
+      # resource is a Amazon Kinesis stream belonging to the same account as
+      # the destination.
       #
       # A destination controls what is written to its Amazon Kinesis stream
-      # through an access policy. By default, PutDestination does not set any
-      # access policy with the destination, which means a cross-account user
-      # will not be able to call `PutSubscriptionFilter` against this
-      # destination. To enable that, the destination owner must call
-      # `PutDestinationPolicy` after PutDestination.
+      # through an access policy. By default, `PutDestination` does not set
+      # any access policy with the destination, which means a cross-account
+      # user cannot call PutSubscriptionFilter against this destination. To
+      # enable this, the destination owner must call PutDestinationPolicy
+      # after `PutDestination`.
       # @option params [required, String] :destination_name
       #   A name for the destination.
       # @option params [required, String] :target_arn
       #   The ARN of an Amazon Kinesis stream to deliver matching log events to.
       # @option params [required, String] :role_arn
-      #   The ARN of an IAM role that grants CloudWatch Logs permissions to do
-      #   Amazon Kinesis PutRecord requests on the destination stream.
+      #   The ARN of an IAM role that grants CloudWatch Logs permissions to call
+      #   Amazon Kinesis PutRecord on the destination stream.
       # @return [Types::PutDestinationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PutDestinationResponse#destination #destination} => Types::Destination
@@ -891,7 +842,7 @@ module Aws
       end
 
       # Creates or updates an access policy associated with an existing
-      # `Destination`. An access policy is an [IAM policy document][1] that is
+      # destination. An access policy is an [IAM policy document][1] that is
       # used to authorize claims to register a subscription filter against a
       # given destination.
       #
@@ -902,7 +853,7 @@ module Aws
       #   A name for an existing destination.
       # @option params [required, String] :access_policy
       #   An IAM policy document that authorizes cross-account users to deliver
-      #   their log events to associated destination.
+      #   their log events to the associated destination.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -919,10 +870,10 @@ module Aws
 
       # Uploads a batch of log events to the specified log stream.
       #
-      # Every PutLogEvents request must include the `sequenceToken` obtained
-      # from the response of the previous request. An upload in a newly
-      # created log stream does not require a `sequenceToken`. You can also
-      # get the `sequenceToken` using DescribeLogStreams.
+      # You must include the sequence token obtained from the response of the
+      # previous call. An upload in a newly created log stream does not
+      # require a sequence token. You can also get the sequence token using
+      # DescribeLogStreams.
       #
       # The batch of events must satisfy the following constraints:
       #
@@ -937,21 +888,20 @@ module Aws
       #   retention period of the log group.
       #
       # * The log events in the batch must be in chronological ordered by
-      #   their `timestamp`.
+      #   their timestamp.
       #
       # * The maximum number of log events in a batch is 10,000.
       #
       # * A batch of log events in a single PutLogEvents request cannot span
       #   more than 24 hours. Otherwise, the PutLogEvents operation will fail.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to put log events to.
+      #   The name of the log group.
       # @option params [required, String] :log_stream_name
-      #   The name of the log stream to put log events to.
+      #   The name of the log stream.
       # @option params [required, Array<Types::InputLogEvent>] :log_events
-      #   A list of log events belonging to a log stream.
+      #   The log events.
       # @option params [String] :sequence_token
-      #   A string token that must be obtained from the response of the previous
-      #   `PutLogEvents` request.
+      #   The sequence token.
       # @return [Types::PutLogEventsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PutLogEventsResponse#next_sequence_token #nextSequenceToken} => String
@@ -984,18 +934,17 @@ module Aws
 
       # Creates or updates a metric filter and associates it with the
       # specified log group. Metric filters allow you to configure rules to
-      # extract metric data from log events ingested through `PutLogEvents`
-      # requests.
+      # extract metric data from log events ingested through PutLogEvents.
       #
       # The maximum number of metric filters that can be associated with a log
       # group is 100.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to associate the metric filter with.
+      #   The name of the log group.
       # @option params [required, String] :filter_name
       #   A name for the metric filter.
       # @option params [required, String] :filter_pattern
-      #   A valid CloudWatch Logs filter pattern for extracting metric data out
-      #   of ingested log events.
+      #   A filter pattern for extracting metric data out of ingested log
+      #   events.
       # @option params [required, Array<Types::MetricTransformation>] :metric_transformations
       #   A collection of information needed to define how metric data gets
       #   emitted.
@@ -1026,11 +975,11 @@ module Aws
       # allows you to configure the number of days you want to retain log
       # events in the specified log group.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to associate the retention policy with.
+      #   The name of the log group.
       # @option params [required, Integer] :retention_in_days
-      #   Specifies the number of days you want to retain log events in the
-      #   specified log group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90,
-      #   120, 150, 180, 365, 400, 545, 731, 1827, 3653.
+      #   The number of days to retain the log events in the specified log
+      #   group. Possible values are: 1, 3, 5, 7, 14, 30, 60, 90, 120, 150, 180,
+      #   365, 400, 545, 731, 1827, and 3653.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1047,31 +996,29 @@ module Aws
 
       # Creates or updates a subscription filter and associates it with the
       # specified log group. Subscription filters allow you to subscribe to a
-      # real-time stream of log events ingested through `PutLogEvents`
-      # requests and have them delivered to a specific destination. Currently,
-      # the supported destinations are:
+      # real-time stream of log events ingested through PutLogEvents and have
+      # them delivered to a specific destination. Currently, the supported
+      # destinations are:
       #
       # * An Amazon Kinesis stream belonging to the same account as the
       #   subscription filter, for same-account delivery.
       #
-      # * A logical destination (used via an ARN of `Destination`) belonging
-      #   to a different account, for cross-account delivery.
+      # * A logical destination that belongs to a different account, for
+      #   cross-account delivery.
       #
-      # * An Amazon Kinesis Firehose stream belonging to the same account as
-      #   the subscription filter, for same-account delivery.
+      # * An Amazon Kinesis Firehose stream that belongs to the same account
+      #   as the subscription filter, for same-account delivery.
       #
-      # * An AWS Lambda function belonging to the same account as the
+      # * An AWS Lambda function that belongs to the same account as the
       #   subscription filter, for same-account delivery.
       #
-      # Currently there can only be one subscription filter associated with a
-      # log group.
+      # There can only be one subscription filter associated with a log group.
       # @option params [required, String] :log_group_name
-      #   The name of the log group to associate the subscription filter with.
+      #   The name of the log group.
       # @option params [required, String] :filter_name
       #   A name for the subscription filter.
       # @option params [required, String] :filter_pattern
-      #   A valid CloudWatch Logs filter pattern for subscribing to a filtered
-      #   stream of log events.
+      #   A filter pattern for subscribing to a filtered stream of log events.
       # @option params [required, String] :destination_arn
       #   The ARN of the destination to deliver matching log events to.
       #   Currently, the supported destinations are:
@@ -1079,8 +1026,8 @@ module Aws
       #   * An Amazon Kinesis stream belonging to the same account as the
       #     subscription filter, for same-account delivery.
       #
-      #   * A logical destination (used via an ARN of `Destination`) belonging
-      #     to a different account, for cross-account delivery.
+      #   * A logical destination (specified using an ARN) belonging to a
+      #     different account, for cross-account delivery.
       #
       #   * An Amazon Kinesis Firehose stream belonging to the same account as
       #     the subscription filter, for same-account delivery.
@@ -1090,8 +1037,8 @@ module Aws
       # @option params [String] :role_arn
       #   The ARN of an IAM role that grants CloudWatch Logs permissions to
       #   deliver ingested log events to the destination stream. You don't need
-      #   to provide the ARN when you are working with a logical destination
-      #   (used via an ARN of `Destination`) for cross-account delivery.
+      #   to provide the ARN when you are working with a logical destination for
+      #   cross-account delivery.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -1118,7 +1065,7 @@ module Aws
       #   timestamps, IP addresses, strings, and so on. You use the filter
       #   pattern to specify what to look for in the log event message.
       # @option params [required, Array<String>] :log_event_messages
-      #   A list of log event messages to test.
+      #   The log event messages to test.
       # @return [Types::TestMetricFilterResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::TestMetricFilterResponse#matches #matches} => Array&lt;Types::MetricFilterMatchRecord&gt;

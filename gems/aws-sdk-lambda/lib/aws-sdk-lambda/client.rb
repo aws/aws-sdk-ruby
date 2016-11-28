@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::RestJson)
 
@@ -188,14 +190,15 @@ module Aws
       #   function ARN can send events to invoke your Lambda function from
       #   Amazon S3.
       # @option params [String] :source_account
-      #   This parameter is used for S3 and SES only. The AWS account ID
-      #   (without a hyphen) of the source owner. For example, if the
-      #   `SourceArn` identifies a bucket, then this is the bucket owner's
-      #   account ID. You can use this additional condition to ensure the bucket
-      #   you specify is owned by a specific account (it is possible the bucket
-      #   owner deleted the bucket and some other AWS account created the
-      #   bucket). You can also use this condition to specify all sources (that
-      #   is, you don't specify the `SourceArn`) owned by a specific account.
+      #   This parameter is used for S3, SES, CloudWatch Logs and CloudWatch
+      #   Rules only. The AWS account ID (without a hyphen) of the source owner.
+      #   For example, if the `SourceArn` identifies a bucket, then this is the
+      #   bucket owner's account ID. You can use this additional condition to
+      #   ensure the bucket you specify is owned by a specific account (it is
+      #   possible the bucket owner deleted the bucket and some other AWS
+      #   account created the bucket). You can also use this condition to
+      #   specify all sources (that is, you don't specify the `SourceArn`)
+      #   owned by a specific account.
       # @option params [String] :event_source_token
       #   A unique token that must be supplied by the principal invoking the
       #   function. This is currently only used for Alexa Smart Home functions.
@@ -469,6 +472,13 @@ module Aws
       #   parameter identifying the list of security group IDs and subnet IDs.
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
+      # @option params [Types::Environment] :environment
+      #   The parent object that contains your environment's configuration
+      #   settings.
+      # @option params [String] :kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If not provided, AWS Lambda will
+      #   use a default service key.
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
@@ -484,6 +494,8 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_function({
@@ -505,6 +517,12 @@ module Aws
       #       subnet_ids: ["SubnetId"],
       #       security_group_ids: ["SecurityGroupId"],
       #     },
+      #     environment: {
+      #       variables: {
+      #         "EnvironmentVariableName" => "EnvironmentVariableValue",
+      #       },
+      #     },
+      #     kms_key_arn: "KMSKeyArn",
       #   })
       #
       # @example Response structure
@@ -525,6 +543,11 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.environment.variables #=> Hash
+      #   resp.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.environment.error.error_code #=> String
+      #   resp.environment.error.message #=> String
+      #   resp.kms_key_arn #=> String
       # @overload create_function(params = {})
       # @param [Hash] params ({})
       def create_function(params = {}, options = {})
@@ -804,6 +827,11 @@ module Aws
       #   resp.configuration.vpc_config.security_group_ids #=> Array
       #   resp.configuration.vpc_config.security_group_ids[0] #=> String
       #   resp.configuration.vpc_config.vpc_id #=> String
+      #   resp.configuration.environment.variables #=> Hash
+      #   resp.configuration.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.configuration.environment.error.error_code #=> String
+      #   resp.configuration.environment.error.message #=> String
+      #   resp.configuration.kms_key_arn #=> String
       #   resp.code.repository_type #=> String
       #   resp.code.location #=> String
       # @overload get_function(params = {})
@@ -868,6 +896,8 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_function_configuration({
@@ -893,6 +923,11 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.environment.variables #=> Hash
+      #   resp.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.environment.error.error_code #=> String
+      #   resp.environment.error.message #=> String
+      #   resp.kms_key_arn #=> String
       # @overload get_function_configuration(params = {})
       # @param [Hash] params ({})
       def get_function_configuration(params = {}, options = {})
@@ -953,7 +988,8 @@ module Aws
         req.send_request(options)
       end
 
-      # Invokes a specific Lambda function.
+      # Invokes a specific Lambda function. For an example, see [Create the
+      # Lambda Function and Test It Manually][1].
       #
       # If you are using the versioning feature, you can invoke the specific
       # function version by providing function version or alias name that is
@@ -962,14 +998,15 @@ module Aws
       # `$LATEST` version of the Lambda function is invoked. Invocations occur
       # at least once in response to an event and functions must be idempotent
       # to handle this. For information about the versioning feature, see [AWS
-      # Lambda Function Versioning and Aliases][1].
+      # Lambda Function Versioning and Aliases][2].
       #
       # This operation requires permission for the `lambda:InvokeFunction`
       # action.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
+      # [1]: http://docs.aws.amazon.com/lambda/latest/dg/with-dynamodb-create-function.html#with-dbb-invoke-manually
+      # [2]: http://docs.aws.amazon.com/lambda/latest/dg/versioning-aliases.html
       # @option params [required, String] :function_name
       #   The Lambda function name.
       #
@@ -1256,6 +1293,11 @@ module Aws
       #   resp.functions[0].vpc_config.security_group_ids #=> Array
       #   resp.functions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.functions[0].vpc_config.vpc_id #=> String
+      #   resp.functions[0].environment.variables #=> Hash
+      #   resp.functions[0].environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.functions[0].environment.error.error_code #=> String
+      #   resp.functions[0].environment.error.message #=> String
+      #   resp.functions[0].kms_key_arn #=> String
       # @overload list_functions(params = {})
       # @param [Hash] params ({})
       def list_functions(params = {}, options = {})
@@ -1318,6 +1360,11 @@ module Aws
       #   resp.versions[0].vpc_config.security_group_ids #=> Array
       #   resp.versions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.versions[0].vpc_config.vpc_id #=> String
+      #   resp.versions[0].environment.variables #=> Hash
+      #   resp.versions[0].environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.versions[0].environment.error.error_code #=> String
+      #   resp.versions[0].environment.error.message #=> String
+      #   resp.versions[0].kms_key_arn #=> String
       # @overload list_versions_by_function(params = {})
       # @param [Hash] params ({})
       def list_versions_by_function(params = {}, options = {})
@@ -1367,6 +1414,8 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.publish_version({
@@ -1393,6 +1442,11 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.environment.variables #=> Hash
+      #   resp.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.environment.error.error_code #=> String
+      #   resp.environment.error.message #=> String
+      #   resp.kms_key_arn #=> String
       # @overload publish_version(params = {})
       # @param [Hash] params ({})
       def publish_version(params = {}, options = {})
@@ -1647,6 +1701,8 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_function_code({
@@ -1676,6 +1732,11 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.environment.variables #=> Hash
+      #   resp.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.environment.error.error_code #=> String
+      #   resp.environment.error.message #=> String
+      #   resp.kms_key_arn #=> String
       # @overload update_function_code(params = {})
       # @param [Hash] params ({})
       def update_function_code(params = {}, options = {})
@@ -1736,6 +1797,14 @@ module Aws
       #   parameter identifying the list of security group IDs and subnet IDs.
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
+      # @option params [Types::Environment] :environment
+      #   The parent object that contains your environment's configuration
+      #   settings.
+      # @option params [String] :kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If you elect to use the AWS Lambda
+      #   default service key, pass in an empty string ("") for this
+      #   parameter.
       # @option params [String] :runtime
       #   The runtime environment for the Lambda function.
       #
@@ -1756,6 +1825,8 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
+      #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_function_configuration({
@@ -1769,6 +1840,12 @@ module Aws
       #       subnet_ids: ["SubnetId"],
       #       security_group_ids: ["SecurityGroupId"],
       #     },
+      #     environment: {
+      #       variables: {
+      #         "EnvironmentVariableName" => "EnvironmentVariableValue",
+      #       },
+      #     },
+      #     kms_key_arn: "KMSKeyArn",
       #     runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7
       #   })
       #
@@ -1790,6 +1867,11 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.environment.variables #=> Hash
+      #   resp.environment.variables["EnvironmentVariableName"] #=> String
+      #   resp.environment.error.error_code #=> String
+      #   resp.environment.error.message #=> String
+      #   resp.kms_key_arn #=> String
       # @overload update_function_configuration(params = {})
       # @param [Hash] params ({})
       def update_function_configuration(params = {}, options = {})

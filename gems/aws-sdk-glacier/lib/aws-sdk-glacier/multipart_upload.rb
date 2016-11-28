@@ -163,9 +163,9 @@ module Aws
       #   marker if you are continuing the pagination of results started in a
       #   previous List Parts request.
       # @option options [Integer] :limit
-      #   Specifies the maximum number of parts returned in the response body.
-      #   If this value is not specified, the List Parts operation returns up to
-      #   1,000 uploads.
+      #   The maximum number of parts to be returned. The default limit is 1000.
+      #   The number of parts returned might be fewer than the specified limit,
+      #   but the number of returned parts never exceeds the limit.
       # @return [Types::ListPartsOutput]
       def parts(options = {})
         options = options.merge(
@@ -192,7 +192,7 @@ module Aws
       #   uploaded in this part. Amazon Glacier uses this information to
       #   assemble the archive in the proper sequence. The format of this header
       #   follows RFC 2616. An example header is Content-Range:bytes
-      #   0-4194303/\*.
+      #   0-4194303/*.
       # @option options [String, IO] :body
       #   The data to upload.
       # @return [Types::UploadMultipartPartOutput]

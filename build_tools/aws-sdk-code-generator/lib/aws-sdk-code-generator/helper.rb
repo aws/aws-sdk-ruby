@@ -124,12 +124,17 @@ module AwsSdkCodeGenerator
     def documentation(ref_or_shape, options = {})
       line_width = options.fetch(:line_width, 70)
       shape = ref_or_shape.key?('type') ? ref_or_shape : shape(ref_or_shape)
-      docstring = ref_or_shape['documentation'] || shape['documentation']
-      if docstring
-        markdown(docstring, line_width:line_width)
-      else
-        ''
+      docstring = ref_or_shape['documentation'] || shape['documentation'] || ''
+
+      # append boilerplate idempotency docs
+      if ref_or_shape['idempotencyToken']
+        docstring = "#{docstring}<p>**A suitable default value is "
+        docstring += "auto-generated.** You should normally "
+        docstring += "not need to pass this option.</p>"
+        docstring = docstring.strip
       end
+
+      docstring == '' ? docstring : markdown(docstring, line_width:line_width)
     end
 
     def member_shape(shape_name, member_name)
@@ -184,7 +189,7 @@ module AwsSdkCodeGenerator
         ).to_kramdown.strip
 
         # remove extra escape
-        markdown.gsub(/\\(`|'|")/, '\1')
+        markdown.gsub(/\\(\*|`|'|")/, '\1')
       end
     end
 

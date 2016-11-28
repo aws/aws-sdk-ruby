@@ -98,9 +98,13 @@ module Aws
       GameSessionStatus = Shapes::StringShape.new(name: 'GameSessionStatus')
       GetGameSessionLogUrlInput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlInput')
       GetGameSessionLogUrlOutput = Shapes::StructureShape.new(name: 'GetGameSessionLogUrlOutput')
+      GetInstanceAccessInput = Shapes::StructureShape.new(name: 'GetInstanceAccessInput')
+      GetInstanceAccessOutput = Shapes::StructureShape.new(name: 'GetInstanceAccessOutput')
       IdStringModel = Shapes::StringShape.new(name: 'IdStringModel')
       IdempotentParameterMismatchException = Shapes::StructureShape.new(name: 'IdempotentParameterMismatchException')
       Instance = Shapes::StructureShape.new(name: 'Instance')
+      InstanceAccess = Shapes::StructureShape.new(name: 'InstanceAccess')
+      InstanceCredentials = Shapes::StructureShape.new(name: 'InstanceCredentials')
       InstanceId = Shapes::StringShape.new(name: 'InstanceId')
       InstanceList = Shapes::ListShape.new(name: 'InstanceList')
       InstanceStatus = Shapes::StringShape.new(name: 'InstanceStatus')
@@ -495,6 +499,13 @@ module Aws
       GetGameSessionLogUrlOutput.add_member(:pre_signed_url, Shapes::ShapeRef.new(shape: NonZeroAndMaxString, location_name: "PreSignedUrl"))
       GetGameSessionLogUrlOutput.struct_class = Types::GetGameSessionLogUrlOutput
 
+      GetInstanceAccessInput.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, required: true, location_name: "FleetId"))
+      GetInstanceAccessInput.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, required: true, location_name: "InstanceId"))
+      GetInstanceAccessInput.struct_class = Types::GetInstanceAccessInput
+
+      GetInstanceAccessOutput.add_member(:instance_access, Shapes::ShapeRef.new(shape: InstanceAccess, location_name: "InstanceAccess"))
+      GetInstanceAccessOutput.struct_class = Types::GetInstanceAccessOutput
+
       Instance.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
       Instance.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
       Instance.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
@@ -503,6 +514,17 @@ module Aws
       Instance.add_member(:status, Shapes::ShapeRef.new(shape: InstanceStatus, location_name: "Status"))
       Instance.add_member(:creation_time, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationTime"))
       Instance.struct_class = Types::Instance
+
+      InstanceAccess.add_member(:fleet_id, Shapes::ShapeRef.new(shape: FleetId, location_name: "FleetId"))
+      InstanceAccess.add_member(:instance_id, Shapes::ShapeRef.new(shape: InstanceId, location_name: "InstanceId"))
+      InstanceAccess.add_member(:ip_address, Shapes::ShapeRef.new(shape: IpAddress, location_name: "IpAddress"))
+      InstanceAccess.add_member(:operating_system, Shapes::ShapeRef.new(shape: OperatingSystem, location_name: "OperatingSystem"))
+      InstanceAccess.add_member(:credentials, Shapes::ShapeRef.new(shape: InstanceCredentials, location_name: "Credentials"))
+      InstanceAccess.struct_class = Types::InstanceAccess
+
+      InstanceCredentials.add_member(:user_name, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "UserName"))
+      InstanceCredentials.add_member(:secret, Shapes::ShapeRef.new(shape: NonEmptyString, location_name: "Secret"))
+      InstanceCredentials.struct_class = Types::InstanceCredentials
 
       InstanceList.member = Shapes::ShapeRef.new(shape: Instance)
 
@@ -1025,6 +1047,18 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+        end)
+
+        api.add_operation(:get_instance_access, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetInstanceAccess"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: GetInstanceAccessInput)
+          o.output = Shapes::ShapeRef.new(shape: GetInstanceAccessOutput)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: InternalServiceException)
         end)
 
         api.add_operation(:list_aliases, Seahorse::Model::Operation.new.tap do |o|

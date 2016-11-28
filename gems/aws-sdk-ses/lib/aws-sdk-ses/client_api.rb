@@ -32,8 +32,22 @@ module Aws
       Cidr = Shapes::StringShape.new(name: 'Cidr')
       CloneReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'CloneReceiptRuleSetRequest')
       CloneReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'CloneReceiptRuleSetResponse')
+      CloudWatchDestination = Shapes::StructureShape.new(name: 'CloudWatchDestination')
+      CloudWatchDimensionConfiguration = Shapes::StructureShape.new(name: 'CloudWatchDimensionConfiguration')
+      CloudWatchDimensionConfigurations = Shapes::ListShape.new(name: 'CloudWatchDimensionConfigurations')
+      ConfigurationSet = Shapes::StructureShape.new(name: 'ConfigurationSet')
+      ConfigurationSetAlreadyExistsException = Shapes::StructureShape.new(name: 'ConfigurationSetAlreadyExistsException')
+      ConfigurationSetAttribute = Shapes::StringShape.new(name: 'ConfigurationSetAttribute')
+      ConfigurationSetAttributeList = Shapes::ListShape.new(name: 'ConfigurationSetAttributeList')
+      ConfigurationSetDoesNotExistException = Shapes::StructureShape.new(name: 'ConfigurationSetDoesNotExistException')
+      ConfigurationSetName = Shapes::StringShape.new(name: 'ConfigurationSetName')
+      ConfigurationSets = Shapes::ListShape.new(name: 'ConfigurationSets')
       Content = Shapes::StructureShape.new(name: 'Content')
       Counter = Shapes::IntegerShape.new(name: 'Counter')
+      CreateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetEventDestinationRequest')
+      CreateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetEventDestinationResponse')
+      CreateConfigurationSetRequest = Shapes::StructureShape.new(name: 'CreateConfigurationSetRequest')
+      CreateConfigurationSetResponse = Shapes::StructureShape.new(name: 'CreateConfigurationSetResponse')
       CreateReceiptFilterRequest = Shapes::StructureShape.new(name: 'CreateReceiptFilterRequest')
       CreateReceiptFilterResponse = Shapes::StructureShape.new(name: 'CreateReceiptFilterResponse')
       CreateReceiptRuleRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleRequest')
@@ -41,6 +55,11 @@ module Aws
       CreateReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetRequest')
       CreateReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'CreateReceiptRuleSetResponse')
       CustomMailFromStatus = Shapes::StringShape.new(name: 'CustomMailFromStatus')
+      DefaultDimensionValue = Shapes::StringShape.new(name: 'DefaultDimensionValue')
+      DeleteConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationRequest')
+      DeleteConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetEventDestinationResponse')
+      DeleteConfigurationSetRequest = Shapes::StructureShape.new(name: 'DeleteConfigurationSetRequest')
+      DeleteConfigurationSetResponse = Shapes::StructureShape.new(name: 'DeleteConfigurationSetResponse')
       DeleteIdentityPolicyRequest = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyRequest')
       DeleteIdentityPolicyResponse = Shapes::StructureShape.new(name: 'DeleteIdentityPolicyResponse')
       DeleteIdentityRequest = Shapes::StructureShape.new(name: 'DeleteIdentityRequest')
@@ -54,17 +73,28 @@ module Aws
       DeleteVerifiedEmailAddressRequest = Shapes::StructureShape.new(name: 'DeleteVerifiedEmailAddressRequest')
       DescribeActiveReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetRequest')
       DescribeActiveReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DescribeActiveReceiptRuleSetResponse')
+      DescribeConfigurationSetRequest = Shapes::StructureShape.new(name: 'DescribeConfigurationSetRequest')
+      DescribeConfigurationSetResponse = Shapes::StructureShape.new(name: 'DescribeConfigurationSetResponse')
       DescribeReceiptRuleRequest = Shapes::StructureShape.new(name: 'DescribeReceiptRuleRequest')
       DescribeReceiptRuleResponse = Shapes::StructureShape.new(name: 'DescribeReceiptRuleResponse')
       DescribeReceiptRuleSetRequest = Shapes::StructureShape.new(name: 'DescribeReceiptRuleSetRequest')
       DescribeReceiptRuleSetResponse = Shapes::StructureShape.new(name: 'DescribeReceiptRuleSetResponse')
       Destination = Shapes::StructureShape.new(name: 'Destination')
       DiagnosticCode = Shapes::StringShape.new(name: 'DiagnosticCode')
+      DimensionName = Shapes::StringShape.new(name: 'DimensionName')
+      DimensionValueSource = Shapes::StringShape.new(name: 'DimensionValueSource')
       DkimAttributes = Shapes::MapShape.new(name: 'DkimAttributes')
       Domain = Shapes::StringShape.new(name: 'Domain')
       DsnAction = Shapes::StringShape.new(name: 'DsnAction')
       DsnStatus = Shapes::StringShape.new(name: 'DsnStatus')
       Enabled = Shapes::BooleanShape.new(name: 'Enabled')
+      EventDestination = Shapes::StructureShape.new(name: 'EventDestination')
+      EventDestinationAlreadyExistsException = Shapes::StructureShape.new(name: 'EventDestinationAlreadyExistsException')
+      EventDestinationDoesNotExistException = Shapes::StructureShape.new(name: 'EventDestinationDoesNotExistException')
+      EventDestinationName = Shapes::StringShape.new(name: 'EventDestinationName')
+      EventDestinations = Shapes::ListShape.new(name: 'EventDestinations')
+      EventType = Shapes::StringShape.new(name: 'EventType')
+      EventTypes = Shapes::ListShape.new(name: 'EventTypes')
       Explanation = Shapes::StringShape.new(name: 'Explanation')
       ExtensionField = Shapes::StructureShape.new(name: 'ExtensionField')
       ExtensionFieldList = Shapes::ListShape.new(name: 'ExtensionFieldList')
@@ -91,14 +121,20 @@ module Aws
       IdentityNotificationAttributes = Shapes::StructureShape.new(name: 'IdentityNotificationAttributes')
       IdentityType = Shapes::StringShape.new(name: 'IdentityType')
       IdentityVerificationAttributes = Shapes::StructureShape.new(name: 'IdentityVerificationAttributes')
+      InvalidCloudWatchDestinationException = Shapes::StructureShape.new(name: 'InvalidCloudWatchDestinationException')
+      InvalidConfigurationSetException = Shapes::StructureShape.new(name: 'InvalidConfigurationSetException')
+      InvalidFirehoseDestinationException = Shapes::StructureShape.new(name: 'InvalidFirehoseDestinationException')
       InvalidLambdaFunctionException = Shapes::StructureShape.new(name: 'InvalidLambdaFunctionException')
       InvalidPolicyException = Shapes::StructureShape.new(name: 'InvalidPolicyException')
       InvalidS3ConfigurationException = Shapes::StructureShape.new(name: 'InvalidS3ConfigurationException')
       InvalidSnsTopicException = Shapes::StructureShape.new(name: 'InvalidSnsTopicException')
       InvocationType = Shapes::StringShape.new(name: 'InvocationType')
+      KinesisFirehoseDestination = Shapes::StructureShape.new(name: 'KinesisFirehoseDestination')
       LambdaAction = Shapes::StructureShape.new(name: 'LambdaAction')
       LastAttemptDate = Shapes::TimestampShape.new(name: 'LastAttemptDate')
       LimitExceededException = Shapes::StructureShape.new(name: 'LimitExceededException')
+      ListConfigurationSetsRequest = Shapes::StructureShape.new(name: 'ListConfigurationSetsRequest')
+      ListConfigurationSetsResponse = Shapes::StructureShape.new(name: 'ListConfigurationSetsResponse')
       ListIdentitiesRequest = Shapes::StructureShape.new(name: 'ListIdentitiesRequest')
       ListIdentitiesResponse = Shapes::StructureShape.new(name: 'ListIdentitiesResponse')
       ListIdentityPoliciesRequest = Shapes::StructureShape.new(name: 'ListIdentityPoliciesRequest')
@@ -119,6 +155,10 @@ module Aws
       MessageDsn = Shapes::StructureShape.new(name: 'MessageDsn')
       MessageId = Shapes::StringShape.new(name: 'MessageId')
       MessageRejected = Shapes::StructureShape.new(name: 'MessageRejected')
+      MessageTag = Shapes::StructureShape.new(name: 'MessageTag')
+      MessageTagList = Shapes::ListShape.new(name: 'MessageTagList')
+      MessageTagName = Shapes::StringShape.new(name: 'MessageTagName')
+      MessageTagValue = Shapes::StringShape.new(name: 'MessageTagValue')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
       NotificationAttributes = Shapes::MapShape.new(name: 'NotificationAttributes')
       NotificationTopic = Shapes::StringShape.new(name: 'NotificationTopic')
@@ -187,6 +227,8 @@ module Aws
       StopScope = Shapes::StringShape.new(name: 'StopScope')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
       TlsPolicy = Shapes::StringShape.new(name: 'TlsPolicy')
+      UpdateConfigurationSetEventDestinationRequest = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationRequest')
+      UpdateConfigurationSetEventDestinationResponse = Shapes::StructureShape.new(name: 'UpdateConfigurationSetEventDestinationResponse')
       UpdateReceiptRuleRequest = Shapes::StructureShape.new(name: 'UpdateReceiptRuleRequest')
       UpdateReceiptRuleResponse = Shapes::StructureShape.new(name: 'UpdateReceiptRuleResponse')
       VerificationAttributes = Shapes::MapShape.new(name: 'VerificationAttributes')
@@ -233,9 +275,37 @@ module Aws
 
       CloneReceiptRuleSetResponse.struct_class = Types::CloneReceiptRuleSetResponse
 
+      CloudWatchDestination.add_member(:dimension_configurations, Shapes::ShapeRef.new(shape: CloudWatchDimensionConfigurations, required: true, location_name: "DimensionConfigurations"))
+      CloudWatchDestination.struct_class = Types::CloudWatchDestination
+
+      CloudWatchDimensionConfiguration.add_member(:dimension_name, Shapes::ShapeRef.new(shape: DimensionName, required: true, location_name: "DimensionName"))
+      CloudWatchDimensionConfiguration.add_member(:dimension_value_source, Shapes::ShapeRef.new(shape: DimensionValueSource, required: true, location_name: "DimensionValueSource"))
+      CloudWatchDimensionConfiguration.add_member(:default_dimension_value, Shapes::ShapeRef.new(shape: DefaultDimensionValue, required: true, location_name: "DefaultDimensionValue"))
+      CloudWatchDimensionConfiguration.struct_class = Types::CloudWatchDimensionConfiguration
+
+      CloudWatchDimensionConfigurations.member = Shapes::ShapeRef.new(shape: CloudWatchDimensionConfiguration)
+
+      ConfigurationSet.add_member(:name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "Name"))
+      ConfigurationSet.struct_class = Types::ConfigurationSet
+
+      ConfigurationSetAttributeList.member = Shapes::ShapeRef.new(shape: ConfigurationSetAttribute)
+
+      ConfigurationSets.member = Shapes::ShapeRef.new(shape: ConfigurationSet)
+
       Content.add_member(:data, Shapes::ShapeRef.new(shape: MessageData, required: true, location_name: "Data"))
       Content.add_member(:charset, Shapes::ShapeRef.new(shape: Charset, location_name: "Charset"))
       Content.struct_class = Types::Content
+
+      CreateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+      CreateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestination, required: true, location_name: "EventDestination"))
+      CreateConfigurationSetEventDestinationRequest.struct_class = Types::CreateConfigurationSetEventDestinationRequest
+
+      CreateConfigurationSetEventDestinationResponse.struct_class = Types::CreateConfigurationSetEventDestinationResponse
+
+      CreateConfigurationSetRequest.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, required: true, location_name: "ConfigurationSet"))
+      CreateConfigurationSetRequest.struct_class = Types::CreateConfigurationSetRequest
+
+      CreateConfigurationSetResponse.struct_class = Types::CreateConfigurationSetResponse
 
       CreateReceiptFilterRequest.add_member(:filter, Shapes::ShapeRef.new(shape: ReceiptFilter, required: true, location_name: "Filter"))
       CreateReceiptFilterRequest.struct_class = Types::CreateReceiptFilterRequest
@@ -253,6 +323,17 @@ module Aws
       CreateReceiptRuleSetRequest.struct_class = Types::CreateReceiptRuleSetRequest
 
       CreateReceiptRuleSetResponse.struct_class = Types::CreateReceiptRuleSetResponse
+
+      DeleteConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+      DeleteConfigurationSetEventDestinationRequest.add_member(:event_destination_name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "EventDestinationName"))
+      DeleteConfigurationSetEventDestinationRequest.struct_class = Types::DeleteConfigurationSetEventDestinationRequest
+
+      DeleteConfigurationSetEventDestinationResponse.struct_class = Types::DeleteConfigurationSetEventDestinationResponse
+
+      DeleteConfigurationSetRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+      DeleteConfigurationSetRequest.struct_class = Types::DeleteConfigurationSetRequest
+
+      DeleteConfigurationSetResponse.struct_class = Types::DeleteConfigurationSetResponse
 
       DeleteIdentityPolicyRequest.add_member(:identity, Shapes::ShapeRef.new(shape: Identity, required: true, location_name: "Identity"))
       DeleteIdentityPolicyRequest.add_member(:policy_name, Shapes::ShapeRef.new(shape: PolicyName, required: true, location_name: "PolicyName"))
@@ -290,6 +371,14 @@ module Aws
       DescribeActiveReceiptRuleSetResponse.add_member(:rules, Shapes::ShapeRef.new(shape: ReceiptRulesList, location_name: "Rules"))
       DescribeActiveReceiptRuleSetResponse.struct_class = Types::DescribeActiveReceiptRuleSetResponse
 
+      DescribeConfigurationSetRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+      DescribeConfigurationSetRequest.add_member(:configuration_set_attribute_names, Shapes::ShapeRef.new(shape: ConfigurationSetAttributeList, location_name: "ConfigurationSetAttributeNames"))
+      DescribeConfigurationSetRequest.struct_class = Types::DescribeConfigurationSetRequest
+
+      DescribeConfigurationSetResponse.add_member(:configuration_set, Shapes::ShapeRef.new(shape: ConfigurationSet, location_name: "ConfigurationSet"))
+      DescribeConfigurationSetResponse.add_member(:event_destinations, Shapes::ShapeRef.new(shape: EventDestinations, location_name: "EventDestinations"))
+      DescribeConfigurationSetResponse.struct_class = Types::DescribeConfigurationSetResponse
+
       DescribeReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
       DescribeReceiptRuleRequest.add_member(:rule_name, Shapes::ShapeRef.new(shape: ReceiptRuleName, required: true, location_name: "RuleName"))
       DescribeReceiptRuleRequest.struct_class = Types::DescribeReceiptRuleRequest
@@ -311,6 +400,17 @@ module Aws
 
       DkimAttributes.key = Shapes::ShapeRef.new(shape: Identity)
       DkimAttributes.value = Shapes::ShapeRef.new(shape: IdentityDkimAttributes)
+
+      EventDestination.add_member(:name, Shapes::ShapeRef.new(shape: EventDestinationName, required: true, location_name: "Name"))
+      EventDestination.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
+      EventDestination.add_member(:matching_event_types, Shapes::ShapeRef.new(shape: EventTypes, required: true, location_name: "MatchingEventTypes"))
+      EventDestination.add_member(:kinesis_firehose_destination, Shapes::ShapeRef.new(shape: KinesisFirehoseDestination, location_name: "KinesisFirehoseDestination"))
+      EventDestination.add_member(:cloud_watch_destination, Shapes::ShapeRef.new(shape: CloudWatchDestination, location_name: "CloudWatchDestination"))
+      EventDestination.struct_class = Types::EventDestination
+
+      EventDestinations.member = Shapes::ShapeRef.new(shape: EventDestination)
+
+      EventTypes.member = Shapes::ShapeRef.new(shape: EventType)
 
       ExtensionField.add_member(:name, Shapes::ShapeRef.new(shape: ExtensionFieldName, required: true, location_name: "Name"))
       ExtensionField.add_member(:value, Shapes::ShapeRef.new(shape: ExtensionFieldValue, required: true, location_name: "Value"))
@@ -382,10 +482,22 @@ module Aws
       IdentityVerificationAttributes.add_member(:verification_token, Shapes::ShapeRef.new(shape: VerificationToken, location_name: "VerificationToken"))
       IdentityVerificationAttributes.struct_class = Types::IdentityVerificationAttributes
 
+      KinesisFirehoseDestination.add_member(:iam_role_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "IAMRoleARN"))
+      KinesisFirehoseDestination.add_member(:delivery_stream_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "DeliveryStreamARN"))
+      KinesisFirehoseDestination.struct_class = Types::KinesisFirehoseDestination
+
       LambdaAction.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
       LambdaAction.add_member(:function_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, required: true, location_name: "FunctionArn"))
       LambdaAction.add_member(:invocation_type, Shapes::ShapeRef.new(shape: InvocationType, location_name: "InvocationType"))
       LambdaAction.struct_class = Types::LambdaAction
+
+      ListConfigurationSetsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListConfigurationSetsRequest.add_member(:max_items, Shapes::ShapeRef.new(shape: MaxItems, location_name: "MaxItems"))
+      ListConfigurationSetsRequest.struct_class = Types::ListConfigurationSetsRequest
+
+      ListConfigurationSetsResponse.add_member(:configuration_sets, Shapes::ShapeRef.new(shape: ConfigurationSets, location_name: "ConfigurationSets"))
+      ListConfigurationSetsResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
+      ListConfigurationSetsResponse.struct_class = Types::ListConfigurationSetsResponse
 
       ListIdentitiesRequest.add_member(:identity_type, Shapes::ShapeRef.new(shape: IdentityType, location_name: "IdentityType"))
       ListIdentitiesRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextToken"))
@@ -428,6 +540,12 @@ module Aws
       MessageDsn.add_member(:arrival_date, Shapes::ShapeRef.new(shape: ArrivalDate, location_name: "ArrivalDate"))
       MessageDsn.add_member(:extension_fields, Shapes::ShapeRef.new(shape: ExtensionFieldList, location_name: "ExtensionFields"))
       MessageDsn.struct_class = Types::MessageDsn
+
+      MessageTag.add_member(:name, Shapes::ShapeRef.new(shape: MessageTagName, required: true, location_name: "Name"))
+      MessageTag.add_member(:value, Shapes::ShapeRef.new(shape: MessageTagValue, required: true, location_name: "Value"))
+      MessageTag.struct_class = Types::MessageTag
+
+      MessageTagList.member = Shapes::ShapeRef.new(shape: MessageTag)
 
       NotificationAttributes.key = Shapes::ShapeRef.new(shape: Identity)
       NotificationAttributes.value = Shapes::ShapeRef.new(shape: IdentityNotificationAttributes)
@@ -540,6 +658,8 @@ module Aws
       SendEmailRequest.add_member(:return_path, Shapes::ShapeRef.new(shape: Address, location_name: "ReturnPath"))
       SendEmailRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "SourceArn"))
       SendEmailRequest.add_member(:return_path_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ReturnPathArn"))
+      SendEmailRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "Tags"))
+      SendEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
       SendEmailRequest.struct_class = Types::SendEmailRequest
 
       SendEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
@@ -551,6 +671,8 @@ module Aws
       SendRawEmailRequest.add_member(:from_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "FromArn"))
       SendRawEmailRequest.add_member(:source_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "SourceArn"))
       SendRawEmailRequest.add_member(:return_path_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "ReturnPathArn"))
+      SendRawEmailRequest.add_member(:tags, Shapes::ShapeRef.new(shape: MessageTagList, location_name: "Tags"))
+      SendRawEmailRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, location_name: "ConfigurationSetName"))
       SendRawEmailRequest.struct_class = Types::SendRawEmailRequest
 
       SendRawEmailResponse.add_member(:message_id, Shapes::ShapeRef.new(shape: MessageId, required: true, location_name: "MessageId"))
@@ -604,6 +726,12 @@ module Aws
       StopAction.add_member(:scope, Shapes::ShapeRef.new(shape: StopScope, required: true, location_name: "Scope"))
       StopAction.add_member(:topic_arn, Shapes::ShapeRef.new(shape: AmazonResourceName, location_name: "TopicArn"))
       StopAction.struct_class = Types::StopAction
+
+      UpdateConfigurationSetEventDestinationRequest.add_member(:configuration_set_name, Shapes::ShapeRef.new(shape: ConfigurationSetName, required: true, location_name: "ConfigurationSetName"))
+      UpdateConfigurationSetEventDestinationRequest.add_member(:event_destination, Shapes::ShapeRef.new(shape: EventDestination, required: true, location_name: "EventDestination"))
+      UpdateConfigurationSetEventDestinationRequest.struct_class = Types::UpdateConfigurationSetEventDestinationRequest
+
+      UpdateConfigurationSetEventDestinationResponse.struct_class = Types::UpdateConfigurationSetEventDestinationResponse
 
       UpdateReceiptRuleRequest.add_member(:rule_set_name, Shapes::ShapeRef.new(shape: ReceiptRuleSetName, required: true, location_name: "RuleSetName"))
       UpdateReceiptRuleRequest.add_member(:rule, Shapes::ShapeRef.new(shape: ReceiptRule, required: true, location_name: "Rule"))
@@ -666,6 +794,30 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
         end)
 
+        api.add_operation(:create_configuration_set, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateConfigurationSet"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateConfigurationSetRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateConfigurationSetResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetAlreadyExistsException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidConfigurationSetException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        end)
+
+        api.add_operation(:create_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateConfigurationSetEventDestination"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateConfigurationSetEventDestinationRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateConfigurationSetEventDestinationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: EventDestinationAlreadyExistsException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        end)
+
         api.add_operation(:create_receipt_filter, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateReceiptFilter"
           o.http_method = "POST"
@@ -699,6 +851,25 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: CreateReceiptRuleSetResponse)
           o.errors << Shapes::ShapeRef.new(shape: AlreadyExistsException)
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+        end)
+
+        api.add_operation(:delete_configuration_set, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteConfigurationSet"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationSetRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationSetResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+        end)
+
+        api.add_operation(:delete_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteConfigurationSetEventDestination"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteConfigurationSetEventDestinationRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteConfigurationSetEventDestinationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: EventDestinationDoesNotExistException)
         end)
 
         api.add_operation(:delete_identity, Seahorse::Model::Operation.new.tap do |o|
@@ -757,6 +928,15 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeActiveReceiptRuleSetRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeActiveReceiptRuleSetResponse)
+        end)
+
+        api.add_operation(:describe_configuration_set, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeConfigurationSet"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeConfigurationSetRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeConfigurationSetResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         end)
 
         api.add_operation(:describe_receipt_rule, Seahorse::Model::Operation.new.tap do |o|
@@ -832,6 +1012,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.output = Shapes::ShapeRef.new(shape: GetSendStatisticsResponse)
+        end)
+
+        api.add_operation(:list_configuration_sets, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListConfigurationSets"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListConfigurationSetsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListConfigurationSetsResponse)
         end)
 
         api.add_operation(:list_identities, Seahorse::Model::Operation.new.tap do |o|
@@ -916,6 +1104,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: SendEmailResponse)
           o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
           o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         end)
 
         api.add_operation(:send_raw_email, Seahorse::Model::Operation.new.tap do |o|
@@ -926,6 +1115,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: SendRawEmailResponse)
           o.errors << Shapes::ShapeRef.new(shape: MessageRejected)
           o.errors << Shapes::ShapeRef.new(shape: MailFromDomainNotVerifiedException)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
         end)
 
         api.add_operation(:set_active_receipt_rule_set, Seahorse::Model::Operation.new.tap do |o|
@@ -985,6 +1175,18 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: SetReceiptRulePositionResponse)
           o.errors << Shapes::ShapeRef.new(shape: RuleSetDoesNotExistException)
           o.errors << Shapes::ShapeRef.new(shape: RuleDoesNotExistException)
+        end)
+
+        api.add_operation(:update_configuration_set_event_destination, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateConfigurationSetEventDestination"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UpdateConfigurationSetEventDestinationRequest)
+          o.output = Shapes::ShapeRef.new(shape: UpdateConfigurationSetEventDestinationResponse)
+          o.errors << Shapes::ShapeRef.new(shape: ConfigurationSetDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: EventDestinationDoesNotExistException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidCloudWatchDestinationException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidFirehoseDestinationException)
         end)
 
         api.add_operation(:update_receipt_rule, Seahorse::Model::Operation.new.tap do |o|

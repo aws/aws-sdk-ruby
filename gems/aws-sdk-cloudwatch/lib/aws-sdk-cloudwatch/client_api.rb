@@ -25,6 +25,7 @@ module Aws
       ComparisonOperator = Shapes::StringShape.new(name: 'ComparisonOperator')
       Datapoint = Shapes::StructureShape.new(name: 'Datapoint')
       DatapointValue = Shapes::FloatShape.new(name: 'DatapointValue')
+      DatapointValueMap = Shapes::MapShape.new(name: 'DatapointValueMap')
       Datapoints = Shapes::ListShape.new(name: 'Datapoints')
       DeleteAlarmsInput = Shapes::StructureShape.new(name: 'DeleteAlarmsInput')
       DescribeAlarmHistoryInput = Shapes::StructureShape.new(name: 'DescribeAlarmHistoryInput')
@@ -43,6 +44,8 @@ module Aws
       EnableAlarmActionsInput = Shapes::StructureShape.new(name: 'EnableAlarmActionsInput')
       ErrorMessage = Shapes::StringShape.new(name: 'ErrorMessage')
       EvaluationPeriods = Shapes::IntegerShape.new(name: 'EvaluationPeriods')
+      ExtendedStatistic = Shapes::StringShape.new(name: 'ExtendedStatistic')
+      ExtendedStatistics = Shapes::ListShape.new(name: 'ExtendedStatistics')
       FaultDescription = Shapes::StringShape.new(name: 'FaultDescription')
       GetMetricStatisticsInput = Shapes::StructureShape.new(name: 'GetMetricStatisticsInput')
       GetMetricStatisticsOutput = Shapes::StructureShape.new(name: 'GetMetricStatisticsOutput')
@@ -104,7 +107,11 @@ module Aws
       Datapoint.add_member(:minimum, Shapes::ShapeRef.new(shape: DatapointValue, location_name: "Minimum"))
       Datapoint.add_member(:maximum, Shapes::ShapeRef.new(shape: DatapointValue, location_name: "Maximum"))
       Datapoint.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
+      Datapoint.add_member(:extended_statistics, Shapes::ShapeRef.new(shape: DatapointValueMap, location_name: "ExtendedStatistics"))
       Datapoint.struct_class = Types::Datapoint
+
+      DatapointValueMap.key = Shapes::ShapeRef.new(shape: ExtendedStatistic)
+      DatapointValueMap.value = Shapes::ShapeRef.new(shape: DatapointValue)
 
       Datapoints.member = Shapes::ShapeRef.new(shape: Datapoint)
 
@@ -126,6 +133,7 @@ module Aws
       DescribeAlarmsForMetricInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
       DescribeAlarmsForMetricInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
       DescribeAlarmsForMetricInput.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+      DescribeAlarmsForMetricInput.add_member(:extended_statistic, Shapes::ShapeRef.new(shape: ExtendedStatistic, location_name: "ExtendedStatistic"))
       DescribeAlarmsForMetricInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
       DescribeAlarmsForMetricInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
       DescribeAlarmsForMetricInput.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
@@ -164,13 +172,16 @@ module Aws
       EnableAlarmActionsInput.add_member(:alarm_names, Shapes::ShapeRef.new(shape: AlarmNames, required: true, location_name: "AlarmNames"))
       EnableAlarmActionsInput.struct_class = Types::EnableAlarmActionsInput
 
+      ExtendedStatistics.member = Shapes::ShapeRef.new(shape: ExtendedStatistic)
+
       GetMetricStatisticsInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
       GetMetricStatisticsInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
       GetMetricStatisticsInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
       GetMetricStatisticsInput.add_member(:start_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "StartTime"))
       GetMetricStatisticsInput.add_member(:end_time, Shapes::ShapeRef.new(shape: Timestamp, required: true, location_name: "EndTime"))
       GetMetricStatisticsInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
-      GetMetricStatisticsInput.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, required: true, location_name: "Statistics"))
+      GetMetricStatisticsInput.add_member(:statistics, Shapes::ShapeRef.new(shape: Statistics, location_name: "Statistics"))
+      GetMetricStatisticsInput.add_member(:extended_statistics, Shapes::ShapeRef.new(shape: ExtendedStatistics, location_name: "ExtendedStatistics"))
       GetMetricStatisticsInput.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
       GetMetricStatisticsInput.struct_class = Types::GetMetricStatisticsInput
 
@@ -208,6 +219,7 @@ module Aws
       MetricAlarm.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, location_name: "MetricName"))
       MetricAlarm.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, location_name: "Namespace"))
       MetricAlarm.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+      MetricAlarm.add_member(:extended_statistic, Shapes::ShapeRef.new(shape: ExtendedStatistic, location_name: "ExtendedStatistic"))
       MetricAlarm.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
       MetricAlarm.add_member(:period, Shapes::ShapeRef.new(shape: Period, location_name: "Period"))
       MetricAlarm.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))
@@ -238,7 +250,8 @@ module Aws
       PutMetricAlarmInput.add_member(:insufficient_data_actions, Shapes::ShapeRef.new(shape: ResourceList, location_name: "InsufficientDataActions"))
       PutMetricAlarmInput.add_member(:metric_name, Shapes::ShapeRef.new(shape: MetricName, required: true, location_name: "MetricName"))
       PutMetricAlarmInput.add_member(:namespace, Shapes::ShapeRef.new(shape: Namespace, required: true, location_name: "Namespace"))
-      PutMetricAlarmInput.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, required: true, location_name: "Statistic"))
+      PutMetricAlarmInput.add_member(:statistic, Shapes::ShapeRef.new(shape: Statistic, location_name: "Statistic"))
+      PutMetricAlarmInput.add_member(:extended_statistic, Shapes::ShapeRef.new(shape: ExtendedStatistic, location_name: "ExtendedStatistic"))
       PutMetricAlarmInput.add_member(:dimensions, Shapes::ShapeRef.new(shape: Dimensions, location_name: "Dimensions"))
       PutMetricAlarmInput.add_member(:period, Shapes::ShapeRef.new(shape: Period, required: true, location_name: "Period"))
       PutMetricAlarmInput.add_member(:unit, Shapes::ShapeRef.new(shape: StandardUnit, location_name: "Unit"))

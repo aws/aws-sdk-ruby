@@ -2,7 +2,7 @@ module AwsSdkCodeGenerator
   class Service
 
     # @param [Hash] options
-    # @option options [required, String] :version Gem version, e.g. "1.0.0".
+    # @option options [required, String] :gem_version Gem version, e.g. "1.0.0".
     # @option options [required, String] :name The service name, e.g. "S3"
     # @option options [required, Hash, String] :api
     # @option options [Hash, String] :docs
@@ -14,7 +14,7 @@ module AwsSdkCodeGenerator
     # @option options [Hash] :add_plugins ({})
     # @option options [Hash] :remove_plugins ([])
     def initialize(options)
-      @version = options.fetch(:version)
+      @gem_version = options.fetch(:gem_version)
       @name = options.fetch(:name)
       @api = load_json(options.fetch(:api))
       ApplyDocs.new(@api).apply(load_json(options[:docs]))
@@ -37,9 +37,6 @@ module AwsSdkCodeGenerator
       @full_name = api.fetch('metadata').fetch('serviceFullName')
       @short_name = api.fetch('metadata').fetch('serviceAbbreviation', @full_name)
     end
-
-    # @return [String]
-    attr_reader :version
 
     # @return [String] The service name, e.g. "S3"
     attr_reader :name
@@ -65,6 +62,9 @@ module AwsSdkCodeGenerator
     # @return [Hash<String,String>] A hash of gem dependencies. Hash keys
     #   are gem names, values are versions.
     attr_reader :gem_dependencies
+
+    # @return [String]
+    attr_reader :gem_version
 
     # @return [Hash<String,String>] A hash of plugins to add.
     attr_reader :add_plugins

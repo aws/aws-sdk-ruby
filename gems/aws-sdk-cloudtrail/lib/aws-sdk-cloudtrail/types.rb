@@ -30,7 +30,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] tags_list
-      #   Contains a list of CloudTrail tags, up to a limit of 10.
+      #   Contains a list of CloudTrail tags, up to a limit of 50
       #   @return [Array<Types::Tag>]
       class AddTagsRequest < Struct.new(
         :resource_id,
@@ -255,6 +255,58 @@ module Aws
         include Aws::Structure
       end
 
+      # The Amazon S3 objects that you specify in your event selectors for
+      # your trail to log data events. Data events are object level API
+      # operations that access S3 objects, such as `GetObject`,
+      # `DeleteObject`, and `PutObject`. You can specify up to 50 S3 buckets
+      # and object prefixes for an event selector.
+      #
+      # Example
+      #
+      # 1.  You create an event selector for a trail and specify an S3 bucket
+      #     and an empty prefix, such as `arn:aws:s3:::bucket-1/`.
+      #
+      # 2.  You upload an image file to `bucket-1`.
+      #
+      # 3.  The `PutObject` API operation occurs on an object in the S3 bucket
+      #     that you specified in the event selector. The trail processes and
+      #     logs the event.
+      #
+      # 4.  You upload another image file to a different S3 bucket named
+      #     `arn:aws:s3:::bucket-2`.
+      #
+      # 5.  The event occurs on an object in an S3 bucket that you didn't
+      #     specify in the event selector. The trail doesn’t log the event.
+      # @note When making an API call, pass DataResource
+      #   data as a hash:
+      #
+      #       {
+      #         type: "String",
+      #         values: ["String"],
+      #       }
+      # @!attribute [rw] type
+      #   The resource type in which you want to log data events. You can
+      #   specify only the following value: `AWS::S3::Object`.
+      #   @return [String]
+      #
+      # @!attribute [rw] values
+      #   A list of ARN-like strings for the specified S3 objects.
+      #
+      #   To log data events for all objects in an S3 bucket, specify the
+      #   bucket and an empty object prefix such as `arn:aws:s3:::bucket-1/`.
+      #   The trail logs data events for all objects in this S3 bucket.
+      #
+      #   To log data events for specific objects, specify the S3 bucket and
+      #   object prefix such as `arn:aws:s3:::bucket-1/example-images`. The
+      #   trail logs data events for objects in this S3 bucket that match the
+      #   prefix.
+      #   @return [Array<String>]
+      class DataResource < Struct.new(
+        :type,
+        :values)
+        include Aws::Structure
+      end
+
       # The request that specifies the name of a trail to delete.
       # @note When making an API call, pass DeleteTrailRequest
       #   data as a hash:
@@ -265,7 +317,6 @@ module Aws
       # @!attribute [rw] name
       #   Specifies the name or the CloudTrail ARN of the trail to be deleted.
       #   The format of a trail ARN is:
-      #
       #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
       #   @return [String]
       class DeleteTrailRequest < Struct.new(
@@ -344,6 +395,10 @@ module Aws
       #   The date and time of the event returned.
       #   @return [Time]
       #
+      # @!attribute [rw] event_source
+      #   The AWS service that the request was made to.
+      #   @return [String]
+      #
       # @!attribute [rw] username
       #   A user name or role name of the requester that called the API in the
       #   event returned.
@@ -360,9 +415,117 @@ module Aws
         :event_id,
         :event_name,
         :event_time,
+        :event_source,
         :username,
         :resources,
         :cloud_trail_event)
+        include Aws::Structure
+      end
+
+      # Use event selectors to specify the types of events that you want your
+      # trail to log. When an event occurs in your account, CloudTrail
+      # evaluates the event selector for all trails. For each trail, if the
+      # event matches any event selector, the trail processes and logs the
+      # event. If the event doesn't match any event selector, the trail
+      # doesn't log the event.
+      #
+      # You can configure up to five event selectors for a trail.
+      # @note When making an API call, pass EventSelector
+      #   data as a hash:
+      #
+      #       {
+      #         read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
+      #         include_management_events: false,
+      #         data_resources: [
+      #           {
+      #             type: "String",
+      #             values: ["String"],
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] read_write_type
+      #   Specify if you want your trail to log read-only events, write-only
+      #   events, or all. For example, the EC2 `GetConsoleOutput` is a
+      #   read-only API operation and `RunInstances` is a write-only API
+      #   operation.
+      #
+      #   By default, the value is `All`.
+      #   @return [String]
+      #
+      # @!attribute [rw] include_management_events
+      #   Specify if you want your event selector to include management events
+      #   for your trail.
+      #
+      #   For more information, see [Management Events][1] in the *AWS
+      #   CloudTrail User Guide*.
+      #
+      #   By default, the value is `true`.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html#event-selector-for-management-events
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] data_resources
+      #   CloudTrail supports logging only data events for S3 objects. You can
+      #   specify up to 50 S3 buckets and object prefixes for an event
+      #   selector.
+      #
+      #   For more information, see [Data Events][1] in the *AWS CloudTrail
+      #   User Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/awscloudtrail/latest/userguide/create-event-selectors-for-a-trail.html#data-events-resources
+      #   @return [Array<Types::DataResource>]
+      class EventSelector < Struct.new(
+        :read_write_type,
+        :include_management_events,
+        :data_resources)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass GetEventSelectorsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         trail_name: "String",
+      #       }
+      # @!attribute [rw] trail_name
+      #   Specifies the name of the trail or trail ARN. If you specify a trail
+      #   name, the string must meet the following requirements:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+      #     underscores (\_), or dashes (-)
+      #
+      #   * Start with a letter or number, and end with a letter or number
+      #
+      #   * Be between 3 and 128 characters
+      #
+      #   * Have no adjacent periods, underscores or dashes. Names like
+      #     `my-_namespace` and `my--namespace` are invalid.
+      #
+      #   * Not be in IP address format (for example, 192.168.5.4)
+      #
+      #   If you specify a trail ARN, it must be in the format:
+      #
+      #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #   @return [String]
+      class GetEventSelectorsRequest < Struct.new(
+        :trail_name)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] trail_arn
+      #   The specified trail ARN that has the event selectors.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_selectors
+      #   The event selectors that are configured for the trail.
+      #   @return [Array<Types::EventSelector>]
+      class GetEventSelectorsResponse < Struct.new(
+        :trail_arn,
+        :event_selectors)
         include Aws::Structure
       end
 
@@ -614,7 +777,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName
+      #         attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName, EventSource
       #         attribute_value: "String", # required
       #       }
       # @!attribute [rw] attribute_key
@@ -637,7 +800,7 @@ module Aws
       #       {
       #         lookup_attributes: [
       #           {
-      #             attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName
+      #             attribute_key: "EventId", # required, accepts EventId, EventName, Username, ResourceType, ResourceName, EventSource
       #             attribute_value: "String", # required
       #           },
       #         ],
@@ -727,6 +890,71 @@ module Aws
         :validity_start_time,
         :validity_end_time,
         :fingerprint)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass PutEventSelectorsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         trail_name: "String",
+      #         event_selectors: [
+      #           {
+      #             read_write_type: "ReadOnly", # accepts ReadOnly, WriteOnly, All
+      #             include_management_events: false,
+      #             data_resources: [
+      #               {
+      #                 type: "String",
+      #                 values: ["String"],
+      #               },
+      #             ],
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] trail_name
+      #   Specifies the name of the trail or trail ARN. If you specify a trail
+      #   name, the string must meet the following requirements:
+      #
+      #   * Contain only ASCII letters (a-z, A-Z), numbers (0-9), periods (.),
+      #     underscores (\_), or dashes (-)
+      #
+      #   * Start with a letter or number, and end with a letter or number
+      #
+      #   * Be between 3 and 128 characters
+      #
+      #   * Have no adjacent periods, underscores or dashes. Names like
+      #     `my-_namespace` and `my--namespace` are invalid.
+      #
+      #   * Not be in IP address format (for example, 192.168.5.4)
+      #
+      #   If you specify a trail ARN, it must be in the format:
+      #
+      #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #   @return [String]
+      #
+      # @!attribute [rw] event_selectors
+      #   Specifies the settings for your event selectors. You can configure
+      #   up to five event selectors for a trail.
+      #   @return [Array<Types::EventSelector>]
+      class PutEventSelectorsRequest < Struct.new(
+        :trail_name,
+        :event_selectors)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] trail_arn
+      #   Specifies the ARN of the trail that was updated with event
+      #   selectors. The format of a trail ARN is:
+      #
+      #   `arn:aws:cloudtrail:us-east-1:123456789012:trail/MyTrail`
+      #   @return [String]
+      #
+      # @!attribute [rw] event_selectors
+      #   Specifies the event selectors configured for your trail.
+      #   @return [Array<Types::EventSelector>]
+      class PutEventSelectorsResponse < Struct.new(
+        :trail_arn,
+        :event_selectors)
         include Aws::Structure
       end
 
@@ -954,6 +1182,10 @@ module Aws
       #
       #   `arn:aws:kms:us-east-1:123456789012:key/12345678-1234-1234-1234-123456789012`
       #   @return [String]
+      #
+      # @!attribute [rw] has_custom_event_selectors
+      #   Specifies if the trail has custom event selectors.
+      #   @return [Boolean]
       class Trail < Struct.new(
         :name,
         :s3_bucket_name,
@@ -967,7 +1199,8 @@ module Aws
         :log_file_validation_enabled,
         :cloud_watch_logs_log_group_arn,
         :cloud_watch_logs_role_arn,
-        :kms_key_id)
+        :kms_key_id,
+        :has_custom_event_selectors)
         include Aws::Structure
       end
 

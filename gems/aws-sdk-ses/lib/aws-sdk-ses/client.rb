@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/query.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::Query)
 
@@ -162,6 +164,90 @@ module Aws
       # @param [Hash] params ({})
       def clone_receipt_rule_set(params = {}, options = {})
         req = build_request(:clone_receipt_rule_set, params)
+        req.send_request(options)
+      end
+
+      # Creates a configuration set.
+      #
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, Types::ConfigurationSet] :configuration_set
+      #   A data structure that contains the name of the configuration set.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_configuration_set({
+      #     configuration_set: { # required
+      #       name: "ConfigurationSetName", # required
+      #     },
+      #   })
+      # @overload create_configuration_set(params = {})
+      # @param [Hash] params ({})
+      def create_configuration_set(params = {}, options = {})
+        req = build_request(:create_configuration_set, params)
+        req.send_request(options)
+      end
+
+      # Creates a configuration set event destination.
+      #
+      # <note markdown="1"> When you create or update an event destination, you must provide one,
+      # and only one, destination. The destination can be either Amazon
+      # CloudWatch or Amazon Kinesis Firehose.
+      #
+      #  </note>
+      #
+      # An event destination is the AWS service to which Amazon SES publishes
+      # the email sending events associated with a configuration set. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, String] :configuration_set_name
+      #   The name of the configuration set to which to apply the event
+      #   destination.
+      # @option params [required, Types::EventDestination] :event_destination
+      #   An object that describes the AWS service to which Amazon SES will
+      #   publish the email sending events associated with the specified
+      #   configuration set.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_configuration_set_event_destination({
+      #     configuration_set_name: "ConfigurationSetName", # required
+      #     event_destination: { # required
+      #       name: "EventDestinationName", # required
+      #       enabled: false,
+      #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+      #       kinesis_firehose_destination: {
+      #         iam_role_arn: "AmazonResourceName", # required
+      #         delivery_stream_arn: "AmazonResourceName", # required
+      #       },
+      #       cloud_watch_destination: {
+      #         dimension_configurations: [ # required
+      #           {
+      #             dimension_name: "DimensionName", # required
+      #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #             default_dimension_value: "DefaultDimensionValue", # required
+      #           },
+      #         ],
+      #       },
+      #     },
+      #   })
+      # @overload create_configuration_set_event_destination(params = {})
+      # @param [Hash] params ({})
+      def create_configuration_set_event_destination(params = {}, options = {})
+        req = build_request(:create_configuration_set_event_destination, params)
         req.send_request(options)
       end
 
@@ -305,6 +391,63 @@ module Aws
       # @param [Hash] params ({})
       def create_receipt_rule_set(params = {}, options = {})
         req = build_request(:create_receipt_rule_set, params)
+        req.send_request(options)
+      end
+
+      # Deletes a configuration set.
+      #
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, String] :configuration_set_name
+      #   The name of the configuration set to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_configuration_set({
+      #     configuration_set_name: "ConfigurationSetName", # required
+      #   })
+      # @overload delete_configuration_set(params = {})
+      # @param [Hash] params ({})
+      def delete_configuration_set(params = {}, options = {})
+        req = build_request(:delete_configuration_set, params)
+        req.send_request(options)
+      end
+
+      # Deletes a configuration set event destination.
+      #
+      # Configuration set event destinations are associated with configuration
+      # sets, which enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, String] :configuration_set_name
+      #   The name of the configuration set from which to delete the event
+      #   destination.
+      # @option params [required, String] :event_destination_name
+      #   The name of the event destination to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_configuration_set_event_destination({
+      #     configuration_set_name: "ConfigurationSetName", # required
+      #     event_destination_name: "EventDestinationName", # required
+      #   })
+      # @overload delete_configuration_set_event_destination(params = {})
+      # @param [Hash] params ({})
+      def delete_configuration_set_event_destination(params = {}, options = {})
+        req = build_request(:delete_configuration_set_event_destination, params)
         req.send_request(options)
       end
 
@@ -531,6 +674,52 @@ module Aws
       # @param [Hash] params ({})
       def describe_active_receipt_rule_set(params = {}, options = {})
         req = build_request(:describe_active_receipt_rule_set, params)
+        req.send_request(options)
+      end
+
+      # Returns the details of the specified configuration set.
+      #
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, String] :configuration_set_name
+      #   The name of the configuration set to describe.
+      # @option params [Array<String>] :configuration_set_attribute_names
+      #   A list of configuration set attributes to return.
+      # @return [Types::DescribeConfigurationSetResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeConfigurationSetResponse#configuration_set #ConfigurationSet} => Types::ConfigurationSet
+      #   * {Types::DescribeConfigurationSetResponse#event_destinations #EventDestinations} => Array&lt;Types::EventDestination&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_configuration_set({
+      #     configuration_set_name: "ConfigurationSetName", # required
+      #     configuration_set_attribute_names: ["eventDestinations"], # accepts eventDestinations
+      #   })
+      #
+      # @example Response structure
+      #   resp.configuration_set.name #=> String
+      #   resp.event_destinations #=> Array
+      #   resp.event_destinations[0].name #=> String
+      #   resp.event_destinations[0].enabled #=> Boolean
+      #   resp.event_destinations[0].matching_event_types #=> Array
+      #   resp.event_destinations[0].matching_event_types[0] #=> String, one of "send", "reject", "bounce", "complaint", "delivery"
+      #   resp.event_destinations[0].kinesis_firehose_destination.iam_role_arn #=> String
+      #   resp.event_destinations[0].kinesis_firehose_destination.delivery_stream_arn #=> String
+      #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations #=> Array
+      #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_name #=> String
+      #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].dimension_value_source #=> String, one of "messageTag", "emailHeader"
+      #   resp.event_destinations[0].cloud_watch_destination.dimension_configurations[0].default_dimension_value #=> String
+      # @overload describe_configuration_set(params = {})
+      # @param [Hash] params ({})
+      def describe_configuration_set(params = {}, options = {})
+        req = build_request(:describe_configuration_set, params)
         req.send_request(options)
       end
 
@@ -895,6 +1084,46 @@ module Aws
       # @param [Hash] params ({})
       def get_send_statistics(params = {}, options = {})
         req = build_request(:get_send_statistics, params)
+        req.send_request(options)
+      end
+
+      # Lists the configuration sets associated with your AWS account.
+      #
+      # Configuration sets enable you to publish email sending events. For
+      # information about using configuration sets, see the [Amazon SES
+      # Developer Guide][1].
+      #
+      # This action is throttled at one request per second and can return up
+      # to 50 configuration sets at a time.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [String] :next_token
+      #   A token returned from a previous call to `ListConfigurationSets` to
+      #   indicate the position of the configuration set in the configuration
+      #   set list.
+      # @option params [Integer] :max_items
+      #   The number of configuration sets to return.
+      # @return [Types::ListConfigurationSetsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListConfigurationSetsResponse#configuration_sets #ConfigurationSets} => Array&lt;Types::ConfigurationSet&gt;
+      #   * {Types::ListConfigurationSetsResponse#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_configuration_sets({
+      #     next_token: "NextToken",
+      #     max_items: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.configuration_sets #=> Array
+      #   resp.configuration_sets[0].name #=> String
+      #   resp.next_token #=> String
+      # @overload list_configuration_sets(params = {})
+      # @param [Hash] params ({})
+      def list_configuration_sets(params = {}, options = {})
+        req = build_request(:list_configuration_sets, params)
         req.send_request(options)
       end
 
@@ -1361,6 +1590,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization.html
+      # @option params [Array<Types::MessageTag>] :tags
+      #   A list of tags, in the form of name/value pairs, to apply to an email
+      #   that you send using `SendEmail`. Tags correspond to characteristics of
+      #   the email that you define, so that you can publish email sending
+      #   events.
+      # @option params [String] :configuration_set_name
+      #   The name of the configuration set to use when you send an email using
+      #   `SendEmail`.
       # @return [Types::SendEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SendEmailResponse#message_id #MessageId} => String
@@ -1393,6 +1630,13 @@ module Aws
       #     return_path: "Address",
       #     source_arn: "AmazonResourceName",
       #     return_path_arn: "AmazonResourceName",
+      #     tags: [
+      #       {
+      #         name: "MessageTagName", # required
+      #         value: "MessageTagValue", # required
+      #       },
+      #     ],
+      #     configuration_set_name: "ConfigurationSetName",
       #   })
       #
       # @example Response structure
@@ -1586,6 +1830,14 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/sending-authorization-delegate-sender-tasks-email.html
+      # @option params [Array<Types::MessageTag>] :tags
+      #   A list of tags, in the form of name/value pairs, to apply to an email
+      #   that you send using `SendRawEmail`. Tags correspond to characteristics
+      #   of the email that you define, so that you can publish email sending
+      #   events.
+      # @option params [String] :configuration_set_name
+      #   The name of the configuration set to use when you send an email using
+      #   `SendRawEmail`.
       # @return [Types::SendRawEmailResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::SendRawEmailResponse#message_id #MessageId} => String
@@ -1600,6 +1852,13 @@ module Aws
       #     from_arn: "AmazonResourceName",
       #     source_arn: "AmazonResourceName",
       #     return_path_arn: "AmazonResourceName",
+      #     tags: [
+      #       {
+      #         name: "MessageTagName", # required
+      #         value: "MessageTagValue", # required
+      #       },
+      #     ],
+      #     configuration_set_name: "ConfigurationSetName",
       #   })
       #
       # @example Response structure
@@ -1902,6 +2161,60 @@ module Aws
       # @param [Hash] params ({})
       def set_receipt_rule_position(params = {}, options = {})
         req = build_request(:set_receipt_rule_position, params)
+        req.send_request(options)
+      end
+
+      # Updates the event destination of a configuration set.
+      #
+      # <note markdown="1"> When you create or update an event destination, you must provide one,
+      # and only one, destination. The destination can be either Amazon
+      # CloudWatch or Amazon Kinesis Firehose.
+      #
+      #  </note>
+      #
+      # Event destinations are associated with configuration sets, which
+      # enable you to publish email sending events to Amazon CloudWatch or
+      # Amazon Kinesis Firehose. For information about using configuration
+      # sets, see the [Amazon SES Developer Guide][1].
+      #
+      # This action is throttled at one request per second.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/ses/latest/DeveloperGuide/monitor-sending-activity.html
+      # @option params [required, String] :configuration_set_name
+      #   The name of the configuration set that you want to update.
+      # @option params [required, Types::EventDestination] :event_destination
+      #   The event destination object that you want to apply to the specified
+      #   configuration set.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_configuration_set_event_destination({
+      #     configuration_set_name: "ConfigurationSetName", # required
+      #     event_destination: { # required
+      #       name: "EventDestinationName", # required
+      #       enabled: false,
+      #       matching_event_types: ["send"], # required, accepts send, reject, bounce, complaint, delivery
+      #       kinesis_firehose_destination: {
+      #         iam_role_arn: "AmazonResourceName", # required
+      #         delivery_stream_arn: "AmazonResourceName", # required
+      #       },
+      #       cloud_watch_destination: {
+      #         dimension_configurations: [ # required
+      #           {
+      #             dimension_name: "DimensionName", # required
+      #             dimension_value_source: "messageTag", # required, accepts messageTag, emailHeader
+      #             default_dimension_value: "DefaultDimensionValue", # required
+      #           },
+      #         ],
+      #       },
+      #     },
+      #   })
+      # @overload update_configuration_set_event_destination(params = {})
+      # @param [Hash] params ({})
+      def update_configuration_set_event_destination(params = {}, options = {})
+        req = build_request(:update_configuration_set_event_destination, params)
         req.send_request(options)
       end
 

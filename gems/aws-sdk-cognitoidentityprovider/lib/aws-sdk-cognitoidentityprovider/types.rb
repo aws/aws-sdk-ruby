@@ -559,7 +559,7 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] authentication_result
-      #   The result type of the authentication result.
+      #   The result of the authentication response.
       #   @return [Types::AuthenticationResultType]
       class AdminInitiateAuthResponse < Struct.new(
         :challenge_name,
@@ -699,7 +699,8 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] authentication_result
-      #   The result type of the authentication result.
+      #   The result returned by the server in response to the authentication
+      #   request.
       #   @return [Types::AuthenticationResultType]
       class AdminRespondToAuthChallengeResponse < Struct.new(
         :challenge_name,
@@ -1238,7 +1239,7 @@ module Aws
       #           reply_to_email_address: "EmailAddressType",
       #         },
       #         sms_configuration: {
-      #           sns_caller_arn: "ArnType",
+      #           sns_caller_arn: "ArnType", # required
       #           external_id: "StringType",
       #         },
       #         admin_create_user_config: {
@@ -1250,6 +1251,23 @@ module Aws
       #             email_subject: "EmailVerificationSubjectType",
       #           },
       #         },
+      #         schema: [
+      #           {
+      #             name: "CustomAttributeNameType",
+      #             attribute_data_type: "String", # accepts String, Number, DateTime, Boolean
+      #             developer_only_attribute: false,
+      #             mutable: false,
+      #             required: false,
+      #             number_attribute_constraints: {
+      #               min_value: "StringType",
+      #               max_value: "StringType",
+      #             },
+      #             string_attribute_constraints: {
+      #               min_length: "StringType",
+      #               max_length: "StringType",
+      #             },
+      #           },
+      #         ],
       #       }
       # @!attribute [rw] pool_name
       #   A string used to name the user pool.
@@ -1308,6 +1326,11 @@ module Aws
       # @!attribute [rw] admin_create_user_config
       #   The configuration for AdminCreateUser requests.
       #   @return [Types::AdminCreateUserConfigType]
+      #
+      # @!attribute [rw] schema
+      #   An array of schema attributes for the new user pool. These
+      #   attributes can be standard or custom attributes.
+      #   @return [Array<Types::SchemaAttributeType>]
       class CreateUserPoolRequest < Struct.new(
         :pool_name,
         :policies,
@@ -1322,7 +1345,8 @@ module Aws
         :device_configuration,
         :email_configuration,
         :sms_configuration,
-        :admin_create_user_config)
+        :admin_create_user_config,
+        :schema)
         include Aws::Structure
       end
 
@@ -1636,8 +1660,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] username
-      #   The user name of the user for whom you want to enter a code to
-      #   retrieve a forgotten password.
+      #   The user name of the user for whom you want to enter a code to reset
+      #   a forgotten password.
       #   @return [String]
       class ForgotPasswordRequest < Struct.new(
         :client_id,
@@ -1649,7 +1673,8 @@ module Aws
       # Respresents the response from the server regarding the request to
       # reset a password.
       # @!attribute [rw] code_delivery_details
-      #   The type of code delivery details being returned from the server.
+      #   The code delivery details returned by the server in response to the
+      #   request to reset a password.
       #   @return [Types::CodeDeliveryDetailsType]
       class ForgotPasswordResponse < Struct.new(
         :code_delivery_details)
@@ -1745,8 +1770,8 @@ module Aws
       # The verification code response returned by the server response to get
       # the user attribute verification code.
       # @!attribute [rw] code_delivery_details
-      #   The code delivery details returned by the server response to get the
-      #   user attribute verification code.
+      #   The code delivery details returned by the server in response to the
+      #   request to get the user attribute verification code.
       #   @return [Types::CodeDeliveryDetailsType]
       class GetUserAttributeVerificationCodeResponse < Struct.new(
         :code_delivery_details)
@@ -1859,7 +1884,8 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] authentication_result
-      #   The result type of the authentication result.
+      #   The result returned by the server in response to the request to
+      #   initiate authentication.
       #   @return [Types::AuthenticationResultType]
       class InitiateAuthResponse < Struct.new(
         :challenge_name,
@@ -2319,10 +2345,11 @@ module Aws
         include Aws::Structure
       end
 
-      # The response from the server when the Amazon Cognito service makes the
-      # request to resend a confirmation code.
+      # The response from the server when the Amazon Cognito Your User Pools
+      # service makes the request to resend a confirmation code.
       # @!attribute [rw] code_delivery_details
-      #   The type of code delivery details being returned from the server.
+      #   The code delivery details returned by the server in response to the
+      #   request to resend the confirmation code.
       #   @return [Types::CodeDeliveryDetailsType]
       class ResendConfirmationCodeResponse < Struct.new(
         :code_delivery_details)
@@ -2378,7 +2405,8 @@ module Aws
       #   @return [Hash<String,String>]
       #
       # @!attribute [rw] authentication_result
-      #   The result type of the authentication result.
+      #   The result returned by the server in response to the request to
+      #   respond to the authentication challenge.
       #   @return [Types::AuthenticationResultType]
       class RespondToAuthChallengeResponse < Struct.new(
         :challenge_name,
@@ -2541,7 +2569,8 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] code_delivery_details
-      #   The type of code delivery details being returned from the server.
+      #   The code delivery details returned by the server response to the
+      #   user registration request.
       #   @return [Types::CodeDeliveryDetailsType]
       class SignUpResponse < Struct.new(
         :user_confirmed,
@@ -2554,7 +2583,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         sns_caller_arn: "ArnType",
+      #         sns_caller_arn: "ArnType", # required
       #         external_id: "StringType",
       #       }
       # @!attribute [rw] sns_caller_arn
@@ -2827,7 +2856,7 @@ module Aws
       #           reply_to_email_address: "EmailAddressType",
       #         },
       #         sms_configuration: {
-      #           sns_caller_arn: "ArnType",
+      #           sns_caller_arn: "ArnType", # required
       #           external_id: "StringType",
       #         },
       #         admin_create_user_config: {

@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/json_rpc.rb'
 
@@ -44,6 +45,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::JsonRpc)
 
@@ -137,8 +139,67 @@ module Aws
 
       # @!group API Operations
 
+      # BatchMeterUsage is called from a SaaS application listed on the AWS
+      # Marketplace to post metering records for a set of customers.
+      #
+      # For identical requests, the API is idempotent; requests can be retried
+      # with the same records or a subset of the input records.
+      #
+      # Every request to BatchMeterUsage is for one product. If you need to
+      # meter usage for multiple products, you must make multiple calls to
+      # BatchMeterUsage.
+      #
+      # BatchMeterUsage can process up to 25 UsageRecords at a time.
+      # @option params [required, Array<Types::UsageRecord>] :usage_records
+      #   The set of UsageRecords to submit. BatchMeterUsage accepts up to 25
+      #   UsageRecords at a time.
+      # @option params [required, String] :product_code
+      #   Product code is used to uniquely identify a product in AWS
+      #   Marketplace. The product code should be the same as the one used
+      #   during the publishing of a new product.
+      # @return [Types::BatchMeterUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::BatchMeterUsageResult#results #Results} => Array&lt;Types::UsageRecordResult&gt;
+      #   * {Types::BatchMeterUsageResult#unprocessed_records #UnprocessedRecords} => Array&lt;Types::UsageRecord&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.batch_meter_usage({
+      #     usage_records: [ # required
+      #       {
+      #         timestamp: Time.now, # required
+      #         customer_identifier: "CustomerIdentifier", # required
+      #         dimension: "UsageDimension", # required
+      #         quantity: 1, # required
+      #       },
+      #     ],
+      #     product_code: "ProductCode", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.results #=> Array
+      #   resp.results[0].usage_record.timestamp #=> Time
+      #   resp.results[0].usage_record.customer_identifier #=> String
+      #   resp.results[0].usage_record.dimension #=> String
+      #   resp.results[0].usage_record.quantity #=> Integer
+      #   resp.results[0].metering_record_id #=> String
+      #   resp.results[0].status #=> String, one of "Success", "CustomerNotSubscribed", "DuplicateRecord"
+      #   resp.unprocessed_records #=> Array
+      #   resp.unprocessed_records[0].timestamp #=> Time
+      #   resp.unprocessed_records[0].customer_identifier #=> String
+      #   resp.unprocessed_records[0].dimension #=> String
+      #   resp.unprocessed_records[0].quantity #=> Integer
+      # @overload batch_meter_usage(params = {})
+      # @param [Hash] params ({})
+      def batch_meter_usage(params = {}, options = {})
+        req = build_request(:batch_meter_usage, params)
+        req.send_request(options)
+      end
+
       # API to emit metering records. For identical requests, the API is
       # idempotent. It simply returns the metering record ID.
+      #
+      # MeterUsage is authenticated on the buyer's AWS account, generally
+      # when running from an EC2 instance on the AWS Marketplace.
       # @option params [required, String] :product_code
       #   Product code is used to uniquely identify a product in AWS
       #   Marketplace. The product code should be the same as the one used
@@ -147,7 +208,7 @@ module Aws
       #   Timestamp of the hour, recorded in UTC. The seconds and milliseconds
       #   portions of the timestamp will be ignored.
       # @option params [required, String] :usage_dimension
-      #   It will be one of the 'fcp dimension name' provided during the
+      #   It will be one of the fcp dimension name provided during the
       #   publishing of the product.
       # @option params [required, Integer] :usage_quantity
       #   Consumption value for the hour.
@@ -174,6 +235,36 @@ module Aws
       # @param [Hash] params ({})
       def meter_usage(params = {}, options = {})
         req = build_request(:meter_usage, params)
+        req.send_request(options)
+      end
+
+      # ResolveCustomer is called by a SaaS application during the
+      # registration process. When a buyer visits your website during the
+      # registration process, the buyer submits a registration token through
+      # their browser. The registration token is resolved through this API to
+      # obtain a CustomerIdentifier and product code.
+      # @option params [required, String] :registration_token
+      #   When a buyer visits your website during the registration process, the
+      #   buyer submits a registration token through the browser. The
+      #   registration token is resolved to obtain a CustomerIdentifier and
+      #   product code.
+      # @return [Types::ResolveCustomerResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ResolveCustomerResult#customer_identifier #CustomerIdentifier} => String
+      #   * {Types::ResolveCustomerResult#product_code #ProductCode} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.resolve_customer({
+      #     registration_token: "NonEmptyString", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.customer_identifier #=> String
+      #   resp.product_code #=> String
+      # @overload resolve_customer(params = {})
+      # @param [Hash] params ({})
+      def resolve_customer(params = {}, options = {})
+        req = build_request(:resolve_customer, params)
         req.send_request(options)
       end
 

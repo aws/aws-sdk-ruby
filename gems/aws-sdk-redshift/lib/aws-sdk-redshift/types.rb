@@ -79,7 +79,7 @@ module Aws
       # @!attribute [rw] snapshot_cluster_identifier
       #   The identifier of the cluster the snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       #   @return [String]
       #
@@ -775,7 +775,7 @@ module Aws
       # @!attribute [rw] source_snapshot_cluster_identifier
       #   The identifier of the cluster the source snapshot was created from.
       #   This parameter is required if your IAM user has a policy containing
-      #   a snapshot resource element that specifies anything other than \*
+      #   a snapshot resource element that specifies anything other than *
       #   for the cluster name.
       #
       #   Constraints:
@@ -1902,7 +1902,7 @@ module Aws
       # @!attribute [rw] snapshot_cluster_identifier
       #   The unique identifier of the cluster the snapshot was created from.
       #   This parameter is required if your IAM user has a policy containing
-      #   a snapshot resource element that specifies anything other than \*
+      #   a snapshot resource element that specifies anything other than *
       #   for the cluster name.
       #
       #   Constraints: Must be the name of valid cluster.
@@ -4973,7 +4973,7 @@ module Aws
       # @!attribute [rw] snapshot_cluster_identifier
       #   The name of the cluster the source snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       #   @return [String]
       #
@@ -5369,7 +5369,7 @@ module Aws
       # @!attribute [rw] snapshot_cluster_identifier
       #   The identifier of the cluster the snapshot was created from. This
       #   parameter is required if your IAM user has a policy containing a
-      #   snapshot resource element that specifies anything other than \* for
+      #   snapshot resource element that specifies anything other than * for
       #   the cluster name.
       #   @return [String]
       #

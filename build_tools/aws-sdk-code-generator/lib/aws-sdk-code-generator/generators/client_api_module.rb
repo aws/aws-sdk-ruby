@@ -70,6 +70,7 @@ module AwsSdkCodeGenerator
         'checksumFormat' => false,
         'globalEndpoint' => false,
         'serviceAbbreviation' => false,
+        'uid' => false,
       }
 
       # @option options [required, Hash] :api

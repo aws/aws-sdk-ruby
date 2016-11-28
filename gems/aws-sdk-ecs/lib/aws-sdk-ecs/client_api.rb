@@ -205,6 +205,7 @@ module Aws
 
       ContainerInstance.add_member(:container_instance_arn, Shapes::ShapeRef.new(shape: String, location_name: "containerInstanceArn"))
       ContainerInstance.add_member(:ec2_instance_id, Shapes::ShapeRef.new(shape: String, location_name: "ec2InstanceId"))
+      ContainerInstance.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
       ContainerInstance.add_member(:version_info, Shapes::ShapeRef.new(shape: VersionInfo, location_name: "versionInfo"))
       ContainerInstance.add_member(:remaining_resources, Shapes::ShapeRef.new(shape: Resources, location_name: "remainingResources"))
       ContainerInstance.add_member(:registered_resources, Shapes::ShapeRef.new(shape: Resources, location_name: "registeredResources"))
@@ -577,6 +578,7 @@ module Aws
       Task.add_member(:desired_status, Shapes::ShapeRef.new(shape: String, location_name: "desiredStatus"))
       Task.add_member(:containers, Shapes::ShapeRef.new(shape: Containers, location_name: "containers"))
       Task.add_member(:started_by, Shapes::ShapeRef.new(shape: String, location_name: "startedBy"))
+      Task.add_member(:version, Shapes::ShapeRef.new(shape: Long, location_name: "version"))
       Task.add_member(:stopped_reason, Shapes::ShapeRef.new(shape: String, location_name: "stoppedReason"))
       Task.add_member(:created_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdAt"))
       Task.add_member(:started_at, Shapes::ShapeRef.new(shape: Timestamp, location_name: "startedAt"))

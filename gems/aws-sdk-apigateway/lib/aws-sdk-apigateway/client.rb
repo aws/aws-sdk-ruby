@@ -17,6 +17,7 @@ require 'aws-sdk-core/plugins/global_configuration.rb'
 require 'aws-sdk-core/plugins/regional_endpoint.rb'
 require 'aws-sdk-core/plugins/response_paging.rb'
 require 'aws-sdk-core/plugins/stub_responses.rb'
+require 'aws-sdk-core/plugins/idempotency_token.rb'
 require 'aws-sdk-core/plugins/signature_v4.rb'
 require 'aws-sdk-core/plugins/protocols/rest_json.rb'
 require 'aws-sdk-apigateway/plugins/apply_content_type_header.rb'
@@ -45,6 +46,7 @@ module Aws
       add_plugin(Aws::Plugins::RegionalEndpoint)
       add_plugin(Aws::Plugins::ResponsePaging)
       add_plugin(Aws::Plugins::StubResponses)
+      add_plugin(Aws::Plugins::IdempotencyToken)
       add_plugin(Aws::Plugins::SignatureV4)
       add_plugin(Aws::Plugins::Protocols::RestJson)
       add_plugin(Aws::APIGateway::Plugins::ApplyContentTypeHeader)
@@ -316,7 +318,7 @@ module Aws
       # callable over the internet.
       # @option params [required, String] :rest_api_id
       #   The RestApi resource identifier for the Deployment resource to create.
-      # @option params [required, String] :stage_name
+      # @option params [String] :stage_name
       #   The name of the Stage resource for the Deployment resource to create.
       # @option params [String] :stage_description
       #   The description of the Stage resource for the Deployment resource to
@@ -343,7 +345,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.create_deployment({
       #     rest_api_id: "String", # required
-      #     stage_name: "String", # required
+      #     stage_name: "String",
       #     stage_description: "String",
       #     description: "String",
       #     cache_cluster_enabled: false,
@@ -510,6 +512,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.request_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
       #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
+      #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
       #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
       #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -520,6 +523,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload create_resource(params = {})
       # @param [Hash] params ({})
       def create_resource(params = {}, options = {})
@@ -534,6 +538,9 @@ module Aws
       #   The description of the RestApi.
       # @option params [String] :clone_from
       #   The ID of the RestApi that you want to clone from.
+      # @option params [Array<String>] :binary_media_types
+      #   The list of binary media types supported by the RestApi. By default,
+      #   the RestApi supports only UTF-8-encoded text payloads.
       # @return [Types::RestApi] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::RestApi#id #id} => String
@@ -541,12 +548,14 @@ module Aws
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
+      #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_rest_api({
       #     name: "String", # required
       #     description: "String",
       #     clone_from: "String",
+      #     binary_media_types: ["String"],
       #   })
       #
       # @example Response structure
@@ -556,6 +565,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      #   resp.binary_media_types #=> Array
+      #   resp.binary_media_types[0] #=> String
       # @overload create_rest_api(params = {})
       # @param [Hash] params ({})
       def create_rest_api(params = {}, options = {})
@@ -1197,6 +1208,7 @@ module Aws
       #   The maximum number of ApiKeys to get information about.
       # @option params [String] :name_query
       #   The name of queried API keys.
+      # @option params [String] :customer_id
       # @option params [Boolean] :include_values
       #   A boolean flag to specify whether (`true`) or not (`false`) the result
       #   contains key values.
@@ -1211,6 +1223,7 @@ module Aws
       #     position: "String",
       #     limit: 1,
       #     name_query: "String",
+      #     customer_id: "String",
       #     include_values: false,
       #   })
       #
@@ -1663,6 +1676,7 @@ module Aws
       #   * {Types::Integration#request_parameters #requestParameters} => Hash&lt;String,String&gt;
       #   * {Types::Integration#request_templates #requestTemplates} => Hash&lt;String,String&gt;
       #   * {Types::Integration#passthrough_behavior #passthroughBehavior} => String
+      #   * {Types::Integration#content_handling #contentHandling} => String
       #   * {Types::Integration#cache_namespace #cacheNamespace} => String
       #   * {Types::Integration#cache_key_parameters #cacheKeyParameters} => Array&lt;String&gt;
       #   * {Types::Integration#integration_responses #integrationResponses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -1684,6 +1698,7 @@ module Aws
       #   resp.request_templates #=> Hash
       #   resp.request_templates["String"] #=> String
       #   resp.passthrough_behavior #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.cache_namespace #=> String
       #   resp.cache_key_parameters #=> Array
       #   resp.cache_key_parameters[0] #=> String
@@ -1694,6 +1709,7 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload get_integration(params = {})
       # @param [Hash] params ({})
       def get_integration(params = {}, options = {})
@@ -1716,6 +1732,7 @@ module Aws
       #   * {Types::IntegrationResponse#selection_pattern #selectionPattern} => String
       #   * {Types::IntegrationResponse#response_parameters #responseParameters} => Hash&lt;String,String&gt;
       #   * {Types::IntegrationResponse#response_templates #responseTemplates} => Hash&lt;String,String&gt;
+      #   * {Types::IntegrationResponse#content_handling #contentHandling} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_integration_response({
@@ -1732,6 +1749,7 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload get_integration_response(params = {})
       # @param [Hash] params ({})
       def get_integration_response(params = {}, options = {})
@@ -1788,6 +1806,7 @@ module Aws
       #   resp.method_integration.request_templates #=> Hash
       #   resp.method_integration.request_templates["String"] #=> String
       #   resp.method_integration.passthrough_behavior #=> String
+      #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.method_integration.cache_namespace #=> String
       #   resp.method_integration.cache_key_parameters #=> Array
       #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -1798,6 +1817,7 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload get_method(params = {})
       # @param [Hash] params ({})
       def get_method(params = {}, options = {})
@@ -1988,6 +2008,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.request_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
       #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
+      #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
       #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
       #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -1998,6 +2019,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload get_resource(params = {})
       # @param [Hash] params ({})
       def get_resource(params = {}, options = {})
@@ -2058,6 +2080,7 @@ module Aws
       #   resp.items[0].resource_methods["String"].method_integration.request_templates #=> Hash
       #   resp.items[0].resource_methods["String"].method_integration.request_templates["String"] #=> String
       #   resp.items[0].resource_methods["String"].method_integration.passthrough_behavior #=> String
+      #   resp.items[0].resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.items[0].resource_methods["String"].method_integration.cache_namespace #=> String
       #   resp.items[0].resource_methods["String"].method_integration.cache_key_parameters #=> Array
       #   resp.items[0].resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -2068,6 +2091,7 @@ module Aws
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.items[0].resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload get_resources(params = {})
       # @param [Hash] params ({})
       def get_resources(params = {}, options = {})
@@ -2085,6 +2109,7 @@ module Aws
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
+      #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_rest_api({
@@ -2098,6 +2123,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      #   resp.binary_media_types #=> Array
+      #   resp.binary_media_types[0] #=> String
       # @overload get_rest_api(params = {})
       # @param [Hash] params ({})
       def get_rest_api(params = {}, options = {})
@@ -2133,6 +2160,8 @@ module Aws
       #   resp.items[0].created_date #=> Time
       #   resp.items[0].warnings #=> Array
       #   resp.items[0].warnings[0] #=> String
+      #   resp.items[0].binary_media_types #=> Array
+      #   resp.items[0].binary_media_types[0] #=> String
       # @overload get_rest_apis(params = {})
       # @param [Hash] params ({})
       def get_rest_apis(params = {}, options = {})
@@ -2538,6 +2567,7 @@ module Aws
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
+      #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.import_rest_api({
@@ -2555,6 +2585,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      #   resp.binary_media_types #=> Array
+      #   resp.binary_media_types[0] #=> String
       # @overload import_rest_api(params = {})
       # @param [Hash] params ({})
       def import_rest_api(params = {}, options = {})
@@ -2619,6 +2651,21 @@ module Aws
       #   Specifies a put integration input's cache namespace.
       # @option params [Array<String>] :cache_key_parameters
       #   Specifies a put integration input's cache key parameters.
+      # @option params [String] :content_handling
+      #   Specifies how to handle request payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a request payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a request payload from a binary blob to
+      #     a Base64-encoded string.
+      #
+      #   If this property is not defined, the request payload will be passed
+      #   through from the method request to integration request without
+      #   modification, provided that the `passthroughBehaviors` is configured
+      #   to support payload pass-through.
       # @return [Types::Integration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Integration#type #type} => String
@@ -2628,6 +2675,7 @@ module Aws
       #   * {Types::Integration#request_parameters #requestParameters} => Hash&lt;String,String&gt;
       #   * {Types::Integration#request_templates #requestTemplates} => Hash&lt;String,String&gt;
       #   * {Types::Integration#passthrough_behavior #passthroughBehavior} => String
+      #   * {Types::Integration#content_handling #contentHandling} => String
       #   * {Types::Integration#cache_namespace #cacheNamespace} => String
       #   * {Types::Integration#cache_key_parameters #cacheKeyParameters} => Array&lt;String&gt;
       #   * {Types::Integration#integration_responses #integrationResponses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -2650,6 +2698,7 @@ module Aws
       #     passthrough_behavior: "String",
       #     cache_namespace: "String",
       #     cache_key_parameters: ["String"],
+      #     content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
       #   })
       #
       # @example Response structure
@@ -2662,6 +2711,7 @@ module Aws
       #   resp.request_templates #=> Hash
       #   resp.request_templates["String"] #=> String
       #   resp.passthrough_behavior #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.cache_namespace #=> String
       #   resp.cache_key_parameters #=> Array
       #   resp.cache_key_parameters[0] #=> String
@@ -2672,6 +2722,7 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload put_integration(params = {})
       # @param [Hash] params ({})
       def put_integration(params = {}, options = {})
@@ -2705,12 +2756,27 @@ module Aws
       #   JSON expression without the `$` prefix.
       # @option params [Hash<String,String>] :response_templates
       #   Specifies a put integration response's templates.
+      # @option params [String] :content_handling
+      #   Specifies how to handle response payload content type conversions.
+      #   Supported values are `CONVERT_TO_BINARY` and `CONVERT_TO_TEXT`, with
+      #   the following behaviors:
+      #
+      #   * `CONVERT_TO_BINARY`\: Converts a response payload from a
+      #     Base64-encoded string to the corresponding binary blob.
+      #
+      #   * `CONVERT_TO_TEXT`\: Converts a response payload from a binary blob
+      #     to a Base64-encoded string.
+      #
+      #   If this property is not defined, the response payload will be passed
+      #   through from the integration response to the method response without
+      #   modification.
       # @return [Types::IntegrationResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::IntegrationResponse#status_code #statusCode} => String
       #   * {Types::IntegrationResponse#selection_pattern #selectionPattern} => String
       #   * {Types::IntegrationResponse#response_parameters #responseParameters} => Hash&lt;String,String&gt;
       #   * {Types::IntegrationResponse#response_templates #responseTemplates} => Hash&lt;String,String&gt;
+      #   * {Types::IntegrationResponse#content_handling #contentHandling} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.put_integration_response({
@@ -2725,6 +2791,7 @@ module Aws
       #     response_templates: {
       #       "String" => "String",
       #     },
+      #     content_handling: "CONVERT_TO_BINARY", # accepts CONVERT_TO_BINARY, CONVERT_TO_TEXT
       #   })
       #
       # @example Response structure
@@ -2734,6 +2801,7 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload put_integration_response(params = {})
       # @param [Hash] params ({})
       def put_integration_response(params = {}, options = {})
@@ -2821,6 +2889,7 @@ module Aws
       #   resp.method_integration.request_templates #=> Hash
       #   resp.method_integration.request_templates["String"] #=> String
       #   resp.method_integration.passthrough_behavior #=> String
+      #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.method_integration.cache_namespace #=> String
       #   resp.method_integration.cache_key_parameters #=> Array
       #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -2831,6 +2900,7 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload put_method(params = {})
       # @param [Hash] params ({})
       def put_method(params = {}, options = {})
@@ -2925,6 +2995,7 @@ module Aws
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
+      #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.put_rest_api({
@@ -2944,6 +3015,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      #   resp.binary_media_types #=> Array
+      #   resp.binary_media_types[0] #=> String
       # @overload put_rest_api(params = {})
       # @param [Hash] params ({})
       def put_rest_api(params = {}, options = {})
@@ -3415,6 +3488,7 @@ module Aws
       #   * {Types::Integration#request_parameters #requestParameters} => Hash&lt;String,String&gt;
       #   * {Types::Integration#request_templates #requestTemplates} => Hash&lt;String,String&gt;
       #   * {Types::Integration#passthrough_behavior #passthroughBehavior} => String
+      #   * {Types::Integration#content_handling #contentHandling} => String
       #   * {Types::Integration#cache_namespace #cacheNamespace} => String
       #   * {Types::Integration#cache_key_parameters #cacheKeyParameters} => Array&lt;String&gt;
       #   * {Types::Integration#integration_responses #integrationResponses} => Hash&lt;String,Types::IntegrationResponse&gt;
@@ -3444,6 +3518,7 @@ module Aws
       #   resp.request_templates #=> Hash
       #   resp.request_templates["String"] #=> String
       #   resp.passthrough_behavior #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.cache_namespace #=> String
       #   resp.cache_key_parameters #=> Array
       #   resp.cache_key_parameters[0] #=> String
@@ -3454,6 +3529,7 @@ module Aws
       #   resp.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.integration_responses["String"].response_templates #=> Hash
       #   resp.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload update_integration(params = {})
       # @param [Hash] params ({})
       def update_integration(params = {}, options = {})
@@ -3480,6 +3556,7 @@ module Aws
       #   * {Types::IntegrationResponse#selection_pattern #selectionPattern} => String
       #   * {Types::IntegrationResponse#response_parameters #responseParameters} => Hash&lt;String,String&gt;
       #   * {Types::IntegrationResponse#response_templates #responseTemplates} => Hash&lt;String,String&gt;
+      #   * {Types::IntegrationResponse#content_handling #contentHandling} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_integration_response({
@@ -3504,6 +3581,7 @@ module Aws
       #   resp.response_parameters["String"] #=> String
       #   resp.response_templates #=> Hash
       #   resp.response_templates["String"] #=> String
+      #   resp.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload update_integration_response(params = {})
       # @param [Hash] params ({})
       def update_integration_response(params = {}, options = {})
@@ -3571,6 +3649,7 @@ module Aws
       #   resp.method_integration.request_templates #=> Hash
       #   resp.method_integration.request_templates["String"] #=> String
       #   resp.method_integration.passthrough_behavior #=> String
+      #   resp.method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.method_integration.cache_namespace #=> String
       #   resp.method_integration.cache_key_parameters #=> Array
       #   resp.method_integration.cache_key_parameters[0] #=> String
@@ -3581,6 +3660,7 @@ module Aws
       #   resp.method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload update_method(params = {})
       # @param [Hash] params ({})
       def update_method(params = {}, options = {})
@@ -3737,6 +3817,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.request_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.request_templates["String"] #=> String
       #   resp.resource_methods["String"].method_integration.passthrough_behavior #=> String
+      #   resp.resource_methods["String"].method_integration.content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       #   resp.resource_methods["String"].method_integration.cache_namespace #=> String
       #   resp.resource_methods["String"].method_integration.cache_key_parameters #=> Array
       #   resp.resource_methods["String"].method_integration.cache_key_parameters[0] #=> String
@@ -3747,6 +3828,7 @@ module Aws
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_parameters["String"] #=> String
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates #=> Hash
       #   resp.resource_methods["String"].method_integration.integration_responses["String"].response_templates["String"] #=> String
+      #   resp.resource_methods["String"].method_integration.integration_responses["String"].content_handling #=> String, one of "CONVERT_TO_BINARY", "CONVERT_TO_TEXT"
       # @overload update_resource(params = {})
       # @param [Hash] params ({})
       def update_resource(params = {}, options = {})
@@ -3767,6 +3849,7 @@ module Aws
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
+      #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_rest_api({
@@ -3788,6 +3871,8 @@ module Aws
       #   resp.created_date #=> Time
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
+      #   resp.binary_media_types #=> Array
+      #   resp.binary_media_types[0] #=> String
       # @overload update_rest_api(params = {})
       # @param [Hash] params ({})
       def update_rest_api(params = {}, options = {})

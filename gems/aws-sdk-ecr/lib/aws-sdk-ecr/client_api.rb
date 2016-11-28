@@ -464,6 +464,12 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterException)
           o.errors << Shapes::ShapeRef.new(shape: RepositoryNotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: ImageNotFoundException)
+          o[:pager] = Aws::Pager.new(
+            limit_key: "max_results",
+            tokens: {
+              "next_token" => "next_token"
+            }
+          )
         end)
 
         api.add_operation(:describe_repositories, Seahorse::Model::Operation.new.tap do |o|
