@@ -10,6 +10,25 @@ We can be found in our [Gitter channel](http://gitter.im/aws/aws-sdk-ruby) and o
 
 ## Ideas
 
+### Add JSON Serialization Helper (Related to SNS Client API)
+
+See [related GitHub issue #1299](https://github.com/aws/aws-sdk-ruby/issues/1299).
+
+### Add NatGateways to the Aws::EC2::Vpc Resource Object
+
+See [related GitHub issue #1323](https://github.com/aws/aws-sdk-ruby/issues/1323).
+
+### Add Use of list_objects_v2 to the S3 Resource Object
+
+See [related GitHub issue #1335](https://github.com/aws/aws-sdk-ruby/issues/1335).
+
+### Add Randomness to Retry Backoff
+
+Currently, the default retry algorithm uses exactly the same backoff time for
+every execution. Adding some randomness to this would be accepted as a PR.
+
+See [related GitHub issue #1336](https://github.com/aws/aws-sdk-ruby/issues/1336).
+
 ### Handle S3 #exists? Edge Cases
 
 See [related GitHub issue #1267](https://github.com/aws/aws-sdk-ruby/issues/1267).
