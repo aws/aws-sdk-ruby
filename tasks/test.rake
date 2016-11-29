@@ -44,7 +44,7 @@ task 'test:features' do
       failures << File.basename(File.dirname(dir)) if !ok
     end
   end
-  abort("one or more test suites failed: %s" % [failures.join(', ')])
+  abort("one or more test suites failed: %s" % [failures.join(', ')]) unless failures.empty?
 end
 
 desc 'Runs unit and integration tests'
