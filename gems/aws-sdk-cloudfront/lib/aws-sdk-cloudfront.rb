@@ -13,9 +13,7 @@ require_relative 'aws-sdk-cloudfront/client'
 require_relative 'aws-sdk-cloudfront/errors'
 require_relative 'aws-sdk-cloudfront/waiters'
 require_relative 'aws-sdk-cloudfront/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-cloudfront/customizations.rb'
+require_relative 'aws-sdk-cloudfront/customizations'
 
 module Aws
   # @service

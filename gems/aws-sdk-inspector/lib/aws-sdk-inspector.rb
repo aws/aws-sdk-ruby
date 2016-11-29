@@ -12,6 +12,7 @@ require_relative 'aws-sdk-inspector/client_api'
 require_relative 'aws-sdk-inspector/client'
 require_relative 'aws-sdk-inspector/errors'
 require_relative 'aws-sdk-inspector/resource'
+require_relative 'aws-sdk-inspector/customizations'
 
 module Aws
   # @service

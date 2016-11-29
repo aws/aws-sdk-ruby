@@ -12,6 +12,7 @@ require_relative 'aws-sdk-firehose/client_api'
 require_relative 'aws-sdk-firehose/client'
 require_relative 'aws-sdk-firehose/errors'
 require_relative 'aws-sdk-firehose/resource'
+require_relative 'aws-sdk-firehose/customizations'
 
 module Aws
   # @service

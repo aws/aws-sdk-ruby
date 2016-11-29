@@ -14,7 +14,7 @@ require_relative 'aws-sdk-code-generator/views/version'
 module AwsSdkCodeGenerator
 
   autoload :Errors, 'aws-sdk-code-generator/errors'
-  autoload :Generator, 'aws-sdk-code-generator/generator'
+  autoload :CodeGenerator, 'aws-sdk-code-generator/code_generator'
   autoload :HashFormatter, 'aws-sdk-code-generator/hash_formatter'
   autoload :Helper, 'aws-sdk-code-generator/helper'
 

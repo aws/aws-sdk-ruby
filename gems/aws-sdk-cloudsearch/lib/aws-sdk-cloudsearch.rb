@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cloudsearch/client_api'
 require_relative 'aws-sdk-cloudsearch/client'
 require_relative 'aws-sdk-cloudsearch/errors'
 require_relative 'aws-sdk-cloudsearch/resource'
+require_relative 'aws-sdk-cloudsearch/customizations'
 
 module Aws
   # @service

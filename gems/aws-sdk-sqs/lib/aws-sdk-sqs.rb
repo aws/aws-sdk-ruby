@@ -12,9 +12,7 @@ require_relative 'aws-sdk-sqs/client_api'
 require_relative 'aws-sdk-sqs/client'
 require_relative 'aws-sdk-sqs/errors'
 require_relative 'aws-sdk-sqs/resource'
-
-# customizations for generated code
-require_relative 'aws-sdk-sqs/customizations.rb'
+require_relative 'aws-sdk-sqs/customizations'
 
 module Aws
   # @service

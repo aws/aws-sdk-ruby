@@ -12,6 +12,7 @@ require_relative 'aws-sdk-route53domains/client_api'
 require_relative 'aws-sdk-route53domains/client'
 require_relative 'aws-sdk-route53domains/errors'
 require_relative 'aws-sdk-route53domains/resource'
+require_relative 'aws-sdk-route53domains/customizations'
 
 module Aws
   # @service

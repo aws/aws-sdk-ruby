@@ -31,9 +31,7 @@ require_relative 'aws-sdk-s3/object'
 require_relative 'aws-sdk-s3/object_acl'
 require_relative 'aws-sdk-s3/object_summary'
 require_relative 'aws-sdk-s3/object_version'
-
-# customizations for generated code
-require_relative 'aws-sdk-s3/customizations.rb'
+require_relative 'aws-sdk-s3/customizations'
 
 module Aws
   # @service

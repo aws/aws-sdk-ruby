@@ -10,6 +10,7 @@ require_relative 'aws-sdk-sts/client_api'
 require_relative 'aws-sdk-sts/client'
 require_relative 'aws-sdk-sts/errors'
 require_relative 'aws-sdk-sts/resource'
+require_relative 'aws-sdk-sts/customizations'
 
 module Aws
   # @service
@@ -39,5 +40,9 @@ module Aws
   #     end
   #
   # See {Errors} for more information.
-  module STS; end
+  module STS
+
+    GEM_VERSION = '1.0.0.rc1'
+
+  end
 end

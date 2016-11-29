@@ -38,6 +38,7 @@ require_relative 'aws-sdk-rds/pending_maintenance_action'
 require_relative 'aws-sdk-rds/reserved_db_instance'
 require_relative 'aws-sdk-rds/reserved_db_instances_offering'
 require_relative 'aws-sdk-rds/resource_pending_maintenance_action_list'
+require_relative 'aws-sdk-rds/customizations'
 
 module Aws
   # @service

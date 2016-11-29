@@ -12,6 +12,7 @@ require_relative 'aws-sdk-gamelift/client_api'
 require_relative 'aws-sdk-gamelift/client'
 require_relative 'aws-sdk-gamelift/errors'
 require_relative 'aws-sdk-gamelift/resource'
+require_relative 'aws-sdk-gamelift/customizations'
 
 module Aws
   # @service

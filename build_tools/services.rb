@@ -7,21 +7,19 @@ module BuildTools
 
     MANIFEST_PATH = File.expand_path('../../services.json', __FILE__)
 
-    API_DIR = File.expand_path('../../apis', __FILE__)
-
-    def initialize
-      manifest = JSON.load(File.read(MANIFEST_PATH))
-      @services = manifest.inject([]) do |services, (svc_name, svc_definition)|
-        services << Service.build(svc_name, svc_definition)
-        services
+    # @option options [String] :manifest_path (MANIFEST_PATH)
+    def initialize(options = {})
+      @services = manifest(options).inject({}) do |hash, (name, config)|
+        service = build_service(name, config)
+        hash[service.identifier] = service
+        hash
       end
     end
 
     # @param [String] identifier
     def [](identifier)
-      service = @services.find { |svc| svc.name.downcase == identifier }
-      if service
-        service
+      if @services.key?(identifier)
+        @services[identifier]
       else
         raise ArgumentError, "unknown service #{identifier.inspect}"
       end
@@ -29,165 +27,84 @@ module BuildTools
     alias service []
 
     def each(&block)
-      @services.each(&block)
+      @services.values.each(&block)
     end
 
-    class Service
+    private
 
-      # @return [String] Something like "dynamodb"
-      attr_accessor :identifier
+    def manifest(options)
+      manifest_path = options.fetch(:manifest_path, MANIFEST_PATH)
+      JSON.load(File.read(manifest_path))
+    end
 
-      # @return [String] Something like "DynamoDB"
-      attr_accessor :name
+    def build_service(svc_name, config)
 
-      # @return [Hash] A hash of service models paths. Keys may include the
-      #   following:
-      #
-      #   * `:api`
-      #   * `:docs`
-      #   * `:paginators`
-      #   * `:waiters`
-      #   * `:resources`
-      #   * `:examples`
-      #
-      attr_accessor :models
+      api = load_api(svc_name, config['models'])
+      docs = load_docs(svc_name, config['models'])
 
-      # @return [String] Something like "aws-sdk-dynamodb"
-      attr_accessor :gem_name
+      AwsSdkCodeGenerator::Service.new(
+        gem_version: gem_version(svc_name),
+        name: svc_name,
+        api: api,
+        docs: load_docs(svc_name, config['models']),
+        paginators: model_path('paginators-1.json', config['models']),
+        waiters: model_path('waiters-2.json', config['models']),
+        resources: model_path('resources-1.json', config['models']),
+        gem_dependencies: gem_dependencies(api, config['dependencies'] || {}),
+        add_plugins: add_plugins(config['addPlugins'] || []),
+        remove_plugins: config['removePlugins'] || []
+      )
+    end
 
-      # @return [String] Path to the gem directory, e.g. "gems/aws-sdk-dynamodb"
-      attr_accessor :gem_dir
+    def load_api(svc_name, models_dir)
+      api = JSON.load(File.read(model_path('api-2.json', models_dir)))
+      BuildTools::Customizations.apply_api_customizations(svc_name, api)
+      api
+    end
 
-      # @return [String]
-      attr_accessor :gem_version
+    def load_docs(svc_name, models_dir)
+      docs = JSON.load(File.read(model_path('docs-2.json', models_dir)))
+      BuildTools::Customizations.apply_doc_customizations(svc_name, docs)
+      docs
+    end
 
-      # @return [Hash<String,String> A hash of runtime gem dependencies. Keys
-      #   are gem names and values are versions
-      attr_accessor :dependencies
-
-      # @return [String] The name/key used in endpoints.json.
-      attr_accessor :endpoints_key
-
-      # @return [Hash<String,String>] A hash of plugins to add to the client.
-      #   Hash keys are plugin class names, hash values are string paths to
-      #   the plugin definition.
-      attr_accessor :add_plugins
-
-      # @return [Array<String>] A list of default plugin class names to
-      #   not remove from the generated client.
-      attr_accessor :remove_plugins
-
-      # @return [Hash]
-      def api
-        @api ||= json_load(models[:api])
-      end
-
-      # @return [nil,String]
-      #   One of:
-      #
-      #   * "json"
-      #   * "query"
-      #   * "rest-json"
-      #   * "rest-xml"
-      #   * "ec2"
-      #
-      def protocol
-        api['metadata']['protocol']
-      end
-
-      # @return [String<YYYY-MM-DD>]
-      def api_version
-        api['metadata']['apiVersion']
-      end
-
-      # @return [String]
-      def signature_version
-        api['metadata']['signatureVersion']
-      end
-
-      # @return [String] Something like "Amazon Simple Storage Service"
-      def full_name
-        api['metadata']['serviceFullName']
-      end
-
-      # @return [String] Something like "Amazon S3"
-      def short_name
-        api['metadata']['serviceAbbreviation'] || full_name
-      end
-
-      def build
-        Builder.new(self).build
-      end
-
-      private
-
-      def json_load(path)
-        JSON.load(File.open(path, 'rb') { |f| f.read })
-      end
-
-      class << self
-
-        def build(name, definition)
-          svc = Service.new
-          svc.identifier = name.downcase
-          svc.name = name
-          svc.models = models(definition['models'])
-          svc.gem_name = "aws-sdk-#{svc.identifier}"
-          svc.gem_dir = definition['gem_dir'] || File.join('gems', svc.gem_name)
-          svc.endpoints_key = definition['endpoint']
-          svc.dependencies = dependencies(svc, definition)
-          svc.add_plugins = add_plugins(svc, definition)
-          svc.remove_plugins = Array(definition['removePlugins'])
-          svc
-        end
-
-        private
-
-        def dependencies(svc, definition)
-          dependencies = {}
-          dependencies['aws-sdk-core'] = '3.0.0.rc1'
-          case svc.signature_version
-          when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
-          when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
-          end
-          dependencies.update(definition['dependencies'] || {})
-          dependencies
-        end
-
-        def models(prefix)
-          Dir.glob("#{API_DIR}/#{prefix}/*").inject({}) do |paths, model_path|
-            paths[model_key(model_path)] = model_path
-            paths
-          end
-        end
-
-        def model_key(model_path)
-          case File.basename(model_path)
-          when 'api-2.json' then :api
-          when 'docs-2.json' then :docs
-          when 'waiters-2.json' then :waiters
-          when 'paginators-1.json' then :paginators
-          when 'examples-1.json' then :examples
-          when 'resources-1.json' then :resources
-          else raise ArgumentError, "unsupported `#{File.basename(model_path)}'"
-          end
-        end
-
-        def add_plugins(svc, definition)
-          Array(definition['addPlugins']).inject({}) do |hash, plugin_name|
-            hash[plugin_name] = plugin_path(svc, plugin_name)
-            hash
-          end
-        end
-
-        def plugin_path(svc, plugin_name)
-          filename = plugin_name.split('::').last
-          filename = AwsSdkCodeGenerator::Underscore.underscore(filename)
-          "gems/#{svc.gem_name}/lib/#{svc.gem_name}/plugins/#{filename}.rb"
-        end
-
+    def add_plugins(plugins)
+      plugins.inject({}) do |hash, plugin|
+        hash[plugin] = plugin_path(plugin)
+        hash
       end
     end
+
+    def plugin_path(plugin_name)
+      parts = plugin_name.split('::')
+      parts = parts.map { |part| AwsSdkCodeGenerator::Underscore.underscore(part) }
+      parts.shift
+      if parts[0] == 'plugins'
+        gem = 'core'
+      else
+        gem = parts.shift.gsub('_', '')
+      end
+      (["gems/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
+    end
+
+    def gem_version(svc_name)
+      path = "gems/aws-sdk-#{svc_name.downcase}/VERSION"
+      File.exists?(path) ? File.read(path).strip : "1.0.0.rc1"
+    end
+
+    def gem_dependencies(api, dependencies)
+      case api['metadata']['signatureVersion']
+      when 'v4' then dependencies['aws-sigv4'] = '~> 1.0'
+      when 'v2' then dependencies['aws-sigv2'] = '~> 1.0'
+      end
+      dependencies
+    end
+
+    def model_path(model_name, models_dir)
+      path = "apis/#{models_dir}/#{model_name}"
+      File.exists?(path) ? path : nil
+    end
+
   end
 
   Services = ServiceEnumerator.new

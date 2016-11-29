@@ -1,37 +1,38 @@
 module AwsSdkCodeGenerator
-  class Generator
+  class CodeGenerator
+
+    GENERATED_SRC_WARNING = <<-WARNING
+# WARNING ABOUT GENERATED CODE
+#
+# This file is generated. See the contributing for info on making contributions:
+# https://github.com/aws/aws-sdk-ruby/blob/master/CONTRIBUTING.md
+#
+# WARNING ABOUT GENERATED CODE
+
+    WARNING
 
     include Helper
 
-    # @option options [required, Array<String>] :module_names
-    # @option options [Hash] :api
-    # @option options [Hash] :docs
-    # @option options [Hash] :paginators
-    # @option options [Hash] :waiters
-    # @option options [Hash] :resources
-    # @option options [Hash] :examples
-    # @option options [Array<String>] :gem_requires ([])
-    # @option options [Hash] :add_plugins ({})
-    # @option options [Hash] :remove_plugins ([])
-    def initialize(options, &block)
-      @module_names = options.fetch(:module_names)
-      @api = options.fetch(:api, {})
-      apply_docs(@api, options.fetch(:docs)) if options[:docs]
-      @paginators = options.fetch(:paginators, nil)
-      @waiters = options.fetch(:waiters, nil)
-      @resources = options.fetch(:resources, nil)
-      @examples = options.fetch(:examples, nil)
-      @gem_requires = options.fetch(:gem_requires, [])
-      @add_plugins = options.fetch(:add_plugins, {})
-      @remove_plugins = options.fetch(:remove_plugins, [])
-      @callback = block
+    # @option options [required, Service] :service
+    def initialize(options)
+      @service = options.fetch(:service)
+      # TODO : remove these
+      @add_plugins = @service.add_plugins
+      @remove_plugins = @service.remove_plugins
+      @gem_dependencies = @service.gem_dependencies
+      @module_names = @service.module_name.split('::')
+      @api = @service.api
+      @paginators = @service.paginators
+      @waiters = @service.waiters
+      @resources = @service.resources
+      @examples = @service.examples
     end
 
     def generate_src
       svc_mod = new_svc_module
-      @gem_requires.each { |gem_name| svc_mod.require(gem_name) }
+      @gem_dependencies.each { |gem_name, _| svc_mod.require(gem_name) }
       svc_mod.docstring(service_docstring)
-      each_module do |mod|
+      each_module do |mod, _|
         svc_mod.add(mod)
       end
       @callback.call(svc_mod) if @callback
@@ -39,34 +40,40 @@ module AwsSdkCodeGenerator
     end
 
     # @option options [String] :prefix
-    def generate_src_files(options = {})
+    def src_files(options = {})
       prefix = options.fetch(:prefix, nil)
       prefix ||= @module_names.map { |n| underscore(n) }.join('/')
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", service_module(prefix))
-        each_module do |mod, is_client|
-          filename = File.join(prefix, underscore(mod.name) + '.rb')
-          if is_client
-            y.yield(filename, mod.root.to_s)
+        y.yield("#{prefix}.rb", GENERATED_SRC_WARNING + service_module(prefix))
+        y.yield("#{prefix}/customizations.rb", '')
+        each_module do |mod, type, code|
+          case type
+          when :unwrapped
+            filename = File.join(prefix, underscore(mod.name) + '.rb')
+            y.yield(filename, GENERATED_SRC_WARNING + wrap(mod))
+          when :wrapped # dsl module
+            filename = File.join(prefix, underscore(mod.name) + '.rb')
+            y.yield(filename, GENERATED_SRC_WARNING + mod.root.to_s)
           else
-            y.yield(filename, wrap(mod))
+            raise "expected :wrapped or :unwrapped"
           end
         end
       end
     end
+    alias generate_src_files src_files
 
     private
 
     def each_module(&block)
-      yield(types_module)
-      yield(client_api_module)
-      yield(client_class, true)
-      yield(errors_module)
-      yield(waiters_module, true) if @waiters
-      yield(root_resource_class)
+      yield(types_module, :unwrapped)
+      yield(client_api_module, :unwrapped)
+      yield(client_class, :wrapped)
+      yield(errors_module, :unwrapped)
+      yield(waiters_module, :wrapped) if @waiters
+      yield(root_resource_class, :unwrapped)
       if @resources
         @resources['resources'].keys.sort.each do |name|
-          yield(resource_class(name, @resources['resources'][name]))
+          yield(resource_class(name, @resources['resources'][name]), :unwrapped)
         end
       end
     end
@@ -87,11 +94,12 @@ module AwsSdkCodeGenerator
       autoloads = Generators::ServiceAutoloads.new(
         prefix: autoload_prefix,
         resources: @resources,
-        waiters: !!@waiters,
+        waiters: !!@waiters
       )
       svc_mod = new_svc_module
-      @gem_requires.each { |gem_name| svc_mod.require(gem_name) }
+      @gem_dependencies.each { |gem_name, _| svc_mod.require(gem_name) }
       svc_mod.docstring(service_docstring)
+      svc_mod.code("GEM_VERSION = '#{@service.gem_version}'")
       autoloads.apply(svc_mod)
       @callback.call(svc_mod) if @callback
       svc_mod.root.to_s

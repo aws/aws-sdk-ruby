@@ -12,6 +12,7 @@ require_relative 'aws-sdk-efs/client_api'
 require_relative 'aws-sdk-efs/client'
 require_relative 'aws-sdk-efs/errors'
 require_relative 'aws-sdk-efs/resource'
+require_relative 'aws-sdk-efs/customizations'
 
 module Aws
   # @service

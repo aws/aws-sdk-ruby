@@ -12,6 +12,7 @@ require_relative 'aws-sdk-importexport/client_api'
 require_relative 'aws-sdk-importexport/client'
 require_relative 'aws-sdk-importexport/errors'
 require_relative 'aws-sdk-importexport/resource'
+require_relative 'aws-sdk-importexport/customizations'
 
 module Aws
   # @service

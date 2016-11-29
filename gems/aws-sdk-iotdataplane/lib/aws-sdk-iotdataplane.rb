@@ -12,6 +12,7 @@ require_relative 'aws-sdk-iotdataplane/client_api'
 require_relative 'aws-sdk-iotdataplane/client'
 require_relative 'aws-sdk-iotdataplane/errors'
 require_relative 'aws-sdk-iotdataplane/resource'
+require_relative 'aws-sdk-iotdataplane/customizations'
 
 module Aws
   # @service

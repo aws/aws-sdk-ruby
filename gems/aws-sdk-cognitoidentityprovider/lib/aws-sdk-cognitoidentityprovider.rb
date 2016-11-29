@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cognitoidentityprovider/client_api'
 require_relative 'aws-sdk-cognitoidentityprovider/client'
 require_relative 'aws-sdk-cognitoidentityprovider/errors'
 require_relative 'aws-sdk-cognitoidentityprovider/resource'
+require_relative 'aws-sdk-cognitoidentityprovider/customizations'
 
 module Aws
   # @service

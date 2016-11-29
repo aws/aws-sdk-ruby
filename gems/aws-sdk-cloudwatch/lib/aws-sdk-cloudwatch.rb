@@ -15,6 +15,7 @@ require_relative 'aws-sdk-cloudwatch/waiters'
 require_relative 'aws-sdk-cloudwatch/resource'
 require_relative 'aws-sdk-cloudwatch/alarm'
 require_relative 'aws-sdk-cloudwatch/metric'
+require_relative 'aws-sdk-cloudwatch/customizations'
 
 module Aws
   # @service

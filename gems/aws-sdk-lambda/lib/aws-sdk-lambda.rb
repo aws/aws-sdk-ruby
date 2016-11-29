@@ -12,6 +12,7 @@ require_relative 'aws-sdk-lambda/client_api'
 require_relative 'aws-sdk-lambda/client'
 require_relative 'aws-sdk-lambda/errors'
 require_relative 'aws-sdk-lambda/resource'
+require_relative 'aws-sdk-lambda/customizations'
 
 module Aws
   # @service

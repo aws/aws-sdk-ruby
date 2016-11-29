@@ -17,6 +17,7 @@ require_relative 'aws-sdk-cloudformation/event'
 require_relative 'aws-sdk-cloudformation/stack'
 require_relative 'aws-sdk-cloudformation/stack_resource'
 require_relative 'aws-sdk-cloudformation/stack_resource_summary'
+require_relative 'aws-sdk-cloudformation/customizations'
 
 module Aws
   # @service

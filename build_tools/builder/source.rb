@@ -11,11 +11,11 @@ module BuildTools
           end
           svc_module.code("GEM_VERSION = '#{gem_version}'")
         end
-        @generator = AwsSdkCodeGenerator::Generator.new(generator_options, &block)
+        @generator = AwsSdkCodeGenerator::CodeGenerator.new(service: service, &block)
       end
 
       def build
-        @generator.generate_src_files(prefix: @service.gem_name).each do |path, contents|
+        @generator.generate_src_files.each do |path, contents|
           FileWriter.new("#{@service.gem_dir}/lib/#{path}").write(contents)
         end
       end
@@ -24,9 +24,9 @@ module BuildTools
 
       def generator_options
         options = {}
-        options[:module_names] = ['Aws', @service.name]
+        options[:module_names] = ['Aws', @service.module_name]
         @service.models.each_pair do |model_name, model_path|
-          options[model_name] = load_model(@service.name, model_name, model_path)
+          options[model_name] = load_model(@service.module_name, model_name, model_path)
         end
         options[:gem_requires] = @service.dependencies.keys
         options[:add_plugins] = @service.add_plugins

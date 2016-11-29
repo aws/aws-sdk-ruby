@@ -4,6 +4,8 @@ module AwsSdkCodeGenerator
     # @param [Hash] options
     # @option options [required, String] :gem_version Gem version, e.g. "1.0.0".
     # @option options [required, String] :name The service name, e.g. "S3"
+    # @option options [String] :module_name The service module name, defaults
+    #   to "Aws::#{name}", e.g. "Aws::S3".
     # @option options [required, Hash, String] :api
     # @option options [Hash, String] :docs
     # @option options [Hash, String] :paginators
@@ -16,24 +18,25 @@ module AwsSdkCodeGenerator
     def initialize(options)
       @gem_version = options.fetch(:gem_version)
       @name = options.fetch(:name)
+      @module_name = options.fetch(:module_name, "Aws::#{name}")
       @api = load_json(options.fetch(:api))
       ApplyDocs.new(@api).apply(load_json(options[:docs]))
       @paginators = load_json(options[:paginators])
       @waiters = load_json(options[:waiters])
       @resources = load_json(options[:resources])
       @examples = load_json(options[:examples])
-      @gem_dependencies = options.fetch(:gem_dependencies, {})
-      @gem_dependencies['aws-sdk-core'] ||= '~> 3.0'
+      @gem_dependencies = {
+        'aws-sdk-core' => '3.0.0.rc1'
+      }.merge(options.fetch(:gem_dependencies, {}))
       @add_plugins = options.fetch(:add_plugins, {})
       @remove_plugins = options.fetch(:remove_plugins, [])
 
       # computed attributes
       @identifier = name.downcase
-      @module_name = "Aws::#{name}"
       @gem_name = "aws-sdk-#{identifier}"
       @protocol = api.fetch('metadata').fetch('protocol')
       @api_version = api.fetch('metadata').fetch('apiVersion')
-      @signature_version = api.fetch('metadata').fetch('signatureVersion')
+      @signature_version = api.fetch('metadata').fetch('signatureVersion', nil)
       @full_name = api.fetch('metadata').fetch('serviceFullName')
       @short_name = api.fetch('metadata').fetch('serviceAbbreviation', @full_name)
     end

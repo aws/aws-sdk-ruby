@@ -16,9 +16,7 @@ require_relative 'aws-sdk-sns/platform_application'
 require_relative 'aws-sdk-sns/platform_endpoint'
 require_relative 'aws-sdk-sns/subscription'
 require_relative 'aws-sdk-sns/topic'
-
-# customizations for generated code
-require_relative 'aws-sdk-sns/customizations.rb'
+require_relative 'aws-sdk-sns/customizations'
 
 module Aws
   # @service

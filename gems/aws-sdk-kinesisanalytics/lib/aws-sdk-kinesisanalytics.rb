@@ -12,6 +12,7 @@ require_relative 'aws-sdk-kinesisanalytics/client_api'
 require_relative 'aws-sdk-kinesisanalytics/client'
 require_relative 'aws-sdk-kinesisanalytics/errors'
 require_relative 'aws-sdk-kinesisanalytics/resource'
+require_relative 'aws-sdk-kinesisanalytics/customizations'
 
 module Aws
   # @service

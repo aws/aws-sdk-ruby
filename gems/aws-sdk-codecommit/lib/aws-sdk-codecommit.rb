@@ -12,6 +12,7 @@ require_relative 'aws-sdk-codecommit/client_api'
 require_relative 'aws-sdk-codecommit/client'
 require_relative 'aws-sdk-codecommit/errors'
 require_relative 'aws-sdk-codecommit/resource'
+require_relative 'aws-sdk-codecommit/customizations'
 
 module Aws
   # @service

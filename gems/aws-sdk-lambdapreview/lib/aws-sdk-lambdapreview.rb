@@ -12,6 +12,7 @@ require_relative 'aws-sdk-lambdapreview/client_api'
 require_relative 'aws-sdk-lambdapreview/client'
 require_relative 'aws-sdk-lambdapreview/errors'
 require_relative 'aws-sdk-lambdapreview/resource'
+require_relative 'aws-sdk-lambdapreview/customizations'
 
 module Aws
   # @service

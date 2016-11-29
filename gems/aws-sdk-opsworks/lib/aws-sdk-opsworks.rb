@@ -16,6 +16,7 @@ require_relative 'aws-sdk-opsworks/resource'
 require_relative 'aws-sdk-opsworks/layer'
 require_relative 'aws-sdk-opsworks/stack'
 require_relative 'aws-sdk-opsworks/stack_summary'
+require_relative 'aws-sdk-opsworks/customizations'
 
 module Aws
   # @service

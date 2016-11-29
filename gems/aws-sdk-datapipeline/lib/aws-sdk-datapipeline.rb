@@ -12,6 +12,7 @@ require_relative 'aws-sdk-datapipeline/client_api'
 require_relative 'aws-sdk-datapipeline/client'
 require_relative 'aws-sdk-datapipeline/errors'
 require_relative 'aws-sdk-datapipeline/resource'
+require_relative 'aws-sdk-datapipeline/customizations'
 
 module Aws
   # @service

@@ -13,6 +13,7 @@ require_relative 'aws-sdk-route53/client'
 require_relative 'aws-sdk-route53/errors'
 require_relative 'aws-sdk-route53/waiters'
 require_relative 'aws-sdk-route53/resource'
+require_relative 'aws-sdk-route53/customizations'
 
 module Aws
   # @service

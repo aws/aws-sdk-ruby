@@ -13,6 +13,7 @@ require_relative 'aws-sdk-elasticloadbalancing/client'
 require_relative 'aws-sdk-elasticloadbalancing/errors'
 require_relative 'aws-sdk-elasticloadbalancing/waiters'
 require_relative 'aws-sdk-elasticloadbalancing/resource'
+require_relative 'aws-sdk-elasticloadbalancing/customizations'
 
 module Aws
   # @service

@@ -69,16 +69,20 @@ module SpecHelper
         svc_path,
       ])
 
-      generator_opts = {}
-      generator_opts[:module_names] = module_names
-      [:api, :paginators, :resources, :waiters, :examples].each do |option|
-        path = "#{api_dir}/#{option}.json"
-        if File.exists?(path)
-          generator_opts[option] = JSON.load(File.read(path))
-        end
-      end
+      service_opts = {
+        gem_version: '1.0.0',
+        name: module_names.last,
+        module_name: module_names.join('::'),
+        api: model_path(:api, api_dir),
+        paginators: model_path(:paginators, api_dir),
+        resources: model_path(:resources, api_dir),
+        waiters: model_path(:waiters, api_dir),
+        examples: model_path(:examples, api_dir),
+      }
 
-      generator = AwsSdkCodeGenerator::Generator.new(generator_opts)
+      generator = AwsSdkCodeGenerator::CodeGenerator.new(
+        service: AwsSdkCodeGenerator::Service.new(service_opts)
+      )
 
       if options.fetch(:multiple_files, true)
 
@@ -112,6 +116,13 @@ module SpecHelper
         $LOAD_PATH.delete(tmpdir)
         FileUtils.rm_rf(tmpdir)
       end
+    end
+
+    private
+
+    def model_path(model, models_dir)
+      path = "#{models_dir}/#{model}.json"
+      File.exists?(path) : path : nil
     end
 
   end

@@ -13,6 +13,7 @@ require_relative 'aws-sdk-kinesis/client'
 require_relative 'aws-sdk-kinesis/errors'
 require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
+require_relative 'aws-sdk-kinesis/customizations'
 
 module Aws
   # @service

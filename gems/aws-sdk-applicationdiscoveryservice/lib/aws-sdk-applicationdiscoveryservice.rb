@@ -12,6 +12,7 @@ require_relative 'aws-sdk-applicationdiscoveryservice/client_api'
 require_relative 'aws-sdk-applicationdiscoveryservice/client'
 require_relative 'aws-sdk-applicationdiscoveryservice/errors'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
+require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 
 module Aws
   # @service

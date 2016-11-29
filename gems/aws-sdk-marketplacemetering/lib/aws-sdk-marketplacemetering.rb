@@ -12,6 +12,7 @@ require_relative 'aws-sdk-marketplacemetering/client_api'
 require_relative 'aws-sdk-marketplacemetering/client'
 require_relative 'aws-sdk-marketplacemetering/errors'
 require_relative 'aws-sdk-marketplacemetering/resource'
+require_relative 'aws-sdk-marketplacemetering/customizations'
 
 module Aws
   # @service

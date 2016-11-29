@@ -23,6 +23,7 @@ require_relative 'aws-sdk-autoscaling/notification_configuration'
 require_relative 'aws-sdk-autoscaling/scaling_policy'
 require_relative 'aws-sdk-autoscaling/scheduled_action'
 require_relative 'aws-sdk-autoscaling/tag'
+require_relative 'aws-sdk-autoscaling/customizations'
 
 module Aws
   # @service

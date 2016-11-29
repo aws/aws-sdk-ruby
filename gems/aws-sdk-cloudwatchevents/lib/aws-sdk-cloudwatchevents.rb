@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cloudwatchevents/client_api'
 require_relative 'aws-sdk-cloudwatchevents/client'
 require_relative 'aws-sdk-cloudwatchevents/errors'
 require_relative 'aws-sdk-cloudwatchevents/resource'
+require_relative 'aws-sdk-cloudwatchevents/customizations'
 
 module Aws
   # @service

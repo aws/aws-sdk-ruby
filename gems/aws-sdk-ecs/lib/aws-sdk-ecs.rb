@@ -13,6 +13,7 @@ require_relative 'aws-sdk-ecs/client'
 require_relative 'aws-sdk-ecs/errors'
 require_relative 'aws-sdk-ecs/waiters'
 require_relative 'aws-sdk-ecs/resource'
+require_relative 'aws-sdk-ecs/customizations'
 
 module Aws
   # @service

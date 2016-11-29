@@ -12,6 +12,7 @@ require_relative 'aws-sdk-storagegateway/client_api'
 require_relative 'aws-sdk-storagegateway/client'
 require_relative 'aws-sdk-storagegateway/errors'
 require_relative 'aws-sdk-storagegateway/resource'
+require_relative 'aws-sdk-storagegateway/customizations'
 
 module Aws
   # @service

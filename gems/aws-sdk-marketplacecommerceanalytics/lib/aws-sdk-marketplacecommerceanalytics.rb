@@ -12,6 +12,7 @@ require_relative 'aws-sdk-marketplacecommerceanalytics/client_api'
 require_relative 'aws-sdk-marketplacecommerceanalytics/client'
 require_relative 'aws-sdk-marketplacecommerceanalytics/errors'
 require_relative 'aws-sdk-marketplacecommerceanalytics/resource'
+require_relative 'aws-sdk-marketplacecommerceanalytics/customizations'
 
 module Aws
   # @service

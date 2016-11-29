@@ -13,6 +13,7 @@ require_relative 'aws-sdk-machinelearning/client'
 require_relative 'aws-sdk-machinelearning/errors'
 require_relative 'aws-sdk-machinelearning/waiters'
 require_relative 'aws-sdk-machinelearning/resource'
+require_relative 'aws-sdk-machinelearning/customizations'
 
 module Aws
   # @service

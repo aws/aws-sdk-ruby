@@ -41,7 +41,7 @@ module AwsSdkCodeGenerator
             end
           end
         end
-        autoloads.values
+        autoloads.values + ["#{@prefix}/customizations"]
       end
 
     end

@@ -34,9 +34,7 @@ require_relative 'aws-sdk-iam/signing_certificate'
 require_relative 'aws-sdk-iam/user'
 require_relative 'aws-sdk-iam/user_policy'
 require_relative 'aws-sdk-iam/virtual_mfa_device'
-
-# customizations for generated code
-require_relative 'aws-sdk-iam/customizations.rb'
+require_relative 'aws-sdk-iam/customizations'
 
 module Aws
   # @service

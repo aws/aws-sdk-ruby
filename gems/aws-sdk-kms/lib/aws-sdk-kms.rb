@@ -12,6 +12,7 @@ require_relative 'aws-sdk-kms/client_api'
 require_relative 'aws-sdk-kms/client'
 require_relative 'aws-sdk-kms/errors'
 require_relative 'aws-sdk-kms/resource'
+require_relative 'aws-sdk-kms/customizations'
 
 module Aws
   # @service

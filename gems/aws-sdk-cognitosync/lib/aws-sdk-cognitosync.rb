@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cognitosync/client_api'
 require_relative 'aws-sdk-cognitosync/client'
 require_relative 'aws-sdk-cognitosync/errors'
 require_relative 'aws-sdk-cognitosync/resource'
+require_relative 'aws-sdk-cognitosync/customizations'
 
 module Aws
   # @service

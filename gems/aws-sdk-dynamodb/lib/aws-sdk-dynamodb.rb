@@ -14,9 +14,7 @@ require_relative 'aws-sdk-dynamodb/errors'
 require_relative 'aws-sdk-dynamodb/waiters'
 require_relative 'aws-sdk-dynamodb/resource'
 require_relative 'aws-sdk-dynamodb/table'
-
-# customizations for generated code
-require_relative 'aws-sdk-dynamodb/customizations.rb'
+require_relative 'aws-sdk-dynamodb/customizations'
 
 module Aws
   # @service

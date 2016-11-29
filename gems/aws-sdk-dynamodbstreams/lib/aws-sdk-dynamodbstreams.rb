@@ -12,6 +12,7 @@ require_relative 'aws-sdk-dynamodbstreams/client_api'
 require_relative 'aws-sdk-dynamodbstreams/client'
 require_relative 'aws-sdk-dynamodbstreams/errors'
 require_relative 'aws-sdk-dynamodbstreams/resource'
+require_relative 'aws-sdk-dynamodbstreams/customizations'
 
 module Aws
   # @service

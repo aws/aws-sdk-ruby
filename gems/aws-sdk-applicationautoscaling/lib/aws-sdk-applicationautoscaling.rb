@@ -12,6 +12,7 @@ require_relative 'aws-sdk-applicationautoscaling/client_api'
 require_relative 'aws-sdk-applicationautoscaling/client'
 require_relative 'aws-sdk-applicationautoscaling/errors'
 require_relative 'aws-sdk-applicationautoscaling/resource'
+require_relative 'aws-sdk-applicationautoscaling/customizations'
 
 module Aws
   # @service

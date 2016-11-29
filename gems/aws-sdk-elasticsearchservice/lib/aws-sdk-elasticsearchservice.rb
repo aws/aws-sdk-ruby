@@ -12,6 +12,7 @@ require_relative 'aws-sdk-elasticsearchservice/client_api'
 require_relative 'aws-sdk-elasticsearchservice/client'
 require_relative 'aws-sdk-elasticsearchservice/errors'
 require_relative 'aws-sdk-elasticsearchservice/resource'
+require_relative 'aws-sdk-elasticsearchservice/customizations'
 
 module Aws
   # @service

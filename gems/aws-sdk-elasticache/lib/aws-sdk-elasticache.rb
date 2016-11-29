@@ -13,6 +13,7 @@ require_relative 'aws-sdk-elasticache/client'
 require_relative 'aws-sdk-elasticache/errors'
 require_relative 'aws-sdk-elasticache/waiters'
 require_relative 'aws-sdk-elasticache/resource'
+require_relative 'aws-sdk-elasticache/customizations'
 
 module Aws
   # @service

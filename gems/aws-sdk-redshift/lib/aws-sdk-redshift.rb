@@ -13,6 +13,7 @@ require_relative 'aws-sdk-redshift/client'
 require_relative 'aws-sdk-redshift/errors'
 require_relative 'aws-sdk-redshift/waiters'
 require_relative 'aws-sdk-redshift/resource'
+require_relative 'aws-sdk-redshift/customizations'
 
 module Aws
   # @service

@@ -12,6 +12,7 @@ require_relative 'aws-sdk-directoryservice/client_api'
 require_relative 'aws-sdk-directoryservice/client'
 require_relative 'aws-sdk-directoryservice/errors'
 require_relative 'aws-sdk-directoryservice/resource'
+require_relative 'aws-sdk-directoryservice/customizations'
 
 module Aws
   # @service

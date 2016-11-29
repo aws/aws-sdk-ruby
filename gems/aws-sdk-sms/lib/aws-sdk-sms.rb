@@ -12,6 +12,7 @@ require_relative 'aws-sdk-sms/client_api'
 require_relative 'aws-sdk-sms/client'
 require_relative 'aws-sdk-sms/errors'
 require_relative 'aws-sdk-sms/resource'
+require_relative 'aws-sdk-sms/customizations'
 
 module Aws
   # @service

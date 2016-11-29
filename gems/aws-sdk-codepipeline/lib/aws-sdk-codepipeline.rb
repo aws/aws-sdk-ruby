@@ -12,6 +12,7 @@ require_relative 'aws-sdk-codepipeline/client_api'
 require_relative 'aws-sdk-codepipeline/client'
 require_relative 'aws-sdk-codepipeline/errors'
 require_relative 'aws-sdk-codepipeline/resource'
+require_relative 'aws-sdk-codepipeline/customizations'
 
 module Aws
   # @service

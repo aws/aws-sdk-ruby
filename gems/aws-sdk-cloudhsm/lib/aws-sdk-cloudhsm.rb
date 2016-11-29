@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cloudhsm/client_api'
 require_relative 'aws-sdk-cloudhsm/client'
 require_relative 'aws-sdk-cloudhsm/errors'
 require_relative 'aws-sdk-cloudhsm/resource'
+require_relative 'aws-sdk-cloudhsm/customizations'
 
 module Aws
   # @service

@@ -12,6 +12,7 @@ require_relative 'aws-sdk-budgets/client_api'
 require_relative 'aws-sdk-budgets/client'
 require_relative 'aws-sdk-budgets/errors'
 require_relative 'aws-sdk-budgets/resource'
+require_relative 'aws-sdk-budgets/customizations'
 
 module Aws
   # @service

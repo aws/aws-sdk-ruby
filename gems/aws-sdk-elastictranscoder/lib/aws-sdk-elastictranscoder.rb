@@ -13,6 +13,7 @@ require_relative 'aws-sdk-elastictranscoder/client'
 require_relative 'aws-sdk-elastictranscoder/errors'
 require_relative 'aws-sdk-elastictranscoder/waiters'
 require_relative 'aws-sdk-elastictranscoder/resource'
+require_relative 'aws-sdk-elastictranscoder/customizations'
 
 module Aws
   # @service

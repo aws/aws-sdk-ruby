@@ -35,9 +35,7 @@ require_relative 'aws-sdk-ec2/volume'
 require_relative 'aws-sdk-ec2/vpc'
 require_relative 'aws-sdk-ec2/vpc_peering_connection'
 require_relative 'aws-sdk-ec2/vpc_address'
-
-# customizations for generated code
-require_relative 'aws-sdk-ec2/customizations.rb'
+require_relative 'aws-sdk-ec2/customizations'
 
 module Aws
   # @service

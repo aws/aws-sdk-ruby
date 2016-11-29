@@ -19,6 +19,7 @@ require_relative 'aws-sdk-glacier/job'
 require_relative 'aws-sdk-glacier/multipart_upload'
 require_relative 'aws-sdk-glacier/notification'
 require_relative 'aws-sdk-glacier/vault'
+require_relative 'aws-sdk-glacier/customizations'
 
 module Aws
   # @service

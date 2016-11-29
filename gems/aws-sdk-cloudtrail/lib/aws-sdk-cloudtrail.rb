@@ -12,6 +12,7 @@ require_relative 'aws-sdk-cloudtrail/client_api'
 require_relative 'aws-sdk-cloudtrail/client'
 require_relative 'aws-sdk-cloudtrail/errors'
 require_relative 'aws-sdk-cloudtrail/resource'
+require_relative 'aws-sdk-cloudtrail/customizations'
 
 module Aws
   # @service

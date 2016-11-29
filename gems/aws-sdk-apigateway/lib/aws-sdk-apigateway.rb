@@ -12,6 +12,7 @@ require_relative 'aws-sdk-apigateway/client_api'
 require_relative 'aws-sdk-apigateway/client'
 require_relative 'aws-sdk-apigateway/errors'
 require_relative 'aws-sdk-apigateway/resource'
+require_relative 'aws-sdk-apigateway/customizations'
 
 module Aws
   # @service

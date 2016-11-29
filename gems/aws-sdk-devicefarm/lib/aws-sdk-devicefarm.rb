@@ -12,6 +12,7 @@ require_relative 'aws-sdk-devicefarm/client_api'
 require_relative 'aws-sdk-devicefarm/client'
 require_relative 'aws-sdk-devicefarm/errors'
 require_relative 'aws-sdk-devicefarm/resource'
+require_relative 'aws-sdk-devicefarm/customizations'
 
 module Aws
   # @service

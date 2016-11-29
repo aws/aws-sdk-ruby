@@ -13,6 +13,7 @@ require_relative 'aws-sdk-codedeploy/client'
 require_relative 'aws-sdk-codedeploy/errors'
 require_relative 'aws-sdk-codedeploy/waiters'
 require_relative 'aws-sdk-codedeploy/resource'
+require_relative 'aws-sdk-codedeploy/customizations'
 
 module Aws
   # @service

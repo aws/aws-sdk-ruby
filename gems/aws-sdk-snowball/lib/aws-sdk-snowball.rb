@@ -12,6 +12,7 @@ require_relative 'aws-sdk-snowball/client_api'
 require_relative 'aws-sdk-snowball/client'
 require_relative 'aws-sdk-snowball/errors'
 require_relative 'aws-sdk-snowball/resource'
+require_relative 'aws-sdk-snowball/customizations'
 
 module Aws
   # @service
