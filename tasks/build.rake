@@ -25,8 +25,8 @@ end
 task 'build:aws-sdk-sts' do
   sts = BuildTools::Services.service('sts')
   sts.gem_dependencies.clear
-  generator = AwsSdkCodeGenerator::CodeGenerator.new(service: sts)
-  files = generator.src_files(prefix: 'aws-sdk-sts')
+  generator = AwsSdkCodeGenerator::CodeBuilder.new(service: sts)
+  files = generator.source_files(prefix: 'aws-sdk-sts')
   writer = BuildTools::FileWriter.new(directory: 'gems/aws-sdk-core/lib')
   writer.write_files(files)
 end
