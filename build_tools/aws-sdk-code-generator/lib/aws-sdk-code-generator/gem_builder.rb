@@ -18,8 +18,8 @@ module AwsSdkCodeGenerator
         y.yield(features_step_definitions_path, features_step_definitions_file)
         y.yield(spec_helper_path, spec_helper_file)
         y.yield(version_path, version_file)
-        code = CodeGenerator.new(@options)
-        code.src_files(prefix: @service.gem_name).each do |path, code|
+        code = CodeBuilder.new(@options)
+        code.source_files(prefix: @service.gem_name).each do |path, code|
           y.yield("lib/#{path}", code)
         end
       end.each(&block)

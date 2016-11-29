@@ -2,7 +2,6 @@ $LOAD_PATH.unshift(File.expand_path('../aws-sdk-code-generator/lib', __FILE__))
 
 require 'aws-sdk-code-generator'
 
-require_relative 'builder'
 require_relative 'customizations'
 require_relative 'file_writer'
 require_relative 'replace_lines'
