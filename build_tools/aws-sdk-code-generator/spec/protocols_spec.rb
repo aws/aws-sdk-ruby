@@ -53,18 +53,19 @@ def client_for(suite, test_case, n)
   unless Aws.const_defined?(name)
     operation = test_case['given']
     operation['http'] ||= { 'method' => 'POST', 'requestUri' => '/' }
-    api = {
-      'metadata' => suite['metadata'],
-      'operations' => {
-        'OperationName' => test_case['given']
+    service = AwsSdkCodeGenerator::Service.new(
+      name: name,
+      module_name: "Aws::#{name}",
+      api: {
+        'metadata' => suite['metadata'],
+        'operations' => {
+          'OperationName' => test_case['given']
+        },
+        'shapes' => suite['shapes'],
       },
-      'shapes' => suite['shapes'],
-    }
-    options = {
-      module_names: ['Aws', name],
-      api: api,
-    }
-    code = AwsSdkCodeGenerator::Generator.new(options).generate_src
+      gem_version: '1.0.0',
+    )
+    code = AwsSdkCodeGenerator::CodeBuilder.new(service: service).source
     Object.module_eval(code)
   end
   client_class = Aws.const_get(name).const_get(:Client)

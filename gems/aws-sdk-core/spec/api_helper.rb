@@ -99,15 +99,22 @@ module ApiHelper
     end
 
     def sample_service(options = {})
+      api_hash = options.fetch(:api, api(options))
+      api_hash['metadata'] ||= metadata(options)
       module_name = next_sample_module_name
-      options[:api] ||= api(options)
-      options[:api]['metadata'] ||= metadata(options)
-      options[:module_names] = [module_name]
-      g = AwsSdkCodeGenerator::Generator.new(options)
+      code = AwsSdkCodeGenerator::CodeBuilder.new(service: AwsSdkCodeGenerator::Service.new(
+        name: module_name,
+        module_name: module_name,
+        api: api_hash,
+        paginators: options[:paginators],
+        waiters: options[:waiters],
+        resources: options[:resources],
+        gem_version: '1.0.0',
+      ))
       begin
-        Object.module_eval(g.generate_src)
+        Object.module_eval(code.source)
       rescue => err
-        puts(g.generate_src)
+        puts(code.source)
         raise err
       end
       Object.const_get(module_name)

@@ -35,9 +35,9 @@ module AwsSdkCodeGenerator
       @identifier = name.downcase
       @gem_name = "aws-sdk-#{identifier}"
       @protocol = api.fetch('metadata').fetch('protocol')
-      @api_version = api.fetch('metadata').fetch('apiVersion')
+      @api_version = api.fetch('metadata').fetch('apiVersion', nil)
       @signature_version = api.fetch('metadata').fetch('signatureVersion', nil)
-      @full_name = api.fetch('metadata').fetch('serviceFullName')
+      @full_name = api.fetch('metadata').fetch('serviceFullName', nil)
       @short_name = api.fetch('metadata').fetch('serviceAbbreviation', @full_name)
     end
 

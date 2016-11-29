@@ -168,6 +168,7 @@ describe 'Interfaces' do
     it 'defines a class for each resource type' do
       expect(Sample.constants.sort).to eq([
         # constants for every service
+        :GEM_VERSION,
         :Client,
         :ClientApi,
         :Errors,

@@ -1,6 +1,7 @@
 module AwsSdkCodeGenerator
-  class CodeGenerator
+  class CodeBuilder
 
+    # @api private
     GENERATED_SRC_WARNING = <<-WARNING
 # WARNING ABOUT GENERATED CODE
 #
@@ -28,7 +29,7 @@ module AwsSdkCodeGenerator
       @examples = @service.examples
     end
 
-    def generate_src
+    def source
       svc_mod = new_svc_module
       @gem_dependencies.each { |gem_name, _| svc_mod.require(gem_name) }
       svc_mod.docstring(service_docstring)
@@ -40,7 +41,8 @@ module AwsSdkCodeGenerator
     end
 
     # @option options [String] :prefix
-    def src_files(options = {})
+    # @return [Enumerable<String<path>, String<code>>]
+    def source_files(options = {})
       prefix = options.fetch(:prefix, nil)
       prefix ||= @module_names.map { |n| underscore(n) }.join('/')
       Enumerator.new do |y|
@@ -60,7 +62,6 @@ module AwsSdkCodeGenerator
         end
       end
     end
-    alias generate_src_files src_files
 
     private
 

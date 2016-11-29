@@ -80,14 +80,14 @@ module SpecHelper
         examples: model_path(:examples, api_dir),
       }
 
-      generator = AwsSdkCodeGenerator::CodeGenerator.new(
+      generator = AwsSdkCodeGenerator::CodeBuilder.new(
         service: AwsSdkCodeGenerator::Service.new(service_opts)
       )
 
       if options.fetch(:multiple_files, true)
 
         tmpdir = Dir.mktmpdir
-        generator.generate_src_files.each do |path, code|
+        generator.source_files.each do |path, code|
           path = File.join(tmpdir, path)
           FileUtils.mkdir_p(File.dirname(path))
           File.open(path, 'wb') do |file|
@@ -99,7 +99,7 @@ module SpecHelper
         tmpdir
 
       else
-        code = generator.generate_src
+        code = generator.source
         begin
           Kernel.module_eval(code)
         rescue => error
@@ -122,7 +122,7 @@ module SpecHelper
 
     def model_path(model, models_dir)
       path = "#{models_dir}/#{model}.json"
-      File.exists?(path) : path : nil
+      File.exists?(path) ? path : nil
     end
 
   end
