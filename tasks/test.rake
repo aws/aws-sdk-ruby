@@ -39,7 +39,7 @@ end
 
 task 'test:features' do
   failures = []
-  Dir.glob('**/features').each do |dir|
+  Dir.glob('gems/*/features').each do |dir|
     sh("bundle exec cucumber -t ~@veryslow -r #{dir} #{dir}") do |ok, _|
       failures << File.basename(File.dirname(dir)) if !ok
     end
