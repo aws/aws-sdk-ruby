@@ -290,8 +290,11 @@ to be backwards compatible.
 | Amazon Kinesis                           | Kinesis                      | 2013-12-02  |
 | Amazon Kinesis Analytics                 | KinesisAnalytics             | 2015-08-14  |
 | Amazon Kinesis Firehose                  | Firehose                     | 2015-08-04  |
+| Amazon Lightsail                         | Lightsail                    | 2016-11-28  |
 | Amazon Machine Learning                  | MachineLearning              | 2014-12-12  |
+| Amazon Polly                             | Polly                        | 2016-06-10  |
 | Amazon Redshift                          | Redshift                     | 2012-12-01  |
+| Amazon Rekognition                       | Rekognition                  | 2016-06-27  |
 | Amazon Relational Database Service       | RDS                          | 2014-10-31  |
 | Amazon Route 53                          | Route53                      | 2013-04-01  |
 | Amazon Route 53 Domains                  | Route53Domains               | 2014-05-15  |
@@ -305,8 +308,8 @@ to be backwards compatible.
 | Amazon WorkSpaces                        | WorkSpaces                   | 2015-04-08  |
 | Application Auto Scaling                 | ApplicationAutoScaling       | 2016-02-06  |
 | Auto Scaling                             | AutoScaling                  | 2011-01-01  |
-| Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
 | Elastic Load Balancing                   | ElasticLoadBalancingV2       | 2015-12-01  |
+| Elastic Load Balancing                   | ElasticLoadBalancing         | 2012-06-01  |
 
 ## License
 

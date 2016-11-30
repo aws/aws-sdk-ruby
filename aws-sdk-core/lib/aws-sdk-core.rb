@@ -72,12 +72,14 @@ module Aws
     KMS
     Lambda
     LambdaPreview
+    Lightsail
     MachineLearning
     MarketplaceCommerceAnalytics
     MarketplaceMetering
     OpsWorks
     Polly
     RDS
+    Rekognition
     Redshift
     Route53
     Route53Domains

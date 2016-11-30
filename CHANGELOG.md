@@ -1,6 +1,14 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Polly - Updated the documentation for Amazon Polly.
+
+* Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
+
+* Feature - Aws::Lightsail - Added support for a new service, Amazon Lightsail.
+
+* Feature - Aws::Rekognition - Added support for a new service, Amazon Rekognition.
+
 * Feature - Aws::Polly - Adds support for Amazon Polly, as well as a presigned URL generation helper `Aws::Polly::Presigner`.
 
 2.6.29 (2016-11-29)
