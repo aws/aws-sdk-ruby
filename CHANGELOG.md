@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.30 (2016-11-30)
+------------------
+
 * Feature - Aws::Polly - Updated the documentation for Amazon Polly.
 
 * Feature - Aws::Snowball - Updated the API, and documentation for Amazon Import/Export Snowball.
