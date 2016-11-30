@@ -1,6 +1,8 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::Polly - Adds support for Amazon Polly, as well as a presigned URL generation helper `Aws::Polly::Presigner`.
+
 2.6.29 (2016-11-29)
 ------------------
 

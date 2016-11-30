@@ -76,6 +76,7 @@ module Aws
     MarketplaceCommerceAnalytics
     MarketplaceMetering
     OpsWorks
+    Polly
     RDS
     Redshift
     Route53

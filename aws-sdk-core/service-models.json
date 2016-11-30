@@ -226,6 +226,10 @@
     "models": "opsworks/2013-02-18",
     "endpoint": "opsworks"
   },
+  "Polly": {
+    "models": "polly/2016-06-10",
+    "endpoint": "polly"
+  },
   "RDS": {
     "models": "rds/2014-10-31",
     "endpoint": "rds"
