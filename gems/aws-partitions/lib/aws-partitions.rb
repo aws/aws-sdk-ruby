@@ -150,7 +150,7 @@ module Aws
       #       puts services.name
       #     end
       #
-      # @param [String] partition_name The name of the partition to return.
+      # @param [String] name The name of the partition to return.
       #   Valid names include "aws", "aws-cn", and "aws-us-gov".
       #
       # @return [Partition]

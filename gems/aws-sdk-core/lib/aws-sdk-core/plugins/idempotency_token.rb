@@ -12,8 +12,6 @@ module Aws
       # @api private
       class Handler < Seahorse::Client::Handler
 
-        # @param [RequestContext] context
-        # @param [Response]
         def call(context)
           auto_fill(context.params, context.operation.input)
           @handler.call(context)
