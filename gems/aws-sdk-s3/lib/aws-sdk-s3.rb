@@ -33,37 +33,33 @@ require_relative 'aws-sdk-s3/object_summary'
 require_relative 'aws-sdk-s3/object_version'
 require_relative 'aws-sdk-s3/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Simple Storage Service, which shipped in `aws-sdk-s3` gem.
-  #
-  # # Aws::S3::Client
-  #
-  # The {Aws::S3::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     s3 = Aws::S3::Client.new
-  #     resp = s3.abort_multipart_upload(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::S3::Errors
-  #
-  # Errors returned from Amazon Simple Storage Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::S3::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module S3
+# This module provides support for Amazon Simple Storage Service. This module is available in the
+# `aws-sdk-s3` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Simple Storage Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::S3::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::S3
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

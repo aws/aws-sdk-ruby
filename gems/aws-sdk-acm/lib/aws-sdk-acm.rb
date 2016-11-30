@@ -14,37 +14,33 @@ require_relative 'aws-sdk-acm/errors'
 require_relative 'aws-sdk-acm/resource'
 require_relative 'aws-sdk-acm/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Certificate Manager, which shipped in `aws-sdk-acm` gem.
-  #
-  # # Aws::ACM::Client
-  #
-  # The {Aws::ACM::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     acm = Aws::ACM::Client.new
-  #     resp = acm.add_tags_to_certificate(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ACM::Errors
-  #
-  # Errors returned from AWS Certificate Manager all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ACM::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ACM
+# This module provides support for AWS Certificate Manager. This module is available in the
+# `aws-sdk-acm` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Certificate Manager all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ACM::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ACM
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

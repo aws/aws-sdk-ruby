@@ -14,37 +14,33 @@ require_relative 'aws-sdk-gamelift/errors'
 require_relative 'aws-sdk-gamelift/resource'
 require_relative 'aws-sdk-gamelift/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon GameLift, which shipped in `aws-sdk-gamelift` gem.
-  #
-  # # Aws::GameLift::Client
-  #
-  # The {Aws::GameLift::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     gamelift = Aws::GameLift::Client.new
-  #     resp = gamelift.create_alias(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::GameLift::Errors
-  #
-  # Errors returned from Amazon GameLift all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::GameLift::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module GameLift
+# This module provides support for Amazon GameLift. This module is available in the
+# `aws-sdk-gamelift` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon GameLift all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::GameLift::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::GameLift
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-datapipeline/errors'
 require_relative 'aws-sdk-datapipeline/resource'
 require_relative 'aws-sdk-datapipeline/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Data Pipeline, which shipped in `aws-sdk-datapipeline` gem.
-  #
-  # # Aws::DataPipeline::Client
-  #
-  # The {Aws::DataPipeline::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     datapipeline = Aws::DataPipeline::Client.new
-  #     resp = datapipeline.activate_pipeline(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::DataPipeline::Errors
-  #
-  # Errors returned from AWS Data Pipeline all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::DataPipeline::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module DataPipeline
+# This module provides support for AWS Data Pipeline. This module is available in the
+# `aws-sdk-datapipeline` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Data Pipeline all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::DataPipeline::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::DataPipeline
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

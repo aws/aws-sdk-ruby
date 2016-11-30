@@ -14,37 +14,33 @@ require_relative 'aws-sdk-cloudsearch/errors'
 require_relative 'aws-sdk-cloudsearch/resource'
 require_relative 'aws-sdk-cloudsearch/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon CloudSearch, which shipped in `aws-sdk-cloudsearch` gem.
-  #
-  # # Aws::CloudSearch::Client
-  #
-  # The {Aws::CloudSearch::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cloudsearch = Aws::CloudSearch::Client.new
-  #     resp = cloudsearch.build_suggesters(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CloudSearch::Errors
-  #
-  # Errors returned from Amazon CloudSearch all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CloudSearch::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CloudSearch
+# This module provides support for Amazon CloudSearch. This module is available in the
+# `aws-sdk-cloudsearch` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon CloudSearch all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CloudSearch::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CloudSearch
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

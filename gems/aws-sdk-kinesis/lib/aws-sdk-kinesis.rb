@@ -15,37 +15,33 @@ require_relative 'aws-sdk-kinesis/waiters'
 require_relative 'aws-sdk-kinesis/resource'
 require_relative 'aws-sdk-kinesis/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Kinesis, which shipped in `aws-sdk-kinesis` gem.
-  #
-  # # Aws::Kinesis::Client
-  #
-  # The {Aws::Kinesis::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     kinesis = Aws::Kinesis::Client.new
-  #     resp = kinesis.add_tags_to_stream(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Kinesis::Errors
-  #
-  # Errors returned from Amazon Kinesis all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Kinesis::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Kinesis
+# This module provides support for Amazon Kinesis. This module is available in the
+# `aws-sdk-kinesis` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Kinesis all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Kinesis::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Kinesis
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

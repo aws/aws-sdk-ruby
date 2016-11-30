@@ -15,37 +15,33 @@ require_relative 'aws-sdk-elastictranscoder/waiters'
 require_relative 'aws-sdk-elastictranscoder/resource'
 require_relative 'aws-sdk-elastictranscoder/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Elastic Transcoder, which shipped in `aws-sdk-elastictranscoder` gem.
-  #
-  # # Aws::ElasticTranscoder::Client
-  #
-  # The {Aws::ElasticTranscoder::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     elastictranscoder = Aws::ElasticTranscoder::Client.new
-  #     resp = elastictranscoder.cancel_job(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ElasticTranscoder::Errors
-  #
-  # Errors returned from Amazon Elastic Transcoder all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ElasticTranscoder::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ElasticTranscoder
+# This module provides support for Amazon Elastic Transcoder. This module is available in the
+# `aws-sdk-elastictranscoder` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Elastic Transcoder all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ElasticTranscoder::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ElasticTranscoder
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

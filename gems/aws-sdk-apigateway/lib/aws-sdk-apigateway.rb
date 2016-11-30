@@ -14,37 +14,33 @@ require_relative 'aws-sdk-apigateway/errors'
 require_relative 'aws-sdk-apigateway/resource'
 require_relative 'aws-sdk-apigateway/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon API Gateway, which shipped in `aws-sdk-apigateway` gem.
-  #
-  # # Aws::APIGateway::Client
-  #
-  # The {Aws::APIGateway::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     apigateway = Aws::APIGateway::Client.new
-  #     resp = apigateway.create_api_key(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::APIGateway::Errors
-  #
-  # Errors returned from Amazon API Gateway all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::APIGateway::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module APIGateway
+# This module provides support for Amazon API Gateway. This module is available in the
+# `aws-sdk-apigateway` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon API Gateway all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::APIGateway::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::APIGateway
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -45,8 +45,11 @@ module AwsSdkCodeGenerator
     def source_files(options = {})
       prefix = options.fetch(:prefix, nil)
       prefix ||= @module_names.map { |n| underscore(n) }.join('/')
+      # prefix should always be the gemname. The service-module (the first
+      # item yielded below) should be moved from here into the gem builder
+      # The source code builder should simply yield the empty module
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", GENERATED_SRC_WARNING + service_module(prefix))
+        y.yield("#{prefix}.rb", Views::ServiceModule.new(service: @service, prefix: prefix).render)
         y.yield("#{prefix}/customizations.rb", '')
         each_module do |mod, type, code|
           case type

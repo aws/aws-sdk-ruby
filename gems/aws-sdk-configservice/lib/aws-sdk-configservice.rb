@@ -14,37 +14,33 @@ require_relative 'aws-sdk-configservice/errors'
 require_relative 'aws-sdk-configservice/resource'
 require_relative 'aws-sdk-configservice/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Config, which shipped in `aws-sdk-configservice` gem.
-  #
-  # # Aws::ConfigService::Client
-  #
-  # The {Aws::ConfigService::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     configservice = Aws::ConfigService::Client.new
-  #     resp = configservice.delete_config_rule(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ConfigService::Errors
-  #
-  # Errors returned from AWS Config all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ConfigService::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ConfigService
+# This module provides support for AWS Config. This module is available in the
+# `aws-sdk-configservice` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Config all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ConfigService::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ConfigService
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-databasemigrationservice/errors'
 require_relative 'aws-sdk-databasemigrationservice/resource'
 require_relative 'aws-sdk-databasemigrationservice/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Database Migration Service, which shipped in `aws-sdk-databasemigrationservice` gem.
-  #
-  # # Aws::DatabaseMigrationService::Client
-  #
-  # The {Aws::DatabaseMigrationService::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     databasemigrationservice = Aws::DatabaseMigrationService::Client.new
-  #     resp = databasemigrationservice.add_tags_to_resource(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::DatabaseMigrationService::Errors
-  #
-  # Errors returned from AWS Database Migration Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::DatabaseMigrationService::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module DatabaseMigrationService
+# This module provides support for AWS Database Migration Service. This module is available in the
+# `aws-sdk-databasemigrationservice` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Database Migration Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::DatabaseMigrationService::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::DatabaseMigrationService
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

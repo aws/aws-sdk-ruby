@@ -40,37 +40,33 @@ require_relative 'aws-sdk-rds/reserved_db_instances_offering'
 require_relative 'aws-sdk-rds/resource_pending_maintenance_action_list'
 require_relative 'aws-sdk-rds/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Relational Database Service, which shipped in `aws-sdk-rds` gem.
-  #
-  # # Aws::RDS::Client
-  #
-  # The {Aws::RDS::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     rds = Aws::RDS::Client.new
-  #     resp = rds.add_role_to_db_cluster(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::RDS::Errors
-  #
-  # Errors returned from Amazon Relational Database Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::RDS::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module RDS
+# This module provides support for Amazon Relational Database Service. This module is available in the
+# `aws-sdk-rds` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Relational Database Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::RDS::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::RDS
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -21,37 +21,33 @@ require_relative 'aws-sdk-glacier/notification'
 require_relative 'aws-sdk-glacier/vault'
 require_relative 'aws-sdk-glacier/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Glacier, which shipped in `aws-sdk-glacier` gem.
-  #
-  # # Aws::Glacier::Client
-  #
-  # The {Aws::Glacier::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     glacier = Aws::Glacier::Client.new
-  #     resp = glacier.abort_multipart_upload(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Glacier::Errors
-  #
-  # Errors returned from Amazon Glacier all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Glacier::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Glacier
+# This module provides support for Amazon Glacier. This module is available in the
+# `aws-sdk-glacier` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Glacier all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Glacier::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Glacier
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

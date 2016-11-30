@@ -17,37 +17,33 @@ require_relative 'aws-sdk-cloudwatch/alarm'
 require_relative 'aws-sdk-cloudwatch/metric'
 require_relative 'aws-sdk-cloudwatch/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon CloudWatch, which shipped in `aws-sdk-cloudwatch` gem.
-  #
-  # # Aws::CloudWatch::Client
-  #
-  # The {Aws::CloudWatch::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cloudwatch = Aws::CloudWatch::Client.new
-  #     resp = cloudwatch.delete_alarms(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CloudWatch::Errors
-  #
-  # Errors returned from Amazon CloudWatch all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CloudWatch::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CloudWatch
+# This module provides support for Amazon CloudWatch. This module is available in the
+# `aws-sdk-cloudwatch` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon CloudWatch all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CloudWatch::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CloudWatch
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

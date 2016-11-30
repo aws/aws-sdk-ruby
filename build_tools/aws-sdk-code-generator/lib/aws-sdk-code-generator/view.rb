@@ -15,5 +15,9 @@ module AwsSdkCodeGenerator
       subclass.raise_on_context_miss = true
     end
 
+    def underscore(string)
+      Underscore.underscore(string)
+    end
+
   end
 end

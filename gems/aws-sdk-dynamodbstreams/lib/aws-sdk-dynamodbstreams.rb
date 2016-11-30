@@ -14,37 +14,33 @@ require_relative 'aws-sdk-dynamodbstreams/errors'
 require_relative 'aws-sdk-dynamodbstreams/resource'
 require_relative 'aws-sdk-dynamodbstreams/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon DynamoDB Streams, which shipped in `aws-sdk-dynamodbstreams` gem.
-  #
-  # # Aws::DynamoDBStreams::Client
-  #
-  # The {Aws::DynamoDBStreams::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     dynamodbstreams = Aws::DynamoDBStreams::Client.new
-  #     resp = dynamodbstreams.describe_stream(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::DynamoDBStreams::Errors
-  #
-  # Errors returned from Amazon DynamoDB Streams all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::DynamoDBStreams::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module DynamoDBStreams
+# This module provides support for Amazon DynamoDB Streams. This module is available in the
+# `aws-sdk-dynamodbstreams` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon DynamoDB Streams all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::DynamoDBStreams::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::DynamoDBStreams
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

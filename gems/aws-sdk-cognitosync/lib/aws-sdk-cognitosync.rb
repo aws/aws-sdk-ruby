@@ -14,37 +14,33 @@ require_relative 'aws-sdk-cognitosync/errors'
 require_relative 'aws-sdk-cognitosync/resource'
 require_relative 'aws-sdk-cognitosync/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Cognito Sync, which shipped in `aws-sdk-cognitosync` gem.
-  #
-  # # Aws::CognitoSync::Client
-  #
-  # The {Aws::CognitoSync::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cognitosync = Aws::CognitoSync::Client.new
-  #     resp = cognitosync.bulk_publish(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CognitoSync::Errors
-  #
-  # Errors returned from Amazon Cognito Sync all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CognitoSync::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CognitoSync
+# This module provides support for Amazon Cognito Sync. This module is available in the
+# `aws-sdk-cognitosync` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Cognito Sync all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CognitoSync::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CognitoSync
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

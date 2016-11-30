@@ -14,37 +14,33 @@ require_relative 'aws-sdk-simpledb/errors'
 require_relative 'aws-sdk-simpledb/resource'
 require_relative 'aws-sdk-simpledb/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon SimpleDB, which shipped in `aws-sdk-simpledb` gem.
-  #
-  # # Aws::SimpleDB::Client
-  #
-  # The {Aws::SimpleDB::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     simpledb = Aws::SimpleDB::Client.new
-  #     resp = simpledb.batch_delete_attributes(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::SimpleDB::Errors
-  #
-  # Errors returned from Amazon SimpleDB all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::SimpleDB::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module SimpleDB
+# This module provides support for Amazon SimpleDB. This module is available in the
+# `aws-sdk-simpledb` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon SimpleDB all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::SimpleDB::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::SimpleDB
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

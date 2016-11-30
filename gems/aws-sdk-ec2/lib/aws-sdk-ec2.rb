@@ -37,37 +37,33 @@ require_relative 'aws-sdk-ec2/vpc_peering_connection'
 require_relative 'aws-sdk-ec2/vpc_address'
 require_relative 'aws-sdk-ec2/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Elastic Compute Cloud, which shipped in `aws-sdk-ec2` gem.
-  #
-  # # Aws::EC2::Client
-  #
-  # The {Aws::EC2::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     ec2 = Aws::EC2::Client.new
-  #     resp = ec2.accept_reserved_instances_exchange_quote(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::EC2::Errors
-  #
-  # Errors returned from Amazon Elastic Compute Cloud all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::EC2::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module EC2
+# This module provides support for Amazon Elastic Compute Cloud. This module is available in the
+# `aws-sdk-ec2` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Elastic Compute Cloud all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::EC2::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::EC2
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

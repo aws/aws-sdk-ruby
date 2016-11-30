@@ -14,37 +14,33 @@ require_relative 'aws-sdk-route53domains/errors'
 require_relative 'aws-sdk-route53domains/resource'
 require_relative 'aws-sdk-route53domains/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Route 53 Domains, which shipped in `aws-sdk-route53domains` gem.
-  #
-  # # Aws::Route53Domains::Client
-  #
-  # The {Aws::Route53Domains::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     route53domains = Aws::Route53Domains::Client.new
-  #     resp = route53domains.check_domain_availability(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Route53Domains::Errors
-  #
-  # Errors returned from Amazon Route 53 Domains all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Route53Domains::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Route53Domains
+# This module provides support for Amazon Route 53 Domains. This module is available in the
+# `aws-sdk-route53domains` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Route 53 Domains all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Route53Domains::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Route53Domains
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-swf/errors'
 require_relative 'aws-sdk-swf/resource'
 require_relative 'aws-sdk-swf/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Simple Workflow Service, which shipped in `aws-sdk-swf` gem.
-  #
-  # # Aws::SWF::Client
-  #
-  # The {Aws::SWF::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     swf = Aws::SWF::Client.new
-  #     resp = swf.count_closed_workflow_executions(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::SWF::Errors
-  #
-  # Errors returned from Amazon Simple Workflow Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::SWF::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module SWF
+# This module provides support for Amazon Simple Workflow Service. This module is available in the
+# `aws-sdk-swf` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Simple Workflow Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::SWF::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::SWF
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

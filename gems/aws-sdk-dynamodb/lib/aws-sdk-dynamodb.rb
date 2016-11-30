@@ -16,37 +16,33 @@ require_relative 'aws-sdk-dynamodb/resource'
 require_relative 'aws-sdk-dynamodb/table'
 require_relative 'aws-sdk-dynamodb/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon DynamoDB, which shipped in `aws-sdk-dynamodb` gem.
-  #
-  # # Aws::DynamoDB::Client
-  #
-  # The {Aws::DynamoDB::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     dynamodb = Aws::DynamoDB::Client.new
-  #     resp = dynamodb.batch_get_item(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::DynamoDB::Errors
-  #
-  # Errors returned from Amazon DynamoDB all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::DynamoDB::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module DynamoDB
+# This module provides support for Amazon DynamoDB. This module is available in the
+# `aws-sdk-dynamodb` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon DynamoDB all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::DynamoDB::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::DynamoDB
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

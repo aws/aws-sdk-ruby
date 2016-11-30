@@ -14,37 +14,33 @@ require_relative 'aws-sdk-elasticsearchservice/errors'
 require_relative 'aws-sdk-elasticsearchservice/resource'
 require_relative 'aws-sdk-elasticsearchservice/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Elasticsearch Service, which shipped in `aws-sdk-elasticsearchservice` gem.
-  #
-  # # Aws::ElasticsearchService::Client
-  #
-  # The {Aws::ElasticsearchService::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     elasticsearchservice = Aws::ElasticsearchService::Client.new
-  #     resp = elasticsearchservice.add_tags(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ElasticsearchService::Errors
-  #
-  # Errors returned from Amazon Elasticsearch Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ElasticsearchService::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ElasticsearchService
+# This module provides support for Amazon Elasticsearch Service. This module is available in the
+# `aws-sdk-elasticsearchservice` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Elasticsearch Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ElasticsearchService::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ElasticsearchService
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

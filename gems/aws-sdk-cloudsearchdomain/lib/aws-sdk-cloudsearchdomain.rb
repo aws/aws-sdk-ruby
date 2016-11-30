@@ -14,37 +14,33 @@ require_relative 'aws-sdk-cloudsearchdomain/errors'
 require_relative 'aws-sdk-cloudsearchdomain/resource'
 require_relative 'aws-sdk-cloudsearchdomain/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon CloudSearch Domain, which shipped in `aws-sdk-cloudsearchdomain` gem.
-  #
-  # # Aws::CloudSearchDomain::Client
-  #
-  # The {Aws::CloudSearchDomain::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cloudsearchdomain = Aws::CloudSearchDomain::Client.new
-  #     resp = cloudsearchdomain.search(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CloudSearchDomain::Errors
-  #
-  # Errors returned from Amazon CloudSearch Domain all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CloudSearchDomain::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CloudSearchDomain
+# This module provides support for Amazon CloudSearch Domain. This module is available in the
+# `aws-sdk-cloudsearchdomain` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon CloudSearch Domain all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CloudSearchDomain::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CloudSearchDomain
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

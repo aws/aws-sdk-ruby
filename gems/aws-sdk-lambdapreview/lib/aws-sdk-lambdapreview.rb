@@ -14,37 +14,33 @@ require_relative 'aws-sdk-lambdapreview/errors'
 require_relative 'aws-sdk-lambdapreview/resource'
 require_relative 'aws-sdk-lambdapreview/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Lambda, which shipped in `aws-sdk-lambdapreview` gem.
-  #
-  # # Aws::LambdaPreview::Client
-  #
-  # The {Aws::LambdaPreview::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     lambdapreview = Aws::LambdaPreview::Client.new
-  #     resp = lambdapreview.add_event_source(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::LambdaPreview::Errors
-  #
-  # Errors returned from AWS Lambda all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::LambdaPreview::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module LambdaPreview
+# This module provides support for AWS Lambda. This module is available in the
+# `aws-sdk-lambdapreview` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Lambda all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::LambdaPreview::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::LambdaPreview
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -15,37 +15,33 @@ require_relative 'aws-sdk-ecs/waiters'
 require_relative 'aws-sdk-ecs/resource'
 require_relative 'aws-sdk-ecs/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon EC2 Container Service, which shipped in `aws-sdk-ecs` gem.
-  #
-  # # Aws::ECS::Client
-  #
-  # The {Aws::ECS::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     ecs = Aws::ECS::Client.new
-  #     resp = ecs.create_cluster(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ECS::Errors
-  #
-  # Errors returned from Amazon EC2 Container Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ECS::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ECS
+# This module provides support for Amazon EC2 Container Service. This module is available in the
+# `aws-sdk-ecs` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon EC2 Container Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ECS::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ECS
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

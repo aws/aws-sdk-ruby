@@ -14,37 +14,33 @@ require_relative 'aws-sdk-efs/errors'
 require_relative 'aws-sdk-efs/resource'
 require_relative 'aws-sdk-efs/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Elastic File System, which shipped in `aws-sdk-efs` gem.
-  #
-  # # Aws::EFS::Client
-  #
-  # The {Aws::EFS::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     efs = Aws::EFS::Client.new
-  #     resp = efs.create_file_system(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::EFS::Errors
-  #
-  # Errors returned from Amazon Elastic File System all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::EFS::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module EFS
+# This module provides support for Amazon Elastic File System. This module is available in the
+# `aws-sdk-efs` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Elastic File System all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::EFS::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::EFS
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-codecommit/errors'
 require_relative 'aws-sdk-codecommit/resource'
 require_relative 'aws-sdk-codecommit/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS CodeCommit, which shipped in `aws-sdk-codecommit` gem.
-  #
-  # # Aws::CodeCommit::Client
-  #
-  # The {Aws::CodeCommit::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     codecommit = Aws::CodeCommit::Client.new
-  #     resp = codecommit.batch_get_repositories(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CodeCommit::Errors
-  #
-  # Errors returned from AWS CodeCommit all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CodeCommit::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CodeCommit
+# This module provides support for AWS CodeCommit. This module is available in the
+# `aws-sdk-codecommit` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS CodeCommit all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CodeCommit::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CodeCommit
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

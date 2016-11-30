@@ -15,37 +15,33 @@ require_relative 'aws-sdk-cloudfront/waiters'
 require_relative 'aws-sdk-cloudfront/resource'
 require_relative 'aws-sdk-cloudfront/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon CloudFront, which shipped in `aws-sdk-cloudfront` gem.
-  #
-  # # Aws::CloudFront::Client
-  #
-  # The {Aws::CloudFront::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cloudfront = Aws::CloudFront::Client.new
-  #     resp = cloudfront.create_cloud_front_origin_access_identity(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CloudFront::Errors
-  #
-  # Errors returned from Amazon CloudFront all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CloudFront::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CloudFront
+# This module provides support for Amazon CloudFront. This module is available in the
+# `aws-sdk-cloudfront` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon CloudFront all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CloudFront::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CloudFront
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

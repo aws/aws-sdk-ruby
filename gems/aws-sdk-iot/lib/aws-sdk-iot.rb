@@ -14,37 +14,33 @@ require_relative 'aws-sdk-iot/errors'
 require_relative 'aws-sdk-iot/resource'
 require_relative 'aws-sdk-iot/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS IoT, which shipped in `aws-sdk-iot` gem.
-  #
-  # # Aws::IoT::Client
-  #
-  # The {Aws::IoT::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     iot = Aws::IoT::Client.new
-  #     resp = iot.accept_certificate_transfer(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::IoT::Errors
-  #
-  # Errors returned from AWS IoT all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::IoT::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module IoT
+# This module provides support for AWS IoT. This module is available in the
+# `aws-sdk-iot` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS IoT all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::IoT::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::IoT
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

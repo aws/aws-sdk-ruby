@@ -14,37 +14,33 @@ require_relative 'aws-sdk-firehose/errors'
 require_relative 'aws-sdk-firehose/resource'
 require_relative 'aws-sdk-firehose/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Kinesis Firehose, which shipped in `aws-sdk-firehose` gem.
-  #
-  # # Aws::Firehose::Client
-  #
-  # The {Aws::Firehose::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     firehose = Aws::Firehose::Client.new
-  #     resp = firehose.create_delivery_stream(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Firehose::Errors
-  #
-  # Errors returned from Amazon Kinesis Firehose all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Firehose::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Firehose
+# This module provides support for Amazon Kinesis Firehose. This module is available in the
+# `aws-sdk-firehose` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Kinesis Firehose all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Firehose::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Firehose
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-kms/errors'
 require_relative 'aws-sdk-kms/resource'
 require_relative 'aws-sdk-kms/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Key Management Service, which shipped in `aws-sdk-kms` gem.
-  #
-  # # Aws::KMS::Client
-  #
-  # The {Aws::KMS::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     kms = Aws::KMS::Client.new
-  #     resp = kms.cancel_key_deletion(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::KMS::Errors
-  #
-  # Errors returned from AWS Key Management Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::KMS::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module KMS
+# This module provides support for AWS Key Management Service. This module is available in the
+# `aws-sdk-kms` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Key Management Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::KMS::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::KMS
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

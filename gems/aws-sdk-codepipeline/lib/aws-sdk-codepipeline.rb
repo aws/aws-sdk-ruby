@@ -14,37 +14,33 @@ require_relative 'aws-sdk-codepipeline/errors'
 require_relative 'aws-sdk-codepipeline/resource'
 require_relative 'aws-sdk-codepipeline/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS CodePipeline, which shipped in `aws-sdk-codepipeline` gem.
-  #
-  # # Aws::CodePipeline::Client
-  #
-  # The {Aws::CodePipeline::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     codepipeline = Aws::CodePipeline::Client.new
-  #     resp = codepipeline.acknowledge_job(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CodePipeline::Errors
-  #
-  # Errors returned from AWS CodePipeline all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CodePipeline::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CodePipeline
+# This module provides support for AWS CodePipeline. This module is available in the
+# `aws-sdk-codepipeline` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS CodePipeline all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CodePipeline::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CodePipeline
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-importexport/errors'
 require_relative 'aws-sdk-importexport/resource'
 require_relative 'aws-sdk-importexport/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Import/Export, which shipped in `aws-sdk-importexport` gem.
-  #
-  # # Aws::ImportExport::Client
-  #
-  # The {Aws::ImportExport::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     importexport = Aws::ImportExport::Client.new
-  #     resp = importexport.cancel_job(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ImportExport::Errors
-  #
-  # Errors returned from AWS Import/Export all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ImportExport::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ImportExport
+# This module provides support for AWS Import/Export. This module is available in the
+# `aws-sdk-importexport` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Import/Export all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ImportExport::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ImportExport
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

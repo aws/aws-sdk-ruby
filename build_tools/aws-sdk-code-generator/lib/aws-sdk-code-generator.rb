@@ -1,19 +1,22 @@
 require_relative 'aws-sdk-code-generator/apply_docs'
+require_relative 'aws-sdk-code-generator/helper'
 require_relative 'aws-sdk-code-generator/service'
-require_relative 'aws-sdk-code-generator/gem_builder'
 require_relative 'aws-sdk-code-generator/underscore'
 require_relative 'aws-sdk-code-generator/view'
+
+require_relative 'aws-sdk-code-generator/code_builder'
+require_relative 'aws-sdk-code-generator/gem_builder'
 
 # views
 require_relative 'aws-sdk-code-generator/views/features/env'
 require_relative 'aws-sdk-code-generator/views/features/step_definitions'
 require_relative 'aws-sdk-code-generator/views/gemspec'
+require_relative 'aws-sdk-code-generator/views/service_module'
 require_relative 'aws-sdk-code-generator/views/spec/spec_helper'
 require_relative 'aws-sdk-code-generator/views/version'
 
 module AwsSdkCodeGenerator
 
-  autoload :CodeBuilder, 'aws-sdk-code-generator/code_builder'
   autoload :Errors, 'aws-sdk-code-generator/errors'
   autoload :HashFormatter, 'aws-sdk-code-generator/hash_formatter'
   autoload :Helper, 'aws-sdk-code-generator/helper'
@@ -53,7 +56,6 @@ module AwsSdkCodeGenerator
     autoload :RootResourceClass, 'aws-sdk-code-generator/generators/root_resource_class'
     autoload :ResourceClass, 'aws-sdk-code-generator/generators/resource_class'
     autoload :ResponseStructureExample, 'aws-sdk-code-generator/generators/response_structure_example'
-    autoload :ServiceAutoloads, 'aws-sdk-code-generator/generators/service_autoloads'
     autoload :ServiceDocumentation, 'aws-sdk-code-generator/generators/service_documentation'
     autoload :SharedExample, 'aws-sdk-code-generator/generators/shared_example'
     autoload :StructureTypeClass, 'aws-sdk-code-generator/generators/structure_type_class'

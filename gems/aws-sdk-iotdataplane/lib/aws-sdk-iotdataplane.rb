@@ -14,37 +14,33 @@ require_relative 'aws-sdk-iotdataplane/errors'
 require_relative 'aws-sdk-iotdataplane/resource'
 require_relative 'aws-sdk-iotdataplane/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS IoT Data Plane, which shipped in `aws-sdk-iotdataplane` gem.
-  #
-  # # Aws::IoTDataPlane::Client
-  #
-  # The {Aws::IoTDataPlane::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     iotdataplane = Aws::IoTDataPlane::Client.new
-  #     resp = iotdataplane.delete_thing_shadow(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::IoTDataPlane::Errors
-  #
-  # Errors returned from AWS IoT Data Plane all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::IoTDataPlane::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module IoTDataPlane
+# This module provides support for AWS IoT Data Plane. This module is available in the
+# `aws-sdk-iotdataplane` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS IoT Data Plane all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::IoTDataPlane::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::IoTDataPlane
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

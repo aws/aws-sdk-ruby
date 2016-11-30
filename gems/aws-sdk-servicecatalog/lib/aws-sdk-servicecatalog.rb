@@ -14,37 +14,33 @@ require_relative 'aws-sdk-servicecatalog/errors'
 require_relative 'aws-sdk-servicecatalog/resource'
 require_relative 'aws-sdk-servicecatalog/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Service Catalog, which shipped in `aws-sdk-servicecatalog` gem.
-  #
-  # # Aws::ServiceCatalog::Client
-  #
-  # The {Aws::ServiceCatalog::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     servicecatalog = Aws::ServiceCatalog::Client.new
-  #     resp = servicecatalog.accept_portfolio_share(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ServiceCatalog::Errors
-  #
-  # Errors returned from AWS Service Catalog all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ServiceCatalog::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ServiceCatalog
+# This module provides support for AWS Service Catalog. This module is available in the
+# `aws-sdk-servicecatalog` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Service Catalog all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ServiceCatalog::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ServiceCatalog
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -15,37 +15,33 @@ require_relative 'aws-sdk-machinelearning/waiters'
 require_relative 'aws-sdk-machinelearning/resource'
 require_relative 'aws-sdk-machinelearning/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Machine Learning, which shipped in `aws-sdk-machinelearning` gem.
-  #
-  # # Aws::MachineLearning::Client
-  #
-  # The {Aws::MachineLearning::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     machinelearning = Aws::MachineLearning::Client.new
-  #     resp = machinelearning.add_tags(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::MachineLearning::Errors
-  #
-  # Errors returned from Amazon Machine Learning all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::MachineLearning::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module MachineLearning
+# This module provides support for Amazon Machine Learning. This module is available in the
+# `aws-sdk-machinelearning` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Machine Learning all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::MachineLearning::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::MachineLearning
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

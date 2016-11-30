@@ -14,37 +14,33 @@ require_relative 'aws-sdk-waf/errors'
 require_relative 'aws-sdk-waf/resource'
 require_relative 'aws-sdk-waf/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS WAF, which shipped in `aws-sdk-waf` gem.
-  #
-  # # Aws::WAF::Client
-  #
-  # The {Aws::WAF::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     waf = Aws::WAF::Client.new
-  #     resp = waf.create_byte_match_set(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::WAF::Errors
-  #
-  # Errors returned from AWS WAF all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::WAF::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module WAF
+# This module provides support for AWS WAF. This module is available in the
+# `aws-sdk-waf` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS WAF all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::WAF::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::WAF
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-workspaces/errors'
 require_relative 'aws-sdk-workspaces/resource'
 require_relative 'aws-sdk-workspaces/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon WorkSpaces, which shipped in `aws-sdk-workspaces` gem.
-  #
-  # # Aws::WorkSpaces::Client
-  #
-  # The {Aws::WorkSpaces::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     workspaces = Aws::WorkSpaces::Client.new
-  #     resp = workspaces.create_tags(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::WorkSpaces::Errors
-  #
-  # Errors returned from Amazon WorkSpaces all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::WorkSpaces::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module WorkSpaces
+# This module provides support for Amazon WorkSpaces. This module is available in the
+# `aws-sdk-workspaces` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon WorkSpaces all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::WorkSpaces::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::WorkSpaces
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

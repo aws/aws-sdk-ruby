@@ -14,37 +14,33 @@ require_relative 'aws-sdk-elasticbeanstalk/errors'
 require_relative 'aws-sdk-elasticbeanstalk/resource'
 require_relative 'aws-sdk-elasticbeanstalk/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Elastic Beanstalk, which shipped in `aws-sdk-elasticbeanstalk` gem.
-  #
-  # # Aws::ElasticBeanstalk::Client
-  #
-  # The {Aws::ElasticBeanstalk::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     elasticbeanstalk = Aws::ElasticBeanstalk::Client.new
-  #     resp = elasticbeanstalk.abort_environment_update(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ElasticBeanstalk::Errors
-  #
-  # Errors returned from AWS Elastic Beanstalk all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ElasticBeanstalk::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ElasticBeanstalk
+# This module provides support for AWS Elastic Beanstalk. This module is available in the
+# `aws-sdk-elasticbeanstalk` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Elastic Beanstalk all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ElasticBeanstalk::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ElasticBeanstalk
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

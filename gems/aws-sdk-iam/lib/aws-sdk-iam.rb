@@ -36,37 +36,33 @@ require_relative 'aws-sdk-iam/user_policy'
 require_relative 'aws-sdk-iam/virtual_mfa_device'
 require_relative 'aws-sdk-iam/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Identity and Access Management, which shipped in `aws-sdk-iam` gem.
-  #
-  # # Aws::IAM::Client
-  #
-  # The {Aws::IAM::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     iam = Aws::IAM::Client.new
-  #     resp = iam.add_client_id_to_open_id_connect_provider(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::IAM::Errors
-  #
-  # Errors returned from AWS Identity and Access Management all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::IAM::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module IAM
+# This module provides support for AWS Identity and Access Management. This module is available in the
+# `aws-sdk-iam` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Identity and Access Management all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::IAM::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::IAM
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

@@ -14,37 +14,33 @@ require_relative 'aws-sdk-lambda/errors'
 require_relative 'aws-sdk-lambda/resource'
 require_relative 'aws-sdk-lambda/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Lambda, which shipped in `aws-sdk-lambda` gem.
-  #
-  # # Aws::Lambda::Client
-  #
-  # The {Aws::Lambda::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     lambda = Aws::Lambda::Client.new
-  #     resp = lambda.add_permission(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Lambda::Errors
-  #
-  # Errors returned from AWS Lambda all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Lambda::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Lambda
+# This module provides support for AWS Lambda. This module is available in the
+# `aws-sdk-lambda` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Lambda all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Lambda::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Lambda
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

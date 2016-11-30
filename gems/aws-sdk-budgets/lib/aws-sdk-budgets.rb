@@ -14,37 +14,33 @@ require_relative 'aws-sdk-budgets/errors'
 require_relative 'aws-sdk-budgets/resource'
 require_relative 'aws-sdk-budgets/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Budgets, which shipped in `aws-sdk-budgets` gem.
-  #
-  # # Aws::Budgets::Client
-  #
-  # The {Aws::Budgets::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     budgets = Aws::Budgets::Client.new
-  #     resp = budgets.create_budget(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Budgets::Errors
-  #
-  # Errors returned from AWS Budgets all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Budgets::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Budgets
+# This module provides support for AWS Budgets. This module is available in the
+# `aws-sdk-budgets` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Budgets all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Budgets::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Budgets
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

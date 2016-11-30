@@ -19,37 +19,33 @@ require_relative 'aws-sdk-cloudformation/stack_resource'
 require_relative 'aws-sdk-cloudformation/stack_resource_summary'
 require_relative 'aws-sdk-cloudformation/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS CloudFormation, which shipped in `aws-sdk-cloudformation` gem.
-  #
-  # # Aws::CloudFormation::Client
-  #
-  # The {Aws::CloudFormation::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cloudformation = Aws::CloudFormation::Client.new
-  #     resp = cloudformation.cancel_update_stack(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CloudFormation::Errors
-  #
-  # Errors returned from AWS CloudFormation all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CloudFormation::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CloudFormation
+# This module provides support for AWS CloudFormation. This module is available in the
+# `aws-sdk-cloudformation` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS CloudFormation all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CloudFormation::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CloudFormation
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

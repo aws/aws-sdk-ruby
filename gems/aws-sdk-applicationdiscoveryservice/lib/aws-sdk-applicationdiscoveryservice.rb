@@ -14,37 +14,33 @@ require_relative 'aws-sdk-applicationdiscoveryservice/errors'
 require_relative 'aws-sdk-applicationdiscoveryservice/resource'
 require_relative 'aws-sdk-applicationdiscoveryservice/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Application Discovery Service, which shipped in `aws-sdk-applicationdiscoveryservice` gem.
-  #
-  # # Aws::ApplicationDiscoveryService::Client
-  #
-  # The {Aws::ApplicationDiscoveryService::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     applicationdiscoveryservice = Aws::ApplicationDiscoveryService::Client.new
-  #     resp = applicationdiscoveryservice.create_tags(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ApplicationDiscoveryService::Errors
-  #
-  # Errors returned from AWS Application Discovery Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ApplicationDiscoveryService::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ApplicationDiscoveryService
+# This module provides support for AWS Application Discovery Service. This module is available in the
+# `aws-sdk-applicationdiscoveryservice` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Application Discovery Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ApplicationDiscoveryService::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ApplicationDiscoveryService
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

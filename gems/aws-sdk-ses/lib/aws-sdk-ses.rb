@@ -15,37 +15,33 @@ require_relative 'aws-sdk-ses/waiters'
 require_relative 'aws-sdk-ses/resource'
 require_relative 'aws-sdk-ses/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Simple Email Service, which shipped in `aws-sdk-ses` gem.
-  #
-  # # Aws::SES::Client
-  #
-  # The {Aws::SES::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     ses = Aws::SES::Client.new
-  #     resp = ses.clone_receipt_rule_set(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::SES::Errors
-  #
-  # Errors returned from Amazon Simple Email Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::SES::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module SES
+# This module provides support for Amazon Simple Email Service. This module is available in the
+# `aws-sdk-ses` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Simple Email Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::SES::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::SES
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

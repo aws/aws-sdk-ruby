@@ -14,37 +14,33 @@ require_relative 'aws-sdk-sms/errors'
 require_relative 'aws-sdk-sms/resource'
 require_relative 'aws-sdk-sms/customizations'
 
-module Aws
-  # @service
-  # This module provides support for AWS Server Migration Service, which shipped in `aws-sdk-sms` gem.
-  #
-  # # Aws::SMS::Client
-  #
-  # The {Aws::SMS::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     sms = Aws::SMS::Client.new
-  #     resp = sms.create_replication_job(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::SMS::Errors
-  #
-  # Errors returned from AWS Server Migration Service all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::SMS::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module SMS
+# This module provides support for AWS Server Migration Service. This module is available in the
+# `aws-sdk-sms` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from AWS Server Migration Service all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::SMS::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::SMS
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

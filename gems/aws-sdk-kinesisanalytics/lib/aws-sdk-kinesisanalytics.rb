@@ -14,37 +14,33 @@ require_relative 'aws-sdk-kinesisanalytics/errors'
 require_relative 'aws-sdk-kinesisanalytics/resource'
 require_relative 'aws-sdk-kinesisanalytics/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Kinesis Analytics, which shipped in `aws-sdk-kinesisanalytics` gem.
-  #
-  # # Aws::KinesisAnalytics::Client
-  #
-  # The {Aws::KinesisAnalytics::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     kinesisanalytics = Aws::KinesisAnalytics::Client.new
-  #     resp = kinesisanalytics.add_application_input(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::KinesisAnalytics::Errors
-  #
-  # Errors returned from Amazon Kinesis Analytics all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::KinesisAnalytics::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module KinesisAnalytics
+# This module provides support for Amazon Kinesis Analytics. This module is available in the
+# `aws-sdk-kinesisanalytics` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Kinesis Analytics all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::KinesisAnalytics::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::KinesisAnalytics
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

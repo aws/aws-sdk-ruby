@@ -14,37 +14,33 @@ require_relative 'aws-sdk-cognitoidentityprovider/errors'
 require_relative 'aws-sdk-cognitoidentityprovider/resource'
 require_relative 'aws-sdk-cognitoidentityprovider/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Cognito Identity Provider, which shipped in `aws-sdk-cognitoidentityprovider` gem.
-  #
-  # # Aws::CognitoIdentityProvider::Client
-  #
-  # The {Aws::CognitoIdentityProvider::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     cognitoidentityprovider = Aws::CognitoIdentityProvider::Client.new
-  #     resp = cognitoidentityprovider.add_custom_attributes(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::CognitoIdentityProvider::Errors
-  #
-  # Errors returned from Amazon Cognito Identity Provider all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::CognitoIdentityProvider::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module CognitoIdentityProvider
+# This module provides support for Amazon Cognito Identity Provider. This module is available in the
+# `aws-sdk-cognitoidentityprovider` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Cognito Identity Provider all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::CognitoIdentityProvider::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::CognitoIdentityProvider
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

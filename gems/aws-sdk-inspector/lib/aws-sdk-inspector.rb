@@ -14,37 +14,33 @@ require_relative 'aws-sdk-inspector/errors'
 require_relative 'aws-sdk-inspector/resource'
 require_relative 'aws-sdk-inspector/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon Inspector, which shipped in `aws-sdk-inspector` gem.
-  #
-  # # Aws::Inspector::Client
-  #
-  # The {Aws::Inspector::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     inspector = Aws::Inspector::Client.new
-  #     resp = inspector.add_attributes_to_findings(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::Inspector::Errors
-  #
-  # Errors returned from Amazon Inspector all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::Inspector::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module Inspector
+# This module provides support for Amazon Inspector. This module is available in the
+# `aws-sdk-inspector` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon Inspector all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::Inspector::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::Inspector
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

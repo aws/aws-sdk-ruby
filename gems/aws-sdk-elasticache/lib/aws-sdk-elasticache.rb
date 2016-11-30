@@ -15,37 +15,33 @@ require_relative 'aws-sdk-elasticache/waiters'
 require_relative 'aws-sdk-elasticache/resource'
 require_relative 'aws-sdk-elasticache/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Amazon ElastiCache, which shipped in `aws-sdk-elasticache` gem.
-  #
-  # # Aws::ElastiCache::Client
-  #
-  # The {Aws::ElastiCache::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     elasticache = Aws::ElastiCache::Client.new
-  #     resp = elasticache.add_tags_to_resource(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ElastiCache::Errors
-  #
-  # Errors returned from Amazon ElastiCache all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ElastiCache::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ElastiCache
+# This module provides support for Amazon ElastiCache. This module is available in the
+# `aws-sdk-elasticache` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Amazon ElastiCache all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ElastiCache::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ElastiCache
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end

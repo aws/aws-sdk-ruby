@@ -15,37 +15,33 @@ require_relative 'aws-sdk-elasticloadbalancing/waiters'
 require_relative 'aws-sdk-elasticloadbalancing/resource'
 require_relative 'aws-sdk-elasticloadbalancing/customizations'
 
-module Aws
-  # @service
-  # This module provides support for Elastic Load Balancing, which shipped in `aws-sdk-elasticloadbalancing` gem.
-  #
-  # # Aws::ElasticLoadBalancing::Client
-  #
-  # The {Aws::ElasticLoadBalancing::Client} class provides one method for each API
-  # operation. Operation methods each accept a hash of request parameters
-  # and return a response object.
-  #
-  #     elasticloadbalancing = Aws::ElasticLoadBalancing::Client.new
-  #     resp = elasticloadbalancing.add_tags(params)
-  #
-  #
-  # See {Client} for more information.
-  #
-  # # Aws::ElasticLoadBalancing::Errors
-  #
-  # Errors returned from Elastic Load Balancing all
-  # extend {Errors::ServiceError}.
-  #
-  #     begin
-  #       # do stuff
-  #     rescue Aws::ElasticLoadBalancing::Errors::ServiceError
-  #       # rescues all service API errors
-  #     end
-  #
-  # See {Errors} for more information.
-  module ElasticLoadBalancing
+# This module provides support for Elastic Load Balancing. This module is available in the
+# `aws-sdk-elasticloadbalancing` gem.
+#
+# # Client
+#
+# The {Client} class provides one method for each API operation. Operation
+# methods each accept a hash of request parameters and return a response
+# structure.
+#
+# See {Client} for more information.
+#
+# # Errors
+#
+# Errors returned from Elastic Load Balancing all
+# extend {Errors::ServiceError}.
+#
+#     begin
+#       # do stuff
+#     rescue Aws::ElasticLoadBalancing::Errors::ServiceError
+#       # rescues all service API errors
+#     end
+#
+# See {Errors} for more information.
+#
+# @service
+module Aws::ElasticLoadBalancing
 
-    GEM_VERSION = '1.0.0.rc1'
+  GEM_VERSION = '1.0.0.rc1'
 
-  end
 end
