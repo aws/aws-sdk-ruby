@@ -5,6 +5,7 @@
 #
 # WARNING ABOUT GENERATED CODE
 
+
 require_relative 'aws-sdk-sts/types'
 require_relative 'aws-sdk-sts/client_api'
 require_relative 'aws-sdk-sts/client'

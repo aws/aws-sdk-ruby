@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv4'
+
 require_relative 'aws-sdk-opsworks/types'
 require_relative 'aws-sdk-opsworks/client_api'
 require_relative 'aws-sdk-opsworks/client'

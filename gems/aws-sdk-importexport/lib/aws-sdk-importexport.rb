@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv2'
+
 require_relative 'aws-sdk-importexport/types'
 require_relative 'aws-sdk-importexport/client_api'
 require_relative 'aws-sdk-importexport/client'

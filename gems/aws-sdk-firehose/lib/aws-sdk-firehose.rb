@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv4'
+
 require_relative 'aws-sdk-firehose/types'
 require_relative 'aws-sdk-firehose/client_api'
 require_relative 'aws-sdk-firehose/client'

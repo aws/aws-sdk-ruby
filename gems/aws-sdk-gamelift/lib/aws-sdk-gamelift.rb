@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv4'
+
 require_relative 'aws-sdk-gamelift/types'
 require_relative 'aws-sdk-gamelift/client_api'
 require_relative 'aws-sdk-gamelift/client'

@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv4'
+
 require_relative 'aws-sdk-cloudformation/types'
 require_relative 'aws-sdk-cloudformation/client_api'
 require_relative 'aws-sdk-cloudformation/client'

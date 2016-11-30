@@ -7,6 +7,7 @@
 
 require 'aws-sdk-core'
 require 'aws-sigv4'
+
 require_relative 'aws-sdk-dynamodb/types'
 require_relative 'aws-sdk-dynamodb/client_api'
 require_relative 'aws-sdk-dynamodb/client'
