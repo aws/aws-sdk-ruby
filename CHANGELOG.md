@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.31 (2016-12-01)
+------------------
+
 * Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
 
 * Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
