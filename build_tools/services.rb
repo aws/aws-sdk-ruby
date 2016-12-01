@@ -43,8 +43,9 @@ module BuildTools
       docs = load_docs(svc_name, config['models'])
 
       AwsSdkCodeGenerator::Service.new(
-        gem_version: gem_version(svc_name),
         name: svc_name,
+        gem_version: gem_version(svc_name),
+        gem_name: config['gemName'],
         api: api,
         docs: load_docs(svc_name, config['models']),
         paginators: model_path('paginators-1.json', config['models']),
