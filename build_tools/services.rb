@@ -101,7 +101,7 @@ module BuildTools
     end
 
     def model_path(model_name, models_dir)
-      path = "apis/#{models_dir}/#{model_name}"
+      path = File.expand_path("../../apis/#{models_dir}/#{model_name}", __FILE__)
       File.exists?(path) ? path : nil
     end
 

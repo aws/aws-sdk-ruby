@@ -1,5 +1,7 @@
 require 'set'
 
+GEMS_DIR = File.expand_path('../../gems', __FILE__)
+
 desc 'Builds every service gem'
 task 'build' do
   BuildTools::Services.each do |service|
@@ -15,7 +17,7 @@ rule /^build:aws-sdk-\w+$/ do |task|
   identifier = task.name.split('-').last
   service = BuildTools::Services[identifier]
   files = AwsSdkCodeGenerator::GemBuilder.new(service: service).each
-  writer = BuildTools::FileWriter.new(directory: "gems/#{service.gem_name}")
+  writer = BuildTools::FileWriter.new(directory: "#{GEMS_DIR}/#{service.gem_name}")
   writer.write_files(files)
 end
 
@@ -27,6 +29,6 @@ task 'build:aws-sdk-sts' do
   sts.gem_dependencies.clear
   generator = AwsSdkCodeGenerator::CodeBuilder.new(service: sts)
   files = generator.source_files(prefix: 'aws-sdk-sts')
-  writer = BuildTools::FileWriter.new(directory: 'gems/aws-sdk-core/lib')
+  writer = BuildTools::FileWriter.new(directory: "#{GEMS_DIR}/aws-sdk-core/lib")
   writer.write_files(files)
 end
