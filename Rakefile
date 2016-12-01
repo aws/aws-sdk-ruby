@@ -1,16 +1,12 @@
 $REPO_ROOT = File.dirname(__FILE__)
+$GEMS_DIR = File.join($REPO_ROOT, 'gems')
 
-$LOAD_PATH.unshift('build_tools')
-
-Dir.glob("#{$REPO_ROOT}/gems/*/lib").each do |lib_dir|
-  $LOAD_PATH.unshift(lib_dir)
-end
+$LOAD_PATH.unshift("#{$REPO_ROOT}/build_tools")
+$LOAD_PATH.unshift("#{$REPO_ROOT}/build_tools/aws-sdk-code-generator/lib")
 
 require 'build_tools'
 require 'aws-sdk-code-generator'
 
-Dir.glob('**/*.rake').each do |task_file|
-  load task_file
+Dir.glob("#{$REPO_ROOT}/tasks/**/*.rake").each do |task_file|
+  load(task_file)
 end
-
-task :default => :test

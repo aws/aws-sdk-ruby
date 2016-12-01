@@ -49,6 +49,7 @@ end
 
 desc 'Runs unit and integration tests'
 task 'test' => ['test:spec', 'test:features']
+task 'default' => 'test'
 
 begin
   require 'coveralls/rake/task'

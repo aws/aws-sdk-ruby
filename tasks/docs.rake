@@ -1,5 +1,3 @@
-require 'aws-sdk-core'
-
 desc 'Delete the locally generated docs' if ENV['ALL']
 task 'docs:clobber' do
   rm_rf '.yardoc'

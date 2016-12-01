@@ -1,5 +1,4 @@
-task 'update-filtered-params' => ['git:require-clean-workspace'] do
-
+task 'update-sensitive-params' do
   # compute the list of senstive params that should be filtered from logging
   sensitive = []
   BuildTools::Services.each do |svc|
@@ -19,18 +18,10 @@ task 'update-filtered-params' => ['git:require-clean-workspace'] do
   end
   sensitive = sensitive.uniq.map(&:inspect).sort.join(', ')
 
-  filename = 'aws-sdk-core/lib/aws-sdk-core/log/param_filter.rb'
-
-  changed = BuildTools.replace_lines(
-    filename: filename,
+  BuildTools.replace_lines(
+    filename: "#{$GEMS_DIR}/aws-sdk-core/lib/aws-sdk-core/log/param_filter.rb", 
     start: /# begin/,
     stop: /# end/,
     new_lines: "      SENSITIVE = [#{sensitive}]\n"
   )
-
-  if changed
-    sh("git add #{filename}")
-    sh('git commit -m "Updated the list of filtered parameters."')
-  end
-
 end
