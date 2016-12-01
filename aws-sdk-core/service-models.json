@@ -23,6 +23,10 @@
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
   },
+  "CodeBuild": {
+    "models": "codebuild/2016-10-06",
+    "endpoint": "codebuild"
+  },
   "CloudFormation": {
     "models": "cloudformation/2010-05-15",
     "endpoint": "cloudformation"
@@ -170,6 +174,10 @@
     "models": "glacier/2012-06-01",
     "endpoint": "glacier"
   },
+  "Health": {
+    "models": "health/2016-08-04",
+    "endpoint": "health"
+  },
   "IAM": {
     "models": "iam/2010-05-08",
     "endpoint": "iam"
@@ -230,6 +238,14 @@
     "models": "opsworks/2013-02-18",
     "endpoint": "opsworks"
   },
+  "OpsWorksCM": {
+    "models": "opsworkscm/2016-11-01",
+    "endpoint": "opsworks-cm"
+  },
+  "Pinpoint": {
+    "models": "pinpoint/2016-12-01",
+    "endpoint": "pinpoint"
+  },
   "Polly": {
     "models": "polly/2016-06-10",
     "endpoint": "polly"
@@ -266,6 +282,10 @@
     "models": "email/2010-12-01",
     "endpoint": "email"
   },
+  "Shield": {
+    "models": "shield/2016-06-02",
+    "endpoint": "shield"
+  },
   "SimpleDB": {
     "models": "sdb/2009-04-15",
     "endpoint": "sdb"
@@ -290,6 +310,10 @@
     "models": "ssm/2014-11-06",
     "endpoint": "ssm"
   },
+  "States": {
+    "models": "states/2016-11-23",
+    "endpoint": "states"
+  },
   "StorageGateway": {
     "models": "storagegateway/2013-06-30",
     "endpoint": "storagegateway"
@@ -313,5 +337,9 @@
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",
     "endpoint": "workspaces"
+  },
+  "XRay": {
+    "models": "xray/2016-04-12",
+    "endpoint": "xray"
   }
 }
