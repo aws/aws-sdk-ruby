@@ -15,6 +15,10 @@
     "models": "discovery/2015-11-01",
     "endpoint": "discovery"
   },
+  "AppStream": {
+    "models": "appstream/2016-12-01",
+    "endpoint": "appstream2"
+  },
   "AutoScaling": {
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
