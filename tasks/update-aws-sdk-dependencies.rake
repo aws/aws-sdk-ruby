@@ -3,7 +3,7 @@ task 'update-aws-sdk-dependencies' do
 
   # update the gemspec
   BuildTools.replace_lines(
-    filename: "${GEMS_DIR}/aws-sdk/aws-sdk.gemspec",
+    filename: "#{$GEMS_DIR}/aws-sdk/aws-sdk.gemspec",
     start: /# service gems/,
     stop: /# end service gems/,
     new_lines: BuildTools::Services.group_by(&:gem_name).map { |gem_name, _|
