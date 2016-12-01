@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.32 (2016-12-01)
+------------------
+
 * Feature - Aws::Pinpoint - Updated the API for Amazon Pinpoint.
 
 2.6.31 (2016-12-01)
