@@ -23,8 +23,10 @@ module Aws
     APIGateway
     ApplicationAutoScaling
     ApplicationDiscoveryService
+    AppStream
     AutoScaling
     Budgets
+    CodeBuild
     CloudFormation
     CloudFront
     CloudHSM
@@ -62,6 +64,7 @@ module Aws
     Firehose
     GameLift
     Glacier
+    Health
     IAM
     ImportExport
     Inspector
@@ -77,6 +80,8 @@ module Aws
     MarketplaceCommerceAnalytics
     MarketplaceMetering
     OpsWorks
+    OpsWorksCM
+    Pinpoint
     Polly
     RDS
     Rekognition
@@ -86,18 +91,21 @@ module Aws
     S3
     ServiceCatalog
     SES
+    Shield
     SimpleDB
     SMS
     SNS
     Snowball
     SQS
     SSM
+    States
     StorageGateway
     STS
     Support
     SWF
     WAF
     WorkSpaces
+    XRay
   )
   # end services
 

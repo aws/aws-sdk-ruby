@@ -1,6 +1,34 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::APIGateway - Updated the API, and documentation for Amazon API Gateway.
+
+* Feature - Aws::DirectConnect - Updated the API, and documentation for AWS Direct Connect.
+
+* Feature - Aws::ElasticBeanstalk - Updated the API, and documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::Lambda - Updated the API, and documentation for AWS Lambda.
+
+* Feature - Aws::SSM - Updated the API, and documentation for Amazon Simple Systems Manager (SSM).
+
+* Feature - Aws::AppStream - Added support for a new service, Amazon AppStream.
+
+* Feature - Aws::CodeBuild - Added support for a new service, AWS CodeBuild.
+
+* Feature - Aws::EC2 - Added support for the new 2016-11-15 API version of Amazon Elastic Compute Cloud.
+
+* Feature - Aws::Health - Added support for a new service, AWS Health APIs and Notifications.
+
+* Feature - Aws::OpsWorksCM - Added support for a new service, AWS OpsWorks for Chef Automate.
+
+* Feature - Aws::Pinpoint - Added support for a new service, Amazon Pinpoint.
+
+* Feature - Aws::Shield - Added support for a new service, AWS Shield.
+
+* Feature - Aws::States - Added support for a new service, AWS Step Functions.
+
+* Feature - Aws::XRay - Added support for a new service, AWS X-Ray.
+
 2.6.30 (2016-11-30)
 ------------------
 
