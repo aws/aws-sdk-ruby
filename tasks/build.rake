@@ -13,7 +13,6 @@ desc 'Build one service, e.g. `rake build  build:aws-sdk-dynamodb`'
 task 'build:aws-sdk-*'
 
 rule /^build:aws-sdk-\w+$/ do |task|
-  # legacy generator
   identifier = task.name.split('-').last
   service = BuildTools::Services[identifier]
   files = AwsSdkCodeGenerator::GemBuilder.new(service: service).each

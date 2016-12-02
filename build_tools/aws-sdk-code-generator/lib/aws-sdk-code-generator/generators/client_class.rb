@@ -276,31 +276,45 @@ end
 
       end
 
+      def core_lib
+        # TODO : may need to register the default plugins directory rather
+        #        than have the hard-coded here as a relative path
+        File.expand_path('../../../../../../gems/aws-sdk-core/lib', __FILE__)
+      end
+
+      def core_plugins
+        "#{core_lib}/aws-sdk-core/plugins"
+      end
+
+      def seahorse_plugins
+        "#{core_lib}/seahorse/client/plugins"
+      end
+
       def default_plugins
         {
-          'Seahorse::Client::Plugins::ContentLength' => 'gems/aws-sdk-core/lib/seahorse/client/plugins/content_length.rb',
-          'Aws::Plugins::CredentialsConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/credentials_configuration.rb',
-          'Aws::Plugins::Logging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/logging.rb',
-          'Aws::Plugins::ParamConverter' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_converter.rb',
-          'Aws::Plugins::ParamValidator' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/param_validator.rb',
-          'Aws::Plugins::UserAgent' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/user_agent.rb',
-          'Aws::Plugins::HelpfulSocketErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/helpful_socket_errors.rb',
-          'Aws::Plugins::RetryErrors' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/retry_errors.rb',
-          'Aws::Plugins::GlobalConfiguration' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/global_configuration.rb',
-          'Aws::Plugins::RegionalEndpoint' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/regional_endpoint.rb',
-          'Aws::Plugins::ResponsePaging' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/response_paging.rb',
-          'Aws::Plugins::StubResponses' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/stub_responses.rb',
-          'Aws::Plugins::IdempotencyToken' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/idempotency_token.rb',
+          'Seahorse::Client::Plugins::ContentLength' => "#{seahorse_plugins}/content_length.rb",
+          'Aws::Plugins::CredentialsConfiguration' => "#{core_plugins}/credentials_configuration.rb",
+          'Aws::Plugins::Logging' => "#{core_plugins}/logging.rb",
+          'Aws::Plugins::ParamConverter' => "#{core_plugins}/param_converter.rb",
+          'Aws::Plugins::ParamValidator' => "#{core_plugins}/param_validator.rb",
+          'Aws::Plugins::UserAgent' => "#{core_plugins}/user_agent.rb",
+          'Aws::Plugins::HelpfulSocketErrors' => "#{core_plugins}/helpful_socket_errors.rb",
+          'Aws::Plugins::RetryErrors' => "#{core_plugins}/retry_errors.rb",
+          'Aws::Plugins::GlobalConfiguration' => "#{core_plugins}/global_configuration.rb",
+          'Aws::Plugins::RegionalEndpoint' => "#{core_plugins}/regional_endpoint.rb",
+          'Aws::Plugins::ResponsePaging' => "#{core_plugins}/response_paging.rb",
+          'Aws::Plugins::StubResponses' => "#{core_plugins}/stub_responses.rb",
+          'Aws::Plugins::IdempotencyToken' => "#{core_plugins}/idempotency_token.rb",
         }
       end
 
       def protocol_plugins(protocol)
         {
-          'json'      => { 'Aws::Plugins::Protocols::JsonRpc' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/json_rpc.rb' },
-          'rest-json' => { 'Aws::Plugins::Protocols::RestJson' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_json.rb' },
-          'rest-xml'  => { 'Aws::Plugins::Protocols::RestXml' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/rest_xml.rb' },
-          'query'     => { 'Aws::Plugins::Protocols::Query' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/query.rb' },
-          'ec2'       => { 'Aws::Plugins::Protocols::EC2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/protocols/ec2.rb' },
+          'json'      => { 'Aws::Plugins::Protocols::JsonRpc' => "#{core_plugins}/protocols/json_rpc.rb" },
+          'rest-json' => { 'Aws::Plugins::Protocols::RestJson' => "#{core_plugins}/protocols/rest_json.rb" },
+          'rest-xml'  => { 'Aws::Plugins::Protocols::RestXml' => "#{core_plugins}/protocols/rest_xml.rb" },
+          'query'     => { 'Aws::Plugins::Protocols::Query' => "#{core_plugins}/protocols/query.rb" },
+          'ec2'       => { 'Aws::Plugins::Protocols::EC2' => "#{core_plugins}/protocols/ec2.rb" },
           nil         => {}
         }[protocol]
       end
@@ -308,9 +322,9 @@ end
       def signature_plugins
         case @api['metadata']['signatureVersion']
         when 'v4'
-          { 'Aws::Plugins::SignatureV4' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v4.rb' }
+          { 'Aws::Plugins::SignatureV4' => "#{core_plugins}/signature_v4.rb" }
         when 'v2'
-          { 'Aws::Plugins::SignatureV2' => 'gems/aws-sdk-core/lib/aws-sdk-core/plugins/signature_v2.rb' }
+          { 'Aws::Plugins::SignatureV2' => "#{core_plugins}/signature_v2.rb" }
         else
           {}
         end
