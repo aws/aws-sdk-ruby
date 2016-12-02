@@ -32,6 +32,7 @@ module AwsSdkCodeGenerator
       }.merge(options[:gem_dependencies] || {})
       @add_plugins = options[:add_plugins] || {}
       @remove_plugins = options[:remove_plugins] || []
+      @endpoints_key = options.fetch(:endpoints_key, nil)
 
       # computed attributes
       @protocol = api.fetch('metadata').fetch('protocol')
@@ -68,6 +69,9 @@ module AwsSdkCodeGenerator
 
     # @return [String]
     attr_reader :gem_version
+
+    # @return [String, nil]
+    attr_reader :endpoints_key
 
     # @return [Hash<String,String>] A hash of plugins to add.
     attr_reader :add_plugins
