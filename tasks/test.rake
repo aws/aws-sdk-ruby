@@ -12,9 +12,11 @@ task 'test:spec:each' do
       failures << spec_file if !ok
     end
   end
-  if !failures.empty?
-    abort("one or more test suites failed: %s" % [failures.join(', ')])
+  msg = "One or more spec files had failures:\n\n"
+  failures.each do |path|
+    msg << "bundle exec rspec #{path}\n"
   end
+  abort(msg) unless failures.empty?
 end
 
 rule /test:spec:aws-sdk-code-generator$/ do |task|
