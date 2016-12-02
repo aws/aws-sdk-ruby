@@ -1,4 +1,4 @@
-desc "Rebuilds the source and gemspec for the aws-sdk umbrella gem."
+# updates list of service gems dependend on by the aws-sdk gem
 task 'update-aws-sdk-dependencies' do
 
   # update the gemspec

@@ -1,5 +1,5 @@
+# rebuilds the list of parameters that should be filtered when logging
 task 'update-sensitive-params' do
-  # compute the list of senstive params that should be filtered from logging
   sensitive = []
   BuildTools::Services.each do |svc|
     svc.api['shapes'].each_pair do |shape_name, shape|

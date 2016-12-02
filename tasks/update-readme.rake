@@ -1,5 +1,4 @@
-# Updates the list of supported services and versions in the README
-desc 'Updated the list of supported services in the README' if ENV['ALL']
+# updates the table of supported services in the repo README
 task 'update-readme' do
 
   # insert one row for each supported service
