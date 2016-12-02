@@ -32,16 +32,16 @@ module BuildTools
     end
 
     def skip(path)
-      log("    skip #{path}")
+      log("    skip #{gems_path(path)}")
     end
 
     def replace(path, code)
-      log(" replace #{path}")
+      log(" replace #{gems_path(path)}")
       write(path, code)
     end
 
     def create(path, code)
-      log("  create #{path}")
+      log("  create #{gems_path(path)}")
       write(path, code)
     end
 
@@ -53,6 +53,10 @@ module BuildTools
 
     def log(msg)
       puts(msg)
+    end
+
+    def gems_path(path)
+      'gems/' + path.split('/gems/', 2)[1]
     end
 
   end

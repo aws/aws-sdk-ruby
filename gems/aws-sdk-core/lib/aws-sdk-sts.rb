@@ -13,7 +13,7 @@ require_relative 'aws-sdk-sts/resource'
 require_relative 'aws-sdk-sts/customizations'
 
 # This module provides support for AWS Security Token Service. This module is available in the
-# `aws-sdk-sts` gem.
+# `aws-sdk-core` gem.
 #
 # # Client
 #

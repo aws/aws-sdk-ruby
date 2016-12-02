@@ -127,7 +127,8 @@ module AwsSdkCodeGenerator
       end
 
       def apply_examples_from_disk(docstring)
-        glob = "doc-src/examples/#{@service_id}/client/#{@method_name}/*.rb"
+        doc_src_dir = File.expand_path('../../../../doc-src', __FILE__)
+        glob = "#{doc_src_dir}/examples/#{@service_id}/client/#{@method_name}/*.rb"
         Dir.glob(glob).map do |path|
           title = File.basename(path).split(/\./).first
           title = title.sub(/^\d+_/, '').gsub(/_/, ' ')

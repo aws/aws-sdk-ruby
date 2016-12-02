@@ -85,7 +85,9 @@ module BuildTools
       else
         gem = parts.shift.gsub('_', '')
       end
-      (["gems/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
+
+      gems_dir = File.expand_path('../../gems', __FILE__)
+      (["#{gems_dir}/aws-sdk-#{gem}/lib/aws-sdk-#{gem}"] + parts).join('/') + '.rb'
     end
 
     def gem_version(svc_name)
