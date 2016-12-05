@@ -126,6 +126,8 @@ module AwsSdkCodeGenerator
         examples: @examples,
         add_plugins: @add_plugins,
         remove_plugins: @remove_plugins,
+        gem_name: @service.gem_name,
+        gem_version: @service.gem_version,
       )
       svc_mod.add(klass)
       klass

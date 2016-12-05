@@ -22,6 +22,8 @@ module AwsSdkCodeGenerator
         @examples = options.fetch(:examples)
         @add_plugins = options.fetch(:add_plugins, {})
         @remove_plugins = options.fetch(:remove_plugins, [])
+        @gem_name = options.fetch(:gem_name, nil)
+        @gem_version = options.fetch(:gem_version, nil)
         super('Client', extends: 'Seahorse::Client::Base', parent: options.fetch(:parent))
         apply_modules(self)
         apply_identifier(self)
@@ -136,6 +138,26 @@ module AwsSdkCodeGenerator
           end
         end
         code('# @!endgroup')
+
+
+        if @gem_name && @gem_version
+          gem_version = "\ncontext[:gem_name] = '#{@gem_name}'"
+          gem_version += "\ncontext[:gem_version] = '#{@gem_version}'"
+        end
+        klass.method(:build_request, api_private: true) do |m|
+          m.param(:operation_name)
+          m.param(:params, default: {})
+          m.code(<<-CODE)
+handlers = @handlers.for(operation_name)
+context = Seahorse::Client::RequestContext.new(
+  operation_name: operation_name,
+  operation: config.api.operation(operation_name),
+  client: self,
+  params: params,
+  config: config)#{gem_version}
+Seahorse::Client::Request.new(handlers, context)
+          CODE
+        end
       end
 
       def apply_waiter_methods(klass)

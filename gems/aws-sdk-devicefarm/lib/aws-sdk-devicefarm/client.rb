@@ -2035,6 +2035,21 @@ module Aws
 
       # @!endgroup
 
+      # @param params ({})
+      # @api private
+      def build_request(operation_name, params = {})
+        handlers = @handlers.for(operation_name)
+        context = Seahorse::Client::RequestContext.new(
+          operation_name: operation_name,
+          operation: config.api.operation(operation_name),
+          client: self,
+          params: params,
+          config: config)
+        context[:gem_name] = 'aws-sdk-devicefarm'
+        context[:gem_version] = '1.0.0.rc1'
+        Seahorse::Client::Request.new(handlers, context)
+      end
+
       # @api private
       # @deprecated
       def waiter_names
