@@ -56,6 +56,7 @@ module Aws
           when STRINGY_TEST then { ss: set.map(&:to_str) }
           when Numeric then { ns: set.map(&:to_s) }
           when StringIO, IO then { bs: set.to_a }
+          when NilClass then { es: set.to_a }
           else
             msg = "set types only support String, Numeric, or IO objects"
             raise ArgumentError, msg
@@ -82,6 +83,7 @@ module Aws
           when :ss then Set.new(value)
           when :ns then Set.new(value.map { |n| BigDecimal.new(n) })
           when :bs then Set.new(value.map { |b| StringIO.new(b) })
+          when :es then Set.new()
           else
             raise ArgumentError, "unhandled type #{type.inspect}"
           end
