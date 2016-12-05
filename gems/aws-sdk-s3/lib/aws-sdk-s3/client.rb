@@ -1328,14 +1328,6 @@ module Aws
       #   resp.metadata #=> { ... }
       #   resp.etag #=> "..."
       #
-      # @example Streaming data to a block
-      #   # WARNING: yielding data to a block disables retries of networking errors
-      #   File.open('/path/to/file', 'wb') do |file|
-      #     s3.get_object(bucket: 'bucket-name', key: 'object-key') do |chunk|
-      #       file.write(chunk)
-      #     end
-      #   end
-      #
       # @example Download object into memory
       #   # omit :response_target to download to a StringIO in memory
       #   resp = s3.get_object(bucket: 'bucket-name', key: 'object-key')
@@ -1343,6 +1335,14 @@ module Aws
       #   # call #read or #string on the response body
       #   resp.body.read
       #   #=> '...'
+      #
+      # @example Streaming data to a block
+      #   # WARNING: yielding data to a block disables retries of networking errors
+      #   File.open('/path/to/file', 'wb') do |file|
+      #     s3.get_object(bucket: 'bucket-name', key: 'object-key') do |chunk|
+      #       file.write(chunk)
+      #     end
+      #   end
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_object({
