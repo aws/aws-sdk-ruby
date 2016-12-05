@@ -8,7 +8,7 @@ task 'update-aws-sdk-dependencies' do
     stop: /# end service gems/,
     new_lines: BuildTools::Services.group_by(&:gem_name).map { |gem_name, _|
       if gem_name != 'aws-sdk-core'
-        "  spec.add_dependency('#{gem_name}', '~> 1.0')\n"
+        "  spec.add_dependency('#{gem_name}', '1.0.0.rc1')\n"
       end
     }.compact
   )
