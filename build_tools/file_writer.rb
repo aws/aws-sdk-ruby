@@ -46,6 +46,7 @@ module BuildTools
     end
 
     def write(path, code)
+      FileUtils.mkdir_p(File.dirname(path))
       File.open(path, 'wb') do |file|
         file.write(code)
       end
