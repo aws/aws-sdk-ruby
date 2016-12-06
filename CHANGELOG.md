@@ -1,6 +1,12 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ConfigService - Updated the API, and documentation for AWS Config.
+
+* Feature - Aws::EC2 - Updated the API for Amazon Elastic Compute Cloud.
+
+* Feature - Aws::STS - Updated the API, and documentation for AWS Security Token Service.
+
 2.6.32 (2016-12-01)
 ------------------
 
