@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.34 (2016-12-07)
+------------------
+
 * Feature - Aws::ConfigService - Updated the API for AWS Config.
 
 * Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
