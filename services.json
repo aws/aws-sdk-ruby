@@ -1,50 +1,41 @@
 {
   "ACM": {
-    "models": "acm/2015-12-08",
-    "endpoint": "acm"
+    "models": "acm/2015-12-08"
   },
   "APIGateway": {
     "models": "apigateway/2015-07-09",
-    "endpoint": "apigateway",
     "addPlugins": [
       "Aws::APIGateway::Plugins::ApplyContentTypeHeader"
     ]
   },
   "ApplicationAutoScaling": {
     "models": "application-autoscaling/2016-02-06",
-    "endpoint": "application-autoscaling"
+    "partitionsKey": "application-autoscaling"
   },
   "ApplicationDiscoveryService": {
-    "models": "discovery/2015-11-01",
-    "endpoint": "discovery"
+    "models": "discovery/2015-11-01"
   },
   "AutoScaling": {
-    "models": "autoscaling/2011-01-01",
-    "endpoint": "autoscaling"
+    "models": "autoscaling/2011-01-01"
   },
   "Budgets": {
-    "models": "budgets/2016-10-20",
-    "endpoint": "budgets"
+    "models": "budgets/2016-10-20"
   },
   "CloudFormation": {
-    "models": "cloudformation/2010-05-15",
-    "endpoint": "cloudformation"
+    "models": "cloudformation/2010-05-15"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-09-29",
-    "endpoint": "cloudfront"
+    "models": "cloudfront/2016-09-29"
   },
   "CloudHSM": {
-    "models": "cloudhsm/2014-05-30",
-    "endpoint": "cloudhsm"
+    "models": "cloudhsm/2014-05-30"
   },
   "CloudSearch": {
-    "models": "cloudsearch/2013-01-01",
-    "endpoint": "cloudsearch"
+    "models": "cloudsearch/2013-01-01"
   },
   "CloudSearchDomain": {
     "models": "cloudsearchdomain/2013-01-01",
-    "addPlugins":[
+    "addPlugins": [
       "Aws::CloudSearchDomain::Plugins::ConditionalSigning"
     ],
     "removePlugins": [
@@ -52,72 +43,55 @@
     ]
   },
   "CloudTrail": {
-    "models": "cloudtrail/2013-11-01",
-    "endpoint": "cloudtrail"
+    "models": "cloudtrail/2013-11-01"
   },
   "CloudWatch": {
-    "models": "monitoring/2010-08-01",
-    "endpoint": "monitoring"
+    "models": "monitoring/2010-08-01"
   },
   "CloudWatchEvents": {
-    "models": "events/2015-10-07",
-    "endpoint": "events"
+    "models": "events/2015-10-07"
   },
   "CloudWatchLogs": {
-    "models": "logs/2014-03-28",
-    "endpoint": "logs"
+    "models": "logs/2014-03-28"
   },
   "CodeCommit": {
-    "models": "codecommit/2015-04-13",
-    "endpoint": "codecommit"
+    "models": "codecommit/2015-04-13"
   },
   "CodeDeploy": {
-    "models": "codedeploy/2014-10-06",
-    "endpoint": "codedeploy"
+    "models": "codedeploy/2014-10-06"
   },
   "CodePipeline": {
-    "models": "codepipeline/2015-07-09",
-    "endpoint": "codepipeline"
+    "models": "codepipeline/2015-07-09"
   },
   "CognitoIdentity": {
-    "models": "cognito-identity/2014-06-30",
-    "endpoint": "cognito-identity"
+    "models": "cognito-identity/2014-06-30"
   },
   "CognitoIdentityProvider": {
-    "models": "cognito-idp/2016-04-18",
-    "endpoint": "cognito-idp"
+    "models": "cognito-idp/2016-04-18"
   },
   "CognitoSync": {
-    "models": "cognito-sync/2014-06-30",
-    "endpoint": "cognito-sync"
+    "models": "cognito-sync/2014-06-30"
   },
   "ConfigService": {
-    "models": "config/2014-11-12",
-    "endpoint": "config"
+    "models": "config/2014-11-12"
   },
   "DatabaseMigrationService": {
-    "models": "dms/2016-01-01",
-    "endpoint": "dms"
+    "models": "dms/2016-01-01"
   },
   "DataPipeline": {
-    "models": "datapipeline/2012-10-29",
-    "endpoint": "datapipeline"
+    "models": "datapipeline/2012-10-29"
   },
   "DeviceFarm": {
-    "models": "devicefarm/2015-06-23",
-    "endpoint": "devicefarm"
+    "models": "devicefarm/2015-06-23"
   },
   "DirectConnect": {
-    "models": "directconnect/2012-10-25",
-    "endpoint": "directconnect"
+    "models": "directconnect/2012-10-25"
   },
   "DirectoryService": {
-    "models": "ds/2015-04-16",
-    "endpoint": "ds"
+    "models": "ds/2015-04-16"
   },
   "DynamoDB": {
     "models": "dynamodb/2012-08-10",
-    "endpoint": "dynamodb",
     "addPlugins": [
       "Aws::DynamoDB::Plugins::ExtendedRetries",
       "Aws::DynamoDB::Plugins::SimpleAttributes",
@@ -125,12 +99,10 @@
     ]
   },
   "DynamoDBStreams": {
-    "models": "streams.dynamodb/2012-08-10",
-    "endpoint": "streams.dynamodb"
+    "models": "streams.dynamodb/2012-08-10"
   },
   "EC2": {
     "models": "ec2/2016-09-15",
-    "endpoint": "ec2",
     "addPlugins": [
       "Aws::EC2::Plugins::CopyEncryptedSnapshot",
       "Aws::EC2::Plugins::RegionValidation"
@@ -140,56 +112,43 @@
     }
   },
   "ECR": {
-    "models": "ecr/2015-09-21",
-    "endpoint": "ecr"
+    "models": "ecr/2015-09-21"
   },
   "ECS": {
-    "models": "ecs/2014-11-13",
-    "endpoint": "ecs"
+    "models": "ecs/2014-11-13"
   },
   "EFS": {
-    "models": "elasticfilesystem/2015-02-01",
-    "endpoint": "elasticfilesystem"
+    "models": "elasticfilesystem/2015-02-01"
   },
   "ElastiCache": {
-    "models": "elasticache/2015-02-02",
-    "endpoint": "elasticache"
+    "models": "elasticache/2015-02-02"
   },
   "ElasticBeanstalk": {
-    "models": "elasticbeanstalk/2010-12-01",
-    "endpoint": "elasticbeanstalk"
+    "models": "elasticbeanstalk/2010-12-01"
   },
   "ElasticLoadBalancing": {
-    "models": "elasticloadbalancing/2012-06-01",
-    "endpoint": "elasticloadbalancing"
+    "models": "elasticloadbalancing/2012-06-01"
   },
   "ElasticLoadBalancingV2": {
-    "models": "elasticloadbalancingv2/2015-12-01",
-    "endpoint": "elasticloadbalancing"
+    "models": "elasticloadbalancingv2/2015-12-01"
   },
   "ElasticsearchService": {
-    "models": "es/2015-01-01",
-    "endpoint": "es"
+    "models": "es/2015-01-01"
   },
   "ElasticTranscoder": {
-    "models": "elastictranscoder/2012-09-25",
-    "endpoint": "elastictranscoder"
+    "models": "elastictranscoder/2012-09-25"
   },
   "EMR": {
-    "models": "elasticmapreduce/2009-03-31",
-    "endpoint": "elasticmapreduce"
+    "models": "elasticmapreduce/2009-03-31"
   },
   "Firehose": {
-    "models": "firehose/2015-08-04",
-    "endpoint": "firehose"
+    "models": "firehose/2015-08-04"
   },
   "GameLift": {
-    "models": "gamelift/2015-10-01",
-    "endpoint": "gamelift"
+    "models": "gamelift/2015-10-01"
   },
   "Glacier": {
     "models": "glacier/2012-06-01",
-    "endpoint": "glacier",
     "addPlugins": [
       "Aws::Glacier::Plugins::AccountId",
       "Aws::Glacier::Plugins::ApiVersion",
@@ -197,86 +156,68 @@
     ]
   },
   "IAM": {
-    "models": "iam/2010-05-08",
-    "endpoint": "iam"
+    "models": "iam/2010-05-08"
   },
   "ImportExport": {
-    "models": "importexport/2010-06-01",
-    "endpoint": "importexport"
+    "models": "importexport/2010-06-01"
   },
   "Inspector": {
-    "models": "inspector/2016-02-16",
-    "endpoint": "inspector"
+    "models": "inspector/2016-02-16"
   },
   "IoT": {
-    "models": "iot/2015-05-28",
-    "endpoint": "iot"
+    "models": "iot/2015-05-28"
   },
   "IoTDataPlane": {
     "models": "iot-data/2015-05-28",
-    "endpoint": "data.iot"
+    "partitionsKey": null
   },
   "Kinesis": {
-    "models": "kinesis/2013-12-02",
-    "endpoint": "kinesis"
+    "models": "kinesis/2013-12-02"
   },
   "KinesisAnalytics": {
-    "models": "kinesisanalytics/2015-08-14",
-    "endpoint": "kinesisanalytics"
+    "models": "kinesisanalytics/2015-08-14"
   },
   "KMS": {
-    "models": "kms/2014-11-01",
-    "endpoint": "kms"
+    "models": "kms/2014-11-01"
   },
   "Lambda": {
-    "models": "lambda/2015-03-31",
-    "endpoint": "lambda"
+    "models": "lambda/2015-03-31"
   },
   "LambdaPreview": {
-    "models": "lambda/2014-11-11",
-    "endpoint": "lambda"
+    "models": "lambda/2014-11-11"
   },
   "MachineLearning": {
     "models": "machinelearning/2014-12-12",
-    "endpoint": "machinelearning",
     "addPlugins": [
       "Aws::MachineLearning::Plugins::PredictEndpoint"
     ]
   },
   "MarketplaceCommerceAnalytics": {
-    "models": "marketplacecommerceanalytics/2015-07-01",
-    "endpoint": "marketplacecommerceanalytics"
+    "models": "marketplacecommerceanalytics/2015-07-01"
   },
   "MarketplaceMetering": {
-    "models": "meteringmarketplace/2016-01-14",
-    "endpoint": "metering.marketplace"
+    "models": "meteringmarketplace/2016-01-14"
   },
   "OpsWorks": {
-    "models": "opsworks/2013-02-18",
-    "endpoint": "opsworks"
+    "models": "opsworks/2013-02-18"
   },
   "RDS": {
-    "models": "rds/2014-10-31",
-    "endpoint": "rds"
+    "models": "rds/2014-10-31"
   },
   "Redshift": {
-    "models": "redshift/2012-12-01",
-    "endpoint": "redshift"
+    "models": "redshift/2012-12-01"
   },
   "Route53": {
     "models": "route53/2013-04-01",
-    "endpoint": "route53",
     "addPlugins": [
       "Aws::Route53::Plugins::IdFix"
     ]
   },
   "Route53Domains": {
-    "models": "route53domains/2014-05-15",
-    "endpoint": "route53domains"
+    "models": "route53domains/2014-05-15"
   },
   "S3": {
     "models": "s3/2006-03-01",
-    "endpoint": "s3",
     "dependencies": {
       "aws-sdk-kms": "1.0.0.rc1",
       "aws-sigv4": "~> 1.0"
@@ -301,67 +242,53 @@
     ]
   },
   "ServiceCatalog": {
-    "models": "servicecatalog/2015-12-10",
-    "endpoint": "servicecatalog"
+    "models": "servicecatalog/2015-12-10"
   },
   "SES": {
-    "models": "email/2010-12-01",
-    "endpoint": "email"
+    "models": "email/2010-12-01"
   },
   "SimpleDB": {
-    "models": "sdb/2009-04-15",
-    "endpoint": "sdb"
+    "models": "sdb/2009-04-15"
   },
   "SMS": {
-    "models": "sms/2016-10-24",
-    "endpoint": "sms"
+    "models": "sms/2016-10-24"
   },
   "SNS": {
-    "models": "sns/2010-03-31",
-    "endpoint": "sns"
+    "models": "sns/2010-03-31"
   },
   "Snowball": {
-    "models": "snowball/2016-06-30",
-    "endpoint": "snowball"
+    "models": "snowball/2016-06-30"
   },
   "SQS": {
     "models": "sqs/2012-11-05",
-    "endpoint": "sqs",
     "addPlugins": [
       "Aws::SQS::Plugins::QueueUrls",
       "Aws::SQS::Plugins::Md5s"
     ]
   },
   "SSM": {
-    "models": "ssm/2014-11-06",
-    "endpoint": "ssm"
+    "models": "ssm/2014-11-06"
   },
   "StorageGateway": {
-    "models": "storagegateway/2013-06-30",
-    "endpoint": "storagegateway"
+    "models": "storagegateway/2013-06-30"
   },
   "STS": {
     "models": "sts/2011-06-15",
-    "endpoint": "sts",
     "gemName": "aws-sdk-core"
   },
   "Support": {
-    "models": "support/2013-04-15",
-    "endpoint": "support"
+    "models": "support/2013-04-15"
   },
   "SWF": {
     "models": "swf/2012-01-25",
-    "endpoint": "swf",
     "addPlugins": [
       "Aws::SWF::Plugins::ReadTimeouts"
     ]
   },
   "WAF": {
-    "models": "waf/2015-08-24",
-    "endpoint": "waf"
+    "models": "waf/2015-08-24"
   },
   "WorkSpaces": {
-    "models": "workspaces/2015-04-08",
-    "endpoint": "workspaces"
+    "models": "workspaces/2015-04-08"
   }
 }

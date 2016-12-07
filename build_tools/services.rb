@@ -46,7 +46,7 @@ module BuildTools
         name: svc_name,
         gem_version: gem_version(svc_name),
         gem_name: config['gemName'],
-        endpoints_key: config['endpoint'],
+        endpoints_key: config.fetch('partitionsKey', api['metadata']['endpointPrefix']),
         api: api,
         docs: load_docs(svc_name, config['models']),
         paginators: model_path('paginators-1.json', config['models']),
