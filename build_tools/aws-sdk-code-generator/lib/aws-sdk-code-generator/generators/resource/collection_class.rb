@@ -65,7 +65,7 @@ module AwsSdkCodeGenerator
               batch_param = underscore(parts[1].sub(/.*?\./, ''))
               batch_param = batch_param == "" ? underscore(param['name']) : batch_param
               (@batch_obj[batch_name] ||= []) << {
-                batch_param.to_sym => underscore(param['name'])
+                batch_param.to_sym => underscore(param['name'] || param['path'])
               }
             else
               @per_batch[param['target']] = underscore(param['name'])
