@@ -35,6 +35,7 @@
   },
   "CloudSearchDomain": {
     "models": "cloudsearchdomain/2013-01-01",
+    "partitionsKey": null,
     "addPlugins": [
       "Aws::CloudSearchDomain::Plugins::ConditionalSigning"
     ],
@@ -75,11 +76,11 @@
   "ConfigService": {
     "models": "config/2014-11-12"
   },
-  "DatabaseMigrationService": {
-    "models": "dms/2016-01-01"
-  },
   "DataPipeline": {
     "models": "datapipeline/2012-10-29"
+  },
+  "DatabaseMigrationService": {
+    "models": "dms/2016-01-01"
   },
   "DeviceFarm": {
     "models": "devicefarm/2015-06-23"
@@ -120,6 +121,9 @@
   "EFS": {
     "models": "elasticfilesystem/2015-02-01"
   },
+  "EMR": {
+    "models": "elasticmapreduce/2009-03-31"
+  },
   "ElastiCache": {
     "models": "elasticache/2015-02-02"
   },
@@ -132,14 +136,11 @@
   "ElasticLoadBalancingV2": {
     "models": "elasticloadbalancingv2/2015-12-01"
   },
-  "ElasticsearchService": {
-    "models": "es/2015-01-01"
-  },
   "ElasticTranscoder": {
     "models": "elastictranscoder/2012-09-25"
   },
-  "EMR": {
-    "models": "elasticmapreduce/2009-03-31"
+  "ElasticsearchService": {
+    "models": "es/2015-01-01"
   },
   "Firehose": {
     "models": "firehose/2015-08-04"
@@ -171,14 +172,14 @@
     "models": "iot-data/2015-05-28",
     "partitionsKey": null
   },
+  "KMS": {
+    "models": "kms/2014-11-01"
+  },
   "Kinesis": {
     "models": "kinesis/2013-12-02"
   },
   "KinesisAnalytics": {
     "models": "kinesisanalytics/2015-08-14"
-  },
-  "KMS": {
-    "models": "kms/2014-11-01"
   },
   "Lambda": {
     "models": "lambda/2015-03-31"
@@ -241,23 +242,14 @@
       "Aws::S3::Plugins::BucketNameRestrictions"
     ]
   },
-  "ServiceCatalog": {
-    "models": "servicecatalog/2015-12-10"
-  },
   "SES": {
     "models": "email/2010-12-01"
-  },
-  "SimpleDB": {
-    "models": "sdb/2009-04-15"
   },
   "SMS": {
     "models": "sms/2016-10-24"
   },
   "SNS": {
     "models": "sns/2010-03-31"
-  },
-  "Snowball": {
-    "models": "snowball/2016-06-30"
   },
   "SQS": {
     "models": "sqs/2012-11-05",
@@ -269,21 +261,30 @@
   "SSM": {
     "models": "ssm/2014-11-06"
   },
-  "StorageGateway": {
-    "models": "storagegateway/2013-06-30"
-  },
   "STS": {
     "models": "sts/2011-06-15",
     "gemName": "aws-sdk-core"
-  },
-  "Support": {
-    "models": "support/2013-04-15"
   },
   "SWF": {
     "models": "swf/2012-01-25",
     "addPlugins": [
       "Aws::SWF::Plugins::ReadTimeouts"
     ]
+  },
+  "ServiceCatalog": {
+    "models": "servicecatalog/2015-12-10"
+  },
+  "SimpleDB": {
+    "models": "sdb/2009-04-15"
+  },
+  "Snowball": {
+    "models": "snowball/2016-06-30"
+  },
+  "StorageGateway": {
+    "models": "storagegateway/2013-06-30"
+  },
+  "Support": {
+    "models": "support/2013-04-15"
   },
   "WAF": {
     "models": "waf/2015-08-24"

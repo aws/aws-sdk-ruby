@@ -253,8 +253,8 @@ to be backwards compatible.
 | AWS IoT                                  | Aws::IoT                          | aws-sdk-iot                          | 2015-05-28  |
 | AWS IoT Data Plane                       | Aws::IoTDataPlane                 | aws-sdk-iotdataplane                 | 2015-05-28  |
 | AWS Key Management Service               | Aws::KMS                          | aws-sdk-kms                          | 2014-11-01  |
-| AWS Lambda                               | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Lambda                               | Aws::Lambda                       | aws-sdk-lambda                       | 2015-03-31  |
+| AWS Lambda                               | Aws::LambdaPreview                | aws-sdk-lambdapreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics       | Aws::MarketplaceCommerceAnalytics | aws-sdk-marketplacecommerceanalytics | 2015-07-01  |
 | AWS OpsWorks                             | Aws::OpsWorks                     | aws-sdk-opsworks                     | 2013-02-18  |
 | AWS Security Token Service               | Aws::STS                          | aws-sdk-core                         | 2011-06-15  |

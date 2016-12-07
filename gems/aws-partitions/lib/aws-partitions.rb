@@ -267,7 +267,6 @@ module Aws
             'ImportExport' => 'importexport',
             'Inspector' => 'inspector',
             'IoT' => 'iot',
-            'IoTDataPlane' => 'data.iot',
             'KMS' => 'kms',
             'Kinesis' => 'kinesis',
             'KinesisAnalytics' => 'kinesisanalytics',
