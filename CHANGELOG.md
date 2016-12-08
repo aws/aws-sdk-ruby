@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.35 (2016-12-08)
+------------------
+
 * Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
 
 * Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
