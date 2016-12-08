@@ -143,6 +143,20 @@ module BuildTools
       # @return [Integer, nil]
       attr_reader :pull
 
+      # @return [Boolean]
+      def point?
+        case @type
+        when :feature then true
+        when :issue then false
+        else
+          raise "unhandled entry type `#{@type.inspect}'"
+        end
+      end
+
+      def patch?
+        !point?
+      end
+
       def lines
         lines = @text.lines.each.with_index.map do |line, n|
           if n == 0
