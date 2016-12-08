@@ -104,6 +104,7 @@ module Aws
     Support
     SWF
     WAF
+    WAFRegional
     WorkSpaces
     XRay
   )

@@ -266,11 +266,12 @@ to be backwards compatible.
 | AWS Storage Gateway                 | StorageGateway               | 2013-06-30  |
 | AWS Support                         | Support                      | 2013-04-15  |
 | AWS WAF                             | WAF                          | 2015-08-24  |
+| AWS WAF Regional                    | WAFRegional                  | 2016-11-28  |
 | AWS X-Ray                           | XRay                         | 2016-04-12  |
 | AWSMarketplace Metering             | MarketplaceMetering          | 2016-01-14  |
 | Amazon API Gateway                  | APIGateway                   | 2015-07-09  |
 | Amazon AppStream                    | AppStream                    | 2016-12-01  |
-| Amazon CloudFront                   | CloudFront                   | 2016-09-29  |
+| Amazon CloudFront                   | CloudFront                   | 2016-11-25  |
 | Amazon CloudHSM                     | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                  | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain           | CloudSearchDomain            | 2013-01-01  |
