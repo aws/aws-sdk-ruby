@@ -338,6 +338,10 @@
     "models": "waf/2015-08-24",
     "endpoint": "waf"
   },
+  "WAFRegional": {
+    "models": "waf-regional/2016-11-28",
+    "endpoint": "waf-regional"
+  },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",
     "endpoint": "workspaces"
