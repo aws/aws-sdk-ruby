@@ -47,9 +47,11 @@ module AWS
         #
         def set?
           @cache_mutex ||= Mutex.new
-          unless @cached_credentials
+          if @cached_credentials.nil? || @cached_credentials.empty?
             @cache_mutex.synchronize do
-              @cached_credentials ||= get_credentials
+              if @cached_credentials.nil? || @cached_credentials.empty?
+                @cached_credentials = get_credentials
+              end
             end
           end
           !!(@cached_credentials[:access_key_id] &&
