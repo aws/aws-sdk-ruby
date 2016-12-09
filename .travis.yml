@@ -5,7 +5,7 @@ rvm:
   - 2.0.0
   - 2.1
   - 2.2
-  - 2.3.0
+  - 2.3.3
   - jruby
 
 sudo: false
@@ -23,7 +23,7 @@ matrix:
     - rvm: jruby
       env: KITCHEN_SINK=1
   include:
-    - rvm: 2.3.0
+    - rvm: 2.3.3
       env: OLD_OJ=1
 
 notifications:
