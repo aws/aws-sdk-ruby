@@ -142,6 +142,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -176,7 +181,7 @@ module Aws
       #   number. We recommend that you specify the port range in a set of IP
       #   permissions instead.
       # @option options [String] :cidr_ip
-      #   The CIDR IP address range. We recommend that you specify the CIDR
+      #   The CIDR IPv4 address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option options [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. You can't specify a destination security
@@ -219,6 +224,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -253,22 +263,26 @@ module Aws
       #   protocol and port range, use a set of IP permissions instead.
       # @option options [String] :ip_protocol
       #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-      #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
-      #   specify `-1`, traffic on all ports is allowed, regardless of any ports
-      #   you specify.
+      #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
+      #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
+      #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
+      #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
+      #   port range. For protocol `58` (ICMPv6), you can optionally specify a
+      #   port range; if you don't, traffic for all types and codes is allowed.
       #
       #
       #
       #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
       # @option options [Integer] :from_port
-      #   The start of port range for the TCP and UDP protocols, or an ICMP type
-      #   number. For the ICMP type number, use `-1` to specify all ICMP types.
+      #   The start of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
+      #   specify all types.
       # @option options [Integer] :to_port
-      #   The end of port range for the TCP and UDP protocols, or an ICMP code
-      #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-      #   for the ICMP type.
+      #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+      #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
+      #   codes.
       # @option options [String] :cidr_ip
-      #   The CIDR IP address range. You can't specify this parameter when
+      #   The CIDR IPv4 address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option options [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. Can be used to specify multiple rules in a
@@ -369,6 +383,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -444,6 +463,11 @@ module Aws
       #         ip_ranges: [
       #           {
       #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
       #           },
       #         ],
       #         prefix_list_ids: [

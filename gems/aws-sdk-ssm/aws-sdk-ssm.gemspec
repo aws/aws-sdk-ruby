@@ -10,7 +10,7 @@ Gem::Specification.new do |spec|
   spec.name          = 'aws-sdk-ssm'
   spec.version       = File.read(File.expand_path('../VERSION', __FILE__)).strip
   spec.summary       = 'AWS SDK for Ruby - Amazon SSM'
-  spec.description   = 'Official AWS Ruby gem for Amazon Simple Systems Management Service (Amazon SSM). This gem is part of the AWS SDK for Ruby.'
+  spec.description   = 'Official AWS Ruby gem for Amazon Simple Systems Manager (SSM) (Amazon SSM). This gem is part of the AWS SDK for Ruby.'
   spec.author        = 'Amazon Web Services'
   spec.homepage      = 'http://github.com/aws/aws-sdk-ruby'
   spec.license       = 'Apache-2.0'

@@ -139,12 +139,31 @@ module Aws
 
       # @!group API Operations
 
-      # Cancels the specified job. Note that you can only cancel a job before
-      # its `JobState` value changes to `PreparingAppliance`. Requesting the
+      # Cancels a cluster job. You can only cancel a cluster job while it's
+      # in the `AwaitingQuorum` status. You'll have at least an hour after
+      # creating a cluster job to cancel it.
+      # @option params [required, String] :cluster_id
+      #   The 39-character ID for the cluster that you want to cancel, for
+      #   example `CID123e4567-e89b-12d3-a456-426655440000`.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.cancel_cluster({
+      #     cluster_id: "ClusterId", # required
+      #   })
+      # @overload cancel_cluster(params = {})
+      # @param [Hash] params ({})
+      def cancel_cluster(params = {}, options = {})
+        req = build_request(:cancel_cluster, params)
+        req.send_request(options)
+      end
+
+      # Cancels the specified job. You can only cancel a job before its
+      # `JobState` value changes to `PreparingAppliance`. Requesting the
       # `ListJobs` or `DescribeJob` action will return a job's `JobState` as
       # part of the response element data returned.
       # @option params [required, String] :job_id
-      #   The 39 character job ID for the job that you want to cancel, for
+      #   The 39-character job ID for the job that you want to cancel, for
       #   example `JID123e4567-e89b-12d3-a456-426655440000`.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
@@ -198,13 +217,120 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a job to import or export data between Amazon S3 and your
-      # on-premises data center. Note that your AWS account must have the
-      # right trust policies and permissions in place to create a job for
-      # Snowball. For more information, see api-reference-policies.
+      # Creates an empty cluster. Each cluster supports five nodes. You use
+      # the CreateJob action separately to create the jobs for each of these
+      # nodes. The cluster does not ship until these five node jobs have been
+      # created.
       # @option params [required, String] :job_type
-      #   Defines the type of job that you're creating.
+      #   The type of job for this cluster. Currently, the only job type
+      #   supported for clusters is `LOCAL_USE`.
       # @option params [required, Types::JobResource] :resources
+      #   The resources associated with the cluster job. These resources include
+      #   Amazon S3 buckets and optional AWS Lambda functions written in the
+      #   Python language.
+      # @option params [String] :description
+      #   An optional description of this specific cluster, for example
+      #   `Environmental Data Cluster-01`.
+      # @option params [required, String] :address_id
+      #   The ID for the address that you want the cluster shipped to.&gt;
+      # @option params [String] :kms_key_arn
+      #   The `KmsKeyARN` value that you want to associate with this cluster.
+      #   `KmsKeyARN` values are created by using the [CreateKey][1] API action
+      #   in AWS Key Management Service (AWS KMS).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+      # @option params [required, String] :role_arn
+      #   The `RoleARN` that you want to associate with this cluster. `RoleArn`
+      #   values are created by using the [CreateRole][1] API action in AWS
+      #   Identity and Access Management (IAM).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+      # @option params [String] :snowball_type
+      #   The type of AWS Snowball appliance to use for this cluster. Currently,
+      #   the only supported appliance type for cluster jobs is `EDGE`.
+      # @option params [required, String] :shipping_option
+      #   The shipping speed for each node in this cluster. This speed doesn't
+      #   dictate how soon you'll get each Snowball Edge appliance, rather it
+      #   represents how quickly each appliance moves to its destination while
+      #   in transit. Regional shipping speeds are as follows:
+      #
+      #   * In Australia, you have access to express shipping. Typically,
+      #     appliances shipped express are delivered in about a day.
+      #
+      #   * In the European Union (EU), you have access to express shipping.
+      #     Typically, Snowball Edges shipped express are delivered in about a
+      #     day. In addition, most countries in the EU have access to standard
+      #     shipping, which typically takes less than a week, one way.
+      #
+      #   * In India, Snowball Edges are delivered in one to seven days.
+      #
+      #   * In the US, you have access to one-day shipping and two-day shipping.
+      # @option params [Types::Notification] :notification
+      #   The Amazon Simple Notification Service (Amazon SNS) notification
+      #   settings for this cluster.
+      # @return [Types::CreateClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateClusterResult#cluster_id #ClusterId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_cluster({
+      #     job_type: "IMPORT", # required, accepts IMPORT, EXPORT, LOCAL_USE
+      #     resources: { # required
+      #       s3_resources: [
+      #         {
+      #           bucket_arn: "ResourceARN",
+      #           key_range: {
+      #             begin_marker: "String",
+      #             end_marker: "String",
+      #           },
+      #         },
+      #       ],
+      #       lambda_resources: [
+      #         {
+      #           lambda_arn: "ResourceARN",
+      #           event_triggers: [
+      #             {
+      #               event_resource_arn: "ResourceARN",
+      #             },
+      #           ],
+      #         },
+      #       ],
+      #     },
+      #     description: "String",
+      #     address_id: "AddressId", # required
+      #     kms_key_arn: "KmsKeyARN",
+      #     role_arn: "RoleARN", # required
+      #     snowball_type: "STANDARD", # accepts STANDARD, EDGE
+      #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+      #     notification: {
+      #       sns_topic_arn: "SnsTopicARN",
+      #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+      #       notify_all: false,
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.cluster_id #=> String
+      # @overload create_cluster(params = {})
+      # @param [Hash] params ({})
+      def create_cluster(params = {}, options = {})
+        req = build_request(:create_cluster, params)
+        req.send_request(options)
+      end
+
+      # Creates a job to import or export data between Amazon S3 and your
+      # on-premises data center. Your AWS account must have the right trust
+      # policies and permissions in place to create a job for Snowball. If
+      # you're creating a job for a node in a cluster, you only need to
+      # provide the `clusterId` value; the other job attributes are inherited
+      # from the cluster. .
+      # @option params [String] :job_type
+      #   Defines the type of job that you're creating.
+      # @option params [Types::JobResource] :resources
       #   Defines the Amazon S3 buckets associated with this job.
       #
       #   With `IMPORT` jobs, you specify the bucket or buckets that your
@@ -219,7 +345,7 @@ module Aws
       # @option params [String] :description
       #   Defines an optional description of this specific job, for example
       #   `Important Photos 2016-08-11`.
-      # @option params [required, String] :address_id
+      # @option params [String] :address_id
       #   The ID for the address that you want the Snowball shipped to.
       # @option params [String] :kms_key_arn
       #   The `KmsKeyARN` that you want to associate with this job. `KmsKeyARN`s
@@ -229,7 +355,7 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
-      # @option params [required, String] :role_arn
+      # @option params [String] :role_arn
       #   The `RoleARN` that you want to associate with this job. `RoleArn`s are
       #   created using the [CreateRole][1] AWS Identity and Access Management
       #   (IAM) API action.
@@ -241,11 +367,11 @@ module Aws
       #   If your job is being created in one of the US regions, you have the
       #   option of specifying what size Snowball you'd like for this job. In
       #   all other regions, Snowballs come with 80 TB in storage capacity.
-      # @option params [required, String] :shipping_option
-      #   The shipping speed for this job. Note that this speed does not dictate
-      #   how soon you'll get the Snowball, rather it represents how quickly
-      #   the Snowball moves to its destination while in transit. Regional
-      #   shipping speeds are as follows:
+      # @option params [String] :shipping_option
+      #   The shipping speed for this job. This speed doesn't dictate how soon
+      #   you'll get the Snowball, rather it represents how quickly the
+      #   Snowball moves to its destination while in transit. Regional shipping
+      #   speeds are as follows:
       #
       #   * In Australia, you have access to express shipping. Typically,
       #     Snowballs shipped express are delivered in about a day.
@@ -261,14 +387,21 @@ module Aws
       # @option params [Types::Notification] :notification
       #   Defines the Amazon Simple Notification Service (Amazon SNS)
       #   notification settings for this job.
+      # @option params [String] :cluster_id
+      #   The ID of a cluster. If you're creating a job for a node in a
+      #   cluster, you need to provide only this `clusterId` value. The other
+      #   job attributes are inherited from the cluster.
+      # @option params [String] :snowball_type
+      #   The type of AWS Snowball appliance to use for this job. Currently, the
+      #   only supported appliance type for cluster jobs is `EDGE`.
       # @return [Types::CreateJobResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateJobResult#job_id #JobId} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_job({
-      #     job_type: "IMPORT", # required, accepts IMPORT, EXPORT
-      #     resources: { # required
+      #     job_type: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+      #     resources: {
       #       s3_resources: [
       #         {
       #           bucket_arn: "ResourceARN",
@@ -278,18 +411,30 @@ module Aws
       #           },
       #         },
       #       ],
+      #       lambda_resources: [
+      #         {
+      #           lambda_arn: "ResourceARN",
+      #           event_triggers: [
+      #             {
+      #               event_resource_arn: "ResourceARN",
+      #             },
+      #           ],
+      #         },
+      #       ],
       #     },
       #     description: "String",
-      #     address_id: "AddressId", # required
+      #     address_id: "AddressId",
       #     kms_key_arn: "KmsKeyARN",
-      #     role_arn: "RoleARN", # required
-      #     snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
-      #     shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+      #     role_arn: "RoleARN",
+      #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+      #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
       #     notification: {
       #       sns_topic_arn: "SnsTopicARN",
       #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
       #       notify_all: false,
       #     },
+      #     cluster_id: "ClusterId",
+      #     snowball_type: "STANDARD", # accepts STANDARD, EDGE
       #   })
       #
       # @example Response structure
@@ -379,8 +524,51 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns information about a specific cluster including shipping
+      # information, cluster status, and other important metadata.
+      # @option params [required, String] :cluster_id
+      #   The automatically generated ID for a cluster.
+      # @return [Types::DescribeClusterResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeClusterResult#cluster_metadata #ClusterMetadata} => Types::ClusterMetadata
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_cluster({
+      #     cluster_id: "ClusterId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.cluster_metadata.cluster_id #=> String
+      #   resp.cluster_metadata.description #=> String
+      #   resp.cluster_metadata.kms_key_arn #=> String
+      #   resp.cluster_metadata.role_arn #=> String
+      #   resp.cluster_metadata.cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
+      #   resp.cluster_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+      #   resp.cluster_metadata.snowball_type #=> String, one of "STANDARD", "EDGE"
+      #   resp.cluster_metadata.creation_date #=> Time
+      #   resp.cluster_metadata.resources.s3_resources #=> Array
+      #   resp.cluster_metadata.resources.s3_resources[0].bucket_arn #=> String
+      #   resp.cluster_metadata.resources.s3_resources[0].key_range.begin_marker #=> String
+      #   resp.cluster_metadata.resources.s3_resources[0].key_range.end_marker #=> String
+      #   resp.cluster_metadata.resources.lambda_resources #=> Array
+      #   resp.cluster_metadata.resources.lambda_resources[0].lambda_arn #=> String
+      #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers #=> Array
+      #   resp.cluster_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
+      #   resp.cluster_metadata.address_id #=> String
+      #   resp.cluster_metadata.shipping_option #=> String, one of "SECOND_DAY", "NEXT_DAY", "EXPRESS", "STANDARD"
+      #   resp.cluster_metadata.notification.sns_topic_arn #=> String
+      #   resp.cluster_metadata.notification.job_states_to_notify #=> Array
+      #   resp.cluster_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+      #   resp.cluster_metadata.notification.notify_all #=> Boolean
+      # @overload describe_cluster(params = {})
+      # @param [Hash] params ({})
+      def describe_cluster(params = {}, options = {})
+        req = build_request(:describe_cluster, params)
+        req.send_request(options)
+      end
+
       # Returns information about a specific job including shipping
-      # information, job status, and other important metadata.
+      # information, job status, and other important metadata. .
       # @option params [required, String] :job_id
       #   The automatically generated ID for a job, for example
       #   `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -397,12 +585,17 @@ module Aws
       # @example Response structure
       #   resp.job_metadata.job_id #=> String
       #   resp.job_metadata.job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
-      #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT"
+      #   resp.job_metadata.job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+      #   resp.job_metadata.snowball_type #=> String, one of "STANDARD", "EDGE"
       #   resp.job_metadata.creation_date #=> Time
       #   resp.job_metadata.resources.s3_resources #=> Array
       #   resp.job_metadata.resources.s3_resources[0].bucket_arn #=> String
       #   resp.job_metadata.resources.s3_resources[0].key_range.begin_marker #=> String
       #   resp.job_metadata.resources.s3_resources[0].key_range.end_marker #=> String
+      #   resp.job_metadata.resources.lambda_resources #=> Array
+      #   resp.job_metadata.resources.lambda_resources[0].lambda_arn #=> String
+      #   resp.job_metadata.resources.lambda_resources[0].event_triggers #=> Array
+      #   resp.job_metadata.resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
       #   resp.job_metadata.description #=> String
       #   resp.job_metadata.kms_key_arn #=> String
       #   resp.job_metadata.role_arn #=> String
@@ -412,7 +605,7 @@ module Aws
       #   resp.job_metadata.shipping_details.inbound_shipment.tracking_number #=> String
       #   resp.job_metadata.shipping_details.outbound_shipment.status #=> String
       #   resp.job_metadata.shipping_details.outbound_shipment.tracking_number #=> String
-      #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "NoPreference"
+      #   resp.job_metadata.snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
       #   resp.job_metadata.notification.sns_topic_arn #=> String
       #   resp.job_metadata.notification.job_states_to_notify #=> Array
       #   resp.job_metadata.notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -424,15 +617,21 @@ module Aws
       #   resp.job_metadata.job_log_info.job_completion_report_uri #=> String
       #   resp.job_metadata.job_log_info.job_success_log_uri #=> String
       #   resp.job_metadata.job_log_info.job_failure_log_uri #=> String
+      #   resp.job_metadata.cluster_id #=> String
       #   resp.sub_job_metadata #=> Array
       #   resp.sub_job_metadata[0].job_id #=> String
       #   resp.sub_job_metadata[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
-      #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT"
+      #   resp.sub_job_metadata[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+      #   resp.sub_job_metadata[0].snowball_type #=> String, one of "STANDARD", "EDGE"
       #   resp.sub_job_metadata[0].creation_date #=> Time
       #   resp.sub_job_metadata[0].resources.s3_resources #=> Array
       #   resp.sub_job_metadata[0].resources.s3_resources[0].bucket_arn #=> String
       #   resp.sub_job_metadata[0].resources.s3_resources[0].key_range.begin_marker #=> String
       #   resp.sub_job_metadata[0].resources.s3_resources[0].key_range.end_marker #=> String
+      #   resp.sub_job_metadata[0].resources.lambda_resources #=> Array
+      #   resp.sub_job_metadata[0].resources.lambda_resources[0].lambda_arn #=> String
+      #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers #=> Array
+      #   resp.sub_job_metadata[0].resources.lambda_resources[0].event_triggers[0].event_resource_arn #=> String
       #   resp.sub_job_metadata[0].description #=> String
       #   resp.sub_job_metadata[0].kms_key_arn #=> String
       #   resp.sub_job_metadata[0].role_arn #=> String
@@ -442,7 +641,7 @@ module Aws
       #   resp.sub_job_metadata[0].shipping_details.inbound_shipment.tracking_number #=> String
       #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.status #=> String
       #   resp.sub_job_metadata[0].shipping_details.outbound_shipment.tracking_number #=> String
-      #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "NoPreference"
+      #   resp.sub_job_metadata[0].snowball_capacity_preference #=> String, one of "T50", "T80", "T100", "NoPreference"
       #   resp.sub_job_metadata[0].notification.sns_topic_arn #=> String
       #   resp.sub_job_metadata[0].notification.job_states_to_notify #=> Array
       #   resp.sub_job_metadata[0].notification.job_states_to_notify[0] #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
@@ -454,6 +653,7 @@ module Aws
       #   resp.sub_job_metadata[0].job_log_info.job_completion_report_uri #=> String
       #   resp.sub_job_metadata[0].job_log_info.job_success_log_uri #=> String
       #   resp.sub_job_metadata[0].job_log_info.job_failure_log_uri #=> String
+      #   resp.sub_job_metadata[0].cluster_id #=> String
       # @overload describe_job(params = {})
       # @param [Hash] params ({})
       def describe_job(params = {}, options = {})
@@ -478,8 +678,8 @@ module Aws
       # job. Saving these separately helps prevent unauthorized parties from
       # gaining access to the Snowball associated with that job.
       #
-      # Note that the credentials of a given job, including its manifest file
-      # and unlock code, expire 90 days after the job is created.
+      # The credentials of a given job, including its manifest file and unlock
+      # code, expire 90 days after the job is created.
       # @option params [required, String] :job_id
       #   The ID for a job that you want to get the manifest file for, for
       #   example `JID123e4567-e89b-12d3-a456-426655440000`.
@@ -538,9 +738,9 @@ module Aws
       # Returns information about the Snowball service limit for your account,
       # and also the number of Snowballs your account has in use.
       #
-      # Note that the default service limit for the number of Snowballs that
-      # you can have at one time is 1. If you want to increase your service
-      # limit, contact AWS Support.
+      # The default service limit for the number of Snowballs that you can
+      # have at one time is 1. If you want to increase your service limit,
+      # contact AWS Support.
       # @return [Types::GetSnowballUsageResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetSnowballUsageResult#snowball_limit #SnowballLimit} => Integer
@@ -556,6 +756,81 @@ module Aws
       # @param [Hash] params ({})
       def get_snowball_usage(params = {}, options = {})
         req = build_request(:get_snowball_usage, params)
+        req.send_request(options)
+      end
+
+      # Returns an array of `JobListEntry` objects of the specified length.
+      # Each `JobListEntry` object is for a job in the specified cluster and
+      # contains a job's state, a job's ID, and other information.
+      # @option params [required, String] :cluster_id
+      #   The 39-character ID for the cluster that you want to list, for example
+      #   `CID123e4567-e89b-12d3-a456-426655440000`.
+      # @option params [Integer] :max_results
+      #   The number of `JobListEntry` objects to return.
+      # @option params [String] :next_token
+      #   HTTP requests are stateless. To identify what object comes "next" in
+      #   the list of `JobListEntry` objects, you have the option of specifying
+      #   `NextToken` as the starting point for your returned list.
+      # @return [Types::ListClusterJobsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListClusterJobsResult#job_list_entries #JobListEntries} => Array&lt;Types::JobListEntry&gt;
+      #   * {Types::ListClusterJobsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_cluster_jobs({
+      #     cluster_id: "ClusterId", # required
+      #     max_results: 1,
+      #     next_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.job_list_entries #=> Array
+      #   resp.job_list_entries[0].job_id #=> String
+      #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
+      #   resp.job_list_entries[0].is_master #=> Boolean
+      #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+      #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
+      #   resp.job_list_entries[0].creation_date #=> Time
+      #   resp.job_list_entries[0].description #=> String
+      #   resp.next_token #=> String
+      # @overload list_cluster_jobs(params = {})
+      # @param [Hash] params ({})
+      def list_cluster_jobs(params = {}, options = {})
+        req = build_request(:list_cluster_jobs, params)
+        req.send_request(options)
+      end
+
+      # Returns an array of `ClusterListEntry` objects of the specified
+      # length. Each `ClusterListEntry` object contains a cluster's state, a
+      # cluster's ID, and other important status information.
+      # @option params [Integer] :max_results
+      #   The number of `ClusterListEntry` objects to return.
+      # @option params [String] :next_token
+      #   HTTP requests are stateless. To identify what object comes "next" in
+      #   the list of `ClusterListEntry` objects, you have the option of
+      #   specifying `NextToken` as the starting point for your returned list.
+      # @return [Types::ListClustersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListClustersResult#cluster_list_entries #ClusterListEntries} => Array&lt;Types::ClusterListEntry&gt;
+      #   * {Types::ListClustersResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_clusters({
+      #     max_results: 1,
+      #     next_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.cluster_list_entries #=> Array
+      #   resp.cluster_list_entries[0].cluster_id #=> String
+      #   resp.cluster_list_entries[0].cluster_state #=> String, one of "AwaitingQuorum", "Pending", "InUse", "Complete", "Cancelled"
+      #   resp.cluster_list_entries[0].creation_date #=> Time
+      #   resp.cluster_list_entries[0].description #=> String
+      #   resp.next_token #=> String
+      # @overload list_clusters(params = {})
+      # @param [Hash] params ({})
+      def list_clusters(params = {}, options = {})
+        req = build_request(:list_clusters, params)
         req.send_request(options)
       end
 
@@ -587,11 +862,86 @@ module Aws
       #   resp.job_list_entries[0].job_id #=> String
       #   resp.job_list_entries[0].job_state #=> String, one of "New", "PreparingAppliance", "PreparingShipment", "InTransitToCustomer", "WithCustomer", "InTransitToAWS", "WithAWS", "InProgress", "Complete", "Cancelled", "Listing", "Pending"
       #   resp.job_list_entries[0].is_master #=> Boolean
+      #   resp.job_list_entries[0].job_type #=> String, one of "IMPORT", "EXPORT", "LOCAL_USE"
+      #   resp.job_list_entries[0].snowball_type #=> String, one of "STANDARD", "EDGE"
+      #   resp.job_list_entries[0].creation_date #=> Time
+      #   resp.job_list_entries[0].description #=> String
       #   resp.next_token #=> String
       # @overload list_jobs(params = {})
       # @param [Hash] params ({})
       def list_jobs(params = {}, options = {})
         req = build_request(:list_jobs, params)
+        req.send_request(options)
+      end
+
+      # While a cluster's `ClusterState` value is in the `AwaitingQuorum`
+      # state, you can update some of the information associated with a
+      # cluster. Once the cluster changes to a different job state, usually 60
+      # minutes after the cluster being created, this action is no longer
+      # available.
+      # @option params [required, String] :cluster_id
+      #   The cluster ID of the cluster that you want to update, for example
+      #   `CID123e4567-e89b-12d3-a456-426655440000`.
+      # @option params [String] :role_arn
+      #   The new role Amazon Resource Name (ARN) that you want to associate
+      #   with this cluster. To create a role ARN, use the [CreateRole][1] API
+      #   action in AWS Identity and Access Management (IAM).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+      # @option params [String] :description
+      #   The updated description of this cluster.
+      # @option params [Types::JobResource] :resources
+      #   The updated arrays of JobResource objects that can include updated
+      #   S3Resource objects or LambdaResource objects.
+      # @option params [String] :address_id
+      #   The ID of the updated Address object.
+      # @option params [String] :shipping_option
+      #   The updated shipping option value of this cluster's ShippingDetails
+      #   object.
+      # @option params [Types::Notification] :notification
+      #   The new or updated Notification object.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_cluster({
+      #     cluster_id: "ClusterId", # required
+      #     role_arn: "RoleARN",
+      #     description: "String",
+      #     resources: {
+      #       s3_resources: [
+      #         {
+      #           bucket_arn: "ResourceARN",
+      #           key_range: {
+      #             begin_marker: "String",
+      #             end_marker: "String",
+      #           },
+      #         },
+      #       ],
+      #       lambda_resources: [
+      #         {
+      #           lambda_arn: "ResourceARN",
+      #           event_triggers: [
+      #             {
+      #               event_resource_arn: "ResourceARN",
+      #             },
+      #           ],
+      #         },
+      #       ],
+      #     },
+      #     address_id: "AddressId",
+      #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+      #     notification: {
+      #       sns_topic_arn: "SnsTopicARN",
+      #       job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+      #       notify_all: false,
+      #     },
+      #   })
+      # @overload update_cluster(params = {})
+      # @param [Hash] params ({})
+      def update_cluster(params = {}, options = {})
+        req = build_request(:update_cluster, params)
         req.send_request(options)
       end
 
@@ -625,8 +975,7 @@ module Aws
       #   The updated description of this job's JobMetadata object.
       # @option params [String] :snowball_capacity_preference
       #   The updated `SnowballCapacityPreference` of this job's JobMetadata
-      #   object. Note that the 50 TB Snowballs are only available in the US
-      #   regions.
+      #   object. The 50 TB Snowballs are only available in the US regions.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -648,11 +997,21 @@ module Aws
       #           },
       #         },
       #       ],
+      #       lambda_resources: [
+      #         {
+      #           lambda_arn: "ResourceARN",
+      #           event_triggers: [
+      #             {
+      #               event_resource_arn: "ResourceARN",
+      #             },
+      #           ],
+      #         },
+      #       ],
       #     },
       #     address_id: "AddressId",
       #     shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
       #     description: "String",
-      #     snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
+      #     snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
       #   })
       # @overload update_job(params = {})
       # @param [Hash] params ({})

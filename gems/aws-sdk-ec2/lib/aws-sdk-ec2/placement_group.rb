@@ -131,6 +131,18 @@ module Aws
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
+      #   * `association.public-ip` - The address of the Elastic IP address
+      #     (IPv4) bound to the network interface.
+      #
+      #   * `association.ip-owner-id` - The owner of the Elastic IP address
+      #     (IPv4) associated with the network interface.
+      #
+      #   * `association.allocation-id` - The allocation ID returned when you
+      #     allocated the Elastic IP address (IPv4) for your network interface.
+      #
+      #   * `association.association-id` - The association ID returned when the
+      #     network interface was associated with an IPv4 address.
+      #
       #   * `availability-zone` - The Availability Zone of the instance.
       #
       #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -191,7 +203,7 @@ module Aws
       #   * `instance.group-name` - The name of the security group for the
       #     instance.
       #
-      #   * `ip-address` - The public IP address of the instance.
+      #   * `ip-address` - The public IPv4 address of the instance.
       #
       #   * `kernel-id` - The kernel ID.
       #
@@ -204,8 +216,91 @@ module Aws
       #
       #   * `launch-time` - The time when the instance was launched.
       #
-      #   * `monitoring-state` - Indicates whether monitoring is enabled for the
-      #     instance (`disabled` \| `enabled`).
+      #   * `monitoring-state` - Indicates whether detailed monitoring is
+      #     enabled (`disabled` \| `enabled`).
+      #
+      #   * `network-interface.addresses.private-ip-address` - The private IPv4
+      #     address associated with the network interface.
+      #
+      #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+      #     address of the network interface is the primary private IPv4
+      #     address.
+      #
+      #   * `network-interface.addresses.association.public-ip` - The ID of the
+      #     association of an Elastic IP address (IPv4) with a network
+      #     interface.
+      #
+      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
+      #     of the private IPv4 address associated with the network interface.
+      #
+      #   * `network-interface.attachment.attachment-id` - The ID of the
+      #     interface attachment.
+      #
+      #   * `network-interface.attachment.instance-id` - The ID of the instance
+      #     to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
+      #     the instance to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.device-index` - The device index to
+      #     which the network interface is attached.
+      #
+      #   * `network-interface.attachment.status` - The status of the attachment
+      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
+      #
+      #   * `network-interface.attachment.attach-time` - The time that the
+      #     network interface was attached to an instance.
+      #
+      #   * `network-interface.attachment.delete-on-termination` - Specifies
+      #     whether the attachment is deleted when an instance is terminated.
+      #
+      #   * `network-interface.availability-zone` - The Availability Zone for
+      #     the network interface.
+      #
+      #   * `network-interface.description` - The description of the network
+      #     interface.
+      #
+      #   * `network-interface.group-id` - The ID of a security group associated
+      #     with the network interface.
+      #
+      #   * `network-interface.group-name` - The name of a security group
+      #     associated with the network interface.
+      #
+      #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      #     associated with the network interface.
+      #
+      #   * `network-interface.mac-address` - The MAC address of the network
+      #     interface.
+      #
+      #   * `network-interface.network-interface-id` - The ID of the network
+      #     interface.
+      #
+      #   * `network-interface.owner-id` - The ID of the owner of the network
+      #     interface.
+      #
+      #   * `network-interface.private-dns-name` - The private DNS name of the
+      #     network interface.
+      #
+      #   * `network-interface.requester-id` - The requester ID for the network
+      #     interface.
+      #
+      #   * `network-interface.requester-managed` - Indicates whether the
+      #     network interface is being managed by AWS.
+      #
+      #   * `network-interface.status` - The status of the network interface
+      #     (`available`) \| `in-use`).
+      #
+      #   * `network-interface.source-dest-check` - Whether the network
+      #     interface performs source/destination checking. A value of `true`
+      #     means checking is enabled, and `false` means checking is disabled.
+      #     The value must be `false` for the network interface to perform
+      #     network address translation (NAT) in your VPC.
+      #
+      #   * `network-interface.subnet-id` - The ID of the subnet for the network
+      #     interface.
+      #
+      #   * `network-interface.vpc-id` - The ID of the VPC for the network
+      #     interface.
       #
       #   * `owner-id` - The AWS account ID of the instance owner.
       #
@@ -215,9 +310,9 @@ module Aws
       #   * `platform` - The platform. Use `windows` if you have Windows
       #     instances; otherwise, leave blank.
       #
-      #   * `private-dns-name` - The private DNS name of the instance.
+      #   * `private-dns-name` - The private IPv4 DNS name of the instance.
       #
-      #   * `private-ip-address` - The private IP address of the instance.
+      #   * `private-ip-address` - The private IPv4 address of the instance.
       #
       #   * `product-code` - The product code associated with the AMI used to
       #     launch the instance.
@@ -285,96 +380,6 @@ module Aws
       #     (`paravirtual` \| `hvm`).
       #
       #   * `vpc-id` - The ID of the VPC that the instance is running in.
-      #
-      #   * `network-interface.description` - The description of the network
-      #     interface.
-      #
-      #   * `network-interface.subnet-id` - The ID of the subnet for the network
-      #     interface.
-      #
-      #   * `network-interface.vpc-id` - The ID of the VPC for the network
-      #     interface.
-      #
-      #   * `network-interface.network-interface-id` - The ID of the network
-      #     interface.
-      #
-      #   * `network-interface.owner-id` - The ID of the owner of the network
-      #     interface.
-      #
-      #   * `network-interface.availability-zone` - The Availability Zone for
-      #     the network interface.
-      #
-      #   * `network-interface.requester-id` - The requester ID for the network
-      #     interface.
-      #
-      #   * `network-interface.requester-managed` - Indicates whether the
-      #     network interface is being managed by AWS.
-      #
-      #   * `network-interface.status` - The status of the network interface
-      #     (`available`) \| `in-use`).
-      #
-      #   * `network-interface.mac-address` - The MAC address of the network
-      #     interface.
-      #
-      #   * `network-interface.private-dns-name` - The private DNS name of the
-      #     network interface.
-      #
-      #   * `network-interface.source-dest-check` - Whether the network
-      #     interface performs source/destination checking. A value of `true`
-      #     means checking is enabled, and `false` means checking is disabled.
-      #     The value must be `false` for the network interface to perform
-      #     network address translation (NAT) in your VPC.
-      #
-      #   * `network-interface.group-id` - The ID of a security group associated
-      #     with the network interface.
-      #
-      #   * `network-interface.group-name` - The name of a security group
-      #     associated with the network interface.
-      #
-      #   * `network-interface.attachment.attachment-id` - The ID of the
-      #     interface attachment.
-      #
-      #   * `network-interface.attachment.instance-id` - The ID of the instance
-      #     to which the network interface is attached.
-      #
-      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
-      #     the instance to which the network interface is attached.
-      #
-      #   * `network-interface.addresses.private-ip-address` - The private IP
-      #     address associated with the network interface.
-      #
-      #   * `network-interface.attachment.device-index` - The device index to
-      #     which the network interface is attached.
-      #
-      #   * `network-interface.attachment.status` - The status of the attachment
-      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
-      #
-      #   * `network-interface.attachment.attach-time` - The time that the
-      #     network interface was attached to an instance.
-      #
-      #   * `network-interface.attachment.delete-on-termination` - Specifies
-      #     whether the attachment is deleted when an instance is terminated.
-      #
-      #   * `network-interface.addresses.primary` - Specifies whether the IP
-      #     address of the network interface is the primary private IP address.
-      #
-      #   * `network-interface.addresses.association.public-ip` - The ID of the
-      #     association of an Elastic IP address with a network interface.
-      #
-      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
-      #     of the private IP address associated with the network interface.
-      #
-      #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
-      #
-      #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
-      #
-      #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
-      #
-      #   * `association.association-id` - The association ID returned when the
-      #     network interface was associated with an IP address.
       # @return [Instance::Collection]
       def instances(options = {})
         batches = Enumerator.new do |y|

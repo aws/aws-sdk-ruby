@@ -215,6 +215,15 @@ module Aws
       #         default_ttl: 1,
       #         max_ttl: 1,
       #         compress: false,
+      #         lambda_function_associations: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               lambda_function_arn: "string",
+      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #             },
+      #           ],
+      #         },
       #       }
       # @!attribute [rw] path_pattern
       #   The pattern (for example, `images/*.jpg`) that specifies which
@@ -400,6 +409,11 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
       #   @return [Boolean]
+      #
+      # @!attribute [rw] lambda_function_associations
+      #   A complex type that contains zero or more Lambda function
+      #   associations for a cache behavior.
+      #   @return [Types::LambdaFunctionAssociations]
       class CacheBehavior < Struct.new(
         :path_pattern,
         :target_origin_id,
@@ -411,7 +425,8 @@ module Aws
         :smooth_streaming,
         :default_ttl,
         :max_ttl,
-        :compress)
+        :compress,
+        :lambda_function_associations)
         include Aws::Structure
       end
 
@@ -462,6 +477,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #         ],
       #       }
@@ -860,6 +884,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #           cache_behaviors: {
       #             quantity: 1, # required
@@ -904,6 +937,15 @@ module Aws
       #                 default_ttl: 1,
       #                 max_ttl: 1,
       #                 compress: false,
+      #                 lambda_function_associations: {
+      #                   quantity: 1, # required
+      #                   items: [
+      #                     {
+      #                       lambda_function_arn: "string",
+      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                     },
+      #                   ],
+      #                 },
       #               },
       #             ],
       #           },
@@ -1060,6 +1102,15 @@ module Aws
       #               default_ttl: 1,
       #               max_ttl: 1,
       #               compress: false,
+      #               lambda_function_associations: {
+      #                 quantity: 1, # required
+      #                 items: [
+      #                   {
+      #                     lambda_function_arn: "string",
+      #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                   },
+      #                 ],
+      #               },
       #             },
       #             cache_behaviors: {
       #               quantity: 1, # required
@@ -1104,6 +1155,15 @@ module Aws
       #                   default_ttl: 1,
       #                   max_ttl: 1,
       #                   compress: false,
+      #                   lambda_function_associations: {
+      #                     quantity: 1, # required
+      #                     items: [
+      #                       {
+      #                         lambda_function_arn: "string",
+      #                         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                       },
+      #                     ],
+      #                   },
       #                 },
       #               ],
       #             },
@@ -1620,6 +1680,15 @@ module Aws
       #         default_ttl: 1,
       #         max_ttl: 1,
       #         compress: false,
+      #         lambda_function_associations: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               lambda_function_arn: "string",
+      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #             },
+      #           ],
+      #         },
       #       }
       # @!attribute [rw] target_origin_id
       #   The value of `ID` for the origin that you want CloudFront to route
@@ -1768,6 +1837,11 @@ module Aws
       #
       #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
       #   @return [Boolean]
+      #
+      # @!attribute [rw] lambda_function_associations
+      #   A complex type that contains zero or more Lambda function
+      #   associations for a cache behavior.
+      #   @return [Types::LambdaFunctionAssociations]
       class DefaultCacheBehavior < Struct.new(
         :target_origin_id,
         :forwarded_values,
@@ -1778,7 +1852,8 @@ module Aws
         :smooth_streaming,
         :default_ttl,
         :max_ttl,
-        :compress)
+        :compress,
+        :lambda_function_associations)
         include Aws::Structure
       end
 
@@ -2030,6 +2105,15 @@ module Aws
       #           default_ttl: 1,
       #           max_ttl: 1,
       #           compress: false,
+      #           lambda_function_associations: {
+      #             quantity: 1, # required
+      #             items: [
+      #               {
+      #                 lambda_function_arn: "string",
+      #                 event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #               },
+      #             ],
+      #           },
       #         },
       #         cache_behaviors: {
       #           quantity: 1, # required
@@ -2074,6 +2158,15 @@ module Aws
       #               default_ttl: 1,
       #               max_ttl: 1,
       #               compress: false,
+      #               lambda_function_associations: {
+      #                 quantity: 1, # required
+      #                 items: [
+      #                   {
+      #                     lambda_function_arn: "string",
+      #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                   },
+      #                 ],
+      #               },
       #             },
       #           ],
       #         },
@@ -2471,6 +2564,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #           cache_behaviors: {
       #             quantity: 1, # required
@@ -2515,6 +2617,15 @@ module Aws
       #                 default_ttl: 1,
       #                 max_ttl: 1,
       #                 compress: false,
+      #                 lambda_function_associations: {
+      #                   quantity: 1, # required
+      #                   items: [
+      #                     {
+      #                       lambda_function_arn: "string",
+      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                     },
+      #                   ],
+      #                 },
       #               },
       #             ],
       #           },
@@ -3318,6 +3429,75 @@ module Aws
       #   For more information, see ActiveTrustedSigners.
       #   @return [Array<String>]
       class KeyPairIds < Struct.new(
+        :quantity,
+        :items)
+        include Aws::Structure
+      end
+
+      # A complex type that contains a Lambda function association.
+      # @note When making an API call, pass LambdaFunctionAssociation
+      #   data as a hash:
+      #
+      #       {
+      #         lambda_function_arn: "string",
+      #         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #       }
+      # @!attribute [rw] lambda_function_arn
+      #   The ARN of the Lambda function.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_type
+      #   Specifies the event type that triggers a Lambda function invocation.
+      #   Valid values are:
+      #
+      #   * `viewer-request`
+      #
+      #   * `origin-request`
+      #
+      #   * `viewer-response`
+      #
+      #   * `origin-response`
+      #   @return [String]
+      class LambdaFunctionAssociation < Struct.new(
+        :lambda_function_arn,
+        :event_type)
+        include Aws::Structure
+      end
+
+      # A complex type that specifies a list of Lambda functions associations
+      # for a cache behavior.
+      #
+      # If you want to invoke one or more Lambda functions triggered by
+      # requests that match the `PathPattern` of the cache behavior, specify
+      # the applicable values for `Quantity` and `Items`. Note that there can
+      # be up to 4 `LambdaFunctionAssociation` items in this list (one for
+      # each possible value of `EventType`) and each `EventType` can be
+      # associated with the Lambda function only once.
+      #
+      # If you don't want to invoke any Lambda functions for the requests
+      # that match `PathPattern`, specify `0` for `Quantity` and omit `Items`.
+      # @note When making an API call, pass LambdaFunctionAssociations
+      #   data as a hash:
+      #
+      #       {
+      #         quantity: 1, # required
+      #         items: [
+      #           {
+      #             lambda_function_arn: "string",
+      #             event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] quantity
+      #   The number of Lambda function associations for this cache behavior.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] items
+      #   **Optional**\: A complex type that contains
+      #   `LambdaFunctionAssociation` items for this cache behavior. If
+      #   `Quantity` is `0`, you can omit `Items`.
+      #   @return [Array<Types::LambdaFunctionAssociation>]
+      class LambdaFunctionAssociations < Struct.new(
         :quantity,
         :items)
         include Aws::Structure
@@ -4685,6 +4865,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #           cache_behaviors: {
       #             quantity: 1, # required
@@ -4729,6 +4918,15 @@ module Aws
       #                 default_ttl: 1,
       #                 max_ttl: 1,
       #                 compress: false,
+      #                 lambda_function_associations: {
+      #                   quantity: 1, # required
+      #                   items: [
+      #                     {
+      #                       lambda_function_arn: "string",
+      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                     },
+      #                   ],
+      #                 },
       #               },
       #             ],
       #           },
@@ -4906,29 +5104,12 @@ module Aws
       #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
       #       }
       # @!attribute [rw] cloud_front_default_certificate
-      #   If you want viewers to use HTTPS to request your objects and you're
-      #   using the CloudFront domain name of your distribution in your object
-      #   URLs (for example,
-      #   `https://d111111abcdef8.cloudfront.net/logo.jpg`), set to `true`.
-      #   Omit this value if you are setting an `ACMCertificateArn` or
-      #   `IAMCertificateId`.
       #   @return [Boolean]
       #
       # @!attribute [rw] iam_certificate_id
-      #   If you want viewers to use HTTPS to request your objects and you're
-      #   using an alternate domain name in your object URLs (for example,
-      #   `https://example.com/logo.jpg)`, specify the IAM certificate
-      #   identifier of the custom viewer certificate for this distribution.
-      #   Specify either this value, `ACMCertificateArn`, or
-      #   `CloudFrontDefaultCertificate`.
       #   @return [String]
       #
       # @!attribute [rw] acm_certificate_arn
-      #   If you want viewers to use HTTPS to request your objects and you're
-      #   using an alternate domain name in your object URLs (for example,
-      #   `https://example.com/logo.jpg)`, specify the ACM certificate ARN of
-      #   the custom viewer certificate for this distribution. Specify either
-      #   this value, `IAMCertificateId`, or `CloudFrontDefaultCertificate`.
       #   @return [String]
       #
       # @!attribute [rw] ssl_support_method

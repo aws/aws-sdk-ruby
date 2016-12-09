@@ -1096,8 +1096,9 @@ module Aws
       # @!attribute [rw] time_window
       #   The start date and time and the end date and time of the range for
       #   which you want `GetSampledRequests` to return a sample of requests.
-      #   Specify the date and time in Unix time format (in seconds). You can
-      #   specify any time range in the previous three hours.
+      #   Specify the date and time in the following format:
+      #   `"2016-09-27T14:50Z"`. You can specify any time range in the
+      #   previous three hours.
       #   @return [Types::TimeWindow]
       #
       # @!attribute [rw] max_items
@@ -1358,12 +1359,19 @@ module Aws
       end
 
       # Contains one or more IP addresses or blocks of IP addresses specified
-      # in Classless Inter-Domain Routing (CIDR) notation. To specify an
-      # individual IP address, you specify the four-part IP address followed
-      # by a `/32`, for example, 192.0.2.0/31. To block a range of IP
-      # addresses, you can specify a `/24`, a `/16`, or a `/8` CIDR. For more
-      # information about CIDR notation, perform an Internet search on `cidr
-      # notation`.
+      # in Classless Inter-Domain Routing (CIDR) notation. AWS WAF supports
+      # /8, /16, /24, and /32 IP address ranges for IPv4, and /24, /32, /48,
+      # /56, /64 and /128 for IPv6.
+      #
+      # To specify an individual IP address, you specify the four-part IP
+      # address followed by a `/32`, for example, 192.0.2.0/31. To block a
+      # range of IP addresses, you can specify a `/128`, `/64`, `/56`, `/48`,
+      # `/32`, `/24`, `/16`, or `/8` CIDR. For more information about CIDR
+      # notation, see the Wikipedia entry [Classless Inter-Domain Routing][1].
+      #
+      #
+      #
+      # [1]: https://en.wikipedia.org/wiki/Classless_Inter-Domain_Routing
       # @!attribute [rw] ip_set_id
       #   The `IPSetId` for an `IPSet`. You use `IPSetId` to get information
       #   about an `IPSet` (see GetIPSet), update an `IPSet` (see
@@ -1380,8 +1388,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ip_set_descriptors
-      #   The IP address type (`IPV4`) and the IP address range (in CIDR
-      #   notation) that web requests originate from. If the `WebACL` is
+      #   The IP address type (`IPV4` or `IPV6`) and the IP address range (in
+      #   CIDR notation) that web requests originate from. If the `WebACL` is
       #   associated with a CloudFront distribution, this is the value of one
       #   of the following fields in CloudFront access logs:
       #
@@ -1398,8 +1406,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Specifies the IP address type (`IPV4`) and the IP address range (in
-      # CIDR format) that web requests originate from.
+      # Specifies the IP address type (`IPV4` or `IPV6`) and the IP address
+      # range (in CIDR format) that web requests originate from.
       # @note When making an API call, pass IPSetDescriptor
       #   data as a hash:
       #
@@ -1408,7 +1416,7 @@ module Aws
       #         value: "IPSetDescriptorValue", # required
       #       }
       # @!attribute [rw] type
-      #   Specify `IPV4`.
+      #   Specify `IPV4` or `IPV6`.
       #   @return [String]
       #
       # @!attribute [rw] value
@@ -1422,10 +1430,21 @@ module Aws
       #     originated from IP addresses from 192.0.2.0 to 192.0.2.255,
       #     specify `192.0.2.0/24`.
       #
-      #   AWS WAF supports only /8, /16, /24, and /32 IP addresses.
-      #
       #   For more information about CIDR notation, see the Wikipedia entry
       #   [Classless Inter-Domain Routing][1].
+      #
+      #   Specify an IPv6 address by using CIDR notation. For example:
+      #
+      #   * To configure AWS WAF to allow, block, or count requests that
+      #     originated from the IP address
+      #     1111:0000:0000:0000:0000:0000:0000:0111, specify
+      #     `1111:0000:0000:0000:0000:0000:0000:0111/128`.
+      #
+      #   * To configure AWS WAF to allow, block, or count requests that
+      #     originated from IP addresses
+      #     1111:0000:0000:0000:0000:0000:0000:0000 to
+      #     1111:0000:0000:0000:ffff:ffff:ffff:ffff, specify
+      #     `1111:0000:0000:0000:0000:0000:0000:0000/64`.
       #
       #
       #
@@ -1470,8 +1489,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] ip_set_descriptor
-      #   The IP address type (`IPV4`) and the IP address range (in CIDR
-      #   notation) that web requests originate from.
+      #   The IP address type (`IPV4` or `IPV6`) and the IP address range (in
+      #   CIDR notation) that web requests originate from.
       #   @return [Types::IPSetDescriptor]
       class IPSetUpdate < Struct.new(
         :action,
@@ -1886,6 +1905,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] metric_name
+      #   A friendly name or description for the metrics for this `Rule`. The
+      #   name can contain only alphanumeric characters (A-Z, a-z, 0-9); the
+      #   name can't contain whitespace. You can't change `MetricName` after
+      #   you create the `Rule`.
       #   @return [String]
       #
       # @!attribute [rw] predicates
@@ -2002,7 +2025,7 @@ module Aws
       #         size: 1, # required
       #       }
       # @!attribute [rw] field_to_match
-      #   Specifies where in a web request to look for `TargetString`.
+      #   Specifies where in a web request to look for the size constraint.
       #   @return [Types::FieldToMatch]
       #
       # @!attribute [rw] text_transformation
@@ -2330,7 +2353,8 @@ module Aws
       #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #       }
       # @!attribute [rw] field_to_match
-      #   Specifies where in a web request to look for `TargetString`.
+      #   Specifies where in a web request to look for snippets of malicious
+      #   SQL code.
       #   @return [Types::FieldToMatch]
       #
       # @!attribute [rw] text_transformation
@@ -2436,14 +2460,17 @@ module Aws
       # @!attribute [rw] start_time
       #   The beginning of the time range from which you want
       #   `GetSampledRequests` to return a sample of the requests that your
-      #   AWS resource received. You can specify any time range in the
+      #   AWS resource received. Specify the date and time in the following
+      #   format: `"2016-09-27T14:50Z"`. You can specify any time range in the
       #   previous three hours.
       #   @return [Time]
       #
       # @!attribute [rw] end_time
       #   The end of the time range from which you want `GetSampledRequests`
       #   to return a sample of the requests that your AWS resource received.
-      #   You can specify any time range in the previous three hours.
+      #   Specify the date and time in the following format:
+      #   `"2016-09-27T14:50Z"`. You can specify any time range in the
+      #   previous three hours.
       #   @return [Time]
       class TimeWindow < Struct.new(
         :start_time,
@@ -2785,12 +2812,9 @@ module Aws
       #   @return [Array<Types::WebACLUpdate>]
       #
       # @!attribute [rw] default_action
-      #   For the action that is associated with a rule in a `WebACL`,
-      #   specifies the action that you want AWS WAF to perform when a web
-      #   request matches all of the conditions in a rule. For the default
-      #   action in a `WebACL`, specifies the action that you want AWS WAF to
-      #   take when a web request doesn't match all of the conditions in any
-      #   of the rules in a `WebACL`.
+      #   A default action for the web ACL, either ALLOW or BLOCK. AWS WAF
+      #   performs the default action if a request doesn't match the criteria
+      #   in any of the rules in a web ACL.
       #   @return [Types::WafAction]
       class UpdateWebACLRequest < Struct.new(
         :web_acl_id,
@@ -2925,6 +2949,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] metric_name
+      #   A friendly name or description for the metrics for this `WebACL`.
+      #   The name can contain only alphanumeric characters (A-Z, a-z, 0-9);
+      #   the name can't contain whitespace. You can't change `MetricName`
+      #   after you create the `WebACL`.
       #   @return [String]
       #
       # @!attribute [rw] default_action
@@ -2990,9 +3018,6 @@ module Aws
       #   `Rule` that you want to insert or delete, the priority of the `Rule`
       #   in the `WebACL`, and the action that you want AWS WAF to take when a
       #   web request matches the `Rule` (`ALLOW`, `BLOCK`, or `COUNT`).
-      #
-      #   To specify whether to insert or delete a `Rule`, use the `Action`
-      #   parameter in the WebACLUpdate data type.
       #   @return [Types::ActivatedRule]
       class WebACLUpdate < Struct.new(
         :action,
@@ -3100,7 +3125,8 @@ module Aws
       #         text_transformation: "NONE", # required, accepts NONE, COMPRESS_WHITE_SPACE, HTML_ENTITY_DECODE, LOWERCASE, CMD_LINE, URL_DECODE
       #       }
       # @!attribute [rw] field_to_match
-      #   Specifies where in a web request to look for `TargetString`.
+      #   Specifies where in a web request to look for cross-site scripting
+      #   attacks.
       #   @return [Types::FieldToMatch]
       #
       # @!attribute [rw] text_transformation

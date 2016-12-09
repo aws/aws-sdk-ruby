@@ -669,6 +669,7 @@ module Aws
       DBCluster.add_member(:earliest_restorable_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "EarliestRestorableTime"))
       DBCluster.add_member(:endpoint, Shapes::ShapeRef.new(shape: String, location_name: "Endpoint"))
       DBCluster.add_member(:reader_endpoint, Shapes::ShapeRef.new(shape: String, location_name: "ReaderEndpoint"))
+      DBCluster.add_member(:multi_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "MultiAZ"))
       DBCluster.add_member(:engine, Shapes::ShapeRef.new(shape: String, location_name: "Engine"))
       DBCluster.add_member(:engine_version, Shapes::ShapeRef.new(shape: String, location_name: "EngineVersion"))
       DBCluster.add_member(:latest_restorable_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "LatestRestorableTime"))
@@ -687,6 +688,7 @@ module Aws
       DBCluster.add_member(:db_cluster_resource_id, Shapes::ShapeRef.new(shape: String, location_name: "DbClusterResourceId"))
       DBCluster.add_member(:db_cluster_arn, Shapes::ShapeRef.new(shape: String, location_name: "DBClusterArn"))
       DBCluster.add_member(:associated_roles, Shapes::ShapeRef.new(shape: DBClusterRoles, location_name: "AssociatedRoles"))
+      DBCluster.add_member(:cluster_create_time, Shapes::ShapeRef.new(shape: TStamp, location_name: "ClusterCreateTime"))
       DBCluster.struct_class = Types::DBCluster
 
       DBClusterList.member = Shapes::ShapeRef.new(shape: DBCluster, location_name: "DBCluster")
@@ -1939,6 +1941,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         end)
 
         api.add_operation(:apply_pending_maintenance_action, Seahorse::Model::Operation.new.tap do |o|
@@ -2037,6 +2040,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBClusterStateFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidDBSubnetGroupStateFault)
           o.errors << Shapes::ShapeRef.new(shape: InvalidSubnet)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidDBInstanceStateFault)
           o.errors << Shapes::ShapeRef.new(shape: DBClusterParameterGroupNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: KMSKeyNotAccessibleFault)
           o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
@@ -2670,6 +2674,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: TagListMessage)
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         end)
 
         api.add_operation(:modify_db_cluster, Seahorse::Model::Operation.new.tap do |o|
@@ -2864,6 +2869,7 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
           o.errors << Shapes::ShapeRef.new(shape: DBInstanceNotFoundFault)
           o.errors << Shapes::ShapeRef.new(shape: DBSnapshotNotFoundFault)
+          o.errors << Shapes::ShapeRef.new(shape: DBClusterNotFoundFault)
         end)
 
         api.add_operation(:reset_db_cluster_parameter_group, Seahorse::Model::Operation.new.tap do |o|

@@ -20,12 +20,21 @@ module Aws
       AccelerateConfiguration = Shapes::StructureShape.new(name: 'AccelerateConfiguration')
       AcceptRanges = Shapes::StringShape.new(name: 'AcceptRanges')
       AccessControlPolicy = Shapes::StructureShape.new(name: 'AccessControlPolicy')
+      AccountId = Shapes::StringShape.new(name: 'AccountId')
       AllowedHeader = Shapes::StringShape.new(name: 'AllowedHeader')
       AllowedHeaders = Shapes::ListShape.new(name: 'AllowedHeaders', flattened: true)
       AllowedMethod = Shapes::StringShape.new(name: 'AllowedMethod')
       AllowedMethods = Shapes::ListShape.new(name: 'AllowedMethods', flattened: true)
       AllowedOrigin = Shapes::StringShape.new(name: 'AllowedOrigin')
       AllowedOrigins = Shapes::ListShape.new(name: 'AllowedOrigins', flattened: true)
+      AnalyticsAndOperator = Shapes::StructureShape.new(name: 'AnalyticsAndOperator')
+      AnalyticsConfiguration = Shapes::StructureShape.new(name: 'AnalyticsConfiguration')
+      AnalyticsConfigurationList = Shapes::ListShape.new(name: 'AnalyticsConfigurationList', flattened: true)
+      AnalyticsExportDestination = Shapes::StructureShape.new(name: 'AnalyticsExportDestination')
+      AnalyticsFilter = Shapes::StructureShape.new(name: 'AnalyticsFilter')
+      AnalyticsId = Shapes::StringShape.new(name: 'AnalyticsId')
+      AnalyticsS3BucketDestination = Shapes::StructureShape.new(name: 'AnalyticsS3BucketDestination')
+      AnalyticsS3ExportFileFormat = Shapes::StringShape.new(name: 'AnalyticsS3ExportFileFormat')
       Body = Shapes::BlobShape.new(name: 'Body')
       Bucket = Shapes::StructureShape.new(name: 'Bucket')
       BucketAccelerateStatus = Shapes::StringShape.new(name: 'BucketAccelerateStatus')
@@ -86,8 +95,11 @@ module Aws
       Days = Shapes::IntegerShape.new(name: 'Days')
       DaysAfterInitiation = Shapes::IntegerShape.new(name: 'DaysAfterInitiation')
       Delete = Shapes::StructureShape.new(name: 'Delete')
+      DeleteBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketAnalyticsConfigurationRequest')
       DeleteBucketCorsRequest = Shapes::StructureShape.new(name: 'DeleteBucketCorsRequest')
+      DeleteBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketInventoryConfigurationRequest')
       DeleteBucketLifecycleRequest = Shapes::StructureShape.new(name: 'DeleteBucketLifecycleRequest')
+      DeleteBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'DeleteBucketMetricsConfigurationRequest')
       DeleteBucketPolicyRequest = Shapes::StructureShape.new(name: 'DeleteBucketPolicyRequest')
       DeleteBucketReplicationRequest = Shapes::StructureShape.new(name: 'DeleteBucketReplicationRequest')
       DeleteBucketRequest = Shapes::StructureShape.new(name: 'DeleteBucketRequest')
@@ -99,6 +111,8 @@ module Aws
       DeleteMarkers = Shapes::ListShape.new(name: 'DeleteMarkers', flattened: true)
       DeleteObjectOutput = Shapes::StructureShape.new(name: 'DeleteObjectOutput')
       DeleteObjectRequest = Shapes::StructureShape.new(name: 'DeleteObjectRequest')
+      DeleteObjectTaggingOutput = Shapes::StructureShape.new(name: 'DeleteObjectTaggingOutput')
+      DeleteObjectTaggingRequest = Shapes::StructureShape.new(name: 'DeleteObjectTaggingRequest')
       DeleteObjectsOutput = Shapes::StructureShape.new(name: 'DeleteObjectsOutput')
       DeleteObjectsRequest = Shapes::StructureShape.new(name: 'DeleteObjectsRequest')
       DeletedObject = Shapes::StructureShape.new(name: 'DeletedObject')
@@ -130,8 +144,12 @@ module Aws
       GetBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketAccelerateConfigurationRequest')
       GetBucketAclOutput = Shapes::StructureShape.new(name: 'GetBucketAclOutput')
       GetBucketAclRequest = Shapes::StructureShape.new(name: 'GetBucketAclRequest')
+      GetBucketAnalyticsConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketAnalyticsConfigurationOutput')
+      GetBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketAnalyticsConfigurationRequest')
       GetBucketCorsOutput = Shapes::StructureShape.new(name: 'GetBucketCorsOutput')
       GetBucketCorsRequest = Shapes::StructureShape.new(name: 'GetBucketCorsRequest')
+      GetBucketInventoryConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationOutput')
+      GetBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketInventoryConfigurationRequest')
       GetBucketLifecycleConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketLifecycleConfigurationOutput')
       GetBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketLifecycleConfigurationRequest')
       GetBucketLifecycleOutput = Shapes::StructureShape.new(name: 'GetBucketLifecycleOutput')
@@ -140,6 +158,8 @@ module Aws
       GetBucketLocationRequest = Shapes::StructureShape.new(name: 'GetBucketLocationRequest')
       GetBucketLoggingOutput = Shapes::StructureShape.new(name: 'GetBucketLoggingOutput')
       GetBucketLoggingRequest = Shapes::StructureShape.new(name: 'GetBucketLoggingRequest')
+      GetBucketMetricsConfigurationOutput = Shapes::StructureShape.new(name: 'GetBucketMetricsConfigurationOutput')
+      GetBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketMetricsConfigurationRequest')
       GetBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'GetBucketNotificationConfigurationRequest')
       GetBucketPolicyOutput = Shapes::StructureShape.new(name: 'GetBucketPolicyOutput')
       GetBucketPolicyRequest = Shapes::StructureShape.new(name: 'GetBucketPolicyRequest')
@@ -157,6 +177,8 @@ module Aws
       GetObjectAclRequest = Shapes::StructureShape.new(name: 'GetObjectAclRequest')
       GetObjectOutput = Shapes::StructureShape.new(name: 'GetObjectOutput')
       GetObjectRequest = Shapes::StructureShape.new(name: 'GetObjectRequest')
+      GetObjectTaggingOutput = Shapes::StructureShape.new(name: 'GetObjectTaggingOutput')
+      GetObjectTaggingRequest = Shapes::StructureShape.new(name: 'GetObjectTaggingRequest')
       GetObjectTorrentOutput = Shapes::StructureShape.new(name: 'GetObjectTorrentOutput')
       GetObjectTorrentRequest = Shapes::StructureShape.new(name: 'GetObjectTorrentRequest')
       GlacierJobParameters = Shapes::StructureShape.new(name: 'GlacierJobParameters')
@@ -182,6 +204,19 @@ module Aws
       IndexDocument = Shapes::StructureShape.new(name: 'IndexDocument')
       Initiated = Shapes::TimestampShape.new(name: 'Initiated')
       Initiator = Shapes::StructureShape.new(name: 'Initiator')
+      InventoryConfiguration = Shapes::StructureShape.new(name: 'InventoryConfiguration')
+      InventoryConfigurationList = Shapes::ListShape.new(name: 'InventoryConfigurationList', flattened: true)
+      InventoryDestination = Shapes::StructureShape.new(name: 'InventoryDestination')
+      InventoryFilter = Shapes::StructureShape.new(name: 'InventoryFilter')
+      InventoryFormat = Shapes::StringShape.new(name: 'InventoryFormat')
+      InventoryFrequency = Shapes::StringShape.new(name: 'InventoryFrequency')
+      InventoryId = Shapes::StringShape.new(name: 'InventoryId')
+      InventoryIncludedObjectVersions = Shapes::StringShape.new(name: 'InventoryIncludedObjectVersions')
+      InventoryOptionalField = Shapes::StringShape.new(name: 'InventoryOptionalField')
+      InventoryOptionalFields = Shapes::ListShape.new(name: 'InventoryOptionalFields')
+      InventoryS3BucketDestination = Shapes::StructureShape.new(name: 'InventoryS3BucketDestination')
+      InventorySchedule = Shapes::StructureShape.new(name: 'InventorySchedule')
+      IsEnabled = Shapes::BooleanShape.new(name: 'IsEnabled')
       IsLatest = Shapes::BooleanShape.new(name: 'IsLatest')
       IsTruncated = Shapes::BooleanShape.new(name: 'IsTruncated')
       KeyCount = Shapes::IntegerShape.new(name: 'KeyCount')
@@ -194,7 +229,15 @@ module Aws
       LifecycleConfiguration = Shapes::StructureShape.new(name: 'LifecycleConfiguration')
       LifecycleExpiration = Shapes::StructureShape.new(name: 'LifecycleExpiration')
       LifecycleRule = Shapes::StructureShape.new(name: 'LifecycleRule')
+      LifecycleRuleAndOperator = Shapes::StructureShape.new(name: 'LifecycleRuleAndOperator')
+      LifecycleRuleFilter = Shapes::StructureShape.new(name: 'LifecycleRuleFilter')
       LifecycleRules = Shapes::ListShape.new(name: 'LifecycleRules', flattened: true)
+      ListBucketAnalyticsConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketAnalyticsConfigurationsOutput')
+      ListBucketAnalyticsConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketAnalyticsConfigurationsRequest')
+      ListBucketInventoryConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketInventoryConfigurationsOutput')
+      ListBucketInventoryConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketInventoryConfigurationsRequest')
+      ListBucketMetricsConfigurationsOutput = Shapes::StructureShape.new(name: 'ListBucketMetricsConfigurationsOutput')
+      ListBucketMetricsConfigurationsRequest = Shapes::StructureShape.new(name: 'ListBucketMetricsConfigurationsRequest')
       ListBucketsOutput = Shapes::StructureShape.new(name: 'ListBucketsOutput')
       ListMultipartUploadsOutput = Shapes::StructureShape.new(name: 'ListMultipartUploadsOutput')
       ListMultipartUploadsRequest = Shapes::StructureShape.new(name: 'ListMultipartUploadsRequest')
@@ -221,6 +264,11 @@ module Aws
       MetadataDirective = Shapes::StringShape.new(name: 'MetadataDirective')
       MetadataKey = Shapes::StringShape.new(name: 'MetadataKey')
       MetadataValue = Shapes::StringShape.new(name: 'MetadataValue')
+      MetricsAndOperator = Shapes::StructureShape.new(name: 'MetricsAndOperator')
+      MetricsConfiguration = Shapes::StructureShape.new(name: 'MetricsConfiguration')
+      MetricsConfigurationList = Shapes::ListShape.new(name: 'MetricsConfigurationList', flattened: true)
+      MetricsFilter = Shapes::StructureShape.new(name: 'MetricsFilter')
+      MetricsId = Shapes::StringShape.new(name: 'MetricsId')
       MissingMeta = Shapes::IntegerShape.new(name: 'MissingMeta')
       MultipartUpload = Shapes::StructureShape.new(name: 'MultipartUpload')
       MultipartUploadId = Shapes::StringShape.new(name: 'MultipartUploadId')
@@ -267,10 +315,13 @@ module Aws
       Protocol = Shapes::StringShape.new(name: 'Protocol')
       PutBucketAccelerateConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAccelerateConfigurationRequest')
       PutBucketAclRequest = Shapes::StructureShape.new(name: 'PutBucketAclRequest')
+      PutBucketAnalyticsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketAnalyticsConfigurationRequest')
       PutBucketCorsRequest = Shapes::StructureShape.new(name: 'PutBucketCorsRequest')
+      PutBucketInventoryConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketInventoryConfigurationRequest')
       PutBucketLifecycleConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleConfigurationRequest')
       PutBucketLifecycleRequest = Shapes::StructureShape.new(name: 'PutBucketLifecycleRequest')
       PutBucketLoggingRequest = Shapes::StructureShape.new(name: 'PutBucketLoggingRequest')
+      PutBucketMetricsConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketMetricsConfigurationRequest')
       PutBucketNotificationConfigurationRequest = Shapes::StructureShape.new(name: 'PutBucketNotificationConfigurationRequest')
       PutBucketNotificationRequest = Shapes::StructureShape.new(name: 'PutBucketNotificationRequest')
       PutBucketPolicyRequest = Shapes::StructureShape.new(name: 'PutBucketPolicyRequest')
@@ -283,6 +334,8 @@ module Aws
       PutObjectAclRequest = Shapes::StructureShape.new(name: 'PutObjectAclRequest')
       PutObjectOutput = Shapes::StructureShape.new(name: 'PutObjectOutput')
       PutObjectRequest = Shapes::StructureShape.new(name: 'PutObjectRequest')
+      PutObjectTaggingOutput = Shapes::StructureShape.new(name: 'PutObjectTaggingOutput')
+      PutObjectTaggingRequest = Shapes::StructureShape.new(name: 'PutObjectTaggingRequest')
       QueueArn = Shapes::StringShape.new(name: 'QueueArn')
       QueueConfiguration = Shapes::StructureShape.new(name: 'QueueConfiguration')
       QueueConfigurationDeprecated = Shapes::StructureShape.new(name: 'QueueConfigurationDeprecated')
@@ -325,10 +378,16 @@ module Aws
       Size = Shapes::IntegerShape.new(name: 'Size')
       StartAfter = Shapes::StringShape.new(name: 'StartAfter')
       StorageClass = Shapes::StringShape.new(name: 'StorageClass')
+      StorageClassAnalysis = Shapes::StructureShape.new(name: 'StorageClassAnalysis')
+      StorageClassAnalysisDataExport = Shapes::StructureShape.new(name: 'StorageClassAnalysisDataExport')
+      StorageClassAnalysisSchemaVersion = Shapes::StringShape.new(name: 'StorageClassAnalysisSchemaVersion')
       Suffix = Shapes::StringShape.new(name: 'Suffix')
       Tag = Shapes::StructureShape.new(name: 'Tag')
+      TagCount = Shapes::IntegerShape.new(name: 'TagCount')
       TagSet = Shapes::ListShape.new(name: 'TagSet')
       Tagging = Shapes::StructureShape.new(name: 'Tagging')
+      TaggingDirective = Shapes::StringShape.new(name: 'TaggingDirective')
+      TaggingHeader = Shapes::StringShape.new(name: 'TaggingHeader')
       TargetBucket = Shapes::StringShape.new(name: 'TargetBucket')
       TargetGrant = Shapes::StructureShape.new(name: 'TargetGrant')
       TargetGrants = Shapes::ListShape.new(name: 'TargetGrants')
@@ -379,6 +438,31 @@ module Aws
       AllowedMethods.member = Shapes::ShapeRef.new(shape: AllowedMethod)
 
       AllowedOrigins.member = Shapes::ShapeRef.new(shape: AllowedOrigin)
+
+      AnalyticsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      AnalyticsAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+      AnalyticsAndOperator.struct_class = Types::AnalyticsAndOperator
+
+      AnalyticsConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: AnalyticsId, required: true, location_name: "Id"))
+      AnalyticsConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: AnalyticsFilter, location_name: "Filter"))
+      AnalyticsConfiguration.add_member(:storage_class_analysis, Shapes::ShapeRef.new(shape: StorageClassAnalysis, required: true, location_name: "StorageClassAnalysis"))
+      AnalyticsConfiguration.struct_class = Types::AnalyticsConfiguration
+
+      AnalyticsConfigurationList.member = Shapes::ShapeRef.new(shape: AnalyticsConfiguration)
+
+      AnalyticsExportDestination.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: AnalyticsS3BucketDestination, required: true, location_name: "S3BucketDestination"))
+      AnalyticsExportDestination.struct_class = Types::AnalyticsExportDestination
+
+      AnalyticsFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      AnalyticsFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+      AnalyticsFilter.add_member(:and, Shapes::ShapeRef.new(shape: AnalyticsAndOperator, location_name: "And"))
+      AnalyticsFilter.struct_class = Types::AnalyticsFilter
+
+      AnalyticsS3BucketDestination.add_member(:format, Shapes::ShapeRef.new(shape: AnalyticsS3ExportFileFormat, required: true, location_name: "Format"))
+      AnalyticsS3BucketDestination.add_member(:bucket_account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "BucketAccountId"))
+      AnalyticsS3BucketDestination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+      AnalyticsS3BucketDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      AnalyticsS3BucketDestination.struct_class = Types::AnalyticsS3BucketDestination
 
       Bucket.add_member(:name, Shapes::ShapeRef.new(shape: BucketName, location_name: "Name"))
       Bucket.add_member(:creation_date, Shapes::ShapeRef.new(shape: CreationDate, location_name: "CreationDate"))
@@ -482,6 +566,7 @@ module Aws
       CopyObjectRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
       CopyObjectRequest.add_member(:metadata, Shapes::ShapeRef.new(shape: Metadata, location: "headers", location_name: "x-amz-meta-"))
       CopyObjectRequest.add_member(:metadata_directive, Shapes::ShapeRef.new(shape: MetadataDirective, location: "header", location_name: "x-amz-metadata-directive"))
+      CopyObjectRequest.add_member(:tagging_directive, Shapes::ShapeRef.new(shape: TaggingDirective, location: "header", location_name: "x-amz-tagging-directive"))
       CopyObjectRequest.add_member(:server_side_encryption, Shapes::ShapeRef.new(shape: ServerSideEncryption, location: "header", location_name: "x-amz-server-side-encryption"))
       CopyObjectRequest.add_member(:storage_class, Shapes::ShapeRef.new(shape: StorageClass, location: "header", location_name: "x-amz-storage-class"))
       CopyObjectRequest.add_member(:website_redirect_location, Shapes::ShapeRef.new(shape: WebsiteRedirectLocation, location: "header", location_name: "x-amz-website-redirect-location"))
@@ -493,6 +578,7 @@ module Aws
       CopyObjectRequest.add_member(:copy_source_sse_customer_key, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKey, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key"))
       CopyObjectRequest.add_member(:copy_source_sse_customer_key_md5, Shapes::ShapeRef.new(shape: CopySourceSSECustomerKeyMD5, location: "header", location_name: "x-amz-copy-source-server-side-encryption-customer-key-MD5"))
       CopyObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+      CopyObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
       CopyObjectRequest.struct_class = Types::CopyObjectRequest
 
       CopyObjectResult.add_member(:etag, Shapes::ShapeRef.new(shape: ETag, location_name: "ETag"))
@@ -561,11 +647,23 @@ module Aws
       Delete.add_member(:quiet, Shapes::ShapeRef.new(shape: Quiet, location_name: "Quiet"))
       Delete.struct_class = Types::Delete
 
+      DeleteBucketAnalyticsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      DeleteBucketAnalyticsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AnalyticsId, required: true, location: "querystring", location_name: "id"))
+      DeleteBucketAnalyticsConfigurationRequest.struct_class = Types::DeleteBucketAnalyticsConfigurationRequest
+
       DeleteBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       DeleteBucketCorsRequest.struct_class = Types::DeleteBucketCorsRequest
 
+      DeleteBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      DeleteBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
+      DeleteBucketInventoryConfigurationRequest.struct_class = Types::DeleteBucketInventoryConfigurationRequest
+
       DeleteBucketLifecycleRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       DeleteBucketLifecycleRequest.struct_class = Types::DeleteBucketLifecycleRequest
+
+      DeleteBucketMetricsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      DeleteBucketMetricsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: MetricsId, required: true, location: "querystring", location_name: "id"))
+      DeleteBucketMetricsConfigurationRequest.struct_class = Types::DeleteBucketMetricsConfigurationRequest
 
       DeleteBucketPolicyRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       DeleteBucketPolicyRequest.struct_class = Types::DeleteBucketPolicyRequest
@@ -602,6 +700,14 @@ module Aws
       DeleteObjectRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
       DeleteObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
       DeleteObjectRequest.struct_class = Types::DeleteObjectRequest
+
+      DeleteObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
+      DeleteObjectTaggingOutput.struct_class = Types::DeleteObjectTaggingOutput
+
+      DeleteObjectTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      DeleteObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+      DeleteObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+      DeleteObjectTaggingRequest.struct_class = Types::DeleteObjectTaggingRequest
 
       DeleteObjectsOutput.add_member(:deleted, Shapes::ShapeRef.new(shape: DeletedObjects, location_name: "Deleted"))
       DeleteObjectsOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
@@ -662,11 +768,29 @@ module Aws
       GetBucketAclRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       GetBucketAclRequest.struct_class = Types::GetBucketAclRequest
 
+      GetBucketAnalyticsConfigurationOutput.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, location_name: "AnalyticsConfiguration"))
+      GetBucketAnalyticsConfigurationOutput.struct_class = Types::GetBucketAnalyticsConfigurationOutput
+      GetBucketAnalyticsConfigurationOutput[:payload] = :analytics_configuration
+      GetBucketAnalyticsConfigurationOutput[:payload_member] = GetBucketAnalyticsConfigurationOutput.member(:analytics_configuration)
+
+      GetBucketAnalyticsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      GetBucketAnalyticsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AnalyticsId, required: true, location: "querystring", location_name: "id"))
+      GetBucketAnalyticsConfigurationRequest.struct_class = Types::GetBucketAnalyticsConfigurationRequest
+
       GetBucketCorsOutput.add_member(:cors_rules, Shapes::ShapeRef.new(shape: CORSRules, location_name: "CORSRule"))
       GetBucketCorsOutput.struct_class = Types::GetBucketCorsOutput
 
       GetBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       GetBucketCorsRequest.struct_class = Types::GetBucketCorsRequest
+
+      GetBucketInventoryConfigurationOutput.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, location_name: "InventoryConfiguration"))
+      GetBucketInventoryConfigurationOutput.struct_class = Types::GetBucketInventoryConfigurationOutput
+      GetBucketInventoryConfigurationOutput[:payload] = :inventory_configuration
+      GetBucketInventoryConfigurationOutput[:payload_member] = GetBucketInventoryConfigurationOutput.member(:inventory_configuration)
+
+      GetBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      GetBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
+      GetBucketInventoryConfigurationRequest.struct_class = Types::GetBucketInventoryConfigurationRequest
 
       GetBucketLifecycleConfigurationOutput.add_member(:rules, Shapes::ShapeRef.new(shape: LifecycleRules, location_name: "Rule"))
       GetBucketLifecycleConfigurationOutput.struct_class = Types::GetBucketLifecycleConfigurationOutput
@@ -691,6 +815,15 @@ module Aws
 
       GetBucketLoggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       GetBucketLoggingRequest.struct_class = Types::GetBucketLoggingRequest
+
+      GetBucketMetricsConfigurationOutput.add_member(:metrics_configuration, Shapes::ShapeRef.new(shape: MetricsConfiguration, location_name: "MetricsConfiguration"))
+      GetBucketMetricsConfigurationOutput.struct_class = Types::GetBucketMetricsConfigurationOutput
+      GetBucketMetricsConfigurationOutput[:payload] = :metrics_configuration
+      GetBucketMetricsConfigurationOutput[:payload_member] = GetBucketMetricsConfigurationOutput.member(:metrics_configuration)
+
+      GetBucketMetricsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      GetBucketMetricsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: MetricsId, required: true, location: "querystring", location_name: "id"))
+      GetBucketMetricsConfigurationRequest.struct_class = Types::GetBucketMetricsConfigurationRequest
 
       GetBucketNotificationConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       GetBucketNotificationConfigurationRequest.struct_class = Types::GetBucketNotificationConfigurationRequest
@@ -778,6 +911,7 @@ module Aws
       GetObjectOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
       GetObjectOutput.add_member(:replication_status, Shapes::ShapeRef.new(shape: ReplicationStatus, location: "header", location_name: "x-amz-replication-status"))
       GetObjectOutput.add_member(:parts_count, Shapes::ShapeRef.new(shape: PartsCount, location: "header", location_name: "x-amz-mp-parts-count"))
+      GetObjectOutput.add_member(:tag_count, Shapes::ShapeRef.new(shape: TagCount, location: "header", location_name: "x-amz-tagging-count"))
       GetObjectOutput.struct_class = Types::GetObjectOutput
       GetObjectOutput[:payload] = :body
       GetObjectOutput[:payload_member] = GetObjectOutput.member(:body)
@@ -802,6 +936,15 @@ module Aws
       GetObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
       GetObjectRequest.add_member(:part_number, Shapes::ShapeRef.new(shape: PartNumber, location: "querystring", location_name: "partNumber"))
       GetObjectRequest.struct_class = Types::GetObjectRequest
+
+      GetObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
+      GetObjectTaggingOutput.add_member(:tag_set, Shapes::ShapeRef.new(shape: TagSet, required: true, location_name: "TagSet"))
+      GetObjectTaggingOutput.struct_class = Types::GetObjectTaggingOutput
+
+      GetObjectTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      GetObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+      GetObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+      GetObjectTaggingRequest.struct_class = Types::GetObjectTaggingRequest
 
       GetObjectTorrentOutput.add_member(:body, Shapes::ShapeRef.new(shape: Body, location_name: "Body", metadata: {"streaming"=>true}))
       GetObjectTorrentOutput.add_member(:request_charged, Shapes::ShapeRef.new(shape: RequestCharged, location: "header", location_name: "x-amz-request-charged"))
@@ -883,6 +1026,34 @@ module Aws
       Initiator.add_member(:display_name, Shapes::ShapeRef.new(shape: DisplayName, location_name: "DisplayName"))
       Initiator.struct_class = Types::Initiator
 
+      InventoryConfiguration.add_member(:destination, Shapes::ShapeRef.new(shape: InventoryDestination, required: true, location_name: "Destination"))
+      InventoryConfiguration.add_member(:is_enabled, Shapes::ShapeRef.new(shape: IsEnabled, required: true, location_name: "IsEnabled"))
+      InventoryConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: InventoryFilter, location_name: "Filter"))
+      InventoryConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location_name: "Id"))
+      InventoryConfiguration.add_member(:included_object_versions, Shapes::ShapeRef.new(shape: InventoryIncludedObjectVersions, required: true, location_name: "IncludedObjectVersions"))
+      InventoryConfiguration.add_member(:optional_fields, Shapes::ShapeRef.new(shape: InventoryOptionalFields, location_name: "OptionalFields"))
+      InventoryConfiguration.add_member(:schedule, Shapes::ShapeRef.new(shape: InventorySchedule, required: true, location_name: "Schedule"))
+      InventoryConfiguration.struct_class = Types::InventoryConfiguration
+
+      InventoryConfigurationList.member = Shapes::ShapeRef.new(shape: InventoryConfiguration)
+
+      InventoryDestination.add_member(:s3_bucket_destination, Shapes::ShapeRef.new(shape: InventoryS3BucketDestination, required: true, location_name: "S3BucketDestination"))
+      InventoryDestination.struct_class = Types::InventoryDestination
+
+      InventoryFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
+      InventoryFilter.struct_class = Types::InventoryFilter
+
+      InventoryOptionalFields.member = Shapes::ShapeRef.new(shape: InventoryOptionalField, location_name: "Field")
+
+      InventoryS3BucketDestination.add_member(:account_id, Shapes::ShapeRef.new(shape: AccountId, location_name: "AccountId"))
+      InventoryS3BucketDestination.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location_name: "Bucket"))
+      InventoryS3BucketDestination.add_member(:format, Shapes::ShapeRef.new(shape: InventoryFormat, required: true, location_name: "Format"))
+      InventoryS3BucketDestination.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      InventoryS3BucketDestination.struct_class = Types::InventoryS3BucketDestination
+
+      InventorySchedule.add_member(:frequency, Shapes::ShapeRef.new(shape: InventoryFrequency, required: true, location_name: "Frequency"))
+      InventorySchedule.struct_class = Types::InventorySchedule
+
       LambdaFunctionConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
       LambdaFunctionConfiguration.add_member(:lambda_function_arn, Shapes::ShapeRef.new(shape: LambdaFunctionArn, required: true, location_name: "CloudFunction"))
       LambdaFunctionConfiguration.add_member(:events, Shapes::ShapeRef.new(shape: EventList, required: true, location_name: "Event"))
@@ -901,7 +1072,8 @@ module Aws
 
       LifecycleRule.add_member(:expiration, Shapes::ShapeRef.new(shape: LifecycleExpiration, location_name: "Expiration"))
       LifecycleRule.add_member(:id, Shapes::ShapeRef.new(shape: ID, location_name: "ID"))
-      LifecycleRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, required: true, location_name: "Prefix"))
+      LifecycleRule.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, deprecated: true, location_name: "Prefix"))
+      LifecycleRule.add_member(:filter, Shapes::ShapeRef.new(shape: LifecycleRuleFilter, location_name: "Filter"))
       LifecycleRule.add_member(:status, Shapes::ShapeRef.new(shape: ExpirationStatus, required: true, location_name: "Status"))
       LifecycleRule.add_member(:transitions, Shapes::ShapeRef.new(shape: TransitionList, location_name: "Transition"))
       LifecycleRule.add_member(:noncurrent_version_transitions, Shapes::ShapeRef.new(shape: NoncurrentVersionTransitionList, location_name: "NoncurrentVersionTransition"))
@@ -909,7 +1081,46 @@ module Aws
       LifecycleRule.add_member(:abort_incomplete_multipart_upload, Shapes::ShapeRef.new(shape: AbortIncompleteMultipartUpload, location_name: "AbortIncompleteMultipartUpload"))
       LifecycleRule.struct_class = Types::LifecycleRule
 
+      LifecycleRuleAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      LifecycleRuleAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+      LifecycleRuleAndOperator.struct_class = Types::LifecycleRuleAndOperator
+
+      LifecycleRuleFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      LifecycleRuleFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+      LifecycleRuleFilter.add_member(:and, Shapes::ShapeRef.new(shape: LifecycleRuleAndOperator, location_name: "And"))
+      LifecycleRuleFilter.struct_class = Types::LifecycleRuleFilter
+
       LifecycleRules.member = Shapes::ShapeRef.new(shape: LifecycleRule)
+
+      ListBucketAnalyticsConfigurationsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+      ListBucketAnalyticsConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+      ListBucketAnalyticsConfigurationsOutput.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+      ListBucketAnalyticsConfigurationsOutput.add_member(:analytics_configuration_list, Shapes::ShapeRef.new(shape: AnalyticsConfigurationList, location_name: "AnalyticsConfiguration"))
+      ListBucketAnalyticsConfigurationsOutput.struct_class = Types::ListBucketAnalyticsConfigurationsOutput
+
+      ListBucketAnalyticsConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      ListBucketAnalyticsConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+      ListBucketAnalyticsConfigurationsRequest.struct_class = Types::ListBucketAnalyticsConfigurationsRequest
+
+      ListBucketInventoryConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+      ListBucketInventoryConfigurationsOutput.add_member(:inventory_configuration_list, Shapes::ShapeRef.new(shape: InventoryConfigurationList, location_name: "InventoryConfiguration"))
+      ListBucketInventoryConfigurationsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+      ListBucketInventoryConfigurationsOutput.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+      ListBucketInventoryConfigurationsOutput.struct_class = Types::ListBucketInventoryConfigurationsOutput
+
+      ListBucketInventoryConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      ListBucketInventoryConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+      ListBucketInventoryConfigurationsRequest.struct_class = Types::ListBucketInventoryConfigurationsRequest
+
+      ListBucketMetricsConfigurationsOutput.add_member(:is_truncated, Shapes::ShapeRef.new(shape: IsTruncated, location_name: "IsTruncated"))
+      ListBucketMetricsConfigurationsOutput.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location_name: "ContinuationToken"))
+      ListBucketMetricsConfigurationsOutput.add_member(:next_continuation_token, Shapes::ShapeRef.new(shape: NextToken, location_name: "NextContinuationToken"))
+      ListBucketMetricsConfigurationsOutput.add_member(:metrics_configuration_list, Shapes::ShapeRef.new(shape: MetricsConfigurationList, location_name: "MetricsConfiguration"))
+      ListBucketMetricsConfigurationsOutput.struct_class = Types::ListBucketMetricsConfigurationsOutput
+
+      ListBucketMetricsConfigurationsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      ListBucketMetricsConfigurationsRequest.add_member(:continuation_token, Shapes::ShapeRef.new(shape: Token, location: "querystring", location_name: "continuation-token"))
+      ListBucketMetricsConfigurationsRequest.struct_class = Types::ListBucketMetricsConfigurationsRequest
 
       ListBucketsOutput.add_member(:buckets, Shapes::ShapeRef.new(shape: Buckets, location_name: "Buckets"))
       ListBucketsOutput.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
@@ -1040,6 +1251,21 @@ module Aws
       Metadata.key = Shapes::ShapeRef.new(shape: MetadataKey)
       Metadata.value = Shapes::ShapeRef.new(shape: MetadataValue)
 
+      MetricsAndOperator.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      MetricsAndOperator.add_member(:tags, Shapes::ShapeRef.new(shape: TagSet, location_name: "Tag", metadata: {"flattened"=>true}))
+      MetricsAndOperator.struct_class = Types::MetricsAndOperator
+
+      MetricsConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: MetricsId, required: true, location_name: "Id"))
+      MetricsConfiguration.add_member(:filter, Shapes::ShapeRef.new(shape: MetricsFilter, location_name: "Filter"))
+      MetricsConfiguration.struct_class = Types::MetricsConfiguration
+
+      MetricsConfigurationList.member = Shapes::ShapeRef.new(shape: MetricsConfiguration)
+
+      MetricsFilter.add_member(:prefix, Shapes::ShapeRef.new(shape: Prefix, location_name: "Prefix"))
+      MetricsFilter.add_member(:tag, Shapes::ShapeRef.new(shape: Tag, location_name: "Tag"))
+      MetricsFilter.add_member(:and, Shapes::ShapeRef.new(shape: MetricsAndOperator, location_name: "And"))
+      MetricsFilter.struct_class = Types::MetricsFilter
+
       MultipartUpload.add_member(:upload_id, Shapes::ShapeRef.new(shape: MultipartUploadId, location_name: "UploadId"))
       MultipartUpload.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, location_name: "Key"))
       MultipartUpload.add_member(:initiated, Shapes::ShapeRef.new(shape: Initiated, location_name: "Initiated"))
@@ -1131,12 +1357,26 @@ module Aws
       PutBucketAclRequest[:payload] = :access_control_policy
       PutBucketAclRequest[:payload_member] = PutBucketAclRequest.member(:access_control_policy)
 
+      PutBucketAnalyticsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      PutBucketAnalyticsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: AnalyticsId, required: true, location: "querystring", location_name: "id"))
+      PutBucketAnalyticsConfigurationRequest.add_member(:analytics_configuration, Shapes::ShapeRef.new(shape: AnalyticsConfiguration, required: true, location_name: "AnalyticsConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+      PutBucketAnalyticsConfigurationRequest.struct_class = Types::PutBucketAnalyticsConfigurationRequest
+      PutBucketAnalyticsConfigurationRequest[:payload] = :analytics_configuration
+      PutBucketAnalyticsConfigurationRequest[:payload_member] = PutBucketAnalyticsConfigurationRequest.member(:analytics_configuration)
+
       PutBucketCorsRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       PutBucketCorsRequest.add_member(:cors_configuration, Shapes::ShapeRef.new(shape: CORSConfiguration, required: true, location_name: "CORSConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
       PutBucketCorsRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
       PutBucketCorsRequest.struct_class = Types::PutBucketCorsRequest
       PutBucketCorsRequest[:payload] = :cors_configuration
       PutBucketCorsRequest[:payload_member] = PutBucketCorsRequest.member(:cors_configuration)
+
+      PutBucketInventoryConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      PutBucketInventoryConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: InventoryId, required: true, location: "querystring", location_name: "id"))
+      PutBucketInventoryConfigurationRequest.add_member(:inventory_configuration, Shapes::ShapeRef.new(shape: InventoryConfiguration, required: true, location_name: "InventoryConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+      PutBucketInventoryConfigurationRequest.struct_class = Types::PutBucketInventoryConfigurationRequest
+      PutBucketInventoryConfigurationRequest[:payload] = :inventory_configuration
+      PutBucketInventoryConfigurationRequest[:payload_member] = PutBucketInventoryConfigurationRequest.member(:inventory_configuration)
 
       PutBucketLifecycleConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       PutBucketLifecycleConfigurationRequest.add_member(:lifecycle_configuration, Shapes::ShapeRef.new(shape: BucketLifecycleConfiguration, location_name: "LifecycleConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1157,6 +1397,13 @@ module Aws
       PutBucketLoggingRequest.struct_class = Types::PutBucketLoggingRequest
       PutBucketLoggingRequest[:payload] = :bucket_logging_status
       PutBucketLoggingRequest[:payload_member] = PutBucketLoggingRequest.member(:bucket_logging_status)
+
+      PutBucketMetricsConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      PutBucketMetricsConfigurationRequest.add_member(:id, Shapes::ShapeRef.new(shape: MetricsId, required: true, location: "querystring", location_name: "id"))
+      PutBucketMetricsConfigurationRequest.add_member(:metrics_configuration, Shapes::ShapeRef.new(shape: MetricsConfiguration, required: true, location_name: "MetricsConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+      PutBucketMetricsConfigurationRequest.struct_class = Types::PutBucketMetricsConfigurationRequest
+      PutBucketMetricsConfigurationRequest[:payload] = :metrics_configuration
+      PutBucketMetricsConfigurationRequest[:payload_member] = PutBucketMetricsConfigurationRequest.member(:metrics_configuration)
 
       PutBucketNotificationConfigurationRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
       PutBucketNotificationConfigurationRequest.add_member(:notification_configuration, Shapes::ShapeRef.new(shape: NotificationConfiguration, required: true, location_name: "NotificationConfiguration", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
@@ -1268,9 +1515,22 @@ module Aws
       PutObjectRequest.add_member(:sse_customer_key_md5, Shapes::ShapeRef.new(shape: SSECustomerKeyMD5, location: "header", location_name: "x-amz-server-side-encryption-customer-key-MD5"))
       PutObjectRequest.add_member(:ssekms_key_id, Shapes::ShapeRef.new(shape: SSEKMSKeyId, location: "header", location_name: "x-amz-server-side-encryption-aws-kms-key-id"))
       PutObjectRequest.add_member(:request_payer, Shapes::ShapeRef.new(shape: RequestPayer, location: "header", location_name: "x-amz-request-payer"))
+      PutObjectRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: TaggingHeader, location: "header", location_name: "x-amz-tagging"))
       PutObjectRequest.struct_class = Types::PutObjectRequest
       PutObjectRequest[:payload] = :body
       PutObjectRequest[:payload_member] = PutObjectRequest.member(:body)
+
+      PutObjectTaggingOutput.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "header", location_name: "x-amz-version-id"))
+      PutObjectTaggingOutput.struct_class = Types::PutObjectTaggingOutput
+
+      PutObjectTaggingRequest.add_member(:bucket, Shapes::ShapeRef.new(shape: BucketName, required: true, location: "uri", location_name: "Bucket"))
+      PutObjectTaggingRequest.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location: "uri", location_name: "Key"))
+      PutObjectTaggingRequest.add_member(:version_id, Shapes::ShapeRef.new(shape: ObjectVersionId, location: "querystring", location_name: "versionId"))
+      PutObjectTaggingRequest.add_member(:content_md5, Shapes::ShapeRef.new(shape: ContentMD5, location: "header", location_name: "Content-MD5"))
+      PutObjectTaggingRequest.add_member(:tagging, Shapes::ShapeRef.new(shape: Tagging, required: true, location_name: "Tagging", metadata: {"xmlNamespace"=>{"uri"=>"http://s3.amazonaws.com/doc/2006-03-01/"}}))
+      PutObjectTaggingRequest.struct_class = Types::PutObjectTaggingRequest
+      PutObjectTaggingRequest[:payload] = :tagging
+      PutObjectTaggingRequest[:payload_member] = PutObjectTaggingRequest.member(:tagging)
 
       QueueConfiguration.add_member(:id, Shapes::ShapeRef.new(shape: NotificationId, location_name: "Id"))
       QueueConfiguration.add_member(:queue_arn, Shapes::ShapeRef.new(shape: QueueArn, required: true, location_name: "Queue"))
@@ -1348,6 +1608,13 @@ module Aws
 
       S3KeyFilter.add_member(:filter_rules, Shapes::ShapeRef.new(shape: FilterRuleList, location_name: "FilterRule"))
       S3KeyFilter.struct_class = Types::S3KeyFilter
+
+      StorageClassAnalysis.add_member(:data_export, Shapes::ShapeRef.new(shape: StorageClassAnalysisDataExport, location_name: "DataExport"))
+      StorageClassAnalysis.struct_class = Types::StorageClassAnalysis
+
+      StorageClassAnalysisDataExport.add_member(:output_schema_version, Shapes::ShapeRef.new(shape: StorageClassAnalysisSchemaVersion, required: true, location_name: "OutputSchemaVersion"))
+      StorageClassAnalysisDataExport.add_member(:destination, Shapes::ShapeRef.new(shape: AnalyticsExportDestination, required: true, location_name: "Destination"))
+      StorageClassAnalysisDataExport.struct_class = Types::StorageClassAnalysisDataExport
 
       Tag.add_member(:key, Shapes::ShapeRef.new(shape: ObjectKey, required: true, location_name: "Key"))
       Tag.add_member(:value, Shapes::ShapeRef.new(shape: Value, required: true, location_name: "Value"))
@@ -1513,6 +1780,14 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
+        api.add_operation(:delete_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteBucketAnalyticsConfiguration"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/{Bucket}?analytics"
+          o.input = Shapes::ShapeRef.new(shape: DeleteBucketAnalyticsConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
         api.add_operation(:delete_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteBucketCors"
           o.http_method = "DELETE"
@@ -1521,11 +1796,27 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
+        api.add_operation(:delete_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteBucketInventoryConfiguration"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/{Bucket}?inventory"
+          o.input = Shapes::ShapeRef.new(shape: DeleteBucketInventoryConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
         api.add_operation(:delete_bucket_lifecycle, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteBucketLifecycle"
           o.http_method = "DELETE"
           o.http_request_uri = "/{Bucket}?lifecycle"
           o.input = Shapes::ShapeRef.new(shape: DeleteBucketLifecycleRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
+        api.add_operation(:delete_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteBucketMetricsConfiguration"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/{Bucket}?metrics"
+          o.input = Shapes::ShapeRef.new(shape: DeleteBucketMetricsConfigurationRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
@@ -1569,6 +1860,14 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: DeleteObjectOutput)
         end)
 
+        api.add_operation(:delete_object_tagging, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteObjectTagging"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/{Bucket}/{Key+}?tagging"
+          o.input = Shapes::ShapeRef.new(shape: DeleteObjectTaggingRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteObjectTaggingOutput)
+        end)
+
         api.add_operation(:delete_objects, Seahorse::Model::Operation.new.tap do |o|
           o.name = "DeleteObjects"
           o.http_method = "POST"
@@ -1593,12 +1892,28 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetBucketAclOutput)
         end)
 
+        api.add_operation(:get_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetBucketAnalyticsConfiguration"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?analytics"
+          o.input = Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetBucketAnalyticsConfigurationOutput)
+        end)
+
         api.add_operation(:get_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetBucketCors"
           o.http_method = "GET"
           o.http_request_uri = "/{Bucket}?cors"
           o.input = Shapes::ShapeRef.new(shape: GetBucketCorsRequest)
           o.output = Shapes::ShapeRef.new(shape: GetBucketCorsOutput)
+        end)
+
+        api.add_operation(:get_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetBucketInventoryConfiguration"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?inventory"
+          o.input = Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetBucketInventoryConfigurationOutput)
         end)
 
         api.add_operation(:get_bucket_lifecycle, Seahorse::Model::Operation.new.tap do |o|
@@ -1632,6 +1947,14 @@ module Aws
           o.http_request_uri = "/{Bucket}?logging"
           o.input = Shapes::ShapeRef.new(shape: GetBucketLoggingRequest)
           o.output = Shapes::ShapeRef.new(shape: GetBucketLoggingOutput)
+        end)
+
+        api.add_operation(:get_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetBucketMetricsConfiguration"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?metrics"
+          o.input = Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetBucketMetricsConfigurationOutput)
         end)
 
         api.add_operation(:get_bucket_notification, Seahorse::Model::Operation.new.tap do |o|
@@ -1717,6 +2040,14 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
         end)
 
+        api.add_operation(:get_object_tagging, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetObjectTagging"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}/{Key+}?tagging"
+          o.input = Shapes::ShapeRef.new(shape: GetObjectTaggingRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetObjectTaggingOutput)
+        end)
+
         api.add_operation(:get_object_torrent, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetObjectTorrent"
           o.http_method = "GET"
@@ -1741,6 +2072,30 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: HeadObjectRequest)
           o.output = Shapes::ShapeRef.new(shape: HeadObjectOutput)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
+        end)
+
+        api.add_operation(:list_bucket_analytics_configurations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListBucketAnalyticsConfigurations"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?analytics"
+          o.input = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListBucketAnalyticsConfigurationsOutput)
+        end)
+
+        api.add_operation(:list_bucket_inventory_configurations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListBucketInventoryConfigurations"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?inventory"
+          o.input = Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListBucketInventoryConfigurationsOutput)
+        end)
+
+        api.add_operation(:list_bucket_metrics_configurations, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListBucketMetricsConfigurations"
+          o.http_method = "GET"
+          o.http_request_uri = "/{Bucket}?metrics"
+          o.input = Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListBucketMetricsConfigurationsOutput)
         end)
 
         api.add_operation(:list_buckets, Seahorse::Model::Operation.new.tap do |o|
@@ -1845,11 +2200,27 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
+        api.add_operation(:put_bucket_analytics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutBucketAnalyticsConfiguration"
+          o.http_method = "PUT"
+          o.http_request_uri = "/{Bucket}?analytics"
+          o.input = Shapes::ShapeRef.new(shape: PutBucketAnalyticsConfigurationRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
         api.add_operation(:put_bucket_cors, Seahorse::Model::Operation.new.tap do |o|
           o.name = "PutBucketCors"
           o.http_method = "PUT"
           o.http_request_uri = "/{Bucket}?cors"
           o.input = Shapes::ShapeRef.new(shape: PutBucketCorsRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
+        api.add_operation(:put_bucket_inventory_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutBucketInventoryConfiguration"
+          o.http_method = "PUT"
+          o.http_request_uri = "/{Bucket}?inventory"
+          o.input = Shapes::ShapeRef.new(shape: PutBucketInventoryConfigurationRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
@@ -1875,6 +2246,14 @@ module Aws
           o.http_method = "PUT"
           o.http_request_uri = "/{Bucket}?logging"
           o.input = Shapes::ShapeRef.new(shape: PutBucketLoggingRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
+        api.add_operation(:put_bucket_metrics_configuration, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutBucketMetricsConfiguration"
+          o.http_method = "PUT"
+          o.http_request_uri = "/{Bucket}?metrics"
+          o.input = Shapes::ShapeRef.new(shape: PutBucketMetricsConfigurationRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
@@ -1958,6 +2337,14 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: PutObjectAclRequest)
           o.output = Shapes::ShapeRef.new(shape: PutObjectAclOutput)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchKey)
+        end)
+
+        api.add_operation(:put_object_tagging, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "PutObjectTagging"
+          o.http_method = "PUT"
+          o.http_request_uri = "/{Bucket}/{Key+}?tagging"
+          o.input = Shapes::ShapeRef.new(shape: PutObjectTaggingRequest)
+          o.output = Shapes::ShapeRef.new(shape: PutObjectTaggingOutput)
         end)
 
         api.add_operation(:restore_object, Seahorse::Model::Operation.new.tap do |o|

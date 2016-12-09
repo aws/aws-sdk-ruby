@@ -62,7 +62,7 @@ module Aws
       #     security_groups: ["String"],
       #     security_group_ids: ["String"],
       #     user_data: "String",
-      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #     placement: {
       #       availability_zone: "String",
       #       group_name: "String",
@@ -94,6 +94,12 @@ module Aws
       #     disable_api_termination: false,
       #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
       #     private_ip_address: "String",
+      #     ipv_6_addresses: [
+      #       {
+      #         ipv_6_address: "String",
+      #       },
+      #     ],
+      #     ipv_6_address_count: 1,
       #     client_token: "String",
       #     additional_info: "String",
       #     network_interfaces: [
@@ -113,6 +119,12 @@ module Aws
       #         ],
       #         secondary_private_ip_address_count: 1,
       #         associate_public_ip_address: false,
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "String",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #       },
       #     ],
       #     iam_instance_profile: {
@@ -231,10 +243,8 @@ module Aws
       #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
       # @option options [Boolean] :disable_api_termination
       #   If you set this parameter to `true`, you can't terminate the instance
-      #   using the Amazon EC2 console, CLI, or API; otherwise, you can. If you
-      #   set this parameter to `true` and then later want to be able to
-      #   terminate the instance, you must first change the value of the
-      #   `disableApiTermination` attribute to `false` using
+      #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
+      #   change this attribute to `false` after launch, use
       #   ModifyInstanceAttribute. Alternatively, if you set
       #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
       #   the instance by running the shutdown command from the instance.
@@ -247,19 +257,27 @@ module Aws
       #
       #   Default: `stop`
       # @option options [String] :private_ip_address
-      #   \[EC2-VPC\] The primary IP address. You must specify a value from the
-      #   IP address range of the subnet.
+      #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
+      #   the IPv4 address range of the subnet.
       #
-      #   Only one private IP address can be designated as primary. Therefore,
-      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary` is
-      #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
-      #   IP address.
-      #
-      #   You cannot specify this option if you're launching more than one
-      #   instance in the request.
-      #
-      #   Default: We select an IP address from the IP address range of the
-      #   subnet.
+      #   Only one private IP address can be designated as primary. You can't
+      #   specify this option if you've specified the option to designate a
+      #   private IP address as the primary IP address in a network interface
+      #   specification. You cannot specify this option if you're launching
+      #   more than one instance in the request.
+      # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+      #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
+      #   subnet to associate with the primary network interface. You cannot
+      #   specify this option and the option to assign a number of IPv6
+      #   addresses in the same request. You cannot specify this option if
+      #   you've specified a minimum number of instances to launch.
+      # @option options [Integer] :ipv_6_address_count
+      #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+      #   network interface. Amazon EC2 chooses the IPv6 addresses from the
+      #   range of your subnet. You cannot specify this option and the option to
+      #   assign specific IPv6 addresses in the same request. You can specify
+      #   this option if you've specified a minimum number of instances to
+      #   launch.
       # @option options [String] :client_token
       #   Unique, case-sensitive identifier you provide to ensure the
       #   idempotency of the request. For more information, see [Ensuring
@@ -383,6 +401,12 @@ module Aws
       #       },
       #     ],
       #     secondary_private_ip_address_count: 1,
+      #     ipv_6_addresses: [
+      #       {
+      #         ipv_6_address: "String",
+      #       },
+      #     ],
+      #     ipv_6_address_count: 1,
       #     dry_run: false,
       #   })
       # @param [Hash] options ({})
@@ -391,30 +415,40 @@ module Aws
       # @option options [String] :description
       #   A description for the network interface.
       # @option options [String] :private_ip_address
-      #   The primary private IP address of the network interface. If you don't
-      #   specify an IP address, Amazon EC2 selects one for you from the subnet
-      #   range. If you specify an IP address, you cannot indicate any IP
-      #   addresses specified in `privateIpAddresses` as primary (only one IP
-      #   address can be designated as primary).
+      #   The primary private IPv4 address of the network interface. If you
+      #   don't specify an IPv4 address, Amazon EC2 selects one for you from
+      #   the subnet's IPv4 CIDR range. If you specify an IP address, you
+      #   cannot indicate any IP addresses specified in `privateIpAddresses` as
+      #   primary (only one IP address can be designated as primary).
       # @option options [Array<String>] :groups
       #   The IDs of one or more security groups.
       # @option options [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-      #   One or more private IP addresses.
+      #   One or more private IPv4 addresses.
       # @option options [Integer] :secondary_private_ip_address_count
-      #   The number of secondary private IP addresses to assign to a network
-      #   interface. When you specify a number of secondary IP addresses, Amazon
-      #   EC2 selects these IP addresses within the subnet range. You can't
-      #   specify this option and specify more than one private IP address using
-      #   `privateIpAddresses`.
+      #   The number of secondary private IPv4 addresses to assign to a network
+      #   interface. When you specify a number of secondary IPv4 addresses,
+      #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
+      #   range. You can't specify this option and specify more than one
+      #   private IP address using `privateIpAddresses`.
       #
       #   The number of IP addresses you can assign to a network interface
-      #   varies by instance type. For more information, see [Private IP
-      #   Addresses Per ENI Per Instance Type][1] in the *Amazon Elastic Compute
-      #   Cloud User Guide*.
+      #   varies by instance type. For more information, see [IP Addresses Per
+      #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
+      #   Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+      # @option options [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+      #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
+      #   your subnet. You can't use this option if you're specifying a number
+      #   of IPv6 addresses.
+      # @option options [Integer] :ipv_6_address_count
+      #   The number of IPv6 addresses to assign to a network interface. Amazon
+      #   EC2 automatically selects the IPv6 addresses from the subnet range.
+      #   You can't use this option if specifying specific IPv6 addresses. If
+      #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
+      #   `true`, you can specify `0` to override this setting.
       # @option options [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -558,6 +592,7 @@ module Aws
       #     dry_run: false,
       #     vpc_id: "String", # required
       #     cidr_block: "String", # required
+      #     ipv_6_cidr_block: "String",
       #     availability_zone: "String",
       #   })
       # @param [Hash] options ({})
@@ -569,8 +604,11 @@ module Aws
       # @option options [required, String] :vpc_id
       #   The ID of the VPC.
       # @option options [required, String] :cidr_block
-      #   The network range for the subnet, in CIDR notation. For example,
+      #   The IPv4 network range for the subnet, in CIDR notation. For example,
       #   `10.0.0.0/24`.
+      # @option options [String] :ipv_6_cidr_block
+      #   The IPv6 network range for the subnet, in CIDR notation. The subnet
+      #   size must use a /64 prefix length.
       # @option options [String] :availability_zone
       #   The Availability Zone for the subnet.
       #
@@ -660,7 +698,7 @@ module Aws
       # @option options [Integer] :iops
       #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
       #   operations per second (IOPS) to provision for the volume, with a
-      #   maximum ratio of 30 IOPS/GiB.
+      #   maximum ratio of 50 IOPS/GiB.
       #
       #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
       # @option options [Boolean] :encrypted
@@ -702,6 +740,7 @@ module Aws
       #     dry_run: false,
       #     cidr_block: "String", # required
       #     instance_tenancy: "default", # accepts default, dedicated, host
+      #     amazon_provided_ipv_6_cidr_block: false,
       #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
@@ -710,7 +749,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [required, String] :cidr_block
-      #   The network range for the VPC, in CIDR notation. For example,
+      #   The IPv4 network range for the VPC, in CIDR notation. For example,
       #   `10.0.0.0/16`.
       # @option options [String] :instance_tenancy
       #   The tenancy options for instances launched into the VPC. For
@@ -724,6 +763,10 @@ module Aws
       #   Use the `default` or `dedicated` values only.
       #
       #   Default: `default`
+      # @option options [Boolean] :amazon_provided_ipv_6_cidr_block
+      #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+      #   for the VPC. You cannot specify the range of IP addresses, or the size
+      #   of the CIDR block.
       # @return [Vpc]
       def create_vpc(options = {})
         resp = @client.create_vpc(options)
@@ -1112,6 +1155,9 @@ module Aws
       #   * `description` - The description of the image (provided during image
       #     creation).
       #
+      #   * `ena-support` - A Boolean that indicates whether enhanced networking
+      #     with ENA is enabled.
+      #
       #   * `hypervisor` - The hypervisor type (`ovm` \| `xen`).
       #
       #   * `image-id` - The ID of the image.
@@ -1228,6 +1274,18 @@ module Aws
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
+      #   * `association.public-ip` - The address of the Elastic IP address
+      #     (IPv4) bound to the network interface.
+      #
+      #   * `association.ip-owner-id` - The owner of the Elastic IP address
+      #     (IPv4) associated with the network interface.
+      #
+      #   * `association.allocation-id` - The allocation ID returned when you
+      #     allocated the Elastic IP address (IPv4) for your network interface.
+      #
+      #   * `association.association-id` - The association ID returned when the
+      #     network interface was associated with an IPv4 address.
+      #
       #   * `availability-zone` - The Availability Zone of the instance.
       #
       #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -1288,7 +1346,7 @@ module Aws
       #   * `instance.group-name` - The name of the security group for the
       #     instance.
       #
-      #   * `ip-address` - The public IP address of the instance.
+      #   * `ip-address` - The public IPv4 address of the instance.
       #
       #   * `kernel-id` - The kernel ID.
       #
@@ -1301,8 +1359,91 @@ module Aws
       #
       #   * `launch-time` - The time when the instance was launched.
       #
-      #   * `monitoring-state` - Indicates whether monitoring is enabled for the
-      #     instance (`disabled` \| `enabled`).
+      #   * `monitoring-state` - Indicates whether detailed monitoring is
+      #     enabled (`disabled` \| `enabled`).
+      #
+      #   * `network-interface.addresses.private-ip-address` - The private IPv4
+      #     address associated with the network interface.
+      #
+      #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+      #     address of the network interface is the primary private IPv4
+      #     address.
+      #
+      #   * `network-interface.addresses.association.public-ip` - The ID of the
+      #     association of an Elastic IP address (IPv4) with a network
+      #     interface.
+      #
+      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
+      #     of the private IPv4 address associated with the network interface.
+      #
+      #   * `network-interface.attachment.attachment-id` - The ID of the
+      #     interface attachment.
+      #
+      #   * `network-interface.attachment.instance-id` - The ID of the instance
+      #     to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
+      #     the instance to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.device-index` - The device index to
+      #     which the network interface is attached.
+      #
+      #   * `network-interface.attachment.status` - The status of the attachment
+      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
+      #
+      #   * `network-interface.attachment.attach-time` - The time that the
+      #     network interface was attached to an instance.
+      #
+      #   * `network-interface.attachment.delete-on-termination` - Specifies
+      #     whether the attachment is deleted when an instance is terminated.
+      #
+      #   * `network-interface.availability-zone` - The Availability Zone for
+      #     the network interface.
+      #
+      #   * `network-interface.description` - The description of the network
+      #     interface.
+      #
+      #   * `network-interface.group-id` - The ID of a security group associated
+      #     with the network interface.
+      #
+      #   * `network-interface.group-name` - The name of a security group
+      #     associated with the network interface.
+      #
+      #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      #     associated with the network interface.
+      #
+      #   * `network-interface.mac-address` - The MAC address of the network
+      #     interface.
+      #
+      #   * `network-interface.network-interface-id` - The ID of the network
+      #     interface.
+      #
+      #   * `network-interface.owner-id` - The ID of the owner of the network
+      #     interface.
+      #
+      #   * `network-interface.private-dns-name` - The private DNS name of the
+      #     network interface.
+      #
+      #   * `network-interface.requester-id` - The requester ID for the network
+      #     interface.
+      #
+      #   * `network-interface.requester-managed` - Indicates whether the
+      #     network interface is being managed by AWS.
+      #
+      #   * `network-interface.status` - The status of the network interface
+      #     (`available`) \| `in-use`).
+      #
+      #   * `network-interface.source-dest-check` - Whether the network
+      #     interface performs source/destination checking. A value of `true`
+      #     means checking is enabled, and `false` means checking is disabled.
+      #     The value must be `false` for the network interface to perform
+      #     network address translation (NAT) in your VPC.
+      #
+      #   * `network-interface.subnet-id` - The ID of the subnet for the network
+      #     interface.
+      #
+      #   * `network-interface.vpc-id` - The ID of the VPC for the network
+      #     interface.
       #
       #   * `owner-id` - The AWS account ID of the instance owner.
       #
@@ -1312,9 +1453,9 @@ module Aws
       #   * `platform` - The platform. Use `windows` if you have Windows
       #     instances; otherwise, leave blank.
       #
-      #   * `private-dns-name` - The private DNS name of the instance.
+      #   * `private-dns-name` - The private IPv4 DNS name of the instance.
       #
-      #   * `private-ip-address` - The private IP address of the instance.
+      #   * `private-ip-address` - The private IPv4 address of the instance.
       #
       #   * `product-code` - The product code associated with the AMI used to
       #     launch the instance.
@@ -1382,96 +1523,6 @@ module Aws
       #     (`paravirtual` \| `hvm`).
       #
       #   * `vpc-id` - The ID of the VPC that the instance is running in.
-      #
-      #   * `network-interface.description` - The description of the network
-      #     interface.
-      #
-      #   * `network-interface.subnet-id` - The ID of the subnet for the network
-      #     interface.
-      #
-      #   * `network-interface.vpc-id` - The ID of the VPC for the network
-      #     interface.
-      #
-      #   * `network-interface.network-interface-id` - The ID of the network
-      #     interface.
-      #
-      #   * `network-interface.owner-id` - The ID of the owner of the network
-      #     interface.
-      #
-      #   * `network-interface.availability-zone` - The Availability Zone for
-      #     the network interface.
-      #
-      #   * `network-interface.requester-id` - The requester ID for the network
-      #     interface.
-      #
-      #   * `network-interface.requester-managed` - Indicates whether the
-      #     network interface is being managed by AWS.
-      #
-      #   * `network-interface.status` - The status of the network interface
-      #     (`available`) \| `in-use`).
-      #
-      #   * `network-interface.mac-address` - The MAC address of the network
-      #     interface.
-      #
-      #   * `network-interface.private-dns-name` - The private DNS name of the
-      #     network interface.
-      #
-      #   * `network-interface.source-dest-check` - Whether the network
-      #     interface performs source/destination checking. A value of `true`
-      #     means checking is enabled, and `false` means checking is disabled.
-      #     The value must be `false` for the network interface to perform
-      #     network address translation (NAT) in your VPC.
-      #
-      #   * `network-interface.group-id` - The ID of a security group associated
-      #     with the network interface.
-      #
-      #   * `network-interface.group-name` - The name of a security group
-      #     associated with the network interface.
-      #
-      #   * `network-interface.attachment.attachment-id` - The ID of the
-      #     interface attachment.
-      #
-      #   * `network-interface.attachment.instance-id` - The ID of the instance
-      #     to which the network interface is attached.
-      #
-      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
-      #     the instance to which the network interface is attached.
-      #
-      #   * `network-interface.addresses.private-ip-address` - The private IP
-      #     address associated with the network interface.
-      #
-      #   * `network-interface.attachment.device-index` - The device index to
-      #     which the network interface is attached.
-      #
-      #   * `network-interface.attachment.status` - The status of the attachment
-      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
-      #
-      #   * `network-interface.attachment.attach-time` - The time that the
-      #     network interface was attached to an instance.
-      #
-      #   * `network-interface.attachment.delete-on-termination` - Specifies
-      #     whether the attachment is deleted when an instance is terminated.
-      #
-      #   * `network-interface.addresses.primary` - Specifies whether the IP
-      #     address of the network interface is the primary private IP address.
-      #
-      #   * `network-interface.addresses.association.public-ip` - The ID of the
-      #     association of an Elastic IP address with a network interface.
-      #
-      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
-      #     of the private IP address associated with the network interface.
-      #
-      #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
-      #
-      #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
-      #
-      #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
-      #
-      #   * `association.association-id` - The association ID returned when the
-      #     network interface was associated with an IP address.
       # @return [Instance::Collection]
       def instances(options = {})
         batches = Enumerator.new do |y|
@@ -1665,7 +1716,7 @@ module Aws
       #   * `default` - Indicates whether the ACL is the default network ACL for
       #     the VPC.
       #
-      #   * `entry.cidr` - The CIDR range specified in the entry.
+      #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
       #
       #   * `entry.egress` - Indicates whether the entry applies to egress
       #     traffic.
@@ -1673,6 +1724,8 @@ module Aws
       #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
       #
       #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
+      #
+      #   * `entry.ipv6-cidr` - The IPv6 CIDR range specified in the entry.
       #
       #   * `entry.port-range.from` - The start of the port range specified in
       #     the entry.
@@ -1757,32 +1810,33 @@ module Aws
       # @option options [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `addresses.private-ip-address` - The private IP addresses associated
-      #     with the network interface.
+      #   * `addresses.private-ip-address` - The private IPv4 addresses
+      #     associated with the network interface.
       #
-      #   * `addresses.primary` - Whether the private IP address is the primary
-      #     IP address associated with the network interface.
+      #   * `addresses.primary` - Whether the private IPv4 address is the
+      #     primary IP address associated with the network interface.
       #
       #   * `addresses.association.public-ip` - The association ID returned when
-      #     the network interface was associated with the Elastic IP address.
+      #     the network interface was associated with the Elastic IP address
+      #     (IPv4).
       #
       #   * `addresses.association.owner-id` - The owner ID of the addresses
       #     associated with the network interface.
       #
       #   * `association.association-id` - The association ID returned when the
-      #     network interface was associated with an IP address.
+      #     network interface was associated with an IPv4 address.
       #
       #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
+      #     allocated the Elastic IP address (IPv4) for your network interface.
       #
       #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
+      #     (IPv4) associated with the network interface.
       #
       #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
+      #     (IPv4) bound to the network interface.
       #
       #   * `association.public-dns-name` - The public DNS name for the network
-      #     interface.
+      #     interface (IPv4).
       #
       #   * `attachment.attachment-id` - The ID of the interface attachment.
       #
@@ -1818,16 +1872,20 @@ module Aws
       #   * `group-name` - The name of a security group associated with the
       #     network interface.
       #
+      #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with the
+      #     network interface.
+      #
       #   * `mac-address` - The MAC address of the network interface.
       #
       #   * `network-interface-id` - The ID of the network interface.
       #
       #   * `owner-id` - The AWS account ID of the network interface owner.
       #
-      #   * `private-ip-address` - The private IP address or addresses of the
+      #   * `private-ip-address` - The private IPv4 address or addresses of the
       #     network interface.
       #
-      #   * `private-dns-name` - The private DNS name of the network interface.
+      #   * `private-dns-name` - The private DNS name of the network interface
+      #     (IPv4).
       #
       #   * `requester-id` - The ID of the entity that launched the instance on
       #     your behalf (for example, AWS Management Console, Auto Scaling, and
@@ -1997,11 +2055,17 @@ module Aws
       #
       #   * `route-table-id` - The ID of the route table.
       #
-      #   * `route.destination-cidr-block` - The CIDR range specified in a route
-      #     in the table.
+      #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
+      #     route in the table.
+      #
+      #   * `route.destination-ipv6-cidr-block` - The IPv6 CIDR range specified
+      #     in a route in the route table.
       #
       #   * `route.destination-prefix-list-id` - The ID (prefix) of the AWS
       #     service specified in a route in the table.
+      #
+      #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
+      #     Internet gateway specified in a route in the route table.
       #
       #   * `route.gateway-id` - The ID of a gateway specified in a route in the
       #     table.
@@ -2113,8 +2177,8 @@ module Aws
       #
       #   * `group-name` - The name of the security group.
       #
-      #   * `ip-permission.cidr` - A CIDR range that has been granted
-      #     permission.
+      #   * `ip-permission.cidr` - An IPv4 CIDR range that has been granted
+      #     permission in a security group rule.
       #
       #   * `ip-permission.from-port` - The start of port range for the TCP and
       #     UDP protocols, or an ICMP type number.
@@ -2124,6 +2188,9 @@ module Aws
       #
       #   * `ip-permission.group-name` - The name of a security group that has
       #     been granted permission.
+      #
+      #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR range that has been granted
+      #     permission in a security group rule.
       #
       #   * `ip-permission.protocol` - The IP protocol for the permission (`tcp`
       #     \| `udp` \| `icmp` or a protocol number).
@@ -2293,10 +2360,10 @@ module Aws
       #   * `availabilityZone` - The Availability Zone for the subnet. You can
       #     also use `availability-zone` as the filter name.
       #
-      #   * `available-ip-address-count` - The number of IP addresses in the
+      #   * `available-ip-address-count` - The number of IPv4 addresses in the
       #     subnet that are available.
       #
-      #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
+      #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
       #     specify must exactly match the subnet's CIDR block for information
       #     to be returned for the subnet. You can also use `cidr` or
       #     `cidr-block` as the filter names.
@@ -2304,6 +2371,15 @@ module Aws
       #   * `defaultForAz` - Indicates whether this is the default subnet for
       #     the Availability Zone. You can also use `default-for-az` as the
       #     filter name.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - An association ID for
+      #     an IPv6 CIDR block associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the subnet.
       #
       #   * `state` - The state of the subnet (`pending` \| `available`).
       #
@@ -2554,7 +2630,8 @@ module Aws
       # @option options [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `accepter-vpc-info.cidr-block` - The CIDR block of the peer VPC.
+      #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the peer
+      #     VPC.
       #
       #   * `accepter-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the peer VPC.
@@ -2564,8 +2641,8 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC peering
       #     connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester's
-      #     VPC.
+      #   * `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
+      #     requester's VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the requester VPC.
@@ -2636,12 +2713,21 @@ module Aws
       # @option options [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify must
-      #     exactly match the VPC's CIDR block for information to be returned
-      #     for the VPC. Must contain the slash followed by one or two digits
-      #     (for example, `/28`).
+      #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you specify
+      #     must exactly match the VPC's CIDR block for information to be
+      #     returned for the VPC. Must contain the slash followed by one or two
+      #     digits (for example, `/28`).
       #
       #   * `dhcp-options-id` - The ID of a set of DHCP options.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - The association ID
+      #     for an IPv6 CIDR block associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the VPC.
       #
       #   * `isDefault` - Indicates whether the VPC is the default VPC.
       #

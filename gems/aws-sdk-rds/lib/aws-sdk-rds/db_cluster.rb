@@ -125,6 +125,13 @@ module Aws
         data.reader_endpoint
       end
 
+      # Specifies whether the DB cluster has instances in multiple
+      # Availability Zones.
+      # @return [Boolean]
+      def multi_az
+        data.multi_az
+      end
+
       # Provides the name of the database engine to be used for this DB
       # cluster.
       # @return [String]
@@ -245,6 +252,13 @@ module Aws
       # @return [Array<Types::DBClusterRole>]
       def associated_roles
         data.associated_roles
+      end
+
+      # Specifies the time when the DB cluster was created, in Universal
+      # Coordinated Time (UTC).
+      # @return [Time]
+      def cluster_create_time
+        data.cluster_create_time
       end
 
       # @!endgroup

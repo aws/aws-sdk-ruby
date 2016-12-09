@@ -687,25 +687,77 @@ module Aws
       #
       #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-south-1, ap-southeast-2, eu-west-1, us-east-1,
-      #     us-west-2):** ` 5.6.10a`
+      #     us-east-2, us-west-2):** ` 5.6.10a`
       #
       #   ^
       #
       #   **MariaDB**
+      #
+      #   * **Version 10.1 (available in these AWS regions: us-east-2):** `
+      #     10.1.16`
       #
       #   * **Version 10.1 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
       #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
       #     us-west-2):** ` 10.1.14`
       #
-      #   * **Version 10.0 (available in all AWS regions):** ` 10.0.17 |
-      #     10.0.24`
+      #   * **Version 10.0 (available in all AWS regions):** ` 10.0.24`
+      #
+      #   * **Version 10.0 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 10.0.17`
+      #
+      #   **Microsoft SQL Server 2016**
+      #
+      #   * `13.00.2164.0.v1` (supported for all editions, and all AWS regions
+      #     except sa-east-1)
+      #
+      #   ^
+      #
+      #   **Microsoft SQL Server 2014**
+      #
+      #   * `12.00.5000.0.v1` (supported for all editions, and all AWS regions)
+      #
+      #   * `12.00.4422.0.v1` (supported for all editions except Enterprise
+      #     Edition, and all AWS regions except us-east-2)
+      #
+      #   **Microsoft SQL Server 2012**
+      #
+      #   * `11.00.6020.0.v1` (supported for all editions, and all AWS regions)
+      #
+      #   * `11.00.5058.0.v1` (supported for all editions, and all AWS regions
+      #     except us-east-2)
+      #
+      #   * `11.00.2100.60.v1` (supported for all editions, and all AWS regions
+      #     except us-east-2)
+      #
+      #   **Microsoft SQL Server 2008 R2**
+      #
+      #   * `10.50.6529.0.v1` (supported for all editions, and all AWS regions
+      #     except us-east-2)
+      #
+      #   * `10.50.6000.34.v1` (supported for all editions, and all AWS regions
+      #     except us-east-2)
+      #
+      #   * `10.50.2789.0.v1` (supported for all editions, and all AWS regions
+      #     except us-east-2)
       #
       #   **MySQL**
       #
-      #   * **Version 5.7 (available in all AWS regions):** ` 5.7.10 | 5.7.11`
+      #   * **Version 5.7 (available in all AWS regions):** ` 5.7.11`
       #
-      #   * **Version 5.6 (available in all AWS regions):** ` 5.6.27 | 5.6.29`
+      #   * **Version 5.7 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 5.7.10`
+      #
+      #   * **Version 5.6 (available in all AWS regions):** ` 5.6.29`
+      #
+      #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 5.6.27`
       #
       #   * **Version 5.6 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
@@ -733,114 +785,96 @@ module Aws
       #     ap-southeast-1, ap-southeast-2, eu-west-1, sa-east-1, us-east-1,
       #     us-gov-west-1, us-west-1, us-west-2):** ` 5.5.40 | 5.5.40a`
       #
-      #   **Oracle Database Enterprise Edition (oracle-ee)**
       #
-      #   * **Version 12.1.0.2 (available in these AWS regions: ap-northeast-1,
-      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 12.1.0.2.v5`
       #
-      #   * **Version 12.1.0.2 (available in all AWS regions):** ` 12.1.0.2.v1 |
-      #     12.1.0.2.v2 | 12.1.0.2.v3 | 12.1.0.2.v4`
+      #   **Oracle 12c**
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v6`
+      #   * `12.1.0.2.v5` (supported for EE in all AWS regions, and SE2 in all
+      #     AWS regions except us-gov-west-1)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
+      #   * `12.1.0.2.v4` (supported for EE in all AWS regions, and SE2 in all
+      #     AWS regions except us-gov-west-1)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-gov-west-1, us-west-1, us-west-2):** `
-      #     12.1.0.1.v1 | 12.1.0.1.v2`
+      #   * `12.1.0.2.v3` (supported for EE in all AWS regions, and SE2 in all
+      #     AWS regions except us-gov-west-1)
       #
-      #   * **Version 11.2.0.4 (available in these AWS regions: ap-northeast-1,
-      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #   * `12.1.0.2.v2` (supported for EE in all AWS regions, and SE2 in all
+      #     AWS regions except us-gov-west-1)
       #
-      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 | 11.2.0.4.v8`
+      #   * `12.1.0.2.v1` (supported for EE in all AWS regions, and SE2 in all
+      #     AWS regions except us-gov-west-1)
       #
-      #   **Oracle Database Standard Edition Two (oracle-se2)**
       #
-      #   * **Version 12.1.0.2 (available in these AWS regions: ap-northeast-1,
-      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 12.1.0.2.v5`
       #
-      #   * **Version 12.1.0.2 (available in all AWS regions):** ` 12.1.0.2.v2 |
-      #     12.1.0.2.v3 | 12.1.0.2.v4`
+      #   * `12.1.0.1.v6` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   **Oracle Database Standard Edition One (oracle-se1)**
+      #   * `12.1.0.1.v5` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v6`
+      #   * `12.1.0.1.v4` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
+      #   * `12.1.0.1.v3` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-gov-west-1, us-west-1, us-west-2):** `
-      #     12.1.0.1.v1 | 12.1.0.1.v2`
+      #   * `12.1.0.1.v2` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   * **Version 11.2.0.4 (available in these AWS regions: ap-northeast-1,
-      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #   * `12.1.0.1.v1` (supported for EE, SE1, and SE, in all AWS regions
+      #     except ap-south-1, ap-northeast-2)
       #
-      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 | 11.2.0.4.v8`
+      #   **Oracle 11g**
       #
-      #   **Oracle Database Standard Edition (oracle-se)**
+      #   * `11.2.0.4.v9` (supported for EE, SE1, and SE, in all AWS regions)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-west-1, us-west-2):** ` 12.1.0.1.v6`
+      #   * `11.2.0.4.v8` (supported for EE, SE1, and SE, in all AWS regions)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-west-1, us-west-2):** ` 12.1.0.1.v3 |
-      #     12.1.0.1.v4 | 12.1.0.1.v5`
+      #   * `11.2.0.4.v7` (supported for EE, SE1, and SE, in all AWS regions)
       #
-      #   * **Version 12.1.0.1 (available in these AWS regions: ap-northeast-1,
-      #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
-      #     us-east-1, us-gov-west-1, us-gov-west-1, us-west-1, us-west-2):** `
-      #     12.1.0.1.v1 | 12.1.0.1.v2`
+      #   * `11.2.0.4.v6` (supported for EE, SE1, and SE, in all AWS regions)
       #
-      #   * **Version 11.2.0.4 (available in these AWS regions: ap-northeast-1,
-      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
-      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 11.2.0.4.v6 | 11.2.0.4.v9`
+      #   * `11.2.0.4.v5` (supported for EE, SE1, and SE, in all AWS regions)
       #
-      #   * **Version 11.2.0.4 (available in all AWS regions):** ` 11.2.0.4.v1 |
-      #     11.2.0.4.v3 | 11.2.0.4.v4 | 11.2.0.4.v5 | 11.2.0.4.v7 | 11.2.0.4.v8`
+      #   * `11.2.0.4.v4` (supported for EE, SE1, and SE, in all AWS regions)
+      #
+      #   * `11.2.0.4.v3` (supported for EE, SE1, and SE, in all AWS regions)
+      #
+      #   * `11.2.0.4.v1` (supported for EE, SE1, and SE, in all AWS regions)
       #
       #   **PostgreSQL**
       #
       #   * **Version 9.5 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
       #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 9.5.2 | 9.5.4`
+      #     us-west-2):** ` 9.5.4`
+      #
+      #   * **Version 9.5 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-east-2, us-west-1,
+      #     us-west-2):** ` 9.5.2`
       #
       #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
       #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-west-1,
-      #     us-west-2):** ` 9.4.7 | 9.4.9`
+      #     us-west-2):** ` 9.4.9`
+      #
+      #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-south-1, ap-southeast-1, ap-southeast-2,
+      #     eu-central-1, eu-west-1, sa-east-1, us-east-1, us-east-2, us-west-1,
+      #     us-west-2):** ` 9.4.7`
       #
       #   * **Version 9.4 (available in all AWS regions):** ` 9.4.5`
       #
       #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
       #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
       #     eu-west-1, sa-east-1, us-east-1, us-gov-west-1, us-west-1,
-      #     us-west-2):** ` 9.4.1 | 9.4.4`
+      #     us-west-2):** ` 9.4.4`
+      #
+      #   * **Version 9.4 (available in these AWS regions: ap-northeast-1,
+      #     ap-northeast-2, ap-southeast-1, ap-southeast-2, eu-central-1,
+      #     eu-west-1, sa-east-1, us-east-1, us-east-2, us-gov-west-1,
+      #     us-west-1, us-west-2):** ` 9.4.1`
       #
       #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
@@ -854,44 +888,6 @@ module Aws
       #   * **Version 9.3 (available in these AWS regions: ap-northeast-1,
       #     ap-southeast-1, ap-southeast-2, eu-central-1, eu-west-1, sa-east-1,
       #     us-east-1, us-west-1, us-west-2):** ` 9.3.12 | 9.3.14`
-      #
-      #   **Microsoft SQL Server Enterprise Edition (sqlserver-ee)**
-      #
-      #   * **Version 11.00 (available in all AWS regions):** ` 11.00.2100.60.v1
-      #     | 11.00.5058.0.v1 | 11.00.6020.0.v1`
-      #
-      #   * **Version 10.50 (available in all AWS regions):** ` 10.50.2789.0.v1
-      #     | 10.50.6000.34.v1 | 10.50.6529.0.v1`
-      #
-      #   **Microsoft SQL Server Express Edition (sqlserver-ex)**
-      #
-      #   * **Version 12.00 (available in all AWS regions):** ` 12.00.4422.0.v1`
-      #
-      #   * **Version 11.00 (available in all AWS regions):** ` 11.00.2100.60.v1
-      #     | 11.00.5058.0.v1 | 11.00.6020.0.v1`
-      #
-      #   * **Version 10.50 (available in all AWS regions):** ` 10.50.2789.0.v1
-      #     | 10.50.6000.34.v1 | 10.50.6529.0.v1`
-      #
-      #   **Microsoft SQL Server Standard Edition (sqlserver-se)**
-      #
-      #   * **Version 12.00 (available in all AWS regions):** ` 12.00.4422.0.v1`
-      #
-      #   * **Version 11.00 (available in all AWS regions):** ` 11.00.2100.60.v1
-      #     | 11.00.5058.0.v1 | 11.00.6020.0.v1`
-      #
-      #   * **Version 10.50 (available in all AWS regions):** ` 10.50.2789.0.v1
-      #     | 10.50.6000.34.v1 | 10.50.6529.0.v1`
-      #
-      #   **Microsoft SQL Server Web Edition (sqlserver-web)**
-      #
-      #   * **Version 12.00 (available in all AWS regions):** ` 12.00.4422.0.v1`
-      #
-      #   * **Version 11.00 (available in all AWS regions):** ` 11.00.2100.60.v1
-      #     | 11.00.5058.0.v1 | 11.00.6020.0.v1`
-      #
-      #   * **Version 10.50 (available in all AWS regions):** ` 10.50.2789.0.v1
-      #     | 10.50.6000.34.v1 | 10.50.6529.0.v1`
       # @option options [Boolean] :auto_minor_version_upgrade
       #   Indicates that minor engine upgrades will be applied automatically to
       #   the DB instance during the maintenance window.
@@ -1490,7 +1486,15 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       # @option options [Array<Types::Filter>] :filters
-      #   This parameter is not currently supported.
+      #   A filter that specifies one or more DB clusters to describe.
+      #
+      #   Supported filters:
+      #
+      #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
+      #     Amazon Resource Names (ARNs). The results list will only include
+      #     information about the DB clusters identified by these ARNs.
+      #
+      #   ^
       # @option options [Integer] :max_records
       #   The maximum number of records to include in the response. If more
       #   records exist than the specified `MaxRecords` value, a pagination
@@ -1642,7 +1646,15 @@ module Aws
       #
       #   * Cannot end with a hyphen or contain two consecutive hyphens
       # @option options [Array<Types::Filter>] :filters
-      #   This parameter is not currently supported.
+      #   A filter that specifies one or more DB instances to describe.
+      #
+      #   Supported filters:
+      #
+      #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+      #     Amazon Resource Names (ARNs). The results list will only include
+      #     information about the DB instances identified by these ARNs.
+      #
+      #   ^
       # @return [DBInstance::Collection]
       def db_instances(options = {})
         batches = Enumerator.new do |y|
@@ -2342,12 +2354,14 @@ module Aws
       #
       #   Supported filters:
       #
-      #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+      #   * `db-cluster-id` - Accepts DB cluster identifiers and DB cluster
       #     Amazon Resource Names (ARNs). The results list will only include
-      #     pending maintenance actions for the DB instances identified by these
+      #     pending maintenance actions for the DB clusters identified by these
       #     ARNs.
       #
-      #   ^
+      #   * `db-instance-id` - Accepts DB instance identifiers and DB instance
+      #     ARNs. The results list will only include pending maintenance actions
+      #     for the DB instances identified by these ARNs.
       # @option options [String] :marker
       #   An optional pagination token provided by a previous
       #   `DescribePendingMaintenanceActions` request. If this parameter is

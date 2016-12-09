@@ -226,6 +226,7 @@ module Aws
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     ssekms_key_id: "SSEKMSKeyId",
       #     request_payer: "requester", # accepts requester
+      #     tagging: "TaggingHeader",
       #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
@@ -298,6 +299,9 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [String] :tagging
+      #   The tag-set for the object. The tag-set must be encoded as URL Query
+      #   parameters
       # @return [Object]
       def put_object(options = {})
         options = options.merge(bucket: @name)

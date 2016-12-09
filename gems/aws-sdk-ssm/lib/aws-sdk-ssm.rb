@@ -15,7 +15,7 @@ require_relative 'aws-sdk-ssm/errors'
 require_relative 'aws-sdk-ssm/resource'
 require_relative 'aws-sdk-ssm/customizations'
 
-# This module provides support for Amazon Simple Systems Management Service. This module is available in the
+# This module provides support for Amazon Simple Systems Manager (SSM). This module is available in the
 # `aws-sdk-ssm` gem.
 #
 # # Client
@@ -28,7 +28,7 @@ require_relative 'aws-sdk-ssm/customizations'
 #
 # # Errors
 #
-# Errors returned from Amazon Simple Systems Management Service all
+# Errors returned from Amazon Simple Systems Manager (SSM) all
 # extend {Errors::ServiceError}.
 #
 #     begin

@@ -664,7 +664,7 @@ module Aws
       # [7]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_control-access_assumerole.html
       # [8]: http://openid.net/specs/openid-connect-core-1_0.html#Claims
       # [9]: http://openid.net/specs/openid-connect-core-1_0.html#SubjectIDTypes
-      # [10]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual
+      # [10]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_roles_providers_oidc_manual.html
       # [11]: http://docs.aws.amazon.com/IAM/latest/UserGuide/id_credentials_temp_request.html#api_assumerolewithwebidentity
       # [12]: https://web-identity-federation-playground.s3.amazonaws.com/index.html
       # [13]: http://aws.amazon.com/articles/4617974389850313
@@ -912,7 +912,7 @@ module Aws
       #
       # * You cannot use these credentials to call any IAM APIs.
       #
-      # * You cannot call any STS APIs.
+      # * You cannot call any STS APIs except `GetCallerIdentity`.
       #
       # **Permissions**
       #
@@ -1078,7 +1078,8 @@ module Aws
       # * You cannot call any IAM APIs unless MFA authentication information
       #   is included in the request.
       #
-      # * You cannot call any STS API *except* `AssumeRole`.
+      # * You cannot call any STS API *except* `AssumeRole` or
+      #   `GetCallerIdentity`.
       #
       # <note markdown="1"> We recommend that you do not call `GetSessionToken` with root account
       # credentials. Instead, follow our [best practices][3] by creating one

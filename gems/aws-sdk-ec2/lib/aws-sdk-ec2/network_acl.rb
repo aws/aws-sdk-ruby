@@ -107,7 +107,8 @@ module Aws
       #     protocol: "String", # required
       #     rule_action: "allow", # required, accepts allow, deny
       #     egress: false, # required
-      #     cidr_block: "String", # required
+      #     cidr_block: "String",
+      #     ipv_6_cidr_block: "String",
       #     icmp_type_code: {
       #       type: 1,
       #       code: 1,
@@ -130,18 +131,29 @@ module Aws
       #   Constraints: Positive integer from 1 to 32766. The range 32767 to
       #   65535 is reserved for internal use.
       # @option options [required, String] :protocol
-      #   The protocol. A value of -1 means all protocols.
+      #   The protocol. A value of `-1` or `all` means all protocols. If you
+      #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`, or
+      #   `icmp`, traffic on all ports is allowed, regardless of any ports or
+      #   ICMP types or codes you specify. If you specify protocol `58` (ICMPv6)
+      #   and specify an IPv4 CIDR block, traffic for all ICMP types and codes
+      #   allowed, regardless of any that you specify. If you specify protocol
+      #   `58` (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP
+      #   type and code.
       # @option options [required, String] :rule_action
       #   Indicates whether to allow or deny the traffic that matches the rule.
       # @option options [required, Boolean] :egress
       #   Indicates whether this is an egress rule (rule is applied to traffic
       #   leaving the subnet).
-      # @option options [required, String] :cidr_block
-      #   The network range to allow or deny, in CIDR notation (for example
+      # @option options [String] :cidr_block
+      #   The IPv4 network range to allow or deny, in CIDR notation (for example
       #   `172.16.0.0/24`).
+      # @option options [String] :ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for example
+      #   `2001:db8:1234:1a00::/64`).
       # @option options [Types::IcmpTypeCode] :icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying ICMP for
-      #   the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
+      #   CIDR block.
       # @option options [Types::PortRange] :port_range
       #   TCP or UDP protocols: The range of ports the rule applies to.
       # @return [EmptyStructure]
@@ -260,7 +272,8 @@ module Aws
       #     protocol: "String", # required
       #     rule_action: "allow", # required, accepts allow, deny
       #     egress: false, # required
-      #     cidr_block: "String", # required
+      #     cidr_block: "String",
+      #     ipv_6_cidr_block: "String",
       #     icmp_type_code: {
       #       type: 1,
       #       code: 1,
@@ -280,20 +293,32 @@ module Aws
       #   The rule number of the entry to replace.
       # @option options [required, String] :protocol
       #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
+      #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
+      #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
+      #   ports or ICMP types or codes you specify. If you specify protocol `58`
+      #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
+      #   and codes allowed, regardless of any that you specify. If you specify
+      #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
+      #   specify an ICMP type and code.
       # @option options [required, String] :rule_action
       #   Indicates whether to allow or deny the traffic that matches the rule.
       # @option options [required, Boolean] :egress
       #   Indicates whether to replace the egress rule.
       #
       #   Default: If no value is specified, we replace the ingress rule.
-      # @option options [required, String] :cidr_block
-      #   The network range to allow or deny, in CIDR notation.
+      # @option options [String] :cidr_block
+      #   The IPv4 network range to allow or deny, in CIDR notation (for example
+      #   `172.16.0.0/24`).
+      # @option options [String] :ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for example
+      #   `2001:bd8:1234:1a00::/64`).
       # @option options [Types::IcmpTypeCode] :icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying 1 (ICMP)
-      #   for the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6
+      #   CIDR block.
       # @option options [Types::PortRange] :port_range
       #   TCP or UDP protocols: The range of ports the rule applies to. Required
-      #   if specifying 6 (TCP) or 17 (UDP) for the protocol.
+      #   if specifying TCP (6) or UDP (17) for the protocol.
       # @return [EmptyStructure]
       def replace_entry(options = {})
         options = options.merge(network_acl_id: @id)

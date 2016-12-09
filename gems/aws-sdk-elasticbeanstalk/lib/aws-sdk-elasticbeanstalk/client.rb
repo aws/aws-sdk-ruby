@@ -341,32 +341,25 @@ module Aws
       # @option params [String] :description
       #   Describes this version.
       # @option params [Types::SourceBuildInformation] :source_build_information
+      #   Specify a commit in an AWS CodeCommit Git repository to use as the
+      #   source code for the application version.
+      #
+      #   Specify a commit in an AWS CodeCommit repository or a source bundle in
+      #   S3 (with `SourceBundle`), but not both. If neither `SourceBundle` nor
+      #   `SourceBuildInformation` are provided, Elastic Beanstalk uses a sample
+      #   application.
       # @option params [Types::S3Location] :source_bundle
       #   The Amazon S3 bucket and key that identify the location of the source
       #   bundle for this version.
       #
-      #   If data found at the Amazon S3 location exceeds the maximum allowed
-      #   source bundle size, AWS Elastic Beanstalk returns an
-      #   `InvalidParameterValue` error. The maximum size allowed is 512 MB.
-      #
-      #   Default: If not specified, AWS Elastic Beanstalk uses a sample
-      #   application. If only partially specified (for example, a bucket is
-      #   provided but not the key) or if no data is found at the Amazon S3
-      #   location, AWS Elastic Beanstalk returns an
-      #   `InvalidParameterCombination` error.
+      #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
+      #   repository (with `SourceBuildInformation`), but not both. If neither
+      #   `SourceBundle` nor `SourceBuildInformation` are provided, Elastic
+      #   Beanstalk uses a sample application.
+      # @option params [Types::BuildConfiguration] :build_configuration
       # @option params [Boolean] :auto_create_application
-      #   Determines how the system behaves if the specified application for
-      #   this version does not already exist:
-      #
-      #   * `true`\: Automatically creates the specified application for this
-      #     release if it does not already exist.
-      #
-      #   * `false`\: Throws an `InvalidParameterValue` if the specified
-      #     application for this release does not already exist.
-      #
-      #   Default: `false`
-      #
-      #   Valid Values: `true` \| `false`
+      #   Set to `true` to create an application with the specified name if it
+      #   doesn't already exist.
       # @option params [Boolean] :process
       #   Preprocesses and validates the environment manifest and configuration
       #   files in the source bundle. Validating configuration files can
@@ -382,13 +375,20 @@ module Aws
       #     version_label: "VersionLabel", # required
       #     description: "Description",
       #     source_build_information: {
-      #       source_type: "Git", # required, accepts Git
-      #       source_repository: "CodeCommit", # required, accepts CodeCommit
+      #       source_type: "Git", # required, accepts Git, Zip
+      #       source_repository: "CodeCommit", # required, accepts CodeCommit, S3
       #       source_location: "SourceLocation", # required
       #     },
       #     source_bundle: {
       #       s3_bucket: "S3Bucket",
       #       s3_key: "S3Key",
+      #     },
+      #     build_configuration: {
+      #       artifact_name: "String",
+      #       code_build_service_role: "NonEmptyString", # required
+      #       compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+      #       image: "NonEmptyString", # required
+      #       timeout_in_minutes: 1,
       #     },
       #     auto_create_application: false,
       #     process: false,
@@ -398,14 +398,15 @@ module Aws
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
-      #   resp.application_version.source_build_information.source_type #=> String, one of "Git"
-      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_version.source_build_information.source_type #=> String, one of "Git", "Zip"
+      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit", "S3"
       #   resp.application_version.source_build_information.source_location #=> String
+      #   resp.application_version.build_arn #=> String
       #   resp.application_version.source_bundle.s3_bucket #=> String
       #   resp.application_version.source_bundle.s3_key #=> String
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
-      #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
       # @overload create_application_version(params = {})
       # @param [Hash] params ({})
       def create_application_version(params = {}, options = {})
@@ -745,20 +746,13 @@ module Aws
       #
       #  </note>
       # @option params [required, String] :application_name
-      #   The name of the application to delete releases from.
+      #   The name of the application to which the version belongs.
       # @option params [required, String] :version_label
       #   The label of the version to delete.
       # @option params [Boolean] :delete_source_bundle
-      #   Indicates whether to delete the associated source bundle from Amazon
-      #   S3:
-      #
-      #   * `true`\: An attempt is made to delete the associated Amazon S3
-      #     source bundle specified at time of creation.
-      #
-      #   * `false`\: No action is taken on the Amazon S3 source bundle
-      #     specified at time of creation.
-      #
-      #   Valid Values: `true` \| `false`
+      #   Set to `true` to delete the source bundle from your storage bucket.
+      #   Otherwise, the application version is deleted only from Elastic
+      #   Beanstalk and the source bundle remains in Amazon S3.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -828,15 +822,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Retrieve a list of application versions stored in your AWS Elastic
-      # Beanstalk storage bucket.
+      # Retrieve a list of application versions.
       # @option params [String] :application_name
-      #   If specified, AWS Elastic Beanstalk restricts the returned
-      #   descriptions to only include ones that are associated with the
-      #   specified application.
+      #   Specify an application name to show only application versions for that
+      #   application.
       # @option params [Array<String>] :version_labels
-      #   If specified, restricts the returned descriptions to only include ones
-      #   that have the specified version labels.
+      #   Specify a version label to show a specific application version.
       # @option params [Integer] :max_records
       #   Specify a maximum number of application versions to paginate in the
       #   request.
@@ -860,14 +851,15 @@ module Aws
       #   resp.application_versions[0].application_name #=> String
       #   resp.application_versions[0].description #=> String
       #   resp.application_versions[0].version_label #=> String
-      #   resp.application_versions[0].source_build_information.source_type #=> String, one of "Git"
-      #   resp.application_versions[0].source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_versions[0].source_build_information.source_type #=> String, one of "Git", "Zip"
+      #   resp.application_versions[0].source_build_information.source_repository #=> String, one of "CodeCommit", "S3"
       #   resp.application_versions[0].source_build_information.source_location #=> String
+      #   resp.application_versions[0].build_arn #=> String
       #   resp.application_versions[0].source_bundle.s3_bucket #=> String
       #   resp.application_versions[0].source_bundle.s3_key #=> String
       #   resp.application_versions[0].date_created #=> Time
       #   resp.application_versions[0].date_updated #=> Time
-      #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      #   resp.application_versions[0].status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
       #   resp.next_token #=> String
       # @overload describe_application_versions(params = {})
       # @param [Hash] params ({})
@@ -1040,20 +1032,16 @@ module Aws
       # environment. The **DescribeEnvironmentHealth** operation is only
       # available with AWS Elastic Beanstalk Enhanced Health.
       # @option params [String] :environment_name
-      #   Specifies the AWS Elastic Beanstalk environment name.
+      #   Specify the environment by name.
       #
-      #   Condition: You must specify either this or an EnvironmentId, or both.
-      #   If you do not specify either, AWS Elastic Beanstalk returns
-      #   `MissingRequiredParameter` error.
+      #   You must specify either this or an EnvironmentName, or both.
       # @option params [String] :environment_id
-      #   Specifies the AWS Elastic Beanstalk environment ID.
+      #   Specify the environment by ID.
       #
-      #   Condition: You must specify either this or an EnvironmentName, or
-      #   both. If you do not specify either, AWS Elastic Beanstalk returns
-      #   `MissingRequiredParameter` error.
+      #   You must specify either this or an EnvironmentName, or both.
       # @option params [Array<String>] :attribute_names
-      #   Specifies the response elements you wish to receive. If no attribute
-      #   names are specified, AWS Elastic Beanstalk only returns the name of
+      #   Specify the response elements to return. To retrieve all attributes,
+      #   set to `All`. If no attribute names are specified, returns the name of
       #   the environment.
       # @return [Types::DescribeEnvironmentHealthResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
@@ -1381,20 +1369,23 @@ module Aws
         req.send_request(options)
       end
 
-      # Returns more detailed information about the health of the specified
-      # instances (for example, CPU utilization, load average, and causes).
-      # The **DescribeInstancesHealth** operation is only available with AWS
-      # Elastic Beanstalk Enhanced Health.
+      # Retrives detailed information about the health of instances in your
+      # AWS Elastic Beanstalk. This operation requires [enhanced health
+      # reporting][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced.html
       # @option params [String] :environment_name
-      #   Specifies the AWS Elastic Beanstalk environment name.
+      #   Specify the AWS Elastic Beanstalk environment by name.
       # @option params [String] :environment_id
-      #   Specifies the AWS Elastic Beanstalk environment ID.
+      #   Specify the AWS Elastic Beanstalk environment by ID.
       # @option params [Array<String>] :attribute_names
-      #   Specifies the response elements you wish to receive. If no attribute
-      #   names are specified, AWS Elastic Beanstalk only returns a list of
-      #   instances.
+      #   Specifies the response elements you wish to receive. To retrieve all
+      #   attributes, set to `All`. If no attribute names are specified, returns
+      #   a list of instances.
       # @option params [String] :next_token
-      #   Specifies the next token of the request.
+      #   Specify the pagination token returned by a previous call.
       # @return [Types::DescribeInstancesHealthResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeInstancesHealthResult#instance_health_list #InstanceHealthList} => Array&lt;Types::SingleInstanceHealth&gt;
@@ -1838,7 +1829,7 @@ module Aws
       #   If no application version is found with this label,
       #   `UpdateApplication` returns an `InvalidParameterValue` error.
       # @option params [String] :description
-      #   A new description for this release.
+      #   A new description for this version.
       # @return [Types::ApplicationVersionDescriptionMessage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApplicationVersionDescriptionMessage#application_version #ApplicationVersion} => Types::ApplicationVersionDescription
@@ -1854,14 +1845,15 @@ module Aws
       #   resp.application_version.application_name #=> String
       #   resp.application_version.description #=> String
       #   resp.application_version.version_label #=> String
-      #   resp.application_version.source_build_information.source_type #=> String, one of "Git"
-      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit"
+      #   resp.application_version.source_build_information.source_type #=> String, one of "Git", "Zip"
+      #   resp.application_version.source_build_information.source_repository #=> String, one of "CodeCommit", "S3"
       #   resp.application_version.source_build_information.source_location #=> String
+      #   resp.application_version.build_arn #=> String
       #   resp.application_version.source_bundle.s3_bucket #=> String
       #   resp.application_version.source_bundle.s3_key #=> String
       #   resp.application_version.date_created #=> Time
       #   resp.application_version.date_updated #=> Time
-      #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing"
+      #   resp.application_version.status #=> String, one of "Processed", "Unprocessed", "Failed", "Processing", "Building"
       # @overload update_application_version(params = {})
       # @param [Hash] params ({})
       def update_application_version(params = {}, options = {})

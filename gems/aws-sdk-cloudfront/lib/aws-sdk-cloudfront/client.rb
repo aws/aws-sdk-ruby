@@ -259,6 +259,15 @@ module Aws
       #         default_ttl: 1,
       #         max_ttl: 1,
       #         compress: false,
+      #         lambda_function_associations: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               lambda_function_arn: "string",
+      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #             },
+      #           ],
+      #         },
       #       },
       #       cache_behaviors: {
       #         quantity: 1, # required
@@ -303,6 +312,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #         ],
       #       },
@@ -411,6 +429,10 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -442,6 +464,10 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
       #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
       #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -567,6 +593,15 @@ module Aws
       #           default_ttl: 1,
       #           max_ttl: 1,
       #           compress: false,
+      #           lambda_function_associations: {
+      #             quantity: 1, # required
+      #             items: [
+      #               {
+      #                 lambda_function_arn: "string",
+      #                 event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #               },
+      #             ],
+      #           },
       #         },
       #         cache_behaviors: {
       #           quantity: 1, # required
@@ -611,6 +646,15 @@ module Aws
       #               default_ttl: 1,
       #               max_ttl: 1,
       #               compress: false,
+      #               lambda_function_associations: {
+      #                 quantity: 1, # required
+      #                 items: [
+      #                   {
+      #                     lambda_function_arn: "string",
+      #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                   },
+      #                 ],
+      #               },
       #             },
       #           ],
       #         },
@@ -728,6 +772,10 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -759,6 +807,10 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
       #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
       #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1255,6 +1307,10 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -1286,6 +1342,10 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
       #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
       #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1384,6 +1444,10 @@ module Aws
       #   resp.distribution_config.default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution_config.default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_config.cache_behaviors.quantity #=> Integer
       #   resp.distribution_config.cache_behaviors.items #=> Array
       #   resp.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -1415,6 +1479,10 @@ module Aws
       #   resp.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_config.custom_error_responses.quantity #=> Integer
       #   resp.distribution_config.custom_error_responses.items #=> Array
       #   resp.distribution_config.custom_error_responses.items[0].error_code #=> Integer
@@ -1686,6 +1754,10 @@ module Aws
       #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
       #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
@@ -1717,6 +1789,10 @@ module Aws
       #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
       #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
       #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -1833,6 +1909,10 @@ module Aws
       #   resp.distribution_list.items[0].default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution_list.items[0].default_cache_behavior.compress #=> Boolean
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_list.items[0].default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_list.items[0].cache_behaviors.quantity #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items #=> Array
       #   resp.distribution_list.items[0].cache_behaviors.items[0].path_pattern #=> String
@@ -1864,6 +1944,10 @@ module Aws
       #   resp.distribution_list.items[0].cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution_list.items[0].cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution_list.items[0].cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution_list.items[0].custom_error_responses.quantity #=> Integer
       #   resp.distribution_list.items[0].custom_error_responses.items #=> Array
       #   resp.distribution_list.items[0].custom_error_responses.items[0].error_code #=> Integer
@@ -2181,6 +2265,15 @@ module Aws
       #         default_ttl: 1,
       #         max_ttl: 1,
       #         compress: false,
+      #         lambda_function_associations: {
+      #           quantity: 1, # required
+      #           items: [
+      #             {
+      #               lambda_function_arn: "string",
+      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #             },
+      #           ],
+      #         },
       #       },
       #       cache_behaviors: {
       #         quantity: 1, # required
@@ -2225,6 +2318,15 @@ module Aws
       #             default_ttl: 1,
       #             max_ttl: 1,
       #             compress: false,
+      #             lambda_function_associations: {
+      #               quantity: 1, # required
+      #               items: [
+      #                 {
+      #                   lambda_function_arn: "string",
+      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+      #                 },
+      #               ],
+      #             },
       #           },
       #         ],
       #       },
@@ -2335,6 +2437,10 @@ module Aws
       #   resp.distribution.distribution_config.default_cache_behavior.default_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.max_ttl #=> Integer
       #   resp.distribution.distribution_config.default_cache_behavior.compress #=> Boolean
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.default_cache_behavior.lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.cache_behaviors.quantity #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items #=> Array
       #   resp.distribution.distribution_config.cache_behaviors.items[0].path_pattern #=> String
@@ -2366,6 +2472,10 @@ module Aws
       #   resp.distribution.distribution_config.cache_behaviors.items[0].default_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].max_ttl #=> Integer
       #   resp.distribution.distribution_config.cache_behaviors.items[0].compress #=> Boolean
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.quantity #=> Integer
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items #=> Array
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].lambda_function_arn #=> String
+      #   resp.distribution.distribution_config.cache_behaviors.items[0].lambda_function_associations.items[0].event_type #=> String, one of "viewer-request", "viewer-response", "origin-request", "origin-response"
       #   resp.distribution.distribution_config.custom_error_responses.quantity #=> Integer
       #   resp.distribution.distribution_config.custom_error_responses.items #=> Array
       #   resp.distribution.distribution_config.custom_error_responses.items[0].error_code #=> Integer

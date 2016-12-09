@@ -1053,8 +1053,9 @@ module Aws
       # @option params [required, Types::TimeWindow] :time_window
       #   The start date and time and the end date and time of the range for
       #   which you want `GetSampledRequests` to return a sample of requests.
-      #   Specify the date and time in Unix time format (in seconds). You can
-      #   specify any time range in the previous three hours.
+      #   Specify the date and time in the following format:
+      #   `"2016-09-27T14:50Z"`. You can specify any time range in the previous
+      #   three hours.
       # @option params [required, Integer] :max_items
       #   The number of requests that you want AWS WAF to return from among the
       #   first 5,000 requests that your AWS resource received during the time
@@ -1576,15 +1577,26 @@ module Aws
       #   to change an `IPSetDescriptor` object, you delete the existing
       #   object and add a new one.
       #
-      # * The IP address version, `IPv4`.
+      # * The IP address version, `IPv4` or `IPv6`.
       #
       # * The IP address in CIDR notation, for example, `192.0.2.0/24` (for
       #   the range of IP addresses from `192.0.2.0` to `192.0.2.255`) or
       #   `192.0.2.44/32` (for the individual IP address `192.0.2.44`).
       #
-      # AWS WAF supports /8, /16, /24, and /32 IP address ranges. For more
-      # information about CIDR notation, see the Wikipedia entry [Classless
-      # Inter-Domain Routing][1].
+      # AWS WAF supports /8, /16, /24, and /32 IP address ranges for IPv4, and
+      # /24, /32, /48, /56, /64 and /128 for IPv6. For more information about
+      # CIDR notation, see the Wikipedia entry [Classless Inter-Domain
+      # Routing][1].
+      #
+      # IPv6 addresses can be represented using any of the following formats:
+      #
+      # * 1111:0000:0000:0000:0000:0000:0000:0111/128
+      #
+      # * 1111:0:0:0:0:0:0:0111/128
+      #
+      # * 1111::0111/128
+      #
+      # * 1111::111/128
       #
       # You use an `IPSet` to specify which web requests you want to allow or
       # block based on the IP addresses that the requests originated from. For
@@ -2003,12 +2015,9 @@ module Aws
       #
       #   * WafAction: Contains `Type`
       # @option params [Types::WafAction] :default_action
-      #   For the action that is associated with a rule in a `WebACL`, specifies
-      #   the action that you want AWS WAF to perform when a web request matches
-      #   all of the conditions in a rule. For the default action in a `WebACL`,
-      #   specifies the action that you want AWS WAF to take when a web request
-      #   doesn't match all of the conditions in any of the rules in a
-      #   `WebACL`.
+      #   A default action for the web ACL, either ALLOW or BLOCK. AWS WAF
+      #   performs the default action if a request doesn't match the criteria
+      #   in any of the rules in a web ACL.
       # @return [Types::UpdateWebACLResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::UpdateWebACLResponse#change_token #ChangeToken} => String

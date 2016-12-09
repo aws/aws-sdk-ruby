@@ -104,6 +104,18 @@ module Aws
         data.origin
       end
 
+      # The IPv6 CIDR block used for the destination match.
+      # @return [String]
+      def destination_ipv_6_cidr_block
+        data.destination_ipv_6_cidr_block
+      end
+
+      # The ID of the egress-only Internet gateway.
+      # @return [String]
+      def egress_only_internet_gateway_id
+        data.egress_only_internet_gateway_id
+      end
+
       # @!endgroup
 
       # @return [Client]
@@ -140,6 +152,7 @@ module Aws
       #
       #   route.delete({
       #     dry_run: false,
+      #     destination_ipv_6_cidr_block: "String",
       #   })
       # @param [Hash] options ({})
       # @option options [Boolean] :dry_run
@@ -147,6 +160,9 @@ module Aws
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option options [String] :destination_ipv_6_cidr_block
+      #   The IPv6 CIDR range for the route. The value you specify must match
+      #   the CIDR for the route exactly.
       # @return [EmptyStructure]
       def delete(options = {})
         options = options.merge(
@@ -162,6 +178,8 @@ module Aws
       #   route.replace({
       #     dry_run: false,
       #     gateway_id: "String",
+      #     destination_ipv_6_cidr_block: "String",
+      #     egress_only_internet_gateway_id: "String",
       #     instance_id: "String",
       #     network_interface_id: "String",
       #     vpc_peering_connection_id: "String",
@@ -175,6 +193,11 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option options [String] :gateway_id
       #   The ID of an Internet gateway or virtual private gateway.
+      # @option options [String] :destination_ipv_6_cidr_block
+      #   The IPv6 CIDR address block used for the destination match. The value
+      #   you provide must match the CIDR of an existing route in the table.
+      # @option options [String] :egress_only_internet_gateway_id
+      #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
       # @option options [String] :instance_id
       #   The ID of a NAT instance in your VPC.
       # @option options [String] :network_interface_id
@@ -182,7 +205,7 @@ module Aws
       # @option options [String] :vpc_peering_connection_id
       #   The ID of a VPC peering connection.
       # @option options [String] :nat_gateway_id
-      #   The ID of a NAT gateway.
+      #   \[IPv4 traffic only\] The ID of a NAT gateway.
       # @return [EmptyStructure]
       def replace(options = {})
         options = options.merge(

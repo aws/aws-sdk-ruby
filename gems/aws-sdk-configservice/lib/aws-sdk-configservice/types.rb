@@ -97,7 +97,7 @@ module Aws
       end
 
       # The number of AWS Config rules or AWS resources that are compliant and
-      # noncompliant, up to a maximum.
+      # noncompliant.
       # @!attribute [rw] compliant_resource_count
       #   The number of AWS Config rules or AWS resources that are compliant,
       #   up to a maximum of 25 for rules and 100 for resources.
@@ -206,8 +206,8 @@ module Aws
       #           compliance_resource_id: "StringWithCharLimit256",
       #         },
       #         source: { # required
-      #           owner: "CUSTOM_LAMBDA", # accepts CUSTOM_LAMBDA, AWS
-      #           source_identifier: "StringWithCharLimit256",
+      #           owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS
+      #           source_identifier: "StringWithCharLimit256", # required
       #           source_details: [
       #             {
       #               event_source: "aws.config", # accepts aws.config
@@ -216,7 +216,7 @@ module Aws
       #             },
       #           ],
       #         },
-      #         input_parameters: "StringWithCharLimit256",
+      #         input_parameters: "StringWithCharLimit1024",
       #         maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #         config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #       }
@@ -598,7 +598,7 @@ module Aws
       #         recording_group: {
       #           all_supported: false,
       #           include_global_resource_types: false,
-      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
+      #           resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription
       #         },
       #       }
       # @!attribute [rw] name
@@ -1014,22 +1014,51 @@ module Aws
       #
       #       {
       #         config_rule_names: ["StringWithCharLimit64"],
+      #         next_token: "String",
+      #         limit: 1,
       #       }
       # @!attribute [rw] config_rule_names
       #   The name of the AWS managed Config rules for which you want status
       #   information. If you do not specify any names, AWS Config returns
       #   status information for all AWS managed Config rules that you use.
       #   @return [Array<String>]
+      #
+      # @!attribute [rw] next_token
+      #   The `NextToken` string returned on a previous page that you use to
+      #   get the next page of results in a paginated response.
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   The number of rule evaluation results that you want returned.
+      #
+      #   This parameter is required if the rule limit for your account is
+      #   more than the default of 50 rules.
+      #
+      #   For more information about requesting a rule limit increase, see
+      #   [AWS Config Limits][1] in the *AWS General Reference Guide*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_config
+      #   @return [Integer]
       class DescribeConfigRuleEvaluationStatusRequest < Struct.new(
-        :config_rule_names)
+        :config_rule_names,
+        :next_token,
+        :limit)
         include Aws::Structure
       end
 
       # @!attribute [rw] config_rules_evaluation_status
       #   Status information about your AWS managed Config rules.
       #   @return [Array<Types::ConfigRuleEvaluationStatus>]
+      #
+      # @!attribute [rw] next_token
+      #   The string that you use in a subsequent request to get the next page
+      #   of results in a paginated response.
+      #   @return [String]
       class DescribeConfigRuleEvaluationStatusResponse < Struct.new(
-        :config_rules_evaluation_status)
+        :config_rules_evaluation_status,
+        :next_token)
         include Aws::Structure
       end
 
@@ -1215,8 +1244,9 @@ module Aws
       #   The time of the event in AWS Config that triggered the evaluation.
       #   For event-based evaluations, the time indicates when AWS Config
       #   created the configuration item that triggered the evaluation. For
-      #   periodic evaluations, the time indicates when AWS Config delivered
-      #   the configuration snapshot that triggered the evaluation.
+      #   periodic evaluations, the time indicates when AWS Config triggered
+      #   the evaluation at the frequency that you specified (for example,
+      #   every 24 hours).
       #   @return [Time]
       class Evaluation < Struct.new(
         :compliance_resource_type,
@@ -1463,7 +1493,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription
       #         resource_id: "ResourceId", # required
       #         later_time: Time.now,
       #         earlier_time: Time.now,
@@ -1536,7 +1566,7 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
+      #         resource_type: "AWS::EC2::CustomerGateway", # required, accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription
       #         resource_ids: ["ResourceId"],
       #         resource_name: "ResourceName",
       #         limit: 1,
@@ -1618,8 +1648,8 @@ module Aws
       #             compliance_resource_id: "StringWithCharLimit256",
       #           },
       #           source: { # required
-      #             owner: "CUSTOM_LAMBDA", # accepts CUSTOM_LAMBDA, AWS
-      #             source_identifier: "StringWithCharLimit256",
+      #             owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS
+      #             source_identifier: "StringWithCharLimit256", # required
       #             source_details: [
       #               {
       #                 event_source: "aws.config", # accepts aws.config
@@ -1628,7 +1658,7 @@ module Aws
       #               },
       #             ],
       #           },
-      #           input_parameters: "StringWithCharLimit256",
+      #           input_parameters: "StringWithCharLimit1024",
       #           maximum_execution_frequency: "One_Hour", # accepts One_Hour, Three_Hours, Six_Hours, Twelve_Hours, TwentyFour_Hours
       #           config_rule_state: "ACTIVE", # accepts ACTIVE, DELETING, DELETING_RESULTS, EVALUATING
       #         },
@@ -1673,7 +1703,7 @@ module Aws
       #           recording_group: {
       #             all_supported: false,
       #             include_global_resource_types: false,
-      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
+      #             resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription
       #           },
       #         },
       #       }
@@ -1798,7 +1828,7 @@ module Aws
       #       {
       #         all_supported: false,
       #         include_global_resource_types: false,
-      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket
+      #         resource_types: ["AWS::EC2::CustomerGateway"], # accepts AWS::EC2::CustomerGateway, AWS::EC2::EIP, AWS::EC2::Host, AWS::EC2::Instance, AWS::EC2::InternetGateway, AWS::EC2::NetworkAcl, AWS::EC2::NetworkInterface, AWS::EC2::RouteTable, AWS::EC2::SecurityGroup, AWS::EC2::Subnet, AWS::CloudTrail::Trail, AWS::EC2::Volume, AWS::EC2::VPC, AWS::EC2::VPNConnection, AWS::EC2::VPNGateway, AWS::IAM::Group, AWS::IAM::Policy, AWS::IAM::Role, AWS::IAM::User, AWS::ACM::Certificate, AWS::RDS::DBInstance, AWS::RDS::DBSubnetGroup, AWS::RDS::DBSecurityGroup, AWS::RDS::DBSnapshot, AWS::RDS::EventSubscription, AWS::ElasticLoadBalancingV2::LoadBalancer, AWS::S3::Bucket, AWS::SSM::ManagedInstanceInventory, AWS::Redshift::Cluster, AWS::Redshift::ClusterSnapshot, AWS::Redshift::ClusterParameterGroup, AWS::Redshift::ClusterSecurityGroup, AWS::Redshift::ClusterSubnetGroup, AWS::Redshift::EventSubscription
       #       }
       # @!attribute [rw] all_supported
       #   Specifies whether AWS Config records configuration changes for every
@@ -1959,8 +1989,8 @@ module Aws
       #   data as a hash:
       #
       #       {
-      #         owner: "CUSTOM_LAMBDA", # accepts CUSTOM_LAMBDA, AWS
-      #         source_identifier: "StringWithCharLimit256",
+      #         owner: "CUSTOM_LAMBDA", # required, accepts CUSTOM_LAMBDA, AWS
+      #         source_identifier: "StringWithCharLimit256", # required
       #         source_details: [
       #           {
       #             event_source: "aws.config", # accepts aws.config

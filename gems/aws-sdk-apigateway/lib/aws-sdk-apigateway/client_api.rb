@@ -36,6 +36,8 @@ module Aws
       CreateAuthorizerRequest = Shapes::StructureShape.new(name: 'CreateAuthorizerRequest')
       CreateBasePathMappingRequest = Shapes::StructureShape.new(name: 'CreateBasePathMappingRequest')
       CreateDeploymentRequest = Shapes::StructureShape.new(name: 'CreateDeploymentRequest')
+      CreateDocumentationPartRequest = Shapes::StructureShape.new(name: 'CreateDocumentationPartRequest')
+      CreateDocumentationVersionRequest = Shapes::StructureShape.new(name: 'CreateDocumentationVersionRequest')
       CreateDomainNameRequest = Shapes::StructureShape.new(name: 'CreateDomainNameRequest')
       CreateModelRequest = Shapes::StructureShape.new(name: 'CreateModelRequest')
       CreateResourceRequest = Shapes::StructureShape.new(name: 'CreateResourceRequest')
@@ -48,6 +50,8 @@ module Aws
       DeleteBasePathMappingRequest = Shapes::StructureShape.new(name: 'DeleteBasePathMappingRequest')
       DeleteClientCertificateRequest = Shapes::StructureShape.new(name: 'DeleteClientCertificateRequest')
       DeleteDeploymentRequest = Shapes::StructureShape.new(name: 'DeleteDeploymentRequest')
+      DeleteDocumentationPartRequest = Shapes::StructureShape.new(name: 'DeleteDocumentationPartRequest')
+      DeleteDocumentationVersionRequest = Shapes::StructureShape.new(name: 'DeleteDocumentationVersionRequest')
       DeleteDomainNameRequest = Shapes::StructureShape.new(name: 'DeleteDomainNameRequest')
       DeleteIntegrationRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationRequest')
       DeleteIntegrationResponseRequest = Shapes::StructureShape.new(name: 'DeleteIntegrationResponseRequest')
@@ -61,6 +65,14 @@ module Aws
       DeleteUsagePlanRequest = Shapes::StructureShape.new(name: 'DeleteUsagePlanRequest')
       Deployment = Shapes::StructureShape.new(name: 'Deployment')
       Deployments = Shapes::StructureShape.new(name: 'Deployments')
+      DocumentationPart = Shapes::StructureShape.new(name: 'DocumentationPart')
+      DocumentationPartIds = Shapes::StructureShape.new(name: 'DocumentationPartIds')
+      DocumentationPartLocation = Shapes::StructureShape.new(name: 'DocumentationPartLocation')
+      DocumentationPartLocationStatusCode = Shapes::StringShape.new(name: 'DocumentationPartLocationStatusCode')
+      DocumentationPartType = Shapes::StringShape.new(name: 'DocumentationPartType')
+      DocumentationParts = Shapes::StructureShape.new(name: 'DocumentationParts')
+      DocumentationVersion = Shapes::StructureShape.new(name: 'DocumentationVersion')
+      DocumentationVersions = Shapes::StructureShape.new(name: 'DocumentationVersions')
       DomainName = Shapes::StructureShape.new(name: 'DomainName')
       DomainNames = Shapes::StructureShape.new(name: 'DomainNames')
       Double = Shapes::FloatShape.new(name: 'Double')
@@ -79,6 +91,10 @@ module Aws
       GetClientCertificatesRequest = Shapes::StructureShape.new(name: 'GetClientCertificatesRequest')
       GetDeploymentRequest = Shapes::StructureShape.new(name: 'GetDeploymentRequest')
       GetDeploymentsRequest = Shapes::StructureShape.new(name: 'GetDeploymentsRequest')
+      GetDocumentationPartRequest = Shapes::StructureShape.new(name: 'GetDocumentationPartRequest')
+      GetDocumentationPartsRequest = Shapes::StructureShape.new(name: 'GetDocumentationPartsRequest')
+      GetDocumentationVersionRequest = Shapes::StructureShape.new(name: 'GetDocumentationVersionRequest')
+      GetDocumentationVersionsRequest = Shapes::StructureShape.new(name: 'GetDocumentationVersionsRequest')
       GetDomainNameRequest = Shapes::StructureShape.new(name: 'GetDomainNameRequest')
       GetDomainNamesRequest = Shapes::StructureShape.new(name: 'GetDomainNamesRequest')
       GetExportRequest = Shapes::StructureShape.new(name: 'GetExportRequest')
@@ -102,6 +118,7 @@ module Aws
       GetUsagePlansRequest = Shapes::StructureShape.new(name: 'GetUsagePlansRequest')
       GetUsageRequest = Shapes::StructureShape.new(name: 'GetUsageRequest')
       ImportApiKeysRequest = Shapes::StructureShape.new(name: 'ImportApiKeysRequest')
+      ImportDocumentationPartsRequest = Shapes::StructureShape.new(name: 'ImportDocumentationPartsRequest')
       ImportRestApiRequest = Shapes::StructureShape.new(name: 'ImportRestApiRequest')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       Integration = Shapes::StructureShape.new(name: 'Integration')
@@ -115,6 +132,8 @@ module Aws
       ListOfBasePathMapping = Shapes::ListShape.new(name: 'ListOfBasePathMapping')
       ListOfClientCertificate = Shapes::ListShape.new(name: 'ListOfClientCertificate')
       ListOfDeployment = Shapes::ListShape.new(name: 'ListOfDeployment')
+      ListOfDocumentationPart = Shapes::ListShape.new(name: 'ListOfDocumentationPart')
+      ListOfDocumentationVersion = Shapes::ListShape.new(name: 'ListOfDocumentationVersion')
       ListOfDomainName = Shapes::ListShape.new(name: 'ListOfDomainName')
       ListOfLong = Shapes::ListShape.new(name: 'ListOfLong')
       ListOfModel = Shapes::ListShape.new(name: 'ListOfModel')
@@ -186,6 +205,8 @@ module Aws
       UpdateBasePathMappingRequest = Shapes::StructureShape.new(name: 'UpdateBasePathMappingRequest')
       UpdateClientCertificateRequest = Shapes::StructureShape.new(name: 'UpdateClientCertificateRequest')
       UpdateDeploymentRequest = Shapes::StructureShape.new(name: 'UpdateDeploymentRequest')
+      UpdateDocumentationPartRequest = Shapes::StructureShape.new(name: 'UpdateDocumentationPartRequest')
+      UpdateDocumentationVersionRequest = Shapes::StructureShape.new(name: 'UpdateDocumentationVersionRequest')
       UpdateDomainNameRequest = Shapes::StructureShape.new(name: 'UpdateDomainNameRequest')
       UpdateIntegrationRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationRequest')
       UpdateIntegrationResponseRequest = Shapes::StructureShape.new(name: 'UpdateIntegrationResponseRequest')
@@ -212,6 +233,7 @@ module Aws
       ApiKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
       ApiKey.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
       ApiKey.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+      ApiKey.add_member(:customer_id, Shapes::ShapeRef.new(shape: String, location_name: "customerId"))
       ApiKey.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       ApiKey.add_member(:enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "enabled"))
       ApiKey.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
@@ -274,6 +296,7 @@ module Aws
       CreateApiKeyRequest.add_member(:generate_distinct_id, Shapes::ShapeRef.new(shape: Boolean, location_name: "generateDistinctId"))
       CreateApiKeyRequest.add_member(:value, Shapes::ShapeRef.new(shape: String, location_name: "value"))
       CreateApiKeyRequest.add_member(:stage_keys, Shapes::ShapeRef.new(shape: ListOfStageKeys, location_name: "stageKeys"))
+      CreateApiKeyRequest.add_member(:customer_id, Shapes::ShapeRef.new(shape: String, location_name: "customerId"))
       CreateApiKeyRequest.struct_class = Types::CreateApiKeyRequest
 
       CreateAuthorizerRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
@@ -303,6 +326,17 @@ module Aws
       CreateDeploymentRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
       CreateDeploymentRequest.struct_class = Types::CreateDeploymentRequest
 
+      CreateDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      CreateDocumentationPartRequest.add_member(:location, Shapes::ShapeRef.new(shape: DocumentationPartLocation, required: true, location_name: "location"))
+      CreateDocumentationPartRequest.add_member(:properties, Shapes::ShapeRef.new(shape: String, required: true, location_name: "properties"))
+      CreateDocumentationPartRequest.struct_class = Types::CreateDocumentationPartRequest
+
+      CreateDocumentationVersionRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      CreateDocumentationVersionRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, required: true, location_name: "documentationVersion"))
+      CreateDocumentationVersionRequest.add_member(:stage_name, Shapes::ShapeRef.new(shape: String, location_name: "stageName"))
+      CreateDocumentationVersionRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+      CreateDocumentationVersionRequest.struct_class = Types::CreateDocumentationVersionRequest
+
       CreateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "domainName"))
       CreateDomainNameRequest.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificateName"))
       CreateDomainNameRequest.add_member(:certificate_body, Shapes::ShapeRef.new(shape: String, required: true, location_name: "certificateBody"))
@@ -324,6 +358,7 @@ module Aws
 
       CreateRestApiRequest.add_member(:name, Shapes::ShapeRef.new(shape: String, required: true, location_name: "name"))
       CreateRestApiRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+      CreateRestApiRequest.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
       CreateRestApiRequest.add_member(:clone_from, Shapes::ShapeRef.new(shape: String, location_name: "cloneFrom"))
       CreateRestApiRequest.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
       CreateRestApiRequest.struct_class = Types::CreateRestApiRequest
@@ -335,6 +370,7 @@ module Aws
       CreateStageRequest.add_member(:cache_cluster_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "cacheClusterEnabled"))
       CreateStageRequest.add_member(:cache_cluster_size, Shapes::ShapeRef.new(shape: CacheClusterSize, location_name: "cacheClusterSize"))
       CreateStageRequest.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
+      CreateStageRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
       CreateStageRequest.struct_class = Types::CreateStageRequest
 
       CreateUsagePlanKeyRequest.add_member(:usage_plan_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "usageplanId"))
@@ -366,6 +402,14 @@ module Aws
       DeleteDeploymentRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
       DeleteDeploymentRequest.add_member(:deployment_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "deployment_id"))
       DeleteDeploymentRequest.struct_class = Types::DeleteDeploymentRequest
+
+      DeleteDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      DeleteDocumentationPartRequest.add_member(:documentation_part_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "part_id"))
+      DeleteDocumentationPartRequest.struct_class = Types::DeleteDocumentationPartRequest
+
+      DeleteDocumentationVersionRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      DeleteDocumentationVersionRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "doc_version"))
+      DeleteDocumentationVersionRequest.struct_class = Types::DeleteDocumentationVersionRequest
 
       DeleteDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
       DeleteDomainNameRequest.struct_class = Types::DeleteDomainNameRequest
@@ -423,6 +467,35 @@ module Aws
       Deployments.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
       Deployments.add_member(:items, Shapes::ShapeRef.new(shape: ListOfDeployment, location_name: "item"))
       Deployments.struct_class = Types::Deployments
+
+      DocumentationPart.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
+      DocumentationPart.add_member(:location, Shapes::ShapeRef.new(shape: DocumentationPartLocation, location_name: "location"))
+      DocumentationPart.add_member(:properties, Shapes::ShapeRef.new(shape: String, location_name: "properties"))
+      DocumentationPart.struct_class = Types::DocumentationPart
+
+      DocumentationPartIds.add_member(:ids, Shapes::ShapeRef.new(shape: ListOfString, location_name: "ids"))
+      DocumentationPartIds.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
+      DocumentationPartIds.struct_class = Types::DocumentationPartIds
+
+      DocumentationPartLocation.add_member(:type, Shapes::ShapeRef.new(shape: DocumentationPartType, required: true, location_name: "type"))
+      DocumentationPartLocation.add_member(:path, Shapes::ShapeRef.new(shape: String, location_name: "path"))
+      DocumentationPartLocation.add_member(:method, Shapes::ShapeRef.new(shape: String, location_name: "method"))
+      DocumentationPartLocation.add_member(:status_code, Shapes::ShapeRef.new(shape: DocumentationPartLocationStatusCode, location_name: "statusCode"))
+      DocumentationPartLocation.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
+      DocumentationPartLocation.struct_class = Types::DocumentationPartLocation
+
+      DocumentationParts.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+      DocumentationParts.add_member(:items, Shapes::ShapeRef.new(shape: ListOfDocumentationPart, location_name: "item"))
+      DocumentationParts.struct_class = Types::DocumentationParts
+
+      DocumentationVersion.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
+      DocumentationVersion.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+      DocumentationVersion.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
+      DocumentationVersion.struct_class = Types::DocumentationVersion
+
+      DocumentationVersions.add_member(:position, Shapes::ShapeRef.new(shape: String, location_name: "position"))
+      DocumentationVersions.add_member(:items, Shapes::ShapeRef.new(shape: ListOfDocumentationVersion, location_name: "item"))
+      DocumentationVersions.struct_class = Types::DocumentationVersions
 
       DomainName.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, location_name: "domainName"))
       DomainName.add_member(:certificate_name, Shapes::ShapeRef.new(shape: String, location_name: "certificateName"))
@@ -498,6 +571,27 @@ module Aws
       GetDeploymentsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
       GetDeploymentsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
       GetDeploymentsRequest.struct_class = Types::GetDeploymentsRequest
+
+      GetDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      GetDocumentationPartRequest.add_member(:documentation_part_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "part_id"))
+      GetDocumentationPartRequest.struct_class = Types::GetDocumentationPartRequest
+
+      GetDocumentationPartsRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      GetDocumentationPartsRequest.add_member(:type, Shapes::ShapeRef.new(shape: DocumentationPartType, location: "querystring", location_name: "type"))
+      GetDocumentationPartsRequest.add_member(:name_query, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "name"))
+      GetDocumentationPartsRequest.add_member(:path, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "path"))
+      GetDocumentationPartsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+      GetDocumentationPartsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetDocumentationPartsRequest.struct_class = Types::GetDocumentationPartsRequest
+
+      GetDocumentationVersionRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      GetDocumentationVersionRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "doc_version"))
+      GetDocumentationVersionRequest.struct_class = Types::GetDocumentationVersionRequest
+
+      GetDocumentationVersionsRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      GetDocumentationVersionsRequest.add_member(:position, Shapes::ShapeRef.new(shape: String, location: "querystring", location_name: "position"))
+      GetDocumentationVersionsRequest.add_member(:limit, Shapes::ShapeRef.new(shape: NullableInteger, location: "querystring", location_name: "limit"))
+      GetDocumentationVersionsRequest.struct_class = Types::GetDocumentationVersionsRequest
 
       GetDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
       GetDomainNameRequest.struct_class = Types::GetDomainNameRequest
@@ -612,6 +706,14 @@ module Aws
       ImportApiKeysRequest[:payload] = :body
       ImportApiKeysRequest[:payload_member] = ImportApiKeysRequest.member(:body)
 
+      ImportDocumentationPartsRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      ImportDocumentationPartsRequest.add_member(:mode, Shapes::ShapeRef.new(shape: PutMode, location: "querystring", location_name: "mode"))
+      ImportDocumentationPartsRequest.add_member(:fail_on_warnings, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "failonwarnings"))
+      ImportDocumentationPartsRequest.add_member(:body, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "body"))
+      ImportDocumentationPartsRequest.struct_class = Types::ImportDocumentationPartsRequest
+      ImportDocumentationPartsRequest[:payload] = :body
+      ImportDocumentationPartsRequest[:payload_member] = ImportDocumentationPartsRequest.member(:body)
+
       ImportRestApiRequest.add_member(:fail_on_warnings, Shapes::ShapeRef.new(shape: Boolean, location: "querystring", location_name: "failonwarnings"))
       ImportRestApiRequest.add_member(:parameters, Shapes::ShapeRef.new(shape: MapOfStringToString, location: "querystring", location_name: "parameters"))
       ImportRestApiRequest.add_member(:body, Shapes::ShapeRef.new(shape: Blob, required: true, location_name: "body"))
@@ -652,6 +754,10 @@ module Aws
       ListOfClientCertificate.member = Shapes::ShapeRef.new(shape: ClientCertificate)
 
       ListOfDeployment.member = Shapes::ShapeRef.new(shape: Deployment)
+
+      ListOfDocumentationPart.member = Shapes::ShapeRef.new(shape: DocumentationPart)
+
+      ListOfDocumentationVersion.member = Shapes::ShapeRef.new(shape: DocumentationVersion)
 
       ListOfDomainName.member = Shapes::ShapeRef.new(shape: DomainName)
 
@@ -830,6 +936,7 @@ module Aws
       RestApi.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "name"))
       RestApi.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "description"))
       RestApi.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
+      RestApi.add_member(:version, Shapes::ShapeRef.new(shape: String, location_name: "version"))
       RestApi.add_member(:warnings, Shapes::ShapeRef.new(shape: ListOfString, location_name: "warnings"))
       RestApi.add_member(:binary_media_types, Shapes::ShapeRef.new(shape: ListOfString, location_name: "binaryMediaTypes"))
       RestApi.struct_class = Types::RestApi
@@ -854,6 +961,7 @@ module Aws
       Stage.add_member(:cache_cluster_status, Shapes::ShapeRef.new(shape: CacheClusterStatus, location_name: "cacheClusterStatus"))
       Stage.add_member(:method_settings, Shapes::ShapeRef.new(shape: MapOfMethodSettings, location_name: "methodSettings"))
       Stage.add_member(:variables, Shapes::ShapeRef.new(shape: MapOfStringToString, location_name: "variables"))
+      Stage.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, location_name: "documentationVersion"))
       Stage.add_member(:created_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "createdDate"))
       Stage.add_member(:last_updated_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "lastUpdatedDate"))
       Stage.struct_class = Types::Stage
@@ -933,6 +1041,16 @@ module Aws
       UpdateDeploymentRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
       UpdateDeploymentRequest.struct_class = Types::UpdateDeploymentRequest
 
+      UpdateDocumentationPartRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      UpdateDocumentationPartRequest.add_member(:documentation_part_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "part_id"))
+      UpdateDocumentationPartRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+      UpdateDocumentationPartRequest.struct_class = Types::UpdateDocumentationPartRequest
+
+      UpdateDocumentationVersionRequest.add_member(:rest_api_id, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "restapi_id"))
+      UpdateDocumentationVersionRequest.add_member(:documentation_version, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "doc_version"))
+      UpdateDocumentationVersionRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
+      UpdateDocumentationVersionRequest.struct_class = Types::UpdateDocumentationVersionRequest
+
       UpdateDomainNameRequest.add_member(:domain_name, Shapes::ShapeRef.new(shape: String, required: true, location: "uri", location_name: "domain_name"))
       UpdateDomainNameRequest.add_member(:patch_operations, Shapes::ShapeRef.new(shape: ListOfPatchOperation, location_name: "patchOperations"))
       UpdateDomainNameRequest.struct_class = Types::UpdateDomainNameRequest
@@ -1004,6 +1122,7 @@ module Aws
       UsagePlan.add_member(:api_stages, Shapes::ShapeRef.new(shape: ListOfApiStage, location_name: "apiStages"))
       UsagePlan.add_member(:throttle, Shapes::ShapeRef.new(shape: ThrottleSettings, location_name: "throttle"))
       UsagePlan.add_member(:quota, Shapes::ShapeRef.new(shape: QuotaSettings, location_name: "quota"))
+      UsagePlan.add_member(:product_code, Shapes::ShapeRef.new(shape: String, location_name: "productCode"))
       UsagePlan.struct_class = Types::UsagePlan
 
       UsagePlanKey.add_member(:id, Shapes::ShapeRef.new(shape: String, location_name: "id"))
@@ -1086,6 +1205,34 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        end)
+
+        api.add_operation(:create_documentation_part, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateDocumentationPart"
+          o.http_method = "POST"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts"
+          o.input = Shapes::ShapeRef.new(shape: CreateDocumentationPartRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:create_documentation_version, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateDocumentationVersion"
+          o.http_method = "POST"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/versions"
+          o.input = Shapes::ShapeRef.new(shape: CreateDocumentationVersionRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationVersion)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
         api.add_operation(:create_domain_name, Seahorse::Model::Operation.new.tap do |o|
@@ -1237,6 +1384,32 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
           o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:delete_documentation_part, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteDocumentationPart"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts/{part_id}"
+          o.input = Shapes::ShapeRef.new(shape: DeleteDocumentationPartRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+        end)
+
+        api.add_operation(:delete_documentation_version, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteDocumentationVersion"
+          o.http_method = "DELETE"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/versions/{doc_version}"
+          o.input = Shapes::ShapeRef.new(shape: DeleteDocumentationVersionRequest)
+          o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
@@ -1559,6 +1732,52 @@ module Aws
           )
         end)
 
+        api.add_operation(:get_documentation_part, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetDocumentationPart"
+          o.http_method = "GET"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts/{part_id}"
+          o.input = Shapes::ShapeRef.new(shape: GetDocumentationPartRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:get_documentation_parts, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetDocumentationParts"
+          o.http_method = "GET"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts"
+          o.input = Shapes::ShapeRef.new(shape: GetDocumentationPartsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationParts)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:get_documentation_version, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetDocumentationVersion"
+          o.http_method = "GET"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/versions/{doc_version}"
+          o.input = Shapes::ShapeRef.new(shape: GetDocumentationVersionRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationVersion)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:get_documentation_versions, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetDocumentationVersions"
+          o.http_method = "GET"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/versions"
+          o.input = Shapes::ShapeRef.new(shape: GetDocumentationVersionsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationVersions)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
         api.add_operation(:get_domain_name, Seahorse::Model::Operation.new.tap do |o|
           o.name = "GetDomainName"
           o.http_method = "GET"
@@ -1869,6 +2088,19 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: ConflictException)
         end)
 
+        api.add_operation(:import_documentation_parts, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ImportDocumentationParts"
+          o.http_method = "PUT"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts"
+          o.input = Shapes::ShapeRef.new(shape: ImportDocumentationPartsRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationPartIds)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
         api.add_operation(:import_rest_api, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ImportRestApi"
           o.http_method = "POST"
@@ -2048,6 +2280,33 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: ServiceUnavailableException)
+        end)
+
+        api.add_operation(:update_documentation_part, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateDocumentationPart"
+          o.http_method = "PATCH"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/parts/{part_id}"
+          o.input = Shapes::ShapeRef.new(shape: UpdateDocumentationPartRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationPart)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: LimitExceededException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+        end)
+
+        api.add_operation(:update_documentation_version, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateDocumentationVersion"
+          o.http_method = "PATCH"
+          o.http_request_uri = "/restapis/{restapi_id}/documentation/versions/{doc_version}"
+          o.input = Shapes::ShapeRef.new(shape: UpdateDocumentationVersionRequest)
+          o.output = Shapes::ShapeRef.new(shape: DocumentationVersion)
+          o.errors << Shapes::ShapeRef.new(shape: UnauthorizedException)
+          o.errors << Shapes::ShapeRef.new(shape: NotFoundException)
+          o.errors << Shapes::ShapeRef.new(shape: ConflictException)
+          o.errors << Shapes::ShapeRef.new(shape: BadRequestException)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
         end)
 
         api.add_operation(:update_domain_name, Seahorse::Model::Operation.new.tap do |o|

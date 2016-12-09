@@ -134,20 +134,19 @@ module Aws
 
       # @!group API Operations
 
-      # Purchases Convertible Reserved Instance offerings described in the
-      # GetReservedInstancesExchangeQuote call.
+      # Accepts the Convertible Reserved Instance exchange quote described in
+      # the GetReservedInstancesExchangeQuote call.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, Array<String>] :reserved_instance_ids
-      #   The IDs of the Convertible Reserved Instances that you want to
-      #   exchange for other Convertible Reserved Instances of the same or
-      #   higher value.
+      #   The IDs of the Convertible Reserved Instances to exchange for other
+      #   Convertible Reserved Instances of the same or higher value.
       # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
-      #   The configurations of the Convertible Reserved Instance offerings you
-      #   are purchasing in this exchange.
+      #   The configurations of the Convertible Reserved Instance offerings that
+      #   you are purchasing in this exchange.
       # @return [Types::AcceptReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::AcceptReservedInstancesExchangeQuoteResult#exchange_id #ExchangeId} => String
@@ -199,6 +198,8 @@ module Aws
       #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -206,6 +207,8 @@ module Aws
       #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -309,6 +312,52 @@ module Aws
       # @param [Hash] params ({})
       def allocate_hosts(params = {}, options = {})
         req = build_request(:allocate_hosts, params)
+        req.send_request(options)
+      end
+
+      # Assigns one or more IPv6 addresses to the specified network interface.
+      # You can specify one or more specific IPv6 addresses, or you can
+      # specify the number of IPv6 addresses to be automatically assigned from
+      # within the subnet's IPv6 CIDR block range. You can assign as many
+      # IPv6 addresses to a network interface as you can assign private IPv4
+      # addresses, and the limit varies per instance type. For information,
+      # see [IP Addresses Per Network Interface Per Instance Type][1] in the
+      # *Amazon Elastic Compute Cloud User Guide*.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+      # @option params [required, String] :network_interface_id
+      #   The ID of the network interface.
+      # @option params [Array<String>] :ipv_6_addresses
+      #   One or more specific IPv6 addresses to be assigned to the network
+      #   interface. You can't use this option if you're specifying a number
+      #   of IPv6 addresses.
+      # @option params [Integer] :ipv_6_address_count
+      #   The number of IPv6 addresses to assign to the network interface.
+      #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+      #   range. You can't use this option if specifying specific IPv6
+      #   addresses.
+      # @return [Types::AssignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::AssignIpv6AddressesResult#network_interface_id #NetworkInterfaceId} => String
+      #   * {Types::AssignIpv6AddressesResult#assigned_ipv_6_addresses #AssignedIpv6Addresses} => Array&lt;String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.assign_ipv_6_addresses({
+      #     network_interface_id: "String", # required
+      #     ipv_6_addresses: ["String"],
+      #     ipv_6_address_count: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.network_interface_id #=> String
+      #   resp.assigned_ipv_6_addresses #=> Array
+      #   resp.assigned_ipv_6_addresses[0] #=> String
+      # @overload assign_ipv_6_addresses(params = {})
+      # @param [Hash] params ({})
+      def assign_ipv_6_addresses(params = {}, options = {})
+        req = build_request(:assign_ipv_6_addresses, params)
         req.send_request(options)
       end
 
@@ -523,6 +572,71 @@ module Aws
       # @param [Hash] params ({})
       def associate_route_table(params = {}, options = {})
         req = build_request(:associate_route_table, params)
+        req.send_request(options)
+      end
+
+      # Associates a CIDR block with your subnet. You can only associate a
+      # single IPv6 CIDR block with your subnet. An IPv6 CIDR block must have
+      # a prefix length of /64.
+      # @option params [required, String] :subnet_id
+      #   The ID of your subnet.
+      # @option params [required, String] :ipv_6_cidr_block
+      #   The IPv6 CIDR block for your subnet. The subnet must have a /64 prefix
+      #   length.
+      # @return [Types::AssociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::AssociateSubnetCidrBlockResult#subnet_id #SubnetId} => String
+      #   * {Types::AssociateSubnetCidrBlockResult#ipv_6_cidr_block_association #Ipv6CidrBlockAssociation} => Types::SubnetIpv6CidrBlockAssociation
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.associate_subnet_cidr_block({
+      #     subnet_id: "String", # required
+      #     ipv_6_cidr_block: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.subnet_id #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+      #   resp.ipv_6_cidr_block_association.association_id #=> String
+      # @overload associate_subnet_cidr_block(params = {})
+      # @param [Hash] params ({})
+      def associate_subnet_cidr_block(params = {}, options = {})
+        req = build_request(:associate_subnet_cidr_block, params)
+        req.send_request(options)
+      end
+
+      # Associates a CIDR block with your VPC. You can only associate a single
+      # Amazon-provided IPv6 CIDR block with your VPC. The IPv6 CIDR block
+      # size is fixed at /56.
+      # @option params [required, String] :vpc_id
+      #   The ID of the VPC.
+      # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
+      #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+      #   for the VPC. You cannot specify the range of IPv6 addresses, or the
+      #   size of the CIDR block.
+      # @return [Types::AssociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::AssociateVpcCidrBlockResult#vpc_id #VpcId} => String
+      #   * {Types::AssociateVpcCidrBlockResult#ipv_6_cidr_block_association #Ipv6CidrBlockAssociation} => Types::VpcIpv6CidrBlockAssociation
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.associate_vpc_cidr_block({
+      #     vpc_id: "String", # required
+      #     amazon_provided_ipv_6_cidr_block: false,
+      #   })
+      #
+      # @example Response structure
+      #   resp.vpc_id #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+      #   resp.ipv_6_cidr_block_association.association_id #=> String
+      # @overload associate_vpc_cidr_block(params = {})
+      # @param [Hash] params ({})
+      def associate_vpc_cidr_block(params = {}, options = {})
+        req = build_request(:associate_vpc_cidr_block, params)
         req.send_request(options)
       end
 
@@ -759,14 +873,12 @@ module Aws
 
       # \[EC2-VPC only\] Adds one or more egress rules to a security group for
       # use with a VPC. Specifically, this action permits instances to send
-      # traffic to one or more destination CIDR IP address ranges, or to one
-      # or more destination security groups for the same VPC. This action
-      # doesn't apply to security groups for use in EC2-Classic. For more
-      # information, see [Security Groups for Your VPC][1] in the *Amazon
-      # Virtual Private Cloud User Guide*.
-      #
-      # You can have up to 50 rules per security group (covering both ingress
-      # and egress rules).
+      # traffic to one or more destination IPv4 or IPv6 CIDR address ranges,
+      # or to one or more destination security groups for the same VPC. This
+      # action doesn't apply to security groups for use in EC2-Classic. For
+      # more information, see [Security Groups for Your VPC][1] in the *Amazon
+      # Virtual Private Cloud User Guide*. For more information about security
+      # group limits, see [Amazon VPC Limits][2].
       #
       # Each rule consists of the protocol (for example, TCP), plus either a
       # CIDR range or a source group. For the TCP and UDP protocols, you must
@@ -780,6 +892,7 @@ module Aws
       #
       #
       # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_SecurityGroups.html
+      # [2]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -807,7 +920,7 @@ module Aws
       #   number. We recommend that you specify the port range in a set of IP
       #   permissions instead.
       # @option params [String] :cidr_ip
-      #   The CIDR IP address range. We recommend that you specify the CIDR
+      #   The CIDR IPv4 address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       # @option params [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. You can't specify a destination security
@@ -844,6 +957,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -861,25 +979,26 @@ module Aws
 
       # Adds one or more ingress rules to a security group.
       #
-      # EC2-Classic: You can have up to 100 rules per group.
-      #
-      #  EC2-VPC: You can have up to 50 rules per group (covering both ingress
-      # and egress rules).
-      #
       # Rule changes are propagated to instances within the security group as
       # quickly as possible. However, a small delay might occur.
       #
-      # \[EC2-Classic\] This action gives one or more CIDR IP address ranges
+      # \[EC2-Classic\] This action gives one or more IPv4 CIDR address ranges
       # permission to access a security group in your account, or gives one or
       # more security groups (called the *source groups*) permission to access
       # a security group for your account. A source group can be for your own
-      # AWS account, or another.
+      # AWS account, or another. You can have up to 100 rules per group.
       #
-      # \[EC2-VPC\] This action gives one or more CIDR IP address ranges
-      # permission to access a security group in your VPC, or gives one or
-      # more other security groups (called the *source groups*) permission to
-      # access a security group for your VPC. The security groups must all be
-      # for the same VPC.
+      # \[EC2-VPC\] This action gives one or more IPv4 or IPv6 CIDR address
+      # ranges permission to access a security group in your VPC, or gives one
+      # or more other security groups (called the *source groups*) permission
+      # to access a security group for your VPC. The security groups must all
+      # be for the same VPC or a peer VPC in a VPC peering connection. For
+      # more information about VPC security group limits, see [Amazon VPC
+      # Limits][1].
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/AmazonVPC/latest/UserGuide/VPC_Appendix_Limits.html
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -907,22 +1026,26 @@ module Aws
       #   protocol and port range, use a set of IP permissions instead.
       # @option params [String] :ip_protocol
       #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-      #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
-      #   specify `-1`, traffic on all ports is allowed, regardless of any ports
-      #   you specify.
+      #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
+      #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`, or
+      #   `58` (ICMPv6), traffic on all ports is allowed, regardless of any
+      #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
+      #   port range. For protocol `58` (ICMPv6), you can optionally specify a
+      #   port range; if you don't, traffic for all types and codes is allowed.
       #
       #
       #
       #   [1]: http://www.iana.org/assignments/protocol-numbers/protocol-numbers.xhtml
       # @option params [Integer] :from_port
-      #   The start of port range for the TCP and UDP protocols, or an ICMP type
-      #   number. For the ICMP type number, use `-1` to specify all ICMP types.
+      #   The start of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1` to
+      #   specify all types.
       # @option params [Integer] :to_port
-      #   The end of port range for the TCP and UDP protocols, or an ICMP code
-      #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-      #   for the ICMP type.
+      #   The end of port range for the TCP and UDP protocols, or an ICMP/ICMPv6
+      #   code number. For the ICMP/ICMPv6 code number, use `-1` to specify all
+      #   codes.
       # @option params [String] :cidr_ip
-      #   The CIDR IP address range. You can't specify this parameter when
+      #   The CIDR IPv4 address range. You can't specify this parameter when
       #   specifying a source security group.
       # @option params [Array<Types::IpPermission>] :ip_permissions
       #   A set of IP permissions. Can be used to specify multiple rules in a
@@ -958,6 +1081,11 @@ module Aws
       #         ip_ranges: [
       #           {
       #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
       #           },
       #         ],
       #         prefix_list_ids: [
@@ -1736,6 +1864,52 @@ module Aws
         req.send_request(options)
       end
 
+      # \[IPv6 only\] Creates an egress-only Internet gateway for your VPC. An
+      # egress-only Internet gateway is used to enable outbound communication
+      # over IPv6 from instances in your VPC to the Internet, and prevents
+      # hosts outside of your VPC from initiating an IPv6 connection with your
+      # instance.
+      # @option params [Boolean] :dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option params [required, String] :vpc_id
+      #   The ID of the VPC for which to create the egress-only Internet
+      #   gateway.
+      # @option params [String] :client_token
+      #   Unique, case-sensitive identifier you provide to ensure the
+      #   idempotency of the request. For more information, see [How to Ensure
+      #   Idempotency][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+      # @return [Types::CreateEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateEgressOnlyInternetGatewayResult#egress_only_internet_gateway #EgressOnlyInternetGateway} => Types::EgressOnlyInternetGateway
+      #   * {Types::CreateEgressOnlyInternetGatewayResult#client_token #ClientToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_egress_only_internet_gateway({
+      #     dry_run: false,
+      #     vpc_id: "String", # required
+      #     client_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.egress_only_internet_gateway.egress_only_internet_gateway_id #=> String
+      #   resp.egress_only_internet_gateway.attachments #=> Array
+      #   resp.egress_only_internet_gateway.attachments[0].vpc_id #=> String
+      #   resp.egress_only_internet_gateway.attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
+      #   resp.client_token #=> String
+      # @overload create_egress_only_internet_gateway(params = {})
+      # @param [Hash] params ({})
+      def create_egress_only_internet_gateway(params = {}, options = {})
+        req = build_request(:create_egress_only_internet_gateway, params)
+        req.send_request(options)
+      end
+
       # Creates one or more flow logs to capture IP traffic for a specific
       # network interface, subnet, or VPC. Flow logs are delivered to a
       # specified log group in Amazon CloudWatch Logs. If you specify a VPC or
@@ -1789,9 +1963,9 @@ module Aws
       #   resp.flow_log_ids[0] #=> String
       #   resp.client_token #=> String
       #   resp.unsuccessful #=> Array
+      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
-      #   resp.unsuccessful[0].resource_id #=> String
       # @overload create_flow_logs(params = {})
       # @param [Hash] params ({})
       def create_flow_logs(params = {}, options = {})
@@ -2118,6 +2292,7 @@ module Aws
       #   resp.network_acl.entries[0].rule_action #=> String, one of "allow", "deny"
       #   resp.network_acl.entries[0].egress #=> Boolean
       #   resp.network_acl.entries[0].cidr_block #=> String
+      #   resp.network_acl.entries[0].ipv_6_cidr_block #=> String
       #   resp.network_acl.entries[0].icmp_type_code.type #=> Integer
       #   resp.network_acl.entries[0].icmp_type_code.code #=> Integer
       #   resp.network_acl.entries[0].port_range.from #=> Integer
@@ -2172,18 +2347,29 @@ module Aws
       #   Constraints: Positive integer from 1 to 32766. The range 32767 to
       #   65535 is reserved for internal use.
       # @option params [required, String] :protocol
-      #   The protocol. A value of -1 means all protocols.
+      #   The protocol. A value of `-1` or `all` means all protocols. If you
+      #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`, or
+      #   `icmp`, traffic on all ports is allowed, regardless of any ports or
+      #   ICMP types or codes you specify. If you specify protocol `58` (ICMPv6)
+      #   and specify an IPv4 CIDR block, traffic for all ICMP types and codes
+      #   allowed, regardless of any that you specify. If you specify protocol
+      #   `58` (ICMPv6) and specify an IPv6 CIDR block, you must specify an ICMP
+      #   type and code.
       # @option params [required, String] :rule_action
       #   Indicates whether to allow or deny the traffic that matches the rule.
       # @option params [required, Boolean] :egress
       #   Indicates whether this is an egress rule (rule is applied to traffic
       #   leaving the subnet).
-      # @option params [required, String] :cidr_block
-      #   The network range to allow or deny, in CIDR notation (for example
+      # @option params [String] :cidr_block
+      #   The IPv4 network range to allow or deny, in CIDR notation (for example
       #   `172.16.0.0/24`).
+      # @option params [String] :ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for example
+      #   `2001:db8:1234:1a00::/64`).
       # @option params [Types::IcmpTypeCode] :icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying ICMP for
-      #   the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
+      #   CIDR block.
       # @option params [Types::PortRange] :port_range
       #   TCP or UDP protocols: The range of ports the rule applies to.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -2196,7 +2382,8 @@ module Aws
       #     protocol: "String", # required
       #     rule_action: "allow", # required, accepts allow, deny
       #     egress: false, # required
-      #     cidr_block: "String", # required
+      #     cidr_block: "String",
+      #     ipv_6_cidr_block: "String",
       #     icmp_type_code: {
       #       type: 1,
       #       code: 1,
@@ -2216,7 +2403,7 @@ module Aws
       # Creates a network interface in the specified subnet.
       #
       # For more information about network interfaces, see [Elastic Network
-      # Interfaces][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      # Interfaces][1] in the *Amazon Virtual Private Cloud User Guide*.
       #
       #
       #
@@ -2226,30 +2413,40 @@ module Aws
       # @option params [String] :description
       #   A description for the network interface.
       # @option params [String] :private_ip_address
-      #   The primary private IP address of the network interface. If you don't
-      #   specify an IP address, Amazon EC2 selects one for you from the subnet
-      #   range. If you specify an IP address, you cannot indicate any IP
-      #   addresses specified in `privateIpAddresses` as primary (only one IP
-      #   address can be designated as primary).
+      #   The primary private IPv4 address of the network interface. If you
+      #   don't specify an IPv4 address, Amazon EC2 selects one for you from
+      #   the subnet's IPv4 CIDR range. If you specify an IP address, you
+      #   cannot indicate any IP addresses specified in `privateIpAddresses` as
+      #   primary (only one IP address can be designated as primary).
       # @option params [Array<String>] :groups
       #   The IDs of one or more security groups.
       # @option params [Array<Types::PrivateIpAddressSpecification>] :private_ip_addresses
-      #   One or more private IP addresses.
+      #   One or more private IPv4 addresses.
       # @option params [Integer] :secondary_private_ip_address_count
-      #   The number of secondary private IP addresses to assign to a network
-      #   interface. When you specify a number of secondary IP addresses, Amazon
-      #   EC2 selects these IP addresses within the subnet range. You can't
-      #   specify this option and specify more than one private IP address using
-      #   `privateIpAddresses`.
+      #   The number of secondary private IPv4 addresses to assign to a network
+      #   interface. When you specify a number of secondary IPv4 addresses,
+      #   Amazon EC2 selects these IP addresses within the subnet's IPv4 CIDR
+      #   range. You can't specify this option and specify more than one
+      #   private IP address using `privateIpAddresses`.
       #
       #   The number of IP addresses you can assign to a network interface
-      #   varies by instance type. For more information, see [Private IP
-      #   Addresses Per ENI Per Instance Type][1] in the *Amazon Elastic Compute
-      #   Cloud User Guide*.
+      #   varies by instance type. For more information, see [IP Addresses Per
+      #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
+      #   Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+      # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+      #   One or more specific IPv6 addresses from the IPv6 CIDR block range of
+      #   your subnet. You can't use this option if you're specifying a number
+      #   of IPv6 addresses.
+      # @option params [Integer] :ipv_6_address_count
+      #   The number of IPv6 addresses to assign to a network interface. Amazon
+      #   EC2 automatically selects the IPv6 addresses from the subnet range.
+      #   You can't use this option if specifying specific IPv6 addresses. If
+      #   your subnet has the `AssignIpv6AddressOnCreation` attribute set to
+      #   `true`, you can specify `0` to override this setting.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
@@ -2272,6 +2469,12 @@ module Aws
       #       },
       #     ],
       #     secondary_private_ip_address_count: 1,
+      #     ipv_6_addresses: [
+      #       {
+      #         ipv_6_address: "String",
+      #       },
+      #     ],
+      #     ipv_6_address_count: 1,
       #     dry_run: false,
       #   })
       #
@@ -2316,6 +2519,8 @@ module Aws
       #   resp.network_interface.private_ip_addresses[0].association.ip_owner_id #=> String
       #   resp.network_interface.private_ip_addresses[0].association.allocation_id #=> String
       #   resp.network_interface.private_ip_addresses[0].association.association_id #=> String
+      #   resp.network_interface.ipv_6_addresses #=> Array
+      #   resp.network_interface.ipv_6_addresses[0].ipv_6_address #=> String
       #   resp.network_interface.interface_type #=> String, one of "interface", "natGateway"
       # @overload create_network_interface(params = {})
       # @param [Hash] params ({})
@@ -2455,11 +2660,12 @@ module Aws
       #
       # You must specify one of the following targets: Internet gateway or
       # virtual private gateway, NAT instance, NAT gateway, VPC peering
-      # connection, or network interface.
+      # connection, network interface, or egress-only Internet gateway.
       #
       # When determining how to route traffic, we use the route with the most
-      # specific match. For example, let's say the traffic is destined for
-      # `192.0.2.3`, and the route table includes the following two routes:
+      # specific match. For example, traffic is destined for the IPv4 address
+      # `192.0.2.3`, and the route table includes the following two IPv4
+      # routes:
       #
       # * `192.0.2.0/24` (goes to some target A)
       #
@@ -2483,12 +2689,17 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, String] :route_table_id
       #   The ID of the route table for the route.
-      # @option params [required, String] :destination_cidr_block
-      #   The CIDR address block used for the destination match. Routing
+      # @option params [String] :destination_cidr_block
+      #   The IPv4 CIDR address block used for the destination match. Routing
       #   decisions are based on the most specific match.
       # @option params [String] :gateway_id
       #   The ID of an Internet gateway or virtual private gateway attached to
       #   your VPC.
+      # @option params [String] :destination_ipv_6_cidr_block
+      #   The IPv6 CIDR block used for the destination match. Routing decisions
+      #   are based on the most specific match.
+      # @option params [String] :egress_only_internet_gateway_id
+      #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
       # @option params [String] :instance_id
       #   The ID of a NAT instance in your VPC. The operation fails if you
       #   specify an instance ID unless exactly one network interface is
@@ -2498,7 +2709,7 @@ module Aws
       # @option params [String] :vpc_peering_connection_id
       #   The ID of a VPC peering connection.
       # @option params [String] :nat_gateway_id
-      #   The ID of a NAT gateway.
+      #   \[IPv4 traffic only\] The ID of a NAT gateway.
       # @return [Types::CreateRouteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateRouteResult#return #Return} => Boolean
@@ -2507,8 +2718,10 @@ module Aws
       #   resp = client.create_route({
       #     dry_run: false,
       #     route_table_id: "String", # required
-      #     destination_cidr_block: "String", # required
+      #     destination_cidr_block: "String",
       #     gateway_id: "String",
+      #     destination_ipv_6_cidr_block: "String",
+      #     egress_only_internet_gateway_id: "String",
       #     instance_id: "String",
       #     network_interface_id: "String",
       #     vpc_peering_connection_id: "String",
@@ -2564,6 +2777,8 @@ module Aws
       #   resp.route_table.routes[0].nat_gateway_id #=> String
       #   resp.route_table.routes[0].state #=> String, one of "active", "blackhole"
       #   resp.route_table.routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
+      #   resp.route_table.routes[0].destination_ipv_6_cidr_block #=> String
+      #   resp.route_table.routes[0].egress_only_internet_gateway_id #=> String
       #   resp.route_table.associations #=> Array
       #   resp.route_table.associations[0].route_table_association_id #=> String
       #   resp.route_table.associations[0].route_table_id #=> String
@@ -2796,12 +3011,16 @@ module Aws
       #
       # When you create each subnet, you provide the VPC ID and the CIDR block
       # you want for the subnet. After you create a subnet, you can't change
-      # its CIDR block. The subnet's CIDR block can be the same as the VPC's
-      # CIDR block (assuming you want only a single subnet in the VPC), or a
-      # subset of the VPC's CIDR block. If you create more than one subnet in
-      # a VPC, the subnets' CIDR blocks must not overlap. The smallest subnet
-      # (and VPC) you can create uses a /28 netmask (16 IP addresses), and the
-      # largest uses a /16 netmask (65,536 IP addresses).
+      # its CIDR block. The subnet's IPv4 CIDR block can be the same as the
+      # VPC's IPv4 CIDR block (assuming you want only a single subnet in the
+      # VPC), or a subset of the VPC's IPv4 CIDR block. If you create more
+      # than one subnet in a VPC, the subnets' CIDR blocks must not overlap.
+      # The smallest IPv4 subnet (and VPC) you can create uses a /28 netmask
+      # (16 IPv4 addresses), and the largest uses a /16 netmask (65,536 IPv4
+      # addresses).
+      #
+      # If you've associated an IPv6 CIDR block with your VPC, you can create
+      # a subnet with an IPv6 CIDR block that uses a /64 prefix length.
       #
       # AWS reserves both the first four and the last IP address in each
       # subnet's CIDR block. They're not available for use.
@@ -2830,8 +3049,11 @@ module Aws
       # @option params [required, String] :vpc_id
       #   The ID of the VPC.
       # @option params [required, String] :cidr_block
-      #   The network range for the subnet, in CIDR notation. For example,
+      #   The IPv4 network range for the subnet, in CIDR notation. For example,
       #   `10.0.0.0/24`.
+      # @option params [String] :ipv_6_cidr_block
+      #   The IPv6 network range for the subnet, in CIDR notation. The subnet
+      #   size must use a /64 prefix length.
       # @option params [String] :availability_zone
       #   The Availability Zone for the subnet.
       #
@@ -2847,6 +3069,7 @@ module Aws
       #     dry_run: false,
       #     vpc_id: "String", # required
       #     cidr_block: "String", # required
+      #     ipv_6_cidr_block: "String",
       #     availability_zone: "String",
       #   })
       #
@@ -2855,6 +3078,12 @@ module Aws
       #   resp.subnet.state #=> String, one of "pending", "available"
       #   resp.subnet.vpc_id #=> String
       #   resp.subnet.cidr_block #=> String
+      #   resp.subnet.ipv_6_cidr_block_association_set #=> Array
+      #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+      #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.subnet.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+      #   resp.subnet.ipv_6_cidr_block_association_set[0].association_id #=> String
+      #   resp.subnet.assign_ipv_6_address_on_creation #=> Boolean
       #   resp.subnet.available_ip_address_count #=> Integer
       #   resp.subnet.availability_zone #=> String
       #   resp.subnet.default_for_az #=> Boolean
@@ -2969,7 +3198,7 @@ module Aws
       # @option params [Integer] :iops
       #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
       #   operations per second (IOPS) to provision for the volume, with a
-      #   maximum ratio of 30 IOPS/GiB.
+      #   maximum ratio of 50 IOPS/GiB.
       #
       #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
       # @option params [Boolean] :encrypted
@@ -3050,12 +3279,16 @@ module Aws
         req.send_request(options)
       end
 
-      # Creates a VPC with the specified CIDR block.
+      # Creates a VPC with the specified IPv4 CIDR block. The smallest VPC you
+      # can create uses a /28 netmask (16 IPv4 addresses), and the largest
+      # uses a /16 netmask (65,536 IPv4 addresses). To help you decide how big
+      # to make your VPC, see [Your VPC and Subnets][1] in the *Amazon Virtual
+      # Private Cloud User Guide*.
       #
-      # The smallest VPC you can create uses a /28 netmask (16 IP addresses),
-      # and the largest uses a /16 netmask (65,536 IP addresses). To help you
-      # decide how big to make your VPC, see [Your VPC and Subnets][1] in the
-      # *Amazon Virtual Private Cloud User Guide*.
+      # You can optionally request an Amazon-provided IPv6 CIDR block for the
+      # VPC. The IPv6 CIDR block uses a /56 prefix length, and is allocated
+      # from Amazon's pool of IPv6 addresses. You cannot choose the IPv6
+      # range for your VPC.
       #
       # By default, each instance you launch in the VPC has the default DHCP
       # options, which includes only a default DNS server that we provide
@@ -3079,7 +3312,7 @@ module Aws
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, String] :cidr_block
-      #   The network range for the VPC, in CIDR notation. For example,
+      #   The IPv4 network range for the VPC, in CIDR notation. For example,
       #   `10.0.0.0/16`.
       # @option params [String] :instance_tenancy
       #   The tenancy options for instances launched into the VPC. For
@@ -3093,6 +3326,10 @@ module Aws
       #   Use the `default` or `dedicated` values only.
       #
       #   Default: `default`
+      # @option params [Boolean] :amazon_provided_ipv_6_cidr_block
+      #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+      #   for the VPC. You cannot specify the range of IP addresses, or the size
+      #   of the CIDR block.
       # @return [Types::CreateVpcResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateVpcResult#vpc #Vpc} => Types::Vpc
@@ -3102,6 +3339,7 @@ module Aws
       #     dry_run: false,
       #     cidr_block: "String", # required
       #     instance_tenancy: "default", # accepts default, dedicated, host
+      #     amazon_provided_ipv_6_cidr_block: false,
       #   })
       #
       # @example Response structure
@@ -3114,6 +3352,11 @@ module Aws
       #   resp.vpc.tags[0].value #=> String
       #   resp.vpc.instance_tenancy #=> String, one of "default", "dedicated", "host"
       #   resp.vpc.is_default #=> Boolean
+      #   resp.vpc.ipv_6_cidr_block_association_set #=> Array
+      #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+      #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.vpc.ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+      #   resp.vpc.ipv_6_cidr_block_association_set[0].association_id #=> String
       # @overload create_vpc(params = {})
       # @param [Hash] params ({})
       def create_vpc(params = {}, options = {})
@@ -3229,6 +3472,8 @@ module Aws
       #   resp.vpc_peering_connection.accepter_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connection.accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connection.accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -3236,6 +3481,8 @@ module Aws
       #   resp.vpc_peering_connection.requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connection.requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connection.requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -3465,6 +3712,33 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes an egress-only Internet gateway.
+      # @option params [Boolean] :dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option params [required, String] :egress_only_internet_gateway_id
+      #   The ID of the egress-only Internet gateway.
+      # @return [Types::DeleteEgressOnlyInternetGatewayResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteEgressOnlyInternetGatewayResult#return_code #ReturnCode} => Boolean
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_egress_only_internet_gateway({
+      #     dry_run: false,
+      #     egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.return_code #=> Boolean
+      # @overload delete_egress_only_internet_gateway(params = {})
+      # @param [Hash] params ({})
+      def delete_egress_only_internet_gateway(params = {}, options = {})
+        req = build_request(:delete_egress_only_internet_gateway, params)
+        req.send_request(options)
+      end
+
       # Deletes one or more flow logs.
       # @option params [required, Array<String>] :flow_log_ids
       #   One or more flow log IDs.
@@ -3479,9 +3753,9 @@ module Aws
       #
       # @example Response structure
       #   resp.unsuccessful #=> Array
+      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
-      #   resp.unsuccessful[0].resource_id #=> String
       # @overload delete_flow_logs(params = {})
       # @param [Hash] params ({})
       def delete_flow_logs(params = {}, options = {})
@@ -3673,16 +3947,20 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, String] :route_table_id
       #   The ID of the route table.
-      # @option params [required, String] :destination_cidr_block
-      #   The CIDR range for the route. The value you specify must match the
-      #   CIDR for the route exactly.
+      # @option params [String] :destination_cidr_block
+      #   The IPv4 CIDR range for the route. The value you specify must match
+      #   the CIDR for the route exactly.
+      # @option params [String] :destination_ipv_6_cidr_block
+      #   The IPv6 CIDR range for the route. The value you specify must match
+      #   the CIDR for the route exactly.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_route({
       #     dry_run: false,
       #     route_table_id: "String", # required
-      #     destination_cidr_block: "String", # required
+      #     destination_cidr_block: "String",
+      #     destination_ipv_6_cidr_block: "String",
       #   })
       # @overload delete_route(params = {})
       # @param [Hash] params ({})
@@ -3954,9 +4232,9 @@ module Aws
       #
       # @example Response structure
       #   resp.unsuccessful #=> Array
+      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
-      #   resp.unsuccessful[0].resource_id #=> String
       # @overload delete_vpc_endpoints(params = {})
       # @param [Hash] params ({})
       def delete_vpc_endpoints(params = {}, options = {})
@@ -4674,6 +4952,49 @@ module Aws
         req.send_request(options)
       end
 
+      # Describes one or more of your egress-only Internet gateways.
+      # @option params [Boolean] :dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      # @option params [Array<String>] :egress_only_internet_gateway_ids
+      #   One or more egress-only Internet gateway IDs.
+      # @option params [Integer] :max_results
+      #   The maximum number of results to return for the request in a single
+      #   page. The remaining results can be seen by sending another request
+      #   with the returned `NextToken` value. This value can be between 5 and
+      #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+      #   results are returned.
+      # @option params [String] :next_token
+      #   The token to retrieve the next page of results.
+      # @return [Types::DescribeEgressOnlyInternetGatewaysResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeEgressOnlyInternetGatewaysResult#egress_only_internet_gateways #EgressOnlyInternetGateways} => Array&lt;Types::EgressOnlyInternetGateway&gt;
+      #   * {Types::DescribeEgressOnlyInternetGatewaysResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_egress_only_internet_gateways({
+      #     dry_run: false,
+      #     egress_only_internet_gateway_ids: ["EgressOnlyInternetGatewayId"],
+      #     max_results: 1,
+      #     next_token: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.egress_only_internet_gateways #=> Array
+      #   resp.egress_only_internet_gateways[0].egress_only_internet_gateway_id #=> String
+      #   resp.egress_only_internet_gateways[0].attachments #=> Array
+      #   resp.egress_only_internet_gateways[0].attachments[0].vpc_id #=> String
+      #   resp.egress_only_internet_gateways[0].attachments[0].state #=> String, one of "attaching", "attached", "detaching", "detached"
+      #   resp.next_token #=> String
+      # @overload describe_egress_only_internet_gateways(params = {})
+      # @param [Hash] params ({})
+      def describe_egress_only_internet_gateways(params = {}, options = {})
+        req = build_request(:describe_egress_only_internet_gateways, params)
+        req.send_request(options)
+      end
+
       # Describes one or more of your export tasks.
       # @option params [Array<String>] :export_task_ids
       #   One or more export task IDs.
@@ -5198,6 +5519,9 @@ module Aws
       #   * `description` - The description of the image (provided during image
       #     creation).
       #
+      #   * `ena-support` - A Boolean that indicates whether enhanced networking
+      #     with ENA is enabled.
+      #
       #   * `hypervisor` - The hypervisor type (`ovm` \| `xen`).
       #
       #   * `image-id` - The ID of the image.
@@ -5699,6 +6023,18 @@ module Aws
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
+      #   * `association.public-ip` - The address of the Elastic IP address
+      #     (IPv4) bound to the network interface.
+      #
+      #   * `association.ip-owner-id` - The owner of the Elastic IP address
+      #     (IPv4) associated with the network interface.
+      #
+      #   * `association.allocation-id` - The allocation ID returned when you
+      #     allocated the Elastic IP address (IPv4) for your network interface.
+      #
+      #   * `association.association-id` - The association ID returned when the
+      #     network interface was associated with an IPv4 address.
+      #
       #   * `availability-zone` - The Availability Zone of the instance.
       #
       #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -5759,7 +6095,7 @@ module Aws
       #   * `instance.group-name` - The name of the security group for the
       #     instance.
       #
-      #   * `ip-address` - The public IP address of the instance.
+      #   * `ip-address` - The public IPv4 address of the instance.
       #
       #   * `kernel-id` - The kernel ID.
       #
@@ -5772,8 +6108,91 @@ module Aws
       #
       #   * `launch-time` - The time when the instance was launched.
       #
-      #   * `monitoring-state` - Indicates whether monitoring is enabled for the
-      #     instance (`disabled` \| `enabled`).
+      #   * `monitoring-state` - Indicates whether detailed monitoring is
+      #     enabled (`disabled` \| `enabled`).
+      #
+      #   * `network-interface.addresses.private-ip-address` - The private IPv4
+      #     address associated with the network interface.
+      #
+      #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+      #     address of the network interface is the primary private IPv4
+      #     address.
+      #
+      #   * `network-interface.addresses.association.public-ip` - The ID of the
+      #     association of an Elastic IP address (IPv4) with a network
+      #     interface.
+      #
+      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
+      #     of the private IPv4 address associated with the network interface.
+      #
+      #   * `network-interface.attachment.attachment-id` - The ID of the
+      #     interface attachment.
+      #
+      #   * `network-interface.attachment.instance-id` - The ID of the instance
+      #     to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
+      #     the instance to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.device-index` - The device index to
+      #     which the network interface is attached.
+      #
+      #   * `network-interface.attachment.status` - The status of the attachment
+      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
+      #
+      #   * `network-interface.attachment.attach-time` - The time that the
+      #     network interface was attached to an instance.
+      #
+      #   * `network-interface.attachment.delete-on-termination` - Specifies
+      #     whether the attachment is deleted when an instance is terminated.
+      #
+      #   * `network-interface.availability-zone` - The Availability Zone for
+      #     the network interface.
+      #
+      #   * `network-interface.description` - The description of the network
+      #     interface.
+      #
+      #   * `network-interface.group-id` - The ID of a security group associated
+      #     with the network interface.
+      #
+      #   * `network-interface.group-name` - The name of a security group
+      #     associated with the network interface.
+      #
+      #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      #     associated with the network interface.
+      #
+      #   * `network-interface.mac-address` - The MAC address of the network
+      #     interface.
+      #
+      #   * `network-interface.network-interface-id` - The ID of the network
+      #     interface.
+      #
+      #   * `network-interface.owner-id` - The ID of the owner of the network
+      #     interface.
+      #
+      #   * `network-interface.private-dns-name` - The private DNS name of the
+      #     network interface.
+      #
+      #   * `network-interface.requester-id` - The requester ID for the network
+      #     interface.
+      #
+      #   * `network-interface.requester-managed` - Indicates whether the
+      #     network interface is being managed by AWS.
+      #
+      #   * `network-interface.status` - The status of the network interface
+      #     (`available`) \| `in-use`).
+      #
+      #   * `network-interface.source-dest-check` - Whether the network
+      #     interface performs source/destination checking. A value of `true`
+      #     means checking is enabled, and `false` means checking is disabled.
+      #     The value must be `false` for the network interface to perform
+      #     network address translation (NAT) in your VPC.
+      #
+      #   * `network-interface.subnet-id` - The ID of the subnet for the network
+      #     interface.
+      #
+      #   * `network-interface.vpc-id` - The ID of the VPC for the network
+      #     interface.
       #
       #   * `owner-id` - The AWS account ID of the instance owner.
       #
@@ -5783,9 +6202,9 @@ module Aws
       #   * `platform` - The platform. Use `windows` if you have Windows
       #     instances; otherwise, leave blank.
       #
-      #   * `private-dns-name` - The private DNS name of the instance.
+      #   * `private-dns-name` - The private IPv4 DNS name of the instance.
       #
-      #   * `private-ip-address` - The private IP address of the instance.
+      #   * `private-ip-address` - The private IPv4 address of the instance.
       #
       #   * `product-code` - The product code associated with the AMI used to
       #     launch the instance.
@@ -5853,96 +6272,6 @@ module Aws
       #     (`paravirtual` \| `hvm`).
       #
       #   * `vpc-id` - The ID of the VPC that the instance is running in.
-      #
-      #   * `network-interface.description` - The description of the network
-      #     interface.
-      #
-      #   * `network-interface.subnet-id` - The ID of the subnet for the network
-      #     interface.
-      #
-      #   * `network-interface.vpc-id` - The ID of the VPC for the network
-      #     interface.
-      #
-      #   * `network-interface.network-interface-id` - The ID of the network
-      #     interface.
-      #
-      #   * `network-interface.owner-id` - The ID of the owner of the network
-      #     interface.
-      #
-      #   * `network-interface.availability-zone` - The Availability Zone for
-      #     the network interface.
-      #
-      #   * `network-interface.requester-id` - The requester ID for the network
-      #     interface.
-      #
-      #   * `network-interface.requester-managed` - Indicates whether the
-      #     network interface is being managed by AWS.
-      #
-      #   * `network-interface.status` - The status of the network interface
-      #     (`available`) \| `in-use`).
-      #
-      #   * `network-interface.mac-address` - The MAC address of the network
-      #     interface.
-      #
-      #   * `network-interface.private-dns-name` - The private DNS name of the
-      #     network interface.
-      #
-      #   * `network-interface.source-dest-check` - Whether the network
-      #     interface performs source/destination checking. A value of `true`
-      #     means checking is enabled, and `false` means checking is disabled.
-      #     The value must be `false` for the network interface to perform
-      #     network address translation (NAT) in your VPC.
-      #
-      #   * `network-interface.group-id` - The ID of a security group associated
-      #     with the network interface.
-      #
-      #   * `network-interface.group-name` - The name of a security group
-      #     associated with the network interface.
-      #
-      #   * `network-interface.attachment.attachment-id` - The ID of the
-      #     interface attachment.
-      #
-      #   * `network-interface.attachment.instance-id` - The ID of the instance
-      #     to which the network interface is attached.
-      #
-      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
-      #     the instance to which the network interface is attached.
-      #
-      #   * `network-interface.addresses.private-ip-address` - The private IP
-      #     address associated with the network interface.
-      #
-      #   * `network-interface.attachment.device-index` - The device index to
-      #     which the network interface is attached.
-      #
-      #   * `network-interface.attachment.status` - The status of the attachment
-      #     (`attaching` \| `attached` \| `detaching` \| `detached`).
-      #
-      #   * `network-interface.attachment.attach-time` - The time that the
-      #     network interface was attached to an instance.
-      #
-      #   * `network-interface.attachment.delete-on-termination` - Specifies
-      #     whether the attachment is deleted when an instance is terminated.
-      #
-      #   * `network-interface.addresses.primary` - Specifies whether the IP
-      #     address of the network interface is the primary private IP address.
-      #
-      #   * `network-interface.addresses.association.public-ip` - The ID of the
-      #     association of an Elastic IP address with a network interface.
-      #
-      #   * `network-interface.addresses.association.ip-owner-id` - The owner ID
-      #     of the private IP address associated with the network interface.
-      #
-      #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
-      #
-      #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
-      #
-      #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
-      #
-      #   * `association.association-id` - The association ID returned when the
-      #     network interface was associated with an IP address.
       # @option params [String] :next_token
       #   The token to request the next page of results.
       # @option params [Integer] :max_results
@@ -6001,7 +6330,7 @@ module Aws
       #   resp.reservations[0].instances[0].product_codes #=> Array
       #   resp.reservations[0].instances[0].product_codes[0].product_code_id #=> String
       #   resp.reservations[0].instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-      #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reservations[0].instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.reservations[0].instances[0].launch_time #=> Time
       #   resp.reservations[0].instances[0].placement.availability_zone #=> String
       #   resp.reservations[0].instances[0].placement.group_name #=> String
@@ -6068,6 +6397,8 @@ module Aws
       #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
       #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
       #   resp.reservations[0].instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
+      #   resp.reservations[0].instances[0].network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.reservations[0].instances[0].network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
       #   resp.reservations[0].instances[0].iam_instance_profile.arn #=> String
       #   resp.reservations[0].instances[0].iam_instance_profile.id #=> String
       #   resp.reservations[0].instances[0].ebs_optimized #=> Boolean
@@ -6357,7 +6688,7 @@ module Aws
       #   * `default` - Indicates whether the ACL is the default network ACL for
       #     the VPC.
       #
-      #   * `entry.cidr` - The CIDR range specified in the entry.
+      #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
       #
       #   * `entry.egress` - Indicates whether the entry applies to egress
       #     traffic.
@@ -6365,6 +6696,8 @@ module Aws
       #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
       #
       #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
+      #
+      #   * `entry.ipv6-cidr` - The IPv6 CIDR range specified in the entry.
       #
       #   * `entry.port-range.from` - The start of the port range specified in
       #     the entry.
@@ -6425,6 +6758,7 @@ module Aws
       #   resp.network_acls[0].entries[0].rule_action #=> String, one of "allow", "deny"
       #   resp.network_acls[0].entries[0].egress #=> Boolean
       #   resp.network_acls[0].entries[0].cidr_block #=> String
+      #   resp.network_acls[0].entries[0].ipv_6_cidr_block #=> String
       #   resp.network_acls[0].entries[0].icmp_type_code.type #=> Integer
       #   resp.network_acls[0].entries[0].icmp_type_code.code #=> Integer
       #   resp.network_acls[0].entries[0].port_range.from #=> Integer
@@ -6503,32 +6837,33 @@ module Aws
       # @option params [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `addresses.private-ip-address` - The private IP addresses associated
-      #     with the network interface.
+      #   * `addresses.private-ip-address` - The private IPv4 addresses
+      #     associated with the network interface.
       #
-      #   * `addresses.primary` - Whether the private IP address is the primary
-      #     IP address associated with the network interface.
+      #   * `addresses.primary` - Whether the private IPv4 address is the
+      #     primary IP address associated with the network interface.
       #
       #   * `addresses.association.public-ip` - The association ID returned when
-      #     the network interface was associated with the Elastic IP address.
+      #     the network interface was associated with the Elastic IP address
+      #     (IPv4).
       #
       #   * `addresses.association.owner-id` - The owner ID of the addresses
       #     associated with the network interface.
       #
       #   * `association.association-id` - The association ID returned when the
-      #     network interface was associated with an IP address.
+      #     network interface was associated with an IPv4 address.
       #
       #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
+      #     allocated the Elastic IP address (IPv4) for your network interface.
       #
       #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
+      #     (IPv4) associated with the network interface.
       #
       #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
+      #     (IPv4) bound to the network interface.
       #
       #   * `association.public-dns-name` - The public DNS name for the network
-      #     interface.
+      #     interface (IPv4).
       #
       #   * `attachment.attachment-id` - The ID of the interface attachment.
       #
@@ -6564,16 +6899,20 @@ module Aws
       #   * `group-name` - The name of a security group associated with the
       #     network interface.
       #
+      #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with the
+      #     network interface.
+      #
       #   * `mac-address` - The MAC address of the network interface.
       #
       #   * `network-interface-id` - The ID of the network interface.
       #
       #   * `owner-id` - The AWS account ID of the network interface owner.
       #
-      #   * `private-ip-address` - The private IP address or addresses of the
+      #   * `private-ip-address` - The private IPv4 address or addresses of the
       #     network interface.
       #
-      #   * `private-dns-name` - The private DNS name of the network interface.
+      #   * `private-dns-name` - The private DNS name of the network interface
+      #     (IPv4).
       #
       #   * `requester-id` - The ID of the entity that launched the instance on
       #     your behalf (for example, AWS Management Console, Auto Scaling, and
@@ -6669,6 +7008,8 @@ module Aws
       #   resp.network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
       #   resp.network_interfaces[0].private_ip_addresses[0].association.allocation_id #=> String
       #   resp.network_interfaces[0].private_ip_addresses[0].association.association_id #=> String
+      #   resp.network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
       #   resp.network_interfaces[0].interface_type #=> String, one of "interface", "natGateway"
       # @overload describe_network_interfaces(params = {})
       # @param [Hash] params ({})
@@ -6943,7 +7284,7 @@ module Aws
       # @example Response structure
       #   resp.reserved_instances #=> Array
       #   resp.reserved_instances[0].reserved_instances_id #=> String
-      #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.reserved_instances[0].availability_zone #=> String
       #   resp.reserved_instances[0].start #=> Time
       #   resp.reserved_instances[0].end #=> Time
@@ -7137,7 +7478,7 @@ module Aws
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.availability_zone #=> String
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.platform #=> String
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_count #=> Integer
-      #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.reserved_instances_modifications[0].modification_results[0].target_configuration.scope #=> String, one of "Availability Zone", "Region"
       #   resp.reserved_instances_modifications[0].create_date #=> Time
       #   resp.reserved_instances_modifications[0].update_date #=> Time
@@ -7278,7 +7619,7 @@ module Aws
       #   resp = client.describe_reserved_instances_offerings({
       #     dry_run: false,
       #     reserved_instances_offering_ids: ["String"],
-      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #     availability_zone: "String",
       #     product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
       #     filters: [
@@ -7301,7 +7642,7 @@ module Aws
       # @example Response structure
       #   resp.reserved_instances_offerings #=> Array
       #   resp.reserved_instances_offerings[0].reserved_instances_offering_id #=> String
-      #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.reserved_instances_offerings[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.reserved_instances_offerings[0].availability_zone #=> String
       #   resp.reserved_instances_offerings[0].duration #=> Integer
       #   resp.reserved_instances_offerings[0].usage_price #=> Float
@@ -7366,11 +7707,17 @@ module Aws
       #
       #   * `route-table-id` - The ID of the route table.
       #
-      #   * `route.destination-cidr-block` - The CIDR range specified in a route
-      #     in the table.
+      #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in a
+      #     route in the table.
+      #
+      #   * `route.destination-ipv6-cidr-block` - The IPv6 CIDR range specified
+      #     in a route in the route table.
       #
       #   * `route.destination-prefix-list-id` - The ID (prefix) of the AWS
       #     service specified in a route in the table.
+      #
+      #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
+      #     Internet gateway specified in a route in the route table.
       #
       #   * `route.gateway-id` - The ID of a gateway specified in a route in the
       #     table.
@@ -7442,6 +7789,8 @@ module Aws
       #   resp.route_tables[0].routes[0].nat_gateway_id #=> String
       #   resp.route_tables[0].routes[0].state #=> String, one of "active", "blackhole"
       #   resp.route_tables[0].routes[0].origin #=> String, one of "CreateRouteTable", "CreateRoute", "EnableVgwRoutePropagation"
+      #   resp.route_tables[0].routes[0].destination_ipv_6_cidr_block #=> String
+      #   resp.route_tables[0].routes[0].egress_only_internet_gateway_id #=> String
       #   resp.route_tables[0].associations #=> Array
       #   resp.route_tables[0].associations[0].route_table_association_id #=> String
       #   resp.route_tables[0].associations[0].route_table_id #=> String
@@ -7722,8 +8071,8 @@ module Aws
       #
       #   * `group-name` - The name of the security group.
       #
-      #   * `ip-permission.cidr` - A CIDR range that has been granted
-      #     permission.
+      #   * `ip-permission.cidr` - An IPv4 CIDR range that has been granted
+      #     permission in a security group rule.
       #
       #   * `ip-permission.from-port` - The start of port range for the TCP and
       #     UDP protocols, or an ICMP type number.
@@ -7733,6 +8082,9 @@ module Aws
       #
       #   * `ip-permission.group-name` - The name of a security group that has
       #     been granted permission.
+      #
+      #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR range that has been granted
+      #     permission in a security group rule.
       #
       #   * `ip-permission.protocol` - The IP protocol for the permission (`tcp`
       #     \| `udp` \| `icmp` or a protocol number).
@@ -7787,6 +8139,8 @@ module Aws
       #   resp.security_groups[0].ip_permissions[0].user_id_group_pairs[0].peering_status #=> String
       #   resp.security_groups[0].ip_permissions[0].ip_ranges #=> Array
       #   resp.security_groups[0].ip_permissions[0].ip_ranges[0].cidr_ip #=> String
+      #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges #=> Array
+      #   resp.security_groups[0].ip_permissions[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
       #   resp.security_groups[0].ip_permissions[0].prefix_list_ids #=> Array
       #   resp.security_groups[0].ip_permissions[0].prefix_list_ids[0].prefix_list_id #=> String
       #   resp.security_groups[0].ip_permissions_egress #=> Array
@@ -7802,6 +8156,8 @@ module Aws
       #   resp.security_groups[0].ip_permissions_egress[0].user_id_group_pairs[0].peering_status #=> String
       #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges #=> Array
       #   resp.security_groups[0].ip_permissions_egress[0].ip_ranges[0].cidr_ip #=> String
+      #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges #=> Array
+      #   resp.security_groups[0].ip_permissions_egress[0].ipv_6_ranges[0].cidr_ipv_6 #=> String
       #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids #=> Array
       #   resp.security_groups[0].ip_permissions_egress[0].prefix_list_ids[0].prefix_list_id #=> String
       #   resp.security_groups[0].vpc_id #=> String
@@ -8221,7 +8577,7 @@ module Aws
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].security_groups[0].group_id #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].user_data #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].addressing_type #=> String
-      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.availability_zone #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].placement.group_name #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].kernel_id #=> String
@@ -8252,6 +8608,9 @@ module Aws
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].secondary_private_ip_address_count #=> Integer
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].associate_public_ip_address #=> Boolean
+      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+      #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].network_interfaces[0].ipv_6_address_count #=> Integer
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.arn #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].iam_instance_profile.name #=> String
       #   resp.spot_fleet_request_configs[0].spot_fleet_request_config.launch_specifications[0].ebs_optimized #=> Boolean
@@ -8461,7 +8820,7 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
       #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
       #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
-      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
       #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
       #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
@@ -8491,6 +8850,9 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].associate_public_ip_address #=> Boolean
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_address_count #=> Integer
       #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
       #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
       #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
@@ -8511,10 +8873,9 @@ module Aws
         req.send_request(options)
       end
 
-      # Describes the Spot price history. The prices returned are listed in
-      # chronological order, from the oldest to the most recent, for up to the
-      # past 90 days. For more information, see [Spot Instance Pricing
-      # History][1] in the *Amazon Elastic Compute Cloud User Guide*.
+      # Describes the Spot price history. For more information, see [Spot
+      # Instance Pricing History][1] in the *Amazon Elastic Compute Cloud User
+      # Guide*.
       #
       # When you specify a start and end time, this operation returns the
       # prices of the instance types within the time range that you specified
@@ -8539,7 +8900,8 @@ module Aws
       #   retrieving the price history data, in UTC format (for example,
       #   *YYYY*-*MM*-*DD*T*HH*\:*MM*\:*SS*Z).
       # @option params [Array<String>] :instance_types
-      #   Filters the results by the specified instance types.
+      #   Filters the results by the specified instance types. Note that T2 and
+      #   HS1 instance types are not supported.
       # @option params [Array<String>] :product_descriptions
       #   Filters the results by the specified basic product descriptions.
       # @option params [Array<Types::Filter>] :filters
@@ -8580,7 +8942,7 @@ module Aws
       #     dry_run: false,
       #     start_time: Time.now,
       #     end_time: Time.now,
-      #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #     product_descriptions: ["String"],
       #     filters: [
       #       {
@@ -8595,7 +8957,7 @@ module Aws
       #
       # @example Response structure
       #   resp.spot_price_history #=> Array
-      #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_price_history[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.spot_price_history[0].product_description #=> String, one of "Linux/UNIX", "Linux/UNIX (Amazon VPC)", "Windows", "Windows (Amazon VPC)"
       #   resp.spot_price_history[0].spot_price #=> String
       #   resp.spot_price_history[0].timestamp #=> Time
@@ -8706,10 +9068,10 @@ module Aws
       #   * `availabilityZone` - The Availability Zone for the subnet. You can
       #     also use `availability-zone` as the filter name.
       #
-      #   * `available-ip-address-count` - The number of IP addresses in the
+      #   * `available-ip-address-count` - The number of IPv4 addresses in the
       #     subnet that are available.
       #
-      #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
+      #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block you
       #     specify must exactly match the subnet's CIDR block for information
       #     to be returned for the subnet. You can also use `cidr` or
       #     `cidr-block` as the filter names.
@@ -8717,6 +9079,15 @@ module Aws
       #   * `defaultForAz` - Indicates whether this is the default subnet for
       #     the Availability Zone. You can also use `default-for-az` as the
       #     filter name.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - An association ID for
+      #     an IPv6 CIDR block associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the subnet.
       #
       #   * `state` - The state of the subnet (`pending` \| `available`).
       #
@@ -8759,6 +9130,12 @@ module Aws
       #   resp.subnets[0].state #=> String, one of "pending", "available"
       #   resp.subnets[0].vpc_id #=> String
       #   resp.subnets[0].cidr_block #=> String
+      #   resp.subnets[0].ipv_6_cidr_block_association_set #=> Array
+      #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+      #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.subnets[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+      #   resp.subnets[0].ipv_6_cidr_block_association_set[0].association_id #=> String
+      #   resp.subnets[0].assign_ipv_6_address_on_creation #=> Boolean
       #   resp.subnets[0].available_ip_address_count #=> Integer
       #   resp.subnets[0].availability_zone #=> String
       #   resp.subnets[0].default_for_az #=> Boolean
@@ -9431,7 +9808,8 @@ module Aws
       # @option params [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `accepter-vpc-info.cidr-block` - The CIDR block of the peer VPC.
+      #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the peer
+      #     VPC.
       #
       #   * `accepter-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the peer VPC.
@@ -9441,8 +9819,8 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC peering
       #     connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the requester's
-      #     VPC.
+      #   * `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
+      #     requester's VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the requester VPC.
@@ -9492,6 +9870,8 @@ module Aws
       #   resp.vpc_peering_connections[0].accepter_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connections[0].accepter_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connections[0].accepter_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connections[0].accepter_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connections[0].accepter_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connections[0].accepter_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -9499,6 +9879,8 @@ module Aws
       #   resp.vpc_peering_connections[0].requester_vpc_info.cidr_block #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.owner_id #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.vpc_id #=> String
+      #   resp.vpc_peering_connections[0].requester_vpc_info.ipv_6_cidr_block_set #=> Array
+      #   resp.vpc_peering_connections[0].requester_vpc_info.ipv_6_cidr_block_set[0].ipv_6_cidr_block #=> String
       #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_classic_link_to_remote_vpc #=> Boolean
       #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_egress_from_local_vpc_to_remote_classic_link #=> Boolean
       #   resp.vpc_peering_connections[0].requester_vpc_info.peering_options.allow_dns_resolution_from_remote_vpc #=> Boolean
@@ -9528,12 +9910,21 @@ module Aws
       # @option params [Array<Types::Filter>] :filters
       #   One or more filters.
       #
-      #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify must
-      #     exactly match the VPC's CIDR block for information to be returned
-      #     for the VPC. Must contain the slash followed by one or two digits
-      #     (for example, `/28`).
+      #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you specify
+      #     must exactly match the VPC's CIDR block for information to be
+      #     returned for the VPC. Must contain the slash followed by one or two
+      #     digits (for example, `/28`).
       #
       #   * `dhcp-options-id` - The ID of a set of DHCP options.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - The association ID
+      #     for an IPv6 CIDR block associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the VPC.
       #
       #   * `isDefault` - Indicates whether the VPC is the default VPC.
       #
@@ -9581,6 +9972,11 @@ module Aws
       #   resp.vpcs[0].tags[0].value #=> String
       #   resp.vpcs[0].instance_tenancy #=> String, one of "default", "dedicated", "host"
       #   resp.vpcs[0].is_default #=> Boolean
+      #   resp.vpcs[0].ipv_6_cidr_block_association_set #=> Array
+      #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block #=> String
+      #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].ipv_6_cidr_block_state.status_message #=> String
+      #   resp.vpcs[0].ipv_6_cidr_block_association_set[0].association_id #=> String
       # @overload describe_vpcs(params = {})
       # @param [Hash] params ({})
       def describe_vpcs(params = {}, options = {})
@@ -10114,6 +10510,64 @@ module Aws
         req.send_request(options)
       end
 
+      # Disassociates a CIDR block from a subnet. Currently, you can
+      # disassociate an IPv6 CIDR block only. You must detach or delete all
+      # gateways and resources that are associated with the CIDR block before
+      # you can disassociate it.
+      # @option params [required, String] :association_id
+      #   The association ID for the CIDR block.
+      # @return [Types::DisassociateSubnetCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DisassociateSubnetCidrBlockResult#subnet_id #SubnetId} => String
+      #   * {Types::DisassociateSubnetCidrBlockResult#ipv_6_cidr_block_association #Ipv6CidrBlockAssociation} => Types::SubnetIpv6CidrBlockAssociation
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.disassociate_subnet_cidr_block({
+      #     association_id: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.subnet_id #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+      #   resp.ipv_6_cidr_block_association.association_id #=> String
+      # @overload disassociate_subnet_cidr_block(params = {})
+      # @param [Hash] params ({})
+      def disassociate_subnet_cidr_block(params = {}, options = {})
+        req = build_request(:disassociate_subnet_cidr_block, params)
+        req.send_request(options)
+      end
+
+      # Disassociates a CIDR block from a VPC. Currently, you can disassociate
+      # an IPv6 CIDR block only. You must detach or delete all gateways and
+      # resources that are associated with the CIDR block before you can
+      # disassociate it.
+      # @option params [required, String] :association_id
+      #   The association ID for the CIDR block.
+      # @return [Types::DisassociateVpcCidrBlockResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DisassociateVpcCidrBlockResult#vpc_id #VpcId} => String
+      #   * {Types::DisassociateVpcCidrBlockResult#ipv_6_cidr_block_association #Ipv6CidrBlockAssociation} => Types::VpcIpv6CidrBlockAssociation
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.disassociate_vpc_cidr_block({
+      #     association_id: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.vpc_id #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block #=> String
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.state #=> String, one of "associating", "associated", "disassociating", "disassociated", "failing", "failed"
+      #   resp.ipv_6_cidr_block_association.ipv_6_cidr_block_state.status_message #=> String
+      #   resp.ipv_6_cidr_block_association.association_id #=> String
+      # @overload disassociate_vpc_cidr_block(params = {})
+      # @param [Hash] params ({})
+      def disassociate_vpc_cidr_block(params = {}, options = {})
+        req = build_request(:disassociate_vpc_cidr_block, params)
+        req.send_request(options)
+      end
+
       # Enables a virtual private gateway (VGW) to propagate routes to the
       # specified route table of a VPC.
       # @option params [required, String] :route_table_id
@@ -10201,7 +10655,7 @@ module Aws
       # which it's linked. Similarly, the DNS hostname of an instance in a
       # VPC resolves to its private IP address when addressed from a linked
       # EC2-Classic instance. For more information about ClassicLink, see
-      # [ClassicLink][1] in the Amazon Elastic Compute Cloud User Guide.
+      # [ClassicLink][1] in the *Amazon Elastic Compute Cloud User Guide*.
       #
       #
       #
@@ -10404,19 +10858,19 @@ module Aws
       end
 
       # Returns details about the values and term of your specified
-      # Convertible Reserved Instances. When an offering ID is specified it
-      # returns information about whether the exchange is valid and can be
-      # performed.
+      # Convertible Reserved Instances. When a target configuration is
+      # specified, it returns information about whether the exchange is valid
+      # and can be performed.
       # @option params [Boolean] :dry_run
       #   Checks whether you have the required permissions for the action,
       #   without actually making the request, and provides an error response.
       #   If you have the required permissions, the error response is
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, Array<String>] :reserved_instance_ids
-      #   The ID/s of the Convertible Reserved Instances you want to exchange.
+      #   The IDs of the Convertible Reserved Instances to exchange.
       # @option params [Array<Types::TargetConfigurationRequest>] :target_configurations
       #   The configuration requirements of the Convertible Reserved Instances
-      #   you want in exchange for your current Convertible Reserved Instances.
+      #   to exchange for your current Convertible Reserved Instances.
       # @return [Types::GetReservedInstancesExchangeQuoteResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetReservedInstancesExchangeQuoteResult#reserved_instance_value_set #ReservedInstanceValueSet} => Array&lt;Types::ReservedInstanceReservationValue&gt;
@@ -10637,7 +11091,7 @@ module Aws
       #       user_data: {
       #         data: "String",
       #       },
-      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #       placement: {
       #         availability_zone: "String",
       #         group_name: "String",
@@ -10924,9 +11378,9 @@ module Aws
       #   resp.successful #=> Array
       #   resp.successful[0] #=> String
       #   resp.unsuccessful #=> Array
+      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
-      #   resp.unsuccessful[0].resource_id #=> String
       # @overload modify_hosts(params = {})
       # @param [Hash] params ({})
       def modify_hosts(params = {}, options = {})
@@ -11389,7 +11843,7 @@ module Aws
       #         availability_zone: "String",
       #         platform: "String",
       #         instance_count: 1,
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         scope: "Availability Zone", # accepts Availability Zone, Region
       #       },
       #     ],
@@ -11527,18 +11981,30 @@ module Aws
         req.send_request(options)
       end
 
-      # Modifies a subnet attribute.
+      # Modifies a subnet attribute. You can only modify one attribute at a
+      # time.
       # @option params [required, String] :subnet_id
       #   The ID of the subnet.
       # @option params [Types::AttributeBooleanValue] :map_public_ip_on_launch
-      #   Specify `true` to indicate that instances launched into the specified
-      #   subnet should be assigned public IP address.
+      #   Specify `true` to indicate that network interfaces created in the
+      #   specified subnet should be assigned a public IPv4 address. This
+      #   includes a network interface that's created when launching an
+      #   instance into the subnet (the instance therefore receives a public
+      #   IPv4 address).
+      # @option params [Types::AttributeBooleanValue] :assign_ipv_6_address_on_creation
+      #   Specify `true` to indicate that network interfaces created in the
+      #   specified subnet should be assigned an IPv6 address. This includes a
+      #   network interface that's created when launching an instance into the
+      #   subnet (the instance therefore receives an IPv6 address).
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.modify_subnet_attribute({
       #     subnet_id: "String", # required
       #     map_public_ip_on_launch: {
+      #       value: false,
+      #     },
+      #     assign_ipv_6_address_on_creation: {
       #       value: false,
       #     },
       #   })
@@ -11737,9 +12203,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Enables monitoring for a running instance. For more information about
-      # monitoring instances, see [Monitoring Your Instances and Volumes][1]
-      # in the *Amazon Elastic Compute Cloud User Guide*.
+      # Enables detailed monitoring for a running instance. Otherwise, basic
+      # monitoring is enabled. For more information, see [Monitoring Your
+      # Instances and Volumes][1] in the *Amazon Elastic Compute Cloud User
+      # Guide*.
+      #
+      # To disable detailed monitoring, see .
       #
       #
       #
@@ -12275,9 +12744,9 @@ module Aws
       #   resp.successful #=> Array
       #   resp.successful[0] #=> String
       #   resp.unsuccessful #=> Array
+      #   resp.unsuccessful[0].resource_id #=> String
       #   resp.unsuccessful[0].error.code #=> String
       #   resp.unsuccessful[0].error.message #=> String
-      #   resp.unsuccessful[0].resource_id #=> String
       # @overload release_hosts(params = {})
       # @param [Hash] params ({})
       def release_hosts(params = {}, options = {})
@@ -12341,20 +12810,32 @@ module Aws
       #   The rule number of the entry to replace.
       # @option params [required, String] :protocol
       #   The IP protocol. You can specify `all` or `-1` to mean all protocols.
+      #   If you specify `all`, `-1`, or a protocol number other than `tcp`,
+      #   `udp`, or `icmp`, traffic on all ports is allowed, regardless of any
+      #   ports or ICMP types or codes you specify. If you specify protocol `58`
+      #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
+      #   and codes allowed, regardless of any that you specify. If you specify
+      #   protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you must
+      #   specify an ICMP type and code.
       # @option params [required, String] :rule_action
       #   Indicates whether to allow or deny the traffic that matches the rule.
       # @option params [required, Boolean] :egress
       #   Indicates whether to replace the egress rule.
       #
       #   Default: If no value is specified, we replace the ingress rule.
-      # @option params [required, String] :cidr_block
-      #   The network range to allow or deny, in CIDR notation.
+      # @option params [String] :cidr_block
+      #   The IPv4 network range to allow or deny, in CIDR notation (for example
+      #   `172.16.0.0/24`).
+      # @option params [String] :ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for example
+      #   `2001:bd8:1234:1a00::/64`).
       # @option params [Types::IcmpTypeCode] :icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying 1 (ICMP)
-      #   for the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an IPv6
+      #   CIDR block.
       # @option params [Types::PortRange] :port_range
       #   TCP or UDP protocols: The range of ports the rule applies to. Required
-      #   if specifying 6 (TCP) or 17 (UDP) for the protocol.
+      #   if specifying TCP (6) or UDP (17) for the protocol.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
@@ -12365,7 +12846,8 @@ module Aws
       #     protocol: "String", # required
       #     rule_action: "allow", # required, accepts allow, deny
       #     egress: false, # required
-      #     cidr_block: "String", # required
+      #     cidr_block: "String",
+      #     ipv_6_cidr_block: "String",
       #     icmp_type_code: {
       #       type: 1,
       #       code: 1,
@@ -12384,8 +12866,8 @@ module Aws
 
       # Replaces an existing route within a route table in a VPC. You must
       # provide only one of the following: Internet gateway or virtual private
-      # gateway, NAT instance, NAT gateway, VPC peering connection, or network
-      # interface.
+      # gateway, NAT instance, NAT gateway, VPC peering connection, network
+      # interface, or egress-only Internet gateway.
       #
       # For more information about route tables, see [Route Tables][1] in the
       # *Amazon Virtual Private Cloud User Guide*.
@@ -12400,11 +12882,16 @@ module Aws
       #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
       # @option params [required, String] :route_table_id
       #   The ID of the route table.
-      # @option params [required, String] :destination_cidr_block
-      #   The CIDR address block used for the destination match. The value you
-      #   provide must match the CIDR of an existing route in the table.
+      # @option params [String] :destination_cidr_block
+      #   The IPv4 CIDR address block used for the destination match. The value
+      #   you provide must match the CIDR of an existing route in the table.
       # @option params [String] :gateway_id
       #   The ID of an Internet gateway or virtual private gateway.
+      # @option params [String] :destination_ipv_6_cidr_block
+      #   The IPv6 CIDR address block used for the destination match. The value
+      #   you provide must match the CIDR of an existing route in the table.
+      # @option params [String] :egress_only_internet_gateway_id
+      #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
       # @option params [String] :instance_id
       #   The ID of a NAT instance in your VPC.
       # @option params [String] :network_interface_id
@@ -12412,15 +12899,17 @@ module Aws
       # @option params [String] :vpc_peering_connection_id
       #   The ID of a VPC peering connection.
       # @option params [String] :nat_gateway_id
-      #   The ID of a NAT gateway.
+      #   \[IPv4 traffic only\] The ID of a NAT gateway.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.replace_route({
       #     dry_run: false,
       #     route_table_id: "String", # required
-      #     destination_cidr_block: "String", # required
+      #     destination_cidr_block: "String",
       #     gateway_id: "String",
+      #     destination_ipv_6_cidr_block: "String",
+      #     egress_only_internet_gateway_id: "String",
       #     instance_id: "String",
       #     network_interface_id: "String",
       #     vpc_peering_connection_id: "String",
@@ -12604,7 +13093,7 @@ module Aws
       #           ],
       #           user_data: "String",
       #           addressing_type: "String",
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -12647,6 +13136,12 @@ module Aws
       #               ],
       #               secondary_private_ip_address_count: 1,
       #               associate_public_ip_address: false,
+      #               ipv_6_addresses: [
+      #                 {
+      #                   ipv_6_address: "String",
+      #                 },
+      #               ],
+      #               ipv_6_address_count: 1,
       #             },
       #           ],
       #           iam_instance_profile: {
@@ -12787,7 +13282,7 @@ module Aws
       #       security_groups: ["String"],
       #       user_data: "String",
       #       addressing_type: "String",
-      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #       instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #       placement: {
       #         availability_zone: "String",
       #         group_name: "String",
@@ -12827,6 +13322,12 @@ module Aws
       #           ],
       #           secondary_private_ip_address_count: 1,
       #           associate_public_ip_address: false,
+      #           ipv_6_addresses: [
+      #             {
+      #               ipv_6_address: "String",
+      #             },
+      #           ],
+      #           ipv_6_address_count: 1,
       #         },
       #       ],
       #       iam_instance_profile: {
@@ -12863,7 +13364,7 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.security_groups[0].group_id #=> String
       #   resp.spot_instance_requests[0].launch_specification.user_data #=> String
       #   resp.spot_instance_requests[0].launch_specification.addressing_type #=> String
-      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.spot_instance_requests[0].launch_specification.instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.spot_instance_requests[0].launch_specification.placement.availability_zone #=> String
       #   resp.spot_instance_requests[0].launch_specification.placement.group_name #=> String
       #   resp.spot_instance_requests[0].launch_specification.kernel_id #=> String
@@ -12893,6 +13394,9 @@ module Aws
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].private_ip_addresses[0].primary #=> Boolean
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].secondary_private_ip_address_count #=> Integer
       #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].associate_public_ip_address #=> Boolean
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
+      #   resp.spot_instance_requests[0].launch_specification.network_interfaces[0].ipv_6_address_count #=> Integer
       #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.arn #=> String
       #   resp.spot_instance_requests[0].launch_specification.iam_instance_profile.name #=> String
       #   resp.spot_instance_requests[0].launch_specification.ebs_optimized #=> Boolean
@@ -13083,10 +13587,10 @@ module Aws
       # (for example, ports) must match the existing rule's values for the
       # rule to be revoked.
       #
-      # Each rule consists of the protocol and the CIDR range or source
-      # security group. For the TCP and UDP protocols, you must also specify
-      # the destination port or range of ports. For the ICMP protocol, you
-      # must also specify the ICMP type and code.
+      # Each rule consists of the protocol and the IPv4 or IPv6 CIDR range or
+      # source security group. For the TCP and UDP protocols, you must also
+      # specify the destination port or range of ports. For the ICMP protocol,
+      # you must also specify the ICMP type and code.
       #
       # Rule changes are propagated to instances within the security group as
       # quickly as possible. However, a small delay might occur.
@@ -13152,6 +13656,11 @@ module Aws
       #         ip_ranges: [
       #           {
       #             cidr_ip: "String",
+      #           },
+      #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
       #           },
       #         ],
       #         prefix_list_ids: [
@@ -13258,6 +13767,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -13276,57 +13790,61 @@ module Aws
       # Launches the specified number of instances using an AMI for which you
       # have permissions.
       #
-      # When you launch an instance, it enters the `pending` state. After the
-      # instance is ready for you, it enters the `running` state. To check the
-      # state of your instance, call DescribeInstances.
+      # You can specify a number of options, or leave the default options. The
+      # following rules apply:
+      #
+      # * \[EC2-VPC\] If you don't specify a subnet ID, we choose a default
+      #   subnet from your default VPC for you. If you don't have a default
+      #   VPC, you must specify a subnet ID in the request.
+      #
+      # * \[EC2-Classic\] If don't specify an Availability Zone, we choose
+      #   one for you.
+      #
+      # * Some instance types must be launched into a VPC. If you do not have
+      #   a default VPC, or if you do not specify a subnet ID, the request
+      #   fails. For more information, see [Instance Types Available Only in a
+      #   VPC][1].
+      #
+      # * \[EC2-VPC\] All instances have a network interface with a primary
+      #   private IPv4 address. If you don't specify this address, we choose
+      #   one from the IPv4 range of your subnet.
+      #
+      # * Not all instance types support IPv6 addresses. For more information,
+      #   see [Amazon EC2 Instance Types][2].
+      #
+      # * If you don't specify a security group ID, we use the default
+      #   security group. For more information, see [Security Groups][3].
+      #
+      # * If any of the AMIs have a product code attached for which the user
+      #   has not subscribed, the request fails.
       #
       # To ensure faster instance launches, break up large requests into
-      # smaller batches. For example, create five separate launch requests for
-      # 100 instances each instead of one launch request for 500 instances.
+      # smaller batches. For example, create 5 separate launch requests for
+      # 100 instances each instead of 1 launch request for 500 instances.
       #
-      # To tag your instance, ensure that it is `running` as CreateTags
-      # requires a resource ID. For more information about tagging, see
-      # [Tagging Your Amazon EC2 Resources][1].
-      #
-      # If you don't specify a security group when launching an instance,
-      # Amazon EC2 uses the default security group. For more information, see
-      # [Security Groups][2] in the *Amazon Elastic Compute Cloud User Guide*.
-      #
-      # \[EC2-VPC only accounts\] If you don't specify a subnet in the
-      # request, we choose a default subnet from your default VPC for you.
-      #
-      # \[EC2-Classic accounts\] If you're launching into EC2-Classic and you
-      # don't specify an Availability Zone, we choose one for you.
+      # An instance is ready for you to use when it's in the `running` state.
+      # You can check the state of your instance using DescribeInstances.
+      # After launch, you can apply tags to your running instance (requires a
+      # resource ID). For more information, see CreateTags and [Tagging Your
+      # Amazon EC2 Resources][4].
       #
       # Linux instances have access to the public key of the key pair at boot.
       # You can use this key to provide secure access to the instance. Amazon
       # EC2 public images use this feature to provide secure access without
-      # passwords. For more information, see [Key Pairs][3] in the *Amazon
+      # passwords. For more information, see [Key Pairs][5] in the *Amazon
       # Elastic Compute Cloud User Guide*.
       #
-      # You can provide optional user data when launching an instance. For
-      # more information, see [Instance Metadata][4] in the *Amazon Elastic
-      # Compute Cloud User Guide*.
-      #
-      # If any of the AMIs have a product code attached for which the user has
-      # not subscribed, `RunInstances` fails.
-      #
-      # Some instance types can only be launched into a VPC. If you do not
-      # have a default VPC, or if you do not specify a subnet ID in the
-      # request, `RunInstances` fails. For more information, see [Instance
-      # Types Available Only in a VPC][5].
-      #
-      # For more information about troubleshooting, see [What To Do If An
-      # Instance Immediately Terminates][6], and [Troubleshooting Connecting
-      # to Your Instance][7] in the *Amazon Elastic Compute Cloud User Guide*.
+      # For troubleshooting, see [What To Do If An Instance Immediately
+      # Terminates][6], and [Troubleshooting Connecting to Your Instance][7]
+      # in the *Amazon Elastic Compute Cloud User Guide*.
       #
       #
       #
-      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
-      # [2]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
-      # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
-      # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/AESDG-chapter-instancedata.html
-      # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
+      # [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-vpc.html#vpc-only-instance-types
+      # [2]: http://aws.amazon.com/ec2/instance-types/
+      # [3]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-network-security.html
+      # [4]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_Tags.html
+      # [5]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-key-pairs.html
       # [6]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Using_InstanceStraightToTerminated.html
       # [7]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/TroubleshootingInstancesConnecting.html
       # @option params [Boolean] :dry_run
@@ -13438,10 +13956,8 @@ module Aws
       #   \[EC2-VPC\] The ID of the subnet to launch the instance into.
       # @option params [Boolean] :disable_api_termination
       #   If you set this parameter to `true`, you can't terminate the instance
-      #   using the Amazon EC2 console, CLI, or API; otherwise, you can. If you
-      #   set this parameter to `true` and then later want to be able to
-      #   terminate the instance, you must first change the value of the
-      #   `disableApiTermination` attribute to `false` using
+      #   using the Amazon EC2 console, CLI, or API; otherwise, you can. To
+      #   change this attribute to `false` after launch, use
       #   ModifyInstanceAttribute. Alternatively, if you set
       #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can terminate
       #   the instance by running the shutdown command from the instance.
@@ -13454,19 +13970,27 @@ module Aws
       #
       #   Default: `stop`
       # @option params [String] :private_ip_address
-      #   \[EC2-VPC\] The primary IP address. You must specify a value from the
-      #   IP address range of the subnet.
+      #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
+      #   the IPv4 address range of the subnet.
       #
-      #   Only one private IP address can be designated as primary. Therefore,
-      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary` is
-      #   set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set to an
-      #   IP address.
-      #
-      #   You cannot specify this option if you're launching more than one
-      #   instance in the request.
-      #
-      #   Default: We select an IP address from the IP address range of the
-      #   subnet.
+      #   Only one private IP address can be designated as primary. You can't
+      #   specify this option if you've specified the option to designate a
+      #   private IP address as the primary IP address in a network interface
+      #   specification. You cannot specify this option if you're launching
+      #   more than one instance in the request.
+      # @option params [Array<Types::InstanceIpv6Address>] :ipv_6_addresses
+      #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
+      #   subnet to associate with the primary network interface. You cannot
+      #   specify this option and the option to assign a number of IPv6
+      #   addresses in the same request. You cannot specify this option if
+      #   you've specified a minimum number of instances to launch.
+      # @option params [Integer] :ipv_6_address_count
+      #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+      #   network interface. Amazon EC2 chooses the IPv6 addresses from the
+      #   range of your subnet. You cannot specify this option and the option to
+      #   assign specific IPv6 addresses in the same request. You can specify
+      #   this option if you've specified a minimum number of instances to
+      #   launch.
       # @option params [String] :client_token
       #   Unique, case-sensitive identifier you provide to ensure the
       #   idempotency of the request. For more information, see [Ensuring
@@ -13509,7 +14033,7 @@ module Aws
       #     security_groups: ["String"],
       #     security_group_ids: ["String"],
       #     user_data: "String",
-      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #     instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #     placement: {
       #       availability_zone: "String",
       #       group_name: "String",
@@ -13541,6 +14065,12 @@ module Aws
       #     disable_api_termination: false,
       #     instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
       #     private_ip_address: "String",
+      #     ipv_6_addresses: [
+      #       {
+      #         ipv_6_address: "String",
+      #       },
+      #     ],
+      #     ipv_6_address_count: 1,
       #     client_token: "String",
       #     additional_info: "String",
       #     network_interfaces: [
@@ -13560,6 +14090,12 @@ module Aws
       #         ],
       #         secondary_private_ip_address_count: 1,
       #         associate_public_ip_address: false,
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "String",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #       },
       #     ],
       #     iam_instance_profile: {
@@ -13589,7 +14125,7 @@ module Aws
       #   resp.instances[0].product_codes #=> Array
       #   resp.instances[0].product_codes[0].product_code_id #=> String
       #   resp.instances[0].product_codes[0].product_code_type #=> String, one of "devpay", "marketplace"
-      #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge"
+      #   resp.instances[0].instance_type #=> String, one of "t1.micro", "t2.nano", "t2.micro", "t2.small", "t2.medium", "t2.large", "t2.xlarge", "t2.2xlarge", "m1.small", "m1.medium", "m1.large", "m1.xlarge", "m3.medium", "m3.large", "m3.xlarge", "m3.2xlarge", "m4.large", "m4.xlarge", "m4.2xlarge", "m4.4xlarge", "m4.10xlarge", "m4.16xlarge", "m2.xlarge", "m2.2xlarge", "m2.4xlarge", "cr1.8xlarge", "r3.large", "r3.xlarge", "r3.2xlarge", "r3.4xlarge", "r3.8xlarge", "r4.large", "r4.xlarge", "r4.2xlarge", "r4.4xlarge", "r4.8xlarge", "r4.16xlarge", "x1.16xlarge", "x1.32xlarge", "i2.xlarge", "i2.2xlarge", "i2.4xlarge", "i2.8xlarge", "hi1.4xlarge", "hs1.8xlarge", "c1.medium", "c1.xlarge", "c3.large", "c3.xlarge", "c3.2xlarge", "c3.4xlarge", "c3.8xlarge", "c4.large", "c4.xlarge", "c4.2xlarge", "c4.4xlarge", "c4.8xlarge", "cc1.4xlarge", "cc2.8xlarge", "g2.2xlarge", "g2.8xlarge", "cg1.4xlarge", "p2.xlarge", "p2.8xlarge", "p2.16xlarge", "d2.xlarge", "d2.2xlarge", "d2.4xlarge", "d2.8xlarge", "f1.2xlarge", "f1.16xlarge"
       #   resp.instances[0].launch_time #=> Time
       #   resp.instances[0].placement.availability_zone #=> String
       #   resp.instances[0].placement.group_name #=> String
@@ -13656,6 +14192,8 @@ module Aws
       #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_ip #=> String
       #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.public_dns_name #=> String
       #   resp.instances[0].network_interfaces[0].private_ip_addresses[0].association.ip_owner_id #=> String
+      #   resp.instances[0].network_interfaces[0].ipv_6_addresses #=> Array
+      #   resp.instances[0].network_interfaces[0].ipv_6_addresses[0].ipv_6_address #=> String
       #   resp.instances[0].iam_instance_profile.arn #=> String
       #   resp.instances[0].iam_instance_profile.id #=> String
       #   resp.instances[0].ebs_optimized #=> Boolean
@@ -13766,6 +14304,12 @@ module Aws
       #           associate_public_ip_address: false,
       #           groups: ["String"],
       #           delete_on_termination: false,
+      #           ipv_6_addresses: [
+      #             {
+      #               ipv_6_address: "Ipv6Address",
+      #             },
+      #           ],
+      #           ipv_6_address_count: 1,
       #         },
       #       ],
       #       iam_instance_profile: {
@@ -13987,6 +14531,33 @@ module Aws
         req.send_request(options)
       end
 
+      # Unassigns one or more IPv6 addresses from a network interface.
+      # @option params [required, String] :network_interface_id
+      #   The ID of the network interface.
+      # @option params [required, Array<String>] :ipv_6_addresses
+      #   The IPv6 addresses to unassign from the network interface.
+      # @return [Types::UnassignIpv6AddressesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UnassignIpv6AddressesResult#network_interface_id #NetworkInterfaceId} => String
+      #   * {Types::UnassignIpv6AddressesResult#unassigned_ipv_6_addresses #UnassignedIpv6Addresses} => Array&lt;String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.unassign_ipv_6_addresses({
+      #     network_interface_id: "String", # required
+      #     ipv_6_addresses: ["String"], # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.network_interface_id #=> String
+      #   resp.unassigned_ipv_6_addresses #=> Array
+      #   resp.unassigned_ipv_6_addresses[0] #=> String
+      # @overload unassign_ipv_6_addresses(params = {})
+      # @param [Hash] params ({})
+      def unassign_ipv_6_addresses(params = {}, options = {})
+        req = build_request(:unassign_ipv_6_addresses, params)
+        req.send_request(options)
+      end
+
       # Unassigns one or more secondary private IP addresses from a network
       # interface.
       # @option params [required, String] :network_interface_id
@@ -14009,9 +14580,9 @@ module Aws
         req.send_request(options)
       end
 
-      # Disables monitoring for a running instance. For more information about
-      # monitoring instances, see [Monitoring Your Instances and Volumes][1]
-      # in the *Amazon Elastic Compute Cloud User Guide*.
+      # Disables detailed monitoring for a running instance. For more
+      # information, see [Monitoring Your Instances and Volumes][1] in the
+      # *Amazon Elastic Compute Cloud User Guide*.
       #
       #
       #

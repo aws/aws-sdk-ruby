@@ -358,9 +358,20 @@ module Aws
       #   receives an event with all the retrieved records. The default is 100
       #   records.
       # @option params [required, String] :starting_position
-      #   The position in the stream where AWS Lambda should start reading. For
-      #   more information, go to [ShardIteratorType][1] in the *Amazon Kinesis
-      #   API Reference*.
+      #   The position in the stream where AWS Lambda should start reading.
+      #   Valid only for Kinesis streams. For more information, go to
+      #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+      # @option params [Time,DateTime,Date,Integer,String] :starting_position_timestamp
+      #   The timestamp of the data record from which to start reading. Used
+      #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
+      #   exact timestamp does not exist, the iterator returned is for the next
+      #   (later) record. If the timestamp is older than the current trim
+      #   horizon, the iterator returned is for the oldest untrimmed data record
+      #   (TRIM\_HORIZON). Valid only for Kinesis streams.
       #
       #
       #
@@ -382,7 +393,8 @@ module Aws
       #     function_name: "FunctionName", # required
       #     enabled: false,
       #     batch_size: 1,
-      #     starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST
+      #     starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
+      #     starting_position_timestamp: Time.now,
       #   })
       #
       # @example Response structure
@@ -428,6 +440,13 @@ module Aws
       #
       #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
       #   use earlier runtime (v0.10.42), set the value to "nodejs".
+      #
+      #   <note markdown="1"> You can no longer create functions using the v0.10.42 runtime version
+      #   as of November, 2016. Existing functions will be supported until early
+      #   2017 but we recommend you migrate them to nodejs4.3 runtime version as
+      #   soon as possible.
+      #
+      #    </note>
       # @option params [required, String] :role
       #   The Amazon Resource Name (ARN) of the IAM role that Lambda assumes
       #   when it executes your function to access any other Amazon Web Services
@@ -472,6 +491,9 @@ module Aws
       #   parameter identifying the list of security group IDs and subnet IDs.
       #   These must belong to the same VPC. You must provide at least one
       #   security group and one subnet ID.
+      # @option params [Types::DeadLetterConfig] :dead_letter_config
+      #   The parent object that contains the target ARN (Amazon Resource Name)
+      #   of an Amazon SQS queue or Amazon SNS topic.
       # @option params [Types::Environment] :environment
       #   The parent object that contains your environment's configuration
       #   settings.
@@ -494,13 +516,14 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
       #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
       #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_function({
       #     function_name: "FunctionName", # required
-      #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7
+      #     runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
       #     role: "RoleArn", # required
       #     handler: "Handler", # required
       #     code: { # required
@@ -517,6 +540,9 @@ module Aws
       #       subnet_ids: ["SubnetId"],
       #       security_group_ids: ["SecurityGroupId"],
       #     },
+      #     dead_letter_config: {
+      #       target_arn: "ResourceArn",
+      #     },
       #     environment: {
       #       variables: {
       #         "EnvironmentVariableName" => "EnvironmentVariableValue",
@@ -528,7 +554,7 @@ module Aws
       # @example Response structure
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
-      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.role #=> String
       #   resp.handler #=> String
       #   resp.code_size #=> Integer
@@ -543,6 +569,7 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.dead_letter_config.target_arn #=> String
       #   resp.environment.variables #=> Hash
       #   resp.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.environment.error.error_code #=> String
@@ -681,6 +708,38 @@ module Aws
         req.send_request(options)
       end
 
+      # Returns a customer's account settings.
+      #
+      # You can use this operation to retrieve Lambda limit information such
+      # as code size and concurrency limits. For more information on limits,
+      # see [AWS Lambda Limits][1]. You can also retrieve resource usage
+      # statistics such as code storage usage and function count.
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/lambda/latest/dg/limits.html
+      # @return [Types::GetAccountSettingsResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetAccountSettingsResponse#account_limit #AccountLimit} => Types::AccountLimit
+      #   * {Types::GetAccountSettingsResponse#account_usage #AccountUsage} => Types::AccountUsage
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_account_settings()
+      #
+      # @example Response structure
+      #   resp.account_limit.total_code_size #=> Integer
+      #   resp.account_limit.code_size_unzipped #=> Integer
+      #   resp.account_limit.code_size_zipped #=> Integer
+      #   resp.account_limit.concurrent_executions #=> Integer
+      #   resp.account_usage.total_code_size #=> Integer
+      #   resp.account_usage.function_count #=> Integer
+      # @overload get_account_settings(params = {})
+      # @param [Hash] params ({})
+      def get_account_settings(params = {}, options = {})
+        req = build_request(:get_account_settings, params)
+        req.send_request(options)
+      end
+
       # Returns the specified alias information such as the alias ARN,
       # description, and function version it is pointing to. For more
       # information, see [Introduction to AWS Lambda Aliases][1].
@@ -812,7 +871,7 @@ module Aws
       # @example Response structure
       #   resp.configuration.function_name #=> String
       #   resp.configuration.function_arn #=> String
-      #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.configuration.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.configuration.role #=> String
       #   resp.configuration.handler #=> String
       #   resp.configuration.code_size #=> Integer
@@ -827,6 +886,7 @@ module Aws
       #   resp.configuration.vpc_config.security_group_ids #=> Array
       #   resp.configuration.vpc_config.security_group_ids[0] #=> String
       #   resp.configuration.vpc_config.vpc_id #=> String
+      #   resp.configuration.dead_letter_config.target_arn #=> String
       #   resp.configuration.environment.variables #=> Hash
       #   resp.configuration.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.configuration.environment.error.error_code #=> String
@@ -896,6 +956,7 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
       #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
       #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
@@ -908,7 +969,7 @@ module Aws
       # @example Response structure
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
-      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.role #=> String
       #   resp.handler #=> String
       #   resp.code_size #=> Integer
@@ -923,6 +984,7 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.dead_letter_config.target_arn #=> String
       #   resp.environment.variables #=> Hash
       #   resp.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.environment.error.error_code #=> String
@@ -1278,7 +1340,7 @@ module Aws
       #   resp.functions #=> Array
       #   resp.functions[0].function_name #=> String
       #   resp.functions[0].function_arn #=> String
-      #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.functions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.functions[0].role #=> String
       #   resp.functions[0].handler #=> String
       #   resp.functions[0].code_size #=> Integer
@@ -1293,6 +1355,7 @@ module Aws
       #   resp.functions[0].vpc_config.security_group_ids #=> Array
       #   resp.functions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.functions[0].vpc_config.vpc_id #=> String
+      #   resp.functions[0].dead_letter_config.target_arn #=> String
       #   resp.functions[0].environment.variables #=> Hash
       #   resp.functions[0].environment.variables["EnvironmentVariableName"] #=> String
       #   resp.functions[0].environment.error.error_code #=> String
@@ -1345,7 +1408,7 @@ module Aws
       #   resp.versions #=> Array
       #   resp.versions[0].function_name #=> String
       #   resp.versions[0].function_arn #=> String
-      #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.versions[0].runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.versions[0].role #=> String
       #   resp.versions[0].handler #=> String
       #   resp.versions[0].code_size #=> Integer
@@ -1360,6 +1423,7 @@ module Aws
       #   resp.versions[0].vpc_config.security_group_ids #=> Array
       #   resp.versions[0].vpc_config.security_group_ids[0] #=> String
       #   resp.versions[0].vpc_config.vpc_id #=> String
+      #   resp.versions[0].dead_letter_config.target_arn #=> String
       #   resp.versions[0].environment.variables #=> Hash
       #   resp.versions[0].environment.variables["EnvironmentVariableName"] #=> String
       #   resp.versions[0].environment.error.error_code #=> String
@@ -1414,6 +1478,7 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
       #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
       #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
@@ -1427,7 +1492,7 @@ module Aws
       # @example Response structure
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
-      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.role #=> String
       #   resp.handler #=> String
       #   resp.code_size #=> Integer
@@ -1442,6 +1507,7 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.dead_letter_config.target_arn #=> String
       #   resp.environment.variables #=> Hash
       #   resp.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.environment.error.error_code #=> String
@@ -1701,6 +1767,7 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
       #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
       #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
@@ -1717,7 +1784,7 @@ module Aws
       # @example Response structure
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
-      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.role #=> String
       #   resp.handler #=> String
       #   resp.code_size #=> Integer
@@ -1732,6 +1799,7 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.dead_letter_config.target_arn #=> String
       #   resp.environment.variables #=> Hash
       #   resp.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.environment.error.error_code #=> String
@@ -1800,16 +1868,24 @@ module Aws
       # @option params [Types::Environment] :environment
       #   The parent object that contains your environment's configuration
       #   settings.
-      # @option params [String] :kms_key_arn
-      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
-      #   function's environment variables. If you elect to use the AWS Lambda
-      #   default service key, pass in an empty string ("") for this
-      #   parameter.
       # @option params [String] :runtime
       #   The runtime environment for the Lambda function.
       #
       #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
       #   use earlier runtime (v0.10.42), set the value to "nodejs".
+      #
+      #   <note markdown="1"> You can no longer downgrade to the v0.10.42 runtime version. This
+      #   version will no longer be supported as of early 2017.
+      #
+      #    </note>
+      # @option params [Types::DeadLetterConfig] :dead_letter_config
+      #   The parent object that contains the target ARN (Amazon Resource Name)
+      #   of an Amazon SQS queue or Amazon SNS topic.
+      # @option params [String] :kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If you elect to use the AWS Lambda
+      #   default service key, pass in an empty string ("") for this
+      #   parameter.
       # @return [Types::FunctionConfiguration] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::FunctionConfiguration#function_name #FunctionName} => String
@@ -1825,6 +1901,7 @@ module Aws
       #   * {Types::FunctionConfiguration#code_sha_256 #CodeSha256} => String
       #   * {Types::FunctionConfiguration#version #Version} => String
       #   * {Types::FunctionConfiguration#vpc_config #VpcConfig} => Types::VpcConfigResponse
+      #   * {Types::FunctionConfiguration#dead_letter_config #DeadLetterConfig} => Types::DeadLetterConfig
       #   * {Types::FunctionConfiguration#environment #Environment} => Types::EnvironmentResponse
       #   * {Types::FunctionConfiguration#kms_key_arn #KMSKeyArn} => String
       #
@@ -1845,14 +1922,17 @@ module Aws
       #         "EnvironmentVariableName" => "EnvironmentVariableValue",
       #       },
       #     },
+      #     runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
+      #     dead_letter_config: {
+      #       target_arn: "ResourceArn",
+      #     },
       #     kms_key_arn: "KMSKeyArn",
-      #     runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7
       #   })
       #
       # @example Response structure
       #   resp.function_name #=> String
       #   resp.function_arn #=> String
-      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7"
+      #   resp.runtime #=> String, one of "nodejs", "nodejs4.3", "java8", "python2.7", "dotnetcore1.0", "nodejs4.3-edge"
       #   resp.role #=> String
       #   resp.handler #=> String
       #   resp.code_size #=> Integer
@@ -1867,6 +1947,7 @@ module Aws
       #   resp.vpc_config.security_group_ids #=> Array
       #   resp.vpc_config.security_group_ids[0] #=> String
       #   resp.vpc_config.vpc_id #=> String
+      #   resp.dead_letter_config.target_arn #=> String
       #   resp.environment.variables #=> Hash
       #   resp.environment.variables["EnvironmentVariableName"] #=> String
       #   resp.environment.error.error_code #=> String

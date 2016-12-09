@@ -341,8 +341,8 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
-      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
       #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
@@ -558,9 +558,9 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/ApproximateNumber.html
-      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
-      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-resources-required-process-messages.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-understanding-logic
       #   [6]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
@@ -715,12 +715,12 @@ module Aws
       #
       # @!attribute [rw] message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
-      #   information, see [Message Attribute Items][1] in the *Amazon SQS
-      #   Developer Guide*.
+      #   information, see [Message Attribute Items and Validation][1] in the
+      #   *Amazon SQS Developer Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html#SQSMessageAttributesNTV
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
       #   @return [Hash<String,Types::MessageAttributeValue>]
       class Message < Struct.new(
         :message_id,
@@ -779,12 +779,12 @@ module Aws
       #   StringValue.
       #
       #   You can also append custom labels. For more information, see
-      #   [Message Attribute Data Types][1] in the *Amazon SQS Developer
-      #   Guide*.
+      #   [Message Attribute Data Types and Validation][1] in the *Amazon SQS
+      #   Developer Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html#SQSMessageAttributes.DataTypes
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-data-types-validation
       #   @return [String]
       class MessageAttributeValue < Struct.new(
         :string_value,
@@ -998,7 +998,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queue-recommendations.html#using-receiverequestattemptid-request-parameter
       #   @return [String]
       class ReceiveMessageRequest < Struct.new(
@@ -1127,12 +1127,12 @@ module Aws
       #
       # @!attribute [rw] message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
-      #   information, see [Message Attribute Items][1] in the *Amazon SQS
-      #   Developer Guide*.
+      #   information, see [Message Attribute Items and Validation][1] in the
+      #   *Amazon SQS Developer Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html#SQSMessageAttributesNTV
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
       #   @return [Hash<String,Types::MessageAttributeValue>]
       #
       # @!attribute [rw] message_deduplication_id
@@ -1354,12 +1354,12 @@ module Aws
       #
       # @!attribute [rw] message_attributes
       #   Each message attribute consists of a Name, Type, and Value. For more
-      #   information, see [Message Attribute Items][1] in the *Amazon SQS
-      #   Developer Guide*.
+      #   information, see [Message Attribute Items and Validation][1] in the
+      #   *Amazon SQS Developer Guide*.
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSMessageAttributes.html#SQSMessageAttributesNTV
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-message-attributes.html#message-attributes-items-validation
       #   @return [Hash<String,Types::MessageAttributeValue>]
       #
       # @!attribute [rw] message_deduplication_id
@@ -1500,7 +1500,7 @@ module Aws
       #
       #
       #
-      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/ImportantIdentifiers.html
+      #   [1]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-queue-message-identifiers.html
       #   @return [String]
       #
       # @!attribute [rw] sequence_number
@@ -1626,8 +1626,8 @@ module Aws
       #
       #
       #   [1]: http://docs.aws.amazon.com/IAM/latest/UserGuide/PoliciesOverview.html
-      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/SQSDeadLetterQueue.html
-      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/AboutVT.html
+      #   [2]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-dead-letter-queues.html
+      #   [3]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/sqs-visibility-timeout.html
       #   [4]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html
       #   [5]: http://docs.aws.amazon.com/AWSSimpleQueueService/latest/SQSDeveloperGuide/FIFO-queues.html#FIFO-queues-exactly-once-processing
       #   @return [Hash<String,String>]

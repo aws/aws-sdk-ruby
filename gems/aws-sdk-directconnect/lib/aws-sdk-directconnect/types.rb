@@ -86,6 +86,7 @@ module Aws
       #           asn: 1, # required
       #           auth_key: "BGPAuthKey",
       #           amazon_address: "AmazonAddress",
+      #           address_family: "ipv4", # accepts ipv4, ipv6
       #           customer_address: "CustomerAddress",
       #         },
       #       }
@@ -128,9 +129,10 @@ module Aws
       #           vlan: 1, # required
       #           asn: 1, # required
       #           auth_key: "BGPAuthKey",
-      #           amazon_address: "AmazonAddress", # required
-      #           customer_address: "CustomerAddress", # required
-      #           route_filter_prefixes: [ # required
+      #           amazon_address: "AmazonAddress",
+      #           customer_address: "CustomerAddress",
+      #           address_family: "ipv4", # accepts ipv4, ipv6
+      #           route_filter_prefixes: [
       #             {
       #               cidr: "CIDR",
       #             },
@@ -160,6 +162,76 @@ module Aws
         :connection_id,
         :owner_account,
         :new_public_virtual_interface_allocation)
+        include Aws::Structure
+      end
+
+      # A structure containing information about a BGP peer.
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      #
+      # @!attribute [rw] bgp_peer_state
+      #   The state of the BGP peer.
+      #
+      #   * **Verifying**\: The BGP peering addresses or ASN require
+      #     validation before the BGP peer can be created. This state only
+      #     applies to BGP peers on a public virtual interface.
+      #
+      #   * **Pending**\: The BGP peer has been created, and is in this state
+      #     until it is ready to be established.
+      #
+      #   * **Available**\: The BGP peer can be established.
+      #
+      #   * **Deleting**\: The BGP peer is in the process of being deleted.
+      #
+      #   * **Deleted**\: The BGP peer has been deleted and cannot be
+      #     established.
+      #   @return [String]
+      #
+      # @!attribute [rw] bgp_status
+      #   The Up/Down state of the BGP peer.
+      #
+      #   * **Up**\: The BGP peer is established.
+      #
+      #   * **Down**\: The BGP peer is down.
+      #   @return [String]
+      class BGPPeer < Struct.new(
+        :asn,
+        :auth_key,
+        :address_family,
+        :amazon_address,
+        :customer_address,
+        :bgp_peer_state,
+        :bgp_status)
         include Aws::Structure
       end
 
@@ -462,6 +534,50 @@ module Aws
         include Aws::Structure
       end
 
+      # Container for the parameters to the CreateBGPPeer operation.
+      # @note When making an API call, pass CreateBGPPeerRequest
+      #   data as a hash:
+      #
+      #       {
+      #         virtual_interface_id: "VirtualInterfaceId",
+      #         new_bgp_peer: {
+      #           asn: 1,
+      #           auth_key: "BGPAuthKey",
+      #           address_family: "ipv4", # accepts ipv4, ipv6
+      #           amazon_address: "AmazonAddress",
+      #           customer_address: "CustomerAddress",
+      #         },
+      #       }
+      # @!attribute [rw] virtual_interface_id
+      #   The ID of the virtual interface on which the BGP peer will be
+      #   provisioned.
+      #
+      #   Example: dxvif-456abc78
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] new_bgp_peer
+      #   Detailed information for the BGP peer to be created.
+      #
+      #   Default: None
+      #   @return [Types::NewBGPPeer]
+      class CreateBGPPeerRequest < Struct.new(
+        :virtual_interface_id,
+        :new_bgp_peer)
+        include Aws::Structure
+      end
+
+      # The response received when CreateBGPPeer is called.
+      # @!attribute [rw] virtual_interface
+      #   A virtual interface (VLAN) transmits the traffic between the AWS
+      #   Direct Connect location and the customer.
+      #   @return [Types::VirtualInterface]
+      class CreateBGPPeerResponse < Struct.new(
+        :virtual_interface)
+        include Aws::Structure
+      end
+
       # Container for the parameters to the CreateConnection operation.
       # @note When making an API call, pass CreateConnectionRequest
       #   data as a hash:
@@ -556,6 +672,7 @@ module Aws
       #           auth_key: "BGPAuthKey",
       #           amazon_address: "AmazonAddress",
       #           customer_address: "CustomerAddress",
+      #           address_family: "ipv4", # accepts ipv4, ipv6
       #           virtual_gateway_id: "VirtualGatewayId", # required
       #         },
       #       }
@@ -591,9 +708,10 @@ module Aws
       #           vlan: 1, # required
       #           asn: 1, # required
       #           auth_key: "BGPAuthKey",
-      #           amazon_address: "AmazonAddress", # required
-      #           customer_address: "CustomerAddress", # required
-      #           route_filter_prefixes: [ # required
+      #           amazon_address: "AmazonAddress",
+      #           customer_address: "CustomerAddress",
+      #           address_family: "ipv4", # accepts ipv4, ipv6
+      #           route_filter_prefixes: [
       #             {
       #               cidr: "CIDR",
       #             },
@@ -616,6 +734,53 @@ module Aws
       class CreatePublicVirtualInterfaceRequest < Struct.new(
         :connection_id,
         :new_public_virtual_interface)
+        include Aws::Structure
+      end
+
+      # Container for the parameters to the DeleteBGPPeer operation.
+      # @note When making an API call, pass DeleteBGPPeerRequest
+      #   data as a hash:
+      #
+      #       {
+      #         virtual_interface_id: "VirtualInterfaceId",
+      #         asn: 1,
+      #         customer_address: "CustomerAddress",
+      #       }
+      # @!attribute [rw] virtual_interface_id
+      #   The ID of the virtual interface from which the BGP peer will be
+      #   deleted.
+      #
+      #   Example: dxvif-456abc78
+      #
+      #   Default: None
+      #   @return [String]
+      #
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      class DeleteBGPPeerRequest < Struct.new(
+        :virtual_interface_id,
+        :asn,
+        :customer_address)
+        include Aws::Structure
+      end
+
+      # The response received when DeleteBGPPeer is called.
+      # @!attribute [rw] virtual_interface
+      #   A virtual interface (VLAN) transmits the traffic between the AWS
+      #   Direct Connect location and the customer.
+      #   @return [Types::VirtualInterface]
+      class DeleteBGPPeerResponse < Struct.new(
+        :virtual_interface)
         include Aws::Structure
       end
 
@@ -1090,6 +1255,58 @@ module Aws
         include Aws::Structure
       end
 
+      # A structure containing information about a new BGP peer.
+      # @note When making an API call, pass NewBGPPeer
+      #   data as a hash:
+      #
+      #       {
+      #         asn: 1,
+      #         auth_key: "BGPAuthKey",
+      #         address_family: "ipv4", # accepts ipv4, ipv6
+      #         amazon_address: "AmazonAddress",
+      #         customer_address: "CustomerAddress",
+      #       }
+      # @!attribute [rw] asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      #   @return [Integer]
+      #
+      # @!attribute [rw] auth_key
+      #   Authentication key for BGP configuration.
+      #
+      #   Example: asdf34example
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_address
+      #   IP address assigned to the Amazon interface.
+      #
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
+      #   @return [String]
+      #
+      # @!attribute [rw] customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      class NewBGPPeer < Struct.new(
+        :asn,
+        :auth_key,
+        :address_family,
+        :amazon_address,
+        :customer_address)
+        include Aws::Structure
+      end
+
       # A structure containing information about a new private virtual
       # interface.
       # @note When making an API call, pass NewPrivateVirtualInterface
@@ -1102,6 +1319,7 @@ module Aws
       #         auth_key: "BGPAuthKey",
       #         amazon_address: "AmazonAddress",
       #         customer_address: "CustomerAddress",
+      #         address_family: "ipv4", # accepts ipv4, ipv6
       #         virtual_gateway_id: "VirtualGatewayId", # required
       #       }
       # @!attribute [rw] virtual_interface_name
@@ -1132,13 +1350,21 @@ module Aws
       # @!attribute [rw] amazon_address
       #   IP address assigned to the Amazon interface.
       #
-      #   Example: 192.168.1.1/30
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
       #   @return [String]
       #
       # @!attribute [rw] customer_address
       #   IP address assigned to the customer interface.
       #
-      #   Example: 192.168.1.2/30
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
       #   @return [String]
       #
       # @!attribute [rw] virtual_gateway_id
@@ -1154,6 +1380,7 @@ module Aws
         :auth_key,
         :amazon_address,
         :customer_address,
+        :address_family,
         :virtual_gateway_id)
         include Aws::Structure
       end
@@ -1169,6 +1396,7 @@ module Aws
       #         asn: 1, # required
       #         auth_key: "BGPAuthKey",
       #         amazon_address: "AmazonAddress",
+      #         address_family: "ipv4", # accepts ipv4, ipv6
       #         customer_address: "CustomerAddress",
       #       }
       # @!attribute [rw] virtual_interface_name
@@ -1199,13 +1427,21 @@ module Aws
       # @!attribute [rw] amazon_address
       #   IP address assigned to the Amazon interface.
       #
-      #   Example: 192.168.1.1/30
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
       #   @return [String]
       #
       # @!attribute [rw] customer_address
       #   IP address assigned to the customer interface.
       #
-      #   Example: 192.168.1.2/30
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
       #   @return [String]
       class NewPrivateVirtualInterfaceAllocation < Struct.new(
         :virtual_interface_name,
@@ -1213,6 +1449,7 @@ module Aws
         :asn,
         :auth_key,
         :amazon_address,
+        :address_family,
         :customer_address)
         include Aws::Structure
       end
@@ -1227,9 +1464,10 @@ module Aws
       #         vlan: 1, # required
       #         asn: 1, # required
       #         auth_key: "BGPAuthKey",
-      #         amazon_address: "AmazonAddress", # required
-      #         customer_address: "CustomerAddress", # required
-      #         route_filter_prefixes: [ # required
+      #         amazon_address: "AmazonAddress",
+      #         customer_address: "CustomerAddress",
+      #         address_family: "ipv4", # accepts ipv4, ipv6
+      #         route_filter_prefixes: [
       #           {
       #             cidr: "CIDR",
       #           },
@@ -1263,13 +1501,21 @@ module Aws
       # @!attribute [rw] amazon_address
       #   IP address assigned to the Amazon interface.
       #
-      #   Example: 192.168.1.1/30
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
       #   @return [String]
       #
       # @!attribute [rw] customer_address
       #   IP address assigned to the customer interface.
       #
-      #   Example: 192.168.1.2/30
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
       #   @return [String]
       #
       # @!attribute [rw] route_filter_prefixes
@@ -1283,6 +1529,7 @@ module Aws
         :auth_key,
         :amazon_address,
         :customer_address,
+        :address_family,
         :route_filter_prefixes)
         include Aws::Structure
       end
@@ -1297,9 +1544,10 @@ module Aws
       #         vlan: 1, # required
       #         asn: 1, # required
       #         auth_key: "BGPAuthKey",
-      #         amazon_address: "AmazonAddress", # required
-      #         customer_address: "CustomerAddress", # required
-      #         route_filter_prefixes: [ # required
+      #         amazon_address: "AmazonAddress",
+      #         customer_address: "CustomerAddress",
+      #         address_family: "ipv4", # accepts ipv4, ipv6
+      #         route_filter_prefixes: [
       #           {
       #             cidr: "CIDR",
       #           },
@@ -1333,13 +1581,21 @@ module Aws
       # @!attribute [rw] amazon_address
       #   IP address assigned to the Amazon interface.
       #
-      #   Example: 192.168.1.1/30
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
       #   @return [String]
       #
       # @!attribute [rw] customer_address
       #   IP address assigned to the customer interface.
       #
-      #   Example: 192.168.1.2/30
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
       #   @return [String]
       #
       # @!attribute [rw] route_filter_prefixes
@@ -1353,6 +1609,7 @@ module Aws
         :auth_key,
         :amazon_address,
         :customer_address,
+        :address_family,
         :route_filter_prefixes)
         include Aws::Structure
       end
@@ -1383,7 +1640,9 @@ module Aws
       #   CIDR notation for the advertised route. Multiple routes are
       #   separated by commas.
       #
-      #   Example: 10.10.10.0/24,10.10.11.0/24
+      #   IPv6 CIDRs must be at least a /64 or shorter
+      #
+      #   Example: 10.10.10.0/24,10.10.11.0/24,2001:db8::/64
       #   @return [String]
       class RouteFilterPrefix < Struct.new(
         :cidr)
@@ -1578,13 +1837,21 @@ module Aws
       # @!attribute [rw] amazon_address
       #   IP address assigned to the Amazon interface.
       #
-      #   Example: 192.168.1.1/30
+      #   Example: 192.168.1.1/30 or 2001:db8::1/125
       #   @return [String]
       #
       # @!attribute [rw] customer_address
       #   IP address assigned to the customer interface.
       #
-      #   Example: 192.168.1.2/30
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      #   @return [String]
+      #
+      # @!attribute [rw] address_family
+      #   Indicates the address family for the BGP peer.
+      #
+      #   * **ipv4**\: IPv4 address family
+      #
+      #   * **ipv6**\: IPv6 address family
       #   @return [String]
       #
       # @!attribute [rw] virtual_interface_state
@@ -1636,6 +1903,10 @@ module Aws
       #   A list of routes to be advertised to the AWS network in this region
       #   (public virtual interface).
       #   @return [Array<Types::RouteFilterPrefix>]
+      #
+      # @!attribute [rw] bgp_peers
+      #   A list of the BGP peers configured on this virtual interface.
+      #   @return [Array<Types::BGPPeer>]
       class VirtualInterface < Struct.new(
         :owner_account,
         :virtual_interface_id,
@@ -1648,10 +1919,12 @@ module Aws
         :auth_key,
         :amazon_address,
         :customer_address,
+        :address_family,
         :virtual_interface_state,
         :customer_router_config,
         :virtual_gateway_id,
-        :route_filter_prefixes)
+        :route_filter_prefixes,
+        :bgp_peers)
         include Aws::Structure
       end
 

@@ -44,19 +44,24 @@ module Aws
         data.state
       end
 
-      # The private DNS name assigned to the instance. This DNS name can only
-      # be used inside the Amazon EC2 network. This name is not available
-      # until the instance enters the `running` state. For EC2-VPC, this name
-      # is only available if you've enabled DNS hostnames for your VPC.
+      # (IPv4 only) The private DNS hostname name assigned to the instance.
+      # This DNS hostname can only be used inside the Amazon EC2 network. This
+      # name is not available until the instance enters the `running` state.
+      #
+      # \[EC2-VPC\] The Amazon-provided DNS server will resolve
+      # Amazon-provided private DNS hostnames if you've enabled DNS
+      # resolution and DNS hostnames in your VPC. If you are not using the
+      # Amazon-provided DNS server in your VPC, your custom domain name
+      # servers must resolve the hostname as appropriate.
       # @return [String]
       def private_dns_name
         data.private_dns_name
       end
 
-      # The public DNS name assigned to the instance. This name is not
-      # available until the instance enters the `running` state. For EC2-VPC,
-      # this name is only available if you've enabled DNS hostnames for your
-      # VPC.
+      # (IPv4 only) The public DNS name assigned to the instance. This name is
+      # not available until the instance enters the `running` state. For
+      # EC2-VPC, this name is only available if you've enabled DNS hostnames
+      # for your VPC.
       # @return [String]
       def public_dns_name
         data.public_dns_name
@@ -125,7 +130,7 @@ module Aws
         data.platform
       end
 
-      # The monitoring information for the instance.
+      # The monitoring for the instance.
       # @return [Types::Monitoring]
       def monitoring
         data.monitoring
@@ -143,13 +148,13 @@ module Aws
         data.vpc_id
       end
 
-      # The private IP address assigned to the instance.
+      # The private IPv4 address assigned to the instance.
       # @return [String]
       def private_ip_address
         data.private_ip_address
       end
 
-      # The public IP address assigned to the instance, if applicable.
+      # The public IPv4 address assigned to the instance, if applicable.
       # @return [String]
       def public_ip_address
         data.public_ip_address

@@ -101,6 +101,11 @@ module Aws
       #   The name of the API Key.
       #   @return [String]
       #
+      # @!attribute [rw] customer_id
+      #   An AWS Marketplace customer identifier , when integrating with the
+      #   AWS SaaS Marketplace.
+      #   @return [String]
+      #
       # @!attribute [rw] description
       #   The description of the API Key.
       #   @return [String]
@@ -129,6 +134,7 @@ module Aws
         :id,
         :value,
         :name,
+        :customer_id,
         :description,
         :enabled,
         :created_date,
@@ -137,8 +143,7 @@ module Aws
         include Aws::Structure
       end
 
-      # The identifier of an API key used to reference an API key in a usage
-      # plan.
+      # The identifier of an ApiKey used in a UsagePlan.
       # @!attribute [rw] ids
       #   A list of all the ApiKey identifiers.
       #   @return [Array<String>]
@@ -469,6 +474,7 @@ module Aws
       #             stage_name: "String",
       #           },
       #         ],
+      #         customer_id: "String",
       #       }
       # @!attribute [rw] name
       #   The name of the ApiKey.
@@ -495,13 +501,19 @@ module Aws
       #   DEPRECATED FOR USAGE PLANS - Specifies stages associated with the
       #   API key.
       #   @return [Array<Types::StageKey>]
+      #
+      # @!attribute [rw] customer_id
+      #   An AWS Marketplace customer identifier , when integrating with the
+      #   AWS SaaS Marketplace.
+      #   @return [String]
       class CreateApiKeyRequest < Struct.new(
         :name,
         :description,
         :enabled,
         :generate_distinct_id,
         :value,
-        :stage_keys)
+        :stage_keys,
+        :customer_id)
         include Aws::Structure
       end
 
@@ -675,6 +687,78 @@ module Aws
         include Aws::Structure
       end
 
+      # Creates a new documentation part of a given API.
+      # @note When making an API call, pass CreateDocumentationPartRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         location: { # required
+      #           type: "API", # required, accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
+      #           path: "String",
+      #           method: "String",
+      #           status_code: "DocumentationPartLocationStatusCode",
+      #           name: "String",
+      #         },
+      #         properties: "String", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-created
+      #   documentation part.
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   \[Required\] The location of the targeted API entity of the
+      #   to-be-created documentation part.
+      #   @return [Types::DocumentationPartLocation]
+      #
+      # @!attribute [rw] properties
+      #   \[Required\] The new documentation content map of the targeted API
+      #   entity. Enclosed key-value pairs are API-specific, but only
+      #   Swagger-compliant key-value pairs can be exported and, hence,
+      #   published.
+      #   @return [String]
+      class CreateDocumentationPartRequest < Struct.new(
+        :rest_api_id,
+        :location,
+        :properties)
+        include Aws::Structure
+      end
+
+      # Creates a new documentation version of a given API.
+      # @note When making an API call, pass CreateDocumentationVersionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_version: "String", # required
+      #         stage_name: "String",
+      #         description: "String",
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] Specifies the API identifier of the to-be-created
+      #   documentation version.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_version
+      #   \[Required\] The version identifier of the new snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] stage_name
+      #   The stage name to be associated with the new documentation snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   A description about the new documentation snapshot.
+      #   @return [String]
+      class CreateDocumentationVersionRequest < Struct.new(
+        :rest_api_id,
+        :documentation_version,
+        :stage_name,
+        :description)
+        include Aws::Structure
+      end
+
       # A request to create a new domain name.
       # @note When making an API call, pass CreateDomainNameRequest
       #   data as a hash:
@@ -799,6 +883,7 @@ module Aws
       #       {
       #         name: "String", # required
       #         description: "String",
+      #         version: "String",
       #         clone_from: "String",
       #         binary_media_types: ["String"],
       #       }
@@ -808,6 +893,10 @@ module Aws
       #
       # @!attribute [rw] description
       #   The description of the RestApi.
+      #   @return [String]
+      #
+      # @!attribute [rw] version
+      #   A version identifier for the API.
       #   @return [String]
       #
       # @!attribute [rw] clone_from
@@ -821,6 +910,7 @@ module Aws
       class CreateRestApiRequest < Struct.new(
         :name,
         :description,
+        :version,
         :clone_from,
         :binary_media_types)
         include Aws::Structure
@@ -840,6 +930,7 @@ module Aws
       #         variables: {
       #           "String" => "String",
       #         },
+      #         documentation_version: "String",
       #       }
       # @!attribute [rw] rest_api_id
       #   The identifier of the RestApi resource for the Stage resource to
@@ -871,6 +962,10 @@ module Aws
       #   Variable names can have alphanumeric and underscore characters, and
       #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
       #   @return [Hash<String,String>]
+      #
+      # @!attribute [rw] documentation_version
+      #   The version of the associated API documentation.
+      #   @return [String]
       class CreateStageRequest < Struct.new(
         :rest_api_id,
         :stage_name,
@@ -878,7 +973,8 @@ module Aws
         :description,
         :cache_cluster_enabled,
         :cache_cluster_size,
-        :variables)
+        :variables,
+        :documentation_version)
         include Aws::Structure
       end
 
@@ -1056,6 +1152,51 @@ module Aws
       class DeleteDeploymentRequest < Struct.new(
         :rest_api_id,
         :deployment_id)
+        include Aws::Structure
+      end
+
+      # Deletes an existing documentation part of an API.
+      # @note When making an API call, pass DeleteDocumentationPartRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_part_id: "String", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] Specifies the identifier of an API of the to-be-deleted
+      #   documentation part.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_part_id
+      #   \[Required\] The identifier of the to-be-deleted documentation part.
+      #   @return [String]
+      class DeleteDocumentationPartRequest < Struct.new(
+        :rest_api_id,
+        :documentation_part_id)
+        include Aws::Structure
+      end
+
+      # Deletes an existing documentation version of an API.
+      # @note When making an API call, pass DeleteDocumentationVersionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_version: "String", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of a to-be-deleted
+      #   documentation snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_version
+      #   \[Required\] The version identifier of a to-be-deleted documentation
+      #   snapshot.
+      #   @return [String]
+      class DeleteDocumentationVersionRequest < Struct.new(
+        :rest_api_id,
+        :documentation_version)
         include Aws::Structure
       end
 
@@ -1390,6 +1531,249 @@ module Aws
         include Aws::Structure
       end
 
+      # A documentation part for a targeted API entity.
+      #
+      # <div class="remarks" markdown="1">
+      # A documentation part consists of a content map (`properties`) and a
+      # target (`location`). The target specifies an API entity to which the
+      # documentation content applies. The supported API entity types are
+      # `API`, `AUTHORIZER`, `MODEL`, `RESOURCE`, `METHOD`, `PATH_PARAMETER`,
+      # `QUERY_PARAMETER`, `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`,
+      # `RESPONSE_HEADER`, and `RESPONSE_BODY`. Valid `location` fields depend
+      # on the API entity type. All valid fields are not required.
+      #
+      # The content map is a JSON string of API-specific key-value pairs.
+      # Although an API can use any shape for the content map, only the
+      # Swagger-compliant documentation fields will be injected into the
+      # associated API entity definition in the exported Swagger definition
+      # file.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Documenting an API][1], DocumentationParts
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+      # @!attribute [rw] id
+      #   The DocumentationPart identifier, generated by Amazon API Gateway
+      #   when the `DocumentationPart` is created.
+      #   @return [String]
+      #
+      # @!attribute [rw] location
+      #   The location of the API entity to which the documentation applies.
+      #   Valid fields depend on the targeted API entity type. All the valid
+      #   location fields are not required. If not explicitly specified, a
+      #   valid location field is treated as a wildcard and associated
+      #   documentation content may be inherited by matching entities, unless
+      #   overridden.
+      #   @return [Types::DocumentationPartLocation]
+      #
+      # @!attribute [rw] properties
+      #   A content map of API-specific key-value pairs describing the
+      #   targeted API entity. The map must be encoded as a JSON string, e.g.,
+      #   `"\{ "description": "The API does ..." \}"`. Only
+      #   Swagger-compliant documentation-related fields from the
+      #   <literal>properties</literal>
+      #
+      #    map are exported and, hence, published as part of the API entity
+      #   definitions, while the original documentation parts are exported in
+      #   a Swagger extension of `x-amazon-apigateway-documentation`.
+      #   @return [String]
+      class DocumentationPart < Struct.new(
+        :id,
+        :location,
+        :properties)
+        include Aws::Structure
+      end
+
+      # A collection of the imported DocumentationPart identifiers.
+      #
+      # <div class="remarks">
+      # This is used to return the result when documentation parts in an
+      # external (e.g., Swagger) file are imported into Amazon API Gateway
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Documenting an API][1], [documentationpart:import][2],
+      # DocumentationPart
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+      # [2]: http://docs.aws.amazon.com/apigateway/api-reference/link-relation/documentationpart-import/
+      # @!attribute [rw] ids
+      #   A list of the returned documentation part identifiers.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] warnings
+      #   A list of warning messages reported during import of documentation
+      #   parts.
+      #   @return [Array<String>]
+      class DocumentationPartIds < Struct.new(
+        :ids,
+        :warnings)
+        include Aws::Structure
+      end
+
+      # Specifies the target API entity to which the documentation applies.
+      # @note When making an API call, pass DocumentationPartLocation
+      #   data as a hash:
+      #
+      #       {
+      #         type: "API", # required, accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
+      #         path: "String",
+      #         method: "String",
+      #         status_code: "DocumentationPartLocationStatusCode",
+      #         name: "String",
+      #       }
+      # @!attribute [rw] type
+      #   The type of API entity to which the documentation content applies.
+      #   It is a valid and required field for API entity types of `API`,
+      #   `AUTHORIZER`, `MODEL`, `RESOURCE`, `METHOD`, `PATH_PARAMETER`,
+      #   `QUERY_PARAMETER`, `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`,
+      #   `RESPONSE_HEADER`, and `RESPONSE_BODY`. Content inheritance does not
+      #   apply to any entity of the `API`, `AUTHROZER`, `MODEL`, or
+      #   `RESOURCE` type.
+      #   @return [String]
+      #
+      # @!attribute [rw] path
+      #   The URL path of the target. It is a valid field for the API entity
+      #   types of `RESOURCE`, `METHOD`, `PATH_PARAMETER`, `QUERY_PARAMETER`,
+      #   `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`, `RESPONSE_HEADER`, and
+      #   `RESPONSE_BODY`. The default value is `/` for the root resource.
+      #   When an applicable child entity inherits the content of another
+      #   entity of the same type with more general specifications of the
+      #   other `location` attributes, the child entity's `path` attribute
+      #   must match that of the parent entity as a prefix.
+      #   @return [String]
+      #
+      # @!attribute [rw] method
+      #   The HTTP verb of a method. It is a valid field for the API entity
+      #   types of `METHOD`, `PATH_PARAMETER`, `QUERY_PARAMETER`,
+      #   `REQUEST_HEADER`, `REQUEST_BODY`, `RESPONSE`, `RESPONSE_HEADER`, and
+      #   `RESPONSE_BODY`. The default value is `*` for any method. When an
+      #   applicable child entity inherits the content of an entity of the
+      #   same type with more general specifications of the other `location`
+      #   attributes, the child entity's `method` attribute must match that
+      #   of the parent entity exactly.
+      #   @return [String]
+      #
+      # @!attribute [rw] status_code
+      #   The HTTP status code of a response. It is a valid field for the API
+      #   entity types of `RESPONSE`, `RESPONSE_HEADER`, and `RESPONSE_BODY`.
+      #   The default value is `*` for any status code. When an applicable
+      #   child entity inherits the content of an entity of the same type with
+      #   more general specifications of the other `location` attributes, the
+      #   child entity's `statusCode` attribute must match that of the parent
+      #   entity exactly.
+      #   @return [String]
+      #
+      # @!attribute [rw] name
+      #   The name of the targeted API entity. It is a valid and required
+      #   field for the API entity types of `AUTHORIZER`, `MODEL`,
+      #   `PATH_PARAMETER`, `QUERY_PARAMETER`, `REQUEST_HEADER`,
+      #   `REQUEST_BODY` and `RESPONSE_HEADER`. It is an invalid field for any
+      #   other entity type.
+      #   @return [String]
+      class DocumentationPartLocation < Struct.new(
+        :type,
+        :path,
+        :method,
+        :status_code,
+        :name)
+        include Aws::Structure
+      end
+
+      # The collection of documentation parts of an API.
+      #
+      # <div class="remarks"></div>
+      #
+      # <div class="seeAlso">
+      # [Documenting an API][1], DocumentationPart
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+      # @!attribute [rw] position
+      #   @return [String]
+      #
+      # @!attribute [rw] items
+      #   The current page of DocumentationPart resources in the
+      #   DocumentationParts collection.
+      #   @return [Array<Types::DocumentationPart>]
+      class DocumentationParts < Struct.new(
+        :position,
+        :items)
+        include Aws::Structure
+      end
+
+      # A snapshot of the documentation of an API.
+      #
+      # <div class="remarks" markdown="1">
+      # Publishing API documentation involves creating a documentation version
+      # associated with an API stage and exporting the versioned documentation
+      # to an external (e.g., Swagger) file.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Documenting an API][1], DocumentationPart, DocumentationVersions
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+      # @!attribute [rw] version
+      #   The version identifier of the API documentation snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] created_date
+      #   The date when the API documentation snapshot is created.
+      #   @return [Time]
+      #
+      # @!attribute [rw] description
+      #   The description of the API documentation snapshot.
+      #   @return [String]
+      class DocumentationVersion < Struct.new(
+        :version,
+        :created_date,
+        :description)
+        include Aws::Structure
+      end
+
+      # The collection of documentation snapshots of an API.
+      #
+      # <div class="remarks" markdown="1">
+      # Use the DocumentationVersions to manage documentation snapshots
+      # associated with various API stages.
+      #
+      # </div>
+      #
+      # <div class="seeAlso">
+      # [Documenting an API][1], DocumentationPart, DocumentationVersion
+      # </div>
+      #
+      #
+      #
+      # [1]: http://docs.aws.amazon.com/apigateway/latest/developerguide/api-gateway-documenting-api.html
+      # @!attribute [rw] position
+      #   @return [String]
+      #
+      # @!attribute [rw] items
+      #   The current page of DocumentationVersion items from the
+      #   DocumentationVersions collection of an API.
+      #   @return [Array<Types::DocumentationVersion>]
+      class DocumentationVersions < Struct.new(
+        :position,
+        :items)
+        include Aws::Structure
+      end
+
       # Represents a domain name that is contained in a simpler, more
       # intuitive URL that can be called.
       #
@@ -1584,6 +1968,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] customer_id
+      #   The identifier of a customer in AWS Marketplace or an external
+      #   system, such as a developer portal.
       #   @return [String]
       #
       # @!attribute [rw] include_values
@@ -1793,6 +2179,129 @@ module Aws
       #   between 1 - 500.
       #   @return [Integer]
       class GetDeploymentsRequest < Struct.new(
+        :rest_api_id,
+        :position,
+        :limit)
+        include Aws::Structure
+      end
+
+      # Gets a specified documentation part of a given API.
+      # @note When making an API call, pass GetDocumentationPartRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_part_id: "String", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-retrieved
+      #   documentation part.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_part_id
+      #   \[Required\] The identifier of the to-be-retrieved documentation
+      #   part.
+      #   @return [String]
+      class GetDocumentationPartRequest < Struct.new(
+        :rest_api_id,
+        :documentation_part_id)
+        include Aws::Structure
+      end
+
+      # Gets the documentation parts of an API. The result may be filtered by
+      # the type, name, or path of API entities (targets).
+      # @note When making an API call, pass GetDocumentationPartsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         type: "API", # accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
+      #         name_query: "String",
+      #         path: "String",
+      #         position: "String",
+      #         limit: 1,
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of the API of the to-be-retrieved
+      #   documentation parts.
+      #   @return [String]
+      #
+      # @!attribute [rw] type
+      #   The type of API entities of the to-be-retrieved documentation parts.
+      #   @return [String]
+      #
+      # @!attribute [rw] name_query
+      #   The name of API entities of the to-be-retrieved documentation parts.
+      #   @return [String]
+      #
+      # @!attribute [rw] path
+      #   The path of API entities of the to-be-retrieved documentation parts.
+      #   @return [String]
+      #
+      # @!attribute [rw] position
+      #   The position of the to-be-retrieved documentation part in the
+      #   DocumentationParts collection.
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   The size of the paged results.
+      #   @return [Integer]
+      class GetDocumentationPartsRequest < Struct.new(
+        :rest_api_id,
+        :type,
+        :name_query,
+        :path,
+        :position,
+        :limit)
+        include Aws::Structure
+      end
+
+      # Gets a documentation snapshot of an API.
+      # @note When making an API call, pass GetDocumentationVersionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_version: "String", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of the API of the to-be-retrieved
+      #   documentation snapshot.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_version
+      #   \[Required\] The version identifier of the to-be-retrieved
+      #   documentation snapshot.
+      #   @return [String]
+      class GetDocumentationVersionRequest < Struct.new(
+        :rest_api_id,
+        :documentation_version)
+        include Aws::Structure
+      end
+
+      # Gets the documentation versions of an API.
+      # @note When making an API call, pass GetDocumentationVersionsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         position: "String",
+      #         limit: 1,
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-retrieved
+      #   documentation versions.
+      #   @return [String]
+      #
+      # @!attribute [rw] position
+      #   The position of the returned `DocumentationVersion` in the
+      #   DocumentationVersions collection.
+      #   @return [String]
+      #
+      # @!attribute [rw] limit
+      #   The page size of the returned documentation versions.
+      #   @return [Integer]
+      class GetDocumentationVersionsRequest < Struct.new(
         :rest_api_id,
         :position,
         :limit)
@@ -2449,6 +2958,47 @@ module Aws
         :body,
         :format,
         :fail_on_warnings)
+        include Aws::Structure
+      end
+
+      # Import documentation parts from an external (e.g., Swagger) definition
+      # file.
+      # @note When making an API call, pass ImportDocumentationPartsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         mode: "merge", # accepts merge, overwrite
+      #         fail_on_warnings: false,
+      #         body: "data", # required
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-imported
+      #   documentation parts.
+      #   @return [String]
+      #
+      # @!attribute [rw] mode
+      #   A query parameter to indicate whether to overwrite (`OVERWRITE`) any
+      #   existing DocumentationParts definition or to merge (`MERGE`) the new
+      #   definition into the existing one. The default value is `MERGE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] fail_on_warnings
+      #   A query parameter to specify whether to rollback the documentation
+      #   importation (`true`) or not (`false`) when a warning is encountered.
+      #   The default value is `false`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] body
+      #   \[Required\] Raw byte array representing the to-be-imported
+      #   documentation parts. To import from a Swagger file, this is a JSON
+      #   object.
+      #   @return [String]
+      class ImportDocumentationPartsRequest < Struct.new(
+        :rest_api_id,
+        :mode,
+        :fail_on_warnings,
+        :body)
         include Aws::Structure
       end
 
@@ -3759,6 +4309,10 @@ module Aws
       #   [1]: http://www.iso.org/iso/home/standards/iso8601.htm
       #   @return [Time]
       #
+      # @!attribute [rw] version
+      #   A version identifier for the API.
+      #   @return [String]
+      #
       # @!attribute [rw] warnings
       #   The warning messages reported when `failonwarnings` is turned on
       #   during API import.
@@ -3773,6 +4327,7 @@ module Aws
         :name,
         :description,
         :created_date,
+        :version,
         :warnings,
         :binary_media_types)
         include Aws::Structure
@@ -3874,6 +4429,10 @@ module Aws
       #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
       #   @return [Hash<String,String>]
       #
+      # @!attribute [rw] documentation_version
+      #   The version of the associated API documentation.
+      #   @return [String]
+      #
       # @!attribute [rw] created_date
       #   The date and time that the stage was created, in [ISO 8601
       #   format][1].
@@ -3901,6 +4460,7 @@ module Aws
         :cache_cluster_status,
         :method_settings,
         :variables,
+        :documentation_version,
         :created_date,
         :last_updated_date)
         include Aws::Structure
@@ -4391,6 +4951,79 @@ module Aws
       class UpdateDeploymentRequest < Struct.new(
         :rest_api_id,
         :deployment_id,
+        :patch_operations)
+        include Aws::Structure
+      end
+
+      # Updates an existing documentation part of a given API.
+      # @note When making an API call, pass UpdateDocumentationPartRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_part_id: "String", # required
+      #         patch_operations: [
+      #           {
+      #             op: "add", # accepts add, remove, replace, move, copy, test
+      #             path: "String",
+      #             value: "String",
+      #             from: "String",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-updated
+      #   documentation part.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_part_id
+      #   \[Required\] The identifier of the to-be-updated documentation part.
+      #   @return [String]
+      #
+      # @!attribute [rw] patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      #   @return [Array<Types::PatchOperation>]
+      class UpdateDocumentationPartRequest < Struct.new(
+        :rest_api_id,
+        :documentation_part_id,
+        :patch_operations)
+        include Aws::Structure
+      end
+
+      # Updates an existing documentation version of an API.
+      # @note When making an API call, pass UpdateDocumentationVersionRequest
+      #   data as a hash:
+      #
+      #       {
+      #         rest_api_id: "String", # required
+      #         documentation_version: "String", # required
+      #         patch_operations: [
+      #           {
+      #             op: "add", # accepts add, remove, replace, move, copy, test
+      #             path: "String",
+      #             value: "String",
+      #             from: "String",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-updated
+      #   documentation version.
+      #   @return [String]
+      #
+      # @!attribute [rw] documentation_version
+      #   \[Required\] The version identifier of the to-be-updated
+      #   documentation version.
+      #   @return [String]
+      #
+      # @!attribute [rw] patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      #   @return [Array<Types::PatchOperation>]
+      class UpdateDocumentationVersionRequest < Struct.new(
+        :rest_api_id,
+        :documentation_version,
         :patch_operations)
         include Aws::Structure
       end
@@ -4888,13 +5521,19 @@ module Aws
       #   The maximum number of permitted requests per a given unit time
       #   interval.
       #   @return [Types::QuotaSettings]
+      #
+      # @!attribute [rw] product_code
+      #   The AWS Markeplace product identifier to associate with the usage
+      #   plan as a SaaS product on AWS Marketplace.
+      #   @return [String]
       class UsagePlan < Struct.new(
         :id,
         :name,
         :description,
         :api_stages,
         :throttle,
-        :quota)
+        :quota,
+        :product_code)
         include Aws::Structure
       end
 

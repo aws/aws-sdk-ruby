@@ -36,12 +36,18 @@ module Aws
       AllocationState = Shapes::StringShape.new(name: 'AllocationState')
       AllocationStrategy = Shapes::StringShape.new(name: 'AllocationStrategy')
       ArchitectureValues = Shapes::StringShape.new(name: 'ArchitectureValues')
+      AssignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'AssignIpv6AddressesRequest')
+      AssignIpv6AddressesResult = Shapes::StructureShape.new(name: 'AssignIpv6AddressesResult')
       AssignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'AssignPrivateIpAddressesRequest')
       AssociateAddressRequest = Shapes::StructureShape.new(name: 'AssociateAddressRequest')
       AssociateAddressResult = Shapes::StructureShape.new(name: 'AssociateAddressResult')
       AssociateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'AssociateDhcpOptionsRequest')
       AssociateRouteTableRequest = Shapes::StructureShape.new(name: 'AssociateRouteTableRequest')
       AssociateRouteTableResult = Shapes::StructureShape.new(name: 'AssociateRouteTableResult')
+      AssociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockRequest')
+      AssociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateSubnetCidrBlockResult')
+      AssociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockRequest')
+      AssociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'AssociateVpcCidrBlockResult')
       AttachClassicLinkVpcRequest = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcRequest')
       AttachClassicLinkVpcResult = Shapes::StructureShape.new(name: 'AttachClassicLinkVpcResult')
       AttachInternetGatewayRequest = Shapes::StructureShape.new(name: 'AttachInternetGatewayRequest')
@@ -117,6 +123,8 @@ module Aws
       CreateCustomerGatewayResult = Shapes::StructureShape.new(name: 'CreateCustomerGatewayResult')
       CreateDhcpOptionsRequest = Shapes::StructureShape.new(name: 'CreateDhcpOptionsRequest')
       CreateDhcpOptionsResult = Shapes::StructureShape.new(name: 'CreateDhcpOptionsResult')
+      CreateEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayRequest')
+      CreateEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'CreateEgressOnlyInternetGatewayResult')
       CreateFlowLogsRequest = Shapes::StructureShape.new(name: 'CreateFlowLogsRequest')
       CreateFlowLogsResult = Shapes::StructureShape.new(name: 'CreateFlowLogsResult')
       CreateImageRequest = Shapes::StructureShape.new(name: 'CreateImageRequest')
@@ -171,6 +179,8 @@ module Aws
       DateTime = Shapes::TimestampShape.new(name: 'DateTime')
       DeleteCustomerGatewayRequest = Shapes::StructureShape.new(name: 'DeleteCustomerGatewayRequest')
       DeleteDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DeleteDhcpOptionsRequest')
+      DeleteEgressOnlyInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayRequest')
+      DeleteEgressOnlyInternetGatewayResult = Shapes::StructureShape.new(name: 'DeleteEgressOnlyInternetGatewayResult')
       DeleteFlowLogsRequest = Shapes::StructureShape.new(name: 'DeleteFlowLogsRequest')
       DeleteFlowLogsResult = Shapes::StructureShape.new(name: 'DeleteFlowLogsResult')
       DeleteInternetGatewayRequest = Shapes::StructureShape.new(name: 'DeleteInternetGatewayRequest')
@@ -215,6 +225,8 @@ module Aws
       DescribeCustomerGatewaysResult = Shapes::StructureShape.new(name: 'DescribeCustomerGatewaysResult')
       DescribeDhcpOptionsRequest = Shapes::StructureShape.new(name: 'DescribeDhcpOptionsRequest')
       DescribeDhcpOptionsResult = Shapes::StructureShape.new(name: 'DescribeDhcpOptionsResult')
+      DescribeEgressOnlyInternetGatewaysRequest = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysRequest')
+      DescribeEgressOnlyInternetGatewaysResult = Shapes::StructureShape.new(name: 'DescribeEgressOnlyInternetGatewaysResult')
       DescribeExportTasksRequest = Shapes::StructureShape.new(name: 'DescribeExportTasksRequest')
       DescribeExportTasksResult = Shapes::StructureShape.new(name: 'DescribeExportTasksResult')
       DescribeFlowLogsRequest = Shapes::StructureShape.new(name: 'DescribeFlowLogsRequest')
@@ -345,6 +357,10 @@ module Aws
       DisableVpcClassicLinkResult = Shapes::StructureShape.new(name: 'DisableVpcClassicLinkResult')
       DisassociateAddressRequest = Shapes::StructureShape.new(name: 'DisassociateAddressRequest')
       DisassociateRouteTableRequest = Shapes::StructureShape.new(name: 'DisassociateRouteTableRequest')
+      DisassociateSubnetCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockRequest')
+      DisassociateSubnetCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateSubnetCidrBlockResult')
+      DisassociateVpcCidrBlockRequest = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockRequest')
+      DisassociateVpcCidrBlockResult = Shapes::StructureShape.new(name: 'DisassociateVpcCidrBlockResult')
       DiskImage = Shapes::StructureShape.new(name: 'DiskImage')
       DiskImageDescription = Shapes::StructureShape.new(name: 'DiskImageDescription')
       DiskImageDetail = Shapes::StructureShape.new(name: 'DiskImageDetail')
@@ -356,6 +372,10 @@ module Aws
       EbsBlockDevice = Shapes::StructureShape.new(name: 'EbsBlockDevice')
       EbsInstanceBlockDevice = Shapes::StructureShape.new(name: 'EbsInstanceBlockDevice')
       EbsInstanceBlockDeviceSpecification = Shapes::StructureShape.new(name: 'EbsInstanceBlockDeviceSpecification')
+      EgressOnlyInternetGateway = Shapes::StructureShape.new(name: 'EgressOnlyInternetGateway')
+      EgressOnlyInternetGatewayId = Shapes::StringShape.new(name: 'EgressOnlyInternetGatewayId')
+      EgressOnlyInternetGatewayIdList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayIdList')
+      EgressOnlyInternetGatewayList = Shapes::ListShape.new(name: 'EgressOnlyInternetGatewayList')
       EnableVgwRoutePropagationRequest = Shapes::StructureShape.new(name: 'EnableVgwRoutePropagationRequest')
       EnableVolumeIORequest = Shapes::StructureShape.new(name: 'EnableVolumeIORequest')
       EnableVpcClassicLinkDnsSupportRequest = Shapes::StructureShape.new(name: 'EnableVpcClassicLinkDnsSupportRequest')
@@ -458,6 +478,8 @@ module Aws
       InstanceExportDetails = Shapes::StructureShape.new(name: 'InstanceExportDetails')
       InstanceIdSet = Shapes::ListShape.new(name: 'InstanceIdSet')
       InstanceIdStringList = Shapes::ListShape.new(name: 'InstanceIdStringList')
+      InstanceIpv6Address = Shapes::StructureShape.new(name: 'InstanceIpv6Address')
+      InstanceIpv6AddressList = Shapes::ListShape.new(name: 'InstanceIpv6AddressList')
       InstanceLifecycleType = Shapes::StringShape.new(name: 'InstanceLifecycleType')
       InstanceList = Shapes::ListShape.new(name: 'InstanceList')
       InstanceMonitoring = Shapes::StructureShape.new(name: 'InstanceMonitoring')
@@ -493,6 +515,12 @@ module Aws
       IpRange = Shapes::StructureShape.new(name: 'IpRange')
       IpRangeList = Shapes::ListShape.new(name: 'IpRangeList')
       IpRanges = Shapes::ListShape.new(name: 'IpRanges')
+      Ipv6Address = Shapes::StringShape.new(name: 'Ipv6Address')
+      Ipv6AddressList = Shapes::ListShape.new(name: 'Ipv6AddressList')
+      Ipv6CidrBlock = Shapes::StructureShape.new(name: 'Ipv6CidrBlock')
+      Ipv6CidrBlockSet = Shapes::ListShape.new(name: 'Ipv6CidrBlockSet')
+      Ipv6Range = Shapes::StructureShape.new(name: 'Ipv6Range')
+      Ipv6RangeList = Shapes::ListShape.new(name: 'Ipv6RangeList')
       KeyNameStringList = Shapes::ListShape.new(name: 'KeyNameStringList')
       KeyPair = Shapes::StructureShape.new(name: 'KeyPair')
       KeyPairInfo = Shapes::StructureShape.new(name: 'KeyPairInfo')
@@ -553,6 +581,8 @@ module Aws
       NetworkInterfaceAttachmentChanges = Shapes::StructureShape.new(name: 'NetworkInterfaceAttachmentChanges')
       NetworkInterfaceAttribute = Shapes::StringShape.new(name: 'NetworkInterfaceAttribute')
       NetworkInterfaceIdList = Shapes::ListShape.new(name: 'NetworkInterfaceIdList')
+      NetworkInterfaceIpv6Address = Shapes::StructureShape.new(name: 'NetworkInterfaceIpv6Address')
+      NetworkInterfaceIpv6AddressesList = Shapes::ListShape.new(name: 'NetworkInterfaceIpv6AddressesList')
       NetworkInterfaceList = Shapes::ListShape.new(name: 'NetworkInterfaceList')
       NetworkInterfacePrivateIpAddress = Shapes::StructureShape.new(name: 'NetworkInterfacePrivateIpAddress')
       NetworkInterfacePrivateIpAddressList = Shapes::ListShape.new(name: 'NetworkInterfacePrivateIpAddressList')
@@ -711,6 +741,8 @@ module Aws
       ScheduledInstancesBlockDeviceMappingSet = Shapes::ListShape.new(name: 'ScheduledInstancesBlockDeviceMappingSet')
       ScheduledInstancesEbs = Shapes::StructureShape.new(name: 'ScheduledInstancesEbs')
       ScheduledInstancesIamInstanceProfile = Shapes::StructureShape.new(name: 'ScheduledInstancesIamInstanceProfile')
+      ScheduledInstancesIpv6Address = Shapes::StructureShape.new(name: 'ScheduledInstancesIpv6Address')
+      ScheduledInstancesIpv6AddressList = Shapes::ListShape.new(name: 'ScheduledInstancesIpv6AddressList')
       ScheduledInstancesLaunchSpecification = Shapes::StructureShape.new(name: 'ScheduledInstancesLaunchSpecification')
       ScheduledInstancesMonitoring = Shapes::StructureShape.new(name: 'ScheduledInstancesMonitoring')
       ScheduledInstancesNetworkInterface = Shapes::StructureShape.new(name: 'ScheduledInstancesNetworkInterface')
@@ -768,7 +800,11 @@ module Aws
       Storage = Shapes::StructureShape.new(name: 'Storage')
       String = Shapes::StringShape.new(name: 'String')
       Subnet = Shapes::StructureShape.new(name: 'Subnet')
+      SubnetCidrBlockState = Shapes::StructureShape.new(name: 'SubnetCidrBlockState')
+      SubnetCidrBlockStateCode = Shapes::StringShape.new(name: 'SubnetCidrBlockStateCode')
       SubnetIdStringList = Shapes::ListShape.new(name: 'SubnetIdStringList')
+      SubnetIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'SubnetIpv6CidrBlockAssociation')
+      SubnetIpv6CidrBlockAssociationSet = Shapes::ListShape.new(name: 'SubnetIpv6CidrBlockAssociationSet')
       SubnetList = Shapes::ListShape.new(name: 'SubnetList')
       SubnetState = Shapes::StringShape.new(name: 'SubnetState')
       SummaryStatus = Shapes::StringShape.new(name: 'SummaryStatus')
@@ -786,6 +822,8 @@ module Aws
       TerminateInstancesRequest = Shapes::StructureShape.new(name: 'TerminateInstancesRequest')
       TerminateInstancesResult = Shapes::StructureShape.new(name: 'TerminateInstancesResult')
       TrafficType = Shapes::StringShape.new(name: 'TrafficType')
+      UnassignIpv6AddressesRequest = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesRequest')
+      UnassignIpv6AddressesResult = Shapes::StructureShape.new(name: 'UnassignIpv6AddressesResult')
       UnassignPrivateIpAddressesRequest = Shapes::StructureShape.new(name: 'UnassignPrivateIpAddressesRequest')
       UnmonitorInstancesRequest = Shapes::StructureShape.new(name: 'UnmonitorInstancesRequest')
       UnmonitorInstancesResult = Shapes::StructureShape.new(name: 'UnmonitorInstancesResult')
@@ -830,12 +868,16 @@ module Aws
       VpcAttachment = Shapes::StructureShape.new(name: 'VpcAttachment')
       VpcAttachmentList = Shapes::ListShape.new(name: 'VpcAttachmentList')
       VpcAttributeName = Shapes::StringShape.new(name: 'VpcAttributeName')
+      VpcCidrBlockState = Shapes::StructureShape.new(name: 'VpcCidrBlockState')
+      VpcCidrBlockStateCode = Shapes::StringShape.new(name: 'VpcCidrBlockStateCode')
       VpcClassicLink = Shapes::StructureShape.new(name: 'VpcClassicLink')
       VpcClassicLinkIdList = Shapes::ListShape.new(name: 'VpcClassicLinkIdList')
       VpcClassicLinkList = Shapes::ListShape.new(name: 'VpcClassicLinkList')
       VpcEndpoint = Shapes::StructureShape.new(name: 'VpcEndpoint')
       VpcEndpointSet = Shapes::ListShape.new(name: 'VpcEndpointSet')
       VpcIdStringList = Shapes::ListShape.new(name: 'VpcIdStringList')
+      VpcIpv6CidrBlockAssociation = Shapes::StructureShape.new(name: 'VpcIpv6CidrBlockAssociation')
+      VpcIpv6CidrBlockAssociationSet = Shapes::ListShape.new(name: 'VpcIpv6CidrBlockAssociationSet')
       VpcList = Shapes::ListShape.new(name: 'VpcList')
       VpcPeeringConnection = Shapes::StructureShape.new(name: 'VpcPeeringConnection')
       VpcPeeringConnectionList = Shapes::ListShape.new(name: 'VpcPeeringConnectionList')
@@ -927,6 +969,15 @@ module Aws
 
       AllocationIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "AllocationId")
 
+      AssignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
+      AssignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "ipv6Addresses"))
+      AssignIpv6AddressesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
+      AssignIpv6AddressesRequest.struct_class = Types::AssignIpv6AddressesRequest
+
+      AssignIpv6AddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+      AssignIpv6AddressesResult.add_member(:assigned_ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "assignedIpv6Addresses"))
+      AssignIpv6AddressesResult.struct_class = Types::AssignIpv6AddressesResult
+
       AssignPrivateIpAddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
       AssignPrivateIpAddressesRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressStringList, location_name: "privateIpAddress"))
       AssignPrivateIpAddressesRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
@@ -957,6 +1008,22 @@ module Aws
 
       AssociateRouteTableResult.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
       AssociateRouteTableResult.struct_class = Types::AssociateRouteTableResult
+
+      AssociateSubnetCidrBlockRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
+      AssociateSubnetCidrBlockRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ipv6CidrBlock"))
+      AssociateSubnetCidrBlockRequest.struct_class = Types::AssociateSubnetCidrBlockRequest
+
+      AssociateSubnetCidrBlockResult.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+      AssociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+      AssociateSubnetCidrBlockResult.struct_class = Types::AssociateSubnetCidrBlockResult
+
+      AssociateVpcCidrBlockRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "vpcId"))
+      AssociateVpcCidrBlockRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
+      AssociateVpcCidrBlockRequest.struct_class = Types::AssociateVpcCidrBlockRequest
+
+      AssociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+      AssociateVpcCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+      AssociateVpcCidrBlockResult.struct_class = Types::AssociateVpcCidrBlockResult
 
       AttachClassicLinkVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       AttachClassicLinkVpcRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "instanceId"))
@@ -1234,6 +1301,15 @@ module Aws
       CreateDhcpOptionsResult.add_member(:dhcp_options, Shapes::ShapeRef.new(shape: DhcpOptions, location_name: "dhcpOptions"))
       CreateDhcpOptionsResult.struct_class = Types::CreateDhcpOptionsResult
 
+      CreateEgressOnlyInternetGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+      CreateEgressOnlyInternetGatewayRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
+      CreateEgressOnlyInternetGatewayRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "ClientToken"))
+      CreateEgressOnlyInternetGatewayRequest.struct_class = Types::CreateEgressOnlyInternetGatewayRequest
+
+      CreateEgressOnlyInternetGatewayResult.add_member(:egress_only_internet_gateway, Shapes::ShapeRef.new(shape: EgressOnlyInternetGateway, location_name: "egressOnlyInternetGateway"))
+      CreateEgressOnlyInternetGatewayResult.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
+      CreateEgressOnlyInternetGatewayResult.struct_class = Types::CreateEgressOnlyInternetGatewayResult
+
       CreateFlowLogsRequest.add_member(:resource_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "ResourceId"))
       CreateFlowLogsRequest.add_member(:resource_type, Shapes::ShapeRef.new(shape: FlowLogsResourceType, required: true, location_name: "ResourceType"))
       CreateFlowLogsRequest.add_member(:traffic_type, Shapes::ShapeRef.new(shape: TrafficType, required: true, location_name: "TrafficType"))
@@ -1292,7 +1368,8 @@ module Aws
       CreateNetworkAclEntryRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: String, required: true, location_name: "protocol"))
       CreateNetworkAclEntryRequest.add_member(:rule_action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "ruleAction"))
       CreateNetworkAclEntryRequest.add_member(:egress, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "egress"))
-      CreateNetworkAclEntryRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cidrBlock"))
+      CreateNetworkAclEntryRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+      CreateNetworkAclEntryRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
       CreateNetworkAclEntryRequest.add_member(:icmp_type_code, Shapes::ShapeRef.new(shape: IcmpTypeCode, location_name: "Icmp"))
       CreateNetworkAclEntryRequest.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
       CreateNetworkAclEntryRequest.struct_class = Types::CreateNetworkAclEntryRequest
@@ -1310,6 +1387,8 @@ module Aws
       CreateNetworkInterfaceRequest.add_member(:groups, Shapes::ShapeRef.new(shape: SecurityGroupIdStringList, location_name: "SecurityGroupId"))
       CreateNetworkInterfaceRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressSpecificationList, location_name: "privateIpAddresses"))
       CreateNetworkInterfaceRequest.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
+      CreateNetworkInterfaceRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: InstanceIpv6AddressList, location_name: "ipv6Addresses"))
+      CreateNetworkInterfaceRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
       CreateNetworkInterfaceRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       CreateNetworkInterfaceRequest.struct_class = Types::CreateNetworkInterfaceRequest
 
@@ -1332,8 +1411,10 @@ module Aws
 
       CreateRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       CreateRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "routeTableId"))
-      CreateRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationCidrBlock"))
+      CreateRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
       CreateRouteRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "gatewayId"))
+      CreateRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+      CreateRouteRequest.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "egressOnlyInternetGatewayId"))
       CreateRouteRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
       CreateRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
       CreateRouteRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
@@ -1375,6 +1456,7 @@ module Aws
       CreateSubnetRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       CreateSubnetRequest.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "VpcId"))
       CreateSubnetRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
+      CreateSubnetRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "Ipv6CidrBlock"))
       CreateSubnetRequest.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "AvailabilityZone"))
       CreateSubnetRequest.struct_class = Types::CreateSubnetRequest
 
@@ -1430,6 +1512,7 @@ module Aws
       CreateVpcRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       CreateVpcRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "CidrBlock"))
       CreateVpcRequest.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
+      CreateVpcRequest.add_member(:amazon_provided_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: Boolean, location_name: "amazonProvidedIpv6CidrBlock"))
       CreateVpcRequest.struct_class = Types::CreateVpcRequest
 
       CreateVpcResult.add_member(:vpc, Shapes::ShapeRef.new(shape: Vpc, location_name: "vpc"))
@@ -1477,6 +1560,13 @@ module Aws
       DeleteDhcpOptionsRequest.add_member(:dhcp_options_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "DhcpOptionsId"))
       DeleteDhcpOptionsRequest.struct_class = Types::DeleteDhcpOptionsRequest
 
+      DeleteEgressOnlyInternetGatewayRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+      DeleteEgressOnlyInternetGatewayRequest.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, required: true, location_name: "EgressOnlyInternetGatewayId"))
+      DeleteEgressOnlyInternetGatewayRequest.struct_class = Types::DeleteEgressOnlyInternetGatewayRequest
+
+      DeleteEgressOnlyInternetGatewayResult.add_member(:return_code, Shapes::ShapeRef.new(shape: Boolean, location_name: "returnCode"))
+      DeleteEgressOnlyInternetGatewayResult.struct_class = Types::DeleteEgressOnlyInternetGatewayResult
+
       DeleteFlowLogsRequest.add_member(:flow_log_ids, Shapes::ShapeRef.new(shape: ValueStringList, required: true, location_name: "FlowLogId"))
       DeleteFlowLogsRequest.struct_class = Types::DeleteFlowLogsRequest
 
@@ -1517,7 +1607,8 @@ module Aws
 
       DeleteRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       DeleteRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "routeTableId"))
-      DeleteRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationCidrBlock"))
+      DeleteRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
+      DeleteRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
       DeleteRouteRequest.struct_class = Types::DeleteRouteRequest
 
       DeleteRouteTableRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -1650,6 +1741,16 @@ module Aws
 
       DescribeDhcpOptionsResult.add_member(:dhcp_options, Shapes::ShapeRef.new(shape: DhcpOptionsList, location_name: "dhcpOptionsSet"))
       DescribeDhcpOptionsResult.struct_class = Types::DescribeDhcpOptionsResult
+
+      DescribeEgressOnlyInternetGatewaysRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "DryRun"))
+      DescribeEgressOnlyInternetGatewaysRequest.add_member(:egress_only_internet_gateway_ids, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayIdList, location_name: "EgressOnlyInternetGatewayId"))
+      DescribeEgressOnlyInternetGatewaysRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: Integer, location_name: "MaxResults"))
+      DescribeEgressOnlyInternetGatewaysRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      DescribeEgressOnlyInternetGatewaysRequest.struct_class = Types::DescribeEgressOnlyInternetGatewaysRequest
+
+      DescribeEgressOnlyInternetGatewaysResult.add_member(:egress_only_internet_gateways, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayList, location_name: "egressOnlyInternetGatewaySet"))
+      DescribeEgressOnlyInternetGatewaysResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "nextToken"))
+      DescribeEgressOnlyInternetGatewaysResult.struct_class = Types::DescribeEgressOnlyInternetGatewaysResult
 
       DescribeExportTasksRequest.add_member(:export_task_ids, Shapes::ShapeRef.new(shape: ExportTaskIdStringList, location_name: "exportTaskId"))
       DescribeExportTasksRequest.struct_class = Types::DescribeExportTasksRequest
@@ -2267,6 +2368,20 @@ module Aws
       DisassociateRouteTableRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
       DisassociateRouteTableRequest.struct_class = Types::DisassociateRouteTableRequest
 
+      DisassociateSubnetCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
+      DisassociateSubnetCidrBlockRequest.struct_class = Types::DisassociateSubnetCidrBlockRequest
+
+      DisassociateSubnetCidrBlockResult.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, location_name: "subnetId"))
+      DisassociateSubnetCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+      DisassociateSubnetCidrBlockResult.struct_class = Types::DisassociateSubnetCidrBlockResult
+
+      DisassociateVpcCidrBlockRequest.add_member(:association_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "associationId"))
+      DisassociateVpcCidrBlockRequest.struct_class = Types::DisassociateVpcCidrBlockRequest
+
+      DisassociateVpcCidrBlockResult.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+      DisassociateVpcCidrBlockResult.add_member(:ipv_6_cidr_block_association, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "ipv6CidrBlockAssociation"))
+      DisassociateVpcCidrBlockResult.struct_class = Types::DisassociateVpcCidrBlockResult
+
       DiskImage.add_member(:image, Shapes::ShapeRef.new(shape: DiskImageDetail, location_name: "Image"))
       DiskImage.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
       DiskImage.add_member(:volume, Shapes::ShapeRef.new(shape: VolumeDetail, location_name: "Volume"))
@@ -2306,6 +2421,14 @@ module Aws
       EbsInstanceBlockDeviceSpecification.add_member(:volume_id, Shapes::ShapeRef.new(shape: String, location_name: "volumeId"))
       EbsInstanceBlockDeviceSpecification.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "deleteOnTermination"))
       EbsInstanceBlockDeviceSpecification.struct_class = Types::EbsInstanceBlockDeviceSpecification
+
+      EgressOnlyInternetGateway.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "egressOnlyInternetGatewayId"))
+      EgressOnlyInternetGateway.add_member(:attachments, Shapes::ShapeRef.new(shape: InternetGatewayAttachmentList, location_name: "attachmentSet"))
+      EgressOnlyInternetGateway.struct_class = Types::EgressOnlyInternetGateway
+
+      EgressOnlyInternetGatewayIdList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGatewayId, location_name: "item")
+
+      EgressOnlyInternetGatewayList.member = Shapes::ShapeRef.new(shape: EgressOnlyInternetGateway, location_name: "item")
 
       EnableVgwRoutePropagationRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "RouteTableId"))
       EnableVgwRoutePropagationRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "GatewayId"))
@@ -2792,6 +2915,11 @@ module Aws
 
       InstanceIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "InstanceId")
 
+      InstanceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+      InstanceIpv6Address.struct_class = Types::InstanceIpv6Address
+
+      InstanceIpv6AddressList.member = Shapes::ShapeRef.new(shape: InstanceIpv6Address, location_name: "item")
+
       InstanceList.member = Shapes::ShapeRef.new(shape: Instance, location_name: "item")
 
       InstanceMonitoring.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
@@ -2814,6 +2942,7 @@ module Aws
       InstanceNetworkInterface.add_member(:attachment, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceAttachment, location_name: "attachment"))
       InstanceNetworkInterface.add_member(:association, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceAssociation, location_name: "association"))
       InstanceNetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: InstancePrivateIpAddressList, location_name: "privateIpAddressesSet"))
+      InstanceNetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: InstanceIpv6AddressList, location_name: "ipv6AddressesSet"))
       InstanceNetworkInterface.struct_class = Types::InstanceNetworkInterface
 
       InstanceNetworkInterfaceAssociation.add_member(:public_ip, Shapes::ShapeRef.new(shape: String, location_name: "publicIp"))
@@ -2840,6 +2969,8 @@ module Aws
       InstanceNetworkInterfaceSpecification.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressSpecificationList, location_name: "privateIpAddressesSet", metadata: {"queryName"=>"PrivateIpAddresses"}))
       InstanceNetworkInterfaceSpecification.add_member(:secondary_private_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "secondaryPrivateIpAddressCount"))
       InstanceNetworkInterfaceSpecification.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "associatePublicIpAddress"))
+      InstanceNetworkInterfaceSpecification.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: InstanceIpv6AddressList, location_name: "ipv6AddressesSet", metadata: {"queryName"=>"Ipv6Addresses"}))
+      InstanceNetworkInterfaceSpecification.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "ipv6AddressCount"))
       InstanceNetworkInterfaceSpecification.struct_class = Types::InstanceNetworkInterfaceSpecification
 
       InstanceNetworkInterfaceSpecificationList.member = Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecification, location_name: "item")
@@ -2912,6 +3043,7 @@ module Aws
       IpPermission.add_member(:to_port, Shapes::ShapeRef.new(shape: Integer, location_name: "toPort"))
       IpPermission.add_member(:user_id_group_pairs, Shapes::ShapeRef.new(shape: UserIdGroupPairList, location_name: "groups"))
       IpPermission.add_member(:ip_ranges, Shapes::ShapeRef.new(shape: IpRangeList, location_name: "ipRanges"))
+      IpPermission.add_member(:ipv_6_ranges, Shapes::ShapeRef.new(shape: Ipv6RangeList, location_name: "ipv6Ranges"))
       IpPermission.add_member(:prefix_list_ids, Shapes::ShapeRef.new(shape: PrefixListIdList, location_name: "prefixListIds"))
       IpPermission.struct_class = Types::IpPermission
 
@@ -2923,6 +3055,18 @@ module Aws
       IpRangeList.member = Shapes::ShapeRef.new(shape: IpRange, location_name: "item")
 
       IpRanges.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      Ipv6AddressList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      Ipv6CidrBlock.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
+      Ipv6CidrBlock.struct_class = Types::Ipv6CidrBlock
+
+      Ipv6CidrBlockSet.member = Shapes::ShapeRef.new(shape: Ipv6CidrBlock, location_name: "item")
+
+      Ipv6Range.add_member(:cidr_ipv_6, Shapes::ShapeRef.new(shape: String, location_name: "cidrIpv6"))
+      Ipv6Range.struct_class = Types::Ipv6Range
+
+      Ipv6RangeList.member = Shapes::ShapeRef.new(shape: Ipv6Range, location_name: "item")
 
       KeyNameStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "KeyName")
 
@@ -3057,6 +3201,7 @@ module Aws
 
       ModifySubnetAttributeRequest.add_member(:subnet_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "subnetId"))
       ModifySubnetAttributeRequest.add_member(:map_public_ip_on_launch, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "MapPublicIpOnLaunch"))
+      ModifySubnetAttributeRequest.add_member(:assign_ipv_6_address_on_creation, Shapes::ShapeRef.new(shape: AttributeBooleanValue, location_name: "AssignIpv6AddressOnCreation"))
       ModifySubnetAttributeRequest.struct_class = Types::ModifySubnetAttributeRequest
 
       ModifyVolumeAttributeRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
@@ -3156,6 +3301,7 @@ module Aws
       NetworkAclEntry.add_member(:rule_action, Shapes::ShapeRef.new(shape: RuleAction, location_name: "ruleAction"))
       NetworkAclEntry.add_member(:egress, Shapes::ShapeRef.new(shape: Boolean, location_name: "egress"))
       NetworkAclEntry.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+      NetworkAclEntry.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
       NetworkAclEntry.add_member(:icmp_type_code, Shapes::ShapeRef.new(shape: IcmpTypeCode, location_name: "icmpTypeCode"))
       NetworkAclEntry.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
       NetworkAclEntry.struct_class = Types::NetworkAclEntry
@@ -3182,6 +3328,7 @@ module Aws
       NetworkInterface.add_member(:association, Shapes::ShapeRef.new(shape: NetworkInterfaceAssociation, location_name: "association"))
       NetworkInterface.add_member(:tag_set, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
       NetworkInterface.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: NetworkInterfacePrivateIpAddressList, location_name: "privateIpAddressesSet"))
+      NetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: NetworkInterfaceIpv6AddressesList, location_name: "ipv6AddressesSet"))
       NetworkInterface.add_member(:interface_type, Shapes::ShapeRef.new(shape: NetworkInterfaceType, location_name: "interfaceType"))
       NetworkInterface.struct_class = Types::NetworkInterface
 
@@ -3206,6 +3353,11 @@ module Aws
       NetworkInterfaceAttachmentChanges.struct_class = Types::NetworkInterfaceAttachmentChanges
 
       NetworkInterfaceIdList.member = Shapes::ShapeRef.new(shape: String, location_name: "item")
+
+      NetworkInterfaceIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: String, location_name: "ipv6Address"))
+      NetworkInterfaceIpv6Address.struct_class = Types::NetworkInterfaceIpv6Address
+
+      NetworkInterfaceIpv6AddressesList.member = Shapes::ShapeRef.new(shape: NetworkInterfaceIpv6Address, location_name: "item")
 
       NetworkInterfaceList.member = Shapes::ShapeRef.new(shape: NetworkInterface, location_name: "item")
 
@@ -3449,15 +3601,18 @@ module Aws
       ReplaceNetworkAclEntryRequest.add_member(:protocol, Shapes::ShapeRef.new(shape: String, required: true, location_name: "protocol"))
       ReplaceNetworkAclEntryRequest.add_member(:rule_action, Shapes::ShapeRef.new(shape: RuleAction, required: true, location_name: "ruleAction"))
       ReplaceNetworkAclEntryRequest.add_member(:egress, Shapes::ShapeRef.new(shape: Boolean, required: true, location_name: "egress"))
-      ReplaceNetworkAclEntryRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "cidrBlock"))
+      ReplaceNetworkAclEntryRequest.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+      ReplaceNetworkAclEntryRequest.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
       ReplaceNetworkAclEntryRequest.add_member(:icmp_type_code, Shapes::ShapeRef.new(shape: IcmpTypeCode, location_name: "Icmp"))
       ReplaceNetworkAclEntryRequest.add_member(:port_range, Shapes::ShapeRef.new(shape: PortRange, location_name: "portRange"))
       ReplaceNetworkAclEntryRequest.struct_class = Types::ReplaceNetworkAclEntryRequest
 
       ReplaceRouteRequest.add_member(:dry_run, Shapes::ShapeRef.new(shape: Boolean, location_name: "dryRun"))
       ReplaceRouteRequest.add_member(:route_table_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "routeTableId"))
-      ReplaceRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, required: true, location_name: "destinationCidrBlock"))
+      ReplaceRouteRequest.add_member(:destination_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationCidrBlock"))
       ReplaceRouteRequest.add_member(:gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "gatewayId"))
+      ReplaceRouteRequest.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+      ReplaceRouteRequest.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "egressOnlyInternetGatewayId"))
       ReplaceRouteRequest.add_member(:instance_id, Shapes::ShapeRef.new(shape: String, location_name: "instanceId"))
       ReplaceRouteRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
       ReplaceRouteRequest.add_member(:vpc_peering_connection_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcPeeringConnectionId"))
@@ -3715,6 +3870,8 @@ module Aws
       Route.add_member(:nat_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "natGatewayId"))
       Route.add_member(:state, Shapes::ShapeRef.new(shape: RouteState, location_name: "state"))
       Route.add_member(:origin, Shapes::ShapeRef.new(shape: RouteOrigin, location_name: "origin"))
+      Route.add_member(:destination_ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "destinationIpv6CidrBlock"))
+      Route.add_member(:egress_only_internet_gateway_id, Shapes::ShapeRef.new(shape: String, location_name: "egressOnlyInternetGatewayId"))
       Route.struct_class = Types::Route
 
       RouteList.member = Shapes::ShapeRef.new(shape: Route, location_name: "item")
@@ -3758,6 +3915,8 @@ module Aws
       RunInstancesRequest.add_member(:disable_api_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "disableApiTermination"))
       RunInstancesRequest.add_member(:instance_initiated_shutdown_behavior, Shapes::ShapeRef.new(shape: ShutdownBehavior, location_name: "instanceInitiatedShutdownBehavior"))
       RunInstancesRequest.add_member(:private_ip_address, Shapes::ShapeRef.new(shape: String, location_name: "privateIpAddress"))
+      RunInstancesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: InstanceIpv6AddressList, location_name: "Ipv6Address"))
+      RunInstancesRequest.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6AddressCount"))
       RunInstancesRequest.add_member(:client_token, Shapes::ShapeRef.new(shape: String, location_name: "clientToken"))
       RunInstancesRequest.add_member(:additional_info, Shapes::ShapeRef.new(shape: String, location_name: "additionalInfo"))
       RunInstancesRequest.add_member(:network_interfaces, Shapes::ShapeRef.new(shape: InstanceNetworkInterfaceSpecificationList, location_name: "networkInterface"))
@@ -3854,6 +4013,11 @@ module Aws
       ScheduledInstancesIamInstanceProfile.add_member(:name, Shapes::ShapeRef.new(shape: String, location_name: "Name"))
       ScheduledInstancesIamInstanceProfile.struct_class = Types::ScheduledInstancesIamInstanceProfile
 
+      ScheduledInstancesIpv6Address.add_member(:ipv_6_address, Shapes::ShapeRef.new(shape: Ipv6Address, location_name: "Ipv6Address"))
+      ScheduledInstancesIpv6Address.struct_class = Types::ScheduledInstancesIpv6Address
+
+      ScheduledInstancesIpv6AddressList.member = Shapes::ShapeRef.new(shape: ScheduledInstancesIpv6Address, location_name: "Ipv6Address")
+
       ScheduledInstancesLaunchSpecification.add_member(:image_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "ImageId"))
       ScheduledInstancesLaunchSpecification.add_member(:key_name, Shapes::ShapeRef.new(shape: String, location_name: "KeyName"))
       ScheduledInstancesLaunchSpecification.add_member(:security_group_ids, Shapes::ShapeRef.new(shape: ScheduledInstancesSecurityGroupIdSet, location_name: "SecurityGroupId"))
@@ -3883,6 +4047,8 @@ module Aws
       ScheduledInstancesNetworkInterface.add_member(:associate_public_ip_address, Shapes::ShapeRef.new(shape: Boolean, location_name: "AssociatePublicIpAddress"))
       ScheduledInstancesNetworkInterface.add_member(:groups, Shapes::ShapeRef.new(shape: ScheduledInstancesSecurityGroupIdSet, location_name: "Group"))
       ScheduledInstancesNetworkInterface.add_member(:delete_on_termination, Shapes::ShapeRef.new(shape: Boolean, location_name: "DeleteOnTermination"))
+      ScheduledInstancesNetworkInterface.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: ScheduledInstancesIpv6AddressList, location_name: "Ipv6Address"))
+      ScheduledInstancesNetworkInterface.add_member(:ipv_6_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "Ipv6AddressCount"))
       ScheduledInstancesNetworkInterface.struct_class = Types::ScheduledInstancesNetworkInterface
 
       ScheduledInstancesNetworkInterfaceSet.member = Shapes::ShapeRef.new(shape: ScheduledInstancesNetworkInterface, location_name: "NetworkInterface")
@@ -4124,6 +4290,8 @@ module Aws
       Subnet.add_member(:state, Shapes::ShapeRef.new(shape: SubnetState, location_name: "state"))
       Subnet.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
       Subnet.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
+      Subnet.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
+      Subnet.add_member(:assign_ipv_6_address_on_creation, Shapes::ShapeRef.new(shape: Boolean, location_name: "assignIpv6AddressOnCreation"))
       Subnet.add_member(:available_ip_address_count, Shapes::ShapeRef.new(shape: Integer, location_name: "availableIpAddressCount"))
       Subnet.add_member(:availability_zone, Shapes::ShapeRef.new(shape: String, location_name: "availabilityZone"))
       Subnet.add_member(:default_for_az, Shapes::ShapeRef.new(shape: Boolean, location_name: "defaultForAz"))
@@ -4131,7 +4299,18 @@ module Aws
       Subnet.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
       Subnet.struct_class = Types::Subnet
 
+      SubnetCidrBlockState.add_member(:state, Shapes::ShapeRef.new(shape: SubnetCidrBlockStateCode, location_name: "state"))
+      SubnetCidrBlockState.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+      SubnetCidrBlockState.struct_class = Types::SubnetCidrBlockState
+
       SubnetIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "SubnetId")
+
+      SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
+      SubnetIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: SubnetCidrBlockState, location_name: "ipv6CidrBlockState"))
+      SubnetIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+      SubnetIpv6CidrBlockAssociation.struct_class = Types::SubnetIpv6CidrBlockAssociation
+
+      SubnetIpv6CidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: SubnetIpv6CidrBlockAssociation, location_name: "item")
 
       SubnetList.member = Shapes::ShapeRef.new(shape: Subnet, location_name: "item")
 
@@ -4172,6 +4351,14 @@ module Aws
       TerminateInstancesResult.add_member(:terminating_instances, Shapes::ShapeRef.new(shape: InstanceStateChangeList, location_name: "instancesSet"))
       TerminateInstancesResult.struct_class = Types::TerminateInstancesResult
 
+      UnassignIpv6AddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
+      UnassignIpv6AddressesRequest.add_member(:ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, required: true, location_name: "ipv6Addresses"))
+      UnassignIpv6AddressesRequest.struct_class = Types::UnassignIpv6AddressesRequest
+
+      UnassignIpv6AddressesResult.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, location_name: "networkInterfaceId"))
+      UnassignIpv6AddressesResult.add_member(:unassigned_ipv_6_addresses, Shapes::ShapeRef.new(shape: Ipv6AddressList, location_name: "unassignedIpv6Addresses"))
+      UnassignIpv6AddressesResult.struct_class = Types::UnassignIpv6AddressesResult
+
       UnassignPrivateIpAddressesRequest.add_member(:network_interface_id, Shapes::ShapeRef.new(shape: String, required: true, location_name: "networkInterfaceId"))
       UnassignPrivateIpAddressesRequest.add_member(:private_ip_addresses, Shapes::ShapeRef.new(shape: PrivateIpAddressStringList, required: true, location_name: "privateIpAddress"))
       UnassignPrivateIpAddressesRequest.struct_class = Types::UnassignPrivateIpAddressesRequest
@@ -4183,8 +4370,8 @@ module Aws
       UnmonitorInstancesResult.add_member(:instance_monitorings, Shapes::ShapeRef.new(shape: InstanceMonitoringList, location_name: "instancesSet"))
       UnmonitorInstancesResult.struct_class = Types::UnmonitorInstancesResult
 
-      UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
       UnsuccessfulItem.add_member(:resource_id, Shapes::ShapeRef.new(shape: String, location_name: "resourceId"))
+      UnsuccessfulItem.add_member(:error, Shapes::ShapeRef.new(shape: UnsuccessfulItemError, required: true, location_name: "error"))
       UnsuccessfulItem.struct_class = Types::UnsuccessfulItem
 
       UnsuccessfulItemError.add_member(:code, Shapes::ShapeRef.new(shape: String, required: true, location_name: "code"))
@@ -4307,6 +4494,7 @@ module Aws
       Vpc.add_member(:tags, Shapes::ShapeRef.new(shape: TagList, location_name: "tagSet"))
       Vpc.add_member(:instance_tenancy, Shapes::ShapeRef.new(shape: Tenancy, location_name: "instanceTenancy"))
       Vpc.add_member(:is_default, Shapes::ShapeRef.new(shape: Boolean, location_name: "isDefault"))
+      Vpc.add_member(:ipv_6_cidr_block_association_set, Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociationSet, location_name: "ipv6CidrBlockAssociationSet"))
       Vpc.struct_class = Types::Vpc
 
       VpcAttachment.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
@@ -4314,6 +4502,10 @@ module Aws
       VpcAttachment.struct_class = Types::VpcAttachment
 
       VpcAttachmentList.member = Shapes::ShapeRef.new(shape: VpcAttachment, location_name: "item")
+
+      VpcCidrBlockState.add_member(:state, Shapes::ShapeRef.new(shape: VpcCidrBlockStateCode, location_name: "state"))
+      VpcCidrBlockState.add_member(:status_message, Shapes::ShapeRef.new(shape: String, location_name: "statusMessage"))
+      VpcCidrBlockState.struct_class = Types::VpcCidrBlockState
 
       VpcClassicLink.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
       VpcClassicLink.add_member(:classic_link_enabled, Shapes::ShapeRef.new(shape: Boolean, location_name: "classicLinkEnabled"))
@@ -4336,6 +4528,13 @@ module Aws
       VpcEndpointSet.member = Shapes::ShapeRef.new(shape: VpcEndpoint, location_name: "item")
 
       VpcIdStringList.member = Shapes::ShapeRef.new(shape: String, location_name: "VpcId")
+
+      VpcIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "ipv6CidrBlock"))
+      VpcIpv6CidrBlockAssociation.add_member(:ipv_6_cidr_block_state, Shapes::ShapeRef.new(shape: VpcCidrBlockState, location_name: "ipv6CidrBlockState"))
+      VpcIpv6CidrBlockAssociation.add_member(:association_id, Shapes::ShapeRef.new(shape: String, location_name: "associationId"))
+      VpcIpv6CidrBlockAssociation.struct_class = Types::VpcIpv6CidrBlockAssociation
+
+      VpcIpv6CidrBlockAssociationSet.member = Shapes::ShapeRef.new(shape: VpcIpv6CidrBlockAssociation, location_name: "item")
 
       VpcList.member = Shapes::ShapeRef.new(shape: Vpc, location_name: "item")
 
@@ -4361,6 +4560,7 @@ module Aws
       VpcPeeringConnectionVpcInfo.add_member(:cidr_block, Shapes::ShapeRef.new(shape: String, location_name: "cidrBlock"))
       VpcPeeringConnectionVpcInfo.add_member(:owner_id, Shapes::ShapeRef.new(shape: String, location_name: "ownerId"))
       VpcPeeringConnectionVpcInfo.add_member(:vpc_id, Shapes::ShapeRef.new(shape: String, location_name: "vpcId"))
+      VpcPeeringConnectionVpcInfo.add_member(:ipv_6_cidr_block_set, Shapes::ShapeRef.new(shape: Ipv6CidrBlockSet, location_name: "ipv6CidrBlockSet"))
       VpcPeeringConnectionVpcInfo.add_member(:peering_options, Shapes::ShapeRef.new(shape: VpcPeeringConnectionOptionsDescription, location_name: "peeringOptions"))
       VpcPeeringConnectionVpcInfo.struct_class = Types::VpcPeeringConnectionVpcInfo
 
@@ -4411,14 +4611,14 @@ module Aws
       # @api private
       API = Seahorse::Model::Api.new.tap do |api|
 
-        api.version = "2016-09-15"
+        api.version = "2016-11-15"
 
         api.metadata = {
           "endpointPrefix" => "ec2",
           "protocol" => "ec2",
           "serviceFullName" => "Amazon Elastic Compute Cloud",
           "signatureVersion" => "v4",
-          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-09-15",
+          "xmlNamespace" => "http://ec2.amazonaws.com/doc/2016-11-15",
         }
 
         api.add_operation(:accept_reserved_instances_exchange_quote, Seahorse::Model::Operation.new.tap do |o|
@@ -4453,6 +4653,14 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: AllocateHostsResult)
         end)
 
+        api.add_operation(:assign_ipv_6_addresses, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AssignIpv6Addresses"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AssignIpv6AddressesRequest)
+          o.output = Shapes::ShapeRef.new(shape: AssignIpv6AddressesResult)
+        end)
+
         api.add_operation(:assign_private_ip_addresses, Seahorse::Model::Operation.new.tap do |o|
           o.name = "AssignPrivateIpAddresses"
           o.http_method = "POST"
@@ -4483,6 +4691,22 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: AssociateRouteTableRequest)
           o.output = Shapes::ShapeRef.new(shape: AssociateRouteTableResult)
+        end)
+
+        api.add_operation(:associate_subnet_cidr_block, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AssociateSubnetCidrBlock"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AssociateSubnetCidrBlockRequest)
+          o.output = Shapes::ShapeRef.new(shape: AssociateSubnetCidrBlockResult)
+        end)
+
+        api.add_operation(:associate_vpc_cidr_block, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "AssociateVpcCidrBlock"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: AssociateVpcCidrBlockRequest)
+          o.output = Shapes::ShapeRef.new(shape: AssociateVpcCidrBlockResult)
         end)
 
         api.add_operation(:attach_classic_link_vpc, Seahorse::Model::Operation.new.tap do |o|
@@ -4643,6 +4867,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreateDhcpOptionsRequest)
           o.output = Shapes::ShapeRef.new(shape: CreateDhcpOptionsResult)
+        end)
+
+        api.add_operation(:create_egress_only_internet_gateway, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateEgressOnlyInternetGateway"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateEgressOnlyInternetGatewayRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateEgressOnlyInternetGatewayResult)
         end)
 
         api.add_operation(:create_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -4859,6 +5091,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DeleteDhcpOptionsRequest)
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
+        end)
+
+        api.add_operation(:delete_egress_only_internet_gateway, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteEgressOnlyInternetGateway"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteEgressOnlyInternetGatewayRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteEgressOnlyInternetGatewayResult)
         end)
 
         api.add_operation(:delete_flow_logs, Seahorse::Model::Operation.new.tap do |o|
@@ -5107,6 +5347,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: DescribeDhcpOptionsRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeDhcpOptionsResult)
+        end)
+
+        api.add_operation(:describe_egress_only_internet_gateways, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeEgressOnlyInternetGateways"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeEgressOnlyInternetGatewaysResult)
         end)
 
         api.add_operation(:describe_export_tasks, Seahorse::Model::Operation.new.tap do |o|
@@ -5696,6 +5944,22 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))
         end)
 
+        api.add_operation(:disassociate_subnet_cidr_block, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DisassociateSubnetCidrBlock"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DisassociateSubnetCidrBlockRequest)
+          o.output = Shapes::ShapeRef.new(shape: DisassociateSubnetCidrBlockResult)
+        end)
+
+        api.add_operation(:disassociate_vpc_cidr_block, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DisassociateVpcCidrBlock"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DisassociateVpcCidrBlockRequest)
+          o.output = Shapes::ShapeRef.new(shape: DisassociateVpcCidrBlockResult)
+        end)
+
         api.add_operation(:enable_vgw_route_propagation, Seahorse::Model::Operation.new.tap do |o|
           o.name = "EnableVgwRoutePropagation"
           o.http_method = "POST"
@@ -6158,6 +6422,14 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: TerminateInstancesRequest)
           o.output = Shapes::ShapeRef.new(shape: TerminateInstancesResult)
+        end)
+
+        api.add_operation(:unassign_ipv_6_addresses, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UnassignIpv6Addresses"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UnassignIpv6AddressesRequest)
+          o.output = Shapes::ShapeRef.new(shape: UnassignIpv6AddressesResult)
         end)
 
         api.add_operation(:unassign_private_ip_addresses, Seahorse::Model::Operation.new.tap do |o|

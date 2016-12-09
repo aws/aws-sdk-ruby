@@ -13,11 +13,16 @@ module Aws
       include Seahorse::Model
 
       ASN = Shapes::IntegerShape.new(name: 'ASN')
+      AddressFamily = Shapes::StringShape.new(name: 'AddressFamily')
       AllocateConnectionOnInterconnectRequest = Shapes::StructureShape.new(name: 'AllocateConnectionOnInterconnectRequest')
       AllocatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePrivateVirtualInterfaceRequest')
       AllocatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'AllocatePublicVirtualInterfaceRequest')
       AmazonAddress = Shapes::StringShape.new(name: 'AmazonAddress')
       BGPAuthKey = Shapes::StringShape.new(name: 'BGPAuthKey')
+      BGPPeer = Shapes::StructureShape.new(name: 'BGPPeer')
+      BGPPeerList = Shapes::ListShape.new(name: 'BGPPeerList')
+      BGPPeerState = Shapes::StringShape.new(name: 'BGPPeerState')
+      BGPStatus = Shapes::StringShape.new(name: 'BGPStatus')
       Bandwidth = Shapes::StringShape.new(name: 'Bandwidth')
       CIDR = Shapes::StringShape.new(name: 'CIDR')
       ConfirmConnectionRequest = Shapes::StructureShape.new(name: 'ConfirmConnectionRequest')
@@ -32,11 +37,15 @@ module Aws
       ConnectionName = Shapes::StringShape.new(name: 'ConnectionName')
       ConnectionState = Shapes::StringShape.new(name: 'ConnectionState')
       Connections = Shapes::StructureShape.new(name: 'Connections')
+      CreateBGPPeerRequest = Shapes::StructureShape.new(name: 'CreateBGPPeerRequest')
+      CreateBGPPeerResponse = Shapes::StructureShape.new(name: 'CreateBGPPeerResponse')
       CreateConnectionRequest = Shapes::StructureShape.new(name: 'CreateConnectionRequest')
       CreateInterconnectRequest = Shapes::StructureShape.new(name: 'CreateInterconnectRequest')
       CreatePrivateVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePrivateVirtualInterfaceRequest')
       CreatePublicVirtualInterfaceRequest = Shapes::StructureShape.new(name: 'CreatePublicVirtualInterfaceRequest')
       CustomerAddress = Shapes::StringShape.new(name: 'CustomerAddress')
+      DeleteBGPPeerRequest = Shapes::StructureShape.new(name: 'DeleteBGPPeerRequest')
+      DeleteBGPPeerResponse = Shapes::StructureShape.new(name: 'DeleteBGPPeerResponse')
       DeleteConnectionRequest = Shapes::StructureShape.new(name: 'DeleteConnectionRequest')
       DeleteInterconnectRequest = Shapes::StructureShape.new(name: 'DeleteInterconnectRequest')
       DeleteInterconnectResponse = Shapes::StructureShape.new(name: 'DeleteInterconnectResponse')
@@ -71,6 +80,7 @@ module Aws
       LocationList = Shapes::ListShape.new(name: 'LocationList')
       LocationName = Shapes::StringShape.new(name: 'LocationName')
       Locations = Shapes::StructureShape.new(name: 'Locations')
+      NewBGPPeer = Shapes::StructureShape.new(name: 'NewBGPPeer')
       NewPrivateVirtualInterface = Shapes::StructureShape.new(name: 'NewPrivateVirtualInterface')
       NewPrivateVirtualInterfaceAllocation = Shapes::StructureShape.new(name: 'NewPrivateVirtualInterfaceAllocation')
       NewPublicVirtualInterface = Shapes::StructureShape.new(name: 'NewPublicVirtualInterface')
@@ -127,6 +137,17 @@ module Aws
       AllocatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface_allocation, Shapes::ShapeRef.new(shape: NewPublicVirtualInterfaceAllocation, required: true, location_name: "newPublicVirtualInterfaceAllocation"))
       AllocatePublicVirtualInterfaceRequest.struct_class = Types::AllocatePublicVirtualInterfaceRequest
 
+      BGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+      BGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
+      BGPPeer.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+      BGPPeer.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+      BGPPeer.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      BGPPeer.add_member(:bgp_peer_state, Shapes::ShapeRef.new(shape: BGPPeerState, location_name: "bgpPeerState"))
+      BGPPeer.add_member(:bgp_status, Shapes::ShapeRef.new(shape: BGPStatus, location_name: "bgpStatus"))
+      BGPPeer.struct_class = Types::BGPPeer
+
+      BGPPeerList.member = Shapes::ShapeRef.new(shape: BGPPeer)
+
       ConfirmConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
       ConfirmConnectionRequest.struct_class = Types::ConfirmConnectionRequest
 
@@ -163,6 +184,13 @@ module Aws
       Connections.add_member(:connections, Shapes::ShapeRef.new(shape: ConnectionList, location_name: "connections"))
       Connections.struct_class = Types::Connections
 
+      CreateBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+      CreateBGPPeerRequest.add_member(:new_bgp_peer, Shapes::ShapeRef.new(shape: NewBGPPeer, location_name: "newBGPPeer"))
+      CreateBGPPeerRequest.struct_class = Types::CreateBGPPeerRequest
+
+      CreateBGPPeerResponse.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
+      CreateBGPPeerResponse.struct_class = Types::CreateBGPPeerResponse
+
       CreateConnectionRequest.add_member(:location, Shapes::ShapeRef.new(shape: LocationCode, required: true, location_name: "location"))
       CreateConnectionRequest.add_member(:bandwidth, Shapes::ShapeRef.new(shape: Bandwidth, required: true, location_name: "bandwidth"))
       CreateConnectionRequest.add_member(:connection_name, Shapes::ShapeRef.new(shape: ConnectionName, required: true, location_name: "connectionName"))
@@ -180,6 +208,14 @@ module Aws
       CreatePublicVirtualInterfaceRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
       CreatePublicVirtualInterfaceRequest.add_member(:new_public_virtual_interface, Shapes::ShapeRef.new(shape: NewPublicVirtualInterface, required: true, location_name: "newPublicVirtualInterface"))
       CreatePublicVirtualInterfaceRequest.struct_class = Types::CreatePublicVirtualInterfaceRequest
+
+      DeleteBGPPeerRequest.add_member(:virtual_interface_id, Shapes::ShapeRef.new(shape: VirtualInterfaceId, location_name: "virtualInterfaceId"))
+      DeleteBGPPeerRequest.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+      DeleteBGPPeerRequest.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      DeleteBGPPeerRequest.struct_class = Types::DeleteBGPPeerRequest
+
+      DeleteBGPPeerResponse.add_member(:virtual_interface, Shapes::ShapeRef.new(shape: VirtualInterface, location_name: "virtualInterface"))
+      DeleteBGPPeerResponse.struct_class = Types::DeleteBGPPeerResponse
 
       DeleteConnectionRequest.add_member(:connection_id, Shapes::ShapeRef.new(shape: ConnectionId, required: true, location_name: "connectionId"))
       DeleteConnectionRequest.struct_class = Types::DeleteConnectionRequest
@@ -258,12 +294,20 @@ module Aws
       Locations.add_member(:locations, Shapes::ShapeRef.new(shape: LocationList, location_name: "locations"))
       Locations.struct_class = Types::Locations
 
+      NewBGPPeer.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, location_name: "asn"))
+      NewBGPPeer.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
+      NewBGPPeer.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+      NewBGPPeer.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+      NewBGPPeer.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      NewBGPPeer.struct_class = Types::NewBGPPeer
+
       NewPrivateVirtualInterface.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
       NewPrivateVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
       NewPrivateVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
       NewPrivateVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
       NewPrivateVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
       NewPrivateVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      NewPrivateVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
       NewPrivateVirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, required: true, location_name: "virtualGatewayId"))
       NewPrivateVirtualInterface.struct_class = Types::NewPrivateVirtualInterface
 
@@ -272,6 +316,7 @@ module Aws
       NewPrivateVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
       NewPrivateVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
       NewPrivateVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+      NewPrivateVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
       NewPrivateVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
       NewPrivateVirtualInterfaceAllocation.struct_class = Types::NewPrivateVirtualInterfaceAllocation
 
@@ -279,18 +324,20 @@ module Aws
       NewPublicVirtualInterface.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
       NewPublicVirtualInterface.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
       NewPublicVirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
-      NewPublicVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, required: true, location_name: "amazonAddress"))
-      NewPublicVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, required: true, location_name: "customerAddress"))
-      NewPublicVirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, required: true, location_name: "routeFilterPrefixes"))
+      NewPublicVirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+      NewPublicVirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      NewPublicVirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+      NewPublicVirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
       NewPublicVirtualInterface.struct_class = Types::NewPublicVirtualInterface
 
       NewPublicVirtualInterfaceAllocation.add_member(:virtual_interface_name, Shapes::ShapeRef.new(shape: VirtualInterfaceName, required: true, location_name: "virtualInterfaceName"))
       NewPublicVirtualInterfaceAllocation.add_member(:vlan, Shapes::ShapeRef.new(shape: VLAN, required: true, location_name: "vlan"))
       NewPublicVirtualInterfaceAllocation.add_member(:asn, Shapes::ShapeRef.new(shape: ASN, required: true, location_name: "asn"))
       NewPublicVirtualInterfaceAllocation.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
-      NewPublicVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, required: true, location_name: "amazonAddress"))
-      NewPublicVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, required: true, location_name: "customerAddress"))
-      NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, required: true, location_name: "routeFilterPrefixes"))
+      NewPublicVirtualInterfaceAllocation.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
+      NewPublicVirtualInterfaceAllocation.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      NewPublicVirtualInterfaceAllocation.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
+      NewPublicVirtualInterfaceAllocation.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
       NewPublicVirtualInterfaceAllocation.struct_class = Types::NewPublicVirtualInterfaceAllocation
 
       ResourceArnList.member = Shapes::ShapeRef.new(shape: ResourceArn)
@@ -346,10 +393,12 @@ module Aws
       VirtualInterface.add_member(:auth_key, Shapes::ShapeRef.new(shape: BGPAuthKey, location_name: "authKey"))
       VirtualInterface.add_member(:amazon_address, Shapes::ShapeRef.new(shape: AmazonAddress, location_name: "amazonAddress"))
       VirtualInterface.add_member(:customer_address, Shapes::ShapeRef.new(shape: CustomerAddress, location_name: "customerAddress"))
+      VirtualInterface.add_member(:address_family, Shapes::ShapeRef.new(shape: AddressFamily, location_name: "addressFamily"))
       VirtualInterface.add_member(:virtual_interface_state, Shapes::ShapeRef.new(shape: VirtualInterfaceState, location_name: "virtualInterfaceState"))
       VirtualInterface.add_member(:customer_router_config, Shapes::ShapeRef.new(shape: RouterConfig, location_name: "customerRouterConfig"))
       VirtualInterface.add_member(:virtual_gateway_id, Shapes::ShapeRef.new(shape: VirtualGatewayId, location_name: "virtualGatewayId"))
       VirtualInterface.add_member(:route_filter_prefixes, Shapes::ShapeRef.new(shape: RouteFilterPrefixList, location_name: "routeFilterPrefixes"))
+      VirtualInterface.add_member(:bgp_peers, Shapes::ShapeRef.new(shape: BGPPeerList, location_name: "bgpPeers"))
       VirtualInterface.struct_class = Types::VirtualInterface
 
       VirtualInterfaceList.member = Shapes::ShapeRef.new(shape: VirtualInterface)
@@ -432,6 +481,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)
 
+        api.add_operation(:create_bgp_peer, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateBGPPeer"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateBGPPeerRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateBGPPeerResponse)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
         api.add_operation(:create_connection, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateConnection"
           o.http_method = "POST"
@@ -468,6 +527,16 @@ module Aws
           o.http_request_uri = "/"
           o.input = Shapes::ShapeRef.new(shape: CreatePublicVirtualInterfaceRequest)
           o.output = Shapes::ShapeRef.new(shape: VirtualInterface)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
+          o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
+        end)
+
+        api.add_operation(:delete_bgp_peer, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DeleteBGPPeer"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DeleteBGPPeerRequest)
+          o.output = Shapes::ShapeRef.new(shape: DeleteBGPPeerResponse)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectServerException)
           o.errors << Shapes::ShapeRef.new(shape: DirectConnectClientException)
         end)

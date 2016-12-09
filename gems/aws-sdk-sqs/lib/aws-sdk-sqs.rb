@@ -13,6 +13,8 @@ require_relative 'aws-sdk-sqs/client_api'
 require_relative 'aws-sdk-sqs/client'
 require_relative 'aws-sdk-sqs/errors'
 require_relative 'aws-sdk-sqs/resource'
+require_relative 'aws-sdk-sqs/message'
+require_relative 'aws-sdk-sqs/queue'
 require_relative 'aws-sdk-sqs/customizations'
 
 # This module provides support for Amazon Simple Queue Service. This module is available in the

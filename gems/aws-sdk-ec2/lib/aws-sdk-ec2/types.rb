@@ -31,14 +31,13 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] reserved_instance_ids
-      #   The IDs of the Convertible Reserved Instances that you want to
-      #   exchange for other Convertible Reserved Instances of the same or
-      #   higher value.
+      #   The IDs of the Convertible Reserved Instances to exchange for other
+      #   Convertible Reserved Instances of the same or higher value.
       #   @return [Array<String>]
       #
       # @!attribute [rw] target_configurations
       #   The configurations of the Convertible Reserved Instance offerings
-      #   you are purchasing in this exchange.
+      #   that you are purchasing in this exchange.
       #   @return [Array<Types::TargetConfigurationRequest>]
       class AcceptReservedInstancesExchangeQuoteRequest < Struct.new(
         :dry_run,
@@ -288,6 +287,50 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass AssignIpv6AddressesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         network_interface_id: "String", # required
+      #         ipv_6_addresses: ["String"],
+      #         ipv_6_address_count: 1,
+      #       }
+      # @!attribute [rw] network_interface_id
+      #   The ID of the network interface.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   One or more specific IPv6 addresses to be assigned to the network
+      #   interface. You can't use this option if you're specifying a number
+      #   of IPv6 addresses.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] ipv_6_address_count
+      #   The number of IPv6 addresses to assign to the network interface.
+      #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+      #   range. You can't use this option if specifying specific IPv6
+      #   addresses.
+      #   @return [Integer]
+      class AssignIpv6AddressesRequest < Struct.new(
+        :network_interface_id,
+        :ipv_6_addresses,
+        :ipv_6_address_count)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] network_interface_id
+      #   The ID of the network interface.
+      #   @return [String]
+      #
+      # @!attribute [rw] assigned_ipv_6_addresses
+      #   The IPv6 addresses assigned to the network interface.
+      #   @return [Array<String>]
+      class AssignIpv6AddressesResult < Struct.new(
+        :network_interface_id,
+        :assigned_ipv_6_addresses)
+        include Aws::Structure
+      end
+
       # Contains the parameters for AssignPrivateIpAddresses.
       # @note When making an API call, pass AssignPrivateIpAddressesRequest
       #   data as a hash:
@@ -476,6 +519,75 @@ module Aws
       #   @return [String]
       class AssociateRouteTableResult < Struct.new(
         :association_id)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AssociateSubnetCidrBlockRequest
+      #   data as a hash:
+      #
+      #       {
+      #         subnet_id: "String", # required
+      #         ipv_6_cidr_block: "String", # required
+      #       }
+      # @!attribute [rw] subnet_id
+      #   The ID of your subnet.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 CIDR block for your subnet. The subnet must have a /64
+      #   prefix length.
+      #   @return [String]
+      class AssociateSubnetCidrBlockRequest < Struct.new(
+        :subnet_id,
+        :ipv_6_cidr_block)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] subnet_id
+      #   The ID of the subnet.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_association
+      #   Information about the IPv6 CIDR block association.
+      #   @return [Types::SubnetIpv6CidrBlockAssociation]
+      class AssociateSubnetCidrBlockResult < Struct.new(
+        :subnet_id,
+        :ipv_6_cidr_block_association)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AssociateVpcCidrBlockRequest
+      #   data as a hash:
+      #
+      #       {
+      #         vpc_id: "String", # required
+      #         amazon_provided_ipv_6_cidr_block: false,
+      #       }
+      # @!attribute [rw] vpc_id
+      #   The ID of the VPC.
+      #   @return [String]
+      #
+      # @!attribute [rw] amazon_provided_ipv_6_cidr_block
+      #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+      #   for the VPC. You cannot specify the range of IPv6 addresses, or the
+      #   size of the CIDR block.
+      #   @return [Boolean]
+      class AssociateVpcCidrBlockRequest < Struct.new(
+        :vpc_id,
+        :amazon_provided_ipv_6_cidr_block)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] vpc_id
+      #   The ID of the VPC.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_association
+      #   Information about the IPv6 CIDR block association.
+      #   @return [Types::VpcIpv6CidrBlockAssociation]
+      class AssociateVpcCidrBlockResult < Struct.new(
+        :vpc_id,
+        :ipv_6_cidr_block_association)
         include Aws::Structure
       end
 
@@ -742,6 +854,11 @@ module Aws
       #                 cidr_ip: "String",
       #               },
       #             ],
+      #             ipv_6_ranges: [
+      #               {
+      #                 cidr_ipv_6: "String",
+      #               },
+      #             ],
       #             prefix_list_ids: [
       #               {
       #                 prefix_list_id: "String",
@@ -791,7 +908,7 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] cidr_ip
-      #   The CIDR IP address range. We recommend that you specify the CIDR
+      #   The CIDR IPv4 address range. We recommend that you specify the CIDR
       #   range in a set of IP permissions instead.
       #   @return [String]
       #
@@ -846,6 +963,11 @@ module Aws
       #                 cidr_ip: "String",
       #               },
       #             ],
+      #             ipv_6_ranges: [
+      #               {
+      #                 cidr_ipv_6: "String",
+      #               },
+      #             ],
       #             prefix_list_ids: [
       #               {
       #                 prefix_list_id: "String",
@@ -893,9 +1015,13 @@ module Aws
       #
       # @!attribute [rw] ip_protocol
       #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
-      #   Numbers][1]). (VPC only) Use `-1` to specify all traffic. If you
-      #   specify `-1`, traffic on all ports is allowed, regardless of any
-      #   ports you specify.
+      #   Numbers][1]). (VPC only) Use `-1` to specify all protocols. If you
+      #   specify `-1`, or a protocol number other than `tcp`, `udp`, `icmp`,
+      #   or `58` (ICMPv6), traffic on all ports is allowed, regardless of any
+      #   ports you specify. For `tcp`, `udp`, and `icmp`, you must specify a
+      #   port range. For protocol `58` (ICMPv6), you can optionally specify a
+      #   port range; if you don't, traffic for all types and codes is
+      #   allowed.
       #
       #
       #
@@ -903,19 +1029,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] from_port
-      #   The start of port range for the TCP and UDP protocols, or an ICMP
-      #   type number. For the ICMP type number, use `-1` to specify all ICMP
-      #   types.
+      #   The start of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 type number. For the ICMP/ICMPv6 type number, use `-1`
+      #   to specify all types.
       #   @return [Integer]
       #
       # @!attribute [rw] to_port
-      #   The end of port range for the TCP and UDP protocols, or an ICMP code
-      #   number. For the ICMP code number, use `-1` to specify all ICMP codes
-      #   for the ICMP type.
+      #   The end of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 code number. For the ICMP/ICMPv6 code number, use `-1`
+      #   to specify all codes.
       #   @return [Integer]
       #
       # @!attribute [rw] cidr_ip
-      #   The CIDR IP address range. You can't specify this parameter when
+      #   The CIDR IPv4 address range. You can't specify this parameter when
       #   specifying a source security group.
       #   @return [String]
       #
@@ -1914,6 +2040,56 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass CreateEgressOnlyInternetGatewayRequest
+      #   data as a hash:
+      #
+      #       {
+      #         dry_run: false,
+      #         vpc_id: "String", # required
+      #         client_token: "String",
+      #       }
+      # @!attribute [rw] dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] vpc_id
+      #   The ID of the VPC for which to create the egress-only Internet
+      #   gateway.
+      #   @return [String]
+      #
+      # @!attribute [rw] client_token
+      #   Unique, case-sensitive identifier you provide to ensure the
+      #   idempotency of the request. For more information, see [How to Ensure
+      #   Idempotency][1].
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/Run_Instance_Idempotency.html
+      #   @return [String]
+      class CreateEgressOnlyInternetGatewayRequest < Struct.new(
+        :dry_run,
+        :vpc_id,
+        :client_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] egress_only_internet_gateway
+      #   Information about the egress-only Internet gateway.
+      #   @return [Types::EgressOnlyInternetGateway]
+      #
+      # @!attribute [rw] client_token
+      #   Unique, case-sensitive identifier you provide to ensure the
+      #   idempotency of the request.
+      #   @return [String]
+      class CreateEgressOnlyInternetGatewayResult < Struct.new(
+        :egress_only_internet_gateway,
+        :client_token)
+        include Aws::Structure
+      end
+
       # Contains the parameters for CreateFlowLogs.
       # @note When making an API call, pass CreateFlowLogsRequest
       #   data as a hash:
@@ -2233,7 +2409,8 @@ module Aws
       #         protocol: "String", # required
       #         rule_action: "allow", # required, accepts allow, deny
       #         egress: false, # required
-      #         cidr_block: "String", # required
+      #         cidr_block: "String",
+      #         ipv_6_cidr_block: "String",
       #         icmp_type_code: {
       #           type: 1,
       #           code: 1,
@@ -2263,7 +2440,14 @@ module Aws
       #   @return [Integer]
       #
       # @!attribute [rw] protocol
-      #   The protocol. A value of -1 means all protocols.
+      #   The protocol. A value of `-1` or `all` means all protocols. If you
+      #   specify `all`, `-1`, or a protocol number other than `tcp`, `udp`,
+      #   or `icmp`, traffic on all ports is allowed, regardless of any ports
+      #   or ICMP types or codes you specify. If you specify protocol `58`
+      #   (ICMPv6) and specify an IPv4 CIDR block, traffic for all ICMP types
+      #   and codes allowed, regardless of any that you specify. If you
+      #   specify protocol `58` (ICMPv6) and specify an IPv6 CIDR block, you
+      #   must specify an ICMP type and code.
       #   @return [String]
       #
       # @!attribute [rw] rule_action
@@ -2277,13 +2461,19 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] cidr_block
-      #   The network range to allow or deny, in CIDR notation (for example
-      #   `172.16.0.0/24`).
+      #   The IPv4 network range to allow or deny, in CIDR notation (for
+      #   example `172.16.0.0/24`).
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for
+      #   example `2001:db8:1234:1a00::/64`).
       #   @return [String]
       #
       # @!attribute [rw] icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying ICMP
-      #   for the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP protocol, or protocol 58 (ICMPv6) with an IPv6
+      #   CIDR block.
       #   @return [Types::IcmpTypeCode]
       #
       # @!attribute [rw] port_range
@@ -2297,6 +2487,7 @@ module Aws
         :rule_action,
         :egress,
         :cidr_block,
+        :ipv_6_cidr_block,
         :icmp_type_code,
         :port_range)
         include Aws::Structure
@@ -2351,6 +2542,12 @@ module Aws
       #           },
       #         ],
       #         secondary_private_ip_address_count: 1,
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "String",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #         dry_run: false,
       #       }
       # @!attribute [rw] subnet_id
@@ -2362,11 +2559,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The primary private IP address of the network interface. If you
-      #   don't specify an IP address, Amazon EC2 selects one for you from
-      #   the subnet range. If you specify an IP address, you cannot indicate
-      #   any IP addresses specified in `privateIpAddresses` as primary (only
-      #   one IP address can be designated as primary).
+      #   The primary private IPv4 address of the network interface. If you
+      #   don't specify an IPv4 address, Amazon EC2 selects one for you from
+      #   the subnet's IPv4 CIDR range. If you specify an IP address, you
+      #   cannot indicate any IP addresses specified in `privateIpAddresses`
+      #   as primary (only one IP address can be designated as primary).
       #   @return [String]
       #
       # @!attribute [rw] groups
@@ -2374,24 +2571,39 @@ module Aws
       #   @return [Array<String>]
       #
       # @!attribute [rw] private_ip_addresses
-      #   One or more private IP addresses.
+      #   One or more private IPv4 addresses.
       #   @return [Array<Types::PrivateIpAddressSpecification>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
-      #   The number of secondary private IP addresses to assign to a network
-      #   interface. When you specify a number of secondary IP addresses,
-      #   Amazon EC2 selects these IP addresses within the subnet range. You
-      #   can't specify this option and specify more than one private IP
-      #   address using `privateIpAddresses`.
+      #   The number of secondary private IPv4 addresses to assign to a
+      #   network interface. When you specify a number of secondary IPv4
+      #   addresses, Amazon EC2 selects these IP addresses within the
+      #   subnet's IPv4 CIDR range. You can't specify this option and
+      #   specify more than one private IP address using `privateIpAddresses`.
       #
       #   The number of IP addresses you can assign to a network interface
-      #   varies by instance type. For more information, see [Private IP
-      #   Addresses Per ENI Per Instance Type][1] in the *Amazon Elastic
-      #   Compute Cloud User Guide*.
+      #   varies by instance type. For more information, see [IP Addresses Per
+      #   ENI Per Instance Type][1] in the *Amazon Virtual Private Cloud User
+      #   Guide*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/using-eni.html#AvailableIpPerENI
+      #   @return [Integer]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   One or more specific IPv6 addresses from the IPv6 CIDR block range
+      #   of your subnet. You can't use this option if you're specifying a
+      #   number of IPv6 addresses.
+      #   @return [Array<Types::InstanceIpv6Address>]
+      #
+      # @!attribute [rw] ipv_6_address_count
+      #   The number of IPv6 addresses to assign to a network interface.
+      #   Amazon EC2 automatically selects the IPv6 addresses from the subnet
+      #   range. You can't use this option if specifying specific IPv6
+      #   addresses. If your subnet has the `AssignIpv6AddressOnCreation`
+      #   attribute set to `true`, you can specify `0` to override this
+      #   setting.
       #   @return [Integer]
       #
       # @!attribute [rw] dry_run
@@ -2407,6 +2619,8 @@ module Aws
         :groups,
         :private_ip_addresses,
         :secondary_private_ip_address_count,
+        :ipv_6_addresses,
+        :ipv_6_address_count,
         :dry_run)
         include Aws::Structure
       end
@@ -2517,8 +2731,10 @@ module Aws
       #       {
       #         dry_run: false,
       #         route_table_id: "String", # required
-      #         destination_cidr_block: "String", # required
+      #         destination_cidr_block: "String",
       #         gateway_id: "String",
+      #         destination_ipv_6_cidr_block: "String",
+      #         egress_only_internet_gateway_id: "String",
       #         instance_id: "String",
       #         network_interface_id: "String",
       #         vpc_peering_connection_id: "String",
@@ -2536,13 +2752,22 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] destination_cidr_block
-      #   The CIDR address block used for the destination match. Routing
+      #   The IPv4 CIDR address block used for the destination match. Routing
       #   decisions are based on the most specific match.
       #   @return [String]
       #
       # @!attribute [rw] gateway_id
       #   The ID of an Internet gateway or virtual private gateway attached to
       #   your VPC.
+      #   @return [String]
+      #
+      # @!attribute [rw] destination_ipv_6_cidr_block
+      #   The IPv6 CIDR block used for the destination match. Routing
+      #   decisions are based on the most specific match.
+      #   @return [String]
+      #
+      # @!attribute [rw] egress_only_internet_gateway_id
+      #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
       #   @return [String]
       #
       # @!attribute [rw] instance_id
@@ -2560,13 +2785,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] nat_gateway_id
-      #   The ID of a NAT gateway.
+      #   \[IPv4 traffic only\] The ID of a NAT gateway.
       #   @return [String]
       class CreateRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
         :destination_cidr_block,
         :gateway_id,
+        :destination_ipv_6_cidr_block,
+        :egress_only_internet_gateway_id,
         :instance_id,
         :network_interface_id,
         :vpc_peering_connection_id,
@@ -2753,6 +2980,7 @@ module Aws
       #         dry_run: false,
       #         vpc_id: "String", # required
       #         cidr_block: "String", # required
+      #         ipv_6_cidr_block: "String",
       #         availability_zone: "String",
       #       }
       # @!attribute [rw] dry_run
@@ -2767,8 +2995,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cidr_block
-      #   The network range for the subnet, in CIDR notation. For example,
-      #   `10.0.0.0/24`.
+      #   The IPv4 network range for the subnet, in CIDR notation. For
+      #   example, `10.0.0.0/24`.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 network range for the subnet, in CIDR notation. The subnet
+      #   size must use a /64 prefix length.
       #   @return [String]
       #
       # @!attribute [rw] availability_zone
@@ -2782,6 +3015,7 @@ module Aws
         :dry_run,
         :vpc_id,
         :cidr_block,
+        :ipv_6_cidr_block,
         :availability_zone)
         include Aws::Structure
       end
@@ -2943,7 +3177,7 @@ module Aws
       # @!attribute [rw] iops
       #   Only valid for Provisioned IOPS SSD volumes. The number of I/O
       #   operations per second (IOPS) to provision for the volume, with a
-      #   maximum ratio of 30 IOPS/GiB.
+      #   maximum ratio of 50 IOPS/GiB.
       #
       #   Constraint: Range is 100 to 20000 for Provisioned IOPS SSD volumes
       #   @return [Integer]
@@ -3116,6 +3350,7 @@ module Aws
       #         dry_run: false,
       #         cidr_block: "String", # required
       #         instance_tenancy: "default", # accepts default, dedicated, host
+      #         amazon_provided_ipv_6_cidr_block: false,
       #       }
       # @!attribute [rw] dry_run
       #   Checks whether you have the required permissions for the action,
@@ -3125,7 +3360,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] cidr_block
-      #   The network range for the VPC, in CIDR notation. For example,
+      #   The IPv4 network range for the VPC, in CIDR notation. For example,
       #   `10.0.0.0/16`.
       #   @return [String]
       #
@@ -3142,10 +3377,17 @@ module Aws
       #
       #   Default: `default`
       #   @return [String]
+      #
+      # @!attribute [rw] amazon_provided_ipv_6_cidr_block
+      #   Requests an Amazon-provided IPv6 CIDR block with a /56 prefix length
+      #   for the VPC. You cannot specify the range of IP addresses, or the
+      #   size of the CIDR block.
+      #   @return [Boolean]
       class CreateVpcRequest < Struct.new(
         :dry_run,
         :cidr_block,
-        :instance_tenancy)
+        :instance_tenancy,
+        :amazon_provided_ipv_6_cidr_block)
         include Aws::Structure
       end
 
@@ -3362,6 +3604,38 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DeleteEgressOnlyInternetGatewayRequest
+      #   data as a hash:
+      #
+      #       {
+      #         dry_run: false,
+      #         egress_only_internet_gateway_id: "EgressOnlyInternetGatewayId", # required
+      #       }
+      # @!attribute [rw] dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] egress_only_internet_gateway_id
+      #   The ID of the egress-only Internet gateway.
+      #   @return [String]
+      class DeleteEgressOnlyInternetGatewayRequest < Struct.new(
+        :dry_run,
+        :egress_only_internet_gateway_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] return_code
+      #   Returns `true` if the request succeeds; otherwise, it returns an
+      #   error.
+      #   @return [Boolean]
+      class DeleteEgressOnlyInternetGatewayResult < Struct.new(
+        :return_code)
+        include Aws::Structure
+      end
+
       # Contains the parameters for DeleteFlowLogs.
       # @note When making an API call, pass DeleteFlowLogsRequest
       #   data as a hash:
@@ -3574,7 +3848,8 @@ module Aws
       #       {
       #         dry_run: false,
       #         route_table_id: "String", # required
-      #         destination_cidr_block: "String", # required
+      #         destination_cidr_block: "String",
+      #         destination_ipv_6_cidr_block: "String",
       #       }
       # @!attribute [rw] dry_run
       #   Checks whether you have the required permissions for the action,
@@ -3588,13 +3863,19 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] destination_cidr_block
-      #   The CIDR range for the route. The value you specify must match the
-      #   CIDR for the route exactly.
+      #   The IPv4 CIDR range for the route. The value you specify must match
+      #   the CIDR for the route exactly.
+      #   @return [String]
+      #
+      # @!attribute [rw] destination_ipv_6_cidr_block
+      #   The IPv6 CIDR range for the route. The value you specify must match
+      #   the CIDR for the route exactly.
       #   @return [String]
       class DeleteRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
-        :destination_cidr_block)
+        :destination_cidr_block,
+        :destination_ipv_6_cidr_block)
         include Aws::Structure
       end
 
@@ -4468,6 +4749,58 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DescribeEgressOnlyInternetGatewaysRequest
+      #   data as a hash:
+      #
+      #       {
+      #         dry_run: false,
+      #         egress_only_internet_gateway_ids: ["EgressOnlyInternetGatewayId"],
+      #         max_results: 1,
+      #         next_token: "String",
+      #       }
+      # @!attribute [rw] dry_run
+      #   Checks whether you have the required permissions for the action,
+      #   without actually making the request, and provides an error response.
+      #   If you have the required permissions, the error response is
+      #   `DryRunOperation`. Otherwise, it is `UnauthorizedOperation`.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] egress_only_internet_gateway_ids
+      #   One or more egress-only Internet gateway IDs.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] max_results
+      #   The maximum number of results to return for the request in a single
+      #   page. The remaining results can be seen by sending another request
+      #   with the returned `NextToken` value. This value can be between 5 and
+      #   1000; if `MaxResults` is given a value larger than 1000, only 1000
+      #   results are returned.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   The token to retrieve the next page of results.
+      #   @return [String]
+      class DescribeEgressOnlyInternetGatewaysRequest < Struct.new(
+        :dry_run,
+        :egress_only_internet_gateway_ids,
+        :max_results,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] egress_only_internet_gateways
+      #   Information about the egress-only Internet gateways.
+      #   @return [Array<Types::EgressOnlyInternetGateway>]
+      #
+      # @!attribute [rw] next_token
+      #   The token to use to retrieve the next page of results.
+      #   @return [String]
+      class DescribeEgressOnlyInternetGatewaysResult < Struct.new(
+        :egress_only_internet_gateways,
+        :next_token)
+        include Aws::Structure
+      end
+
       # Contains the parameters for DescribeExportTasks.
       # @note When making an API call, pass DescribeExportTasksRequest
       #   data as a hash:
@@ -4944,6 +5277,9 @@ module Aws
       #   * `description` - The description of the image (provided during
       #     image creation).
       #
+      #   * `ena-support` - A Boolean that indicates whether enhanced
+      #     networking with ENA is enabled.
+      #
       #   * `hypervisor` - The hypervisor type (`ovm` \| `xen`).
       #
       #   * `image-id` - The ID of the image.
@@ -5345,6 +5681,19 @@ module Aws
       #
       #   * `architecture` - The instance architecture (`i386` \| `x86_64`).
       #
+      #   * `association.public-ip` - The address of the Elastic IP address
+      #     (IPv4) bound to the network interface.
+      #
+      #   * `association.ip-owner-id` - The owner of the Elastic IP address
+      #     (IPv4) associated with the network interface.
+      #
+      #   * `association.allocation-id` - The allocation ID returned when you
+      #     allocated the Elastic IP address (IPv4) for your network
+      #     interface.
+      #
+      #   * `association.association-id` - The association ID returned when
+      #     the network interface was associated with an IPv4 address.
+      #
       #   * `availability-zone` - The Availability Zone of the instance.
       #
       #   * `block-device-mapping.attach-time` - The attach time for an EBS
@@ -5409,7 +5758,7 @@ module Aws
       #   * `instance.group-name` - The name of the security group for the
       #     instance.
       #
-      #   * `ip-address` - The public IP address of the instance.
+      #   * `ip-address` - The public IPv4 address of the instance.
       #
       #   * `kernel-id` - The kernel ID.
       #
@@ -5422,8 +5771,93 @@ module Aws
       #
       #   * `launch-time` - The time when the instance was launched.
       #
-      #   * `monitoring-state` - Indicates whether monitoring is enabled for
-      #     the instance (`disabled` \| `enabled`).
+      #   * `monitoring-state` - Indicates whether detailed monitoring is
+      #     enabled (`disabled` \| `enabled`).
+      #
+      #   * `network-interface.addresses.private-ip-address` - The private
+      #     IPv4 address associated with the network interface.
+      #
+      #   * `network-interface.addresses.primary` - Specifies whether the IPv4
+      #     address of the network interface is the primary private IPv4
+      #     address.
+      #
+      #   * `network-interface.addresses.association.public-ip` - The ID of
+      #     the association of an Elastic IP address (IPv4) with a network
+      #     interface.
+      #
+      #   * `network-interface.addresses.association.ip-owner-id` - The owner
+      #     ID of the private IPv4 address associated with the network
+      #     interface.
+      #
+      #   * `network-interface.attachment.attachment-id` - The ID of the
+      #     interface attachment.
+      #
+      #   * `network-interface.attachment.instance-id` - The ID of the
+      #     instance to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
+      #     the instance to which the network interface is attached.
+      #
+      #   * `network-interface.attachment.device-index` - The device index to
+      #     which the network interface is attached.
+      #
+      #   * `network-interface.attachment.status` - The status of the
+      #     attachment (`attaching` \| `attached` \| `detaching` \|
+      #     `detached`).
+      #
+      #   * `network-interface.attachment.attach-time` - The time that the
+      #     network interface was attached to an instance.
+      #
+      #   * `network-interface.attachment.delete-on-termination` - Specifies
+      #     whether the attachment is deleted when an instance is terminated.
+      #
+      #   * `network-interface.availability-zone` - The Availability Zone for
+      #     the network interface.
+      #
+      #   * `network-interface.description` - The description of the network
+      #     interface.
+      #
+      #   * `network-interface.group-id` - The ID of a security group
+      #     associated with the network interface.
+      #
+      #   * `network-interface.group-name` - The name of a security group
+      #     associated with the network interface.
+      #
+      #   * `network-interface.ipv6-addresses.ipv6-address` - The IPv6 address
+      #     associated with the network interface.
+      #
+      #   * `network-interface.mac-address` - The MAC address of the network
+      #     interface.
+      #
+      #   * `network-interface.network-interface-id` - The ID of the network
+      #     interface.
+      #
+      #   * `network-interface.owner-id` - The ID of the owner of the network
+      #     interface.
+      #
+      #   * `network-interface.private-dns-name` - The private DNS name of the
+      #     network interface.
+      #
+      #   * `network-interface.requester-id` - The requester ID for the
+      #     network interface.
+      #
+      #   * `network-interface.requester-managed` - Indicates whether the
+      #     network interface is being managed by AWS.
+      #
+      #   * `network-interface.status` - The status of the network interface
+      #     (`available`) \| `in-use`).
+      #
+      #   * `network-interface.source-dest-check` - Whether the network
+      #     interface performs source/destination checking. A value of `true`
+      #     means checking is enabled, and `false` means checking is disabled.
+      #     The value must be `false` for the network interface to perform
+      #     network address translation (NAT) in your VPC.
+      #
+      #   * `network-interface.subnet-id` - The ID of the subnet for the
+      #     network interface.
+      #
+      #   * `network-interface.vpc-id` - The ID of the VPC for the network
+      #     interface.
       #
       #   * `owner-id` - The AWS account ID of the instance owner.
       #
@@ -5433,9 +5867,9 @@ module Aws
       #   * `platform` - The platform. Use `windows` if you have Windows
       #     instances; otherwise, leave blank.
       #
-      #   * `private-dns-name` - The private DNS name of the instance.
+      #   * `private-dns-name` - The private IPv4 DNS name of the instance.
       #
-      #   * `private-ip-address` - The private IP address of the instance.
+      #   * `private-ip-address` - The private IPv4 address of the instance.
       #
       #   * `product-code` - The product code associated with the AMI used to
       #     launch the instance.
@@ -5505,99 +5939,6 @@ module Aws
       #     (`paravirtual` \| `hvm`).
       #
       #   * `vpc-id` - The ID of the VPC that the instance is running in.
-      #
-      #   * `network-interface.description` - The description of the network
-      #     interface.
-      #
-      #   * `network-interface.subnet-id` - The ID of the subnet for the
-      #     network interface.
-      #
-      #   * `network-interface.vpc-id` - The ID of the VPC for the network
-      #     interface.
-      #
-      #   * `network-interface.network-interface-id` - The ID of the network
-      #     interface.
-      #
-      #   * `network-interface.owner-id` - The ID of the owner of the network
-      #     interface.
-      #
-      #   * `network-interface.availability-zone` - The Availability Zone for
-      #     the network interface.
-      #
-      #   * `network-interface.requester-id` - The requester ID for the
-      #     network interface.
-      #
-      #   * `network-interface.requester-managed` - Indicates whether the
-      #     network interface is being managed by AWS.
-      #
-      #   * `network-interface.status` - The status of the network interface
-      #     (`available`) \| `in-use`).
-      #
-      #   * `network-interface.mac-address` - The MAC address of the network
-      #     interface.
-      #
-      #   * `network-interface.private-dns-name` - The private DNS name of the
-      #     network interface.
-      #
-      #   * `network-interface.source-dest-check` - Whether the network
-      #     interface performs source/destination checking. A value of `true`
-      #     means checking is enabled, and `false` means checking is disabled.
-      #     The value must be `false` for the network interface to perform
-      #     network address translation (NAT) in your VPC.
-      #
-      #   * `network-interface.group-id` - The ID of a security group
-      #     associated with the network interface.
-      #
-      #   * `network-interface.group-name` - The name of a security group
-      #     associated with the network interface.
-      #
-      #   * `network-interface.attachment.attachment-id` - The ID of the
-      #     interface attachment.
-      #
-      #   * `network-interface.attachment.instance-id` - The ID of the
-      #     instance to which the network interface is attached.
-      #
-      #   * `network-interface.attachment.instance-owner-id` - The owner ID of
-      #     the instance to which the network interface is attached.
-      #
-      #   * `network-interface.addresses.private-ip-address` - The private IP
-      #     address associated with the network interface.
-      #
-      #   * `network-interface.attachment.device-index` - The device index to
-      #     which the network interface is attached.
-      #
-      #   * `network-interface.attachment.status` - The status of the
-      #     attachment (`attaching` \| `attached` \| `detaching` \|
-      #     `detached`).
-      #
-      #   * `network-interface.attachment.attach-time` - The time that the
-      #     network interface was attached to an instance.
-      #
-      #   * `network-interface.attachment.delete-on-termination` - Specifies
-      #     whether the attachment is deleted when an instance is terminated.
-      #
-      #   * `network-interface.addresses.primary` - Specifies whether the IP
-      #     address of the network interface is the primary private IP
-      #     address.
-      #
-      #   * `network-interface.addresses.association.public-ip` - The ID of
-      #     the association of an Elastic IP address with a network interface.
-      #
-      #   * `network-interface.addresses.association.ip-owner-id` - The owner
-      #     ID of the private IP address associated with the network
-      #     interface.
-      #
-      #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
-      #
-      #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
-      #
-      #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
-      #
-      #   * `association.association-id` - The association ID returned when
-      #     the network interface was associated with an IP address.
       #   @return [Array<Types::Filter>]
       #
       # @!attribute [rw] next_token
@@ -5937,7 +6278,7 @@ module Aws
       #   * `default` - Indicates whether the ACL is the default network ACL
       #     for the VPC.
       #
-      #   * `entry.cidr` - The CIDR range specified in the entry.
+      #   * `entry.cidr` - The IPv4 CIDR range specified in the entry.
       #
       #   * `entry.egress` - Indicates whether the entry applies to egress
       #     traffic.
@@ -5945,6 +6286,8 @@ module Aws
       #   * `entry.icmp.code` - The ICMP code specified in the entry, if any.
       #
       #   * `entry.icmp.type` - The ICMP type specified in the entry, if any.
+      #
+      #   * `entry.ipv6-cidr` - The IPv6 CIDR range specified in the entry.
       #
       #   * `entry.port-range.from` - The start of the port range specified in
       #     the entry.
@@ -6085,33 +6428,34 @@ module Aws
       # @!attribute [rw] filters
       #   One or more filters.
       #
-      #   * `addresses.private-ip-address` - The private IP addresses
+      #   * `addresses.private-ip-address` - The private IPv4 addresses
       #     associated with the network interface.
       #
-      #   * `addresses.primary` - Whether the private IP address is the
+      #   * `addresses.primary` - Whether the private IPv4 address is the
       #     primary IP address associated with the network interface.
       #
       #   * `addresses.association.public-ip` - The association ID returned
       #     when the network interface was associated with the Elastic IP
-      #     address.
+      #     address (IPv4).
       #
       #   * `addresses.association.owner-id` - The owner ID of the addresses
       #     associated with the network interface.
       #
       #   * `association.association-id` - The association ID returned when
-      #     the network interface was associated with an IP address.
+      #     the network interface was associated with an IPv4 address.
       #
       #   * `association.allocation-id` - The allocation ID returned when you
-      #     allocated the Elastic IP address for your network interface.
+      #     allocated the Elastic IP address (IPv4) for your network
+      #     interface.
       #
       #   * `association.ip-owner-id` - The owner of the Elastic IP address
-      #     associated with the network interface.
+      #     (IPv4) associated with the network interface.
       #
       #   * `association.public-ip` - The address of the Elastic IP address
-      #     bound to the network interface.
+      #     (IPv4) bound to the network interface.
       #
       #   * `association.public-dns-name` - The public DNS name for the
-      #     network interface.
+      #     network interface (IPv4).
       #
       #   * `attachment.attachment-id` - The ID of the interface attachment.
       #
@@ -6147,17 +6491,20 @@ module Aws
       #   * `group-name` - The name of a security group associated with the
       #     network interface.
       #
+      #   * `ipv6-addresses.ipv6-address` - An IPv6 address associated with
+      #     the network interface.
+      #
       #   * `mac-address` - The MAC address of the network interface.
       #
       #   * `network-interface-id` - The ID of the network interface.
       #
       #   * `owner-id` - The AWS account ID of the network interface owner.
       #
-      #   * `private-ip-address` - The private IP address or addresses of the
-      #     network interface.
+      #   * `private-ip-address` - The private IPv4 address or addresses of
+      #     the network interface.
       #
-      #   * `private-dns-name` - The private DNS name of the network
-      #     interface.
+      #   * `private-dns-name` - The private DNS name of the network interface
+      #     (IPv4).
       #
       #   * `requester-id` - The ID of the entity that launched the instance
       #     on your behalf (for example, AWS Management Console, Auto Scaling,
@@ -6534,7 +6881,7 @@ module Aws
       #       {
       #         dry_run: false,
       #         reserved_instances_offering_ids: ["String"],
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         availability_zone: "String",
       #         product_description: "Linux/UNIX", # accepts Linux/UNIX, Linux/UNIX (Amazon VPC), Windows, Windows (Amazon VPC)
       #         filters: [
@@ -6877,11 +7224,17 @@ module Aws
       #
       #   * `route-table-id` - The ID of the route table.
       #
-      #   * `route.destination-cidr-block` - The CIDR range specified in a
-      #     route in the table.
+      #   * `route.destination-cidr-block` - The IPv4 CIDR range specified in
+      #     a route in the table.
+      #
+      #   * `route.destination-ipv6-cidr-block` - The IPv6 CIDR range
+      #     specified in a route in the route table.
       #
       #   * `route.destination-prefix-list-id` - The ID (prefix) of the AWS
       #     service specified in a route in the table.
+      #
+      #   * `route.egress-only-internet-gateway-id` - The ID of an egress-only
+      #     Internet gateway specified in a route in the route table.
       #
       #   * `route.gateway-id` - The ID of a gateway specified in a route in
       #     the table.
@@ -7213,8 +7566,8 @@ module Aws
       #
       #   * `group-name` - The name of the security group.
       #
-      #   * `ip-permission.cidr` - A CIDR range that has been granted
-      #     permission.
+      #   * `ip-permission.cidr` - An IPv4 CIDR range that has been granted
+      #     permission in a security group rule.
       #
       #   * `ip-permission.from-port` - The start of port range for the TCP
       #     and UDP protocols, or an ICMP type number.
@@ -7224,6 +7577,9 @@ module Aws
       #
       #   * `ip-permission.group-name` - The name of a security group that has
       #     been granted permission.
+      #
+      #   * `ip-permission.ipv6-cidr` - An IPv6 CIDR range that has been
+      #     granted permission in a security group rule.
       #
       #   * `ip-permission.protocol` - The IP protocol for the permission
       #     (`tcp` \| `udp` \| `icmp` or a protocol number).
@@ -7850,7 +8206,7 @@ module Aws
       #         dry_run: false,
       #         start_time: Time.now,
       #         end_time: Time.now,
-      #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_types: ["t1.micro"], # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         product_descriptions: ["String"],
       #         filters: [
       #           {
@@ -7882,7 +8238,8 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] instance_types
-      #   Filters the results by the specified instance types.
+      #   Filters the results by the specified instance types. Note that T2
+      #   and HS1 instance types are not supported.
       #   @return [Array<String>]
       #
       # @!attribute [rw] product_descriptions
@@ -8038,17 +8395,26 @@ module Aws
       #   * `availabilityZone` - The Availability Zone for the subnet. You can
       #     also use `availability-zone` as the filter name.
       #
-      #   * `available-ip-address-count` - The number of IP addresses in the
+      #   * `available-ip-address-count` - The number of IPv4 addresses in the
       #     subnet that are available.
       #
-      #   * `cidrBlock` - The CIDR block of the subnet. The CIDR block you
-      #     specify must exactly match the subnet's CIDR block for
+      #   * `cidrBlock` - The IPv4 CIDR block of the subnet. The CIDR block
+      #     you specify must exactly match the subnet's CIDR block for
       #     information to be returned for the subnet. You can also use `cidr`
       #     or `cidr-block` as the filter names.
       #
       #   * `defaultForAz` - Indicates whether this is the default subnet for
       #     the Availability Zone. You can also use `default-for-az` as the
       #     filter name.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - An association ID
+      #     for an IPv6 CIDR block associated with the subnet.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the subnet.
       #
       #   * `state` - The state of the subnet (`pending` \| `available`).
       #
@@ -8764,7 +9130,8 @@ module Aws
       # @!attribute [rw] filters
       #   One or more filters.
       #
-      #   * `accepter-vpc-info.cidr-block` - The CIDR block of the peer VPC.
+      #   * `accepter-vpc-info.cidr-block` - The IPv4 CIDR block of the peer
+      #     VPC.
       #
       #   * `accepter-vpc-info.owner-id` - The AWS account ID of the owner of
       #     the peer VPC.
@@ -8774,7 +9141,7 @@ module Aws
       #   * `expiration-time` - The expiration date and time for the VPC
       #     peering connection.
       #
-      #   * `requester-vpc-info.cidr-block` - The CIDR block of the
+      #   * `requester-vpc-info.cidr-block` - The IPv4 CIDR block of the
       #     requester's VPC.
       #
       #   * `requester-vpc-info.owner-id` - The AWS account ID of the owner of
@@ -8853,12 +9220,21 @@ module Aws
       # @!attribute [rw] filters
       #   One or more filters.
       #
-      #   * `cidr` - The CIDR block of the VPC. The CIDR block you specify
-      #     must exactly match the VPC's CIDR block for information to be
-      #     returned for the VPC. Must contain the slash followed by one or
-      #     two digits (for example, `/28`).
+      #   * `cidr` - The IPv4 CIDR block of the VPC. The CIDR block you
+      #     specify must exactly match the VPC's CIDR block for information
+      #     to be returned for the VPC. Must contain the slash followed by one
+      #     or two digits (for example, `/28`).
       #
       #   * `dhcp-options-id` - The ID of a set of DHCP options.
+      #
+      #   * `ipv6-cidr-block-association.ipv6-cidr-block` - An IPv6 CIDR block
+      #     associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.association-id` - The association ID
+      #     for an IPv6 CIDR block associated with the VPC.
+      #
+      #   * `ipv6-cidr-block-association.state` - The state of an IPv6 CIDR
+      #     block associated with the VPC.
       #
       #   * `isDefault` - Indicates whether the VPC is the default VPC.
       #
@@ -9410,6 +9786,60 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DisassociateSubnetCidrBlockRequest
+      #   data as a hash:
+      #
+      #       {
+      #         association_id: "String", # required
+      #       }
+      # @!attribute [rw] association_id
+      #   The association ID for the CIDR block.
+      #   @return [String]
+      class DisassociateSubnetCidrBlockRequest < Struct.new(
+        :association_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] subnet_id
+      #   The ID of the subnet.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_association
+      #   Information about the IPv6 CIDR block association.
+      #   @return [Types::SubnetIpv6CidrBlockAssociation]
+      class DisassociateSubnetCidrBlockResult < Struct.new(
+        :subnet_id,
+        :ipv_6_cidr_block_association)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DisassociateVpcCidrBlockRequest
+      #   data as a hash:
+      #
+      #       {
+      #         association_id: "String", # required
+      #       }
+      # @!attribute [rw] association_id
+      #   The association ID for the CIDR block.
+      #   @return [String]
+      class DisassociateVpcCidrBlockRequest < Struct.new(
+        :association_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] vpc_id
+      #   The ID of the VPC.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_association
+      #   Information about the IPv6 CIDR block association.
+      #   @return [Types::VpcIpv6CidrBlockAssociation]
+      class DisassociateVpcCidrBlockResult < Struct.new(
+        :vpc_id,
+        :ipv_6_cidr_block_association)
+        include Aws::Structure
+      end
+
       # Describes a disk image.
       # @note When making an API call, pass DiskImage
       #   data as a hash:
@@ -9653,6 +10083,21 @@ module Aws
       class EbsInstanceBlockDeviceSpecification < Struct.new(
         :volume_id,
         :delete_on_termination)
+        include Aws::Structure
+      end
+
+      # Describes an egress-only Internet gateway.
+      # @!attribute [rw] egress_only_internet_gateway_id
+      #   The ID of the egress-only Internet gateway.
+      #   @return [String]
+      #
+      # @!attribute [rw] attachments
+      #   Information about the attachment of the egress-only Internet
+      #   gateway.
+      #   @return [Array<Types::InternetGatewayAttachment>]
+      class EgressOnlyInternetGateway < Struct.new(
+        :egress_only_internet_gateway_id,
+        :attachments)
         include Aws::Structure
       end
 
@@ -10210,13 +10655,12 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] reserved_instance_ids
-      #   The ID/s of the Convertible Reserved Instances you want to exchange.
+      #   The IDs of the Convertible Reserved Instances to exchange.
       #   @return [Array<String>]
       #
       # @!attribute [rw] target_configurations
       #   The configuration requirements of the Convertible Reserved Instances
-      #   you want in exchange for your current Convertible Reserved
-      #   Instances.
+      #   to exchange for your current Convertible Reserved Instances.
       #   @return [Array<Types::TargetConfigurationRequest>]
       class GetReservedInstancesExchangeQuoteRequest < Struct.new(
         :dry_run,
@@ -10256,11 +10700,11 @@ module Aws
       #
       # @!attribute [rw] is_valid_exchange
       #   If `true`, the exchange is valid. If `false`, the exchange cannot be
-      #   performed.
+      #   completed.
       #   @return [Boolean]
       #
       # @!attribute [rw] validation_failure_reason
-      #   Describes the reason why the exchange can not be completed.
+      #   Describes the reason why the exchange cannot be completed.
       #   @return [String]
       class GetReservedInstancesExchangeQuoteResult < Struct.new(
         :reserved_instance_value_set,
@@ -10583,12 +11027,12 @@ module Aws
       #         code: 1,
       #       }
       # @!attribute [rw] type
-      #   The ICMP code. A value of -1 means all codes for the specified ICMP
-      #   type.
+      #   The ICMP type. A value of -1 means all types.
       #   @return [Integer]
       #
       # @!attribute [rw] code
-      #   The ICMP type. A value of -1 means all types.
+      #   The ICMP code. A value of -1 means all codes for the specified ICMP
+      #   type.
       #   @return [Integer]
       class IcmpTypeCode < Struct.new(
         :type,
@@ -11090,7 +11534,7 @@ module Aws
       #         user_data: {
       #           data: "String",
       #         },
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -11188,7 +11632,7 @@ module Aws
       #           user_data: {
       #             data: "String",
       #           },
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -11565,16 +12009,21 @@ module Aws
       #   @return [Types::InstanceState]
       #
       # @!attribute [rw] private_dns_name
-      #   The private DNS name assigned to the instance. This DNS name can
-      #   only be used inside the Amazon EC2 network. This name is not
-      #   available until the instance enters the `running` state. For
-      #   EC2-VPC, this name is only available if you've enabled DNS
-      #   hostnames for your VPC.
+      #   (IPv4 only) The private DNS hostname name assigned to the instance.
+      #   This DNS hostname can only be used inside the Amazon EC2 network.
+      #   This name is not available until the instance enters the `running`
+      #   state.
+      #
+      #   \[EC2-VPC\] The Amazon-provided DNS server will resolve
+      #   Amazon-provided private DNS hostnames if you've enabled DNS
+      #   resolution and DNS hostnames in your VPC. If you are not using the
+      #   Amazon-provided DNS server in your VPC, your custom domain name
+      #   servers must resolve the hostname as appropriate.
       #   @return [String]
       #
       # @!attribute [rw] public_dns_name
-      #   The public DNS name assigned to the instance. This name is not
-      #   available until the instance enters the `running` state. For
+      #   (IPv4 only) The public DNS name assigned to the instance. This name
+      #   is not available until the instance enters the `running` state. For
       #   EC2-VPC, this name is only available if you've enabled DNS
       #   hostnames for your VPC.
       #   @return [String]
@@ -11623,7 +12072,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] monitoring
-      #   The monitoring information for the instance.
+      #   The monitoring for the instance.
       #   @return [Types::Monitoring]
       #
       # @!attribute [rw] subnet_id
@@ -11635,11 +12084,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The private IP address assigned to the instance.
+      #   The private IPv4 address assigned to the instance.
       #   @return [String]
       #
       # @!attribute [rw] public_ip_address
-      #   The public IP address assigned to the instance, if applicable.
+      #   The public IPv4 address assigned to the instance, if applicable.
       #   @return [String]
       #
       # @!attribute [rw] state_reason
@@ -11963,13 +12412,28 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the monitoring information of the instance.
+      # Describes an IPv6 address.
+      # @note When making an API call, pass InstanceIpv6Address
+      #   data as a hash:
+      #
+      #       {
+      #         ipv_6_address: "String",
+      #       }
+      # @!attribute [rw] ipv_6_address
+      #   The IPv6 address.
+      #   @return [String]
+      class InstanceIpv6Address < Struct.new(
+        :ipv_6_address)
+        include Aws::Structure
+      end
+
+      # Describes the monitoring of an instance.
       # @!attribute [rw] instance_id
       #   The ID of the instance.
       #   @return [String]
       #
       # @!attribute [rw] monitoring
-      #   The monitoring information.
+      #   The monitoring for the instance.
       #   @return [Types::Monitoring]
       class InstanceMonitoring < Struct.new(
         :instance_id,
@@ -12007,7 +12471,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The IP address of the network interface within the subnet.
+      #   The IPv4 address of the network interface within the subnet.
       #   @return [String]
       #
       # @!attribute [rw] private_dns_name
@@ -12028,13 +12492,18 @@ module Aws
       #   @return [Types::InstanceNetworkInterfaceAttachment]
       #
       # @!attribute [rw] association
-      #   The association information for an Elastic IP associated with the
+      #   The association information for an Elastic IPv4 associated with the
       #   network interface.
       #   @return [Types::InstanceNetworkInterfaceAssociation]
       #
       # @!attribute [rw] private_ip_addresses
-      #   The private IP addresses associated with the network interface.
+      #   One or more private IPv4 addresses associated with the network
+      #   interface.
       #   @return [Array<Types::InstancePrivateIpAddress>]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   One or more IPv6 addresses associated with the network interface.
+      #   @return [Array<Types::InstanceIpv6Address>]
       class InstanceNetworkInterface < Struct.new(
         :network_interface_id,
         :subnet_id,
@@ -12049,11 +12518,12 @@ module Aws
         :groups,
         :attachment,
         :association,
-        :private_ip_addresses)
+        :private_ip_addresses,
+        :ipv_6_addresses)
         include Aws::Structure
       end
 
-      # Describes association information for an Elastic IP address.
+      # Describes association information for an Elastic IP address (IPv4).
       # @!attribute [rw] public_ip
       #   The public IP address or Elastic IP address bound to the network
       #   interface.
@@ -12124,6 +12594,12 @@ module Aws
       #         ],
       #         secondary_private_ip_address_count: 1,
       #         associate_public_ip_address: false,
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "String",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #       }
       # @!attribute [rw] network_interface_id
       #   The ID of the network interface.
@@ -12146,7 +12622,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The private IP address of the network interface. Applies only if
+      #   The private IPv4 address of the network interface. Applies only if
       #   creating a network interface when launching an instance. You cannot
       #   specify this option if you're launching more than one instance in a
       #   RunInstances request.
@@ -12164,27 +12640,42 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] private_ip_addresses
-      #   One or more private IP addresses to assign to the network interface.
-      #   Only one private IP address can be designated as primary. You cannot
-      #   specify this option if you're launching more than one instance in a
-      #   RunInstances request.
+      #   One or more private IPv4 addresses to assign to the network
+      #   interface. Only one private IPv4 address can be designated as
+      #   primary. You cannot specify this option if you're launching more
+      #   than one instance in a RunInstances request.
       #   @return [Array<Types::PrivateIpAddressSpecification>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
-      #   The number of secondary private IP addresses. You can't specify
+      #   The number of secondary private IPv4 addresses. You can't specify
       #   this option and specify more than one private IP address using the
       #   private IP addresses option. You cannot specify this option if
       #   you're launching more than one instance in a RunInstances request.
       #   @return [Integer]
       #
       # @!attribute [rw] associate_public_ip_address
-      #   Indicates whether to assign a public IP address to an instance you
+      #   Indicates whether to assign a public IPv4 address to an instance you
       #   launch in a VPC. The public IP address can only be assigned to a
       #   network interface for eth0, and can only be assigned to a new
       #   network interface, not an existing one. You cannot specify more than
       #   one network interface in the request. If launching into a default
       #   subnet, the default value is `true`.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   One or more IPv6 addresses to assign to the network interface. You
+      #   cannot specify this option and the option to assign a number of IPv6
+      #   addresses in the same request. You cannot specify this option if
+      #   you've specified a minimum number of instances to launch.
+      #   @return [Array<Types::InstanceIpv6Address>]
+      #
+      # @!attribute [rw] ipv_6_address_count
+      #   A number of IPv6 addresses to assign to the network interface.
+      #   Amazon EC2 chooses the IPv6 addresses from the range of the subnet.
+      #   You cannot specify this option and the option to assign specific
+      #   IPv6 addresses in the same request. You can specify this option if
+      #   you've specified a minimum number of instances to launch.
+      #   @return [Integer]
       class InstanceNetworkInterfaceSpecification < Struct.new(
         :network_interface_id,
         :device_index,
@@ -12195,22 +12686,24 @@ module Aws
         :delete_on_termination,
         :private_ip_addresses,
         :secondary_private_ip_address_count,
-        :associate_public_ip_address)
+        :associate_public_ip_address,
+        :ipv_6_addresses,
+        :ipv_6_address_count)
         include Aws::Structure
       end
 
-      # Describes a private IP address.
+      # Describes a private IPv4 address.
       # @!attribute [rw] private_ip_address
-      #   The private IP address of the network interface.
+      #   The private IPv4 address of the network interface.
       #   @return [String]
       #
       # @!attribute [rw] private_dns_name
-      #   The private DNS name.
+      #   The private IPv4 DNS name.
       #   @return [String]
       #
       # @!attribute [rw] primary
-      #   Indicates whether this IP address is the primary private IP address
-      #   of the network interface.
+      #   Indicates whether this IPv4 address is the primary private IP
+      #   address of the network interface.
       #   @return [Boolean]
       #
       # @!attribute [rw] association
@@ -12225,7 +12718,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the current state of the instance.
+      # Describes the current state of an instance.
       # @!attribute [rw] code
       #   The low byte represents the state. The high byte is an opaque
       #   internal value and should be ignored.
@@ -12391,7 +12884,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the attachment of a VPC to an Internet gateway.
+      # Describes the attachment of a VPC to an Internet gateway or an
+      # egress-only Internet gateway.
       # @!attribute [rw] vpc_id
       #   The ID of the VPC.
       #   @return [String]
@@ -12428,6 +12922,11 @@ module Aws
       #             cidr_ip: "String",
       #           },
       #         ],
+      #         ipv_6_ranges: [
+      #           {
+      #             cidr_ipv_6: "String",
+      #           },
+      #         ],
       #         prefix_list_ids: [
       #           {
       #             prefix_list_id: "String",
@@ -12435,11 +12934,16 @@ module Aws
       #         ],
       #       }
       # @!attribute [rw] ip_protocol
-      #   The IP protocol name (for `tcp`, `udp`, and `icmp`) or number (see
-      #   [Protocol Numbers][1]).
+      #   The IP protocol name (`tcp`, `udp`, `icmp`) or number (see [Protocol
+      #   Numbers][1]).
       #
-      #   \[EC2-VPC only\] When you authorize or revoke security group rules,
-      #   you can use `-1` to specify all.
+      #   \[EC2-VPC only\] Use `-1` to specify all protocols. When authorizing
+      #   security group rules, specifying `-1` or a protocol number other
+      #   than `tcp`, `udp`, `icmp`, or `58` (ICMPv6) allows traffic on all
+      #   ports, regardless of any port range you specify. For `tcp`, `udp`,
+      #   and `icmp`, you must specify a port range. For `58` (ICMPv6), you
+      #   can optionally specify a port range; if you don't, traffic for all
+      #   types and codes is allowed when authorizing rules.
       #
       #
       #
@@ -12447,14 +12951,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] from_port
-      #   The start of port range for the TCP and UDP protocols, or an ICMP
-      #   type number. A value of `-1` indicates all ICMP types.
+      #   The start of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 type number. A value of `-1` indicates all ICMP/ICMPv6
+      #   types.
       #   @return [Integer]
       #
       # @!attribute [rw] to_port
-      #   The end of port range for the TCP and UDP protocols, or an ICMP
-      #   code. A value of `-1` indicates all ICMP codes for the specified
-      #   ICMP type.
+      #   The end of port range for the TCP and UDP protocols, or an
+      #   ICMP/ICMPv6 code. A value of `-1` indicates all ICMP/ICMPv6 codes
+      #   for the specified ICMP type.
       #   @return [Integer]
       #
       # @!attribute [rw] user_id_group_pairs
@@ -12462,8 +12967,12 @@ module Aws
       #   @return [Array<Types::UserIdGroupPair>]
       #
       # @!attribute [rw] ip_ranges
-      #   One or more IP ranges.
+      #   One or more IPv4 ranges.
       #   @return [Array<Types::IpRange>]
+      #
+      # @!attribute [rw] ipv_6_ranges
+      #   \[EC2-VPC only\] One or more IPv6 ranges.
+      #   @return [Array<Types::Ipv6Range>]
       #
       # @!attribute [rw] prefix_list_ids
       #   (Valid for AuthorizeSecurityGroupEgress, RevokeSecurityGroupEgress
@@ -12478,11 +12987,12 @@ module Aws
         :to_port,
         :user_id_group_pairs,
         :ip_ranges,
+        :ipv_6_ranges,
         :prefix_list_ids)
         include Aws::Structure
       end
 
-      # Describes an IP range.
+      # Describes an IPv4 range.
       # @note When making an API call, pass IpRange
       #   data as a hash:
       #
@@ -12490,11 +13000,38 @@ module Aws
       #         cidr_ip: "String",
       #       }
       # @!attribute [rw] cidr_ip
-      #   The CIDR range. You can either specify a CIDR range or a source
-      #   security group, not both.
+      #   The IPv4 CIDR range. You can either specify a CIDR range or a source
+      #   security group, not both. To specify a single IPv4 address, use the
+      #   /32 prefix.
       #   @return [String]
       class IpRange < Struct.new(
         :cidr_ip)
+        include Aws::Structure
+      end
+
+      # Describes an IPv6 CIDR block.
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 CIDR block.
+      #   @return [String]
+      class Ipv6CidrBlock < Struct.new(
+        :ipv_6_cidr_block)
+        include Aws::Structure
+      end
+
+      # \[EC2-VPC only\] Describes an IPv6 range.
+      # @note When making an API call, pass Ipv6Range
+      #   data as a hash:
+      #
+      #       {
+      #         cidr_ipv_6: "String",
+      #       }
+      # @!attribute [rw] cidr_ipv_6
+      #   The IPv6 CIDR range. You can either specify a CIDR range or a source
+      #   security group, not both. To specify a single IPv6 address, use the
+      #   /128 prefix.
+      #   @return [String]
+      class Ipv6Range < Struct.new(
+        :cidr_ipv_6)
         include Aws::Structure
       end
 
@@ -12643,7 +13180,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] network_interfaces
-      #   One or more network interfaces.
+      #   One or more network interfaces. If you specify a network interface,
+      #   you must specify subnet IDs and security group IDs using the network
+      #   interface.
       #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
       #
       # @!attribute [rw] iam_instance_profile
@@ -12662,7 +13201,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] monitoring
-      #   Describes the monitoring for the instance.
+      #   Describes the monitoring of an instance.
       #   @return [Types::RunInstancesMonitoringEnabled]
       class LaunchSpecification < Struct.new(
         :image_id,
@@ -13174,7 +13713,7 @@ module Aws
       #             availability_zone: "String",
       #             platform: "String",
       #             instance_count: 1,
-      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #             scope: "Availability Zone", # accepts Availability Zone, Region
       #           },
       #         ],
@@ -13331,18 +13870,32 @@ module Aws
       #         map_public_ip_on_launch: {
       #           value: false,
       #         },
+      #         assign_ipv_6_address_on_creation: {
+      #           value: false,
+      #         },
       #       }
       # @!attribute [rw] subnet_id
       #   The ID of the subnet.
       #   @return [String]
       #
       # @!attribute [rw] map_public_ip_on_launch
-      #   Specify `true` to indicate that instances launched into the
-      #   specified subnet should be assigned public IP address.
+      #   Specify `true` to indicate that network interfaces created in the
+      #   specified subnet should be assigned a public IPv4 address. This
+      #   includes a network interface that's created when launching an
+      #   instance into the subnet (the instance therefore receives a public
+      #   IPv4 address).
+      #   @return [Types::AttributeBooleanValue]
+      #
+      # @!attribute [rw] assign_ipv_6_address_on_creation
+      #   Specify `true` to indicate that network interfaces created in the
+      #   specified subnet should be assigned an IPv6 address. This includes a
+      #   network interface that's created when launching an instance into
+      #   the subnet (the instance therefore receives an IPv6 address).
       #   @return [Types::AttributeBooleanValue]
       class ModifySubnetAttributeRequest < Struct.new(
         :subnet_id,
-        :map_public_ip_on_launch)
+        :map_public_ip_on_launch,
+        :assign_ipv_6_address_on_creation)
         include Aws::Structure
       end
 
@@ -13568,16 +14121,17 @@ module Aws
 
       # Contains the output of MonitorInstances.
       # @!attribute [rw] instance_monitorings
-      #   Monitoring information for one or more instances.
+      #   The monitoring information.
       #   @return [Array<Types::InstanceMonitoring>]
       class MonitorInstancesResult < Struct.new(
         :instance_monitorings)
         include Aws::Structure
       end
 
-      # Describes the monitoring for the instance.
+      # Describes the monitoring of an instance.
       # @!attribute [rw] state
-      #   Indicates whether monitoring is enabled for the instance.
+      #   Indicates whether detailed monitoring is enabled. Otherwise, basic
+      #   monitoring is enabled.
       #   @return [String]
       class Monitoring < Struct.new(
         :state)
@@ -13838,7 +14392,11 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] cidr_block
-      #   The network range to allow or deny, in CIDR notation.
+      #   The IPv4 network range to allow or deny, in CIDR notation.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation.
       #   @return [String]
       #
       # @!attribute [rw] icmp_type_code
@@ -13854,6 +14412,7 @@ module Aws
         :rule_action,
         :egress,
         :cidr_block,
+        :ipv_6_cidr_block,
         :icmp_type_code,
         :port_range)
         include Aws::Structure
@@ -13902,7 +14461,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The IP address of the network interface within the subnet.
+      #   The IPv4 address of the network interface within the subnet.
       #   @return [String]
       #
       # @!attribute [rw] private_dns_name
@@ -13922,8 +14481,8 @@ module Aws
       #   @return [Types::NetworkInterfaceAttachment]
       #
       # @!attribute [rw] association
-      #   The association information for an Elastic IP associated with the
-      #   network interface.
+      #   The association information for an Elastic IP address (IPv4)
+      #   associated with the network interface.
       #   @return [Types::NetworkInterfaceAssociation]
       #
       # @!attribute [rw] tag_set
@@ -13931,8 +14490,12 @@ module Aws
       #   @return [Array<Types::Tag>]
       #
       # @!attribute [rw] private_ip_addresses
-      #   The private IP addresses associated with the network interface.
+      #   The private IPv4 addresses associated with the network interface.
       #   @return [Array<Types::NetworkInterfacePrivateIpAddress>]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   The IPv6 addresses associated with the network interface.
+      #   @return [Array<Types::NetworkInterfaceIpv6Address>]
       #
       # @!attribute [rw] interface_type
       #   The type of interface.
@@ -13956,11 +14519,13 @@ module Aws
         :association,
         :tag_set,
         :private_ip_addresses,
+        :ipv_6_addresses,
         :interface_type)
         include Aws::Structure
       end
 
-      # Describes association information for an Elastic IP address.
+      # Describes association information for an Elastic IP address (IPv4
+      # only).
       # @!attribute [rw] public_ip
       #   The address of the Elastic IP address bound to the network
       #   interface.
@@ -14053,9 +14618,18 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the private IP address of a network interface.
+      # Describes an IPv6 address associated with a network interface.
+      # @!attribute [rw] ipv_6_address
+      #   The IPv6 address.
+      #   @return [String]
+      class NetworkInterfaceIpv6Address < Struct.new(
+        :ipv_6_address)
+        include Aws::Structure
+      end
+
+      # Describes the private IPv4 address of a network interface.
       # @!attribute [rw] private_ip_address
-      #   The private IP address.
+      #   The private IPv4 address.
       #   @return [String]
       #
       # @!attribute [rw] private_dns_name
@@ -14063,13 +14637,13 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] primary
-      #   Indicates whether this IP address is the primary private IP address
-      #   of the network interface.
+      #   Indicates whether this IPv4 address is the primary private IPv4
+      #   address of the network interface.
       #   @return [Boolean]
       #
       # @!attribute [rw] association
-      #   The association information for an Elastic IP address associated
-      #   with the network interface.
+      #   The association information for an Elastic IP address (IPv4)
+      #   associated with the network interface.
       #   @return [Types::NetworkInterfaceAssociation]
       class NetworkInterfacePrivateIpAddress < Struct.new(
         :private_ip_address,
@@ -14153,7 +14727,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the placement for the instance.
+      # Describes the placement of an instance.
       # @note When making an API call, pass Placement
       #   data as a hash:
       #
@@ -14353,7 +14927,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a secondary private IP address for a network interface.
+      # Describes a secondary private IPv4 address for a network interface.
       # @note When making an API call, pass PrivateIpAddressSpecification
       #   data as a hash:
       #
@@ -14362,12 +14936,12 @@ module Aws
       #         primary: false,
       #       }
       # @!attribute [rw] private_ip_address
-      #   The private IP addresses.
+      #   The private IPv4 addresses.
       #   @return [String]
       #
       # @!attribute [rw] primary
-      #   Indicates whether the private IP address is the primary private IP
-      #   address. Only one IP address can be designated as primary.
+      #   Indicates whether the private IPv4 address is the primary private
+      #   IPv4 address. Only one IPv4 address can be designated as primary.
       #   @return [Boolean]
       class PrivateIpAddressSpecification < Struct.new(
         :private_ip_address,
@@ -15047,7 +15621,8 @@ module Aws
       #         protocol: "String", # required
       #         rule_action: "allow", # required, accepts allow, deny
       #         egress: false, # required
-      #         cidr_block: "String", # required
+      #         cidr_block: "String",
+      #         ipv_6_cidr_block: "String",
       #         icmp_type_code: {
       #           type: 1,
       #           code: 1,
@@ -15074,7 +15649,13 @@ module Aws
       #
       # @!attribute [rw] protocol
       #   The IP protocol. You can specify `all` or `-1` to mean all
-      #   protocols.
+      #   protocols. If you specify `all`, `-1`, or a protocol number other
+      #   than `tcp`, `udp`, or `icmp`, traffic on all ports is allowed,
+      #   regardless of any ports or ICMP types or codes you specify. If you
+      #   specify protocol `58` (ICMPv6) and specify an IPv4 CIDR block,
+      #   traffic for all ICMP types and codes allowed, regardless of any that
+      #   you specify. If you specify protocol `58` (ICMPv6) and specify an
+      #   IPv6 CIDR block, you must specify an ICMP type and code.
       #   @return [String]
       #
       # @!attribute [rw] rule_action
@@ -15089,17 +15670,24 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] cidr_block
-      #   The network range to allow or deny, in CIDR notation.
+      #   The IPv4 network range to allow or deny, in CIDR notation (for
+      #   example `172.16.0.0/24`).
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 network range to allow or deny, in CIDR notation (for
+      #   example `2001:bd8:1234:1a00::/64`).
       #   @return [String]
       #
       # @!attribute [rw] icmp_type_code
-      #   ICMP protocol: The ICMP type and code. Required if specifying 1
-      #   (ICMP) for the protocol.
+      #   ICMP protocol: The ICMP or ICMPv6 type and code. Required if
+      #   specifying the ICMP (1) protocol, or protocol 58 (ICMPv6) with an
+      #   IPv6 CIDR block.
       #   @return [Types::IcmpTypeCode]
       #
       # @!attribute [rw] port_range
       #   TCP or UDP protocols: The range of ports the rule applies to.
-      #   Required if specifying 6 (TCP) or 17 (UDP) for the protocol.
+      #   Required if specifying TCP (6) or UDP (17) for the protocol.
       #   @return [Types::PortRange]
       class ReplaceNetworkAclEntryRequest < Struct.new(
         :dry_run,
@@ -15109,6 +15697,7 @@ module Aws
         :rule_action,
         :egress,
         :cidr_block,
+        :ipv_6_cidr_block,
         :icmp_type_code,
         :port_range)
         include Aws::Structure
@@ -15121,8 +15710,10 @@ module Aws
       #       {
       #         dry_run: false,
       #         route_table_id: "String", # required
-      #         destination_cidr_block: "String", # required
+      #         destination_cidr_block: "String",
       #         gateway_id: "String",
+      #         destination_ipv_6_cidr_block: "String",
+      #         egress_only_internet_gateway_id: "String",
       #         instance_id: "String",
       #         network_interface_id: "String",
       #         vpc_peering_connection_id: "String",
@@ -15140,12 +15731,23 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] destination_cidr_block
-      #   The CIDR address block used for the destination match. The value you
-      #   provide must match the CIDR of an existing route in the table.
+      #   The IPv4 CIDR address block used for the destination match. The
+      #   value you provide must match the CIDR of an existing route in the
+      #   table.
       #   @return [String]
       #
       # @!attribute [rw] gateway_id
       #   The ID of an Internet gateway or virtual private gateway.
+      #   @return [String]
+      #
+      # @!attribute [rw] destination_ipv_6_cidr_block
+      #   The IPv6 CIDR address block used for the destination match. The
+      #   value you provide must match the CIDR of an existing route in the
+      #   table.
+      #   @return [String]
+      #
+      # @!attribute [rw] egress_only_internet_gateway_id
+      #   \[IPv6 traffic only\] The ID of an egress-only Internet gateway.
       #   @return [String]
       #
       # @!attribute [rw] instance_id
@@ -15161,13 +15763,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] nat_gateway_id
-      #   The ID of a NAT gateway.
+      #   \[IPv4 traffic only\] The ID of a NAT gateway.
       #   @return [String]
       class ReplaceRouteRequest < Struct.new(
         :dry_run,
         :route_table_id,
         :destination_cidr_block,
         :gateway_id,
+        :destination_ipv_6_cidr_block,
+        :egress_only_internet_gateway_id,
         :instance_id,
         :network_interface_id,
         :vpc_peering_connection_id,
@@ -15320,7 +15924,7 @@ module Aws
       #               ],
       #               user_data: "String",
       #               addressing_type: "String",
-      #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #               instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #               placement: {
       #                 availability_zone: "String",
       #                 group_name: "String",
@@ -15363,6 +15967,12 @@ module Aws
       #                   ],
       #                   secondary_private_ip_address_count: 1,
       #                   associate_public_ip_address: false,
+      #                   ipv_6_addresses: [
+      #                     {
+      #                       ipv_6_address: "String",
+      #                     },
+      #                   ],
+      #                   ipv_6_address_count: 1,
       #                 },
       #               ],
       #               iam_instance_profile: {
@@ -15426,7 +16036,7 @@ module Aws
       #           security_groups: ["String"],
       #           user_data: "String",
       #           addressing_type: "String",
-      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #           instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #           placement: {
       #             availability_zone: "String",
       #             group_name: "String",
@@ -15466,6 +16076,12 @@ module Aws
       #               ],
       #               secondary_private_ip_address_count: 1,
       #               associate_public_ip_address: false,
+      #               ipv_6_addresses: [
+      #                 {
+      #                   ipv_6_address: "String",
+      #                 },
+      #               ],
+      #               ipv_6_address_count: 1,
       #             },
       #           ],
       #           iam_instance_profile: {
@@ -15618,7 +16234,7 @@ module Aws
       #         security_groups: ["String"],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -15658,6 +16274,12 @@ module Aws
       #             ],
       #             secondary_private_ip_address_count: 1,
       #             associate_public_ip_address: false,
+      #             ipv_6_addresses: [
+      #               {
+      #                 ipv_6_address: "String",
+      #               },
+      #             ],
+      #             ipv_6_address_count: 1,
       #           },
       #         ],
       #         iam_instance_profile: {
@@ -15720,7 +16342,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] network_interfaces
-      #   One or more network interfaces.
+      #   One or more network interfaces. If you specify a network interface,
+      #   you must specify subnet IDs and security group IDs using the network
+      #   interface.
       #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
       #
       # @!attribute [rw] iam_instance_profile
@@ -15739,7 +16363,7 @@ module Aws
       #   @return [Boolean]
       #
       # @!attribute [rw] monitoring
-      #   Describes the monitoring for the instance.
+      #   Describes the monitoring of an instance.
       #   @return [Types::RunInstancesMonitoringEnabled]
       #
       # @!attribute [rw] security_group_ids
@@ -15957,7 +16581,7 @@ module Aws
       #         availability_zone: "String",
       #         platform: "String",
       #         instance_count: 1,
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         scope: "Availability Zone", # accepts Availability Zone, Region
       #       }
       # @!attribute [rw] availability_zone
@@ -15978,7 +16602,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] scope
-      #   Whether the Reserved Instance is `standard` or `convertible`.
+      #   Whether the Reserved Instance is applied to instances in a region or
+      #   instances in a specific Availability Zone.
       #   @return [String]
       class ReservedInstancesConfiguration < Struct.new(
         :availability_zone,
@@ -16418,6 +17043,11 @@ module Aws
       #                 cidr_ip: "String",
       #               },
       #             ],
+      #             ipv_6_ranges: [
+      #               {
+      #                 cidr_ipv_6: "String",
+      #               },
+      #             ],
       #             prefix_list_ids: [
       #               {
       #                 prefix_list_id: "String",
@@ -16522,6 +17152,11 @@ module Aws
       #                 cidr_ip: "String",
       #               },
       #             ],
+      #             ipv_6_ranges: [
+      #               {
+      #                 cidr_ipv_6: "String",
+      #               },
+      #             ],
       #             prefix_list_ids: [
       #               {
       #                 prefix_list_id: "String",
@@ -16611,7 +17246,7 @@ module Aws
 
       # Describes a route in a route table.
       # @!attribute [rw] destination_cidr_block
-      #   The CIDR block used for the destination match.
+      #   The IPv4 CIDR block used for the destination match.
       #   @return [String]
       #
       # @!attribute [rw] destination_prefix_list_id
@@ -16660,6 +17295,14 @@ module Aws
       #   * `EnableVgwRoutePropagation` - The route was propagated by route
       #     propagation.
       #   @return [String]
+      #
+      # @!attribute [rw] destination_ipv_6_cidr_block
+      #   The IPv6 CIDR block used for the destination match.
+      #   @return [String]
+      #
+      # @!attribute [rw] egress_only_internet_gateway_id
+      #   The ID of the egress-only Internet gateway.
+      #   @return [String]
       class Route < Struct.new(
         :destination_cidr_block,
         :destination_prefix_list_id,
@@ -16670,7 +17313,9 @@ module Aws
         :vpc_peering_connection_id,
         :nat_gateway_id,
         :state,
-        :origin)
+        :origin,
+        :destination_ipv_6_cidr_block,
+        :egress_only_internet_gateway_id)
         include Aws::Structure
       end
 
@@ -16733,7 +17378,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes the monitoring for the instance.
+      # Describes the monitoring of an instance.
       # @note When making an API call, pass RunInstancesMonitoringEnabled
       #   data as a hash:
       #
@@ -16741,7 +17386,8 @@ module Aws
       #         enabled: false, # required
       #       }
       # @!attribute [rw] enabled
-      #   Indicates whether monitoring is enabled for the instance.
+      #   Indicates whether detailed monitoring is enabled. Otherwise, basic
+      #   monitoring is enabled.
       #   @return [Boolean]
       class RunInstancesMonitoringEnabled < Struct.new(
         :enabled)
@@ -16761,7 +17407,7 @@ module Aws
       #         security_groups: ["String"],
       #         security_group_ids: ["String"],
       #         user_data: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -16793,6 +17439,12 @@ module Aws
       #         disable_api_termination: false,
       #         instance_initiated_shutdown_behavior: "stop", # accepts stop, terminate
       #         private_ip_address: "String",
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "String",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #         client_token: "String",
       #         additional_info: "String",
       #         network_interfaces: [
@@ -16812,6 +17464,12 @@ module Aws
       #             ],
       #             secondary_private_ip_address_count: 1,
       #             associate_public_ip_address: false,
+      #             ipv_6_addresses: [
+      #               {
+      #                 ipv_6_address: "String",
+      #               },
+      #             ],
+      #             ipv_6_address_count: 1,
       #           },
       #         ],
       #         iam_instance_profile: {
@@ -16960,9 +17618,7 @@ module Aws
       # @!attribute [rw] disable_api_termination
       #   If you set this parameter to `true`, you can't terminate the
       #   instance using the Amazon EC2 console, CLI, or API; otherwise, you
-      #   can. If you set this parameter to `true` and then later want to be
-      #   able to terminate the instance, you must first change the value of
-      #   the `disableApiTermination` attribute to `false` using
+      #   can. To change this attribute to `false` after launch, use
       #   ModifyInstanceAttribute. Alternatively, if you set
       #   `InstanceInitiatedShutdownBehavior` to `terminate`, you can
       #   terminate the instance by running the shutdown command from the
@@ -16980,20 +17636,32 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   \[EC2-VPC\] The primary IP address. You must specify a value from
-      #   the IP address range of the subnet.
+      #   \[EC2-VPC\] The primary IPv4 address. You must specify a value from
+      #   the IPv4 address range of the subnet.
       #
-      #   Only one private IP address can be designated as primary. Therefore,
-      #   you can't specify this parameter if `PrivateIpAddresses.n.Primary`
-      #   is set to `true` and `PrivateIpAddresses.n.PrivateIpAddress` is set
-      #   to an IP address.
-      #
-      #   You cannot specify this option if you're launching more than one
-      #   instance in the request.
-      #
-      #   Default: We select an IP address from the IP address range of the
-      #   subnet.
+      #   Only one private IP address can be designated as primary. You can't
+      #   specify this option if you've specified the option to designate a
+      #   private IP address as the primary IP address in a network interface
+      #   specification. You cannot specify this option if you're launching
+      #   more than one instance in the request.
       #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   \[EC2-VPC\] Specify one or more IPv6 addresses from the range of the
+      #   subnet to associate with the primary network interface. You cannot
+      #   specify this option and the option to assign a number of IPv6
+      #   addresses in the same request. You cannot specify this option if
+      #   you've specified a minimum number of instances to launch.
+      #   @return [Array<Types::InstanceIpv6Address>]
+      #
+      # @!attribute [rw] ipv_6_address_count
+      #   \[EC2-VPC\] A number of IPv6 addresses to associate with the primary
+      #   network interface. Amazon EC2 chooses the IPv6 addresses from the
+      #   range of your subnet. You cannot specify this option and the option
+      #   to assign specific IPv6 addresses in the same request. You can
+      #   specify this option if you've specified a minimum number of
+      #   instances to launch.
+      #   @return [Integer]
       #
       # @!attribute [rw] client_token
       #   Unique, case-sensitive identifier you provide to ensure the
@@ -17048,6 +17716,8 @@ module Aws
         :disable_api_termination,
         :instance_initiated_shutdown_behavior,
         :private_ip_address,
+        :ipv_6_addresses,
+        :ipv_6_address_count,
         :client_token,
         :additional_info,
         :network_interfaces,
@@ -17113,6 +17783,12 @@ module Aws
       #               associate_public_ip_address: false,
       #               groups: ["String"],
       #               delete_on_termination: false,
+      #               ipv_6_addresses: [
+      #                 {
+      #                   ipv_6_address: "Ipv6Address",
+      #                 },
+      #               ],
+      #               ipv_6_address_count: 1,
       #             },
       #           ],
       #           iam_instance_profile: {
@@ -17600,6 +18276,21 @@ module Aws
         include Aws::Structure
       end
 
+      # Describes an IPv6 address.
+      # @note When making an API call, pass ScheduledInstancesIpv6Address
+      #   data as a hash:
+      #
+      #       {
+      #         ipv_6_address: "Ipv6Address",
+      #       }
+      # @!attribute [rw] ipv_6_address
+      #   The IPv6 address.
+      #   @return [String]
+      class ScheduledInstancesIpv6Address < Struct.new(
+        :ipv_6_address)
+        include Aws::Structure
+      end
+
       # Describes the launch specification for a Scheduled Instance.
       #
       # If you are launching the Scheduled Instance in EC2-VPC, you must
@@ -17656,6 +18347,12 @@ module Aws
       #             associate_public_ip_address: false,
       #             groups: ["String"],
       #             delete_on_termination: false,
+      #             ipv_6_addresses: [
+      #               {
+      #                 ipv_6_address: "Ipv6Address",
+      #               },
+      #             ],
+      #             ipv_6_address_count: 1,
       #           },
       #         ],
       #         iam_instance_profile: {
@@ -17779,6 +18476,12 @@ module Aws
       #         associate_public_ip_address: false,
       #         groups: ["String"],
       #         delete_on_termination: false,
+      #         ipv_6_addresses: [
+      #           {
+      #             ipv_6_address: "Ipv6Address",
+      #           },
+      #         ],
+      #         ipv_6_address_count: 1,
       #       }
       # @!attribute [rw] network_interface_id
       #   The ID of the network interface.
@@ -17797,20 +18500,20 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address
-      #   The IP address of the network interface within the subnet.
+      #   The IPv4 address of the network interface within the subnet.
       #   @return [String]
       #
       # @!attribute [rw] private_ip_address_configs
-      #   The private IP addresses.
+      #   The private IPv4 addresses.
       #   @return [Array<Types::ScheduledInstancesPrivateIpAddressConfig>]
       #
       # @!attribute [rw] secondary_private_ip_address_count
-      #   The number of secondary private IP addresses.
+      #   The number of secondary private IPv4 addresses.
       #   @return [Integer]
       #
       # @!attribute [rw] associate_public_ip_address
-      #   Indicates whether to assign a public IP address to instances
-      #   launched in a VPC. The public IP address can only be assigned to a
+      #   Indicates whether to assign a public IPv4 address to instances
+      #   launched in a VPC. The public IPv4 address can only be assigned to a
       #   network interface for eth0, and can only be assigned to a new
       #   network interface, not an existing one. You cannot specify more than
       #   one network interface in the request. If launching into a default
@@ -17825,6 +18528,15 @@ module Aws
       #   Indicates whether to delete the interface when the instance is
       #   terminated.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   One or more specific IPv6 addresses from the subnet range.
+      #   @return [Array<Types::ScheduledInstancesIpv6Address>]
+      #
+      # @!attribute [rw] ipv_6_address_count
+      #   The number of IPv6 addresses to assign to the network interface. The
+      #   IPv6 addresses are automatically selected from the subnet range.
+      #   @return [Integer]
       class ScheduledInstancesNetworkInterface < Struct.new(
         :network_interface_id,
         :device_index,
@@ -17835,7 +18547,9 @@ module Aws
         :secondary_private_ip_address_count,
         :associate_public_ip_address,
         :groups,
-        :delete_on_termination)
+        :delete_on_termination,
+        :ipv_6_addresses,
+        :ipv_6_address_count)
         include Aws::Structure
       end
 
@@ -17860,7 +18574,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Describes a private IP address for a Scheduled Instance.
+      # Describes a private IPv4 address for a Scheduled Instance.
       # @note When making an API call, pass ScheduledInstancesPrivateIpAddressConfig
       #   data as a hash:
       #
@@ -17869,12 +18583,12 @@ module Aws
       #         primary: false,
       #       }
       # @!attribute [rw] private_ip_address
-      #   The IP address.
+      #   The IPv4 address.
       #   @return [String]
       #
       # @!attribute [rw] primary
-      #   Indicates whether this is a primary IP address. Otherwise, this is a
-      #   secondary IP address.
+      #   Indicates whether this is a primary IPv4 address. Otherwise, this is
+      #   a secondary IPv4 address.
       #   @return [Boolean]
       class ScheduledInstancesPrivateIpAddressConfig < Struct.new(
         :private_ip_address,
@@ -18276,7 +18990,7 @@ module Aws
       #         ],
       #         user_data: "String",
       #         addressing_type: "String",
-      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #         instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #         placement: {
       #           availability_zone: "String",
       #           group_name: "String",
@@ -18319,6 +19033,12 @@ module Aws
       #             ],
       #             secondary_private_ip_address_count: 1,
       #             associate_public_ip_address: false,
+      #             ipv_6_addresses: [
+      #               {
+      #                 ipv_6_address: "String",
+      #               },
+      #             ],
+      #             ipv_6_address_count: 1,
       #           },
       #         ],
       #         iam_instance_profile: {
@@ -18356,7 +19076,8 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] instance_type
-      #   The instance type.
+      #   The instance type. Note that T2 and HS1 instance types are not
+      #   supported.
       #   @return [String]
       #
       # @!attribute [rw] placement
@@ -18386,7 +19107,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] network_interfaces
-      #   One or more network interfaces.
+      #   One or more network interfaces. If you specify a network interface,
+      #   you must specify subnet IDs and security group IDs using the network
+      #   interface.
       #   @return [Array<Types::InstanceNetworkInterfaceSpecification>]
       #
       # @!attribute [rw] iam_instance_profile
@@ -18517,7 +19240,7 @@ module Aws
       #             ],
       #             user_data: "String",
       #             addressing_type: "String",
-      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge
+      #             instance_type: "t1.micro", # accepts t1.micro, t2.nano, t2.micro, t2.small, t2.medium, t2.large, t2.xlarge, t2.2xlarge, m1.small, m1.medium, m1.large, m1.xlarge, m3.medium, m3.large, m3.xlarge, m3.2xlarge, m4.large, m4.xlarge, m4.2xlarge, m4.4xlarge, m4.10xlarge, m4.16xlarge, m2.xlarge, m2.2xlarge, m2.4xlarge, cr1.8xlarge, r3.large, r3.xlarge, r3.2xlarge, r3.4xlarge, r3.8xlarge, r4.large, r4.xlarge, r4.2xlarge, r4.4xlarge, r4.8xlarge, r4.16xlarge, x1.16xlarge, x1.32xlarge, i2.xlarge, i2.2xlarge, i2.4xlarge, i2.8xlarge, hi1.4xlarge, hs1.8xlarge, c1.medium, c1.xlarge, c3.large, c3.xlarge, c3.2xlarge, c3.4xlarge, c3.8xlarge, c4.large, c4.xlarge, c4.2xlarge, c4.4xlarge, c4.8xlarge, cc1.4xlarge, cc2.8xlarge, g2.2xlarge, g2.8xlarge, cg1.4xlarge, p2.xlarge, p2.8xlarge, p2.16xlarge, d2.xlarge, d2.2xlarge, d2.4xlarge, d2.8xlarge, f1.2xlarge, f1.16xlarge
       #             placement: {
       #               availability_zone: "String",
       #               group_name: "String",
@@ -18560,6 +19283,12 @@ module Aws
       #                 ],
       #                 secondary_private_ip_address_count: 1,
       #                 associate_public_ip_address: false,
+      #                 ipv_6_addresses: [
+      #                   {
+      #                     ipv_6_address: "String",
+      #                   },
+      #                 ],
+      #                 ipv_6_address_count: 1,
       #               },
       #             ],
       #             iam_instance_profile: {
@@ -18851,7 +19580,8 @@ module Aws
       # Describes the maximum hourly price (bid) for any Spot instance
       # launched to fulfill the request.
       # @!attribute [rw] instance_type
-      #   The instance type.
+      #   The instance type. Note that T2 and HS1 instance types are not
+      #   supported.
       #   @return [String]
       #
       # @!attribute [rw] product_description
@@ -19117,12 +19847,23 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cidr_block
-      #   The CIDR block assigned to the subnet.
+      #   The IPv4 CIDR block assigned to the subnet.
       #   @return [String]
       #
+      # @!attribute [rw] ipv_6_cidr_block_association_set
+      #   Information about the IPv6 CIDR blocks associated with the subnet.
+      #   @return [Array<Types::SubnetIpv6CidrBlockAssociation>]
+      #
+      # @!attribute [rw] assign_ipv_6_address_on_creation
+      #   Indicates whether a network interface created in this subnet
+      #   (including a network interface created by RunInstances) receives an
+      #   IPv6 address.
+      #   @return [Boolean]
+      #
       # @!attribute [rw] available_ip_address_count
-      #   The number of unused IP addresses in the subnet. Note that the IP
-      #   addresses for any stopped instances are considered unavailable.
+      #   The number of unused private IPv4 addresses in the subnet. Note that
+      #   the IPv4 addresses for any stopped instances are considered
+      #   unavailable.
       #   @return [Integer]
       #
       # @!attribute [rw] availability_zone
@@ -19136,7 +19877,7 @@ module Aws
       #
       # @!attribute [rw] map_public_ip_on_launch
       #   Indicates whether instances launched in this subnet receive a public
-      #   IP address.
+      #   IPv4 address.
       #   @return [Boolean]
       #
       # @!attribute [rw] tags
@@ -19147,11 +19888,46 @@ module Aws
         :state,
         :vpc_id,
         :cidr_block,
+        :ipv_6_cidr_block_association_set,
+        :assign_ipv_6_address_on_creation,
         :available_ip_address_count,
         :availability_zone,
         :default_for_az,
         :map_public_ip_on_launch,
         :tags)
+        include Aws::Structure
+      end
+
+      # Describes the state of a CIDR block.
+      # @!attribute [rw] state
+      #   The state of a CIDR block.
+      #   @return [String]
+      #
+      # @!attribute [rw] status_message
+      #   A message about the status of the CIDR block, if applicable.
+      #   @return [String]
+      class SubnetCidrBlockState < Struct.new(
+        :state,
+        :status_message)
+        include Aws::Structure
+      end
+
+      # Describes an IPv6 CIDR block associated with a subnet.
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 CIDR block.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_state
+      #   Information about the state of the CIDR block.
+      #   @return [Types::SubnetCidrBlockState]
+      #
+      # @!attribute [rw] association_id
+      #   The association ID for the CIDR block.
+      #   @return [String]
+      class SubnetIpv6CidrBlockAssociation < Struct.new(
+        :ipv_6_cidr_block,
+        :ipv_6_cidr_block_state,
+        :association_id)
         include Aws::Structure
       end
 
@@ -19231,9 +20007,7 @@ module Aws
       #         instance_count: 1,
       #       }
       # @!attribute [rw] offering_id
-      #   The Convertible Reserved Instance offering ID. If this isn't
-      #   included in the request, the response lists your current Convertible
-      #   Reserved Instance/s and their value/s.
+      #   The Convertible Reserved Instance offering ID.
       #   @return [String]
       #
       # @!attribute [rw] instance_count
@@ -19300,6 +20074,40 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass UnassignIpv6AddressesRequest
+      #   data as a hash:
+      #
+      #       {
+      #         network_interface_id: "String", # required
+      #         ipv_6_addresses: ["String"], # required
+      #       }
+      # @!attribute [rw] network_interface_id
+      #   The ID of the network interface.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_addresses
+      #   The IPv6 addresses to unassign from the network interface.
+      #   @return [Array<String>]
+      class UnassignIpv6AddressesRequest < Struct.new(
+        :network_interface_id,
+        :ipv_6_addresses)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] network_interface_id
+      #   The ID of the network interface.
+      #   @return [String]
+      #
+      # @!attribute [rw] unassigned_ipv_6_addresses
+      #   The IPv6 addresses that have been unassigned from the network
+      #   interface.
+      #   @return [Array<String>]
+      class UnassignIpv6AddressesResult < Struct.new(
+        :network_interface_id,
+        :unassigned_ipv_6_addresses)
+        include Aws::Structure
+      end
+
       # Contains the parameters for UnassignPrivateIpAddresses.
       # @note When making an API call, pass UnassignPrivateIpAddressesRequest
       #   data as a hash:
@@ -19349,7 +20157,7 @@ module Aws
 
       # Contains the output of UnmonitorInstances.
       # @!attribute [rw] instance_monitorings
-      #   Monitoring information for one or more instances.
+      #   The monitoring information.
       #   @return [Array<Types::InstanceMonitoring>]
       class UnmonitorInstancesResult < Struct.new(
         :instance_monitorings)
@@ -19358,16 +20166,16 @@ module Aws
 
       # Information about items that were not successfully processed in a
       # batch call.
-      # @!attribute [rw] error
-      #   Information about the error.
-      #   @return [Types::UnsuccessfulItemError]
-      #
       # @!attribute [rw] resource_id
       #   The ID of the resource.
       #   @return [String]
+      #
+      # @!attribute [rw] error
+      #   Information about the error.
+      #   @return [Types::UnsuccessfulItemError]
       class UnsuccessfulItem < Struct.new(
-        :error,
-        :resource_id)
+        :resource_id,
+        :error)
         include Aws::Structure
       end
 
@@ -19778,7 +20586,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] cidr_block
-      #   The CIDR block for the VPC.
+      #   The IPv4 CIDR block for the VPC.
       #   @return [String]
       #
       # @!attribute [rw] dhcp_options_id
@@ -19797,6 +20605,10 @@ module Aws
       # @!attribute [rw] is_default
       #   Indicates whether the VPC is the default VPC.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_association_set
+      #   Information about the IPv6 CIDR blocks associated with the VPC.
+      #   @return [Array<Types::VpcIpv6CidrBlockAssociation>]
       class Vpc < Struct.new(
         :vpc_id,
         :state,
@@ -19804,7 +20616,8 @@ module Aws
         :dhcp_options_id,
         :tags,
         :instance_tenancy,
-        :is_default)
+        :is_default,
+        :ipv_6_cidr_block_association_set)
         include Aws::Structure
       end
 
@@ -19819,6 +20632,20 @@ module Aws
       class VpcAttachment < Struct.new(
         :vpc_id,
         :state)
+        include Aws::Structure
+      end
+
+      # Describes the state of a CIDR block.
+      # @!attribute [rw] state
+      #   The state of the CIDR block.
+      #   @return [String]
+      #
+      # @!attribute [rw] status_message
+      #   A message about the status of the CIDR block, if applicable.
+      #   @return [String]
+      class VpcCidrBlockState < Struct.new(
+        :state,
+        :status_message)
         include Aws::Structure
       end
 
@@ -19877,6 +20704,25 @@ module Aws
         :policy_document,
         :route_table_ids,
         :creation_timestamp)
+        include Aws::Structure
+      end
+
+      # Describes an IPv6 CIDR block associated with a VPC.
+      # @!attribute [rw] ipv_6_cidr_block
+      #   The IPv6 CIDR block.
+      #   @return [String]
+      #
+      # @!attribute [rw] ipv_6_cidr_block_state
+      #   Information about the state of the CIDR block.
+      #   @return [Types::VpcCidrBlockState]
+      #
+      # @!attribute [rw] association_id
+      #   The association ID for the IPv6 CIDR block.
+      #   @return [String]
+      class VpcIpv6CidrBlockAssociation < Struct.new(
+        :ipv_6_cidr_block,
+        :ipv_6_cidr_block_state,
+        :association_id)
         include Aws::Structure
       end
 
@@ -19956,7 +20802,7 @@ module Aws
 
       # Describes a VPC in a VPC peering connection.
       # @!attribute [rw] cidr_block
-      #   The CIDR block for the VPC.
+      #   The IPv4 CIDR block for the VPC.
       #   @return [String]
       #
       # @!attribute [rw] owner_id
@@ -19967,6 +20813,10 @@ module Aws
       #   The ID of the VPC.
       #   @return [String]
       #
+      # @!attribute [rw] ipv_6_cidr_block_set
+      #   The IPv6 CIDR block for the VPC.
+      #   @return [Array<Types::Ipv6CidrBlock>]
+      #
       # @!attribute [rw] peering_options
       #   Information about the VPC peering connection options for the
       #   accepter or requester VPC.
@@ -19975,6 +20825,7 @@ module Aws
         :cidr_block,
         :owner_id,
         :vpc_id,
+        :ipv_6_cidr_block_set,
         :peering_options)
         include Aws::Structure
       end

@@ -164,6 +164,7 @@ module Aws
       ResourceType = Shapes::StringShape.new(name: 'ResourceType')
       ResourceTypeList = Shapes::ListShape.new(name: 'ResourceTypeList')
       ResourceTypes = Shapes::ListShape.new(name: 'ResourceTypes')
+      RuleLimit = Shapes::IntegerShape.new(name: 'RuleLimit')
       Scope = Shapes::StructureShape.new(name: 'Scope')
       Source = Shapes::StructureShape.new(name: 'Source')
       SourceDetail = Shapes::StructureShape.new(name: 'SourceDetail')
@@ -173,6 +174,7 @@ module Aws
       StartConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StartConfigurationRecorderRequest')
       StopConfigurationRecorderRequest = Shapes::StructureShape.new(name: 'StopConfigurationRecorderRequest')
       String = Shapes::StringShape.new(name: 'String')
+      StringWithCharLimit1024 = Shapes::StringShape.new(name: 'StringWithCharLimit1024')
       StringWithCharLimit128 = Shapes::StringShape.new(name: 'StringWithCharLimit128')
       StringWithCharLimit256 = Shapes::StringShape.new(name: 'StringWithCharLimit256')
       StringWithCharLimit64 = Shapes::StringShape.new(name: 'StringWithCharLimit64')
@@ -234,7 +236,7 @@ module Aws
       ConfigRule.add_member(:description, Shapes::ShapeRef.new(shape: EmptiableStringWithCharLimit256, location_name: "Description"))
       ConfigRule.add_member(:scope, Shapes::ShapeRef.new(shape: Scope, location_name: "Scope"))
       ConfigRule.add_member(:source, Shapes::ShapeRef.new(shape: Source, required: true, location_name: "Source"))
-      ConfigRule.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "InputParameters"))
+      ConfigRule.add_member(:input_parameters, Shapes::ShapeRef.new(shape: StringWithCharLimit1024, location_name: "InputParameters"))
       ConfigRule.add_member(:maximum_execution_frequency, Shapes::ShapeRef.new(shape: MaximumExecutionFrequency, location_name: "MaximumExecutionFrequency"))
       ConfigRule.add_member(:config_rule_state, Shapes::ShapeRef.new(shape: ConfigRuleState, location_name: "ConfigRuleState"))
       ConfigRule.struct_class = Types::ConfigRule
@@ -370,9 +372,12 @@ module Aws
       DescribeComplianceByResourceResponse.struct_class = Types::DescribeComplianceByResourceResponse
 
       DescribeConfigRuleEvaluationStatusRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
+      DescribeConfigRuleEvaluationStatusRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      DescribeConfigRuleEvaluationStatusRequest.add_member(:limit, Shapes::ShapeRef.new(shape: RuleLimit, location_name: "Limit"))
       DescribeConfigRuleEvaluationStatusRequest.struct_class = Types::DescribeConfigRuleEvaluationStatusRequest
 
       DescribeConfigRuleEvaluationStatusResponse.add_member(:config_rules_evaluation_status, Shapes::ShapeRef.new(shape: ConfigRuleEvaluationStatusList, location_name: "ConfigRulesEvaluationStatus"))
+      DescribeConfigRuleEvaluationStatusResponse.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
       DescribeConfigRuleEvaluationStatusResponse.struct_class = Types::DescribeConfigRuleEvaluationStatusResponse
 
       DescribeConfigRulesRequest.add_member(:config_rule_names, Shapes::ShapeRef.new(shape: ConfigRuleNames, location_name: "ConfigRuleNames"))
@@ -542,8 +547,8 @@ module Aws
       Scope.add_member(:compliance_resource_id, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "ComplianceResourceId"))
       Scope.struct_class = Types::Scope
 
-      Source.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, location_name: "Owner"))
-      Source.add_member(:source_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, location_name: "SourceIdentifier"))
+      Source.add_member(:owner, Shapes::ShapeRef.new(shape: Owner, required: true, location_name: "Owner"))
+      Source.add_member(:source_identifier, Shapes::ShapeRef.new(shape: StringWithCharLimit256, required: true, location_name: "SourceIdentifier"))
       Source.add_member(:source_details, Shapes::ShapeRef.new(shape: SourceDetails, location_name: "SourceDetails"))
       Source.struct_class = Types::Source
 
@@ -663,6 +668,7 @@ module Aws
           o.input = Shapes::ShapeRef.new(shape: DescribeConfigRuleEvaluationStatusRequest)
           o.output = Shapes::ShapeRef.new(shape: DescribeConfigRuleEvaluationStatusResponse)
           o.errors << Shapes::ShapeRef.new(shape: NoSuchConfigRuleException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
         end)
 
         api.add_operation(:describe_config_rules, Seahorse::Model::Operation.new.tap do |o|

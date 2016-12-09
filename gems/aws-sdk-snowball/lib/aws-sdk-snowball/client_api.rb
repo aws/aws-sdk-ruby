@@ -16,10 +16,20 @@ module Aws
       AddressId = Shapes::StringShape.new(name: 'AddressId')
       AddressList = Shapes::ListShape.new(name: 'AddressList')
       Boolean = Shapes::BooleanShape.new(name: 'Boolean')
+      CancelClusterRequest = Shapes::StructureShape.new(name: 'CancelClusterRequest')
+      CancelClusterResult = Shapes::StructureShape.new(name: 'CancelClusterResult')
       CancelJobRequest = Shapes::StructureShape.new(name: 'CancelJobRequest')
       CancelJobResult = Shapes::StructureShape.new(name: 'CancelJobResult')
+      ClusterId = Shapes::StringShape.new(name: 'ClusterId')
+      ClusterLimitExceededException = Shapes::StructureShape.new(name: 'ClusterLimitExceededException')
+      ClusterListEntry = Shapes::StructureShape.new(name: 'ClusterListEntry')
+      ClusterListEntryList = Shapes::ListShape.new(name: 'ClusterListEntryList')
+      ClusterMetadata = Shapes::StructureShape.new(name: 'ClusterMetadata')
+      ClusterState = Shapes::StringShape.new(name: 'ClusterState')
       CreateAddressRequest = Shapes::StructureShape.new(name: 'CreateAddressRequest')
       CreateAddressResult = Shapes::StructureShape.new(name: 'CreateAddressResult')
+      CreateClusterRequest = Shapes::StructureShape.new(name: 'CreateClusterRequest')
+      CreateClusterResult = Shapes::StructureShape.new(name: 'CreateClusterResult')
       CreateJobRequest = Shapes::StructureShape.new(name: 'CreateJobRequest')
       CreateJobResult = Shapes::StructureShape.new(name: 'CreateJobResult')
       DataTransfer = Shapes::StructureShape.new(name: 'DataTransfer')
@@ -27,8 +37,12 @@ module Aws
       DescribeAddressResult = Shapes::StructureShape.new(name: 'DescribeAddressResult')
       DescribeAddressesRequest = Shapes::StructureShape.new(name: 'DescribeAddressesRequest')
       DescribeAddressesResult = Shapes::StructureShape.new(name: 'DescribeAddressesResult')
+      DescribeClusterRequest = Shapes::StructureShape.new(name: 'DescribeClusterRequest')
+      DescribeClusterResult = Shapes::StructureShape.new(name: 'DescribeClusterResult')
       DescribeJobRequest = Shapes::StructureShape.new(name: 'DescribeJobRequest')
       DescribeJobResult = Shapes::StructureShape.new(name: 'DescribeJobResult')
+      EventTriggerDefinition = Shapes::StructureShape.new(name: 'EventTriggerDefinition')
+      EventTriggerDefinitionList = Shapes::ListShape.new(name: 'EventTriggerDefinitionList')
       GetJobManifestRequest = Shapes::StructureShape.new(name: 'GetJobManifestRequest')
       GetJobManifestResult = Shapes::StructureShape.new(name: 'GetJobManifestResult')
       GetJobUnlockCodeRequest = Shapes::StructureShape.new(name: 'GetJobUnlockCodeRequest')
@@ -37,6 +51,7 @@ module Aws
       GetSnowballUsageResult = Shapes::StructureShape.new(name: 'GetSnowballUsageResult')
       Integer = Shapes::IntegerShape.new(name: 'Integer')
       InvalidAddressException = Shapes::StructureShape.new(name: 'InvalidAddressException')
+      InvalidInputCombinationException = Shapes::StructureShape.new(name: 'InvalidInputCombinationException')
       InvalidJobStateException = Shapes::StructureShape.new(name: 'InvalidJobStateException')
       InvalidResourceException = Shapes::StructureShape.new(name: 'InvalidResourceException')
       JobId = Shapes::StringShape.new(name: 'JobId')
@@ -52,6 +67,12 @@ module Aws
       KMSRequestFailedException = Shapes::StructureShape.new(name: 'KMSRequestFailedException')
       KeyRange = Shapes::StructureShape.new(name: 'KeyRange')
       KmsKeyARN = Shapes::StringShape.new(name: 'KmsKeyARN')
+      LambdaResource = Shapes::StructureShape.new(name: 'LambdaResource')
+      LambdaResourceList = Shapes::ListShape.new(name: 'LambdaResourceList')
+      ListClusterJobsRequest = Shapes::StructureShape.new(name: 'ListClusterJobsRequest')
+      ListClusterJobsResult = Shapes::StructureShape.new(name: 'ListClusterJobsResult')
+      ListClustersRequest = Shapes::StructureShape.new(name: 'ListClustersRequest')
+      ListClustersResult = Shapes::StructureShape.new(name: 'ListClustersResult')
       ListJobsRequest = Shapes::StructureShape.new(name: 'ListJobsRequest')
       ListJobsResult = Shapes::StructureShape.new(name: 'ListJobsResult')
       ListLimit = Shapes::IntegerShape.new(name: 'ListLimit')
@@ -65,10 +86,13 @@ module Aws
       ShippingDetails = Shapes::StructureShape.new(name: 'ShippingDetails')
       ShippingOption = Shapes::StringShape.new(name: 'ShippingOption')
       SnowballCapacity = Shapes::StringShape.new(name: 'SnowballCapacity')
+      SnowballType = Shapes::StringShape.new(name: 'SnowballType')
       SnsTopicARN = Shapes::StringShape.new(name: 'SnsTopicARN')
       String = Shapes::StringShape.new(name: 'String')
       Timestamp = Shapes::TimestampShape.new(name: 'Timestamp')
       UnsupportedAddressException = Shapes::StructureShape.new(name: 'UnsupportedAddressException')
+      UpdateClusterRequest = Shapes::StructureShape.new(name: 'UpdateClusterRequest')
+      UpdateClusterResult = Shapes::StructureShape.new(name: 'UpdateClusterResult')
       UpdateJobRequest = Shapes::StructureShape.new(name: 'UpdateJobRequest')
       UpdateJobResult = Shapes::StructureShape.new(name: 'UpdateJobResult')
 
@@ -89,10 +113,37 @@ module Aws
 
       AddressList.member = Shapes::ShapeRef.new(shape: Address)
 
+      CancelClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      CancelClusterRequest.struct_class = Types::CancelClusterRequest
+
+      CancelClusterResult.struct_class = Types::CancelClusterResult
+
       CancelJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
       CancelJobRequest.struct_class = Types::CancelJobRequest
 
       CancelJobResult.struct_class = Types::CancelJobResult
+
+      ClusterListEntry.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
+      ClusterListEntry.add_member(:cluster_state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "ClusterState"))
+      ClusterListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+      ClusterListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+      ClusterListEntry.struct_class = Types::ClusterListEntry
+
+      ClusterListEntryList.member = Shapes::ShapeRef.new(shape: ClusterListEntry)
+
+      ClusterMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
+      ClusterMetadata.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+      ClusterMetadata.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
+      ClusterMetadata.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+      ClusterMetadata.add_member(:cluster_state, Shapes::ShapeRef.new(shape: ClusterState, location_name: "ClusterState"))
+      ClusterMetadata.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
+      ClusterMetadata.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
+      ClusterMetadata.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+      ClusterMetadata.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
+      ClusterMetadata.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
+      ClusterMetadata.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
+      ClusterMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+      ClusterMetadata.struct_class = Types::ClusterMetadata
 
       CreateAddressRequest.add_member(:address, Shapes::ShapeRef.new(shape: Address, required: true, location_name: "Address"))
       CreateAddressRequest.struct_class = Types::CreateAddressRequest
@@ -100,15 +151,31 @@ module Aws
       CreateAddressResult.add_member(:address_id, Shapes::ShapeRef.new(shape: String, location_name: "AddressId"))
       CreateAddressResult.struct_class = Types::CreateAddressResult
 
-      CreateJobRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
-      CreateJobRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, required: true, location_name: "Resources"))
+      CreateClusterRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, required: true, location_name: "JobType"))
+      CreateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, required: true, location_name: "Resources"))
+      CreateClusterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+      CreateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, required: true, location_name: "AddressId"))
+      CreateClusterRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
+      CreateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+      CreateClusterRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
+      CreateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
+      CreateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+      CreateClusterRequest.struct_class = Types::CreateClusterRequest
+
+      CreateClusterResult.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+      CreateClusterResult.struct_class = Types::CreateClusterResult
+
+      CreateJobRequest.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
+      CreateJobRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
       CreateJobRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
-      CreateJobRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, required: true, location_name: "AddressId"))
+      CreateJobRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
       CreateJobRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KmsKeyARN, location_name: "KmsKeyARN"))
-      CreateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, required: true, location_name: "RoleARN"))
+      CreateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
       CreateJobRequest.add_member(:snowball_capacity_preference, Shapes::ShapeRef.new(shape: SnowballCapacity, location_name: "SnowballCapacityPreference"))
-      CreateJobRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, required: true, location_name: "ShippingOption"))
+      CreateJobRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
       CreateJobRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+      CreateJobRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, location_name: "ClusterId"))
+      CreateJobRequest.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
       CreateJobRequest.struct_class = Types::CreateJobRequest
 
       CreateJobResult.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, location_name: "JobId"))
@@ -134,12 +201,23 @@ module Aws
       DescribeAddressesResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
       DescribeAddressesResult.struct_class = Types::DescribeAddressesResult
 
+      DescribeClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      DescribeClusterRequest.struct_class = Types::DescribeClusterRequest
+
+      DescribeClusterResult.add_member(:cluster_metadata, Shapes::ShapeRef.new(shape: ClusterMetadata, location_name: "ClusterMetadata"))
+      DescribeClusterResult.struct_class = Types::DescribeClusterResult
+
       DescribeJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
       DescribeJobRequest.struct_class = Types::DescribeJobRequest
 
       DescribeJobResult.add_member(:job_metadata, Shapes::ShapeRef.new(shape: JobMetadata, location_name: "JobMetadata"))
       DescribeJobResult.add_member(:sub_job_metadata, Shapes::ShapeRef.new(shape: JobMetadataList, location_name: "SubJobMetadata"))
       DescribeJobResult.struct_class = Types::DescribeJobResult
+
+      EventTriggerDefinition.add_member(:event_resource_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "EventResourceARN"))
+      EventTriggerDefinition.struct_class = Types::EventTriggerDefinition
+
+      EventTriggerDefinitionList.member = Shapes::ShapeRef.new(shape: EventTriggerDefinition)
 
       GetJobManifestRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
       GetJobManifestRequest.struct_class = Types::GetJobManifestRequest
@@ -162,6 +240,10 @@ module Aws
       JobListEntry.add_member(:job_id, Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
       JobListEntry.add_member(:job_state, Shapes::ShapeRef.new(shape: JobState, location_name: "JobState"))
       JobListEntry.add_member(:is_master, Shapes::ShapeRef.new(shape: Boolean, location_name: "IsMaster"))
+      JobListEntry.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
+      JobListEntry.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
+      JobListEntry.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
+      JobListEntry.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
       JobListEntry.struct_class = Types::JobListEntry
 
       JobListEntryList.member = Shapes::ShapeRef.new(shape: JobListEntry)
@@ -174,6 +256,7 @@ module Aws
       JobMetadata.add_member(:job_id, Shapes::ShapeRef.new(shape: String, location_name: "JobId"))
       JobMetadata.add_member(:job_state, Shapes::ShapeRef.new(shape: JobState, location_name: "JobState"))
       JobMetadata.add_member(:job_type, Shapes::ShapeRef.new(shape: JobType, location_name: "JobType"))
+      JobMetadata.add_member(:snowball_type, Shapes::ShapeRef.new(shape: SnowballType, location_name: "SnowballType"))
       JobMetadata.add_member(:creation_date, Shapes::ShapeRef.new(shape: Timestamp, location_name: "CreationDate"))
       JobMetadata.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
       JobMetadata.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
@@ -185,11 +268,13 @@ module Aws
       JobMetadata.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
       JobMetadata.add_member(:data_transfer_progress, Shapes::ShapeRef.new(shape: DataTransfer, location_name: "DataTransferProgress"))
       JobMetadata.add_member(:job_log_info, Shapes::ShapeRef.new(shape: JobLogs, location_name: "JobLogInfo"))
+      JobMetadata.add_member(:cluster_id, Shapes::ShapeRef.new(shape: String, location_name: "ClusterId"))
       JobMetadata.struct_class = Types::JobMetadata
 
       JobMetadataList.member = Shapes::ShapeRef.new(shape: JobMetadata)
 
       JobResource.add_member(:s3_resources, Shapes::ShapeRef.new(shape: S3ResourceList, location_name: "S3Resources"))
+      JobResource.add_member(:lambda_resources, Shapes::ShapeRef.new(shape: LambdaResourceList, location_name: "LambdaResources"))
       JobResource.struct_class = Types::JobResource
 
       JobStateList.member = Shapes::ShapeRef.new(shape: JobState)
@@ -197,6 +282,29 @@ module Aws
       KeyRange.add_member(:begin_marker, Shapes::ShapeRef.new(shape: String, location_name: "BeginMarker"))
       KeyRange.add_member(:end_marker, Shapes::ShapeRef.new(shape: String, location_name: "EndMarker"))
       KeyRange.struct_class = Types::KeyRange
+
+      LambdaResource.add_member(:lambda_arn, Shapes::ShapeRef.new(shape: ResourceARN, location_name: "LambdaArn"))
+      LambdaResource.add_member(:event_triggers, Shapes::ShapeRef.new(shape: EventTriggerDefinitionList, location_name: "EventTriggers"))
+      LambdaResource.struct_class = Types::LambdaResource
+
+      LambdaResourceList.member = Shapes::ShapeRef.new(shape: LambdaResource)
+
+      ListClusterJobsRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      ListClusterJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
+      ListClusterJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      ListClusterJobsRequest.struct_class = Types::ListClusterJobsRequest
+
+      ListClusterJobsResult.add_member(:job_list_entries, Shapes::ShapeRef.new(shape: JobListEntryList, location_name: "JobListEntries"))
+      ListClusterJobsResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      ListClusterJobsResult.struct_class = Types::ListClusterJobsResult
+
+      ListClustersRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
+      ListClustersRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      ListClustersRequest.struct_class = Types::ListClustersRequest
+
+      ListClustersResult.add_member(:cluster_list_entries, Shapes::ShapeRef.new(shape: ClusterListEntryList, location_name: "ClusterListEntries"))
+      ListClustersResult.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
+      ListClustersResult.struct_class = Types::ListClustersResult
 
       ListJobsRequest.add_member(:max_results, Shapes::ShapeRef.new(shape: ListLimit, location_name: "MaxResults"))
       ListJobsRequest.add_member(:next_token, Shapes::ShapeRef.new(shape: String, location_name: "NextToken"))
@@ -226,6 +334,17 @@ module Aws
       ShippingDetails.add_member(:outbound_shipment, Shapes::ShapeRef.new(shape: Shipment, location_name: "OutboundShipment"))
       ShippingDetails.struct_class = Types::ShippingDetails
 
+      UpdateClusterRequest.add_member(:cluster_id, Shapes::ShapeRef.new(shape: ClusterId, required: true, location_name: "ClusterId"))
+      UpdateClusterRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
+      UpdateClusterRequest.add_member(:description, Shapes::ShapeRef.new(shape: String, location_name: "Description"))
+      UpdateClusterRequest.add_member(:resources, Shapes::ShapeRef.new(shape: JobResource, location_name: "Resources"))
+      UpdateClusterRequest.add_member(:address_id, Shapes::ShapeRef.new(shape: AddressId, location_name: "AddressId"))
+      UpdateClusterRequest.add_member(:shipping_option, Shapes::ShapeRef.new(shape: ShippingOption, location_name: "ShippingOption"))
+      UpdateClusterRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
+      UpdateClusterRequest.struct_class = Types::UpdateClusterRequest
+
+      UpdateClusterResult.struct_class = Types::UpdateClusterResult
+
       UpdateJobRequest.add_member(:job_id, Shapes::ShapeRef.new(shape: JobId, required: true, location_name: "JobId"))
       UpdateJobRequest.add_member(:role_arn, Shapes::ShapeRef.new(shape: RoleARN, location_name: "RoleARN"))
       UpdateJobRequest.add_member(:notification, Shapes::ShapeRef.new(shape: Notification, location_name: "Notification"))
@@ -253,6 +372,17 @@ module Aws
           "targetPrefix" => "AWSIESnowballJobManagementService",
         }
 
+        api.add_operation(:cancel_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CancelCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CancelClusterRequest)
+          o.output = Shapes::ShapeRef.new(shape: CancelClusterResult)
+          o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        end)
+
         api.add_operation(:cancel_job, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CancelJob"
           o.http_method = "POST"
@@ -274,6 +404,17 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: UnsupportedAddressException)
         end)
 
+        api.add_operation(:create_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "CreateCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: CreateClusterRequest)
+          o.output = Shapes::ShapeRef.new(shape: CreateClusterResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+        end)
+
         api.add_operation(:create_job, Seahorse::Model::Operation.new.tap do |o|
           o.name = "CreateJob"
           o.http_method = "POST"
@@ -282,6 +423,8 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: CreateJobResult)
           o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
           o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+          o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
         end)
 
         api.add_operation(:describe_address, Seahorse::Model::Operation.new.tap do |o|
@@ -306,6 +449,15 @@ module Aws
               "next_token" => "next_token"
             }
           )
+        end)
+
+        api.add_operation(:describe_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "DescribeCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: DescribeClusterRequest)
+          o.output = Shapes::ShapeRef.new(shape: DescribeClusterResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
         end)
 
         api.add_operation(:describe_job, Seahorse::Model::Operation.new.tap do |o|
@@ -345,6 +497,23 @@ module Aws
           o.output = Shapes::ShapeRef.new(shape: GetSnowballUsageResult)
         end)
 
+        api.add_operation(:list_cluster_jobs, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListClusterJobs"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListClusterJobsRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListClusterJobsResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+        end)
+
+        api.add_operation(:list_clusters, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "ListClusters"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: ListClustersRequest)
+          o.output = Shapes::ShapeRef.new(shape: ListClustersResult)
+        end)
+
         api.add_operation(:list_jobs, Seahorse::Model::Operation.new.tap do |o|
           o.name = "ListJobs"
           o.http_method = "POST"
@@ -359,6 +528,18 @@ module Aws
           )
         end)
 
+        api.add_operation(:update_cluster, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "UpdateCluster"
+          o.http_method = "POST"
+          o.http_request_uri = "/"
+          o.input = Shapes::ShapeRef.new(shape: UpdateClusterRequest)
+          o.output = Shapes::ShapeRef.new(shape: UpdateClusterResult)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
+          o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+        end)
+
         api.add_operation(:update_job, Seahorse::Model::Operation.new.tap do |o|
           o.name = "UpdateJob"
           o.http_method = "POST"
@@ -368,6 +549,8 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: InvalidResourceException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidJobStateException)
           o.errors << Shapes::ShapeRef.new(shape: KMSRequestFailedException)
+          o.errors << Shapes::ShapeRef.new(shape: InvalidInputCombinationException)
+          o.errors << Shapes::ShapeRef.new(shape: ClusterLimitExceededException)
         end)
       end
 

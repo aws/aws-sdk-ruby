@@ -155,11 +155,15 @@ module Aws
       # @option params [Array<Types::StageKey>] :stage_keys
       #   DEPRECATED FOR USAGE PLANS - Specifies stages associated with the API
       #   key.
+      # @option params [String] :customer_id
+      #   An AWS Marketplace customer identifier , when integrating with the AWS
+      #   SaaS Marketplace.
       # @return [Types::ApiKey] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::ApiKey#id #id} => String
       #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
+      #   * {Types::ApiKey#customer_id #customerId} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
       #   * {Types::ApiKey#created_date #createdDate} => Time
@@ -179,12 +183,14 @@ module Aws
       #         stage_name: "String",
       #       },
       #     ],
+      #     customer_id: "String",
       #   })
       #
       # @example Response structure
       #   resp.id #=> String
       #   resp.value #=> String
       #   resp.name #=> String
+      #   resp.customer_id #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
       #   resp.created_date #=> Time
@@ -370,6 +376,85 @@ module Aws
         req.send_request(options)
       end
 
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-created
+      #   documentation part.
+      # @option params [required, Types::DocumentationPartLocation] :location
+      #   \[Required\] The location of the targeted API entity of the
+      #   to-be-created documentation part.
+      # @option params [required, String] :properties
+      #   \[Required\] The new documentation content map of the targeted API
+      #   entity. Enclosed key-value pairs are API-specific, but only
+      #   Swagger-compliant key-value pairs can be exported and, hence,
+      #   published.
+      # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationPart#id #id} => String
+      #   * {Types::DocumentationPart#location #location} => Types::DocumentationPartLocation
+      #   * {Types::DocumentationPart#properties #properties} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_documentation_part({
+      #     rest_api_id: "String", # required
+      #     location: { # required
+      #       type: "API", # required, accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
+      #       path: "String",
+      #       method: "String",
+      #       status_code: "DocumentationPartLocationStatusCode",
+      #       name: "String",
+      #     },
+      #     properties: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.location.type #=> String, one of "API", "AUTHORIZER", "MODEL", "RESOURCE", "METHOD", "PATH_PARAMETER", "QUERY_PARAMETER", "REQUEST_HEADER", "REQUEST_BODY", "RESPONSE", "RESPONSE_HEADER", "RESPONSE_BODY"
+      #   resp.location.path #=> String
+      #   resp.location.method #=> String
+      #   resp.location.status_code #=> String
+      #   resp.location.name #=> String
+      #   resp.properties #=> String
+      # @overload create_documentation_part(params = {})
+      # @param [Hash] params ({})
+      def create_documentation_part(params = {}, options = {})
+        req = build_request(:create_documentation_part, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] Specifies the API identifier of the to-be-created
+      #   documentation version.
+      # @option params [required, String] :documentation_version
+      #   \[Required\] The version identifier of the new snapshot.
+      # @option params [String] :stage_name
+      #   The stage name to be associated with the new documentation snapshot.
+      # @option params [String] :description
+      #   A description about the new documentation snapshot.
+      # @return [Types::DocumentationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationVersion#version #version} => String
+      #   * {Types::DocumentationVersion#created_date #createdDate} => Time
+      #   * {Types::DocumentationVersion#description #description} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_documentation_version({
+      #     rest_api_id: "String", # required
+      #     documentation_version: "String", # required
+      #     stage_name: "String",
+      #     description: "String",
+      #   })
+      #
+      # @example Response structure
+      #   resp.version #=> String
+      #   resp.created_date #=> Time
+      #   resp.description #=> String
+      # @overload create_documentation_version(params = {})
+      # @param [Hash] params ({})
+      def create_documentation_version(params = {}, options = {})
+        req = build_request(:create_documentation_version, params)
+        req.send_request(options)
+      end
+
       # Creates a new domain name.
       # @option params [required, String] :domain_name
       #   The name of the DomainName resource.
@@ -536,6 +621,8 @@ module Aws
       #   The name of the RestApi.
       # @option params [String] :description
       #   The description of the RestApi.
+      # @option params [String] :version
+      #   A version identifier for the API.
       # @option params [String] :clone_from
       #   The ID of the RestApi that you want to clone from.
       # @option params [Array<String>] :binary_media_types
@@ -547,6 +634,7 @@ module Aws
       #   * {Types::RestApi#name #name} => String
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
+      #   * {Types::RestApi#version #version} => String
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
@@ -554,6 +642,7 @@ module Aws
       #   resp = client.create_rest_api({
       #     name: "String", # required
       #     description: "String",
+      #     version: "String",
       #     clone_from: "String",
       #     binary_media_types: ["String"],
       #   })
@@ -563,6 +652,7 @@ module Aws
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.created_date #=> Time
+      #   resp.version #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
       #   resp.binary_media_types #=> Array
@@ -593,6 +683,8 @@ module Aws
       #   A map that defines the stage variables for the new Stage resource.
       #   Variable names can have alphanumeric and underscore characters, and
       #   the values must match `[A-Za-z0-9-._~:/?#&=,]+`.
+      # @option params [String] :documentation_version
+      #   The version of the associated API documentation.
       # @return [Types::Stage] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::Stage#deployment_id #deploymentId} => String
@@ -604,6 +696,7 @@ module Aws
       #   * {Types::Stage#cache_cluster_status #cacheClusterStatus} => String
       #   * {Types::Stage#method_settings #methodSettings} => Hash&lt;String,Types::MethodSetting&gt;
       #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
+      #   * {Types::Stage#documentation_version #documentationVersion} => String
       #   * {Types::Stage#created_date #createdDate} => Time
       #   * {Types::Stage#last_updated_date #lastUpdatedDate} => Time
       #
@@ -618,6 +711,7 @@ module Aws
       #     variables: {
       #       "String" => "String",
       #     },
+      #     documentation_version: "String",
       #   })
       #
       # @example Response structure
@@ -641,6 +735,7 @@ module Aws
       #   resp.method_settings["String"].unauthorized_cache_control_header_strategy #=> String, one of "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER"
       #   resp.variables #=> Hash
       #   resp.variables["String"] #=> String
+      #   resp.documentation_version #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
       # @overload create_stage(params = {})
@@ -670,6 +765,7 @@ module Aws
       #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
       #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
       #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #   * {Types::UsagePlan#product_code #productCode} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_usage_plan({
@@ -704,6 +800,7 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      #   resp.product_code #=> String
       # @overload create_usage_plan(params = {})
       # @param [Hash] params ({})
       def create_usage_plan(params = {}, options = {})
@@ -843,6 +940,45 @@ module Aws
       # @param [Hash] params ({})
       def delete_deployment(params = {}, options = {})
         req = build_request(:delete_deployment, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] Specifies the identifier of an API of the to-be-deleted
+      #   documentation part.
+      # @option params [required, String] :documentation_part_id
+      #   \[Required\] The identifier of the to-be-deleted documentation part.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_documentation_part({
+      #     rest_api_id: "String", # required
+      #     documentation_part_id: "String", # required
+      #   })
+      # @overload delete_documentation_part(params = {})
+      # @param [Hash] params ({})
+      def delete_documentation_part(params = {}, options = {})
+        req = build_request(:delete_documentation_part, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of a to-be-deleted documentation
+      #   snapshot.
+      # @option params [required, String] :documentation_version
+      #   \[Required\] The version identifier of a to-be-deleted documentation
+      #   snapshot.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_documentation_version({
+      #     rest_api_id: "String", # required
+      #     documentation_version: "String", # required
+      #   })
+      # @overload delete_documentation_version(params = {})
+      # @param [Hash] params ({})
+      def delete_documentation_version(params = {}, options = {})
+        req = build_request(:delete_documentation_version, params)
         req.send_request(options)
       end
 
@@ -1172,6 +1308,7 @@ module Aws
       #   * {Types::ApiKey#id #id} => String
       #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
+      #   * {Types::ApiKey#customer_id #customerId} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
       #   * {Types::ApiKey#created_date #createdDate} => Time
@@ -1188,6 +1325,7 @@ module Aws
       #   resp.id #=> String
       #   resp.value #=> String
       #   resp.name #=> String
+      #   resp.customer_id #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
       #   resp.created_date #=> Time
@@ -1209,6 +1347,8 @@ module Aws
       # @option params [String] :name_query
       #   The name of queried API keys.
       # @option params [String] :customer_id
+      #   The identifier of a customer in AWS Marketplace or an external system,
+      #   such as a developer portal.
       # @option params [Boolean] :include_values
       #   A boolean flag to specify whether (`true`) or not (`false`) the result
       #   contains key values.
@@ -1235,6 +1375,7 @@ module Aws
       #   resp.items[0].id #=> String
       #   resp.items[0].value #=> String
       #   resp.items[0].name #=> String
+      #   resp.items[0].customer_id #=> String
       #   resp.items[0].description #=> String
       #   resp.items[0].enabled #=> Boolean
       #   resp.items[0].created_date #=> Time
@@ -1548,6 +1689,146 @@ module Aws
       # @param [Hash] params ({})
       def get_deployments(params = {}, options = {})
         req = build_request(:get_deployments, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-retrieved
+      #   documentation part.
+      # @option params [required, String] :documentation_part_id
+      #   \[Required\] The identifier of the to-be-retrieved documentation part.
+      # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationPart#id #id} => String
+      #   * {Types::DocumentationPart#location #location} => Types::DocumentationPartLocation
+      #   * {Types::DocumentationPart#properties #properties} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_documentation_part({
+      #     rest_api_id: "String", # required
+      #     documentation_part_id: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.location.type #=> String, one of "API", "AUTHORIZER", "MODEL", "RESOURCE", "METHOD", "PATH_PARAMETER", "QUERY_PARAMETER", "REQUEST_HEADER", "REQUEST_BODY", "RESPONSE", "RESPONSE_HEADER", "RESPONSE_BODY"
+      #   resp.location.path #=> String
+      #   resp.location.method #=> String
+      #   resp.location.status_code #=> String
+      #   resp.location.name #=> String
+      #   resp.properties #=> String
+      # @overload get_documentation_part(params = {})
+      # @param [Hash] params ({})
+      def get_documentation_part(params = {}, options = {})
+        req = build_request(:get_documentation_part, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of the API of the to-be-retrieved
+      #   documentation parts.
+      # @option params [String] :type
+      #   The type of API entities of the to-be-retrieved documentation parts.
+      # @option params [String] :name_query
+      #   The name of API entities of the to-be-retrieved documentation parts.
+      # @option params [String] :path
+      #   The path of API entities of the to-be-retrieved documentation parts.
+      # @option params [String] :position
+      #   The position of the to-be-retrieved documentation part in the
+      #   DocumentationParts collection.
+      # @option params [Integer] :limit
+      #   The size of the paged results.
+      # @return [Types::DocumentationParts] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationParts#position #position} => String
+      #   * {Types::DocumentationParts#items #items} => Array&lt;Types::DocumentationPart&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_documentation_parts({
+      #     rest_api_id: "String", # required
+      #     type: "API", # accepts API, AUTHORIZER, MODEL, RESOURCE, METHOD, PATH_PARAMETER, QUERY_PARAMETER, REQUEST_HEADER, REQUEST_BODY, RESPONSE, RESPONSE_HEADER, RESPONSE_BODY
+      #     name_query: "String",
+      #     path: "String",
+      #     position: "String",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.position #=> String
+      #   resp.items #=> Array
+      #   resp.items[0].id #=> String
+      #   resp.items[0].location.type #=> String, one of "API", "AUTHORIZER", "MODEL", "RESOURCE", "METHOD", "PATH_PARAMETER", "QUERY_PARAMETER", "REQUEST_HEADER", "REQUEST_BODY", "RESPONSE", "RESPONSE_HEADER", "RESPONSE_BODY"
+      #   resp.items[0].location.path #=> String
+      #   resp.items[0].location.method #=> String
+      #   resp.items[0].location.status_code #=> String
+      #   resp.items[0].location.name #=> String
+      #   resp.items[0].properties #=> String
+      # @overload get_documentation_parts(params = {})
+      # @param [Hash] params ({})
+      def get_documentation_parts(params = {}, options = {})
+        req = build_request(:get_documentation_parts, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of the API of the to-be-retrieved
+      #   documentation snapshot.
+      # @option params [required, String] :documentation_version
+      #   \[Required\] The version identifier of the to-be-retrieved
+      #   documentation snapshot.
+      # @return [Types::DocumentationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationVersion#version #version} => String
+      #   * {Types::DocumentationVersion#created_date #createdDate} => Time
+      #   * {Types::DocumentationVersion#description #description} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_documentation_version({
+      #     rest_api_id: "String", # required
+      #     documentation_version: "String", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.version #=> String
+      #   resp.created_date #=> Time
+      #   resp.description #=> String
+      # @overload get_documentation_version(params = {})
+      # @param [Hash] params ({})
+      def get_documentation_version(params = {}, options = {})
+        req = build_request(:get_documentation_version, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-retrieved
+      #   documentation versions.
+      # @option params [String] :position
+      #   The position of the returned `DocumentationVersion` in the
+      #   DocumentationVersions collection.
+      # @option params [Integer] :limit
+      #   The page size of the returned documentation versions.
+      # @return [Types::DocumentationVersions] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationVersions#position #position} => String
+      #   * {Types::DocumentationVersions#items #items} => Array&lt;Types::DocumentationVersion&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_documentation_versions({
+      #     rest_api_id: "String", # required
+      #     position: "String",
+      #     limit: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.position #=> String
+      #   resp.items #=> Array
+      #   resp.items[0].version #=> String
+      #   resp.items[0].created_date #=> Time
+      #   resp.items[0].description #=> String
+      # @overload get_documentation_versions(params = {})
+      # @param [Hash] params ({})
+      def get_documentation_versions(params = {}, options = {})
+        req = build_request(:get_documentation_versions, params)
         req.send_request(options)
       end
 
@@ -2108,6 +2389,7 @@ module Aws
       #   * {Types::RestApi#name #name} => String
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
+      #   * {Types::RestApi#version #version} => String
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
@@ -2121,6 +2403,7 @@ module Aws
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.created_date #=> Time
+      #   resp.version #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
       #   resp.binary_media_types #=> Array
@@ -2158,6 +2441,7 @@ module Aws
       #   resp.items[0].name #=> String
       #   resp.items[0].description #=> String
       #   resp.items[0].created_date #=> Time
+      #   resp.items[0].version #=> String
       #   resp.items[0].warnings #=> Array
       #   resp.items[0].warnings[0] #=> String
       #   resp.items[0].binary_media_types #=> Array
@@ -2227,6 +2511,7 @@ module Aws
       #   * {Types::Stage#cache_cluster_status #cacheClusterStatus} => String
       #   * {Types::Stage#method_settings #methodSettings} => Hash&lt;String,Types::MethodSetting&gt;
       #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
+      #   * {Types::Stage#documentation_version #documentationVersion} => String
       #   * {Types::Stage#created_date #createdDate} => Time
       #   * {Types::Stage#last_updated_date #lastUpdatedDate} => Time
       #
@@ -2257,6 +2542,7 @@ module Aws
       #   resp.method_settings["String"].unauthorized_cache_control_header_strategy #=> String, one of "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER"
       #   resp.variables #=> Hash
       #   resp.variables["String"] #=> String
+      #   resp.documentation_version #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
       # @overload get_stage(params = {})
@@ -2303,6 +2589,7 @@ module Aws
       #   resp.item[0].method_settings["String"].unauthorized_cache_control_header_strategy #=> String, one of "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER"
       #   resp.item[0].variables #=> Hash
       #   resp.item[0].variables["String"] #=> String
+      #   resp.item[0].documentation_version #=> String
       #   resp.item[0].created_date #=> Time
       #   resp.item[0].last_updated_date #=> Time
       # @overload get_stages(params = {})
@@ -2370,6 +2657,7 @@ module Aws
       #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
       #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
       #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #   * {Types::UsagePlan#product_code #productCode} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_usage_plan({
@@ -2388,6 +2676,7 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      #   resp.product_code #=> String
       # @overload get_usage_plan(params = {})
       # @param [Hash] params ({})
       def get_usage_plan(params = {}, options = {})
@@ -2504,6 +2793,7 @@ module Aws
       #   resp.items[0].quota.limit #=> Integer
       #   resp.items[0].quota.offset #=> Integer
       #   resp.items[0].quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      #   resp.items[0].product_code #=> String
       # @overload get_usage_plans(params = {})
       # @param [Hash] params ({})
       def get_usage_plans(params = {}, options = {})
@@ -2549,6 +2839,46 @@ module Aws
         req.send_request(options)
       end
 
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-imported
+      #   documentation parts.
+      # @option params [String] :mode
+      #   A query parameter to indicate whether to overwrite (`OVERWRITE`) any
+      #   existing DocumentationParts definition or to merge (`MERGE`) the new
+      #   definition into the existing one. The default value is `MERGE`.
+      # @option params [Boolean] :fail_on_warnings
+      #   A query parameter to specify whether to rollback the documentation
+      #   importation (`true`) or not (`false`) when a warning is encountered.
+      #   The default value is `false`.
+      # @option params [required, String, IO] :body
+      #   \[Required\] Raw byte array representing the to-be-imported
+      #   documentation parts. To import from a Swagger file, this is a JSON
+      #   object.
+      # @return [Types::DocumentationPartIds] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationPartIds#ids #ids} => Array&lt;String&gt;
+      #   * {Types::DocumentationPartIds#warnings #warnings} => Array&lt;String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.import_documentation_parts({
+      #     rest_api_id: "String", # required
+      #     mode: "merge", # accepts merge, overwrite
+      #     fail_on_warnings: false,
+      #     body: "data", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.ids #=> Array
+      #   resp.ids[0] #=> String
+      #   resp.warnings #=> Array
+      #   resp.warnings[0] #=> String
+      # @overload import_documentation_parts(params = {})
+      # @param [Hash] params ({})
+      def import_documentation_parts(params = {}, options = {})
+        req = build_request(:import_documentation_parts, params)
+        req.send_request(options)
+      end
+
       # A feature of the Amazon API Gateway control service for creating a new
       # API from an external API definition file.
       # @option params [Boolean] :fail_on_warnings
@@ -2566,6 +2896,7 @@ module Aws
       #   * {Types::RestApi#name #name} => String
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
+      #   * {Types::RestApi#version #version} => String
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
@@ -2583,6 +2914,7 @@ module Aws
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.created_date #=> Time
+      #   resp.version #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
       #   resp.binary_media_types #=> Array
@@ -2994,6 +3326,7 @@ module Aws
       #   * {Types::RestApi#name #name} => String
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
+      #   * {Types::RestApi#version #version} => String
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
@@ -3013,6 +3346,7 @@ module Aws
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.created_date #=> Time
+      #   resp.version #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
       #   resp.binary_media_types #=> Array
@@ -3208,6 +3542,7 @@ module Aws
       #   * {Types::ApiKey#id #id} => String
       #   * {Types::ApiKey#value #value} => String
       #   * {Types::ApiKey#name #name} => String
+      #   * {Types::ApiKey#customer_id #customerId} => String
       #   * {Types::ApiKey#description #description} => String
       #   * {Types::ApiKey#enabled #enabled} => Boolean
       #   * {Types::ApiKey#created_date #createdDate} => Time
@@ -3231,6 +3566,7 @@ module Aws
       #   resp.id #=> String
       #   resp.value #=> String
       #   resp.name #=> String
+      #   resp.customer_id #=> String
       #   resp.description #=> String
       #   resp.enabled #=> Boolean
       #   resp.created_date #=> Time
@@ -3428,6 +3764,89 @@ module Aws
       # @param [Hash] params ({})
       def update_deployment(params = {}, options = {})
         req = build_request(:update_deployment, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-updated
+      #   documentation part.
+      # @option params [required, String] :documentation_part_id
+      #   \[Required\] The identifier of the to-be-updated documentation part.
+      # @option params [Array<Types::PatchOperation>] :patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      # @return [Types::DocumentationPart] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationPart#id #id} => String
+      #   * {Types::DocumentationPart#location #location} => Types::DocumentationPartLocation
+      #   * {Types::DocumentationPart#properties #properties} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_documentation_part({
+      #     rest_api_id: "String", # required
+      #     documentation_part_id: "String", # required
+      #     patch_operations: [
+      #       {
+      #         op: "add", # accepts add, remove, replace, move, copy, test
+      #         path: "String",
+      #         value: "String",
+      #         from: "String",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.id #=> String
+      #   resp.location.type #=> String, one of "API", "AUTHORIZER", "MODEL", "RESOURCE", "METHOD", "PATH_PARAMETER", "QUERY_PARAMETER", "REQUEST_HEADER", "REQUEST_BODY", "RESPONSE", "RESPONSE_HEADER", "RESPONSE_BODY"
+      #   resp.location.path #=> String
+      #   resp.location.method #=> String
+      #   resp.location.status_code #=> String
+      #   resp.location.name #=> String
+      #   resp.properties #=> String
+      # @overload update_documentation_part(params = {})
+      # @param [Hash] params ({})
+      def update_documentation_part(params = {}, options = {})
+        req = build_request(:update_documentation_part, params)
+        req.send_request(options)
+      end
+
+      # @option params [required, String] :rest_api_id
+      #   \[Required\] The identifier of an API of the to-be-updated
+      #   documentation version.
+      # @option params [required, String] :documentation_version
+      #   \[Required\] The version identifier of the to-be-updated documentation
+      #   version.
+      # @option params [Array<Types::PatchOperation>] :patch_operations
+      #   A list of update operations to be applied to the specified resource
+      #   and in the order specified in this list.
+      # @return [Types::DocumentationVersion] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DocumentationVersion#version #version} => String
+      #   * {Types::DocumentationVersion#created_date #createdDate} => Time
+      #   * {Types::DocumentationVersion#description #description} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_documentation_version({
+      #     rest_api_id: "String", # required
+      #     documentation_version: "String", # required
+      #     patch_operations: [
+      #       {
+      #         op: "add", # accepts add, remove, replace, move, copy, test
+      #         path: "String",
+      #         value: "String",
+      #         from: "String",
+      #       },
+      #     ],
+      #   })
+      #
+      # @example Response structure
+      #   resp.version #=> String
+      #   resp.created_date #=> Time
+      #   resp.description #=> String
+      # @overload update_documentation_version(params = {})
+      # @param [Hash] params ({})
+      def update_documentation_version(params = {}, options = {})
+        req = build_request(:update_documentation_version, params)
         req.send_request(options)
       end
 
@@ -3848,6 +4267,7 @@ module Aws
       #   * {Types::RestApi#name #name} => String
       #   * {Types::RestApi#description #description} => String
       #   * {Types::RestApi#created_date #createdDate} => Time
+      #   * {Types::RestApi#version #version} => String
       #   * {Types::RestApi#warnings #warnings} => Array&lt;String&gt;
       #   * {Types::RestApi#binary_media_types #binaryMediaTypes} => Array&lt;String&gt;
       #
@@ -3869,6 +4289,7 @@ module Aws
       #   resp.name #=> String
       #   resp.description #=> String
       #   resp.created_date #=> Time
+      #   resp.version #=> String
       #   resp.warnings #=> Array
       #   resp.warnings[0] #=> String
       #   resp.binary_media_types #=> Array
@@ -3900,6 +4321,7 @@ module Aws
       #   * {Types::Stage#cache_cluster_status #cacheClusterStatus} => String
       #   * {Types::Stage#method_settings #methodSettings} => Hash&lt;String,Types::MethodSetting&gt;
       #   * {Types::Stage#variables #variables} => Hash&lt;String,String&gt;
+      #   * {Types::Stage#documentation_version #documentationVersion} => String
       #   * {Types::Stage#created_date #createdDate} => Time
       #   * {Types::Stage#last_updated_date #lastUpdatedDate} => Time
       #
@@ -3938,6 +4360,7 @@ module Aws
       #   resp.method_settings["String"].unauthorized_cache_control_header_strategy #=> String, one of "FAIL_WITH_403", "SUCCEED_WITH_RESPONSE_HEADER", "SUCCEED_WITHOUT_RESPONSE_HEADER"
       #   resp.variables #=> Hash
       #   resp.variables["String"] #=> String
+      #   resp.documentation_version #=> String
       #   resp.created_date #=> Time
       #   resp.last_updated_date #=> Time
       # @overload update_stage(params = {})
@@ -4009,6 +4432,7 @@ module Aws
       #   * {Types::UsagePlan#api_stages #apiStages} => Array&lt;Types::ApiStage&gt;
       #   * {Types::UsagePlan#throttle #throttle} => Types::ThrottleSettings
       #   * {Types::UsagePlan#quota #quota} => Types::QuotaSettings
+      #   * {Types::UsagePlan#product_code #productCode} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.update_usage_plan({
@@ -4035,6 +4459,7 @@ module Aws
       #   resp.quota.limit #=> Integer
       #   resp.quota.offset #=> Integer
       #   resp.quota.period #=> String, one of "DAY", "WEEK", "MONTH"
+      #   resp.product_code #=> String
       # @overload update_usage_plan(params = {})
       # @param [Hash] params ({})
       def update_usage_plan(params = {}, options = {})

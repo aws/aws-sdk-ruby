@@ -87,7 +87,7 @@ module Aws
         data.mac_address
       end
 
-      # The IP address of the network interface within the subnet.
+      # The IPv4 address of the network interface within the subnet.
       # @return [String]
       def private_ip_address
         data.private_ip_address
@@ -123,10 +123,16 @@ module Aws
         data.tag_set
       end
 
-      # The private IP addresses associated with the network interface.
+      # The private IPv4 addresses associated with the network interface.
       # @return [Array<Types::NetworkInterfacePrivateIpAddress>]
       def private_ip_addresses
         data.private_ip_addresses
+      end
+
+      # The IPv6 addresses associated with the network interface.
+      # @return [Array<Types::NetworkInterfaceIpv6Address>]
+      def ipv_6_addresses
+        data.ipv_6_addresses
       end
 
       # The type of interface.

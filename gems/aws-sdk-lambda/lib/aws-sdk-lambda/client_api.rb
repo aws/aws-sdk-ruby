@@ -12,6 +12,8 @@ module Aws
 
       include Seahorse::Model
 
+      AccountLimit = Shapes::StructureShape.new(name: 'AccountLimit')
+      AccountUsage = Shapes::StructureShape.new(name: 'AccountUsage')
       Action = Shapes::StringShape.new(name: 'Action')
       AddPermissionRequest = Shapes::StructureShape.new(name: 'AddPermissionRequest')
       AddPermissionResponse = Shapes::StructureShape.new(name: 'AddPermissionResponse')
@@ -28,6 +30,7 @@ module Aws
       CreateEventSourceMappingRequest = Shapes::StructureShape.new(name: 'CreateEventSourceMappingRequest')
       CreateFunctionRequest = Shapes::StructureShape.new(name: 'CreateFunctionRequest')
       Date = Shapes::TimestampShape.new(name: 'Date')
+      DeadLetterConfig = Shapes::StructureShape.new(name: 'DeadLetterConfig')
       DeleteAliasRequest = Shapes::StructureShape.new(name: 'DeleteAliasRequest')
       DeleteEventSourceMappingRequest = Shapes::StructureShape.new(name: 'DeleteEventSourceMappingRequest')
       DeleteFunctionRequest = Shapes::StructureShape.new(name: 'DeleteFunctionRequest')
@@ -53,6 +56,8 @@ module Aws
       FunctionConfiguration = Shapes::StructureShape.new(name: 'FunctionConfiguration')
       FunctionList = Shapes::ListShape.new(name: 'FunctionList')
       FunctionName = Shapes::StringShape.new(name: 'FunctionName')
+      GetAccountSettingsRequest = Shapes::StructureShape.new(name: 'GetAccountSettingsRequest')
+      GetAccountSettingsResponse = Shapes::StructureShape.new(name: 'GetAccountSettingsResponse')
       GetAliasRequest = Shapes::StructureShape.new(name: 'GetAliasRequest')
       GetEventSourceMappingRequest = Shapes::StructureShape.new(name: 'GetEventSourceMappingRequest')
       GetFunctionConfigurationRequest = Shapes::StructureShape.new(name: 'GetFunctionConfigurationRequest')
@@ -96,6 +101,7 @@ module Aws
       Qualifier = Shapes::StringShape.new(name: 'Qualifier')
       RemovePermissionRequest = Shapes::StructureShape.new(name: 'RemovePermissionRequest')
       RequestTooLargeException = Shapes::StructureShape.new(name: 'RequestTooLargeException')
+      ResourceArn = Shapes::StringShape.new(name: 'ResourceArn')
       ResourceConflictException = Shapes::StructureShape.new(name: 'ResourceConflictException')
       ResourceNotFoundException = Shapes::StructureShape.new(name: 'ResourceNotFoundException')
       RoleArn = Shapes::StringShape.new(name: 'RoleArn')
@@ -105,6 +111,7 @@ module Aws
       S3ObjectVersion = Shapes::StringShape.new(name: 'S3ObjectVersion')
       SecurityGroupId = Shapes::StringShape.new(name: 'SecurityGroupId')
       SecurityGroupIds = Shapes::ListShape.new(name: 'SecurityGroupIds')
+      SensitiveString = Shapes::StringShape.new(name: 'SensitiveString')
       ServiceException = Shapes::StructureShape.new(name: 'ServiceException')
       SourceOwner = Shapes::StringShape.new(name: 'SourceOwner')
       StatementId = Shapes::StringShape.new(name: 'StatementId')
@@ -125,6 +132,16 @@ module Aws
       VpcConfig = Shapes::StructureShape.new(name: 'VpcConfig')
       VpcConfigResponse = Shapes::StructureShape.new(name: 'VpcConfigResponse')
       VpcId = Shapes::StringShape.new(name: 'VpcId')
+
+      AccountLimit.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
+      AccountLimit.add_member(:code_size_unzipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeUnzipped"))
+      AccountLimit.add_member(:code_size_zipped, Shapes::ShapeRef.new(shape: Long, location_name: "CodeSizeZipped"))
+      AccountLimit.add_member(:concurrent_executions, Shapes::ShapeRef.new(shape: Integer, location_name: "ConcurrentExecutions"))
+      AccountLimit.struct_class = Types::AccountLimit
+
+      AccountUsage.add_member(:total_code_size, Shapes::ShapeRef.new(shape: Long, location_name: "TotalCodeSize"))
+      AccountUsage.add_member(:function_count, Shapes::ShapeRef.new(shape: Long, location_name: "FunctionCount"))
+      AccountUsage.struct_class = Types::AccountUsage
 
       AddPermissionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
       AddPermissionRequest.add_member(:statement_id, Shapes::ShapeRef.new(shape: StatementId, required: true, location_name: "StatementId"))
@@ -158,6 +175,7 @@ module Aws
       CreateEventSourceMappingRequest.add_member(:enabled, Shapes::ShapeRef.new(shape: Enabled, location_name: "Enabled"))
       CreateEventSourceMappingRequest.add_member(:batch_size, Shapes::ShapeRef.new(shape: BatchSize, location_name: "BatchSize"))
       CreateEventSourceMappingRequest.add_member(:starting_position, Shapes::ShapeRef.new(shape: EventSourcePosition, required: true, location_name: "StartingPosition"))
+      CreateEventSourceMappingRequest.add_member(:starting_position_timestamp, Shapes::ShapeRef.new(shape: Date, location_name: "StartingPositionTimestamp"))
       CreateEventSourceMappingRequest.struct_class = Types::CreateEventSourceMappingRequest
 
       CreateFunctionRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location_name: "FunctionName"))
@@ -170,9 +188,13 @@ module Aws
       CreateFunctionRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
       CreateFunctionRequest.add_member(:publish, Shapes::ShapeRef.new(shape: Boolean, location_name: "Publish"))
       CreateFunctionRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
+      CreateFunctionRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
       CreateFunctionRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
       CreateFunctionRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       CreateFunctionRequest.struct_class = Types::CreateFunctionRequest
+
+      DeadLetterConfig.add_member(:target_arn, Shapes::ShapeRef.new(shape: ResourceArn, location_name: "TargetArn"))
+      DeadLetterConfig.struct_class = Types::DeadLetterConfig
 
       DeleteAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
       DeleteAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
@@ -189,7 +211,7 @@ module Aws
       Environment.struct_class = Types::Environment
 
       EnvironmentError.add_member(:error_code, Shapes::ShapeRef.new(shape: String, location_name: "ErrorCode"))
-      EnvironmentError.add_member(:message, Shapes::ShapeRef.new(shape: String, location_name: "Message"))
+      EnvironmentError.add_member(:message, Shapes::ShapeRef.new(shape: SensitiveString, location_name: "Message"))
       EnvironmentError.struct_class = Types::EnvironmentError
 
       EnvironmentResponse.add_member(:variables, Shapes::ShapeRef.new(shape: EnvironmentVariables, location_name: "Variables"))
@@ -234,11 +256,18 @@ module Aws
       FunctionConfiguration.add_member(:code_sha_256, Shapes::ShapeRef.new(shape: String, location_name: "CodeSha256"))
       FunctionConfiguration.add_member(:version, Shapes::ShapeRef.new(shape: Version, location_name: "Version"))
       FunctionConfiguration.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfigResponse, location_name: "VpcConfig"))
+      FunctionConfiguration.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
       FunctionConfiguration.add_member(:environment, Shapes::ShapeRef.new(shape: EnvironmentResponse, location_name: "Environment"))
       FunctionConfiguration.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       FunctionConfiguration.struct_class = Types::FunctionConfiguration
 
       FunctionList.member = Shapes::ShapeRef.new(shape: FunctionConfiguration)
+
+      GetAccountSettingsRequest.struct_class = Types::GetAccountSettingsRequest
+
+      GetAccountSettingsResponse.add_member(:account_limit, Shapes::ShapeRef.new(shape: AccountLimit, location_name: "AccountLimit"))
+      GetAccountSettingsResponse.add_member(:account_usage, Shapes::ShapeRef.new(shape: AccountUsage, location_name: "AccountUsage"))
+      GetAccountSettingsResponse.struct_class = Types::GetAccountSettingsResponse
 
       GetAliasRequest.add_member(:function_name, Shapes::ShapeRef.new(shape: FunctionName, required: true, location: "uri", location_name: "FunctionName"))
       GetAliasRequest.add_member(:name, Shapes::ShapeRef.new(shape: Alias, required: true, location: "uri", location_name: "Name"))
@@ -372,8 +401,9 @@ module Aws
       UpdateFunctionConfigurationRequest.add_member(:memory_size, Shapes::ShapeRef.new(shape: MemorySize, location_name: "MemorySize"))
       UpdateFunctionConfigurationRequest.add_member(:vpc_config, Shapes::ShapeRef.new(shape: VpcConfig, location_name: "VpcConfig"))
       UpdateFunctionConfigurationRequest.add_member(:environment, Shapes::ShapeRef.new(shape: Environment, location_name: "Environment"))
-      UpdateFunctionConfigurationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       UpdateFunctionConfigurationRequest.add_member(:runtime, Shapes::ShapeRef.new(shape: Runtime, location_name: "Runtime"))
+      UpdateFunctionConfigurationRequest.add_member(:dead_letter_config, Shapes::ShapeRef.new(shape: DeadLetterConfig, location_name: "DeadLetterConfig"))
+      UpdateFunctionConfigurationRequest.add_member(:kms_key_arn, Shapes::ShapeRef.new(shape: KMSKeyArn, location_name: "KMSKeyArn"))
       UpdateFunctionConfigurationRequest.struct_class = Types::UpdateFunctionConfigurationRequest
 
       VpcConfig.add_member(:subnet_ids, Shapes::ShapeRef.new(shape: SubnetIds, location_name: "SubnetIds"))
@@ -486,6 +516,16 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
           o.errors << Shapes::ShapeRef.new(shape: InvalidParameterValueException)
           o.errors << Shapes::ShapeRef.new(shape: ResourceConflictException)
+        end)
+
+        api.add_operation(:get_account_settings, Seahorse::Model::Operation.new.tap do |o|
+          o.name = "GetAccountSettings"
+          o.http_method = "GET"
+          o.http_request_uri = "/2016-08-19/account-settings/"
+          o.input = Shapes::ShapeRef.new(shape: GetAccountSettingsRequest)
+          o.output = Shapes::ShapeRef.new(shape: GetAccountSettingsResponse)
+          o.errors << Shapes::ShapeRef.new(shape: TooManyRequestsException)
+          o.errors << Shapes::ShapeRef.new(shape: ServiceException)
         end)
 
         api.add_operation(:get_alias, Seahorse::Model::Operation.new.tap do |o|

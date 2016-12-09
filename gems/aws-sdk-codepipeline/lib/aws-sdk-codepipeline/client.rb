@@ -146,8 +146,9 @@ module Aws
       #   confirm receipt.
       # @option params [required, String] :nonce
       #   A system-generated random number that AWS CodePipeline uses to ensure
-      #   that the job is being worked on by only one job worker. This number
-      #   must be returned in the response.
+      #   that the job is being worked on by only one job worker. Get this
+      #   number from the response of the PollForJobs request that returned this
+      #   job.
       # @return [Types::AcknowledgeJobOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::AcknowledgeJobOutput#status #status} => String
@@ -173,8 +174,8 @@ module Aws
       #   The unique system-generated ID of the job.
       # @option params [required, String] :nonce
       #   A system-generated random number that AWS CodePipeline uses to ensure
-      #   that the job is being worked on by only one job worker. This number
-      #   must be returned in the response.
+      #   that the job is being worked on by only one job worker. Get this
+      #   number from the response to a GetThirdPartyJobDetails request.
       # @option params [required, String] :client_token
       #   The clientToken portion of the clientId and clientToken pair used to
       #   verify that the calling entity is allowed access to the job and its

@@ -9,6 +9,59 @@ module Aws
   module Lambda
     module Types
 
+      # Provides limits of code size and concurrency associated with the
+      # current account and region.
+      # @!attribute [rw] total_code_size
+      #   Maximum size, in megabytes, of a code package you can upload per
+      #   region. The default size is 75 GB.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] code_size_unzipped
+      #   Size, in bytes, of code/dependencies that you can zip into a
+      #   deployment package (uncompressed zip/jar size) for uploading. The
+      #   default limit is 250 MB.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] code_size_zipped
+      #   Size, in bytes, of a single zipped code/dependencies package you can
+      #   upload for your Lambda function(.zip/.jar file). Try using AWS S3
+      #   for uploading larger files. Default limit is 50 MB.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] concurrent_executions
+      #   Number of simultaneous executions of your function per region. For
+      #   more information or to request a limit increase for concurrent
+      #   executions, see [Lambda Function Concurrent Executions][1]. The
+      #   default limit is 100.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/lambda/latest/dg/concurrent-executions.html
+      #   @return [Integer]
+      class AccountLimit < Struct.new(
+        :total_code_size,
+        :code_size_unzipped,
+        :code_size_zipped,
+        :concurrent_executions)
+        include Aws::Structure
+      end
+
+      # Provides code size usage and function count associated with the
+      # current account and region.
+      # @!attribute [rw] total_code_size
+      #   Total size, in megabytes, of the account's deployment packages per
+      #   region.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] function_count
+      #   The number of your account's existing functions per region.
+      #   @return [Integer]
+      class AccountUsage < Struct.new(
+        :total_code_size,
+        :function_count)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass AddPermissionRequest
       #   data as a hash:
       #
@@ -196,7 +249,8 @@ module Aws
       #         function_name: "FunctionName", # required
       #         enabled: false,
       #         batch_size: 1,
-      #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST
+      #         starting_position: "TRIM_HORIZON", # required, accepts TRIM_HORIZON, LATEST, AT_TIMESTAMP
+      #         starting_position_timestamp: Time.now,
       #       }
       # @!attribute [rw] event_source_arn
       #   The Amazon Resource Name (ARN) of the Amazon Kinesis or the Amazon
@@ -245,19 +299,33 @@ module Aws
       #
       # @!attribute [rw] starting_position
       #   The position in the stream where AWS Lambda should start reading.
-      #   For more information, go to [ShardIteratorType][1] in the *Amazon
-      #   Kinesis API Reference*.
+      #   Valid only for Kinesis streams. For more information, go to
+      #   [ShardIteratorType][1] in the *Amazon Kinesis API Reference*.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
       #   @return [String]
+      #
+      # @!attribute [rw] starting_position_timestamp
+      #   The timestamp of the data record from which to start reading. Used
+      #   with [shard iterator type][1] AT\_TIMESTAMP. If a record with this
+      #   exact timestamp does not exist, the iterator returned is for the
+      #   next (later) record. If the timestamp is older than the current trim
+      #   horizon, the iterator returned is for the oldest untrimmed data
+      #   record (TRIM\_HORIZON). Valid only for Kinesis streams.
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kinesis/latest/APIReference/API_GetShardIterator.html#Kinesis-GetShardIterator-request-ShardIteratorType
+      #   @return [Time]
       class CreateEventSourceMappingRequest < Struct.new(
         :event_source_arn,
         :function_name,
         :enabled,
         :batch_size,
-        :starting_position)
+        :starting_position,
+        :starting_position_timestamp)
         include Aws::Structure
       end
 
@@ -266,7 +334,7 @@ module Aws
       #
       #       {
       #         function_name: "FunctionName", # required
-      #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7
+      #         runtime: "nodejs", # required, accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
       #         role: "RoleArn", # required
       #         handler: "Handler", # required
       #         code: { # required
@@ -282,6 +350,9 @@ module Aws
       #         vpc_config: {
       #           subnet_ids: ["SubnetId"],
       #           security_group_ids: ["SecurityGroupId"],
+      #         },
+      #         dead_letter_config: {
+      #           target_arn: "ResourceArn",
       #         },
       #         environment: {
       #           variables: {
@@ -302,6 +373,13 @@ module Aws
       #
       #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
       #   use earlier runtime (v0.10.42), set the value to "nodejs".
+      #
+      #   <note markdown="1"> You can no longer create functions using the v0.10.42 runtime
+      #   version as of November, 2016. Existing functions will be supported
+      #   until early 2017 but we recommend you migrate them to nodejs4.3
+      #   runtime version as soon as possible.
+      #
+      #    </note>
       #   @return [String]
       #
       # @!attribute [rw] role
@@ -364,6 +442,11 @@ module Aws
       #   one security group and one subnet ID.
       #   @return [Types::VpcConfig]
       #
+      # @!attribute [rw] dead_letter_config
+      #   The parent object that contains the target ARN (Amazon Resource
+      #   Name) of an Amazon SQS queue or Amazon SNS topic.
+      #   @return [Types::DeadLetterConfig]
+      #
       # @!attribute [rw] environment
       #   The parent object that contains your environment's configuration
       #   settings.
@@ -385,8 +468,26 @@ module Aws
         :memory_size,
         :publish,
         :vpc_config,
+        :dead_letter_config,
         :environment,
         :kms_key_arn)
+        include Aws::Structure
+      end
+
+      # The parent object that contains the target ARN (Amazon Resource Name)
+      # of an Amazon SQS queue or Amazon SNS topic.
+      # @note When making an API call, pass DeadLetterConfig
+      #   data as a hash:
+      #
+      #       {
+      #         target_arn: "ResourceArn",
+      #       }
+      # @!attribute [rw] target_arn
+      #   The ARN (Amazon Resource Value) of an Amazon SQS queue or Amazon SNS
+      #   topic you specify as your Dead Letter Queue (DLQ).
+      #   @return [String]
+      class DeadLetterConfig < Struct.new(
+        :target_arn)
         include Aws::Structure
       end
 
@@ -699,6 +800,11 @@ module Aws
       #   VPC configuration associated with your Lambda function.
       #   @return [Types::VpcConfigResponse]
       #
+      # @!attribute [rw] dead_letter_config
+      #   The parent object that contains the target ARN (Amazon Resource
+      #   Name) of an Amazon SQS queue or Amazon SNS topic.
+      #   @return [Types::DeadLetterConfig]
+      #
       # @!attribute [rw] environment
       #   The parent object that contains your environment's configuration
       #   settings.
@@ -723,8 +829,27 @@ module Aws
         :code_sha_256,
         :version,
         :vpc_config,
+        :dead_letter_config,
         :environment,
         :kms_key_arn)
+        include Aws::Structure
+      end
+
+      # @api private
+      class GetAccountSettingsRequest < Aws::EmptyStructure; end
+
+      # @!attribute [rw] account_limit
+      #   Provides limits of code size and concurrency associated with the
+      #   current account and region.
+      #   @return [Types::AccountLimit]
+      #
+      # @!attribute [rw] account_usage
+      #   Provides code size usage and function count associated with the
+      #   current account and region.
+      #   @return [Types::AccountUsage]
+      class GetAccountSettingsResponse < Struct.new(
+        :account_limit,
+        :account_usage)
         include Aws::Structure
       end
 
@@ -1504,8 +1629,11 @@ module Aws
       #             "EnvironmentVariableName" => "EnvironmentVariableValue",
       #           },
       #         },
+      #         runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7, dotnetcore1.0, nodejs4.3-edge
+      #         dead_letter_config: {
+      #           target_arn: "ResourceArn",
+      #         },
       #         kms_key_arn: "KMSKeyArn",
-      #         runtime: "nodejs", # accepts nodejs, nodejs4.3, java8, python2.7
       #       }
       # @!attribute [rw] function_name
       #   The name of the Lambda function.
@@ -1562,18 +1690,28 @@ module Aws
       #   settings.
       #   @return [Types::Environment]
       #
-      # @!attribute [rw] kms_key_arn
-      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
-      #   function's environment variables. If you elect to use the AWS
-      #   Lambda default service key, pass in an empty string ("") for this
-      #   parameter.
-      #   @return [String]
-      #
       # @!attribute [rw] runtime
       #   The runtime environment for the Lambda function.
       #
       #   To use the Node.js runtime v4.3, set the value to "nodejs4.3". To
       #   use earlier runtime (v0.10.42), set the value to "nodejs".
+      #
+      #   <note markdown="1"> You can no longer downgrade to the v0.10.42 runtime version. This
+      #   version will no longer be supported as of early 2017.
+      #
+      #    </note>
+      #   @return [String]
+      #
+      # @!attribute [rw] dead_letter_config
+      #   The parent object that contains the target ARN (Amazon Resource
+      #   Name) of an Amazon SQS queue or Amazon SNS topic.
+      #   @return [Types::DeadLetterConfig]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The Amazon Resource Name (ARN) of the KMS key used to encrypt your
+      #   function's environment variables. If you elect to use the AWS
+      #   Lambda default service key, pass in an empty string ("") for this
+      #   parameter.
       #   @return [String]
       class UpdateFunctionConfigurationRequest < Struct.new(
         :function_name,
@@ -1584,8 +1722,9 @@ module Aws
         :memory_size,
         :vpc_config,
         :environment,
-        :kms_key_arn,
-        :runtime)
+        :runtime,
+        :dead_letter_config,
+        :kms_key_arn)
         include Aws::Structure
       end
 

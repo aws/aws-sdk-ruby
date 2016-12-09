@@ -329,6 +329,7 @@ module Aws
       #       "MetadataKey" => "MetadataValue",
       #     },
       #     metadata_directive: "COPY", # accepts COPY, REPLACE
+      #     tagging_directive: "COPY", # accepts COPY, REPLACE
       #     server_side_encryption: "AES256", # accepts AES256, aws:kms
       #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
       #     website_redirect_location: "WebsiteRedirectLocation",
@@ -340,6 +341,7 @@ module Aws
       #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
       #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
       #     request_payer: "requester", # accepts requester
+      #     tagging: "TaggingHeader",
       #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
@@ -385,6 +387,9 @@ module Aws
       # @option options [String] :metadata_directive
       #   Specifies whether the metadata is copied from the source object or
       #   replaced with metadata provided in the request.
+      # @option options [String] :tagging_directive
+      #   Specifies whether the object tag-set are copied from the source object
+      #   or replaced with tag-set provided in the request.
       # @option options [String] :server_side_encryption
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
@@ -430,6 +435,10 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [String] :tagging
+      #   The tag-set for the object destination object this value must be used
+      #   in conjunction with the TaggingDirective. The tag-set must be encoded
+      #   as URL Query parameters
       # @return [Types::CopyObjectOutput]
       def copy_from(options = {})
         options = options.merge(
@@ -686,6 +695,7 @@ module Aws
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     ssekms_key_id: "SSEKMSKeyId",
       #     request_payer: "requester", # accepts requester
+      #     tagging: "TaggingHeader",
       #   })
       # @param [Hash] options ({})
       # @option options [String] :acl
@@ -756,6 +766,9 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option options [String] :tagging
+      #   The tag-set for the object. The tag-set must be encoded as URL Query
+      #   parameters
       # @return [Types::PutObjectOutput]
       def put(options = {})
         options = options.merge(

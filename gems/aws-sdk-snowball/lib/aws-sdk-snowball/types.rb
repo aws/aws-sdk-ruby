@@ -70,13 +70,12 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] prefecture_or_district
-      #   The prefecture or district in an address that a Snowball is to be
-      #   delivered to.
+      #   The prefecture or district that the appliance will be shipped to.
       #   @return [String]
       #
       # @!attribute [rw] landmark
-      #   A landmark listed in an address that a Snowball is to be delivered
-      #   to.
+      #   The landmark identifying the address that the appliance will be
+      #   shipped to.
       #   @return [String]
       #
       # @!attribute [rw] country
@@ -108,6 +107,23 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass CancelClusterRequest
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #       }
+      # @!attribute [rw] cluster_id
+      #   The 39-character ID for the cluster that you want to cancel, for
+      #   example `CID123e4567-e89b-12d3-a456-426655440000`.
+      #   @return [String]
+      class CancelClusterRequest < Struct.new(
+        :cluster_id)
+        include Aws::Structure
+      end
+
+      class CancelClusterResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass CancelJobRequest
       #   data as a hash:
       #
@@ -115,7 +131,7 @@ module Aws
       #         job_id: "JobId", # required
       #       }
       # @!attribute [rw] job_id
-      #   The 39 character job ID for the job that you want to cancel, for
+      #   The 39-character job ID for the job that you want to cancel, for
       #   example `JID123e4567-e89b-12d3-a456-426655440000`.
       #   @return [String]
       class CancelJobRequest < Struct.new(
@@ -124,6 +140,132 @@ module Aws
       end
 
       class CancelJobResult < Aws::EmptyStructure; end
+
+      # Contains a cluster's state, a cluster's ID, and other important
+      # information.
+      # @!attribute [rw] cluster_id
+      #   The 39-character ID for the cluster that you want to list, for
+      #   example `CID123e4567-e89b-12d3-a456-426655440000`.
+      #   @return [String]
+      #
+      # @!attribute [rw] cluster_state
+      #   The current state of this cluster. For information about the state
+      #   of a specific node, see JobListEntry$JobState.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The creation date for this cluster.
+      #   @return [Time]
+      #
+      # @!attribute [rw] description
+      #   Defines an optional description of the cluster, for example
+      #   `Environmental Data Cluster-01`.
+      #   @return [String]
+      class ClusterListEntry < Struct.new(
+        :cluster_id,
+        :cluster_state,
+        :creation_date,
+        :description)
+        include Aws::Structure
+      end
+
+      # Contains metadata about a specific cluster.
+      # @!attribute [rw] cluster_id
+      #   The automatically generated ID for a cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The optional description of the cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The `KmsKeyARN` Amazon Resource Name (ARN) associated with this
+      #   cluster. This ARN was created using the [CreateKey][1] API action in
+      #   AWS Key Management Service (AWS KMS).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The role ARN associated with this cluster. This ARN was created
+      #   using the [CreateRole][1] API action in AWS Identity and Access
+      #   Management (IAM).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+      #   @return [String]
+      #
+      # @!attribute [rw] cluster_state
+      #   The current status of the cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] job_type
+      #   The type of job for this cluster. Currently, the only job type
+      #   supported for clusters is `LOCAL_USE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] snowball_type
+      #   The type of AWS Snowball appliance to use for this cluster.
+      #   Currently, the only supported appliance type for cluster jobs is
+      #   `EDGE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The creation date for this cluster.
+      #   @return [Time]
+      #
+      # @!attribute [rw] resources
+      #   The arrays of JobResource objects that can include updated
+      #   S3Resource objects or LambdaResource objects.
+      #   @return [Types::JobResource]
+      #
+      # @!attribute [rw] address_id
+      #   The automatically generated ID for a specific address.
+      #   @return [String]
+      #
+      # @!attribute [rw] shipping_option
+      #   The shipping speed for each node in this cluster. This speed
+      #   doesn't dictate how soon you'll get each Snowball Edge appliance,
+      #   rather it represents how quickly each appliance moves to its
+      #   destination while in transit. Regional shipping speeds are as
+      #   follows:
+      #
+      #   * In Australia, you have access to express shipping. Typically,
+      #     appliances shipped express are delivered in about a day.
+      #
+      #   * In the European Union (EU), you have access to express shipping.
+      #     Typically, Snowball Edges shipped express are delivered in about a
+      #     day. In addition, most countries in the EU have access to standard
+      #     shipping, which typically takes less than a week, one way.
+      #
+      #   * In India, Snowball Edges are delivered in one to seven days.
+      #
+      #   * In the US, you have access to one-day shipping and two-day
+      #     shipping.
+      #   @return [String]
+      #
+      # @!attribute [rw] notification
+      #   The Amazon Simple Notification Service (Amazon SNS) notification
+      #   settings for this cluster.
+      #   @return [Types::Notification]
+      class ClusterMetadata < Struct.new(
+        :cluster_id,
+        :description,
+        :kms_key_arn,
+        :role_arn,
+        :cluster_state,
+        :job_type,
+        :snowball_type,
+        :creation_date,
+        :resources,
+        :address_id,
+        :shipping_option,
+        :notification)
+        include Aws::Structure
+      end
 
       # @note When making an API call, pass CreateAddressRequest
       #   data as a hash:
@@ -163,11 +305,11 @@ module Aws
         include Aws::Structure
       end
 
-      # @note When making an API call, pass CreateJobRequest
+      # @note When making an API call, pass CreateClusterRequest
       #   data as a hash:
       #
       #       {
-      #         job_type: "IMPORT", # required, accepts IMPORT, EXPORT
+      #         job_type: "IMPORT", # required, accepts IMPORT, EXPORT, LOCAL_USE
       #         resources: { # required
       #           s3_resources: [
       #             {
@@ -178,18 +320,160 @@ module Aws
       #               },
       #             },
       #           ],
+      #           lambda_resources: [
+      #             {
+      #               lambda_arn: "ResourceARN",
+      #               event_triggers: [
+      #                 {
+      #                   event_resource_arn: "ResourceARN",
+      #                 },
+      #               ],
+      #             },
+      #           ],
       #         },
       #         description: "String",
       #         address_id: "AddressId", # required
       #         kms_key_arn: "KmsKeyARN",
       #         role_arn: "RoleARN", # required
-      #         snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
+      #         snowball_type: "STANDARD", # accepts STANDARD, EDGE
       #         shipping_option: "SECOND_DAY", # required, accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
       #         notification: {
       #           sns_topic_arn: "SnsTopicARN",
       #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
       #           notify_all: false,
       #         },
+      #       }
+      # @!attribute [rw] job_type
+      #   The type of job for this cluster. Currently, the only job type
+      #   supported for clusters is `LOCAL_USE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] resources
+      #   The resources associated with the cluster job. These resources
+      #   include Amazon S3 buckets and optional AWS Lambda functions written
+      #   in the Python language.
+      #   @return [Types::JobResource]
+      #
+      # @!attribute [rw] description
+      #   An optional description of this specific cluster, for example
+      #   `Environmental Data Cluster-01`.
+      #   @return [String]
+      #
+      # @!attribute [rw] address_id
+      #   The ID for the address that you want the cluster shipped to.&gt;
+      #   @return [String]
+      #
+      # @!attribute [rw] kms_key_arn
+      #   The `KmsKeyARN` value that you want to associate with this cluster.
+      #   `KmsKeyARN` values are created by using the [CreateKey][1] API
+      #   action in AWS Key Management Service (AWS KMS).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/kms/latest/APIReference/API_CreateKey.html
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The `RoleARN` that you want to associate with this cluster.
+      #   `RoleArn` values are created by using the [CreateRole][1] API action
+      #   in AWS Identity and Access Management (IAM).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+      #   @return [String]
+      #
+      # @!attribute [rw] snowball_type
+      #   The type of AWS Snowball appliance to use for this cluster.
+      #   Currently, the only supported appliance type for cluster jobs is
+      #   `EDGE`.
+      #   @return [String]
+      #
+      # @!attribute [rw] shipping_option
+      #   The shipping speed for each node in this cluster. This speed
+      #   doesn't dictate how soon you'll get each Snowball Edge appliance,
+      #   rather it represents how quickly each appliance moves to its
+      #   destination while in transit. Regional shipping speeds are as
+      #   follows:
+      #
+      #   * In Australia, you have access to express shipping. Typically,
+      #     appliances shipped express are delivered in about a day.
+      #
+      #   * In the European Union (EU), you have access to express shipping.
+      #     Typically, Snowball Edges shipped express are delivered in about a
+      #     day. In addition, most countries in the EU have access to standard
+      #     shipping, which typically takes less than a week, one way.
+      #
+      #   * In India, Snowball Edges are delivered in one to seven days.
+      #
+      #   * In the US, you have access to one-day shipping and two-day
+      #     shipping.
+      #   @return [String]
+      #
+      # @!attribute [rw] notification
+      #   The Amazon Simple Notification Service (Amazon SNS) notification
+      #   settings for this cluster.
+      #   @return [Types::Notification]
+      class CreateClusterRequest < Struct.new(
+        :job_type,
+        :resources,
+        :description,
+        :address_id,
+        :kms_key_arn,
+        :role_arn,
+        :snowball_type,
+        :shipping_option,
+        :notification)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] cluster_id
+      #   The automatically generated ID for a cluster.
+      #   @return [String]
+      class CreateClusterResult < Struct.new(
+        :cluster_id)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass CreateJobRequest
+      #   data as a hash:
+      #
+      #       {
+      #         job_type: "IMPORT", # accepts IMPORT, EXPORT, LOCAL_USE
+      #         resources: {
+      #           s3_resources: [
+      #             {
+      #               bucket_arn: "ResourceARN",
+      #               key_range: {
+      #                 begin_marker: "String",
+      #                 end_marker: "String",
+      #               },
+      #             },
+      #           ],
+      #           lambda_resources: [
+      #             {
+      #               lambda_arn: "ResourceARN",
+      #               event_triggers: [
+      #                 {
+      #                   event_resource_arn: "ResourceARN",
+      #                 },
+      #               ],
+      #             },
+      #           ],
+      #         },
+      #         description: "String",
+      #         address_id: "AddressId",
+      #         kms_key_arn: "KmsKeyARN",
+      #         role_arn: "RoleARN",
+      #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
+      #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+      #         notification: {
+      #           sns_topic_arn: "SnsTopicARN",
+      #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+      #           notify_all: false,
+      #         },
+      #         cluster_id: "ClusterId",
+      #         snowball_type: "STANDARD", # accepts STANDARD, EDGE
       #       }
       # @!attribute [rw] job_type
       #   Defines the type of job that you're creating.
@@ -245,10 +529,10 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] shipping_option
-      #   The shipping speed for this job. Note that this speed does not
-      #   dictate how soon you'll get the Snowball, rather it represents how
-      #   quickly the Snowball moves to its destination while in transit.
-      #   Regional shipping speeds are as follows:
+      #   The shipping speed for this job. This speed doesn't dictate how
+      #   soon you'll get the Snowball, rather it represents how quickly the
+      #   Snowball moves to its destination while in transit. Regional
+      #   shipping speeds are as follows:
       #
       #   * In Australia, you have access to express shipping. Typically,
       #     Snowballs shipped express are delivered in about a day.
@@ -268,6 +552,17 @@ module Aws
       #   Defines the Amazon Simple Notification Service (Amazon SNS)
       #   notification settings for this job.
       #   @return [Types::Notification]
+      #
+      # @!attribute [rw] cluster_id
+      #   The ID of a cluster. If you're creating a job for a node in a
+      #   cluster, you need to provide only this `clusterId` value. The other
+      #   job attributes are inherited from the cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] snowball_type
+      #   The type of AWS Snowball appliance to use for this job. Currently,
+      #   the only supported appliance type for cluster jobs is `EDGE`.
+      #   @return [String]
       class CreateJobRequest < Struct.new(
         :job_type,
         :resources,
@@ -277,7 +572,9 @@ module Aws
         :role_arn,
         :snowball_capacity_preference,
         :shipping_option,
-        :notification)
+        :notification,
+        :cluster_id,
+        :snowball_type)
         include Aws::Structure
       end
 
@@ -291,9 +588,8 @@ module Aws
       end
 
       # Defines the real-time status of a Snowball's data transfer while the
-      # appliance is at AWS. Note that this data is only available while a job
-      # has a `JobState` value of `InProgress`, for both import and export
-      # jobs.
+      # appliance is at AWS. This data is only available while a job has a
+      # `JobState` value of `InProgress`, for both import and export jobs.
       # @!attribute [rw] bytes_transferred
       #   The number of bytes transferred between a Snowball and Amazon S3.
       #   @return [Integer]
@@ -382,6 +678,29 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DescribeClusterRequest
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #       }
+      # @!attribute [rw] cluster_id
+      #   The automatically generated ID for a cluster.
+      #   @return [String]
+      class DescribeClusterRequest < Struct.new(
+        :cluster_id)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] cluster_metadata
+      #   Information about a specific cluster, including shipping
+      #   information, cluster status, and other important metadata.
+      #   @return [Types::ClusterMetadata]
+      class DescribeClusterResult < Struct.new(
+        :cluster_metadata)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass DescribeJobRequest
       #   data as a hash:
       #
@@ -410,6 +729,22 @@ module Aws
       class DescribeJobResult < Struct.new(
         :job_metadata,
         :sub_job_metadata)
+        include Aws::Structure
+      end
+
+      # The container for the EventTriggerDefinition$EventResourceARN.
+      # @note When making an API call, pass EventTriggerDefinition
+      #   data as a hash:
+      #
+      #       {
+      #         event_resource_arn: "ResourceARN",
+      #       }
+      # @!attribute [rw] event_resource_arn
+      #   The Amazon Resource Name (ARN) for any local Amazon S3 resource that
+      #   is an AWS Lambda function's event trigger associated with this job.
+      #   @return [String]
+      class EventTriggerDefinition < Struct.new(
+        :event_resource_arn)
         include Aws::Structure
       end
 
@@ -499,10 +834,31 @@ module Aws
       #   with a particular master job are listed, because they are created
       #   after the master job is created.
       #   @return [Boolean]
+      #
+      # @!attribute [rw] job_type
+      #   The type of job.
+      #   @return [String]
+      #
+      # @!attribute [rw] snowball_type
+      #   The type of appliance used with this job.
+      #   @return [String]
+      #
+      # @!attribute [rw] creation_date
+      #   The creation date for this job.
+      #   @return [Time]
+      #
+      # @!attribute [rw] description
+      #   The optional description of this specific job, for example
+      #   `Important Photos 2016-08-11`.
+      #   @return [String]
       class JobListEntry < Struct.new(
         :job_id,
         :job_state,
-        :is_master)
+        :is_master,
+        :job_type,
+        :snowball_type,
+        :creation_date,
+        :description)
         include Aws::Structure
       end
 
@@ -559,11 +915,15 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] job_state
-      #   The current state of the jobs.
+      #   The current status of the jobs.
       #   @return [String]
       #
       # @!attribute [rw] job_type
       #   The type of job.
+      #   @return [String]
+      #
+      # @!attribute [rw] snowball_type
+      #   The type of appliance used with this job.
       #   @return [String]
       #
       # @!attribute [rw] creation_date
@@ -616,9 +976,9 @@ module Aws
       #
       # @!attribute [rw] data_transfer_progress
       #   A value that defines the real-time status of a Snowball's data
-      #   transfer while the appliance is at AWS. Note that this data is only
-      #   available while a job has a `JobState` value of `InProgress`, for
-      #   both import and export jobs.
+      #   transfer while the appliance is at AWS. This data is only available
+      #   while a job has a `JobState` value of `InProgress`, for both import
+      #   and export jobs.
       #   @return [Types::DataTransfer]
       #
       # @!attribute [rw] job_log_info
@@ -628,10 +988,16 @@ module Aws
       #   available while the Snowball for your job part is being delivered to
       #   you.
       #   @return [Types::JobLogs]
+      #
+      # @!attribute [rw] cluster_id
+      #   The 39-character ID for the cluster, for example
+      #   `CID123e4567-e89b-12d3-a456-426655440000`.
+      #   @return [String]
       class JobMetadata < Struct.new(
         :job_id,
         :job_state,
         :job_type,
+        :snowball_type,
         :creation_date,
         :resources,
         :description,
@@ -642,7 +1008,8 @@ module Aws
         :snowball_capacity_preference,
         :notification,
         :data_transfer_progress,
-        :job_log_info)
+        :job_log_info,
+        :cluster_id)
         include Aws::Structure
       end
 
@@ -662,12 +1029,27 @@ module Aws
       #             },
       #           },
       #         ],
+      #         lambda_resources: [
+      #           {
+      #             lambda_arn: "ResourceARN",
+      #             event_triggers: [
+      #               {
+      #                 event_resource_arn: "ResourceARN",
+      #               },
+      #             ],
+      #           },
+      #         ],
       #       }
       # @!attribute [rw] s3_resources
       #   An array of `S3Resource` objects.
       #   @return [Array<Types::S3Resource>]
+      #
+      # @!attribute [rw] lambda_resources
+      #   The Python-language Lambda functions for this job.
+      #   @return [Array<Types::LambdaResource>]
       class JobResource < Struct.new(
-        :s3_resources)
+        :s3_resources,
+        :lambda_resources)
         include Aws::Structure
       end
 
@@ -694,6 +1076,118 @@ module Aws
       class KeyRange < Struct.new(
         :begin_marker,
         :end_marker)
+        include Aws::Structure
+      end
+
+      # Identifies
+      # @note When making an API call, pass LambdaResource
+      #   data as a hash:
+      #
+      #       {
+      #         lambda_arn: "ResourceARN",
+      #         event_triggers: [
+      #           {
+      #             event_resource_arn: "ResourceARN",
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] lambda_arn
+      #   An Amazon Resource Name (ARN) that represents an AWS Lambda function
+      #   to be triggered by PUT object actions on the associated local Amazon
+      #   S3 resource.
+      #   @return [String]
+      #
+      # @!attribute [rw] event_triggers
+      #   The array of ARNs for S3Resource objects to trigger the
+      #   LambdaResource objects associated with this job.
+      #   @return [Array<Types::EventTriggerDefinition>]
+      class LambdaResource < Struct.new(
+        :lambda_arn,
+        :event_triggers)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListClusterJobsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #         max_results: 1,
+      #         next_token: "String",
+      #       }
+      # @!attribute [rw] cluster_id
+      #   The 39-character ID for the cluster that you want to list, for
+      #   example `CID123e4567-e89b-12d3-a456-426655440000`.
+      #   @return [String]
+      #
+      # @!attribute [rw] max_results
+      #   The number of `JobListEntry` objects to return.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   HTTP requests are stateless. To identify what object comes "next"
+      #   in the list of `JobListEntry` objects, you have the option of
+      #   specifying `NextToken` as the starting point for your returned list.
+      #   @return [String]
+      class ListClusterJobsRequest < Struct.new(
+        :cluster_id,
+        :max_results,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] job_list_entries
+      #   Each `JobListEntry` object contains a job's state, a job's ID, and
+      #   a value that indicates whether the job is a job part, in the case of
+      #   export jobs.
+      #   @return [Array<Types::JobListEntry>]
+      #
+      # @!attribute [rw] next_token
+      #   HTTP requests are stateless. If you use the automatically generated
+      #   `NextToken` value in your next `ListClusterJobsResult` call, your
+      #   list of returned jobs will start from this point in the array.
+      #   @return [String]
+      class ListClusterJobsResult < Struct.new(
+        :job_list_entries,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListClustersRequest
+      #   data as a hash:
+      #
+      #       {
+      #         max_results: 1,
+      #         next_token: "String",
+      #       }
+      # @!attribute [rw] max_results
+      #   The number of `ClusterListEntry` objects to return.
+      #   @return [Integer]
+      #
+      # @!attribute [rw] next_token
+      #   HTTP requests are stateless. To identify what object comes "next"
+      #   in the list of `ClusterListEntry` objects, you have the option of
+      #   specifying `NextToken` as the starting point for your returned list.
+      #   @return [String]
+      class ListClustersRequest < Struct.new(
+        :max_results,
+        :next_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] cluster_list_entries
+      #   Each `ClusterListEntry` object contains a cluster's state, a
+      #   cluster's ID, and other important status information.
+      #   @return [Array<Types::ClusterListEntry>]
+      #
+      # @!attribute [rw] next_token
+      #   HTTP requests are stateless. If you use the automatically generated
+      #   `NextToken` value in your next `ClusterListEntry` call, your list of
+      #   returned clusters will start from this point in the array.
+      #   @return [String]
+      class ListClustersResult < Struct.new(
+        :cluster_list_entries,
+        :next_token)
         include Aws::Structure
       end
 
@@ -759,9 +1253,9 @@ module Aws
       #   can create Amazon Resource Names (ARNs) for topics by using the
       #   [CreateTopic][1] Amazon SNS API action.
       #
-      #   Note that you can subscribe email addresses to an Amazon SNS topic
-      #   through the AWS Management Console, or by using the [Subscribe][2]
-      #   AWS Simple Notification Service (SNS) API action.
+      #   You can subscribe email addresses to an Amazon SNS topic through the
+      #   AWS Management Console, or by using the [Subscribe][2] AWS Simple
+      #   Notification Service (SNS) API action.
       #
       #
       #
@@ -840,11 +1334,10 @@ module Aws
       # A job's shipping information, including inbound and outbound tracking
       # numbers and shipping speed options.
       # @!attribute [rw] shipping_option
-      #   The shipping speed for a particular job. Note that this speed does
-      #   not dictate how soon you'll get the Snowball from the job's
-      #   creation date. This speed represents how quickly it moves to its
-      #   destination while in transit. Regional shipping speeds are as
-      #   follows:
+      #   The shipping speed for a particular job. This speed doesn't dictate
+      #   how soon you'll get the Snowball from the job's creation date.
+      #   This speed represents how quickly it moves to its destination while
+      #   in transit. Regional shipping speeds are as follows:
       #
       #   * In Australia, you have access to express shipping. Typically,
       #     Snowballs shipped express are delivered in about a day.
@@ -876,6 +1369,91 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass UpdateClusterRequest
+      #   data as a hash:
+      #
+      #       {
+      #         cluster_id: "ClusterId", # required
+      #         role_arn: "RoleARN",
+      #         description: "String",
+      #         resources: {
+      #           s3_resources: [
+      #             {
+      #               bucket_arn: "ResourceARN",
+      #               key_range: {
+      #                 begin_marker: "String",
+      #                 end_marker: "String",
+      #               },
+      #             },
+      #           ],
+      #           lambda_resources: [
+      #             {
+      #               lambda_arn: "ResourceARN",
+      #               event_triggers: [
+      #                 {
+      #                   event_resource_arn: "ResourceARN",
+      #                 },
+      #               ],
+      #             },
+      #           ],
+      #         },
+      #         address_id: "AddressId",
+      #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
+      #         notification: {
+      #           sns_topic_arn: "SnsTopicARN",
+      #           job_states_to_notify: ["New"], # accepts New, PreparingAppliance, PreparingShipment, InTransitToCustomer, WithCustomer, InTransitToAWS, WithAWS, InProgress, Complete, Cancelled, Listing, Pending
+      #           notify_all: false,
+      #         },
+      #       }
+      # @!attribute [rw] cluster_id
+      #   The cluster ID of the cluster that you want to update, for example
+      #   `CID123e4567-e89b-12d3-a456-426655440000`.
+      #   @return [String]
+      #
+      # @!attribute [rw] role_arn
+      #   The new role Amazon Resource Name (ARN) that you want to associate
+      #   with this cluster. To create a role ARN, use the [CreateRole][1] API
+      #   action in AWS Identity and Access Management (IAM).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/IAM/latest/APIReference/API_CreateRole.html
+      #   @return [String]
+      #
+      # @!attribute [rw] description
+      #   The updated description of this cluster.
+      #   @return [String]
+      #
+      # @!attribute [rw] resources
+      #   The updated arrays of JobResource objects that can include updated
+      #   S3Resource objects or LambdaResource objects.
+      #   @return [Types::JobResource]
+      #
+      # @!attribute [rw] address_id
+      #   The ID of the updated Address object.
+      #   @return [String]
+      #
+      # @!attribute [rw] shipping_option
+      #   The updated shipping option value of this cluster's ShippingDetails
+      #   object.
+      #   @return [String]
+      #
+      # @!attribute [rw] notification
+      #   The new or updated Notification object.
+      #   @return [Types::Notification]
+      class UpdateClusterRequest < Struct.new(
+        :cluster_id,
+        :role_arn,
+        :description,
+        :resources,
+        :address_id,
+        :shipping_option,
+        :notification)
+        include Aws::Structure
+      end
+
+      class UpdateClusterResult < Aws::EmptyStructure; end
+
       # @note When making an API call, pass UpdateJobRequest
       #   data as a hash:
       #
@@ -897,11 +1475,21 @@ module Aws
       #               },
       #             },
       #           ],
+      #           lambda_resources: [
+      #             {
+      #               lambda_arn: "ResourceARN",
+      #               event_triggers: [
+      #                 {
+      #                   event_resource_arn: "ResourceARN",
+      #                 },
+      #               ],
+      #             },
+      #           ],
       #         },
       #         address_id: "AddressId",
       #         shipping_option: "SECOND_DAY", # accepts SECOND_DAY, NEXT_DAY, EXPRESS, STANDARD
       #         description: "String",
-      #         snowball_capacity_preference: "T50", # accepts T50, T80, NoPreference
+      #         snowball_capacity_preference: "T50", # accepts T50, T80, T100, NoPreference
       #       }
       # @!attribute [rw] job_id
       #   The job ID of the job that you want to update, for example
@@ -943,8 +1531,7 @@ module Aws
       #
       # @!attribute [rw] snowball_capacity_preference
       #   The updated `SnowballCapacityPreference` of this job's JobMetadata
-      #   object. Note that the 50 TB Snowballs are only available in the US
-      #   regions.
+      #   object. The 50 TB Snowballs are only available in the US regions.
       #   @return [String]
       class UpdateJobRequest < Struct.new(
         :job_id,

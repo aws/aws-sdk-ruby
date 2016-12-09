@@ -284,9 +284,9 @@ module Aws
       #
       #   Example: `my-db-snapshot`
       # @option options [String] :kms_key_id
-      #   The AWS Key Management Service (AWS KMS) key identifier for an
-      #   encrypted DB snapshot. The KMS key identifier is the Amazon Resource
-      #   Name (ARN) or the KMS key alias for the KMS encryption key.
+      #   The AWS KMS key ID for an encrypted DB snapshot. The KMS key ID is the
+      #   Amazon Resource Name (ARN), KMS key identifier, or the KMS key alias
+      #   for the KMS encryption key.
       #
       #   If you copy an unencrypted DB snapshot and specify a value for the
       #   `KmsKeyId` parameter, Amazon RDS encrypts the target DB snapshot using
@@ -294,7 +294,7 @@ module Aws
       #
       #   If you copy an encrypted DB snapshot from your AWS account, you can
       #   specify a value for `KmsKeyId` to encrypt the copy with a new KMS
-      #   encryption key. If you don't specify a value for `KmsKeyId` then the
+      #   encryption key. If you don't specify a value for `KmsKeyId`, then the
       #   copy of the DB snapshot is encrypted with the same KMS key as the
       #   source DB snapshot.
       #

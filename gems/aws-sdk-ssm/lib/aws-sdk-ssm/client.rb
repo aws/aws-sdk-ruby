@@ -175,7 +175,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.add_tags_to_resource({
-      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
       #     resource_id: "ResourceId", # required
       #     tags: [ # required
       #       {
@@ -265,22 +265,44 @@ module Aws
         req.send_request(options)
       end
 
-      # Associates the specified SSM document with the specified instance.
+      # Associates the specified SSM document with the specified instances or
+      # targets.
       #
-      # When you associate an SSM document with an instance, the configuration
-      # agent on the instance (SSM agent for Linux and EC2Config service for
-      # Windows) processes the document and configures the instance as
-      # specified.
+      # When you associate an SSM document with one or more instances using
+      # instance IDs or tags, the SSM agent running on the instance processes
+      # the document and configures the instance as specified.
       #
       # If you associate a document with an instance that already has an
       # associated document, the system throws the AssociationAlreadyExists
       # exception.
       # @option params [required, String] :name
       #   The name of the SSM document.
-      # @option params [required, String] :instance_id
+      # @option params [String] :document_version
+      #   The document version you want to associate with the target(s). Can be
+      #   a specific version or the default version.
+      # @option params [String] :instance_id
       #   The instance ID.
       # @option params [Hash<String,Array>] :parameters
       #   The parameters for the documents runtime configuration.
+      # @option params [Array<Types::Target>] :targets
+      #   The targets (either instances or tags) for the association. Instances
+      #   are specified using
+      #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
+      #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+      # @option params [String] :schedule_expression
+      #   A cron expression when the association will be applied to the
+      #   target(s). Supported expressions are every half, 1, 2, 4, 8 or 12
+      #   hour(s); every specified day and time of the week. For example: cron(0
+      #   0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 *
+      #   ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run
+      #   every Sunday at 10 a.m.
+      # @option params [Types::InstanceAssociationOutputLocation] :output_location
+      #   An Amazon S3 bucket where you want to store the output details of the
+      #   request. For example:
+      #
+      #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
+      #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
+      #   "folder name" \} \}"`
       # @return [Types::CreateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateAssociationResult#association_description #AssociationDescription} => Types::AssociationDescription
@@ -288,9 +310,24 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.create_association({
       #     name: "DocumentName", # required
-      #     instance_id: "InstanceId", # required
+      #     document_version: "DocumentVersion",
+      #     instance_id: "InstanceId",
       #     parameters: {
       #       "ParameterName" => ["ParameterValue"],
+      #     },
+      #     targets: [
+      #       {
+      #         key: "TargetKey",
+      #         values: ["TargetValue"],
+      #       },
+      #     ],
+      #     schedule_expression: "ScheduleExpression",
+      #     output_location: {
+      #       s3_location: {
+      #         output_s3_region: "S3Region",
+      #         output_s3_bucket_name: "S3BucketName",
+      #         output_s3_key_prefix: "S3KeyPrefix",
+      #       },
       #     },
       #   })
       #
@@ -298,13 +335,30 @@ module Aws
       #   resp.association_description.name #=> String
       #   resp.association_description.instance_id #=> String
       #   resp.association_description.date #=> Time
+      #   resp.association_description.last_update_association_date #=> Time
       #   resp.association_description.status.date #=> Time
       #   resp.association_description.status.name #=> String, one of "Pending", "Success", "Failed"
       #   resp.association_description.status.message #=> String
       #   resp.association_description.status.additional_info #=> String
+      #   resp.association_description.overview.status #=> String
+      #   resp.association_description.overview.detailed_status #=> String
+      #   resp.association_description.overview.association_status_aggregated_count #=> Hash
+      #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.association_description.document_version #=> String
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      #   resp.association_description.association_id #=> String
+      #   resp.association_description.targets #=> Array
+      #   resp.association_description.targets[0].key #=> String
+      #   resp.association_description.targets[0].values #=> Array
+      #   resp.association_description.targets[0].values[0] #=> String
+      #   resp.association_description.schedule_expression #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_region #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
+      #   resp.association_description.last_execution_date #=> Time
+      #   resp.association_description.last_successful_execution_date #=> Time
       # @overload create_association(params = {})
       # @param [Hash] params ({})
       def create_association(params = {}, options = {})
@@ -312,12 +366,12 @@ module Aws
         req.send_request(options)
       end
 
-      # Associates the specified SSM document with the specified instances.
+      # Associates the specified SSM document with the specified instances or
+      # targets.
       #
-      # When you associate an SSM document with an instance, the configuration
-      # agent on the instance (SSM agent for Linux and EC2Config service for
-      # Windows) processes the document and configures the instance as
-      # specified.
+      # When you associate an SSM document with one or more instances using
+      # instance IDs or tags, the SSM agent running on the instance processes
+      # the document and configures the instance as specified.
       #
       # If you associate a document with an instance that already has an
       # associated document, the system throws the AssociationAlreadyExists
@@ -333,10 +387,25 @@ module Aws
       #   resp = client.create_association_batch({
       #     entries: [ # required
       #       {
-      #         name: "DocumentName",
+      #         name: "DocumentName", # required
       #         instance_id: "InstanceId",
       #         parameters: {
       #           "ParameterName" => ["ParameterValue"],
+      #         },
+      #         document_version: "DocumentVersion",
+      #         targets: [
+      #           {
+      #             key: "TargetKey",
+      #             values: ["TargetValue"],
+      #           },
+      #         ],
+      #         schedule_expression: "ScheduleExpression",
+      #         output_location: {
+      #           s3_location: {
+      #             output_s3_region: "S3Region",
+      #             output_s3_bucket_name: "S3BucketName",
+      #             output_s3_key_prefix: "S3KeyPrefix",
+      #           },
       #         },
       #       },
       #     ],
@@ -347,19 +416,45 @@ module Aws
       #   resp.successful[0].name #=> String
       #   resp.successful[0].instance_id #=> String
       #   resp.successful[0].date #=> Time
+      #   resp.successful[0].last_update_association_date #=> Time
       #   resp.successful[0].status.date #=> Time
       #   resp.successful[0].status.name #=> String, one of "Pending", "Success", "Failed"
       #   resp.successful[0].status.message #=> String
       #   resp.successful[0].status.additional_info #=> String
+      #   resp.successful[0].overview.status #=> String
+      #   resp.successful[0].overview.detailed_status #=> String
+      #   resp.successful[0].overview.association_status_aggregated_count #=> Hash
+      #   resp.successful[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.successful[0].document_version #=> String
       #   resp.successful[0].parameters #=> Hash
       #   resp.successful[0].parameters["ParameterName"] #=> Array
       #   resp.successful[0].parameters["ParameterName"][0] #=> String
+      #   resp.successful[0].association_id #=> String
+      #   resp.successful[0].targets #=> Array
+      #   resp.successful[0].targets[0].key #=> String
+      #   resp.successful[0].targets[0].values #=> Array
+      #   resp.successful[0].targets[0].values[0] #=> String
+      #   resp.successful[0].schedule_expression #=> String
+      #   resp.successful[0].output_location.s3_location.output_s3_region #=> String
+      #   resp.successful[0].output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.successful[0].output_location.s3_location.output_s3_key_prefix #=> String
+      #   resp.successful[0].last_execution_date #=> Time
+      #   resp.successful[0].last_successful_execution_date #=> Time
       #   resp.failed #=> Array
       #   resp.failed[0].entry.name #=> String
       #   resp.failed[0].entry.instance_id #=> String
       #   resp.failed[0].entry.parameters #=> Hash
       #   resp.failed[0].entry.parameters["ParameterName"] #=> Array
       #   resp.failed[0].entry.parameters["ParameterName"][0] #=> String
+      #   resp.failed[0].entry.document_version #=> String
+      #   resp.failed[0].entry.targets #=> Array
+      #   resp.failed[0].entry.targets[0].key #=> String
+      #   resp.failed[0].entry.targets[0].values #=> Array
+      #   resp.failed[0].entry.targets[0].values[0] #=> String
+      #   resp.failed[0].entry.schedule_expression #=> String
+      #   resp.failed[0].entry.output_location.s3_location.output_s3_region #=> String
+      #   resp.failed[0].entry.output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.failed[0].entry.output_location.s3_location.output_s3_key_prefix #=> String
       #   resp.failed[0].message #=> String
       #   resp.failed[0].fault #=> String, one of "Client", "Server", "Unknown"
       # @overload create_association_batch(params = {})
@@ -377,6 +472,9 @@ module Aws
       #   A valid JSON string.
       # @option params [required, String] :name
       #   A name for the SSM document.
+      # @option params [String] :document_type
+      #   The type of document to create. Valid document types include: Policy,
+      #   Automation, and Command.
       # @return [Types::CreateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CreateDocumentResult#document_description #DocumentDescription} => Types::DocumentDescription
@@ -385,6 +483,7 @@ module Aws
       #   resp = client.create_document({
       #     content: "DocumentContent", # required
       #     name: "DocumentName", # required
+      #     document_type: "Command", # accepts Command, Policy, Automation
       #   })
       #
       # @example Response structure
@@ -394,7 +493,8 @@ module Aws
       #   resp.document_description.name #=> String
       #   resp.document_description.owner #=> String
       #   resp.document_description.created_date #=> Time
-      #   resp.document_description.status #=> String, one of "Creating", "Active", "Deleting"
+      #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+      #   resp.document_description.document_version #=> String
       #   resp.document_description.description #=> String
       #   resp.document_description.parameters #=> Array
       #   resp.document_description.parameters[0].name #=> String
@@ -403,10 +503,56 @@ module Aws
       #   resp.document_description.parameters[0].default_value #=> String
       #   resp.document_description.platform_types #=> Array
       #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
+      #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+      #   resp.document_description.schema_version #=> String
+      #   resp.document_description.latest_version #=> String
+      #   resp.document_description.default_version #=> String
       # @overload create_document(params = {})
       # @param [Hash] params ({})
       def create_document(params = {}, options = {})
         req = build_request(:create_document, params)
+        req.send_request(options)
+      end
+
+      # Creates a new Maintenance Window.
+      # @option params [required, String] :name
+      #   The name of the Maintenance Window.
+      # @option params [required, String] :schedule
+      #   The schedule of the Maintenance Window in the form of a cron or rate
+      #   expression.
+      # @option params [required, Integer] :duration
+      #   The duration of the Maintenance Window in hours.
+      # @option params [required, Integer] :cutoff
+      #   The number of hours before the end of the Maintenance Window that
+      #   Systems Manager stops scheduling new tasks for execution.
+      # @option params [required, Boolean] :allow_unassociated_targets
+      #   Whether targets must be registered with the Maintenance Window before
+      #   tasks can be defined for those targets.
+      # @option params [String] :client_token
+      #   User-provided idempotency token.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::CreateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateMaintenanceWindowResult#window_id #WindowId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_maintenance_window({
+      #     name: "MaintenanceWindowName", # required
+      #     schedule: "MaintenanceWindowSchedule", # required
+      #     duration: 1, # required
+      #     cutoff: 1, # required
+      #     allow_unassociated_targets: false, # required
+      #     client_token: "ClientToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      # @overload create_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def create_maintenance_window(params = {}, options = {})
+        req = build_request(:create_maintenance_window, params)
         req.send_request(options)
       end
 
@@ -437,16 +583,19 @@ module Aws
       # state of an instance after you disassociate a document, you must
       # create a new document with the desired configuration and associate it
       # with the instance.
-      # @option params [required, String] :name
+      # @option params [String] :name
       #   The name of the SSM document.
-      # @option params [required, String] :instance_id
+      # @option params [String] :instance_id
       #   The ID of the instance.
+      # @option params [String] :association_id
+      #   The association ID that you want to delete.
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
       #
       # @example Request syntax with placeholder values
       #   resp = client.delete_association({
-      #     name: "DocumentName", # required
-      #     instance_id: "InstanceId", # required
+      #     name: "DocumentName",
+      #     instance_id: "InstanceId",
+      #     association_id: "AssociationId",
       #   })
       # @overload delete_association(params = {})
       # @param [Hash] params ({})
@@ -476,6 +625,43 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window to delete.
+      # @return [Types::DeleteMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteMaintenanceWindowResult#window_id #WindowId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      # @overload delete_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def delete_maintenance_window(params = {}, options = {})
+        req = build_request(:delete_maintenance_window, params)
+        req.send_request(options)
+      end
+
+      # Delete a parameter from the system.
+      # @option params [required, String] :name
+      #   The name of the parameter to delete.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_parameter({
+      #     name: "PSParameterName", # required
+      #   })
+      # @overload delete_parameter(params = {})
+      # @param [Hash] params ({})
+      def delete_parameter(params = {}, options = {})
+        req = build_request(:delete_parameter, params)
+        req.send_request(options)
+      end
+
       # Removes the server or virtual machine from the list of registered
       # servers. You can reregister the instance again at any time. If you
       # don’t plan to use Run Command on the server, we suggest uninstalling
@@ -493,6 +679,58 @@ module Aws
       # @param [Hash] params ({})
       def deregister_managed_instance(params = {}, options = {})
         req = build_request(:deregister_managed_instance, params)
+        req.send_request(options)
+      end
+
+      # Removes a target from a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window the target should be removed from.
+      # @option params [required, String] :window_target_id
+      #   The ID of the target definition to remove.
+      # @return [Types::DeregisterTargetFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeregisterTargetFromMaintenanceWindowResult#window_id #WindowId} => String
+      #   * {Types::DeregisterTargetFromMaintenanceWindowResult#window_target_id #WindowTargetId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.deregister_target_from_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #     window_target_id: "MaintenanceWindowTargetId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      #   resp.window_target_id #=> String
+      # @overload deregister_target_from_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def deregister_target_from_maintenance_window(params = {}, options = {})
+        req = build_request(:deregister_target_from_maintenance_window, params)
+        req.send_request(options)
+      end
+
+      # Removes a task from a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window the task should be removed from.
+      # @option params [required, String] :window_task_id
+      #   The ID of the task to remove from the Maintenance Window.
+      # @return [Types::DeregisterTaskFromMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeregisterTaskFromMaintenanceWindowResult#window_id #WindowId} => String
+      #   * {Types::DeregisterTaskFromMaintenanceWindowResult#window_task_id #WindowTaskId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.deregister_task_from_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #     window_task_id: "MaintenanceWindowTaskId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      #   resp.window_task_id #=> String
+      # @overload deregister_task_from_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def deregister_task_from_maintenance_window(params = {}, options = {})
+        req = build_request(:deregister_task_from_maintenance_window, params)
         req.send_request(options)
       end
 
@@ -546,31 +784,51 @@ module Aws
       end
 
       # Describes the associations for the specified SSM document or instance.
-      # @option params [required, String] :name
+      # @option params [String] :name
       #   The name of the SSM document.
-      # @option params [required, String] :instance_id
+      # @option params [String] :instance_id
       #   The instance ID.
+      # @option params [String] :association_id
+      #   The association ID for which you want information.
       # @return [Types::DescribeAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeAssociationResult#association_description #AssociationDescription} => Types::AssociationDescription
       #
       # @example Request syntax with placeholder values
       #   resp = client.describe_association({
-      #     name: "DocumentName", # required
-      #     instance_id: "InstanceId", # required
+      #     name: "DocumentName",
+      #     instance_id: "InstanceId",
+      #     association_id: "AssociationId",
       #   })
       #
       # @example Response structure
       #   resp.association_description.name #=> String
       #   resp.association_description.instance_id #=> String
       #   resp.association_description.date #=> Time
+      #   resp.association_description.last_update_association_date #=> Time
       #   resp.association_description.status.date #=> Time
       #   resp.association_description.status.name #=> String, one of "Pending", "Success", "Failed"
       #   resp.association_description.status.message #=> String
       #   resp.association_description.status.additional_info #=> String
+      #   resp.association_description.overview.status #=> String
+      #   resp.association_description.overview.detailed_status #=> String
+      #   resp.association_description.overview.association_status_aggregated_count #=> Hash
+      #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.association_description.document_version #=> String
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      #   resp.association_description.association_id #=> String
+      #   resp.association_description.targets #=> Array
+      #   resp.association_description.targets[0].key #=> String
+      #   resp.association_description.targets[0].values #=> Array
+      #   resp.association_description.targets[0].values[0] #=> String
+      #   resp.association_description.schedule_expression #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_region #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
+      #   resp.association_description.last_execution_date #=> Time
+      #   resp.association_description.last_successful_execution_date #=> Time
       # @overload describe_association(params = {})
       # @param [Hash] params ({})
       def describe_association(params = {}, options = {})
@@ -578,9 +836,61 @@ module Aws
         req.send_request(options)
       end
 
+      # Provides details about all active and terminated Automation
+      # executions.
+      # @option params [Array<Types::AutomationExecutionFilter>] :filters
+      #   Filters used to limit the scope of executions that are requested.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeAutomationExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeAutomationExecutionsResult#automation_execution_metadata_list #AutomationExecutionMetadataList} => Array&lt;Types::AutomationExecutionMetadata&gt;
+      #   * {Types::DescribeAutomationExecutionsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_automation_executions({
+      #     filters: [
+      #       {
+      #         key: "DocumentNamePrefix", # required, accepts DocumentNamePrefix, ExecutionStatus
+      #         values: ["AutomationExecutionFilterValue"], # required
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.automation_execution_metadata_list #=> Array
+      #   resp.automation_execution_metadata_list[0].automation_execution_id #=> String
+      #   resp.automation_execution_metadata_list[0].document_name #=> String
+      #   resp.automation_execution_metadata_list[0].document_version #=> String
+      #   resp.automation_execution_metadata_list[0].automation_execution_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.automation_execution_metadata_list[0].execution_start_time #=> Time
+      #   resp.automation_execution_metadata_list[0].execution_end_time #=> Time
+      #   resp.automation_execution_metadata_list[0].executed_by #=> String
+      #   resp.automation_execution_metadata_list[0].log_file #=> String
+      #   resp.automation_execution_metadata_list[0].outputs #=> Hash
+      #   resp.automation_execution_metadata_list[0].outputs["AutomationParameterKey"] #=> Array
+      #   resp.automation_execution_metadata_list[0].outputs["AutomationParameterKey"][0] #=> String
+      #   resp.next_token #=> String
+      # @overload describe_automation_executions(params = {})
+      # @param [Hash] params ({})
+      def describe_automation_executions(params = {}, options = {})
+        req = build_request(:describe_automation_executions, params)
+        req.send_request(options)
+      end
+
       # Describes the specified SSM document.
       # @option params [required, String] :name
       #   The name of the SSM document.
+      # @option params [String] :document_version
+      #   The document version for which you want information. Can be a specific
+      #   version or the default version.
       # @return [Types::DescribeDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::DescribeDocumentResult#document #Document} => Types::DocumentDescription
@@ -588,6 +898,7 @@ module Aws
       # @example Request syntax with placeholder values
       #   resp = client.describe_document({
       #     name: "DocumentARN", # required
+      #     document_version: "DocumentVersion",
       #   })
       #
       # @example Response structure
@@ -597,7 +908,8 @@ module Aws
       #   resp.document.name #=> String
       #   resp.document.owner #=> String
       #   resp.document.created_date #=> Time
-      #   resp.document.status #=> String, one of "Creating", "Active", "Deleting"
+      #   resp.document.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+      #   resp.document.document_version #=> String
       #   resp.document.description #=> String
       #   resp.document.parameters #=> Array
       #   resp.document.parameters[0].name #=> String
@@ -606,6 +918,10 @@ module Aws
       #   resp.document.parameters[0].default_value #=> String
       #   resp.document.platform_types #=> Array
       #   resp.document.platform_types[0] #=> String, one of "Windows", "Linux"
+      #   resp.document.document_type #=> String, one of "Command", "Policy", "Automation"
+      #   resp.document.schema_version #=> String
+      #   resp.document.latest_version #=> String
+      #   resp.document.default_version #=> String
       # @overload describe_document(params = {})
       # @param [Hash] params ({})
       def describe_document(params = {}, options = {})
@@ -642,6 +958,83 @@ module Aws
         req.send_request(options)
       end
 
+      # All associations for the instance(s).
+      # @option params [required, String] :instance_id
+      #   The instance ID for which you want to view all associations.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeEffectiveInstanceAssociationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeEffectiveInstanceAssociationsResult#associations #Associations} => Array&lt;Types::InstanceAssociation&gt;
+      #   * {Types::DescribeEffectiveInstanceAssociationsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_effective_instance_associations({
+      #     instance_id: "InstanceId", # required
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.associations #=> Array
+      #   resp.associations[0].association_id #=> String
+      #   resp.associations[0].instance_id #=> String
+      #   resp.associations[0].content #=> String
+      #   resp.next_token #=> String
+      # @overload describe_effective_instance_associations(params = {})
+      # @param [Hash] params ({})
+      def describe_effective_instance_associations(params = {}, options = {})
+        req = build_request(:describe_effective_instance_associations, params)
+        req.send_request(options)
+      end
+
+      # The status of the associations for the instance(s).
+      # @option params [required, String] :instance_id
+      #   The instance IDs for which you want association status information.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeInstanceAssociationsStatusResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeInstanceAssociationsStatusResult#instance_association_status_infos #InstanceAssociationStatusInfos} => Array&lt;Types::InstanceAssociationStatusInfo&gt;
+      #   * {Types::DescribeInstanceAssociationsStatusResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_instance_associations_status({
+      #     instance_id: "InstanceId", # required
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.instance_association_status_infos #=> Array
+      #   resp.instance_association_status_infos[0].association_id #=> String
+      #   resp.instance_association_status_infos[0].name #=> String
+      #   resp.instance_association_status_infos[0].document_version #=> String
+      #   resp.instance_association_status_infos[0].instance_id #=> String
+      #   resp.instance_association_status_infos[0].execution_date #=> Time
+      #   resp.instance_association_status_infos[0].status #=> String
+      #   resp.instance_association_status_infos[0].detailed_status #=> String
+      #   resp.instance_association_status_infos[0].execution_summary #=> String
+      #   resp.instance_association_status_infos[0].error_code #=> String
+      #   resp.instance_association_status_infos[0].output_url.s3_output_url.output_url #=> String
+      #   resp.next_token #=> String
+      # @overload describe_instance_associations_status(params = {})
+      # @param [Hash] params ({})
+      def describe_instance_associations_status(params = {}, options = {})
+        req = build_request(:describe_instance_associations_status, params)
+        req.send_request(options)
+      end
+
       # Describes one or more of your instances. You can use this to get
       # information about instances like the operating system platform, the
       # SSM agent version (Linux), status etc. If you specify one or more
@@ -650,6 +1043,9 @@ module Aws
       # instances. If you specify an instance ID that is not valid or an
       # instance that you do not own, you receive an error.
       # @option params [Array<Types::InstanceInformationFilter>] :instance_information_filter_list
+      #   One or more filters. Use a filter to return a more specific list of
+      #   instances.
+      # @option params [Array<Types::InstanceInformationStringFilter>] :filters
       #   One or more filters. Use a filter to return a more specific list of
       #   instances.
       # @option params [Integer] :max_results
@@ -668,8 +1064,14 @@ module Aws
       #   resp = client.describe_instance_information({
       #     instance_information_filter_list: [
       #       {
-      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType
+      #         key: "InstanceIds", # required, accepts InstanceIds, AgentVersion, PingStatus, PlatformTypes, ActivationIds, IamRole, ResourceType, AssociationStatus
       #         value_set: ["InstanceInformationFilterValue"], # required
+      #       },
+      #     ],
+      #     filters: [
+      #       {
+      #         key: "InstanceInformationStringFilterKey", # required
+      #         values: ["InstanceInformationFilterValue"], # required
       #       },
       #     ],
       #     max_results: 1,
@@ -693,6 +1095,12 @@ module Aws
       #   resp.instance_information_list[0].name #=> String
       #   resp.instance_information_list[0].ip_address #=> String
       #   resp.instance_information_list[0].computer_name #=> String
+      #   resp.instance_information_list[0].association_status #=> String
+      #   resp.instance_information_list[0].last_association_execution_date #=> Time
+      #   resp.instance_information_list[0].last_successful_association_execution_date #=> Time
+      #   resp.instance_information_list[0].association_overview.detailed_status #=> String
+      #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count #=> Hash
+      #   resp.instance_information_list[0].association_overview.instance_association_status_aggregated_count["StatusName"] #=> Integer
       #   resp.next_token #=> String
       # @overload describe_instance_information(params = {})
       # @param [Hash] params ({})
@@ -701,22 +1109,501 @@ module Aws
         req.send_request(options)
       end
 
+      # Retrieves the individual task executions (one per target) for a
+      # particular task executed as part of a Maintenance Window execution.
+      # @option params [required, String] :window_execution_id
+      #   The ID of the Maintenance Window execution the task is part of.
+      # @option params [required, String] :task_id
+      #   The ID of the specific task in the Maintenance Window task that should
+      #   be retrieved.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Optional filters used to scope down the returned task invocations. The
+      #   supported filter key is STATUS with the corresponding values PENDING,
+      #   IN\_PROGRESS, SUCCESS, FAILED, TIMED\_OUT, CANCELLING, and CANCELLED.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult#window_execution_task_invocation_identities #WindowExecutionTaskInvocationIdentities} => Array&lt;Types::MaintenanceWindowExecutionTaskInvocationIdentity&gt;
+      #   * {Types::DescribeMaintenanceWindowExecutionTaskInvocationsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_window_execution_task_invocations({
+      #     window_execution_id: "MaintenanceWindowExecutionId", # required
+      #     task_id: "MaintenanceWindowExecutionTaskId", # required
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_execution_task_invocation_identities #=> Array
+      #   resp.window_execution_task_invocation_identities[0].window_execution_id #=> String
+      #   resp.window_execution_task_invocation_identities[0].task_execution_id #=> String
+      #   resp.window_execution_task_invocation_identities[0].invocation_id #=> String
+      #   resp.window_execution_task_invocation_identities[0].execution_id #=> String
+      #   resp.window_execution_task_invocation_identities[0].parameters #=> String
+      #   resp.window_execution_task_invocation_identities[0].status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+      #   resp.window_execution_task_invocation_identities[0].status_details #=> String
+      #   resp.window_execution_task_invocation_identities[0].start_time #=> Time
+      #   resp.window_execution_task_invocation_identities[0].end_time #=> Time
+      #   resp.window_execution_task_invocation_identities[0].owner_information #=> String
+      #   resp.window_execution_task_invocation_identities[0].window_target_id #=> String
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_window_execution_task_invocations(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_window_execution_task_invocations(params = {}, options = {})
+        req = build_request(:describe_maintenance_window_execution_task_invocations, params)
+        req.send_request(options)
+      end
+
+      # For a given Maintenance Window execution, lists the tasks that were
+      # executed.
+      # @option params [required, String] :window_execution_id
+      #   The ID of the Maintenance Window execution whose task executions
+      #   should be retrieved.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Optional filters used to scope down the returned tasks. The supported
+      #   filter key is STATUS with the corresponding values PENDING,
+      #   IN\_PROGRESS, SUCCESS, FAILED, TIMED\_OUT, CANCELLING, and CANCELLED.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowExecutionTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowExecutionTasksResult#window_execution_task_identities #WindowExecutionTaskIdentities} => Array&lt;Types::MaintenanceWindowExecutionTaskIdentity&gt;
+      #   * {Types::DescribeMaintenanceWindowExecutionTasksResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_window_execution_tasks({
+      #     window_execution_id: "MaintenanceWindowExecutionId", # required
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_execution_task_identities #=> Array
+      #   resp.window_execution_task_identities[0].window_execution_id #=> String
+      #   resp.window_execution_task_identities[0].task_execution_id #=> String
+      #   resp.window_execution_task_identities[0].status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+      #   resp.window_execution_task_identities[0].status_details #=> String
+      #   resp.window_execution_task_identities[0].start_time #=> Time
+      #   resp.window_execution_task_identities[0].end_time #=> Time
+      #   resp.window_execution_task_identities[0].task_arn #=> String
+      #   resp.window_execution_task_identities[0].task_type #=> String, one of "RUN_COMMAND"
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_window_execution_tasks(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_window_execution_tasks(params = {}, options = {})
+        req = build_request(:describe_maintenance_window_execution_tasks, params)
+        req.send_request(options)
+      end
+
+      # Lists the executions of a Maintenance Window (meaning, information
+      # about when the Maintenance Window was scheduled to be active and
+      # information about tasks registered and run with the Maintenance
+      # Window).
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window whose executions should be retrieved.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Each entry in the array is a structure containing:
+      #
+      #   Key (string, 1 ≤ length ≤ 128)
+      #
+      #   Values (array of strings 1 ≤ length ≤ 256)
+      #
+      #   The supported Keys are `ExecutedBefore` and `ExecutedAfter` with the
+      #   value being a date/time string such as 2016-11-04T05:00:00Z.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowExecutionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowExecutionsResult#window_executions #WindowExecutions} => Array&lt;Types::MaintenanceWindowExecution&gt;
+      #   * {Types::DescribeMaintenanceWindowExecutionsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_window_executions({
+      #     window_id: "MaintenanceWindowId", # required
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_executions #=> Array
+      #   resp.window_executions[0].window_id #=> String
+      #   resp.window_executions[0].window_execution_id #=> String
+      #   resp.window_executions[0].status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+      #   resp.window_executions[0].status_details #=> String
+      #   resp.window_executions[0].start_time #=> Time
+      #   resp.window_executions[0].end_time #=> Time
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_window_executions(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_window_executions(params = {}, options = {})
+        req = build_request(:describe_maintenance_window_executions, params)
+        req.send_request(options)
+      end
+
+      # Lists the targets registered with the Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window whose targets should be retrieved.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Optional filters that can be used to narrow down the scope of the
+      #   returned window targets. The supported filter keys are `Type`,
+      #   `WindowTargetId` and `OwnerInformation`.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowTargetsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowTargetsResult#targets #Targets} => Array&lt;Types::MaintenanceWindowTarget&gt;
+      #   * {Types::DescribeMaintenanceWindowTargetsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_window_targets({
+      #     window_id: "MaintenanceWindowId", # required
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.targets #=> Array
+      #   resp.targets[0].window_id #=> String
+      #   resp.targets[0].window_target_id #=> String
+      #   resp.targets[0].resource_type #=> String, one of "INSTANCE"
+      #   resp.targets[0].targets #=> Array
+      #   resp.targets[0].targets[0].key #=> String
+      #   resp.targets[0].targets[0].values #=> Array
+      #   resp.targets[0].targets[0].values[0] #=> String
+      #   resp.targets[0].owner_information #=> String
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_window_targets(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_window_targets(params = {}, options = {})
+        req = build_request(:describe_maintenance_window_targets, params)
+        req.send_request(options)
+      end
+
+      # Lists the tasks in a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window whose tasks should be retrieved.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Optional filters used to narrow down the scope of the returned tasks.
+      #   The supported filter keys are `WindowTaskId`, `TaskArn`, `Priority`,
+      #   and `TaskType`.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowTasksResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowTasksResult#tasks #Tasks} => Array&lt;Types::MaintenanceWindowTask&gt;
+      #   * {Types::DescribeMaintenanceWindowTasksResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_window_tasks({
+      #     window_id: "MaintenanceWindowId", # required
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.tasks #=> Array
+      #   resp.tasks[0].window_id #=> String
+      #   resp.tasks[0].window_task_id #=> String
+      #   resp.tasks[0].task_arn #=> String
+      #   resp.tasks[0].type #=> String, one of "RUN_COMMAND"
+      #   resp.tasks[0].targets #=> Array
+      #   resp.tasks[0].targets[0].key #=> String
+      #   resp.tasks[0].targets[0].values #=> Array
+      #   resp.tasks[0].targets[0].values[0] #=> String
+      #   resp.tasks[0].task_parameters #=> Hash
+      #   resp.tasks[0].task_parameters["MaintenanceWindowTaskParameterName"].values #=> Array
+      #   resp.tasks[0].task_parameters["MaintenanceWindowTaskParameterName"].values[0] #=> String
+      #   resp.tasks[0].priority #=> Integer
+      #   resp.tasks[0].logging_info.s3_bucket_name #=> String
+      #   resp.tasks[0].logging_info.s3_key_prefix #=> String
+      #   resp.tasks[0].logging_info.s3_region #=> String
+      #   resp.tasks[0].service_role_arn #=> String
+      #   resp.tasks[0].max_concurrency #=> String
+      #   resp.tasks[0].max_errors #=> String
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_window_tasks(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_window_tasks(params = {}, options = {})
+        req = build_request(:describe_maintenance_window_tasks, params)
+        req.send_request(options)
+      end
+
+      # Retrieves the Maintenance Windows in an AWS account.
+      # @option params [Array<Types::MaintenanceWindowFilter>] :filters
+      #   Optional filters used to narrow down the scope of the returned
+      #   Maintenance Windows. Supported filter keys are `Name` and `Enabled`.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeMaintenanceWindowsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeMaintenanceWindowsResult#window_identities #WindowIdentities} => Array&lt;Types::MaintenanceWindowIdentity&gt;
+      #   * {Types::DescribeMaintenanceWindowsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_maintenance_windows({
+      #     filters: [
+      #       {
+      #         key: "MaintenanceWindowFilterKey",
+      #         values: ["MaintenanceWindowFilterValue"],
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_identities #=> Array
+      #   resp.window_identities[0].window_id #=> String
+      #   resp.window_identities[0].name #=> String
+      #   resp.window_identities[0].enabled #=> Boolean
+      #   resp.window_identities[0].duration #=> Integer
+      #   resp.window_identities[0].cutoff #=> Integer
+      #   resp.next_token #=> String
+      # @overload describe_maintenance_windows(params = {})
+      # @param [Hash] params ({})
+      def describe_maintenance_windows(params = {}, options = {})
+        req = build_request(:describe_maintenance_windows, params)
+        req.send_request(options)
+      end
+
+      # Get information about a parameter.
+      # @option params [Array<Types::ParametersFilter>] :filters
+      #   One or more filters. Use a filter to return a more specific list of
+      #   results.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::DescribeParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DescribeParametersResult#parameters #Parameters} => Array&lt;Types::ParameterMetadata&gt;
+      #   * {Types::DescribeParametersResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.describe_parameters({
+      #     filters: [
+      #       {
+      #         key: "Name", # accepts Name, Type, KeyId
+      #         values: ["ParametersFilterValue"], # required
+      #       },
+      #     ],
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.parameters #=> Array
+      #   resp.parameters[0].name #=> String
+      #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
+      #   resp.parameters[0].key_id #=> String
+      #   resp.parameters[0].last_modified_date #=> Time
+      #   resp.parameters[0].last_modified_user #=> String
+      #   resp.parameters[0].description #=> String
+      #   resp.next_token #=> String
+      # @overload describe_parameters(params = {})
+      # @param [Hash] params ({})
+      def describe_parameters(params = {}, options = {})
+        req = build_request(:describe_parameters, params)
+        req.send_request(options)
+      end
+
+      # Get detailed information about a particular Automation execution.
+      # @option params [required, String] :automation_execution_id
+      #   The unique identifier for an existing automation execution to examine.
+      #   The execution ID is returned by `StartAutomationExecution` when the
+      #   execution of an Automation document is initiated.
+      # @return [Types::GetAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetAutomationExecutionResult#automation_execution #AutomationExecution} => Types::AutomationExecution
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_automation_execution({
+      #     automation_execution_id: "AutomationExecutionId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.automation_execution.automation_execution_id #=> String
+      #   resp.automation_execution.document_name #=> String
+      #   resp.automation_execution.document_version #=> String
+      #   resp.automation_execution.execution_start_time #=> Time
+      #   resp.automation_execution.execution_end_time #=> Time
+      #   resp.automation_execution.automation_execution_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.automation_execution.step_executions #=> Array
+      #   resp.automation_execution.step_executions[0].step_name #=> String
+      #   resp.automation_execution.step_executions[0].action #=> String
+      #   resp.automation_execution.step_executions[0].execution_start_time #=> Time
+      #   resp.automation_execution.step_executions[0].execution_end_time #=> Time
+      #   resp.automation_execution.step_executions[0].step_status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.automation_execution.step_executions[0].response_code #=> String
+      #   resp.automation_execution.step_executions[0].inputs #=> Hash
+      #   resp.automation_execution.step_executions[0].inputs["String"] #=> String
+      #   resp.automation_execution.step_executions[0].outputs #=> Hash
+      #   resp.automation_execution.step_executions[0].outputs["AutomationParameterKey"] #=> Array
+      #   resp.automation_execution.step_executions[0].outputs["AutomationParameterKey"][0] #=> String
+      #   resp.automation_execution.step_executions[0].response #=> String
+      #   resp.automation_execution.step_executions[0].failure_message #=> String
+      #   resp.automation_execution.parameters #=> Hash
+      #   resp.automation_execution.parameters["AutomationParameterKey"] #=> Array
+      #   resp.automation_execution.parameters["AutomationParameterKey"][0] #=> String
+      #   resp.automation_execution.outputs #=> Hash
+      #   resp.automation_execution.outputs["AutomationParameterKey"] #=> Array
+      #   resp.automation_execution.outputs["AutomationParameterKey"][0] #=> String
+      #   resp.automation_execution.failure_message #=> String
+      # @overload get_automation_execution(params = {})
+      # @param [Hash] params ({})
+      def get_automation_execution(params = {}, options = {})
+        req = build_request(:get_automation_execution, params)
+        req.send_request(options)
+      end
+
+      # Returns detailed information about command execution for an invocation
+      # or plugin.
+      # @option params [required, String] :command_id
+      #   (Required) The parent command ID of the invocation plugin.
+      # @option params [required, String] :instance_id
+      #   (Required) The ID of the managed instance targeted by the command. A
+      #   managed instance can be an Amazon EC2 instance or an instance in your
+      #   hybrid environment that is configured for Systems Manager.
+      # @option params [String] :plugin_name
+      #   (Optional) The name of the plugin for which you want detailed results.
+      #   If the SSM document contains only one plugin, the name can be omitted
+      #   and the details will be returned.
+      # @return [Types::GetCommandInvocationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetCommandInvocationResult#command_id #CommandId} => String
+      #   * {Types::GetCommandInvocationResult#instance_id #InstanceId} => String
+      #   * {Types::GetCommandInvocationResult#comment #Comment} => String
+      #   * {Types::GetCommandInvocationResult#document_name #DocumentName} => String
+      #   * {Types::GetCommandInvocationResult#plugin_name #PluginName} => String
+      #   * {Types::GetCommandInvocationResult#response_code #ResponseCode} => Integer
+      #   * {Types::GetCommandInvocationResult#execution_start_date_time #ExecutionStartDateTime} => String
+      #   * {Types::GetCommandInvocationResult#execution_elapsed_time #ExecutionElapsedTime} => String
+      #   * {Types::GetCommandInvocationResult#execution_end_date_time #ExecutionEndDateTime} => String
+      #   * {Types::GetCommandInvocationResult#status #Status} => String
+      #   * {Types::GetCommandInvocationResult#status_details #StatusDetails} => String
+      #   * {Types::GetCommandInvocationResult#standard_output_content #StandardOutputContent} => String
+      #   * {Types::GetCommandInvocationResult#standard_output_url #StandardOutputUrl} => String
+      #   * {Types::GetCommandInvocationResult#standard_error_content #StandardErrorContent} => String
+      #   * {Types::GetCommandInvocationResult#standard_error_url #StandardErrorUrl} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_command_invocation({
+      #     command_id: "CommandId", # required
+      #     instance_id: "InstanceId", # required
+      #     plugin_name: "CommandPluginName",
+      #   })
+      #
+      # @example Response structure
+      #   resp.command_id #=> String
+      #   resp.instance_id #=> String
+      #   resp.comment #=> String
+      #   resp.document_name #=> String
+      #   resp.plugin_name #=> String
+      #   resp.response_code #=> Integer
+      #   resp.execution_start_date_time #=> String
+      #   resp.execution_elapsed_time #=> String
+      #   resp.execution_end_date_time #=> String
+      #   resp.status #=> String, one of "Pending", "InProgress", "Delayed", "Success", "Cancelled", "TimedOut", "Failed", "Cancelling"
+      #   resp.status_details #=> String
+      #   resp.standard_output_content #=> String
+      #   resp.standard_output_url #=> String
+      #   resp.standard_error_content #=> String
+      #   resp.standard_error_url #=> String
+      # @overload get_command_invocation(params = {})
+      # @param [Hash] params ({})
+      def get_command_invocation(params = {}, options = {})
+        req = build_request(:get_command_invocation, params)
+        req.send_request(options)
+      end
+
       # Gets the contents of the specified SSM document.
       # @option params [required, String] :name
       #   The name of the SSM document.
+      # @option params [String] :document_version
+      #   The document version for which you want information.
       # @return [Types::GetDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::GetDocumentResult#name #Name} => String
+      #   * {Types::GetDocumentResult#document_version #DocumentVersion} => String
       #   * {Types::GetDocumentResult#content #Content} => String
+      #   * {Types::GetDocumentResult#document_type #DocumentType} => String
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_document({
       #     name: "DocumentARN", # required
+      #     document_version: "DocumentVersion",
       #   })
       #
       # @example Response structure
       #   resp.name #=> String
+      #   resp.document_version #=> String
       #   resp.content #=> String
+      #   resp.document_type #=> String, one of "Command", "Policy", "Automation"
       # @overload get_document(params = {})
       # @param [Hash] params ({})
       def get_document(params = {}, options = {})
@@ -724,8 +1611,299 @@ module Aws
         req.send_request(options)
       end
 
+      # Query inventory information.
+      # @option params [Array<Types::InventoryFilter>] :filters
+      #   One or more filters. Use a filter to return a more specific list of
+      #   results.
+      # @option params [Array<Types::ResultAttribute>] :result_attributes
+      #   The list of inventory item types to return.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @return [Types::GetInventoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetInventoryResult#entities #Entities} => Array&lt;Types::InventoryResultEntity&gt;
+      #   * {Types::GetInventoryResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_inventory({
+      #     filters: [
+      #       {
+      #         key: "InventoryFilterKey", # required
+      #         values: ["InventoryFilterValue"], # required
+      #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+      #       },
+      #     ],
+      #     result_attributes: [
+      #       {
+      #         type_name: "InventoryItemTypeName", # required
+      #       },
+      #     ],
+      #     next_token: "NextToken",
+      #     max_results: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.entities #=> Array
+      #   resp.entities[0].id #=> String
+      #   resp.entities[0].data #=> Hash
+      #   resp.entities[0].data["InventoryResultItemKey"].type_name #=> String
+      #   resp.entities[0].data["InventoryResultItemKey"].schema_version #=> String
+      #   resp.entities[0].data["InventoryResultItemKey"].capture_time #=> String
+      #   resp.entities[0].data["InventoryResultItemKey"].content_hash #=> String
+      #   resp.entities[0].data["InventoryResultItemKey"].content #=> Array
+      #   resp.entities[0].data["InventoryResultItemKey"].content[0] #=> Hash
+      #   resp.entities[0].data["InventoryResultItemKey"].content[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #   resp.next_token #=> String
+      # @overload get_inventory(params = {})
+      # @param [Hash] params ({})
+      def get_inventory(params = {}, options = {})
+        req = build_request(:get_inventory, params)
+        req.send_request(options)
+      end
+
+      # Return a list of inventory type names for the account, or return a
+      # list of attribute names for a specific Inventory item type.
+      # @option params [String] :type_name
+      #   The type of inventory item to return.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @return [Types::GetInventorySchemaResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetInventorySchemaResult#schemas #Schemas} => Array&lt;Types::InventoryItemSchema&gt;
+      #   * {Types::GetInventorySchemaResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_inventory_schema({
+      #     type_name: "InventoryItemTypeNameFilter",
+      #     next_token: "NextToken",
+      #     max_results: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.schemas #=> Array
+      #   resp.schemas[0].type_name #=> String
+      #   resp.schemas[0].version #=> String
+      #   resp.schemas[0].attributes #=> Array
+      #   resp.schemas[0].attributes[0].name #=> String
+      #   resp.schemas[0].attributes[0].data_type #=> String, one of "string", "number"
+      #   resp.next_token #=> String
+      # @overload get_inventory_schema(params = {})
+      # @param [Hash] params ({})
+      def get_inventory_schema(params = {}, options = {})
+        req = build_request(:get_inventory_schema, params)
+        req.send_request(options)
+      end
+
+      # Retrieves a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the desired Maintenance Window.
+      # @return [Types::GetMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetMaintenanceWindowResult#window_id #WindowId} => String
+      #   * {Types::GetMaintenanceWindowResult#name #Name} => String
+      #   * {Types::GetMaintenanceWindowResult#schedule #Schedule} => String
+      #   * {Types::GetMaintenanceWindowResult#duration #Duration} => Integer
+      #   * {Types::GetMaintenanceWindowResult#cutoff #Cutoff} => Integer
+      #   * {Types::GetMaintenanceWindowResult#allow_unassociated_targets #AllowUnassociatedTargets} => Boolean
+      #   * {Types::GetMaintenanceWindowResult#enabled #Enabled} => Boolean
+      #   * {Types::GetMaintenanceWindowResult#created_date #CreatedDate} => Time
+      #   * {Types::GetMaintenanceWindowResult#modified_date #ModifiedDate} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      #   resp.name #=> String
+      #   resp.schedule #=> String
+      #   resp.duration #=> Integer
+      #   resp.cutoff #=> Integer
+      #   resp.allow_unassociated_targets #=> Boolean
+      #   resp.enabled #=> Boolean
+      #   resp.created_date #=> Time
+      #   resp.modified_date #=> Time
+      # @overload get_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def get_maintenance_window(params = {}, options = {})
+        req = build_request(:get_maintenance_window, params)
+        req.send_request(options)
+      end
+
+      # Retrieves details about a specific task executed as part of a
+      # Maintenance Window execution.
+      # @option params [required, String] :window_execution_id
+      #   The ID of the Maintenance Window execution that includes the task.
+      # @return [Types::GetMaintenanceWindowExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetMaintenanceWindowExecutionResult#window_execution_id #WindowExecutionId} => String
+      #   * {Types::GetMaintenanceWindowExecutionResult#task_ids #TaskIds} => Array&lt;String&gt;
+      #   * {Types::GetMaintenanceWindowExecutionResult#status #Status} => String
+      #   * {Types::GetMaintenanceWindowExecutionResult#status_details #StatusDetails} => String
+      #   * {Types::GetMaintenanceWindowExecutionResult#start_time #StartTime} => Time
+      #   * {Types::GetMaintenanceWindowExecutionResult#end_time #EndTime} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_maintenance_window_execution({
+      #     window_execution_id: "MaintenanceWindowExecutionId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_execution_id #=> String
+      #   resp.task_ids #=> Array
+      #   resp.task_ids[0] #=> String
+      #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+      #   resp.status_details #=> String
+      #   resp.start_time #=> Time
+      #   resp.end_time #=> Time
+      # @overload get_maintenance_window_execution(params = {})
+      # @param [Hash] params ({})
+      def get_maintenance_window_execution(params = {}, options = {})
+        req = build_request(:get_maintenance_window_execution, params)
+        req.send_request(options)
+      end
+
+      # Retrieves the details about a specific task executed as part of a
+      # Maintenance Window execution.
+      # @option params [required, String] :window_execution_id
+      #   The ID of the Maintenance Window execution that includes the task.
+      # @option params [required, String] :task_id
+      #   The ID of the specific task execution in the Maintenance Window task
+      #   that should be retrieved.
+      # @return [Types::GetMaintenanceWindowExecutionTaskResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#window_execution_id #WindowExecutionId} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#task_execution_id #TaskExecutionId} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#task_arn #TaskArn} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#service_role #ServiceRole} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#type #Type} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#task_parameters #TaskParameters} => Array&lt;Hash&lt;String,Types::MaintenanceWindowTaskParameterValueExpression&gt;&gt;
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#priority #Priority} => Integer
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#max_concurrency #MaxConcurrency} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#max_errors #MaxErrors} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#status #Status} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#status_details #StatusDetails} => String
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#start_time #StartTime} => Time
+      #   * {Types::GetMaintenanceWindowExecutionTaskResult#end_time #EndTime} => Time
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_maintenance_window_execution_task({
+      #     window_execution_id: "MaintenanceWindowExecutionId", # required
+      #     task_id: "MaintenanceWindowExecutionTaskId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_execution_id #=> String
+      #   resp.task_execution_id #=> String
+      #   resp.task_arn #=> String
+      #   resp.service_role #=> String
+      #   resp.type #=> String, one of "RUN_COMMAND"
+      #   resp.task_parameters #=> Array
+      #   resp.task_parameters[0] #=> Hash
+      #   resp.task_parameters[0]["MaintenanceWindowTaskParameterName"].values #=> Array
+      #   resp.task_parameters[0]["MaintenanceWindowTaskParameterName"].values[0] #=> String
+      #   resp.priority #=> Integer
+      #   resp.max_concurrency #=> String
+      #   resp.max_errors #=> String
+      #   resp.status #=> String, one of "PENDING", "IN_PROGRESS", "SUCCESS", "FAILED", "TIMED_OUT", "CANCELLING", "CANCELLED", "SKIPPED_OVERLAPPING"
+      #   resp.status_details #=> String
+      #   resp.start_time #=> Time
+      #   resp.end_time #=> Time
+      # @overload get_maintenance_window_execution_task(params = {})
+      # @param [Hash] params ({})
+      def get_maintenance_window_execution_task(params = {}, options = {})
+        req = build_request(:get_maintenance_window_execution_task, params)
+        req.send_request(options)
+      end
+
+      # Query a list of all parameters used by the AWS account.
+      # @option params [required, String] :name
+      #   The name of a parameter you want to query.
+      # @option params [Boolean] :with_decryption
+      #   Return decrypted values for secure string parameters. This flag is
+      #   ignored for String and StringList parameter types.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::GetParameterHistoryResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetParameterHistoryResult#parameters #Parameters} => Array&lt;Types::ParameterHistory&gt;
+      #   * {Types::GetParameterHistoryResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_parameter_history({
+      #     name: "PSParameterName", # required
+      #     with_decryption: false,
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.parameters #=> Array
+      #   resp.parameters[0].name #=> String
+      #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
+      #   resp.parameters[0].key_id #=> String
+      #   resp.parameters[0].last_modified_date #=> Time
+      #   resp.parameters[0].last_modified_user #=> String
+      #   resp.parameters[0].description #=> String
+      #   resp.parameters[0].value #=> String
+      #   resp.next_token #=> String
+      # @overload get_parameter_history(params = {})
+      # @param [Hash] params ({})
+      def get_parameter_history(params = {}, options = {})
+        req = build_request(:get_parameter_history, params)
+        req.send_request(options)
+      end
+
+      # Get a list of parameters used by the AWS account.&gt;
+      # @option params [required, Array<String>] :names
+      #   Names of the parameters for which you want to query information.
+      # @option params [Boolean] :with_decryption
+      #   Return decrypted secure string value. Return decrypted values for
+      #   secure string parameters. This flag is ignored for String and
+      #   StringList parameter types.
+      # @return [Types::GetParametersResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetParametersResult#parameters #Parameters} => Array&lt;Types::Parameter&gt;
+      #   * {Types::GetParametersResult#invalid_parameters #InvalidParameters} => Array&lt;String&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_parameters({
+      #     names: ["PSParameterName"], # required
+      #     with_decryption: false,
+      #   })
+      #
+      # @example Response structure
+      #   resp.parameters #=> Array
+      #   resp.parameters[0].name #=> String
+      #   resp.parameters[0].type #=> String, one of "String", "StringList", "SecureString"
+      #   resp.parameters[0].value #=> String
+      #   resp.invalid_parameters #=> Array
+      #   resp.invalid_parameters[0] #=> String
+      # @overload get_parameters(params = {})
+      # @param [Hash] params ({})
+      def get_parameters(params = {}, options = {})
+        req = build_request(:get_parameters, params)
+        req.send_request(options)
+      end
+
       # Lists the associations for the specified SSM document or instance.
-      # @option params [required, Array<Types::AssociationFilter>] :association_filter_list
+      # @option params [Array<Types::AssociationFilter>] :association_filter_list
       #   One or more filters. Use a filter to return a more specific list of
       #   results.
       # @option params [Integer] :max_results
@@ -742,9 +1920,9 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.list_associations({
-      #     association_filter_list: [ # required
+      #     association_filter_list: [
       #       {
-      #         key: "InstanceId", # required, accepts InstanceId, Name
+      #         key: "InstanceId", # required, accepts InstanceId, Name, AssociationId, AssociationStatusName, LastExecutedBefore, LastExecutedAfter
       #         value: "AssociationFilterValue", # required
       #       },
       #     ],
@@ -756,6 +1934,18 @@ module Aws
       #   resp.associations #=> Array
       #   resp.associations[0].name #=> String
       #   resp.associations[0].instance_id #=> String
+      #   resp.associations[0].association_id #=> String
+      #   resp.associations[0].document_version #=> String
+      #   resp.associations[0].targets #=> Array
+      #   resp.associations[0].targets[0].key #=> String
+      #   resp.associations[0].targets[0].values #=> Array
+      #   resp.associations[0].targets[0].values[0] #=> String
+      #   resp.associations[0].last_execution_date #=> Time
+      #   resp.associations[0].overview.status #=> String
+      #   resp.associations[0].overview.detailed_status #=> String
+      #   resp.associations[0].overview.association_status_aggregated_count #=> Hash
+      #   resp.associations[0].overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.associations[0].schedule_expression #=> String
       #   resp.next_token #=> String
       # @overload list_associations(params = {})
       # @param [Hash] params ({})
@@ -811,18 +2001,26 @@ module Aws
       #   resp.command_invocations #=> Array
       #   resp.command_invocations[0].command_id #=> String
       #   resp.command_invocations[0].instance_id #=> String
+      #   resp.command_invocations[0].instance_name #=> String
       #   resp.command_invocations[0].comment #=> String
       #   resp.command_invocations[0].document_name #=> String
       #   resp.command_invocations[0].requested_date_time #=> Time
-      #   resp.command_invocations[0].status #=> String, one of "Pending", "InProgress", "Cancelling", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.command_invocations[0].status #=> String, one of "Pending", "InProgress", "Delayed", "Success", "Cancelled", "TimedOut", "Failed", "Cancelling"
+      #   resp.command_invocations[0].status_details #=> String
       #   resp.command_invocations[0].trace_output #=> String
+      #   resp.command_invocations[0].standard_output_url #=> String
+      #   resp.command_invocations[0].standard_error_url #=> String
       #   resp.command_invocations[0].command_plugins #=> Array
       #   resp.command_invocations[0].command_plugins[0].name #=> String
       #   resp.command_invocations[0].command_plugins[0].status #=> String, one of "Pending", "InProgress", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.command_invocations[0].command_plugins[0].status_details #=> String
       #   resp.command_invocations[0].command_plugins[0].response_code #=> Integer
       #   resp.command_invocations[0].command_plugins[0].response_start_date_time #=> Time
       #   resp.command_invocations[0].command_plugins[0].response_finish_date_time #=> Time
       #   resp.command_invocations[0].command_plugins[0].output #=> String
+      #   resp.command_invocations[0].command_plugins[0].standard_output_url #=> String
+      #   resp.command_invocations[0].command_plugins[0].standard_error_url #=> String
+      #   resp.command_invocations[0].command_plugins[0].output_s3_region #=> String
       #   resp.command_invocations[0].command_plugins[0].output_s3_bucket_name #=> String
       #   resp.command_invocations[0].command_plugins[0].output_s3_key_prefix #=> String
       #   resp.command_invocations[0].service_role #=> String
@@ -883,10 +2081,21 @@ module Aws
       #   resp.commands[0].parameters["ParameterName"][0] #=> String
       #   resp.commands[0].instance_ids #=> Array
       #   resp.commands[0].instance_ids[0] #=> String
+      #   resp.commands[0].targets #=> Array
+      #   resp.commands[0].targets[0].key #=> String
+      #   resp.commands[0].targets[0].values #=> Array
+      #   resp.commands[0].targets[0].values[0] #=> String
       #   resp.commands[0].requested_date_time #=> Time
-      #   resp.commands[0].status #=> String, one of "Pending", "InProgress", "Cancelling", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.commands[0].status #=> String, one of "Pending", "InProgress", "Success", "Cancelled", "Failed", "TimedOut", "Cancelling"
+      #   resp.commands[0].status_details #=> String
+      #   resp.commands[0].output_s3_region #=> String
       #   resp.commands[0].output_s3_bucket_name #=> String
       #   resp.commands[0].output_s3_key_prefix #=> String
+      #   resp.commands[0].max_concurrency #=> String
+      #   resp.commands[0].max_errors #=> String
+      #   resp.commands[0].target_count #=> Integer
+      #   resp.commands[0].completed_count #=> Integer
+      #   resp.commands[0].error_count #=> Integer
       #   resp.commands[0].service_role #=> String
       #   resp.commands[0].notification_config.notification_arn #=> String
       #   resp.commands[0].notification_config.notification_events #=> Array
@@ -897,6 +2106,42 @@ module Aws
       # @param [Hash] params ({})
       def list_commands(params = {}, options = {})
         req = build_request(:list_commands, params)
+        req.send_request(options)
+      end
+
+      # List all versions for a document.
+      # @option params [required, String] :name
+      #   The name of the document about which you want version information.
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @return [Types::ListDocumentVersionsResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListDocumentVersionsResult#document_versions #DocumentVersions} => Array&lt;Types::DocumentVersionInfo&gt;
+      #   * {Types::ListDocumentVersionsResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_document_versions({
+      #     name: "DocumentName", # required
+      #     max_results: 1,
+      #     next_token: "NextToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.document_versions #=> Array
+      #   resp.document_versions[0].name #=> String
+      #   resp.document_versions[0].document_version #=> String
+      #   resp.document_versions[0].created_date #=> Time
+      #   resp.document_versions[0].is_default_version #=> Boolean
+      #   resp.next_token #=> String
+      # @overload list_document_versions(params = {})
+      # @param [Hash] params ({})
+      def list_document_versions(params = {}, options = {})
+        req = build_request(:list_document_versions, params)
         req.send_request(options)
       end
 
@@ -920,7 +2165,7 @@ module Aws
       #   resp = client.list_documents({
       #     document_filter_list: [
       #       {
-      #         key: "Name", # required, accepts Name, Owner, PlatformTypes
+      #         key: "Name", # required, accepts Name, Owner, PlatformTypes, DocumentType
       #         value: "DocumentFilterValue", # required
       #       },
       #     ],
@@ -934,11 +2179,69 @@ module Aws
       #   resp.document_identifiers[0].owner #=> String
       #   resp.document_identifiers[0].platform_types #=> Array
       #   resp.document_identifiers[0].platform_types[0] #=> String, one of "Windows", "Linux"
+      #   resp.document_identifiers[0].document_version #=> String
+      #   resp.document_identifiers[0].document_type #=> String, one of "Command", "Policy", "Automation"
+      #   resp.document_identifiers[0].schema_version #=> String
       #   resp.next_token #=> String
       # @overload list_documents(params = {})
       # @param [Hash] params ({})
       def list_documents(params = {}, options = {})
         req = build_request(:list_documents, params)
+        req.send_request(options)
+      end
+
+      # A list of inventory items returned by the request.
+      # @option params [required, String] :instance_id
+      #   The instance ID for which you want inventory information.
+      # @option params [required, String] :type_name
+      #   The type of inventory item for which you want information.
+      # @option params [Array<Types::InventoryFilter>] :filters
+      #   One or more filters. Use a filter to return a more specific list of
+      #   results.
+      # @option params [String] :next_token
+      #   The token for the next set of items to return. (You received this
+      #   token from a previous call.)
+      # @option params [Integer] :max_results
+      #   The maximum number of items to return for this call. The call also
+      #   returns a token that you can specify in a subsequent call to get the
+      #   next set of results.
+      # @return [Types::ListInventoryEntriesResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListInventoryEntriesResult#type_name #TypeName} => String
+      #   * {Types::ListInventoryEntriesResult#instance_id #InstanceId} => String
+      #   * {Types::ListInventoryEntriesResult#schema_version #SchemaVersion} => String
+      #   * {Types::ListInventoryEntriesResult#capture_time #CaptureTime} => String
+      #   * {Types::ListInventoryEntriesResult#entries #Entries} => Array&lt;Hash&lt;String,String&gt;&gt;
+      #   * {Types::ListInventoryEntriesResult#next_token #NextToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_inventory_entries({
+      #     instance_id: "InstanceId", # required
+      #     type_name: "InventoryItemTypeName", # required
+      #     filters: [
+      #       {
+      #         key: "InventoryFilterKey", # required
+      #         values: ["InventoryFilterValue"], # required
+      #         type: "Equal", # accepts Equal, NotEqual, BeginWith, LessThan, GreaterThan
+      #       },
+      #     ],
+      #     next_token: "NextToken",
+      #     max_results: 1,
+      #   })
+      #
+      # @example Response structure
+      #   resp.type_name #=> String
+      #   resp.instance_id #=> String
+      #   resp.schema_version #=> String
+      #   resp.capture_time #=> String
+      #   resp.entries #=> Array
+      #   resp.entries[0] #=> Hash
+      #   resp.entries[0]["AttributeName"] #=> <Hash,Array,String,Numeric,Boolean,IO,Set,nil>
+      #   resp.next_token #=> String
+      # @overload list_inventory_entries(params = {})
+      # @param [Hash] params ({})
+      def list_inventory_entries(params = {}, options = {})
+        req = build_request(:list_inventory_entries, params)
         req.send_request(options)
       end
 
@@ -953,7 +2256,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.list_tags_for_resource({
-      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
       #     resource_id: "ResourceId", # required
       #   })
       #
@@ -1002,6 +2305,190 @@ module Aws
         req.send_request(options)
       end
 
+      # Bulk update custom inventory items on one more instance. The request
+      # adds an inventory item, if it doesn't already exist, or updates an
+      # inventory item, if it does exist.
+      # @option params [required, String] :instance_id
+      #   One or more instance IDs where you want to add or update inventory
+      #   items.
+      # @option params [required, Array<Types::InventoryItem>] :items
+      #   The inventory items that you want to add or update on instances.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_inventory({
+      #     instance_id: "InstanceId", # required
+      #     items: [ # required
+      #       {
+      #         type_name: "InventoryItemTypeName", # required
+      #         schema_version: "InventoryItemSchemaVersion", # required
+      #         capture_time: "InventoryItemCaptureTime", # required
+      #         content_hash: "InventoryItemContentHash",
+      #         content: [
+      #           {
+      #             "AttributeName" => "AttributeValue",
+      #           },
+      #         ],
+      #       },
+      #     ],
+      #   })
+      # @overload put_inventory(params = {})
+      # @param [Hash] params ({})
+      def put_inventory(params = {}, options = {})
+        req = build_request(:put_inventory, params)
+        req.send_request(options)
+      end
+
+      # Add one or more paramaters to the system.
+      # @option params [required, String] :name
+      #   The name of the parameter that you want to add to the system.
+      # @option params [String] :description
+      #   Information about the parameter that you want to add to the system
+      # @option params [required, String] :value
+      #   The parameter value that you want to add to the system.
+      # @option params [required, String] :type
+      #   The type of parameter that you want to add to the system.
+      # @option params [String] :key_id
+      #   The parameter key ID that you want to add to the system.
+      # @option params [Boolean] :overwrite
+      #   Overwrite an existing parameter.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_parameter({
+      #     name: "PSParameterName", # required
+      #     description: "ParameterDescription",
+      #     value: "PSParameterValue", # required
+      #     type: "String", # required, accepts String, StringList, SecureString
+      #     key_id: "ParameterKeyId",
+      #     overwrite: false,
+      #   })
+      # @overload put_parameter(params = {})
+      # @param [Hash] params ({})
+      def put_parameter(params = {}, options = {})
+        req = build_request(:put_parameter, params)
+        req.send_request(options)
+      end
+
+      # Registers a target with a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window the target should be registered with.
+      # @option params [required, String] :resource_type
+      #   The type of target being registered with the Maintenance Window.
+      # @option params [required, Array<Types::Target>] :targets
+      #   The targets (either instances or tags). Instances are specified using
+      #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
+      #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+      # @option params [String] :owner_information
+      #   User-provided value that will be included in any CloudWatch events
+      #   raised while running tasks for these targets in this Maintenance
+      #   Window.
+      # @option params [String] :client_token
+      #   User-provided idempotency token.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::RegisterTargetWithMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::RegisterTargetWithMaintenanceWindowResult#window_target_id #WindowTargetId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.register_target_with_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #     resource_type: "INSTANCE", # required, accepts INSTANCE
+      #     targets: [ # required
+      #       {
+      #         key: "TargetKey",
+      #         values: ["TargetValue"],
+      #       },
+      #     ],
+      #     owner_information: "OwnerInformation",
+      #     client_token: "ClientToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_target_id #=> String
+      # @overload register_target_with_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def register_target_with_maintenance_window(params = {}, options = {})
+        req = build_request(:register_target_with_maintenance_window, params)
+        req.send_request(options)
+      end
+
+      # Adds a new task to a Maintenance Window.
+      # @option params [required, String] :window_id
+      #   The id of the Maintenance Window the task should be added to.
+      # @option params [required, Array<Types::Target>] :targets
+      #   The targets (either instances or tags). Instances are specified using
+      #   Key=instanceids,Values=&lt;instanceid1&gt;,&lt;instanceid2&gt;. Tags
+      #   are specified using Key=&lt;tag name&gt;,Values=&lt;tag value&gt;.
+      # @option params [required, String] :task_arn
+      #   The ARN of the task to execute
+      # @option params [required, String] :service_role_arn
+      #   The role that should be assumed when executing the task.
+      # @option params [required, String] :task_type
+      #   The type of task being registered.
+      # @option params [Hash<String,Types::MaintenanceWindowTaskParameterValueExpression>] :task_parameters
+      #   The parameters that should be passed to the task when it is executed.
+      # @option params [Integer] :priority
+      #   The priority of the task in the Maintenance Window, the lower the
+      #   number the higher the priority. Tasks in a Maintenance Window are
+      #   scheduled in priority order with tasks that have the same priority
+      #   scheduled in parallel.
+      # @option params [required, String] :max_concurrency
+      #   The maximum number of targets this task can be run for in parallel.
+      # @option params [required, String] :max_errors
+      #   The maximum number of errors allowed before this task stops being
+      #   scheduled.
+      # @option params [Types::LoggingInfo] :logging_info
+      #   A structure containing information about an Amazon S3 bucket to write
+      #   instance-level logs to.
+      # @option params [String] :client_token
+      #   User-provided idempotency token.
+      #
+      #   **A suitable default value is auto-generated.** You should
+      #   normally not need to pass this option.
+      # @return [Types::RegisterTaskWithMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::RegisterTaskWithMaintenanceWindowResult#window_task_id #WindowTaskId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.register_task_with_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #     targets: [ # required
+      #       {
+      #         key: "TargetKey",
+      #         values: ["TargetValue"],
+      #       },
+      #     ],
+      #     task_arn: "MaintenanceWindowTaskArn", # required
+      #     service_role_arn: "ServiceRole", # required
+      #     task_type: "RUN_COMMAND", # required, accepts RUN_COMMAND
+      #     task_parameters: {
+      #       "MaintenanceWindowTaskParameterName" => {
+      #         values: ["MaintenanceWindowTaskParameterValue"],
+      #       },
+      #     },
+      #     priority: 1,
+      #     max_concurrency: "VelocityConstraint", # required
+      #     max_errors: "VelocityConstraint", # required
+      #     logging_info: {
+      #       s3_bucket_name: "S3BucketName", # required
+      #       s3_key_prefix: "S3KeyPrefix",
+      #       s3_region: "S3Region", # required
+      #     },
+      #     client_token: "ClientToken",
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_task_id #=> String
+      # @overload register_task_with_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def register_task_with_maintenance_window(params = {}, options = {})
+        req = build_request(:register_task_with_maintenance_window, params)
+        req.send_request(options)
+      end
+
       # Removes all tags from the specified resource.
       # @option params [required, String] :resource_type
       #   The type of resource of which you want to remove a tag.
@@ -1013,7 +2500,7 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.remove_tags_from_resource({
-      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance
+      #     resource_type: "ManagedInstance", # required, accepts ManagedInstance, MaintenanceWindow, Parameter
       #     resource_id: "ResourceId", # required
       #     tag_keys: ["TagKey"], # required
       #   })
@@ -1025,9 +2512,21 @@ module Aws
       end
 
       # Executes commands on one or more remote instances.
-      # @option params [required, Array<String>] :instance_ids
+      # @option params [Array<String>] :instance_ids
       #   Required. The instance IDs where the command should execute. You can
       #   specify a maximum of 50 IDs.
+      # @option params [Array<Types::Target>] :targets
+      #   (Optional) An array of search criteria that targets instances using a
+      #   `Key`;`Value` combination that you specify. `Targets` is required if
+      #   you don't provide one or more instance IDs in the call. For more
+      #   information about how to use `Targets`, see [Executing a Command Using
+      #   Amazon EC2 Run Command][1] (Linux) or [Executing a Command Using
+      #   Amazon EC2 Run Command][2] (Windows).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
+      #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
       # @option params [required, String] :document_name
       #   Required. The name of the SSM document to execute. This can be an SSM
       #   public document or a custom document.
@@ -1053,14 +2552,43 @@ module Aws
       # @option params [Hash<String,Array>] :parameters
       #   The required and optional parameters specified in the SSM document
       #   being executed.
+      # @option params [String] :output_s3_region
+      #   (Optional) The region where the Amazon Simple Storage Service (Amazon
+      #   S3) output bucket is located. The default value is the region where
+      #   Run Command is being called.
       # @option params [String] :output_s3_bucket_name
       #   The name of the S3 bucket where command execution responses should be
       #   stored.
       # @option params [String] :output_s3_key_prefix
       #   The directory structure within the S3 bucket where the responses
       #   should be stored.
+      # @option params [String] :max_concurrency
+      #   (Optional) The maximum number of instances that are allowed to execute
+      #   the command at the same time. You can specify a number such as “10” or
+      #   a percentage such as “10%”. The default value is 50. For more
+      #   information about how to use `MaxConcurrency`, see [Executing a
+      #   Command Using Amazon EC2 Run Command][1] (Linux) or [Executing a
+      #   Command Using Amazon EC2 Run Command][2] (Windows).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
+      #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
+      # @option params [String] :max_errors
+      #   The maximum number of errors allowed without the command failing. When
+      #   the command fails one more time beyond the value of `MaxErrors`, the
+      #   systems stops sending the command to additional targets. You can
+      #   specify a number like “10” or a percentage like “10%”. The default
+      #   value is 50. For more information about how to use `MaxErrors`, see
+      #   [Executing a Command Using Amazon EC2 Run Command][1] (Linux) or
+      #   [Executing a Command Using Amazon EC2 Run Command][2] (Windows).
+      #
+      #
+      #
+      #   [1]: http://docs.aws.amazon.com/AWSEC2/latest/UserGuide/run-command.html
+      #   [2]: http://docs.aws.amazon.com/AWSEC2/latest/WindowsGuide/run-command.html
       # @option params [String] :service_role_arn
-      #   The IAM role that SSM uses to send notifications.
+      #   The IAM role that Systems Manager uses to send notifications.
       # @option params [Types::NotificationConfig] :notification_config
       #   Configurations for sending notifications.
       # @return [Types::SendCommandResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -1069,7 +2597,13 @@ module Aws
       #
       # @example Request syntax with placeholder values
       #   resp = client.send_command({
-      #     instance_ids: ["InstanceId"], # required
+      #     instance_ids: ["InstanceId"],
+      #     targets: [
+      #       {
+      #         key: "TargetKey",
+      #         values: ["TargetValue"],
+      #       },
+      #     ],
       #     document_name: "DocumentARN", # required
       #     document_hash: "DocumentHash",
       #     document_hash_type: "Sha256", # accepts Sha256, Sha1
@@ -1078,8 +2612,11 @@ module Aws
       #     parameters: {
       #       "ParameterName" => ["ParameterValue"],
       #     },
+      #     output_s3_region: "S3Region",
       #     output_s3_bucket_name: "S3BucketName",
       #     output_s3_key_prefix: "S3KeyPrefix",
+      #     max_concurrency: "VelocityConstraint",
+      #     max_errors: "VelocityConstraint",
       #     service_role_arn: "ServiceRole",
       #     notification_config: {
       #       notification_arn: "NotificationArn",
@@ -1098,10 +2635,21 @@ module Aws
       #   resp.command.parameters["ParameterName"][0] #=> String
       #   resp.command.instance_ids #=> Array
       #   resp.command.instance_ids[0] #=> String
+      #   resp.command.targets #=> Array
+      #   resp.command.targets[0].key #=> String
+      #   resp.command.targets[0].values #=> Array
+      #   resp.command.targets[0].values[0] #=> String
       #   resp.command.requested_date_time #=> Time
-      #   resp.command.status #=> String, one of "Pending", "InProgress", "Cancelling", "Success", "TimedOut", "Cancelled", "Failed"
+      #   resp.command.status #=> String, one of "Pending", "InProgress", "Success", "Cancelled", "Failed", "TimedOut", "Cancelling"
+      #   resp.command.status_details #=> String
+      #   resp.command.output_s3_region #=> String
       #   resp.command.output_s3_bucket_name #=> String
       #   resp.command.output_s3_key_prefix #=> String
+      #   resp.command.max_concurrency #=> String
+      #   resp.command.max_errors #=> String
+      #   resp.command.target_count #=> Integer
+      #   resp.command.completed_count #=> Integer
+      #   resp.command.error_count #=> Integer
       #   resp.command.service_role #=> String
       #   resp.command.notification_config.notification_arn #=> String
       #   resp.command.notification_config.notification_events #=> Array
@@ -1111,6 +2659,132 @@ module Aws
       # @param [Hash] params ({})
       def send_command(params = {}, options = {})
         req = build_request(:send_command, params)
+        req.send_request(options)
+      end
+
+      # Initiates execution of an Automation document.
+      # @option params [required, String] :document_name
+      #   The name of the Automation document to use for this execution.
+      # @option params [String] :document_version
+      #   The version of the Automation document to use for this execution.
+      # @option params [Hash<String,Array>] :parameters
+      #   A key-value map of execution parameters, which match the declared
+      #   parameters in the Automation document.
+      # @return [Types::StartAutomationExecutionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::StartAutomationExecutionResult#automation_execution_id #AutomationExecutionId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.start_automation_execution({
+      #     document_name: "DocumentName", # required
+      #     document_version: "DocumentVersion",
+      #     parameters: {
+      #       "AutomationParameterKey" => ["AutomationParameterValue"],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.automation_execution_id #=> String
+      # @overload start_automation_execution(params = {})
+      # @param [Hash] params ({})
+      def start_automation_execution(params = {}, options = {})
+        req = build_request(:start_automation_execution, params)
+        req.send_request(options)
+      end
+
+      # Stop an Automation that is currently executing.
+      # @option params [required, String] :automation_execution_id
+      #   The execution ID of the Automation to stop.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.stop_automation_execution({
+      #     automation_execution_id: "AutomationExecutionId", # required
+      #   })
+      # @overload stop_automation_execution(params = {})
+      # @param [Hash] params ({})
+      def stop_automation_execution(params = {}, options = {})
+        req = build_request(:stop_automation_execution, params)
+        req.send_request(options)
+      end
+
+      # Updates an association. You can only update the document version,
+      # schedule, parameters, and Amazon S3 output of an association.
+      # @option params [required, String] :association_id
+      #   The ID of the association you want to update.
+      # @option params [Hash<String,Array>] :parameters
+      #   The parameters you want to update for the association. If you create a
+      #   parameter using Parameter Store, you can reference the parameter using
+      #   \\\{\\\{ssm:parameter-name\\}\\}
+      # @option params [String] :document_version
+      #   The document version you want update for the association.
+      # @option params [String] :schedule_expression
+      #   The cron expression used to schedule the association that you want to
+      #   update. Supported expressions are every half, 1, 2, 4, 8 or 12
+      #   hour(s); every specified day and time of the week. For example: cron(0
+      #   0/30 * 1/1 * ? *) to run every thirty minutes; cron(0 0 0/4 1/1 *
+      #   ? *) to run every four hours; and cron(0 0 10 ? * SUN *) to run
+      #   every Sunday at 10 a.m.
+      # @option params [Types::InstanceAssociationOutputLocation] :output_location
+      #   An Amazon S3 bucket where you want to store the results of this
+      #   request.
+      #
+      #   `"\{ "S3Location": \{ "OutputS3Region": "<region>",
+      #   "OutputS3BucketName": "bucket name", "OutputS3KeyPrefix":
+      #   "folder name" \} \}"`
+      # @return [Types::UpdateAssociationResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateAssociationResult#association_description #AssociationDescription} => Types::AssociationDescription
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_association({
+      #     association_id: "AssociationId", # required
+      #     parameters: {
+      #       "ParameterName" => ["ParameterValue"],
+      #     },
+      #     document_version: "DocumentVersion",
+      #     schedule_expression: "ScheduleExpression",
+      #     output_location: {
+      #       s3_location: {
+      #         output_s3_region: "S3Region",
+      #         output_s3_bucket_name: "S3BucketName",
+      #         output_s3_key_prefix: "S3KeyPrefix",
+      #       },
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.association_description.name #=> String
+      #   resp.association_description.instance_id #=> String
+      #   resp.association_description.date #=> Time
+      #   resp.association_description.last_update_association_date #=> Time
+      #   resp.association_description.status.date #=> Time
+      #   resp.association_description.status.name #=> String, one of "Pending", "Success", "Failed"
+      #   resp.association_description.status.message #=> String
+      #   resp.association_description.status.additional_info #=> String
+      #   resp.association_description.overview.status #=> String
+      #   resp.association_description.overview.detailed_status #=> String
+      #   resp.association_description.overview.association_status_aggregated_count #=> Hash
+      #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.association_description.document_version #=> String
+      #   resp.association_description.parameters #=> Hash
+      #   resp.association_description.parameters["ParameterName"] #=> Array
+      #   resp.association_description.parameters["ParameterName"][0] #=> String
+      #   resp.association_description.association_id #=> String
+      #   resp.association_description.targets #=> Array
+      #   resp.association_description.targets[0].key #=> String
+      #   resp.association_description.targets[0].values #=> Array
+      #   resp.association_description.targets[0].values[0] #=> String
+      #   resp.association_description.schedule_expression #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_region #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
+      #   resp.association_description.last_execution_date #=> Time
+      #   resp.association_description.last_successful_execution_date #=> Time
+      # @overload update_association(params = {})
+      # @param [Hash] params ({})
+      def update_association(params = {}, options = {})
+        req = build_request(:update_association, params)
         req.send_request(options)
       end
 
@@ -1142,17 +2816,162 @@ module Aws
       #   resp.association_description.name #=> String
       #   resp.association_description.instance_id #=> String
       #   resp.association_description.date #=> Time
+      #   resp.association_description.last_update_association_date #=> Time
       #   resp.association_description.status.date #=> Time
       #   resp.association_description.status.name #=> String, one of "Pending", "Success", "Failed"
       #   resp.association_description.status.message #=> String
       #   resp.association_description.status.additional_info #=> String
+      #   resp.association_description.overview.status #=> String
+      #   resp.association_description.overview.detailed_status #=> String
+      #   resp.association_description.overview.association_status_aggregated_count #=> Hash
+      #   resp.association_description.overview.association_status_aggregated_count["StatusName"] #=> Integer
+      #   resp.association_description.document_version #=> String
       #   resp.association_description.parameters #=> Hash
       #   resp.association_description.parameters["ParameterName"] #=> Array
       #   resp.association_description.parameters["ParameterName"][0] #=> String
+      #   resp.association_description.association_id #=> String
+      #   resp.association_description.targets #=> Array
+      #   resp.association_description.targets[0].key #=> String
+      #   resp.association_description.targets[0].values #=> Array
+      #   resp.association_description.targets[0].values[0] #=> String
+      #   resp.association_description.schedule_expression #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_region #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_bucket_name #=> String
+      #   resp.association_description.output_location.s3_location.output_s3_key_prefix #=> String
+      #   resp.association_description.last_execution_date #=> Time
+      #   resp.association_description.last_successful_execution_date #=> Time
       # @overload update_association_status(params = {})
       # @param [Hash] params ({})
       def update_association_status(params = {}, options = {})
         req = build_request(:update_association_status, params)
+        req.send_request(options)
+      end
+
+      # The document you want to update.
+      # @option params [required, String] :content
+      #   The content in a document that you want to update.
+      # @option params [required, String] :name
+      #   The name of the document that you want to update.
+      # @option params [String] :document_version
+      #   The version of the document that you want to update.
+      # @return [Types::UpdateDocumentResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateDocumentResult#document_description #DocumentDescription} => Types::DocumentDescription
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_document({
+      #     content: "DocumentContent", # required
+      #     name: "DocumentName", # required
+      #     document_version: "DocumentVersion",
+      #   })
+      #
+      # @example Response structure
+      #   resp.document_description.sha_1 #=> String
+      #   resp.document_description.hash #=> String
+      #   resp.document_description.hash_type #=> String, one of "Sha256", "Sha1"
+      #   resp.document_description.name #=> String
+      #   resp.document_description.owner #=> String
+      #   resp.document_description.created_date #=> Time
+      #   resp.document_description.status #=> String, one of "Creating", "Active", "Updating", "Deleting"
+      #   resp.document_description.document_version #=> String
+      #   resp.document_description.description #=> String
+      #   resp.document_description.parameters #=> Array
+      #   resp.document_description.parameters[0].name #=> String
+      #   resp.document_description.parameters[0].type #=> String, one of "String", "StringList"
+      #   resp.document_description.parameters[0].description #=> String
+      #   resp.document_description.parameters[0].default_value #=> String
+      #   resp.document_description.platform_types #=> Array
+      #   resp.document_description.platform_types[0] #=> String, one of "Windows", "Linux"
+      #   resp.document_description.document_type #=> String, one of "Command", "Policy", "Automation"
+      #   resp.document_description.schema_version #=> String
+      #   resp.document_description.latest_version #=> String
+      #   resp.document_description.default_version #=> String
+      # @overload update_document(params = {})
+      # @param [Hash] params ({})
+      def update_document(params = {}, options = {})
+        req = build_request(:update_document, params)
+        req.send_request(options)
+      end
+
+      # Set the default version of a document.
+      # @option params [required, String] :name
+      #   The name of a custom document that you want to set as the default
+      #   version.
+      # @option params [required, String] :document_version
+      #   The version of a custom document that you want to set as the default
+      #   version.
+      # @return [Types::UpdateDocumentDefaultVersionResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateDocumentDefaultVersionResult#description #Description} => Types::DocumentDefaultVersionDescription
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_document_default_version({
+      #     name: "DocumentName", # required
+      #     document_version: "DocumentVersionNumber", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.description.name #=> String
+      #   resp.description.default_version #=> String
+      # @overload update_document_default_version(params = {})
+      # @param [Hash] params ({})
+      def update_document_default_version(params = {}, options = {})
+        req = build_request(:update_document_default_version, params)
+        req.send_request(options)
+      end
+
+      # Updates an existing Maintenance Window. Only specified parameters are
+      # modified.
+      # @option params [required, String] :window_id
+      #   The ID of the Maintenance Window to update.
+      # @option params [String] :name
+      #   The name of the Maintenance Window.
+      # @option params [String] :schedule
+      #   The schedule of the Maintenance Window in the form of a cron or rate
+      #   expression.
+      # @option params [Integer] :duration
+      #   The duration of the Maintenance Window in hours.
+      # @option params [Integer] :cutoff
+      #   The number of hours before the end of the Maintenance Window that
+      #   Systems Manager stops scheduling new tasks for execution.
+      # @option params [Boolean] :allow_unassociated_targets
+      #   Whether targets must be registered with the Maintenance Window before
+      #   tasks can be defined for those targets.
+      # @option params [Boolean] :enabled
+      #   Whether the Maintenance Window is enabled.
+      # @return [Types::UpdateMaintenanceWindowResult] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::UpdateMaintenanceWindowResult#window_id #WindowId} => String
+      #   * {Types::UpdateMaintenanceWindowResult#name #Name} => String
+      #   * {Types::UpdateMaintenanceWindowResult#schedule #Schedule} => String
+      #   * {Types::UpdateMaintenanceWindowResult#duration #Duration} => Integer
+      #   * {Types::UpdateMaintenanceWindowResult#cutoff #Cutoff} => Integer
+      #   * {Types::UpdateMaintenanceWindowResult#allow_unassociated_targets #AllowUnassociatedTargets} => Boolean
+      #   * {Types::UpdateMaintenanceWindowResult#enabled #Enabled} => Boolean
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.update_maintenance_window({
+      #     window_id: "MaintenanceWindowId", # required
+      #     name: "MaintenanceWindowName",
+      #     schedule: "MaintenanceWindowSchedule",
+      #     duration: 1,
+      #     cutoff: 1,
+      #     allow_unassociated_targets: false,
+      #     enabled: false,
+      #   })
+      #
+      # @example Response structure
+      #   resp.window_id #=> String
+      #   resp.name #=> String
+      #   resp.schedule #=> String
+      #   resp.duration #=> Integer
+      #   resp.cutoff #=> Integer
+      #   resp.allow_unassociated_targets #=> Boolean
+      #   resp.enabled #=> Boolean
+      # @overload update_maintenance_window(params = {})
+      # @param [Hash] params ({})
+      def update_maintenance_window(params = {}, options = {})
+        req = build_request(:update_maintenance_window, params)
         req.send_request(options)
       end
 

@@ -84,7 +84,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents the application metrics for a specified environment.
+      # Application request metrics for an AWS Elastic Beanstalk environment.
       # @!attribute [rw] duration
       #   The amount of time that the metrics cover (usually 10 seconds). For
       #   example, you might have 5 requests (`request_count`) within the most
@@ -116,23 +116,29 @@ module Aws
 
       # Describes the properties of an application version.
       # @!attribute [rw] application_name
-      #   The name of the application associated with this release.
+      #   The name of the application to which the application version
+      #   belongs.
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   The description of this application version.
+      #   The description of the application version.
       #   @return [String]
       #
       # @!attribute [rw] version_label
-      #   A label uniquely identifying the version for the associated
-      #   application.
+      #   A unique identifier for the application version.
       #   @return [String]
       #
       # @!attribute [rw] source_build_information
+      #   If the version's source code was retrieved from AWS CodeCommit, the
+      #   location of the source code for the application version.
       #   @return [Types::SourceBuildInformation]
       #
+      # @!attribute [rw] build_arn
+      #   @return [String]
+      #
       # @!attribute [rw] source_bundle
-      #   The location where the source bundle is located for this version.
+      #   The storage location of the application version's source bundle in
+      #   Amazon S3.
       #   @return [Types::S3Location]
       #
       # @!attribute [rw] date_created
@@ -151,6 +157,7 @@ module Aws
         :description,
         :version_label,
         :source_build_information,
+        :build_arn,
         :source_bundle,
         :date_created,
         :date_updated,
@@ -170,7 +177,7 @@ module Aws
 
       # Result message wrapping a list of application version descriptions.
       # @!attribute [rw] application_versions
-      #   List of `ApplicationVersionDescription` objects sorted by order of
+      #   List of `ApplicationVersionDescription` objects sorted in order of
       #   creation.
       #   @return [Array<Types::ApplicationVersionDescription>]
       #
@@ -244,10 +251,40 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents CPU utilization information from the specified instance
-      # that belongs to the AWS Elastic Beanstalk environment. Use the
-      # `instanceId` property to specify the application instance for which
-      # you'd like to return data.
+      # @note When making an API call, pass BuildConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         artifact_name: "String",
+      #         code_build_service_role: "NonEmptyString", # required
+      #         compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+      #         image: "NonEmptyString", # required
+      #         timeout_in_minutes: 1,
+      #       }
+      # @!attribute [rw] artifact_name
+      #   @return [String]
+      #
+      # @!attribute [rw] code_build_service_role
+      #   @return [String]
+      #
+      # @!attribute [rw] compute_type
+      #   @return [String]
+      #
+      # @!attribute [rw] image
+      #   @return [String]
+      #
+      # @!attribute [rw] timeout_in_minutes
+      #   @return [Integer]
+      class BuildConfiguration < Struct.new(
+        :artifact_name,
+        :code_build_service_role,
+        :compute_type,
+        :image,
+        :timeout_in_minutes)
+        include Aws::Structure
+      end
+
+      # CPU utilization metrics for an instance.
       # @!attribute [rw] user
       #   Percentage of time that the CPU has spent in the `User` state over
       #   the last 10 seconds.
@@ -643,13 +680,20 @@ module Aws
       #         version_label: "VersionLabel", # required
       #         description: "Description",
       #         source_build_information: {
-      #           source_type: "Git", # required, accepts Git
-      #           source_repository: "CodeCommit", # required, accepts CodeCommit
+      #           source_type: "Git", # required, accepts Git, Zip
+      #           source_repository: "CodeCommit", # required, accepts CodeCommit, S3
       #           source_location: "SourceLocation", # required
       #         },
       #         source_bundle: {
       #           s3_bucket: "S3Bucket",
       #           s3_key: "S3Key",
+      #         },
+      #         build_configuration: {
+      #           artifact_name: "String",
+      #           code_build_service_role: "NonEmptyString", # required
+      #           compute_type: "BUILD_GENERAL1_SMALL", # accepts BUILD_GENERAL1_SMALL, BUILD_GENERAL1_MEDIUM, BUILD_GENERAL1_LARGE
+      #           image: "NonEmptyString", # required
+      #           timeout_in_minutes: 1,
       #         },
       #         auto_create_application: false,
       #         process: false,
@@ -674,36 +718,31 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] source_build_information
+      #   Specify a commit in an AWS CodeCommit Git repository to use as the
+      #   source code for the application version.
+      #
+      #   Specify a commit in an AWS CodeCommit repository or a source bundle
+      #   in S3 (with `SourceBundle`), but not both. If neither `SourceBundle`
+      #   nor `SourceBuildInformation` are provided, Elastic Beanstalk uses a
+      #   sample application.
       #   @return [Types::SourceBuildInformation]
       #
       # @!attribute [rw] source_bundle
       #   The Amazon S3 bucket and key that identify the location of the
       #   source bundle for this version.
       #
-      #   If data found at the Amazon S3 location exceeds the maximum allowed
-      #   source bundle size, AWS Elastic Beanstalk returns an
-      #   `InvalidParameterValue` error. The maximum size allowed is 512 MB.
-      #
-      #   Default: If not specified, AWS Elastic Beanstalk uses a sample
-      #   application. If only partially specified (for example, a bucket is
-      #   provided but not the key) or if no data is found at the Amazon S3
-      #   location, AWS Elastic Beanstalk returns an
-      #   `InvalidParameterCombination` error.
+      #   Specify a source bundle in S3 or a commit in an AWS CodeCommit
+      #   repository (with `SourceBuildInformation`), but not both. If neither
+      #   `SourceBundle` nor `SourceBuildInformation` are provided, Elastic
+      #   Beanstalk uses a sample application.
       #   @return [Types::S3Location]
       #
+      # @!attribute [rw] build_configuration
+      #   @return [Types::BuildConfiguration]
+      #
       # @!attribute [rw] auto_create_application
-      #   Determines how the system behaves if the specified application for
-      #   this version does not already exist:
-      #
-      #   * `true`\: Automatically creates the specified application for this
-      #     release if it does not already exist.
-      #
-      #   * `false`\: Throws an `InvalidParameterValue` if the specified
-      #     application for this release does not already exist.
-      #
-      #   Default: `false`
-      #
-      #   Valid Values: `true` \| `false`
+      #   Set to `true` to create an application with the specified name if it
+      #   doesn't already exist.
       #   @return [Boolean]
       #
       # @!attribute [rw] process
@@ -718,6 +757,7 @@ module Aws
         :description,
         :source_build_information,
         :source_bundle,
+        :build_configuration,
         :auto_create_application,
         :process)
         include Aws::Structure
@@ -1017,7 +1057,7 @@ module Aws
       #         delete_source_bundle: false,
       #       }
       # @!attribute [rw] application_name
-      #   The name of the application to delete releases from.
+      #   The name of the application to which the version belongs.
       #   @return [String]
       #
       # @!attribute [rw] version_label
@@ -1025,16 +1065,9 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] delete_source_bundle
-      #   Indicates whether to delete the associated source bundle from Amazon
-      #   S3:
-      #
-      #   * `true`\: An attempt is made to delete the associated Amazon S3
-      #     source bundle specified at time of creation.
-      #
-      #   * `false`\: No action is taken on the Amazon S3 source bundle
-      #     specified at time of creation.
-      #
-      #   Valid Values: `true` \| `false`
+      #   Set to `true` to delete the source bundle from your storage bucket.
+      #   Otherwise, the application version is deleted only from Elastic
+      #   Beanstalk and the source bundle remains in Amazon S3.
       #   @return [Boolean]
       class DeleteApplicationVersionMessage < Struct.new(
         :application_name,
@@ -1120,7 +1153,7 @@ module Aws
         include Aws::Structure
       end
 
-      # Result message containing a list of configuration descriptions.
+      # Request to describe application versions.
       # @note When making an API call, pass DescribeApplicationVersionsMessage
       #   data as a hash:
       #
@@ -1131,14 +1164,12 @@ module Aws
       #         next_token: "Token",
       #       }
       # @!attribute [rw] application_name
-      #   If specified, AWS Elastic Beanstalk restricts the returned
-      #   descriptions to only include ones that are associated with the
-      #   specified application.
+      #   Specify an application name to show only application versions for
+      #   that application.
       #   @return [String]
       #
       # @!attribute [rw] version_labels
-      #   If specified, restricts the returned descriptions to only include
-      #   ones that have the specified version labels.
+      #   Specify a version label to show a specific application version.
       #   @return [Array<String>]
       #
       # @!attribute [rw] max_records
@@ -1275,25 +1306,21 @@ module Aws
       #         attribute_names: ["Status"], # accepts Status, Color, Causes, ApplicationMetrics, InstancesHealth, All, HealthStatus, RefreshedAt
       #       }
       # @!attribute [rw] environment_name
-      #   Specifies the AWS Elastic Beanstalk environment name.
+      #   Specify the environment by name.
       #
-      #   Condition: You must specify either this or an EnvironmentId, or
-      #   both. If you do not specify either, AWS Elastic Beanstalk returns
-      #   `MissingRequiredParameter` error.
+      #   You must specify either this or an EnvironmentName, or both.
       #   @return [String]
       #
       # @!attribute [rw] environment_id
-      #   Specifies the AWS Elastic Beanstalk environment ID.
+      #   Specify the environment by ID.
       #
-      #   Condition: You must specify either this or an EnvironmentName, or
-      #   both. If you do not specify either, AWS Elastic Beanstalk returns
-      #   `MissingRequiredParameter` error.
+      #   You must specify either this or an EnvironmentName, or both.
       #   @return [String]
       #
       # @!attribute [rw] attribute_names
-      #   Specifies the response elements you wish to receive. If no attribute
-      #   names are specified, AWS Elastic Beanstalk only returns the name of
-      #   the environment.
+      #   Specify the response elements to return. To retrieve all attributes,
+      #   set to `All`. If no attribute names are specified, returns the name
+      #   of the environment.
       #   @return [Array<String>]
       class DescribeEnvironmentHealthRequest < Struct.new(
         :environment_name,
@@ -1302,29 +1329,26 @@ module Aws
         include Aws::Structure
       end
 
-      # See the example below for a sample response.
+      # Health details for an AWS Elastic Beanstalk environment.
       # @!attribute [rw] environment_name
-      #   The AWS Elastic Beanstalk environment name.
+      #   The environment's name.
       #   @return [String]
       #
       # @!attribute [rw] health_status
-      #   Contains the response body with information about the health of the
-      #   environment.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   Returns the health status value of the environment. For more
-      #   information, see [Health Colors and Statuses][1].
+      #   The [health status][1] of the environment. For example, `Ok`.
       #
       #
       #
       #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
       #   @return [String]
       #
+      # @!attribute [rw] status
+      #   The environment's operational status. `Ready`, `Launching`,
+      #   `Updating`, `Terminating`, or `Terminated`.
+      #   @return [String]
+      #
       # @!attribute [rw] color
-      #   Returns the color indicator that tells you information about the
-      #   health of the environment. For more information, see [Health Colors
-      #   and Statuses][1].
+      #   The [health color][1] of the environment.
       #
       #
       #
@@ -1332,24 +1356,20 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] causes
-      #   Returns potential causes for the reported status.
+      #   Descriptions of the data that contributed to the environment's
+      #   current health status.
       #   @return [Array<String>]
       #
       # @!attribute [rw] application_metrics
-      #   Represents the application metrics for a specified environment.
+      #   Application request metrics for the environment.
       #   @return [Types::ApplicationMetrics]
       #
       # @!attribute [rw] instances_health
-      #   Represents summary information about the health of an instance. For
-      #   more information, see [Health Colors and Statuses][1].
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/elasticbeanstalk/latest/dg/health-enhanced-status.html
+      #   Summary health information for the instances in the environment.
       #   @return [Types::InstanceHealthSummary]
       #
       # @!attribute [rw] refreshed_at
-      #   The date and time the information was last refreshed.
+      #   The date and time that the health information was retrieved.
       #   @return [Time]
       class DescribeEnvironmentHealthResult < Struct.new(
         :environment_name,
@@ -1624,7 +1644,7 @@ module Aws
         include Aws::Structure
       end
 
-      # See the example below to learn how to create a request body.
+      # Parameters for a call to `DescribeInstancesHealth`.
       # @note When making an API call, pass DescribeInstancesHealthRequest
       #   data as a hash:
       #
@@ -1635,21 +1655,21 @@ module Aws
       #         next_token: "NextToken",
       #       }
       # @!attribute [rw] environment_name
-      #   Specifies the AWS Elastic Beanstalk environment name.
+      #   Specify the AWS Elastic Beanstalk environment by name.
       #   @return [String]
       #
       # @!attribute [rw] environment_id
-      #   Specifies the AWS Elastic Beanstalk environment ID.
+      #   Specify the AWS Elastic Beanstalk environment by ID.
       #   @return [String]
       #
       # @!attribute [rw] attribute_names
-      #   Specifies the response elements you wish to receive. If no attribute
-      #   names are specified, AWS Elastic Beanstalk only returns a list of
-      #   instances.
+      #   Specifies the response elements you wish to receive. To retrieve all
+      #   attributes, set to `All`. If no attribute names are specified,
+      #   returns a list of instances.
       #   @return [Array<String>]
       #
       # @!attribute [rw] next_token
-      #   Specifies the next token of the request.
+      #   Specify the pagination token returned by a previous call.
       #   @return [String]
       class DescribeInstancesHealthRequest < Struct.new(
         :environment_name,
@@ -1659,18 +1679,18 @@ module Aws
         include Aws::Structure
       end
 
-      # See the example below for a sample response.
+      # Detailed health information about the Amazon EC2 instances in an AWS
+      # Elastic Beanstalk environment.
       # @!attribute [rw] instance_health_list
-      #   Contains the response body with information about the health of the
-      #   instance.
+      #   Detailed health information about each instance.
       #   @return [Array<Types::SingleInstanceHealth>]
       #
       # @!attribute [rw] refreshed_at
-      #   The date and time the information was last refreshed.
+      #   The date and time that the health information was retrieved.
       #   @return [Time]
       #
       # @!attribute [rw] next_token
-      #   The next token.
+      #   Pagination token for the next page of results, if available.
       #   @return [String]
       class DescribeInstancesHealthResult < Struct.new(
         :instance_health_list,
@@ -2484,7 +2504,7 @@ module Aws
         include Aws::Structure
       end
 
-      # A specification of a location in Amazon S3.
+      # The bucket and key of an item stored in Amazon S3.
       # @note When making an API call, pass S3Location
       #   data as a hash:
       #
@@ -2505,10 +2525,8 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents health information from the specified instance that belongs
-      # to the AWS Elastic Beanstalk environment. Use the `InstanceId`
-      # property to specify the application instance for which you'd like to
-      # return data.
+      # Detailed health information about an Amazon EC2 instance in your
+      # Elastic Beanstalk environment.
       # @!attribute [rw] instance_id
       #   The ID of the Amazon EC2 instance.
       #   @return [String]
@@ -2542,12 +2560,11 @@ module Aws
       #   @return [Time]
       #
       # @!attribute [rw] application_metrics
-      #   Represents the application metrics for a specified environment.
+      #   Request metrics from your application.
       #   @return [Types::ApplicationMetrics]
       #
       # @!attribute [rw] system
-      #   Represents CPU utilization and load average information for
-      #   applications running in the specified environment.
+      #   Operating system metrics from the instance.
       #   @return [Types::SystemStatus]
       #
       # @!attribute [rw] deployment
@@ -2589,21 +2606,26 @@ module Aws
         include Aws::Structure
       end
 
+      # Location of the source code for an application version.
       # @note When making an API call, pass SourceBuildInformation
       #   data as a hash:
       #
       #       {
-      #         source_type: "Git", # required, accepts Git
-      #         source_repository: "CodeCommit", # required, accepts CodeCommit
+      #         source_type: "Git", # required, accepts Git, Zip
+      #         source_repository: "CodeCommit", # required, accepts CodeCommit, S3
       #         source_location: "SourceLocation", # required
       #       }
       # @!attribute [rw] source_type
+      #   The type of repository, such as `Git`.
       #   @return [String]
       #
       # @!attribute [rw] source_repository
+      #   Location where the repository is stored, such as `CodeCommit`.
       #   @return [String]
       #
       # @!attribute [rw] source_location
+      #   The repository name and commit ID, separated by a forward slash. For
+      #   example, `my-repo/265cfa0cf6af46153527f55d6503ec030551f57a`.
       #   @return [String]
       class SourceBuildInformation < Struct.new(
         :source_type,
@@ -2720,13 +2742,9 @@ module Aws
         include Aws::Structure
       end
 
-      # Represents CPU utilization and load average information for
-      # applications running in the specified environment.
+      # CPU utilization and load average metrics for an Amazon EC2 instance.
       # @!attribute [rw] cpu_utilization
-      #   Represents CPU utilization information from the specified instance
-      #   that belongs to the AWS Elastic Beanstalk environment. Use the
-      #   `instanceId` property to specify the application instance for which
-      #   you'd like to return data.
+      #   CPU utilization metrics for the instance.
       #   @return [Types::CPUUtilization]
       #
       # @!attribute [rw] load_average
@@ -2882,7 +2900,7 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] description
-      #   A new description for this release.
+      #   A new description for this version.
       #   @return [String]
       class UpdateApplicationVersionMessage < Struct.new(
         :application_name,
@@ -3147,9 +3165,11 @@ module Aws
       #   @return [String]
       #
       # @!attribute [rw] namespace
+      #   The namespace to which the option belongs.
       #   @return [String]
       #
       # @!attribute [rw] option_name
+      #   The name of the option.
       #   @return [String]
       class ValidationMessage < Struct.new(
         :message,

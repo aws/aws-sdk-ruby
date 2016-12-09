@@ -313,6 +313,9 @@ module Aws
       # @option params [String] :metadata_directive
       #   Specifies whether the metadata is copied from the source object or
       #   replaced with metadata provided in the request.
+      # @option params [String] :tagging_directive
+      #   Specifies whether the object tag-set are copied from the source object
+      #   or replaced with tag-set provided in the request.
       # @option params [String] :server_side_encryption
       #   The Server-side encryption algorithm used when storing this object in
       #   S3 (e.g., AES256, aws:kms).
@@ -358,6 +361,10 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option params [String] :tagging
+      #   The tag-set for the object destination object this value must be used
+      #   in conjunction with the TaggingDirective. The tag-set must be encoded
+      #   as URL Query parameters
       # @return [Types::CopyObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::CopyObjectOutput#copy_object_result #CopyObjectResult} => Types::CopyObjectResult
@@ -394,6 +401,7 @@ module Aws
       #       "MetadataKey" => "MetadataValue",
       #     },
       #     metadata_directive: "COPY", # accepts COPY, REPLACE
+      #     tagging_directive: "COPY", # accepts COPY, REPLACE
       #     server_side_encryption: "AES256", # accepts AES256, aws:kms
       #     storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
       #     website_redirect_location: "WebsiteRedirectLocation",
@@ -405,6 +413,7 @@ module Aws
       #     copy_source_sse_customer_key: "CopySourceSSECustomerKey",
       #     copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
       #     request_payer: "requester", # accepts requester
+      #     tagging: "TaggingHeader",
       #   })
       #
       # @example Response structure
@@ -615,6 +624,27 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes an analytics configuration for the bucket (specified by the
+      # analytics configuration ID).
+      # @option params [required, String] :bucket
+      #   The name of the bucket from which an analytics configuration is
+      #   deleted.
+      # @option params [required, String] :id
+      #   The identifier used to represent an analytics configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_bucket_analytics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "AnalyticsId", # required
+      #   })
+      # @overload delete_bucket_analytics_configuration(params = {})
+      # @param [Hash] params ({})
+      def delete_bucket_analytics_configuration(params = {}, options = {})
+        req = build_request(:delete_bucket_analytics_configuration, params)
+        req.send_request(options)
+      end
+
       # Deletes the cors configuration information set for the bucket.
       # @option params [required, String] :bucket
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -630,6 +660,27 @@ module Aws
         req.send_request(options)
       end
 
+      # Deletes an inventory configuration (identified by the inventory ID)
+      # from the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the inventory configuration to
+      #   delete.
+      # @option params [required, String] :id
+      #   The ID used to identify the inventory configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_bucket_inventory_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "InventoryId", # required
+      #   })
+      # @overload delete_bucket_inventory_configuration(params = {})
+      # @param [Hash] params ({})
+      def delete_bucket_inventory_configuration(params = {}, options = {})
+        req = build_request(:delete_bucket_inventory_configuration, params)
+        req.send_request(options)
+      end
+
       # Deletes the lifecycle configuration from the bucket.
       # @option params [required, String] :bucket
       # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
@@ -642,6 +693,26 @@ module Aws
       # @param [Hash] params ({})
       def delete_bucket_lifecycle(params = {}, options = {})
         req = build_request(:delete_bucket_lifecycle, params)
+        req.send_request(options)
+      end
+
+      # Deletes a metrics configuration (specified by the metrics
+      # configuration ID) from the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the metrics configuration to delete.
+      # @option params [required, String] :id
+      #   The ID used to identify the metrics configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_bucket_metrics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "MetricsId", # required
+      #   })
+      # @overload delete_bucket_metrics_configuration(params = {})
+      # @param [Hash] params ({})
+      def delete_bucket_metrics_configuration(params = {}, options = {})
+        req = build_request(:delete_bucket_metrics_configuration, params)
         req.send_request(options)
       end
 
@@ -744,6 +815,31 @@ module Aws
       # @param [Hash] params ({})
       def delete_object(params = {}, options = {})
         req = build_request(:delete_object, params)
+        req.send_request(options)
+      end
+
+      # Removes the tag-set from an existing object.
+      # @option params [required, String] :bucket
+      # @option params [required, String] :key
+      # @option params [String] :version_id
+      #   The versionId of the object that the tag-set will be removed from.
+      # @return [Types::DeleteObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteObjectTaggingOutput#version_id #VersionId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_object_tagging({
+      #     bucket: "BucketName", # required
+      #     key: "ObjectKey", # required
+      #     version_id: "ObjectVersionId",
+      #   })
+      #
+      # @example Response structure
+      #   resp.version_id #=> String
+      # @overload delete_object_tagging(params = {})
+      # @param [Hash] params ({})
+      def delete_object_tagging(params = {}, options = {})
+        req = build_request(:delete_object_tagging, params)
         req.send_request(options)
       end
 
@@ -852,6 +948,44 @@ module Aws
         req.send_request(options)
       end
 
+      # Gets an analytics configuration for the bucket (specified by the
+      # analytics configuration ID).
+      # @option params [required, String] :bucket
+      #   The name of the bucket from which an analytics configuration is
+      #   retrieved.
+      # @option params [required, String] :id
+      #   The identifier used to represent an analytics configuration.
+      # @return [Types::GetBucketAnalyticsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetBucketAnalyticsConfigurationOutput#analytics_configuration #AnalyticsConfiguration} => Types::AnalyticsConfiguration
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_bucket_analytics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "AnalyticsId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.analytics_configuration.id #=> String
+      #   resp.analytics_configuration.filter.prefix #=> String
+      #   resp.analytics_configuration.filter.tag.key #=> String
+      #   resp.analytics_configuration.filter.tag.value #=> String
+      #   resp.analytics_configuration.filter.and.prefix #=> String
+      #   resp.analytics_configuration.filter.and.tags #=> Array
+      #   resp.analytics_configuration.filter.and.tags[0].key #=> String
+      #   resp.analytics_configuration.filter.and.tags[0].value #=> String
+      #   resp.analytics_configuration.storage_class_analysis.data_export.output_schema_version #=> String, one of "V_1"
+      #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.format #=> String, one of "CSV"
+      #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_account_id #=> String
+      #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.bucket #=> String
+      #   resp.analytics_configuration.storage_class_analysis.data_export.destination.s3_bucket_destination.prefix #=> String
+      # @overload get_bucket_analytics_configuration(params = {})
+      # @param [Hash] params ({})
+      def get_bucket_analytics_configuration(params = {}, options = {})
+        req = build_request(:get_bucket_analytics_configuration, params)
+        req.send_request(options)
+      end
+
       # Returns the cors configuration for the bucket.
       # @option params [required, String] :bucket
       # @return [Types::GetBucketCorsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
@@ -878,6 +1012,42 @@ module Aws
       # @param [Hash] params ({})
       def get_bucket_cors(params = {}, options = {})
         req = build_request(:get_bucket_cors, params)
+        req.send_request(options)
+      end
+
+      # Returns an inventory configuration (identified by the inventory ID)
+      # from the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the inventory configuration to
+      #   retrieve.
+      # @option params [required, String] :id
+      #   The ID used to identify the inventory configuration.
+      # @return [Types::GetBucketInventoryConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetBucketInventoryConfigurationOutput#inventory_configuration #InventoryConfiguration} => Types::InventoryConfiguration
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_bucket_inventory_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "InventoryId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.inventory_configuration.destination.s3_bucket_destination.account_id #=> String
+      #   resp.inventory_configuration.destination.s3_bucket_destination.bucket #=> String
+      #   resp.inventory_configuration.destination.s3_bucket_destination.format #=> String, one of "CSV"
+      #   resp.inventory_configuration.destination.s3_bucket_destination.prefix #=> String
+      #   resp.inventory_configuration.is_enabled #=> Boolean
+      #   resp.inventory_configuration.filter.prefix #=> String
+      #   resp.inventory_configuration.id #=> String
+      #   resp.inventory_configuration.included_object_versions #=> String, one of "All", "Current"
+      #   resp.inventory_configuration.optional_fields #=> Array
+      #   resp.inventory_configuration.optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus"
+      #   resp.inventory_configuration.schedule.frequency #=> String, one of "Daily", "Weekly"
+      # @overload get_bucket_inventory_configuration(params = {})
+      # @param [Hash] params ({})
+      def get_bucket_inventory_configuration(params = {}, options = {})
+        req = build_request(:get_bucket_inventory_configuration, params)
         req.send_request(options)
       end
 
@@ -932,6 +1102,13 @@ module Aws
       #   resp.rules[0].expiration.expired_object_delete_marker #=> Boolean
       #   resp.rules[0].id #=> String
       #   resp.rules[0].prefix #=> String
+      #   resp.rules[0].filter.prefix #=> String
+      #   resp.rules[0].filter.tag.key #=> String
+      #   resp.rules[0].filter.tag.value #=> String
+      #   resp.rules[0].filter.and.prefix #=> String
+      #   resp.rules[0].filter.and.tags #=> Array
+      #   resp.rules[0].filter.and.tags[0].key #=> String
+      #   resp.rules[0].filter.and.tags[0].value #=> String
       #   resp.rules[0].status #=> String, one of "Enabled", "Disabled"
       #   resp.rules[0].transitions #=> Array
       #   resp.rules[0].transitions[0].date #=> Time
@@ -996,6 +1173,39 @@ module Aws
       # @param [Hash] params ({})
       def get_bucket_logging(params = {}, options = {})
         req = build_request(:get_bucket_logging, params)
+        req.send_request(options)
+      end
+
+      # Gets a metrics configuration (specified by the metrics configuration
+      # ID) from the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the metrics configuration to
+      #   retrieve.
+      # @option params [required, String] :id
+      #   The ID used to identify the metrics configuration.
+      # @return [Types::GetBucketMetricsConfigurationOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetBucketMetricsConfigurationOutput#metrics_configuration #MetricsConfiguration} => Types::MetricsConfiguration
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_bucket_metrics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "MetricsId", # required
+      #   })
+      #
+      # @example Response structure
+      #   resp.metrics_configuration.id #=> String
+      #   resp.metrics_configuration.filter.prefix #=> String
+      #   resp.metrics_configuration.filter.tag.key #=> String
+      #   resp.metrics_configuration.filter.tag.value #=> String
+      #   resp.metrics_configuration.filter.and.prefix #=> String
+      #   resp.metrics_configuration.filter.and.tags #=> Array
+      #   resp.metrics_configuration.filter.and.tags[0].key #=> String
+      #   resp.metrics_configuration.filter.and.tags[0].value #=> String
+      # @overload get_bucket_metrics_configuration(params = {})
+      # @param [Hash] params ({})
+      def get_bucket_metrics_configuration(params = {}, options = {})
+        req = build_request(:get_bucket_metrics_configuration, params)
         req.send_request(options)
       end
 
@@ -1316,6 +1526,7 @@ module Aws
       #   * {Types::GetObjectOutput#request_charged #RequestCharged} => String
       #   * {Types::GetObjectOutput#replication_status #ReplicationStatus} => String
       #   * {Types::GetObjectOutput#parts_count #PartsCount} => Integer
+      #   * {Types::GetObjectOutput#tag_count #TagCount} => Integer
       #
       # @example Download an object to disk
       #   # stream object directly to disk
@@ -1328,14 +1539,6 @@ module Aws
       #   resp.metadata #=> { ... }
       #   resp.etag #=> "..."
       #
-      # @example Download object into memory
-      #   # omit :response_target to download to a StringIO in memory
-      #   resp = s3.get_object(bucket: 'bucket-name', key: 'object-key')
-      # 
-      #   # call #read or #string on the response body
-      #   resp.body.read
-      #   #=> '...'
-      #
       # @example Streaming data to a block
       #   # WARNING: yielding data to a block disables retries of networking errors
       #   File.open('/path/to/file', 'wb') do |file|
@@ -1343,6 +1546,14 @@ module Aws
       #       file.write(chunk)
       #     end
       #   end
+      #
+      # @example Download object into memory
+      #   # omit :response_target to download to a StringIO in memory
+      #   resp = s3.get_object(bucket: 'bucket-name', key: 'object-key')
+      # 
+      #   # call #read or #string on the response body
+      #   resp.body.read
+      #   #=> '...'
       #
       # @example Request syntax with placeholder values
       #   resp = client.get_object({
@@ -1397,6 +1608,7 @@ module Aws
       #   resp.request_charged #=> String, one of "requester"
       #   resp.replication_status #=> String, one of "COMPLETE", "PENDING", "FAILED", "REPLICA"
       #   resp.parts_count #=> Integer
+      #   resp.tag_count #=> Integer
       # @overload get_object(params = {})
       # @param [Hash] params ({})
       def get_object(params = {}, options = {})
@@ -1444,6 +1656,34 @@ module Aws
       # @param [Hash] params ({})
       def get_object_acl(params = {}, options = {})
         req = build_request(:get_object_acl, params)
+        req.send_request(options)
+      end
+
+      # Returns the tag-set of an object.
+      # @option params [required, String] :bucket
+      # @option params [required, String] :key
+      # @option params [String] :version_id
+      # @return [Types::GetObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::GetObjectTaggingOutput#version_id #VersionId} => String
+      #   * {Types::GetObjectTaggingOutput#tag_set #TagSet} => Array&lt;Types::Tag&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.get_object_tagging({
+      #     bucket: "BucketName", # required
+      #     key: "ObjectKey", # required
+      #     version_id: "ObjectVersionId",
+      #   })
+      #
+      # @example Response structure
+      #   resp.version_id #=> String
+      #   resp.tag_set #=> Array
+      #   resp.tag_set[0].key #=> String
+      #   resp.tag_set[0].value #=> String
+      # @overload get_object_tagging(params = {})
+      # @param [Hash] params ({})
+      def get_object_tagging(params = {}, options = {})
+        req = build_request(:get_object_tagging, params)
         req.send_request(options)
       end
 
@@ -1622,6 +1862,138 @@ module Aws
       # @param [Hash] params ({})
       def head_object(params = {}, options = {})
         req = build_request(:head_object, params)
+        req.send_request(options)
+      end
+
+      # Lists the analytics configurations for the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket from which analytics configurations are
+      #   retrieved.
+      # @option params [String] :continuation_token
+      #   The ContinuationToken that represents a placeholder from where this
+      #   request should begin.
+      # @return [Types::ListBucketAnalyticsConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListBucketAnalyticsConfigurationsOutput#is_truncated #IsTruncated} => Boolean
+      #   * {Types::ListBucketAnalyticsConfigurationsOutput#continuation_token #ContinuationToken} => String
+      #   * {Types::ListBucketAnalyticsConfigurationsOutput#next_continuation_token #NextContinuationToken} => String
+      #   * {Types::ListBucketAnalyticsConfigurationsOutput#analytics_configuration_list #AnalyticsConfigurationList} => Array&lt;Types::AnalyticsConfiguration&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_bucket_analytics_configurations({
+      #     bucket: "BucketName", # required
+      #     continuation_token: "Token",
+      #   })
+      #
+      # @example Response structure
+      #   resp.is_truncated #=> Boolean
+      #   resp.continuation_token #=> String
+      #   resp.next_continuation_token #=> String
+      #   resp.analytics_configuration_list #=> Array
+      #   resp.analytics_configuration_list[0].id #=> String
+      #   resp.analytics_configuration_list[0].filter.prefix #=> String
+      #   resp.analytics_configuration_list[0].filter.tag.key #=> String
+      #   resp.analytics_configuration_list[0].filter.tag.value #=> String
+      #   resp.analytics_configuration_list[0].filter.and.prefix #=> String
+      #   resp.analytics_configuration_list[0].filter.and.tags #=> Array
+      #   resp.analytics_configuration_list[0].filter.and.tags[0].key #=> String
+      #   resp.analytics_configuration_list[0].filter.and.tags[0].value #=> String
+      #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.output_schema_version #=> String, one of "V_1"
+      #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.format #=> String, one of "CSV"
+      #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.bucket_account_id #=> String
+      #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.bucket #=> String
+      #   resp.analytics_configuration_list[0].storage_class_analysis.data_export.destination.s3_bucket_destination.prefix #=> String
+      # @overload list_bucket_analytics_configurations(params = {})
+      # @param [Hash] params ({})
+      def list_bucket_analytics_configurations(params = {}, options = {})
+        req = build_request(:list_bucket_analytics_configurations, params)
+        req.send_request(options)
+      end
+
+      # Returns a list of inventory configurations for the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the inventory configurations to
+      #   retrieve.
+      # @option params [String] :continuation_token
+      #   The marker used to continue an inventory configuration listing that
+      #   has been truncated. Use the NextContinuationToken from a previously
+      #   truncated list response to continue the listing. The continuation
+      #   token is an opaque value that Amazon S3 understands.
+      # @return [Types::ListBucketInventoryConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListBucketInventoryConfigurationsOutput#continuation_token #ContinuationToken} => String
+      #   * {Types::ListBucketInventoryConfigurationsOutput#inventory_configuration_list #InventoryConfigurationList} => Array&lt;Types::InventoryConfiguration&gt;
+      #   * {Types::ListBucketInventoryConfigurationsOutput#is_truncated #IsTruncated} => Boolean
+      #   * {Types::ListBucketInventoryConfigurationsOutput#next_continuation_token #NextContinuationToken} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_bucket_inventory_configurations({
+      #     bucket: "BucketName", # required
+      #     continuation_token: "Token",
+      #   })
+      #
+      # @example Response structure
+      #   resp.continuation_token #=> String
+      #   resp.inventory_configuration_list #=> Array
+      #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.account_id #=> String
+      #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.bucket #=> String
+      #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.format #=> String, one of "CSV"
+      #   resp.inventory_configuration_list[0].destination.s3_bucket_destination.prefix #=> String
+      #   resp.inventory_configuration_list[0].is_enabled #=> Boolean
+      #   resp.inventory_configuration_list[0].filter.prefix #=> String
+      #   resp.inventory_configuration_list[0].id #=> String
+      #   resp.inventory_configuration_list[0].included_object_versions #=> String, one of "All", "Current"
+      #   resp.inventory_configuration_list[0].optional_fields #=> Array
+      #   resp.inventory_configuration_list[0].optional_fields[0] #=> String, one of "Size", "LastModifiedDate", "StorageClass", "ETag", "IsMultipartUploaded", "ReplicationStatus"
+      #   resp.inventory_configuration_list[0].schedule.frequency #=> String, one of "Daily", "Weekly"
+      #   resp.is_truncated #=> Boolean
+      #   resp.next_continuation_token #=> String
+      # @overload list_bucket_inventory_configurations(params = {})
+      # @param [Hash] params ({})
+      def list_bucket_inventory_configurations(params = {}, options = {})
+        req = build_request(:list_bucket_inventory_configurations, params)
+        req.send_request(options)
+      end
+
+      # Lists the metrics configurations for the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket containing the metrics configurations to
+      #   retrieve.
+      # @option params [String] :continuation_token
+      #   The marker that is used to continue a metrics configuration listing
+      #   that has been truncated. Use the NextContinuationToken from a
+      #   previously truncated list response to continue the listing. The
+      #   continuation token is an opaque value that Amazon S3 understands.
+      # @return [Types::ListBucketMetricsConfigurationsOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::ListBucketMetricsConfigurationsOutput#is_truncated #IsTruncated} => Boolean
+      #   * {Types::ListBucketMetricsConfigurationsOutput#continuation_token #ContinuationToken} => String
+      #   * {Types::ListBucketMetricsConfigurationsOutput#next_continuation_token #NextContinuationToken} => String
+      #   * {Types::ListBucketMetricsConfigurationsOutput#metrics_configuration_list #MetricsConfigurationList} => Array&lt;Types::MetricsConfiguration&gt;
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.list_bucket_metrics_configurations({
+      #     bucket: "BucketName", # required
+      #     continuation_token: "Token",
+      #   })
+      #
+      # @example Response structure
+      #   resp.is_truncated #=> Boolean
+      #   resp.continuation_token #=> String
+      #   resp.next_continuation_token #=> String
+      #   resp.metrics_configuration_list #=> Array
+      #   resp.metrics_configuration_list[0].id #=> String
+      #   resp.metrics_configuration_list[0].filter.prefix #=> String
+      #   resp.metrics_configuration_list[0].filter.tag.key #=> String
+      #   resp.metrics_configuration_list[0].filter.tag.value #=> String
+      #   resp.metrics_configuration_list[0].filter.and.prefix #=> String
+      #   resp.metrics_configuration_list[0].filter.and.tags #=> Array
+      #   resp.metrics_configuration_list[0].filter.and.tags[0].key #=> String
+      #   resp.metrics_configuration_list[0].filter.and.tags[0].value #=> String
+      # @overload list_bucket_metrics_configurations(params = {})
+      # @param [Hash] params ({})
+      def list_bucket_metrics_configurations(params = {}, options = {})
+        req = build_request(:list_bucket_metrics_configurations, params)
         req.send_request(options)
       end
 
@@ -2121,6 +2493,60 @@ module Aws
         req.send_request(options)
       end
 
+      # Sets an analytics configuration for the bucket (specified by the
+      # analytics configuration ID).
+      # @option params [required, String] :bucket
+      #   The name of the bucket to which an analytics configuration is stored.
+      # @option params [required, String] :id
+      #   The identifier used to represent an analytics configuration.
+      # @option params [required, Types::AnalyticsConfiguration] :analytics_configuration
+      #   The configuration and any analyses for the analytics filter.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_bucket_analytics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "AnalyticsId", # required
+      #     analytics_configuration: { # required
+      #       id: "AnalyticsId", # required
+      #       filter: {
+      #         prefix: "Prefix",
+      #         tag: {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #         and: {
+      #           prefix: "Prefix",
+      #           tags: [
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       },
+      #       storage_class_analysis: { # required
+      #         data_export: {
+      #           output_schema_version: "V_1", # required, accepts V_1
+      #           destination: { # required
+      #             s3_bucket_destination: { # required
+      #               format: "CSV", # required, accepts CSV
+      #               bucket_account_id: "AccountId",
+      #               bucket: "BucketName", # required
+      #               prefix: "Prefix",
+      #             },
+      #           },
+      #         },
+      #       },
+      #     },
+      #   })
+      # @overload put_bucket_analytics_configuration(params = {})
+      # @param [Hash] params ({})
+      def put_bucket_analytics_configuration(params = {}, options = {})
+        req = build_request(:put_bucket_analytics_configuration, params)
+        req.send_request(options)
+      end
+
       # Sets the cors configuration for a bucket.
       # @option params [required, String] :bucket
       # @option params [required, Types::CORSConfiguration] :cors_configuration
@@ -2147,6 +2573,49 @@ module Aws
       # @param [Hash] params ({})
       def put_bucket_cors(params = {}, options = {})
         req = build_request(:put_bucket_cors, params)
+        req.send_request(options)
+      end
+
+      # Adds an inventory configuration (identified by the inventory ID) from
+      # the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket where the inventory configuration will be
+      #   stored.
+      # @option params [required, String] :id
+      #   The ID used to identify the inventory configuration.
+      # @option params [required, Types::InventoryConfiguration] :inventory_configuration
+      #   Specifies the inventory configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_bucket_inventory_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "InventoryId", # required
+      #     inventory_configuration: { # required
+      #       destination: { # required
+      #         s3_bucket_destination: { # required
+      #           account_id: "AccountId",
+      #           bucket: "BucketName", # required
+      #           format: "CSV", # required, accepts CSV
+      #           prefix: "Prefix",
+      #         },
+      #       },
+      #       is_enabled: false, # required
+      #       filter: {
+      #         prefix: "Prefix", # required
+      #       },
+      #       id: "InventoryId", # required
+      #       included_object_versions: "All", # required, accepts All, Current
+      #       optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+      #       schedule: { # required
+      #         frequency: "Daily", # required, accepts Daily, Weekly
+      #       },
+      #     },
+      #   })
+      # @overload put_bucket_inventory_configuration(params = {})
+      # @param [Hash] params ({})
+      def put_bucket_inventory_configuration(params = {}, options = {})
+        req = build_request(:put_bucket_inventory_configuration, params)
         req.send_request(options)
       end
 
@@ -2215,7 +2684,23 @@ module Aws
       #             expired_object_delete_marker: false,
       #           },
       #           id: "ID",
-      #           prefix: "Prefix", # required
+      #           prefix: "Prefix",
+      #           filter: {
+      #             prefix: "Prefix",
+      #             tag: {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #             and: {
+      #               prefix: "Prefix",
+      #               tags: [
+      #                 {
+      #                   key: "ObjectKey", # required
+      #                   value: "Value", # required
+      #                 },
+      #               ],
+      #             },
+      #           },
       #           status: "Enabled", # required, accepts Enabled, Disabled
       #           transitions: [
       #             {
@@ -2282,6 +2767,47 @@ module Aws
       # @param [Hash] params ({})
       def put_bucket_logging(params = {}, options = {})
         req = build_request(:put_bucket_logging, params)
+        req.send_request(options)
+      end
+
+      # Sets a metrics configuration (specified by the metrics configuration
+      # ID) for the bucket.
+      # @option params [required, String] :bucket
+      #   The name of the bucket for which the metrics configuration is set.
+      # @option params [required, String] :id
+      #   The ID used to identify the metrics configuration.
+      # @option params [required, Types::MetricsConfiguration] :metrics_configuration
+      #   Specifies the metrics configuration.
+      # @return [Struct] Returns an empty {Seahorse::Client::Response response}.
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_bucket_metrics_configuration({
+      #     bucket: "BucketName", # required
+      #     id: "MetricsId", # required
+      #     metrics_configuration: { # required
+      #       id: "MetricsId", # required
+      #       filter: {
+      #         prefix: "Prefix",
+      #         tag: {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #         and: {
+      #           prefix: "Prefix",
+      #           tags: [
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       },
+      #     },
+      #   })
+      # @overload put_bucket_metrics_configuration(params = {})
+      # @param [Hash] params ({})
+      def put_bucket_metrics_configuration(params = {}, options = {})
+        req = build_request(:put_bucket_metrics_configuration, params)
         req.send_request(options)
       end
 
@@ -2648,6 +3174,9 @@ module Aws
       #   requests. Documentation on downloading objects from requester pays
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
+      # @option params [String] :tagging
+      #   The tag-set for the object. The tag-set must be encoded as URL Query
+      #   parameters
       # @return [Types::PutObjectOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
       #
       #   * {Types::PutObjectOutput#expiration #Expiration} => String
@@ -2694,6 +3223,7 @@ module Aws
       #     sse_customer_key_md5: "SSECustomerKeyMD5",
       #     ssekms_key_id: "SSEKMSKeyId",
       #     request_payer: "requester", # accepts requester
+      #     tagging: "TaggingHeader",
       #   })
       #
       # @example Response structure
@@ -2783,6 +3313,41 @@ module Aws
       # @param [Hash] params ({})
       def put_object_acl(params = {}, options = {})
         req = build_request(:put_object_acl, params)
+        req.send_request(options)
+      end
+
+      # Sets the supplied tag-set to an object that already exists in a bucket
+      # @option params [required, String] :bucket
+      # @option params [required, String] :key
+      # @option params [String] :version_id
+      # @option params [String] :content_md5
+      # @option params [required, Types::Tagging] :tagging
+      # @return [Types::PutObjectTaggingOutput] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::PutObjectTaggingOutput#version_id #VersionId} => String
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.put_object_tagging({
+      #     bucket: "BucketName", # required
+      #     key: "ObjectKey", # required
+      #     version_id: "ObjectVersionId",
+      #     content_md5: "ContentMD5",
+      #     tagging: { # required
+      #       tag_set: [ # required
+      #         {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #       ],
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.version_id #=> String
+      # @overload put_object_tagging(params = {})
+      # @param [Hash] params ({})
+      def put_object_tagging(params = {}, options = {})
+        req = build_request(:put_object_tagging, params)
         req.send_request(options)
       end
 

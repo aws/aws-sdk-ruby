@@ -47,8 +47,9 @@ module Aws
       #
       # @!attribute [rw] nonce
       #   A system-generated random number that AWS CodePipeline uses to
-      #   ensure that the job is being worked on by only one job worker. This
-      #   number must be returned in the response.
+      #   ensure that the job is being worked on by only one job worker. Get
+      #   this number from the response of the PollForJobs request that
+      #   returned this job.
       #   @return [String]
       class AcknowledgeJobInput < Struct.new(
         :job_id,
@@ -80,8 +81,8 @@ module Aws
       #
       # @!attribute [rw] nonce
       #   A system-generated random number that AWS CodePipeline uses to
-      #   ensure that the job is being worked on by only one job worker. This
-      #   number must be returned in the response.
+      #   ensure that the job is being worked on by only one job worker. Get
+      #   this number from the response to a GetThirdPartyJobDetails request.
       #   @return [String]
       #
       # @!attribute [rw] client_token
@@ -1308,8 +1309,8 @@ module Aws
       #
       # @!attribute [rw] nonce
       #   A system-generated random number that AWS CodePipeline uses to
-      #   ensure that the job is being worked on by only one job worker. This
-      #   number must be returned in the response.
+      #   ensure that the job is being worked on by only one job worker. Use
+      #   this number in an AcknowledgeJob request.
       #   @return [String]
       #
       # @!attribute [rw] account_id
@@ -2310,8 +2311,8 @@ module Aws
       #
       # @!attribute [rw] nonce
       #   A system-generated random number that AWS CodePipeline uses to
-      #   ensure that the job is being worked on by only one job worker. This
-      #   number must be returned in the response.
+      #   ensure that the job is being worked on by only one job worker. Use
+      #   this number in an AcknowledgeThirdPartyJob request.
       #   @return [String]
       class ThirdPartyJobDetails < Struct.new(
         :id,

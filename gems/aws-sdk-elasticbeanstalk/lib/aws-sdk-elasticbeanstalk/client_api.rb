@@ -37,13 +37,17 @@ module Aws
       AutoScalingGroupList = Shapes::ListShape.new(name: 'AutoScalingGroupList')
       AvailableSolutionStackDetailsList = Shapes::ListShape.new(name: 'AvailableSolutionStackDetailsList')
       AvailableSolutionStackNamesList = Shapes::ListShape.new(name: 'AvailableSolutionStackNamesList')
+      BoxedInt = Shapes::IntegerShape.new(name: 'BoxedInt')
+      BuildConfiguration = Shapes::StructureShape.new(name: 'BuildConfiguration')
       CPUUtilization = Shapes::StructureShape.new(name: 'CPUUtilization')
       Cause = Shapes::StringShape.new(name: 'Cause')
       Causes = Shapes::ListShape.new(name: 'Causes')
       CheckDNSAvailabilityMessage = Shapes::StructureShape.new(name: 'CheckDNSAvailabilityMessage')
       CheckDNSAvailabilityResultMessage = Shapes::StructureShape.new(name: 'CheckDNSAvailabilityResultMessage')
       CnameAvailability = Shapes::BooleanShape.new(name: 'CnameAvailability')
+      CodeBuildNotInServiceRegionException = Shapes::StructureShape.new(name: 'CodeBuildNotInServiceRegionException')
       ComposeEnvironmentsMessage = Shapes::StructureShape.new(name: 'ComposeEnvironmentsMessage')
+      ComputeType = Shapes::StringShape.new(name: 'ComputeType')
       ConfigurationDeploymentStatus = Shapes::StringShape.new(name: 'ConfigurationDeploymentStatus')
       ConfigurationOptionDefaultValue = Shapes::StringShape.new(name: 'ConfigurationOptionDefaultValue')
       ConfigurationOptionDescription = Shapes::StructureShape.new(name: 'ConfigurationOptionDescription')
@@ -161,6 +165,7 @@ module Aws
       MaxRecords = Shapes::IntegerShape.new(name: 'MaxRecords')
       Message = Shapes::StringShape.new(name: 'Message')
       NextToken = Shapes::StringShape.new(name: 'NextToken')
+      NonEmptyString = Shapes::StringShape.new(name: 'NonEmptyString')
       NullableDouble = Shapes::FloatShape.new(name: 'NullableDouble')
       NullableInteger = Shapes::IntegerShape.new(name: 'NullableInteger')
       NullableLong = Shapes::IntegerShape.new(name: 'NullableLong')
@@ -271,6 +276,7 @@ module Aws
       ApplicationVersionDescription.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
       ApplicationVersionDescription.add_member(:version_label, Shapes::ShapeRef.new(shape: VersionLabel, location_name: "VersionLabel"))
       ApplicationVersionDescription.add_member(:source_build_information, Shapes::ShapeRef.new(shape: SourceBuildInformation, location_name: "SourceBuildInformation"))
+      ApplicationVersionDescription.add_member(:build_arn, Shapes::ShapeRef.new(shape: String, location_name: "BuildArn"))
       ApplicationVersionDescription.add_member(:source_bundle, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceBundle"))
       ApplicationVersionDescription.add_member(:date_created, Shapes::ShapeRef.new(shape: CreationDate, location_name: "DateCreated"))
       ApplicationVersionDescription.add_member(:date_updated, Shapes::ShapeRef.new(shape: UpdateDate, location_name: "DateUpdated"))
@@ -305,6 +311,13 @@ module Aws
       AvailableSolutionStackDetailsList.member = Shapes::ShapeRef.new(shape: SolutionStackDescription)
 
       AvailableSolutionStackNamesList.member = Shapes::ShapeRef.new(shape: SolutionStackName)
+
+      BuildConfiguration.add_member(:artifact_name, Shapes::ShapeRef.new(shape: String, location_name: "ArtifactName"))
+      BuildConfiguration.add_member(:code_build_service_role, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "CodeBuildServiceRole"))
+      BuildConfiguration.add_member(:compute_type, Shapes::ShapeRef.new(shape: ComputeType, location_name: "ComputeType"))
+      BuildConfiguration.add_member(:image, Shapes::ShapeRef.new(shape: NonEmptyString, required: true, location_name: "Image"))
+      BuildConfiguration.add_member(:timeout_in_minutes, Shapes::ShapeRef.new(shape: BoxedInt, location_name: "TimeoutInMinutes"))
+      BuildConfiguration.struct_class = Types::BuildConfiguration
 
       CPUUtilization.add_member(:user, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "User"))
       CPUUtilization.add_member(:nice, Shapes::ShapeRef.new(shape: NullableDouble, location_name: "Nice"))
@@ -388,6 +401,7 @@ module Aws
       CreateApplicationVersionMessage.add_member(:description, Shapes::ShapeRef.new(shape: Description, location_name: "Description"))
       CreateApplicationVersionMessage.add_member(:source_build_information, Shapes::ShapeRef.new(shape: SourceBuildInformation, location_name: "SourceBuildInformation"))
       CreateApplicationVersionMessage.add_member(:source_bundle, Shapes::ShapeRef.new(shape: S3Location, location_name: "SourceBundle"))
+      CreateApplicationVersionMessage.add_member(:build_configuration, Shapes::ShapeRef.new(shape: BuildConfiguration, location_name: "BuildConfiguration"))
       CreateApplicationVersionMessage.add_member(:auto_create_application, Shapes::ShapeRef.new(shape: AutoCreateApplication, location_name: "AutoCreateApplication"))
       CreateApplicationVersionMessage.add_member(:process, Shapes::ShapeRef.new(shape: ApplicationVersionProccess, location_name: "Process"))
       CreateApplicationVersionMessage.struct_class = Types::CreateApplicationVersionMessage
@@ -908,6 +922,7 @@ module Aws
           o.errors << Shapes::ShapeRef.new(shape: TooManyApplicationVersionsException)
           o.errors << Shapes::ShapeRef.new(shape: InsufficientPrivilegesException)
           o.errors << Shapes::ShapeRef.new(shape: S3LocationNotInServiceRegionException)
+          o.errors << Shapes::ShapeRef.new(shape: CodeBuildNotInServiceRegionException)
         end)
 
         api.add_operation(:create_configuration_template, Seahorse::Model::Operation.new.tap do |o|

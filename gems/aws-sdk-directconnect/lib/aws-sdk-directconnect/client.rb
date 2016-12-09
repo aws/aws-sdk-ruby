@@ -257,10 +257,12 @@ module Aws
       #   * {Types::VirtualInterface#auth_key #authKey} => String
       #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
       #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#address_family #addressFamily} => String
       #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
       #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
       #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
       #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.allocate_private_virtual_interface({
@@ -272,6 +274,7 @@ module Aws
       #       asn: 1, # required
       #       auth_key: "BGPAuthKey",
       #       amazon_address: "AmazonAddress",
+      #       address_family: "ipv4", # accepts ipv4, ipv6
       #       customer_address: "CustomerAddress",
       #     },
       #   })
@@ -288,11 +291,20 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
+      #   resp.address_family #=> String, one of "ipv4", "ipv6"
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      #   resp.bgp_peers #=> Array
+      #   resp.bgp_peers[0].asn #=> Integer
+      #   resp.bgp_peers[0].auth_key #=> String
+      #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.bgp_peers[0].amazon_address #=> String
+      #   resp.bgp_peers[0].customer_address #=> String
+      #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
       # @overload allocate_private_virtual_interface(params = {})
       # @param [Hash] params ({})
       def allocate_private_virtual_interface(params = {}, options = {})
@@ -310,6 +322,11 @@ module Aws
       # the virtual interface owner by calling ConfirmPublicVirtualInterface.
       # Until this step has been completed, the virtual interface will be in
       # 'Confirming' state, and will not be available for handling traffic.
+      #
+      # When creating an IPv6 public virtual interface (addressFamily is
+      # 'ipv6'), the customer and amazon address fields should be left blank
+      # to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently
+      # not supported.
       # @option params [required, String] :connection_id
       #   The connection ID on which the public virtual interface is
       #   provisioned.
@@ -337,10 +354,12 @@ module Aws
       #   * {Types::VirtualInterface#auth_key #authKey} => String
       #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
       #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#address_family #addressFamily} => String
       #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
       #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
       #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
       #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.allocate_public_virtual_interface({
@@ -351,9 +370,10 @@ module Aws
       #       vlan: 1, # required
       #       asn: 1, # required
       #       auth_key: "BGPAuthKey",
-      #       amazon_address: "AmazonAddress", # required
-      #       customer_address: "CustomerAddress", # required
-      #       route_filter_prefixes: [ # required
+      #       amazon_address: "AmazonAddress",
+      #       customer_address: "CustomerAddress",
+      #       address_family: "ipv4", # accepts ipv4, ipv6
+      #       route_filter_prefixes: [
       #         {
       #           cidr: "CIDR",
       #         },
@@ -373,11 +393,20 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
+      #   resp.address_family #=> String, one of "ipv4", "ipv6"
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      #   resp.bgp_peers #=> Array
+      #   resp.bgp_peers[0].asn #=> Integer
+      #   resp.bgp_peers[0].auth_key #=> String
+      #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.bgp_peers[0].amazon_address #=> String
+      #   resp.bgp_peers[0].customer_address #=> String
+      #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
       # @overload allocate_public_virtual_interface(params = {})
       # @param [Hash] params ({})
       def allocate_public_virtual_interface(params = {}, options = {})
@@ -484,6 +513,80 @@ module Aws
       # @param [Hash] params ({})
       def confirm_public_virtual_interface(params = {}, options = {})
         req = build_request(:confirm_public_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Creates a new BGP peer on a specified virtual interface. The BGP peer
+      # cannot be in the same address family (IPv4/IPv6) of an existing BGP
+      # peer on the virtual interface.
+      #
+      # You must create a BGP peer for the corresponding address family in
+      # order to access AWS resources that also use that address family.
+      #
+      # When creating a IPv6 BGP peer, the Amazon address and customer address
+      # fields must be left blank. IPv6 addresses are automatically assigned
+      # from Amazon's pool of IPv6 addresses; you cannot specify custom IPv6
+      # addresses.
+      #
+      # For a public virtual interface, the Autonomous System Number (ASN)
+      # must be private or already whitelisted for the virtual interface.
+      # @option params [String] :virtual_interface_id
+      #   The ID of the virtual interface on which the BGP peer will be
+      #   provisioned.
+      #
+      #   Example: dxvif-456abc78
+      #
+      #   Default: None
+      # @option params [Types::NewBGPPeer] :new_bgp_peer
+      #   Detailed information for the BGP peer to be created.
+      #
+      #   Default: None
+      # @return [Types::CreateBGPPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::CreateBGPPeerResponse#virtual_interface #virtualInterface} => Types::VirtualInterface
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.create_bgp_peer({
+      #     virtual_interface_id: "VirtualInterfaceId",
+      #     new_bgp_peer: {
+      #       asn: 1,
+      #       auth_key: "BGPAuthKey",
+      #       address_family: "ipv4", # accepts ipv4, ipv6
+      #       amazon_address: "AmazonAddress",
+      #       customer_address: "CustomerAddress",
+      #     },
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interface.owner_account #=> String
+      #   resp.virtual_interface.virtual_interface_id #=> String
+      #   resp.virtual_interface.location #=> String
+      #   resp.virtual_interface.connection_id #=> String
+      #   resp.virtual_interface.virtual_interface_type #=> String
+      #   resp.virtual_interface.virtual_interface_name #=> String
+      #   resp.virtual_interface.vlan #=> Integer
+      #   resp.virtual_interface.asn #=> Integer
+      #   resp.virtual_interface.auth_key #=> String
+      #   resp.virtual_interface.amazon_address #=> String
+      #   resp.virtual_interface.customer_address #=> String
+      #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface.customer_router_config #=> String
+      #   resp.virtual_interface.virtual_gateway_id #=> String
+      #   resp.virtual_interface.route_filter_prefixes #=> Array
+      #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
+      #   resp.virtual_interface.bgp_peers #=> Array
+      #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+      #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
+      #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
+      #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
+      #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      # @overload create_bgp_peer(params = {})
+      # @param [Hash] params ({})
+      def create_bgp_peer(params = {}, options = {})
+        req = build_request(:create_bgp_peer, params)
         req.send_request(options)
       end
 
@@ -654,10 +757,12 @@ module Aws
       #   * {Types::VirtualInterface#auth_key #authKey} => String
       #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
       #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#address_family #addressFamily} => String
       #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
       #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
       #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
       #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_private_virtual_interface({
@@ -669,6 +774,7 @@ module Aws
       #       auth_key: "BGPAuthKey",
       #       amazon_address: "AmazonAddress",
       #       customer_address: "CustomerAddress",
+      #       address_family: "ipv4", # accepts ipv4, ipv6
       #       virtual_gateway_id: "VirtualGatewayId", # required
       #     },
       #   })
@@ -685,11 +791,20 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
+      #   resp.address_family #=> String, one of "ipv4", "ipv6"
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      #   resp.bgp_peers #=> Array
+      #   resp.bgp_peers[0].asn #=> Integer
+      #   resp.bgp_peers[0].auth_key #=> String
+      #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.bgp_peers[0].amazon_address #=> String
+      #   resp.bgp_peers[0].customer_address #=> String
+      #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
       # @overload create_private_virtual_interface(params = {})
       # @param [Hash] params ({})
       def create_private_virtual_interface(params = {}, options = {})
@@ -701,6 +816,11 @@ module Aws
       # VLAN that transports AWS Direct Connect traffic. A public virtual
       # interface supports sending traffic to public services of AWS such as
       # Amazon Simple Storage Service (Amazon S3).
+      #
+      # When creating an IPv6 public virtual interface (addressFamily is
+      # 'ipv6'), the customer and amazon address fields should be left blank
+      # to use auto-assigned IPv6 space. Custom IPv6 Addresses are currently
+      # not supported.
       # @option params [required, String] :connection_id
       #   ID of the connection.
       #
@@ -724,10 +844,12 @@ module Aws
       #   * {Types::VirtualInterface#auth_key #authKey} => String
       #   * {Types::VirtualInterface#amazon_address #amazonAddress} => String
       #   * {Types::VirtualInterface#customer_address #customerAddress} => String
+      #   * {Types::VirtualInterface#address_family #addressFamily} => String
       #   * {Types::VirtualInterface#virtual_interface_state #virtualInterfaceState} => String
       #   * {Types::VirtualInterface#customer_router_config #customerRouterConfig} => String
       #   * {Types::VirtualInterface#virtual_gateway_id #virtualGatewayId} => String
       #   * {Types::VirtualInterface#route_filter_prefixes #routeFilterPrefixes} => Array&lt;Types::RouteFilterPrefix&gt;
+      #   * {Types::VirtualInterface#bgp_peers #bgpPeers} => Array&lt;Types::BGPPeer&gt;
       #
       # @example Request syntax with placeholder values
       #   resp = client.create_public_virtual_interface({
@@ -737,9 +859,10 @@ module Aws
       #       vlan: 1, # required
       #       asn: 1, # required
       #       auth_key: "BGPAuthKey",
-      #       amazon_address: "AmazonAddress", # required
-      #       customer_address: "CustomerAddress", # required
-      #       route_filter_prefixes: [ # required
+      #       amazon_address: "AmazonAddress",
+      #       customer_address: "CustomerAddress",
+      #       address_family: "ipv4", # accepts ipv4, ipv6
+      #       route_filter_prefixes: [
       #         {
       #           cidr: "CIDR",
       #         },
@@ -759,15 +882,87 @@ module Aws
       #   resp.auth_key #=> String
       #   resp.amazon_address #=> String
       #   resp.customer_address #=> String
+      #   resp.address_family #=> String, one of "ipv4", "ipv6"
       #   resp.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.customer_router_config #=> String
       #   resp.virtual_gateway_id #=> String
       #   resp.route_filter_prefixes #=> Array
       #   resp.route_filter_prefixes[0].cidr #=> String
+      #   resp.bgp_peers #=> Array
+      #   resp.bgp_peers[0].asn #=> Integer
+      #   resp.bgp_peers[0].auth_key #=> String
+      #   resp.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.bgp_peers[0].amazon_address #=> String
+      #   resp.bgp_peers[0].customer_address #=> String
+      #   resp.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.bgp_peers[0].bgp_status #=> String, one of "up", "down"
       # @overload create_public_virtual_interface(params = {})
       # @param [Hash] params ({})
       def create_public_virtual_interface(params = {}, options = {})
         req = build_request(:create_public_virtual_interface, params)
+        req.send_request(options)
+      end
+
+      # Deletes a BGP peer on the specified virtual interface that matches the
+      # specified customer address and ASN. You cannot delete the last BGP
+      # peer from a virtual interface.
+      # @option params [String] :virtual_interface_id
+      #   The ID of the virtual interface from which the BGP peer will be
+      #   deleted.
+      #
+      #   Example: dxvif-456abc78
+      #
+      #   Default: None
+      # @option params [Integer] :asn
+      #   Autonomous system (AS) number for Border Gateway Protocol (BGP)
+      #   configuration.
+      #
+      #   Example: 65000
+      # @option params [String] :customer_address
+      #   IP address assigned to the customer interface.
+      #
+      #   Example: 192.168.1.2/30 or 2001:db8::2/125
+      # @return [Types::DeleteBGPPeerResponse] Returns a {Seahorse::Client::Response response} object which responds to the following methods:
+      #
+      #   * {Types::DeleteBGPPeerResponse#virtual_interface #virtualInterface} => Types::VirtualInterface
+      #
+      # @example Request syntax with placeholder values
+      #   resp = client.delete_bgp_peer({
+      #     virtual_interface_id: "VirtualInterfaceId",
+      #     asn: 1,
+      #     customer_address: "CustomerAddress",
+      #   })
+      #
+      # @example Response structure
+      #   resp.virtual_interface.owner_account #=> String
+      #   resp.virtual_interface.virtual_interface_id #=> String
+      #   resp.virtual_interface.location #=> String
+      #   resp.virtual_interface.connection_id #=> String
+      #   resp.virtual_interface.virtual_interface_type #=> String
+      #   resp.virtual_interface.virtual_interface_name #=> String
+      #   resp.virtual_interface.vlan #=> Integer
+      #   resp.virtual_interface.asn #=> Integer
+      #   resp.virtual_interface.auth_key #=> String
+      #   resp.virtual_interface.amazon_address #=> String
+      #   resp.virtual_interface.customer_address #=> String
+      #   resp.virtual_interface.address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.virtual_interface.virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
+      #   resp.virtual_interface.customer_router_config #=> String
+      #   resp.virtual_interface.virtual_gateway_id #=> String
+      #   resp.virtual_interface.route_filter_prefixes #=> Array
+      #   resp.virtual_interface.route_filter_prefixes[0].cidr #=> String
+      #   resp.virtual_interface.bgp_peers #=> Array
+      #   resp.virtual_interface.bgp_peers[0].asn #=> Integer
+      #   resp.virtual_interface.bgp_peers[0].auth_key #=> String
+      #   resp.virtual_interface.bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.virtual_interface.bgp_peers[0].amazon_address #=> String
+      #   resp.virtual_interface.bgp_peers[0].customer_address #=> String
+      #   resp.virtual_interface.bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.virtual_interface.bgp_peers[0].bgp_status #=> String, one of "up", "down"
+      # @overload delete_bgp_peer(params = {})
+      # @param [Hash] params ({})
+      def delete_bgp_peer(params = {}, options = {})
+        req = build_request(:delete_bgp_peer, params)
         req.send_request(options)
       end
 
@@ -1197,11 +1392,20 @@ module Aws
       #   resp.virtual_interfaces[0].auth_key #=> String
       #   resp.virtual_interfaces[0].amazon_address #=> String
       #   resp.virtual_interfaces[0].customer_address #=> String
+      #   resp.virtual_interfaces[0].address_family #=> String, one of "ipv4", "ipv6"
       #   resp.virtual_interfaces[0].virtual_interface_state #=> String, one of "confirming", "verifying", "pending", "available", "down", "deleting", "deleted", "rejected"
       #   resp.virtual_interfaces[0].customer_router_config #=> String
       #   resp.virtual_interfaces[0].virtual_gateway_id #=> String
       #   resp.virtual_interfaces[0].route_filter_prefixes #=> Array
       #   resp.virtual_interfaces[0].route_filter_prefixes[0].cidr #=> String
+      #   resp.virtual_interfaces[0].bgp_peers #=> Array
+      #   resp.virtual_interfaces[0].bgp_peers[0].asn #=> Integer
+      #   resp.virtual_interfaces[0].bgp_peers[0].auth_key #=> String
+      #   resp.virtual_interfaces[0].bgp_peers[0].address_family #=> String, one of "ipv4", "ipv6"
+      #   resp.virtual_interfaces[0].bgp_peers[0].amazon_address #=> String
+      #   resp.virtual_interfaces[0].bgp_peers[0].customer_address #=> String
+      #   resp.virtual_interfaces[0].bgp_peers[0].bgp_peer_state #=> String, one of "verifying", "pending", "available", "deleting", "deleted"
+      #   resp.virtual_interfaces[0].bgp_peers[0].bgp_status #=> String, one of "up", "down"
       # @overload describe_virtual_interfaces(params = {})
       # @param [Hash] params ({})
       def describe_virtual_interfaces(params = {}, options = {})

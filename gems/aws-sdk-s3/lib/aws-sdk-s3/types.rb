@@ -116,6 +116,182 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass AnalyticsAndOperator
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tags: [
+      #           {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] prefix
+      #   The prefix to use when evaluating an AND predicate.
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   The list of tags to use when evaluating an AND predicate.
+      #   @return [Array<Types::Tag>]
+      class AnalyticsAndOperator < Struct.new(
+        :prefix,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AnalyticsConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         id: "AnalyticsId", # required
+      #         filter: {
+      #           prefix: "Prefix",
+      #           tag: {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #           and: {
+      #             prefix: "Prefix",
+      #             tags: [
+      #               {
+      #                 key: "ObjectKey", # required
+      #                 value: "Value", # required
+      #               },
+      #             ],
+      #           },
+      #         },
+      #         storage_class_analysis: { # required
+      #           data_export: {
+      #             output_schema_version: "V_1", # required, accepts V_1
+      #             destination: { # required
+      #               s3_bucket_destination: { # required
+      #                 format: "CSV", # required, accepts CSV
+      #                 bucket_account_id: "AccountId",
+      #                 bucket: "BucketName", # required
+      #                 prefix: "Prefix",
+      #               },
+      #             },
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] id
+      #   The identifier used to represent an analytics configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] filter
+      #   The filter used to describe a set of objects for analyses. A filter
+      #   must have exactly one prefix, one tag, or one conjunction
+      #   (AnalyticsAndOperator). If no filter is provided, all objects will
+      #   be considered in any analysis.
+      #   @return [Types::AnalyticsFilter]
+      #
+      # @!attribute [rw] storage_class_analysis
+      #   If present, it indicates that data related to access patterns will
+      #   be collected and made available to analyze the tradeoffs between
+      #   different storage classes.
+      #   @return [Types::StorageClassAnalysis]
+      class AnalyticsConfiguration < Struct.new(
+        :id,
+        :filter,
+        :storage_class_analysis)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AnalyticsExportDestination
+      #   data as a hash:
+      #
+      #       {
+      #         s3_bucket_destination: { # required
+      #           format: "CSV", # required, accepts CSV
+      #           bucket_account_id: "AccountId",
+      #           bucket: "BucketName", # required
+      #           prefix: "Prefix",
+      #         },
+      #       }
+      # @!attribute [rw] s3_bucket_destination
+      #   A destination signifying output to an S3 bucket.
+      #   @return [Types::AnalyticsS3BucketDestination]
+      class AnalyticsExportDestination < Struct.new(
+        :s3_bucket_destination)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AnalyticsFilter
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tag: {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #         and: {
+      #           prefix: "Prefix",
+      #           tags: [
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] prefix
+      #   The prefix to use when evaluating an analytics filter.
+      #   @return [String]
+      #
+      # @!attribute [rw] tag
+      #   The tag to use when evaluating an analytics filter.
+      #   @return [Types::Tag]
+      #
+      # @!attribute [rw] and
+      #   A conjunction (logical AND) of predicates, which is used in
+      #   evaluating an analytics filter. The operator must have at least two
+      #   predicates.
+      #   @return [Types::AnalyticsAndOperator]
+      class AnalyticsFilter < Struct.new(
+        :prefix,
+        :tag,
+        :and)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass AnalyticsS3BucketDestination
+      #   data as a hash:
+      #
+      #       {
+      #         format: "CSV", # required, accepts CSV
+      #         bucket_account_id: "AccountId",
+      #         bucket: "BucketName", # required
+      #         prefix: "Prefix",
+      #       }
+      # @!attribute [rw] format
+      #   The file format used when exporting data to Amazon S3.
+      #   @return [String]
+      #
+      # @!attribute [rw] bucket_account_id
+      #   The account ID that owns the destination bucket. If no account ID is
+      #   provided, the owner will not be validated prior to exporting data.
+      #   @return [String]
+      #
+      # @!attribute [rw] bucket
+      #   The Amazon resource name (ARN) of the bucket to which data is
+      #   exported.
+      #   @return [String]
+      #
+      # @!attribute [rw] prefix
+      #   The prefix to use when exporting data. The exported data begins with
+      #   this prefix.
+      #   @return [String]
+      class AnalyticsS3BucketDestination < Struct.new(
+        :format,
+        :bucket_account_id,
+        :bucket,
+        :prefix)
+        include Aws::Structure
+      end
+
       # @!attribute [rw] name
       #   The name of the bucket.
       #   @return [String]
@@ -141,7 +317,23 @@ module Aws
       #               expired_object_delete_marker: false,
       #             },
       #             id: "ID",
-      #             prefix: "Prefix", # required
+      #             prefix: "Prefix",
+      #             filter: {
+      #               prefix: "Prefix",
+      #               tag: {
+      #                 key: "ObjectKey", # required
+      #                 value: "Value", # required
+      #               },
+      #               and: {
+      #                 prefix: "Prefix",
+      #                 tags: [
+      #                   {
+      #                     key: "ObjectKey", # required
+      #                     value: "Value", # required
+      #                   },
+      #                 ],
+      #               },
+      #             },
       #             status: "Enabled", # required, accepts Enabled, Disabled
       #             transitions: [
       #               {
@@ -554,6 +746,7 @@ module Aws
       #           "MetadataKey" => "MetadataValue",
       #         },
       #         metadata_directive: "COPY", # accepts COPY, REPLACE
+      #         tagging_directive: "COPY", # accepts COPY, REPLACE
       #         server_side_encryption: "AES256", # accepts AES256, aws:kms
       #         storage_class: "STANDARD", # accepts STANDARD, REDUCED_REDUNDANCY, STANDARD_IA
       #         website_redirect_location: "WebsiteRedirectLocation",
@@ -565,6 +758,7 @@ module Aws
       #         copy_source_sse_customer_key: "CopySourceSSECustomerKey",
       #         copy_source_sse_customer_key_md5: "CopySourceSSECustomerKeyMD5",
       #         request_payer: "requester", # accepts requester
+      #         tagging: "TaggingHeader",
       #       }
       # @!attribute [rw] acl
       #   The canned ACL to apply to the object.
@@ -652,6 +846,11 @@ module Aws
       #   replaced with metadata provided in the request.
       #   @return [String]
       #
+      # @!attribute [rw] tagging_directive
+      #   Specifies whether the object tag-set are copied from the source
+      #   object or replaced with tag-set provided in the request.
+      #   @return [String]
+      #
       # @!attribute [rw] server_side_encryption
       #   The Server-side encryption algorithm used when storing this object
       #   in S3 (e.g., AES256, aws:kms).
@@ -719,6 +918,12 @@ module Aws
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       #   @return [String]
+      #
+      # @!attribute [rw] tagging
+      #   The tag-set for the object destination object this value must be
+      #   used in conjunction with the TaggingDirective. The tag-set must be
+      #   encoded as URL Query parameters
+      #   @return [String]
       class CopyObjectRequest < Struct.new(
         :acl,
         :bucket,
@@ -740,6 +945,7 @@ module Aws
         :key,
         :metadata,
         :metadata_directive,
+        :tagging_directive,
         :server_side_encryption,
         :storage_class,
         :website_redirect_location,
@@ -750,7 +956,8 @@ module Aws
         :copy_source_sse_customer_algorithm,
         :copy_source_sse_customer_key,
         :copy_source_sse_customer_key_md5,
-        :request_payer)
+        :request_payer,
+        :tagging)
         include Aws::Structure
       end
 
@@ -1108,6 +1315,27 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DeleteBucketAnalyticsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "AnalyticsId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket from which an analytics configuration is
+      #   deleted.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier used to represent an analytics configuration.
+      #   @return [String]
+      class DeleteBucketAnalyticsConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass DeleteBucketCorsRequest
       #   data as a hash:
       #
@@ -1121,6 +1349,27 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass DeleteBucketInventoryConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "InventoryId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the inventory configuration to
+      #   delete.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the inventory configuration.
+      #   @return [String]
+      class DeleteBucketInventoryConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass DeleteBucketLifecycleRequest
       #   data as a hash:
       #
@@ -1131,6 +1380,27 @@ module Aws
       #   @return [String]
       class DeleteBucketLifecycleRequest < Struct.new(
         :bucket)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DeleteBucketMetricsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "MetricsId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the metrics configuration to
+      #   delete.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the metrics configuration.
+      #   @return [String]
+      class DeleteBucketMetricsConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
         include Aws::Structure
       end
 
@@ -1287,6 +1557,38 @@ module Aws
         :mfa,
         :version_id,
         :request_payer)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] version_id
+      #   The versionId of the object the tag-set was removed from.
+      #   @return [String]
+      class DeleteObjectTaggingOutput < Struct.new(
+        :version_id)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass DeleteObjectTaggingRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         key: "ObjectKey", # required
+      #         version_id: "ObjectVersionId",
+      #       }
+      # @!attribute [rw] bucket
+      #   @return [String]
+      #
+      # @!attribute [rw] key
+      #   @return [String]
+      #
+      # @!attribute [rw] version_id
+      #   The versionId of the object that the tag-set will be removed from.
+      #   @return [String]
+      class DeleteObjectTaggingRequest < Struct.new(
+        :bucket,
+        :key,
+        :version_id)
         include Aws::Structure
       end
 
@@ -1502,6 +1804,35 @@ module Aws
         include Aws::Structure
       end
 
+      # @!attribute [rw] analytics_configuration
+      #   The configuration and any analyses for the analytics filter.
+      #   @return [Types::AnalyticsConfiguration]
+      class GetBucketAnalyticsConfigurationOutput < Struct.new(
+        :analytics_configuration)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass GetBucketAnalyticsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "AnalyticsId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket from which an analytics configuration is
+      #   retrieved.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier used to represent an analytics configuration.
+      #   @return [String]
+      class GetBucketAnalyticsConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
+        include Aws::Structure
+      end
+
       # @!attribute [rw] cors_rules
       #   @return [Array<Types::CORSRule>]
       class GetBucketCorsOutput < Struct.new(
@@ -1519,6 +1850,35 @@ module Aws
       #   @return [String]
       class GetBucketCorsRequest < Struct.new(
         :bucket)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] inventory_configuration
+      #   Specifies the inventory configuration.
+      #   @return [Types::InventoryConfiguration]
+      class GetBucketInventoryConfigurationOutput < Struct.new(
+        :inventory_configuration)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass GetBucketInventoryConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "InventoryId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the inventory configuration to
+      #   retrieve.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the inventory configuration.
+      #   @return [String]
+      class GetBucketInventoryConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
         include Aws::Structure
       end
 
@@ -1599,6 +1959,35 @@ module Aws
       #   @return [String]
       class GetBucketLoggingRequest < Struct.new(
         :bucket)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] metrics_configuration
+      #   Specifies the metrics configuration.
+      #   @return [Types::MetricsConfiguration]
+      class GetBucketMetricsConfigurationOutput < Struct.new(
+        :metrics_configuration)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass GetBucketMetricsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "MetricsId", # required
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the metrics configuration to
+      #   retrieve.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the metrics configuration.
+      #   @return [String]
+      class GetBucketMetricsConfigurationRequest < Struct.new(
+        :bucket,
+        :id)
         include Aws::Structure
       end
 
@@ -1944,6 +2333,10 @@ module Aws
       # @!attribute [rw] parts_count
       #   The count of parts this object has.
       #   @return [Integer]
+      #
+      # @!attribute [rw] tag_count
+      #   The number of tags, if any, on the object.
+      #   @return [Integer]
       class GetObjectOutput < Struct.new(
         :body,
         :delete_marker,
@@ -1972,7 +2365,8 @@ module Aws
         :storage_class,
         :request_charged,
         :replication_status,
-        :parts_count)
+        :parts_count,
+        :tag_count)
         include Aws::Structure
       end
 
@@ -2113,6 +2507,40 @@ module Aws
         :sse_customer_key_md5,
         :request_payer,
         :part_number)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] version_id
+      #   @return [String]
+      #
+      # @!attribute [rw] tag_set
+      #   @return [Array<Types::Tag>]
+      class GetObjectTaggingOutput < Struct.new(
+        :version_id,
+        :tag_set)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass GetObjectTaggingRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         key: "ObjectKey", # required
+      #         version_id: "ObjectVersionId",
+      #       }
+      # @!attribute [rw] bucket
+      #   @return [String]
+      #
+      # @!attribute [rw] key
+      #   @return [String]
+      #
+      # @!attribute [rw] version_id
+      #   @return [String]
+      class GetObjectTaggingRequest < Struct.new(
+        :bucket,
+        :key,
+        :version_id)
         include Aws::Structure
       end
 
@@ -2536,6 +2964,152 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass InventoryConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         destination: { # required
+      #           s3_bucket_destination: { # required
+      #             account_id: "AccountId",
+      #             bucket: "BucketName", # required
+      #             format: "CSV", # required, accepts CSV
+      #             prefix: "Prefix",
+      #           },
+      #         },
+      #         is_enabled: false, # required
+      #         filter: {
+      #           prefix: "Prefix", # required
+      #         },
+      #         id: "InventoryId", # required
+      #         included_object_versions: "All", # required, accepts All, Current
+      #         optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+      #         schedule: { # required
+      #           frequency: "Daily", # required, accepts Daily, Weekly
+      #         },
+      #       }
+      # @!attribute [rw] destination
+      #   Contains information about where to publish the inventory results.
+      #   @return [Types::InventoryDestination]
+      #
+      # @!attribute [rw] is_enabled
+      #   Specifies whether the inventory is enabled or disabled.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] filter
+      #   Specifies an inventory filter. The inventory only includes objects
+      #   that meet the filter's criteria.
+      #   @return [Types::InventoryFilter]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the inventory configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] included_object_versions
+      #   Specifies which object version(s) to included in the inventory
+      #   results.
+      #   @return [String]
+      #
+      # @!attribute [rw] optional_fields
+      #   Contains the optional fields that are included in the inventory
+      #   results.
+      #   @return [Array<String>]
+      #
+      # @!attribute [rw] schedule
+      #   Specifies the schedule for generating inventory results.
+      #   @return [Types::InventorySchedule]
+      class InventoryConfiguration < Struct.new(
+        :destination,
+        :is_enabled,
+        :filter,
+        :id,
+        :included_object_versions,
+        :optional_fields,
+        :schedule)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass InventoryDestination
+      #   data as a hash:
+      #
+      #       {
+      #         s3_bucket_destination: { # required
+      #           account_id: "AccountId",
+      #           bucket: "BucketName", # required
+      #           format: "CSV", # required, accepts CSV
+      #           prefix: "Prefix",
+      #         },
+      #       }
+      # @!attribute [rw] s3_bucket_destination
+      #   Contains the bucket name, file format, bucket owner (optional), and
+      #   prefix (optional) where inventory results are published.
+      #   @return [Types::InventoryS3BucketDestination]
+      class InventoryDestination < Struct.new(
+        :s3_bucket_destination)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass InventoryFilter
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix", # required
+      #       }
+      # @!attribute [rw] prefix
+      #   The prefix that an object must have to be included in the inventory
+      #   results.
+      #   @return [String]
+      class InventoryFilter < Struct.new(
+        :prefix)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass InventoryS3BucketDestination
+      #   data as a hash:
+      #
+      #       {
+      #         account_id: "AccountId",
+      #         bucket: "BucketName", # required
+      #         format: "CSV", # required, accepts CSV
+      #         prefix: "Prefix",
+      #       }
+      # @!attribute [rw] account_id
+      #   The ID of the account that owns the destination bucket.
+      #   @return [String]
+      #
+      # @!attribute [rw] bucket
+      #   The Amazon resource name (ARN) of the bucket where inventory results
+      #   will be published.
+      #   @return [String]
+      #
+      # @!attribute [rw] format
+      #   Specifies the output format of the inventory results.
+      #   @return [String]
+      #
+      # @!attribute [rw] prefix
+      #   The prefix that is prepended to all inventory results.
+      #   @return [String]
+      class InventoryS3BucketDestination < Struct.new(
+        :account_id,
+        :bucket,
+        :format,
+        :prefix)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass InventorySchedule
+      #   data as a hash:
+      #
+      #       {
+      #         frequency: "Daily", # required, accepts Daily, Weekly
+      #       }
+      # @!attribute [rw] frequency
+      #   Specifies how frequently inventory results are produced.
+      #   @return [String]
+      class InventorySchedule < Struct.new(
+        :frequency)
+        include Aws::Structure
+      end
+
       # Container for specifying the AWS Lambda notification configuration.
       # @note When making an API call, pass LambdaFunctionConfiguration
       #   data as a hash:
@@ -2666,7 +3240,23 @@ module Aws
       #           expired_object_delete_marker: false,
       #         },
       #         id: "ID",
-      #         prefix: "Prefix", # required
+      #         prefix: "Prefix",
+      #         filter: {
+      #           prefix: "Prefix",
+      #           tag: {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #           and: {
+      #             prefix: "Prefix",
+      #             tags: [
+      #               {
+      #                 key: "ObjectKey", # required
+      #                 value: "Value", # required
+      #               },
+      #             ],
+      #           },
+      #         },
       #         status: "Enabled", # required, accepts Enabled, Disabled
       #         transitions: [
       #           {
@@ -2698,7 +3288,13 @@ module Aws
       #
       # @!attribute [rw] prefix
       #   Prefix identifying one or more objects to which the rule applies.
+      #   This is deprecated; use Filter instead.
       #   @return [String]
+      #
+      # @!attribute [rw] filter
+      #   The Filter is used to identify objects that a Lifecycle Rule applies
+      #   to. A Filter must have exactly one of Prefix, Tag, or And specified.
+      #   @return [Types::LifecycleRuleFilter]
       #
       # @!attribute [rw] status
       #   If 'Enabled', the rule is currently being applied. If
@@ -2729,11 +3325,241 @@ module Aws
         :expiration,
         :id,
         :prefix,
+        :filter,
         :status,
         :transitions,
         :noncurrent_version_transitions,
         :noncurrent_version_expiration,
         :abort_incomplete_multipart_upload)
+        include Aws::Structure
+      end
+
+      # This is used in a Lifecycle Rule Filter to apply a logical AND to two
+      # or more predicates. The Lifecycle Rule will apply to any object
+      # matching all of the predicates configured inside the And operator.
+      # @note When making an API call, pass LifecycleRuleAndOperator
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tags: [
+      #           {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] prefix
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   All of these tags must exist in the object's tag set in order for
+      #   the rule to apply.
+      #   @return [Array<Types::Tag>]
+      class LifecycleRuleAndOperator < Struct.new(
+        :prefix,
+        :tags)
+        include Aws::Structure
+      end
+
+      # The Filter is used to identify objects that a Lifecycle Rule applies
+      # to. A Filter must have exactly one of Prefix, Tag, or And specified.
+      # @note When making an API call, pass LifecycleRuleFilter
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tag: {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #         and: {
+      #           prefix: "Prefix",
+      #           tags: [
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] prefix
+      #   Prefix identifying one or more objects to which the rule applies.
+      #   @return [String]
+      #
+      # @!attribute [rw] tag
+      #   This tag must exist in the object's tag set in order for the rule
+      #   to apply.
+      #   @return [Types::Tag]
+      #
+      # @!attribute [rw] and
+      #   This is used in a Lifecycle Rule Filter to apply a logical AND to
+      #   two or more predicates. The Lifecycle Rule will apply to any object
+      #   matching all of the predicates configured inside the And operator.
+      #   @return [Types::LifecycleRuleAndOperator]
+      class LifecycleRuleFilter < Struct.new(
+        :prefix,
+        :tag,
+        :and)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] is_truncated
+      #   Indicates whether the returned list of analytics configurations is
+      #   complete. A value of true indicates that the list is not complete
+      #   and the NextContinuationToken will be provided for a subsequent
+      #   request.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] continuation_token
+      #   The ContinuationToken that represents where this request began.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_continuation_token
+      #   NextContinuationToken is sent when isTruncated is true, which
+      #   indicates that there are more analytics configurations to list. The
+      #   next request must include this NextContinuationToken. The token is
+      #   obfuscated and is not a usable value.
+      #   @return [String]
+      #
+      # @!attribute [rw] analytics_configuration_list
+      #   The list of analytics configurations for a bucket.
+      #   @return [Array<Types::AnalyticsConfiguration>]
+      class ListBucketAnalyticsConfigurationsOutput < Struct.new(
+        :is_truncated,
+        :continuation_token,
+        :next_continuation_token,
+        :analytics_configuration_list)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListBucketAnalyticsConfigurationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         continuation_token: "Token",
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket from which analytics configurations are
+      #   retrieved.
+      #   @return [String]
+      #
+      # @!attribute [rw] continuation_token
+      #   The ContinuationToken that represents a placeholder from where this
+      #   request should begin.
+      #   @return [String]
+      class ListBucketAnalyticsConfigurationsRequest < Struct.new(
+        :bucket,
+        :continuation_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] continuation_token
+      #   If sent in the request, the marker that is used as a starting point
+      #   for this inventory configuration list response.
+      #   @return [String]
+      #
+      # @!attribute [rw] inventory_configuration_list
+      #   The list of inventory configurations for a bucket.
+      #   @return [Array<Types::InventoryConfiguration>]
+      #
+      # @!attribute [rw] is_truncated
+      #   Indicates whether the returned list of inventory configurations is
+      #   truncated in this response. A value of true indicates that the list
+      #   is truncated.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] next_continuation_token
+      #   The marker used to continue this inventory configuration listing.
+      #   Use the NextContinuationToken from this response to continue the
+      #   listing in a subsequent request. The continuation token is an opaque
+      #   value that Amazon S3 understands.
+      #   @return [String]
+      class ListBucketInventoryConfigurationsOutput < Struct.new(
+        :continuation_token,
+        :inventory_configuration_list,
+        :is_truncated,
+        :next_continuation_token)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListBucketInventoryConfigurationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         continuation_token: "Token",
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the inventory configurations to
+      #   retrieve.
+      #   @return [String]
+      #
+      # @!attribute [rw] continuation_token
+      #   The marker used to continue an inventory configuration listing that
+      #   has been truncated. Use the NextContinuationToken from a previously
+      #   truncated list response to continue the listing. The continuation
+      #   token is an opaque value that Amazon S3 understands.
+      #   @return [String]
+      class ListBucketInventoryConfigurationsRequest < Struct.new(
+        :bucket,
+        :continuation_token)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] is_truncated
+      #   Indicates whether the returned list of metrics configurations is
+      #   complete. A value of true indicates that the list is not complete
+      #   and the NextContinuationToken will be provided for a subsequent
+      #   request.
+      #   @return [Boolean]
+      #
+      # @!attribute [rw] continuation_token
+      #   The marker that is used as a starting point for this metrics
+      #   configuration list response. This value is present if it was sent in
+      #   the request.
+      #   @return [String]
+      #
+      # @!attribute [rw] next_continuation_token
+      #   The marker used to continue a metrics configuration listing that has
+      #   been truncated. Use the NextContinuationToken from a previously
+      #   truncated list response to continue the listing. The continuation
+      #   token is an opaque value that Amazon S3 understands.
+      #   @return [String]
+      #
+      # @!attribute [rw] metrics_configuration_list
+      #   The list of metrics configurations for a bucket.
+      #   @return [Array<Types::MetricsConfiguration>]
+      class ListBucketMetricsConfigurationsOutput < Struct.new(
+        :is_truncated,
+        :continuation_token,
+        :next_continuation_token,
+        :metrics_configuration_list)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass ListBucketMetricsConfigurationsRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         continuation_token: "Token",
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket containing the metrics configurations to
+      #   retrieve.
+      #   @return [String]
+      #
+      # @!attribute [rw] continuation_token
+      #   The marker that is used to continue a metrics configuration listing
+      #   that has been truncated. Use the NextContinuationToken from a
+      #   previously truncated list response to continue the listing. The
+      #   continuation token is an opaque value that Amazon S3 understands.
+      #   @return [String]
+      class ListBucketMetricsConfigurationsRequest < Struct.new(
+        :bucket,
+        :continuation_token)
         include Aws::Structure
       end
 
@@ -3430,6 +4256,108 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass MetricsAndOperator
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tags: [
+      #           {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #         ],
+      #       }
+      # @!attribute [rw] prefix
+      #   The prefix used when evaluating an AND predicate.
+      #   @return [String]
+      #
+      # @!attribute [rw] tags
+      #   The list of tags used when evaluating an AND predicate.
+      #   @return [Array<Types::Tag>]
+      class MetricsAndOperator < Struct.new(
+        :prefix,
+        :tags)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass MetricsConfiguration
+      #   data as a hash:
+      #
+      #       {
+      #         id: "MetricsId", # required
+      #         filter: {
+      #           prefix: "Prefix",
+      #           tag: {
+      #             key: "ObjectKey", # required
+      #             value: "Value", # required
+      #           },
+      #           and: {
+      #             prefix: "Prefix",
+      #             tags: [
+      #               {
+      #                 key: "ObjectKey", # required
+      #                 value: "Value", # required
+      #               },
+      #             ],
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] id
+      #   The ID used to identify the metrics configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] filter
+      #   Specifies a metrics configuration filter. The metrics configuration
+      #   will only include objects that meet the filter's criteria. A filter
+      #   must be a prefix, a tag, or a conjunction (MetricsAndOperator).
+      #   @return [Types::MetricsFilter]
+      class MetricsConfiguration < Struct.new(
+        :id,
+        :filter)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass MetricsFilter
+      #   data as a hash:
+      #
+      #       {
+      #         prefix: "Prefix",
+      #         tag: {
+      #           key: "ObjectKey", # required
+      #           value: "Value", # required
+      #         },
+      #         and: {
+      #           prefix: "Prefix",
+      #           tags: [
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] prefix
+      #   The prefix used when evaluating a metrics filter.
+      #   @return [String]
+      #
+      # @!attribute [rw] tag
+      #   The tag used when evaluating a metrics filter.
+      #   @return [Types::Tag]
+      #
+      # @!attribute [rw] and
+      #   A conjunction (logical AND) of predicates, which is used in
+      #   evaluating a metrics filter. The operator must have at least two
+      #   predicates, and an object must match all of the predicates in order
+      #   for the filter to apply.
+      #   @return [Types::MetricsAndOperator]
+      class MetricsFilter < Struct.new(
+        :prefix,
+        :tag,
+        :and)
+        include Aws::Structure
+      end
+
       # @!attribute [rw] upload_id
       #   Upload ID that identifies the multipart upload.
       #   @return [String]
@@ -3896,6 +4824,64 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass PutBucketAnalyticsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "AnalyticsId", # required
+      #         analytics_configuration: { # required
+      #           id: "AnalyticsId", # required
+      #           filter: {
+      #             prefix: "Prefix",
+      #             tag: {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #             and: {
+      #               prefix: "Prefix",
+      #               tags: [
+      #                 {
+      #                   key: "ObjectKey", # required
+      #                   value: "Value", # required
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #           storage_class_analysis: { # required
+      #             data_export: {
+      #               output_schema_version: "V_1", # required, accepts V_1
+      #               destination: { # required
+      #                 s3_bucket_destination: { # required
+      #                   format: "CSV", # required, accepts CSV
+      #                   bucket_account_id: "AccountId",
+      #                   bucket: "BucketName", # required
+      #                   prefix: "Prefix",
+      #                 },
+      #               },
+      #             },
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket to which an analytics configuration is
+      #   stored.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The identifier used to represent an analytics configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] analytics_configuration
+      #   The configuration and any analyses for the analytics filter.
+      #   @return [Types::AnalyticsConfiguration]
+      class PutBucketAnalyticsConfigurationRequest < Struct.new(
+        :bucket,
+        :id,
+        :analytics_configuration)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass PutBucketCorsRequest
       #   data as a hash:
       #
@@ -3929,6 +4915,52 @@ module Aws
         include Aws::Structure
       end
 
+      # @note When making an API call, pass PutBucketInventoryConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "InventoryId", # required
+      #         inventory_configuration: { # required
+      #           destination: { # required
+      #             s3_bucket_destination: { # required
+      #               account_id: "AccountId",
+      #               bucket: "BucketName", # required
+      #               format: "CSV", # required, accepts CSV
+      #               prefix: "Prefix",
+      #             },
+      #           },
+      #           is_enabled: false, # required
+      #           filter: {
+      #             prefix: "Prefix", # required
+      #           },
+      #           id: "InventoryId", # required
+      #           included_object_versions: "All", # required, accepts All, Current
+      #           optional_fields: ["Size"], # accepts Size, LastModifiedDate, StorageClass, ETag, IsMultipartUploaded, ReplicationStatus
+      #           schedule: { # required
+      #             frequency: "Daily", # required, accepts Daily, Weekly
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket where the inventory configuration will be
+      #   stored.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the inventory configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] inventory_configuration
+      #   Specifies the inventory configuration.
+      #   @return [Types::InventoryConfiguration]
+      class PutBucketInventoryConfigurationRequest < Struct.new(
+        :bucket,
+        :id,
+        :inventory_configuration)
+        include Aws::Structure
+      end
+
       # @note When making an API call, pass PutBucketLifecycleConfigurationRequest
       #   data as a hash:
       #
@@ -3943,7 +4975,23 @@ module Aws
       #                 expired_object_delete_marker: false,
       #               },
       #               id: "ID",
-      #               prefix: "Prefix", # required
+      #               prefix: "Prefix",
+      #               filter: {
+      #                 prefix: "Prefix",
+      #                 tag: {
+      #                   key: "ObjectKey", # required
+      #                   value: "Value", # required
+      #                 },
+      #                 and: {
+      #                   prefix: "Prefix",
+      #                   tags: [
+      #                     {
+      #                       key: "ObjectKey", # required
+      #                       value: "Value", # required
+      #                     },
+      #                   ],
+      #                 },
+      #               },
       #               status: "Enabled", # required, accepts Enabled, Disabled
       #               transitions: [
       #                 {
@@ -4067,6 +5115,50 @@ module Aws
         :bucket,
         :bucket_logging_status,
         :content_md5)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass PutBucketMetricsConfigurationRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         id: "MetricsId", # required
+      #         metrics_configuration: { # required
+      #           id: "MetricsId", # required
+      #           filter: {
+      #             prefix: "Prefix",
+      #             tag: {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #             and: {
+      #               prefix: "Prefix",
+      #               tags: [
+      #                 {
+      #                   key: "ObjectKey", # required
+      #                   value: "Value", # required
+      #                 },
+      #               ],
+      #             },
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] bucket
+      #   The name of the bucket for which the metrics configuration is set.
+      #   @return [String]
+      #
+      # @!attribute [rw] id
+      #   The ID used to identify the metrics configuration.
+      #   @return [String]
+      #
+      # @!attribute [rw] metrics_configuration
+      #   Specifies the metrics configuration.
+      #   @return [Types::MetricsConfiguration]
+      class PutBucketMetricsConfigurationRequest < Struct.new(
+        :bucket,
+        :id,
+        :metrics_configuration)
         include Aws::Structure
       end
 
@@ -4578,6 +5670,7 @@ module Aws
       #         sse_customer_key_md5: "SSECustomerKeyMD5",
       #         ssekms_key_id: "SSEKMSKeyId",
       #         request_payer: "requester", # accepts requester
+      #         tagging: "TaggingHeader",
       #       }
       # @!attribute [rw] acl
       #   The canned ACL to apply to the object.
@@ -4701,6 +5794,11 @@ module Aws
       #   buckets can be found at
       #   http://docs.aws.amazon.com/AmazonS3/latest/dev/ObjectsinRequesterPaysBuckets.html
       #   @return [String]
+      #
+      # @!attribute [rw] tagging
+      #   The tag-set for the object. The tag-set must be encoded as URL Query
+      #   parameters
+      #   @return [String]
       class PutObjectRequest < Struct.new(
         :acl,
         :body,
@@ -4726,7 +5824,55 @@ module Aws
         :sse_customer_key,
         :sse_customer_key_md5,
         :ssekms_key_id,
-        :request_payer)
+        :request_payer,
+        :tagging)
+        include Aws::Structure
+      end
+
+      # @!attribute [rw] version_id
+      #   @return [String]
+      class PutObjectTaggingOutput < Struct.new(
+        :version_id)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass PutObjectTaggingRequest
+      #   data as a hash:
+      #
+      #       {
+      #         bucket: "BucketName", # required
+      #         key: "ObjectKey", # required
+      #         version_id: "ObjectVersionId",
+      #         content_md5: "ContentMD5",
+      #         tagging: { # required
+      #           tag_set: [ # required
+      #             {
+      #               key: "ObjectKey", # required
+      #               value: "Value", # required
+      #             },
+      #           ],
+      #         },
+      #       }
+      # @!attribute [rw] bucket
+      #   @return [String]
+      #
+      # @!attribute [rw] key
+      #   @return [String]
+      #
+      # @!attribute [rw] version_id
+      #   @return [String]
+      #
+      # @!attribute [rw] content_md5
+      #   @return [String]
+      #
+      # @!attribute [rw] tagging
+      #   @return [Types::Tagging]
+      class PutObjectTaggingRequest < Struct.new(
+        :bucket,
+        :key,
+        :version_id,
+        :content_md5,
+        :tagging)
         include Aws::Structure
       end
 
@@ -5180,6 +6326,59 @@ module Aws
       #   @return [Array<Types::FilterRule>]
       class S3KeyFilter < Struct.new(
         :filter_rules)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass StorageClassAnalysis
+      #   data as a hash:
+      #
+      #       {
+      #         data_export: {
+      #           output_schema_version: "V_1", # required, accepts V_1
+      #           destination: { # required
+      #             s3_bucket_destination: { # required
+      #               format: "CSV", # required, accepts CSV
+      #               bucket_account_id: "AccountId",
+      #               bucket: "BucketName", # required
+      #               prefix: "Prefix",
+      #             },
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] data_export
+      #   A container used to describe how data related to the storage class
+      #   analysis should be exported.
+      #   @return [Types::StorageClassAnalysisDataExport]
+      class StorageClassAnalysis < Struct.new(
+        :data_export)
+        include Aws::Structure
+      end
+
+      # @note When making an API call, pass StorageClassAnalysisDataExport
+      #   data as a hash:
+      #
+      #       {
+      #         output_schema_version: "V_1", # required, accepts V_1
+      #         destination: { # required
+      #           s3_bucket_destination: { # required
+      #             format: "CSV", # required, accepts CSV
+      #             bucket_account_id: "AccountId",
+      #             bucket: "BucketName", # required
+      #             prefix: "Prefix",
+      #           },
+      #         },
+      #       }
+      # @!attribute [rw] output_schema_version
+      #   The version of the output schema to use when exporting data. Must be
+      #   V\_1.
+      #   @return [String]
+      #
+      # @!attribute [rw] destination
+      #   The place to store the data for an analysis.
+      #   @return [Types::AnalyticsExportDestination]
+      class StorageClassAnalysisDataExport < Struct.new(
+        :output_schema_version,
+        :destination)
         include Aws::Structure
       end
 
