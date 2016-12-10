@@ -1033,7 +1033,7 @@ module Aws
           params: params,
           config: config)
         context[:gem_name] = 'aws-sdk-snowball'
-        context[:gem_version] = '1.0.0.rc1'
+        context[:gem_version] = '1.0.0.rc2'
         Seahorse::Client::Request.new(handlers, context)
       end
 
