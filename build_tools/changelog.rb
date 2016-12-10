@@ -53,13 +53,14 @@ module BuildTools
       write(lines.join)
     end
 
-    # @return [ChangeSet]
+    # @return [ChangeSet, nil]
     def unreleased_changes
       most_recent_changes = change_sets.first
       if most_recent_changes.name == 'Unreleased Changes'
         most_recent_changes
       else
-        raise "the most recent changes have a date and version"
+        add_unreleased_changes_section
+        unreleased_changes
       end
     end
 
