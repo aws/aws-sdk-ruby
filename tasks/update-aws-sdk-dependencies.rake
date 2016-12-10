@@ -6,9 +6,12 @@ task 'update-aws-sdk-dependencies' do
     filename: "#{$GEMS_DIR}/aws-sdk/aws-sdk.gemspec",
     start: /# service gems/,
     stop: /# end service gems/,
-    new_lines: BuildTools::Services.group_by(&:gem_name).map { |gem_name, _|
-      if gem_name != 'aws-sdk-core'
-        "  spec.add_dependency('#{gem_name}', '1.0.0.rc1')\n"
+    new_lines: BuildTools::Services.map { |svc|
+      if svc.gem_name != 'aws-sdk-core'
+        version = svc.gem_version.match(/^\d+\.\d+\.\d+$/) ?
+          "~> #{svc.gem_version.split('.')[0]}" :
+          svc.gem_version
+        "  spec.add_dependency('#{svc.gem_name}', '#{version}')\n"
       end
     }.compact
   )
