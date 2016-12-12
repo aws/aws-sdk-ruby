@@ -30,14 +30,15 @@ module AwsSdkCodeGenerator
     end
 
     def source
-      svc_mod = new_svc_module
-      @gem_dependencies.each { |gem_name, _| svc_mod.require(gem_name) }
-      svc_mod.docstring(service_docstring)
-      each_module do |mod, _|
-        svc_mod.add(mod)
+      code = []
+      @gem_dependencies.each do |gem_name, _|
+        code << "require '#{gem_name}'"
       end
-      @callback.call(svc_mod) if @callback
-      svc_mod.root.to_s
+      code << new_svc_module.tap { |m| m.docstring(service_docstring) }.root.to_s
+      each_module do |mod, _|
+        code << new_svc_module.tap { |m| m.add(mod) }.root.to_s
+      end
+      code.join("\n")
     end
 
     # @option options [String] :prefix
@@ -105,7 +106,6 @@ module AwsSdkCodeGenerator
       svc_mod.docstring(service_docstring)
       svc_mod.code("GEM_VERSION = '#{@service.gem_version}'")
       autoloads.apply(svc_mod)
-      @callback.call(svc_mod) if @callback
       svc_mod.root.to_s
     end
 
