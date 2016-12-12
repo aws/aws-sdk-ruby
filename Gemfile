@@ -11,7 +11,8 @@ group :test do
   # has a dependency on ~> 2.0 of public_suffix which is not compatible
   # with Ruby 1.9.3
   gem 'addressable', '2.4.0'
-  gem 'webmock'
+  # webmock dropped support for Ruby 1.9.3 after version 2.2.0
+  gem 'webmock', '2.2.0'
   # webmock depends on addressable, but the latest version of addressable
   # has a dependency on ~> 2.0 of public_suffix which is not compatible
   # with Ruby 1.9.3
