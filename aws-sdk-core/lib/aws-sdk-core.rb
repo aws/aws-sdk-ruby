@@ -25,6 +25,7 @@ module Aws
     ApplicationDiscoveryService
     AppStream
     AutoScaling
+    Batch
     Budgets
     CodeBuild
     CloudFormation
