@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.36 (2016-12-14)
+------------------
+
 * Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
 
 * Feature - Aws::ElasticBeanstalk - Updated the documentation for AWS Elastic Beanstalk.
