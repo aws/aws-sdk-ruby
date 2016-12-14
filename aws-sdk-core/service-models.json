@@ -23,6 +23,10 @@
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
   },
+  "Batch": {
+    "models": "batch/2016-08-10",
+    "endpoint": "batch"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
