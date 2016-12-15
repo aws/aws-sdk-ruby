@@ -1,6 +1,43 @@
 Unreleased Changes
 ------------------
 
+2.6.36 (2016-12-14)
+------------------
+
+* Feature - Aws::DatabaseMigrationService - Updated the API, and documentation for AWS Database Migration Service.
+
+* Feature - Aws::ElasticBeanstalk - Updated the documentation for AWS Elastic Beanstalk.
+
+* Feature - Aws::CloudWatchLogs - Updated the API, and documentation for Amazon CloudWatch Logs.
+
+* Feature - Aws::MarketplaceCommerceAnalytics - Updated the API, and documentation for AWS Marketplace Commerce Analytics.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
+* Feature - Aws::STS - Updated the documentation for AWS Security Token Service.
+
+* Feature - Aws::Batch - Added support for a new service, AWS Batch.
+
+2.6.35 (2016-12-08)
+------------------
+
+* Feature - Aws::CodePipeline - Updated the API, and documentation for AWS CodePipeline.
+
+* Feature - Aws::RDS - Updated the API, and documentation for Amazon Relational Database Service.
+
+* Feature - Aws::CloudFront - Added support for the new 2016-11-25 API version of Amazon CloudFront.
+
+* Feature - Aws::WAFRegional - Added support for a new service, AWS WAF Regional.
+
+2.6.34 (2016-12-07)
+------------------
+
+* Feature - Aws::ConfigService - Updated the API for AWS Config.
+
+* Feature - Aws::S3 - Updated the API for Amazon Simple Storage Service.
+
+* Feature - Aws::SQS - Updated the API, and documentation for Amazon Simple Queue Service.
+
 2.6.33 (2016-12-06)
 ------------------
 

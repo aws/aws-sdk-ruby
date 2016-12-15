@@ -23,6 +23,10 @@
     "models": "autoscaling/2011-01-01",
     "endpoint": "autoscaling"
   },
+  "Batch": {
+    "models": "batch/2016-08-10",
+    "endpoint": "batch"
+  },
   "Budgets": {
     "models": "budgets/2016-10-20",
     "endpoint": "budgets"
@@ -36,7 +40,7 @@
     "endpoint": "cloudformation"
   },
   "CloudFront": {
-    "models": "cloudfront/2016-09-29",
+    "models": "cloudfront/2016-11-25",
     "endpoint": "cloudfront"
   },
   "CloudHSM": {
@@ -337,6 +341,10 @@
   "WAF": {
     "models": "waf/2015-08-24",
     "endpoint": "waf"
+  },
+  "WAFRegional": {
+    "models": "waf-regional/2016-11-28",
+    "endpoint": "waf-regional"
   },
   "WorkSpaces": {
     "models": "workspaces/2015-04-08",

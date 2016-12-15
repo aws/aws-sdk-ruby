@@ -232,6 +232,7 @@ to be backwards compatible.
 | Service Name                        | Service Class                | API Version |
 | ----------------------------------- | ---------------------------- | ----------- |
 | AWS Application Discovery Service   | ApplicationDiscoveryService  | 2015-11-01  |
+| AWS Batch                           | Batch                        | 2016-08-10  |
 | AWS Budgets                         | Budgets                      | 2016-10-20  |
 | AWS Certificate Manager             | ACM                          | 2015-12-08  |
 | AWS CloudFormation                  | CloudFormation               | 2010-05-15  |
@@ -253,8 +254,8 @@ to be backwards compatible.
 | AWS IoT                             | IoT                          | 2015-05-28  |
 | AWS IoT Data Plane                  | IoTDataPlane                 | 2015-05-28  |
 | AWS Key Management Service          | KMS                          | 2014-11-01  |
-| AWS Lambda                          | LambdaPreview                | 2014-11-11  |
 | AWS Lambda                          | Lambda                       | 2015-03-31  |
+| AWS Lambda                          | LambdaPreview                | 2014-11-11  |
 | AWS Marketplace Commerce Analytics  | MarketplaceCommerceAnalytics | 2015-07-01  |
 | AWS OpsWorks                        | OpsWorks                     | 2013-02-18  |
 | AWS OpsWorks for Chef Automate      | OpsWorksCM                   | 2016-11-01  |
@@ -266,11 +267,12 @@ to be backwards compatible.
 | AWS Storage Gateway                 | StorageGateway               | 2013-06-30  |
 | AWS Support                         | Support                      | 2013-04-15  |
 | AWS WAF                             | WAF                          | 2015-08-24  |
+| AWS WAF Regional                    | WAFRegional                  | 2016-11-28  |
 | AWS X-Ray                           | XRay                         | 2016-04-12  |
 | AWSMarketplace Metering             | MarketplaceMetering          | 2016-01-14  |
 | Amazon API Gateway                  | APIGateway                   | 2015-07-09  |
 | Amazon AppStream                    | AppStream                    | 2016-12-01  |
-| Amazon CloudFront                   | CloudFront                   | 2016-09-29  |
+| Amazon CloudFront                   | CloudFront                   | 2016-11-25  |
 | Amazon CloudHSM                     | CloudHSM                     | 2014-05-30  |
 | Amazon CloudSearch                  | CloudSearch                  | 2013-01-01  |
 | Amazon CloudSearch Domain           | CloudSearchDomain            | 2013-01-01  |

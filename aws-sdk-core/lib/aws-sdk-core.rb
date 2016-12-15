@@ -25,6 +25,7 @@ module Aws
     ApplicationDiscoveryService
     AppStream
     AutoScaling
+    Batch
     Budgets
     CodeBuild
     CloudFormation
@@ -104,6 +105,7 @@ module Aws
     Support
     SWF
     WAF
+    WAFRegional
     WorkSpaces
     XRay
   )

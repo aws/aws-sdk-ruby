@@ -23,7 +23,7 @@ module Aws
           expect {
             Presigner.new(region: region)
           }.to raise_error(
-            KeyError, 'key not found: :credentials'
+            KeyError, /credentials/
           )
         end
 
@@ -31,7 +31,7 @@ module Aws
           expect {
             Presigner.new(credentials: credentials)
           }.to raise_error(
-            KeyError, 'key not found: :region'
+            KeyError, /region/
           )
         end
 
