@@ -43,6 +43,7 @@ module Aws
         def tags(api, shape)
           tags = []
           tags << input_example_tag(api, shape) if input_shape?(api, shape)
+          tags << see_also_tag(api, shape) if redirectable?(api, shape)
           tags
         end
 
@@ -82,6 +83,14 @@ module Aws
           note << "method, you can use a\n  vanilla Hash:\n\n      "
           note << params.format.lines.join("      ")
           tag(note)
+        end
+
+        def see_also_tag(api, shape)
+          tag(Crosslink.tag_string(api.metadata["uid"], shape.name))
+        end
+
+        def redirectable?(api, shape)
+          Crosslink.taggable?(api.metadata["uid"]) && shape.name
         end
 
         def returned_by(api, shape)

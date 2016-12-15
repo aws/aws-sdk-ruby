@@ -157,6 +157,7 @@ module Aws
     module Docs
       autoload :Builder, 'aws-sdk-core/api/docs/builder'
       autoload :ClientTypeDocumenter, 'aws-sdk-core/api/docs/client_type_documenter'
+      autoload :Crosslink, 'aws-sdk-core/api/docs/crosslink'
       autoload :DocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :NullDocstringProvider, 'aws-sdk-core/api/docs/docstring_provider'
       autoload :OperationDocumenter, 'aws-sdk-core/api/docs/operation_documenter'

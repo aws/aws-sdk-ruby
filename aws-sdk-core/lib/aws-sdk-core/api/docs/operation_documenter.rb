@@ -6,10 +6,11 @@ module Aws
         include Seahorse::Model
         include Utils
 
-        def initialize(service_name, namespace)
+        def initialize(service_name, namespace, uid)
           @service_name = service_name
           @namespace = namespace
           @optname = 'options'
+          @uid = uid
         end
 
         # @param [Symbol] method_name
@@ -137,7 +138,11 @@ module Aws
         end
 
         def see_also_tags(method_name, operation)
-          []
+          if Crosslink.taggable?(@uid)
+            [tag(Crosslink.tag_string(@uid, operation.name))]
+          else
+            []
+          end
         end
 
       end
