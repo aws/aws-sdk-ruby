@@ -17,6 +17,7 @@ module Aws
           @client_class = svc_module.const_get(:Client)
           @api = @client_class.api
           @full_name = @api.metadata['serviceFullName']
+          @uid = @api.metadata['uid']
           @error_names = @api.operations.map {|_,o| o.errors.map(&:shape).map(&:name) }
           @error_names = @error_names.flatten.uniq.sort
           @namespace = YARD::Registry['Aws']
@@ -143,7 +144,7 @@ Constructs an API client.
         end
 
         def document_client_operation(namespace, method_name, operation)
-          documenter = OperationDocumenter.new(@svc_name, namespace)
+          documenter = OperationDocumenter.new(@svc_name, namespace, @uid)
           documenter.document(method_name, operation)
         end
 
