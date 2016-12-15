@@ -22,7 +22,8 @@ module Aws
         'proxy-authorization',
         'from',
         'referer',
-        'user-agent'
+        'user-agent',
+        'x-amzn-trace-id'
       ]
 
       def self.sign(context)
@@ -48,6 +49,7 @@ module Aws
       # @param [Seahorse::Client::Http::Request] req
       # @return [Seahorse::Client::Http::Request] the signed request.
       def sign(req)
+        puts "HEADERS: #{req.headers.to_a}"
         datetime = Time.now.utc.strftime("%Y%m%dT%H%M%SZ")
         body_digest = req.headers['X-Amz-Content-Sha256'] || hexdigest(req.body)
         req.headers['X-Amz-Date'] = datetime
