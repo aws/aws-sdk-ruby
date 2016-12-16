@@ -52,38 +52,21 @@ module AwsSdkCodeGenerator
       Enumerator.new do |y|
         y.yield("#{prefix}.rb", Views::ServiceModule.new(service: @service, prefix: prefix).render)
         y.yield("#{prefix}/customizations.rb", '')
-        each_module do |mod, type, code|
-          case type
-          when :code
-            y.yield("#{prefix}/#{mod}", code)
-          when :unwrapped
-            filename = File.join(prefix, underscore(mod.name) + '.rb')
-            y.yield(filename, GENERATED_SRC_WARNING + wrap(mod))
-          when :wrapped # dsl module
-            filename = File.join(prefix, underscore(mod.name) + '.rb')
-            y.yield(filename, GENERATED_SRC_WARNING + mod.root.to_s)
-          else
-            raise "expected :wrapped or :unwrapped"
+        y.yield("#{prefix}/types.rb", types_module)
+        y.yield("#{prefix}/client_api.rb", GENERATED_SRC_WARNING + wrap(client_api_module))
+        y.yield("#{prefix}/client.rb", GENERATED_SRC_WARNING + client_class.root.to_s)
+        y.yield("#{prefix}/errors.rb", GENERATED_SRC_WARNING + wrap(errors_module))
+        y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s)
+        y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
+        if @resources
+          @resources['resources'].keys.sort.each do |name|
+            y.yield("#{prefix}/#{underscore(name)}.rb", GENERATED_SRC_WARNING + wrap(resource_class(name, @resources['resources'][name])))
           end
         end
       end
     end
 
     private
-
-    def each_module(&block)
-      yield("types.rb", :code, types_module)
-      yield(client_api_module, :unwrapped)
-      yield(client_class, :wrapped)
-      yield(errors_module, :unwrapped)
-      yield(waiters_module, :wrapped) if @waiters
-      yield(root_resource_class, :unwrapped)
-      if @resources
-        @resources['resources'].keys.sort.each do |name|
-          yield(resource_class(name, @resources['resources'][name]), :unwrapped)
-        end
-      end
-    end
 
     def new_svc_module
       @module_names.inject(Dsl::Main.new) do |mod, module_name|
