@@ -50,13 +50,13 @@ module AwsSdkCodeGenerator
       # item yielded below) should be moved from here into the gem builder
       # The source code builder should simply yield the empty module
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", Views::ServiceModule.new(service: @service, prefix: prefix).render)
+        y.yield("#{prefix}.rb", service_module(prefix: prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
         y.yield("#{prefix}/client_api.rb", GENERATED_SRC_WARNING + wrap(client_api_module))
         y.yield("#{prefix}/client.rb", GENERATED_SRC_WARNING + client_class.root.to_s)
         y.yield("#{prefix}/errors.rb", GENERATED_SRC_WARNING + wrap(errors_module))
-        y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s)
+        y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
         y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
           @resources['resources'].keys.sort.each do |name|
@@ -68,6 +68,14 @@ module AwsSdkCodeGenerator
 
     private
 
+    def service_module(prefix:)
+      Views::ServiceModule.new(service: @service, prefix: prefix).render
+    end
+
+    def types_module
+      Views::TypesModule.new(service: @service).render
+    end
+
     def new_svc_module
       @module_names.inject(Dsl::Main.new) do |mod, module_name|
         mod.module(module_name)
@@ -78,24 +86,6 @@ module AwsSdkCodeGenerator
       svc_mod = new_svc_module
       svc_mod.add(mod)
       svc_mod.root.to_s
-    end
-
-    def service_module(autoload_prefix)
-      autoloads = Generators::ServiceAutoloads.new(
-        prefix: autoload_prefix,
-        resources: @resources,
-        waiters: !!@waiters
-      )
-      svc_mod = new_svc_module
-      @gem_dependencies.each { |gem_name, _| svc_mod.require(gem_name) }
-      svc_mod.docstring(service_docstring)
-      svc_mod.code("GEM_VERSION = '#{@service.gem_version}'")
-      autoloads.apply(svc_mod)
-      svc_mod.root.to_s
-    end
-
-    def types_module
-      Views::TypesModule.new(service: @service).render
     end
 
     def client_api_module
