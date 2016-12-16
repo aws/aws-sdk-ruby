@@ -29,14 +29,16 @@ module AwsSdkCodeGenerator
       @examples = @service.examples
     end
 
+    # @return [String<code>]
     def source
       code = []
       @gem_dependencies.each do |gem_name, _|
         code << "require '#{gem_name}'"
       end
       code << new_svc_module.tap { |m| m.docstring(service_docstring) }.root.to_s
-      each_module do |mod, _|
-        code << new_svc_module.tap { |m| m.add(mod) }.root.to_s
+      source_files.each.with_index do |(_, src_code), n|
+        next if n < 2
+        code << src_code
       end
       code.join("\n")
     end
@@ -54,6 +56,8 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/customizations.rb", '')
         each_module do |mod, type, code|
           case type
+          when :code
+            y.yield("#{prefix}/#{mod}", code)
           when :unwrapped
             filename = File.join(prefix, underscore(mod.name) + '.rb')
             y.yield(filename, GENERATED_SRC_WARNING + wrap(mod))
@@ -70,7 +74,7 @@ module AwsSdkCodeGenerator
     private
 
     def each_module(&block)
-      yield(types_module, :unwrapped)
+      yield("types.rb", :code, types_module)
       yield(client_api_module, :unwrapped)
       yield(client_class, :wrapped)
       yield(errors_module, :unwrapped)
@@ -110,7 +114,7 @@ module AwsSdkCodeGenerator
     end
 
     def types_module
-      Generators::TypesModule.new(api: @api)
+      Views::TypesModule.new(service: @service).render
     end
 
     def client_api_module

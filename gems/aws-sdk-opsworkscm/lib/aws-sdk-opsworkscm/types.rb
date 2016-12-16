@@ -5,1065 +5,1115 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module OpsWorksCM
-    module Types
+module Aws::OpsWorksCM
+  module Types
 
-      # Stores account attributes.
-      # @!attribute [rw] name
-      #   The attribute name. The following are supported attribute names.
-      #
-      #   * *ServerLimit:* The number of servers that currently existing /
-      #     maximal allowed. By default 10 servers can be created.
-      #
-      #   * *ManualBackupLimit:* The number of manual backups that currently
-      #     exist / are maximal allowed. By default 50 manual backups can be
-      #     created.
-      #   @return [String]
-      #
-      # @!attribute [rw] maximum
-      #   The maximum allowed value.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] used
-      #   The current usage, such as the current number of servers associated
-      #   with the account.
-      #   @return [Integer]
-      class AccountAttribute < Struct.new(
-        :name,
-        :maximum,
-        :used)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass AssociateNodeRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #         node_name: "NodeName", # required
-      #         engine_attributes: [
-      #           {
-      #             name: "String",
-      #             value: "String",
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] server_name
-      #   @return [String]
-      #
-      # @!attribute [rw] node_name
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_attributes
-      #   @return [Array<Types::EngineAttribute>]
-      class AssociateNodeRequest < Struct.new(
-        :server_name,
-        :node_name,
-        :engine_attributes)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] node_association_status_token
-      #   @return [String]
-      class AssociateNodeResponse < Struct.new(
-        :node_association_status_token)
-        include Aws::Structure
-      end
-
-      # Describes a single backup.
-      # @!attribute [rw] backup_arn
-      #   The ARN of the backup.
-      #   @return [String]
-      #
-      # @!attribute [rw] backup_id
-      #   The generated ID of the backup. Example:
-      #   `myServerName-yyyyMMddHHmmssSSS`
-      #   @return [String]
-      #
-      # @!attribute [rw] backup_type
-      #   The backup type. Valid values are `automated` or `manual`.
-      #   @return [String]
-      #
-      # @!attribute [rw] created_at
-      #   The time stamp when the backup was created in the database. Example:
-      #   `2016-07-29T13:38:47.520Z`
-      #   @return [Time]
-      #
-      # @!attribute [rw] description
-      #   A user-provided description for a manual backup. This field is empty
-      #   for automated backups.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine
-      #   The engine type that is obtained from the server when the backup is
-      #   created.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_model
-      #   The engine model that is obtained from the server when the backup is
-      #   created.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_version
-      #   The engine version that is obtained from the server when the backup
-      #   is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_profile_arn
-      #   The EC2 instance profile ARN that is obtained from the server when
-      #   the backup is created. Because this value is stored, you are not
-      #   required to provide the InstanceProfileArn again if you restore a
-      #   backup.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_type
-      #   The instance type that is obtained from the server when the backup
-      #   is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] key_pair
-      #   The key pair that is obtained from the server when the backup is
-      #   created.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_backup_window
-      #   The preferred backup period that is obtained from the server when
-      #   the backup is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_maintenance_window
-      #   The preferred maintenance period that is obtained from the server
-      #   when the backup is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_data_size
-      #   The size of the backup, in bytes. The size is returned by the
-      #   instance in the command results.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] s3_data_url
-      #   The Amazon S3 URL of the backup's tar.gz file.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_log_url
-      #   The Amazon S3 URL of the backup's log file.
-      #   @return [String]
-      #
-      # @!attribute [rw] security_group_ids
-      #   The security group IDs that are obtained from the server when the
-      #   backup is created.
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server from which the backup was made.
-      #   @return [String]
-      #
-      # @!attribute [rw] service_role_arn
-      #   The service role ARN that is obtained from the server when the
-      #   backup is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   The status of a backup while in progress.
-      #   @return [String]
-      #
-      # @!attribute [rw] status_description
-      #   An informational message about backup status.
-      #   @return [String]
-      #
-      # @!attribute [rw] subnet_ids
-      #   The subnet IDs that are obtained from the server when the backup is
-      #   created.
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] tools_version
-      #   The version of AWS OpsWorks for Chef Automate-specific tools that is
-      #   obtained from the server when the backup is created.
-      #   @return [String]
-      #
-      # @!attribute [rw] user_arn
-      #   The IAM user ARN of the requester for manual backups. This field is
-      #   empty for automated backups.
-      #   @return [String]
-      class Backup < Struct.new(
-        :backup_arn,
-        :backup_id,
-        :backup_type,
-        :created_at,
-        :description,
-        :engine,
-        :engine_model,
-        :engine_version,
-        :instance_profile_arn,
-        :instance_type,
-        :key_pair,
-        :preferred_backup_window,
-        :preferred_maintenance_window,
-        :s3_data_size,
-        :s3_data_url,
-        :s3_log_url,
-        :security_group_ids,
-        :server_name,
-        :service_role_arn,
-        :status,
-        :status_description,
-        :subnet_ids,
-        :tools_version,
-        :user_arn)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass CreateBackupRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #         description: "String",
-      #       }
-      # @!attribute [rw] server_name
-      #   The name of the server that you want to back up.
-      #   @return [String]
-      #
-      # @!attribute [rw] description
-      #   A user-defined description of the backup.
-      #   @return [String]
-      class CreateBackupRequest < Struct.new(
-        :server_name,
-        :description)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] backup
-      #   Backup created by request.
-      #   @return [Types::Backup]
-      class CreateBackupResponse < Struct.new(
-        :backup)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass CreateServerRequest
-      #   data as a hash:
-      #
-      #       {
-      #         disable_automated_backup: false,
-      #         engine: "String",
-      #         engine_model: "String",
-      #         engine_version: "String",
-      #         engine_attributes: [
-      #           {
-      #             name: "String",
-      #             value: "String",
-      #           },
-      #         ],
-      #         backup_retention_count: 1,
-      #         server_name: "ServerName", # required
-      #         instance_profile_arn: "InstanceProfileArn", # required
-      #         instance_type: "String",
-      #         key_pair: "KeyPair",
-      #         preferred_maintenance_window: "TimeWindowDefinition",
-      #         preferred_backup_window: "TimeWindowDefinition",
-      #         security_group_ids: ["String"],
-      #         service_role_arn: "ServiceRoleArn", # required
-      #         subnet_ids: ["String"],
-      #         backup_id: "BackupId",
-      #       }
-      # @!attribute [rw] disable_automated_backup
-      #   Enable or disable scheduled backups. Valid values are `true` or
-      #   `false`. The default value is `true`.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] engine
-      #   The configuration management engine to use. Valid values include
-      #   `Chef`.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_model
-      #   The engine model, or option. Valid values include `Single`.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_version
-      #   The major release version of the engine that you want to use. Values
-      #   depend on the engine that you choose.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_attributes
-      #   Engine attributes on a specified server.
-      #
-      #   **Attributes accepted in a createServer request:**
-      #
-      #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
-      #     stored by AWS OpsWorks for Chef Automate. This private key is
-      #     required to access the Chef API.
-      #
-      #   ^
-      #   @return [Array<Types::EngineAttribute>]
-      #
-      # @!attribute [rw] backup_retention_count
-      #   The number of automated backups that you want to keep. Whenever a
-      #   new backup is created, AWS OpsWorks for Chef Automate deletes the
-      #   oldest backups if this number is exceeded. The default value is `1`.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server. The server name must be unique within your
-      #   AWS account, within each region. Server names must start with a
-      #   letter; then letters, numbers, or hyphens (-) are allowed, up to a
-      #   maximum of 32 characters.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_profile_arn
-      #   The ARN of the instance profile that your Amazon EC2 instances use.
-      #   Although the AWS OpsWorks console typically creates the instance
-      #   profile for you, in this release of AWS OpsWorks for Chef Automate,
-      #   run the service-role-creation.yaml AWS CloudFormation template,
-      #   located at
-      #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-      #   This template creates a stack that includes the instance profile you
-      #   need.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_type
-      #   The Amazon EC2 instance type to use. Valid values must be specified
-      #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
-      #   @return [String]
-      #
-      # @!attribute [rw] key_pair
-      #   The Amazon EC2 key pair to set for the instance. You may specify
-      #   this parameter to connect to your instances by using SSH.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_maintenance_window
-      #   The start time for a one-hour period each week during which AWS
-      #   OpsWorks for Chef Automate performs maintenance on the instance.
-      #   Valid values must be specified in the following format: `DDD:HH:MM`.
-      #   The specified time is in coordinated universal time (UTC). The
-      #   default value is a random one-hour period on Tuesday, Wednesday, or
-      #   Friday. See `TimeWindowDefinition` for more information.
-      #
-      #   **Example:** `Mon:08:00`, which represents a start time of every
-      #   Monday at 08:00 UTC. (8:00 a.m.)
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_backup_window
-      #   The start time for a one-hour period during which AWS OpsWorks for
-      #   Chef Automate backs up application-level data on your server if
-      #   backups are enabled. Valid values must be specified in one of the
-      #   following formats:
-      #
-      #   * `HH:MM` for daily backups
-      #
-      #   * `DDD:HH:MM` for weekly backups
-      #
-      #   The specified time is in coordinated universal time (UTC). The
-      #   default value is a random, daily start time.
-      #
-      #   **Example:** `08:00`, which represents a daily start time of 08:00
-      #   UTC.
-      #
-      #   **Example:** `Mon:08:00`, which represents a start time of every
-      #   Monday at 08:00 UTC. (8:00 a.m.)
-      #   @return [String]
-      #
-      # @!attribute [rw] security_group_ids
-      #   A list of security group IDs to attach to the Amazon EC2 instance.
-      #   If you add this parameter, the specified security groups must be
-      #   within the VPC that is specified by `SubnetIds`.
-      #
-      #   If you do not specify this parameter, AWS OpsWorks for Chef Automate
-      #   creates one new security group that uses TCP ports 22 and 443, open
-      #   to 0.0.0.0/0 (everyone).
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] service_role_arn
-      #   The service role that the AWS OpsWorks for Chef Automate service
-      #   backend uses to work with your account. Although the AWS OpsWorks
-      #   console typically creates the service role for you, in this release
-      #   of AWS OpsWorks for Chef Automate, run the
-      #   service-role-creation.yaml AWS CloudFormation template, located at
-      #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
-      #   This template creates a stack that includes the service role that
-      #   you need.
-      #   @return [String]
-      #
-      # @!attribute [rw] subnet_ids
-      #   The IDs of subnets in which to launch the server EC2 instance.
-      #
-      #   Amazon EC2-Classic customers: This field is required. All servers
-      #   must run within a VPC. The VPC must have "Auto Assign Public IP"
-      #   enabled.
-      #
-      #   EC2-VPC customers: This field is optional. If you do not specify
-      #   subnet IDs, your EC2 instances are created in a default subnet that
-      #   is selected by Amazon EC2. If you specify subnet IDs, the VPC must
-      #   have "Auto Assign Public IP" enabled.
-      #
-      #   For more information about supported Amazon EC2 platforms, see
-      #   [Supported Platforms][1].
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] backup_id
-      #   If you specify this field, AWS OpsWorks for Chef Automate creates
-      #   the server by using the backup represented by BackupId.
-      #   @return [String]
-      class CreateServerRequest < Struct.new(
-        :disable_automated_backup,
-        :engine,
-        :engine_model,
-        :engine_version,
-        :engine_attributes,
-        :backup_retention_count,
-        :server_name,
-        :instance_profile_arn,
-        :instance_type,
-        :key_pair,
-        :preferred_maintenance_window,
-        :preferred_backup_window,
-        :security_group_ids,
-        :service_role_arn,
-        :subnet_ids,
-        :backup_id)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] server
-      #   The server that is created by the request.
-      #   @return [Types::Server]
-      class CreateServerResponse < Struct.new(
-        :server)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DeleteBackupRequest
-      #   data as a hash:
-      #
-      #       {
-      #         backup_id: "BackupId", # required
-      #       }
-      # @!attribute [rw] backup_id
-      #   The ID of the backup to delete. Run the DescribeBackups command to
-      #   get a list of backup IDs. Backup IDs are in the format
-      #   `ServerName-yyyyMMddHHmmssSSS`.
-      #   @return [String]
-      class DeleteBackupRequest < Struct.new(
-        :backup_id)
-        include Aws::Structure
-      end
-
-      class DeleteBackupResponse < Aws::EmptyStructure; end
-
-      # @note When making an API call, pass DeleteServerRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #       }
-      # @!attribute [rw] server_name
-      #   The ID of the server to delete.
-      #   @return [String]
-      class DeleteServerRequest < Struct.new(
-        :server_name)
-        include Aws::Structure
-      end
-
-      class DeleteServerResponse < Aws::EmptyStructure; end
-
-      # @api private
-      class DescribeAccountAttributesRequest < Aws::EmptyStructure; end
-
-      # @!attribute [rw] attributes
-      #   The attributes that are currently set for the account.
-      #   @return [Array<Types::AccountAttribute>]
-      class DescribeAccountAttributesResponse < Struct.new(
-        :attributes)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DescribeBackupsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         backup_id: "BackupId",
-      #         server_name: "ServerName",
-      #         next_token: "NextToken",
-      #         max_results: 1,
-      #       }
-      # @!attribute [rw] backup_id
-      #   Describes a single backup.
-      #   @return [String]
-      #
-      # @!attribute [rw] server_name
-      #   Returns backups for the server with the specified ServerName.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeBackups` again, and assign the
-      #   token from the previous results as the value of the `nextToken`
-      #   parameter. If there are no more results, the response object's
-      #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-      #   that was not returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_results
-      #   To receive a paginated response, use this parameter to specify the
-      #   maximum number of results to be returned with a single call. If the
-      #   number of available results exceeds this maximum, the response
-      #   includes a `NextToken` value that you can assign to the `NextToken`
-      #   request parameter to get the next set of results.
-      #   @return [Integer]
-      class DescribeBackupsRequest < Struct.new(
-        :backup_id,
-        :server_name,
-        :next_token,
-        :max_results)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] backups
-      #   Contains the response to a `DescribeBackups` request.
-      #   @return [Array<Types::Backup>]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeBackups` again, and assign the
-      #   token from the previous results as the value of the `nextToken`
-      #   parameter. If there are no more results, the response object's
-      #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-      #   that was not returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      class DescribeBackupsResponse < Struct.new(
-        :backups,
-        :next_token)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DescribeEventsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #         next_token: "NextToken",
-      #         max_results: 1,
-      #       }
-      # @!attribute [rw] server_name
-      #   The name of the server for which you want to view events.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeEvents` again, and assign the token
-      #   from the previous results as the value of the `nextToken` parameter.
-      #   If there are no more results, the response object's `nextToken`
-      #   parameter value is `null`. Setting a `nextToken` value that was not
-      #   returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_results
-      #   To receive a paginated response, use this parameter to specify the
-      #   maximum number of results to be returned with a single call. If the
-      #   number of available results exceeds this maximum, the response
-      #   includes a `NextToken` value that you can assign to the `NextToken`
-      #   request parameter to get the next set of results.
-      #   @return [Integer]
-      class DescribeEventsRequest < Struct.new(
-        :server_name,
-        :next_token,
-        :max_results)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] server_events
-      #   Contains the response to a `DescribeEvents` request.
-      #   @return [Array<Types::ServerEvent>]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeEvents` again, and assign the token
-      #   from the previous results as the value of the `nextToken` parameter.
-      #   If there are no more results, the response object's `nextToken`
-      #   parameter value is `null`. Setting a `nextToken` value that was not
-      #   returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      class DescribeEventsResponse < Struct.new(
-        :server_events,
-        :next_token)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DescribeNodeAssociationStatusRequest
-      #   data as a hash:
-      #
-      #       {
-      #         node_association_status_token: "NodeAssociationStatusToken", # required
-      #         server_name: "ServerName", # required
-      #       }
-      # @!attribute [rw] node_association_status_token
-      #   @return [String]
-      #
-      # @!attribute [rw] server_name
-      #   @return [String]
-      class DescribeNodeAssociationStatusRequest < Struct.new(
-        :node_association_status_token,
-        :server_name)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] node_association_status
-      #   @return [String]
-      class DescribeNodeAssociationStatusResponse < Struct.new(
-        :node_association_status)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DescribeServersRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName",
-      #         next_token: "NextToken",
-      #         max_results: 1,
-      #       }
-      # @!attribute [rw] server_name
-      #   Describes the server with the specified ServerName.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeServers` again, and assign the
-      #   token from the previous results as the value of the `nextToken`
-      #   parameter. If there are no more results, the response object's
-      #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-      #   that was not returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_results
-      #   To receive a paginated response, use this parameter to specify the
-      #   maximum number of results to be returned with a single call. If the
-      #   number of available results exceeds this maximum, the response
-      #   includes a `NextToken` value that you can assign to the `NextToken`
-      #   request parameter to get the next set of results.
-      #   @return [Integer]
-      class DescribeServersRequest < Struct.new(
-        :server_name,
-        :next_token,
-        :max_results)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] servers
-      #   Contains the response to a `DescribeServers` request.
-      #   @return [Array<Types::Server>]
-      #
-      # @!attribute [rw] next_token
-      #   NextToken is a string that is returned in some command responses. It
-      #   indicates that not all entries have been returned, and that you must
-      #   run at least one more request to get remaining items. To get
-      #   remaining results, call `DescribeServers` again, and assign the
-      #   token from the previous results as the value of the `nextToken`
-      #   parameter. If there are no more results, the response object's
-      #   `nextToken` parameter value is `null`. Setting a `nextToken` value
-      #   that was not returned in your previous results causes an
-      #   `InvalidNextTokenException` to occur.
-      #   @return [String]
-      class DescribeServersResponse < Struct.new(
-        :servers,
-        :next_token)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass DisassociateNodeRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #         node_name: "NodeName", # required
-      #         engine_attributes: [
-      #           {
-      #             name: "String",
-      #             value: "String",
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] server_name
-      #   @return [String]
-      #
-      # @!attribute [rw] node_name
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_attributes
-      #   @return [Array<Types::EngineAttribute>]
-      class DisassociateNodeRequest < Struct.new(
-        :server_name,
-        :node_name,
-        :engine_attributes)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] node_association_status_token
-      #   @return [String]
-      class DisassociateNodeResponse < Struct.new(
-        :node_association_status_token)
-        include Aws::Structure
-      end
-
-      # A name/value pair that is specific to the engine of the server.
-      # @note When making an API call, pass EngineAttribute
-      #   data as a hash:
-      #
-      #       {
-      #         name: "String",
-      #         value: "String",
-      #       }
-      # @!attribute [rw] name
-      #   The name of the engine attribute.
-      #   @return [String]
-      #
-      # @!attribute [rw] value
-      #   The value of the engine attribute.
-      #   @return [String]
-      class EngineAttribute < Struct.new(
-        :name,
-        :value)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass RestoreServerRequest
-      #   data as a hash:
-      #
-      #       {
-      #         backup_id: "BackupId", # required
-      #         server_name: "ServerName", # required
-      #         instance_type: "String",
-      #         key_pair: "KeyPair",
-      #       }
-      # @!attribute [rw] backup_id
-      #   The ID of the backup that you want to use to restore a server.
-      #   @return [String]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server that you want to restore.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_type
-      #   The type of the instance to create. Valid values must be specified
-      #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
-      #   If you do not specify this parameter, RestoreServer uses the
-      #   instance type from the specified backup.
-      #   @return [String]
-      #
-      # @!attribute [rw] key_pair
-      #   The name of the key pair to set on the new EC2 instance. This can be
-      #   helpful if any of the administrators who manage the server no longer
-      #   have the SSH key.
-      #   @return [String]
-      class RestoreServerRequest < Struct.new(
-        :backup_id,
-        :server_name,
-        :instance_type,
-        :key_pair)
-        include Aws::Structure
-      end
-
-      class RestoreServerResponse < Aws::EmptyStructure; end
-
-      # Describes a configuration management server.
-      # @!attribute [rw] backup_retention_count
-      #   The number of automated backups to keep.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] created_at
-      #   Time stamp of server creation. Example `2016-07-29T13:38:47.520Z`
-      #   @return [Time]
-      #
-      # @!attribute [rw] disable_automated_backup
-      #   Disables automated backups. The number of stored backups is
-      #   dependent on the value of PreferredBackupCount.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] endpoint
-      #   A DNS name that can be used to access the engine. Example:
-      #   `myserver-asdfghjkl.us-east-1.opsworks.io`
-      #   @return [String]
-      #
-      # @!attribute [rw] engine
-      #   The engine type of the server. The valid value in this release is
-      #   `Chef`.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_model
-      #   The engine model of the server. The valid value in this release is
-      #   `Single`.
-      #   @return [String]
-      #
-      # @!attribute [rw] engine_attributes
-      #   The response of a createServer() request returns the master
-      #   credential to access the server in EngineAttributes. These
-      #   credentials are not stored by AWS OpsWorks for Chef Automate; they
-      #   are returned only as part of the result of createServer().
-      #
-      #   **Attributes returned in a createServer response:**
-      #
-      #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is
-      #     generated by AWS OpsWorks for Chef Automate. This private key is
-      #     required to access the Chef API.
-      #
-      #   * `CHEF_STARTER_KIT`\: A base64-encoded ZIP file. The ZIP file
-      #     contains a Chef starter kit, which includes a README, a
-      #     configuration file, and the required RSA private key. Save this
-      #     file, unzip it, and then change to the directory where you've
-      #     unzipped the file contents. From this directory, you can run Knife
-      #     commands.
-      #   @return [Array<Types::EngineAttribute>]
-      #
-      # @!attribute [rw] engine_version
-      #   The engine version of the server. Because Chef is the engine
-      #   available in this release, the valid value for EngineVersion is
-      #   `12`.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_profile_arn
-      #   The instance profile ARN of the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] instance_type
-      #   The instance type for the server, as specified in the CloudFormation
-      #   stack. This might not be the same instance type that is shown in the
-      #   EC2 console.
-      #   @return [String]
-      #
-      # @!attribute [rw] key_pair
-      #   The key pair associated with the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] maintenance_status
-      #   The status of the most recent server maintenance run. Shows
-      #   `SUCCESS` or `FAILED`.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_maintenance_window
-      #   The preferred maintenance period specified for the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_backup_window
-      #   The preferred backup period specified for the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] security_group_ids
-      #   The security group IDs for the server, as specified in the
-      #   CloudFormation stack. These might not be the same security groups
-      #   that are shown in the EC2 console.
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] service_role_arn
-      #   The service role ARN used to create the server.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   The server's status. This field displays the states of actions in
-      #   progress, such as creating, running, or backing up the server, as
-      #   well as server health.
-      #   @return [String]
-      #
-      # @!attribute [rw] status_reason
-      #   Depending on the server status, this field has either a
-      #   human-readable message (such as a create or backup error), or an
-      #   escaped block of JSON (used for health check results).
-      #   @return [String]
-      #
-      # @!attribute [rw] subnet_ids
-      #   The subnet IDs specified in a CreateServer request.
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] server_arn
-      #   The ARN of the server.
-      #   @return [String]
-      class Server < Struct.new(
-        :backup_retention_count,
-        :server_name,
-        :created_at,
-        :disable_automated_backup,
-        :endpoint,
-        :engine,
-        :engine_model,
-        :engine_attributes,
-        :engine_version,
-        :instance_profile_arn,
-        :instance_type,
-        :key_pair,
-        :maintenance_status,
-        :preferred_maintenance_window,
-        :preferred_backup_window,
-        :security_group_ids,
-        :service_role_arn,
-        :status,
-        :status_reason,
-        :subnet_ids,
-        :server_arn)
-        include Aws::Structure
-      end
-
-      # An event that is related to the server, such as the start of
-      # maintenance or backup.
-      # @!attribute [rw] created_at
-      #   The time when the event occurred.
-      #   @return [Time]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server on or for which the event occurred.
-      #   @return [String]
-      #
-      # @!attribute [rw] message
-      #   A human-readable informational or status message.
-      #   @return [String]
-      #
-      # @!attribute [rw] log_url
-      #   The Amazon S3 URL of the event's log file.
-      #   @return [String]
-      class ServerEvent < Struct.new(
-        :created_at,
-        :server_name,
-        :message,
-        :log_url)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass StartMaintenanceRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #       }
-      # @!attribute [rw] server_name
-      #   The name of the server on which to run maintenance.
-      #   @return [String]
-      class StartMaintenanceRequest < Struct.new(
-        :server_name)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] server
-      #   Contains the response to a `StartMaintenance` request.
-      #   @return [Types::Server]
-      class StartMaintenanceResponse < Struct.new(
-        :server)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass UpdateServerEngineAttributesRequest
-      #   data as a hash:
-      #
-      #       {
-      #         server_name: "ServerName", # required
-      #         attribute_name: "AttributeName", # required
-      #         attribute_value: "AttributeValue",
-      #       }
-      # @!attribute [rw] server_name
-      #   The name of the server to update.
-      #   @return [String]
-      #
-      # @!attribute [rw] attribute_name
-      #   The name of the engine attribute to update.
-      #   @return [String]
-      #
-      # @!attribute [rw] attribute_value
-      #   The value to set for the attribute.
-      #   @return [String]
-      class UpdateServerEngineAttributesRequest < Struct.new(
-        :server_name,
-        :attribute_name,
-        :attribute_value)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] server
-      #   Contains the response to an `UpdateServerEngineAttributes` request.
-      #   @return [Types::Server]
-      class UpdateServerEngineAttributesResponse < Struct.new(
-        :server)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass UpdateServerRequest
-      #   data as a hash:
-      #
-      #       {
-      #         disable_automated_backup: false,
-      #         backup_retention_count: 1,
-      #         server_name: "ServerName", # required
-      #         preferred_maintenance_window: "TimeWindowDefinition",
-      #         preferred_backup_window: "TimeWindowDefinition",
-      #       }
-      # @!attribute [rw] disable_automated_backup
-      #   Setting DisableAutomatedBackup to `true` disables automated or
-      #   scheduled backups. Automated backups are enabled by default.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] backup_retention_count
-      #   Sets the number of automated backups that you want to keep.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] server_name
-      #   The name of the server to update.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_maintenance_window
-      #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
-      #
-      #   Time windows always use coordinated universal time (UTC).
-      #
-      #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-      #   Sat, Sun.
-      #   @return [String]
-      #
-      # @!attribute [rw] preferred_backup_window
-      #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
-      #
-      #   Time windows always use coordinated universal time (UTC).
-      #
-      #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
-      #   Sat, Sun.
-      #   @return [String]
-      class UpdateServerRequest < Struct.new(
-        :disable_automated_backup,
-        :backup_retention_count,
-        :server_name,
-        :preferred_maintenance_window,
-        :preferred_backup_window)
-        include Aws::Structure
-      end
-
-      # @!attribute [rw] server
-      #   Contains the response to a `UpdateServer` request.
-      #   @return [Types::Server]
-      class UpdateServerResponse < Struct.new(
-        :server)
-        include Aws::Structure
-      end
-
+    # Stores account attributes.
+    #
+    # @!attribute [rw] name
+    #   The attribute name. The following are supported attribute names.
+    #
+    #   * *ServerLimit:* The number of servers that currently existing /
+    #     maximal allowed. By default 10 servers can be created.
+    #
+    #   * *ManualBackupLimit:* The number of manual backups that currently
+    #     exist / are maximal allowed. By default 50 manual backups can be
+    #     created.
+    #   @return [String]
+    #
+    # @!attribute [rw] maximum
+    #   The maximum allowed value.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] used
+    #   The current usage, such as the current number of servers associated
+    #   with the account.
+    #   @return [Integer]
+    #
+    class AccountAttribute < Struct.new(
+      :name,
+      :maximum,
+      :used)
+      include Aws::Structure
     end
+
+    # @note When making an API call, you may pass AssociateNodeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #         node_name: "NodeName", # required
+    #         engine_attributes: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_name
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_attributes
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    class AssociateNodeRequest < Struct.new(
+      :server_name,
+      :node_name,
+      :engine_attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_association_status_token
+    #   @return [String]
+    #
+    class AssociateNodeResponse < Struct.new(
+      :node_association_status_token)
+      include Aws::Structure
+    end
+
+    # Describes a single backup.
+    #
+    # @!attribute [rw] backup_arn
+    #   The ARN of the backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_id
+    #   The generated ID of the backup. Example:
+    #   `myServerName-yyyyMMddHHmmssSSS`
+    #   @return [String]
+    #
+    # @!attribute [rw] backup_type
+    #   The backup type. Valid values are `automated` or `manual`.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   The time stamp when the backup was created in the database. Example:
+    #   `2016-07-29T13:38:47.520Z`
+    #   @return [Time]
+    #
+    # @!attribute [rw] description
+    #   A user-provided description for a manual backup. This field is empty
+    #   for automated backups.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The engine type that is obtained from the server when the backup is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_model
+    #   The engine model that is obtained from the server when the backup is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version that is obtained from the server when the backup
+    #   is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_arn
+    #   The EC2 instance profile ARN that is obtained from the server when
+    #   the backup is created. Because this value is stored, you are not
+    #   required to provide the InstanceProfileArn again if you restore a
+    #   backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type that is obtained from the server when the backup
+    #   is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair
+    #   The key pair that is obtained from the server when the backup is
+    #   created.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The preferred backup period that is obtained from the server when
+    #   the backup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The preferred maintenance period that is obtained from the server
+    #   when the backup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_data_size
+    #   The size of the backup, in bytes. The size is returned by the
+    #   instance in the command results.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] s3_data_url
+    #   The Amazon S3 URL of the backup's tar.gz file.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_log_url
+    #   The Amazon S3 URL of the backup's log file.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs that are obtained from the server when the
+    #   backup is created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server from which the backup was made.
+    #   @return [String]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The service role ARN that is obtained from the server when the
+    #   backup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of a backup while in progress.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_description
+    #   An informational message about backup status.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs that are obtained from the server when the backup is
+    #   created.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] tools_version
+    #   The version of AWS OpsWorks for Chef Automate-specific tools that is
+    #   obtained from the server when the backup is created.
+    #   @return [String]
+    #
+    # @!attribute [rw] user_arn
+    #   The IAM user ARN of the requester for manual backups. This field is
+    #   empty for automated backups.
+    #   @return [String]
+    #
+    class Backup < Struct.new(
+      :backup_arn,
+      :backup_id,
+      :backup_type,
+      :created_at,
+      :description,
+      :engine,
+      :engine_model,
+      :engine_version,
+      :instance_profile_arn,
+      :instance_type,
+      :key_pair,
+      :preferred_backup_window,
+      :preferred_maintenance_window,
+      :s3_data_size,
+      :s3_data_url,
+      :s3_log_url,
+      :security_group_ids,
+      :server_name,
+      :service_role_arn,
+      :status,
+      :status_description,
+      :subnet_ids,
+      :tools_version,
+      :user_arn)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #         description: "String",
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server that you want to back up.
+    #   @return [String]
+    #
+    # @!attribute [rw] description
+    #   A user-defined description of the backup.
+    #   @return [String]
+    #
+    class CreateBackupRequest < Struct.new(
+      :server_name,
+      :description)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backup
+    #   Backup created by request.
+    #   @return [Types::Backup]
+    #
+    class CreateBackupResponse < Struct.new(
+      :backup)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass CreateServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disable_automated_backup: false,
+    #         engine: "String",
+    #         engine_model: "String",
+    #         engine_version: "String",
+    #         engine_attributes: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #         backup_retention_count: 1,
+    #         server_name: "ServerName", # required
+    #         instance_profile_arn: "InstanceProfileArn", # required
+    #         instance_type: "String",
+    #         key_pair: "KeyPair",
+    #         preferred_maintenance_window: "TimeWindowDefinition",
+    #         preferred_backup_window: "TimeWindowDefinition",
+    #         security_group_ids: ["String"],
+    #         service_role_arn: "ServiceRoleArn", # required
+    #         subnet_ids: ["String"],
+    #         backup_id: "BackupId",
+    #       }
+    #
+    # @!attribute [rw] disable_automated_backup
+    #   Enable or disable scheduled backups. Valid values are `true` or
+    #   `false`. The default value is `true`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] engine
+    #   The configuration management engine to use. Valid values include
+    #   `Chef`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_model
+    #   The engine model, or option. Valid values include `Single`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_version
+    #   The major release version of the engine that you want to use. Values
+    #   depend on the engine that you choose.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_attributes
+    #   Engine attributes on a specified server.
+    #
+    #   **Attributes accepted in a createServer request:**
+    #
+    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is not
+    #     stored by AWS OpsWorks for Chef Automate. This private key is
+    #     required to access the Chef API.
+    #
+    #   ^
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    # @!attribute [rw] backup_retention_count
+    #   The number of automated backups that you want to keep. Whenever a
+    #   new backup is created, AWS OpsWorks for Chef Automate deletes the
+    #   oldest backups if this number is exceeded. The default value is `1`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server. The server name must be unique within your
+    #   AWS account, within each region. Server names must start with a
+    #   letter; then letters, numbers, or hyphens (-) are allowed, up to a
+    #   maximum of 32 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_arn
+    #   The ARN of the instance profile that your Amazon EC2 instances use.
+    #   Although the AWS OpsWorks console typically creates the instance
+    #   profile for you, in this release of AWS OpsWorks for Chef Automate,
+    #   run the service-role-creation.yaml AWS CloudFormation template,
+    #   located at
+    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
+    #   This template creates a stack that includes the instance profile you
+    #   need.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The Amazon EC2 instance type to use. Valid values must be specified
+    #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair
+    #   The Amazon EC2 key pair to set for the instance. You may specify
+    #   this parameter to connect to your instances by using SSH.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The start time for a one-hour period each week during which AWS
+    #   OpsWorks for Chef Automate performs maintenance on the instance.
+    #   Valid values must be specified in the following format: `DDD:HH:MM`.
+    #   The specified time is in coordinated universal time (UTC). The
+    #   default value is a random one-hour period on Tuesday, Wednesday, or
+    #   Friday. See `TimeWindowDefinition` for more information.
+    #
+    #   **Example:** `Mon:08:00`, which represents a start time of every
+    #   Monday at 08:00 UTC. (8:00 a.m.)
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The start time for a one-hour period during which AWS OpsWorks for
+    #   Chef Automate backs up application-level data on your server if
+    #   backups are enabled. Valid values must be specified in one of the
+    #   following formats:
+    #
+    #   * `HH:MM` for daily backups
+    #
+    #   * `DDD:HH:MM` for weekly backups
+    #
+    #   The specified time is in coordinated universal time (UTC). The
+    #   default value is a random, daily start time.
+    #
+    #   **Example:** `08:00`, which represents a daily start time of 08:00
+    #   UTC.
+    #
+    #   **Example:** `Mon:08:00`, which represents a start time of every
+    #   Monday at 08:00 UTC. (8:00 a.m.)
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   A list of security group IDs to attach to the Amazon EC2 instance.
+    #   If you add this parameter, the specified security groups must be
+    #   within the VPC that is specified by `SubnetIds`.
+    #
+    #   If you do not specify this parameter, AWS OpsWorks for Chef Automate
+    #   creates one new security group that uses TCP ports 22 and 443, open
+    #   to 0.0.0.0/0 (everyone).
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The service role that the AWS OpsWorks for Chef Automate service
+    #   backend uses to work with your account. Although the AWS OpsWorks
+    #   console typically creates the service role for you, in this release
+    #   of AWS OpsWorks for Chef Automate, run the
+    #   service-role-creation.yaml AWS CloudFormation template, located at
+    #   https://s3.amazonaws.com/opsworks-stuff/latest/service-role-creation.yaml.
+    #   This template creates a stack that includes the service role that
+    #   you need.
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The IDs of subnets in which to launch the server EC2 instance.
+    #
+    #   Amazon EC2-Classic customers: This field is required. All servers
+    #   must run within a VPC. The VPC must have "Auto Assign Public IP"
+    #   enabled.
+    #
+    #   EC2-VPC customers: This field is optional. If you do not specify
+    #   subnet IDs, your EC2 instances are created in a default subnet that
+    #   is selected by Amazon EC2. If you specify subnet IDs, the VPC must
+    #   have "Auto Assign Public IP" enabled.
+    #
+    #   For more information about supported Amazon EC2 platforms, see
+    #   [Supported Platforms][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/https:/docs.aws.amazon.com/AWSEC2/latest/UserGuide/ec2-supported-platforms.html
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] backup_id
+    #   If you specify this field, AWS OpsWorks for Chef Automate creates
+    #   the server by using the backup represented by BackupId.
+    #   @return [String]
+    #
+    class CreateServerRequest < Struct.new(
+      :disable_automated_backup,
+      :engine,
+      :engine_model,
+      :engine_version,
+      :engine_attributes,
+      :backup_retention_count,
+      :server_name,
+      :instance_profile_arn,
+      :instance_type,
+      :key_pair,
+      :preferred_maintenance_window,
+      :preferred_backup_window,
+      :security_group_ids,
+      :service_role_arn,
+      :subnet_ids,
+      :backup_id)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server
+    #   The server that is created by the request.
+    #   @return [Types::Server]
+    #
+    class CreateServerResponse < Struct.new(
+      :server)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DeleteBackupRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup to delete. Run the DescribeBackups command to
+    #   get a list of backup IDs. Backup IDs are in the format
+    #   `ServerName-yyyyMMddHHmmssSSS`.
+    #   @return [String]
+    #
+    class DeleteBackupRequest < Struct.new(
+      :backup_id)
+      include Aws::Structure
+    end
+
+    class DeleteBackupResponse < Aws::EmptyStructure; end
+
+    # @note When making an API call, you may pass DeleteServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The ID of the server to delete.
+    #   @return [String]
+    #
+    class DeleteServerRequest < Struct.new(
+      :server_name)
+      include Aws::Structure
+    end
+
+    class DeleteServerResponse < Aws::EmptyStructure; end
+
+    # @api private
+    #
+    class DescribeAccountAttributesRequest < Aws::EmptyStructure; end
+
+    # @!attribute [rw] attributes
+    #   The attributes that are currently set for the account.
+    #   @return [Array<Types::AccountAttribute>]
+    #
+    class DescribeAccountAttributesResponse < Struct.new(
+      :attributes)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeBackupsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId",
+    #         server_name: "ServerName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   Describes a single backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   Returns backups for the server with the specified ServerName.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeBackups` again, and assign the
+    #   token from the previous results as the value of the `nextToken`
+    #   parameter. If there are no more results, the response object's
+    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
+    #   that was not returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    class DescribeBackupsRequest < Struct.new(
+      :backup_id,
+      :server_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] backups
+    #   Contains the response to a `DescribeBackups` request.
+    #   @return [Array<Types::Backup>]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeBackups` again, and assign the
+    #   token from the previous results as the value of the `nextToken`
+    #   parameter. If there are no more results, the response object's
+    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
+    #   that was not returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    class DescribeBackupsResponse < Struct.new(
+      :backups,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeEventsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server for which you want to view events.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeEvents` again, and assign the token
+    #   from the previous results as the value of the `nextToken` parameter.
+    #   If there are no more results, the response object's `nextToken`
+    #   parameter value is `null`. Setting a `nextToken` value that was not
+    #   returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    class DescribeEventsRequest < Struct.new(
+      :server_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server_events
+    #   Contains the response to a `DescribeEvents` request.
+    #   @return [Array<Types::ServerEvent>]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeEvents` again, and assign the token
+    #   from the previous results as the value of the `nextToken` parameter.
+    #   If there are no more results, the response object's `nextToken`
+    #   parameter value is `null`. Setting a `nextToken` value that was not
+    #   returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    class DescribeEventsResponse < Struct.new(
+      :server_events,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeNodeAssociationStatusRequest
+    #   data as a hash:
+    #
+    #       {
+    #         node_association_status_token: "NodeAssociationStatusToken", # required
+    #         server_name: "ServerName", # required
+    #       }
+    #
+    # @!attribute [rw] node_association_status_token
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   @return [String]
+    #
+    class DescribeNodeAssociationStatusRequest < Struct.new(
+      :node_association_status_token,
+      :server_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_association_status
+    #   @return [String]
+    #
+    class DescribeNodeAssociationStatusResponse < Struct.new(
+      :node_association_status)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DescribeServersRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName",
+    #         next_token: "NextToken",
+    #         max_results: 1,
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   Describes the server with the specified ServerName.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeServers` again, and assign the
+    #   token from the previous results as the value of the `nextToken`
+    #   parameter. If there are no more results, the response object's
+    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
+    #   that was not returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_results
+    #   To receive a paginated response, use this parameter to specify the
+    #   maximum number of results to be returned with a single call. If the
+    #   number of available results exceeds this maximum, the response
+    #   includes a `NextToken` value that you can assign to the `NextToken`
+    #   request parameter to get the next set of results.
+    #   @return [Integer]
+    #
+    class DescribeServersRequest < Struct.new(
+      :server_name,
+      :next_token,
+      :max_results)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] servers
+    #   Contains the response to a `DescribeServers` request.
+    #   @return [Array<Types::Server>]
+    #
+    # @!attribute [rw] next_token
+    #   NextToken is a string that is returned in some command responses. It
+    #   indicates that not all entries have been returned, and that you must
+    #   run at least one more request to get remaining items. To get
+    #   remaining results, call `DescribeServers` again, and assign the
+    #   token from the previous results as the value of the `nextToken`
+    #   parameter. If there are no more results, the response object's
+    #   `nextToken` parameter value is `null`. Setting a `nextToken` value
+    #   that was not returned in your previous results causes an
+    #   `InvalidNextTokenException` to occur.
+    #   @return [String]
+    #
+    class DescribeServersResponse < Struct.new(
+      :servers,
+      :next_token)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass DisassociateNodeRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #         node_name: "NodeName", # required
+    #         engine_attributes: [
+    #           {
+    #             name: "String",
+    #             value: "String",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   @return [String]
+    #
+    # @!attribute [rw] node_name
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_attributes
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    class DisassociateNodeRequest < Struct.new(
+      :server_name,
+      :node_name,
+      :engine_attributes)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] node_association_status_token
+    #   @return [String]
+    #
+    class DisassociateNodeResponse < Struct.new(
+      :node_association_status_token)
+      include Aws::Structure
+    end
+
+    # A name/value pair that is specific to the engine of the server.
+    #
+    # @note When making an API call, you may pass EngineAttribute
+    #   data as a hash:
+    #
+    #       {
+    #         name: "String",
+    #         value: "String",
+    #       }
+    #
+    # @!attribute [rw] name
+    #   The name of the engine attribute.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   The value of the engine attribute.
+    #   @return [String]
+    #
+    class EngineAttribute < Struct.new(
+      :name,
+      :value)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass RestoreServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         backup_id: "BackupId", # required
+    #         server_name: "ServerName", # required
+    #         instance_type: "String",
+    #         key_pair: "KeyPair",
+    #       }
+    #
+    # @!attribute [rw] backup_id
+    #   The ID of the backup that you want to use to restore a server.
+    #   @return [String]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server that you want to restore.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The type of the instance to create. Valid values must be specified
+    #   in the following format: `^([cm][34]|t2).*` For example, `c3.large`.
+    #   If you do not specify this parameter, RestoreServer uses the
+    #   instance type from the specified backup.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair
+    #   The name of the key pair to set on the new EC2 instance. This can be
+    #   helpful if any of the administrators who manage the server no longer
+    #   have the SSH key.
+    #   @return [String]
+    #
+    class RestoreServerRequest < Struct.new(
+      :backup_id,
+      :server_name,
+      :instance_type,
+      :key_pair)
+      include Aws::Structure
+    end
+
+    class RestoreServerResponse < Aws::EmptyStructure; end
+
+    # Describes a configuration management server.
+    #
+    # @!attribute [rw] backup_retention_count
+    #   The number of automated backups to keep.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] created_at
+    #   Time stamp of server creation. Example `2016-07-29T13:38:47.520Z`
+    #   @return [Time]
+    #
+    # @!attribute [rw] disable_automated_backup
+    #   Disables automated backups. The number of stored backups is
+    #   dependent on the value of PreferredBackupCount.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] endpoint
+    #   A DNS name that can be used to access the engine. Example:
+    #   `myserver-asdfghjkl.us-east-1.opsworks.io`
+    #   @return [String]
+    #
+    # @!attribute [rw] engine
+    #   The engine type of the server. The valid value in this release is
+    #   `Chef`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_model
+    #   The engine model of the server. The valid value in this release is
+    #   `Single`.
+    #   @return [String]
+    #
+    # @!attribute [rw] engine_attributes
+    #   The response of a createServer() request returns the master
+    #   credential to access the server in EngineAttributes. These
+    #   credentials are not stored by AWS OpsWorks for Chef Automate; they
+    #   are returned only as part of the result of createServer().
+    #
+    #   **Attributes returned in a createServer response:**
+    #
+    #   * `CHEF_PIVOTAL_KEY`\: A base64-encoded RSA private key that is
+    #     generated by AWS OpsWorks for Chef Automate. This private key is
+    #     required to access the Chef API.
+    #
+    #   * `CHEF_STARTER_KIT`\: A base64-encoded ZIP file. The ZIP file
+    #     contains a Chef starter kit, which includes a README, a
+    #     configuration file, and the required RSA private key. Save this
+    #     file, unzip it, and then change to the directory where you've
+    #     unzipped the file contents. From this directory, you can run Knife
+    #     commands.
+    #   @return [Array<Types::EngineAttribute>]
+    #
+    # @!attribute [rw] engine_version
+    #   The engine version of the server. Because Chef is the engine
+    #   available in this release, the valid value for EngineVersion is
+    #   `12`.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_profile_arn
+    #   The instance profile ARN of the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] instance_type
+    #   The instance type for the server, as specified in the CloudFormation
+    #   stack. This might not be the same instance type that is shown in the
+    #   EC2 console.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair
+    #   The key pair associated with the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] maintenance_status
+    #   The status of the most recent server maintenance run. Shows
+    #   `SUCCESS` or `FAILED`.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   The preferred maintenance period specified for the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   The preferred backup period specified for the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] security_group_ids
+    #   The security group IDs for the server, as specified in the
+    #   CloudFormation stack. These might not be the same security groups
+    #   that are shown in the EC2 console.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] service_role_arn
+    #   The service role ARN used to create the server.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The server's status. This field displays the states of actions in
+    #   progress, such as creating, running, or backing up the server, as
+    #   well as server health.
+    #   @return [String]
+    #
+    # @!attribute [rw] status_reason
+    #   Depending on the server status, this field has either a
+    #   human-readable message (such as a create or backup error), or an
+    #   escaped block of JSON (used for health check results).
+    #   @return [String]
+    #
+    # @!attribute [rw] subnet_ids
+    #   The subnet IDs specified in a CreateServer request.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] server_arn
+    #   The ARN of the server.
+    #   @return [String]
+    #
+    class Server < Struct.new(
+      :backup_retention_count,
+      :server_name,
+      :created_at,
+      :disable_automated_backup,
+      :endpoint,
+      :engine,
+      :engine_model,
+      :engine_attributes,
+      :engine_version,
+      :instance_profile_arn,
+      :instance_type,
+      :key_pair,
+      :maintenance_status,
+      :preferred_maintenance_window,
+      :preferred_backup_window,
+      :security_group_ids,
+      :service_role_arn,
+      :status,
+      :status_reason,
+      :subnet_ids,
+      :server_arn)
+      include Aws::Structure
+    end
+
+    # An event that is related to the server, such as the start of
+    # maintenance or backup.
+    #
+    # @!attribute [rw] created_at
+    #   The time when the event occurred.
+    #   @return [Time]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server on or for which the event occurred.
+    #   @return [String]
+    #
+    # @!attribute [rw] message
+    #   A human-readable informational or status message.
+    #   @return [String]
+    #
+    # @!attribute [rw] log_url
+    #   The Amazon S3 URL of the event's log file.
+    #   @return [String]
+    #
+    class ServerEvent < Struct.new(
+      :created_at,
+      :server_name,
+      :message,
+      :log_url)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass StartMaintenanceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server on which to run maintenance.
+    #   @return [String]
+    #
+    class StartMaintenanceRequest < Struct.new(
+      :server_name)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server
+    #   Contains the response to a `StartMaintenance` request.
+    #   @return [Types::Server]
+    #
+    class StartMaintenanceResponse < Struct.new(
+      :server)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateServerEngineAttributesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         server_name: "ServerName", # required
+    #         attribute_name: "AttributeName", # required
+    #         attribute_value: "AttributeValue",
+    #       }
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_name
+    #   The name of the engine attribute to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] attribute_value
+    #   The value to set for the attribute.
+    #   @return [String]
+    #
+    class UpdateServerEngineAttributesRequest < Struct.new(
+      :server_name,
+      :attribute_name,
+      :attribute_value)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server
+    #   Contains the response to an `UpdateServerEngineAttributes` request.
+    #   @return [Types::Server]
+    #
+    class UpdateServerEngineAttributesResponse < Struct.new(
+      :server)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass UpdateServerRequest
+    #   data as a hash:
+    #
+    #       {
+    #         disable_automated_backup: false,
+    #         backup_retention_count: 1,
+    #         server_name: "ServerName", # required
+    #         preferred_maintenance_window: "TimeWindowDefinition",
+    #         preferred_backup_window: "TimeWindowDefinition",
+    #       }
+    #
+    # @!attribute [rw] disable_automated_backup
+    #   Setting DisableAutomatedBackup to `true` disables automated or
+    #   scheduled backups. Automated backups are enabled by default.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] backup_retention_count
+    #   Sets the number of automated backups that you want to keep.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] server_name
+    #   The name of the server to update.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_maintenance_window
+    #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
+    #
+    #   Time windows always use coordinated universal time (UTC).
+    #
+    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
+    #   Sat, Sun.
+    #   @return [String]
+    #
+    # @!attribute [rw] preferred_backup_window
+    #   `DDD:HH:MM` (weekly start time) or `HH:MM` (daily start time).
+    #
+    #   Time windows always use coordinated universal time (UTC).
+    #
+    #   Valid strings for day of week (`DDD`) are: Mon, Tue, Wed, Thr, Fri,
+    #   Sat, Sun.
+    #   @return [String]
+    #
+    class UpdateServerRequest < Struct.new(
+      :disable_automated_backup,
+      :backup_retention_count,
+      :server_name,
+      :preferred_maintenance_window,
+      :preferred_backup_window)
+      include Aws::Structure
+    end
+
+    # @!attribute [rw] server
+    #   Contains the response to a `UpdateServer` request.
+    #   @return [Types::Server]
+    #
+    class UpdateServerResponse < Struct.new(
+      :server)
+      include Aws::Structure
+    end
+
   end
 end

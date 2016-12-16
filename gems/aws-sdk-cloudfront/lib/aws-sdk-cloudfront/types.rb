@@ -5,5288 +5,5557 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module CloudFront
-    module Types
-
-      # A complex type that lists the AWS accounts, if any, that you included
-      # in the `TrustedSigners` complex type for this distribution. These are
-      # the accounts that you want to allow to create signed URLs for private
-      # content.
-      #
-      # The `Signer` complex type lists the AWS account number of the trusted
-      # signer or `self` if the signer is the AWS account that created the
-      # distribution. The `Signer` element also includes the IDs of any active
-      # CloudFront key pairs that are associated with the trusted signer's
-      # AWS account. If no `KeyPairId` element appears for a `Signer`, that
-      # signer can't create signed URLs.
-      #
-      # For more information, see [Serving Private Content through
-      # CloudFront][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      # @!attribute [rw] enabled
-      #   Enabled is `true` if any of the AWS accounts listed in the
-      #   `TrustedSigners` complex type for this RTMP distribution have active
-      #   CloudFront key pairs. If not, `Enabled` is `false`.
-      #
-      #   For more information, see ActiveTrustedSigners.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   A complex type that contains one `Signer` complex type for each
-      #   trusted signer specified in the `TrustedSigners` complex type.
-      #
-      #   For more information, see ActiveTrustedSigners.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `Signer` complex type for each
-      #   trusted signer that is specified in the `TrustedSigners` complex
-      #   type.
-      #
-      #   For more information, see ActiveTrustedSigners.
-      #   @return [Array<Types::Signer>]
-      class ActiveTrustedSigners < Struct.new(
-        :enabled,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about CNAMEs (alternate
-      # domain names), if any, for this distribution.
-      # @note When making an API call, pass Aliases
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of CNAME aliases, if any, that you want to associate with
-      #   this distribution.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains the CNAME aliases, if any, that you
-      #   want to associate with this distribution.
-      #   @return [Array<String>]
-      class Aliases < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that controls which HTTP methods CloudFront processes
-      # and forwards to your Amazon S3 bucket or your custom origin. There are
-      # three choices:
-      #
-      # * CloudFront forwards only `GET` and `HEAD` requests.
-      #
-      # * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
-      #
-      # * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
-      #   `DELETE` requests.
-      #
-      # If you pick the third choice, you may need to restrict access to your
-      # Amazon S3 bucket or to your custom origin so users can't perform
-      # operations that you don't want them to. For example, you might not
-      # want users to have permissions to delete objects from your origin.
-      # @note When making an API call, pass AllowedMethods
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #         cached_methods: {
-      #           quantity: 1, # required
-      #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #         },
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of HTTP methods that you want CloudFront to forward to
-      #   your origin. Valid values are 2 (for `GET` and `HEAD` requests), 3
-      #   (for `GET`, `HEAD`, and `OPTIONS` requests) and 7 (for `GET, HEAD,
-      #   OPTIONS, PUT, PATCH, POST`, and `DELETE` requests).
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains the HTTP methods that you want
-      #   CloudFront to process and forward to your origin.
-      #   @return [Array<String>]
-      #
-      # @!attribute [rw] cached_methods
-      #   A complex type that controls whether CloudFront caches the response
-      #   to requests using the specified HTTP methods. There are two choices:
-      #
-      #   * CloudFront caches responses to `GET` and `HEAD` requests.
-      #
-      #   * CloudFront caches responses to `GET`, `HEAD`, and `OPTIONS`
-      #     requests.
-      #
-      #   If you pick the second choice for your Amazon S3 Origin, you may
-      #   need to forward Access-Control-Request-Method,
-      #   Access-Control-Request-Headers, and Origin headers for the responses
-      #   to be cached correctly.
-      #   @return [Types::CachedMethods]
-      class AllowedMethods < Struct.new(
-        :quantity,
-        :items,
-        :cached_methods)
-        include Aws::Structure
-      end
-
-      # A complex type that describes how CloudFront processes requests.
-      #
-      # You must create at least as many cache behaviors (including the
-      # default cache behavior) as you have origins if you want CloudFront to
-      # distribute objects from all of the origins. Each cache behavior
-      # specifies the one origin from which you want CloudFront to get
-      # objects. If you have two origins and only the default cache behavior,
-      # the default cache behavior will cause CloudFront to get objects from
-      # one of the origins, but the other origin is never used.
-      #
-      # For the current limit on the number of cache behaviors that you can
-      # add to a distribution, see [Amazon CloudFront Limits][1] in the *AWS
-      # General Reference*.
-      #
-      # If you don't want to specify any cache behaviors, include only an
-      # empty `CacheBehaviors` element. Don't include an empty
-      # `CacheBehavior` element, or CloudFront returns a `MalformedXML` error.
-      #
-      # To delete all cache behaviors in an existing distribution, update the
-      # distribution configuration and include only an empty `CacheBehaviors`
-      # element.
-      #
-      # To add, change, or remove one or more cache behaviors, update the
-      # distribution configuration and specify all of the cache behaviors that
-      # you want to include in the updated distribution.
-      #
-      # For more information about cache behaviors, see [Cache Behaviors][2]
-      # in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
-      # [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
-      # @note When making an API call, pass CacheBehavior
-      #   data as a hash:
-      #
-      #       {
-      #         path_pattern: "string", # required
-      #         target_origin_id: "string", # required
-      #         forwarded_values: { # required
-      #           query_string: false, # required
-      #           cookies: { # required
-      #             forward: "none", # required, accepts none, whitelist, all
-      #             whitelisted_names: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           headers: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           query_string_cache_keys: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #         },
-      #         trusted_signers: { # required
-      #           enabled: false, # required
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #         min_ttl: 1, # required
-      #         allowed_methods: {
-      #           quantity: 1, # required
-      #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #           cached_methods: {
-      #             quantity: 1, # required
-      #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #           },
-      #         },
-      #         smooth_streaming: false,
-      #         default_ttl: 1,
-      #         max_ttl: 1,
-      #         compress: false,
-      #         lambda_function_associations: {
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               lambda_function_arn: "string",
-      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #             },
-      #           ],
-      #         },
-      #       }
-      # @!attribute [rw] path_pattern
-      #   The pattern (for example, `images/*.jpg`) that specifies which
-      #   requests to apply the behavior to. When CloudFront receives a viewer
-      #   request, the requested path is compared with path patterns in the
-      #   order in which cache behaviors are listed in the distribution.
-      #
-      #   <note markdown="1"> You can optionally include a slash (`/`) at the beginning of the
-      #   path pattern. For example, `/images/*.jpg`. CloudFront behavior is
-      #   the same with or without the leading `/`.
-      #
-      #    </note>
-      #
-      #   The path pattern for the default cache behavior is `*` and cannot be
-      #   changed. If the request for an object does not match the path
-      #   pattern for any cache behaviors, CloudFront applies the behavior in
-      #   the default cache behavior.
-      #
-      #   For more information, see [Path Pattern][1] in the <i> Amazon
-      #   CloudFront Developer Guide</i>.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern
-      #   @return [String]
-      #
-      # @!attribute [rw] target_origin_id
-      #   The value of `ID` for the origin that you want CloudFront to route
-      #   requests to when a request matches the path pattern either for a
-      #   cache behavior or for the default cache behavior.
-      #   @return [String]
-      #
-      # @!attribute [rw] forwarded_values
-      #   A complex type that specifies how CloudFront handles query strings
-      #   and cookies.
-      #   @return [Types::ForwardedValues]
-      #
-      # @!attribute [rw] trusted_signers
-      #   A complex type that specifies the AWS accounts, if any, that you
-      #   want to allow to create signed URLs for private content.
-      #
-      #   If you want to require signed URLs in requests for objects in the
-      #   target origin that match the `PathPattern` for this cache behavior,
-      #   specify `true` for `Enabled`, and specify the applicable values for
-      #   `Quantity` and `Items`. For more information, see [Serving Private
-      #   Content through CloudFront][1] in the *Amazon Amazon CloudFront
-      #   Developer Guide*.
-      #
-      #   If you don't want to require signed URLs in requests for objects
-      #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
-      #   `Quantity`. Omit `Items`.
-      #
-      #   To add, change, or remove one or more trusted signers, change
-      #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
-      #   as applicable, and specify all of the trusted signers that you want
-      #   to include in the updated distribution.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      #   @return [Types::TrustedSigners]
-      #
-      # @!attribute [rw] viewer_protocol_policy
-      #   The protocol that viewers can use to access the files in the origin
-      #   specified by `TargetOriginId` when a request matches the path
-      #   pattern in `PathPattern`. You can specify the following options:
-      #
-      #   * `allow-all`\: Viewers can use HTTP or HTTPS.
-      #
-      #   * `redirect-to-https`\: If a viewer submits an HTTP request,
-      #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
-      #     to the viewer along with the HTTPS URL. The viewer then resubmits
-      #     the request using the new URL.
-      #
-      #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
-      #     returns an HTTP status code of 403 (Forbidden).
-      #
-      #   For more information about requiring the HTTPS protocol, see [Using
-      #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
-      #   fetched from the origin using HTTPS is never to use any other
-      #   protocol to fetch the object. If you have recently changed from HTTP
-      #   to HTTPS, we recommend that you clear your objects' cache because
-      #   cached objects are protocol agnostic. That means that an edge
-      #   location will return an object from the cache regardless of whether
-      #   the current request protocol matches the protocol used previously.
-      #   For more information, see [Specifying How Long Objects and Errors
-      #   Stay in a CloudFront Edge Cache (Expiration)][2] in the *Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #    </note>
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
-      #   [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [String]
-      #
-      # @!attribute [rw] min_ttl
-      #   The minimum amount of time that you want objects to stay in
-      #   CloudFront caches before CloudFront forwards another request to your
-      #   origin to determine whether the object has been updated. For more
-      #   information, see [Specifying How Long Objects and Errors Stay in a
-      #   CloudFront Edge Cache (Expiration)][1] in the *Amazon Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #   You must specify `0` for `MinTTL` if you configure CloudFront to
-      #   forward all headers to your origin (under `Headers`, if you specify
-      #   `1` for `Quantity` and `*` for `Name`).
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [Integer]
-      #
-      # @!attribute [rw] allowed_methods
-      #   A complex type that controls which HTTP methods CloudFront processes
-      #   and forwards to your Amazon S3 bucket or your custom origin. There
-      #   are three choices:
-      #
-      #   * CloudFront forwards only `GET` and `HEAD` requests.
-      #
-      #   * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
-      #
-      #   * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
-      #     `DELETE` requests.
-      #
-      #   If you pick the third choice, you may need to restrict access to
-      #   your Amazon S3 bucket or to your custom origin so users can't
-      #   perform operations that you don't want them to. For example, you
-      #   might not want users to have permissions to delete objects from your
-      #   origin.
-      #   @return [Types::AllowedMethods]
-      #
-      # @!attribute [rw] smooth_streaming
-      #   Indicates whether you want to distribute media files in the
-      #   Microsoft Smooth Streaming format using the origin that is
-      #   associated with this cache behavior. If so, specify `true`; if not,
-      #   specify `false`. If you specify `true` for `SmoothStreaming`, you
-      #   can still distribute other content using this cache behavior if the
-      #   content matches the value of `PathPattern`.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] default_ttl
-      #   The default amount of time that you want objects to stay in
-      #   CloudFront caches before CloudFront forwards another request to your
-      #   origin to determine whether the object has been updated. The value
-      #   that you specify applies only when your origin does not add HTTP
-      #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
-      #   and `Expires` to objects. For more information, see [Specifying How
-      #   Long Objects and Errors Stay in a CloudFront Edge Cache
-      #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [Integer]
-      #
-      # @!attribute [rw] max_ttl
-      #   The maximum amount of time that you want objects to stay in
-      #   CloudFront caches before CloudFront forwards another request to your
-      #   origin to determine whether the object has been updated. The value
-      #   that you specify applies only when your origin adds HTTP headers
-      #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
-      #   `Expires` to objects. For more information, see [Specifying How Long
-      #   Objects and Errors Stay in a CloudFront Edge Cache (Expiration)][1]
-      #   in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [Integer]
-      #
-      # @!attribute [rw] compress
-      #   Whether you want CloudFront to automatically compress certain files
-      #   for this cache behavior. If so, specify true; if not, specify false.
-      #   For more information, see [Serving Compressed Files][1] in the
-      #   *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] lambda_function_associations
-      #   A complex type that contains zero or more Lambda function
-      #   associations for a cache behavior.
-      #   @return [Types::LambdaFunctionAssociations]
-      class CacheBehavior < Struct.new(
-        :path_pattern,
-        :target_origin_id,
-        :forwarded_values,
-        :trusted_signers,
-        :viewer_protocol_policy,
-        :min_ttl,
-        :allowed_methods,
-        :smooth_streaming,
-        :default_ttl,
-        :max_ttl,
-        :compress,
-        :lambda_function_associations)
-        include Aws::Structure
-      end
-
-      # A complex type that contains zero or more `CacheBehavior` elements.
-      # @note When making an API call, pass CacheBehaviors
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: [
-      #           {
-      #             path_pattern: "string", # required
-      #             target_origin_id: "string", # required
-      #             forwarded_values: { # required
-      #               query_string: false, # required
-      #               cookies: { # required
-      #                 forward: "none", # required, accepts none, whitelist, all
-      #                 whitelisted_names: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               headers: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               query_string_cache_keys: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             trusted_signers: { # required
-      #               enabled: false, # required
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #             min_ttl: 1, # required
-      #             allowed_methods: {
-      #               quantity: 1, # required
-      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               cached_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               },
-      #             },
-      #             smooth_streaming: false,
-      #             default_ttl: 1,
-      #             max_ttl: 1,
-      #             compress: false,
-      #             lambda_function_associations: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   lambda_function_arn: "string",
-      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                 },
-      #               ],
-      #             },
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of cache behaviors for this distribution.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   Optional: A complex type that contains cache behaviors for this
-      #   distribution. If `Quantity` is `0`, you can omit `Items`.
-      #   @return [Array<Types::CacheBehavior>]
-      class CacheBehaviors < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that controls whether CloudFront caches the response to
-      # requests using the specified HTTP methods. There are two choices:
-      #
-      # * CloudFront caches responses to `GET` and `HEAD` requests.
-      #
-      # * CloudFront caches responses to `GET`, `HEAD`, and `OPTIONS`
-      #   requests.
-      #
-      # If you pick the second choice for your Amazon S3 Origin, you may need
-      # to forward Access-Control-Request-Method,
-      # Access-Control-Request-Headers, and Origin headers for the responses
-      # to be cached correctly.
-      # @note When making an API call, pass CachedMethods
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of HTTP methods for which you want CloudFront to cache
-      #   responses. Valid values are `2` (for caching responses to `GET` and
-      #   `HEAD` requests) and `3` (for caching responses to `GET`, `HEAD`,
-      #   and `OPTIONS` requests).
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains the HTTP methods that you want
-      #   CloudFront to cache responses to.
-      #   @return [Array<String>]
-      class CachedMethods < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # CloudFront origin access identity.
-      # @!attribute [rw] id
-      #   The ID for the origin access identity. For example:
-      #   `E74FTE3AJFJ256A`.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_canonical_user_id
-      #   The Amazon S3 canonical user ID for the origin access identity, used
-      #   when giving the origin access identity read permission to an object
-      #   in Amazon S3.
-      #   @return [String]
-      #
-      # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The current configuration information for the identity.
-      #   @return [Types::CloudFrontOriginAccessIdentityConfig]
-      class CloudFrontOriginAccessIdentity < Struct.new(
-        :id,
-        :s3_canonical_user_id,
-        :cloud_front_origin_access_identity_config)
-        include Aws::Structure
-      end
-
-      # Origin access identity configuration. Send a `GET` request to the
-      # `/CloudFront API version/CloudFront/identity ID/config` resource.
-      # @note When making an API call, pass CloudFrontOriginAccessIdentityConfig
-      #   data as a hash:
-      #
-      #       {
-      #         caller_reference: "string", # required
-      #         comment: "string", # required
-      #       }
-      # @!attribute [rw] caller_reference
-      #   A unique number that ensures the request can't be replayed.
-      #
-      #   If the `CallerReference` is new (no matter the content of the
-      #   `CloudFrontOriginAccessIdentityConfig` object), a new origin access
-      #   identity is created.
-      #
-      #   If the `CallerReference` is a value already sent in a previous
-      #   identity request, and the content of the
-      #   `CloudFrontOriginAccessIdentityConfig` is identical to the original
-      #   request (ignoring white space), the response includes the same
-      #   information returned to the original request.
-      #
-      #   If the `CallerReference` is a value you already sent in a previous
-      #   request to create an identity, but the content of the
-      #   `CloudFrontOriginAccessIdentityConfig` is different from the
-      #   original request, CloudFront returns a
-      #   `CloudFrontOriginAccessIdentityAlreadyExists` error.
-      #   @return [String]
-      #
-      # @!attribute [rw] comment
-      #   Any comments you want to include about the origin access identity.
-      #   @return [String]
-      class CloudFrontOriginAccessIdentityConfig < Struct.new(
-        :caller_reference,
-        :comment)
-        include Aws::Structure
-      end
-
-      # Lists the origin access identities for CloudFront.Send a `GET` request
-      # to the `/CloudFront API version/origin-access-identity/cloudfront`
-      # resource. The response includes a `CloudFrontOriginAccessIdentityList`
-      # element with zero or more `CloudFrontOriginAccessIdentitySummary`
-      # child elements. By default, your entire list of origin access
-      # identities is returned in one single page. If the list is long, you
-      # can paginate it using the `MaxItems` and `Marker` parameters.
-      # @!attribute [rw] marker
-      #   Use this when paginating results to indicate where to begin in your
-      #   list of origin access identities. The results include identities in
-      #   the list that occur after the marker. To get the next page of
-      #   results, set the `Marker` to the value of the `NextMarker` from the
-      #   current page's response (which is also the ID of the last identity
-      #   on that page).
-      #   @return [String]
-      #
-      # @!attribute [rw] next_marker
-      #   If `IsTruncated` is `true`, this element is present and contains the
-      #   value you can use for the `Marker` request parameter to continue
-      #   listing your origin access identities where they left off.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of origin access identities you want in the
-      #   response body.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates whether more origin access identities remain
-      #   to be listed. If your results were truncated, you can make a
-      #   follow-up pagination request using the `Marker` request parameter to
-      #   retrieve more items in the list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   The number of CloudFront origin access identities that were created
-      #   by the current AWS account.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one
-      #   `CloudFrontOriginAccessIdentitySummary` element for each origin
-      #   access identity that was created by the current AWS account.
-      #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
-      class CloudFrontOriginAccessIdentityList < Struct.new(
-        :marker,
-        :next_marker,
-        :max_items,
-        :is_truncated,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # Summary of the information about a CloudFront origin access identity.
-      # @!attribute [rw] id
-      #   The ID for the origin access identity. For example:
-      #   `E74FTE3AJFJ256A`.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_canonical_user_id
-      #   The Amazon S3 canonical user ID for the origin access identity,
-      #   which you use when giving the origin access identity read permission
-      #   to an object in Amazon S3.
-      #   @return [String]
-      #
-      # @!attribute [rw] comment
-      #   The comment for this origin access identity, as originally specified
-      #   when created.
-      #   @return [String]
-      class CloudFrontOriginAccessIdentitySummary < Struct.new(
-        :id,
-        :s3_canonical_user_id,
-        :comment)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies whether you want CloudFront to forward
-      # cookies to the origin and, if so, which ones. For more information
-      # about forwarding cookies to the origin, see [How CloudFront Forwards,
-      # Caches, and Logs Cookies][1] in the *Amazon CloudFront Developer
-      # Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
-      # @note When making an API call, pass CookieNames
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of different cookies that you want CloudFront to forward
-      #   to the origin for this cache behavior.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `Name` element for each cookie that
-      #   you want CloudFront to forward to the origin for this cache
-      #   behavior.
-      #   @return [Array<String>]
-      class CookieNames < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies whether you want CloudFront to forward
-      # cookies to the origin and, if so, which ones. For more information
-      # about forwarding cookies to the origin, see [How CloudFront Forwards,
-      # Caches, and Logs Cookies][1] in the *Amazon CloudFront Developer
-      # Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
-      # @note When making an API call, pass CookiePreference
-      #   data as a hash:
-      #
-      #       {
-      #         forward: "none", # required, accepts none, whitelist, all
-      #         whitelisted_names: {
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #       }
-      # @!attribute [rw] forward
-      #   Specifies which cookies to forward to the origin for this cache
-      #   behavior: all, none, or the list of cookies specified in the
-      #   `WhitelistedNames` complex type.
-      #
-      #   Amazon S3 doesn't process cookies. When the cache behavior is
-      #   forwarding requests to an Amazon S3 origin, specify none for the
-      #   `Forward` element.
-      #   @return [String]
-      #
-      # @!attribute [rw] whitelisted_names
-      #   Required if you specify `whitelist` for the value of `Forward:`. A
-      #   complex type that specifies how many different cookies you want
-      #   CloudFront to forward to the origin for this cache behavior and, if
-      #   you want to forward selected cookies, the names of those cookies.
-      #
-      #   If you specify `all` or none for the value of `Forward`, omit
-      #   `WhitelistedNames`. If you change the value of `Forward` from
-      #   `whitelist` to all or none and you don't delete the
-      #   `WhitelistedNames` element and its child elements, CloudFront
-      #   deletes them automatically.
-      #
-      #   For the current limit on the number of cookie names that you can
-      #   whitelist for each cache behavior, see [Amazon CloudFront Limits][1]
-      #   in the *AWS General Reference*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
-      #   @return [Types::CookieNames]
-      class CookiePreference < Struct.new(
-        :forward,
-        :whitelisted_names)
-        include Aws::Structure
-      end
-
-      # The request to create a new origin access identity.
-      # @note When making an API call, pass CreateCloudFrontOriginAccessIdentityRequest
-      #   data as a hash:
-      #
-      #       {
-      #         cloud_front_origin_access_identity_config: { # required
-      #           caller_reference: "string", # required
-      #           comment: "string", # required
-      #         },
-      #       }
-      # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The current configuration information for the identity.
-      #   @return [Types::CloudFrontOriginAccessIdentityConfig]
-      class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
-        :cloud_front_origin_access_identity_config)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity's information.
-      #   @return [Types::CloudFrontOriginAccessIdentity]
-      #
-      # @!attribute [rw] location
-      #   The fully qualified URI of the new origin access identity just
-      #   created. For example:
-      #   `https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A`.
-      #   @return [String]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the origin access identity created.
-      #   @return [String]
-      class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
-        :cloud_front_origin_access_identity,
-        :location,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to create a new distribution.
-      # @note When making an API call, pass CreateDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           default_root_object: "string",
-      #           origins: { # required
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 id: "string", # required
-      #                 domain_name: "string", # required
-      #                 origin_path: "string",
-      #                 custom_headers: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       header_name: "string", # required
-      #                       header_value: "string", # required
-      #                     },
-      #                   ],
-      #                 },
-      #                 s3_origin_config: {
-      #                   origin_access_identity: "string", # required
-      #                 },
-      #                 custom_origin_config: {
-      #                   http_port: 1, # required
-      #                   https_port: 1, # required
-      #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #                   origin_ssl_protocols: {
-      #                     quantity: 1, # required
-      #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #                   },
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           default_cache_behavior: { # required
-      #             target_origin_id: "string", # required
-      #             forwarded_values: { # required
-      #               query_string: false, # required
-      #               cookies: { # required
-      #                 forward: "none", # required, accepts none, whitelist, all
-      #                 whitelisted_names: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               headers: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               query_string_cache_keys: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             trusted_signers: { # required
-      #               enabled: false, # required
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #             min_ttl: 1, # required
-      #             allowed_methods: {
-      #               quantity: 1, # required
-      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               cached_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               },
-      #             },
-      #             smooth_streaming: false,
-      #             default_ttl: 1,
-      #             max_ttl: 1,
-      #             compress: false,
-      #             lambda_function_associations: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   lambda_function_arn: "string",
-      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                 },
-      #               ],
-      #             },
-      #           },
-      #           cache_behaviors: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 path_pattern: "string", # required
-      #                 target_origin_id: "string", # required
-      #                 forwarded_values: { # required
-      #                   query_string: false, # required
-      #                   cookies: { # required
-      #                     forward: "none", # required, accepts none, whitelist, all
-      #                     whitelisted_names: {
-      #                       quantity: 1, # required
-      #                       items: ["string"],
-      #                     },
-      #                   },
-      #                   headers: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                   query_string_cache_keys: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                 },
-      #                 trusted_signers: { # required
-      #                   enabled: false, # required
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #                 min_ttl: 1, # required
-      #                 allowed_methods: {
-      #                   quantity: 1, # required
-      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   cached_methods: {
-      #                     quantity: 1, # required
-      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   },
-      #                 },
-      #                 smooth_streaming: false,
-      #                 default_ttl: 1,
-      #                 max_ttl: 1,
-      #                 compress: false,
-      #                 lambda_function_associations: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       lambda_function_arn: "string",
-      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                     },
-      #                   ],
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           custom_error_responses: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 error_code: 1, # required
-      #                 response_page_path: "string",
-      #                 response_code: "string",
-      #                 error_caching_min_ttl: 1,
-      #               },
-      #             ],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             include_cookies: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #           viewer_certificate: {
-      #             cloud_front_default_certificate: false,
-      #             iam_certificate_id: "string",
-      #             acm_certificate_arn: "string",
-      #             ssl_support_method: "sni-only", # accepts sni-only, vip
-      #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #             certificate: "string",
-      #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #           },
-      #           restrictions: {
-      #             geo_restriction: { # required
-      #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           web_acl_id: "string",
-      #           http_version: "http1.1", # accepts http1.1, http2
-      #           is_ipv6_enabled: false,
-      #         },
-      #       }
-      # @!attribute [rw] distribution_config
-      #   The distribution's configuration information.
-      #   @return [Types::DistributionConfig]
-      class CreateDistributionRequest < Struct.new(
-        :distribution_config)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution
-      #   The distribution's information.
-      #   @return [Types::Distribution]
-      #
-      # @!attribute [rw] location
-      #   The fully qualified URI of the new distribution resource just
-      #   created. For example:
-      #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the distribution created.
-      #   @return [String]
-      class CreateDistributionResult < Struct.new(
-        :distribution,
-        :location,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to create a new distribution with tags.
-      # @note When making an API call, pass CreateDistributionWithTagsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_config_with_tags: { # required
-      #           distribution_config: { # required
-      #             caller_reference: "string", # required
-      #             aliases: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             default_root_object: "string",
-      #             origins: { # required
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   id: "string", # required
-      #                   domain_name: "string", # required
-      #                   origin_path: "string",
-      #                   custom_headers: {
-      #                     quantity: 1, # required
-      #                     items: [
-      #                       {
-      #                         header_name: "string", # required
-      #                         header_value: "string", # required
-      #                       },
-      #                     ],
-      #                   },
-      #                   s3_origin_config: {
-      #                     origin_access_identity: "string", # required
-      #                   },
-      #                   custom_origin_config: {
-      #                     http_port: 1, # required
-      #                     https_port: 1, # required
-      #                     origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #                     origin_ssl_protocols: {
-      #                       quantity: 1, # required
-      #                       items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #                     },
-      #                   },
-      #                 },
-      #               ],
-      #             },
-      #             default_cache_behavior: { # required
-      #               target_origin_id: "string", # required
-      #               forwarded_values: { # required
-      #                 query_string: false, # required
-      #                 cookies: { # required
-      #                   forward: "none", # required, accepts none, whitelist, all
-      #                   whitelisted_names: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                 },
-      #                 headers: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #                 query_string_cache_keys: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               trusted_signers: { # required
-      #                 enabled: false, # required
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #               min_ttl: 1, # required
-      #               allowed_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                 cached_methods: {
-      #                   quantity: 1, # required
-      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                 },
-      #               },
-      #               smooth_streaming: false,
-      #               default_ttl: 1,
-      #               max_ttl: 1,
-      #               compress: false,
-      #               lambda_function_associations: {
-      #                 quantity: 1, # required
-      #                 items: [
-      #                   {
-      #                     lambda_function_arn: "string",
-      #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                   },
-      #                 ],
-      #               },
-      #             },
-      #             cache_behaviors: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   path_pattern: "string", # required
-      #                   target_origin_id: "string", # required
-      #                   forwarded_values: { # required
-      #                     query_string: false, # required
-      #                     cookies: { # required
-      #                       forward: "none", # required, accepts none, whitelist, all
-      #                       whitelisted_names: {
-      #                         quantity: 1, # required
-      #                         items: ["string"],
-      #                       },
-      #                     },
-      #                     headers: {
-      #                       quantity: 1, # required
-      #                       items: ["string"],
-      #                     },
-      #                     query_string_cache_keys: {
-      #                       quantity: 1, # required
-      #                       items: ["string"],
-      #                     },
-      #                   },
-      #                   trusted_signers: { # required
-      #                     enabled: false, # required
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                   viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #                   min_ttl: 1, # required
-      #                   allowed_methods: {
-      #                     quantity: 1, # required
-      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                     cached_methods: {
-      #                       quantity: 1, # required
-      #                       items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                     },
-      #                   },
-      #                   smooth_streaming: false,
-      #                   default_ttl: 1,
-      #                   max_ttl: 1,
-      #                   compress: false,
-      #                   lambda_function_associations: {
-      #                     quantity: 1, # required
-      #                     items: [
-      #                       {
-      #                         lambda_function_arn: "string",
-      #                         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                       },
-      #                     ],
-      #                   },
-      #                 },
-      #               ],
-      #             },
-      #             custom_error_responses: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   error_code: 1, # required
-      #                   response_page_path: "string",
-      #                   response_code: "string",
-      #                   error_caching_min_ttl: 1,
-      #                 },
-      #               ],
-      #             },
-      #             comment: "string", # required
-      #             logging: {
-      #               enabled: false, # required
-      #               include_cookies: false, # required
-      #               bucket: "string", # required
-      #               prefix: "string", # required
-      #             },
-      #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #             enabled: false, # required
-      #             viewer_certificate: {
-      #               cloud_front_default_certificate: false,
-      #               iam_certificate_id: "string",
-      #               acm_certificate_arn: "string",
-      #               ssl_support_method: "sni-only", # accepts sni-only, vip
-      #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #               certificate: "string",
-      #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #             },
-      #             restrictions: {
-      #               geo_restriction: { # required
-      #                 restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             web_acl_id: "string",
-      #             http_version: "http1.1", # accepts http1.1, http2
-      #             is_ipv6_enabled: false,
-      #           },
-      #           tags: { # required
-      #             items: [
-      #               {
-      #                 key: "TagKey", # required
-      #                 value: "TagValue",
-      #               },
-      #             ],
-      #           },
-      #         },
-      #       }
-      # @!attribute [rw] distribution_config_with_tags
-      #   The distribution's configuration information.
-      #   @return [Types::DistributionConfigWithTags]
-      class CreateDistributionWithTagsRequest < Struct.new(
-        :distribution_config_with_tags)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution
-      #   The distribution's information.
-      #   @return [Types::Distribution]
-      #
-      # @!attribute [rw] location
-      #   The fully qualified URI of the new distribution resource just
-      #   created. For example:
-      #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the distribution created.
-      #   @return [String]
-      class CreateDistributionWithTagsResult < Struct.new(
-        :distribution,
-        :location,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to create an invalidation.
-      # @note When making an API call, pass CreateInvalidationRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_id: "string", # required
-      #         invalidation_batch: { # required
-      #           paths: { # required
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           caller_reference: "string", # required
-      #         },
-      #       }
-      # @!attribute [rw] distribution_id
-      #   The distribution's id.
-      #   @return [String]
-      #
-      # @!attribute [rw] invalidation_batch
-      #   The batch information for the invalidation.
-      #   @return [Types::InvalidationBatch]
-      class CreateInvalidationRequest < Struct.new(
-        :distribution_id,
-        :invalidation_batch)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] location
-      #   The fully qualified URI of the distribution and invalidation batch
-      #   request, including the `Invalidation ID`.
-      #   @return [String]
-      #
-      # @!attribute [rw] invalidation
-      #   The invalidation's information.
-      #   @return [Types::Invalidation]
-      class CreateInvalidationResult < Struct.new(
-        :location,
-        :invalidation)
-        include Aws::Structure
-      end
-
-      # The request to create a new streaming distribution.
-      # @note When making an API call, pass CreateStreamingDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         streaming_distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           s3_origin: { # required
-      #             domain_name: "string", # required
-      #             origin_access_identity: "string", # required
-      #           },
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           trusted_signers: { # required
-      #             enabled: false, # required
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #         },
-      #       }
-      # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution's configuration information.
-      #   @return [Types::StreamingDistributionConfig]
-      class CreateStreamingDistributionRequest < Struct.new(
-        :streaming_distribution_config)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution
-      #   The streaming distribution's information.
-      #   @return [Types::StreamingDistribution]
-      #
-      # @!attribute [rw] location
-      #   The fully qualified URI of the new streaming distribution resource
-      #   just created. For example:
-      #   `https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
-      #   @return [String]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the streaming distribution created.
-      #   @return [String]
-      class CreateStreamingDistributionResult < Struct.new(
-        :streaming_distribution,
-        :location,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to create a new streaming distribution with tags.
-      # @note When making an API call, pass CreateStreamingDistributionWithTagsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         streaming_distribution_config_with_tags: { # required
-      #           streaming_distribution_config: { # required
-      #             caller_reference: "string", # required
-      #             s3_origin: { # required
-      #               domain_name: "string", # required
-      #               origin_access_identity: "string", # required
-      #             },
-      #             aliases: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             comment: "string", # required
-      #             logging: {
-      #               enabled: false, # required
-      #               bucket: "string", # required
-      #               prefix: "string", # required
-      #             },
-      #             trusted_signers: { # required
-      #               enabled: false, # required
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #             enabled: false, # required
-      #           },
-      #           tags: { # required
-      #             items: [
-      #               {
-      #                 key: "TagKey", # required
-      #                 value: "TagValue",
-      #               },
-      #             ],
-      #           },
-      #         },
-      #       }
-      # @!attribute [rw] streaming_distribution_config_with_tags
-      #   The streaming distribution's configuration information.
-      #   @return [Types::StreamingDistributionConfigWithTags]
-      class CreateStreamingDistributionWithTagsRequest < Struct.new(
-        :streaming_distribution_config_with_tags)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution
-      #   The streaming distribution's information.
-      #   @return [Types::StreamingDistribution]
-      #
-      # @!attribute [rw] location
-      #   The fully qualified URI of the new streaming distribution resource
-      #   just created. For example:`
-      #   https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
-      #   @return [String]
-      #
-      # @!attribute [rw] etag
-      #   @return [String]
-      class CreateStreamingDistributionWithTagsResult < Struct.new(
-        :streaming_distribution,
-        :location,
-        :etag)
-        include Aws::Structure
-      end
-
-      # A complex type that controls:
-      #
-      # * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
-      #   range with custom error messages before returning the response to
-      #   the viewer.
-      #
-      # * How long CloudFront caches HTTP status codes in the 4xx and 5xx
-      #   range.
-      #
-      # For more information about custom error pages, see [Customizing Error
-      # Responses][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
-      # @note When making an API call, pass CustomErrorResponse
-      #   data as a hash:
-      #
-      #       {
-      #         error_code: 1, # required
-      #         response_page_path: "string",
-      #         response_code: "string",
-      #         error_caching_min_ttl: 1,
-      #       }
-      # @!attribute [rw] error_code
-      #   The HTTP status code for which you want to specify a custom error
-      #   page and/or a caching duration.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] response_page_path
-      #   The path to the custom error page that you want CloudFront to return
-      #   to a viewer when your origin returns the HTTP status code specified
-      #   by `ErrorCode`, for example, `/4xx-errors/403-forbidden.html`. If
-      #   you want to store your objects and your custom error pages in
-      #   different locations, your distribution must include a cache behavior
-      #   for which the following is true:
-      #
-      #   * The value of `PathPattern` matches the path to your custom error
-      #     messages. For example, suppose you saved custom error pages for
-      #     4xx errors in an Amazon S3 bucket in a directory named
-      #     `/4xx-errors`. Your distribution must include a cache behavior for
-      #     which the path pattern routes requests for your custom error pages
-      #     to that location, for example, `/4xx-errors/*`.
-      #
-      #   * The value of `TargetOriginId` specifies the value of the `ID`
-      #     element for the origin that contains your custom error pages.
-      #
-      #   If you specify a value for `ResponsePagePath`, you must also specify
-      #   a value for `ResponseCode`. If you don't want to specify a value,
-      #   include an empty element, `<ResponsePagePath>`, in the XML document.
-      #
-      #   We recommend that you store custom error pages in an Amazon S3
-      #   bucket. If you store custom error pages on an HTTP server and the
-      #   server starts to return 5xx errors, CloudFront can't get the files
-      #   that you want to return to viewers because the origin server is
-      #   unavailable.
-      #   @return [String]
-      #
-      # @!attribute [rw] response_code
-      #   The HTTP status code that you want CloudFront to return to the
-      #   viewer along with the custom error page. There are a variety of
-      #   reasons that you might want CloudFront to return a status code
-      #   different from the status code that your origin returned to
-      #   CloudFront, for example:
-      #
-      #   * Some Internet devices (some firewalls and corporate proxies, for
-      #     example) intercept HTTP 4xx and 5xx and prevent the response from
-      #     being returned to the viewer. If you substitute `200`, the
-      #     response typically won't be intercepted.
-      #
-      #   * If you don't care about distinguishing among different client
-      #     errors or server errors, you can specify `400` or `500` as the
-      #     `ResponseCode` for all 4xx or 5xx errors.
-      #
-      #   * You might want to return a `200` status code (OK) and static
-      #     website so your customers don't know that your website is down.
-      #
-      #   If you specify a value for `ResponseCode`, you must also specify a
-      #   value for `ResponsePagePath`. If you don't want to specify a value,
-      #   include an empty element, `<ResponseCode>`, in the XML document.
-      #   @return [String]
-      #
-      # @!attribute [rw] error_caching_min_ttl
-      #   The minimum amount of time, in seconds, that you want CloudFront to
-      #   cache the HTTP status code specified in `ErrorCode`. When this time
-      #   period has elapsed, CloudFront queries your origin to see whether
-      #   the problem that caused the error has been resolved and the
-      #   requested object is now available.
-      #
-      #   If you don't want to specify a value, include an empty element,
-      #   `<ErrorCachingMinTTL>`, in the XML document.
-      #
-      #   For more information, see [Customizing Error Responses][1] in the
-      #   *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
-      #   @return [Integer]
-      class CustomErrorResponse < Struct.new(
-        :error_code,
-        :response_page_path,
-        :response_code,
-        :error_caching_min_ttl)
-        include Aws::Structure
-      end
-
-      # A complex type that controls:
-      #
-      # * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
-      #   range with custom error messages before returning the response to
-      #   the viewer.
-      #
-      # * How long CloudFront caches HTTP status codes in the 4xx and 5xx
-      #   range.
-      #
-      # For more information about custom error pages, see [Customizing Error
-      # Responses][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
-      # @note When making an API call, pass CustomErrorResponses
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: [
-      #           {
-      #             error_code: 1, # required
-      #             response_page_path: "string",
-      #             response_code: "string",
-      #             error_caching_min_ttl: 1,
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of HTTP status codes for which you want to specify a
-      #   custom error page and/or a caching duration. If `Quantity` is `0`,
-      #   you can omit `Items`.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains a `CustomErrorResponse` element for
-      #   each HTTP status code for which you want to specify a custom error
-      #   page and/or a caching duration.
-      #   @return [Array<Types::CustomErrorResponse>]
-      class CustomErrorResponses < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that contains the list of Custom Headers for each
-      # origin.
-      # @note When making an API call, pass CustomHeaders
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: [
-      #           {
-      #             header_name: "string", # required
-      #             header_value: "string", # required
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of custom headers, if any, for this distribution.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   **Optional**\: A list that contains one `OriginCustomHeader` element
-      #   for each custom header that you want CloudFront to forward to the
-      #   origin. If Quantity is `0`, omit `Items`.
-      #   @return [Array<Types::OriginCustomHeader>]
-      class CustomHeaders < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A customer origin.
-      # @note When making an API call, pass CustomOriginConfig
-      #   data as a hash:
-      #
-      #       {
-      #         http_port: 1, # required
-      #         https_port: 1, # required
-      #         origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #         origin_ssl_protocols: {
-      #           quantity: 1, # required
-      #           items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #         },
-      #       }
-      # @!attribute [rw] http_port
-      #   The HTTP port the custom origin listens on.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] https_port
-      #   The HTTPS port the custom origin listens on.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] origin_protocol_policy
-      #   The origin protocol policy to apply to your origin.
-      #   @return [String]
-      #
-      # @!attribute [rw] origin_ssl_protocols
-      #   The SSL/TLS protocols that you want CloudFront to use when
-      #   communicating with your origin over HTTPS.
-      #   @return [Types::OriginSslProtocols]
-      class CustomOriginConfig < Struct.new(
-        :http_port,
-        :https_port,
-        :origin_protocol_policy,
-        :origin_ssl_protocols)
-        include Aws::Structure
-      end
-
-      # A complex type that describes the default cache behavior if you do not
-      # specify a `CacheBehavior` element or if files don't match any of the
-      # values of `PathPattern` in `CacheBehavior` elements. You must create
-      # exactly one default cache behavior.
-      # @note When making an API call, pass DefaultCacheBehavior
-      #   data as a hash:
-      #
-      #       {
-      #         target_origin_id: "string", # required
-      #         forwarded_values: { # required
-      #           query_string: false, # required
-      #           cookies: { # required
-      #             forward: "none", # required, accepts none, whitelist, all
-      #             whitelisted_names: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           headers: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           query_string_cache_keys: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #         },
-      #         trusted_signers: { # required
-      #           enabled: false, # required
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #         min_ttl: 1, # required
-      #         allowed_methods: {
-      #           quantity: 1, # required
-      #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #           cached_methods: {
-      #             quantity: 1, # required
-      #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #           },
-      #         },
-      #         smooth_streaming: false,
-      #         default_ttl: 1,
-      #         max_ttl: 1,
-      #         compress: false,
-      #         lambda_function_associations: {
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               lambda_function_arn: "string",
-      #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #             },
-      #           ],
-      #         },
-      #       }
-      # @!attribute [rw] target_origin_id
-      #   The value of `ID` for the origin that you want CloudFront to route
-      #   requests to when a request matches the path pattern either for a
-      #   cache behavior or for the default cache behavior.
-      #   @return [String]
-      #
-      # @!attribute [rw] forwarded_values
-      #   A complex type that specifies how CloudFront handles query strings
-      #   and cookies.
-      #   @return [Types::ForwardedValues]
-      #
-      # @!attribute [rw] trusted_signers
-      #   A complex type that specifies the AWS accounts, if any, that you
-      #   want to allow to create signed URLs for private content.
-      #
-      #   If you want to require signed URLs in requests for objects in the
-      #   target origin that match the `PathPattern` for this cache behavior,
-      #   specify `true` for `Enabled`, and specify the applicable values for
-      #   `Quantity` and `Items`. For more information, see [Serving Private
-      #   Content through CloudFront][1] in the *Amazon Amazon CloudFront
-      #   Developer Guide*.
-      #
-      #   If you don't want to require signed URLs in requests for objects
-      #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
-      #   `Quantity`. Omit `Items`.
-      #
-      #   To add, change, or remove one or more trusted signers, change
-      #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
-      #   as applicable, and specify all of the trusted signers that you want
-      #   to include in the updated distribution.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      #   @return [Types::TrustedSigners]
-      #
-      # @!attribute [rw] viewer_protocol_policy
-      #   The protocol that viewers can use to access the files in the origin
-      #   specified by `TargetOriginId` when a request matches the path
-      #   pattern in `PathPattern`. You can specify the following options:
-      #
-      #   * `allow-all`\: Viewers can use HTTP or HTTPS.
-      #
-      #   * `redirect-to-https`\: If a viewer submits an HTTP request,
-      #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
-      #     to the viewer along with the HTTPS URL. The viewer then resubmits
-      #     the request using the new URL.
-      #
-      #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
-      #     returns an HTTP status code of 403 (Forbidden).
-      #
-      #   For more information about requiring the HTTPS protocol, see [Using
-      #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
-      #   fetched from the origin using HTTPS is never to use any other
-      #   protocol to fetch the object. If you have recently changed from HTTP
-      #   to HTTPS, we recommend that you clear your objects' cache because
-      #   cached objects are protocol agnostic. That means that an edge
-      #   location will return an object from the cache regardless of whether
-      #   the current request protocol matches the protocol used previously.
-      #   For more information, see [Specifying How Long Objects and Errors
-      #   Stay in a CloudFront Edge Cache (Expiration)][2] in the *Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #    </note>
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
-      #   [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [String]
-      #
-      # @!attribute [rw] min_ttl
-      #   The minimum amount of time that you want objects to stay in
-      #   CloudFront caches before CloudFront forwards another request to your
-      #   origin to determine whether the object has been updated. For more
-      #   information, see [Specifying How Long Objects and Errors Stay in a
-      #   CloudFront Edge Cache (Expiration)][1] in the *Amazon Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #   You must specify `0` for `MinTTL` if you configure CloudFront to
-      #   forward all headers to your origin (under `Headers`, if you specify
-      #   `1` for `Quantity` and `*` for `Name`).
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [Integer]
-      #
-      # @!attribute [rw] allowed_methods
-      #   A complex type that controls which HTTP methods CloudFront processes
-      #   and forwards to your Amazon S3 bucket or your custom origin. There
-      #   are three choices:
-      #
-      #   * CloudFront forwards only `GET` and `HEAD` requests.
-      #
-      #   * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
-      #
-      #   * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
-      #     `DELETE` requests.
-      #
-      #   If you pick the third choice, you may need to restrict access to
-      #   your Amazon S3 bucket or to your custom origin so users can't
-      #   perform operations that you don't want them to. For example, you
-      #   might not want users to have permissions to delete objects from your
-      #   origin.
-      #   @return [Types::AllowedMethods]
-      #
-      # @!attribute [rw] smooth_streaming
-      #   Indicates whether you want to distribute media files in the
-      #   Microsoft Smooth Streaming format using the origin that is
-      #   associated with this cache behavior. If so, specify `true`; if not,
-      #   specify `false`. If you specify `true` for `SmoothStreaming`, you
-      #   can still distribute other content using this cache behavior if the
-      #   content matches the value of `PathPattern`.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] default_ttl
-      #   The default amount of time that you want objects to stay in
-      #   CloudFront caches before CloudFront forwards another request to your
-      #   origin to determine whether the object has been updated. The value
-      #   that you specify applies only when your origin does not add HTTP
-      #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
-      #   and `Expires` to objects. For more information, see [Specifying How
-      #   Long Objects and Errors Stay in a CloudFront Edge Cache
-      #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
-      #   @return [Integer]
-      #
-      # @!attribute [rw] max_ttl
-      #   @return [Integer]
-      #
-      # @!attribute [rw] compress
-      #   Whether you want CloudFront to automatically compress certain files
-      #   for this cache behavior. If so, specify `true`; if not, specify
-      #   `false`. For more information, see [Serving Compressed Files][1] in
-      #   the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] lambda_function_associations
-      #   A complex type that contains zero or more Lambda function
-      #   associations for a cache behavior.
-      #   @return [Types::LambdaFunctionAssociations]
-      class DefaultCacheBehavior < Struct.new(
-        :target_origin_id,
-        :forwarded_values,
-        :trusted_signers,
-        :viewer_protocol_policy,
-        :min_ttl,
-        :allowed_methods,
-        :smooth_streaming,
-        :default_ttl,
-        :max_ttl,
-        :compress,
-        :lambda_function_associations)
-        include Aws::Structure
-      end
-
-      # Deletes a origin access identity.
-      # @note When making an API call, pass DeleteCloudFrontOriginAccessIdentityRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] id
-      #   The origin access identity's ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header you received from a previous `GET` or
-      #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # This action deletes a web distribution. To delete a web distribution
-      # using the CloudFront API, perform the following steps.
-      #
-      # **To delete a web distribution using the CloudFront API:**
-      #
-      # 1.  Disable the web distribution
-      #
-      # 2.  Submit a `GET Distribution Config` request to get the current
-      #     configuration and the `Etag` header for the distribution.
-      #
-      # 3.  Update the XML document that was returned in the response to your
-      #     `GET Distribution Config` request to change the value of `Enabled`
-      #     to `false`.
-      #
-      # 4.  Submit a `PUT Distribution Config` request to update the
-      #     configuration for your distribution. In the request body, include
-      #     the XML document that you updated in Step 3. Set the value of the
-      #     HTTP `If-Match` header to the value of the `ETag` header that
-      #     CloudFront returned when you submitted the `GET Distribution
-      #     Config` request in Step 2.
-      #
-      # 5.  Review the response to the `PUT Distribution Config` request to
-      #     confirm that the distribution was successfully disabled.
-      #
-      # 6.  Submit a `GET Distribution` request to confirm that your changes
-      #     have propagated. When propagation is complete, the value of
-      #     `Status` is `Deployed`.
-      #
-      # 7.  Submit a `DELETE Distribution` request. Set the value of the HTTP
-      #     `If-Match` header to the value of the `ETag` header that
-      #     CloudFront returned when you submitted the `GET Distribution
-      #     Config` request in Step 6.
-      #
-      # 8.  Review the response to your `DELETE Distribution` request to
-      #     confirm that the distribution was successfully deleted.
-      #
-      # For information about deleting a distribution using the CloudFront
-      # console, see [Deleting a Distribution][1] in the *Amazon CloudFront
-      # Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
-      # @note When making an API call, pass DeleteDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] id
-      #   The distribution ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header that you received when you disabled
-      #   the distribution. For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class DeleteDistributionRequest < Struct.new(
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # The request to delete a streaming distribution.
-      # @note When making an API call, pass DeleteStreamingDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] id
-      #   The distribution ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header that you received when you disabled
-      #   the streaming distribution. For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class DeleteStreamingDistributionRequest < Struct.new(
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # The distribution's information.
-      # @!attribute [rw] id
-      #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] arn
-      #   The ARN (Amazon Resource Name) for the distribution. For example:
-      #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-      #   where `123456789012` is your AWS account ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   This response element indicates the current status of the
-      #   distribution. When the status is `Deployed`, the distribution's
-      #   information is fully propagated to all CloudFront edge locations.
-      #   @return [String]
-      #
-      # @!attribute [rw] last_modified_time
-      #   The date and time the distribution was last modified.
-      #   @return [Time]
-      #
-      # @!attribute [rw] in_progress_invalidation_batches
-      #   The number of invalidation batches currently in progress.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] domain_name
-      #   The domain name corresponding to the distribution. For example:
-      #   `d604721fxaaqy9.cloudfront.net`.
-      #   @return [String]
-      #
-      # @!attribute [rw] active_trusted_signers
-      #   CloudFront automatically adds this element to the response only if
-      #   you've set up the distribution to serve private content with signed
-      #   URLs. The element lists the key pair IDs that CloudFront is aware of
-      #   for each trusted signer. The `Signer` child element lists the AWS
-      #   account number of the trusted signer (or an empty `Self` element if
-      #   the signer is you). The `Signer` element also includes the IDs of
-      #   any active key pairs associated with the trusted signer's AWS
-      #   account. If no `KeyPairId` element appears for a `Signer`, that
-      #   signer can't create working signed URLs.
-      #   @return [Types::ActiveTrustedSigners]
-      #
-      # @!attribute [rw] distribution_config
-      #   The current configuration information for the distribution. Send a
-      #   `GET` request to the `/CloudFront API version/distribution
-      #   ID/config` resource.
-      #   @return [Types::DistributionConfig]
-      class Distribution < Struct.new(
-        :id,
-        :arn,
-        :status,
-        :last_modified_time,
-        :in_progress_invalidation_batches,
-        :domain_name,
-        :active_trusted_signers,
-        :distribution_config)
-        include Aws::Structure
-      end
-
-      # A distribution configuration.
-      # @note When making an API call, pass DistributionConfig
-      #   data as a hash:
-      #
-      #       {
-      #         caller_reference: "string", # required
-      #         aliases: {
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         default_root_object: "string",
-      #         origins: { # required
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               id: "string", # required
-      #               domain_name: "string", # required
-      #               origin_path: "string",
-      #               custom_headers: {
-      #                 quantity: 1, # required
-      #                 items: [
-      #                   {
-      #                     header_name: "string", # required
-      #                     header_value: "string", # required
-      #                   },
-      #                 ],
-      #               },
-      #               s3_origin_config: {
-      #                 origin_access_identity: "string", # required
-      #               },
-      #               custom_origin_config: {
-      #                 http_port: 1, # required
-      #                 https_port: 1, # required
-      #                 origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #                 origin_ssl_protocols: {
-      #                   quantity: 1, # required
-      #                   items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #                 },
-      #               },
-      #             },
-      #           ],
-      #         },
-      #         default_cache_behavior: { # required
-      #           target_origin_id: "string", # required
-      #           forwarded_values: { # required
-      #             query_string: false, # required
-      #             cookies: { # required
-      #               forward: "none", # required, accepts none, whitelist, all
-      #               whitelisted_names: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             headers: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             query_string_cache_keys: {
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           trusted_signers: { # required
-      #             enabled: false, # required
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #           min_ttl: 1, # required
-      #           allowed_methods: {
-      #             quantity: 1, # required
-      #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #             cached_methods: {
-      #               quantity: 1, # required
-      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #             },
-      #           },
-      #           smooth_streaming: false,
-      #           default_ttl: 1,
-      #           max_ttl: 1,
-      #           compress: false,
-      #           lambda_function_associations: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 lambda_function_arn: "string",
-      #                 event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #               },
-      #             ],
-      #           },
-      #         },
-      #         cache_behaviors: {
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               path_pattern: "string", # required
-      #               target_origin_id: "string", # required
-      #               forwarded_values: { # required
-      #                 query_string: false, # required
-      #                 cookies: { # required
-      #                   forward: "none", # required, accepts none, whitelist, all
-      #                   whitelisted_names: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                 },
-      #                 headers: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #                 query_string_cache_keys: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               trusted_signers: { # required
-      #                 enabled: false, # required
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #               min_ttl: 1, # required
-      #               allowed_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                 cached_methods: {
-      #                   quantity: 1, # required
-      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                 },
-      #               },
-      #               smooth_streaming: false,
-      #               default_ttl: 1,
-      #               max_ttl: 1,
-      #               compress: false,
-      #               lambda_function_associations: {
-      #                 quantity: 1, # required
-      #                 items: [
-      #                   {
-      #                     lambda_function_arn: "string",
-      #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                   },
-      #                 ],
-      #               },
-      #             },
-      #           ],
-      #         },
-      #         custom_error_responses: {
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               error_code: 1, # required
-      #               response_page_path: "string",
-      #               response_code: "string",
-      #               error_caching_min_ttl: 1,
-      #             },
-      #           ],
-      #         },
-      #         comment: "string", # required
-      #         logging: {
-      #           enabled: false, # required
-      #           include_cookies: false, # required
-      #           bucket: "string", # required
-      #           prefix: "string", # required
-      #         },
-      #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #         enabled: false, # required
-      #         viewer_certificate: {
-      #           cloud_front_default_certificate: false,
-      #           iam_certificate_id: "string",
-      #           acm_certificate_arn: "string",
-      #           ssl_support_method: "sni-only", # accepts sni-only, vip
-      #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #           certificate: "string",
-      #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #         },
-      #         restrictions: {
-      #           geo_restriction: { # required
-      #             restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #         },
-      #         web_acl_id: "string",
-      #         http_version: "http1.1", # accepts http1.1, http2
-      #         is_ipv6_enabled: false,
-      #       }
-      # @!attribute [rw] caller_reference
-      #   A unique value (for example, a date-time stamp) that ensures that
-      #   the request can't be replayed.
-      #
-      #   If the value of `CallerReference` is new (regardless of the content
-      #   of the `DistributionConfig` object), CloudFront creates a new
-      #   distribution.
-      #
-      #   If `CallerReference` is a value you already sent in a previous
-      #   request to create a distribution, and if the content of the
-      #   `DistributionConfig` is identical to the original request (ignoring
-      #   white space), CloudFront returns the same the response that it
-      #   returned to the original request.
-      #
-      #   If `CallerReference` is a value you already sent in a previous
-      #   request to create a distribution but the content of the
-      #   `DistributionConfig` is different from the original request,
-      #   CloudFront returns a `DistributionAlreadyExists` error.
-      #   @return [String]
-      #
-      # @!attribute [rw] aliases
-      #   A complex type that contains information about CNAMEs (alternate
-      #   domain names), if any, for this distribution.
-      #   @return [Types::Aliases]
-      #
-      # @!attribute [rw] default_root_object
-      #   The object that you want CloudFront to request from your origin (for
-      #   example, `index.html`) when a viewer requests the root URL for your
-      #   distribution (`http://www.example.com`) instead of an object in your
-      #   distribution (`http://www.example.com/product-description.html`).
-      #   Specifying a default root object avoids exposing the contents of
-      #   your distribution.
-      #
-      #   Specify only the object name, for example, `index.html`. Do not add
-      #   a `/` before the object name.
-      #
-      #   If you don't want to specify a default root object when you create
-      #   a distribution, include an empty `DefaultRootObject` element.
-      #
-      #   To delete the default root object from an existing distribution,
-      #   update the distribution configuration and include an empty
-      #   `DefaultRootObject` element.
-      #
-      #   To replace the default root object, update the distribution
-      #   configuration and specify the new object.
-      #
-      #   For more information about the default root object, see [Creating a
-      #   Default Root Object][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html
-      #   @return [String]
-      #
-      # @!attribute [rw] origins
-      #   A complex type that contains information about origins for this
-      #   distribution.
-      #   @return [Types::Origins]
-      #
-      # @!attribute [rw] default_cache_behavior
-      #   A complex type that describes the default cache behavior if you do
-      #   not specify a `CacheBehavior` element or if files don't match any
-      #   of the values of `PathPattern` in `CacheBehavior` elements. You must
-      #   create exactly one default cache behavior.
-      #   @return [Types::DefaultCacheBehavior]
-      #
-      # @!attribute [rw] cache_behaviors
-      #   A complex type that contains zero or more `CacheBehavior` elements.
-      #   @return [Types::CacheBehaviors]
-      #
-      # @!attribute [rw] custom_error_responses
-      #   A complex type that controls the following:
-      #
-      #   * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
-      #     range with custom error messages before returning the response to
-      #     the viewer.
-      #
-      #   * How long CloudFront caches HTTP status codes in the 4xx and 5xx
-      #     range.
-      #
-      #   For more information about custom error pages, see [Customizing
-      #   Error Responses][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
-      #   @return [Types::CustomErrorResponses]
-      #
-      # @!attribute [rw] comment
-      #   Any comments you want to include about the distribution.
-      #
-      #   If you don't want to specify a comment, include an empty `Comment`
-      #   element.
-      #
-      #   To delete an existing comment, update the distribution configuration
-      #   and include an empty `Comment` element.
-      #
-      #   To add or change a comment, update the distribution configuration
-      #   and specify the new comment.
-      #   @return [String]
-      #
-      # @!attribute [rw] logging
-      #   A complex type that controls whether access logs are written for the
-      #   distribution.
-      #
-      #   For more information about logging, see [Access Logs][1] in the
-      #   *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
-      #   @return [Types::LoggingConfig]
-      #
-      # @!attribute [rw] price_class
-      #   The price class that corresponds with the maximum price that you
-      #   want to pay for CloudFront service. If you specify `PriceClass_All`,
-      #   CloudFront responds to requests for your objects from all CloudFront
-      #   edge locations.
-      #
-      #   If you specify a price class other than `PriceClass_All`, CloudFront
-      #   serves your objects from the CloudFront edge location that has the
-      #   lowest latency among the edge locations in your price class. Viewers
-      #   who are in or near regions that are excluded from your specified
-      #   price class may encounter slower performance.
-      #
-      #   For more information about price classes, see [Choosing the Price
-      #   Class for a CloudFront Distribution][1] in the *Amazon CloudFront
-      #   Developer Guide*. For information about CloudFront pricing,
-      #   including how price classes map to CloudFront regions, see [Amazon
-      #   CloudFront Pricing][2].
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
-      #   [2]: https://aws.amazon.com/cloudfront/pricing/
-      #   @return [String]
-      #
-      # @!attribute [rw] enabled
-      #   Specifies whether you want CloudFront to save access logs to an
-      #   Amazon S3 bucket.
-      #
-      #   If you do not want to enable logging when you create a distribution,
-      #   or if you want to disable logging for an existing distribution,
-      #   specify `false` for `Enabled`, and specify empty `Bucket` and
-      #   `Prefix` elements.
-      #
-      #   If you specify `false` for `Enabled` but you specify values for
-      #   `Bucket` and `Prefix`, the values are automatically deleted.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] viewer_certificate
-      #   A complex type that specifies the following:
-      #
-      #   * Which SSL/TLS certificate to use when viewers request objects
-      #     using HTTPS
-      #
-      #   * Whether you want CloudFront to use dedicated IP addresses or SNI
-      #     when you're using alternate domain names in your object names
-      #
-      #   * The minimum protocol version that you want CloudFront to use when
-      #     communicating with viewers
-      #
-      #   For more information, see [Using an HTTPS Connection to Access Your
-      #   Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
-      #   @return [Types::ViewerCertificate]
-      #
-      # @!attribute [rw] restrictions
-      #   A complex type that identifies ways in which you want to restrict
-      #   distribution of your content.
-      #   @return [Types::Restrictions]
-      #
-      # @!attribute [rw] web_acl_id
-      #   A unique identifier that specifies the AWS WAF web ACL, if any, to
-      #   associate with this distribution.
-      #
-      #   AWS WAF is a web application firewall that lets you monitor the HTTP
-      #   and HTTPS requests that are forwarded to CloudFront, and lets you
-      #   control access to your content. Based on conditions that you
-      #   specify, such as the IP addresses that requests originate from or
-      #   the values of query strings, CloudFront responds to requests either
-      #   with the requested content or with an HTTP 403 status code
-      #   (Forbidden). You can also configure CloudFront to return a custom
-      #   error page when a request is blocked. For more information about AWS
-      #   WAF, see the [AWS WAF Developer Guide][1].
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
-      #   @return [String]
-      #
-      # @!attribute [rw] http_version
-      #   (Optional) Specify the maximum HTTP version that you want viewers to
-      #   use to communicate with CloudFront. The default value for new web
-      #   distributions is http2. Viewers that don't support HTTP/2
-      #   automatically use an earlier HTTP version.
-      #
-      #   For viewers and CloudFront to use HTTP/2, viewers must support TLS
-      #   1.2 or later, and must support Server Name Identification (SNI).
-      #
-      #   In general, configuring CloudFront to communicate with viewers using
-      #   HTTP/2 reduces latency. You can improve performance by optimizing
-      #   for HTTP/2. For more information, do an Internet search for "http/2
-      #   optimization."
-      #   @return [String]
-      #
-      # @!attribute [rw] is_ipv6_enabled
-      #   If you want CloudFront to respond to IPv6 DNS requests with an IPv6
-      #   address for your distribution, specify `true`. If you specify
-      #   `false`, CloudFront responds to IPv6 DNS requests with the DNS
-      #   response code `NOERROR` and with no IP addresses. This allows
-      #   viewers to submit a second request, for an IPv4 address for your
-      #   distribution.
-      #
-      #   In general, you should enable IPv6 if you have users on IPv6
-      #   networks who want to access your content. However, if you're using
-      #   signed URLs or signed cookies to restrict access to your content,
-      #   and if you're using a custom policy that includes the `IpAddress`
-      #   parameter to restrict the IP addresses that can access your content,
-      #   do not enable IPv6. If you want to restrict access to some content
-      #   by IP address and not restrict access to other content (or restrict
-      #   access but not by IP address), you can create two distributions. For
-      #   more information, see [Creating a Signed URL Using a Custom
-      #   Policy][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #   If you're using an Amazon Route 53 alias resource record set to
-      #   route traffic to your CloudFront distribution, you need to create a
-      #   second alias resource record set when both of the following are
-      #   true:
-      #
-      #   * You enable IPv6 for the distribution
-      #
-      #   * You're using alternate domain names in the URLs for your objects
-      #
-      #   For more information, see [Routing Traffic to an Amazon CloudFront
-      #   Web Distribution by Using Your Domain Name][2] in the *Amazon Route
-      #   53 Developer Guide*.
-      #
-      #   If you created a CNAME resource record set, either with Amazon Route
-      #   53 or with another DNS service, you don't need to make any changes.
-      #   A CNAME record will route traffic to your distribution regardless of
-      #   the IP address format of the viewer request.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html
-      #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
-      #   @return [Boolean]
-      class DistributionConfig < Struct.new(
-        :caller_reference,
-        :aliases,
-        :default_root_object,
-        :origins,
-        :default_cache_behavior,
-        :cache_behaviors,
-        :custom_error_responses,
-        :comment,
-        :logging,
-        :price_class,
-        :enabled,
-        :viewer_certificate,
-        :restrictions,
-        :web_acl_id,
-        :http_version,
-        :is_ipv6_enabled)
-        include Aws::Structure
-      end
-
-      # A distribution Configuration and a list of tags to be associated with
-      # the distribution.
-      # @note When making an API call, pass DistributionConfigWithTags
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           default_root_object: "string",
-      #           origins: { # required
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 id: "string", # required
-      #                 domain_name: "string", # required
-      #                 origin_path: "string",
-      #                 custom_headers: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       header_name: "string", # required
-      #                       header_value: "string", # required
-      #                     },
-      #                   ],
-      #                 },
-      #                 s3_origin_config: {
-      #                   origin_access_identity: "string", # required
-      #                 },
-      #                 custom_origin_config: {
-      #                   http_port: 1, # required
-      #                   https_port: 1, # required
-      #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #                   origin_ssl_protocols: {
-      #                     quantity: 1, # required
-      #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #                   },
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           default_cache_behavior: { # required
-      #             target_origin_id: "string", # required
-      #             forwarded_values: { # required
-      #               query_string: false, # required
-      #               cookies: { # required
-      #                 forward: "none", # required, accepts none, whitelist, all
-      #                 whitelisted_names: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               headers: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               query_string_cache_keys: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             trusted_signers: { # required
-      #               enabled: false, # required
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #             min_ttl: 1, # required
-      #             allowed_methods: {
-      #               quantity: 1, # required
-      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               cached_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               },
-      #             },
-      #             smooth_streaming: false,
-      #             default_ttl: 1,
-      #             max_ttl: 1,
-      #             compress: false,
-      #             lambda_function_associations: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   lambda_function_arn: "string",
-      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                 },
-      #               ],
-      #             },
-      #           },
-      #           cache_behaviors: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 path_pattern: "string", # required
-      #                 target_origin_id: "string", # required
-      #                 forwarded_values: { # required
-      #                   query_string: false, # required
-      #                   cookies: { # required
-      #                     forward: "none", # required, accepts none, whitelist, all
-      #                     whitelisted_names: {
-      #                       quantity: 1, # required
-      #                       items: ["string"],
-      #                     },
-      #                   },
-      #                   headers: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                   query_string_cache_keys: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                 },
-      #                 trusted_signers: { # required
-      #                   enabled: false, # required
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #                 min_ttl: 1, # required
-      #                 allowed_methods: {
-      #                   quantity: 1, # required
-      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   cached_methods: {
-      #                     quantity: 1, # required
-      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   },
-      #                 },
-      #                 smooth_streaming: false,
-      #                 default_ttl: 1,
-      #                 max_ttl: 1,
-      #                 compress: false,
-      #                 lambda_function_associations: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       lambda_function_arn: "string",
-      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                     },
-      #                   ],
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           custom_error_responses: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 error_code: 1, # required
-      #                 response_page_path: "string",
-      #                 response_code: "string",
-      #                 error_caching_min_ttl: 1,
-      #               },
-      #             ],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             include_cookies: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #           viewer_certificate: {
-      #             cloud_front_default_certificate: false,
-      #             iam_certificate_id: "string",
-      #             acm_certificate_arn: "string",
-      #             ssl_support_method: "sni-only", # accepts sni-only, vip
-      #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #             certificate: "string",
-      #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #           },
-      #           restrictions: {
-      #             geo_restriction: { # required
-      #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           web_acl_id: "string",
-      #           http_version: "http1.1", # accepts http1.1, http2
-      #           is_ipv6_enabled: false,
-      #         },
-      #         tags: { # required
-      #           items: [
-      #             {
-      #               key: "TagKey", # required
-      #               value: "TagValue",
-      #             },
-      #           ],
-      #         },
-      #       }
-      # @!attribute [rw] distribution_config
-      #   A distribution configuration.
-      #   @return [Types::DistributionConfig]
-      #
-      # @!attribute [rw] tags
-      #   A complex type that contains zero or more `Tag` elements.
-      #   @return [Types::Tags]
-      class DistributionConfigWithTags < Struct.new(
-        :distribution_config,
-        :tags)
-        include Aws::Structure
-      end
-
-      # A distribution list.
-      # @!attribute [rw] marker
-      #   The value you provided for the `Marker` request parameter.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_marker
-      #   If `IsTruncated` is `true`, this element is present and contains the
-      #   value you can use for the `Marker` request parameter to continue
-      #   listing your distributions where they left off.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The value you provided for the `MaxItems` request parameter.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates whether more distributions remain to be
-      #   listed. If your results were truncated, you can make a follow-up
-      #   pagination request using the `Marker` request parameter to retrieve
-      #   more distributions in the list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   The number of distributions that were created by the current AWS
-      #   account.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `DistributionSummary` element for
-      #   each distribution that was created by the current AWS account.
-      #   @return [Array<Types::DistributionSummary>]
-      class DistributionList < Struct.new(
-        :marker,
-        :next_marker,
-        :max_items,
-        :is_truncated,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A summary of the information about a CloudFront distribution.
-      # @!attribute [rw] id
-      #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] arn
-      #   The ARN (Amazon Resource Name) for the distribution. For example:
-      #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
-      #   where `123456789012` is your AWS account ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   The current status of the distribution. When the status is
-      #   `Deployed`, the distribution's information is propagated to all
-      #   CloudFront edge locations.
-      #   @return [String]
-      #
-      # @!attribute [rw] last_modified_time
-      #   The date and time the distribution was last modified.
-      #   @return [Time]
-      #
-      # @!attribute [rw] domain_name
-      #   The domain name that corresponds to the distribution. For example:
-      #   `d604721fxaaqy9.cloudfront.net`.
-      #   @return [String]
-      #
-      # @!attribute [rw] aliases
-      #   A complex type that contains information about CNAMEs (alternate
-      #   domain names), if any, for this distribution.
-      #   @return [Types::Aliases]
-      #
-      # @!attribute [rw] origins
-      #   A complex type that contains information about origins for this
-      #   distribution.
-      #   @return [Types::Origins]
-      #
-      # @!attribute [rw] default_cache_behavior
-      #   A complex type that describes the default cache behavior if you do
-      #   not specify a `CacheBehavior` element or if files don't match any
-      #   of the values of `PathPattern` in `CacheBehavior` elements. You must
-      #   create exactly one default cache behavior.
-      #   @return [Types::DefaultCacheBehavior]
-      #
-      # @!attribute [rw] cache_behaviors
-      #   A complex type that contains zero or more `CacheBehavior` elements.
-      #   @return [Types::CacheBehaviors]
-      #
-      # @!attribute [rw] custom_error_responses
-      #   A complex type that contains zero or more `CustomErrorResponses`
-      #   elements.
-      #   @return [Types::CustomErrorResponses]
-      #
-      # @!attribute [rw] comment
-      #   The comment originally specified when this distribution was created.
-      #   @return [String]
-      #
-      # @!attribute [rw] price_class
-      #   @return [String]
-      #
-      # @!attribute [rw] enabled
-      #   Whether the distribution is enabled to accept user requests for
-      #   content.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] viewer_certificate
-      #   A complex type that specifies the following:
-      #
-      #   * Which SSL/TLS certificate to use when viewers request objects
-      #     using HTTPS
-      #
-      #   * Whether you want CloudFront to use dedicated IP addresses or SNI
-      #     when you're using alternate domain names in your object names
-      #
-      #   * The minimum protocol version that you want CloudFront to use when
-      #     communicating with viewers
-      #
-      #   For more information, see [Using an HTTPS Connection to Access Your
-      #   Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
-      #   @return [Types::ViewerCertificate]
-      #
-      # @!attribute [rw] restrictions
-      #   A complex type that identifies ways in which you want to restrict
-      #   distribution of your content.
-      #   @return [Types::Restrictions]
-      #
-      # @!attribute [rw] web_acl_id
-      #   The Web ACL Id (if any) associated with the distribution.
-      #   @return [String]
-      #
-      # @!attribute [rw] http_version
-      #   Specify the maximum HTTP version that you want viewers to use to
-      #   communicate with CloudFront. The default value for new web
-      #   distributions is `http2`. Viewers that don't support `HTTP/2` will
-      #   automatically use an earlier version.
-      #   @return [String]
-      #
-      # @!attribute [rw] is_ipv6_enabled
-      #   Whether CloudFront responds to IPv6 DNS requests with an IPv6
-      #   address for your distribution.
-      #   @return [Boolean]
-      class DistributionSummary < Struct.new(
-        :id,
-        :arn,
-        :status,
-        :last_modified_time,
-        :domain_name,
-        :aliases,
-        :origins,
-        :default_cache_behavior,
-        :cache_behaviors,
-        :custom_error_responses,
-        :comment,
-        :price_class,
-        :enabled,
-        :viewer_certificate,
-        :restrictions,
-        :web_acl_id,
-        :http_version,
-        :is_ipv6_enabled)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies how CloudFront handles query strings and
-      # cookies.
-      # @note When making an API call, pass ForwardedValues
-      #   data as a hash:
-      #
-      #       {
-      #         query_string: false, # required
-      #         cookies: { # required
-      #           forward: "none", # required, accepts none, whitelist, all
-      #           whitelisted_names: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #         },
-      #         headers: {
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         query_string_cache_keys: {
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #       }
-      # @!attribute [rw] query_string
-      #   Indicates whether you want CloudFront to forward query strings to
-      #   the origin that is associated with this cache behavior and cache
-      #   based on the query string parameters. CloudFront behavior depends on
-      #   the value of `QueryString` and on the values that you specify for
-      #   `QueryStringCacheKeys`, if any:
-      #
-      #   If you specify true for `QueryString` and you don't specify any
-      #   values for `QueryStringCacheKeys`, CloudFront forwards all query
-      #   string parameters to the origin and caches based on all query string
-      #   parameters. Depending on how many query string parameters and values
-      #   you have, this can adversely affect performance because CloudFront
-      #   must forward more requests to the origin.
-      #
-      #   If you specify true for `QueryString` and you specify one or more
-      #   values for `QueryStringCacheKeys`, CloudFront forwards all query
-      #   string parameters to the origin, but it only caches based on the
-      #   query string parameters that you specify.
-      #
-      #   If you specify false for `QueryString`, CloudFront doesn't forward
-      #   any query string parameters to the origin, and doesn't cache based
-      #   on query string parameters.
-      #
-      #   For more information, see [Configuring CloudFront to Cache Based on
-      #   Query String Parameters][1] in the *Amazon CloudFront Developer
-      #   Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] cookies
-      #   A complex type that specifies whether you want CloudFront to forward
-      #   cookies to the origin and, if so, which ones. For more information
-      #   about forwarding cookies to the origin, see [How CloudFront
-      #   Forwards, Caches, and Logs Cookies][1] in the *Amazon CloudFront
-      #   Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
-      #   @return [Types::CookiePreference]
-      #
-      # @!attribute [rw] headers
-      #   A complex type that specifies the `Headers`, if any, that you want
-      #   CloudFront to vary upon for this cache behavior.
-      #   @return [Types::Headers]
-      #
-      # @!attribute [rw] query_string_cache_keys
-      #   A complex type that contains information about the query string
-      #   parameters that you want CloudFront to use for caching for this
-      #   cache behavior.
-      #   @return [Types::QueryStringCacheKeys]
-      class ForwardedValues < Struct.new(
-        :query_string,
-        :cookies,
-        :headers,
-        :query_string_cache_keys)
-        include Aws::Structure
-      end
-
-      # A complex type that controls the countries in which your content is
-      # distributed. CloudFront determines the location of your users using
-      # `MaxMind` GeoIP databases.
-      # @note When making an API call, pass GeoRestriction
-      #   data as a hash:
-      #
-      #       {
-      #         restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] restriction_type
-      #   The method that you want to use to restrict distribution of your
-      #   content by country:
-      #
-      #   * `none`\: No geo restriction is enabled, meaning access to content
-      #     is not restricted by client geo location.
-      #
-      #   * `blacklist`\: The `Location` elements specify the countries in
-      #     which you do not want CloudFront to distribute your content.
-      #
-      #   * `whitelist`\: The `Location` elements specify the countries in
-      #     which you want CloudFront to distribute your content.
-      #   @return [String]
-      #
-      # @!attribute [rw] quantity
-      #   When geo restriction is `enabled`, this is the number of countries
-      #   in your `whitelist` or `blacklist`. Otherwise, when it is not
-      #   enabled, `Quantity` is `0`, and you can omit `Items`.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains a `Location` element for each country
-      #   in which you want CloudFront either to distribute your content
-      #   (`whitelist`) or not distribute your content (`blacklist`).
-      #
-      #   The `Location` element is a two-letter, uppercase country code for a
-      #   country that you want to include in your `blacklist` or `whitelist`.
-      #   Include one `Location` element for each country.
-      #
-      #   CloudFront and `MaxMind` both use `ISO 3166` country codes. For the
-      #   current list of countries and the corresponding codes, see `ISO
-      #   3166-1-alpha-2` code on the *International Organization for
-      #   Standardization* website. You can also refer to the country list in
-      #   the CloudFront console, which includes both country names and codes.
-      #   @return [Array<String>]
-      class GeoRestriction < Struct.new(
-        :restriction_type,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # The origin access identity's configuration information. For more
-      # information, see CloudFrontOriginAccessIdentityConfigComplexType.
-      # @note When making an API call, pass GetCloudFrontOriginAccessIdentityConfigRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The identity's ID.
-      #   @return [String]
-      class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The origin access identity's configuration information.
-      #   @return [Types::CloudFrontOriginAccessIdentityConfig]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
-        :cloud_front_origin_access_identity_config,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to get an origin access identity's information.
-      # @note When making an API call, pass GetCloudFrontOriginAccessIdentityRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The identity's ID.
-      #   @return [String]
-      class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity's information.
-      #   @return [Types::CloudFrontOriginAccessIdentity]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the origin access identity's information.
-      #   For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetCloudFrontOriginAccessIdentityResult < Struct.new(
-        :cloud_front_origin_access_identity,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to get a distribution configuration.
-      # @note When making an API call, pass GetDistributionConfigRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The distribution's ID.
-      #   @return [String]
-      class GetDistributionConfigRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution_config
-      #   The distribution's configuration information.
-      #   @return [Types::DistributionConfig]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetDistributionConfigResult < Struct.new(
-        :distribution_config,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to get a distribution's information.
-      # @note When making an API call, pass GetDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The distribution's ID.
-      #   @return [String]
-      class GetDistributionRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution
-      #   The distribution's information.
-      #   @return [Types::Distribution]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the distribution's information. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetDistributionResult < Struct.new(
-        :distribution,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to get an invalidation's information.
-      # @note When making an API call, pass GetInvalidationRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_id: "string", # required
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] distribution_id
-      #   The distribution's ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] id
-      #   The identifier for the invalidation request, for example,
-      #   `IDFDVBD632BHDS5`.
-      #   @return [String]
-      class GetInvalidationRequest < Struct.new(
-        :distribution_id,
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] invalidation
-      #   The invalidation's information. For more information, see
-      #   [Invalidation Complex Type][1].
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
-      #   @return [Types::Invalidation]
-      class GetInvalidationResult < Struct.new(
-        :invalidation)
-        include Aws::Structure
-      end
-
-      # To request to get a streaming distribution configuration.
-      # @note When making an API call, pass GetStreamingDistributionConfigRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The streaming distribution's ID.
-      #   @return [String]
-      class GetStreamingDistributionConfigRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution's configuration information.
-      #   @return [Types::StreamingDistributionConfig]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetStreamingDistributionConfigResult < Struct.new(
-        :streaming_distribution_config,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to get a streaming distribution's information.
-      # @note When making an API call, pass GetStreamingDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #       }
-      # @!attribute [rw] id
-      #   The streaming distribution's ID.
-      #   @return [String]
-      class GetStreamingDistributionRequest < Struct.new(
-        :id)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution
-      #   The streaming distribution's information.
-      #   @return [Types::StreamingDistribution]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the streaming distribution's information.
-      #   For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class GetStreamingDistributionResult < Struct.new(
-        :streaming_distribution,
-        :etag)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies the headers that you want CloudFront to
-      # forward to the origin for this cache behavior.
-      #
-      # For the headers that you specify, CloudFront also caches separate
-      # versions of a specified object based on the header values in viewer
-      # requests. For example, suppose viewer requests for `logo.jpg` contain
-      # a custom `Product` header that has a value of either `Acme` or `Apex`,
-      # and you configure CloudFront to cache your content based on values in
-      # the `Product` header. CloudFront forwards the `Product` header to the
-      # origin and caches the response from the origin once for each header
-      # value. For more information about caching based on header values, see
-      # [How CloudFront Forwards and Caches Headers][1] in the *Amazon
-      # CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
-      # @note When making an API call, pass Headers
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of different headers that you want CloudFront to forward
-      #   to the origin for this cache behavior. You can configure each cache
-      #   behavior in a web distribution to do one of the following:
-      #
-      #   * **Forward all headers to your origin**\: Specify `1` for
-      #     `Quantity` and `*` for `Name`.
-      #
-      #     If you configure CloudFront to forward all headers to your origin,
-      #     CloudFront doesn't cache the objects associated with this cache
-      #     behavior. Instead, it sends every request to the origin.
-      #
-      #   * *Forward a whitelist of headers you specify*\: Specify the number
-      #     of headers that you want to forward, and specify the header names
-      #     in `Name` elements. CloudFront caches your objects based on the
-      #     values in all of the specified headers. CloudFront also forwards
-      #     the headers that it forwards by default, but it caches your
-      #     objects based only on the headers that you specify.
-      #
-      #   * **Forward only the default headers**\: Specify `0` for `Quantity`
-      #     and omit `Items`. In this configuration, CloudFront doesn't cache
-      #     based on the values in the request headers.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `Name` element for each header that
-      #   you want CloudFront to forward to the origin and to vary on for this
-      #   cache behavior. If `Quantity` is `0`, omit `Items`.
-      #   @return [Array<String>]
-      class Headers < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # An invalidation.
-      # @!attribute [rw] id
-      #   The identifier for the invalidation request. For example:
-      #   `IDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   The status of the invalidation request. When the invalidation batch
-      #   is finished, the status is `Completed`.
-      #   @return [String]
-      #
-      # @!attribute [rw] create_time
-      #   The date and time the invalidation request was first made.
-      #   @return [Time]
-      #
-      # @!attribute [rw] invalidation_batch
-      #   The current invalidation information for the batch request.
-      #   @return [Types::InvalidationBatch]
-      class Invalidation < Struct.new(
-        :id,
-        :status,
-        :create_time,
-        :invalidation_batch)
-        include Aws::Structure
-      end
-
-      # An invalidation batch.
-      # @note When making an API call, pass InvalidationBatch
-      #   data as a hash:
-      #
-      #       {
-      #         paths: { # required
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         caller_reference: "string", # required
-      #       }
-      # @!attribute [rw] paths
-      #   A complex type that contains information about the objects that you
-      #   want to invalidate. For more information, see [Specifying the
-      #   Objects to Invalidate][1] in the *Amazon CloudFront Developer
-      #   Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects
-      #   @return [Types::Paths]
-      #
-      # @!attribute [rw] caller_reference
-      #   A value that you specify to uniquely identify an invalidation
-      #   request. CloudFront uses the value to prevent you from accidentally
-      #   resubmitting an identical request. Whenever you create a new
-      #   invalidation request, you must specify a new value for
-      #   `CallerReference` and change other values in the request as
-      #   applicable. One way to ensure that the value of `CallerReference` is
-      #   unique is to use a `timestamp`, for example, `20120301090000`.
-      #
-      #   If you make a second invalidation request with the same value for
-      #   `CallerReference`, and if the rest of the request is the same,
-      #   CloudFront doesn't create a new invalidation request. Instead,
-      #   CloudFront returns information about the invalidation request that
-      #   you previously created with the same `CallerReference`.
-      #
-      #   If `CallerReference` is a value you already sent in a previous
-      #   invalidation batch request but the content of any `Path` is
-      #   different from the original request, CloudFront returns an
-      #   `InvalidationBatchAlreadyExists` error.
-      #   @return [String]
-      class InvalidationBatch < Struct.new(
-        :paths,
-        :caller_reference)
-        include Aws::Structure
-      end
-
-      # The `InvalidationList` complex type describes the list of invalidation
-      # objects. For more information about invalidation, see [Invalidating
-      # Objects (Web Distributions Only)][1] in the *Amazon CloudFront
-      # Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
-      # @!attribute [rw] marker
-      #   The value that you provided for the `Marker` request parameter.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_marker
-      #   If `IsTruncated` is `true`, this element is present and contains the
-      #   value that you can use for the `Marker` request parameter to
-      #   continue listing your invalidation batches where they left off.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The value that you provided for the `MaxItems` request parameter.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates whether more invalidation batch requests
-      #   remain to be listed. If your results were truncated, you can make a
-      #   follow-up pagination request using the `Marker` request parameter to
-      #   retrieve more invalidation batches in the list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   The number of invalidation batches that were created by the current
-      #   AWS account.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `InvalidationSummary` element for
-      #   each invalidation batch created by the current AWS account.
-      #   @return [Array<Types::InvalidationSummary>]
-      class InvalidationList < Struct.new(
-        :marker,
-        :next_marker,
-        :max_items,
-        :is_truncated,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A summary of an invalidation request.
-      # @!attribute [rw] id
-      #   The unique ID for an invalidation request.
-      #   @return [String]
-      #
-      # @!attribute [rw] create_time
-      #   @return [Time]
-      #
-      # @!attribute [rw] status
-      #   The status of an invalidation request.
-      #   @return [String]
-      class InvalidationSummary < Struct.new(
-        :id,
-        :create_time,
-        :status)
-        include Aws::Structure
-      end
-
-      # A complex type that lists the active CloudFront key pairs, if any,
-      # that are associated with `AwsAccountNumber`.
-      #
-      # For more information, see ActiveTrustedSigners.
-      # @!attribute [rw] quantity
-      #   The number of active CloudFront key pairs for `AwsAccountNumber`.
-      #
-      #   For more information, see ActiveTrustedSigners.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that lists the active CloudFront key pairs, if any,
-      #   that are associated with `AwsAccountNumber`.
-      #
-      #   For more information, see ActiveTrustedSigners.
-      #   @return [Array<String>]
-      class KeyPairIds < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that contains a Lambda function association.
-      # @note When making an API call, pass LambdaFunctionAssociation
-      #   data as a hash:
-      #
-      #       {
-      #         lambda_function_arn: "string",
-      #         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #       }
-      # @!attribute [rw] lambda_function_arn
-      #   The ARN of the Lambda function.
-      #   @return [String]
-      #
-      # @!attribute [rw] event_type
-      #   Specifies the event type that triggers a Lambda function invocation.
-      #   Valid values are:
-      #
-      #   * `viewer-request`
-      #
-      #   * `origin-request`
-      #
-      #   * `viewer-response`
-      #
-      #   * `origin-response`
-      #   @return [String]
-      class LambdaFunctionAssociation < Struct.new(
-        :lambda_function_arn,
-        :event_type)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies a list of Lambda functions associations
-      # for a cache behavior.
-      #
-      # If you want to invoke one or more Lambda functions triggered by
-      # requests that match the `PathPattern` of the cache behavior, specify
-      # the applicable values for `Quantity` and `Items`. Note that there can
-      # be up to 4 `LambdaFunctionAssociation` items in this list (one for
-      # each possible value of `EventType`) and each `EventType` can be
-      # associated with the Lambda function only once.
-      #
-      # If you don't want to invoke any Lambda functions for the requests
-      # that match `PathPattern`, specify `0` for `Quantity` and omit `Items`.
-      # @note When making an API call, pass LambdaFunctionAssociations
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: [
-      #           {
-      #             lambda_function_arn: "string",
-      #             event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of Lambda function associations for this cache behavior.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   **Optional**\: A complex type that contains
-      #   `LambdaFunctionAssociation` items for this cache behavior. If
-      #   `Quantity` is `0`, you can omit `Items`.
-      #   @return [Array<Types::LambdaFunctionAssociation>]
-      class LambdaFunctionAssociations < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # The request to list origin access identities.
-      # @note When making an API call, pass ListCloudFrontOriginAccessIdentitiesRequest
-      #   data as a hash:
-      #
-      #       {
-      #         marker: "string",
-      #         max_items: 1,
-      #       }
-      # @!attribute [rw] marker
-      #   Use this when paginating results to indicate where to begin in your
-      #   list of origin access identities. The results include identities in
-      #   the list that occur after the marker. To get the next page of
-      #   results, set the `Marker` to the value of the `NextMarker` from the
-      #   current page's response (which is also the ID of the last identity
-      #   on that page).
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of origin access identities you want in the
-      #   response body.
-      #   @return [Integer]
-      class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
-        :marker,
-        :max_items)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] cloud_front_origin_access_identity_list
-      #   The `CloudFrontOriginAccessIdentityList` type.
-      #   @return [Types::CloudFrontOriginAccessIdentityList]
-      class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
-        :cloud_front_origin_access_identity_list)
-        include Aws::Structure
-      end
-
-      # The request to list distributions that are associated with a specified
-      # AWS WAF web ACL.
-      # @note When making an API call, pass ListDistributionsByWebACLIdRequest
-      #   data as a hash:
-      #
-      #       {
-      #         marker: "string",
-      #         max_items: 1,
-      #         web_acl_id: "string", # required
-      #       }
-      # @!attribute [rw] marker
-      #   Use `Marker` and `MaxItems` to control pagination of results. If you
-      #   have more than `MaxItems` distributions that satisfy the request,
-      #   the response includes a `NextMarker` element. To get the next page
-      #   of results, submit another request. For the value of `Marker`,
-      #   specify the value of `NextMarker` from the last response. (For the
-      #   first request, omit `Marker`.)
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of distributions that you want CloudFront to
-      #   return in the response body. The maximum and default values are both
-      #   100.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] web_acl_id
-      #   The ID of the AWS WAF web ACL that you want to list the associated
-      #   distributions. If you specify "null" for the ID, the request
-      #   returns a list of the distributions that aren't associated with a
-      #   web ACL.
-      #   @return [String]
-      class ListDistributionsByWebACLIdRequest < Struct.new(
-        :marker,
-        :max_items,
-        :web_acl_id)
-        include Aws::Structure
-      end
-
-      # The response to a request to list the distributions that are
-      # associated with a specified AWS WAF web ACL.
-      # @!attribute [rw] distribution_list
-      #   The `DistributionList` type.
-      #   @return [Types::DistributionList]
-      class ListDistributionsByWebACLIdResult < Struct.new(
-        :distribution_list)
-        include Aws::Structure
-      end
-
-      # The request to list your distributions.
-      # @note When making an API call, pass ListDistributionsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         marker: "string",
-      #         max_items: 1,
-      #       }
-      # @!attribute [rw] marker
-      #   Use this when paginating results to indicate where to begin in your
-      #   list of distributions. The results include distributions in the list
-      #   that occur after the marker. To get the next page of results, set
-      #   the `Marker` to the value of the `NextMarker` from the current
-      #   page's response (which is also the ID of the last distribution on
-      #   that page).
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of distributions you want in the response body.
-      #   @return [Integer]
-      class ListDistributionsRequest < Struct.new(
-        :marker,
-        :max_items)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution_list
-      #   The `DistributionList` type.
-      #   @return [Types::DistributionList]
-      class ListDistributionsResult < Struct.new(
-        :distribution_list)
-        include Aws::Structure
-      end
-
-      # The request to list invalidations.
-      # @note When making an API call, pass ListInvalidationsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_id: "string", # required
-      #         marker: "string",
-      #         max_items: 1,
-      #       }
-      # @!attribute [rw] distribution_id
-      #   The distribution's ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] marker
-      #   Use this parameter when paginating results to indicate where to
-      #   begin in your list of invalidation batches. Because the results are
-      #   returned in decreasing order from most recent to oldest, the most
-      #   recent results are on the first page, the second page will contain
-      #   earlier results, and so on. To get the next page of results, set
-      #   `Marker` to the value of the `NextMarker` from the current page's
-      #   response. This value is the same as the ID of the last invalidation
-      #   batch on that page.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The maximum number of invalidation batches that you want in the
-      #   response body.
-      #   @return [Integer]
-      class ListInvalidationsRequest < Struct.new(
-        :distribution_id,
-        :marker,
-        :max_items)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] invalidation_list
-      #   Information about invalidation batches.
-      #   @return [Types::InvalidationList]
-      class ListInvalidationsResult < Struct.new(
-        :invalidation_list)
-        include Aws::Structure
-      end
-
-      # The request to list your streaming distributions.
-      # @note When making an API call, pass ListStreamingDistributionsRequest
-      #   data as a hash:
-      #
-      #       {
-      #         marker: "string",
-      #         max_items: 1,
-      #       }
-      # @!attribute [rw] marker
-      #   The value that you provided for the `Marker` request parameter.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The value that you provided for the `MaxItems` request parameter.
-      #   @return [Integer]
-      class ListStreamingDistributionsRequest < Struct.new(
-        :marker,
-        :max_items)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution_list
-      #   The `StreamingDistributionList` type.
-      #   @return [Types::StreamingDistributionList]
-      class ListStreamingDistributionsResult < Struct.new(
-        :streaming_distribution_list)
-        include Aws::Structure
-      end
-
-      # The request to list tags for a CloudFront resource.
-      # @note When making an API call, pass ListTagsForResourceRequest
-      #   data as a hash:
-      #
-      #       {
-      #         resource: "ResourceARN", # required
-      #       }
-      # @!attribute [rw] resource
-      #   An ARN of a CloudFront resource.
-      #   @return [String]
-      class ListTagsForResourceRequest < Struct.new(
-        :resource)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] tags
-      #   A complex type that contains zero or more `Tag` elements.
-      #   @return [Types::Tags]
-      class ListTagsForResourceResult < Struct.new(
-        :tags)
-        include Aws::Structure
-      end
-
-      # A complex type that controls whether access logs are written for the
-      # distribution.
-      # @note When making an API call, pass LoggingConfig
-      #   data as a hash:
-      #
-      #       {
-      #         enabled: false, # required
-      #         include_cookies: false, # required
-      #         bucket: "string", # required
-      #         prefix: "string", # required
-      #       }
-      # @!attribute [rw] enabled
-      #   Specifies whether you want CloudFront to save access logs to an
-      #   Amazon S3 bucket. If you do not want to enable logging when you
-      #   create a distribution or if you want to disable logging for an
-      #   existing distribution, specify `false` for `Enabled`, and specify
-      #   empty `Bucket` and `Prefix` elements. If you specify `false` for
-      #   `Enabled` but you specify values for `Bucket`, `prefix`, and
-      #   `IncludeCookies`, the values are automatically deleted.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] include_cookies
-      #   Specifies whether you want CloudFront to include cookies in access
-      #   logs, specify `true` for `IncludeCookies`. If you choose to include
-      #   cookies in logs, CloudFront logs all cookies regardless of how you
-      #   configure the cache behaviors for this distribution. If you do not
-      #   want to include cookies when you create a distribution or if you
-      #   want to disable include cookies for an existing distribution,
-      #   specify `false` for `IncludeCookies`.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] bucket
-      #   The Amazon S3 bucket to store the access logs in, for example,
-      #   `myawslogbucket.s3.amazonaws.com`.
-      #   @return [String]
-      #
-      # @!attribute [rw] prefix
-      #   An optional string that you want CloudFront to prefix to the access
-      #   log `filenames` for this distribution, for example, `myprefix/`. If
-      #   you want to enable logging, but you do not want to specify a prefix,
-      #   you still must include an empty `Prefix` element in the `Logging`
-      #   element.
-      #   @return [String]
-      class LoggingConfig < Struct.new(
-        :enabled,
-        :include_cookies,
-        :bucket,
-        :prefix)
-        include Aws::Structure
-      end
-
-      # A complex type that describes the Amazon S3 bucket or the HTTP server
-      # (for example, a web server) from which CloudFront gets your files. You
-      # must create at least one origin.
-      #
-      # For the current limit on the number of origins that you can create for
-      # a distribution, see [Amazon CloudFront Limits][1] in the *AWS General
-      # Reference*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
-      # @note When making an API call, pass Origin
-      #   data as a hash:
-      #
-      #       {
-      #         id: "string", # required
-      #         domain_name: "string", # required
-      #         origin_path: "string",
-      #         custom_headers: {
-      #           quantity: 1, # required
-      #           items: [
-      #             {
-      #               header_name: "string", # required
-      #               header_value: "string", # required
-      #             },
-      #           ],
-      #         },
-      #         s3_origin_config: {
-      #           origin_access_identity: "string", # required
-      #         },
-      #         custom_origin_config: {
-      #           http_port: 1, # required
-      #           https_port: 1, # required
-      #           origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #           origin_ssl_protocols: {
-      #             quantity: 1, # required
-      #             items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #           },
-      #         },
-      #       }
-      # @!attribute [rw] id
-      #   A unique identifier for the origin. The value of `Id` must be unique
-      #   within the distribution.
-      #
-      #   When you specify the value of `TargetOriginId` for the default cache
-      #   behavior or for another cache behavior, you indicate the origin to
-      #   which you want the cache behavior to route requests by specifying
-      #   the value of the `Id` element for that origin. When a request
-      #   matches the path pattern for that cache behavior, CloudFront routes
-      #   the request to the specified origin. For more information, see
-      #   [Cache Behavior Settings][1] in the *Amazon CloudFront Developer
-      #   Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
-      #   @return [String]
-      #
-      # @!attribute [rw] domain_name
-      #   **Amazon S3 origins**\: The DNS name of the Amazon S3 bucket from
-      #   which you want CloudFront to get objects for this origin, for
-      #   example, `myawsbucket.s3.amazonaws.com`.
-      #
-      #   Constraints for Amazon S3 origins:
-      #
-      #   * If you configured Amazon S3 Transfer Acceleration for your bucket,
-      #     do not specify the `s3-accelerate` endpoint for `DomainName`.
-      #
-      #   * The bucket name must be between 3 and 63 characters long
-      #     (inclusive).
-      #
-      #   * The bucket name must contain only lowercase characters, numbers,
-      #     periods, underscores, and dashes.
-      #
-      #   * The bucket name must not contain adjacent periods.
-      #
-      #   **Custom Origins**\: The DNS domain name for the HTTP server from
-      #   which you want CloudFront to get objects for this origin, for
-      #   example, `www.example.com`.
-      #
-      #   Constraints for custom origins:
-      #
-      #   * `DomainName` must be a valid DNS name that contains only a-z, A-Z,
-      #     0-9, dot (.), hyphen (-), or underscore (\_) characters.
-      #
-      #   * The name cannot exceed 128 characters.
-      #   @return [String]
-      #
-      # @!attribute [rw] origin_path
-      #   An optional element that causes CloudFront to request your content
-      #   from a directory in your Amazon S3 bucket or your custom origin.
-      #   When you include the `OriginPath` element, specify the directory
-      #   name, beginning with a `/`. CloudFront appends the directory name to
-      #   the value of `DomainName`, for example, `example.com/production`. Do
-      #   not include a `/` at the end of the directory name.
-      #
-      #   For example, suppose you've specified the following values for your
-      #   distribution:
-      #
-      #   * `DomainName`\: An Amazon S3 bucket named `myawsbucket`.
-      #
-      #   * `OriginPath`\: `/production`
-      #
-      #   * `CNAME`\: `example.com`
-      #
-      #   When a user enters `example.com/index.html` in a browser, CloudFront
-      #   sends a request to Amazon S3 for
-      #   `myawsbucket/production/index.html`.
-      #
-      #   When a user enters `example.com/acme/index.html` in a browser,
-      #   CloudFront sends a request to Amazon S3 for
-      #   `myawsbucket/production/acme/index.html`.
-      #   @return [String]
-      #
-      # @!attribute [rw] custom_headers
-      #   A complex type that contains names and values for the custom headers
-      #   that you want.
-      #   @return [Types::CustomHeaders]
-      #
-      # @!attribute [rw] s3_origin_config
-      #   A complex type that contains information about the Amazon S3 origin.
-      #   If the origin is a custom origin, use the `CustomOriginConfig`
-      #   element instead.
-      #   @return [Types::S3OriginConfig]
-      #
-      # @!attribute [rw] custom_origin_config
-      #   A complex type that contains information about a custom origin. If
-      #   the origin is an Amazon S3 bucket, use the `S3OriginConfig` element
-      #   instead.
-      #   @return [Types::CustomOriginConfig]
-      class Origin < Struct.new(
-        :id,
-        :domain_name,
-        :origin_path,
-        :custom_headers,
-        :s3_origin_config,
-        :custom_origin_config)
-        include Aws::Structure
-      end
-
-      # A complex type that contains `HeaderName` and `HeaderValue` elements,
-      # if any, for this distribution.
-      # @note When making an API call, pass OriginCustomHeader
-      #   data as a hash:
-      #
-      #       {
-      #         header_name: "string", # required
-      #         header_value: "string", # required
-      #       }
-      # @!attribute [rw] header_name
-      #   The name of a header that you want CloudFront to forward to your
-      #   origin. For more information, see [Forwarding Custom Headers to Your
-      #   Origin (Web Distributions Only)][1] in the *Amazon Amazon CloudFront
-      #   Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html
-      #   @return [String]
-      #
-      # @!attribute [rw] header_value
-      #   The value for the header that you specified in the `HeaderName`
-      #   field.
-      #   @return [String]
-      class OriginCustomHeader < Struct.new(
-        :header_name,
-        :header_value)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about the SSL/TLS protocols
-      # that CloudFront can use when establishing an HTTPS connection with
-      # your origin.
-      # @note When making an API call, pass OriginSslProtocols
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of SSL/TLS protocols that you want to allow CloudFront to
-      #   use when establishing an HTTPS connection with this origin.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A list that contains allowed SSL/TLS protocols for this
-      #   distribution.
-      #   @return [Array<String>]
-      class OriginSslProtocols < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about origins for this
-      # distribution.
-      # @note When making an API call, pass Origins
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: [
-      #           {
-      #             id: "string", # required
-      #             domain_name: "string", # required
-      #             origin_path: "string",
-      #             custom_headers: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   header_name: "string", # required
-      #                   header_value: "string", # required
-      #                 },
-      #               ],
-      #             },
-      #             s3_origin_config: {
-      #               origin_access_identity: "string", # required
-      #             },
-      #             custom_origin_config: {
-      #               http_port: 1, # required
-      #               https_port: 1, # required
-      #               origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #               origin_ssl_protocols: {
-      #                 quantity: 1, # required
-      #                 items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #               },
-      #             },
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of origins for this distribution.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains origins for this distribution.
-      #   @return [Array<Types::Origin>]
-      class Origins < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about the objects that you
-      # want to invalidate. For more information, see [Specifying the Objects
-      # to Invalidate][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects
-      # @note When making an API call, pass Paths
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of objects that you want to invalidate.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains a list of the paths that you want to
-      #   invalidate.
-      #   @return [Array<String>]
-      class Paths < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # @note When making an API call, pass QueryStringCacheKeys
-      #   data as a hash:
-      #
-      #       {
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] quantity
-      #   The number of `whitelisted` query string parameters for this cache
-      #   behavior.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   (Optional) A list that contains the query string parameters that you
-      #   want CloudFront to use as a basis for caching for this cache
-      #   behavior. If `Quantity` is 0, you can omit `Items`.
-      #   @return [Array<String>]
-      class QueryStringCacheKeys < Struct.new(
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that identifies ways in which you want to restrict
-      # distribution of your content.
-      # @note When making an API call, pass Restrictions
-      #   data as a hash:
-      #
-      #       {
-      #         geo_restriction: { # required
-      #           restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #       }
-      # @!attribute [rw] geo_restriction
-      #   A complex type that controls the countries in which your content is
-      #   distributed. CloudFront determines the location of your users using
-      #   `MaxMind` GeoIP databases.
-      #   @return [Types::GeoRestriction]
-      class Restrictions < Struct.new(
-        :geo_restriction)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about the Amazon S3 bucket
-      # from which you want CloudFront to get your media files for
-      # distribution.
-      # @note When making an API call, pass S3Origin
-      #   data as a hash:
-      #
-      #       {
-      #         domain_name: "string", # required
-      #         origin_access_identity: "string", # required
-      #       }
-      # @!attribute [rw] domain_name
-      #   The DNS name of the Amazon S3 origin.
-      #   @return [String]
-      #
-      # @!attribute [rw] origin_access_identity
-      #   The CloudFront origin access identity to associate with the RTMP
-      #   distribution. Use an origin access identity to configure the
-      #   distribution so that end users can only access objects in an Amazon
-      #   S3 bucket through CloudFront.
-      #
-      #   If you want end users to be able to access objects using either the
-      #   CloudFront URL or the Amazon S3 URL, specify an empty
-      #   `OriginAccessIdentity` element.
-      #
-      #   To delete the origin access identity from an existing distribution,
-      #   update the distribution configuration and include an empty
-      #   `OriginAccessIdentity` element.
-      #
-      #   To replace the origin access identity, update the distribution
-      #   configuration and specify the new origin access identity.
-      #
-      #   For more information, see [Using an Origin Access Identity to
-      #   Restrict Access to Your Amazon S3 Content][1] in the *Amazon Amazon
-      #   CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
-      #   @return [String]
-      class S3Origin < Struct.new(
-        :domain_name,
-        :origin_access_identity)
-        include Aws::Structure
-      end
-
-      # A complex type that contains information about the Amazon S3 origin.
-      # If the origin is a custom origin, use the `CustomOriginConfig` element
-      # instead.
-      # @note When making an API call, pass S3OriginConfig
-      #   data as a hash:
-      #
-      #       {
-      #         origin_access_identity: "string", # required
-      #       }
-      # @!attribute [rw] origin_access_identity
-      #   The CloudFront origin access identity to associate with the origin.
-      #   Use an origin access identity to configure the origin so that
-      #   viewers can *only* access objects in an Amazon S3 bucket through
-      #   CloudFront. The format of the value is:
-      #
-      #   origin-access-identity/CloudFront/*ID-of-origin-access-identity*
-      #
-      #   where ` ID-of-origin-access-identity ` is the value that CloudFront
-      #   returned in the `ID` element when you created the origin access
-      #   identity.
-      #
-      #   If you want viewers to be able to access objects using either the
-      #   CloudFront URL or the Amazon S3 URL, specify an empty
-      #   `OriginAccessIdentity` element.
-      #
-      #   To delete the origin access identity from an existing distribution,
-      #   update the distribution configuration and include an empty
-      #   `OriginAccessIdentity` element.
-      #
-      #   To replace the origin access identity, update the distribution
-      #   configuration and specify the new origin access identity.
-      #
-      #   For more information about the origin access identity, see [Serving
-      #   Private Content through CloudFront][1] in the *Amazon CloudFront
-      #   Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      #   @return [String]
-      class S3OriginConfig < Struct.new(
-        :origin_access_identity)
-        include Aws::Structure
-      end
-
-      # A complex type that lists the AWS accounts that were included in the
-      # `TrustedSigners` complex type, as well as their active CloudFront key
-      # pair IDs, if any.
-      # @!attribute [rw] aws_account_number
-      #   An AWS account that is included in the `TrustedSigners` complex type
-      #   for this RTMP distribution. Valid values include:
-      #
-      #   * `self`, which is the AWS account used to create the distribution.
-      #
-      #   * An AWS account number.
-      #   @return [String]
-      #
-      # @!attribute [rw] key_pair_ids
-      #   A complex type that lists the active CloudFront key pairs, if any,
-      #   that are associated with `AwsAccountNumber`.
-      #   @return [Types::KeyPairIds]
-      class Signer < Struct.new(
-        :aws_account_number,
-        :key_pair_ids)
-        include Aws::Structure
-      end
-
-      # A streaming distribution.
-      # @!attribute [rw] id
-      #   The identifier for the RTMP distribution. For example:
-      #   `EGTXBD79EXAMPLE`.
-      #   @return [String]
-      #
-      # @!attribute [rw] arn
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   The current status of the RTMP distribution. When the status is
-      #   `Deployed`, the distribution's information is propagated to all
-      #   CloudFront edge locations.
-      #   @return [String]
-      #
-      # @!attribute [rw] last_modified_time
-      #   The date and time that the distribution was last modified.
-      #   @return [Time]
-      #
-      # @!attribute [rw] domain_name
-      #   The domain name that corresponds to the streaming distribution. For
-      #   example: `s5c39gqb8ow64r.cloudfront.net`.
-      #   @return [String]
-      #
-      # @!attribute [rw] active_trusted_signers
-      #   A complex type that lists the AWS accounts, if any, that you
-      #   included in the `TrustedSigners` complex type for this distribution.
-      #   These are the accounts that you want to allow to create signed URLs
-      #   for private content.
-      #
-      #   The `Signer` complex type lists the AWS account number of the
-      #   trusted signer or `self` if the signer is the AWS account that
-      #   created the distribution. The `Signer` element also includes the IDs
-      #   of any active CloudFront key pairs that are associated with the
-      #   trusted signer's AWS account. If no `KeyPairId` element appears for
-      #   a `Signer`, that signer can't create signed URLs.
-      #
-      #   For more information, see [Serving Private Content through
-      #   CloudFront][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      #   @return [Types::ActiveTrustedSigners]
-      #
-      # @!attribute [rw] streaming_distribution_config
-      #   The current configuration information for the RTMP distribution.
-      #   @return [Types::StreamingDistributionConfig]
-      class StreamingDistribution < Struct.new(
-        :id,
-        :arn,
-        :status,
-        :last_modified_time,
-        :domain_name,
-        :active_trusted_signers,
-        :streaming_distribution_config)
-        include Aws::Structure
-      end
-
-      # The RTMP distribution's configuration information.
-      # @note When making an API call, pass StreamingDistributionConfig
-      #   data as a hash:
-      #
-      #       {
-      #         caller_reference: "string", # required
-      #         s3_origin: { # required
-      #           domain_name: "string", # required
-      #           origin_access_identity: "string", # required
-      #         },
-      #         aliases: {
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         comment: "string", # required
-      #         logging: {
-      #           enabled: false, # required
-      #           bucket: "string", # required
-      #           prefix: "string", # required
-      #         },
-      #         trusted_signers: { # required
-      #           enabled: false, # required
-      #           quantity: 1, # required
-      #           items: ["string"],
-      #         },
-      #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #         enabled: false, # required
-      #       }
-      # @!attribute [rw] caller_reference
-      #   A unique number that ensures that the request can't be replayed. If
-      #   the `CallerReference` is new (no matter the content of the
-      #   `StreamingDistributionConfig` object), a new streaming distribution
-      #   is created. If the `CallerReference` is a value that you already
-      #   sent in a previous request to create a streaming distribution, and
-      #   the content of the `StreamingDistributionConfig` is identical to the
-      #   original request (ignoring white space), the response includes the
-      #   same information returned to the original request. If the
-      #   `CallerReference` is a value that you already sent in a previous
-      #   request to create a streaming distribution but the content of the
-      #   `StreamingDistributionConfig` is different from the original
-      #   request, CloudFront returns a `DistributionAlreadyExists` error.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_origin
-      #   A complex type that contains information about the Amazon S3 bucket
-      #   from which you want CloudFront to get your media files for
-      #   distribution.
-      #   @return [Types::S3Origin]
-      #
-      # @!attribute [rw] aliases
-      #   A complex type that contains information about CNAMEs (alternate
-      #   domain names), if any, for this streaming distribution.
-      #   @return [Types::Aliases]
-      #
-      # @!attribute [rw] comment
-      #   Any comments you want to include about the streaming distribution.
-      #   @return [String]
-      #
-      # @!attribute [rw] logging
-      #   A complex type that controls whether access logs are written for the
-      #   streaming distribution.
-      #   @return [Types::StreamingLoggingConfig]
-      #
-      # @!attribute [rw] trusted_signers
-      #   A complex type that specifies any AWS accounts that you want to
-      #   permit to create signed URLs for private content. If you want the
-      #   distribution to use signed URLs, include this element; if you want
-      #   the distribution to use public URLs, remove this element. For more
-      #   information, see [Serving Private Content through CloudFront][1] in
-      #   the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      #   @return [Types::TrustedSigners]
-      #
-      # @!attribute [rw] price_class
-      #   A complex type that contains information about price class for this
-      #   streaming distribution.
-      #   @return [String]
-      #
-      # @!attribute [rw] enabled
-      #   Whether the streaming distribution is enabled to accept user
-      #   requests for content.
-      #   @return [Boolean]
-      class StreamingDistributionConfig < Struct.new(
-        :caller_reference,
-        :s3_origin,
-        :aliases,
-        :comment,
-        :logging,
-        :trusted_signers,
-        :price_class,
-        :enabled)
-        include Aws::Structure
-      end
-
-      # A streaming distribution Configuration and a list of tags to be
-      # associated with the streaming distribution.
-      # @note When making an API call, pass StreamingDistributionConfigWithTags
-      #   data as a hash:
-      #
-      #       {
-      #         streaming_distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           s3_origin: { # required
-      #             domain_name: "string", # required
-      #             origin_access_identity: "string", # required
-      #           },
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           trusted_signers: { # required
-      #             enabled: false, # required
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #         },
-      #         tags: { # required
-      #           items: [
-      #             {
-      #               key: "TagKey", # required
-      #               value: "TagValue",
-      #             },
-      #           ],
-      #         },
-      #       }
-      # @!attribute [rw] streaming_distribution_config
-      #   A streaming distribution Configuration.
-      #   @return [Types::StreamingDistributionConfig]
-      #
-      # @!attribute [rw] tags
-      #   A complex type that contains zero or more `Tag` elements.
-      #   @return [Types::Tags]
-      class StreamingDistributionConfigWithTags < Struct.new(
-        :streaming_distribution_config,
-        :tags)
-        include Aws::Structure
-      end
-
-      # A streaming distribution list.
-      # @!attribute [rw] marker
-      #   The value you provided for the `Marker` request parameter.
-      #   @return [String]
-      #
-      # @!attribute [rw] next_marker
-      #   If `IsTruncated` is `true`, this element is present and contains the
-      #   value you can use for the `Marker` request parameter to continue
-      #   listing your RTMP distributions where they left off.
-      #   @return [String]
-      #
-      # @!attribute [rw] max_items
-      #   The value you provided for the `MaxItems` request parameter.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] is_truncated
-      #   A flag that indicates whether more streaming distributions remain to
-      #   be listed. If your results were truncated, you can make a follow-up
-      #   pagination request using the `Marker` request parameter to retrieve
-      #   more distributions in the list.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   The number of streaming distributions that were created by the
-      #   current AWS account.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   A complex type that contains one `StreamingDistributionSummary`
-      #   element for each distribution that was created by the current AWS
-      #   account.
-      #   @return [Array<Types::StreamingDistributionSummary>]
-      class StreamingDistributionList < Struct.new(
-        :marker,
-        :next_marker,
-        :max_items,
-        :is_truncated,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # A summary of the information for an Amazon CloudFront streaming
-      # distribution.
-      # @!attribute [rw] id
-      #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
-      #   @return [String]
-      #
-      # @!attribute [rw] arn
-      #   The ARN (Amazon Resource Name) for the streaming distribution. For
-      #   example:
-      #   `arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5`,
-      #   where `123456789012` is your AWS account ID.
-      #   @return [String]
-      #
-      # @!attribute [rw] status
-      #   Indicates the current status of the distribution. When the status is
-      #   `Deployed`, the distribution's information is fully propagated
-      #   throughout the Amazon CloudFront system.
-      #   @return [String]
-      #
-      # @!attribute [rw] last_modified_time
-      #   The date and time the distribution was last modified.
-      #   @return [Time]
-      #
-      # @!attribute [rw] domain_name
-      #   The domain name corresponding to the distribution. For example:
-      #   `d604721fxaaqy9.cloudfront.net`.
-      #   @return [String]
-      #
-      # @!attribute [rw] s3_origin
-      #   A complex type that contains information about the Amazon S3 bucket
-      #   from which you want CloudFront to get your media files for
-      #   distribution.
-      #   @return [Types::S3Origin]
-      #
-      # @!attribute [rw] aliases
-      #   A complex type that contains information about CNAMEs (alternate
-      #   domain names), if any, for this streaming distribution.
-      #   @return [Types::Aliases]
-      #
-      # @!attribute [rw] trusted_signers
-      #   A complex type that specifies the AWS accounts, if any, that you
-      #   want to allow to create signed URLs for private content. If you want
-      #   to require signed URLs in requests for objects in the target origin
-      #   that match the `PathPattern` for this cache behavior, specify `true`
-      #   for `Enabled`, and specify the applicable values for `Quantity` and
-      #   `Items`.If you don't want to require signed URLs in requests for
-      #   objects that match `PathPattern`, specify `false` for `Enabled` and
-      #   `0` for `Quantity`. Omit `Items`. To add, change, or remove one or
-      #   more trusted signers, change `Enabled` to `true` (if it's currently
-      #   `false`), change `Quantity` as applicable, and specify all of the
-      #   trusted signers that you want to include in the updated
-      #   distribution.
-      #   @return [Types::TrustedSigners]
-      #
-      # @!attribute [rw] comment
-      #   The comment originally specified when this distribution was created.
-      #   @return [String]
-      #
-      # @!attribute [rw] price_class
-      #   @return [String]
-      #
-      # @!attribute [rw] enabled
-      #   Whether the distribution is enabled to accept end user requests for
-      #   content.
-      #   @return [Boolean]
-      class StreamingDistributionSummary < Struct.new(
-        :id,
-        :arn,
-        :status,
-        :last_modified_time,
-        :domain_name,
-        :s3_origin,
-        :aliases,
-        :trusted_signers,
-        :comment,
-        :price_class,
-        :enabled)
-        include Aws::Structure
-      end
-
-      # A complex type that controls whether access logs are written for this
-      # streaming distribution.
-      # @note When making an API call, pass StreamingLoggingConfig
-      #   data as a hash:
-      #
-      #       {
-      #         enabled: false, # required
-      #         bucket: "string", # required
-      #         prefix: "string", # required
-      #       }
-      # @!attribute [rw] enabled
-      #   Specifies whether you want CloudFront to save access logs to an
-      #   Amazon S3 bucket. If you do not want to enable logging when you
-      #   create a streaming distribution or if you want to disable logging
-      #   for an existing streaming distribution, specify `false` for
-      #   `Enabled`, and specify `empty Bucket` and `Prefix` elements. If you
-      #   specify `false` for `Enabled` but you specify values for `Bucket`
-      #   and `Prefix`, the values are automatically deleted.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] bucket
-      #   The Amazon S3 bucket to store the access logs in, for example,
-      #   `myawslogbucket.s3.amazonaws.com`.
-      #   @return [String]
-      #
-      # @!attribute [rw] prefix
-      #   An optional string that you want CloudFront to prefix to the access
-      #   log `filenames` for this streaming distribution, for example,
-      #   `myprefix/`. If you want to enable logging, but you do not want to
-      #   specify a prefix, you still must include an empty `Prefix` element
-      #   in the `Logging` element.
-      #   @return [String]
-      class StreamingLoggingConfig < Struct.new(
-        :enabled,
-        :bucket,
-        :prefix)
-        include Aws::Structure
-      end
-
-      # A complex type that contains `Tag` key and `Tag` value.
-      # @note When making an API call, pass Tag
-      #   data as a hash:
-      #
-      #       {
-      #         key: "TagKey", # required
-      #         value: "TagValue",
-      #       }
-      # @!attribute [rw] key
-      #   A string that contains `Tag` key.
-      #
-      #   The string length should be between 1 and 128 characters. Valid
-      #   characters include `a-z`, `A-Z`, `0-9`, space, and the special
-      #   characters `_ - . : / = + @`.
-      #   @return [String]
-      #
-      # @!attribute [rw] value
-      #   A string that contains an optional `Tag` value.
-      #
-      #   The string length should be between 0 and 256 characters. Valid
-      #   characters include `a-z`, `A-Z`, `0-9`, space, and the special
-      #   characters `_ - . : / = + @`.
-      #   @return [String]
-      class Tag < Struct.new(
-        :key,
-        :value)
-        include Aws::Structure
-      end
-
-      # A complex type that contains zero or more `Tag` elements.
-      # @note When making an API call, pass TagKeys
-      #   data as a hash:
-      #
-      #       {
-      #         items: ["TagKey"],
-      #       }
-      # @!attribute [rw] items
-      #   A complex type that contains `Tag` key elements.
-      #   @return [Array<String>]
-      class TagKeys < Struct.new(
-        :items)
-        include Aws::Structure
-      end
-
-      # The request to add tags to a CloudFront resource.
-      # @note When making an API call, pass TagResourceRequest
-      #   data as a hash:
-      #
-      #       {
-      #         resource: "ResourceARN", # required
-      #         tags: { # required
-      #           items: [
-      #             {
-      #               key: "TagKey", # required
-      #               value: "TagValue",
-      #             },
-      #           ],
-      #         },
-      #       }
-      # @!attribute [rw] resource
-      #   An ARN of a CloudFront resource.
-      #   @return [String]
-      #
-      # @!attribute [rw] tags
-      #   A complex type that contains zero or more `Tag` elements.
-      #   @return [Types::Tags]
-      class TagResourceRequest < Struct.new(
-        :resource,
-        :tags)
-        include Aws::Structure
-      end
-
-      # A complex type that contains zero or more `Tag` elements.
-      # @note When making an API call, pass Tags
-      #   data as a hash:
-      #
-      #       {
-      #         items: [
-      #           {
-      #             key: "TagKey", # required
-      #             value: "TagValue",
-      #           },
-      #         ],
-      #       }
-      # @!attribute [rw] items
-      #   A complex type that contains `Tag` elements.
-      #   @return [Array<Types::Tag>]
-      class Tags < Struct.new(
-        :items)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies the AWS accounts, if any, that you want
-      # to allow to create signed URLs for private content.
-      #
-      # If you want to require signed URLs in requests for objects in the
-      # target origin that match the `PathPattern` for this cache behavior,
-      # specify `true` for `Enabled`, and specify the applicable values for
-      # `Quantity` and `Items`. For more information, see [Serving Private
-      # Content through CloudFront][1] in the *Amazon Amazon CloudFront
-      # Developer Guide*.
-      #
-      # If you don't want to require signed URLs in requests for objects that
-      # match `PathPattern`, specify `false` for `Enabled` and `0` for
-      # `Quantity`. Omit `Items`.
-      #
-      # To add, change, or remove one or more trusted signers, change
-      # `Enabled` to `true` (if it's currently `false`), change `Quantity` as
-      # applicable, and specify all of the trusted signers that you want to
-      # include in the updated distribution.
-      #
-      # For more information about updating the distribution configuration,
-      # see DistributionConfig .
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
-      # @note When making an API call, pass TrustedSigners
-      #   data as a hash:
-      #
-      #       {
-      #         enabled: false, # required
-      #         quantity: 1, # required
-      #         items: ["string"],
-      #       }
-      # @!attribute [rw] enabled
-      #   Specifies whether you want to require viewers to use signed URLs to
-      #   access the files specified by `PathPattern` and `TargetOriginId`.
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] quantity
-      #   The number of trusted signers for this cache behavior.
-      #   @return [Integer]
-      #
-      # @!attribute [rw] items
-      #   **Optional**\: A complex type that contains trusted signers for this
-      #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
-      #   @return [Array<String>]
-      class TrustedSigners < Struct.new(
-        :enabled,
-        :quantity,
-        :items)
-        include Aws::Structure
-      end
-
-      # The request to remove tags from a CloudFront resource.
-      # @note When making an API call, pass UntagResourceRequest
-      #   data as a hash:
-      #
-      #       {
-      #         resource: "ResourceARN", # required
-      #         tag_keys: { # required
-      #           items: ["TagKey"],
-      #         },
-      #       }
-      # @!attribute [rw] resource
-      #   An ARN of a CloudFront resource.
-      #   @return [String]
-      #
-      # @!attribute [rw] tag_keys
-      #   A complex type that contains zero or more `Tag` key elements.
-      #   @return [Types::TagKeys]
-      class UntagResourceRequest < Struct.new(
-        :resource,
-        :tag_keys)
-        include Aws::Structure
-      end
-
-      # The request to update an origin access identity.
-      # @note When making an API call, pass UpdateCloudFrontOriginAccessIdentityRequest
-      #   data as a hash:
-      #
-      #       {
-      #         cloud_front_origin_access_identity_config: { # required
-      #           caller_reference: "string", # required
-      #           comment: "string", # required
-      #         },
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] cloud_front_origin_access_identity_config
-      #   The identity's configuration information.
-      #   @return [Types::CloudFrontOriginAccessIdentityConfig]
-      #
-      # @!attribute [rw] id
-      #   The identity's id.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header that you received when retrieving the
-      #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
-        :cloud_front_origin_access_identity_config,
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] cloud_front_origin_access_identity
-      #   The origin access identity's information.
-      #   @return [Types::CloudFrontOriginAccessIdentity]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
-        :cloud_front_origin_access_identity,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to update a distribution.
-      # @note When making an API call, pass UpdateDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           default_root_object: "string",
-      #           origins: { # required
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 id: "string", # required
-      #                 domain_name: "string", # required
-      #                 origin_path: "string",
-      #                 custom_headers: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       header_name: "string", # required
-      #                       header_value: "string", # required
-      #                     },
-      #                   ],
-      #                 },
-      #                 s3_origin_config: {
-      #                   origin_access_identity: "string", # required
-      #                 },
-      #                 custom_origin_config: {
-      #                   http_port: 1, # required
-      #                   https_port: 1, # required
-      #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
-      #                   origin_ssl_protocols: {
-      #                     quantity: 1, # required
-      #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
-      #                   },
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           default_cache_behavior: { # required
-      #             target_origin_id: "string", # required
-      #             forwarded_values: { # required
-      #               query_string: false, # required
-      #               cookies: { # required
-      #                 forward: "none", # required, accepts none, whitelist, all
-      #                 whitelisted_names: {
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #               },
-      #               headers: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #               query_string_cache_keys: {
-      #                 quantity: 1, # required
-      #                 items: ["string"],
-      #               },
-      #             },
-      #             trusted_signers: { # required
-      #               enabled: false, # required
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #             min_ttl: 1, # required
-      #             allowed_methods: {
-      #               quantity: 1, # required
-      #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               cached_methods: {
-      #                 quantity: 1, # required
-      #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #               },
-      #             },
-      #             smooth_streaming: false,
-      #             default_ttl: 1,
-      #             max_ttl: 1,
-      #             compress: false,
-      #             lambda_function_associations: {
-      #               quantity: 1, # required
-      #               items: [
-      #                 {
-      #                   lambda_function_arn: "string",
-      #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                 },
-      #               ],
-      #             },
-      #           },
-      #           cache_behaviors: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 path_pattern: "string", # required
-      #                 target_origin_id: "string", # required
-      #                 forwarded_values: { # required
-      #                   query_string: false, # required
-      #                   cookies: { # required
-      #                     forward: "none", # required, accepts none, whitelist, all
-      #                     whitelisted_names: {
-      #                       quantity: 1, # required
-      #                       items: ["string"],
-      #                     },
-      #                   },
-      #                   headers: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                   query_string_cache_keys: {
-      #                     quantity: 1, # required
-      #                     items: ["string"],
-      #                   },
-      #                 },
-      #                 trusted_signers: { # required
-      #                   enabled: false, # required
-      #                   quantity: 1, # required
-      #                   items: ["string"],
-      #                 },
-      #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
-      #                 min_ttl: 1, # required
-      #                 allowed_methods: {
-      #                   quantity: 1, # required
-      #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   cached_methods: {
-      #                     quantity: 1, # required
-      #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
-      #                   },
-      #                 },
-      #                 smooth_streaming: false,
-      #                 default_ttl: 1,
-      #                 max_ttl: 1,
-      #                 compress: false,
-      #                 lambda_function_associations: {
-      #                   quantity: 1, # required
-      #                   items: [
-      #                     {
-      #                       lambda_function_arn: "string",
-      #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
-      #                     },
-      #                   ],
-      #                 },
-      #               },
-      #             ],
-      #           },
-      #           custom_error_responses: {
-      #             quantity: 1, # required
-      #             items: [
-      #               {
-      #                 error_code: 1, # required
-      #                 response_page_path: "string",
-      #                 response_code: "string",
-      #                 error_caching_min_ttl: 1,
-      #               },
-      #             ],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             include_cookies: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #           viewer_certificate: {
-      #             cloud_front_default_certificate: false,
-      #             iam_certificate_id: "string",
-      #             acm_certificate_arn: "string",
-      #             ssl_support_method: "sni-only", # accepts sni-only, vip
-      #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #             certificate: "string",
-      #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #           },
-      #           restrictions: {
-      #             geo_restriction: { # required
-      #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
-      #               quantity: 1, # required
-      #               items: ["string"],
-      #             },
-      #           },
-      #           web_acl_id: "string",
-      #           http_version: "http1.1", # accepts http1.1, http2
-      #           is_ipv6_enabled: false,
-      #         },
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] distribution_config
-      #   The distribution's configuration information.
-      #   @return [Types::DistributionConfig]
-      #
-      # @!attribute [rw] id
-      #   The distribution's id.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header that you received when retrieving the
-      #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateDistributionRequest < Struct.new(
-        :distribution_config,
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] distribution
-      #   The distribution's information.
-      #   @return [Types::Distribution]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateDistributionResult < Struct.new(
-        :distribution,
-        :etag)
-        include Aws::Structure
-      end
-
-      # The request to update a streaming distribution.
-      # @note When making an API call, pass UpdateStreamingDistributionRequest
-      #   data as a hash:
-      #
-      #       {
-      #         streaming_distribution_config: { # required
-      #           caller_reference: "string", # required
-      #           s3_origin: { # required
-      #             domain_name: "string", # required
-      #             origin_access_identity: "string", # required
-      #           },
-      #           aliases: {
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           comment: "string", # required
-      #           logging: {
-      #             enabled: false, # required
-      #             bucket: "string", # required
-      #             prefix: "string", # required
-      #           },
-      #           trusted_signers: { # required
-      #             enabled: false, # required
-      #             quantity: 1, # required
-      #             items: ["string"],
-      #           },
-      #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
-      #           enabled: false, # required
-      #         },
-      #         id: "string", # required
-      #         if_match: "string",
-      #       }
-      # @!attribute [rw] streaming_distribution_config
-      #   The streaming distribution's configuration information.
-      #   @return [Types::StreamingDistributionConfig]
-      #
-      # @!attribute [rw] id
-      #   The streaming distribution's id.
-      #   @return [String]
-      #
-      # @!attribute [rw] if_match
-      #   The value of the `ETag` header that you received when retrieving the
-      #   streaming distribution's configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateStreamingDistributionRequest < Struct.new(
-        :streaming_distribution_config,
-        :id,
-        :if_match)
-        include Aws::Structure
-      end
-
-      # The returned result of the corresponding request.
-      # @!attribute [rw] streaming_distribution
-      #   The streaming distribution's information.
-      #   @return [Types::StreamingDistribution]
-      #
-      # @!attribute [rw] etag
-      #   The current version of the configuration. For example:
-      #   `E2QWRUHAPOMQZL`.
-      #   @return [String]
-      class UpdateStreamingDistributionResult < Struct.new(
-        :streaming_distribution,
-        :etag)
-        include Aws::Structure
-      end
-
-      # A complex type that specifies the following:
-      #
-      # * Which SSL/TLS certificate to use when viewers request objects using
-      #   HTTPS
-      #
-      # * Whether you want CloudFront to use dedicated IP addresses or SNI
-      #   when you're using alternate domain names in your object names
-      #
-      # * The minimum protocol version that you want CloudFront to use when
-      #   communicating with viewers
-      #
-      # For more information, see [Using an HTTPS Connection to Access Your
-      # Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
-      # @note When making an API call, pass ViewerCertificate
-      #   data as a hash:
-      #
-      #       {
-      #         cloud_front_default_certificate: false,
-      #         iam_certificate_id: "string",
-      #         acm_certificate_arn: "string",
-      #         ssl_support_method: "sni-only", # accepts sni-only, vip
-      #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
-      #         certificate: "string",
-      #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
-      #       }
-      # @!attribute [rw] cloud_front_default_certificate
-      #   @return [Boolean]
-      #
-      # @!attribute [rw] iam_certificate_id
-      #   @return [String]
-      #
-      # @!attribute [rw] acm_certificate_arn
-      #   @return [String]
-      #
-      # @!attribute [rw] ssl_support_method
-      #   If you specify a value for `ACMCertificateArn` or for
-      #   `IAMCertificateId`, you must also specify how you want CloudFront to
-      #   serve HTTPS requests: using a method that works for all clients or
-      #   one that works for most clients:
-      #
-      #   * `vip`\: CloudFront uses dedicated IP addresses for your content
-      #     and can respond to HTTPS requests from any viewer. However, you
-      #     must request permission to use this feature, and you incur
-      #     additional monthly charges.
-      #
-      #   * `sni-only`\: CloudFront can respond to HTTPS requests from viewers
-      #     that support Server Name Indication (SNI). All modern browsers
-      #     support SNI, but some browsers still in use don't support SNI. If
-      #     some of your users' browsers don't support SNI, we recommend
-      #     that you do one of the following:
-      #
-      #     * Use the `vip` option (dedicated IP addresses) instead of
-      #       `sni-only`.
-      #
-      #     * Use the CloudFront SSL/TLS certificate instead of a custom
-      #       certificate. This requires that you use the CloudFront domain
-      #       name of your distribution in the URLs for your objects, for
-      #       example, `https://d111111abcdef8.cloudfront.net/logo.png`.
-      #
-      #     * If you can control which browser your users use, upgrade the
-      #       browser to one that supports SNI.
-      #
-      #     * Use HTTP instead of HTTPS.
-      #
-      #   Do not specify a value for `SSLSupportMethod` if you specified
-      #   `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>`.
-      #
-      #   For more information, see [Using Alternate Domain Names and
-      #   HTTPS][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html
-      #   @return [String]
-      #
-      # @!attribute [rw] minimum_protocol_version
-      #   Specify the minimum version of the SSL/TLS protocol that you want
-      #   CloudFront to use for HTTPS connections between viewers and
-      #   CloudFront: `SSLv3` or `TLSv1`. CloudFront serves your objects only
-      #   to viewers that support SSL/TLS version that you specify and later
-      #   versions. The `TLSv1` protocol is more secure, so we recommend that
-      #   you specify `SSLv3` only if your users are using browsers or devices
-      #   that don't support `TLSv1`. Note the following:
-      #
-      #   * If you specify
-      #     &lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;,
-      #     the minimum SSL protocol version is `TLSv1` and can't be changed.
-      #
-      #   * If you're using a custom certificate (if you specify a value for
-      #     `ACMCertificateArn` or for `IAMCertificateId`) and if you're
-      #     using SNI (if you specify `sni-only` for `SSLSupportMethod`), you
-      #     must specify `TLSv1` for `MinimumProtocolVersion`.
-      #   @return [String]
-      #
-      # @!attribute [rw] certificate
-      #   Include one of these values to specify the following:
-      #
-      #   * Whether you want viewers to use HTTP or HTTPS to request your
-      #     objects.
-      #
-      #   * If you want viewers to use HTTPS, whether you're using an
-      #     alternate domain name such as example.com or the CloudFront domain
-      #     name for your distribution, such as
-      #     `d111111abcdef8.cloudfront.net`.
-      #
-      #   * If you're using an alternate domain name, whether AWS Certificate
-      #     Manager (ACM) provided the certificate, or you purchased a
-      #     certificate from a third-party certificate authority and imported
-      #     it into ACM or uploaded it to the IAM certificate store.
-      #
-      #   You must specify one (and only one) of the three values. Do not
-      #   specify `false` for `CloudFrontDefaultCertificate`.
-      #
-      #   **If you want viewers to use HTTP to request your objects**\:
-      #   Specify the following value:
-      #
-      #   `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>`
-      #
-      #   In addition, specify `allow-all` for `ViewerProtocolPolicy` for all
-      #   of your cache behaviors.
-      #
-      #   **If you want viewers to use HTTPS to request your objects**\:
-      #   Choose the type of certificate that you want to use based on whether
-      #   you're using an alternate domain name for your objects or the
-      #   CloudFront domain name:
-      #
-      #   * **If you're using an alternate domain name, such as
-      #     example.com**\: Specify one of the following values, depending on
-      #     whether ACM provided your certificate or you purchased your
-      #     certificate from third-party certificate authority:
-      #
-      #     * `<ACMCertificateArn>ARN for ACM SSL/TLS
-      #       certificate<ACMCertificateArn>` where ARN for ACM SSL/TLS
-      #       certificate is the ARN for the ACM SSL/TLS certificate that you
-      #       want to use for this distribution.
-      #
-      #     * `<IAMCertificateId>IAM certificate ID<IAMCertificateId>` where
-      #       IAM certificate ID is the ID that IAM returned when you added
-      #       the certificate to the IAM certificate store.
-      #
-      #     If you specify `ACMCertificateArn` or `IAMCertificateId`, you must
-      #     also specify a value for `SSLSupportMethod`.
-      #
-      #     If you choose to use an ACM certificate or a certificate in the
-      #     IAM certificate store, we recommend that you use only an alternate
-      #     domain name in your object URLs (`https://example.com/logo.jpg`).
-      #     If you use the domain name that is associated with your CloudFront
-      #     distribution (`https://d111111abcdef8.cloudfront.net/logo.jpg`)
-      #     and the viewer supports `SNI`, then CloudFront behaves normally.
-      #     However, if the browser does not support SNI, the user's
-      #     experience depends on the value that you choose for
-      #     `SSLSupportMethod`\:
-      #
-      #     * `vip`\: The viewer displays a warning because there is a
-      #       mismatch between the CloudFront domain name and the domain name
-      #       in your SSL/TLS certificate.
-      #
-      #     * `sni-only`\: CloudFront drops the connection with the browser
-      #       without returning the object.
-      #
-      #   * <b>If you're using the CloudFront domain name for your
-      #     distribution, such as <code>d111111abcdef8.cloudfront.net</code>
-      #     </b>\: Specify the following value:
-      #
-      #     ` <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
-      #     `
-      #
-      #     If you want viewers to use HTTPS, you must also specify one of the
-      #     following values in your cache behaviors:
-      #
-      #     * ` <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy> `
-      #
-      #     * ` <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
-      #       `
-      #
-      #     You can also optionally require that CloudFront use HTTPS to
-      #     communicate with your origin by specifying one of the following
-      #     values for the applicable origins:
-      #
-      #     * ` <OriginProtocolPolicy>https-only<OriginProtocolPolicy> `
-      #
-      #     * ` <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy> `
-      #
-      #     For more information, see [Using Alternate Domain Names and
-      #     HTTPS][1] in the *Amazon CloudFront Developer Guide*.
-      #
-      #
-      #
-      #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS
-      #   @return [String]
-      #
-      # @!attribute [rw] certificate_source
-      #   <note markdown="1"> This field is deprecated. You can use one of the following:
-      #   `[ACMCertificateArn`, `IAMCertificateId`, or
-      #   `CloudFrontDefaultCertificate]`.
-      #
-      #    </note>
-      #   @return [String]
-      class ViewerCertificate < Struct.new(
-        :cloud_front_default_certificate,
-        :iam_certificate_id,
-        :acm_certificate_arn,
-        :ssl_support_method,
-        :minimum_protocol_version,
-        :certificate,
-        :certificate_source)
-        include Aws::Structure
-      end
-
+module Aws::CloudFront
+  module Types
+
+    # A complex type that lists the AWS accounts, if any, that you included
+    # in the `TrustedSigners` complex type for this distribution. These are
+    # the accounts that you want to allow to create signed URLs for private
+    # content.
+    #
+    # The `Signer` complex type lists the AWS account number of the trusted
+    # signer or `self` if the signer is the AWS account that created the
+    # distribution. The `Signer` element also includes the IDs of any active
+    # CloudFront key pairs that are associated with the trusted signer's
+    # AWS account. If no `KeyPairId` element appears for a `Signer`, that
+    # signer can't create signed URLs.
+    #
+    # For more information, see [Serving Private Content through
+    # CloudFront][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #
+    # @!attribute [rw] enabled
+    #   Enabled is `true` if any of the AWS accounts listed in the
+    #   `TrustedSigners` complex type for this RTMP distribution have active
+    #   CloudFront key pairs. If not, `Enabled` is `false`.
+    #
+    #   For more information, see ActiveTrustedSigners.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   A complex type that contains one `Signer` complex type for each
+    #   trusted signer specified in the `TrustedSigners` complex type.
+    #
+    #   For more information, see ActiveTrustedSigners.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `Signer` complex type for each
+    #   trusted signer that is specified in the `TrustedSigners` complex
+    #   type.
+    #
+    #   For more information, see ActiveTrustedSigners.
+    #   @return [Array<Types::Signer>]
+    #
+    class ActiveTrustedSigners < Struct.new(
+      :enabled,
+      :quantity,
+      :items)
+      include Aws::Structure
     end
+
+    # A complex type that contains information about CNAMEs (alternate
+    # domain names), if any, for this distribution.
+    #
+    # @note When making an API call, you may pass Aliases
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of CNAME aliases, if any, that you want to associate with
+    #   this distribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains the CNAME aliases, if any, that you
+    #   want to associate with this distribution.
+    #   @return [Array<String>]
+    #
+    class Aliases < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that controls which HTTP methods CloudFront processes
+    # and forwards to your Amazon S3 bucket or your custom origin. There are
+    # three choices:
+    #
+    # * CloudFront forwards only `GET` and `HEAD` requests.
+    #
+    # * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
+    #
+    # * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
+    #   `DELETE` requests.
+    #
+    # If you pick the third choice, you may need to restrict access to your
+    # Amazon S3 bucket or to your custom origin so users can't perform
+    # operations that you don't want them to. For example, you might not
+    # want users to have permissions to delete objects from your origin.
+    #
+    # @note When making an API call, you may pass AllowedMethods
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #         cached_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #         },
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of HTTP methods that you want CloudFront to forward to
+    #   your origin. Valid values are 2 (for `GET` and `HEAD` requests), 3
+    #   (for `GET`, `HEAD`, and `OPTIONS` requests) and 7 (for `GET, HEAD,
+    #   OPTIONS, PUT, PATCH, POST`, and `DELETE` requests).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains the HTTP methods that you want
+    #   CloudFront to process and forward to your origin.
+    #   @return [Array<String>]
+    #
+    # @!attribute [rw] cached_methods
+    #   A complex type that controls whether CloudFront caches the response
+    #   to requests using the specified HTTP methods. There are two choices:
+    #
+    #   * CloudFront caches responses to `GET` and `HEAD` requests.
+    #
+    #   * CloudFront caches responses to `GET`, `HEAD`, and `OPTIONS`
+    #     requests.
+    #
+    #   If you pick the second choice for your Amazon S3 Origin, you may
+    #   need to forward Access-Control-Request-Method,
+    #   Access-Control-Request-Headers, and Origin headers for the responses
+    #   to be cached correctly.
+    #   @return [Types::CachedMethods]
+    #
+    class AllowedMethods < Struct.new(
+      :quantity,
+      :items,
+      :cached_methods)
+      include Aws::Structure
+    end
+
+    # A complex type that describes how CloudFront processes requests.
+    #
+    # You must create at least as many cache behaviors (including the
+    # default cache behavior) as you have origins if you want CloudFront to
+    # distribute objects from all of the origins. Each cache behavior
+    # specifies the one origin from which you want CloudFront to get
+    # objects. If you have two origins and only the default cache behavior,
+    # the default cache behavior will cause CloudFront to get objects from
+    # one of the origins, but the other origin is never used.
+    #
+    # For the current limit on the number of cache behaviors that you can
+    # add to a distribution, see [Amazon CloudFront Limits][1] in the *AWS
+    # General Reference*.
+    #
+    # If you don't want to specify any cache behaviors, include only an
+    # empty `CacheBehaviors` element. Don't include an empty
+    # `CacheBehavior` element, or CloudFront returns a `MalformedXML` error.
+    #
+    # To delete all cache behaviors in an existing distribution, update the
+    # distribution configuration and include only an empty `CacheBehaviors`
+    # element.
+    #
+    # To add, change, or remove one or more cache behaviors, update the
+    # distribution configuration and specify all of the cache behaviors that
+    # you want to include in the updated distribution.
+    #
+    # For more information about cache behaviors, see [Cache Behaviors][2]
+    # in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
+    # [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
+    #
+    # @note When making an API call, you may pass CacheBehavior
+    #   data as a hash:
+    #
+    #       {
+    #         path_pattern: "string", # required
+    #         target_origin_id: "string", # required
+    #         forwarded_values: { # required
+    #           query_string: false, # required
+    #           cookies: { # required
+    #             forward: "none", # required, accepts none, whitelist, all
+    #             whitelisted_names: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           query_string_cache_keys: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         min_ttl: 1, # required
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         default_ttl: 1,
+    #         max_ttl: 1,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "string",
+    #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] path_pattern
+    #   The pattern (for example, `images/*.jpg`) that specifies which
+    #   requests to apply the behavior to. When CloudFront receives a viewer
+    #   request, the requested path is compared with path patterns in the
+    #   order in which cache behaviors are listed in the distribution.
+    #
+    #   <note markdown="1"> You can optionally include a slash (`/`) at the beginning of the
+    #   path pattern. For example, `/images/*.jpg`. CloudFront behavior is
+    #   the same with or without the leading `/`.
+    #
+    #    </note>
+    #
+    #   The path pattern for the default cache behavior is `*` and cannot be
+    #   changed. If the request for an object does not match the path
+    #   pattern for any cache behaviors, CloudFront applies the behavior in
+    #   the default cache behavior.
+    #
+    #   For more information, see [Path Pattern][1] in the <i> Amazon
+    #   CloudFront Developer Guide</i>.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesPathPattern
+    #   @return [String]
+    #
+    # @!attribute [rw] target_origin_id
+    #   The value of `ID` for the origin that you want CloudFront to route
+    #   requests to when a request matches the path pattern either for a
+    #   cache behavior or for the default cache behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarded_values
+    #   A complex type that specifies how CloudFront handles query strings
+    #   and cookies.
+    #   @return [Types::ForwardedValues]
+    #
+    # @!attribute [rw] trusted_signers
+    #   A complex type that specifies the AWS accounts, if any, that you
+    #   want to allow to create signed URLs for private content.
+    #
+    #   If you want to require signed URLs in requests for objects in the
+    #   target origin that match the `PathPattern` for this cache behavior,
+    #   specify `true` for `Enabled`, and specify the applicable values for
+    #   `Quantity` and `Items`. For more information, see [Serving Private
+    #   Content through CloudFront][1] in the *Amazon Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #   If you don't want to require signed URLs in requests for objects
+    #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
+    #   `Quantity`. Omit `Items`.
+    #
+    #   To add, change, or remove one or more trusted signers, change
+    #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
+    #   as applicable, and specify all of the trusted signers that you want
+    #   to include in the updated distribution.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] viewer_protocol_policy
+    #   The protocol that viewers can use to access the files in the origin
+    #   specified by `TargetOriginId` when a request matches the path
+    #   pattern in `PathPattern`. You can specify the following options:
+    #
+    #   * `allow-all`\: Viewers can use HTTP or HTTPS.
+    #
+    #   * `redirect-to-https`\: If a viewer submits an HTTP request,
+    #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
+    #     to the viewer along with the HTTPS URL. The viewer then resubmits
+    #     the request using the new URL.
+    #
+    #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
+    #     returns an HTTP status code of 403 (Forbidden).
+    #
+    #   For more information about requiring the HTTPS protocol, see [Using
+    #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
+    #   fetched from the origin using HTTPS is never to use any other
+    #   protocol to fetch the object. If you have recently changed from HTTP
+    #   to HTTPS, we recommend that you clear your objects' cache because
+    #   cached objects are protocol agnostic. That means that an edge
+    #   location will return an object from the cache regardless of whether
+    #   the current request protocol matches the protocol used previously.
+    #   For more information, see [Specifying How Long Objects and Errors
+    #   Stay in a CloudFront Edge Cache (Expiration)][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] min_ttl
+    #   The minimum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. For more
+    #   information, see [Specifying How Long Objects and Errors Stay in a
+    #   CloudFront Edge Cache (Expiration)][1] in the *Amazon Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #   forward all headers to your origin (under `Headers`, if you specify
+    #   `1` for `Quantity` and `*` for `Name`).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_methods
+    #   A complex type that controls which HTTP methods CloudFront processes
+    #   and forwards to your Amazon S3 bucket or your custom origin. There
+    #   are three choices:
+    #
+    #   * CloudFront forwards only `GET` and `HEAD` requests.
+    #
+    #   * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
+    #
+    #   * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
+    #     `DELETE` requests.
+    #
+    #   If you pick the third choice, you may need to restrict access to
+    #   your Amazon S3 bucket or to your custom origin so users can't
+    #   perform operations that you don't want them to. For example, you
+    #   might not want users to have permissions to delete objects from your
+    #   origin.
+    #   @return [Types::AllowedMethods]
+    #
+    # @!attribute [rw] smooth_streaming
+    #   Indicates whether you want to distribute media files in the
+    #   Microsoft Smooth Streaming format using the origin that is
+    #   associated with this cache behavior. If so, specify `true`; if not,
+    #   specify `false`. If you specify `true` for `SmoothStreaming`, you
+    #   can still distribute other content using this cache behavior if the
+    #   content matches the value of `PathPattern`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_ttl
+    #   The default amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin does not add HTTP
+    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
+    #   and `Expires` to objects. For more information, see [Specifying How
+    #   Long Objects and Errors Stay in a CloudFront Edge Cache
+    #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_ttl
+    #   The maximum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin adds HTTP headers
+    #   such as `Cache-Control max-age`, `Cache-Control s-maxage`, and
+    #   `Expires` to objects. For more information, see [Specifying How Long
+    #   Objects and Errors Stay in a CloudFront Edge Cache (Expiration)][1]
+    #   in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compress
+    #   Whether you want CloudFront to automatically compress certain files
+    #   for this cache behavior. If so, specify true; if not, specify false.
+    #   For more information, see [Serving Compressed Files][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_associations
+    #   A complex type that contains zero or more Lambda function
+    #   associations for a cache behavior.
+    #   @return [Types::LambdaFunctionAssociations]
+    #
+    class CacheBehavior < Struct.new(
+      :path_pattern,
+      :target_origin_id,
+      :forwarded_values,
+      :trusted_signers,
+      :viewer_protocol_policy,
+      :min_ttl,
+      :allowed_methods,
+      :smooth_streaming,
+      :default_ttl,
+      :max_ttl,
+      :compress,
+      :lambda_function_associations)
+      include Aws::Structure
+    end
+
+    # A complex type that contains zero or more `CacheBehavior` elements.
+    #
+    # @note When making an API call, you may pass CacheBehaviors
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             path_pattern: "string", # required
+    #             target_origin_id: "string", # required
+    #             forwarded_values: { # required
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none", # required, accepts none, whitelist, all
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             min_ttl: 1, # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             default_ttl: 1,
+    #             max_ttl: 1,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "string",
+    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of cache behaviors for this distribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   Optional: A complex type that contains cache behaviors for this
+    #   distribution. If `Quantity` is `0`, you can omit `Items`.
+    #   @return [Array<Types::CacheBehavior>]
+    #
+    class CacheBehaviors < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that controls whether CloudFront caches the response to
+    # requests using the specified HTTP methods. There are two choices:
+    #
+    # * CloudFront caches responses to `GET` and `HEAD` requests.
+    #
+    # * CloudFront caches responses to `GET`, `HEAD`, and `OPTIONS`
+    #   requests.
+    #
+    # If you pick the second choice for your Amazon S3 Origin, you may need
+    # to forward Access-Control-Request-Method,
+    # Access-Control-Request-Headers, and Origin headers for the responses
+    # to be cached correctly.
+    #
+    # @note When making an API call, you may pass CachedMethods
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of HTTP methods for which you want CloudFront to cache
+    #   responses. Valid values are `2` (for caching responses to `GET` and
+    #   `HEAD` requests) and `3` (for caching responses to `GET`, `HEAD`,
+    #   and `OPTIONS` requests).
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains the HTTP methods that you want
+    #   CloudFront to cache responses to.
+    #   @return [Array<String>]
+    #
+    class CachedMethods < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # CloudFront origin access identity.
+    #
+    # @!attribute [rw] id
+    #   The ID for the origin access identity. For example:
+    #   `E74FTE3AJFJ256A`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_canonical_user_id
+    #   The Amazon S3 canonical user ID for the origin access identity, used
+    #   when giving the origin access identity read permission to an object
+    #   in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity_config
+    #   The current configuration information for the identity.
+    #   @return [Types::CloudFrontOriginAccessIdentityConfig]
+    #
+    class CloudFrontOriginAccessIdentity < Struct.new(
+      :id,
+      :s3_canonical_user_id,
+      :cloud_front_origin_access_identity_config)
+      include Aws::Structure
+    end
+
+    # Origin access identity configuration. Send a `GET` request to the
+    # `/CloudFront API version/CloudFront/identity ID/config` resource.
+    #
+    # @note When making an API call, you may pass CloudFrontOriginAccessIdentityConfig
+    #   data as a hash:
+    #
+    #       {
+    #         caller_reference: "string", # required
+    #         comment: "string", # required
+    #       }
+    #
+    # @!attribute [rw] caller_reference
+    #   A unique number that ensures the request can't be replayed.
+    #
+    #   If the `CallerReference` is new (no matter the content of the
+    #   `CloudFrontOriginAccessIdentityConfig` object), a new origin access
+    #   identity is created.
+    #
+    #   If the `CallerReference` is a value already sent in a previous
+    #   identity request, and the content of the
+    #   `CloudFrontOriginAccessIdentityConfig` is identical to the original
+    #   request (ignoring white space), the response includes the same
+    #   information returned to the original request.
+    #
+    #   If the `CallerReference` is a value you already sent in a previous
+    #   request to create an identity, but the content of the
+    #   `CloudFrontOriginAccessIdentityConfig` is different from the
+    #   original request, CloudFront returns a
+    #   `CloudFrontOriginAccessIdentityAlreadyExists` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   Any comments you want to include about the origin access identity.
+    #   @return [String]
+    #
+    class CloudFrontOriginAccessIdentityConfig < Struct.new(
+      :caller_reference,
+      :comment)
+      include Aws::Structure
+    end
+
+    # Lists the origin access identities for CloudFront.Send a `GET` request
+    # to the `/CloudFront API version/origin-access-identity/cloudfront`
+    # resource. The response includes a `CloudFrontOriginAccessIdentityList`
+    # element with zero or more `CloudFrontOriginAccessIdentitySummary`
+    # child elements. By default, your entire list of origin access
+    # identities is returned in one single page. If the list is long, you
+    # can paginate it using the `MaxItems` and `Marker` parameters.
+    #
+    # @!attribute [rw] marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of origin access identities. The results include identities in
+    #   the list that occur after the marker. To get the next page of
+    #   results, set the `Marker` to the value of the `NextMarker` from the
+    #   current page's response (which is also the ID of the last identity
+    #   on that page).
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If `IsTruncated` is `true`, this element is present and contains the
+    #   value you can use for the `Marker` request parameter to continue
+    #   listing your origin access identities where they left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin access identities you want in the
+    #   response body.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether more origin access identities remain
+    #   to be listed. If your results were truncated, you can make a
+    #   follow-up pagination request using the `Marker` request parameter to
+    #   retrieve more items in the list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of CloudFront origin access identities that were created
+    #   by the current AWS account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one
+    #   `CloudFrontOriginAccessIdentitySummary` element for each origin
+    #   access identity that was created by the current AWS account.
+    #   @return [Array<Types::CloudFrontOriginAccessIdentitySummary>]
+    #
+    class CloudFrontOriginAccessIdentityList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # Summary of the information about a CloudFront origin access identity.
+    #
+    # @!attribute [rw] id
+    #   The ID for the origin access identity. For example:
+    #   `E74FTE3AJFJ256A`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_canonical_user_id
+    #   The Amazon S3 canonical user ID for the origin access identity,
+    #   which you use when giving the origin access identity read permission
+    #   to an object in Amazon S3.
+    #   @return [String]
+    #
+    # @!attribute [rw] comment
+    #   The comment for this origin access identity, as originally specified
+    #   when created.
+    #   @return [String]
+    #
+    class CloudFrontOriginAccessIdentitySummary < Struct.new(
+      :id,
+      :s3_canonical_user_id,
+      :comment)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies whether you want CloudFront to forward
+    # cookies to the origin and, if so, which ones. For more information
+    # about forwarding cookies to the origin, see [How CloudFront Forwards,
+    # Caches, and Logs Cookies][1] in the *Amazon CloudFront Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
+    #
+    # @note When making an API call, you may pass CookieNames
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of different cookies that you want CloudFront to forward
+    #   to the origin for this cache behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `Name` element for each cookie that
+    #   you want CloudFront to forward to the origin for this cache
+    #   behavior.
+    #   @return [Array<String>]
+    #
+    class CookieNames < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies whether you want CloudFront to forward
+    # cookies to the origin and, if so, which ones. For more information
+    # about forwarding cookies to the origin, see [How CloudFront Forwards,
+    # Caches, and Logs Cookies][1] in the *Amazon CloudFront Developer
+    # Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
+    #
+    # @note When making an API call, you may pass CookiePreference
+    #   data as a hash:
+    #
+    #       {
+    #         forward: "none", # required, accepts none, whitelist, all
+    #         whitelisted_names: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] forward
+    #   Specifies which cookies to forward to the origin for this cache
+    #   behavior: all, none, or the list of cookies specified in the
+    #   `WhitelistedNames` complex type.
+    #
+    #   Amazon S3 doesn't process cookies. When the cache behavior is
+    #   forwarding requests to an Amazon S3 origin, specify none for the
+    #   `Forward` element.
+    #   @return [String]
+    #
+    # @!attribute [rw] whitelisted_names
+    #   Required if you specify `whitelist` for the value of `Forward:`. A
+    #   complex type that specifies how many different cookies you want
+    #   CloudFront to forward to the origin for this cache behavior and, if
+    #   you want to forward selected cookies, the names of those cookies.
+    #
+    #   If you specify `all` or none for the value of `Forward`, omit
+    #   `WhitelistedNames`. If you change the value of `Forward` from
+    #   `whitelist` to all or none and you don't delete the
+    #   `WhitelistedNames` element and its child elements, CloudFront
+    #   deletes them automatically.
+    #
+    #   For the current limit on the number of cookie names that you can
+    #   whitelist for each cache behavior, see [Amazon CloudFront Limits][1]
+    #   in the *AWS General Reference*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
+    #   @return [Types::CookieNames]
+    #
+    class CookiePreference < Struct.new(
+      :forward,
+      :whitelisted_names)
+      include Aws::Structure
+    end
+
+    # The request to create a new origin access identity.
+    #
+    # @note When making an API call, you may pass CreateCloudFrontOriginAccessIdentityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_front_origin_access_identity_config: { # required
+    #           caller_reference: "string", # required
+    #           comment: "string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity_config
+    #   The current configuration information for the identity.
+    #   @return [Types::CloudFrontOriginAccessIdentityConfig]
+    #
+    class CreateCloudFrontOriginAccessIdentityRequest < Struct.new(
+      :cloud_front_origin_access_identity_config)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity
+    #   The origin access identity's information.
+    #   @return [Types::CloudFrontOriginAccessIdentity]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the new origin access identity just
+    #   created. For example:
+    #   `https://cloudfront.amazonaws.com/2010-11-01/origin-access-identity/cloudfront/E74FTE3AJFJ256A`.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin access identity created.
+    #   @return [String]
+    #
+    class CreateCloudFrontOriginAccessIdentityResult < Struct.new(
+      :cloud_front_origin_access_identity,
+      :location,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to create a new distribution.
+    #
+    # @note When making an API call, you may pass CreateDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           default_root_object: "string",
+    #           origins: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 id: "string", # required
+    #                 domain_name: "string", # required
+    #                 origin_path: "string",
+    #                 custom_headers: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       header_name: "string", # required
+    #                       header_value: "string", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "string", # required
+    #                 },
+    #                 custom_origin_config: {
+    #                   http_port: 1, # required
+    #                   https_port: 1, # required
+    #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #                   origin_ssl_protocols: {
+    #                     quantity: 1, # required
+    #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           default_cache_behavior: { # required
+    #             target_origin_id: "string", # required
+    #             forwarded_values: { # required
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none", # required, accepts none, whitelist, all
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             min_ttl: 1, # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             default_ttl: 1,
+    #             max_ttl: 1,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "string",
+    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           cache_behaviors: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 path_pattern: "string", # required
+    #                 target_origin_id: "string", # required
+    #                 forwarded_values: { # required
+    #                   query_string: false, # required
+    #                   cookies: { # required
+    #                     forward: "none", # required, accepts none, whitelist, all
+    #                     whitelisted_names: {
+    #                       quantity: 1, # required
+    #                       items: ["string"],
+    #                     },
+    #                   },
+    #                   headers: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   query_string_cache_keys: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                 },
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 min_ttl: 1, # required
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 default_ttl: 1,
+    #                 max_ttl: 1,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "string",
+    #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           custom_error_responses: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 error_code: 1, # required
+    #                 response_page_path: "string",
+    #                 response_code: "string",
+    #                 error_caching_min_ttl: 1,
+    #               },
+    #             ],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             include_cookies: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #           viewer_certificate: {
+    #             cloud_front_default_certificate: false,
+    #             iam_certificate_id: "string",
+    #             acm_certificate_arn: "string",
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #             certificate: "string",
+    #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #           },
+    #           restrictions: {
+    #             geo_restriction: { # required
+    #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           web_acl_id: "string",
+    #           http_version: "http1.1", # accepts http1.1, http2
+    #           is_ipv6_enabled: false,
+    #         },
+    #       }
+    #
+    # @!attribute [rw] distribution_config
+    #   The distribution's configuration information.
+    #   @return [Types::DistributionConfig]
+    #
+    class CreateDistributionRequest < Struct.new(
+      :distribution_config)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution
+    #   The distribution's information.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the new distribution resource just
+    #   created. For example:
+    #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution created.
+    #   @return [String]
+    #
+    class CreateDistributionResult < Struct.new(
+      :distribution,
+      :location,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to create a new distribution with tags.
+    #
+    # @note When making an API call, you may pass CreateDistributionWithTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_config_with_tags: { # required
+    #           distribution_config: { # required
+    #             caller_reference: "string", # required
+    #             aliases: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             default_root_object: "string",
+    #             origins: { # required
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   id: "string", # required
+    #                   domain_name: "string", # required
+    #                   origin_path: "string",
+    #                   custom_headers: {
+    #                     quantity: 1, # required
+    #                     items: [
+    #                       {
+    #                         header_name: "string", # required
+    #                         header_value: "string", # required
+    #                       },
+    #                     ],
+    #                   },
+    #                   s3_origin_config: {
+    #                     origin_access_identity: "string", # required
+    #                   },
+    #                   custom_origin_config: {
+    #                     http_port: 1, # required
+    #                     https_port: 1, # required
+    #                     origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #                     origin_ssl_protocols: {
+    #                       quantity: 1, # required
+    #                       items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #                     },
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             default_cache_behavior: { # required
+    #               target_origin_id: "string", # required
+    #               forwarded_values: { # required
+    #                 query_string: false, # required
+    #                 cookies: { # required
+    #                   forward: "none", # required, accepts none, whitelist, all
+    #                   whitelisted_names: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                 },
+    #                 headers: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 query_string_cache_keys: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               trusted_signers: { # required
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #               min_ttl: 1, # required
+    #               allowed_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 cached_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 },
+    #               },
+    #               smooth_streaming: false,
+    #               default_ttl: 1,
+    #               max_ttl: 1,
+    #               compress: false,
+    #               lambda_function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     lambda_function_arn: "string",
+    #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #             cache_behaviors: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   path_pattern: "string", # required
+    #                   target_origin_id: "string", # required
+    #                   forwarded_values: { # required
+    #                     query_string: false, # required
+    #                     cookies: { # required
+    #                       forward: "none", # required, accepts none, whitelist, all
+    #                       whitelisted_names: {
+    #                         quantity: 1, # required
+    #                         items: ["string"],
+    #                       },
+    #                     },
+    #                     headers: {
+    #                       quantity: 1, # required
+    #                       items: ["string"],
+    #                     },
+    #                     query_string_cache_keys: {
+    #                       quantity: 1, # required
+    #                       items: ["string"],
+    #                     },
+    #                   },
+    #                   trusted_signers: { # required
+    #                     enabled: false, # required
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                   min_ttl: 1, # required
+    #                   allowed_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                     cached_methods: {
+    #                       quantity: 1, # required
+    #                       items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                     },
+    #                   },
+    #                   smooth_streaming: false,
+    #                   default_ttl: 1,
+    #                   max_ttl: 1,
+    #                   compress: false,
+    #                   lambda_function_associations: {
+    #                     quantity: 1, # required
+    #                     items: [
+    #                       {
+    #                         lambda_function_arn: "string",
+    #                         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                       },
+    #                     ],
+    #                   },
+    #                 },
+    #               ],
+    #             },
+    #             custom_error_responses: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   error_code: 1, # required
+    #                   response_page_path: "string",
+    #                   response_code: "string",
+    #                   error_caching_min_ttl: 1,
+    #                 },
+    #               ],
+    #             },
+    #             comment: "string", # required
+    #             logging: {
+    #               enabled: false, # required
+    #               include_cookies: false, # required
+    #               bucket: "string", # required
+    #               prefix: "string", # required
+    #             },
+    #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #             enabled: false, # required
+    #             viewer_certificate: {
+    #               cloud_front_default_certificate: false,
+    #               iam_certificate_id: "string",
+    #               acm_certificate_arn: "string",
+    #               ssl_support_method: "sni-only", # accepts sni-only, vip
+    #               minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #               certificate: "string",
+    #               certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #             },
+    #             restrictions: {
+    #               geo_restriction: { # required
+    #                 restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             web_acl_id: "string",
+    #             http_version: "http1.1", # accepts http1.1, http2
+    #             is_ipv6_enabled: false,
+    #           },
+    #           tags: { # required
+    #             items: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] distribution_config_with_tags
+    #   The distribution's configuration information.
+    #   @return [Types::DistributionConfigWithTags]
+    #
+    class CreateDistributionWithTagsRequest < Struct.new(
+      :distribution_config_with_tags)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution
+    #   The distribution's information.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the new distribution resource just
+    #   created. For example:
+    #   `https://cloudfront.amazonaws.com/2010-11-01/distribution/EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution created.
+    #   @return [String]
+    #
+    class CreateDistributionWithTagsResult < Struct.new(
+      :distribution,
+      :location,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to create an invalidation.
+    #
+    # @note When making an API call, you may pass CreateInvalidationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #         invalidation_batch: { # required
+    #           paths: { # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           caller_reference: "string", # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The distribution's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalidation_batch
+    #   The batch information for the invalidation.
+    #   @return [Types::InvalidationBatch]
+    #
+    class CreateInvalidationRequest < Struct.new(
+      :distribution_id,
+      :invalidation_batch)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the distribution and invalidation batch
+    #   request, including the `Invalidation ID`.
+    #   @return [String]
+    #
+    # @!attribute [rw] invalidation
+    #   The invalidation's information.
+    #   @return [Types::Invalidation]
+    #
+    class CreateInvalidationResult < Struct.new(
+      :location,
+      :invalidation)
+      include Aws::Structure
+    end
+
+    # The request to create a new streaming distribution.
+    #
+    # @note When making an API call, you may pass CreateStreamingDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         streaming_distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           s3_origin: { # required
+    #             domain_name: "string", # required
+    #             origin_access_identity: "string", # required
+    #           },
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #         },
+    #       }
+    #
+    # @!attribute [rw] streaming_distribution_config
+    #   The streaming distribution's configuration information.
+    #   @return [Types::StreamingDistributionConfig]
+    #
+    class CreateStreamingDistributionRequest < Struct.new(
+      :streaming_distribution_config)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution
+    #   The streaming distribution's information.
+    #   @return [Types::StreamingDistribution]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the new streaming distribution resource
+    #   just created. For example:
+    #   `https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the streaming distribution created.
+    #   @return [String]
+    #
+    class CreateStreamingDistributionResult < Struct.new(
+      :streaming_distribution,
+      :location,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to create a new streaming distribution with tags.
+    #
+    # @note When making an API call, you may pass CreateStreamingDistributionWithTagsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         streaming_distribution_config_with_tags: { # required
+    #           streaming_distribution_config: { # required
+    #             caller_reference: "string", # required
+    #             s3_origin: { # required
+    #               domain_name: "string", # required
+    #               origin_access_identity: "string", # required
+    #             },
+    #             aliases: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             comment: "string", # required
+    #             logging: {
+    #               enabled: false, # required
+    #               bucket: "string", # required
+    #               prefix: "string", # required
+    #             },
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #             enabled: false, # required
+    #           },
+    #           tags: { # required
+    #             items: [
+    #               {
+    #                 key: "TagKey", # required
+    #                 value: "TagValue",
+    #               },
+    #             ],
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] streaming_distribution_config_with_tags
+    #   The streaming distribution's configuration information.
+    #   @return [Types::StreamingDistributionConfigWithTags]
+    #
+    class CreateStreamingDistributionWithTagsRequest < Struct.new(
+      :streaming_distribution_config_with_tags)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution
+    #   The streaming distribution's information.
+    #   @return [Types::StreamingDistribution]
+    #
+    # @!attribute [rw] location
+    #   The fully qualified URI of the new streaming distribution resource
+    #   just created. For example:`
+    #   https://cloudfront.amazonaws.com/2010-11-01/streaming-distribution/EGTXBD79H29TRA8`.
+    #   @return [String]
+    #
+    # @!attribute [rw] etag
+    #   @return [String]
+    #
+    class CreateStreamingDistributionWithTagsResult < Struct.new(
+      :streaming_distribution,
+      :location,
+      :etag)
+      include Aws::Structure
+    end
+
+    # A complex type that controls:
+    #
+    # * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
+    #   range with custom error messages before returning the response to
+    #   the viewer.
+    #
+    # * How long CloudFront caches HTTP status codes in the 4xx and 5xx
+    #   range.
+    #
+    # For more information about custom error pages, see [Customizing Error
+    # Responses][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
+    #
+    # @note When making an API call, you may pass CustomErrorResponse
+    #   data as a hash:
+    #
+    #       {
+    #         error_code: 1, # required
+    #         response_page_path: "string",
+    #         response_code: "string",
+    #         error_caching_min_ttl: 1,
+    #       }
+    #
+    # @!attribute [rw] error_code
+    #   The HTTP status code for which you want to specify a custom error
+    #   page and/or a caching duration.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] response_page_path
+    #   The path to the custom error page that you want CloudFront to return
+    #   to a viewer when your origin returns the HTTP status code specified
+    #   by `ErrorCode`, for example, `/4xx-errors/403-forbidden.html`. If
+    #   you want to store your objects and your custom error pages in
+    #   different locations, your distribution must include a cache behavior
+    #   for which the following is true:
+    #
+    #   * The value of `PathPattern` matches the path to your custom error
+    #     messages. For example, suppose you saved custom error pages for
+    #     4xx errors in an Amazon S3 bucket in a directory named
+    #     `/4xx-errors`. Your distribution must include a cache behavior for
+    #     which the path pattern routes requests for your custom error pages
+    #     to that location, for example, `/4xx-errors/*`.
+    #
+    #   * The value of `TargetOriginId` specifies the value of the `ID`
+    #     element for the origin that contains your custom error pages.
+    #
+    #   If you specify a value for `ResponsePagePath`, you must also specify
+    #   a value for `ResponseCode`. If you don't want to specify a value,
+    #   include an empty element, `<ResponsePagePath>`, in the XML document.
+    #
+    #   We recommend that you store custom error pages in an Amazon S3
+    #   bucket. If you store custom error pages on an HTTP server and the
+    #   server starts to return 5xx errors, CloudFront can't get the files
+    #   that you want to return to viewers because the origin server is
+    #   unavailable.
+    #   @return [String]
+    #
+    # @!attribute [rw] response_code
+    #   The HTTP status code that you want CloudFront to return to the
+    #   viewer along with the custom error page. There are a variety of
+    #   reasons that you might want CloudFront to return a status code
+    #   different from the status code that your origin returned to
+    #   CloudFront, for example:
+    #
+    #   * Some Internet devices (some firewalls and corporate proxies, for
+    #     example) intercept HTTP 4xx and 5xx and prevent the response from
+    #     being returned to the viewer. If you substitute `200`, the
+    #     response typically won't be intercepted.
+    #
+    #   * If you don't care about distinguishing among different client
+    #     errors or server errors, you can specify `400` or `500` as the
+    #     `ResponseCode` for all 4xx or 5xx errors.
+    #
+    #   * You might want to return a `200` status code (OK) and static
+    #     website so your customers don't know that your website is down.
+    #
+    #   If you specify a value for `ResponseCode`, you must also specify a
+    #   value for `ResponsePagePath`. If you don't want to specify a value,
+    #   include an empty element, `<ResponseCode>`, in the XML document.
+    #   @return [String]
+    #
+    # @!attribute [rw] error_caching_min_ttl
+    #   The minimum amount of time, in seconds, that you want CloudFront to
+    #   cache the HTTP status code specified in `ErrorCode`. When this time
+    #   period has elapsed, CloudFront queries your origin to see whether
+    #   the problem that caused the error has been resolved and the
+    #   requested object is now available.
+    #
+    #   If you don't want to specify a value, include an empty element,
+    #   `<ErrorCachingMinTTL>`, in the XML document.
+    #
+    #   For more information, see [Customizing Error Responses][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
+    #   @return [Integer]
+    #
+    class CustomErrorResponse < Struct.new(
+      :error_code,
+      :response_page_path,
+      :response_code,
+      :error_caching_min_ttl)
+      include Aws::Structure
+    end
+
+    # A complex type that controls:
+    #
+    # * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
+    #   range with custom error messages before returning the response to
+    #   the viewer.
+    #
+    # * How long CloudFront caches HTTP status codes in the 4xx and 5xx
+    #   range.
+    #
+    # For more information about custom error pages, see [Customizing Error
+    # Responses][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
+    #
+    # @note When making an API call, you may pass CustomErrorResponses
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             error_code: 1, # required
+    #             response_page_path: "string",
+    #             response_code: "string",
+    #             error_caching_min_ttl: 1,
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of HTTP status codes for which you want to specify a
+    #   custom error page and/or a caching duration. If `Quantity` is `0`,
+    #   you can omit `Items`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains a `CustomErrorResponse` element for
+    #   each HTTP status code for which you want to specify a custom error
+    #   page and/or a caching duration.
+    #   @return [Array<Types::CustomErrorResponse>]
+    #
+    class CustomErrorResponses < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that contains the list of Custom Headers for each
+    # origin.
+    #
+    # @note When making an API call, you may pass CustomHeaders
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             header_name: "string", # required
+    #             header_value: "string", # required
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of custom headers, if any, for this distribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   **Optional**\: A list that contains one `OriginCustomHeader` element
+    #   for each custom header that you want CloudFront to forward to the
+    #   origin. If Quantity is `0`, omit `Items`.
+    #   @return [Array<Types::OriginCustomHeader>]
+    #
+    class CustomHeaders < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A customer origin.
+    #
+    # @note When making an API call, you may pass CustomOriginConfig
+    #   data as a hash:
+    #
+    #       {
+    #         http_port: 1, # required
+    #         https_port: 1, # required
+    #         origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #         origin_ssl_protocols: {
+    #           quantity: 1, # required
+    #           items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #         },
+    #       }
+    #
+    # @!attribute [rw] http_port
+    #   The HTTP port the custom origin listens on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] https_port
+    #   The HTTPS port the custom origin listens on.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] origin_protocol_policy
+    #   The origin protocol policy to apply to your origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_ssl_protocols
+    #   The SSL/TLS protocols that you want CloudFront to use when
+    #   communicating with your origin over HTTPS.
+    #   @return [Types::OriginSslProtocols]
+    #
+    class CustomOriginConfig < Struct.new(
+      :http_port,
+      :https_port,
+      :origin_protocol_policy,
+      :origin_ssl_protocols)
+      include Aws::Structure
+    end
+
+    # A complex type that describes the default cache behavior if you do not
+    # specify a `CacheBehavior` element or if files don't match any of the
+    # values of `PathPattern` in `CacheBehavior` elements. You must create
+    # exactly one default cache behavior.
+    #
+    # @note When making an API call, you may pass DefaultCacheBehavior
+    #   data as a hash:
+    #
+    #       {
+    #         target_origin_id: "string", # required
+    #         forwarded_values: { # required
+    #           query_string: false, # required
+    #           cookies: { # required
+    #             forward: "none", # required, accepts none, whitelist, all
+    #             whitelisted_names: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           headers: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           query_string_cache_keys: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #         min_ttl: 1, # required
+    #         allowed_methods: {
+    #           quantity: 1, # required
+    #           items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           cached_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #           },
+    #         },
+    #         smooth_streaming: false,
+    #         default_ttl: 1,
+    #         max_ttl: 1,
+    #         compress: false,
+    #         lambda_function_associations: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               lambda_function_arn: "string",
+    #               event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] target_origin_id
+    #   The value of `ID` for the origin that you want CloudFront to route
+    #   requests to when a request matches the path pattern either for a
+    #   cache behavior or for the default cache behavior.
+    #   @return [String]
+    #
+    # @!attribute [rw] forwarded_values
+    #   A complex type that specifies how CloudFront handles query strings
+    #   and cookies.
+    #   @return [Types::ForwardedValues]
+    #
+    # @!attribute [rw] trusted_signers
+    #   A complex type that specifies the AWS accounts, if any, that you
+    #   want to allow to create signed URLs for private content.
+    #
+    #   If you want to require signed URLs in requests for objects in the
+    #   target origin that match the `PathPattern` for this cache behavior,
+    #   specify `true` for `Enabled`, and specify the applicable values for
+    #   `Quantity` and `Items`. For more information, see [Serving Private
+    #   Content through CloudFront][1] in the *Amazon Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #   If you don't want to require signed URLs in requests for objects
+    #   that match `PathPattern`, specify `false` for `Enabled` and `0` for
+    #   `Quantity`. Omit `Items`.
+    #
+    #   To add, change, or remove one or more trusted signers, change
+    #   `Enabled` to `true` (if it's currently `false`), change `Quantity`
+    #   as applicable, and specify all of the trusted signers that you want
+    #   to include in the updated distribution.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] viewer_protocol_policy
+    #   The protocol that viewers can use to access the files in the origin
+    #   specified by `TargetOriginId` when a request matches the path
+    #   pattern in `PathPattern`. You can specify the following options:
+    #
+    #   * `allow-all`\: Viewers can use HTTP or HTTPS.
+    #
+    #   * `redirect-to-https`\: If a viewer submits an HTTP request,
+    #     CloudFront returns an HTTP status code of 301 (Moved Permanently)
+    #     to the viewer along with the HTTPS URL. The viewer then resubmits
+    #     the request using the new URL.
+    #
+    #   * `https-only`\: If a viewer sends an HTTP request, CloudFront
+    #     returns an HTTP status code of 403 (Forbidden).
+    #
+    #   For more information about requiring the HTTPS protocol, see [Using
+    #   an HTTPS Connection to Access Your Objects][1] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   <note markdown="1"> The only way to guarantee that viewers retrieve an object that was
+    #   fetched from the origin using HTTPS is never to use any other
+    #   protocol to fetch the object. If you have recently changed from HTTP
+    #   to HTTPS, we recommend that you clear your objects' cache because
+    #   cached objects are protocol agnostic. That means that an edge
+    #   location will return an object from the cache regardless of whether
+    #   the current request protocol matches the protocol used previously.
+    #   For more information, see [Specifying How Long Objects and Errors
+    #   Stay in a CloudFront Edge Cache (Expiration)][2] in the *Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #    </note>
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   [2]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [String]
+    #
+    # @!attribute [rw] min_ttl
+    #   The minimum amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. For more
+    #   information, see [Specifying How Long Objects and Errors Stay in a
+    #   CloudFront Edge Cache (Expiration)][1] in the *Amazon Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #   You must specify `0` for `MinTTL` if you configure CloudFront to
+    #   forward all headers to your origin (under `Headers`, if you specify
+    #   `1` for `Quantity` and `*` for `Name`).
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] allowed_methods
+    #   A complex type that controls which HTTP methods CloudFront processes
+    #   and forwards to your Amazon S3 bucket or your custom origin. There
+    #   are three choices:
+    #
+    #   * CloudFront forwards only `GET` and `HEAD` requests.
+    #
+    #   * CloudFront forwards only `GET`, `HEAD`, and `OPTIONS` requests.
+    #
+    #   * CloudFront forwards `GET, HEAD, OPTIONS, PUT, PATCH, POST`, and
+    #     `DELETE` requests.
+    #
+    #   If you pick the third choice, you may need to restrict access to
+    #   your Amazon S3 bucket or to your custom origin so users can't
+    #   perform operations that you don't want them to. For example, you
+    #   might not want users to have permissions to delete objects from your
+    #   origin.
+    #   @return [Types::AllowedMethods]
+    #
+    # @!attribute [rw] smooth_streaming
+    #   Indicates whether you want to distribute media files in the
+    #   Microsoft Smooth Streaming format using the origin that is
+    #   associated with this cache behavior. If so, specify `true`; if not,
+    #   specify `false`. If you specify `true` for `SmoothStreaming`, you
+    #   can still distribute other content using this cache behavior if the
+    #   content matches the value of `PathPattern`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] default_ttl
+    #   The default amount of time that you want objects to stay in
+    #   CloudFront caches before CloudFront forwards another request to your
+    #   origin to determine whether the object has been updated. The value
+    #   that you specify applies only when your origin does not add HTTP
+    #   headers such as `Cache-Control max-age`, `Cache-Control s-maxage`,
+    #   and `Expires` to objects. For more information, see [Specifying How
+    #   Long Objects and Errors Stay in a CloudFront Edge Cache
+    #   (Expiration)][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Expiration.html
+    #   @return [Integer]
+    #
+    # @!attribute [rw] max_ttl
+    #   @return [Integer]
+    #
+    # @!attribute [rw] compress
+    #   Whether you want CloudFront to automatically compress certain files
+    #   for this cache behavior. If so, specify `true`; if not, specify
+    #   `false`. For more information, see [Serving Compressed Files][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/ServingCompressedFiles.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] lambda_function_associations
+    #   A complex type that contains zero or more Lambda function
+    #   associations for a cache behavior.
+    #   @return [Types::LambdaFunctionAssociations]
+    #
+    class DefaultCacheBehavior < Struct.new(
+      :target_origin_id,
+      :forwarded_values,
+      :trusted_signers,
+      :viewer_protocol_policy,
+      :min_ttl,
+      :allowed_methods,
+      :smooth_streaming,
+      :default_ttl,
+      :max_ttl,
+      :compress,
+      :lambda_function_associations)
+      include Aws::Structure
+    end
+
+    # Deletes a origin access identity.
+    #
+    # @note When making an API call, you may pass DeleteCloudFrontOriginAccessIdentityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The origin access identity's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header you received from a previous `GET` or
+    #   `PUT` request. For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class DeleteCloudFrontOriginAccessIdentityRequest < Struct.new(
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # This action deletes a web distribution. To delete a web distribution
+    # using the CloudFront API, perform the following steps.
+    #
+    # **To delete a web distribution using the CloudFront API:**
+    #
+    # 1.  Disable the web distribution
+    #
+    # 2.  Submit a `GET Distribution Config` request to get the current
+    #     configuration and the `Etag` header for the distribution.
+    #
+    # 3.  Update the XML document that was returned in the response to your
+    #     `GET Distribution Config` request to change the value of `Enabled`
+    #     to `false`.
+    #
+    # 4.  Submit a `PUT Distribution Config` request to update the
+    #     configuration for your distribution. In the request body, include
+    #     the XML document that you updated in Step 3. Set the value of the
+    #     HTTP `If-Match` header to the value of the `ETag` header that
+    #     CloudFront returned when you submitted the `GET Distribution
+    #     Config` request in Step 2.
+    #
+    # 5.  Review the response to the `PUT Distribution Config` request to
+    #     confirm that the distribution was successfully disabled.
+    #
+    # 6.  Submit a `GET Distribution` request to confirm that your changes
+    #     have propagated. When propagation is complete, the value of
+    #     `Status` is `Deployed`.
+    #
+    # 7.  Submit a `DELETE Distribution` request. Set the value of the HTTP
+    #     `If-Match` header to the value of the `ETag` header that
+    #     CloudFront returned when you submitted the `GET Distribution
+    #     Config` request in Step 6.
+    #
+    # 8.  Review the response to your `DELETE Distribution` request to
+    #     confirm that the distribution was successfully deleted.
+    #
+    # For information about deleting a distribution using the CloudFront
+    # console, see [Deleting a Distribution][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/HowToDeleteDistribution.html
+    #
+    # @note When making an API call, you may pass DeleteDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The distribution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when you disabled
+    #   the distribution. For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class DeleteDistributionRequest < Struct.new(
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # The request to delete a streaming distribution.
+    #
+    # @note When making an API call, you may pass DeleteStreamingDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The distribution ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when you disabled
+    #   the streaming distribution. For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class DeleteStreamingDistributionRequest < Struct.new(
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # The distribution's information.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the distribution. For example:
+    #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
+    #   where `123456789012` is your AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   This response element indicates the current status of the
+    #   distribution. When the status is `Deployed`, the distribution's
+    #   information is fully propagated to all CloudFront edge locations.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the distribution was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] in_progress_invalidation_batches
+    #   The number of invalidation batches currently in progress.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name corresponding to the distribution. For example:
+    #   `d604721fxaaqy9.cloudfront.net`.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_trusted_signers
+    #   CloudFront automatically adds this element to the response only if
+    #   you've set up the distribution to serve private content with signed
+    #   URLs. The element lists the key pair IDs that CloudFront is aware of
+    #   for each trusted signer. The `Signer` child element lists the AWS
+    #   account number of the trusted signer (or an empty `Self` element if
+    #   the signer is you). The `Signer` element also includes the IDs of
+    #   any active key pairs associated with the trusted signer's AWS
+    #   account. If no `KeyPairId` element appears for a `Signer`, that
+    #   signer can't create working signed URLs.
+    #   @return [Types::ActiveTrustedSigners]
+    #
+    # @!attribute [rw] distribution_config
+    #   The current configuration information for the distribution. Send a
+    #   `GET` request to the `/CloudFront API version/distribution
+    #   ID/config` resource.
+    #   @return [Types::DistributionConfig]
+    #
+    class Distribution < Struct.new(
+      :id,
+      :arn,
+      :status,
+      :last_modified_time,
+      :in_progress_invalidation_batches,
+      :domain_name,
+      :active_trusted_signers,
+      :distribution_config)
+      include Aws::Structure
+    end
+
+    # A distribution configuration.
+    #
+    # @note When making an API call, you may pass DistributionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         caller_reference: "string", # required
+    #         aliases: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         default_root_object: "string",
+    #         origins: { # required
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               id: "string", # required
+    #               domain_name: "string", # required
+    #               origin_path: "string",
+    #               custom_headers: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     header_name: "string", # required
+    #                     header_value: "string", # required
+    #                   },
+    #                 ],
+    #               },
+    #               s3_origin_config: {
+    #                 origin_access_identity: "string", # required
+    #               },
+    #               custom_origin_config: {
+    #                 http_port: 1, # required
+    #                 https_port: 1, # required
+    #                 origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #                 origin_ssl_protocols: {
+    #                   quantity: 1, # required
+    #                   items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #                 },
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         default_cache_behavior: { # required
+    #           target_origin_id: "string", # required
+    #           forwarded_values: { # required
+    #             query_string: false, # required
+    #             cookies: { # required
+    #               forward: "none", # required, accepts none, whitelist, all
+    #               whitelisted_names: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             headers: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             query_string_cache_keys: {
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #           min_ttl: 1, # required
+    #           allowed_methods: {
+    #             quantity: 1, # required
+    #             items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             cached_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #             },
+    #           },
+    #           smooth_streaming: false,
+    #           default_ttl: 1,
+    #           max_ttl: 1,
+    #           compress: false,
+    #           lambda_function_associations: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 lambda_function_arn: "string",
+    #                 event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #               },
+    #             ],
+    #           },
+    #         },
+    #         cache_behaviors: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               path_pattern: "string", # required
+    #               target_origin_id: "string", # required
+    #               forwarded_values: { # required
+    #                 query_string: false, # required
+    #                 cookies: { # required
+    #                   forward: "none", # required, accepts none, whitelist, all
+    #                   whitelisted_names: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                 },
+    #                 headers: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 query_string_cache_keys: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               trusted_signers: { # required
+    #                 enabled: false, # required
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #               min_ttl: 1, # required
+    #               allowed_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 cached_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                 },
+    #               },
+    #               smooth_streaming: false,
+    #               default_ttl: 1,
+    #               max_ttl: 1,
+    #               compress: false,
+    #               lambda_function_associations: {
+    #                 quantity: 1, # required
+    #                 items: [
+    #                   {
+    #                     lambda_function_arn: "string",
+    #                     event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                   },
+    #                 ],
+    #               },
+    #             },
+    #           ],
+    #         },
+    #         custom_error_responses: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               error_code: 1, # required
+    #               response_page_path: "string",
+    #               response_code: "string",
+    #               error_caching_min_ttl: 1,
+    #             },
+    #           ],
+    #         },
+    #         comment: "string", # required
+    #         logging: {
+    #           enabled: false, # required
+    #           include_cookies: false, # required
+    #           bucket: "string", # required
+    #           prefix: "string", # required
+    #         },
+    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #         enabled: false, # required
+    #         viewer_certificate: {
+    #           cloud_front_default_certificate: false,
+    #           iam_certificate_id: "string",
+    #           acm_certificate_arn: "string",
+    #           ssl_support_method: "sni-only", # accepts sni-only, vip
+    #           minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #           certificate: "string",
+    #           certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #         },
+    #         restrictions: {
+    #           geo_restriction: { # required
+    #             restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         web_acl_id: "string",
+    #         http_version: "http1.1", # accepts http1.1, http2
+    #         is_ipv6_enabled: false,
+    #       }
+    #
+    # @!attribute [rw] caller_reference
+    #   A unique value (for example, a date-time stamp) that ensures that
+    #   the request can't be replayed.
+    #
+    #   If the value of `CallerReference` is new (regardless of the content
+    #   of the `DistributionConfig` object), CloudFront creates a new
+    #   distribution.
+    #
+    #   If `CallerReference` is a value you already sent in a previous
+    #   request to create a distribution, and if the content of the
+    #   `DistributionConfig` is identical to the original request (ignoring
+    #   white space), CloudFront returns the same the response that it
+    #   returned to the original request.
+    #
+    #   If `CallerReference` is a value you already sent in a previous
+    #   request to create a distribution but the content of the
+    #   `DistributionConfig` is different from the original request,
+    #   CloudFront returns a `DistributionAlreadyExists` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   A complex type that contains information about CNAMEs (alternate
+    #   domain names), if any, for this distribution.
+    #   @return [Types::Aliases]
+    #
+    # @!attribute [rw] default_root_object
+    #   The object that you want CloudFront to request from your origin (for
+    #   example, `index.html`) when a viewer requests the root URL for your
+    #   distribution (`http://www.example.com`) instead of an object in your
+    #   distribution (`http://www.example.com/product-description.html`).
+    #   Specifying a default root object avoids exposing the contents of
+    #   your distribution.
+    #
+    #   Specify only the object name, for example, `index.html`. Do not add
+    #   a `/` before the object name.
+    #
+    #   If you don't want to specify a default root object when you create
+    #   a distribution, include an empty `DefaultRootObject` element.
+    #
+    #   To delete the default root object from an existing distribution,
+    #   update the distribution configuration and include an empty
+    #   `DefaultRootObject` element.
+    #
+    #   To replace the default root object, update the distribution
+    #   configuration and specify the new object.
+    #
+    #   For more information about the default root object, see [Creating a
+    #   Default Root Object][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/DefaultRootObject.html
+    #   @return [String]
+    #
+    # @!attribute [rw] origins
+    #   A complex type that contains information about origins for this
+    #   distribution.
+    #   @return [Types::Origins]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   A complex type that describes the default cache behavior if you do
+    #   not specify a `CacheBehavior` element or if files don't match any
+    #   of the values of `PathPattern` in `CacheBehavior` elements. You must
+    #   create exactly one default cache behavior.
+    #   @return [Types::DefaultCacheBehavior]
+    #
+    # @!attribute [rw] cache_behaviors
+    #   A complex type that contains zero or more `CacheBehavior` elements.
+    #   @return [Types::CacheBehaviors]
+    #
+    # @!attribute [rw] custom_error_responses
+    #   A complex type that controls the following:
+    #
+    #   * Whether CloudFront replaces HTTP status codes in the 4xx and 5xx
+    #     range with custom error messages before returning the response to
+    #     the viewer.
+    #
+    #   * How long CloudFront caches HTTP status codes in the 4xx and 5xx
+    #     range.
+    #
+    #   For more information about custom error pages, see [Customizing
+    #   Error Responses][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/custom-error-pages.html
+    #   @return [Types::CustomErrorResponses]
+    #
+    # @!attribute [rw] comment
+    #   Any comments you want to include about the distribution.
+    #
+    #   If you don't want to specify a comment, include an empty `Comment`
+    #   element.
+    #
+    #   To delete an existing comment, update the distribution configuration
+    #   and include an empty `Comment` element.
+    #
+    #   To add or change a comment, update the distribution configuration
+    #   and specify the new comment.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging
+    #   A complex type that controls whether access logs are written for the
+    #   distribution.
+    #
+    #   For more information about logging, see [Access Logs][1] in the
+    #   *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/AccessLogs.html
+    #   @return [Types::LoggingConfig]
+    #
+    # @!attribute [rw] price_class
+    #   The price class that corresponds with the maximum price that you
+    #   want to pay for CloudFront service. If you specify `PriceClass_All`,
+    #   CloudFront responds to requests for your objects from all CloudFront
+    #   edge locations.
+    #
+    #   If you specify a price class other than `PriceClass_All`, CloudFront
+    #   serves your objects from the CloudFront edge location that has the
+    #   lowest latency among the edge locations in your price class. Viewers
+    #   who are in or near regions that are excluded from your specified
+    #   price class may encounter slower performance.
+    #
+    #   For more information about price classes, see [Choosing the Price
+    #   Class for a CloudFront Distribution][1] in the *Amazon CloudFront
+    #   Developer Guide*. For information about CloudFront pricing,
+    #   including how price classes map to CloudFront regions, see [Amazon
+    #   CloudFront Pricing][2].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PriceClass.html
+    #   [2]: https://aws.amazon.com/cloudfront/pricing/
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want CloudFront to save access logs to an
+    #   Amazon S3 bucket.
+    #
+    #   If you do not want to enable logging when you create a distribution,
+    #   or if you want to disable logging for an existing distribution,
+    #   specify `false` for `Enabled`, and specify empty `Bucket` and
+    #   `Prefix` elements.
+    #
+    #   If you specify `false` for `Enabled` but you specify values for
+    #   `Bucket` and `Prefix`, the values are automatically deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] viewer_certificate
+    #   A complex type that specifies the following:
+    #
+    #   * Which SSL/TLS certificate to use when viewers request objects
+    #     using HTTPS
+    #
+    #   * Whether you want CloudFront to use dedicated IP addresses or SNI
+    #     when you're using alternate domain names in your object names
+    #
+    #   * The minimum protocol version that you want CloudFront to use when
+    #     communicating with viewers
+    #
+    #   For more information, see [Using an HTTPS Connection to Access Your
+    #   Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   @return [Types::ViewerCertificate]
+    #
+    # @!attribute [rw] restrictions
+    #   A complex type that identifies ways in which you want to restrict
+    #   distribution of your content.
+    #   @return [Types::Restrictions]
+    #
+    # @!attribute [rw] web_acl_id
+    #   A unique identifier that specifies the AWS WAF web ACL, if any, to
+    #   associate with this distribution.
+    #
+    #   AWS WAF is a web application firewall that lets you monitor the HTTP
+    #   and HTTPS requests that are forwarded to CloudFront, and lets you
+    #   control access to your content. Based on conditions that you
+    #   specify, such as the IP addresses that requests originate from or
+    #   the values of query strings, CloudFront responds to requests either
+    #   with the requested content or with an HTTP 403 status code
+    #   (Forbidden). You can also configure CloudFront to return a custom
+    #   error page when a request is blocked. For more information about AWS
+    #   WAF, see the [AWS WAF Developer Guide][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/waf/latest/developerguide/what-is-aws-waf.html
+    #   @return [String]
+    #
+    # @!attribute [rw] http_version
+    #   (Optional) Specify the maximum HTTP version that you want viewers to
+    #   use to communicate with CloudFront. The default value for new web
+    #   distributions is http2. Viewers that don't support HTTP/2
+    #   automatically use an earlier HTTP version.
+    #
+    #   For viewers and CloudFront to use HTTP/2, viewers must support TLS
+    #   1.2 or later, and must support Server Name Identification (SNI).
+    #
+    #   In general, configuring CloudFront to communicate with viewers using
+    #   HTTP/2 reduces latency. You can improve performance by optimizing
+    #   for HTTP/2. For more information, do an Internet search for "http/2
+    #   optimization."
+    #   @return [String]
+    #
+    # @!attribute [rw] is_ipv6_enabled
+    #   If you want CloudFront to respond to IPv6 DNS requests with an IPv6
+    #   address for your distribution, specify `true`. If you specify
+    #   `false`, CloudFront responds to IPv6 DNS requests with the DNS
+    #   response code `NOERROR` and with no IP addresses. This allows
+    #   viewers to submit a second request, for an IPv4 address for your
+    #   distribution.
+    #
+    #   In general, you should enable IPv6 if you have users on IPv6
+    #   networks who want to access your content. However, if you're using
+    #   signed URLs or signed cookies to restrict access to your content,
+    #   and if you're using a custom policy that includes the `IpAddress`
+    #   parameter to restrict the IP addresses that can access your content,
+    #   do not enable IPv6. If you want to restrict access to some content
+    #   by IP address and not restrict access to other content (or restrict
+    #   access but not by IP address), you can create two distributions. For
+    #   more information, see [Creating a Signed URL Using a Custom
+    #   Policy][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #   If you're using an Amazon Route 53 alias resource record set to
+    #   route traffic to your CloudFront distribution, you need to create a
+    #   second alias resource record set when both of the following are
+    #   true:
+    #
+    #   * You enable IPv6 for the distribution
+    #
+    #   * You're using alternate domain names in the URLs for your objects
+    #
+    #   For more information, see [Routing Traffic to an Amazon CloudFront
+    #   Web Distribution by Using Your Domain Name][2] in the *Amazon Route
+    #   53 Developer Guide*.
+    #
+    #   If you created a CNAME resource record set, either with Amazon Route
+    #   53 or with another DNS service, you don't need to make any changes.
+    #   A CNAME record will route traffic to your distribution regardless of
+    #   the IP address format of the viewer request.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-creating-signed-url-custom-policy.html
+    #   [2]: http://docs.aws.amazon.com/Route53/latest/DeveloperGuide/routing-to-cloudfront-distribution.html
+    #   @return [Boolean]
+    #
+    class DistributionConfig < Struct.new(
+      :caller_reference,
+      :aliases,
+      :default_root_object,
+      :origins,
+      :default_cache_behavior,
+      :cache_behaviors,
+      :custom_error_responses,
+      :comment,
+      :logging,
+      :price_class,
+      :enabled,
+      :viewer_certificate,
+      :restrictions,
+      :web_acl_id,
+      :http_version,
+      :is_ipv6_enabled)
+      include Aws::Structure
+    end
+
+    # A distribution Configuration and a list of tags to be associated with
+    # the distribution.
+    #
+    # @note When making an API call, you may pass DistributionConfigWithTags
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           default_root_object: "string",
+    #           origins: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 id: "string", # required
+    #                 domain_name: "string", # required
+    #                 origin_path: "string",
+    #                 custom_headers: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       header_name: "string", # required
+    #                       header_value: "string", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "string", # required
+    #                 },
+    #                 custom_origin_config: {
+    #                   http_port: 1, # required
+    #                   https_port: 1, # required
+    #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #                   origin_ssl_protocols: {
+    #                     quantity: 1, # required
+    #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           default_cache_behavior: { # required
+    #             target_origin_id: "string", # required
+    #             forwarded_values: { # required
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none", # required, accepts none, whitelist, all
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             min_ttl: 1, # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             default_ttl: 1,
+    #             max_ttl: 1,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "string",
+    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           cache_behaviors: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 path_pattern: "string", # required
+    #                 target_origin_id: "string", # required
+    #                 forwarded_values: { # required
+    #                   query_string: false, # required
+    #                   cookies: { # required
+    #                     forward: "none", # required, accepts none, whitelist, all
+    #                     whitelisted_names: {
+    #                       quantity: 1, # required
+    #                       items: ["string"],
+    #                     },
+    #                   },
+    #                   headers: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   query_string_cache_keys: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                 },
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 min_ttl: 1, # required
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 default_ttl: 1,
+    #                 max_ttl: 1,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "string",
+    #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           custom_error_responses: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 error_code: 1, # required
+    #                 response_page_path: "string",
+    #                 response_code: "string",
+    #                 error_caching_min_ttl: 1,
+    #               },
+    #             ],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             include_cookies: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #           viewer_certificate: {
+    #             cloud_front_default_certificate: false,
+    #             iam_certificate_id: "string",
+    #             acm_certificate_arn: "string",
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #             certificate: "string",
+    #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #           },
+    #           restrictions: {
+    #             geo_restriction: { # required
+    #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           web_acl_id: "string",
+    #           http_version: "http1.1", # accepts http1.1, http2
+    #           is_ipv6_enabled: false,
+    #         },
+    #         tags: { # required
+    #           items: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] distribution_config
+    #   A distribution configuration.
+    #   @return [Types::DistributionConfig]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    class DistributionConfigWithTags < Struct.new(
+      :distribution_config,
+      :tags)
+      include Aws::Structure
+    end
+
+    # A distribution list.
+    #
+    # @!attribute [rw] marker
+    #   The value you provided for the `Marker` request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If `IsTruncated` is `true`, this element is present and contains the
+    #   value you can use for the `Marker` request parameter to continue
+    #   listing your distributions where they left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The value you provided for the `MaxItems` request parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether more distributions remain to be
+    #   listed. If your results were truncated, you can make a follow-up
+    #   pagination request using the `Marker` request parameter to retrieve
+    #   more distributions in the list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of distributions that were created by the current AWS
+    #   account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `DistributionSummary` element for
+    #   each distribution that was created by the current AWS account.
+    #   @return [Array<Types::DistributionSummary>]
+    #
+    class DistributionList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A summary of the information about a CloudFront distribution.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the distribution. For example:
+    #   `arn:aws:cloudfront::123456789012:distribution/EDFDVBD632BHDS5`,
+    #   where `123456789012` is your AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the distribution. When the status is
+    #   `Deployed`, the distribution's information is propagated to all
+    #   CloudFront edge locations.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the distribution was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name that corresponds to the distribution. For example:
+    #   `d604721fxaaqy9.cloudfront.net`.
+    #   @return [String]
+    #
+    # @!attribute [rw] aliases
+    #   A complex type that contains information about CNAMEs (alternate
+    #   domain names), if any, for this distribution.
+    #   @return [Types::Aliases]
+    #
+    # @!attribute [rw] origins
+    #   A complex type that contains information about origins for this
+    #   distribution.
+    #   @return [Types::Origins]
+    #
+    # @!attribute [rw] default_cache_behavior
+    #   A complex type that describes the default cache behavior if you do
+    #   not specify a `CacheBehavior` element or if files don't match any
+    #   of the values of `PathPattern` in `CacheBehavior` elements. You must
+    #   create exactly one default cache behavior.
+    #   @return [Types::DefaultCacheBehavior]
+    #
+    # @!attribute [rw] cache_behaviors
+    #   A complex type that contains zero or more `CacheBehavior` elements.
+    #   @return [Types::CacheBehaviors]
+    #
+    # @!attribute [rw] custom_error_responses
+    #   A complex type that contains zero or more `CustomErrorResponses`
+    #   elements.
+    #   @return [Types::CustomErrorResponses]
+    #
+    # @!attribute [rw] comment
+    #   The comment originally specified when this distribution was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_class
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the distribution is enabled to accept user requests for
+    #   content.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] viewer_certificate
+    #   A complex type that specifies the following:
+    #
+    #   * Which SSL/TLS certificate to use when viewers request objects
+    #     using HTTPS
+    #
+    #   * Whether you want CloudFront to use dedicated IP addresses or SNI
+    #     when you're using alternate domain names in your object names
+    #
+    #   * The minimum protocol version that you want CloudFront to use when
+    #     communicating with viewers
+    #
+    #   For more information, see [Using an HTTPS Connection to Access Your
+    #   Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #   @return [Types::ViewerCertificate]
+    #
+    # @!attribute [rw] restrictions
+    #   A complex type that identifies ways in which you want to restrict
+    #   distribution of your content.
+    #   @return [Types::Restrictions]
+    #
+    # @!attribute [rw] web_acl_id
+    #   The Web ACL Id (if any) associated with the distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] http_version
+    #   Specify the maximum HTTP version that you want viewers to use to
+    #   communicate with CloudFront. The default value for new web
+    #   distributions is `http2`. Viewers that don't support `HTTP/2` will
+    #   automatically use an earlier version.
+    #   @return [String]
+    #
+    # @!attribute [rw] is_ipv6_enabled
+    #   Whether CloudFront responds to IPv6 DNS requests with an IPv6
+    #   address for your distribution.
+    #   @return [Boolean]
+    #
+    class DistributionSummary < Struct.new(
+      :id,
+      :arn,
+      :status,
+      :last_modified_time,
+      :domain_name,
+      :aliases,
+      :origins,
+      :default_cache_behavior,
+      :cache_behaviors,
+      :custom_error_responses,
+      :comment,
+      :price_class,
+      :enabled,
+      :viewer_certificate,
+      :restrictions,
+      :web_acl_id,
+      :http_version,
+      :is_ipv6_enabled)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies how CloudFront handles query strings and
+    # cookies.
+    #
+    # @note When making an API call, you may pass ForwardedValues
+    #   data as a hash:
+    #
+    #       {
+    #         query_string: false, # required
+    #         cookies: { # required
+    #           forward: "none", # required, accepts none, whitelist, all
+    #           whitelisted_names: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #         },
+    #         headers: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         query_string_cache_keys: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] query_string
+    #   Indicates whether you want CloudFront to forward query strings to
+    #   the origin that is associated with this cache behavior and cache
+    #   based on the query string parameters. CloudFront behavior depends on
+    #   the value of `QueryString` and on the values that you specify for
+    #   `QueryStringCacheKeys`, if any:
+    #
+    #   If you specify true for `QueryString` and you don't specify any
+    #   values for `QueryStringCacheKeys`, CloudFront forwards all query
+    #   string parameters to the origin and caches based on all query string
+    #   parameters. Depending on how many query string parameters and values
+    #   you have, this can adversely affect performance because CloudFront
+    #   must forward more requests to the origin.
+    #
+    #   If you specify true for `QueryString` and you specify one or more
+    #   values for `QueryStringCacheKeys`, CloudFront forwards all query
+    #   string parameters to the origin, but it only caches based on the
+    #   query string parameters that you specify.
+    #
+    #   If you specify false for `QueryString`, CloudFront doesn't forward
+    #   any query string parameters to the origin, and doesn't cache based
+    #   on query string parameters.
+    #
+    #   For more information, see [Configuring CloudFront to Cache Based on
+    #   Query String Parameters][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/QueryStringParameters.html
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] cookies
+    #   A complex type that specifies whether you want CloudFront to forward
+    #   cookies to the origin and, if so, which ones. For more information
+    #   about forwarding cookies to the origin, see [How CloudFront
+    #   Forwards, Caches, and Logs Cookies][1] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Cookies.html
+    #   @return [Types::CookiePreference]
+    #
+    # @!attribute [rw] headers
+    #   A complex type that specifies the `Headers`, if any, that you want
+    #   CloudFront to vary upon for this cache behavior.
+    #   @return [Types::Headers]
+    #
+    # @!attribute [rw] query_string_cache_keys
+    #   A complex type that contains information about the query string
+    #   parameters that you want CloudFront to use for caching for this
+    #   cache behavior.
+    #   @return [Types::QueryStringCacheKeys]
+    #
+    class ForwardedValues < Struct.new(
+      :query_string,
+      :cookies,
+      :headers,
+      :query_string_cache_keys)
+      include Aws::Structure
+    end
+
+    # A complex type that controls the countries in which your content is
+    # distributed. CloudFront determines the location of your users using
+    # `MaxMind` GeoIP databases.
+    #
+    # @note When making an API call, you may pass GeoRestriction
+    #   data as a hash:
+    #
+    #       {
+    #         restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] restriction_type
+    #   The method that you want to use to restrict distribution of your
+    #   content by country:
+    #
+    #   * `none`\: No geo restriction is enabled, meaning access to content
+    #     is not restricted by client geo location.
+    #
+    #   * `blacklist`\: The `Location` elements specify the countries in
+    #     which you do not want CloudFront to distribute your content.
+    #
+    #   * `whitelist`\: The `Location` elements specify the countries in
+    #     which you want CloudFront to distribute your content.
+    #   @return [String]
+    #
+    # @!attribute [rw] quantity
+    #   When geo restriction is `enabled`, this is the number of countries
+    #   in your `whitelist` or `blacklist`. Otherwise, when it is not
+    #   enabled, `Quantity` is `0`, and you can omit `Items`.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains a `Location` element for each country
+    #   in which you want CloudFront either to distribute your content
+    #   (`whitelist`) or not distribute your content (`blacklist`).
+    #
+    #   The `Location` element is a two-letter, uppercase country code for a
+    #   country that you want to include in your `blacklist` or `whitelist`.
+    #   Include one `Location` element for each country.
+    #
+    #   CloudFront and `MaxMind` both use `ISO 3166` country codes. For the
+    #   current list of countries and the corresponding codes, see `ISO
+    #   3166-1-alpha-2` code on the *International Organization for
+    #   Standardization* website. You can also refer to the country list in
+    #   the CloudFront console, which includes both country names and codes.
+    #   @return [Array<String>]
+    #
+    class GeoRestriction < Struct.new(
+      :restriction_type,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # The origin access identity's configuration information. For more
+    # information, see CloudFrontOriginAccessIdentityConfigComplexType.
+    #
+    # @note When making an API call, you may pass GetCloudFrontOriginAccessIdentityConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identity's ID.
+    #   @return [String]
+    #
+    class GetCloudFrontOriginAccessIdentityConfigRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity_config
+    #   The origin access identity's configuration information.
+    #   @return [Types::CloudFrontOriginAccessIdentityConfig]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetCloudFrontOriginAccessIdentityConfigResult < Struct.new(
+      :cloud_front_origin_access_identity_config,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to get an origin access identity's information.
+    #
+    # @note When making an API call, you may pass GetCloudFrontOriginAccessIdentityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The identity's ID.
+    #   @return [String]
+    #
+    class GetCloudFrontOriginAccessIdentityRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity
+    #   The origin access identity's information.
+    #   @return [Types::CloudFrontOriginAccessIdentity]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the origin access identity's information.
+    #   For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetCloudFrontOriginAccessIdentityResult < Struct.new(
+      :cloud_front_origin_access_identity,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to get a distribution configuration.
+    #
+    # @note When making an API call, you may pass GetDistributionConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The distribution's ID.
+    #   @return [String]
+    #
+    class GetDistributionConfigRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution_config
+    #   The distribution's configuration information.
+    #   @return [Types::DistributionConfig]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetDistributionConfigResult < Struct.new(
+      :distribution_config,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to get a distribution's information.
+    #
+    # @note When making an API call, you may pass GetDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The distribution's ID.
+    #   @return [String]
+    #
+    class GetDistributionRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution
+    #   The distribution's information.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the distribution's information. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetDistributionResult < Struct.new(
+      :distribution,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to get an invalidation's information.
+    #
+    # @note When making an API call, you may pass GetInvalidationRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The distribution's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] id
+    #   The identifier for the invalidation request, for example,
+    #   `IDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    class GetInvalidationRequest < Struct.new(
+      :distribution_id,
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] invalidation
+    #   The invalidation's information. For more information, see
+    #   [Invalidation Complex Type][1].
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/InvalidationDatatype.html
+    #   @return [Types::Invalidation]
+    #
+    class GetInvalidationResult < Struct.new(
+      :invalidation)
+      include Aws::Structure
+    end
+
+    # To request to get a streaming distribution configuration.
+    #
+    # @note When making an API call, you may pass GetStreamingDistributionConfigRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The streaming distribution's ID.
+    #   @return [String]
+    #
+    class GetStreamingDistributionConfigRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution_config
+    #   The streaming distribution's configuration information.
+    #   @return [Types::StreamingDistributionConfig]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetStreamingDistributionConfigResult < Struct.new(
+      :streaming_distribution_config,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to get a streaming distribution's information.
+    #
+    # @note When making an API call, you may pass GetStreamingDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] id
+    #   The streaming distribution's ID.
+    #   @return [String]
+    #
+    class GetStreamingDistributionRequest < Struct.new(
+      :id)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution
+    #   The streaming distribution's information.
+    #   @return [Types::StreamingDistribution]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the streaming distribution's information.
+    #   For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class GetStreamingDistributionResult < Struct.new(
+      :streaming_distribution,
+      :etag)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies the headers that you want CloudFront to
+    # forward to the origin for this cache behavior.
+    #
+    # For the headers that you specify, CloudFront also caches separate
+    # versions of a specified object based on the header values in viewer
+    # requests. For example, suppose viewer requests for `logo.jpg` contain
+    # a custom `Product` header that has a value of either `Acme` or `Apex`,
+    # and you configure CloudFront to cache your content based on values in
+    # the `Product` header. CloudFront forwards the `Product` header to the
+    # origin and caches the response from the origin once for each header
+    # value. For more information about caching based on header values, see
+    # [How CloudFront Forwards and Caches Headers][1] in the *Amazon
+    # CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/header-caching.html
+    #
+    # @note When making an API call, you may pass Headers
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of different headers that you want CloudFront to forward
+    #   to the origin for this cache behavior. You can configure each cache
+    #   behavior in a web distribution to do one of the following:
+    #
+    #   * **Forward all headers to your origin**\: Specify `1` for
+    #     `Quantity` and `*` for `Name`.
+    #
+    #     If you configure CloudFront to forward all headers to your origin,
+    #     CloudFront doesn't cache the objects associated with this cache
+    #     behavior. Instead, it sends every request to the origin.
+    #
+    #   * *Forward a whitelist of headers you specify*\: Specify the number
+    #     of headers that you want to forward, and specify the header names
+    #     in `Name` elements. CloudFront caches your objects based on the
+    #     values in all of the specified headers. CloudFront also forwards
+    #     the headers that it forwards by default, but it caches your
+    #     objects based only on the headers that you specify.
+    #
+    #   * **Forward only the default headers**\: Specify `0` for `Quantity`
+    #     and omit `Items`. In this configuration, CloudFront doesn't cache
+    #     based on the values in the request headers.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `Name` element for each header that
+    #   you want CloudFront to forward to the origin and to vary on for this
+    #   cache behavior. If `Quantity` is `0`, omit `Items`.
+    #   @return [Array<String>]
+    #
+    class Headers < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # An invalidation.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the invalidation request. For example:
+    #   `IDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The status of the invalidation request. When the invalidation batch
+    #   is finished, the status is `Completed`.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   The date and time the invalidation request was first made.
+    #   @return [Time]
+    #
+    # @!attribute [rw] invalidation_batch
+    #   The current invalidation information for the batch request.
+    #   @return [Types::InvalidationBatch]
+    #
+    class Invalidation < Struct.new(
+      :id,
+      :status,
+      :create_time,
+      :invalidation_batch)
+      include Aws::Structure
+    end
+
+    # An invalidation batch.
+    #
+    # @note When making an API call, you may pass InvalidationBatch
+    #   data as a hash:
+    #
+    #       {
+    #         paths: { # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         caller_reference: "string", # required
+    #       }
+    #
+    # @!attribute [rw] paths
+    #   A complex type that contains information about the objects that you
+    #   want to invalidate. For more information, see [Specifying the
+    #   Objects to Invalidate][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects
+    #   @return [Types::Paths]
+    #
+    # @!attribute [rw] caller_reference
+    #   A value that you specify to uniquely identify an invalidation
+    #   request. CloudFront uses the value to prevent you from accidentally
+    #   resubmitting an identical request. Whenever you create a new
+    #   invalidation request, you must specify a new value for
+    #   `CallerReference` and change other values in the request as
+    #   applicable. One way to ensure that the value of `CallerReference` is
+    #   unique is to use a `timestamp`, for example, `20120301090000`.
+    #
+    #   If you make a second invalidation request with the same value for
+    #   `CallerReference`, and if the rest of the request is the same,
+    #   CloudFront doesn't create a new invalidation request. Instead,
+    #   CloudFront returns information about the invalidation request that
+    #   you previously created with the same `CallerReference`.
+    #
+    #   If `CallerReference` is a value you already sent in a previous
+    #   invalidation batch request but the content of any `Path` is
+    #   different from the original request, CloudFront returns an
+    #   `InvalidationBatchAlreadyExists` error.
+    #   @return [String]
+    #
+    class InvalidationBatch < Struct.new(
+      :paths,
+      :caller_reference)
+      include Aws::Structure
+    end
+
+    # The `InvalidationList` complex type describes the list of invalidation
+    # objects. For more information about invalidation, see [Invalidating
+    # Objects (Web Distributions Only)][1] in the *Amazon CloudFront
+    # Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html
+    #
+    # @!attribute [rw] marker
+    #   The value that you provided for the `Marker` request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If `IsTruncated` is `true`, this element is present and contains the
+    #   value that you can use for the `Marker` request parameter to
+    #   continue listing your invalidation batches where they left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The value that you provided for the `MaxItems` request parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether more invalidation batch requests
+    #   remain to be listed. If your results were truncated, you can make a
+    #   follow-up pagination request using the `Marker` request parameter to
+    #   retrieve more invalidation batches in the list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of invalidation batches that were created by the current
+    #   AWS account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `InvalidationSummary` element for
+    #   each invalidation batch created by the current AWS account.
+    #   @return [Array<Types::InvalidationSummary>]
+    #
+    class InvalidationList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A summary of an invalidation request.
+    #
+    # @!attribute [rw] id
+    #   The unique ID for an invalidation request.
+    #   @return [String]
+    #
+    # @!attribute [rw] create_time
+    #   @return [Time]
+    #
+    # @!attribute [rw] status
+    #   The status of an invalidation request.
+    #   @return [String]
+    #
+    class InvalidationSummary < Struct.new(
+      :id,
+      :create_time,
+      :status)
+      include Aws::Structure
+    end
+
+    # A complex type that lists the active CloudFront key pairs, if any,
+    # that are associated with `AwsAccountNumber`.
+    #
+    # For more information, see ActiveTrustedSigners.
+    #
+    # @!attribute [rw] quantity
+    #   The number of active CloudFront key pairs for `AwsAccountNumber`.
+    #
+    #   For more information, see ActiveTrustedSigners.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that lists the active CloudFront key pairs, if any,
+    #   that are associated with `AwsAccountNumber`.
+    #
+    #   For more information, see ActiveTrustedSigners.
+    #   @return [Array<String>]
+    #
+    class KeyPairIds < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that contains a Lambda function association.
+    #
+    # @note When making an API call, you may pass LambdaFunctionAssociation
+    #   data as a hash:
+    #
+    #       {
+    #         lambda_function_arn: "string",
+    #         event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #       }
+    #
+    # @!attribute [rw] lambda_function_arn
+    #   The ARN of the Lambda function.
+    #   @return [String]
+    #
+    # @!attribute [rw] event_type
+    #   Specifies the event type that triggers a Lambda function invocation.
+    #   Valid values are:
+    #
+    #   * `viewer-request`
+    #
+    #   * `origin-request`
+    #
+    #   * `viewer-response`
+    #
+    #   * `origin-response`
+    #   @return [String]
+    #
+    class LambdaFunctionAssociation < Struct.new(
+      :lambda_function_arn,
+      :event_type)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies a list of Lambda functions associations
+    # for a cache behavior.
+    #
+    # If you want to invoke one or more Lambda functions triggered by
+    # requests that match the `PathPattern` of the cache behavior, specify
+    # the applicable values for `Quantity` and `Items`. Note that there can
+    # be up to 4 `LambdaFunctionAssociation` items in this list (one for
+    # each possible value of `EventType`) and each `EventType` can be
+    # associated with the Lambda function only once.
+    #
+    # If you don't want to invoke any Lambda functions for the requests
+    # that match `PathPattern`, specify `0` for `Quantity` and omit `Items`.
+    #
+    # @note When making an API call, you may pass LambdaFunctionAssociations
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             lambda_function_arn: "string",
+    #             event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of Lambda function associations for this cache behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   **Optional**\: A complex type that contains
+    #   `LambdaFunctionAssociation` items for this cache behavior. If
+    #   `Quantity` is `0`, you can omit `Items`.
+    #   @return [Array<Types::LambdaFunctionAssociation>]
+    #
+    class LambdaFunctionAssociations < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # The request to list origin access identities.
+    #
+    # @note When making an API call, you may pass ListCloudFrontOriginAccessIdentitiesRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of origin access identities. The results include identities in
+    #   the list that occur after the marker. To get the next page of
+    #   results, set the `Marker` to the value of the `NextMarker` from the
+    #   current page's response (which is also the ID of the last identity
+    #   on that page).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of origin access identities you want in the
+    #   response body.
+    #   @return [Integer]
+    #
+    class ListCloudFrontOriginAccessIdentitiesRequest < Struct.new(
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity_list
+    #   The `CloudFrontOriginAccessIdentityList` type.
+    #   @return [Types::CloudFrontOriginAccessIdentityList]
+    #
+    class ListCloudFrontOriginAccessIdentitiesResult < Struct.new(
+      :cloud_front_origin_access_identity_list)
+      include Aws::Structure
+    end
+
+    # The request to list distributions that are associated with a specified
+    # AWS WAF web ACL.
+    #
+    # @note When making an API call, you may pass ListDistributionsByWebACLIdRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #         web_acl_id: "string", # required
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use `Marker` and `MaxItems` to control pagination of results. If you
+    #   have more than `MaxItems` distributions that satisfy the request,
+    #   the response includes a `NextMarker` element. To get the next page
+    #   of results, submit another request. For the value of `Marker`,
+    #   specify the value of `NextMarker` from the last response. (For the
+    #   first request, omit `Marker`.)
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions that you want CloudFront to
+    #   return in the response body. The maximum and default values are both
+    #   100.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] web_acl_id
+    #   The ID of the AWS WAF web ACL that you want to list the associated
+    #   distributions. If you specify "null" for the ID, the request
+    #   returns a list of the distributions that aren't associated with a
+    #   web ACL.
+    #   @return [String]
+    #
+    class ListDistributionsByWebACLIdRequest < Struct.new(
+      :marker,
+      :max_items,
+      :web_acl_id)
+      include Aws::Structure
+    end
+
+    # The response to a request to list the distributions that are
+    # associated with a specified AWS WAF web ACL.
+    #
+    # @!attribute [rw] distribution_list
+    #   The `DistributionList` type.
+    #   @return [Types::DistributionList]
+    #
+    class ListDistributionsByWebACLIdResult < Struct.new(
+      :distribution_list)
+      include Aws::Structure
+    end
+
+    # The request to list your distributions.
+    #
+    # @note When making an API call, you may pass ListDistributionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   Use this when paginating results to indicate where to begin in your
+    #   list of distributions. The results include distributions in the list
+    #   that occur after the marker. To get the next page of results, set
+    #   the `Marker` to the value of the `NextMarker` from the current
+    #   page's response (which is also the ID of the last distribution on
+    #   that page).
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of distributions you want in the response body.
+    #   @return [Integer]
+    #
+    class ListDistributionsRequest < Struct.new(
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution_list
+    #   The `DistributionList` type.
+    #   @return [Types::DistributionList]
+    #
+    class ListDistributionsResult < Struct.new(
+      :distribution_list)
+      include Aws::Structure
+    end
+
+    # The request to list invalidations.
+    #
+    # @note When making an API call, you may pass ListInvalidationsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_id: "string", # required
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] distribution_id
+    #   The distribution's ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] marker
+    #   Use this parameter when paginating results to indicate where to
+    #   begin in your list of invalidation batches. Because the results are
+    #   returned in decreasing order from most recent to oldest, the most
+    #   recent results are on the first page, the second page will contain
+    #   earlier results, and so on. To get the next page of results, set
+    #   `Marker` to the value of the `NextMarker` from the current page's
+    #   response. This value is the same as the ID of the last invalidation
+    #   batch on that page.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The maximum number of invalidation batches that you want in the
+    #   response body.
+    #   @return [Integer]
+    #
+    class ListInvalidationsRequest < Struct.new(
+      :distribution_id,
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] invalidation_list
+    #   Information about invalidation batches.
+    #   @return [Types::InvalidationList]
+    #
+    class ListInvalidationsResult < Struct.new(
+      :invalidation_list)
+      include Aws::Structure
+    end
+
+    # The request to list your streaming distributions.
+    #
+    # @note When making an API call, you may pass ListStreamingDistributionsRequest
+    #   data as a hash:
+    #
+    #       {
+    #         marker: "string",
+    #         max_items: 1,
+    #       }
+    #
+    # @!attribute [rw] marker
+    #   The value that you provided for the `Marker` request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The value that you provided for the `MaxItems` request parameter.
+    #   @return [Integer]
+    #
+    class ListStreamingDistributionsRequest < Struct.new(
+      :marker,
+      :max_items)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution_list
+    #   The `StreamingDistributionList` type.
+    #   @return [Types::StreamingDistributionList]
+    #
+    class ListStreamingDistributionsResult < Struct.new(
+      :streaming_distribution_list)
+      include Aws::Structure
+    end
+
+    # The request to list tags for a CloudFront resource.
+    #
+    # @note When making an API call, you may pass ListTagsForResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "ResourceARN", # required
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   An ARN of a CloudFront resource.
+    #   @return [String]
+    #
+    class ListTagsForResourceRequest < Struct.new(
+      :resource)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    class ListTagsForResourceResult < Struct.new(
+      :tags)
+      include Aws::Structure
+    end
+
+    # A complex type that controls whether access logs are written for the
+    # distribution.
+    #
+    # @note When making an API call, you may pass LoggingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         include_cookies: false, # required
+    #         bucket: "string", # required
+    #         prefix: "string", # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want CloudFront to save access logs to an
+    #   Amazon S3 bucket. If you do not want to enable logging when you
+    #   create a distribution or if you want to disable logging for an
+    #   existing distribution, specify `false` for `Enabled`, and specify
+    #   empty `Bucket` and `Prefix` elements. If you specify `false` for
+    #   `Enabled` but you specify values for `Bucket`, `prefix`, and
+    #   `IncludeCookies`, the values are automatically deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] include_cookies
+    #   Specifies whether you want CloudFront to include cookies in access
+    #   logs, specify `true` for `IncludeCookies`. If you choose to include
+    #   cookies in logs, CloudFront logs all cookies regardless of how you
+    #   configure the cache behaviors for this distribution. If you do not
+    #   want to include cookies when you create a distribution or if you
+    #   want to disable include cookies for an existing distribution,
+    #   specify `false` for `IncludeCookies`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket to store the access logs in, for example,
+    #   `myawslogbucket.s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   An optional string that you want CloudFront to prefix to the access
+    #   log `filenames` for this distribution, for example, `myprefix/`. If
+    #   you want to enable logging, but you do not want to specify a prefix,
+    #   you still must include an empty `Prefix` element in the `Logging`
+    #   element.
+    #   @return [String]
+    #
+    class LoggingConfig < Struct.new(
+      :enabled,
+      :include_cookies,
+      :bucket,
+      :prefix)
+      include Aws::Structure
+    end
+
+    # A complex type that describes the Amazon S3 bucket or the HTTP server
+    # (for example, a web server) from which CloudFront gets your files. You
+    # must create at least one origin.
+    #
+    # For the current limit on the number of origins that you can create for
+    # a distribution, see [Amazon CloudFront Limits][1] in the *AWS General
+    # Reference*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/general/latest/gr/aws_service_limits.html#limits_cloudfront
+    #
+    # @note When making an API call, you may pass Origin
+    #   data as a hash:
+    #
+    #       {
+    #         id: "string", # required
+    #         domain_name: "string", # required
+    #         origin_path: "string",
+    #         custom_headers: {
+    #           quantity: 1, # required
+    #           items: [
+    #             {
+    #               header_name: "string", # required
+    #               header_value: "string", # required
+    #             },
+    #           ],
+    #         },
+    #         s3_origin_config: {
+    #           origin_access_identity: "string", # required
+    #         },
+    #         custom_origin_config: {
+    #           http_port: 1, # required
+    #           https_port: 1, # required
+    #           origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #           origin_ssl_protocols: {
+    #             quantity: 1, # required
+    #             items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #           },
+    #         },
+    #       }
+    #
+    # @!attribute [rw] id
+    #   A unique identifier for the origin. The value of `Id` must be unique
+    #   within the distribution.
+    #
+    #   When you specify the value of `TargetOriginId` for the default cache
+    #   behavior or for another cache behavior, you indicate the origin to
+    #   which you want the cache behavior to route requests by specifying
+    #   the value of the `Id` element for that origin. When a request
+    #   matches the path pattern for that cache behavior, CloudFront routes
+    #   the request to the specified origin. For more information, see
+    #   [Cache Behavior Settings][1] in the *Amazon CloudFront Developer
+    #   Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/distribution-web-values-specify.html#DownloadDistValuesCacheBehavior
+    #   @return [String]
+    #
+    # @!attribute [rw] domain_name
+    #   **Amazon S3 origins**\: The DNS name of the Amazon S3 bucket from
+    #   which you want CloudFront to get objects for this origin, for
+    #   example, `myawsbucket.s3.amazonaws.com`.
+    #
+    #   Constraints for Amazon S3 origins:
+    #
+    #   * If you configured Amazon S3 Transfer Acceleration for your bucket,
+    #     do not specify the `s3-accelerate` endpoint for `DomainName`.
+    #
+    #   * The bucket name must be between 3 and 63 characters long
+    #     (inclusive).
+    #
+    #   * The bucket name must contain only lowercase characters, numbers,
+    #     periods, underscores, and dashes.
+    #
+    #   * The bucket name must not contain adjacent periods.
+    #
+    #   **Custom Origins**\: The DNS domain name for the HTTP server from
+    #   which you want CloudFront to get objects for this origin, for
+    #   example, `www.example.com`.
+    #
+    #   Constraints for custom origins:
+    #
+    #   * `DomainName` must be a valid DNS name that contains only a-z, A-Z,
+    #     0-9, dot (.), hyphen (-), or underscore (\_) characters.
+    #
+    #   * The name cannot exceed 128 characters.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_path
+    #   An optional element that causes CloudFront to request your content
+    #   from a directory in your Amazon S3 bucket or your custom origin.
+    #   When you include the `OriginPath` element, specify the directory
+    #   name, beginning with a `/`. CloudFront appends the directory name to
+    #   the value of `DomainName`, for example, `example.com/production`. Do
+    #   not include a `/` at the end of the directory name.
+    #
+    #   For example, suppose you've specified the following values for your
+    #   distribution:
+    #
+    #   * `DomainName`\: An Amazon S3 bucket named `myawsbucket`.
+    #
+    #   * `OriginPath`\: `/production`
+    #
+    #   * `CNAME`\: `example.com`
+    #
+    #   When a user enters `example.com/index.html` in a browser, CloudFront
+    #   sends a request to Amazon S3 for
+    #   `myawsbucket/production/index.html`.
+    #
+    #   When a user enters `example.com/acme/index.html` in a browser,
+    #   CloudFront sends a request to Amazon S3 for
+    #   `myawsbucket/production/acme/index.html`.
+    #   @return [String]
+    #
+    # @!attribute [rw] custom_headers
+    #   A complex type that contains names and values for the custom headers
+    #   that you want.
+    #   @return [Types::CustomHeaders]
+    #
+    # @!attribute [rw] s3_origin_config
+    #   A complex type that contains information about the Amazon S3 origin.
+    #   If the origin is a custom origin, use the `CustomOriginConfig`
+    #   element instead.
+    #   @return [Types::S3OriginConfig]
+    #
+    # @!attribute [rw] custom_origin_config
+    #   A complex type that contains information about a custom origin. If
+    #   the origin is an Amazon S3 bucket, use the `S3OriginConfig` element
+    #   instead.
+    #   @return [Types::CustomOriginConfig]
+    #
+    class Origin < Struct.new(
+      :id,
+      :domain_name,
+      :origin_path,
+      :custom_headers,
+      :s3_origin_config,
+      :custom_origin_config)
+      include Aws::Structure
+    end
+
+    # A complex type that contains `HeaderName` and `HeaderValue` elements,
+    # if any, for this distribution.
+    #
+    # @note When making an API call, you may pass OriginCustomHeader
+    #   data as a hash:
+    #
+    #       {
+    #         header_name: "string", # required
+    #         header_value: "string", # required
+    #       }
+    #
+    # @!attribute [rw] header_name
+    #   The name of a header that you want CloudFront to forward to your
+    #   origin. For more information, see [Forwarding Custom Headers to Your
+    #   Origin (Web Distributions Only)][1] in the *Amazon Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/forward-custom-headers.html
+    #   @return [String]
+    #
+    # @!attribute [rw] header_value
+    #   The value for the header that you specified in the `HeaderName`
+    #   field.
+    #   @return [String]
+    #
+    class OriginCustomHeader < Struct.new(
+      :header_name,
+      :header_value)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the SSL/TLS protocols
+    # that CloudFront can use when establishing an HTTPS connection with
+    # your origin.
+    #
+    # @note When making an API call, you may pass OriginSslProtocols
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of SSL/TLS protocols that you want to allow CloudFront to
+    #   use when establishing an HTTPS connection with this origin.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A list that contains allowed SSL/TLS protocols for this
+    #   distribution.
+    #   @return [Array<String>]
+    #
+    class OriginSslProtocols < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about origins for this
+    # distribution.
+    #
+    # @note When making an API call, you may pass Origins
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: [
+    #           {
+    #             id: "string", # required
+    #             domain_name: "string", # required
+    #             origin_path: "string",
+    #             custom_headers: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   header_name: "string", # required
+    #                   header_value: "string", # required
+    #                 },
+    #               ],
+    #             },
+    #             s3_origin_config: {
+    #               origin_access_identity: "string", # required
+    #             },
+    #             custom_origin_config: {
+    #               http_port: 1, # required
+    #               https_port: 1, # required
+    #               origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #               origin_ssl_protocols: {
+    #                 quantity: 1, # required
+    #                 items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #               },
+    #             },
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of origins for this distribution.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains origins for this distribution.
+    #   @return [Array<Types::Origin>]
+    #
+    class Origins < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the objects that you
+    # want to invalidate. For more information, see [Specifying the Objects
+    # to Invalidate][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/Invalidation.html#invalidation-specifying-objects
+    #
+    # @note When making an API call, you may pass Paths
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of objects that you want to invalidate.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains a list of the paths that you want to
+    #   invalidate.
+    #   @return [Array<String>]
+    #
+    class Paths < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # @note When making an API call, you may pass QueryStringCacheKeys
+    #   data as a hash:
+    #
+    #       {
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] quantity
+    #   The number of `whitelisted` query string parameters for this cache
+    #   behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   (Optional) A list that contains the query string parameters that you
+    #   want CloudFront to use as a basis for caching for this cache
+    #   behavior. If `Quantity` is 0, you can omit `Items`.
+    #   @return [Array<String>]
+    #
+    class QueryStringCacheKeys < Struct.new(
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that identifies ways in which you want to restrict
+    # distribution of your content.
+    #
+    # @note When making an API call, you may pass Restrictions
+    #   data as a hash:
+    #
+    #       {
+    #         geo_restriction: { # required
+    #           restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] geo_restriction
+    #   A complex type that controls the countries in which your content is
+    #   distributed. CloudFront determines the location of your users using
+    #   `MaxMind` GeoIP databases.
+    #   @return [Types::GeoRestriction]
+    #
+    class Restrictions < Struct.new(
+      :geo_restriction)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the Amazon S3 bucket
+    # from which you want CloudFront to get your media files for
+    # distribution.
+    #
+    # @note When making an API call, you may pass S3Origin
+    #   data as a hash:
+    #
+    #       {
+    #         domain_name: "string", # required
+    #         origin_access_identity: "string", # required
+    #       }
+    #
+    # @!attribute [rw] domain_name
+    #   The DNS name of the Amazon S3 origin.
+    #   @return [String]
+    #
+    # @!attribute [rw] origin_access_identity
+    #   The CloudFront origin access identity to associate with the RTMP
+    #   distribution. Use an origin access identity to configure the
+    #   distribution so that end users can only access objects in an Amazon
+    #   S3 bucket through CloudFront.
+    #
+    #   If you want end users to be able to access objects using either the
+    #   CloudFront URL or the Amazon S3 URL, specify an empty
+    #   `OriginAccessIdentity` element.
+    #
+    #   To delete the origin access identity from an existing distribution,
+    #   update the distribution configuration and include an empty
+    #   `OriginAccessIdentity` element.
+    #
+    #   To replace the origin access identity, update the distribution
+    #   configuration and specify the new origin access identity.
+    #
+    #   For more information, see [Using an Origin Access Identity to
+    #   Restrict Access to Your Amazon S3 Content][1] in the *Amazon Amazon
+    #   CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/private-content-restricting-access-to-s3.html
+    #   @return [String]
+    #
+    class S3Origin < Struct.new(
+      :domain_name,
+      :origin_access_identity)
+      include Aws::Structure
+    end
+
+    # A complex type that contains information about the Amazon S3 origin.
+    # If the origin is a custom origin, use the `CustomOriginConfig` element
+    # instead.
+    #
+    # @note When making an API call, you may pass S3OriginConfig
+    #   data as a hash:
+    #
+    #       {
+    #         origin_access_identity: "string", # required
+    #       }
+    #
+    # @!attribute [rw] origin_access_identity
+    #   The CloudFront origin access identity to associate with the origin.
+    #   Use an origin access identity to configure the origin so that
+    #   viewers can *only* access objects in an Amazon S3 bucket through
+    #   CloudFront. The format of the value is:
+    #
+    #   origin-access-identity/CloudFront/*ID-of-origin-access-identity*
+    #
+    #   where ` ID-of-origin-access-identity ` is the value that CloudFront
+    #   returned in the `ID` element when you created the origin access
+    #   identity.
+    #
+    #   If you want viewers to be able to access objects using either the
+    #   CloudFront URL or the Amazon S3 URL, specify an empty
+    #   `OriginAccessIdentity` element.
+    #
+    #   To delete the origin access identity from an existing distribution,
+    #   update the distribution configuration and include an empty
+    #   `OriginAccessIdentity` element.
+    #
+    #   To replace the origin access identity, update the distribution
+    #   configuration and specify the new origin access identity.
+    #
+    #   For more information about the origin access identity, see [Serving
+    #   Private Content through CloudFront][1] in the *Amazon CloudFront
+    #   Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [String]
+    #
+    class S3OriginConfig < Struct.new(
+      :origin_access_identity)
+      include Aws::Structure
+    end
+
+    # A complex type that lists the AWS accounts that were included in the
+    # `TrustedSigners` complex type, as well as their active CloudFront key
+    # pair IDs, if any.
+    #
+    # @!attribute [rw] aws_account_number
+    #   An AWS account that is included in the `TrustedSigners` complex type
+    #   for this RTMP distribution. Valid values include:
+    #
+    #   * `self`, which is the AWS account used to create the distribution.
+    #
+    #   * An AWS account number.
+    #   @return [String]
+    #
+    # @!attribute [rw] key_pair_ids
+    #   A complex type that lists the active CloudFront key pairs, if any,
+    #   that are associated with `AwsAccountNumber`.
+    #   @return [Types::KeyPairIds]
+    #
+    class Signer < Struct.new(
+      :aws_account_number,
+      :key_pair_ids)
+      include Aws::Structure
+    end
+
+    # A streaming distribution.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the RTMP distribution. For example:
+    #   `EGTXBD79EXAMPLE`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   The current status of the RTMP distribution. When the status is
+    #   `Deployed`, the distribution's information is propagated to all
+    #   CloudFront edge locations.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time that the distribution was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name that corresponds to the streaming distribution. For
+    #   example: `s5c39gqb8ow64r.cloudfront.net`.
+    #   @return [String]
+    #
+    # @!attribute [rw] active_trusted_signers
+    #   A complex type that lists the AWS accounts, if any, that you
+    #   included in the `TrustedSigners` complex type for this distribution.
+    #   These are the accounts that you want to allow to create signed URLs
+    #   for private content.
+    #
+    #   The `Signer` complex type lists the AWS account number of the
+    #   trusted signer or `self` if the signer is the AWS account that
+    #   created the distribution. The `Signer` element also includes the IDs
+    #   of any active CloudFront key pairs that are associated with the
+    #   trusted signer's AWS account. If no `KeyPairId` element appears for
+    #   a `Signer`, that signer can't create signed URLs.
+    #
+    #   For more information, see [Serving Private Content through
+    #   CloudFront][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::ActiveTrustedSigners]
+    #
+    # @!attribute [rw] streaming_distribution_config
+    #   The current configuration information for the RTMP distribution.
+    #   @return [Types::StreamingDistributionConfig]
+    #
+    class StreamingDistribution < Struct.new(
+      :id,
+      :arn,
+      :status,
+      :last_modified_time,
+      :domain_name,
+      :active_trusted_signers,
+      :streaming_distribution_config)
+      include Aws::Structure
+    end
+
+    # The RTMP distribution's configuration information.
+    #
+    # @note When making an API call, you may pass StreamingDistributionConfig
+    #   data as a hash:
+    #
+    #       {
+    #         caller_reference: "string", # required
+    #         s3_origin: { # required
+    #           domain_name: "string", # required
+    #           origin_access_identity: "string", # required
+    #         },
+    #         aliases: {
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         comment: "string", # required
+    #         logging: {
+    #           enabled: false, # required
+    #           bucket: "string", # required
+    #           prefix: "string", # required
+    #         },
+    #         trusted_signers: { # required
+    #           enabled: false, # required
+    #           quantity: 1, # required
+    #           items: ["string"],
+    #         },
+    #         price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #         enabled: false, # required
+    #       }
+    #
+    # @!attribute [rw] caller_reference
+    #   A unique number that ensures that the request can't be replayed. If
+    #   the `CallerReference` is new (no matter the content of the
+    #   `StreamingDistributionConfig` object), a new streaming distribution
+    #   is created. If the `CallerReference` is a value that you already
+    #   sent in a previous request to create a streaming distribution, and
+    #   the content of the `StreamingDistributionConfig` is identical to the
+    #   original request (ignoring white space), the response includes the
+    #   same information returned to the original request. If the
+    #   `CallerReference` is a value that you already sent in a previous
+    #   request to create a streaming distribution but the content of the
+    #   `StreamingDistributionConfig` is different from the original
+    #   request, CloudFront returns a `DistributionAlreadyExists` error.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_origin
+    #   A complex type that contains information about the Amazon S3 bucket
+    #   from which you want CloudFront to get your media files for
+    #   distribution.
+    #   @return [Types::S3Origin]
+    #
+    # @!attribute [rw] aliases
+    #   A complex type that contains information about CNAMEs (alternate
+    #   domain names), if any, for this streaming distribution.
+    #   @return [Types::Aliases]
+    #
+    # @!attribute [rw] comment
+    #   Any comments you want to include about the streaming distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] logging
+    #   A complex type that controls whether access logs are written for the
+    #   streaming distribution.
+    #   @return [Types::StreamingLoggingConfig]
+    #
+    # @!attribute [rw] trusted_signers
+    #   A complex type that specifies any AWS accounts that you want to
+    #   permit to create signed URLs for private content. If you want the
+    #   distribution to use signed URLs, include this element; if you want
+    #   the distribution to use public URLs, remove this element. For more
+    #   information, see [Serving Private Content through CloudFront][1] in
+    #   the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] price_class
+    #   A complex type that contains information about price class for this
+    #   streaming distribution.
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the streaming distribution is enabled to accept user
+    #   requests for content.
+    #   @return [Boolean]
+    #
+    class StreamingDistributionConfig < Struct.new(
+      :caller_reference,
+      :s3_origin,
+      :aliases,
+      :comment,
+      :logging,
+      :trusted_signers,
+      :price_class,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # A streaming distribution Configuration and a list of tags to be
+    # associated with the streaming distribution.
+    #
+    # @note When making an API call, you may pass StreamingDistributionConfigWithTags
+    #   data as a hash:
+    #
+    #       {
+    #         streaming_distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           s3_origin: { # required
+    #             domain_name: "string", # required
+    #             origin_access_identity: "string", # required
+    #           },
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #         },
+    #         tags: { # required
+    #           items: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] streaming_distribution_config
+    #   A streaming distribution Configuration.
+    #   @return [Types::StreamingDistributionConfig]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    class StreamingDistributionConfigWithTags < Struct.new(
+      :streaming_distribution_config,
+      :tags)
+      include Aws::Structure
+    end
+
+    # A streaming distribution list.
+    #
+    # @!attribute [rw] marker
+    #   The value you provided for the `Marker` request parameter.
+    #   @return [String]
+    #
+    # @!attribute [rw] next_marker
+    #   If `IsTruncated` is `true`, this element is present and contains the
+    #   value you can use for the `Marker` request parameter to continue
+    #   listing your RTMP distributions where they left off.
+    #   @return [String]
+    #
+    # @!attribute [rw] max_items
+    #   The value you provided for the `MaxItems` request parameter.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] is_truncated
+    #   A flag that indicates whether more streaming distributions remain to
+    #   be listed. If your results were truncated, you can make a follow-up
+    #   pagination request using the `Marker` request parameter to retrieve
+    #   more distributions in the list.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of streaming distributions that were created by the
+    #   current AWS account.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains one `StreamingDistributionSummary`
+    #   element for each distribution that was created by the current AWS
+    #   account.
+    #   @return [Array<Types::StreamingDistributionSummary>]
+    #
+    class StreamingDistributionList < Struct.new(
+      :marker,
+      :next_marker,
+      :max_items,
+      :is_truncated,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # A summary of the information for an Amazon CloudFront streaming
+    # distribution.
+    #
+    # @!attribute [rw] id
+    #   The identifier for the distribution. For example: `EDFDVBD632BHDS5`.
+    #   @return [String]
+    #
+    # @!attribute [rw] arn
+    #   The ARN (Amazon Resource Name) for the streaming distribution. For
+    #   example:
+    #   `arn:aws:cloudfront::123456789012:streaming-distribution/EDFDVBD632BHDS5`,
+    #   where `123456789012` is your AWS account ID.
+    #   @return [String]
+    #
+    # @!attribute [rw] status
+    #   Indicates the current status of the distribution. When the status is
+    #   `Deployed`, the distribution's information is fully propagated
+    #   throughout the Amazon CloudFront system.
+    #   @return [String]
+    #
+    # @!attribute [rw] last_modified_time
+    #   The date and time the distribution was last modified.
+    #   @return [Time]
+    #
+    # @!attribute [rw] domain_name
+    #   The domain name corresponding to the distribution. For example:
+    #   `d604721fxaaqy9.cloudfront.net`.
+    #   @return [String]
+    #
+    # @!attribute [rw] s3_origin
+    #   A complex type that contains information about the Amazon S3 bucket
+    #   from which you want CloudFront to get your media files for
+    #   distribution.
+    #   @return [Types::S3Origin]
+    #
+    # @!attribute [rw] aliases
+    #   A complex type that contains information about CNAMEs (alternate
+    #   domain names), if any, for this streaming distribution.
+    #   @return [Types::Aliases]
+    #
+    # @!attribute [rw] trusted_signers
+    #   A complex type that specifies the AWS accounts, if any, that you
+    #   want to allow to create signed URLs for private content. If you want
+    #   to require signed URLs in requests for objects in the target origin
+    #   that match the `PathPattern` for this cache behavior, specify `true`
+    #   for `Enabled`, and specify the applicable values for `Quantity` and
+    #   `Items`.If you don't want to require signed URLs in requests for
+    #   objects that match `PathPattern`, specify `false` for `Enabled` and
+    #   `0` for `Quantity`. Omit `Items`. To add, change, or remove one or
+    #   more trusted signers, change `Enabled` to `true` (if it's currently
+    #   `false`), change `Quantity` as applicable, and specify all of the
+    #   trusted signers that you want to include in the updated
+    #   distribution.
+    #   @return [Types::TrustedSigners]
+    #
+    # @!attribute [rw] comment
+    #   The comment originally specified when this distribution was created.
+    #   @return [String]
+    #
+    # @!attribute [rw] price_class
+    #   @return [String]
+    #
+    # @!attribute [rw] enabled
+    #   Whether the distribution is enabled to accept end user requests for
+    #   content.
+    #   @return [Boolean]
+    #
+    class StreamingDistributionSummary < Struct.new(
+      :id,
+      :arn,
+      :status,
+      :last_modified_time,
+      :domain_name,
+      :s3_origin,
+      :aliases,
+      :trusted_signers,
+      :comment,
+      :price_class,
+      :enabled)
+      include Aws::Structure
+    end
+
+    # A complex type that controls whether access logs are written for this
+    # streaming distribution.
+    #
+    # @note When making an API call, you may pass StreamingLoggingConfig
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         bucket: "string", # required
+    #         prefix: "string", # required
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want CloudFront to save access logs to an
+    #   Amazon S3 bucket. If you do not want to enable logging when you
+    #   create a streaming distribution or if you want to disable logging
+    #   for an existing streaming distribution, specify `false` for
+    #   `Enabled`, and specify `empty Bucket` and `Prefix` elements. If you
+    #   specify `false` for `Enabled` but you specify values for `Bucket`
+    #   and `Prefix`, the values are automatically deleted.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] bucket
+    #   The Amazon S3 bucket to store the access logs in, for example,
+    #   `myawslogbucket.s3.amazonaws.com`.
+    #   @return [String]
+    #
+    # @!attribute [rw] prefix
+    #   An optional string that you want CloudFront to prefix to the access
+    #   log `filenames` for this streaming distribution, for example,
+    #   `myprefix/`. If you want to enable logging, but you do not want to
+    #   specify a prefix, you still must include an empty `Prefix` element
+    #   in the `Logging` element.
+    #   @return [String]
+    #
+    class StreamingLoggingConfig < Struct.new(
+      :enabled,
+      :bucket,
+      :prefix)
+      include Aws::Structure
+    end
+
+    # A complex type that contains `Tag` key and `Tag` value.
+    #
+    # @note When making an API call, you may pass Tag
+    #   data as a hash:
+    #
+    #       {
+    #         key: "TagKey", # required
+    #         value: "TagValue",
+    #       }
+    #
+    # @!attribute [rw] key
+    #   A string that contains `Tag` key.
+    #
+    #   The string length should be between 1 and 128 characters. Valid
+    #   characters include `a-z`, `A-Z`, `0-9`, space, and the special
+    #   characters `_ - . : / = + @`.
+    #   @return [String]
+    #
+    # @!attribute [rw] value
+    #   A string that contains an optional `Tag` value.
+    #
+    #   The string length should be between 0 and 256 characters. Valid
+    #   characters include `a-z`, `A-Z`, `0-9`, space, and the special
+    #   characters `_ - . : / = + @`.
+    #   @return [String]
+    #
+    class Tag < Struct.new(
+      :key,
+      :value)
+      include Aws::Structure
+    end
+
+    # A complex type that contains zero or more `Tag` elements.
+    #
+    # @note When making an API call, you may pass TagKeys
+    #   data as a hash:
+    #
+    #       {
+    #         items: ["TagKey"],
+    #       }
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains `Tag` key elements.
+    #   @return [Array<String>]
+    #
+    class TagKeys < Struct.new(
+      :items)
+      include Aws::Structure
+    end
+
+    # The request to add tags to a CloudFront resource.
+    #
+    # @note When making an API call, you may pass TagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "ResourceARN", # required
+    #         tags: { # required
+    #           items: [
+    #             {
+    #               key: "TagKey", # required
+    #               value: "TagValue",
+    #             },
+    #           ],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   An ARN of a CloudFront resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tags
+    #   A complex type that contains zero or more `Tag` elements.
+    #   @return [Types::Tags]
+    #
+    class TagResourceRequest < Struct.new(
+      :resource,
+      :tags)
+      include Aws::Structure
+    end
+
+    # A complex type that contains zero or more `Tag` elements.
+    #
+    # @note When making an API call, you may pass Tags
+    #   data as a hash:
+    #
+    #       {
+    #         items: [
+    #           {
+    #             key: "TagKey", # required
+    #             value: "TagValue",
+    #           },
+    #         ],
+    #       }
+    #
+    # @!attribute [rw] items
+    #   A complex type that contains `Tag` elements.
+    #   @return [Array<Types::Tag>]
+    #
+    class Tags < Struct.new(
+      :items)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies the AWS accounts, if any, that you want
+    # to allow to create signed URLs for private content.
+    #
+    # If you want to require signed URLs in requests for objects in the
+    # target origin that match the `PathPattern` for this cache behavior,
+    # specify `true` for `Enabled`, and specify the applicable values for
+    # `Quantity` and `Items`. For more information, see [Serving Private
+    # Content through CloudFront][1] in the *Amazon Amazon CloudFront
+    # Developer Guide*.
+    #
+    # If you don't want to require signed URLs in requests for objects that
+    # match `PathPattern`, specify `false` for `Enabled` and `0` for
+    # `Quantity`. Omit `Items`.
+    #
+    # To add, change, or remove one or more trusted signers, change
+    # `Enabled` to `true` (if it's currently `false`), change `Quantity` as
+    # applicable, and specify all of the trusted signers that you want to
+    # include in the updated distribution.
+    #
+    # For more information about updating the distribution configuration,
+    # see DistributionConfig .
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/PrivateContent.html
+    #
+    # @note When making an API call, you may pass TrustedSigners
+    #   data as a hash:
+    #
+    #       {
+    #         enabled: false, # required
+    #         quantity: 1, # required
+    #         items: ["string"],
+    #       }
+    #
+    # @!attribute [rw] enabled
+    #   Specifies whether you want to require viewers to use signed URLs to
+    #   access the files specified by `PathPattern` and `TargetOriginId`.
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] quantity
+    #   The number of trusted signers for this cache behavior.
+    #   @return [Integer]
+    #
+    # @!attribute [rw] items
+    #   **Optional**\: A complex type that contains trusted signers for this
+    #   cache behavior. If `Quantity` is `0`, you can omit `Items`.
+    #   @return [Array<String>]
+    #
+    class TrustedSigners < Struct.new(
+      :enabled,
+      :quantity,
+      :items)
+      include Aws::Structure
+    end
+
+    # The request to remove tags from a CloudFront resource.
+    #
+    # @note When making an API call, you may pass UntagResourceRequest
+    #   data as a hash:
+    #
+    #       {
+    #         resource: "ResourceARN", # required
+    #         tag_keys: { # required
+    #           items: ["TagKey"],
+    #         },
+    #       }
+    #
+    # @!attribute [rw] resource
+    #   An ARN of a CloudFront resource.
+    #   @return [String]
+    #
+    # @!attribute [rw] tag_keys
+    #   A complex type that contains zero or more `Tag` key elements.
+    #   @return [Types::TagKeys]
+    #
+    class UntagResourceRequest < Struct.new(
+      :resource,
+      :tag_keys)
+      include Aws::Structure
+    end
+
+    # The request to update an origin access identity.
+    #
+    # @note When making an API call, you may pass UpdateCloudFrontOriginAccessIdentityRequest
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_front_origin_access_identity_config: { # required
+    #           caller_reference: "string", # required
+    #           comment: "string", # required
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity_config
+    #   The identity's configuration information.
+    #   @return [Types::CloudFrontOriginAccessIdentityConfig]
+    #
+    # @!attribute [rw] id
+    #   The identity's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   identity's configuration. For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateCloudFrontOriginAccessIdentityRequest < Struct.new(
+      :cloud_front_origin_access_identity_config,
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] cloud_front_origin_access_identity
+    #   The origin access identity's information.
+    #   @return [Types::CloudFrontOriginAccessIdentity]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateCloudFrontOriginAccessIdentityResult < Struct.new(
+      :cloud_front_origin_access_identity,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to update a distribution.
+    #
+    # @note When making an API call, you may pass UpdateDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           default_root_object: "string",
+    #           origins: { # required
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 id: "string", # required
+    #                 domain_name: "string", # required
+    #                 origin_path: "string",
+    #                 custom_headers: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       header_name: "string", # required
+    #                       header_value: "string", # required
+    #                     },
+    #                   ],
+    #                 },
+    #                 s3_origin_config: {
+    #                   origin_access_identity: "string", # required
+    #                 },
+    #                 custom_origin_config: {
+    #                   http_port: 1, # required
+    #                   https_port: 1, # required
+    #                   origin_protocol_policy: "http-only", # required, accepts http-only, match-viewer, https-only
+    #                   origin_ssl_protocols: {
+    #                     quantity: 1, # required
+    #                     items: ["SSLv3"], # required, accepts SSLv3, TLSv1, TLSv1.1, TLSv1.2
+    #                   },
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           default_cache_behavior: { # required
+    #             target_origin_id: "string", # required
+    #             forwarded_values: { # required
+    #               query_string: false, # required
+    #               cookies: { # required
+    #                 forward: "none", # required, accepts none, whitelist, all
+    #                 whitelisted_names: {
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #               },
+    #               headers: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #               query_string_cache_keys: {
+    #                 quantity: 1, # required
+    #                 items: ["string"],
+    #               },
+    #             },
+    #             trusted_signers: { # required
+    #               enabled: false, # required
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #             viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #             min_ttl: 1, # required
+    #             allowed_methods: {
+    #               quantity: 1, # required
+    #               items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               cached_methods: {
+    #                 quantity: 1, # required
+    #                 items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #               },
+    #             },
+    #             smooth_streaming: false,
+    #             default_ttl: 1,
+    #             max_ttl: 1,
+    #             compress: false,
+    #             lambda_function_associations: {
+    #               quantity: 1, # required
+    #               items: [
+    #                 {
+    #                   lambda_function_arn: "string",
+    #                   event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                 },
+    #               ],
+    #             },
+    #           },
+    #           cache_behaviors: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 path_pattern: "string", # required
+    #                 target_origin_id: "string", # required
+    #                 forwarded_values: { # required
+    #                   query_string: false, # required
+    #                   cookies: { # required
+    #                     forward: "none", # required, accepts none, whitelist, all
+    #                     whitelisted_names: {
+    #                       quantity: 1, # required
+    #                       items: ["string"],
+    #                     },
+    #                   },
+    #                   headers: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                   query_string_cache_keys: {
+    #                     quantity: 1, # required
+    #                     items: ["string"],
+    #                   },
+    #                 },
+    #                 trusted_signers: { # required
+    #                   enabled: false, # required
+    #                   quantity: 1, # required
+    #                   items: ["string"],
+    #                 },
+    #                 viewer_protocol_policy: "allow-all", # required, accepts allow-all, https-only, redirect-to-https
+    #                 min_ttl: 1, # required
+    #                 allowed_methods: {
+    #                   quantity: 1, # required
+    #                   items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   cached_methods: {
+    #                     quantity: 1, # required
+    #                     items: ["GET"], # required, accepts GET, HEAD, POST, PUT, PATCH, OPTIONS, DELETE
+    #                   },
+    #                 },
+    #                 smooth_streaming: false,
+    #                 default_ttl: 1,
+    #                 max_ttl: 1,
+    #                 compress: false,
+    #                 lambda_function_associations: {
+    #                   quantity: 1, # required
+    #                   items: [
+    #                     {
+    #                       lambda_function_arn: "string",
+    #                       event_type: "viewer-request", # accepts viewer-request, viewer-response, origin-request, origin-response
+    #                     },
+    #                   ],
+    #                 },
+    #               },
+    #             ],
+    #           },
+    #           custom_error_responses: {
+    #             quantity: 1, # required
+    #             items: [
+    #               {
+    #                 error_code: 1, # required
+    #                 response_page_path: "string",
+    #                 response_code: "string",
+    #                 error_caching_min_ttl: 1,
+    #               },
+    #             ],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             include_cookies: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #           viewer_certificate: {
+    #             cloud_front_default_certificate: false,
+    #             iam_certificate_id: "string",
+    #             acm_certificate_arn: "string",
+    #             ssl_support_method: "sni-only", # accepts sni-only, vip
+    #             minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #             certificate: "string",
+    #             certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #           },
+    #           restrictions: {
+    #             geo_restriction: { # required
+    #               restriction_type: "blacklist", # required, accepts blacklist, whitelist, none
+    #               quantity: 1, # required
+    #               items: ["string"],
+    #             },
+    #           },
+    #           web_acl_id: "string",
+    #           http_version: "http1.1", # accepts http1.1, http2
+    #           is_ipv6_enabled: false,
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] distribution_config
+    #   The distribution's configuration information.
+    #   @return [Types::DistributionConfig]
+    #
+    # @!attribute [rw] id
+    #   The distribution's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   distribution's configuration. For example: `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateDistributionRequest < Struct.new(
+      :distribution_config,
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] distribution
+    #   The distribution's information.
+    #   @return [Types::Distribution]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateDistributionResult < Struct.new(
+      :distribution,
+      :etag)
+      include Aws::Structure
+    end
+
+    # The request to update a streaming distribution.
+    #
+    # @note When making an API call, you may pass UpdateStreamingDistributionRequest
+    #   data as a hash:
+    #
+    #       {
+    #         streaming_distribution_config: { # required
+    #           caller_reference: "string", # required
+    #           s3_origin: { # required
+    #             domain_name: "string", # required
+    #             origin_access_identity: "string", # required
+    #           },
+    #           aliases: {
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           comment: "string", # required
+    #           logging: {
+    #             enabled: false, # required
+    #             bucket: "string", # required
+    #             prefix: "string", # required
+    #           },
+    #           trusted_signers: { # required
+    #             enabled: false, # required
+    #             quantity: 1, # required
+    #             items: ["string"],
+    #           },
+    #           price_class: "PriceClass_100", # accepts PriceClass_100, PriceClass_200, PriceClass_All
+    #           enabled: false, # required
+    #         },
+    #         id: "string", # required
+    #         if_match: "string",
+    #       }
+    #
+    # @!attribute [rw] streaming_distribution_config
+    #   The streaming distribution's configuration information.
+    #   @return [Types::StreamingDistributionConfig]
+    #
+    # @!attribute [rw] id
+    #   The streaming distribution's id.
+    #   @return [String]
+    #
+    # @!attribute [rw] if_match
+    #   The value of the `ETag` header that you received when retrieving the
+    #   streaming distribution's configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateStreamingDistributionRequest < Struct.new(
+      :streaming_distribution_config,
+      :id,
+      :if_match)
+      include Aws::Structure
+    end
+
+    # The returned result of the corresponding request.
+    #
+    # @!attribute [rw] streaming_distribution
+    #   The streaming distribution's information.
+    #   @return [Types::StreamingDistribution]
+    #
+    # @!attribute [rw] etag
+    #   The current version of the configuration. For example:
+    #   `E2QWRUHAPOMQZL`.
+    #   @return [String]
+    #
+    class UpdateStreamingDistributionResult < Struct.new(
+      :streaming_distribution,
+      :etag)
+      include Aws::Structure
+    end
+
+    # A complex type that specifies the following:
+    #
+    # * Which SSL/TLS certificate to use when viewers request objects using
+    #   HTTPS
+    #
+    # * Whether you want CloudFront to use dedicated IP addresses or SNI
+    #   when you're using alternate domain names in your object names
+    #
+    # * The minimum protocol version that you want CloudFront to use when
+    #   communicating with viewers
+    #
+    # For more information, see [Using an HTTPS Connection to Access Your
+    # Objects][1] in the *Amazon Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    # [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html
+    #
+    # @note When making an API call, you may pass ViewerCertificate
+    #   data as a hash:
+    #
+    #       {
+    #         cloud_front_default_certificate: false,
+    #         iam_certificate_id: "string",
+    #         acm_certificate_arn: "string",
+    #         ssl_support_method: "sni-only", # accepts sni-only, vip
+    #         minimum_protocol_version: "SSLv3", # accepts SSLv3, TLSv1
+    #         certificate: "string",
+    #         certificate_source: "cloudfront", # accepts cloudfront, iam, acm
+    #       }
+    #
+    # @!attribute [rw] cloud_front_default_certificate
+    #   @return [Boolean]
+    #
+    # @!attribute [rw] iam_certificate_id
+    #   @return [String]
+    #
+    # @!attribute [rw] acm_certificate_arn
+    #   @return [String]
+    #
+    # @!attribute [rw] ssl_support_method
+    #   If you specify a value for `ACMCertificateArn` or for
+    #   `IAMCertificateId`, you must also specify how you want CloudFront to
+    #   serve HTTPS requests: using a method that works for all clients or
+    #   one that works for most clients:
+    #
+    #   * `vip`\: CloudFront uses dedicated IP addresses for your content
+    #     and can respond to HTTPS requests from any viewer. However, you
+    #     must request permission to use this feature, and you incur
+    #     additional monthly charges.
+    #
+    #   * `sni-only`\: CloudFront can respond to HTTPS requests from viewers
+    #     that support Server Name Indication (SNI). All modern browsers
+    #     support SNI, but some browsers still in use don't support SNI. If
+    #     some of your users' browsers don't support SNI, we recommend
+    #     that you do one of the following:
+    #
+    #     * Use the `vip` option (dedicated IP addresses) instead of
+    #       `sni-only`.
+    #
+    #     * Use the CloudFront SSL/TLS certificate instead of a custom
+    #       certificate. This requires that you use the CloudFront domain
+    #       name of your distribution in the URLs for your objects, for
+    #       example, `https://d111111abcdef8.cloudfront.net/logo.png`.
+    #
+    #     * If you can control which browser your users use, upgrade the
+    #       browser to one that supports SNI.
+    #
+    #     * Use HTTP instead of HTTPS.
+    #
+    #   Do not specify a value for `SSLSupportMethod` if you specified
+    #   `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>`.
+    #
+    #   For more information, see [Using Alternate Domain Names and
+    #   HTTPS][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS.html
+    #   @return [String]
+    #
+    # @!attribute [rw] minimum_protocol_version
+    #   Specify the minimum version of the SSL/TLS protocol that you want
+    #   CloudFront to use for HTTPS connections between viewers and
+    #   CloudFront: `SSLv3` or `TLSv1`. CloudFront serves your objects only
+    #   to viewers that support SSL/TLS version that you specify and later
+    #   versions. The `TLSv1` protocol is more secure, so we recommend that
+    #   you specify `SSLv3` only if your users are using browsers or devices
+    #   that don't support `TLSv1`. Note the following:
+    #
+    #   * If you specify
+    #     &lt;CloudFrontDefaultCertificate&gt;true&lt;CloudFrontDefaultCertificate&gt;,
+    #     the minimum SSL protocol version is `TLSv1` and can't be changed.
+    #
+    #   * If you're using a custom certificate (if you specify a value for
+    #     `ACMCertificateArn` or for `IAMCertificateId`) and if you're
+    #     using SNI (if you specify `sni-only` for `SSLSupportMethod`), you
+    #     must specify `TLSv1` for `MinimumProtocolVersion`.
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate
+    #   Include one of these values to specify the following:
+    #
+    #   * Whether you want viewers to use HTTP or HTTPS to request your
+    #     objects.
+    #
+    #   * If you want viewers to use HTTPS, whether you're using an
+    #     alternate domain name such as example.com or the CloudFront domain
+    #     name for your distribution, such as
+    #     `d111111abcdef8.cloudfront.net`.
+    #
+    #   * If you're using an alternate domain name, whether AWS Certificate
+    #     Manager (ACM) provided the certificate, or you purchased a
+    #     certificate from a third-party certificate authority and imported
+    #     it into ACM or uploaded it to the IAM certificate store.
+    #
+    #   You must specify one (and only one) of the three values. Do not
+    #   specify `false` for `CloudFrontDefaultCertificate`.
+    #
+    #   **If you want viewers to use HTTP to request your objects**\:
+    #   Specify the following value:
+    #
+    #   `<CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>`
+    #
+    #   In addition, specify `allow-all` for `ViewerProtocolPolicy` for all
+    #   of your cache behaviors.
+    #
+    #   **If you want viewers to use HTTPS to request your objects**\:
+    #   Choose the type of certificate that you want to use based on whether
+    #   you're using an alternate domain name for your objects or the
+    #   CloudFront domain name:
+    #
+    #   * **If you're using an alternate domain name, such as
+    #     example.com**\: Specify one of the following values, depending on
+    #     whether ACM provided your certificate or you purchased your
+    #     certificate from third-party certificate authority:
+    #
+    #     * `<ACMCertificateArn>ARN for ACM SSL/TLS
+    #       certificate<ACMCertificateArn>` where ARN for ACM SSL/TLS
+    #       certificate is the ARN for the ACM SSL/TLS certificate that you
+    #       want to use for this distribution.
+    #
+    #     * `<IAMCertificateId>IAM certificate ID<IAMCertificateId>` where
+    #       IAM certificate ID is the ID that IAM returned when you added
+    #       the certificate to the IAM certificate store.
+    #
+    #     If you specify `ACMCertificateArn` or `IAMCertificateId`, you must
+    #     also specify a value for `SSLSupportMethod`.
+    #
+    #     If you choose to use an ACM certificate or a certificate in the
+    #     IAM certificate store, we recommend that you use only an alternate
+    #     domain name in your object URLs (`https://example.com/logo.jpg`).
+    #     If you use the domain name that is associated with your CloudFront
+    #     distribution (`https://d111111abcdef8.cloudfront.net/logo.jpg`)
+    #     and the viewer supports `SNI`, then CloudFront behaves normally.
+    #     However, if the browser does not support SNI, the user's
+    #     experience depends on the value that you choose for
+    #     `SSLSupportMethod`\:
+    #
+    #     * `vip`\: The viewer displays a warning because there is a
+    #       mismatch between the CloudFront domain name and the domain name
+    #       in your SSL/TLS certificate.
+    #
+    #     * `sni-only`\: CloudFront drops the connection with the browser
+    #       without returning the object.
+    #
+    #   * <b>If you're using the CloudFront domain name for your
+    #     distribution, such as <code>d111111abcdef8.cloudfront.net</code>
+    #     </b>\: Specify the following value:
+    #
+    #     ` <CloudFrontDefaultCertificate>true<CloudFrontDefaultCertificate>
+    #     `
+    #
+    #     If you want viewers to use HTTPS, you must also specify one of the
+    #     following values in your cache behaviors:
+    #
+    #     * ` <ViewerProtocolPolicy>https-only<ViewerProtocolPolicy> `
+    #
+    #     * ` <ViewerProtocolPolicy>redirect-to-https<ViewerProtocolPolicy>
+    #       `
+    #
+    #     You can also optionally require that CloudFront use HTTPS to
+    #     communicate with your origin by specifying one of the following
+    #     values for the applicable origins:
+    #
+    #     * ` <OriginProtocolPolicy>https-only<OriginProtocolPolicy> `
+    #
+    #     * ` <OriginProtocolPolicy>match-viewer<OriginProtocolPolicy> `
+    #
+    #     For more information, see [Using Alternate Domain Names and
+    #     HTTPS][1] in the *Amazon CloudFront Developer Guide*.
+    #
+    #
+    #
+    #   [1]: http://docs.aws.amazon.com/AmazonCloudFront/latest/DeveloperGuide/SecureConnections.html#CNAMEsAndHTTPS
+    #   @return [String]
+    #
+    # @!attribute [rw] certificate_source
+    #   <note markdown="1"> This field is deprecated. You can use one of the following:
+    #   `[ACMCertificateArn`, `IAMCertificateId`, or
+    #   `CloudFrontDefaultCertificate]`.
+    #
+    #    </note>
+    #   @return [String]
+    #
+    class ViewerCertificate < Struct.new(
+      :cloud_front_default_certificate,
+      :iam_certificate_id,
+      :acm_certificate_arn,
+      :ssl_support_method,
+      :minimum_protocol_version,
+      :certificate,
+      :certificate_source)
+      include Aws::Structure
+    end
+
   end
 end

@@ -1,4 +1,5 @@
 require_relative 'aws-sdk-code-generator/apply_docs'
+require_relative 'aws-sdk-code-generator/docstring'
 require_relative 'aws-sdk-code-generator/helper'
 require_relative 'aws-sdk-code-generator/service'
 require_relative 'aws-sdk-code-generator/underscore'
@@ -8,11 +9,13 @@ require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
 
 # views
+require_relative 'aws-sdk-code-generator/views/docstring'
 require_relative 'aws-sdk-code-generator/views/features/env'
 require_relative 'aws-sdk-code-generator/views/features/step_definitions'
 require_relative 'aws-sdk-code-generator/views/gemspec'
 require_relative 'aws-sdk-code-generator/views/service_module'
 require_relative 'aws-sdk-code-generator/views/spec/spec_helper'
+require_relative 'aws-sdk-code-generator/views/types_module'
 require_relative 'aws-sdk-code-generator/views/version'
 
 module AwsSdkCodeGenerator
