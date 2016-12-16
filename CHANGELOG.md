@@ -1,5 +1,10 @@
 Unreleased Changes
 ------------------
+Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
+
+ See related [GitHub issue #1365](https://github.com/aws/aws-sdk-ruby/issues/1365).
+
+
 
 2.6.38 (2016-12-15)
 ------------------
