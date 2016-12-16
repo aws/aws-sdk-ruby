@@ -20,7 +20,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AuthorizeClusterSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -69,7 +68,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AuthorizeSnapshotAccessMessage
     #   data as a hash:
     #
@@ -470,7 +468,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] parameter_group_name
     #   The name of the cluster parameter group.
     #   @return [String]
@@ -633,7 +630,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -800,7 +796,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CopyClusterSnapshotMessage
     #   data as a hash:
     #
@@ -866,7 +861,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateClusterMessage
     #   data as a hash:
     #
@@ -1267,7 +1261,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -1349,7 +1342,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateClusterSecurityGroupMessage
     #   data as a hash:
     #
@@ -1404,7 +1396,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateClusterSnapshotMessage
     #   data as a hash:
     #
@@ -1460,7 +1451,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateClusterSubnetGroupMessage
     #   data as a hash:
     #
@@ -1522,7 +1512,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateEventSubscriptionMessage
     #   data as a hash:
     #
@@ -1631,7 +1620,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateHsmClientCertificateMessage
     #   data as a hash:
     #
@@ -1672,7 +1660,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateHsmConfigurationMessage
     #   data as a hash:
     #
@@ -1879,7 +1866,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteClusterMessage
     #   data as a hash:
     #
@@ -1938,7 +1924,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -1970,7 +1955,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteClusterSecurityGroupMessage
     #   data as a hash:
     #
@@ -1987,7 +1971,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteClusterSnapshotMessage
     #   data as a hash:
     #
@@ -2027,7 +2010,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteClusterSubnetGroupMessage
     #   data as a hash:
     #
@@ -2044,7 +2026,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteEventSubscriptionMessage
     #   data as a hash:
     #
@@ -2062,7 +2043,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteHsmClientCertificateMessage
     #   data as a hash:
     #
@@ -2079,7 +2059,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteHsmConfigurationMessage
     #   data as a hash:
     #
@@ -2141,7 +2120,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterParameterGroupsMessage
     #   data as a hash:
     #
@@ -2210,7 +2188,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterParametersMessage
     #   data as a hash:
     #
@@ -2266,7 +2243,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterSecurityGroupsMessage
     #   data as a hash:
     #
@@ -2340,7 +2316,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterSnapshotsMessage
     #   data as a hash:
     #
@@ -2463,7 +2438,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterSubnetGroupsMessage
     #   data as a hash:
     #
@@ -2531,7 +2505,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClusterVersionsMessage
     #   data as a hash:
     #
@@ -2591,7 +2564,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeClustersMessage
     #   data as a hash:
     #
@@ -2663,7 +2635,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDefaultClusterParametersMessage
     #   data as a hash:
     #
@@ -2716,7 +2687,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventCategoriesMessage
     #   data as a hash:
     #
@@ -2737,7 +2707,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
     #   data as a hash:
     #
@@ -2781,7 +2750,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventsMessage
     #   data as a hash:
     #
@@ -2903,7 +2871,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeHsmClientCertificatesMessage
     #   data as a hash:
     #
@@ -2973,7 +2940,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeHsmConfigurationsMessage
     #   data as a hash:
     #
@@ -3042,7 +3008,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeLoggingStatusMessage
     #   data as a hash:
     #
@@ -3061,7 +3026,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeOrderableClusterOptionsMessage
     #   data as a hash:
     #
@@ -3117,7 +3081,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReservedNodeOfferingsMessage
     #   data as a hash:
     #
@@ -3160,7 +3123,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReservedNodesMessage
     #   data as a hash:
     #
@@ -3202,7 +3164,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeResizeMessage
     #   data as a hash:
     #
@@ -3293,7 +3254,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTableRestoreStatusMessage
     #   data as a hash:
     #
@@ -3337,7 +3297,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTagsMessage
     #   data as a hash:
     #
@@ -3436,7 +3395,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DisableLoggingMessage
     #   data as a hash:
     #
@@ -3455,7 +3413,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DisableSnapshotCopyMessage
     #   data as a hash:
     #
@@ -3528,7 +3485,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass EnableLoggingMessage
     #   data as a hash:
     #
@@ -3584,7 +3540,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass EnableSnapshotCopyMessage
     #   data as a hash:
     #
@@ -3723,7 +3678,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] event_categories_map_list
     #   A list of event categories descriptions.
     #   @return [Array<Types::EventCategoriesMap>]
@@ -3844,7 +3798,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -3864,7 +3817,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -3908,7 +3860,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -3966,7 +3917,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -4070,7 +4020,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyClusterIamRolesMessage
     #   data as a hash:
     #
@@ -4113,7 +4062,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyClusterMessage
     #   data as a hash:
     #
@@ -4396,7 +4344,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -4448,7 +4395,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyClusterSubnetGroupMessage
     #   data as a hash:
     #
@@ -4487,7 +4433,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyEventSubscriptionMessage
     #   data as a hash:
     #
@@ -4575,7 +4520,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifySnapshotCopyRetentionPeriodMessage
     #   data as a hash:
     #
@@ -4816,7 +4760,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PurchaseReservedNodeOfferingMessage
     #   data as a hash:
     #
@@ -4853,7 +4796,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RebootClusterMessage
     #   data as a hash:
     #
@@ -5029,7 +4971,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -5049,7 +4990,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   A value that indicates the starting point for the next set of
     #   response records in a subsequent request. If a value is returned in
@@ -5069,7 +5009,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ResetClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -5210,7 +5149,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreFromClusterSnapshotMessage
     #   data as a hash:
     #
@@ -5528,7 +5466,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreTableFromClusterSnapshotMessage
     #   data as a hash:
     #
@@ -5602,7 +5539,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RevokeClusterSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -5658,7 +5594,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RevokeSnapshotAccessMessage
     #   data as a hash:
     #
@@ -5701,7 +5636,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RotateEncryptionKeyMessage
     #   data as a hash:
     #
@@ -5955,7 +5889,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional parameter that specifies the starting point to return a
     #   set of response records. When the results of a
@@ -6111,7 +6044,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] table_restore_status_details
     #   A list of status details for one or more table restore requests.
     #   @return [Array<Types::TableRestoreStatus>]
@@ -6201,7 +6133,6 @@ module Aws::Redshift
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] tagged_resources
     #   A list of tags with their associated resources.
     #   @return [Array<Types::TaggedResource>]

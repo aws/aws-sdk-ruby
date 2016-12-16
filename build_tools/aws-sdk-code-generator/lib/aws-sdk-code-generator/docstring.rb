@@ -21,12 +21,72 @@ module AwsSdkCodeGenerator
         if text
           gap = options.fetch(:gap, ' ')
           text.lines.map do |line|
-            if line == "\n"
-              "#\n"
+            line = line.rstrip
+            if line == ''
+              "#"
             else
               "##{gap}#{line}"
             end
-          end.join
+          end.join("\n")
+        end
+      end
+
+      # Joins multiple doc strings into a single doc block. Each entry
+      # in the given `docstrings` array can be a string, nil, or an another array.
+      # Arrays are flattened, and nils are compacted out.
+      #
+      # Given the following `docstrings`:
+      #
+      #     [
+      #       "First doc block",
+      #       nil,
+      #       "Second doc block\nthat contains\nmultiple lines\n",
+      #       [
+      #         "Third doc block\n",
+      #         "Last doc block\n",
+      #       ],
+      #     ]
+      #
+      # The following joined doc block would be returned:
+      #
+      #     # First doc block
+      #     #
+      #     # Second doc block
+      #     # that contains
+      #     # multiple lines
+      #     #
+      #     # Third doc block
+      #     #
+      #     # Last doc block
+      #
+      # @param [Array<String>] docstrings
+      #
+      # @option options [Boolean] :block_comment (true)
+      #   By default, each docstring is commented by passing
+      #   it to {Docstring.block_comment}. Setting `:block_comment` to
+      #   false disables this behavior.
+      #
+      # @option options [String] :gap (' ')
+      #   This option is given to {Docstring.block_comment} when
+      #   `:block_comment` is `true`.
+      #
+      # @return [String, nil] If the given `docstrings` is empty,
+      #   then a `nil` is returned.
+      #
+      def join_docstrings(docstrings, options = {})
+        docs = docstrings.flatten.inject([]) do |sections, section|
+          if section.nil? || section.size == 0
+            sections
+          else
+            sections << block_comment(section, options)
+            sections << "\n#\n"
+          end
+        end
+        if docs.empty?
+          nil
+        else
+          docs[-1] = docs[-1].rstrip
+          docs.join
         end
       end
 

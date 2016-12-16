@@ -8,7 +8,6 @@
 module Aws::SQS
   module Types
 
-    #
     # @note When making an API call, you may pass AddPermissionRequest
     #   data as a hash:
     #
@@ -98,7 +97,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ChangeMessageVisibilityBatchRequest
     #   data as a hash:
     #
@@ -237,7 +235,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateQueueRequest
     #   data as a hash:
     #
@@ -383,7 +380,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteMessageBatchRequest
     #   data as a hash:
     #
@@ -468,7 +464,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteMessageRequest
     #   data as a hash:
     #
@@ -493,7 +488,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteQueueRequest
     #   data as a hash:
     #
@@ -512,7 +506,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetQueueAttributesRequest
     #   data as a hash:
     #
@@ -622,7 +615,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetQueueUrlRequest
     #   data as a hash:
     #
@@ -665,7 +657,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListDeadLetterSourceQueuesRequest
     #   data as a hash:
     #
@@ -696,7 +687,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListQueuesRequest
     #   data as a hash:
     #
@@ -857,7 +847,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PurgeQueueRequest
     #   data as a hash:
     #
@@ -877,7 +866,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ReceiveMessageRequest
     #   data as a hash:
     #
@@ -1091,7 +1079,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RemovePermissionRequest
     #   data as a hash:
     #
@@ -1117,7 +1104,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass SendMessageBatchRequest
     #   data as a hash:
     #
@@ -1393,7 +1379,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass SendMessageRequest
     #   data as a hash:
     #
@@ -1608,7 +1593,6 @@ module Aws::SQS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass SetQueueAttributesRequest
     #   data as a hash:
     #

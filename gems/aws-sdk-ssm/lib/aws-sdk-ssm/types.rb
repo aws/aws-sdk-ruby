@@ -456,7 +456,6 @@ module Aws::SSM
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CancelCommandRequest
     #   data as a hash:
     #

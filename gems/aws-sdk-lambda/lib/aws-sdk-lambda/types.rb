@@ -65,7 +65,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AddPermissionRequest
     #   data as a hash:
     #
@@ -177,7 +176,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] statement
     #   The permission statement you specified in the request. The response
     #   returns the same as a string using a backslash ("\\") as an escape
@@ -253,7 +251,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateEventSourceMappingRequest
     #   data as a hash:
     #
@@ -344,7 +341,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateFunctionRequest
     #   data as a hash:
     #
@@ -535,7 +531,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteEventSourceMappingRequest
     #   data as a hash:
     #
@@ -923,7 +918,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetEventSourceMappingRequest
     #   data as a hash:
     #
@@ -940,7 +934,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetFunctionConfigurationRequest
     #   data as a hash:
     #
@@ -981,7 +974,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetFunctionRequest
     #   data as a hash:
     #
@@ -1036,7 +1028,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetPolicyRequest
     #   data as a hash:
     #
@@ -1074,7 +1065,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] policy
     #   The resource policy associated with the specified function. The
     #   response returns the same as a string using a backslash ("\\") as
@@ -1086,7 +1076,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass InvocationRequest
     #   data as a hash:
     #
@@ -1221,7 +1210,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass InvokeAsyncRequest
     #   data as a hash:
     #
@@ -1310,7 +1298,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListEventSourceMappingsRequest
     #   data as a hash:
     #
@@ -1376,7 +1363,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListFunctionsRequest
     #   data as a hash:
     #
@@ -1420,7 +1406,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListVersionsByFunctionRequest
     #   data as a hash:
     #
@@ -1460,7 +1445,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] next_marker
     #   A string, present if there are more function versions.
     #   @return [String]
@@ -1475,7 +1459,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PublishVersionRequest
     #   data as a hash:
     #
@@ -1515,7 +1498,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RemovePermissionRequest
     #   data as a hash:
     #
@@ -1591,7 +1573,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass UpdateEventSourceMappingRequest
     #   data as a hash:
     #
@@ -1647,7 +1628,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass UpdateFunctionCodeRequest
     #   data as a hash:
     #
@@ -1716,7 +1696,6 @@ module Aws::Lambda
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass UpdateFunctionConfigurationRequest
     #   data as a hash:
     #

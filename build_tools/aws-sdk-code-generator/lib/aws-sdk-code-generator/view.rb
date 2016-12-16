@@ -29,15 +29,18 @@ module AwsSdkCodeGenerator
       Docstring.html_to_markdown(html, options)
     end
 
-    # @return [Array<String>] Converts the given `text` in to an array
-    #   of lines of text.
-    def block_comment(text)
-      docstring = Docstring.block_comment(text)
-      if docstring
-        docstring.lines.map(&:strip)
-      else
-        nil
-      end
+    # @param (see Docstring.block_comment)
+    # @option (see Docstring.block_comment)
+    # @return (see Docstring.block_comment)
+    def block_comment(text, options = {})
+      Docstring.block_comment(text, options = {})
+    end
+
+    # @param (see Docstring.join_docstrings)
+    # @option (see Docstring.join_docstrings)
+    # @return (see Docstring.join_docstrings)
+    def join_docstrings(docs, options = {})
+      Docstring.join_docstrings(docs, options)
     end
 
     # @param [String, Hash] shape_or_shape_ref

@@ -8,7 +8,6 @@
 module Aws::KinesisAnalytics
   module Types
 
-    #
     # @note When making an API call, you may pass AddApplicationInputRequest
     #   data as a hash:
     #
@@ -82,10 +81,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class AddApplicationInputResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass AddApplicationOutputRequest
     #   data as a hash:
     #
@@ -135,10 +132,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class AddApplicationOutputResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass AddApplicationReferenceDataSourceRequest
     #   data as a hash:
     #
@@ -205,7 +200,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class AddApplicationReferenceDataSourceResponse < Aws::EmptyStructure; end
 
     # Provides a description of the application, including the application
@@ -617,7 +611,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteApplicationOutputRequest
     #   data as a hash:
     #
@@ -655,7 +648,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class DeleteApplicationOutputResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass DeleteApplicationReferenceDataSourceRequest
@@ -695,7 +687,6 @@ module Aws::KinesisAnalytics
 
     class DeleteApplicationReferenceDataSourceResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass DeleteApplicationRequest
     #   data as a hash:
     #
@@ -718,10 +709,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class DeleteApplicationResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass DescribeApplicationRequest
     #   data as a hash:
     #
@@ -738,7 +727,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] application_detail
     #   Provides a description of the application, such as the application
     #   Amazon Resource Name (ARN), status, latest version, and input and
@@ -773,7 +761,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DiscoverInputSchemaRequest
     #   data as a hash:
     #
@@ -806,7 +793,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] input_schema
     #   Schema inferred from the streaming source. It identifies the format
     #   of the data in the streaming source and how each data element maps
@@ -1567,7 +1553,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListApplicationsRequest
     #   data as a hash:
     #
@@ -1594,7 +1579,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] application_summaries
     #   List of `ApplicationSummary` objects.
     #   @return [Array<Types::ApplicationSummary>]
@@ -2190,7 +2174,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass StartApplicationRequest
     #   data as a hash:
     #
@@ -2223,10 +2206,8 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class StartApplicationResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass StopApplicationRequest
     #   data as a hash:
     #
@@ -2243,7 +2224,6 @@ module Aws::KinesisAnalytics
       include Aws::Structure
     end
 
-    #
     class StopApplicationResponse < Aws::EmptyStructure; end
 
     # @note When making an API call, you may pass UpdateApplicationRequest

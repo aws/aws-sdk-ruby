@@ -51,7 +51,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass BackendConnectionErrors
     #   data as a hash:
     #
@@ -669,7 +668,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] name
     #   @return [String]
     #
@@ -724,7 +722,6 @@ module Aws::XRay
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass TelemetryRecord
     #   data as a hash:
     #

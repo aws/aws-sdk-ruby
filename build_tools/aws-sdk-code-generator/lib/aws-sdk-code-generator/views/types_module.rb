@@ -38,26 +38,27 @@ module AwsSdkCodeGenerator
       end
 
       def struct_class_docs(shape_name)
-        docs = []
-        docs << block_comment(html_to_markdown(docstring(shape_name)))
-        docs << input_example_docs(shape_name) if @input_shapes.include?(shape_name)
-        docs += attribute_macros_docs(shape_name)
-        docs.compact
+        join_docstrings([
+          html_to_markdown(docstring(shape_name)),
+          input_example_docs(shape_name),
+          attribute_macros_docs(shape_name),
+        ])
       end
 
       def input_example_docs(shape_name)
-        if shape(shape_name)['members'].empty?
-          note = '@api private'
-        else
-          note = "@note When making an API call, you may pass #{shape_name}\n"
-          note += "  data as a hash:\n\n"
-          note += Generators::SyntaxExample.new(
-            struct_shape: shape(shape_name),
-            api: @service.api,
-            indent: ' ' * 6
-          ).format
+        if @input_shapes.include?(shape_name)
+          if shape(shape_name)['members'].empty?
+            note = '@api private'
+          else
+            note = "@note When making an API call, you may pass #{shape_name}\n"
+            note += "  data as a hash:\n\n"
+            note += Generators::SyntaxExample.new(
+              struct_shape: shape(shape_name),
+              api: @service.api,
+              indent: ' ' * 6
+            ).format
+          end
         end
-        block_comment(note)
       end
 
       def attribute_macros_docs(shape_name)
@@ -69,7 +70,7 @@ module AwsSdkCodeGenerator
           macro = "@!attribute [rw] #{underscore(member_name)}\n"
           macro += "  #{docs}\n" unless docs == ''
           macro += "  @return [#{ruby_type(member_ref)}]"
-          block_comment(macro)
+          macro
         end
       end
 

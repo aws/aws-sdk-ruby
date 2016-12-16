@@ -8,7 +8,6 @@
 module Aws::Support
   module Types
 
-    #
     # @note When making an API call, you may pass AddAttachmentsToSetRequest
     #   data as a hash:
     #
@@ -327,7 +326,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateCaseRequest
     #   data as a hash:
     #
@@ -451,7 +449,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeCasesRequest
     #   data as a hash:
     #
@@ -544,7 +541,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeCommunicationsRequest
     #   data as a hash:
     #
@@ -607,7 +603,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeServicesRequest
     #   data as a hash:
     #
@@ -644,7 +639,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeSeverityLevelsRequest
     #   data as a hash:
     #
@@ -678,7 +672,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTrustedAdvisorCheckRefreshStatusesRequest
     #   data as a hash:
     #
@@ -709,7 +702,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTrustedAdvisorCheckResultRequest
     #   data as a hash:
     #
@@ -747,7 +739,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTrustedAdvisorCheckSummariesRequest
     #   data as a hash:
     #
@@ -776,7 +767,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTrustedAdvisorChecksRequest
     #   data as a hash:
     #
@@ -824,7 +814,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RefreshTrustedAdvisorCheckRequest
     #   data as a hash:
     #
@@ -855,7 +844,6 @@ module Aws::Support
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ResolveCaseRequest
     #   data as a hash:
     #

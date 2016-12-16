@@ -30,7 +30,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AddTagsToResourceMessage
     #   data as a hash:
     #
@@ -60,10 +59,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     class AddTagsToResourceResponse < Aws::EmptyStructure; end
 
-    #
     # @!attribute [rw] name
     #   The name of the availability zone.
     #   @return [String]
@@ -126,7 +123,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_instance_arn
     #   The Amazon Resource Name (ARN) of the replication instance.
     #   @return [String]
@@ -165,7 +161,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateEndpointMessage
     #   data as a hash:
     #
@@ -272,7 +267,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] endpoint
     #   The endpoint that was created.
     #   @return [Types::Endpoint]
@@ -282,7 +276,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateReplicationInstanceMessage
     #   data as a hash:
     #
@@ -424,7 +417,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_instance
     #   The replication instance that was created.
     #   @return [Types::ReplicationInstance]
@@ -434,7 +426,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateReplicationSubnetGroupMessage
     #   data as a hash:
     #
@@ -480,7 +471,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_subnet_group
     #   The replication subnet group that was created.
     #   @return [Types::ReplicationSubnetGroup]
@@ -490,7 +480,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateReplicationTaskMessage
     #   data as a hash:
     #
@@ -573,7 +562,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task
     #   The replication task that was created.
     #   @return [Types::ReplicationTask]
@@ -608,7 +596,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteEndpointMessage
     #   data as a hash:
     #
@@ -626,7 +613,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] endpoint
     #   The endpoint that was deleted.
     #   @return [Types::Endpoint]
@@ -636,7 +622,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteReplicationInstanceMessage
     #   data as a hash:
     #
@@ -654,7 +639,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_instance
     #   The replication instance that was deleted.
     #   @return [Types::ReplicationInstance]
@@ -664,7 +648,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteReplicationSubnetGroupMessage
     #   data as a hash:
     #
@@ -681,10 +664,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     class DeleteReplicationSubnetGroupResponse < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass DeleteReplicationTaskMessage
     #   data as a hash:
     #
@@ -702,7 +683,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task
     #   The deleted replication task.
     #   @return [Types::ReplicationTask]
@@ -712,12 +692,10 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @api private
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
-    #
     # @!attribute [rw] account_quotas
     #   Account quota information.
     #   @return [Array<Types::AccountQuota>]
@@ -782,7 +760,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeConnectionsMessage
     #   data as a hash:
     #
@@ -827,7 +804,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -844,7 +820,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEndpointTypesMessage
     #   data as a hash:
     #
@@ -889,7 +864,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -906,7 +880,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEndpointsMessage
     #   data as a hash:
     #
@@ -952,7 +925,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -969,7 +941,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeOrderableReplicationInstancesMessage
     #   data as a hash:
     #
@@ -1001,7 +972,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] orderable_replication_instances
     #   The order-able replication instances available.
     #   @return [Array<Types::OrderableReplicationInstance>]
@@ -1018,7 +988,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeRefreshSchemasStatusMessage
     #   data as a hash:
     #
@@ -1036,7 +1005,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] refresh_schemas_status
     #   The status of the schema.
     #   @return [Types::RefreshSchemasStatus]
@@ -1046,7 +1014,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReplicationInstancesMessage
     #   data as a hash:
     #
@@ -1093,7 +1060,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -1110,7 +1076,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReplicationSubnetGroupsMessage
     #   data as a hash:
     #
@@ -1153,7 +1118,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -1170,7 +1134,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReplicationTasksMessage
     #   data as a hash:
     #
@@ -1216,7 +1179,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -1233,7 +1195,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeSchemasMessage
     #   data as a hash:
     #
@@ -1272,7 +1233,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous request. If this
     #   parameter is specified, the response includes only records beyond
@@ -1289,7 +1249,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTableStatisticsMessage
     #   data as a hash:
     #
@@ -1327,7 +1286,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task_arn
     #   The Amazon Resource Name (ARN) of the replication task.
     #   @return [String]
@@ -1349,7 +1307,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] endpoint_identifier
     #   The database endpoint identifier. Identifiers must begin with a
     #   letter; must contain only ASCII letters, digits, and hyphens; and
@@ -1433,7 +1390,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass Filter
     #   data as a hash:
     #
@@ -1488,7 +1444,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
     #
@@ -1506,7 +1461,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] tag_list
     #   A list of tags for the resource.
     #   @return [Array<Types::Tag>]
@@ -1516,7 +1470,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyEndpointMessage
     #   data as a hash:
     #
@@ -1609,7 +1562,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] endpoint
     #   The modified endpoint.
     #   @return [Types::Endpoint]
@@ -1619,7 +1571,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyReplicationInstanceMessage
     #   data as a hash:
     #
@@ -1733,7 +1684,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_instance
     #   The modified replication instance.
     #   @return [Types::ReplicationInstance]
@@ -1743,7 +1693,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyReplicationSubnetGroupMessage
     #   data as a hash:
     #
@@ -1772,7 +1721,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_subnet_group
     #   The modified replication subnet group.
     #   @return [Types::ReplicationSubnetGroup]
@@ -1782,7 +1730,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] engine_version
     #   The version of the replication engine.
     #   @return [String]
@@ -1830,7 +1777,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RefreshSchemasMessage
     #   data as a hash:
     #
@@ -1854,7 +1800,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] refresh_schemas_status
     #   The status of the refreshed schema.
     #   @return [Types::RefreshSchemasStatus]
@@ -1864,7 +1809,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] endpoint_arn
     #   The Amazon Resource Name (ARN) string that uniquely identifies the
     #   endpoint.
@@ -1895,7 +1839,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RemoveTagsFromResourceMessage
     #   data as a hash:
     #
@@ -1919,10 +1862,8 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     class RemoveTagsFromResourceResponse < Aws::EmptyStructure; end
 
-    #
     # @!attribute [rw] replication_instance_identifier
     #   The replication instance identifier. This parameter is stored as a
     #   lowercase string.
@@ -2054,7 +1995,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_instance_class
     #   The compute and memory capacity of the replication instance.
     #
@@ -2086,7 +2026,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_subnet_group_identifier
     #   The identifier of the replication instance subnet group.
     #   @return [String]
@@ -2116,7 +2055,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task_identifier
     #   The replication task identifier.
     #
@@ -2198,7 +2136,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] full_load_progress_percent
     #   The percent complete for the full load migration task.
     #   @return [Integer]
@@ -2233,7 +2170,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass StartReplicationTaskMessage
     #   data as a hash:
     #
@@ -2263,7 +2199,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task
     #   The replication task started.
     #   @return [Types::ReplicationTask]
@@ -2273,7 +2208,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass StopReplicationTaskMessage
     #   data as a hash:
     #
@@ -2291,7 +2225,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] replication_task
     #   The replication task stopped.
     #   @return [Types::ReplicationTask]
@@ -2301,7 +2234,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] subnet_identifier
     #   The subnet identifier.
     #   @return [String]
@@ -2321,7 +2253,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] engine_name
     #   The database engine name.
     #   @return [String]
@@ -2341,7 +2272,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] schema_name
     #   The schema name.
     #   @return [String]
@@ -2392,7 +2322,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass Tag
     #   data as a hash:
     #
@@ -2425,7 +2354,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass TestConnectionMessage
     #   data as a hash:
     #
@@ -2449,7 +2377,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] connection
     #   The connection tested.
     #   @return [Types::Connection]
@@ -2459,7 +2386,6 @@ module Aws::DatabaseMigrationService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] vpc_security_group_id
     #   The VPC security group Id.
     #   @return [String]

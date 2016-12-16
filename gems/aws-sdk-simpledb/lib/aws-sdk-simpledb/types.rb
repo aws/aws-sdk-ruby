@@ -8,7 +8,6 @@
 module Aws::SimpleDB
   module Types
 
-    #
     # @note When making an API call, you may pass Attribute
     #   data as a hash:
     #
@@ -321,7 +320,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] name
     #   The name of the item.
     #   @return [String]
@@ -425,7 +423,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ReplaceableAttribute
     #   data as a hash:
     #
@@ -454,7 +451,6 @@ module Aws::SimpleDB
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ReplaceableItem
     #   data as a hash:
     #

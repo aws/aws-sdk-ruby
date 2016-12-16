@@ -8,7 +8,6 @@
 module Aws::ElasticBeanstalk
   module Types
 
-    #
     # @note When making an API call, you may pass AbortEnvironmentUpdateMessage
     #   data as a hash:
     #
@@ -723,7 +722,6 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateApplicationVersionMessage
     #   data as a hash:
     #
@@ -920,7 +918,6 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateEnvironmentMessage
     #   data as a hash:
     #
@@ -2520,7 +2517,6 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RebuildEnvironmentMessage
     #   data as a hash:
     #
@@ -2596,7 +2592,6 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestartAppServerMessage
     #   data as a hash:
     #
@@ -3087,7 +3082,6 @@ module Aws::ElasticBeanstalk
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass UpdateApplicationVersionMessage
     #   data as a hash:
     #

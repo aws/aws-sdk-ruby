@@ -697,7 +697,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteConfigRuleRequest
     #   data as a hash:
     #
@@ -753,7 +752,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteEvaluationResultsRequest
     #   data as a hash:
     #
@@ -952,7 +950,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeComplianceByConfigRuleRequest
     #   data as a hash:
     #
@@ -986,7 +983,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] compliance_by_config_rules
     #   Indicates whether each of the specified AWS Config rules is
     #   compliant.
@@ -1003,7 +999,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeComplianceByResourceRequest
     #   data as a hash:
     #
@@ -1055,7 +1050,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] compliance_by_resources
     #   Indicates whether the specified AWS resource complies with all of
     #   the AWS Config rules that evaluate it.
@@ -1072,7 +1066,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeConfigRuleEvaluationStatusRequest
     #   data as a hash:
     #
@@ -1114,7 +1107,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] config_rules_evaluation_status
     #   Status information about your AWS managed Config rules.
     #   @return [Array<Types::ConfigRuleEvaluationStatus>]
@@ -1130,7 +1122,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeConfigRulesRequest
     #   data as a hash:
     #
@@ -1156,7 +1147,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] config_rules
     #   The details about your AWS Config rules.
     #   @return [Array<Types::ConfigRule>]
@@ -1443,7 +1433,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetComplianceDetailsByConfigRuleRequest
     #   data as a hash:
     #
@@ -1485,7 +1474,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] evaluation_results
     #   Indicates whether the AWS resource complies with the specified AWS
     #   Config rule.
@@ -1502,7 +1490,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetComplianceDetailsByResourceRequest
     #   data as a hash:
     #
@@ -1543,7 +1530,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] evaluation_results
     #   Indicates whether the specified AWS resource complies each AWS
     #   Config rule.
@@ -1560,7 +1546,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] compliance_summary
     #   The number of AWS Config rules that are compliant and the number
     #   that are noncompliant, up to a maximum of 25 for each.
@@ -1571,7 +1556,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass GetComplianceSummaryByResourceTypeRequest
     #   data as a hash:
     #
@@ -1594,7 +1578,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] compliance_summaries_by_resource_type
     #   The number of resources that are compliant and the number that are
     #   noncompliant. If one or more resource types were provided with the
@@ -1686,7 +1669,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListDiscoveredResourcesRequest
     #   data as a hash:
     #
@@ -1743,7 +1725,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] resource_identifiers
     #   The details that identify a resource that is discovered by AWS
     #   Config, including the resource type, ID, and (if available) the
@@ -1761,7 +1742,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PutConfigRuleRequest
     #   data as a hash:
     #
@@ -1879,7 +1859,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PutEvaluationsRequest
     #   data as a hash:
     #
@@ -1915,7 +1894,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] failed_evaluations
     #   Requests that failed because of a client or server error.
     #   @return [Array<Types::Evaluation>]
@@ -2233,7 +2211,6 @@ module Aws::ConfigService
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass StartConfigRulesEvaluationRequest
     #   data as a hash:
     #

@@ -67,7 +67,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AddSourceIdentifierToSubscriptionMessage
     #   data as a hash:
     #
@@ -118,7 +117,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AddTagsToResourceMessage
     #   data as a hash:
     #
@@ -152,7 +150,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ApplyPendingMaintenanceActionMessage
     #   data as a hash:
     #
@@ -210,7 +207,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass AuthorizeDBSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -455,7 +451,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CopyDBClusterSnapshotMessage
     #   data as a hash:
     #
@@ -528,7 +523,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CopyDBParameterGroupMessage
     #   data as a hash:
     #
@@ -607,7 +601,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CopyDBSnapshotMessage
     #   data as a hash:
     #
@@ -724,7 +717,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CopyOptionGroupMessage
     #   data as a hash:
     #
@@ -802,7 +794,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBClusterMessage
     #   data as a hash:
     #
@@ -1057,7 +1048,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -1152,7 +1142,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBClusterSnapshotMessage
     #   data as a hash:
     #
@@ -1225,7 +1214,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBInstanceMessage
     #   data as a hash:
     #
@@ -2378,7 +2366,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBParameterGroupMessage
     #   data as a hash:
     #
@@ -2447,7 +2434,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBSecurityGroupMessage
     #   data as a hash:
     #
@@ -2515,7 +2501,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBSnapshotMessage
     #   data as a hash:
     #
@@ -2587,7 +2572,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateDBSubnetGroupMessage
     #   data as a hash:
     #
@@ -2654,7 +2638,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateEventSubscriptionMessage
     #   data as a hash:
     #
@@ -2760,7 +2743,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateOptionGroupMessage
     #   data as a hash:
     #
@@ -3176,7 +3158,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] db_cluster_parameter_group_name
     #   The name of the DB cluster parameter group.
     #
@@ -3198,7 +3179,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   An optional pagination token provided by a previous
     #   `DescribeDBClusterParameterGroups` request. If this parameter is
@@ -4386,7 +4366,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBClusterMessage
     #   data as a hash:
     #
@@ -4448,7 +4427,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -4498,7 +4476,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBClusterSnapshotMessage
     #   data as a hash:
     #
@@ -4535,7 +4512,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBInstanceMessage
     #   data as a hash:
     #
@@ -4625,7 +4601,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBParameterGroupMessage
     #   data as a hash:
     #
@@ -4650,7 +4625,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBSecurityGroupMessage
     #   data as a hash:
     #
@@ -4681,7 +4655,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBSnapshotMessage
     #   data as a hash:
     #
@@ -4718,7 +4691,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteDBSubnetGroupMessage
     #   data as a hash:
     #
@@ -4746,7 +4718,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteEventSubscriptionMessage
     #   data as a hash:
     #
@@ -4774,7 +4745,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteOptionGroupMessage
     #   data as a hash:
     #
@@ -4795,12 +4765,10 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @api private
     #
     class DescribeAccountAttributesMessage < Aws::EmptyStructure; end
 
-    #
     # @note When making an API call, you may pass DescribeCertificatesMessage
     #   data as a hash:
     #
@@ -4860,7 +4828,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBClusterParameterGroupsMessage
     #   data as a hash:
     #
@@ -4919,7 +4886,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBClusterParametersMessage
     #   data as a hash:
     #
@@ -4985,7 +4951,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBClusterSnapshotAttributesMessage
     #   data as a hash:
     #
@@ -5018,7 +4983,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBClusterSnapshotsMessage
     #   data as a hash:
     #
@@ -5156,7 +5120,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBClustersMessage
     #   data as a hash:
     #
@@ -5318,7 +5281,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBInstancesMessage
     #   data as a hash:
     #
@@ -5407,7 +5369,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBLogFilesMessage
     #   data as a hash:
     #
@@ -5499,7 +5460,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBParameterGroupsMessage
     #   data as a hash:
     #
@@ -5624,7 +5584,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBSecurityGroupsMessage
     #   data as a hash:
     #
@@ -5674,7 +5633,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBSnapshotAttributesMessage
     #   data as a hash:
     #
@@ -5705,7 +5663,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBSnapshotsMessage
     #   data as a hash:
     #
@@ -5840,7 +5797,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeDBSubnetGroupsMessage
     #   data as a hash:
     #
@@ -5890,7 +5846,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEngineDefaultClusterParametersMessage
     #   data as a hash:
     #
@@ -5951,7 +5906,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEngineDefaultParametersMessage
     #   data as a hash:
     #
@@ -6011,7 +5965,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventCategoriesMessage
     #   data as a hash:
     #
@@ -6042,7 +5995,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventSubscriptionsMessage
     #   data as a hash:
     #
@@ -6093,7 +6045,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeEventsMessage
     #   data as a hash:
     #
@@ -6213,7 +6164,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeOptionGroupOptionsMessage
     #   data as a hash:
     #
@@ -6270,7 +6220,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeOptionGroupsMessage
     #   data as a hash:
     #
@@ -6336,7 +6285,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeOrderableDBInstanceOptionsMessage
     #   data as a hash:
     #
@@ -6415,7 +6363,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribePendingMaintenanceActionsMessage
     #   data as a hash:
     #
@@ -6477,7 +6424,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReservedDBInstancesMessage
     #   data as a hash:
     #
@@ -6575,7 +6521,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeReservedDBInstancesOfferingsMessage
     #   data as a hash:
     #
@@ -6669,7 +6614,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeSourceRegionsMessage
     #   data as a hash:
     #
@@ -6778,7 +6722,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DownloadDBLogFilePortionMessage
     #   data as a hash:
     #
@@ -7108,7 +7051,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass FailoverDBClusterMessage
     #   data as a hash:
     #
@@ -7210,7 +7152,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ListTagsForResourceMessage
     #   data as a hash:
     #
@@ -7244,7 +7185,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBClusterMessage
     #   data as a hash:
     #
@@ -7423,7 +7363,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -7484,7 +7423,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBClusterSnapshotAttributeMessage
     #   data as a hash:
     #
@@ -7555,7 +7493,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBInstanceMessage
     #   data as a hash:
     #
@@ -8211,7 +8148,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBParameterGroupMessage
     #   data as a hash:
     #
@@ -8270,7 +8206,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBSnapshotAttributeMessage
     #   data as a hash:
     #
@@ -8338,7 +8273,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyDBSubnetGroupMessage
     #   data as a hash:
     #
@@ -8394,7 +8328,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyEventSubscriptionMessage
     #   data as a hash:
     #
@@ -8460,7 +8393,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyOptionGroupMessage
     #   data as a hash:
     #
@@ -8648,7 +8580,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] option_group_name
     #   Specifies the name of the option group.
     #   @return [String]
@@ -8839,7 +8770,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] option_group_options
     #   List of available option group options.
     #   @return [Array<Types::OptionGroupOption>]
@@ -9286,7 +9216,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PromoteReadReplicaDBClusterMessage
     #   data as a hash:
     #
@@ -9339,7 +9268,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PromoteReadReplicaMessage
     #   data as a hash:
     #
@@ -9431,7 +9359,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass PurchaseReservedDBInstancesOfferingMessage
     #   data as a hash:
     #
@@ -9488,7 +9415,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RebootDBInstanceMessage
     #   data as a hash:
     #
@@ -9585,7 +9511,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RemoveSourceIdentifierFromSubscriptionMessage
     #   data as a hash:
     #
@@ -9621,7 +9546,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RemoveTagsFromResourceMessage
     #   data as a hash:
     #
@@ -9828,7 +9752,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ResetDBClusterParameterGroupMessage
     #   data as a hash:
     #
@@ -9875,7 +9798,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ResetDBParameterGroupMessage
     #   data as a hash:
     #
@@ -10278,7 +10200,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreDBClusterFromSnapshotMessage
     #   data as a hash:
     #
@@ -10442,7 +10363,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreDBClusterToPointInTimeMessage
     #   data as a hash:
     #
@@ -10612,7 +10532,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreDBInstanceFromDBSnapshotMessage
     #   data as a hash:
     #
@@ -10892,7 +10811,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RestoreDBInstanceToPointInTimeMessage
     #   data as a hash:
     #
@@ -11192,7 +11110,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass RevokeDBSecurityGroupIngressMessage
     #   data as a hash:
     #
@@ -11373,7 +11290,6 @@ module Aws::RDS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] tag_list
     #   List of tags returned by the ListTagsForResource operation.
     #   @return [Array<Types::Tag>]

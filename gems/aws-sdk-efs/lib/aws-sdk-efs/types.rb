@@ -36,7 +36,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateMountTargetRequest
     #   data as a hash:
     #
@@ -72,7 +71,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass CreateTagsRequest
     #   data as a hash:
     #
@@ -102,7 +100,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteFileSystemRequest
     #   data as a hash:
     #
@@ -119,7 +116,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteMountTargetRequest
     #   data as a hash:
     #
@@ -136,7 +132,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DeleteTagsRequest
     #   data as a hash:
     #
@@ -159,7 +154,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeFileSystemsRequest
     #   data as a hash:
     #
@@ -224,7 +218,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeMountTargetSecurityGroupsRequest
     #   data as a hash:
     #
@@ -250,7 +243,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeMountTargetsRequest
     #   data as a hash:
     #
@@ -293,7 +285,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   If the request included the `Marker`, the response returns that
     #   value in this field.
@@ -317,7 +308,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass DescribeTagsRequest
     #   data as a hash:
     #
@@ -349,7 +339,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @!attribute [rw] marker
     #   If the request included a `Marker`, the response returns that value
     #   in this field.
@@ -467,7 +456,6 @@ module Aws::EFS
       include Aws::Structure
     end
 
-    #
     # @note When making an API call, you may pass ModifyMountTargetSecurityGroupsRequest
     #   data as a hash:
     #
