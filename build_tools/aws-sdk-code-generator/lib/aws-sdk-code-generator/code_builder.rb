@@ -29,15 +29,13 @@ module AwsSdkCodeGenerator
       @examples = @service.examples
     end
 
+    # Generates the source for a library as a single string.
     # @return [String<code>]
+    # @api private
     def source
-      code = []
-      @gem_dependencies.each do |gem_name, _|
-        code << "require '#{gem_name}'"
-      end
-      code << new_svc_module.tap { |m| m.docstring(service_docstring) }.root.to_s
+      code = @gem_dependencies.map { |gem_name, _| "require '#{gem_name}'" }
       source_files.each.with_index do |(_, src_code), n|
-        next if n < 2
+        next if n < 2 # skip the service module and customizations
         code << src_code
       end
       code.join("\n")
