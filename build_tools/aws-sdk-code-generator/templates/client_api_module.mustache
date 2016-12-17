@@ -1,0 +1,54 @@
+{{> generated_src_warning}}
+
+module {{module_name}}
+  # @api private
+  module ClientApi
+
+    include Seahorse::Model
+
+    {{#shapes}}
+    {{name}} = {{class_name}}.new({{{constructor_args}}})
+    {{/shapes}}
+
+    {{#shape_definitions}}
+    {{#lines}}
+    {{{.}}}{{/lines}}
+
+    {{/shape_definitions}}
+
+    # @api private
+    API = Seahorse::Model::Api.new.tap do |api|
+
+      api.version = "{{api_version}}"
+
+      api.metadata = {
+        {{#metadata}}
+        {{{key}}} => {{{value}}},
+        {{/metadata}}
+      }
+      {{#operations}}
+
+      api.add_operation(:{{method_name}}, Seahorse::Model::Operation.new.tap do |o|
+        o.name = "{{name}}"
+        o.http_method = "{{http_method}}"
+        o.http_request_uri = "{{{http_request_uri}}}"
+        {{#deprecated}}
+        o.deprecated = true
+        {{/deprecated}}
+        {{#authtype}}
+        o['authtype'] = "{{.}}"
+        {{/authtype}}
+        {{#shape_references}}
+        {{#lines}}
+        {{{.}}}{{/lines}}
+        {{/shape_references}}
+        {{#pager}}
+        {{#lines}}
+        {{{.}}}{{/lines}}
+        {{/pager}}
+      end)
+      {{/operations}}
+    end
+
+  end
+end

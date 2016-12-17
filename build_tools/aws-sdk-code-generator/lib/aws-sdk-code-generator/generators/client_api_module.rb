@@ -303,14 +303,6 @@ module AwsSdkCodeGenerator
         end
       end
 
-      def shape_class(type)
-        if SHAPE_CLASSES.key?(type)
-          SHAPE_CLASSES[type]
-        else
-          raise ArgumentError, "unsupported shape type `#{type}'"
-        end
-      end
-
       def shape_defs
         Enumerator.new do |y|
           (@api['shapes'] || {}).keys.sort.each do |shape_name|

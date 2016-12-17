@@ -22,6 +22,13 @@ module AwsSdkCodeGenerator
       Underscore.underscore(string)
     end
 
+    # @param (see Underscore.underscore_jmespath)
+    # @option (see Underscore.underscore_jmespath)
+    # @return (see Underscore.underscore_jmespath)
+    def underscore_jmespath(string)
+      Underscore.underscore_jmespath(string)
+    end
+
     # @param (see Docstring.html_to_markdown)
     # @option (see Docstring.html_to_markdown)
     # @return (see Docstring.html_to_markdown)

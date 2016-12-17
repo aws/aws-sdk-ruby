@@ -53,7 +53,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}.rb", service_module(prefix: prefix))
         y.yield("#{prefix}/customizations.rb", '')
         y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/client_api.rb", GENERATED_SRC_WARNING + wrap(client_api_module))
+        y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", GENERATED_SRC_WARNING + client_class.root.to_s)
         y.yield("#{prefix}/errors.rb", GENERATED_SRC_WARNING + wrap(errors_module))
         y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
@@ -76,6 +76,10 @@ module AwsSdkCodeGenerator
       Views::TypesModule.new(service: @service).render
     end
 
+    def client_api_module
+      Views::ClientApiModule.new(service: @service).render
+    end
+
     def new_svc_module
       @module_names.inject(Dsl::Main.new) do |mod, module_name|
         mod.module(module_name)
@@ -86,10 +90,6 @@ module AwsSdkCodeGenerator
       svc_mod = new_svc_module
       svc_mod.add(mod)
       svc_mod.root.to_s
-    end
-
-    def client_api_module
-      Generators::ClientApiModule.new(api: @api, paginators:@paginators)
     end
 
     def client_class(svc_mod = new_svc_module)
