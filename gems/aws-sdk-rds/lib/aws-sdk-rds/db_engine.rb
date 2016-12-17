@@ -38,11 +38,11 @@ module Aws
         @client
       end
 
-      # @raise [Errors::ResourceNotLoadable]
+      # @raise [NotImplementedError]
       # @api private
       def load
         msg = "#load is not implemented, data only available via enumeration"
-        raise Errors::ResourceNotLoadable, msg
+        raise NotImplementedError, msg
       end
       alias :reload :load
 

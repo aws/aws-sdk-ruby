@@ -52,15 +52,15 @@ module Aws
         @client
       end
 
-      # @raise [Errors::ResourceNotLoadable]
+      # @raise [NotImplementedError]
       # @api private
       def load
         msg = "#load is not implemented, data only available via enumeration"
-        raise Errors::ResourceNotLoadable, msg
+        raise NotImplementedError, msg
       end
       alias :reload :load
 
-      # @raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
+      # @raise [NotImplementedError] Raises when {#data_loaded?} is `false`.
       # @return [Types::MFADevice]
       #   Returns the data for this {MfaDevice}.
       def data

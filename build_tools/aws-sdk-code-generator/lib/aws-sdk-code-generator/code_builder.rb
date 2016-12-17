@@ -55,7 +55,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/types.rb", types_module)
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", GENERATED_SRC_WARNING + client_class.root.to_s)
-        y.yield("#{prefix}/errors.rb", GENERATED_SRC_WARNING + wrap(errors_module))
+        y.yield("#{prefix}/errors.rb", errors_module)
         y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
         y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
@@ -78,6 +78,10 @@ module AwsSdkCodeGenerator
 
     def client_api_module
       Views::ClientApiModule.new(service: @service).render
+    end
+
+    def errors_module
+      Views::ErrorsModule.new(service: @service).render
     end
 
     def new_svc_module
@@ -106,10 +110,6 @@ module AwsSdkCodeGenerator
       )
       svc_mod.add(klass)
       klass
-    end
-
-    def errors_module
-      Generators::ErrorsModule.new(api: @api)
     end
 
     def waiters_module(svc_mod = new_svc_module)

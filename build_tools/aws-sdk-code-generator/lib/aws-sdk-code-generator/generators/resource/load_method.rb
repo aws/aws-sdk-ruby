@@ -21,11 +21,11 @@ module AwsSdkCodeGenerator
               c << "self"
             end
           else
-            docstring('@raise [Errors::ResourceNotLoadable]')
+            docstring('@raise [NotImplementedError]')
             docstring('@api private')
             code do |c|
               c << "msg = #{LOAD_NOT_IMPLEMENTED.inspect}"
-              c << "raise Errors::ResourceNotLoadable, msg"
+              c << "raise NotImplementedError, msg"
             end
           end
         end

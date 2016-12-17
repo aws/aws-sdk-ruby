@@ -317,7 +317,7 @@ describe 'Interfaces' do
           ticket = Sample::TicketReservation.new(1, client: client)
           expect {
             ticket.load
-          }.to raise_error(Sample::Errors::ResourceNotLoadable)
+          }.to raise_error(NotImplementedError)
         end
 
         it '#data returns the shape when present' do
@@ -329,7 +329,7 @@ describe 'Interfaces' do
         it '#data raises an error when shape not present' do
           expect {
             Sample::TicketReservation.new(123, client: client).data
-          }.to raise_error(Sample::Errors::ResourceNotLoadable)
+          }.to raise_error(NotImplementedError)
         end
 
         it '#data_loaded? returns true if data is present' do
@@ -347,7 +347,7 @@ describe 'Interfaces' do
           res = Sample::EmptyResource.new(client: client)
           expect {
             res.load
-          }.to raise_error(Sample::Errors::ResourceNotLoadable)
+          }.to raise_error(NotImplementedError)
         end
 
         it '#data returns an empty shape' do

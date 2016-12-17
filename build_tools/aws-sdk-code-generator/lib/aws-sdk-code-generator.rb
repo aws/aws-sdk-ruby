@@ -11,6 +11,7 @@ require_relative 'aws-sdk-code-generator/gem_builder'
 # views
 require_relative 'aws-sdk-code-generator/views/client_api_module'
 require_relative 'aws-sdk-code-generator/views/docstring'
+require_relative 'aws-sdk-code-generator/views/errors_module'
 require_relative 'aws-sdk-code-generator/views/features/env'
 require_relative 'aws-sdk-code-generator/views/features/step_definitions'
 require_relative 'aws-sdk-code-generator/views/gemspec'

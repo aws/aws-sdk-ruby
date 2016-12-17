@@ -5,19 +5,10 @@
 #
 # WARNING ABOUT GENERATED CODE
 
-module Aws
-  module Route53
-    module Errors
+module Aws::Route53
+  module Errors
 
-      extend Aws::Errors::DynamicErrors
+    extend Aws::Errors::DynamicErrors
 
-      # Raised when calling #load or #data on a resource class that can not be
-      # loaded.  This can happen when:
-      #
-      # * A resource class has identifiers, but no data attributes.
-      # * Resource data is only available when making an API call that
-      # enumerates all resources of that type.
-      class ResourceNotLoadable < RuntimeError; end
-    end
   end
 end

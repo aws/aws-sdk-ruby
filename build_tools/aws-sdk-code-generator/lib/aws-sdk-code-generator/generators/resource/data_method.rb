@@ -19,7 +19,7 @@ module AwsSdkCodeGenerator
             end
             if !@load
               docstring(<<-DOCSTRING)
-@raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
+@raise [NotImplementedError] Raises when {#data_loaded?} is `false`.
               DOCSTRING
             end
           else

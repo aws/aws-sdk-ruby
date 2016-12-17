@@ -8,11 +8,11 @@ module AwsSdkCodeGenerator
         it 'supports resources that have not defined load' do
           m = LoadMethod.new(resource_name:'ResourceName', definition:nil)
           expect(m.to_s).to eq(<<-CODE)
-# @raise [Errors::ResourceNotLoadable]
+# @raise [NotImplementedError]
 # @api private
 def load
   msg = "#load is not implemented, data only available via enumeration"
-  raise Errors::ResourceNotLoadable, msg
+  raise NotImplementedError, msg
 end
 alias :reload :load
           CODE

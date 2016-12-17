@@ -30,7 +30,7 @@ end
             'shape' => 'ShapeName',
           })
           expect(m.to_s).to eq(<<-CODE)
-# @raise [Errors::ResourceNotLoadableError] Raises when {#data_loaded?} is `false`.
+# @raise [NotImplementedError] Raises when {#data_loaded?} is `false`.
 # @return [Types::ShapeName]
 #   Returns the data for this {ResourceName}.
 def data
