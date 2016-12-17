@@ -81,11 +81,6 @@ module AwsSdkCodeGenerator
         @service.module_name
       end
 
-      # @return [String]
-      def service_name
-        @service.name
-      end
-
       # @return [String<YYYY-MM-DD>]
       def api_version
         @service.api_version
@@ -159,9 +154,7 @@ module AwsSdkCodeGenerator
                 o.shape_references << "o.#{key} = Shapes::ShapeRef.new(shape: Shapes::StructureShape.new(struct_class: Aws::EmptyStructure))"
               end
             end
-            operation.fetch('errors', []).map do |error|
-              o.shape_references << "o.errors << #{operation_ref(error)}"
-            end
+            o.error_shape_names = operation.fetch('errors', []).map {|e| e['shape'] }
             o.deprecated = true if operation['deprecated']
             o.authtype = operation['authtype'] if operation.key?('authtype')
             o.pager = pager(operation_name)
@@ -340,6 +333,7 @@ module AwsSdkCodeGenerator
 
         def initialize
           @shape_references = []
+          @error_shape_names = []
         end
 
         # @return [String] The UpperCamelCase operation name.
@@ -356,6 +350,9 @@ module AwsSdkCodeGenerator
 
         # @return [Array<String>]
         attr_accessor :shape_references
+
+        # @return [Array<String>]
+        attr_accessor :error_shape_names
 
         # @return [Boolean]
         attr_accessor :deprecated
