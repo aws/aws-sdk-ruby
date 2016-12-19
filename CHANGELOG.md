@@ -1,6 +1,16 @@
 Unreleased Changes
 ------------------
 Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
+* Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
+
+* Feature - Aws::CognitoIdentity - Updated the API, and documentation for Amazon Cognito Identity.
+
+* Feature - Aws::ApplicationDiscoveryService - Updated the API, and documentation for AWS Application Discovery Service.
+
+* Feature - Aws::Inspector - Updated the API, and documentation for Amazon Inspector.
+
+* Feature - Aws::SQS - Updated the documentation for Amazon Simple Queue Service.
+
 
  See related [GitHub issue #1365](https://github.com/aws/aws-sdk-ruby/issues/1365).
 
