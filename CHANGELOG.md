@@ -1,5 +1,8 @@
 Unreleased Changes
 ------------------
+
+2.6.39 (2016-12-19)
+------------------
 Issue - Aws::CloudTrail - Added missing paginator configuration for `Aws::CloudTrail::Client#lookup_events`.
 * Feature - Aws::CloudFormation - Updated the documentation for AWS CloudFormation.
 
