@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.40 (2016-12-20)
+------------------
+
 * Feature - Aws::Firehose - Updated the API, and documentation for Amazon Kinesis Firehose.
 
 * Feature - Aws::Route53 - Updated the API, and documentation for Amazon Route 53.
