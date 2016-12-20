@@ -102,15 +102,18 @@ module ApiHelper
       api_hash = options.fetch(:api, api(options))
       api_hash['metadata'] ||= metadata(options)
       module_name = next_sample_module_name
-      code = AwsSdkCodeGenerator::CodeBuilder.new(service: AwsSdkCodeGenerator::Service.new(
-        name: module_name,
-        module_name: module_name,
-        api: api_hash,
-        paginators: options[:paginators],
-        waiters: options[:waiters],
-        resources: options[:resources],
-        gem_version: '1.0.0',
-      ))
+      code = AwsSdkCodeGenerator::CodeBuilder.new(
+        aws_sdk_core_lib_path: File.expand_path('../../lib/', __FILE__),
+        service: AwsSdkCodeGenerator::Service.new(
+          name: module_name,
+          module_name: module_name,
+          api: api_hash,
+          paginators: options[:paginators],
+          waiters: options[:waiters],
+          resources: options[:resources],
+          gem_version: '1.0.0',
+        )
+      )
       begin
         Object.module_eval(code.source)
       rescue => err

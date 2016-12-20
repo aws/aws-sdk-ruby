@@ -3,6 +3,7 @@ module AwsSdkCodeGenerator
 
     # @param [Hash] options
     # @option options [required, Service] :service
+    # @option options [required, String] :aws_sdk_core_lib_path
     def initialize(options)
       @options = options
       @service = options.fetch(:service)

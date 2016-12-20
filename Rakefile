@@ -1,5 +1,6 @@
 $REPO_ROOT = File.dirname(__FILE__)
 $GEMS_DIR = "#{$REPO_ROOT}/gems"
+$CORE_LIB = "#{$REPO_ROOT}/gems/aws-sdk-core/lib"
 
 $:.unshift("#{$REPO_ROOT}/build_tools")
 $:.unshift("#{$REPO_ROOT}/build_tools/aws-sdk-code-generator/lib")

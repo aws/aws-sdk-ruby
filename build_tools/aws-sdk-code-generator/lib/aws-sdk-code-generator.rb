@@ -1,15 +1,18 @@
 require_relative 'aws-sdk-code-generator/apply_docs'
 require_relative 'aws-sdk-code-generator/docstring'
 require_relative 'aws-sdk-code-generator/helper'
+require_relative 'aws-sdk-code-generator/plugin_list'
 require_relative 'aws-sdk-code-generator/service'
 require_relative 'aws-sdk-code-generator/underscore'
 require_relative 'aws-sdk-code-generator/view'
+require_relative 'aws-sdk-code-generator/waiter_list'
 
 require_relative 'aws-sdk-code-generator/code_builder'
 require_relative 'aws-sdk-code-generator/gem_builder'
 
 # views
 require_relative 'aws-sdk-code-generator/views/client_api_module'
+require_relative 'aws-sdk-code-generator/views/client_class'
 require_relative 'aws-sdk-code-generator/views/docstring'
 require_relative 'aws-sdk-code-generator/views/errors_module'
 require_relative 'aws-sdk-code-generator/views/features/env'

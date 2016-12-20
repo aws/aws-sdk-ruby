@@ -15,8 +15,11 @@ module AwsSdkCodeGenerator
     include Helper
 
     # @option options [required, Service] :service
+    # @option options [required, String] :aws_sdk_core_lib_path
     def initialize(options)
       @service = options.fetch(:service)
+      @aws_sdk_core_lib_path = options.fetch(:aws_sdk_core_lib_path)
+
       # TODO : remove these
       @add_plugins = @service.add_plugins
       @remove_plugins = @service.remove_plugins
@@ -50,17 +53,17 @@ module AwsSdkCodeGenerator
       # item yielded below) should be moved from here into the gem builder
       # The source code builder should simply yield the empty module
       Enumerator.new do |y|
-        y.yield("#{prefix}.rb", service_module(prefix: prefix))
-        y.yield("#{prefix}/customizations.rb", '')
-        y.yield("#{prefix}/types.rb", types_module)
-        y.yield("#{prefix}/client_api.rb", client_api_module)
-        y.yield("#{prefix}/client.rb", GENERATED_SRC_WARNING + client_class.root.to_s)
-        y.yield("#{prefix}/errors.rb", errors_module)
-        y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
-        y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
+        #y.yield("#{prefix}.rb", service_module(prefix: prefix))
+        #y.yield("#{prefix}/customizations.rb", '')
+        #y.yield("#{prefix}/types.rb", types_module)
+        #y.yield("#{prefix}/client_api.rb", client_api_module)
+        y.yield("#{prefix}/client.rb", client_class)
+        #y.yield("#{prefix}/errors.rb", errors_module)
+        #y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
+        #y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
           @resources['resources'].keys.sort.each do |name|
-            y.yield("#{prefix}/#{underscore(name)}.rb", GENERATED_SRC_WARNING + wrap(resource_class(name, @resources['resources'][name])))
+            #y.yield("#{prefix}/#{underscore(name)}.rb", GENERATED_SRC_WARNING + wrap(resource_class(name, @resources['resources'][name])))
           end
         end
       end
@@ -80,6 +83,22 @@ module AwsSdkCodeGenerator
       Views::ClientApiModule.new(service: @service).render
     end
 
+    def client_class
+      Views::ClientClass.new(
+        service_identifier: @service.identifier,
+        service_name: @service.name,
+        module_name: @service.module_name,
+        gem_name: @service.gem_name,
+        gem_version: @service.gem_version,
+        aws_sdk_core_lib_path: @aws_sdk_core_lib_path,
+        protocol: @service.protocol,
+        signature_version: @service.signature_version,
+        add_plugins: @service.add_plugins,
+        remove_plugins: @service.remove_plugins,
+        waiters: @service.waiters,
+      ).render
+    end
+
     def errors_module
       Views::ErrorsModule.new(service: @service).render
     end
@@ -94,22 +113,6 @@ module AwsSdkCodeGenerator
       svc_mod = new_svc_module
       svc_mod.add(mod)
       svc_mod.root.to_s
-    end
-
-    def client_class(svc_mod = new_svc_module)
-      klass = Generators::ClientClass.new(
-        parent: svc_mod,
-        identifier: @module_names.last.downcase,
-        api: @api,
-        waiters: @waiters,
-        examples: @examples,
-        add_plugins: @add_plugins,
-        remove_plugins: @remove_plugins,
-        gem_name: @service.gem_name,
-        gem_version: @service.gem_version,
-      )
-      svc_mod.add(klass)
-      klass
     end
 
     def waiters_module(svc_mod = new_svc_module)
