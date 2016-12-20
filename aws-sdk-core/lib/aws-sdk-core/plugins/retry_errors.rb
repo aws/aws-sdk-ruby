@@ -32,6 +32,7 @@ module Aws
           'ProvisionedThroughputExceededException', # dynamodb
           'RequestLimitExceeded',                   # ec2
           'BandwidthLimitExceeded',                 # cloud search
+          'LimitExceededException',                 # kinesis
         ])
 
         CHECKSUM_ERRORS = Set.new([
