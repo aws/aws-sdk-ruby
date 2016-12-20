@@ -77,7 +77,7 @@ module Aws
           returned_md5 = response.md5_of_message_attributes
           if returned_md5 != calculated_md5
             error_message =  mismatch_error_message(
-              'message atributes',
+              'message attributes',
               calculated_md5,
               returned_md5,
               response)
