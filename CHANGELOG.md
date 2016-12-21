@@ -1,6 +1,10 @@
 Unreleased Changes
 ------------------
 
+* Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
+
+* Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
+
 * Feature - Aws::RDS - Adds cross-region encrypted snapshot copying, including
   automatic population of the `:pre_signed_url` parameter for
   `Aws::RDS::Client#copy_db_snapshot` when the `:source_region` parameter is
