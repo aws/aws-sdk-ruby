@@ -1,6 +1,9 @@
 Unreleased Changes
 ------------------
 
+2.6.41 (2016-12-21)
+------------------
+
 * Feature - Aws::ECR - Updated the API, and documentation for Amazon EC2 Container Registry.
 
 * Feature - Aws::RDS - Updated the documentation for Amazon Relational Database Service.
