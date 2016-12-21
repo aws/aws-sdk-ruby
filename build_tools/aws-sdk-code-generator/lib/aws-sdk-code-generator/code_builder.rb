@@ -70,7 +70,7 @@ module AwsSdkCodeGenerator
         y.yield("#{prefix}/client_api.rb", client_api_module)
         y.yield("#{prefix}/client.rb", client_class)
         y.yield("#{prefix}/errors.rb", errors_module)
-        y.yield("#{prefix}/waiters.rb", GENERATED_SRC_WARNING + waiters_module.root.to_s) if @waiters
+        y.yield("#{prefix}/waiters.rb", waiters_module) if @waiters
         y.yield("#{prefix}/resource.rb", GENERATED_SRC_WARNING + wrap(root_resource_class))
         if @resources
           @resources['resources'].keys.sort.each do |name|
@@ -129,12 +129,10 @@ module AwsSdkCodeGenerator
     end
 
     def waiters_module(svc_mod = new_svc_module)
-      klass = Generators::WaitersModule.new(
-        parent: svc_mod,
-        waiters: @waiters
-      )
-      svc_mod.add(klass)
-      klass
+      Views::WaitersModule.new(
+        module_name: @service.module_name,
+        waiters: @waiters,
+      ).render
     end
 
     def root_resource_class

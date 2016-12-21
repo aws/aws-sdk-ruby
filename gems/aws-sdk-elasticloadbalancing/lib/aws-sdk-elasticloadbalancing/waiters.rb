@@ -7,123 +7,122 @@
 
 require 'aws-sdk-core/waiters'
 
-module Aws
-  module ElasticLoadBalancing
-    module Waiters
-      class InstanceDeregistered
+module ElasticLoadBalancing
+  module Waiters
 
-        # @param [Hash] options
-        # @option options [required, Client] :client
-        # @option options [Integer] :max_attempts (40)
-        # @option options [Integer] :delay (15)
-        # @option options [Proc] :before_attempt
-        # @option options [Proc] :before_wait
-        def initialize(options)
-          @client = options.fetch(:client)
-          @waiter = Aws::Waiters::Waiter.new({
-            max_attempts: 40,
-            delay: 15,
-            poller: Aws::Waiters::Poller.new(
-              operation_name: :describe_instance_health,
-              acceptors: [
-                {
-                  "expected" => "OutOfService",
-                  "matcher" => "pathAll",
-                  "state" => "success",
-                  "argument" => "instance_states[].state"
-                },
-                {
-                  "matcher" => "error",
-                  "expected" => "InvalidInstance",
-                  "state" => "success"
-                }
-              ]
-            )
-          }.merge(options))
-        end
+    class AnyInstanceInService
 
-        # @option (see Client#describe_instance_health)
-        # @return (see Client#describe_instance_health)
-        def wait(params = {})
-          @waiter.wait(client: @client, params: params)
-        end
-
-        # @api private
-        attr_reader :waiter
-
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_instance_health,
+            acceptors: [{
+              "argument" => "instance_states[].state",
+              "expected" => "InService",
+              "matcher" => "pathAny",
+              "state" => "success"
+            }]
+          )
+        }.merge(options))
       end
 
-      class AnyInstanceInService
-
-        # @param [Hash] options
-        # @option options [required, Client] :client
-        # @option options [Integer] :max_attempts (40)
-        # @option options [Integer] :delay (15)
-        # @option options [Proc] :before_attempt
-        # @option options [Proc] :before_wait
-        def initialize(options)
-          @client = options.fetch(:client)
-          @waiter = Aws::Waiters::Waiter.new({
-            max_attempts: 40,
-            delay: 15,
-            poller: Aws::Waiters::Poller.new(
-              operation_name: :describe_instance_health,
-              acceptors: [{
-                "argument" => "instance_states[].state",
-                "expected" => "InService",
-                "matcher" => "pathAny",
-                "state" => "success"
-              }]
-            )
-          }.merge(options))
-        end
-
-        # @option (see Client#describe_instance_health)
-        # @return (see Client#describe_instance_health)
-        def wait(params = {})
-          @waiter.wait(client: @client, params: params)
-        end
-
-        # @api private
-        attr_reader :waiter
-
+      # @option (see Client#describe_instance_health)
+      # @return (see Client#describe_instance_health)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
       end
 
-      class InstanceInService
+      # @api private
+      attr_reader :waiter
 
-        # @param [Hash] options
-        # @option options [required, Client] :client
-        # @option options [Integer] :max_attempts (40)
-        # @option options [Integer] :delay (15)
-        # @option options [Proc] :before_attempt
-        # @option options [Proc] :before_wait
-        def initialize(options)
-          @client = options.fetch(:client)
-          @waiter = Aws::Waiters::Waiter.new({
-            max_attempts: 40,
-            delay: 15,
-            poller: Aws::Waiters::Poller.new(
-              operation_name: :describe_instance_health,
-              acceptors: [{
-                "argument" => "instance_states[].state",
-                "expected" => "InService",
+    end
+
+    class InstanceDeregistered
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_instance_health,
+            acceptors: [
+              {
+                "expected" => "OutOfService",
                 "matcher" => "pathAll",
+                "state" => "success",
+                "argument" => "instance_states[].state"
+              },
+              {
+                "matcher" => "error",
+                "expected" => "InvalidInstance",
                 "state" => "success"
-              }]
-            )
-          }.merge(options))
-        end
-
-        # @option (see Client#describe_instance_health)
-        # @return (see Client#describe_instance_health)
-        def wait(params = {})
-          @waiter.wait(client: @client, params: params)
-        end
-
-        # @api private
-        attr_reader :waiter
-
+              }
+            ]
+          )
+        }.merge(options))
       end
+
+      # @option (see Client#describe_instance_health)
+      # @return (see Client#describe_instance_health)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
+    end
+
+    class InstanceInService
+
+      # @param [Hash] options
+      # @option options [required, Client] :client
+      # @option options [Integer] :max_attempts (40)
+      # @option options [Integer] :delay (15)
+      # @option options [Proc] :before_attempt
+      # @option options [Proc] :before_wait
+      def initialize(options)
+        @client = options.fetch(:client)
+        @waiter = Aws::Waiters::Waiter.new({
+          max_attempts: 40,
+          delay: 15,
+          poller: Aws::Waiters::Poller.new(
+            operation_name: :describe_instance_health,
+            acceptors: [{
+              "argument" => "instance_states[].state",
+              "expected" => "InService",
+              "matcher" => "pathAll",
+              "state" => "success"
+            }]
+          )
+        }.merge(options))
+      end
+
+      # @option (see Client#describe_instance_health)
+      # @return (see Client#describe_instance_health)
+      def wait(params = {})
+        @waiter.wait(client: @client, params: params)
+      end
+
+      # @api private
+      attr_reader :waiter
+
     end
   end
 end

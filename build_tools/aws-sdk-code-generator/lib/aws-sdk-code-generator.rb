@@ -29,6 +29,7 @@ require_relative 'aws-sdk-code-generator/views/service_module'
 require_relative 'aws-sdk-code-generator/views/spec/spec_helper'
 require_relative 'aws-sdk-code-generator/views/types_module'
 require_relative 'aws-sdk-code-generator/views/version'
+require_relative 'aws-sdk-code-generator/views/waiters_module'
 
 module AwsSdkCodeGenerator
 

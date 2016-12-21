@@ -175,7 +175,7 @@ module {{module_name}}
     def waiters
       {
         {{#waiters}}
-        {{name}}: {{class_name}}{{^last}},{{/last}}
+        {{name}}: Waiters::{{class_name}}{{^last}},{{/last}}
         {{/waiters}}
       }
     end
