@@ -65,7 +65,10 @@ def client_for(suite, test_case, n)
       },
       gem_version: '1.0.0',
     )
-    code = AwsSdkCodeGenerator::CodeBuilder.new(service: service).source
+    code = AwsSdkCodeGenerator::CodeBuilder.new(
+      aws_sdk_core_lib_path: File.expand_path('../../../../gems/aws-sdk-core/lib/', __FILE__),
+      service: service,
+    ).source
     Object.module_eval(code)
   end
   client_class = Aws.const_get(name).const_get(:Client)

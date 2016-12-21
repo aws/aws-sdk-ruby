@@ -81,6 +81,7 @@ module SpecHelper
       }
 
       generator = AwsSdkCodeGenerator::CodeBuilder.new(
+        aws_sdk_core_lib_path: File.expand_path('../../../../gems/aws-sdk-core/lib/', __FILE__),
         service: AwsSdkCodeGenerator::Service.new(service_opts)
       )
 

@@ -67,7 +67,7 @@ module AwsSdkCodeGenerator
         shape['members'].map do |member_name, member_ref|
           docstring = Api.docstring(member_ref, api)
           if member_ref['idempotencyToken']
-            docstring += "<p><b>A suitable default value is auto-generated.** You should normally not need to pass this option.</b></p>"
+            docstring = docstring.to_s + "<p><b>A suitable default value is auto-generated.** You should normally not need to pass this option.</b></p>"
           end
           YardOptionTag.new(
             name: Underscore.underscore(member_name),
